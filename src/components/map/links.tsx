@@ -8,6 +8,7 @@ import {
 } from "preact";
 import * as d3Selection from "d3-selection";
 import * as style from "./map.css";
+import cx from "classnames";
 
 interface LinkProps {
     link: LinkI;
@@ -24,10 +25,12 @@ class Link extends Component<LinkProps, {}> {
 
     render(): ComponentChild {
         const { link, ...rest } = this.props;
+        const linkType = link.type as string;
+        const mappedClas = style[linkType] as string;
         return (
             <path
                 {...rest}
-                className={style.link}
+                className={cx(style.link, mappedClas)}
                 ref={this.ref}
                 strokeWidth={5}
             />
@@ -57,13 +60,8 @@ class LinkLabel extends Component<LinkProps, {}> {
         );
     }
 }
-
-{
-    /* <text>{link.linkQuality}</text> */
-}
 const Links: FunctionalComponent<{ links: LinkI[] }> = props => {
     const { links } = props;
-    // 
     return (
         <g className={style.links}>
             <defs>

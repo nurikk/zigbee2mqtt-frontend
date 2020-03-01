@@ -38,11 +38,26 @@
 
 }
 .nodes {
-  
 }
 .EndDevice {
   fill: green;
 }
 .Router, .Coordinator {
   fill: blue;
+}
+
+.Router2Coordinator {
+  stroke: blue;
+}
+.Router2Router {
+  stroke: blue;
+  stroke-dasharray: 5;
+}
+.EndDevice2Coordinator {
+  stroke: green;
+}
+.EndDevice2Router {
+  stroke: green;
+  opacity: 0.8;
+  stroke-dasharray: 5;
 }

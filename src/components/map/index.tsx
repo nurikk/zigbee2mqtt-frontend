@@ -6,7 +6,7 @@ import * as d3Force from "d3-force";
 import * as d3Selection from "d3-selection";
 
 import * as style from "./map.css";
-import { GraphI, NodeI, LinkI } from "./types";
+import { GraphI, NodeI, LinkI, DeviceType, Device } from "./types";
 import * as request from "superagent";
 import { convert2graph } from "./convert";
 
@@ -83,15 +83,34 @@ export default class Map extends Component<Props, State> {
     constructor(props: Props) {
         super(props);
         const { width, height } = this.props;
+        const routerTypes = [DeviceType.Coordinator, DeviceType.Router];
+        const getDistance = (d: LinkI): number => {
+            switch (d.type) {
+                case "Router2Router":
+                case "Router2Coordinator":
+                    return 200;
+                case "EndDevice2Coordinator":
+                case "EndDevice2Router":
+                    return 100;
+                default:
+                    return 200;
+            }
+        };
         const linkForce = d3Force
             .forceLink<NodeI, LinkI>()
             .id(d => d.id)
-            .distance(50)
-            .strength(0.1);
+            .distance(getDistance)
+            .strength(1);
 
         const chargeForce = d3Force
             .forceManyBody<NodeI>()
-            .distanceMin(10)
+            // .strength(d =>
+            //     routerTypes.includes((d.device as Device).type as DeviceType)
+            //         ? -100
+            //         : -1000
+            // )
+            .distanceMin(200)
+            .distanceMax(1000)
             .strength(-200);
 
         this.simulation = d3Force

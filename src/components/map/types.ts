@@ -4,9 +4,14 @@ export interface NodeI extends d3Force.SimulationNodeDatum {
     id: string;
     device: Device;
 }
-
+export type LinkType =
+    | "Router2Coordinator"
+    | "Router2Router"
+    | "EndDevice2Coordinator"
+    | "EndDevice2Router";
 export interface LinkI extends d3Force.SimulationLinkDatum<NodeI> {
     linkQuality: number | undefined;
+    type: LinkType;
 }
 
 export interface GraphI {
