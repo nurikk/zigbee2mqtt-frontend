@@ -1,5 +1,11 @@
 import { LinkI } from "./types";
-import { h, Component, ComponentChild, createRef } from "preact";
+import {
+    h,
+    Component,
+    ComponentChild,
+    createRef,
+    FunctionalComponent
+} from "preact";
 import * as d3Selection from "d3-selection";
 import * as style from "./map.css";
 
@@ -19,15 +25,14 @@ class Link extends Component<{ link: LinkI }, {}> {
     }
 }
 
-export default class Links extends Component<{ links: LinkI[] }, {}> {
-    render(): ComponentChild {
-        const { links } = this.props;
-        return (
-            <g className={style.links}>
-                {links.map((link: LinkI, index: number) => (
-                    <Link key={index} link={link} />
-                ))}
-            </g>
-        );
-    }
-}
+const Links: FunctionalComponent<{ links: LinkI[] }> = props => {
+    const { links } = props;
+    return (
+        <g className={style.links}>
+            {links.map((link: LinkI, index: number) => (
+                <Link key={index} link={link} />
+            ))}
+        </g>
+    );
+};
+export default Links;

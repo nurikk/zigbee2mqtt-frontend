@@ -1,10 +1,11 @@
 .container {
-  background-color: #333;
+  /* background-color: #333; */
 }
 
 .node {
   stroke: #fff;
   stroke-width: 1.5px;
+  cursor: pointer;
 }
 
 .link {
@@ -15,7 +16,12 @@
 .label {
   font-size: 10px;
   fill: #fff;
+  cursor: pointer;
 }
+.label.Coordinator {
+  display: none;
+}
+
 .labels {
 
 }
@@ -24,4 +30,10 @@
 }
 .nodes {
   
+}
+.EndDevice {
+  fill: green;
+}
+.Router, .Coordinator {
+  fill: blue;
 }

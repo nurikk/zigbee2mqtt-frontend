@@ -1,4 +1,5 @@
 import { resolve } from "path";
+import CopyWebpackPlugin from "copy-webpack-plugin";
 
 export default {
     /**
@@ -30,5 +31,7 @@ export default {
             "src",
             "index"
         );
+
+        config.plugins.push(new CopyWebpackPlugin([{ from: "../api-mocks" }]));
     }
 };

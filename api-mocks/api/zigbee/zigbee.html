@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>SLS Gateway: ZigBee</title>
+    <style>
+        body {
+            padding-top: 5rem;
+            background-color: #eef5f9 !important;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border-color: #d7dfe3;
+            border-radius: 4px;
+            box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        #editor {
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+        }
+    </style>
+    <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css'
+        integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+    <script src='https://code.jquery.com/jquery-3.4.1.slim.min.js'
+        integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n'
+        crossorigin='anonymous'></script>
+    <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js'
+        integrity='sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6'
+        crossorigin='anonymous'></script>
+    <script src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js'
+        integrity='sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo'
+        crossorigin='anonymous'></script>
+    <meta name="viewport" content="width=device-width">
+    <meta name="mobile-web-app-capable" content="yes">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: #1e88e5;"> <a
+            class="navbar-brand" href="/">SLS Gateway</a> <button class="navbar-toggler" type="button"
+            data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault"
+            aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item"> <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a> </li>
+                <li class="nav-item"> <a class="nav-link" href="/zigbee">Zigbee</a> </li>
+                <li class="nav-item"> <a class="nav-link" href="/log">Log</a> </li>
+                <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="dropdown01"
+                        data-toggle="dropdown" aria-expanded="false">Settings</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown01"> <a class="dropdown-item" href="/wifi">WiFi
+                            Setup</a> <a class="dropdown-item" href="/time">Time Setup</a> <a class="dropdown-item"
+                            href="/link">Link Setup</a> <a class="dropdown-item" href="/hw">HW Setup</a> </div>
+                </li>
+                <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="dropdown02"
+                        data-toggle="dropdown" aria-expanded="false">Help</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown02"> <a class="dropdown-item"
+                            href="https://t.me/slsys">Telegram (Support, discussions)</a> <a class="dropdown-item"
+                            href="https://mjdm.ru/forum/viewtopic.php?t=6700">Forum (Updates, knowledges)</a> </div>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="dropdown03"
+                        data-toggle="dropdown" aria-expanded="false">Actions</a>
+                    <div class="dropdown-menu dropdown-menu-right"> <a class="dropdown-item" href="/update">Update</a>
+                        <a class="dropdown-item" href="/reset">Reset</a> <a class="dropdown-item"
+                            href="/reboot">Reboot</a> </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <main role="main" class="container">
+        <style>
+            .btn-simple {
+                color: #fff;
+                background-color: #1e88e5;
+            }
+
+            .btn-simple:hover {
+                color: #fff;
+                background-color: #138496;
+                border-color: #117a8b;
+            }
+        </style><button type="button" class="btn btn-simple"
+            onclick="location.href='/zigbee';">Refresh</button>&nbsp;<button type="button" class="btn btn-simple"
+            onclick="location.href='/groups';">Groups</button>&nbsp;<button type="button" class="btn btn-info"
+            onclick="location.href='?setup=1';">Setup</button>&nbsp;<button type="button" class="btn btn-success"
+            onclick="location.href='/zigbee?join=255';">Start Join</button><br><br>
+        <table class="table table-striped">
+            <thead>
+                <tr align="center">
+                    <th>N</th>
+                    <th>nwkAddr</th>
+                    <th>FriendlyName</th>
+                    <th>ieeeAddr</th>
+                    <th>ManufName</th>
+                    <th>ModelId</th>
+                    <th>LinkQuality</th>
+                    <th>Interview</th>
+                    <th>LastSeen</th>
+                    <th>Routes</th>
+                    <th>PS</th>
+                    <th style="min-width:150px">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr align="center">
+                    <td>1</td>
+                    <td><a href="/zigbee?nwkAddr=0xFB31">FB31</a></td>
+                    <td>Round button</td>
+                    <td>00158D000224154D</td>
+                    <td>LUMI</td>
+                    <td>
+                        <font color='green'>lumi.sensor_switch</font>
+                    </td>
+                    <td>86</td>
+                    <td>
+                        <font color='green'>Ok</font>
+                    </td>
+                    <td>00:01:46</td>
+                    <td></td>
+                    <td></td>
+                    <td> <button type="button" class="btn btn-danger btn-sm"
+                            onclick="if (confirm('Remove device?')) location.href='/zigbee?remove=0xFB31';">&#10008;</button>
+                        <button type="button" class="btn btn-secondary btn-sm"
+                            onclick="result = prompt('Enter new name', 'Round button');if (result != null) location.href='/zigbee?rename=0x00158D000224154D&new='+result;">&#128393;</button>
+                        <button type="button" class="btn btn-success btn-sm"
+                            onclick="location.href='/zigbee?bind=0x00158D000224154D';">Bind</button> </td>
+                </tr>
+                <tr align="center">
+                    <td>2</td>
+                    <td><a href="/zigbee?nwkAddr=0x3011">3011</a></td>
+                    <td>Yard</td>
+                    <td>00158D0004145EAC</td>
+                    <td>LUMI</td>
+                    <td>
+                        <font color='green'>lumi.sensor_magnet</font>
+                    </td>
+                    <td>2</td>
+                    <td>
+                        <font color='green'>Ok</font>
+                    </td>
+                    <td>00:04:03</td>
+                    <td></td>
+                    <td>100</td>
+                    <td> <button type="button" class="btn btn-danger btn-sm"
+                            onclick="if (confirm('Remove device?')) location.href='/zigbee?remove=0x3011';">&#10008;</button>
+                        <button type="button" class="btn btn-secondary btn-sm"
+                            onclick="result = prompt('Enter new name', 'Yard');if (result != null) location.href='/zigbee?rename=0x00158D0004145EAC&new='+result;">&#128393;</button>
+                        <button type="button" class="btn btn-success btn-sm"
+                            onclick="location.href='/zigbee?bind=0x00158D0004145EAC';">Bind</button> </td>
+                </tr>
+                <tr align="center">
+                    <td>3</td>
+                    <td><a href="/zigbee?nwkAddr=0x1DE7">1DE7</a></td>
+                    <td>null</td>
+                    <td>00158D0003D20443</td>
+                    <td>LUMI</td>
+                    <td>
+                        <font color='green'>lumi.sensor_magnet</font>
+                    </td>
+                    <td>47</td>
+                    <td>
+                        <font color='green'>Ok</font>
+                    </td>
+                    <td>00:28:21</td>
+                    <td></td>
+                    <td></td>
+                    <td> <button type="button" class="btn btn-danger btn-sm"
+                            onclick="if (confirm('Remove device?')) location.href='/zigbee?remove=0x1DE7';">&#10008;</button>
+                        <button type="button" class="btn btn-secondary btn-sm"
+                            onclick="result = prompt('Enter new name', 'null');if (result != null) location.href='/zigbee?rename=0x00158D0003D20443&new='+result;">&#128393;</button>
+                        <button type="button" class="btn btn-success btn-sm"
+                            onclick="location.href='/zigbee?bind=0x00158D0003D20443';">Bind</button> </td>
+                </tr>
+                <tr align="center">
+                    <td>4</td>
+                    <td><a href="/zigbee?nwkAddr=0x3B75">3B75</a></td>
+                    <td>null</td>
+                    <td>00158D00028902BE</td>
+                    <td>LUMI</td>
+                    <td>
+                        <font color='green'>lumi.sensor_magnet</font>
+                    </td>
+                    <td>84</td>
+                    <td>
+                        <font color='green'>Ok</font>
+                    </td>
+                    <td>00:20:32</td>
+                    <td></td>
+                    <td>100</td>
+                    <td> <button type="button" class="btn btn-danger btn-sm"
+                            onclick="if (confirm('Remove device?')) location.href='/zigbee?remove=0x3B75';">&#10008;</button>
+                        <button type="button" class="btn btn-secondary btn-sm"
+                            onclick="result = prompt('Enter new name', 'null');if (result != null) location.href='/zigbee?rename=0x00158D00028902BE&new='+result;">&#128393;</button>
+                        <button type="button" class="btn btn-success btn-sm"
+                            onclick="location.href='/zigbee?bind=0x00158D00028902BE';">Bind</button> </td>
+                </tr>
+                <tr align="center">
+                    <td>5</td>
+                    <td><a href="/zigbee?nwkAddr=0x0E9D">0E9D</a></td>
+                    <td>null</td>
+                    <td>00158D0004318A33</td>
+                    <td>LUMI</td>
+                    <td>
+                        <font color='green'>lumi.sensor_magnet</font>
+                    </td>
+                    <td>68</td>
+                    <td>
+                        <font color='green'>Ok</font>
+                    </td>
+                    <td>00:01:38</td>
+                    <td></td>
+                    <td>100</td>
+                    <td> <button type="button" class="btn btn-danger btn-sm"
+                            onclick="if (confirm('Remove device?')) location.href='/zigbee?remove=0x0E9D';">&#10008;</button>
+                        <button type="button" class="btn btn-secondary btn-sm"
+                            onclick="result = prompt('Enter new name', 'null');if (result != null) location.href='/zigbee?rename=0x00158D0004318A33&new='+result;">&#128393;</button>
+                        <button type="button" class="btn btn-success btn-sm"
+                            onclick="location.href='/zigbee?bind=0x00158D0004318A33';">Bind</button> </td>
+                </tr>
+                <tr align="center">
+                    <td>6</td>
+                    <td><a href="/zigbee?nwkAddr=0xEF6B">EF6B</a></td>
+                    <td>null</td>
+                    <td>00158D0004261DC7</td>
+                    <td>LUMI</td>
+                    <td>
+                        <font color='green'>lumi.sensor_magnet</font>
+                    </td>
+                    <td>99</td>
+                    <td>
+                        <font color='green'>Ok</font>
+                    </td>
+                    <td>00:45:48</td>
+                    <td></td>
+                    <td>100</td>
+                    <td> <button type="button" class="btn btn-danger btn-sm"
+                            onclick="if (confirm('Remove device?')) location.href='/zigbee?remove=0xEF6B';">&#10008;</button>
+                        <button type="button" class="btn btn-secondary btn-sm"
+                            onclick="result = prompt('Enter new name', 'null');if (result != null) location.href='/zigbee?rename=0x00158D0004261DC7&new='+result;">&#128393;</button>
+                        <button type="button" class="btn btn-success btn-sm"
+                            onclick="location.href='/zigbee?bind=0x00158D0004261DC7';">Bind</button> </td>
+                </tr>
+                <tr align="center">
+                    <td>7</td>
+                    <td><a href="/zigbee?nwkAddr=0x2833">2833</a></td>
+                    <td>null</td>
+                    <td>00158D0001E1A85A</td>
+                    <td>LUMI</td>
+                    <td>
+                        <font color='green'>lumi.sensor_magnet</font>
+                    </td>
+                    <td>94</td>
+                    <td>
+                        <font color='green'>Ok</font>
+                    </td>
+                    <td>00:35:25</td>
+                    <td></td>
+                    <td>100</td>
+                    <td> <button type="button" class="btn btn-danger btn-sm"
+                            onclick="if (confirm('Remove device?')) location.href='/zigbee?remove=0x2833';">&#10008;</button>
+                        <button type="button" class="btn btn-secondary btn-sm"
+                            onclick="result = prompt('Enter new name', 'null');if (result != null) location.href='/zigbee?rename=0x00158D0001E1A85A&new='+result;">&#128393;</button>
+                        <button type="button" class="btn btn-success btn-sm"
+                            onclick="location.href='/zigbee?bind=0x00158D0001E1A85A';">Bind</button> </td>
+                </tr>
+                <tr align="center">
+                    <td>8</td>
+                    <td><a href="/zigbee?nwkAddr=0xF9E8">F9E8</a></td>
+                    <td>null</td>
+                    <td>00158D0003E734DD</td>
+                    <td>LUMI</td>
+                    <td>
+                        <font color='green'>lumi.sensor_magnet</font>
+                    </td>
+                    <td>81</td>
+                    <td>
+                        <font color='green'>Ok</font>
+                    </td>
+                    <td>00:37:28</td>
+                    <td></td>
+                    <td>100</td>
+                    <td> <button type="button" class="btn btn-danger btn-sm"
+                            onclick="if (confirm('Remove device?')) location.href='/zigbee?remove=0xF9E8';">&#10008;</button>
+                        <button type="button" class="btn btn-secondary btn-sm"
+                            onclick="result = prompt('Enter new name', 'null');if (result != null) location.href='/zigbee?rename=0x00158D0003E734DD&new='+result;">&#128393;</button>
+                        <button type="button" class="btn btn-success btn-sm"
+                            onclick="location.href='/zigbee?bind=0x00158D0003E734DD';">Bind</button> </td>
+                </tr>
+                <tr align="center">
+                    <td>9</td>
+                    <td><a href="/zigbee?nwkAddr=0xB715">B715</a></td>
+                    <td>null</td>
+                    <td>00158D0001FA4F2F</td>
+                    <td>LUMI</td>
+                    <td>
+                        <font color='green'>lumi.sens</font>
+                    </td>
+                    <td>68</td>
+                    <td>
+                        <font color='green'>Ok</font>
+                    </td>
+                    <td>00:23:31</td>
+                    <td></td>
+                    <td></td>
+                    <td> <button type="button" class="btn btn-danger btn-sm"
+                            onclick="if (confirm('Remove device?')) location.href='/zigbee?remove=0xB715';">&#10008;</button>
+                        <button type="button" class="btn btn-secondary btn-sm"
+                            onclick="result = prompt('Enter new name', 'null');if (result != null) location.href='/zigbee?rename=0x00158D0001FA4F2F&new='+result;">&#128393;</button>
+                        <button type="button" class="btn btn-success btn-sm"
+                            onclick="location.href='/zigbee?bind=0x00158D0001FA4F2F';">Bind</button> </td>
+                </tr>
+                <tr align="center">
+                    <td>10</td>
+                    <td><a href="/zigbee?nwkAddr=0x7ABF">7ABF</a></td>
+                    <td>null</td>
+                    <td>00158D0002FD0D07</td>
+                    <td>LUMI</td>
+                    <td>
+                        <font color='green'>lumi.remote.b286acn01</font>
+                    </td>
+                    <td>44</td>
+                    <td>
+                        <font color='green'>Ok</font>
+                    </td>
+                    <td>00:09:58</td>
+                    <td></td>
+                    <td>100</td>
+                    <td> <button type="button" class="btn btn-danger btn-sm"
+                            onclick="if (confirm('Remove device?')) location.href='/zigbee?remove=0x7ABF';">&#10008;</button>
+                        <button type="button" class="btn btn-secondary btn-sm"
+                            onclick="result = prompt('Enter new name', 'null');if (result != null) location.href='/zigbee?rename=0x00158D0002FD0D07&new='+result;">&#128393;</button>
+                        <button type="button" class="btn btn-success btn-sm"
+                            onclick="location.href='/zigbee?bind=0x00158D0002FD0D07';">Bind</button> </td>
+                </tr>
+                <tr align="center">
+                    <td>11</td>
+                    <td><a href="/zigbee?nwkAddr=0x636D">636D</a></td>
+                    <td>null</td>
+                    <td>00158D00040B4822</td>
+                    <td>LUMI</td>
+                    <td>
+                        <font color='green'>lumi.sensor_magnet</font>
+                    </td>
+                    <td>76</td>
+                    <td>
+                        <font color='green'>Ok</font>
+                    </td>
+                    <td>00:30:36</td>
+                    <td></td>
+                    <td></td>
+                    <td> <button type="button" class="btn btn-danger btn-sm"
+                            onclick="if (confirm('Remove device?')) location.href='/zigbee?remove=0x636D';">&#10008;</button>
+                        <button type="button" class="btn btn-secondary btn-sm"
+                            onclick="result = prompt('Enter new name', 'null');if (result != null) location.href='/zigbee?rename=0x00158D00040B4822&new='+result;">&#128393;</button>
+                        <button type="button" class="btn btn-success btn-sm"
+                            onclick="location.href='/zigbee?bind=0x00158D00040B4822';">Bind</button> </td>
+                </tr>
+                <tr align="center">
+                    <td>12</td>
+                    <td><a href="/zigbee?nwkAddr=0x66A7">66A7</a></td>
+                    <td>null</td>
+                    <td>00158D0002C48958</td>
+                    <td>LUMI</td>
+                    <td>
+                        <font color='green'>lumi.vibration.aq1</font>
+                    </td>
+                    <td>141</td>
+                    <td>
+                        <font color='green'>Ok</font>
+                    </td>
+                    <td>00:03:50</td>
+                    <td></td>
+                    <td></td>
+                    <td> <button type="button" class="btn btn-danger btn-sm"
+                            onclick="if (confirm('Remove device?')) location.href='/zigbee?remove=0x66A7';">&#10008;</button>
+                        <button type="button" class="btn btn-secondary btn-sm"
+                            onclick="result = prompt('Enter new name', 'null');if (result != null) location.href='/zigbee?rename=0x00158D0002C48958&new='+result;">&#128393;</button>
+                        <button type="button" class="btn btn-success btn-sm"
+                            onclick="location.href='/zigbee?bind=0x00158D0002C48958';">Bind</button> </td>
+                </tr>
+                <tr align="center">
+                    <td>13</td>
+                    <td><a href="/zigbee?nwkAddr=0xB074">B074</a></td>
+                    <td>null</td>
+                    <td>00158D0002C4A78F</td>
+                    <td>LUMI</td>
+                    <td>
+                        <font color='green'>lumi.vibration.aq1</font>
+                    </td>
+                    <td>81</td>
+                    <td>
+                        <font color='green'>Ok</font>
+                    </td>
+                    <td>00:02:45</td>
+                    <td></td>
+                    <td></td>
+                    <td> <button type="button" class="btn btn-danger btn-sm"
+                            onclick="if (confirm('Remove device?')) location.href='/zigbee?remove=0xB074';">&#10008;</button>
+                        <button type="button" class="btn btn-secondary btn-sm"
+                            onclick="result = prompt('Enter new name', 'null');if (result != null) location.href='/zigbee?rename=0x00158D0002C4A78F&new='+result;">&#128393;</button>
+                        <button type="button" class="btn btn-success btn-sm"
+                            onclick="location.href='/zigbee?bind=0x00158D0002C4A78F';">Bind</button> </td>
+                </tr>
+                <tr align="center">
+                    <td>14</td>
+                    <td><a href="/zigbee?nwkAddr=0x06A2">06A2</a></td>
+                    <td>null</td>
+                    <td>00158D000450D0E6</td>
+                    <td>LUMI</td>
+                    <td>
+                        <font color='green'>lumi.sensor_motion.aq2</font>
+                    </td>
+                    <td>126</td>
+                    <td>
+                        <font color='green'>Ok</font>
+                    </td>
+                    <td>00:00:49</td>
+                    <td></td>
+                    <td></td>
+                    <td> <button type="button" class="btn btn-danger btn-sm"
+                            onclick="if (confirm('Remove device?')) location.href='/zigbee?remove=0x06A2';">&#10008;</button>
+                        <button type="button" class="btn btn-secondary btn-sm"
+                            onclick="result = prompt('Enter new name', 'null');if (result != null) location.href='/zigbee?rename=0x00158D000450D0E6&new='+result;">&#128393;</button>
+                        <button type="button" class="btn btn-success btn-sm"
+                            onclick="location.href='/zigbee?bind=0x00158D000450D0E6';">Bind</button> </td>
+                </tr>
+            </tbody>
+        </table>
+    </main><!-- /.container -->
+</body>
+
+</html>
