@@ -19,7 +19,7 @@ class Label extends Component<{ node: NodeI }, {}> {
         const mappedClas = style[deviceType] as string;
         const cn = cx(style.label, mappedClas);
         return (
-            <text className={cn} ref={this.ref}>
+            <text className={cn} ref={this.ref} dy={-4} dx={3}>
                 {node.id}
             </text>
         );

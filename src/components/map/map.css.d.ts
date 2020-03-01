@@ -2,6 +2,7 @@
 export const container: string;
 export const node: string;
 export const link: string;
+export const linkLabel: string;
 export const label: string;
 export const Coordinator: string;
 export const coordinator: string;

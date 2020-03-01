@@ -3,15 +3,9 @@ import * as d3Force from "d3-force";
 export interface NodeI extends d3Force.SimulationNodeDatum {
     id: string;
     device: Device;
-    // x?: number;
-    // y?: number;
 }
 
-// const a: SimulationNodeDatum;
-
 export interface LinkI extends d3Force.SimulationLinkDatum<NodeI> {
-    // source: string;
-    // target: string;
     linkQuality: number | undefined;
 }
 

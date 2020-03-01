@@ -38,14 +38,32 @@ export default class Map extends Component<Props, State> {
         const link = d3Selection.selectAll<SVGLineElement, LinkI>(
             `.${style.link}`
         );
+        const linkLabel = d3Selection.selectAll<SVGLineElement, LinkI>(
+            `.${style.linkLabel}`
+        );
         const label = d3Selection.selectAll<SVGTextElement, NodeI>(
             `.${style.label}`
         );
         const ticked = (): void => {
-            link.attr("x1", d => (d.source as NodeI).x as number)
-                .attr("y1", d => (d.source as NodeI).y as number)
-                .attr("x2", d => (d.target as NodeI).x as number)
-                .attr("y2", d => (d.target as NodeI).y as number);
+            link.attr(
+                "d",
+                d =>
+                    `M ${d.source.x} ${d.source.y} L ${d.target.x} ${d.target.y}`
+            );
+            // link.attr("x1", d => (d.source as NodeI).x as number)
+            //     .attr("y1", d => (d.source as NodeI).y as number)
+            //     .attr("x2", d => (d.target as NodeI).x as number)
+            //     .attr("y2", d => (d.target as NodeI).y as number);
+
+            linkLabel.attr("transform", function(d) {
+                if (d.target.x < d.source.x) {
+                    const bbox = this.getBBox();
+                    const rx = bbox.x + bbox.width / 2;
+                    const ry = bbox.y + bbox.height / 2;
+                    return `rotate(180 ${rx} ${ry})`;
+                }
+                return "rotate(0)";
+            });
 
             // node.attr("cx", d => d.x as number).attr("cy", d => d.y as number);
             node.attr("transform", d => `translate(${d.x}, ${d.y})`);
@@ -83,9 +101,6 @@ export default class Map extends Component<Props, State> {
             .force("link", linkForce)
             .force("charge", chargeForce)
             .force("center", d3Force.forceCenter<NodeI>(width / 2, height / 2));
-        // .nodes(graph.nodes);
-
-        // linkForce.links(graph.links);
 
         this.state = {
             graph: {
