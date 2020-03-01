@@ -1020,5 +1020,6 @@
             "battery": 100
         }
     },
-    "missing_all": {}
+    "missing_all": {},
+    "hz node1 123": {}
 }

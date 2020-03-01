@@ -37,6 +37,9 @@ class Link extends Component<LinkProps, {}> {
         );
     }
 }
+interface LinkLabelProps extends LinkProps {
+    xlinkHref: string;
+}
 class LinkLabel extends Component<LinkProps, {}> {
     ref = createRef<SVGTextElement>();
 
@@ -47,7 +50,7 @@ class LinkLabel extends Component<LinkProps, {}> {
     }
 
     render(): ComponentChild {
-        const { link } = this.props;
+        const { link, xlinkHref } = this.props;
         return (
             <text
                 filter={"url(#solid)"}
@@ -55,7 +58,7 @@ class LinkLabel extends Component<LinkProps, {}> {
                 ref={this.ref}
                 dy={4}
             >
-                <textPath>{link.linkQuality}</textPath>
+                <textPath startOffset="50%" xlinkHref={xlinkHref}>{link.linkQuality}</textPath>
             </text>
         );
     }
@@ -82,7 +85,6 @@ const Links: FunctionalComponent<LinksPros> = props => {
             ))}
             {links.map((link: LinkI, index: number) => (
                 <LinkLabel
-                    startOffset="50%"
                     xlinkHref={`#edgepath${index}`}
                     key={`label${index}`}
                     link={link}
