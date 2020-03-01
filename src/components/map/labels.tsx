@@ -4,8 +4,12 @@ import { h, Component, ComponentChild, createRef } from "preact";
 import { NodeI, Device } from "./types";
 import * as style from "./map.css";
 import cx from "classnames";
+import { HoverableNode } from ".";
 
-class Label extends Component<{ node: NodeI }, {}> {
+interface LabelProps extends HoverableNode {
+    node: NodeI;
+}
+class Label extends Component<LabelProps, {}> {
     ref = createRef<SVGTextElement>();
 
     componentDidMount(): void {
@@ -14,23 +18,32 @@ class Label extends Component<{ node: NodeI }, {}> {
     }
 
     render(): ComponentChild {
-        const { node } = this.props;
+        const { node, onMouseOut, onMouseOver } = this.props;
         const deviceType = (node.device as Device).type as string;
         const mappedClas = style[deviceType] as string;
         const cn = cx(style.label, mappedClas);
         return (
-            <text className={cn} ref={this.ref} dy={-4} dx={3}>
+            <text onMouseOut={()=> onMouseOut(node)} onMouseOver={() => onMouseOver(node)} className={cn} ref={this.ref} dy={-4} dx={3}>
                 {node.id}
             </text>
         );
     }
 }
-
-export default class Labels extends Component<{ nodes: NodeI[] }, {}> {
+interface LabelsProps extends HoverableNode {
+    nodes: NodeI[];
+}
+export default class Labels extends Component<LabelsProps, {}> {
     render(): ComponentChild {
-        const { nodes } = this.props;
+        const { nodes, onMouseOut, onMouseOver } = this.props;
         const labels = nodes.map((node: NodeI, index: number) => {
-            return <Label key={index} node={node} />;
+            return (
+                <Label
+                    onMouseOut={onMouseOut}
+                    onMouseOver={onMouseOver}
+                    key={index}
+                    node={node}
+                />
+            );
         });
         return <g className={style.labels}>{labels}</g>;
     }

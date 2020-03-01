@@ -1,5 +1,10 @@
 /* eslint-disable react/display-name */
-import { h, Component, createRef, ComponentChild } from "preact";
+import {
+    h,
+    Component,
+    createRef,
+    ComponentChild
+} from "preact";
 
 import * as d3Shape from "d3-shape";
 import * as d3Drag from "d3-drag";
@@ -8,11 +13,6 @@ import * as d3Selection from "d3-selection";
 import { NodeI, LinkI, Device, DeviceType } from "./types";
 import cx from "classnames";
 import * as style from "./map.css";
-
-interface NodeProps {
-    node: NodeI;
-    color: string;
-}
 
 const getStarShape = (r1: number, r2: number): string | null => {
     const radialLineGenerator = d3Shape.lineRadial<[number, number]>();
@@ -64,17 +64,25 @@ const getStarShape = (r1: number, r2: number): string | null => {
 //     );
 // };
 
+interface NodeProps {
+    node: NodeI;
+    color: string;
+    onMouseOver?: (arg0: NodeI) => void;
+    onMouseOut?: (arg0: NodeI) => void;
+}
+
 class Node extends Component<NodeProps, {}> {
     ref = createRef<SVGElement>();
 
     componentDidMount(): void {
         const { current } = this.ref;
+        const { node } = this.props;
 
-        d3Selection.select(current as SVGElement).data([this.props.node]);
+        d3Selection.select(current as SVGElement).data([node]);
     }
 
     render(): ComponentChild {
-        const { node } = this.props;
+        const { node, onMouseOver, onMouseOut } = this.props;
         const deviceType = (node.device as Device).type as string;
         const mappedClas = style[deviceType] as string;
         const cn = cx(style.node, mappedClas);
@@ -86,19 +94,35 @@ class Node extends Component<NodeProps, {}> {
                         className={cn}
                         ref={this.ref}
                         d={getStarShape(14, 5)}
+                        onMouseOver={() => onMouseOver(node)}
+                        onMouseOut={() => onMouseOut(node)}
                     />
                 );
             default:
-                return <circle className={cn} ref={this.ref} r={5} />;
+                return (
+                    <circle
+                        onMouseOver={() => onMouseOver(node)}
+	                    onMouseOut={()=> onMouseOut(node)}
+                        className={cn}
+                        ref={this.ref}
+                        r={5}
+                />);
         }
     }
 }
 interface NodesProps {
     nodes: NodeI[];
     simulation: d3Force.Simulation<NodeI, LinkI>;
+    [k: string]: unknown;
+    onMouseOver?: () => void;
+    onMouseOut?: () => void;
 }
 
-export default class Nodes extends Component<NodesProps, {}> {
+interface NodesState {
+    tooltipNode: NodeI | undefined;
+}
+
+export default class Nodes extends Component<NodesProps, NodesState> {
     updateDrag(): void {
         const { simulation } = this.props;
         const drag = d3Drag
@@ -126,6 +150,7 @@ export default class Nodes extends Component<NodesProps, {}> {
             .selectAll<SVGCircleElement, NodeI>(`.${style.node}`)
             .call(drag);
     }
+
     componentDidMount(): void {
         this.updateDrag();
     }
@@ -134,12 +159,20 @@ export default class Nodes extends Component<NodesProps, {}> {
     }
 
     render(): ComponentChild {
-        const { nodes } = this.props;
-
+        const { nodes, onMouseOut, onMouseOver, ...rest } = this.props;
         return (
             <g className={style.nodes}>
                 {nodes.map((node: NodeI, index: number) => {
-                    return <Node key={index} node={node} color={"red"} />;
+                    return (
+                        <Node
+	onMouseOut={onMouseOut}
+	onMouseOver={onMouseOver}
+	{...rest}
+	key={index}
+	node={node}
+	color={"red"}
+                        />
+                    );
                 })}
             </g>
         );

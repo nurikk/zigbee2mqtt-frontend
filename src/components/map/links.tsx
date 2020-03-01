@@ -1,4 +1,4 @@
-import { LinkI } from "./types";
+import { LinkI, NodeI } from "./types";
 import {
     h,
     Component,
@@ -10,9 +10,9 @@ import * as d3Selection from "d3-selection";
 import * as style from "./map.css";
 import cx from "classnames";
 
+
 interface LinkProps {
     link: LinkI;
-    [k: string]: unknown;
 }
 class Link extends Component<LinkProps, {}> {
     ref = createRef<SVGLineElement>();
@@ -47,7 +47,7 @@ class LinkLabel extends Component<LinkProps, {}> {
     }
 
     render(): ComponentChild {
-        const { link, ...rest } = this.props;
+        const { link } = this.props;
         return (
             <text
                 filter={"url(#solid)"}
@@ -55,19 +55,22 @@ class LinkLabel extends Component<LinkProps, {}> {
                 ref={this.ref}
                 dy={4}
             >
-                <textPath {...rest}>{link.linkQuality}</textPath>
+                <textPath>{link.linkQuality}</textPath>
             </text>
         );
     }
 }
-const Links: FunctionalComponent<{ links: LinkI[] }> = props => {
+interface LinksPros {
+    links: LinkI[];
+}
+const Links: FunctionalComponent<LinksPros> = props => {
     const { links } = props;
     return (
         <g className={style.links}>
             <defs>
                 <filter x="-0.1" y="0" width="1.2" height="1" id="solid">
-                    <feFlood flood-color="white"/>
-                    <feComposite in="SourceGraphic"/>
+                    <feFlood flood-color="white" />
+                    <feComposite in="SourceGraphic" />
                 </filter>
             </defs>
             {links.map((link: LinkI, index: number) => (

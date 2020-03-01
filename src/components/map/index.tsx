@@ -1,4 +1,4 @@
-import { h, Component, ComponentChild } from "preact";
+import { h, Component, ComponentChild, FunctionalComponent } from "preact";
 import Links from "./links";
 import Nodes from "./nodes";
 import Labels from "./labels";
@@ -6,17 +6,21 @@ import * as d3Force from "d3-force";
 import * as d3Selection from "d3-selection";
 
 import * as style from "./map.css";
-import { GraphI, NodeI, LinkI, DeviceType, Device } from "./types";
+import { GraphI, NodeI, LinkI } from "./types";
 import * as request from "superagent";
 import { convert2graph } from "./convert";
 
+export interface HoverableNode {
+    onMouseOver?: (arg0: NodeI) => void;
+    onMouseOut?: (arg0: NodeI) => void;
+}
 interface Props {
     width: number;
     height: number;
-    // graph: GraphI;
 }
 interface State {
     graph: GraphI;
+    tooltipNode: NodeI | undefined;
 }
 
 type CallbackHandler = (err: unknown, res: request.Response) => void;
@@ -26,6 +30,22 @@ const fetchZibeeDevicesList = (callback: CallbackHandler): void => {
         .get("/api/zigbee/devices")
         .responseType("json")
         .end(callback);
+};
+
+interface TooltipProps {
+    x: number;
+    y: number;
+    info: NodeI;
+}
+
+const Tooltip: FunctionalComponent<TooltipProps> = (props: TooltipProps) => {
+    const { x, y, info } = props;
+    return (
+        <foreignObject x={x + 10} y={y + 10} width={100} height={50}>
+            <div>{info.device.friendly_name}</div>
+            <div>{info.device.ModelId}</div>
+        </foreignObject>
+    );
 };
 
 export default class Map extends Component<Props, State> {
@@ -80,10 +100,17 @@ export default class Map extends Component<Props, State> {
         linkForce.links(graph.links);
         this.simulation.restart();
     }
+
+    setTooltip = (tooltipNode: NodeI): void => {
+        console.log(tooltipNode);
+        this.setState({ tooltipNode });
+    };
+    removeTooltip = (): void => {
+        this.setState({ tooltipNode: undefined });
+    };
     constructor(props: Props) {
         super(props);
         const { width, height } = this.props;
-        const routerTypes = [DeviceType.Coordinator, DeviceType.Router];
         const getDistance = (d: LinkI): number => {
             switch (d.type) {
                 case "Router2Router":
@@ -125,7 +152,8 @@ export default class Map extends Component<Props, State> {
             graph: {
                 nodes: [],
                 links: []
-            }
+            },
+            tooltipNode: undefined
         };
     }
     componentDidMount(): void {
@@ -137,12 +165,29 @@ export default class Map extends Component<Props, State> {
 
     render(): ComponentChild {
         const { width, height } = this.props;
-        const { graph } = this.state;
+        const { graph, tooltipNode } = this.state;
+        const { setTooltip, removeTooltip } = this;
         return (
             <svg className={style.container} width={width} height={height}>
                 <Links links={graph.links} />
-                <Nodes nodes={graph.nodes} simulation={this.simulation} />
-                <Labels nodes={graph.nodes} />
+                <Nodes
+                    nodes={graph.nodes}
+                    simulation={this.simulation}
+                    onMouseOver={setTooltip}
+                    onMouseOut={removeTooltip}
+                />
+                <Labels
+                    nodes={graph.nodes}
+                    onMouseOver={setTooltip}
+                    onMouseOut={removeTooltip}
+                />
+                {tooltipNode ? (
+                    <Tooltip
+	x={tooltipNode.x}
+	y={tooltipNode.y}
+	info={tooltipNode}
+                    />
+                ) : null}
             </svg>
         );
     }
