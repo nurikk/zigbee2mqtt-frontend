@@ -1,37 +1,42 @@
-import { LinkI, NodeI } from "./types";
+import { LinkI } from './types';
 import {
     h,
     Component,
     ComponentChild,
     createRef,
-    FunctionalComponent
-} from "preact";
-import * as d3Selection from "d3-selection";
-import * as style from "./map.css";
-import cx from "classnames";
+    FunctionalComponent,
+    RefObject
+} from 'preact';
+import * as d3Selection from 'd3-selection';
+import * as style from './map.css';
+import cx from 'classnames';
 
+type KeyValuePairs = { [k: string]: string };
 
 interface LinkProps {
     link: LinkI;
+    id?: string;
 }
+
 class Link extends Component<LinkProps, {}> {
-    ref = createRef<SVGLineElement>();
+    ref = createRef<SVGPathElement>();
 
     componentDidMount(): void {
         const { current } = this.ref;
         const { link } = this.props;
-        d3Selection.select(current as SVGLineElement).data([link]);
+        d3Selection.select(current as SVGPathElement).data([link]);
     }
 
     render(): ComponentChild {
-        const { link, ...rest } = this.props;
+        const { link, id, ...rest } = this.props;
         const linkType = link.type as string;
-        const mappedClas = style[linkType] as string;
+        const mappedClas = (style as KeyValuePairs)[linkType] as string;
         return (
             <path
+                id={id}
                 {...rest}
                 className={cx(style.link, mappedClas)}
-                ref={this.ref}
+                ref={this.ref as RefObject<SVGPathElement>}
                 strokeWidth={5}
             />
         );
@@ -40,7 +45,8 @@ class Link extends Component<LinkProps, {}> {
 interface LinkLabelProps extends LinkProps {
     xlinkHref: string;
 }
-class LinkLabel extends Component<LinkProps, {}> {
+
+class LinkLabel extends Component<LinkLabelProps, {}> {
     ref = createRef<SVGTextElement>();
 
     componentDidMount(): void {
@@ -53,12 +59,14 @@ class LinkLabel extends Component<LinkProps, {}> {
         const { link, xlinkHref } = this.props;
         return (
             <text
-                filter={"url(#solid)"}
+                filter={'url(#solid)'}
                 className={style.linkLabel}
                 ref={this.ref}
                 dy={4}
             >
-                <textPath startOffset="50%" xlinkHref={xlinkHref}>{link.linkQuality}</textPath>
+                <textPath startOffset="50%" xlinkHref={xlinkHref}>
+                    {link.linkQuality}
+                </textPath>
             </text>
         );
     }

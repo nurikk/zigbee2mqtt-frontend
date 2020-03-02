@@ -1,14 +1,14 @@
-import { h, Component, ComponentChild, FunctionalComponent } from "preact";
-import Links from "./links";
-import Nodes from "./nodes";
-import Labels from "./labels";
-import * as d3Force from "d3-force";
-import * as d3Selection from "d3-selection";
+import { h, Component, ComponentChild, FunctionalComponent } from 'preact';
+import Links from './links';
+import Nodes from './nodes';
+import Labels from './labels';
+import * as d3Force from 'd3-force';
+import * as d3Selection from 'd3-selection';
 
-import * as style from "./map.css";
-import { GraphI, NodeI, LinkI } from "./types";
-import * as request from "superagent";
-import { convert2graph } from "./convert";
+import * as style from './map.css';
+import { GraphI, NodeI, LinkI } from './types';
+import * as request from 'superagent';
+import { convert2graph } from './convert';
 
 export interface HoverableNode {
     onMouseOver?: (arg0: NodeI) => void;
@@ -20,15 +20,15 @@ interface Props {
 }
 interface State {
     graph: GraphI;
-    tooltipNode: NodeI | undefined;
+    tooltipNode: NodeI | false;
 }
 
 type CallbackHandler = (err: unknown, res: request.Response) => void;
 
 const fetchZibeeDevicesList = (callback: CallbackHandler): void => {
     request
-        .get("/api/zigbee/devices")
-        .responseType("json")
+        .get('/api/zigbee/devices')
+        .responseType('json')
         .end(callback);
 };
 
@@ -66,34 +66,29 @@ export default class Map extends Component<Props, State> {
         );
         const ticked = (): void => {
             link.attr(
-                "d",
+                'd',
                 d =>
-                    `M ${d.source.x} ${d.source.y} L ${d.target.x} ${d.target.y}`
+                    `M ${(d.source as NodeI).x} ${(d.source as NodeI).y} L ${(d.target as NodeI).x} ${(d.target as NodeI).y}`
             );
-            // link.attr("x1", d => (d.source as NodeI).x as number)
-            //     .attr("y1", d => (d.source as NodeI).y as number)
-            //     .attr("x2", d => (d.target as NodeI).x as number)
-            //     .attr("y2", d => (d.target as NodeI).y as number);
 
-            linkLabel.attr("transform", function(d) {
-                if (d.target.x < d.source.x) {
+            linkLabel.attr('transform', function (d) {
+                //TODO: add type guard
+                if (((d.target as NodeI).x as number) < ((d.source as NodeI).x as number)) {
                     const bbox = this.getBBox();
                     const rx = bbox.x + bbox.width / 2;
                     const ry = bbox.y + bbox.height / 2;
                     return `rotate(180 ${rx} ${ry})`;
                 }
-                return "rotate(0)";
+                return 'rotate(0)';
             });
-
-            // node.attr("cx", d => d.x as number).attr("cy", d => d.y as number);
-            node.attr("transform", d => `translate(${d.x}, ${d.y})`);
+            node.attr('transform', d => `translate(${d.x}, ${d.y})`);
             label
-                .attr("x", d => (d.x as number) + 5)
-                .attr("y", d => (d.y as number) + 5);
+                .attr('x', d => (d.x as number) + 5)
+                .attr('y', d => (d.y as number) + 5);
         };
         const { graph } = this.state;
-        this.simulation.nodes(graph.nodes).on("tick", ticked);
-        const linkForce = this.simulation.force("link") as d3Force.ForceLink<
+        this.simulation.nodes(graph.nodes).on('tick', ticked);
+        const linkForce = this.simulation.force('link') as d3Force.ForceLink<
             NodeI,
             LinkI
         >;
@@ -102,25 +97,24 @@ export default class Map extends Component<Props, State> {
     }
 
     setTooltip = (tooltipNode: NodeI): void => {
-        console.log(tooltipNode);
         this.setState({ tooltipNode });
     };
     removeTooltip = (): void => {
-        this.setState({ tooltipNode: undefined });
+        this.setState({ tooltipNode: false });
     };
     constructor(props: Props) {
         super(props);
         const { width, height } = this.props;
         const getDistance = (d: LinkI): number => {
             switch (d.type) {
-                case "Router2Router":
-                case "Router2Coordinator":
+                case 'Router2Router':
+                case 'Router2Coordinator':
                     return 200;
-                case "EndDevice2Coordinator":
-                case "EndDevice2Router":
+                case 'EndDevice2Coordinator':
+                case 'EndDevice2Router':
                     return 100;
                 default:
-                    return 200;
+                    return 150;
             }
         };
         const linkForce = d3Force
@@ -131,29 +125,24 @@ export default class Map extends Component<Props, State> {
 
         const chargeForce = d3Force
             .forceManyBody<NodeI>()
-            // .strength(d =>
-            //     routerTypes.includes((d.device as Device).type as DeviceType)
-            //         ? -100
-            //         : -1000
-            // )
             .distanceMin(200)
             .distanceMax(1000)
             .strength(-200);
 
         this.simulation = d3Force
             .forceSimulation<NodeI>()
-            .force("x", d3Force.forceX(width / 2).strength(0.05))
-            .force("y", d3Force.forceY(height / 2).strength(0.05))
-            .force("link", linkForce)
-            .force("charge", chargeForce)
-            .force("center", d3Force.forceCenter<NodeI>(width / 2, height / 2));
+            .force('x', d3Force.forceX(width / 2).strength(0.05))
+            .force('y', d3Force.forceY(height / 2).strength(0.05))
+            .force('link', linkForce)
+            .force('charge', chargeForce)
+            .force('center', d3Force.forceCenter<NodeI>(width / 2, height / 2));
 
         this.state = {
             graph: {
                 nodes: [],
                 links: []
             },
-            tooltipNode: undefined
+            tooltipNode: false
         };
     }
     componentDidMount(): void {
@@ -183,9 +172,9 @@ export default class Map extends Component<Props, State> {
                 />
                 {tooltipNode ? (
                     <Tooltip
-	x={tooltipNode.x}
-	y={tooltipNode.y}
-	info={tooltipNode}
+                        x={tooltipNode.x as number}
+                        y={tooltipNode.y as number}
+                        info={tooltipNode}
                     />
                 ) : null}
             </svg>

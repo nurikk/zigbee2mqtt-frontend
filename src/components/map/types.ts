@@ -1,14 +1,16 @@
-import * as d3Force from "d3-force";
+import * as d3Force from 'd3-force';
 
 export interface NodeI extends d3Force.SimulationNodeDatum {
     id: string;
+    name: string;
     device: Device;
 }
 export type LinkType =
-    | "Router2Coordinator"
-    | "Router2Router"
-    | "EndDevice2Coordinator"
-    | "EndDevice2Router";
+    | 'Router2Coordinator'
+    | 'Router2Router'
+    | 'EndDevice2Coordinator'
+    | 'EndDevice2Router';
+
 export interface LinkI extends d3Force.SimulationLinkDatum<NodeI> {
     linkQuality: number | undefined;
     type: LinkType;
@@ -27,9 +29,9 @@ export interface TimeInfo {
 }
 
 export enum DeviceType {
-    EndDevice = "EndDevice",
-    Router = "Router",
-    Coordinator = "Coordinator"
+    EndDevice = 'EndDevice',
+    Router = 'Router',
+    Coordinator = 'Coordinator'
 }
 
 export type DeviceStats = {
@@ -46,3 +48,5 @@ export type Device = {
     friendly_name?: string | undefined;
     Rtg?: number[] | undefined;
 };
+
+export type Dictionary = { [index: string]: string }

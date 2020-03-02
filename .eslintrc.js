@@ -3,10 +3,11 @@ module.exports = {
         browser: true
     },
     extends: [
-        "plugin:preact/recommended",
+        "preact",
+        // "plugin:preact/recommended",
         "plugin:@typescript-eslint/recommended",
-        "prettier/@typescript-eslint",
-        "plugin:prettier/recommended"
+        // "prettier/@typescript-eslint",
+        // "plugin:prettier/recommended"
     ],
     parser: "@typescript-eslint/parser",
     parserOptions: {

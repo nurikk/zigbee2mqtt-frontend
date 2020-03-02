@@ -32,12 +32,13 @@
 }
 
 .labels {
-
+  -custom-noop: noop;
 }
 .links {
-
+  -custom-noop: noop;
 }
 .nodes {
+  -custom-noop: noop;
 }
 .EndDevice {
   fill: green;

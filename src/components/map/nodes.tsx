@@ -1,18 +1,21 @@
-/* eslint-disable react/display-name */
 import {
     h,
     Component,
     createRef,
-    ComponentChild
-} from "preact";
+    ComponentChild,
+    RefObject
+} from 'preact';
 
-import * as d3Shape from "d3-shape";
-import * as d3Drag from "d3-drag";
-import * as d3Force from "d3-force";
-import * as d3Selection from "d3-selection";
-import { NodeI, LinkI, Device, DeviceType } from "./types";
-import cx from "classnames";
-import * as style from "./map.css";
+import * as d3Shape from 'd3-shape';
+import * as d3Drag from 'd3-drag';
+import * as d3Force from 'd3-force';
+import * as d3Selection from 'd3-selection';
+import { NodeI, LinkI, Device, DeviceType, Dictionary } from './types';
+import cx from 'classnames';
+
+import * as style from './map.css';
+import { HoverableNode } from '.';
+const stylesDict: Dictionary = { ...style };
 
 const getStarShape = (r1: number, r2: number): string | null => {
     const radialLineGenerator = d3Shape.lineRadial<[number, number]>();
@@ -64,15 +67,12 @@ const getStarShape = (r1: number, r2: number): string | null => {
 //     );
 // };
 
-interface NodeProps {
+interface NodeProps extends HoverableNode {
     node: NodeI;
-    color: string;
-    onMouseOver?: (arg0: NodeI) => void;
-    onMouseOut?: (arg0: NodeI) => void;
 }
 
 class Node extends Component<NodeProps, {}> {
-    ref = createRef<SVGElement>();
+    ref = createRef<SVGPathElement | SVGCircleElement>();
 
     componentDidMount(): void {
         const { current } = this.ref;
@@ -81,10 +81,23 @@ class Node extends Component<NodeProps, {}> {
         d3Selection.select(current as SVGElement).data([node]);
     }
 
+
+    onMouseOut = (): void => {
+        const { node, onMouseOut } = this.props;
+        onMouseOut && onMouseOut(node);
+    }
+
+    onMouseOver = (): void => {
+        const { node, onMouseOver } = this.props;
+        onMouseOver && onMouseOver(node);
+    }
+
+
     render(): ComponentChild {
-        const { node, onMouseOver, onMouseOut } = this.props;
+        const { node } = this.props;
+        const { onMouseOver, onMouseOut } = this;
         const deviceType = (node.device as Device).type as string;
-        const mappedClas = style[deviceType] as string;
+        const mappedClas = stylesDict[deviceType] as string;
         const cn = cx(style.node, mappedClas);
 
         switch (node.device.type) {
@@ -92,30 +105,27 @@ class Node extends Component<NodeProps, {}> {
                 return (
                     <path
                         className={cn}
-                        ref={this.ref}
-                        d={getStarShape(14, 5)}
-                        onMouseOver={() => onMouseOver(node)}
-                        onMouseOut={() => onMouseOut(node)}
+                        ref={this.ref as RefObject<SVGPathElement>}
+                        d={getStarShape(14, 5) as string}
+                        onMouseOver={onMouseOver}
+                        onMouseOut={onMouseOut}
                     />
                 );
             default:
                 return (
                     <circle
-                        onMouseOver={() => onMouseOver(node)}
-	                    onMouseOut={()=> onMouseOut(node)}
+                        onMouseOver={onMouseOver}
+                        onMouseOut={onMouseOut}
                         className={cn}
-                        ref={this.ref}
+                        ref={this.ref as RefObject<SVGCircleElement>}
                         r={5}
-                />);
+                    />);
         }
     }
 }
-interface NodesProps {
+interface NodesProps extends HoverableNode {
     nodes: NodeI[];
     simulation: d3Force.Simulation<NodeI, LinkI>;
-    [k: string]: unknown;
-    onMouseOver?: () => void;
-    onMouseOut?: () => void;
 }
 
 interface NodesState {
@@ -127,18 +137,18 @@ export default class Nodes extends Component<NodesProps, NodesState> {
         const { simulation } = this.props;
         const drag = d3Drag
             .drag<SVGCircleElement, NodeI>()
-            .on("start", d => {
+            .on('start', d => {
                 if (!d3Selection.event.active) {
                     simulation.alphaTarget(0.3).restart();
                 }
                 d.fx = d.x;
                 d.fy = d.y;
             })
-            .on("drag", d => {
+            .on('drag', d => {
                 d.fx = d3Selection.event.x;
                 d.fy = d3Selection.event.y;
             })
-            .on("end", d => {
+            .on('end', d => {
                 if (!d3Selection.event.active) {
                     simulation.alphaTarget(0);
                 }
@@ -159,21 +169,17 @@ export default class Nodes extends Component<NodesProps, NodesState> {
     }
 
     render(): ComponentChild {
-        const { nodes, onMouseOut, onMouseOver, ...rest } = this.props;
+        const { nodes, onMouseOut, onMouseOver } = this.props;
         return (
             <g className={style.nodes}>
-                {nodes.map((node: NodeI, index: number) => {
-                    return (
-                        <Node
-	onMouseOut={onMouseOut}
-	onMouseOver={onMouseOver}
-	{...rest}
-	key={index}
-	node={node}
-	color={"red"}
-                        />
-                    );
-                })}
+                {nodes.map((node: NodeI, index: number) => (
+                    <Node
+                        onMouseOut={onMouseOut}
+                        onMouseOver={onMouseOver}
+                        key={index}
+                        node={node}
+                    />
+                ))}
             </g>
         );
     }
