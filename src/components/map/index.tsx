@@ -1,4 +1,4 @@
-import { h, Component, ComponentChild } from 'preact';
+import { h, Component, ComponentChild, createRef } from 'preact';
 import Links from './links';
 import Nodes from './nodes';
 import Labels from './labels';
@@ -15,13 +15,12 @@ export interface HoverableNode {
     onMouseOver?: (arg0: NodeI) => void;
     onMouseOut?: (arg0: NodeI) => void;
 }
-interface Props {
-    width: number;
-    height: number;
-}
+
 interface State {
     graph: GraphI;
     tooltipNode: NodeI | false;
+    width: number;
+    height: number;
 }
 
 type CallbackHandler = (err: unknown, res: request.Response) => void;
@@ -33,12 +32,25 @@ const fetchZibeeDevicesList = (callback: CallbackHandler): void => {
         .end(callback);
 };
 
+const getDistance = (d: LinkI): number => {
+    switch (d.type) {
+        case 'Router2Router':
+        case 'Router2Coordinator':
+            return 200;
+        case 'EndDevice2Coordinator':
+        case 'EndDevice2Router':
+            return 100;
+        default:
+            return 150;
+    }
+};
 
-
-export default class Map extends Component<Props, State> {
-    simulation: d3Force.Simulation<NodeI, LinkI>;
+export default class Map extends Component<{}, State> {
+    ref = createRef<HTMLDivElement>();
+    simulation!: d3Force.Simulation<NodeI, LinkI>;
 
     updateNodes(): void {
+        this.updateForces();
         const node = d3Selection.selectAll<SVGGeometryElement, NodeI>(
             `.${style.node}`
         );
@@ -51,12 +63,10 @@ export default class Map extends Component<Props, State> {
         const label = d3Selection.selectAll<SVGTextElement, NodeI>(
             `.${style.label}`
         );
+        const linkComputeFn = (d: LinkI): string =>
+                `M ${(d.source as NodeI).x} ${(d.source as NodeI).y} L ${(d.target as NodeI).x} ${(d.target as NodeI).y}`
         const ticked = (): void => {
-            link.attr(
-                'd',
-                d =>
-                    `M ${(d.source as NodeI).x} ${(d.source as NodeI).y} L ${(d.target as NodeI).x} ${(d.target as NodeI).y}`
-            );
+            link.attr('d', linkComputeFn);
 
             linkLabel.attr('transform', function (d) {
                 //TODO: add type guard
@@ -87,44 +97,13 @@ export default class Map extends Component<Props, State> {
         this.setState({ tooltipNode });
     };
     removeTooltip = (): void => {
-        // this.setState({ tooltipNode: false });
+        this.setState({ tooltipNode: false });
     };
-    constructor(props: Props) {
-        super(props);
-        const { width, height } = this.props;
-        const getDistance = (d: LinkI): number => {
-            switch (d.type) {
-                case 'Router2Router':
-                case 'Router2Coordinator':
-                    return 200;
-                case 'EndDevice2Coordinator':
-                case 'EndDevice2Router':
-                    return 100;
-                default:
-                    return 150;
-            }
-        };
-        const linkForce = d3Force
-            .forceLink<NodeI, LinkI>()
-            .id(d => d.id)
-            .distance(getDistance)
-            .strength(1);
-
-        const chargeForce = d3Force
-            .forceManyBody<NodeI>()
-            .distanceMin(200)
-            .distanceMax(1000)
-            .strength(-200);
-
-        this.simulation = d3Force
-            .forceSimulation<NodeI>()
-            .force('x', d3Force.forceX(width / 2).strength(0.05))
-            .force('y', d3Force.forceY(height / 2).strength(0.05))
-            .force('link', linkForce)
-            .force('charge', chargeForce)
-            .force('center', d3Force.forceCenter<NodeI>(width / 2, height / 2));
-
+    constructor() {
+        super();
         this.state = {
+            width: 0,
+            height: 0,
             graph: {
                 nodes: [],
                 links: []
@@ -132,41 +111,68 @@ export default class Map extends Component<Props, State> {
             tooltipNode: false
         };
     }
+
+    updateForces(): void {
+        const { width, height } = this.state;
+
+        const linkForce = d3Force
+            .forceLink<NodeI, LinkI>()
+            .id(d => d.id)
+            .distance(getDistance)
+            .strength(1);
+
+        const chargeForce = d3Force
+            .forceManyBody()
+            .distanceMin(200)
+            .distanceMax(1000)
+            .strength(-200);
+
+        this.simulation = d3Force
+            .forceSimulation<NodeI>()
+            .force('x', d3Force.forceX(width / 2).strength(0.1))
+            .force('y', d3Force.forceY(height / 2).strength(0.1))
+            .force('link', linkForce)
+            .force('charge', chargeForce)
+            .force('center', d3Force.forceCenter(width / 2, height / 2));
+    }
     componentDidMount(): void {
         fetchZibeeDevicesList((err, res) => {
+            const { width, height } = (this.ref.current as HTMLDivElement).getBoundingClientRect();
             const graph = convert2graph(res.body);
-            this.setState({ graph }, this.updateNodes);
+            this.setState({ graph, width, height }, this.updateNodes);
         });
     }
 
     render(): ComponentChild {
-        const { width, height } = this.props;
+        const { width, height } = this.state;
         const { graph, tooltipNode } = this.state;
         const { setTooltip, removeTooltip } = this;
         return (
-            <svg className={style.container} width={width} height={height}>
-                <Links links={graph.links} />
-                <Nodes
-                    nodes={graph.nodes}
-                    simulation={this.simulation}
-                    onMouseOver={setTooltip}
-                    onMouseOut={removeTooltip}
-                />
-                <Labels
-                    nodes={graph.nodes}
-                    onMouseOver={setTooltip}
-                    onMouseOut={removeTooltip}
-                />
-                {tooltipNode ? (
-                    <foreignObject
-                        className={style.foreignObject}
-                        x={tooltipNode.x as number + 10}
-                        y={tooltipNode.y as number + 5}
-                    >
-                        <Tooltip info={tooltipNode} />
-                    </foreignObject>
-                ) : null}
-            </svg>
+            <div className={style.container} ref={this.ref}>
+                <svg width={width} height={height}>
+                    <Links links={graph.links} />
+                    <Nodes
+                        nodes={graph.nodes}
+                        simulation={this.simulation}
+                        onMouseOver={setTooltip}
+                        onMouseOut={removeTooltip}
+                    />
+                    <Labels
+                        nodes={graph.nodes}
+                        onMouseOver={setTooltip}
+                        onMouseOut={removeTooltip}
+                    />
+                    {tooltipNode ? (
+                        <foreignObject
+                            className={style.foreignObject}
+                            x={tooltipNode.x as number + 10}
+                            y={tooltipNode.y as number + 5}
+                        >
+                            <Tooltip info={tooltipNode} />
+                        </foreignObject>
+                    ) : null}
+                </svg>
+            </div>
         );
     }
 }
