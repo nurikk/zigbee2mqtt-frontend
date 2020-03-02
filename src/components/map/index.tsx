@@ -44,7 +44,7 @@ const getDistance = (d: LinkI): number => {
             return 150;
     }
 };
-
+const MOBILE_SCREEN_TRESHOLD = 400;
 export default class Map extends Component<{}, State> {
     ref = createRef<HTMLDivElement>();
     simulation!: d3Force.Simulation<NodeI, LinkI>;
@@ -64,7 +64,7 @@ export default class Map extends Component<{}, State> {
             `.${style.label}`
         );
         const linkComputeFn = (d: LinkI): string =>
-                `M ${(d.source as NodeI).x} ${(d.source as NodeI).y} L ${(d.target as NodeI).x} ${(d.target as NodeI).y}`
+            `M ${(d.source as NodeI).x} ${(d.source as NodeI).y} L ${(d.target as NodeI).x} ${(d.target as NodeI).y}`
         const ticked = (): void => {
             link.attr('d', linkComputeFn);
 
@@ -110,6 +110,9 @@ export default class Map extends Component<{}, State> {
             },
             tooltipNode: false
         };
+
+        this.simulation = d3Force
+            .forceSimulation<NodeI>();
     }
 
     updateForces(): void {
@@ -127,13 +130,15 @@ export default class Map extends Component<{}, State> {
             .distanceMax(1000)
             .strength(-200);
 
-        this.simulation = d3Force
-            .forceSimulation<NodeI>()
-            .force('x', d3Force.forceX(width / 2).strength(0.1))
-            .force('y', d3Force.forceY(height / 2).strength(0.1))
+        this.simulation
             .force('link', linkForce)
             .force('charge', chargeForce)
             .force('center', d3Force.forceCenter(width / 2, height / 2));
+
+        if (width < MOBILE_SCREEN_TRESHOLD) {
+            this.simulation.force('x', d3Force.forceX(width / 2).strength(0.1))
+                .force('y', d3Force.forceY(height / 2).strength(0.1))
+        }
     }
     componentDidMount(): void {
         fetchZibeeDevicesList((err, res) => {
