@@ -1,4 +1,4 @@
-import { h, Component, ComponentChild, FunctionalComponent } from 'preact';
+import { h, Component, ComponentChild } from 'preact';
 import Links from './links';
 import Nodes from './nodes';
 import Labels from './labels';
@@ -9,6 +9,7 @@ import * as style from './map.css';
 import { GraphI, NodeI, LinkI } from './types';
 import * as request from 'superagent';
 import { convert2graph } from './convert';
+import Tooltip from './tooltip';
 
 export interface HoverableNode {
     onMouseOver?: (arg0: NodeI) => void;
@@ -32,21 +33,7 @@ const fetchZibeeDevicesList = (callback: CallbackHandler): void => {
         .end(callback);
 };
 
-interface TooltipProps {
-    x: number;
-    y: number;
-    info: NodeI;
-}
 
-const Tooltip: FunctionalComponent<TooltipProps> = (props: TooltipProps) => {
-    const { x, y, info } = props;
-    return (
-        <foreignObject x={x + 10} y={y + 10} width={100} height={50}>
-            <div>{info.device.friendly_name}</div>
-            <div>{info.device.ModelId}</div>
-        </foreignObject>
-    );
-};
 
 export default class Map extends Component<Props, State> {
     simulation: d3Force.Simulation<NodeI, LinkI>;
@@ -100,7 +87,7 @@ export default class Map extends Component<Props, State> {
         this.setState({ tooltipNode });
     };
     removeTooltip = (): void => {
-        this.setState({ tooltipNode: false });
+        // this.setState({ tooltipNode: false });
     };
     constructor(props: Props) {
         super(props);
@@ -171,11 +158,13 @@ export default class Map extends Component<Props, State> {
                     onMouseOut={removeTooltip}
                 />
                 {tooltipNode ? (
-                    <Tooltip
-                        x={tooltipNode.x as number}
-                        y={tooltipNode.y as number}
-                        info={tooltipNode}
-                    />
+                    <foreignObject
+                        className={style.foreignObject}
+                        x={tooltipNode.x as number + 10}
+                        y={tooltipNode.y as number + 5}
+                    >
+                        <Tooltip info={tooltipNode} />
+                    </foreignObject>
                 ) : null}
             </svg>
         );

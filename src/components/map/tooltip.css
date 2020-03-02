@@ -1,0 +1,11 @@
+
+
+.tooltip {
+    border: 1px solid #000;
+    min-width: 200px;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 5px;
+    box-shadow: 2px 2px 3px 0px rgba(0,0,0,0.75);
+
+}

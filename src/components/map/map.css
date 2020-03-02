@@ -24,7 +24,7 @@
 
 .label {
   font-size: 14px;
-  fill: #fff;
+  fill: black;
   cursor: pointer;
 }
 .label.Coordinator {
@@ -61,4 +61,8 @@
   stroke: green;
   opacity: 0.8;
   stroke-dasharray: 5;
+}
+
+.foreignObject {
+  overflow: visible;
 }

@@ -21,3 +21,4 @@ export const EndDevice2Coordinator: string;
 export const endDevice2Coordinator: string;
 export const EndDevice2Router: string;
 export const endDevice2Router: string;
+export const foreignObject: string;
