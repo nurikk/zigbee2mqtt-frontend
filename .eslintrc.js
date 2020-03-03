@@ -4,17 +4,14 @@ module.exports = {
     },
     extends: [
         "preact",
-        // "plugin:preact/recommended",
         "plugin:@typescript-eslint/recommended",
-        // "prettier/@typescript-eslint",
-        // "plugin:prettier/recommended"
     ],
     parser: "@typescript-eslint/parser",
     parserOptions: {
         ecmaFeatures: {
             jsx: true
         },
-        ecmaVersion:  2018,
+        ecmaVersion: 2018,
         sourceType: "module",
     },
     rules: {
@@ -26,12 +23,10 @@ module.exports = {
             version: "detect"
         },
     },
-    overrides: [
-        {
-            files: ["*.js"],
-            rules: {
-                "@typescript-eslint/explicit-function-return-type": "off",
-            }
+    overrides: [{
+        files: ["*.js"],
+        rules: {
+            "@typescript-eslint/explicit-function-return-type": "off",
         }
-    ]
+    }]
 };

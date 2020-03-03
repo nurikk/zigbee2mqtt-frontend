@@ -1,4 +1,4 @@
-import { LinkI } from './types';
+import { LinkI, Dictionary } from './types';
 import {
     h,
     Component,
@@ -10,8 +10,6 @@ import {
 import * as d3Selection from 'd3-selection';
 import * as style from './map.css';
 import cx from 'classnames';
-
-type KeyValuePairs = { [k: string]: string };
 
 interface LinkProps {
     link: LinkI;
@@ -30,7 +28,7 @@ class Link extends Component<LinkProps, {}> {
     render(): ComponentChild {
         const { link, id, ...rest } = this.props;
         const linkType = link.type as string;
-        const mappedClas = (style as KeyValuePairs)[linkType] as string;
+        const mappedClas = (style as Dictionary<string>)[linkType] as string;
         return (
             <path
                 id={id}

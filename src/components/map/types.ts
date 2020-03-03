@@ -49,4 +49,4 @@ export type Device = {
     Rtg?: number[] | undefined;
 };
 
-export type Dictionary = { [index: string]: string }
+export type Dictionary<V> = { [index: string]: V }

@@ -14,6 +14,7 @@ import Tooltip from './tooltip';
 export interface HoverableNode {
     onMouseOver?: (arg0: NodeI) => void;
     onMouseOut?: (arg0: NodeI) => void;
+    onDblClick?: (arg0: NodeI) => void;
 }
 
 export interface TimeInfo {
@@ -21,7 +22,7 @@ export interface TimeInfo {
     ntp_server: string;
     tz: string;
     ts: number;
-};
+}
 
 interface State {
     graph: GraphI;
@@ -114,6 +115,11 @@ export default class Map extends Component<{}, State> {
     removeTooltip = (): void => {
         this.setState({ tooltipNode: false });
     };
+
+    openDetailsWindow = (node: NodeI): void => {
+        const id = parseInt(node.id, 10);
+        window.open(`/zigbee?nwkAddr=0x${id.toString(16)}`, '_blank');
+    }
     constructor() {
         super();
         this.state = {
@@ -170,7 +176,7 @@ export default class Map extends Component<{}, State> {
     render(): ComponentChild {
         const { width, height, time } = this.state;
         const { graph, tooltipNode } = this.state;
-        const { setTooltip, removeTooltip } = this;
+        const { setTooltip, removeTooltip, openDetailsWindow } = this;
         return (
             <div className={style.container} ref={this.ref}>
                 <svg width={width} height={height}>
@@ -180,12 +186,14 @@ export default class Map extends Component<{}, State> {
                         simulation={this.simulation}
                         onMouseOver={setTooltip}
                         onMouseOut={removeTooltip}
+                        onDblClick={openDetailsWindow}
                         time={time}
                     />
                     <Labels
                         nodes={graph.nodes}
                         onMouseOver={setTooltip}
                         onMouseOut={removeTooltip}
+                        onDblClick={openDetailsWindow}
                     />
                     {tooltipNode ? (
                         <foreignObject

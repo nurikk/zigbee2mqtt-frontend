@@ -15,7 +15,7 @@ import cx from 'classnames';
 
 import * as style from './map.css';
 import { HoverableNode } from '.';
-const stylesDict: Dictionary = { ...style };
+const stylesDict: Dictionary<string> = { ...style };
 
 const getStarShape = (r1: number, r2: number): string | null => {
     const radialLineGenerator = d3Shape.lineRadial<[number, number]>();
@@ -88,7 +88,9 @@ class Node extends Component<NodeProps, {}> {
         const { current } = this.ref;
         const { node } = this.props;
 
-        d3Selection.select(current as SVGElement).data([node]);
+        d3Selection
+            .select(current as SVGElement)
+            .data([node]);
     }
 
 
@@ -101,13 +103,16 @@ class Node extends Component<NodeProps, {}> {
         const { node, onMouseOver } = this.props;
         onMouseOver && onMouseOver(node);
     }
-
+    onDblClick = (): void => {
+        const { node, onDblClick } = this.props;
+        onDblClick && onDblClick(node);
+    }
 
     render(): ComponentChild {
         const { node, time } = this.props;
-        const { onMouseOver, onMouseOut } = this;
+        const { onMouseOver, onMouseOut, onDblClick } = this;
         const deviceType = (node.device as Device).type as string;
-        const mappedClas = stylesDict[deviceType] as string;
+        const mappedClas = stylesDict[deviceType];
         const cn = cx(style.node, mappedClas, {[stylesDict.offline]: !isOnline(node.device, time)});
 
         switch (node.device.type) {
@@ -119,6 +124,7 @@ class Node extends Component<NodeProps, {}> {
                         d={getStarShape(14, 5) as string}
                         onMouseOver={onMouseOver}
                         onMouseOut={onMouseOut}
+                        onDblClick={onDblClick}
                     />
                 );
             default:
@@ -126,6 +132,7 @@ class Node extends Component<NodeProps, {}> {
                     <circle
                         onMouseOver={onMouseOver}
                         onMouseOut={onMouseOut}
+                        onDblClick={onDblClick}
                         className={cn}
                         ref={this.ref as RefObject<SVGCircleElement>}
                         r={5}
@@ -180,7 +187,7 @@ export default class Nodes extends Component<NodesProps, NodesState> {
     }
 
     render(): ComponentChild {
-        const { nodes, onMouseOut, onMouseOver, time } = this.props;
+        const { nodes, onMouseOut, onMouseOver, onDblClick, time } = this.props;
         return (
             <g className={style.nodes}>
                 {nodes.map((node: NodeI, index: number) => (
@@ -188,6 +195,7 @@ export default class Nodes extends Component<NodesProps, NodesState> {
                         time={time}
                         onMouseOut={onMouseOut}
                         onMouseOver={onMouseOver}
+                        onDblClick={onDblClick}
                         key={index}
                         node={node}
                     />

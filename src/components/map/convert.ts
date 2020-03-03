@@ -1,11 +1,11 @@
 import { GATEWAY } from './consts';
-import { Device, GraphI, NodeI, LinkType, DeviceType } from './types';
+import { Device, GraphI, NodeI, LinkType, DeviceType, Dictionary } from './types';
 
 const getName = (device: Device): string => {
 	const { friendly_name: friendlyName, ieeeAddr } = device;
 	return friendlyName ?? `${ieeeAddr?.slice(-4) ?? 'Unknow device'}`;
 };
-export const convert2graph = (file: { [k: string]: Device }): GraphI => {
+export const convert2graph = (file: Dictionary<Device>): GraphI => {
 	const coordinator: NodeI = {
 		id: 'SLS GW',
 		device: GATEWAY,

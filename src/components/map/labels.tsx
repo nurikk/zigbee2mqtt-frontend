@@ -4,7 +4,7 @@ import { NodeI, Device, Dictionary } from './types';
 import * as style from './map.css';
 import cx from 'classnames';
 import { HoverableNode } from '.';
-const stylesDict: Dictionary = { ...style };
+const stylesDict: Dictionary<string> = { ...style };
 
 interface LabelProps extends HoverableNode {
     node: NodeI;
@@ -27,17 +27,22 @@ class Label extends Component<LabelProps, {}> {
         const { node, onMouseOver } = this.props;
         onMouseOver && onMouseOver(node);
     }
+    onDblClick = (): void => {
+        const { node, onDblClick } = this.props;
+        onDblClick && onDblClick(node);
+    }
 
     render(): ComponentChild {
         const { node } = this.props;
         const deviceType = (node.device as Device).type as string;
         const mappedClas = stylesDict[deviceType] as string;
         const cn = cx(style.label, mappedClas);
-        const { onMouseOut, onMouseOver } = this;
+        const { onMouseOut, onMouseOver, onDblClick } = this;
         return (
             <text
                 onMouseOut={onMouseOut}
                 onMouseOver={onMouseOver}
+                onDblClick={onDblClick}
                 className={cn}
                 ref={this.ref}
                 dy={-4}
@@ -55,11 +60,12 @@ interface LabelsProps extends HoverableNode {
 
 
 const Labels: FunctionalComponent<LabelsProps> = (props) => {
-    const { nodes, onMouseOut, onMouseOver } = props;
+    const { nodes, onMouseOut, onMouseOver, onDblClick } = props;
         const labels = nodes.map((node: NodeI, index: number) => (
             <Label
                 onMouseOut={onMouseOut}
                 onMouseOver={onMouseOver}
+                onDblClick={onDblClick}
                 key={index}
                 node={node}
             />
