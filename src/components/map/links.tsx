@@ -10,6 +10,7 @@ import {
 import * as d3Selection from 'd3-selection';
 import * as style from './map.css';
 import cx from 'classnames';
+console.log('style', style);
 
 type KeyValuePairs = { [k: string]: string };
 
@@ -57,16 +58,16 @@ class LinkLabel extends Component<LinkLabelProps, {}> {
 
     render(): ComponentChild {
         const { link, xlinkHref } = this.props;
+        /* eslint-disable @typescript-eslint/ban-ts-ignore */
+        //@ts-ignore
+        const textPath = <textPath startOffset="50%" xlinkHref={xlinkHref}>{link.linkQuality}</textPath>
         return (
             <text
                 filter={'url(#solid)'}
                 className={style.linkLabel}
                 ref={this.ref}
                 dy={4}
-            >
-                <textPath startOffset="50%" xlinkHref={xlinkHref}>
-                    {link.linkQuality}
-                </textPath>
+            >{textPath}
             </text>
         );
     }

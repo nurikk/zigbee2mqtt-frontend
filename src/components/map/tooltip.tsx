@@ -1,5 +1,5 @@
 import { NodeI, Device } from "./types";
-import style from './tooltip.css';
+import * as style from './tooltip.css';
 import { h, FunctionalComponent } from "preact";
 
 interface TooltipProps {
