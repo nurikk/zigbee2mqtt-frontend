@@ -14,3 +14,4 @@ export const Router2Router: string;
 export const EndDevice2Coordinator: string;
 export const EndDevice2Router: string;
 export const foreignObject: string;
+export const offline: string;

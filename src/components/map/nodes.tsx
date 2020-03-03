@@ -10,7 +10,7 @@ import * as d3Shape from 'd3-shape';
 import * as d3Drag from 'd3-drag';
 import * as d3Force from 'd3-force';
 import * as d3Selection from 'd3-selection';
-import { NodeI, LinkI, Device, DeviceType, Dictionary } from './types';
+import { NodeI, LinkI, Device, DeviceType, Dictionary, TimeInfo } from './types';
 import cx from 'classnames';
 
 import * as style from './map.css';
@@ -69,6 +69,16 @@ const getStarShape = (r1: number, r2: number): string | null => {
 
 interface NodeProps extends HoverableNode {
     node: NodeI;
+    time: TimeInfo | undefined;
+}
+
+const offlineTimeout = 3600 * 2;
+
+export const isOnline = (device: Device, timeInfo: TimeInfo | undefined): boolean => {
+    if (!timeInfo || !device.last_seen) {
+        return true;
+    }
+    return timeInfo.ts - parseInt(device.last_seen, 10) < offlineTimeout;
 }
 
 class Node extends Component<NodeProps, {}> {
@@ -94,11 +104,11 @@ class Node extends Component<NodeProps, {}> {
 
 
     render(): ComponentChild {
-        const { node } = this.props;
+        const { node, time } = this.props;
         const { onMouseOver, onMouseOut } = this;
         const deviceType = (node.device as Device).type as string;
         const mappedClas = stylesDict[deviceType] as string;
-        const cn = cx(style.node, mappedClas);
+        const cn = cx(style.node, mappedClas, {[stylesDict.offline]: !isOnline(node.device, time)});
 
         switch (node.device.type) {
             case DeviceType.Coordinator:
@@ -126,6 +136,7 @@ class Node extends Component<NodeProps, {}> {
 interface NodesProps extends HoverableNode {
     nodes: NodeI[];
     simulation: d3Force.Simulation<NodeI, LinkI>;
+    time: TimeInfo | undefined;
 }
 
 interface NodesState {
@@ -169,11 +180,12 @@ export default class Nodes extends Component<NodesProps, NodesState> {
     }
 
     render(): ComponentChild {
-        const { nodes, onMouseOut, onMouseOver } = this.props;
+        const { nodes, onMouseOut, onMouseOver, time } = this.props;
         return (
             <g className={style.nodes}>
                 {nodes.map((node: NodeI, index: number) => (
                     <Node
+                        time={time}
                         onMouseOut={onMouseOut}
                         onMouseOver={onMouseOver}
                         key={index}

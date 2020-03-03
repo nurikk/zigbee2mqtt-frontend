@@ -10,7 +10,6 @@ import {
 import * as d3Selection from 'd3-selection';
 import * as style from './map.css';
 import cx from 'classnames';
-console.log('style', style);
 
 type KeyValuePairs = { [k: string]: string };
 

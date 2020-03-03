@@ -68,3 +68,8 @@
 .foreignObject {
   overflow: visible;
 }
+
+.offline {
+  opacity: 0.5;
+  stroke: gray;
+}

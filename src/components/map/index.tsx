@@ -16,11 +16,19 @@ export interface HoverableNode {
     onMouseOut?: (arg0: NodeI) => void;
 }
 
+export interface TimeInfo {
+    ntp_enable: boolean;
+    ntp_server: string;
+    tz: string;
+    ts: number;
+};
+
 interface State {
     graph: GraphI;
     tooltipNode: NodeI | false;
     width: number;
     height: number;
+    time: TimeInfo | undefined;
 }
 
 type CallbackHandler = (err: unknown, res: request.Response) => void;
@@ -28,6 +36,13 @@ type CallbackHandler = (err: unknown, res: request.Response) => void;
 const fetchZibeeDevicesList = (callback: CallbackHandler): void => {
     request
         .get('/api/zigbee/devices')
+        .responseType('json')
+        .end(callback);
+};
+
+const fetchTimeInfo = (callback: CallbackHandler): void => {
+    request
+        .get('/api/time')
         .responseType('json')
         .end(callback);
 };
@@ -108,7 +123,8 @@ export default class Map extends Component<{}, State> {
                 nodes: [],
                 links: []
             },
-            tooltipNode: false
+            tooltipNode: false,
+            time: undefined
         };
 
         this.simulation = d3Force
@@ -141,6 +157,9 @@ export default class Map extends Component<{}, State> {
         }
     }
     componentDidMount(): void {
+        fetchTimeInfo((err, res) => {
+            this.setState({time: res.body});
+        });
         fetchZibeeDevicesList((err, res) => {
             const { width, height } = (this.ref.current as HTMLDivElement).getBoundingClientRect();
             const graph = convert2graph(res.body);
@@ -149,7 +168,7 @@ export default class Map extends Component<{}, State> {
     }
 
     render(): ComponentChild {
-        const { width, height } = this.state;
+        const { width, height, time } = this.state;
         const { graph, tooltipNode } = this.state;
         const { setTooltip, removeTooltip } = this;
         return (
@@ -161,6 +180,7 @@ export default class Map extends Component<{}, State> {
                         simulation={this.simulation}
                         onMouseOver={setTooltip}
                         onMouseOut={removeTooltip}
+                        time={time}
                     />
                     <Labels
                         nodes={graph.nodes}
@@ -173,7 +193,7 @@ export default class Map extends Component<{}, State> {
                             x={tooltipNode.x as number + 10}
                             y={tooltipNode.y as number + 5}
                         >
-                            <Tooltip info={tooltipNode} />
+                            <Tooltip info={tooltipNode} time={time} />
                         </foreignObject>
                     ) : null}
                 </svg>
