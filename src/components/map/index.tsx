@@ -6,7 +6,7 @@ import * as d3Force from 'd3-force';
 import * as d3Selection from 'd3-selection';
 
 import * as style from './map.css';
-import { GraphI, NodeI, LinkI } from './types';
+import { GraphI, NodeI, LinkI, DeviceType } from './types';
 import * as request from 'superagent';
 import { convert2graph } from './convert';
 import Tooltip from './tooltip';
@@ -117,8 +117,14 @@ export default class Map extends Component<{}, State> {
     };
 
     openDetailsWindow = (node: NodeI): void => {
-        const id = parseInt(node.id, 10);
-        window.open(`/zigbee?nwkAddr=0x${id.toString(16)}`, '_blank');
+        switch (node.device.type) {
+            case DeviceType.EndDevice:
+            case DeviceType.Router:
+                window.open(`/zigbee?nwkAddr=0x${parseInt(node.id, 10).toString(16)}`, '_blank');
+            break;
+            default:
+            break;
+        }
     }
     constructor() {
         super();
