@@ -1,6 +1,7 @@
 
 # Demo
 https://nurikk.github.io/sls-frontend/
+https://nurikk.github.io/sls-frontend/map.html
 
 
 # Build

@@ -88,6 +88,10 @@ module.exports = (env, args) => {
 			}, ]),
 			new HtmlWebpackPlugin({
 				template: 'src/index.ejs'
+			}),
+			new HtmlWebpackPlugin({
+				template: 'src/static/map.html',
+				filename: 'map.html'
 			})
 		],
 	};

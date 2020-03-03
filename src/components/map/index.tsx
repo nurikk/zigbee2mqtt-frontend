@@ -164,7 +164,7 @@ export default class Map extends Component<{}, State> {
     }
     componentDidMount(): void {
         fetchTimeInfo((err, res) => {
-            this.setState({time: res.body});
+            this.setState({ time: res.body });
         });
         fetchZibeeDevicesList((err, res) => {
             const { width, height } = (this.ref.current as HTMLDivElement).getBoundingClientRect();
@@ -179,7 +179,7 @@ export default class Map extends Component<{}, State> {
         const { setTooltip, removeTooltip, openDetailsWindow } = this;
         return (
             <div className={style.container} ref={this.ref}>
-                <svg width={width} height={height}>
+                <svg viewBox={`0 0 ${width} ${height}`}>
                     <Links links={graph.links} />
                     <Nodes
                         nodes={graph.nodes}
