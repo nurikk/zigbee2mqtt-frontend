@@ -15,6 +15,26 @@ module.exports = (env, args) => {
 		console.log('== Development mode');
 	}
 
+	const plugins = [
+		new ForkTsCheckerWebpackPlugin(),
+		new CopyWebpackPlugin([{
+			from: '**/*',
+			context: './api-mocks/'
+		}, ]),
+		new HtmlWebpackPlugin({
+			template: 'src/index.ejs'
+		}),
+		new HtmlWebpackPlugin({
+			template: 'src/static/map.html',
+			filename: 'map.html'
+		})
+	];
+	if (production) {
+		plugins.push(new BundleAnalyzerPlugin({
+			analyzerMode: 'static'
+		}));
+	}
+
 
 	return {
 		entry: {
@@ -27,16 +47,9 @@ module.exports = (env, args) => {
 		devtool: production ? false : 'source-map',
 		optimization: {
 			splitChunks: {
-				// always create vendor.js
 				cacheGroups: {
-					d3: {
-						test: /node_modules\/(d3)/,
-						name: 'scripts/d3',
-						chunks: 'initial',
-						enforce: true,
-					},
 					vendor: {
-						test: /node_modules\/(?!d3)/,
+						test: /node_modules/,
 						name: 'scripts/vendor',
 						chunks: 'initial',
 						enforce: true,
@@ -59,14 +72,16 @@ module.exports = (env, args) => {
 				{
 					test: /\.css$/i,
 					use: [
-					  "style-loader",
-					  "@teamsupercell/typings-for-css-modules-loader",
-					  {
-						loader: "css-loader",
-						options: { modules: true }
-					  }
+						"style-loader",
+						"@teamsupercell/typings-for-css-modules-loader",
+						{
+							loader: "css-loader",
+							options: {
+								modules: true
+							}
+						}
 					]
-				  }
+				}
 			],
 		},
 		devServer: {
@@ -77,22 +92,6 @@ module.exports = (env, args) => {
 			compress: true,
 			port: 3030,
 		},
-		plugins: [
-			new ForkTsCheckerWebpackPlugin(),
-			new CopyWebpackPlugin([{
-				from: '**/*',
-				context: './api-mocks/'
-			}, ]),
-			new HtmlWebpackPlugin({
-				template: 'src/index.ejs'
-			}),
-			new HtmlWebpackPlugin({
-				template: 'src/static/map.html',
-				filename: 'map.html'
-			}),
-			new BundleAnalyzerPlugin({
-				analyzerMode: 'static'
-			})
-		],
+		plugins
 	};
 };
