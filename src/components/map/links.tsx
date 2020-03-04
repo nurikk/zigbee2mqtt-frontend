@@ -1,4 +1,4 @@
-import { LinkI, Dictionary } from './types';
+import { LinkI } from './types';
 import {
     h,
     Component,
@@ -28,7 +28,7 @@ class Link extends Component<LinkProps, {}> {
     render(): ComponentChild {
         const { link, id, ...rest } = this.props;
         const linkType = link.type as string;
-        const mappedClas = (style as Dictionary<string>)[linkType] as string;
+        const mappedClas = style[linkType] as string;
         return (
             <path
                 id={id}

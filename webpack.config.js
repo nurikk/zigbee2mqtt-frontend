@@ -49,27 +49,16 @@ module.exports = (env, args) => {
 					}],
 				},
 				{
-					test: /\.css$/,
-					include: path.join(__dirname, 'src'),
+					test: /\.css$/i,
 					use: [
-					  'style-loader',
+					  "style-loader",
+					  "@teamsupercell/typings-for-css-modules-loader",
 					  {
-						loader: 'typings-for-css-modules-loader',
-						options: {
-						  modules: true,
-						  namedExport: true
-						}
+						loader: "css-loader",
+						options: { modules: true }
 					  }
 					]
 				  }
-				// {
-				// 	test: /\.css$/,
-				// 	loader: 'typings-for-css-modules-loader?modules&namedExport&camelCase'
-				// },
-				// {
-				// 	test: /\.scss$/,
-				// 	loader: 'typings-for-css-modules-loader?modules&sass&namedExport&camelCase'
-				// }
 			],
 		},
 		devServer: {

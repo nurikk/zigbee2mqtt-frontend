@@ -10,12 +10,11 @@ import * as d3Shape from 'd3-shape';
 import * as d3Drag from 'd3-drag';
 import * as d3Force from 'd3-force';
 import * as d3Selection from 'd3-selection';
-import { NodeI, LinkI, Device, DeviceType, Dictionary, TimeInfo } from './types';
+import { NodeI, LinkI, Device, DeviceType, TimeInfo } from './types';
 import cx from 'classnames';
 
 import * as style from './map.css';
 import { HoverableNode } from '.';
-const stylesDict: Dictionary<string> = { ...style };
 
 const getStarShape = (r1: number, r2: number): string | null => {
     const radialLineGenerator = d3Shape.lineRadial<[number, number]>();
@@ -112,8 +111,8 @@ class Node extends Component<NodeProps, {}> {
         const { node, time } = this.props;
         const { onMouseOver, onMouseOut, onDblClick } = this;
         const deviceType = (node.device as Device).type as string;
-        const mappedClas = stylesDict[deviceType];
-        const cn = cx(style.node, mappedClas, {[stylesDict.offline]: !isOnline(node.device, time)});
+        const mappedClas = style[deviceType];
+        const cn = cx(style.node, mappedClas, {[style.offline]: !isOnline(node.device, time)});
 
         switch (node.device.type) {
             case DeviceType.Coordinator:
