@@ -16,17 +16,35 @@ import cx from 'classnames';
 import * as style from './map.css';
 import { HoverableNode } from '.';
 
-const getStarShape = (branches: number, r1: number, r2: number): string => {
-    const dots: string[] = [];
-    const step = Math.PI / branches;
-    const max = 2 * branches;
-    let r, a;
-    for (let i = 0; i <= max; i++) {
-        r = (i & 1) ? r1 : r2;
-        a = i * step;
-        dots[i] = `${r * Math.cos(a)}, ${r * Math.sin(a)}`;
+const calcStarPoints = (
+    centerX: number,
+    centerY: number,
+    innerCircleArms: number,
+    innerRadius: number,
+    outerRadius: number
+): string => {
+    const angle = Math.PI / innerCircleArms;
+    const angleOffsetToCenterStar = 60;
+    const totalArms = innerCircleArms * 2;
+    let points = "";
+    for (let i = 0; i < totalArms; i++) {
+        const isEvenIndex = i % 2 == 0;
+        const r = isEvenIndex ? outerRadius : innerRadius;
+        const currX = centerX + Math.cos(i * angle + angleOffsetToCenterStar) * r;
+        const currY = centerY + Math.sin(i * angle + angleOffsetToCenterStar) * r;
+        points += `${currX}, ${currY} `;
     }
-    return dots.join(' ');
+    return points;
+}
+
+const getStarShape = (innerCircleArms: number, styleStarWidth: number, innerOuterRadiusRatio: number): string => {
+    return calcStarPoints(
+        0,
+        0,
+        innerCircleArms,
+        styleStarWidth,
+        innerOuterRadiusRatio
+    );
 };
 
 interface NodeProps extends HoverableNode {
@@ -81,7 +99,7 @@ class Node extends Component<NodeProps, {}> {
                     <polygon
                         className={cn}
                         ref={this.ref as RefObject<SVGPolygonElement>}
-                        points={getStarShape(5, 14, 5) as string}
+                        points={getStarShape(5, 5, 14) as string}
                         onMouseOver={onMouseOver}
                         onMouseOut={onMouseOut}
                         onDblClick={onDblClick}
@@ -134,7 +152,7 @@ export default class Nodes extends Component<NodesProps, NodesState> {
             });
 
 
-            selectAll<SVGCircleElement, NodeI>(`.${style.node}`)
+        selectAll<SVGCircleElement, NodeI>(`.${style.node}`)
             .call(dragForce);
     }
 
