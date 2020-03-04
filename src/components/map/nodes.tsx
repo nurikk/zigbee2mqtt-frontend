@@ -6,65 +6,28 @@ import {
     RefObject
 } from 'preact';
 
-import * as d3Shape from 'd3-shape';
-import * as d3Drag from 'd3-drag';
-import * as d3Force from 'd3-force';
-import * as d3Selection from 'd3-selection';
+
+import { drag } from 'd3-drag';
+import { Simulation } from 'd3-force';
+import { selectAll, event, select } from 'd3-selection';
 import { NodeI, LinkI, Device, DeviceType, TimeInfo } from './types';
 import cx from 'classnames';
 
 import * as style from './map.css';
 import { HoverableNode } from '.';
 
-const getStarShape = (r1: number, r2: number): string | null => {
-    const radialLineGenerator = d3Shape.lineRadial<[number, number]>();
-    const radialpoints: [number, number][] = [
-        [0, r1],
-        [Math.PI * 0.2, r2],
-        [Math.PI * 0.4, r1],
-        [Math.PI * 0.6, r2],
-        [Math.PI * 0.8, r1],
-        [Math.PI * 1, r2],
-        [Math.PI * 1.2, r1],
-        [Math.PI * 1.4, r2],
-        [Math.PI * 1.6, r1],
-        [Math.PI * 1.8, r2],
-        [Math.PI * 2, r1]
-    ];
-    return radialLineGenerator(radialpoints);
+const getStarShape = (branches: number, r1: number, r2: number): string => {
+    const dots: string[] = [];
+    const step = Math.PI / branches;
+    const max = 2 * branches;
+    let r, a;
+    for (let i = 0; i <= max; i++) {
+        r = (i & 1) ? r1 : r2;
+        a = i * step;
+        dots[i] = `${r * Math.cos(a)}, ${r * Math.sin(a)}`;
+    }
+    return dots.join(' ');
 };
-//TODO: figure how to forward ref to parent comp
-// interface StarProps {
-//     r1: number;
-//     r2: number;
-//     [k: string]: unknown;
-// }
-// const Star: FunctionalComponent<StarProps> = (props: StarProps) => {
-//     const { r1, r2, forwardRef, ...rest } = props;
-//     debugger;
-//     const radialLineGenerator = d3Shape.lineRadial<[number, number]>();
-//     const radialpoints: [number, number][] = [
-//         [0, r1],
-//         [Math.PI * 0.2, r2],
-//         [Math.PI * 0.4, r1],
-//         [Math.PI * 0.6, r2],
-//         [Math.PI * 0.8, r1],
-//         [Math.PI * 1, r2],
-//         [Math.PI * 1.2, r1],
-//         [Math.PI * 1.4, r2],
-//         [Math.PI * 1.6, r1],
-//         [Math.PI * 1.8, r2],
-//         [Math.PI * 2, r1]
-//     ];
-
-//     return (
-//         <path
-//             ref={forwardRef}
-//             {...rest}
-//             d={radialLineGenerator(radialpoints) as string}
-//         />
-//     );
-// };
 
 interface NodeProps extends HoverableNode {
     node: NodeI;
@@ -81,15 +44,13 @@ export const isOnline = (device: Device, timeInfo: TimeInfo | undefined): boolea
 }
 
 class Node extends Component<NodeProps, {}> {
-    ref = createRef<SVGPathElement | SVGCircleElement>();
+    ref = createRef<SVGPolygonElement | SVGCircleElement>();
 
     componentDidMount(): void {
         const { current } = this.ref;
         const { node } = this.props;
 
-        d3Selection
-            .select(current as SVGElement)
-            .data([node]);
+        select(current as SVGElement).data([node]);
     }
 
 
@@ -112,15 +73,15 @@ class Node extends Component<NodeProps, {}> {
         const { onMouseOver, onMouseOut, onDblClick } = this;
         const deviceType = (node.device as Device).type as string;
         const mappedClas = style[deviceType];
-        const cn = cx(style.node, mappedClas, {[style.offline]: !isOnline(node.device, time)});
+        const cn = cx(style.node, mappedClas, { [style.offline]: !isOnline(node.device, time) });
 
         switch (node.device.type) {
             case DeviceType.Coordinator:
                 return (
-                    <path
+                    <polygon
                         className={cn}
-                        ref={this.ref as RefObject<SVGPathElement>}
-                        d={getStarShape(14, 5) as string}
+                        ref={this.ref as RefObject<SVGPolygonElement>}
+                        points={getStarShape(5, 14, 5) as string}
                         onMouseOver={onMouseOver}
                         onMouseOut={onMouseOut}
                         onDblClick={onDblClick}
@@ -141,7 +102,7 @@ class Node extends Component<NodeProps, {}> {
 }
 interface NodesProps extends HoverableNode {
     nodes: NodeI[];
-    simulation: d3Force.Simulation<NodeI, LinkI>;
+    simulation: Simulation<NodeI, LinkI>;
     time: TimeInfo | undefined;
 }
 
@@ -152,30 +113,29 @@ interface NodesState {
 export default class Nodes extends Component<NodesProps, NodesState> {
     updateDrag(): void {
         const { simulation } = this.props;
-        const drag = d3Drag
-            .drag<SVGCircleElement, NodeI>()
+        const dragForce = drag<SVGCircleElement, NodeI>()
             .on('start', d => {
-                if (!d3Selection.event.active) {
+                if (!event.active) {
                     simulation.alphaTarget(0.3).restart();
                 }
                 d.fx = d.x;
                 d.fy = d.y;
             })
             .on('drag', d => {
-                d.fx = d3Selection.event.x;
-                d.fy = d3Selection.event.y;
+                d.fx = event.x;
+                d.fy = event.y;
             })
             .on('end', d => {
-                if (!d3Selection.event.active) {
+                if (!event.active) {
                     simulation.alphaTarget(0);
                 }
                 d.fx = undefined;
                 d.fy = undefined;
             });
 
-        d3Selection
-            .selectAll<SVGCircleElement, NodeI>(`.${style.node}`)
-            .call(drag);
+
+            selectAll<SVGCircleElement, NodeI>(`.${style.node}`)
+            .call(dragForce);
     }
 
     componentDidMount(): void {

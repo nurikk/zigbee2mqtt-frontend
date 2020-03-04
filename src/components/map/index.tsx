@@ -2,12 +2,12 @@ import { h, Component, ComponentChild, createRef } from 'preact';
 import Links from './links';
 import Nodes from './nodes';
 import Labels from './labels';
-import * as d3Force from 'd3-force';
-import * as d3Selection from 'd3-selection';
+import { forceSimulation, Simulation, ForceLink, forceLink, forceManyBody, forceCenter, forceX, forceY } from 'd3-force';
+import { selectAll } from 'd3-selection';
 
 import * as style from './map.css';
-import { GraphI, NodeI, LinkI, DeviceType } from './types';
-import * as request from 'superagent';
+import { GraphI, NodeI, LinkI, DeviceType, Dictionary, Device } from './types';
+
 import { convert2graph } from './convert';
 import Tooltip from './tooltip';
 
@@ -32,20 +32,14 @@ interface State {
     time: TimeInfo | undefined;
 }
 
-type CallbackHandler = (err: unknown, res: request.Response) => void;
+type CallbackHandler = (err: unknown, res: unknown) => void;
 
 const fetchZibeeDevicesList = (callback: CallbackHandler): void => {
-    request
-        .get('/api/zigbee/devices')
-        .responseType('json')
-        .end(callback);
+    fetch('/api/zigbee/devices').then((res) => res.json()).then(data => callback(false, data));
 };
 
 const fetchTimeInfo = (callback: CallbackHandler): void => {
-    request
-        .get('/api/time')
-        .responseType('json')
-        .end(callback);
+    fetch('/api/time').then((res) => res.json()).then(data => callback(false, data));
 };
 
 const getDistance = (d: LinkI): number => {
@@ -63,20 +57,20 @@ const getDistance = (d: LinkI): number => {
 const MOBILE_SCREEN_TRESHOLD = 400;
 export default class Map extends Component<{}, State> {
     ref = createRef<HTMLDivElement>();
-    simulation!: d3Force.Simulation<NodeI, LinkI>;
+    simulation!: Simulation<NodeI, LinkI>;
 
     updateNodes(): void {
         this.updateForces();
-        const node = d3Selection.selectAll<SVGGeometryElement, NodeI>(
+        const node = selectAll<SVGGeometryElement, NodeI>(
             `.${style.node}`
         );
-        const link = d3Selection.selectAll<SVGLineElement, LinkI>(
+        const link = selectAll<SVGLineElement, LinkI>(
             `.${style.link}`
         );
-        const linkLabel = d3Selection.selectAll<SVGLineElement, LinkI>(
+        const linkLabel = selectAll<SVGLineElement, LinkI>(
             `.${style.linkLabel}`
         );
-        const label = d3Selection.selectAll<SVGTextElement, NodeI>(
+        const label = selectAll<SVGTextElement, NodeI>(
             `.${style.label}`
         );
         const linkComputeFn = (d: LinkI): string =>
@@ -101,7 +95,7 @@ export default class Map extends Component<{}, State> {
         };
         const { graph } = this.state;
         this.simulation.nodes(graph.nodes).on('tick', ticked);
-        const linkForce = this.simulation.force('link') as d3Force.ForceLink<
+        const linkForce = this.simulation.force('link') as ForceLink<
             NodeI,
             LinkI
         >;
@@ -121,9 +115,9 @@ export default class Map extends Component<{}, State> {
             case DeviceType.EndDevice:
             case DeviceType.Router:
                 window.open(`/zigbee?nwkAddr=0x${parseInt(node.id, 10).toString(16)}`, '_blank');
-            break;
+                break;
             default:
-            break;
+                break;
         }
     }
     constructor() {
@@ -139,21 +133,19 @@ export default class Map extends Component<{}, State> {
             time: undefined
         };
 
-        this.simulation = d3Force
-            .forceSimulation<NodeI>();
+        this.simulation = forceSimulation<NodeI>();
     }
 
     updateForces(): void {
         const { width, height } = this.state;
 
-        const linkForce = d3Force
-            .forceLink<NodeI, LinkI>()
+        const linkForce = forceLink<NodeI, LinkI>()
             .id(d => d.id)
             .distance(getDistance)
             .strength(1);
 
-        const chargeForce = d3Force
-            .forceManyBody()
+        const chargeForce =
+            forceManyBody()
             .distanceMin(200)
             .distanceMax(1000)
             .strength(-200);
@@ -161,20 +153,20 @@ export default class Map extends Component<{}, State> {
         this.simulation
             .force('link', linkForce)
             .force('charge', chargeForce)
-            .force('center', d3Force.forceCenter(width / 2, height / 2));
+            .force('center', forceCenter(width / 2, height / 2));
 
         if (width < MOBILE_SCREEN_TRESHOLD) {
-            this.simulation.force('x', d3Force.forceX(width / 2).strength(0.1))
-                .force('y', d3Force.forceY(height / 2).strength(0.1))
+            this.simulation.force('x', forceX(width / 2).strength(0.1))
+                .force('y', forceY(height / 2).strength(0.1))
         }
     }
     componentDidMount(): void {
-        fetchTimeInfo((err, res) => {
-            this.setState({ time: res.body });
+        fetchTimeInfo((err, res: TimeInfo) => {
+            this.setState({ time: res });
         });
-        fetchZibeeDevicesList((err, res) => {
+        fetchZibeeDevicesList((err, res: Dictionary<Device>) => {
             const { width, height } = (this.ref.current as HTMLDivElement).getBoundingClientRect();
-            const graph = convert2graph(res.body);
+            const graph = convert2graph(res);
             this.setState({ graph, width, height }, this.updateNodes);
         });
     }

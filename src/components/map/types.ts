@@ -1,6 +1,6 @@
-import * as d3Force from 'd3-force';
+import { SimulationNodeDatum ,SimulationLinkDatum } from 'd3-force';
 
-export interface NodeI extends d3Force.SimulationNodeDatum {
+export interface NodeI extends SimulationNodeDatum {
     id: string;
     name: string;
     device: Device;
@@ -11,7 +11,7 @@ export type LinkType =
     | 'EndDevice2Coordinator'
     | 'EndDevice2Router';
 
-export interface LinkI extends d3Force.SimulationLinkDatum<NodeI> {
+export interface LinkI extends SimulationLinkDatum<NodeI> {
     linkQuality: number | undefined;
     type: LinkType;
 }

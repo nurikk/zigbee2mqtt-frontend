@@ -1,4 +1,4 @@
-import * as d3Selection from 'd3-selection';
+import { select } from 'd3-selection';
 import { h, Component, ComponentChild, createRef, FunctionalComponent } from 'preact';
 import { NodeI, Device } from './types';
 import * as style from './map.css';
@@ -14,7 +14,7 @@ class Label extends Component<LabelProps, {}> {
 
     componentDidMount(): void {
         const { current } = this.ref;
-        d3Selection.select(current as SVGTextElement).data([this.props.node]);
+        select(current as SVGTextElement).data([this.props.node]);
     }
 
     onMouseOut = (): void => {

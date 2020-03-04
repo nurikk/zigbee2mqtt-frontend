@@ -1,17 +1,28 @@
-export const container: string;
-export const node: string;
-export const link: string;
-export const linkLabel: string;
-export const label: string;
-export const Coordinator: string;
-export const labels: string;
-export const links: string;
-export const nodes: string;
-export const EndDevice: string;
-export const Router: string;
-export const Router2Coordinator: string;
-export const Router2Router: string;
-export const EndDevice2Coordinator: string;
-export const EndDevice2Router: string;
-export const foreignObject: string;
-export const offline: string;
+declare namespace MapCssModule {
+    export interface IMapCss {
+        Coordinator: string;
+        EndDevice: string;
+        EndDevice2Coordinator: string;
+        EndDevice2Router: string;
+        Router: string;
+        Router2Coordinator: string;
+        Router2Router: string;
+        container: string;
+        foreignObject: string;
+        label: string;
+        labels: string;
+        link: string;
+        linkLabel: string;
+        links: string;
+        node: string;
+        nodes: string;
+        offline: string;
+    }
+}
+
+declare const MapCssModule: MapCssModule.IMapCss & {
+    /** WARNING: Only available when `css-loader` is used without `style-loader` or `mini-css-extract-plugin` */
+    locals: MapCssModule.IMapCss;
+};
+
+export = MapCssModule;

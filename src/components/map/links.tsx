@@ -7,7 +7,7 @@ import {
     FunctionalComponent,
     RefObject
 } from 'preact';
-import * as d3Selection from 'd3-selection';
+import { select } from 'd3-selection';
 import * as style from './map.css';
 import cx from 'classnames';
 
@@ -22,7 +22,7 @@ class Link extends Component<LinkProps, {}> {
     componentDidMount(): void {
         const { current } = this.ref;
         const { link } = this.props;
-        d3Selection.select(current as SVGPathElement).data([link]);
+        select(current as SVGPathElement).data([link]);
     }
 
     render(): ComponentChild {
@@ -50,7 +50,7 @@ class LinkLabel extends Component<LinkLabelProps, {}> {
     componentDidMount(): void {
         const { current } = this.ref;
         const { link } = this.props;
-        d3Selection.select(current as SVGTextElement).data([link]);
+        select(current as SVGTextElement).data([link]);
     }
 
     render(): ComponentChild {

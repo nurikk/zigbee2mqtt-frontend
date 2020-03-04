@@ -1,6 +1,7 @@
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const path = require('path');
 
@@ -28,8 +29,14 @@ module.exports = (env, args) => {
 			splitChunks: {
 				// always create vendor.js
 				cacheGroups: {
+					d3: {
+						test: /node_modules\/(d3)/,
+						name: 'scripts/d3',
+						chunks: 'initial',
+						enforce: true,
+					},
 					vendor: {
-						test: /[\\/]node_modules[\\/]/,
+						test: /node_modules\/(?!d3)/,
 						name: 'scripts/vendor',
 						chunks: 'initial',
 						enforce: true,
@@ -38,6 +45,7 @@ module.exports = (env, args) => {
 			},
 		},
 		resolve: {
+			mainFields: ['module', 'main'],
 			extensions: ['.ts', '.tsx', '.js', '.html', '.txt'],
 		},
 		module: {
@@ -81,6 +89,9 @@ module.exports = (env, args) => {
 			new HtmlWebpackPlugin({
 				template: 'src/static/map.html',
 				filename: 'map.html'
+			}),
+			new BundleAnalyzerPlugin({
+				analyzerMode: 'static'
 			})
 		],
 	};
