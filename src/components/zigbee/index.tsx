@@ -152,54 +152,53 @@ export class ZigbeeTable extends Component<TimedProps, State> {
         const { onBindClick, onRenameClick, onRemoveClick, onSortChange } = this;
 
         return (
-            <div class="table-responsive">
-                <table class="table table-striped">
-                    <thead>
+            <table className={`table table-striped ${style.adaptive}`}>
+                <thead>
+                    <tr className="text-nowrap">
+                        <ActionTH className={style["action-colum"]} column="0" currenDirection={sortDirection} current={sortColumn} onClick={onSortChange}>nwkAddr</ActionTH>
+                        <ActionTH className={style["action-colum"]} column="1.friendly_name" currenDirection={sortDirection} current={sortColumn} onClick={onSortChange}>FriendlyName</ActionTH>
+                        <ActionTH className={style["action-colum"]} column="1.ieeeAddr" currenDirection={sortDirection} current={sortColumn} onClick={onSortChange}>ieeeAddr</ActionTH>
+                        <ActionTH className={style["action-colum"]} column="1.ManufName" currenDirection={sortDirection} current={sortColumn} onClick={onSortChange}>ManufName</ActionTH>
+                        <ActionTH className={style["action-colum"]} column="1.ModelId" currenDirection={sortDirection} current={sortColumn} onClick={onSortChange}>ModelId</ActionTH>
+                        <ActionTH className={style["action-colum"]} column="1.st.linkquality" currenDirection={sortDirection} current={sortColumn} onClick={onSortChange}>LinkQuality</ActionTH>
+                        <ActionTH className={style["action-colum"]} column="1.Interview.State" currenDirection={sortDirection} current={sortColumn} onClick={onSortChange}>Interview</ActionTH>
+                        <ActionTH className={style["action-colum"]} column="1.last_seen" currenDirection={sortDirection} current={sortColumn} onClick={onSortChange}>LastSeen</ActionTH>
+                        <th>Routes</th>
+                        <ActionTH className={style["action-colum"]} column="1.st.battery" currenDirection={sortDirection} current={sortColumn} onClick={onSortChange}>PS</ActionTH>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {sortedDevices.map(([k, device]: DeviceKeyTupple) => (
                         <tr>
-                            <ActionTH className={style["action-colum"]} column="0" currenDirection={sortDirection} current={sortColumn} onClick={onSortChange}>nwkAddr</ActionTH>
-                            <ActionTH className={style["action-colum"]} column="1.friendly_name" currenDirection={sortDirection} current={sortColumn} onClick={onSortChange}>FriendlyName</ActionTH>
-                            <ActionTH className={style["action-colum"]} column="1.ieeeAddr" currenDirection={sortDirection} current={sortColumn} onClick={onSortChange}>ieeeAddr</ActionTH>
-                            <ActionTH className={style["action-colum"]} column="1.ManufName" currenDirection={sortDirection} current={sortColumn} onClick={onSortChange}>ManufName</ActionTH>
-                            <ActionTH className={style["action-colum"]} column="1.ModelId" currenDirection={sortDirection} current={sortColumn} onClick={onSortChange}>ModelId</ActionTH>
-                            <ActionTH className={style["action-colum"]} column="1.st.linkquality" currenDirection={sortDirection} current={sortColumn} onClick={onSortChange}>LinkQuality</ActionTH>
-                            <ActionTH className={style["action-colum"]} column="1.Interview.State" currenDirection={sortDirection} current={sortColumn} onClick={onSortChange}>Interview</ActionTH>
-                            <ActionTH className={style["action-colum"]} column="1.last_seen" currenDirection={sortDirection} current={sortColumn} onClick={onSortChange}>LastSeen</ActionTH>
-                            <th>Routes</th>
-                            <ActionTH className={style["action-colum"]} column="1.st.battery" currenDirection={sortDirection} current={sortColumn} onClick={onSortChange}>PS</ActionTH>
-                            <th>Actions</th>
+                            <td><a href={genDeviceDetailsLink(k)}>{genDeviceShortAddress(k)}</a></td>
+                            <td>{device.friendly_name}</td>
+                            <td>{device.ieeeAddr}</td>
+                            <td>{device.ManufName}</td>
+                            <td className={style.green}>
+                                {device.ModelId}
+                            </td>
+                            <td>{device.st?.linkquality}</td>
+                            <td className={cx({
+                                'table-success': device.Interview?.State == 4,
+                                'table-warning': device.Interview?.State !== 4,
+                            })}>{this.renderInterviewState([k, device])}</td>
+                            <td>{lastSeen(device, time)}</td>
+                            <td>{device?.Rtg?.join(', ')}</td>
+                            <td>{device.st?.battery}</td>
+                            <td>
+                                <div className="btn-group" role="group" aria-label="Basic example">
+                                    <Button<DeviceKeyTupple> className="btn btn-danger btn-sm" onClick={onRemoveClick} item={[k, device]}><i className="fa fa-trash" /></Button>
+                                    <Button<DeviceKeyTupple> className="btn btn-secondary btn-sm" onClick={onRenameClick} item={[k, device]}><i className="fa fa-edit" /></Button>
+                                    {device.ieeeAddr ? <Button<DeviceKeyTupple> className="btn btn-success btn-sm" onClick={onBindClick} item={[k, device]}>Bind</Button> : null}
+                                </div>
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        {sortedDevices.map(([k, device]: DeviceKeyTupple) => (
-                            <tr>
-                                <td><a href={genDeviceDetailsLink(k)}>{genDeviceShortAddress(k)}</a></td>
-                                <td>{device.friendly_name}</td>
-                                <td>{device.ieeeAddr}</td>
-                                <td>{device.ManufName}</td>
-                                <td className={style.green}>
-                                    {device.ModelId}
-                                </td>
-                                <td>{device.st?.linkquality}</td>
-                                <td className={cx({
-                                    'table-success': device.Interview?.State == 4,
-                                    'table-warning': device.Interview?.State !== 4,
-                                })}>{this.renderInterviewState([k, device])} </td>
-                                <td>{lastSeen(device, time)}</td>
-                                <td>{device?.Rtg?.join(', ')}</td>
-                                <td>{device.st?.battery}</td>
-                                <td>
-                                    <div class="btn-group" role="group" aria-label="Basic example">
-                                        <Button<DeviceKeyTupple> className="btn btn-danger btn-sm" onClick={onRemoveClick} item={[k, device]}><i className="fa fa-trash" /></Button>
-                                        <Button<DeviceKeyTupple> className="btn btn-secondary btn-sm" onClick={onRenameClick} item={[k, device]}><i className="fa fa-edit" /></Button>
-                                        {device.ieeeAddr ? <Button<DeviceKeyTupple> className="btn btn-success btn-sm" onClick={onBindClick} item={[k, device]}>Bind</Button> : null}
-                                    </div>
-                                </td>
-                            </tr>
-                        ))}
+                    ))}
 
-                    </tbody>
-                </table>
-            </div>
+                </tbody>
+            </table>
+
         );
     }
 }

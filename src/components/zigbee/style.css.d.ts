@@ -2,6 +2,7 @@ declare namespace StyleCssModule {
     export interface IStyleCss {
         "action-colum": string;
         actions: string;
+        adaptive: string;
         green: string;
         invisible: string;
     }
