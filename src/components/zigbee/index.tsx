@@ -1,6 +1,6 @@
 import * as style from "./style.css";
 import { h, ComponentChild, Component } from "preact";
-import { fetchZibeeDevicesList, renameDevice } from "../actions";
+import { fetchZibeeDevicesList, renameDevice, startInterview } from "../actions";
 import { Dictionary, Device } from "../map/types";
 import { genDeviceDetailsLink, genDeviceShortAddress } from "../map";
 import Timed, { TimedProps, lastSeen } from "../time";
@@ -94,6 +94,11 @@ export class ZigbeeTable extends Component<TimedProps, State> {
             location.href = `/zigbee?remove=0x${device.ieeeAddr}`;
         }
     }
+    onInteviewClick = (device: Device): void => {
+        if (confirm('Start Interview?')) {
+            startInterview(device, () => this.loadData());
+        }
+    }
 
     onSortChange = (column: SortColumns): void => {
         const { sortColumn } = this.state;
@@ -128,16 +133,17 @@ export class ZigbeeTable extends Component<TimedProps, State> {
     renderDevicesTable(): ComponentChild {
         const { sortedDevices, sortColumn, sortDirection } = this.state;
         const { time } = this.props;
-        const { onBindClick, onRenameClick, onRemoveClick, onSortChange } = this;
-        const getInterviewState = (device: Device): string => {
+        const { onBindClick, onRenameClick, onRemoveClick, onInteviewClick, onSortChange } = this;
+        const getInterviewState = (device: Device): ComponentChild | string => {
             const inteviewsCount = 4;
+            const intreviewTrigger = <Button className="btn btn-normal btn-sm" onClick={onInteviewClick} item={device}><i className="fa fa-refresh" /></Button>;
             if (device.Interview) {
                 if (inteviewsCount === device.Interview.State) {
                     return 'Ok';
                 }
-                return `${device.Interview.State}/${inteviewsCount}`;
+                return <div>{device.Interview.State}/{inteviewsCount} {intreviewTrigger}</div>;
             }
-            return 'N/A';
+            return <div>N/A {intreviewTrigger}</div>;
 
         }
         return (
