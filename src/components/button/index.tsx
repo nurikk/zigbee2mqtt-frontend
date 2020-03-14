@@ -1,12 +1,12 @@
 import { h, ComponentChild, Component } from "preact";
 
-interface ButtonProps {
-    item: unknown;
+interface ButtonProps<T> {
+    item: T;
     className?: string;
-    onClick?(arg1: unknown): void;
+    onClick?(arg1: T): void;
 }
 
-export default class Button extends Component<ButtonProps, {}> {
+export default class Button<T> extends Component<ButtonProps<T>, {}> {
     onClick = (): void => {
         const { item, onClick } = this.props;
         onClick && onClick(item);

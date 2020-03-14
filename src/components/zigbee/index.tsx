@@ -1,14 +1,14 @@
-import * as style from "./style.css";
+import style from "./style.css";
 import { h, ComponentChild, Component } from "preact";
-import { fetchZibeeDevicesList, renameDevice, startInterview } from "../actions";
+import { fetchZibeeDevicesList, renameDevice, startInterview, removeDevice } from "../actions";
 import { Dictionary, Device } from "../map/types";
 import { genDeviceDetailsLink, genDeviceShortAddress } from "../map";
 import Timed, { TimedProps, lastSeen } from "../time";
 import Button from "../button";
 import orderBy from "lodash/orderBy";
 import cx from 'classnames';
-import WithLoading from "../loading";
 type SortDirection = "asc" | "desc";
+//TODO: proper type alias
 type SortColumns = "1.last_seen";
 
 type DeviceKeyTupple = [string, Device];
@@ -67,7 +67,7 @@ export class ZigbeeTable extends Component<TimedProps, State> {
             sortedDevices: []
         }
     }
-    loadData(): void {
+    loadData = (): void => {
         this.setState({ isLoading: true }, () => {
             fetchZibeeDevicesList((err, devices: Dictionary<Device>) => {
                 this.setState({ isLoading: false, devices }, () => {
@@ -80,23 +80,27 @@ export class ZigbeeTable extends Component<TimedProps, State> {
     componentDidMount(): void {
         this.loadData();
     }
-    onBindClick = (device: Device): void => {
-        location.href = `/zigbee?bind=0x${device.ieeeAddr}`;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    onBindClick = ([nwkAddr, device]: DeviceKeyTupple): void => {
+        location.href = `/zigbee?bind=${genDeviceShortAddress(nwkAddr)}`;
     }
-    onRenameClick = (device: Device): void => {
+
+    onRenameClick = ([nwkAddr, device]: DeviceKeyTupple): void => {
         const newName = prompt('Enter new name', device.friendly_name);
         if (newName && newName !== device.friendly_name) {
-            renameDevice(device, newName, () => this.loadData());
+            renameDevice(genDeviceShortAddress(nwkAddr), newName, this.loadData);
         }
     }
-    onRemoveClick = (device: Device): void => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    onRemoveClick = ([nwkAddr, device]: DeviceKeyTupple): void => {
         if (confirm('Remove device?')) {
-            location.href = `/zigbee?remove=0x${device.ieeeAddr}`;
+            removeDevice(genDeviceShortAddress(nwkAddr), this.loadData);
         }
     }
-    onInteviewClick = (device: Device): void => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    onInteviewClick = ([nwkAddr, device]: DeviceKeyTupple): void => {
         if (confirm('Start Interview?')) {
-            startInterview(device, () => this.loadData());
+            startInterview(genDeviceShortAddress(nwkAddr), this.loadData);
         }
     }
 
@@ -130,22 +134,23 @@ export class ZigbeeTable extends Component<TimedProps, State> {
         }
         return (sortedDevices.length ? this.renderDevicesTable() : <div>No data</div>);
     }
+    renderInterviewState([nwkAddr, device]: DeviceKeyTupple): ComponentChild {
+        const { onInteviewClick } = this;
+        const inteviewsCount = 4;
+        const intreviewTrigger = <Button<DeviceKeyTupple> className="btn btn-normal btn-sm" onClick={onInteviewClick} item={[nwkAddr, device]}><i className="fa fa-refresh" /></Button>;
+        if (device.Interview) {
+            if (inteviewsCount === device.Interview.State) {
+                return 'Ok';
+            }
+            return <div>{device.Interview.State}/{inteviewsCount} {intreviewTrigger}</div>;
+        }
+        return <div>N/A {intreviewTrigger}</div>;
+    }
     renderDevicesTable(): ComponentChild {
         const { sortedDevices, sortColumn, sortDirection } = this.state;
         const { time } = this.props;
-        const { onBindClick, onRenameClick, onRemoveClick, onInteviewClick, onSortChange } = this;
-        const getInterviewState = (device: Device): ComponentChild | string => {
-            const inteviewsCount = 4;
-            const intreviewTrigger = <Button className="btn btn-normal btn-sm" onClick={onInteviewClick} item={device}><i className="fa fa-refresh" /></Button>;
-            if (device.Interview) {
-                if (inteviewsCount === device.Interview.State) {
-                    return 'Ok';
-                }
-                return <div>{device.Interview.State}/{inteviewsCount} {intreviewTrigger}</div>;
-            }
-            return <div>N/A {intreviewTrigger}</div>;
+        const { onBindClick, onRenameClick, onRemoveClick, onSortChange } = this;
 
-        }
         return (
             <div class="table-responsive">
                 <table class="table table-striped">
@@ -165,7 +170,7 @@ export class ZigbeeTable extends Component<TimedProps, State> {
                         </tr>
                     </thead>
                     <tbody>
-                        {sortedDevices.map(([k, device]) => (
+                        {sortedDevices.map(([k, device]: DeviceKeyTupple) => (
                             <tr>
                                 <td><a href={genDeviceDetailsLink(k)}>{genDeviceShortAddress(k)}</a></td>
                                 <td>{device.friendly_name}</td>
@@ -178,15 +183,15 @@ export class ZigbeeTable extends Component<TimedProps, State> {
                                 <td className={cx({
                                     'table-success': device.Interview?.State == 4,
                                     'table-warning': device.Interview?.State !== 4,
-                                })}>{getInterviewState(device)} </td>
+                                })}>{this.renderInterviewState([k, device])} </td>
                                 <td>{lastSeen(device, time)}</td>
                                 <td>{device?.Rtg?.join(', ')}</td>
                                 <td>{device.st?.battery}</td>
                                 <td>
                                     <div class="btn-group" role="group" aria-label="Basic example">
-                                        <Button className="btn btn-danger btn-sm" onClick={onRemoveClick} item={device}><i className="fa fa-trash" /></Button>
-                                        <Button className="btn btn-secondary btn-sm" onClick={onRenameClick} item={device}><i className="fa fa-edit" /></Button>
-                                        {device.ieeeAddr ? <Button className="btn btn-success btn-sm" onClick={onBindClick} item={device}>Bind</Button> : null}
+                                        <Button<DeviceKeyTupple> className="btn btn-danger btn-sm" onClick={onRemoveClick} item={[k, device]}><i className="fa fa-trash" /></Button>
+                                        <Button<DeviceKeyTupple> className="btn btn-secondary btn-sm" onClick={onRenameClick} item={[k, device]}><i className="fa fa-edit" /></Button>
+                                        {device.ieeeAddr ? <Button<DeviceKeyTupple> className="btn btn-success btn-sm" onClick={onBindClick} item={[k, device]}>Bind</Button> : null}
                                     </div>
                                 </td>
                             </tr>
