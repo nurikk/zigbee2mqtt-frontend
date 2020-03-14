@@ -4,12 +4,13 @@ import Nodes from './nodes';
 import Labels from './labels';
 import { forceSimulation, Simulation, ForceLink, forceLink, forceManyBody, forceCenter, forceX, forceY } from 'd3-force';
 import { selectAll } from 'd3-selection';
-
+import { fetchZibeeDevicesList } from '../actions';
 import * as style from './map.css';
 import { GraphI, NodeI, LinkI, DeviceType, Dictionary, Device } from './types';
 
 import { convert2graph } from './convert';
 import Tooltip from './tooltip';
+import Timed, { TimedProps } from '../time';
 
 export interface HoverableNode {
     onMouseOver?: (arg0: NodeI) => void;
@@ -29,19 +30,10 @@ interface State {
     tooltipNode: NodeI | false;
     width: number;
     height: number;
-    time: TimeInfo | undefined;
 }
 
-type CallbackHandler = (err: unknown, res: unknown) => void;
-
-const fetchZibeeDevicesList = (callback: CallbackHandler): void => {
-    fetch('/api/zigbee/devices').then((res) => res.json()).then(data => callback(false, data));
-};
-
-const fetchTimeInfo = (callback: CallbackHandler): void => {
-    fetch('/api/time').then((res) => res.json()).then(data => callback(false, data));
-};
-
+export const genDeviceShortAddress = (deviceKey: string): string => (`0x${parseInt(deviceKey, 10).toString(16)}`)
+export const genDeviceDetailsLink = (deviceKey: string): string => (`/zigbee?nwkAddr=${genDeviceShortAddress(deviceKey)}`)
 const getDistance = (d: LinkI): number => {
     switch (d.type) {
         case 'Router2Router':
@@ -55,7 +47,7 @@ const getDistance = (d: LinkI): number => {
     }
 };
 const MOBILE_SCREEN_TRESHOLD = 400;
-export default class Map extends Component<{}, State> {
+export class Map extends Component<TimedProps, State> {
     ref = createRef<HTMLDivElement>();
     simulation!: Simulation<NodeI, LinkI>;
 
@@ -114,7 +106,7 @@ export default class Map extends Component<{}, State> {
         switch (node.device.type) {
             case DeviceType.EndDevice:
             case DeviceType.Router:
-                window.open(`/zigbee?nwkAddr=0x${parseInt(node.id, 10).toString(16)}`, '_blank');
+                window.open(genDeviceDetailsLink(node.id));
                 break;
             default:
                 break;
@@ -129,8 +121,7 @@ export default class Map extends Component<{}, State> {
                 nodes: [],
                 links: []
             },
-            tooltipNode: false,
-            time: undefined
+            tooltipNode: false
         };
 
         this.simulation = forceSimulation<NodeI>();
@@ -146,9 +137,9 @@ export default class Map extends Component<{}, State> {
 
         const chargeForce =
             forceManyBody()
-            .distanceMin(200)
-            .distanceMax(1000)
-            .strength(-200);
+                .distanceMin(200)
+                .distanceMax(1000)
+                .strength(-200);
 
         this.simulation
             .force('link', linkForce)
@@ -161,9 +152,6 @@ export default class Map extends Component<{}, State> {
         }
     }
     componentDidMount(): void {
-        fetchTimeInfo((err, res: TimeInfo) => {
-            this.setState({ time: res });
-        });
         fetchZibeeDevicesList((err, res: Dictionary<Device>) => {
             const { width, height } = (this.ref.current as HTMLDivElement).getBoundingClientRect();
             const graph = convert2graph(res);
@@ -172,8 +160,8 @@ export default class Map extends Component<{}, State> {
     }
 
     render(): ComponentChild {
-        const { width, height, time } = this.state;
-        const { graph, tooltipNode } = this.state;
+        const { width, height, graph, tooltipNode } = this.state;
+        const { time } = this.props;
         const { setTooltip, removeTooltip, openDetailsWindow } = this;
         return (
             <div className={style.container} ref={this.ref}>
@@ -207,3 +195,5 @@ export default class Map extends Component<{}, State> {
         );
     }
 }
+
+export default Timed(Map);

@@ -1,7 +1,16 @@
 // const poly = require("preact-cli/lib/lib/webpack/polyfills");
+// import 'preact-material-components/Theme/style.css';
+
 import habitat from "preact-habitat";
 import Map from "./components/map";
 import Header from "./components/header";
+import ZigbeeTable from "./components/zigbee";
+
+
+habitat(ZigbeeTable).render({
+    selector: '[data-widget-host="zigbee"]',
+    clean: true
+});
 
 habitat(Map).render({
     selector: '[data-widget-host="map"]',

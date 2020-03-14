@@ -59,12 +59,13 @@ module.exports = (env, args) => {
 		},
 		resolve: {
 			mainFields: ['module', 'main'],
-			extensions: ['.ts', '.tsx', '.js', '.html', '.txt'],
+			extensions: ['.ts', '.tsx', '.js', '.html', '.txt']
 		},
 		module: {
 			rules: [{
 					test: /\.tsx?$/,
-					exclude: /node_modules/,
+					exclude: /node_modules\/(?!preact-material-components\/ts)/,
+
 					use: [{
 						loader: 'ts-loader'
 					}],

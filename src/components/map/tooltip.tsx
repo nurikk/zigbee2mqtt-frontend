@@ -1,22 +1,11 @@
-import { NodeI, Device, TimeInfo, DeviceType } from "./types";
+import { NodeI, Device, DeviceType } from "./types";
 import * as style from './tooltip.css';
 import { h, FunctionalComponent } from "preact";
 import { isOnline } from "./nodes";
+import { lastSeen, TimedProps, TimeInfo } from "../time";
 
-interface TooltipProps {
+interface TooltipProps extends TimedProps {
     info: NodeI;
-    time: TimeInfo | undefined;
-}
-
-const toHHMMSS = (secs: number): string => {
-    const hours = Math.floor(secs / 3600)
-    const minutes = Math.floor(secs / 60) % 60
-    const seconds = secs % 60
-
-    return [hours, minutes, seconds]
-        .map(v => v < 10 ? `0${v}` : v)
-        .filter((v, i) => v !== "00" || i > 0)
-        .join(":")
 }
 
 const getTooltip = (device: Device, timeInfo: TimeInfo): string[] => {
@@ -39,8 +28,7 @@ const getTooltip = (device: Device, timeInfo: TimeInfo): string[] => {
     }
     if (device.type !== DeviceType.Coordinator) {
         if (device.last_seen && timeInfo) {
-            const lastSeen = timeInfo.ts - parseInt(device.last_seen, 10);
-            strings.push(`Last seen: ${toHHMMSS(lastSeen)}`);
+            strings.push(`Last seen: ${lastSeen(device, timeInfo)}`);
         }
         if (!isOnline(device, timeInfo)) {
             strings.push("Offline");

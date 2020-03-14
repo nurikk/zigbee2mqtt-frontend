@@ -10,11 +10,12 @@ import {
 import { drag } from 'd3-drag';
 import { Simulation } from 'd3-force';
 import { selectAll, event, select } from 'd3-selection';
-import { NodeI, LinkI, Device, DeviceType, TimeInfo } from './types';
+import { NodeI, LinkI, Device, DeviceType } from './types';
 import cx from 'classnames';
 
 import * as style from './map.css';
 import { HoverableNode } from '.';
+import { TimedProps, TimeInfo } from '../time';
 
 const calcStarPoints = (
     centerX: number,
@@ -47,9 +48,8 @@ const getStarShape = (innerCircleArms: number, styleStarWidth: number, innerOute
     );
 };
 
-interface NodeProps extends HoverableNode {
+interface NodeProps extends HoverableNode, TimedProps {
     node: NodeI;
-    time: TimeInfo | undefined;
 }
 
 const offlineTimeout = 3600 * 2;
@@ -118,10 +118,9 @@ class Node extends Component<NodeProps, {}> {
         }
     }
 }
-interface NodesProps extends HoverableNode {
+interface NodesProps extends HoverableNode, TimedProps {
     nodes: NodeI[];
     simulation: Simulation<NodeI, LinkI>;
-    time: TimeInfo | undefined;
 }
 
 interface NodesState {

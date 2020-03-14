@@ -21,12 +21,7 @@ export interface GraphI {
     links: LinkI[];
 }
 
-export interface TimeInfo {
-    ntp_enable: boolean;
-    ntp_server: string;
-    tz: string;
-    ts: number;
-}
+
 
 export enum DeviceType {
     EndDevice = 'EndDevice',
@@ -36,17 +31,22 @@ export enum DeviceType {
 
 export type DeviceStats = {
     linkquality: number;
+    battery?: number;
 };
-
+interface Interview {
+    TS?: number;
+    State?: number;
+}
 export type Device = {
     ieeeAddr?: string | undefined;
-    last_seen: string | undefined;
+    last_seen?: string | undefined;
     type?: DeviceType | undefined;
     ManufName?: string | undefined;
     ModelId?: string | undefined;
     st?: DeviceStats | undefined;
     friendly_name?: string | undefined;
     Rtg?: number[] | undefined;
+    Interview?: Interview | undefined;
 };
 
 export type Dictionary<V> = { [index: string]: V }

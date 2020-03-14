@@ -49,7 +49,7 @@
         "powerSource": "Main",
         "Interview": {
             "TS": 0,
-            "State": 4
+            "State": 2
         },
         "ep": {
             "2": {
@@ -1020,6 +1020,6 @@
             "battery": 100
         }
     },
-    "missing_all": {},
-    "hz node1 123": {}
+    "1244": {},
+    "1488": {}
 }

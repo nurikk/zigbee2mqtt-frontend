@@ -3,12 +3,14 @@
 		"outDir": "./dist",
 		"target": "es5",
 		"moduleResolution": "node",
-		"module": "commonjs",
+		"module": "ESNext",
 		"noImplicitAny": false,
 		"removeComments": true,
 		"sourceMap": true,
 		"jsx": "react",
-		"jsxFactory": "h"
+		"jsxFactory": "h",
+		"experimentalDecorators": true,
+		"allowSyntheticDefaultImports": true
 	},
 	"suppressImplicitAnyIndexErrors": true,
 	"lib": [
