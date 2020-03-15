@@ -71,11 +71,10 @@ export class ZigbeeTable extends Component<TimedProps, State> {
         this.setState({ isLoading: true }, () => {
             fetchZibeeDevicesList((err, devices: Dictionary<Device>) => {
                 this.setState({ isLoading: false, devices }, () => {
-                    this.onSortChange("1.last_seen")
+                    this.onSortChange("1.last_seen", "asc");
                 });
             });
         });
-
     }
     componentDidMount(): void {
         this.loadData();
@@ -104,11 +103,15 @@ export class ZigbeeTable extends Component<TimedProps, State> {
         }
     }
 
-    onSortChange = (column: SortColumns): void => {
+    onSortChange = (column: SortColumns, sortDir: SortDirection | undefined): void => {
         const { sortColumn } = this.state;
         let { sortDirection } = this.state;
+
         if (sortColumn === column) {
-            if (sortDirection == "asc") {
+            if (sortDir) {
+                sortDirection = sortDir;
+            }
+            else if (sortDirection == "asc") {
                 sortDirection = "desc"
             } else {
                 sortDirection = "asc";
@@ -173,7 +176,7 @@ export class ZigbeeTable extends Component<TimedProps, State> {
                         <tr>
                             <td><a href={genDeviceDetailsLink(k)}>{genDeviceShortAddress(k)}</a></td>
                             <td>{device.friendly_name}</td>
-                            <td>{device.ieeeAddr ? `0x${device.ieeeAddr}`: 'NA'}</td>
+                            <td>{device.ieeeAddr ? `0x${device.ieeeAddr}` : 'NA'}</td>
                             <td>{device.ManufName}</td>
                             <td className={style.green}>
                                 {device.ModelId}
