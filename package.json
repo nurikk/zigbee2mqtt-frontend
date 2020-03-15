@@ -36,7 +36,7 @@
     "eslint-plugin-preact": "^0.1.0",
     "fork-ts-checker-webpack-plugin": "^4.0.5",
     "lodash": "^4.17.15",
-    "preact": "^10.3.1",
+    "preact": "^10.3.4",
     "preact-habitat": "^3.3.0",
     "preact-jsx-chai": "^3.0.0",
     "preact-markup": "^2.0.0",
