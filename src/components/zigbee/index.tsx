@@ -71,7 +71,7 @@ export class ZigbeeTable extends Component<TimedProps, State> {
         this.setState({ isLoading: true }, () => {
             fetchZibeeDevicesList((err, devices: Dictionary<Device>) => {
                 this.setState({ isLoading: false, devices }, () => {
-                    this.onSortChange("1.last_seen", "asc");
+                    this.onSortChange("1.last_seen", "desc");
                 });
             });
         });
@@ -110,8 +110,7 @@ export class ZigbeeTable extends Component<TimedProps, State> {
         if (sortColumn === column) {
             if (sortDir) {
                 sortDirection = sortDir;
-            }
-            else if (sortDirection == "asc") {
+            } else if (sortDirection == "asc") {
                 sortDirection = "desc"
             } else {
                 sortDirection = "asc";
