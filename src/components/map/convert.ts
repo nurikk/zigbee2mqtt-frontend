@@ -30,10 +30,7 @@ export const convert2graph = (file: Dictionary<Device>): GraphI => {
 					source: deviceKey,
 					target: route.toString(),
 					linkQuality: deviceData?.st?.linkquality,
-					type: getLinkType(
-                        deviceData.type as DeviceType,
-                        file[route.toString()].type as DeviceType
-					)
+					type: getLinkType(deviceData.type, file[route.toString()].type)
 				});
 			});
 		}
@@ -42,7 +39,7 @@ export const convert2graph = (file: Dictionary<Device>): GraphI => {
 				source: deviceKey,
 				target: coordinator.id,
 				linkQuality: deviceData?.st?.linkquality,
-				type: getLinkType(deviceData.type as DeviceType, DeviceType.Coordinator)
+				type: getLinkType(deviceData.type, "Coordinator")
 			});
 		}
 	});

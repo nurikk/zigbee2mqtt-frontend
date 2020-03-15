@@ -6,7 +6,7 @@ import { forceSimulation, Simulation, ForceLink, forceLink, forceManyBody, force
 import { selectAll } from 'd3-selection';
 import { fetchZibeeDevicesList } from '../actions';
 import * as style from './map.css';
-import { GraphI, NodeI, LinkI, DeviceType, Dictionary, Device } from './types';
+import { GraphI, NodeI, LinkI, Dictionary, Device } from './types';
 
 import { convert2graph } from './convert';
 import Tooltip from './tooltip';
@@ -104,8 +104,8 @@ export class Map extends Component<TimedProps, State> {
 
     openDetailsWindow = (node: NodeI): void => {
         switch (node.device.type) {
-            case DeviceType.EndDevice:
-            case DeviceType.Router:
+            case "EndDevice":
+            case "Router":
                 window.open(genDeviceDetailsLink(node.id));
                 break;
             default:

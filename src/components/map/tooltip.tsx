@@ -1,5 +1,5 @@
-import { NodeI, Device, DeviceType } from "./types";
-import * as style from './tooltip.css';
+import { NodeI, Device } from "./types";
+import style from './tooltip.css';
 import { h, FunctionalComponent } from "preact";
 import { isOnline } from "./nodes";
 import { lastSeen, TimedProps, TimeInfo } from "../time";
@@ -26,7 +26,7 @@ const getTooltip = (device: Device, timeInfo: TimeInfo): string[] => {
     if (strings.length == 0) {
         strings.push("A very strange device...");
     }
-    if (device.type !== DeviceType.Coordinator) {
+    if (device.type !== "Coordinator") {
         if (device.last_seen && timeInfo) {
             strings.push(`Last seen: ${lastSeen(device, timeInfo)}`);
         }

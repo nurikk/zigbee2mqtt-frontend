@@ -10,7 +10,7 @@ import {
 import { drag } from 'd3-drag';
 import { Simulation } from 'd3-force';
 import { selectAll, event, select } from 'd3-selection';
-import { NodeI, LinkI, Device, DeviceType } from './types';
+import { NodeI, LinkI, Device } from './types';
 import cx from 'classnames';
 
 import * as style from './map.css';
@@ -94,7 +94,7 @@ class Node extends Component<NodeProps, {}> {
         const cn = cx(style.node, mappedClas, { [style.offline]: !isOnline(node.device, time) });
 
         switch (node.device.type) {
-            case DeviceType.Coordinator:
+            case "Coordinator":
                 return (
                     <polygon
                         className={cn}
