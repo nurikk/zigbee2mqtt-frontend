@@ -1,10 +1,11 @@
 import { GATEWAY } from './consts';
 import { GraphI, NodeI, LinkType } from './types';
 import { Device, Dictionary, DeviceType } from '../../types';
+import { genDeviceShortAddress } from '../../utils';
 
-const getName = (device: Device): string => {
-	const { friendly_name: friendlyName, ieeeAddr } = device;
-	return friendlyName ?? `${ieeeAddr?.slice(-4) ?? 'Unknow device'}`;
+const getName = (device: Device, deviceKey: string): string => {
+	const { friendly_name: friendlyName } = device;
+	return friendlyName ?? `${genDeviceShortAddress(deviceKey) ?? 'Unknow device'}`;
 };
 export const convert2graph = (file: Dictionary<Device>): GraphI => {
 	const coordinator: NodeI = {
@@ -22,7 +23,7 @@ export const convert2graph = (file: Dictionary<Device>): GraphI => {
 	Object.entries(file).forEach(([deviceKey, deviceData]) => {
 		graph.nodes.push({
 			id: deviceKey,
-			name: getName(deviceData),
+			name: getName(deviceData, deviceKey),
 			device: deviceData
 		});
 		if (Array.isArray(deviceData.Rtg) && deviceData.Rtg.length) {
