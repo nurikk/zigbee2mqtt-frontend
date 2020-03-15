@@ -173,7 +173,7 @@ export class ZigbeeTable extends Component<TimedProps, State> {
                         <tr>
                             <td><a href={genDeviceDetailsLink(k)}>{genDeviceShortAddress(k)}</a></td>
                             <td>{device.friendly_name}</td>
-                            <td>{device.ieeeAddr}</td>
+                            <td>{device.ieeeAddr ? `0x${device.ieeeAddr}`: 'NA'}</td>
                             <td>{device.ManufName}</td>
                             <td className={style.green}>
                                 {device.ModelId}

@@ -19,7 +19,7 @@ const getTooltip = (device: Device, timeInfo: TimeInfo): string[] => {
         }
     }
     if (device.ieeeAddr) {
-        strings.push(device.ieeeAddr);
+        strings.push(`0x${device.ieeeAddr}`);
     }
     if (device?.st?.linkquality) {
         strings.push(`LinkQuality: ${device.st.linkquality}`)
