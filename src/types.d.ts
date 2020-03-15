@@ -17,6 +17,8 @@ interface Interview {
      */
     State?: 0 | 1 | 2 | 3 | 4;
 }
+
+export type PowerSource = "Main" | "Battery";
 export interface Device {
     /** A 64-bit IEEE address (also called MAC address or Extended address) */
     ieeeAddr?: string | undefined;
@@ -33,6 +35,7 @@ export interface Device {
     Rtg?: number[] | undefined;
     /** Features discovery status, aka interview */
     Interview?: Interview | undefined;
+    powerSource: PowerSource | undefined;
 }
 
 export type Dictionary<V> = { [index: string]: V }

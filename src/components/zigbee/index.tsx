@@ -148,6 +148,21 @@ export class ZigbeeTable extends Component<TimedProps, State> {
         }
         return <div>N/A {intreviewTrigger}</div>;
     }
+    renderPowerSource(device: Device): ComponentChild {
+        switch (device.powerSource) {
+            case "Main":
+                return <i className="fa fa-plug" />
+            case "Battery":
+                if (device.st?.battery) {
+                    return device.st?.battery;
+                }
+                return <i className="fa fa-battery" />
+            default:
+                return <i className="fa fa-question" />;
+        }
+
+
+    }
     renderDevicesTable(): ComponentChild {
         const { sortedDevices, sortColumn, sortDirection } = this.state;
         const { time } = this.props;
@@ -187,7 +202,7 @@ export class ZigbeeTable extends Component<TimedProps, State> {
                             })}>{this.renderInterviewState([k, device])}</td>
                             <td>{lastSeen(device, time)}</td>
                             <td>{device?.Rtg?.map((route) => genDeviceShortAddress(route)).join(', ')}</td>
-                            <td>{device.st?.battery}</td>
+                            <td className="text-center">{this.renderPowerSource(device)}</td>
                             <td>
                                 <div className="btn-group" role="group" aria-label="Basic example">
                                     <Button<DeviceKeyTupple> className="btn btn-danger btn-sm" onClick={onRemoveClick} item={[k, device]}><i className="fa fa-trash" /></Button>
