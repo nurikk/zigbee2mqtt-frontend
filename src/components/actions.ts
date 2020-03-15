@@ -11,13 +11,13 @@ export const fetchTimeInfo = (callback: CallbackHandler): void => {
 };
 
 export const renameDevice = (address: string, newName: string, callback: CallbackHandler): void => {
-    fetch(`/zigbee?rename=${address}&new=${encodeURIComponent(newName)}`).then((res) => res.json()).then(data => callback(false, data));
+    fetch(`/zigbee?rename=${address}&new=${encodeURIComponent(newName)}`).then((res) => res.blob()).then(data => callback(false, data));
 };
 
 export const removeDevice = (address: string, callback: CallbackHandler): void => {
-    fetch(`/zigbee?remove=${address}`).then((res) => res.json()).then(data => callback(false, data));
+    fetch(`/zigbee?remove=${address}`).then((res) => res.blob()).then(data => callback(false, data));
 };
 
 export const startInterview = (address: string, callback: CallbackHandler): void => {
-    fetch(`/zigbee?intstart=${address}`).then((res) => res.json()).then(data => callback(false, data));
+    fetch(`/zigbee?intstart=${address}`).then((res) => res.blob()).then(data => callback(false, data));
 };
