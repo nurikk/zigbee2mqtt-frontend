@@ -35,7 +35,7 @@ export interface Device {
     Rtg?: number[] | undefined;
     /** Features discovery status, aka interview */
     Interview?: Interview | undefined;
-    powerSource: PowerSource | undefined;
+    powerSource?: PowerSource | undefined;
 }
 
 export type Dictionary<V> = { [index: string]: V }
