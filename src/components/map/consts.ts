@@ -1,4 +1,5 @@
-import { Device } from './types';
+import { Device } from "../../types";
+
 
 export const GATEWAY: Device = {
 	ieeeAddr: 'Coordinator node',

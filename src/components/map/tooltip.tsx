@@ -1,8 +1,9 @@
-import { NodeI, Device } from "./types";
+import { NodeI } from "./types";
 import style from './tooltip.css';
 import { h, FunctionalComponent } from "preact";
 import { isOnline } from "./nodes";
 import { lastSeen, TimedProps, TimeInfo } from "../time";
+import { Device } from "../../types";
 
 interface TooltipProps extends TimedProps {
     info: NodeI;

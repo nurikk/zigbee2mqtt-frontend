@@ -1,0 +1,2 @@
+export const genDeviceShortAddress = (deviceKey: string): string => (`0x${parseInt(deviceKey, 10).toString(16)}`)
+export const genDeviceDetailsLink = (deviceKey: string): string => (`/zigbee?nwkAddr=${genDeviceShortAddress(deviceKey)}`)

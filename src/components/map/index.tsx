@@ -5,12 +5,14 @@ import Labels from './labels';
 import { forceSimulation, Simulation, ForceLink, forceLink, forceManyBody, forceCenter, forceX, forceY } from 'd3-force';
 import { selectAll } from 'd3-selection';
 import { fetchZibeeDevicesList } from '../actions';
-import * as style from './map.css';
-import { GraphI, NodeI, LinkI, Dictionary, Device } from './types';
+import style from './map.css';
+import { GraphI, NodeI, LinkI } from './types';
 
 import { convert2graph } from './convert';
 import Tooltip from './tooltip';
 import Timed, { TimedProps } from '../time';
+import { Dictionary, Device } from '../../types';
+import { genDeviceDetailsLink } from '../../utils';
 
 export interface HoverableNode {
     onMouseOver?: (arg0: NodeI) => void;
@@ -31,9 +33,6 @@ interface State {
     width: number;
     height: number;
 }
-
-export const genDeviceShortAddress = (deviceKey: string): string => (`0x${parseInt(deviceKey, 10).toString(16)}`)
-export const genDeviceDetailsLink = (deviceKey: string): string => (`/zigbee?nwkAddr=${genDeviceShortAddress(deviceKey)}`)
 const getDistance = (d: LinkI): number => {
     switch (d.type) {
         case 'Router2Router':

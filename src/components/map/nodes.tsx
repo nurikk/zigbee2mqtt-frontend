@@ -10,12 +10,13 @@ import {
 import { drag } from 'd3-drag';
 import { Simulation } from 'd3-force';
 import { selectAll, event, select } from 'd3-selection';
-import { NodeI, LinkI, Device } from './types';
+import { NodeI, LinkI } from './types';
 import cx from 'classnames';
 
 import * as style from './map.css';
 import { HoverableNode } from '.';
 import { TimedProps, TimeInfo } from '../time';
+import { Device } from '../../types';
 
 const calcStarPoints = (
     centerX: number,

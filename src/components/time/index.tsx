@@ -1,7 +1,8 @@
 
 import { h, ComponentChild, Component, ComponentType } from "preact";
 import { fetchTimeInfo } from "../actions";
-import { Device } from "../map/types";
+import { Device } from "../../types";
+
 
 export interface TimeInfo {
     ntp_enable: boolean;

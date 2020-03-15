@@ -1,9 +1,10 @@
 import { select } from 'd3-selection';
 import { h, Component, ComponentChild, createRef, FunctionalComponent } from 'preact';
-import { NodeI, Device } from './types';
-import * as style from './map.css';
+import { NodeI } from './types';
+import style from './map.css';
 import cx from 'classnames';
 import { HoverableNode } from '.';
+import { Device } from '../../types';
 
 interface LabelProps extends HoverableNode {
     node: NodeI;
@@ -33,8 +34,8 @@ class Label extends Component<LabelProps, {}> {
 
     render(): ComponentChild {
         const { node } = this.props;
-        const deviceType = (node.device as Device).type as string;
-        const mappedClas = style[deviceType] as string;
+        const deviceType = (node.device as Device).type;
+        const mappedClas = style[deviceType];
         const cn = cx(style.label, mappedClas);
         const { onMouseOut, onMouseOver, onDblClick } = this;
         return (

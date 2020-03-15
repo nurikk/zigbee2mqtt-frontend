@@ -1,12 +1,12 @@
 import style from "./style.css";
 import { h, ComponentChild, Component } from "preact";
 import { fetchZibeeDevicesList, renameDevice, startInterview, removeDevice } from "../actions";
-import { Dictionary, Device } from "../map/types";
-import { genDeviceDetailsLink, genDeviceShortAddress } from "../map";
 import Timed, { TimedProps, lastSeen } from "../time";
 import Button from "../button";
 import orderBy from "lodash/orderBy";
 import cx from 'classnames';
+import { Device, Dictionary } from "../../types";
+import { genDeviceShortAddress, genDeviceDetailsLink } from "../../utils";
 type SortDirection = "asc" | "desc";
 //TODO: proper type alias
 type SortColumns = "1.last_seen";

@@ -1,5 +1,6 @@
 import { GATEWAY } from './consts';
-import { Device, GraphI, NodeI, LinkType, DeviceType, Dictionary } from './types';
+import { GraphI, NodeI, LinkType } from './types';
+import { Device, Dictionary, DeviceType } from '../../types';
 
 const getName = (device: Device): string => {
 	const { friendly_name: friendlyName, ieeeAddr } = device;
