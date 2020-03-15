@@ -50,7 +50,7 @@
     "@types/superagent": "^4.1.7",
     "@types/webpack-env": "^1.15.1",
     "@typescript-eslint/eslint-plugin": "^2.23.0",
-    "@typescript-eslint/parser": "^2.19.0",
+    "@typescript-eslint/parser": "^2.23.0",
     "copy-webpack-plugin": "^5.1.1",
     "css-loader": "^3.4.2",
     "eslint": "^6.8.0",
