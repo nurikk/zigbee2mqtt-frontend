@@ -3,7 +3,7 @@ import { h, ComponentChild, Component } from "preact";
 import { fetchZibeeDevicesList, renameDevice, startInterview, removeDevice } from "../actions";
 import Timed, { TimedProps, lastSeen } from "../time";
 import Button from "../button";
-import orderBy from "lodash/orderBy";
+import orderBy from "lodash.orderby";
 import cx from 'classnames';
 import { Device, Dictionary } from "../../types";
 import { genDeviceShortAddress, genDeviceDetailsLink } from "../../utils";
