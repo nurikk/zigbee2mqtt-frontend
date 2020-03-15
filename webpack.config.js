@@ -64,8 +64,6 @@ module.exports = (env, args) => {
 		module: {
 			rules: [{
 					test: /\.tsx?$/,
-					exclude: /node_modules\/(?!preact-material-components\/ts)/,
-
 					use: [{
 						loader: 'ts-loader'
 					}],

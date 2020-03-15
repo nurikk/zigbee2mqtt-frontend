@@ -23,9 +23,6 @@
   "eslintIgnore": [
     "dist/*"
   ],
-  "alias": {
-    "preact": "./node_modules/preact/dist/preact.min.js"
-  },
   "dependencies": {
     "@types/classnames": "^2.2.10",
     "@types/lodash.orderby": "^4.6.6",
