@@ -27,7 +27,7 @@
     "preact": "./node_modules/preact/dist/preact.min.js"
   },
   "dependencies": {
-    "@types/classnames": "^2.2.9",
+    "@types/classnames": "^2.2.10",
     "@types/lodash": "^4.14.149",
     "classnames": "^2.2.6",
     "d3-drag": "^1.2.5",
