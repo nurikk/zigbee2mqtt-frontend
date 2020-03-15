@@ -149,19 +149,16 @@ export class ZigbeeTable extends Component<TimedProps, State> {
         return <div>N/A {intreviewTrigger}</div>;
     }
     renderPowerSource(device: Device): ComponentChild {
-        switch (device.powerSource) {
-            case "Main":
-                return <i className="fa fa-plug" />
-            case "Battery":
-                if (device.st?.battery) {
-                    return device.st?.battery;
-                }
-                return <i className="fa fa-battery" />
-            default:
-                return <i className="fa fa-question" />;
+        if (device.st?.battery) {
+            return device.st?.battery;
         }
-
-
+        if (device.powerSource == "Main") {
+            return <i className="fa fa-plug" />
+        }
+        if (device.powerSource == "Battery") {
+            return <i className="fa fa-plug" />
+        }
+        return <i className="fa fa-question" />;
     }
     renderDevicesTable(): ComponentChild {
         const { sortedDevices, sortColumn, sortDirection } = this.state;
