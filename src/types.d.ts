@@ -22,6 +22,7 @@ export type PowerSource = "Main" | "Battery";
 export interface Device {
     /** A 64-bit IEEE address (also called MAC address or Extended address) */
     ieeeAddr?: string | undefined;
+    nwkAddr: string;
     /** Node last message timestamp */
     last_seen?: string | undefined;
     type?: DeviceType | undefined;

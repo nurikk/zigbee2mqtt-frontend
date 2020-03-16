@@ -5,33 +5,33 @@ import Timed, { TimedProps, lastSeen } from "../time";
 import Button from "../button";
 import orderBy from "lodash.orderby";
 import cx from 'classnames';
-import { Device, Dictionary } from "../../types";
+import { Device } from "../../types";
 import { genDeviceShortAddress, genDeviceDetailsLink } from "../../utils";
 type SortDirection = "asc" | "desc";
 //TODO: proper type alias
-type SortColumns = "1.last_seen";
+type SortColumns = "last_seen" | "nwkAddr" | "friendly_name" | "ieeeAddr" | "ManufName" | "st.linkquality" | "ModelId" | "Interview.State" | "st.battery";
 
-type DeviceKeyTupple = [string, Device];
+
 
 
 interface State {
     isLoading: boolean;
     sortDirection: SortDirection;
     sortColumn: SortColumns;
-    devices: Dictionary<Device>;
-    sortedDevices: DeviceKeyTupple[];
+    devices: Device[];
+    sortedDevices: Device[];
 }
 
 
-interface ActionTHProps {
-    column: string;
+interface ActionTHProps<T> {
+    column: T;
     onClick?(arg1: unknown): void;
-    current: string;
+    current: T;
     currenDirection: SortDirection;
     [k: string]: unknown;
 }
 
-class ActionTH extends Component<ActionTHProps, {}> {
+class ActionTH<T> extends Component<ActionTHProps<T>, {}> {
     onClick = (event: MouseEvent): void => {
         event.preventDefault();
         event.stopPropagation();
@@ -62,16 +62,16 @@ export class ZigbeeTable extends Component<TimedProps, State> {
         this.state = {
             isLoading: false,
             sortDirection: "asc",
-            sortColumn: "1.last_seen",
-            devices: {},
+            sortColumn: "last_seen",
+            devices: [],
             sortedDevices: []
         }
     }
     loadData = (): void => {
         this.setState({ isLoading: true }, () => {
-            fetchZibeeDevicesList((err, devices: Dictionary<Device>) => {
+            fetchZibeeDevicesList((err, devices: Device[]) => {
                 this.setState({ isLoading: false, devices }, () => {
-                    this.onSortChange("1.last_seen", "desc");
+                    this.onSortChange("last_seen", "desc");
                 });
             });
         });
@@ -80,26 +80,26 @@ export class ZigbeeTable extends Component<TimedProps, State> {
         this.loadData();
     }
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    onBindClick = ([nwkAddr, device]: DeviceKeyTupple): void => {
-        location.href = `/zigbee?bind=${genDeviceShortAddress(nwkAddr)}`;
+    onBindClick = (device: Device): void => {
+        location.href = `/zigbee?bind=${genDeviceShortAddress(device.nwkAddr)}`;
     }
 
-    onRenameClick = ([nwkAddr, device]: DeviceKeyTupple): void => {
+    onRenameClick = (device: Device): void => {
         const newName = prompt('Enter new name', device.friendly_name);
         if (newName && newName !== device.friendly_name) {
-            renameDevice(genDeviceShortAddress(nwkAddr), newName, this.loadData);
+            renameDevice(genDeviceShortAddress(device.nwkAddr), newName, this.loadData);
         }
     }
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    onRemoveClick = ([nwkAddr, device]: DeviceKeyTupple): void => {
+    onRemoveClick = (device: Device): void => {
         if (confirm('Remove device?')) {
-            removeDevice(genDeviceShortAddress(nwkAddr), this.loadData);
+            removeDevice(genDeviceShortAddress(device.nwkAddr), this.loadData);
         }
     }
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    onInteviewClick = ([nwkAddr, device]: DeviceKeyTupple): void => {
+    onInteviewClick = (device: Device): void => {
         if (confirm('Start Interview?')) {
-            startInterview(genDeviceShortAddress(nwkAddr), this.loadData);
+            startInterview(genDeviceShortAddress(device.nwkAddr), this.loadData);
         }
     }
 
@@ -118,11 +118,7 @@ export class ZigbeeTable extends Component<TimedProps, State> {
         }
 
         const { devices } = this.state;
-        let sortedDevices = Object
-            .entries(devices)
-            .map(([k, device]) => [k, device] as DeviceKeyTupple);
-
-        sortedDevices = orderBy<DeviceKeyTupple>(sortedDevices, [column], [sortDirection]);
+        const sortedDevices = orderBy<Device>(devices, [column], [sortDirection]);
         this.setState({ sortColumn: column, sortDirection, sortedDevices });
     }
     render(): ComponentChild {
@@ -136,10 +132,10 @@ export class ZigbeeTable extends Component<TimedProps, State> {
         }
         return (sortedDevices.length ? this.renderDevicesTable() : <div>No data</div>);
     }
-    renderInterviewState([nwkAddr, device]: DeviceKeyTupple): ComponentChild {
+    renderInterviewState(device: Device): ComponentChild {
         const { onInteviewClick } = this;
         const inteviewsCount = 4;
-        const intreviewTrigger = <Button<DeviceKeyTupple> className="btn btn-normal btn-sm" onClick={onInteviewClick} item={[nwkAddr, device]}><i className="fa fa-refresh" /></Button>;
+        const intreviewTrigger = <Button<Device> className="btn btn-normal btn-sm" onClick={onInteviewClick} item={device}><i className="fa fa-refresh" /></Button>;
         if (device.Interview) {
             if (inteviewsCount === device.Interview.State) {
                 return 'Ok';
@@ -170,41 +166,42 @@ export class ZigbeeTable extends Component<TimedProps, State> {
                 <thead>
                     <tr className="text-nowrap">
                         <th>#</th>
-                        <ActionTH className={style["action-colum"]} column="0" currenDirection={sortDirection} current={sortColumn} onClick={onSortChange}>nwkAddr</ActionTH>
-                        <ActionTH className={style["action-colum"]} column="1.friendly_name" currenDirection={sortDirection} current={sortColumn} onClick={onSortChange}>FriendlyName</ActionTH>
-                        <ActionTH className={style["action-colum"]} column="1.ieeeAddr" currenDirection={sortDirection} current={sortColumn} onClick={onSortChange}>ieeeAddr</ActionTH>
-                        <ActionTH className={style["action-colum"]} column="1.ManufName" currenDirection={sortDirection} current={sortColumn} onClick={onSortChange}>ManufName</ActionTH>
-                        <ActionTH className={style["action-colum"]} column="1.ModelId" currenDirection={sortDirection} current={sortColumn} onClick={onSortChange}>ModelId</ActionTH>
-                        <ActionTH className={style["action-colum"]} column="1.st.linkquality" currenDirection={sortDirection} current={sortColumn} onClick={onSortChange}>LinkQuality</ActionTH>
-                        <ActionTH className={style["action-colum"]} column="1.Interview.State" currenDirection={sortDirection} current={sortColumn} onClick={onSortChange}>Interview</ActionTH>
-                        <ActionTH className={style["action-colum"]} column="1.last_seen" currenDirection={sortDirection} current={sortColumn} onClick={onSortChange}>LastSeen</ActionTH>
+                        <ActionTH<SortColumns> className={style["action-colum"]} column="nwkAddr" currenDirection={sortDirection} current={sortColumn} onClick={onSortChange}>nwkAddr</ActionTH>
+                        <ActionTH<SortColumns> className={style["action-colum"]} column="friendly_name" currenDirection={sortDirection} current={sortColumn} onClick={onSortChange}>FriendlyName</ActionTH>
+                        <ActionTH<SortColumns> className={style["action-colum"]} column="ieeeAddr" currenDirection={sortDirection} current={sortColumn} onClick={onSortChange}>ieeeAddr</ActionTH>
+                        <ActionTH<SortColumns> className={style["action-colum"]} column="ManufName" currenDirection={sortDirection} current={sortColumn} onClick={onSortChange}>ManufName</ActionTH>
+                        <ActionTH<SortColumns> className={style["action-colum"]} column="ModelId" currenDirection={sortDirection} current={sortColumn} onClick={onSortChange}>ModelId</ActionTH>
+                        <ActionTH<SortColumns> className={style["action-colum"]} column="st.linkquality" currenDirection={sortDirection} current={sortColumn} onClick={onSortChange}>LinkQuality</ActionTH>
+                        <ActionTH<SortColumns> className={style["action-colum"]} column="Interview.State" currenDirection={sortDirection} current={sortColumn} onClick={onSortChange}>Interview</ActionTH>
+                        <ActionTH<SortColumns> className={style["action-colum"]} column="last_seen" currenDirection={sortDirection} current={sortColumn} onClick={onSortChange}>LastSeen</ActionTH>
                         <th>Routes</th>
-                        <ActionTH className={style["action-colum"]} column="1.st.battery" currenDirection={sortDirection} current={sortColumn} onClick={onSortChange}>PS</ActionTH>
+                        <ActionTH<SortColumns> className={style["action-colum"]} column="st.battery" currenDirection={sortDirection} current={sortColumn} onClick={onSortChange}>PS</ActionTH>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {sortedDevices.map(([k, device]: DeviceKeyTupple, index) => (
-                        <tr>
-                            <th scope="row">{index}</th>
-                            <td><a href={genDeviceDetailsLink(k)}>{genDeviceShortAddress(k)}</a></td>
+                    {sortedDevices.map((device: Device, index) => (
+                        <tr className={cx({
+                            'table-danger': !device.ieeeAddr
+                        })}>
+                            <th scope="row">{index + 1}</th>
+                            <td><a href={genDeviceDetailsLink(device.nwkAddr)}>{genDeviceShortAddress(device.nwkAddr)}</a></td>
                             <td>{device.friendly_name}</td>
-                            <td>{device.ieeeAddr ? `0x${device.ieeeAddr}` : 'NA'}</td>
+                            <td>{device.ieeeAddr ? `0x${device.ieeeAddr}` : '<corrupted>'}</td>
                             <td>{device.ManufName}</td>
                             <td>{device.ModelId}</td>
                             <td>{device.st?.linkquality}</td>
                             <td className={cx({
-                                'table-success': device.Interview?.State == 4,
                                 'table-warning': device.Interview?.State !== 4,
-                            })}>{this.renderInterviewState([k, device])}</td>
+                            })}>{this.renderInterviewState(device)}</td>
                             <td>{lastSeen(device, time)}</td>
                             <td>{device?.Rtg?.map((route) => genDeviceShortAddress(route)).join(' ')}</td>
                             <td className="text-center">{this.renderPowerSource(device)}</td>
                             <td>
                                 <div className="btn-group" role="group" aria-label="Basic example">
-                                    <Button<DeviceKeyTupple> className="btn btn-danger btn-sm" onClick={onRemoveClick} item={[k, device]}><i className="fa fa-trash" /></Button>
-                                    <Button<DeviceKeyTupple> className="btn btn-secondary btn-sm" onClick={onRenameClick} item={[k, device]}><i className="fa fa-edit" /></Button>
-                                    {device.ieeeAddr ? <Button<DeviceKeyTupple> className="btn btn-success btn-sm" onClick={onBindClick} item={[k, device]}>Bind</Button> : null}
+                                    <Button<Device> className="btn btn-danger btn-sm" onClick={onRemoveClick} item={device}><i className="fa fa-trash" /></Button>
+                                    <Button<Device> className="btn btn-secondary btn-sm" onClick={onRenameClick} item={device}><i className="fa fa-edit" /></Button>
+                                    {device.ieeeAddr ? <Button<Device> className="btn btn-success btn-sm" onClick={onBindClick} item={device}>Bind</Button> : null}
                                 </div>
                             </td>
                         </tr>

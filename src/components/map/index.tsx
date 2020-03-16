@@ -11,7 +11,7 @@ import { GraphI, NodeI, LinkI } from './types';
 import { convert2graph } from './convert';
 import Tooltip from './tooltip';
 import Timed, { TimedProps } from '../time';
-import { Dictionary, Device } from '../../types';
+import { Device } from '../../types';
 import { genDeviceDetailsLink } from '../../utils';
 
 export interface HoverableNode {
@@ -151,7 +151,7 @@ export class Map extends Component<TimedProps, State> {
         }
     }
     componentDidMount(): void {
-        fetchZibeeDevicesList((err, res: Dictionary<Device>) => {
+        fetchZibeeDevicesList((err, res: Device[]) => {
             const { width, height } = (this.ref.current as HTMLDivElement).getBoundingClientRect();
             const graph = convert2graph(res);
             this.setState({ graph, width, height }, this.updateNodes);
