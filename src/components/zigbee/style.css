@@ -54,7 +54,7 @@
     text-align: left !important;
   }
   .adaptive td:empty::after {
-    content: " ";
+    content: "\200B";
   }
   .adaptive td:before {
     /* Now like a table header */
