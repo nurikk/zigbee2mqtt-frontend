@@ -217,7 +217,7 @@ export class ZigbeeTable extends Component<TimedProps, State> {
                             })}>{this.renderInterviewState(device)}</td>
                             <td>{lastSeen(device, time)}</td>
                             <td>{device?.Rtg?.map((route) => <a href={genDeviceDetailsLink(route)}>{genDeviceShortAddress(route)}</a>)}</td>
-                            <td className="text-center">{this.renderPowerSource(device)}</td>
+                            <td className="text-left">{this.renderPowerSource(device)}</td>
                             <td>
                                 <div className="btn-group" role="group" aria-label="Basic example">
                                     <Button<Device> className="btn btn-danger btn-sm" onClick={onRemoveClick} item={device}><i className="fa fa-trash" /></Button>

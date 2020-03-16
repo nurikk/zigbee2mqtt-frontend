@@ -51,7 +51,6 @@
     border-bottom: 1px solid #eee;
     position: relative;
     padding-left: 30%;
-    text-align: left !important;
   }
   .adaptive td:empty::after {
     content: "\200B";
