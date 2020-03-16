@@ -1,9 +1,5 @@
 @import url("https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
 
-.green {
-	color: green;
-}
-
 .actions {
 	min-width: 150px
 }
@@ -30,6 +26,9 @@
     Label the data
     */
   }
+  /* .adaptive table {
+    empty-cells: show;
+  } */
   .adaptive table,
 .adaptive thead,
 .adaptive tbody,
@@ -52,9 +51,10 @@
     border-bottom: 1px solid #eee;
     position: relative;
     padding-left: 50%;
+    text-align: left !important;
   }
   .adaptive td:empty::after {
-    content: " ";
+    content: " ";
   }
   .adaptive td:before {
     /* Now like a table header */

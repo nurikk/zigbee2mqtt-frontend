@@ -3,7 +3,6 @@ declare namespace StyleCssModule {
         "action-colum": string;
         actions: string;
         adaptive: string;
-        green: string;
         invisible: string;
     }
 }

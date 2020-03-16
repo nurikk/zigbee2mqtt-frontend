@@ -189,9 +189,7 @@ export class ZigbeeTable extends Component<TimedProps, State> {
                             <td>{device.friendly_name}</td>
                             <td>{device.ieeeAddr ? `0x${device.ieeeAddr}` : 'NA'}</td>
                             <td>{device.ManufName}</td>
-                            <td className={style.green}>
-                                {device.ModelId}
-                            </td>
+                            <td>{device.ModelId}</td>
                             <td>{device.st?.linkquality}</td>
                             <td className={cx({
                                 'table-success': device.Interview?.State == 4,
