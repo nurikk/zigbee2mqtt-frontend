@@ -169,6 +169,7 @@ export class ZigbeeTable extends Component<TimedProps, State> {
             <table className={`table table-striped ${style.adaptive}`}>
                 <thead>
                     <tr className="text-nowrap">
+                        <th>#</th>
                         <ActionTH className={style["action-colum"]} column="0" currenDirection={sortDirection} current={sortColumn} onClick={onSortChange}>nwkAddr</ActionTH>
                         <ActionTH className={style["action-colum"]} column="1.friendly_name" currenDirection={sortDirection} current={sortColumn} onClick={onSortChange}>FriendlyName</ActionTH>
                         <ActionTH className={style["action-colum"]} column="1.ieeeAddr" currenDirection={sortDirection} current={sortColumn} onClick={onSortChange}>ieeeAddr</ActionTH>
@@ -183,8 +184,9 @@ export class ZigbeeTable extends Component<TimedProps, State> {
                     </tr>
                 </thead>
                 <tbody>
-                    {sortedDevices.map(([k, device]: DeviceKeyTupple) => (
+                    {sortedDevices.map(([k, device]: DeviceKeyTupple, index) => (
                         <tr>
+                            <th scope="row">{index}</th>
                             <td><a href={genDeviceDetailsLink(k)}>{genDeviceShortAddress(k)}</a></td>
                             <td>{device.friendly_name}</td>
                             <td>{device.ieeeAddr ? `0x${device.ieeeAddr}` : 'NA'}</td>
