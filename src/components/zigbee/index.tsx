@@ -19,7 +19,6 @@ interface State {
     sortDirection: SortDirection;
     sortColumn: SortColumns;
     devices: Device[];
-    sortedDevices: Device[];
 }
 
 
@@ -55,28 +54,50 @@ class ActionTH<T> extends Component<ActionTHProps<T>, {}> {
         </th>
     }
 }
-
+const storeKey = 'ZigbeeTableState';
 export class ZigbeeTable extends Component<TimedProps, State> {
     constructor() {
         super();
         this.state = {
             isLoading: false,
-            sortDirection: "asc",
+            sortDirection: "desc",
             sortColumn: "last_seen",
-            devices: [],
-            sortedDevices: []
+            devices: []
+        }
+    }
+    restoreState(): void {
+        const storedState = localStorage.getItem(storeKey);
+        if (storedState) {
+            try {
+                const restored: Partial<State> = JSON.parse(storedState);
+                this.setState(restored);
+            } catch (e) {
+                console.error(e);
+            }
+        }
+    }
+    saveState = (): void => {
+        const { sortDirection, sortColumn } = this.state;
+        const storeData = {
+            sortDirection,
+            sortColumn
+        }
+        //in private mode localstorage access can throw exceptions
+        try {
+            localStorage.setItem(storeKey, JSON.stringify(storeData));
+        } catch (e) {
+            console.error(e);
         }
     }
     loadData = (): void => {
         this.setState({ isLoading: true }, () => {
             fetchZibeeDevicesList((err, devices: Device[]) => {
-                this.setState({ isLoading: false, devices }, () => {
-                    this.onSortChange("last_seen", "desc");
-                });
+                this.setState({ isLoading: false, devices });
             });
         });
     }
     componentDidMount(): void {
+        this.restoreState();
         this.loadData();
     }
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -117,12 +138,10 @@ export class ZigbeeTable extends Component<TimedProps, State> {
             }
         }
 
-        const { devices } = this.state;
-        const sortedDevices = orderBy<Device>(devices, [column], [sortDirection]);
-        this.setState({ sortColumn: column, sortDirection, sortedDevices });
+        this.setState({ sortColumn: column, sortDirection }, this.saveState);
     }
     render(): ComponentChild {
-        const { sortedDevices, isLoading } = this.state;
+        const { devices, isLoading } = this.state;
         if (isLoading) {
             return <div className="d-flex justify-content-center">
                 <div className="spinner-border" role="status">
@@ -130,7 +149,7 @@ export class ZigbeeTable extends Component<TimedProps, State> {
                 </div>
             </div>
         }
-        return (sortedDevices.length ? this.renderDevicesTable() : <div>No data</div>);
+        return (devices.length ? this.renderDevicesTable() : <div>No data</div>);
     }
     renderInterviewState(device: Device): ComponentChild {
         const { onInteviewClick } = this;
@@ -157,9 +176,11 @@ export class ZigbeeTable extends Component<TimedProps, State> {
         return <i className="fa fa-question" />;
     }
     renderDevicesTable(): ComponentChild {
-        const { sortedDevices, sortColumn, sortDirection } = this.state;
+        const { sortColumn, sortDirection } = this.state;
         const { time } = this.props;
         const { onBindClick, onRenameClick, onRemoveClick, onSortChange } = this;
+        const { devices } = this.state;
+        const sortedDevices = orderBy<Device>(devices, [sortColumn], [sortDirection]);
 
         return (
             <table className={`table table-striped ${style.adaptive}`}>
