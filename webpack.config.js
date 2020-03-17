@@ -27,6 +27,10 @@ module.exports = (env, args) => {
 		new HtmlWebpackPlugin({
 			template: 'src/static/map.html',
 			filename: 'map.html'
+		}),
+		new HtmlWebpackPlugin({
+			template: 'src/static/zigbee.html',
+			filename: 'zigbee.html'
 		})
 	];
 	if (production) {
