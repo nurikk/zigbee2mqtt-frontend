@@ -59,7 +59,7 @@
     /* Now like a table header */
     position: absolute;
     /* Top/left values mimic padding */
-    top: 6px;
+    top: 12px;
     left: 6px;
     width: 45%;
     padding-right: 10px;
