@@ -65,7 +65,12 @@ export default class Discovery extends Component<{}, DiscoveryState> {
         this.setState({ events, joinDuration, updateTimerId });
     }
     onMessageRecieve = (wsEvent: MessageEvent): void => {
-        const event = JSON.parse(wsEvent.data) as WebsocketMessage;
+        let event = {} as WebsocketMessage;
+        try {
+            event = JSON.parse(wsEvent.data) as WebsocketMessage;
+        } catch (e) {
+            console.error('Cant parse json', e);
+        }
         switch (event.category) {
             case "log":
                 // console.log(event.payload);
