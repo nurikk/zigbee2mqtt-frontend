@@ -14,6 +14,18 @@
     }
 }
 
-.mw-33 {
-    max-width: 33.333%;
+@keyframes blink {
+    0% {
+        color: red;
+
+    }
+
+    100% {
+        color: black;
+    }
+}
+
+
+.blink {
+    animation: blink 1s linear infinite;
 }

@@ -162,7 +162,7 @@ export default class DeviceCard extends Component<DeviceCardProps, DeviceCardSta
         const lastUpdateTime = this.getLastUpdateTime();
         if (manualInteviewStarted && lastUpdateTime > deviceManualWakeupTimeouit) {
             return (<div class={`row ${style["scale-in-center"]}`}>
-                <div class="col-12">Press wakeup button</div>
+                <div class={`col-12 ${style.blink}`}>Press wakeup button</div>
             </div>);
         }
         if (!manualInteviewStarted && lastUpdateTime > deviceNotRespondingTimeout)

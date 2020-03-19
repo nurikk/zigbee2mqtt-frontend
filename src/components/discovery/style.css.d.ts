@@ -1,6 +1,6 @@
 declare namespace StyleCssModule {
     export interface IStyleCss {
-        "mw-33": string;
+        blink: string;
         "scale-in-center": string;
     }
 }

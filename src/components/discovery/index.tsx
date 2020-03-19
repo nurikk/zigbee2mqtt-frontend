@@ -9,9 +9,6 @@ import DeviceCard from "./device-card";
 import Button from "../button";
 import { enableJoin } from "../actions";
 
-let ws;
-
-
 
 interface DiscoveryState {
     updateTimerId: number;
