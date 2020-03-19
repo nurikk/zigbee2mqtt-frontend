@@ -9,9 +9,7 @@ import DeviceCard from "./device-card";
 import Button from "../button";
 import { enableJoin } from "../actions";
 
-// const ws = new WebSocket("ws://localhost:8579/");
-const ws = new WebSocket("ws://192.168.1.209:81/log");
-// const ws = new WebSocket(`ws://${document.location.hostname}:81/log`);
+let ws;
 
 
 
@@ -73,7 +71,6 @@ export default class Discovery extends Component<{}, DiscoveryState> {
                 // console.log(event.payload);
                 break;
             case "zigbee":
-                console.log(wsEvent.data);
                 this.processZigbeeEvent(event.payload as ZigbeePayload);
                 break;
             default:
@@ -82,18 +79,19 @@ export default class Discovery extends Component<{}, DiscoveryState> {
         }
     }
     connectWS = (): void => {
-
+        // const ws = new WebSocket("ws://localhost:8579/");
+        ws = new WebSocket("ws://192.168.1.209:81/log");
+        // const ws = new WebSocket(`ws://${document.location.hostname}:81/log`);
         ws.addEventListener("open", (): void => {
             console.log("[WS] Connected!")
-            // ws.send("hello");
+            ws.send("hello");
         });
 
         ws.addEventListener("message", this.onMessageRecieve);
         ws.addEventListener("error", (event) => {
             console.error("[WS] error", event);
+            setTimeout(this.connectWS, 1000);
         });
-
-
     }
 
 
@@ -107,21 +105,27 @@ export default class Discovery extends Component<{}, DiscoveryState> {
         return <div className="row no-gutters">{Object.entries(events).map(([nkwAaar, events]) => <DeviceCard nwkAddr={nkwAaar} events={events} />)}</div>
     }
     enableJoin = (): void => {
-        enableJoin(255, () => {
+        enableJoin(255, undefined, () => {
             console.log("Enabled");
         });
     }
     renderEmptyScreen(): ComponentChild {
         const { joinDuration } = this.state;
-        return (<Fragment>
-            <h1>Nothing yet happened </h1>
+        return (
+            <div class="container h-100">
+                <div class="row h-100 justify-content-center align-items-center">
+                    <h2>Nothing yet happened </h2>
 
-            {joinDuration <= 0 ?
-                <Button<void> className="btn btn-success" onClick={this.enableJoin} item={undefined}>Enable join</Button> :
-                <div>Join enabled for {joinDuration} seconds</div>}
-
-        </Fragment>);
+                    {joinDuration <= 0 ?
+                        <Button<void> className="btn btn-success" onClick={this.enableJoin} item={undefined}>Enable join</Button> :
+                        <div>Join enabled for {joinDuration} seconds</div>
+                    }
+                </div>
+            </div>
+        )
     }
+
+
     render(): ComponentChild {
         const { events } = this.state;
         const hasAnyEvents = Object.keys(events).length !== 0;

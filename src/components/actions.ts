@@ -1,7 +1,9 @@
 
 import { convertRawDevices } from './convert';
-import { Device } from '../types';
+import { Device, Dictionary } from '../types';
 import { TimeInfo } from './time';
+
+const encodeData = (data: Dictionary<string | number>): string => Object.keys(data).map((key) => [key, data[key]].map(encodeURIComponent).join("=")).join("&")
 
 type CallbackHandler<T> = (err: unknown, res: T) => void;
 
@@ -25,6 +27,9 @@ export const startInterview = (address: string, callback: CallbackHandler<unknow
     fetch(`/zigbee?intstart=${address}`).then((res) => res.blob()).then(data => callback(false, data));
 };
 
-export const enableJoin = (joinTimeout=255, callback: CallbackHandler<unknown>): void => {
-    fetch(`/zigbee?join=${joinTimeout}`).then((res) => res.blob()).then(data => callback(false, data));
+export const enableJoin = (duration = 255, target = "", callback: CallbackHandler<unknown>): void => {
+    fetch(`/api/zigbee/join?${encodeData({ duration, target })}`)
+        .then((res) => res.json())
+        .then(data => callback(false, data))
+        .catch(e => console.error(e));
 };
