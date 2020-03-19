@@ -18,7 +18,7 @@ interface DeviceCardProps {
 }
 
 const EventLabels = new Map<ZigbeeEvent, string>([
-    ['TcDeviceInd', 'Device joined to the network'],
+    ['TcDeviceInd', 'Device joined'],
     ['DeviceAnnceInd', 'Announce recieved'],
     ['SimpleDescRsp', 'Endpoints recieved'],
     ['ActiveEpRsp', 'Clusters recieved'],
