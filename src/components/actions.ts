@@ -34,7 +34,10 @@ export const removeDevice = (dev: string, callback: CallbackHandler<unknown>): v
 };
 
 export const startInterview = (address: string, callback: CallbackHandler<unknown>): void => {
-    fetch(`/zigbee?intstart=${address}`).then((res) => res.blob()).then(data => callback(false, data));
+    fetch(`/zigbee?${encodeData({ intstart: address })}`)
+        .then((res) => res.blob())
+        .then(data => callback(false, data))
+        .catch(e => console.error(e));
 };
 
 export const enableJoin = (duration = 255, target = "", callback: CallbackHandler<unknown>): void => {

@@ -151,7 +151,7 @@ export default class DeviceCard extends Component<DeviceCardProps, DeviceCardSta
     }
 
     onInterviewClick = (nwkAddr: string): void => {
-        startInterview(nwkAddr, () => this.setState({ manualInteviewStarted: true }));
+        startInterview(genDeviceShortAddress(nwkAddr), () => this.setState({ manualInteviewStarted: true }));
     }
 
     renderManualIterviewHelper(): ComponentChild {
