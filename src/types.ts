@@ -1,9 +1,25 @@
 export type DeviceType = "EndDevice" | "Router" | "Coordinator";
 
+export type Dictionary<V> = { [index: string]: V }
+
 export interface DeviceStats {
-    linkquality: number;
+    linkquality?: number;
     battery?: number;
+    occupancy?: boolean;
 }
+
+export const inteviewsCount = 4;
+
+export enum InterviewState {
+    StateUnknown = -1,
+    AnnouncementReceived = 0,
+    DescriptionRecieved = 1,
+    EndpointsRecieved = 2,
+    ClustersRecieved = 3,
+    ModelRecieved = 4
+}
+
+
 
 interface Interview {
     /** Last intreview timestamp */
@@ -15,7 +31,18 @@ interface Interview {
      * 3 - получены кластеры
      * 4- получена модель
      */
-    State?: 0 | 1 | 2 | 3 | 4;
+    State?: InterviewState;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface Cluster {
+
+}
+export interface Enpoint {
+    "profId": number;
+    "In": Dictionary<Cluster[]>;
+    "Out": Dictionary<Cluster[]>;
+    "devId": number;
 }
 
 export type PowerSource = "Main" | "Battery";
@@ -37,6 +64,6 @@ export interface Device {
     /** Features discovery status, aka interview */
     Interview?: Interview | undefined;
     powerSource?: PowerSource | undefined;
+    ep?: Dictionary<Enpoint>;
 }
 
-export type Dictionary<V> = { [index: string]: V }

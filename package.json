@@ -7,6 +7,7 @@
     "build": "npm run clean && webpack --config ./webpack.config.js --mode production --progress",
     "dev": "npm run clean && webpack --config ./webpack.config.js --mode development",
     "start": "webpack-dev-server --config ./webpack.config.js --mode development",
+    "start:ws": "node ws.js",
     "clean": "rimraf ./dist",
     "deploy": "gh-pages -d dist"
   },
@@ -25,14 +26,21 @@
   ],
   "dependencies": {
     "@types/classnames": "^2.2.10",
+    "@types/lodash.groupby": "^4.6.6",
+    "@types/lodash.isequal": "^4.5.5",
     "@types/lodash.orderby": "^4.6.6",
+    "@types/lodash.uniqwith": "^4.5.6",
+    "@types/ws": "^7.2.2",
     "classnames": "^2.2.6",
     "d3-drag": "^1.2.5",
     "d3-force": "^2.0.1",
     "d3-selection": "^1.4.1",
     "eslint-plugin-preact": "^0.1.0",
     "fork-ts-checker-webpack-plugin": "^4.1.0",
+    "lodash.groupby": "^4.6.0",
+    "lodash.isequal": "^4.5.0",
     "lodash.orderby": "^4.6.0",
+    "lodash.uniqwith": "^4.5.0",
     "preact": "^10.3.4",
     "preact-habitat": "^3.3.0",
     "preact-jsx-chai": "^3.0.0",
@@ -63,6 +71,7 @@
     "webpack": "4.42.0",
     "webpack-bundle-analyzer": "^3.6.1",
     "webpack-cli": "3.3.11",
-    "webpack-dev-server": "3.10.3"
+    "webpack-dev-server": "3.10.3",
+    "ws": "^7.2.3"
   }
 }

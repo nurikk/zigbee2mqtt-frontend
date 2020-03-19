@@ -1,11 +1,12 @@
 import style from "./style.css";
 import { h, ComponentChild, Component } from "preact";
-import { fetchZibeeDevicesList, renameDevice, startInterview, removeDevice } from "../actions";
+import { fetchZibeeDevicesList, renameDevice, startInterview } from "../actions";
 import Timed, { TimedProps, lastSeen } from "../time";
 import Button from "../button";
 import orderBy from "lodash.orderby";
+import DeviceControlGroup from "../device-control";
 import cx from 'classnames';
-import { Device } from "../../types";
+import { Device, inteviewsCount } from "../../types";
 import { genDeviceShortAddress, genDeviceDetailsLink } from "../../utils";
 type SortDirection = "asc" | "desc";
 //TODO: proper type alias
@@ -100,29 +101,13 @@ export class ZigbeeTable extends Component<TimedProps, State> {
         this.restoreState();
         this.loadData();
     }
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    onBindClick = (device: Device): void => {
-        location.href = `/zigbee?bind=${genDeviceShortAddress(device.nwkAddr)}`;
-    }
 
-    onRenameClick = (device: Device): void => {
-        const newName = prompt('Enter new name', device.friendly_name);
-        if (newName && newName !== device.friendly_name) {
-            renameDevice(genDeviceShortAddress(device.nwkAddr), newName, this.loadData);
-        }
-    }
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    onRemoveClick = (device: Device): void => {
-        if (confirm('Remove device?')) {
-            removeDevice(genDeviceShortAddress(device.nwkAddr), this.loadData);
-        }
-    }
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    onInteviewClick = (device: Device): void => {
+    onInterviewClick = (device: Device): void => {
         if (confirm('Start Interview?')) {
             startInterview(genDeviceShortAddress(device.nwkAddr), this.loadData);
         }
-    }
+    };
 
     onSortChange = (column: SortColumns, sortDir: SortDirection | undefined = undefined): void => {
         const { sortColumn } = this.state;
@@ -152,9 +137,9 @@ export class ZigbeeTable extends Component<TimedProps, State> {
         return (devices.length ? this.renderDevicesTable() : <div>No data</div>);
     }
     renderInterviewState(device: Device): ComponentChild {
-        const { onInteviewClick } = this;
-        const inteviewsCount = 4;
-        const intreviewTrigger = <Button<Device> className="btn btn-normal btn-sm" onClick={onInteviewClick} item={device}><i className="fa fa-refresh" /></Button>;
+        const { onInterviewClick } = this;
+        const intreviewTrigger = <Button<Device> className="btn btn-normal btn-sm" onClick={onInterviewClick} item={device}><i className="fa fa-refresh" /></Button>;
+
         if (device.Interview) {
             if (inteviewsCount === device.Interview.State) {
                 return 'Ok';
@@ -164,8 +149,8 @@ export class ZigbeeTable extends Component<TimedProps, State> {
         return <div>N/A {intreviewTrigger}</div>;
     }
     renderPowerSource(device: Device): ComponentChild {
-        if (device.st?.battery) {
-            return device.st?.battery;
+        if (device.st && device.st.battery) {
+            return device.st.battery;
         }
         if (device.powerSource == "Main") {
             return <i className="fa fa-plug" />
@@ -178,9 +163,9 @@ export class ZigbeeTable extends Component<TimedProps, State> {
     renderDevicesTable(): ComponentChild {
         const { sortColumn, sortDirection } = this.state;
         const { time } = this.props;
-        const { onBindClick, onRenameClick, onRemoveClick, onSortChange } = this;
         const { devices } = this.state;
         const sortedDevices = orderBy<Device>(devices, [sortColumn], [sortDirection]);
+        const { onSortChange } = this;
 
         return (
             <table className={`table table-striped ${style.adaptive}`}>
@@ -201,32 +186,28 @@ export class ZigbeeTable extends Component<TimedProps, State> {
                     </tr>
                 </thead>
                 <tbody>
-                    {sortedDevices.map((device: Device, index) => (
-                        <tr className={cx({
-                            'table-danger': !device.ieeeAddr
-                        })}>
-                            <th scope="row">{index + 1}</th>
-                            <td><a href={genDeviceDetailsLink(device.nwkAddr)}>{genDeviceShortAddress(device.nwkAddr)}</a></td>
-                            <td>{device.friendly_name}</td>
-                            <td>{device.ieeeAddr ? `0x${device.ieeeAddr}` : '<corrupted>'}</td>
-                            <td>{device.ManufName}</td>
-                            <td>{device.ModelId}</td>
-                            <td>{device.st?.linkquality}</td>
-                            <td className={cx({
-                                'table-warning': device.Interview?.State !== 4,
-                            })}>{this.renderInterviewState(device)}</td>
-                            <td>{lastSeen(device, time)}</td>
-                            <td>{device?.Rtg?.map((route) => <a href={genDeviceDetailsLink(route)}>{genDeviceShortAddress(route)}</a>)}</td>
-                            <td className="text-left">{this.renderPowerSource(device)}</td>
-                            <td>
-                                <div className="btn-group" role="group" aria-label="Basic example">
-                                    <Button<Device> className="btn btn-danger btn-sm" onClick={onRemoveClick} item={device}><i className="fa fa-trash" /></Button>
-                                    <Button<Device> className="btn btn-secondary btn-sm" onClick={onRenameClick} item={device}><i className="fa fa-edit" /></Button>
-                                    {device.ieeeAddr ? <Button<Device> className="btn btn-success btn-sm" onClick={onBindClick} item={device}>Bind</Button> : null}
-                                </div>
-                            </td>
-                        </tr>
-                    ))}
+                    {sortedDevices.map((device: Device, index) => <tr className={cx({
+                        'table-danger': !device.ieeeAddr
+                    })}>
+                        <th scope="row">{index + 1}</th>
+                        <td><a href={genDeviceDetailsLink(device.nwkAddr)}>{genDeviceShortAddress(device.nwkAddr)}</a>
+                        </td>
+                        <td>{device.friendly_name}</td>
+                        <td>{device.ieeeAddr ? `0x${device.ieeeAddr}` : '<corrupted>'}</td>
+                        <td>{device.ManufName}</td>
+                        <td>{device.ModelId}</td>
+                        <td>{device.st?.linkquality}</td>
+                        <td className={cx({
+                            'table-warning': device.Interview?.State !== 4,
+                        })}>{this.renderInterviewState(device)}</td>
+                        <td>{lastSeen(device, time)}</td>
+                        <td>{device?.Rtg?.map((route) => <a
+                            href={genDeviceDetailsLink(route)}>{genDeviceShortAddress(route)}</a>)}</td>
+                        <td className="text-left">{this.renderPowerSource(device)}</td>
+                        <td>
+                            <DeviceControlGroup device={device} />
+                        </td>
+                    </tr>)}
 
                 </tbody>
             </table>

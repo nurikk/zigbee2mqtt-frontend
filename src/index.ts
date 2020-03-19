@@ -5,6 +5,7 @@ import habitat from "preact-habitat";
 import Map from "./components/map";
 import Header from "./components/header";
 import ZigbeeTable from "./components/zigbee";
+import Discovery from "./components/discovery";
 
 
 const initWidgets = (): void => {
@@ -20,6 +21,11 @@ const initWidgets = (): void => {
 
     habitat(Header).render({
         selector: '[data-widget-host="header"]',
+        clean: true
+    });
+
+    habitat(Discovery).render({
+        selector: '[data-widget-host="discovery"]',
         clean: true
     });
 };

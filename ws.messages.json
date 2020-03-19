@@ -1,0 +1,487 @@
+[{
+        "category": "zigbee",
+        "payload": {
+            "event": "LeaveInd",
+            "nwkAddr": 33156
+        }
+    },
+    {
+        "category": "zigbee",
+        "payload": {
+            "event": "TcDeviceInd",
+            "nwkAddr": 59147,
+            "ieeeAddr": "0x00158D000450D0E6"
+        }
+    },
+    {
+        "category": "zigbee",
+        "payload": {
+            "event": "DeviceAnnceInd",
+            "nwkAddr": 59147,
+            "ieeeAddr": "0x00158D000450D0E6",
+            "type": "EndDevice",
+            "powerSource": "Battery",
+            "ReceiverOnIdle": "ON",
+            "Security": "OFF"
+        }
+    },
+    {
+        "category": "zigbee",
+        "payload": {
+            "event": "NodeDescRsp",
+            "nwkAddr": 59147
+        }
+    },
+    {
+        "category": "zigbee",
+        "payload": {
+            "event": "ActiveEpRsp",
+            "nwkAddr": 59147
+        }
+    },
+    {
+        "category": "zigbee",
+        "payload": {
+            "event": "SimpleDescRsp",
+            "nwkAddr": 59147,
+            "ep": 1
+        }
+    },
+    {
+        "category": "zigbee",
+        "payload": {
+            "event": "SimpleDescRsp",
+            "nwkAddr": 59147
+        }
+    },
+    {
+        "category": "zigbee",
+        "payload": {
+            "event": "ModelRcv",
+            "nwkAddr": 59147,
+            "ModelId": "lumi.sensor_motion.aq2"
+        }
+    },
+    {
+        "category": "zigbee",
+        "payload": {
+            "event": "LeaveInd",
+            "nwkAddr": 0
+        }
+    },
+    {
+        "category": "zigbee",
+        "payload": {
+            "event": "TcDeviceInd",
+            "nwkAddr": 12318,
+            "ieeeAddr": "0x00158D0002C4A78F"
+        }
+    },
+
+    {
+        "category": "zigbee",
+        "payload": {
+            "event": "TcDeviceInd",
+            "nwkAddr": 12318,
+            "ieeeAddr": "0x00158D0002C4A78F"
+        }
+    },
+
+    {
+        "category": "zigbee",
+        "payload": {
+            "event": "TcDeviceInd",
+            "nwkAddr": 12318,
+            "ieeeAddr": "0x00158D0002C4A78F"
+        }
+    },
+
+    {
+        "category": "zigbee",
+        "payload": {
+            "event": "DeviceAnnceInd",
+            "nwkAddr": 12318,
+            "ieeeAddr": "0x00158D0002C4A78F",
+            "type": "EndDevice",
+            "powerSource": "Battery",
+            "ReceiverOnIdle": "ON",
+            "Security": "OFF"
+        }
+    },
+
+    {
+        "category": "zigbee",
+        "payload": {
+            "event": "NodeDescRsp",
+            "nwkAddr": 12318
+        }
+    },
+
+    {
+        "category": "zigbee",
+        "payload": {
+            "event": "NodeDescRsp",
+            "nwkAddr": 12318
+        }
+    },
+
+    {
+        "category": "zigbee",
+        "payload": {
+            "event": "ActiveEpRsp",
+            "nwkAddr": 12318
+        }
+    },
+
+    {
+        "category": "zigbee",
+        "payload": {
+            "event": "ActiveEpRsp",
+            "nwkAddr": 12318
+        }
+    },
+
+    {
+        "category": "zigbee",
+        "payload": {
+            "event": "SimpleDescRsp",
+            "nwkAddr": 12318,
+            "ep": 1
+        }
+    },
+
+    {
+        "category": "zigbee",
+        "payload": {
+            "event": "SimpleDescRsp",
+            "nwkAddr": 12318,
+            "ep": 1
+        }
+    },
+
+    {
+        "category": "zigbee",
+        "payload": {
+            "event": "SimpleDescRsp",
+            "nwkAddr": 12318,
+            "ep": 2
+        }
+    },
+
+    {
+        "category": "zigbee",
+        "payload": {
+            "event": "SimpleDescRsp",
+            "nwkAddr": 12318
+        }
+    },
+
+    {
+        "category": "zigbee",
+        "payload": {
+            "event": "ModelRcv",
+            "nwkAddr": 12318,
+            "ModelId": "lumi.vibration.aq1"
+        }
+    },
+
+    {
+        "category": "zigbee",
+        "payload": {
+            "event": "TcDeviceInd",
+            "nwkAddr": 55945,
+            "ieeeAddr": "0x00158D0004261DC7"
+        }
+    },
+    {
+        "category": "zigbee",
+        "payload": {
+            "event": "TcDeviceInd",
+            "nwkAddr": 55945,
+            "ieeeAddr": "0x00158D0004261DC7"
+        }
+    },
+    {
+        "category": "zigbee",
+        "payload": {
+            "event": "DeviceAnnceInd",
+            "nwkAddr": 55945,
+            "ieeeAddr": "0x00158D0004261DC7",
+            "type": "EndDevice",
+            "powerSource": "Battery",
+            "ReceiverOnIdle": "ON",
+            "Security": "OFF"
+        }
+    },
+    {
+        "category": "zigbee",
+        "payload": {
+            "event": "NodeDescRsp",
+            "nwkAddr": 55945
+        }
+    },
+    {
+        "category": "zigbee",
+        "payload": {
+            "event": "ActiveEpRsp",
+            "nwkAddr": 55945
+        }
+    },
+    {
+        "category": "zigbee",
+        "payload": {
+            "event": "SimpleDescRsp",
+            "nwkAddr": 55945,
+            "ep": 1
+        }
+    },
+    {
+        "category": "zigbee",
+        "payload": {
+            "event": "SimpleDescRsp",
+            "nwkAddr": 55945
+        }
+    },
+    {
+        "category": "zigbee",
+        "payload": {
+            "event": "ModelRcv",
+            "nwkAddr": 55945,
+            "ModelId": "lumi.sensor_magnet"
+        }
+    },
+    {
+        "category": "zigbee",
+        "payload": {
+            "event": "LinkData",
+            "topic": "ZigBeeBA60/bridge/log",
+            "payload": {
+                "type": "device_connected",
+                "message": "0x00158D0004261DC7",
+                "meta": {
+                    "modelID": "lumi.sensor_magnet"
+                }
+            }
+        }
+    },
+    {
+        "category": "zigbee",
+        "payload": {
+            "event": "LinkData",
+            "topic": "ZigBeeBA60/0x00158D000450D0E6",
+            "payload": {
+                "linkquality": 126,
+                "trSeqNum": 64,
+                "illuminance": 43
+            }
+        }
+    },
+    {
+        "category": "zigbee",
+        "payload": {
+            "event": "LinkData",
+            "topic": "ZigBeeBA60/0x00158D000450D0E6",
+            "payload": {
+                "linkquality": 123,
+                "trSeqNum": 65,
+                "occupancy": true
+            }
+        }
+    },
+    {
+        "category": "zigbee",
+        "payload": {
+            "event": "LinkData",
+            "topic": "ZigBeeBA60/0x00158D000450D0E6",
+            "payload": {
+                "linkquality": 113,
+                "trSeqNum": 66,
+                "illuminance": 43
+            }
+        }
+    },
+    {
+        "category": "zigbee",
+        "payload": {
+            "event": "LinkData",
+            "topic": "ZigBeeBA60/0x00158D000450D0E6",
+            "payload": {
+                "linkquality": 113,
+                "trSeqNum": 67,
+                "occupancy": true
+            }
+        }
+    },
+    {
+        "category": "zigbee",
+        "payload": {
+            "event": "TcDeviceInd",
+            "nwkAddr": 14467,
+            "ieeeAddr": "0x00158D000450D0E6"
+        }
+    },
+    {
+        "category": "zigbee",
+        "payload": {
+            "event": "DeviceAnnceInd",
+            "nwkAddr": 14467,
+            "ieeeAddr": "0x00158D000450D0E6",
+            "type": "EndDevice",
+            "powerSource": "Battery",
+            "ReceiverOnIdle": "ON",
+            "Security": "OFF"
+        }
+    },
+    {
+        "category": "zigbee",
+        "payload": {
+            "event": "NodeDescRsp",
+            "nwkAddr": 14467
+        }
+    },
+    {
+        "category": "zigbee",
+        "payload": {
+            "event": "ActiveEpRsp",
+            "nwkAddr": 14467
+        }
+    },
+    {
+        "category": "zigbee",
+        "payload": {
+            "event": "SimpleDescRsp",
+            "nwkAddr": 14467,
+            "ep": 1
+        }
+    },
+    {
+        "category": "zigbee",
+        "payload": {
+            "event": "SimpleDescRsp",
+            "nwkAddr": 14467
+        }
+    },
+    {
+        "category": "zigbee",
+        "payload": {
+            "event": "ModelRcv",
+            "nwkAddr": 14467,
+            "ModelId": "lumi.sensor_motion.aq2"
+        }
+    },
+    {
+        "category": "zigbee",
+        "payload": {
+            "event": "TcDeviceInd",
+            "nwkAddr": 36917,
+            "ieeeAddr": "0x00158D000450D0E6"
+        }
+    },
+    {
+        "category": "zigbee",
+        "payload": {
+            "event": "DeviceAnnceInd",
+            "nwkAddr": 36917,
+            "ieeeAddr": "0x00158D000450D0E6",
+            "type": "EndDevice",
+            "powerSource": "Battery",
+            "ReceiverOnIdle": "ON",
+            "Security": "OFF"
+        }
+    },
+    {
+        "category": "zigbee",
+        "payload": {
+            "event": "NodeDescRsp",
+            "nwkAddr": 36917
+        }
+    },
+    {
+        "category": "zigbee",
+        "payload": {
+            "event": "ActiveEpRsp",
+            "nwkAddr": 36917
+        }
+    },
+    {
+        "category": "zigbee",
+        "payload": {
+            "event": "SimpleDescRsp",
+            "nwkAddr": 36917,
+            "ep": 1
+        }
+    },
+    {
+        "category": "zigbee",
+        "payload": {
+            "event": "SimpleDescRsp",
+            "nwkAddr": 36917
+        }
+    },
+    {
+        "category": "zigbee",
+        "payload": {
+            "event": "ModelRcv",
+            "nwkAddr": 36917,
+            "ModelId": "lumi.sensor_motion.aq2"
+        }
+    },
+    {
+        "category": "zigbee",
+        "payload": {
+            "event": "TcDeviceInd",
+            "nwkAddr": 18397,
+            "ieeeAddr": "0x00158D000450D0E6"
+        }
+    },
+    {
+        "category": "zigbee",
+        "payload": {
+            "event": "DeviceAnnceInd",
+            "nwkAddr": 18397,
+            "ieeeAddr": "0x00158D000450D0E6",
+            "type": "EndDevice",
+            "powerSource": "Battery",
+            "ReceiverOnIdle": "ON",
+            "Security": "OFF"
+        }
+    },
+    {
+        "category": "zigbee",
+        "payload": {
+            "event": "NodeDescRsp",
+            "nwkAddr": 18397
+        }
+    },
+    {
+        "category": "zigbee",
+        "payload": {
+            "event": "ActiveEpRsp",
+            "nwkAddr": 18397
+        }
+    },
+    {
+        "category": "zigbee",
+        "payload": {
+            "event": "SimpleDescRsp",
+            "nwkAddr": 18397,
+            "ep": 1
+        }
+    },
+    {
+        "category": "zigbee",
+        "payload": {
+            "event": "SimpleDescRsp",
+            "nwkAddr": 18397
+        }
+    },
+    {
+        "category": "zigbee",
+        "payload": {
+            "event": "ModelRcv",
+            "nwkAddr": 18397,
+            "ModelId": "lumi.sensor_motion.aq2"
+        }
+    }
+
+]
