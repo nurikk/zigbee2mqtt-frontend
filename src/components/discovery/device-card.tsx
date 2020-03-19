@@ -111,8 +111,13 @@ const EventRow: FunctionalComponent<{ eventName: ZigbeeEvent; events: ZigbeePayl
     }
 };
 
+interface DeviceCardState {
+    currentTimestamp: number;
+    updateTimerId: number;
+    manualInteviewStarted: boolean;
+}
 
-export default class DeviceCard extends Component<DeviceCardProps, { currentTimestamp: number; updateTimerId: number }> {
+export default class DeviceCard extends Component<DeviceCardProps, DeviceCardState> {
     constructor() {
         super();
         const updateTimerId = window.setInterval(() => {
@@ -121,7 +126,7 @@ export default class DeviceCard extends Component<DeviceCardProps, { currentTime
 
 
         this.state = {
-
+            manualInteviewStarted: false,
             updateTimerId,
             currentTimestamp: Date.now()
         }
@@ -146,12 +151,32 @@ export default class DeviceCard extends Component<DeviceCardProps, { currentTime
     }
 
     onInterviewClick = (nwkAddr: string): void => {
-        startInterview(nwkAddr, () => console.log('started'));
+        startInterview(nwkAddr, () => this.setState({ manualInteviewStarted: true }));
     }
 
-    render(): ComponentChild {
+    renderManualIterviewHelper(): ComponentChild {
+        const { manualInteviewStarted } = this.state;
+        const { nwkAddr } = this.props;
         const deviceNotRespondingTimeout = 20;
+        const deviceManualWakeupTimeouit = 5;
         const lastUpdateTime = this.getLastUpdateTime();
+        if (manualInteviewStarted && lastUpdateTime > deviceManualWakeupTimeouit) {
+            return (<div class={`row ${style["scale-in-center"]}`}>
+                <div class="col-12">Press wakeup button</div>
+            </div>);
+        }
+        if (!manualInteviewStarted && lastUpdateTime > deviceNotRespondingTimeout)
+            return (
+                <div class={`row ${style["scale-in-center"]}`}>
+                    <div class="col-5">Start interview:</div>
+                    <div class="col">
+                        <Button<string> className="btn btn-normal btn-sm" onClick={this.onInterviewClick} item={nwkAddr}><i className="fa fa-refresh" /></Button>
+                    </div>
+                </div>
+            );
+    }
+    render(): ComponentChild {
+
         const { updateTimerId } = this.state;
         const { events, nwkAddr } = this.props;
         const uniqEvents = uniqWith(events, isEqual);
@@ -219,20 +244,10 @@ export default class DeviceCard extends Component<DeviceCardProps, { currentTime
                     {
                         Object.entries(groupedEvents).map(([eventName, events]) => ((<EventRow key={eventName} eventName={eventName as ZigbeeEvent} events={events} />)))
                     }
-
                     {
-                        lastUpdateTime > deviceNotRespondingTimeout ?
-                            (
-                                <div class={`row ${style["scale-in-center"]}`}>
-                                    <div class="col-5">Start interview:</div>
-                                    <div class="col">
-                                        <Button<string> className="btn btn-normal btn-sm" onClick={this.onInterviewClick} item={nwkAddr}><i className="fa fa-refresh" /></Button>
-                                    </div>
-                                </div>
-                            ) : null
-
-
+                        this.renderManualIterviewHelper()
                     }
+
 
                     {/* {device.ModelId ? <img class="img-fluid card-img-bottom h-25" src="https://www.zigbee2mqtt.io/images/devices/4713407.jpg" alt="Card image cap" /> : null} */}
                 </div>

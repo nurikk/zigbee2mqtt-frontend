@@ -1,6 +1,6 @@
 import style from "./style.css";
 import { h, ComponentChild, Component } from "preact";
-import { fetchZibeeDevicesList, renameDevice, startInterview } from "../actions";
+import { fetchZibeeDevicesList, startInterview } from "../actions";
 import Timed, { TimedProps, lastSeen } from "../time";
 import Button from "../button";
 import orderBy from "lodash.orderby";

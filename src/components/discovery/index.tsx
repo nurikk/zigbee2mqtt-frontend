@@ -89,6 +89,7 @@ export default class Discovery extends Component<{}, DiscoveryState> {
         const ws = new WebSocket(`ws://${document.location.hostname}:81/log`);
         ws.addEventListener("open", (): void => {
             console.log("[WS] Connected!")
+            this.enableJoin();
             ws.send("hello");
         });
 
@@ -103,7 +104,7 @@ export default class Discovery extends Component<{}, DiscoveryState> {
 
     componentDidMount(): void {
         this.connectWS();
-        setTimeout(this.enableJoin, 1000);
+
     }
     renderDevices(): ComponentChild {
         const { events } = this.state;
