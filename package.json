@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "build": "npm run clean && webpack --config ./webpack.config.js --mode production --progress",
+    "build": "npm run clean && webpack --config ./webpack.config.js --mode production",
     "dev": "npm run clean && webpack --config ./webpack.config.js --mode development",
     "start": "webpack-dev-server --config ./webpack.config.js --mode development",
     "start:ws": "node ws.js",
