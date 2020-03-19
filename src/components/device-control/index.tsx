@@ -7,7 +7,7 @@ interface DeviceControlGroupProps {
     device: Device;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+
 const onBindClick = (device: Device): void => {
     location.href = `/zigbee?bind=${genDeviceShortAddress(device.nwkAddr)}`;
 };
@@ -15,13 +15,13 @@ const onBindClick = (device: Device): void => {
 const onRenameClick = (device: Device): void => {
     const newName = prompt('Enter new name', device.friendly_name);
     if (newName && newName !== device.friendly_name) {
-        renameDevice(genDeviceShortAddress(device.nwkAddr), newName, this.loadData);
+        renameDevice(genDeviceShortAddress(device.nwkAddr), newName, () => window.location.reload());
     }
 };
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+
 const onRemoveClick = (device: Device): void => {
     if (confirm('Remove device?')) {
-        removeDevice(genDeviceShortAddress(device.nwkAddr), this.loadData);
+        removeDevice(genDeviceShortAddress(device.nwkAddr), () => window.location.reload());
     }
 };
 
