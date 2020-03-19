@@ -179,9 +179,15 @@ export default class DeviceCard extends Component<DeviceCardProps, DeviceCardSta
 
         const { updateTimerId } = this.state;
         const { events, nwkAddr } = this.props;
-        const uniqEvents = uniqWith(events, isEqual);
+        const uniqEvents = uniqWith(events, (a, b) => {
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            const { timestamp: tsA, ...restA } = a;
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            const { timestamp: tsB, ...restB } = b;
+            return isEqual({ ...restA }, { ...restB });
+        });
         const groupedEvents = groupBy(uniqEvents, 'event') as Dictionary<ZigbeePayload[]>;
-        let progressValue;
+        let progressValue = 0;
         let isDone = false;
         const lastEvent = this.getLastEvent();
 
