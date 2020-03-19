@@ -103,7 +103,7 @@ export default class Discovery extends Component<{}, DiscoveryState> {
 
     componentDidMount(): void {
         this.connectWS();
-        this.enableJoin();
+        setTimeout(this.enableJoin, 1000);
     }
     renderDevices(): ComponentChild {
         const { events } = this.state;
