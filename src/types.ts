@@ -46,6 +46,12 @@ export interface Enpoint {
 }
 
 export type PowerSource = "Main" | "Battery";
+export enum DeviceSupportStatus {
+    Unknown = 0,
+    Supported = 1,
+    UnSopported = 2
+}
+
 export interface Device {
     /** A 64-bit IEEE address (also called MAC address or Extended address) */
     ieeeAddr?: string | undefined;
@@ -65,5 +71,6 @@ export interface Device {
     Interview?: Interview | undefined;
     powerSource?: PowerSource | undefined;
     ep?: Dictionary<Enpoint>;
+    supported?: DeviceSupportStatus;
 }
 

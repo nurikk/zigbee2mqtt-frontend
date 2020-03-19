@@ -6,7 +6,7 @@ import Button from "../button";
 import orderBy from "lodash.orderby";
 import DeviceControlGroup from "../device-control";
 import cx from 'classnames';
-import { Device, inteviewsCount } from "../../types";
+import { Device, inteviewsCount, DeviceSupportStatus } from "../../types";
 import { genDeviceShortAddress, genDeviceDetailsLink } from "../../utils";
 type SortDirection = "asc" | "desc";
 //TODO: proper type alias
@@ -144,7 +144,7 @@ export class ZigbeeTable extends Component<TimedProps, State> {
             if (inteviewsCount === device.Interview.State) {
                 return 'Ok';
             }
-            return <div>{device.Interview.State}/{inteviewsCount} {intreviewTrigger}</div>;
+            return <div>{device.Interview.State ?? 0}/{inteviewsCount} {intreviewTrigger}</div>;
         }
         return <div>N/A {intreviewTrigger}</div>;
     }
@@ -195,7 +195,11 @@ export class ZigbeeTable extends Component<TimedProps, State> {
                         <td>{device.friendly_name}</td>
                         <td>{device.ieeeAddr ? `0x${device.ieeeAddr}` : '<corrupted>'}</td>
                         <td>{device.ManufName}</td>
-                        <td>{device.ModelId}</td>
+                        <td className={cx({
+                            'table-success': device.supported == DeviceSupportStatus.Supported,
+                            'table-danger': device.supported == DeviceSupportStatus.UnSopported,
+                            'table-warning': device.supported == DeviceSupportStatus.Unknown,
+                        })}>{device.ModelId}</td>
                         <td>{device.st?.linkquality}</td>
                         <td className={cx({
                             'table-warning': device.Interview?.State !== 4,
