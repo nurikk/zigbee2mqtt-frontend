@@ -1,5 +1,5 @@
-import { h, ComponentChild, Component, Fragment } from "preact";
-import { Dictionary, Device } from "../../types";
+import { h, ComponentChild, Component } from "preact";
+import { Dictionary } from "../../types";
 
 
 
@@ -115,12 +115,15 @@ export default class Discovery extends Component<{}, DiscoveryState> {
             <div class="container h-100">
                 <div class="row h-100 justify-content-center align-items-center">
                     <h2>Nothing yet happened </h2>
-
+                </div>
+                <div class="row h-100 justify-content-center align-items-center">
                     {joinDuration <= 0 ?
                         <Button<void> className="btn btn-success" onClick={this.enableJoin} item={undefined}>Enable join</Button> :
                         <div>Join enabled for {joinDuration} seconds</div>
                     }
                 </div>
+
+
             </div>
         )
     }
