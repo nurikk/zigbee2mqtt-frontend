@@ -1,4 +1,4 @@
-import { h, ComponentChild, Component } from "preact";
+import { h, ComponentChild, Component, Fragment } from "preact";
 import { Dictionary } from "../../types";
 
 
@@ -29,6 +29,7 @@ export default class Discovery extends Component<{}, DiscoveryState> {
 
     }
     processZigbeeEvent(message: ZigbeePayload): void {
+        console.log('processZigbeeEvent', message);
         message.timestamp = Date.now();
         const { events } = this.state;
         const { nwkAddr } = message;
@@ -39,6 +40,9 @@ export default class Discovery extends Component<{}, DiscoveryState> {
                 break;
             case "PermitJoin":
                 joinDuration = message.duration;
+                window.clearInterval(updateTimerId);
+
+
                 updateTimerId = window.setInterval(() => {
                     const { joinDuration, updateTimerId } = this.state;
                     if (joinDuration <= 0) {
@@ -81,9 +85,9 @@ export default class Discovery extends Component<{}, DiscoveryState> {
         }
     }
     connectWS = (): void => {
-        const ws = new WebSocket("ws://localhost:8579/");
+        // const ws = new WebSocket("ws://localhost:8579/");
         // ws = new WebSocket("ws://192.168.1.209:81/log");
-        // const ws = new WebSocket(`ws://${document.location.hostname}:81/log`);
+        const ws = new WebSocket(`ws://${document.location.hostname}:81/log`);
         ws.addEventListener("open", (): void => {
             console.log("[WS] Connected!")
             this.enableJoin();
@@ -105,28 +109,36 @@ export default class Discovery extends Component<{}, DiscoveryState> {
     }
     renderDevices(): ComponentChild {
         const { events } = this.state;
-        return <div className="row no-gutters">{Object.entries(events).map(([nkwAaar, events]) => <DeviceCard nwkAddr={nkwAaar} events={events} />)}</div>
+        return (<Fragment>
+            {this.renderJoinButton()}
+            <div className="row no-gutters">{Object.entries(events).map(([nkwAaar, events]) => <DeviceCard nwkAddr={nkwAaar} events={events} />)}</div>
+        </Fragment>);
+
     }
     enableJoin = (): void => {
         enableJoin(255, undefined, () => {
             console.log("Enabled");
         });
     }
-    renderEmptyScreen(): ComponentChild {
+    disableJoin = (): void => {
+        enableJoin(0, undefined, () => {
+            console.log("Disabled");
+        });
+    }
+    renderJoinButton(): ComponentChild {
         const { joinDuration } = this.state;
+
+        return (<div class="row h-100 justify-content-center align-items-center">
+            {joinDuration <= 0 ? <Button<void> className="btn btn-success" onClick={this.enableJoin} item={undefined}>Enable join</Button> : <div>Join enabled for {joinDuration} seconds, <a href="#" onClick={this.disableJoin}>Stop</a></div>}
+        </div>);
+    }
+    renderEmptyScreen(): ComponentChild {
         return (
             <div class="container h-100">
                 <div class="row h-100 justify-content-center align-items-center">
-                    <h2>Nothing yet happened </h2>
+                    <h2>Nothing yet happened</h2>
                 </div>
-                <div class="row h-100 justify-content-center align-items-center">
-                    {joinDuration <= 0 ?
-                        <Button<void> className="btn btn-success" onClick={this.enableJoin} item={undefined}>Enable join</Button> :
-                        <div>Join enabled for {joinDuration} seconds</div>
-                    }
-                </div>
-
-
+                {this.renderJoinButton()}
             </div>
         )
     }

@@ -1,4 +1,13 @@
-[{
+[
+
+    {
+        "category": "zigbee",
+        "payload": {
+            "event": "PermitJoin",
+            "duration": 50
+        }
+    },
+    {
         "category": "zigbee",
         "payload": {
             "event": "LeaveInd",
