@@ -92,12 +92,12 @@ export default class Discovery extends Component<{}, DiscoveryState> {
             console.error("[WS] error", event);
             setTimeout(this.connectWS, 1000);
         });
+        ws.send("hello");
     }
 
 
     componentDidMount(): void {
         this.connectWS();
-        ws.send("hello");
         this.enableJoin();
     }
     renderDevices(): ComponentChild {
