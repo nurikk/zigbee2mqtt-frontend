@@ -35,6 +35,10 @@ module.exports = (env, args) => {
 		new HtmlWebpackPlugin({
 			template: 'src/static/join.html',
 			filename: 'join.html'
+		}),
+		new HtmlWebpackPlugin({
+			template: 'src/static/zigbee/config.html',
+			filename: 'zigbee/config.html'
 		})
 	];
 	if (production) {
