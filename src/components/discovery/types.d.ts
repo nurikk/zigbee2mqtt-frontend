@@ -14,8 +14,6 @@ export interface ZigbeePayload {
     ieeeAddr?: string;
     type?: DeviceType;
     powerSource?: PowerSource;
-    ReceiverOnIdle?: string;
-    Security?: string;
     ModelId?: string;
     duration?: number;
 }

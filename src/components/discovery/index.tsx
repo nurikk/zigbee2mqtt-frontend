@@ -87,7 +87,13 @@ export default class Discovery extends Component<{}, DiscoveryState> {
     connectWS = (): void => {
         // const ws = new WebSocket("ws://localhost:8579/");
         // ws = new WebSocket("ws://192.168.1.209:81/log");
-        const ws = new WebSocket(`ws://${document.location.hostname}:81/log`);
+        let ws: WebSocket;
+        const { hostname } = document.location;
+        if (hostname === 'localhost') {
+            ws = new WebSocket("ws://localhost:8579/");
+        } else {
+            ws = new WebSocket(`ws://${document.location.hostname}:81/log`);
+        }
         ws.addEventListener("open", (): void => {
             console.log("[WS] Connected!")
             this.enableJoin();

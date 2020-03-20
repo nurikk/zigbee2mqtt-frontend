@@ -29,24 +29,18 @@ const EventLabels = new Map<ZigbeeEvent, string>([
 const EventRow: FunctionalComponent<{ eventName: ZigbeeEvent; events: ZigbeePayload[] }> = ({ eventName, events }) => {
     switch (eventName) {
         case "TcDeviceInd":
-            return (<Fragment>
-                <div class={`row ${style["scale-in-center"]}`}>
-                    <div class="col-5">nwkAddr:</div>
-                    <div class="col">
-                        {events[0].nwkAddr}
-                    </div>
-                </div>
+            return (
+
                 <div class={`row ${style["scale-in-center"]}`}>
                     <div class="col-5">ieeeAddr:</div>
                     <div class="col">
                         {events[0].ieeeAddr}
                     </div>
                 </div>
-            </Fragment>);
+            );
 
 
         case "DeviceAnnceInd":
-
             return (<Fragment>
                 <div class={`row ${style["scale-in-center"]}`}>
                     <div class="col-5">Type:</div>
@@ -58,18 +52,6 @@ const EventRow: FunctionalComponent<{ eventName: ZigbeeEvent; events: ZigbeePayl
                     <div class="col-5">powerSource:</div>
                     <div class="col">
                         {events[0].powerSource}
-                    </div>
-                </div>
-                <div class={`row ${style["scale-in-center"]}`}>
-                    <div class="col-5">ReceiverOnIdle:</div>
-                    <div class="col">
-                        {events[0].ReceiverOnIdle}
-                    </div>
-                </div>
-                <div class={`row ${style["scale-in-center"]}`}>
-                    <div class="col-5">Security:</div>
-                    <div class="col">
-                        {events[0].Security}
                     </div>
                 </div>
             </Fragment>)
