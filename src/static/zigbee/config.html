@@ -111,84 +111,87 @@
             </div>
         </div>
     </div>
-    <main role="main" class="h-100 container">
-        <form name="zb_setup" method="get" action="/store">
-            <div class="form-group row">
-                <div class="col-sm-2">
-                    <h3>Zigbee Setup</h3>
+    <main role="main" class="h-100">
+        <div class="container">
+            <form name="zb_setup" method="get" action="/store">
+                <div class="form-group row">
+                    <div class="col-sm-2">
+                        <h3>Zigbee Setup</h3>
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group row">
-                <label for="zb_channel" class="col-sm-2 col-form-label">Channel</label>
-                <div class="col-sm-10">
-                    <input aria-describedby="zb_channelHelp" type="number" class="form-control" id="zb_channel"
-                        placeholder="Enter zigbee channel">
-                    <small id="zb_channelHelp" class="form-text text-muted">Range: 11-26. Standard channels: 15, 20,
-                        25. Default: 11</small>
+                <div class="form-group row">
+                    <label for="zb_channel" class="col-sm-2 col-form-label">Channel</label>
+                    <div class="col-sm-10">
+                        <input aria-describedby="zb_channelHelp" type="number" class="form-control" id="zb_channel"
+                            placeholder="Enter zigbee channel">
+                        <small id="zb_channelHelp" class="form-text text-muted">Range: 11-26. Standard channels: 15, 20,
+                            25. Default: 11</small>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group row">
-                <label for="zb_pan_id" class="col-sm-2 col-form-label">PanId</label>
-                <div class="col-sm-10">
-                    <input aria-describedby="zb_pan_idHelp" type="number" class="form-control" id="zb_pan_id"
-                        placeholder="Enter zigbee channel">
-                    <small id="zb_pan_idHelp" class="form-text text-muted">Range: 1-65535. Default: 4660
-                        (0x1234)</small>
+                <div class="form-group row">
+                    <label for="zb_pan_id" class="col-sm-2 col-form-label">PanId</label>
+                    <div class="col-sm-10">
+                        <input aria-describedby="zb_pan_idHelp" type="number" class="form-control" id="zb_pan_id"
+                            placeholder="Enter zigbee channel">
+                        <small id="zb_pan_idHelp" class="form-text text-muted">Range: 1-65535. Default: 4660
+                            (0x1234)</small>
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group row">
-                <legend class="col-form-label col-sm-2 pt-0">MQTT messages options</legend>
-                <div class="col-sm-10">
+                <div class="form-group row">
+                    <legend class="col-form-label col-sm-2 pt-0">MQTT messages options</legend>
                     <div class="col-sm-10">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="zb_mqtt_raw" name="zb_mqtt_raw">
-                            <label class="form-check-label" for="zb_mqtt_raw">MQTT Send Raw Command</label>
+                        <div class="col-sm-10">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="zb_mqtt_raw" name="zb_mqtt_raw">
+                                <label class="form-check-label" for="zb_mqtt_raw">MQTT Send Raw Command</label>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-sm-10">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="zb_mqtt_json" name="zb_mqtt_json">
-                            <label class="form-check-label" for="zb_mqtt_json">MQTT Send parsed JSON (Default)</label>
+                        <div class="col-sm-10">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="zb_mqtt_json" name="zb_mqtt_json">
+                                <label class="form-check-label" for="zb_mqtt_json">MQTT Send parsed JSON
+                                    (Default)</label>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-sm-10">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="zb_mqtt_attr" name="zb_mqtt_attr">
-                            <label class="form-check-label" for="zb_mqtt_attr">MQTT Send parsed Attributes</label>
+                        <div class="col-sm-10">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="zb_mqtt_attr" name="zb_mqtt_attr">
+                                <label class="form-check-label" for="zb_mqtt_attr">MQTT Send parsed Attributes</label>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="col-sm-10">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="zb_use_fn" name="zb_use_fn">
-                            <label class="form-check-label" for="zb_use_fn">Use FriendlyName</label>
+                        <div class="col-sm-10">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="zb_use_fn" name="zb_use_fn">
+                                <label class="form-check-label" for="zb_use_fn">Use FriendlyName</label>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="col-sm-10">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="cache_states" name="cache_states">
-                            <label class="form-check-label" for="cache_states">Cache States (Default)</label>
+                        <div class="col-sm-10">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="cache_states" name="cache_states">
+                                <label class="form-check-label" for="cache_states">Cache States (Default)</label>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-sm-10">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="clear_states" name="clear_states">
-                            <label class="form-check-label" for="clear_states">Clear States (Default)</label>
+                        <div class="col-sm-10">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="clear_states" name="clear_states">
+                                <label class="form-check-label" for="clear_states">Clear States (Default)</label>
+                            </div>
                         </div>
+                        <input type="hidden" name="reboot" value="1" />
                     </div>
-                    <input type="hidden" name="reboot" value="1" />
                 </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-sm-10">
-                    <input type="submit" class='btn btn-primary' value="Save" />
+                <div class="form-group row">
+                    <div class="col-sm-10">
+                        <input type="submit" class='btn btn-primary' value="Save" />
+                    </div>
                 </div>
-            </div>
 
-        </form>
+            </form>
+        </div>
     </main>
 
 
