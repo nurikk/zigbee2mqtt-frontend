@@ -189,7 +189,7 @@ export class ZigbeeTable extends Component<TimedProps, State> {
                     {sortedDevices.map((device: Device, index) => <tr className={cx({
                         'table-danger': !device.ieeeAddr
                     })}>
-                        <th scope="row">{index + 1}</th>
+                        <td className="font-weight-bold">{index + 1}</td>
                         <td><a href={genDeviceDetailsLink(device.nwkAddr)}>{genDeviceShortAddress(device.nwkAddr)}</a>
                         </td>
                         <td>{device.friendly_name}</td>
