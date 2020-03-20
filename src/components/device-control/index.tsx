@@ -28,7 +28,7 @@ const onRemoveClick = (device: Device): void => {
 const DeviceControlGroup: FunctionalComponent<DeviceControlGroupProps> = (props) => {
     const { device } = props;
     return (
-        <div className="btn-group" role="group">
+        <div className="btn-group btn-group-sm" role="group">
             <Button<Device> className="btn btn-danger" onClick={onRemoveClick} item={device}><i className="fa fa-trash" /></Button>
             <Button<Device> className="btn btn-secondary" onClick={onRenameClick} item={device}><i className="fa fa-edit" /></Button>
             <Button<Device> className="btn btn-success" onClick={onBindClick} item={device}>Bind</Button>

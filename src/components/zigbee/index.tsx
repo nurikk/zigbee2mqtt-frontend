@@ -168,7 +168,7 @@ export class ZigbeeTable extends Component<TimedProps, State> {
         const { onSortChange } = this;
 
         return (
-            <table className={`table table-striped ${style.adaptive}`}>
+            <table className={`table table-striped ${style.adaptive} ${style.zigbee}`}>
                 <thead>
                     <tr className="text-nowrap">
                         <th>#</th>

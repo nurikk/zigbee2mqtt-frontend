@@ -1,5 +1,10 @@
 @import url("https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
 
+.zigbee td, .zigbee th {
+  padding-left: 0.1rem;
+  padding-right: 0.1rem;
+}
+
 .actions {
 	min-width: 150px
 }
