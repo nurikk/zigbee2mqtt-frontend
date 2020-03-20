@@ -61,8 +61,8 @@
     /* Top/left values mimic padding */
     top: 12px;
     left: 6px;
-    width: 45%;
-    padding-right: 10px;
+/*     width: 45%;
+    padding-right: 10px; */
     white-space: nowrap;
   }
   .adaptive td:nth-of-type(1):before {
