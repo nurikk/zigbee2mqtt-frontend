@@ -27,7 +27,8 @@
   "eslintIgnore": [
     "dist/*"
   ],
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
     "@types/classnames": "^2.2.10",
     "@types/ws": "^7.2.3",
     "classnames": "^2.2.6",
@@ -40,9 +41,7 @@
     "preact-habitat": "^3.3.0",
     "preact-jsx-chai": "^3.0.0",
     "preact-markup": "^2.0.0",
-    "preact-render-to-string": "^5.1.4"
-  },
-  "devDependencies": {
+    "preact-render-to-string": "^5.1.4",
     "@teamsupercell/typings-for-css-modules-loader": "^2.1.0",
     "@types/d3-drag": "^1.2.3",
     "@types/d3-force": "^1.2.1",
