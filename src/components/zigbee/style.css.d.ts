@@ -4,6 +4,8 @@ declare namespace StyleCssModule {
         actions: string;
         adaptive: string;
         invisible: string;
+        zigbee: string;
+
     }
 }
 
