@@ -3,7 +3,7 @@ import { h, ComponentChild, Component } from "preact";
 import { fetchZibeeDevicesList, startInterview } from "../actions";
 import Timed, { TimedProps, lastSeen } from "../time";
 import Button from "../button";
-import orderBy from "lodash.orderby";
+import orderBy from "lodash/orderby";
 import DeviceControlGroup from "../device-control";
 import cx from 'classnames';
 import { Device, inteviewsCount, DeviceSupportStatus } from "../../types";
