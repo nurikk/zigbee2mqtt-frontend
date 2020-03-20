@@ -58,16 +58,16 @@ module.exports = (env, args) => {
 			usedExports: true,
 			moduleIds: 'hashed',
 			// runtimeChunk: 'single',
-			// splitChunks: {
-			// 	cacheGroups: {
-			// 		vendor: {
-			// 			test: /node_modules/,
-			// 			name: 'scripts/vendor',
-			// 			chunks: 'all',
-			// 			enforce: true,
-			// 		},
-			// 	},
-			// },
+			splitChunks: {
+				cacheGroups: {
+					vendor: {
+						test: /node_modules/,
+						name: 'scripts/vendor',
+						chunks: 'all',
+						enforce: true,
+					},
+				},
+			},
 		},
 		resolve: {
 			mainFields: ['module', 'main'],
