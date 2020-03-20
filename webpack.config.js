@@ -49,17 +49,21 @@ module.exports = (env, args) => {
 			'scripts/main': './src/index.ts',
 		},
 		output: {
+			filename: '[name].[contenthash:4].js',
 			path: path.resolve('./dist'),
 		},
 		target: 'web',
 		devtool: production ? false : 'source-map',
 		optimization: {
+			usedExports: true,
+			moduleIds: 'hashed',
+			// runtimeChunk: 'single',
 			splitChunks: {
 				cacheGroups: {
 					vendor: {
 						test: /node_modules/,
 						name: 'scripts/vendor',
-						chunks: 'initial',
+						chunks: 'all',
 						enforce: true,
 					},
 				},
