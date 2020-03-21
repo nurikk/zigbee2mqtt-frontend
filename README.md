@@ -1,4 +1,3 @@
-[![relativeCI](https://badges.relative-ci.com/badges/F4XnVeJtIJWhWDI6bRGD?branch=master)](https://app.relative-ci.com/projects/F4XnVeJtIJWhWDI6bRGD)
 [![Build Status](https://travis-ci.com/nurikk/sls-frontend.svg?branch=master)](https://travis-ci.com/nurikk/sls-frontend)
 
 # Demo
