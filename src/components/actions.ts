@@ -3,7 +3,7 @@ import { convertRawDevices } from './convert';
 import { Device, Dictionary } from '../types';
 import { TimeInfo } from './time';
 
-const encodeData = (data: Dictionary<string | number>): string => Object.keys(data).map((key) => [key, data[key]].map(encodeURIComponent).join("=")).join("&")
+const encodeData = (data: Dictionary<string | number>): string => Object.keys(data).map((key) => [key, data[key]].map(encodeURIComponent).join("=")).join("&");
 
 
 
@@ -11,7 +11,7 @@ const encodeData = (data: Dictionary<string | number>): string => Object.keys(da
 
 type CallbackHandler<T> = (err: unknown, res: T) => void;
 
-export const fetchZibeeDevicesList = (callback: CallbackHandler<Device[]>): void => {
+export const fetchZigbeeDevicesList = (callback: CallbackHandler<Device[]>): void => {
     fetch('/api/zigbee/devices').then((res) => res.json()).then(data => callback(false, convertRawDevices(data)));
 };
 

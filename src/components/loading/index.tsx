@@ -1,4 +1,4 @@
-import { h, ComponentType, FunctionalComponent } from "preact";
+import { h, ComponentType, FunctionalComponent, ComponentChild } from "preact";
 
 interface LoadingProps {
     isLoading: boolean;
@@ -16,18 +16,15 @@ interface LoadingProps {
 //     };
 // };
 
-const WithLoading = (WrappedComponent: ComponentType<LoadingProps>): FunctionalComponent<LoadingProps> => {
+const WithLoading = (WrappedComponent: ComponentType<LoadingProps>): (props: LoadingProps) => ComponentChild => {
 
-    const LoadingProviderHOC: FunctionalComponent<LoadingProps> = (props: LoadingProps) => {
+    return (props: LoadingProps): ComponentChild => {
         const { isLoading } = props;
         if (!isLoading) {
             return (<WrappedComponent {...props} />)
         }
         return (<p>Be Hold, fetching data may take some time :)</p>);
-
-        // return <div className={style.hello}>hello</div>;
     };
-    return LoadingProviderHOC;
 };
 
 

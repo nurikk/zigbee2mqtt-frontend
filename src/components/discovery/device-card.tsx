@@ -19,11 +19,11 @@ interface DeviceCardProps {
 
 const EventLabels = new Map<ZigbeeEvent, string>([
     ['TcDeviceInd', 'Device joined'],
-    ['DeviceAnnceInd', 'Announce recieved'],
-    ['SimpleDescRsp', 'Endpoints recieved'],
-    ['ActiveEpRsp', 'Clusters recieved'],
-    ["ModelRcv", 'Model recieved'],
-    ['NodeDescRsp', 'Processing inteviews']
+    ['DeviceAnnceInd', 'Announce received'],
+    ['SimpleDescRsp', 'Endpoints received'],
+    ['ActiveEpRsp', 'Clusters received'],
+    ["ModelRcv", 'Model received'],
+    ['NodeDescRsp', 'Processing interviews']
 ]);
 
 const EventRow: FunctionalComponent<{ eventName: ZigbeeEvent; events: ZigbeePayload[] }> = ({ eventName, events }) => {
@@ -54,7 +54,7 @@ const EventRow: FunctionalComponent<{ eventName: ZigbeeEvent; events: ZigbeePayl
                         {events[0].powerSource}
                     </div>
                 </div>
-            </Fragment>)
+            </Fragment>);
 
         case "SimpleDescRsp":
             return (<Fragment>
@@ -80,7 +80,7 @@ const EventRow: FunctionalComponent<{ eventName: ZigbeeEvent; events: ZigbeePayl
 
 
 
-            )
+            );
 
         // case "ActiveEpRsp":
         // case "NodeDescRsp":
@@ -134,7 +134,7 @@ export default class DeviceCard extends Component<DeviceCardProps, DeviceCardSta
 
     onInterviewClick = (nwkAddr: string): void => {
         startInterview(genDeviceShortAddress(nwkAddr), () => this.setState({ manualInteviewStarted: true }));
-    }
+    };
 
     renderManualIterviewHelper(): ComponentChild {
         const { manualInteviewStarted } = this.state;
@@ -201,7 +201,7 @@ export default class DeviceCard extends Component<DeviceCardProps, DeviceCardSta
                 window.clearInterval(updateTimerId);
                 break;
             default:
-                console.log("Unknow event", lastEvent.event);
+                console.log("Unknown event", lastEvent.event);
                 break;
         }
 
@@ -212,7 +212,7 @@ export default class DeviceCard extends Component<DeviceCardProps, DeviceCardSta
                 <div class="card-header">
                     New device <a href={genDeviceDetailsLink(nwkAddr)}>{genDeviceShortAddress(nwkAddr)}</a>
                     <p class="card-text"><small class="text-muted">
-                        {isDone ? 'Successully joined!' : `Last updated ${this.getLastUpdateTimeMessage()}`}</small></p>
+                        {isDone ? 'Successfully joined!' : `Last updated ${this.getLastUpdateTimeMessage()}`}</small></p>
                 </div>
                 <div className="card-body">
                     {!isDone ? (<p className="card-text">

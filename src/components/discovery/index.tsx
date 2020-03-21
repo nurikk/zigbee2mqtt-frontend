@@ -65,7 +65,7 @@ export default class Discovery extends Component<{}, DiscoveryState> {
         }
         this.setState({ events, joinDuration, updateTimerId });
     }
-    onMessageRecieve = (wsEvent: MessageEvent): void => {
+    onMessageReceive = (wsEvent: MessageEvent): void => {
         let event = {} as WebsocketMessage;
         try {
             event = JSON.parse(wsEvent.data) as WebsocketMessage;
@@ -80,10 +80,10 @@ export default class Discovery extends Component<{}, DiscoveryState> {
                 this.processZigbeeEvent(event.payload as ZigbeePayload);
                 break;
             default:
-                console.warn("Unknow event", event);
+                console.warn("Unknown event", event);
                 break;
         }
-    }
+    };
     connectWS = (): void => {
         // const ws = new WebSocket("ws://localhost:8579/");
         // ws = new WebSocket("ws://192.168.1.209:81/log");
@@ -95,18 +95,18 @@ export default class Discovery extends Component<{}, DiscoveryState> {
             ws = new WebSocket(`ws://${document.location.hostname}:81/log`);
         }
         ws.addEventListener("open", (): void => {
-            console.log("[WS] Connected!")
+            console.log("[WS] Connected!");
             this.enableJoin();
             ws.send("hello");
         });
 
-        ws.addEventListener("message", this.onMessageRecieve);
+        ws.addEventListener("message", this.onMessageReceive);
         ws.addEventListener("error", (event) => {
             console.error("[WS] error", event);
             setTimeout(this.connectWS, 1000);
         });
         ws.send("hello");
-    }
+    };
 
 
     componentDidMount(): void {
@@ -117,7 +117,7 @@ export default class Discovery extends Component<{}, DiscoveryState> {
         const { events } = this.state;
         return (<Fragment>
             {this.renderJoinButton()}
-            <div className="row no-gutters">{Object.entries(events).map(([nkwAaar, events]) => <DeviceCard nwkAddr={nkwAaar} events={events} />)}</div>
+            <div className="row no-gutters">{Object.entries(events).map(([nwkAddr, events]) => <DeviceCard nwkAddr={nwkAddr} events={events} />)}</div>
         </Fragment>);
 
     }
@@ -125,12 +125,12 @@ export default class Discovery extends Component<{}, DiscoveryState> {
         enableJoin(255, undefined, () => {
             console.log("Enabled");
         });
-    }
+    };
     disableJoin = (): void => {
         enableJoin(0, undefined, () => {
             console.log("Disabled");
         });
-    }
+    };
     renderJoinButton(): ComponentChild {
         const { joinDuration } = this.state;
 

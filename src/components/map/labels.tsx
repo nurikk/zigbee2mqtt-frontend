@@ -3,10 +3,10 @@ import { h, Component, ComponentChild, createRef, FunctionalComponent } from 'pr
 import { NodeI } from './types';
 import style from './map.css';
 import cx from 'classnames';
-import { HoverableNode } from '.';
+import { MouseEventsResponderNode } from '.';
 import { Device } from '../../types';
 
-interface LabelProps extends HoverableNode {
+interface LabelProps extends MouseEventsResponderNode {
     node: NodeI;
 }
 
@@ -21,22 +21,21 @@ class Label extends Component<LabelProps, {}> {
     onMouseOut = (): void => {
         const { node, onMouseOut } = this.props;
         onMouseOut && onMouseOut(node);
-    }
+    };
 
     onMouseOver = (): void => {
         const { node, onMouseOver } = this.props;
         onMouseOver && onMouseOver(node);
-    }
+    };
     onDblClick = (): void => {
         const { node, onDblClick } = this.props;
         onDblClick && onDblClick(node);
-    }
+    };
 
     render(): ComponentChild {
         const { node } = this.props;
         const deviceType = (node.device as Device).type;
-        const mappedClas = style[deviceType];
-        const cn = cx(style.label, mappedClas);
+        const cn = cx(style.label, style[deviceType]);
         const { onMouseOut, onMouseOver, onDblClick } = this;
         return (
             <text
@@ -54,7 +53,7 @@ class Label extends Component<LabelProps, {}> {
     }
 }
 
-interface LabelsProps extends HoverableNode {
+interface LabelsProps extends MouseEventsResponderNode {
     nodes: NodeI[];
 }
 

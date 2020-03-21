@@ -5,4 +5,4 @@ export const convertRawDevices = (devices: Dictionary<Device>): Device[] => {
         ...device,
         nwkAddr
     }));
-}
+};

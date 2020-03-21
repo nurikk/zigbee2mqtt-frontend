@@ -49,7 +49,7 @@ export type PowerSource = "Main" | "Battery";
 export enum DeviceSupportStatus {
     Unknown = 0,
     Supported = 1,
-    UnSopported = 2
+    UnSupported = 2
 }
 
 export interface Device {

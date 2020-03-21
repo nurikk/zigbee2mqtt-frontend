@@ -9,12 +9,12 @@
 	min-width: 150px
 }
 
-.action-colum a {
+.action-column a {
 	text-decoration: none;
 	border-bottom: 1px dashed black;
 }
 
-.action-colum i {
+.action-column i {
 	margin-left: 5px;
 }
 

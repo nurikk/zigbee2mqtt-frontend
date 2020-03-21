@@ -4,7 +4,7 @@ import Nodes from './nodes';
 import Labels from './labels';
 import { forceSimulation, Simulation, ForceLink, forceLink, forceManyBody, forceCenter, forceX, forceY } from 'd3-force';
 import { selectAll } from 'd3-selection';
-import { fetchZibeeDevicesList } from '../actions';
+import { fetchZigbeeDevicesList } from '../actions';
 import style from './map.css';
 import { GraphI, NodeI, LinkI } from './types';
 
@@ -14,7 +14,7 @@ import Timed, { TimedProps } from '../time';
 import { Device } from '../../types';
 import { genDeviceDetailsLink } from '../../utils';
 
-export interface HoverableNode {
+export interface MouseEventsResponderNode {
     onMouseOver?: (arg0: NodeI) => void;
     onMouseOut?: (arg0: NodeI) => void;
     onDblClick?: (arg0: NodeI) => void;
@@ -45,7 +45,7 @@ const getDistance = (d: LinkI): number => {
             return 150;
     }
 };
-const MOBILE_SCREEN_TRESHOLD = 400;
+const MOBILE_SCREEN_THRESHOLD = 400;
 export class Map extends Component<TimedProps, State> {
     ref = createRef<HTMLDivElement>();
     simulation!: Simulation<NodeI, LinkI>;
@@ -65,7 +65,7 @@ export class Map extends Component<TimedProps, State> {
             `.${style.label}`
         );
         const linkComputeFn = (d: LinkI): string =>
-            `M ${(d.source as NodeI).x} ${(d.source as NodeI).y} L ${(d.target as NodeI).x} ${(d.target as NodeI).y}`
+            `M ${(d.source as NodeI).x} ${(d.source as NodeI).y} L ${(d.target as NodeI).x} ${(d.target as NodeI).y}`;
         const ticked = (): void => {
             link.attr('d', linkComputeFn);
 
@@ -110,7 +110,7 @@ export class Map extends Component<TimedProps, State> {
             default:
                 break;
         }
-    }
+    };
     constructor() {
         super();
         this.state = {
@@ -145,13 +145,13 @@ export class Map extends Component<TimedProps, State> {
             .force('charge', chargeForce)
             .force('center', forceCenter(width / 2, height / 2));
 
-        if (width < MOBILE_SCREEN_TRESHOLD) {
+        if (width < MOBILE_SCREEN_THRESHOLD) {
             this.simulation.force('x', forceX(width / 2).strength(0.1))
                 .force('y', forceY(height / 2).strength(0.1))
         }
     }
     componentDidMount(): void {
-        fetchZibeeDevicesList((err, res: Device[]) => {
+        fetchZigbeeDevicesList((err, res: Device[]) => {
             const { width, height } = (this.ref.current as HTMLDivElement).getBoundingClientRect();
             const graph = convert2graph(res);
             this.setState({ graph, width, height }, this.updateNodes);

@@ -11,7 +11,7 @@ export default class Button<T> extends Component<ButtonProps<T>, {}> {
         const { item, onClick } = this.props;
         onClick && onClick(item);
 
-    }
+    };
     render(): ComponentChild {
         const { children, ...rest } = this.props;
         return <button {...rest} onClick={this.onClick}>{children}</button>

@@ -14,7 +14,7 @@ import { NodeI, LinkI } from './types';
 import cx from 'classnames';
 
 import * as style from './map.css';
-import { HoverableNode } from '.';
+import { MouseEventsResponderNode } from '.';
 import { TimedProps, TimeInfo } from '../time';
 import { Device } from '../../types';
 
@@ -37,7 +37,7 @@ const calcStarPoints = (
         points += `${currX}, ${currY} `;
     }
     return points;
-}
+};;
 
 const getStarShape = (innerCircleArms: number, styleStarWidth: number, innerOuterRadiusRatio: number): string => {
     return calcStarPoints(
@@ -49,7 +49,7 @@ const getStarShape = (innerCircleArms: number, styleStarWidth: number, innerOute
     );
 };
 
-interface NodeProps extends HoverableNode, TimedProps {
+interface NodeProps extends MouseEventsResponderNode, TimedProps {
     node: NodeI;
 }
 
@@ -60,7 +60,7 @@ export const isOnline = (device: Device, timeInfo: TimeInfo | undefined): boolea
         return true;
     }
     return timeInfo.ts - parseInt(device.last_seen, 10) < offlineTimeout;
-}
+};;
 
 class Node extends Component<NodeProps, {}> {
     ref = createRef<SVGPolygonElement | SVGCircleElement>();
@@ -76,50 +76,48 @@ class Node extends Component<NodeProps, {}> {
     onMouseOut = (): void => {
         const { node, onMouseOut } = this.props;
         onMouseOut && onMouseOut(node);
-    }
+    };;
 
     onMouseOver = (): void => {
         const { node, onMouseOver } = this.props;
         onMouseOver && onMouseOver(node);
-    }
+    };;
     onDblClick = (): void => {
         const { node, onDblClick } = this.props;
         onDblClick && onDblClick(node);
-    }
+    };;
 
     render(): ComponentChild {
         const { node, time } = this.props;
         const { onMouseOver, onMouseOut, onDblClick } = this;
         const deviceType = (node.device as Device).type as string;
-        const mappedClas = style[deviceType];
-        const cn = cx(style.node, mappedClas, { [style.offline]: !isOnline(node.device, time) });
+        const cn = cx(style.node, style[deviceType], { [style.offline]: !isOnline(node.device, time) });
 
-        switch (node.device.type) {
-            case "Coordinator":
-                return (
-                    <polygon
-                        className={cn}
-                        ref={this.ref as RefObject<SVGPolygonElement>}
-                        points={getStarShape(5, 5, 14) as string}
-                        onMouseOver={onMouseOver}
-                        onMouseOut={onMouseOut}
-                        onDblClick={onDblClick}
-                    />
-                );
-            default:
-                return (
-                    <circle
-                        onMouseOver={onMouseOver}
-                        onMouseOut={onMouseOut}
-                        onDblClick={onDblClick}
-                        className={cn}
-                        ref={this.ref as RefObject<SVGCircleElement>}
-                        r={5}
-                    />);
+        if (node.device.type === "Coordinator") {
+            return (
+                <polygon
+                    className={cn}
+                    ref={this.ref as RefObject<SVGPolygonElement>}
+                    points={getStarShape(5, 5, 14) as string}
+                    onMouseOver={onMouseOver}
+                    onMouseOut={onMouseOut}
+                    onDblClick={onDblClick}
+                />
+            );
+        } else {
+            return (
+                <circle
+                    onMouseOver={onMouseOver}
+                    onMouseOut={onMouseOut}
+                    onDblClick={onDblClick}
+                    className={cn}
+                    ref={this.ref as RefObject<SVGCircleElement>}
+                    r={5}
+                />);
         }
     }
 }
-interface NodesProps extends HoverableNode, TimedProps {
+interface NodesProps extends MouseEventsResponderNode, TimedProps {
     nodes: NodeI[];
     simulation: Simulation<NodeI, LinkI>;
 }

@@ -1,11 +1,10 @@
 declare namespace StyleCssModule {
     export interface IStyleCss {
-        "action-colum": string;
+        "action-column": string;
         actions: string;
         adaptive: string;
         invisible: string;
         zigbee: string;
-
     }
 }
 

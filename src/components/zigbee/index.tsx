@@ -1,6 +1,6 @@
 import style from "./style.css";
 import { h, ComponentChild, Component } from "preact";
-import { fetchZibeeDevicesList, startInterview } from "../actions";
+import { fetchZigbeeDevicesList, startInterview } from "../actions";
 import Timed, { TimedProps, lastSeen } from "../time";
 import Button from "../button";
 import orderBy from "lodash/orderBy";
@@ -27,7 +27,7 @@ interface ActionTHProps<T> {
     column: T;
     onClick?(arg1: unknown): void;
     current: T;
-    currenDirection: SortDirection;
+    currentDirection: SortDirection;
     [k: string]: unknown;
 }
 
@@ -37,11 +37,11 @@ class ActionTH<T> extends Component<ActionTHProps<T>, {}> {
         event.stopPropagation();
         const { column, onClick } = this.props;
         onClick && onClick(column);
-    }
+    };
     renderArrow(): ComponentChild {
-        const { currenDirection, current, column } = this.props;
+        const { currentDirection, current, column } = this.props;
         if (current === column) {
-            return <i className={`fa fa-sort-amount-${currenDirection}`} />
+            return <i className={`fa fa-sort-amount-${currentDirection}`} />
         }
         return <i className={`fa fa-sort-amount-asc ${style.invisible}`} />
 
@@ -82,21 +82,21 @@ export class ZigbeeTable extends Component<TimedProps, State> {
         const storeData = {
             sortDirection,
             sortColumn
-        }
+        };
         //in private mode localstorage access can throw exceptions
         try {
             localStorage.setItem(storeKey, JSON.stringify(storeData));
         } catch (e) {
             console.error(e);
         }
-    }
+    };
     loadData = (): void => {
         this.setState({ isLoading: true }, () => {
-            fetchZibeeDevicesList((err, devices: Device[]) => {
+            fetchZigbeeDevicesList((err, devices: Device[]) => {
                 this.setState({ isLoading: false, devices });
             });
         });
-    }
+    };
     componentDidMount(): void {
         this.restoreState();
         this.loadData();
@@ -124,7 +124,7 @@ export class ZigbeeTable extends Component<TimedProps, State> {
         }
 
         this.setState({ sortColumn: column, sortDirection }, this.saveState);
-    }
+    };
     render(): ComponentChild {
         const { devices, isLoading } = this.state;
         if (isLoading) {
@@ -138,15 +138,15 @@ export class ZigbeeTable extends Component<TimedProps, State> {
     }
     renderInterviewState(device: Device): ComponentChild {
         const { onInterviewClick } = this;
-        const intreviewTrigger = <Button<Device> className="btn btn-normal btn-sm" onClick={onInterviewClick} item={device}><i className="fa fa-refresh" /></Button>;
+        const interviewTrigger = <Button<Device> className="btn btn-normal btn-sm" onClick={onInterviewClick} item={device}><i className="fa fa-refresh" /></Button>;
 
         if (device.Interview) {
             if (inteviewsCount === device.Interview.State) {
                 return 'Ok';
             }
-            return <div>{device.Interview.State ?? 0}/{inteviewsCount} {intreviewTrigger}</div>;
+            return <div>{device.Interview.State ?? 0}/{inteviewsCount} {interviewTrigger}</div>;
         }
-        return <div>N/A {intreviewTrigger}</div>;
+        return <div>N/A {interviewTrigger}</div>;
     }
     renderPowerSource(device: Device): ComponentChild {
         if (device.st && device.st.battery) {
@@ -172,16 +172,16 @@ export class ZigbeeTable extends Component<TimedProps, State> {
                 <thead>
                     <tr className="text-nowrap">
                         <th>#</th>
-                        <ActionTH<SortColumns> className={style["action-colum"]} column="nwkAddr" currenDirection={sortDirection} current={sortColumn} onClick={onSortChange}>nwkAddr</ActionTH>
-                        <ActionTH<SortColumns> className={style["action-colum"]} column="friendly_name" currenDirection={sortDirection} current={sortColumn} onClick={onSortChange}>FriendlyName</ActionTH>
-                        <ActionTH<SortColumns> className={style["action-colum"]} column="ieeeAddr" currenDirection={sortDirection} current={sortColumn} onClick={onSortChange}>ieeeAddr</ActionTH>
-                        <ActionTH<SortColumns> className={style["action-colum"]} column="ManufName" currenDirection={sortDirection} current={sortColumn} onClick={onSortChange}>ManufName</ActionTH>
-                        <ActionTH<SortColumns> className={style["action-colum"]} column="ModelId" currenDirection={sortDirection} current={sortColumn} onClick={onSortChange}>ModelId</ActionTH>
-                        <ActionTH<SortColumns> className={style["action-colum"]} column="st.linkquality" currenDirection={sortDirection} current={sortColumn} onClick={onSortChange}>LinkQuality</ActionTH>
-                        <ActionTH<SortColumns> className={style["action-colum"]} column="Interview.State" currenDirection={sortDirection} current={sortColumn} onClick={onSortChange}>Interview</ActionTH>
-                        <ActionTH<SortColumns> className={style["action-colum"]} column="last_seen" currenDirection={sortDirection} current={sortColumn} onClick={onSortChange}>LastSeen</ActionTH>
+                        <ActionTH<SortColumns> className={style["action-column"]} column="nwkAddr" currentDirection={sortDirection} current={sortColumn} onClick={onSortChange}>nwkAddr</ActionTH>
+                        <ActionTH<SortColumns> className={style["action-column"]} column="friendly_name" currentDirection={sortDirection} current={sortColumn} onClick={onSortChange}>FriendlyName</ActionTH>
+                        <ActionTH<SortColumns> className={style["action-column"]} column="ieeeAddr" currentDirection={sortDirection} current={sortColumn} onClick={onSortChange}>ieeeAddr</ActionTH>
+                        <ActionTH<SortColumns> className={style["action-column"]} column="ManufName" currentDirection={sortDirection} current={sortColumn} onClick={onSortChange}>ManufName</ActionTH>
+                        <ActionTH<SortColumns> className={style["action-column"]} column="ModelId" currentDirection={sortDirection} current={sortColumn} onClick={onSortChange}>ModelId</ActionTH>
+                        <ActionTH<SortColumns> className={style["action-column"]} column="st.linkquality" currentDirection={sortDirection} current={sortColumn} onClick={onSortChange}>LinkQuality</ActionTH>
+                        <ActionTH<SortColumns> className={style["action-column"]} column="Interview.State" currentDirection={sortDirection} current={sortColumn} onClick={onSortChange}>Interview</ActionTH>
+                        <ActionTH<SortColumns> className={style["action-column"]} column="last_seen" currentDirection={sortDirection} current={sortColumn} onClick={onSortChange}>LastSeen</ActionTH>
                         <th>Routes</th>
-                        <ActionTH<SortColumns> className={style["action-colum"]} column="st.battery" currenDirection={sortDirection} current={sortColumn} onClick={onSortChange}>PS</ActionTH>
+                        <ActionTH<SortColumns> className={style["action-column"]} column="st.battery" currentDirection={sortDirection} current={sortColumn} onClick={onSortChange}>PS</ActionTH>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -197,7 +197,7 @@ export class ZigbeeTable extends Component<TimedProps, State> {
                         <td>{device.ManufName}</td>
                         <td className={cx({
                             'table-success': device.supported == DeviceSupportStatus.Supported,
-                            'table-danger': device.supported == DeviceSupportStatus.UnSopported,
+                            'table-danger': device.supported == DeviceSupportStatus.UnSupported,
                             'table-warning': device.supported == DeviceSupportStatus.Unknown,
                         })}>{device.ModelId}</td>
                         <td>{device.st?.linkquality}</td>
