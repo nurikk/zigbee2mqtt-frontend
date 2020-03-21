@@ -2,10 +2,6 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-const {
-	RelativeCiAgentWebpackPlugin
-} = require('@relative-ci/agent');
-
 const path = require('path');
 
 module.exports = (env, args) => {
@@ -19,10 +15,7 @@ module.exports = (env, args) => {
 	}
 
 	const plugins = [
-		new RelativeCiAgentWebpackPlugin(),
-		new ForkTsCheckerWebpackPlugin({
-			silent: true
-		}),
+		new ForkTsCheckerWebpackPlugin(),
 		new CopyWebpackPlugin([{
 			from: '**/*',
 			context: './api-mocks/'
@@ -53,8 +46,7 @@ module.exports = (env, args) => {
 	];
 	if (production) {
 		plugins.push(new BundleAnalyzerPlugin({
-			analyzerMode: 'static',
-			logLevel: 'silent'
+			analyzerMode: 'static'
 		}));
 	}
 
@@ -119,14 +111,7 @@ module.exports = (env, args) => {
 			host: '0.0.0.0',
 			port: 3030
 		},
-		plugins,
-
-		stats: {
-			assets: true,
-			chunks: true,
-			entrypoints: true,
-			modules: true,
-		}
+		plugins
 
 	};
 };

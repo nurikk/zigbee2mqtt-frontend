@@ -7,7 +7,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "build": "npm run clean && mkdir dist/ && webpack --config ./webpack.config.js --mode production --profile --json > dist/webpack-stats.json",
+    "build": "npm run clean && webpack --config ./webpack.config.js --mode production",
     "dev": "npm run clean && webpack --config ./webpack.config.js --mode development",
     "start": "webpack-dev-server --config ./webpack.config.js --mode development",
     "start:ws": "node ws.js",
@@ -29,7 +29,6 @@
   ],
   "dependencies": {},
   "devDependencies": {
-    "@relative-ci/agent": "^1.2.0",
     "@teamsupercell/typings-for-css-modules-loader": "^2.1.0",
     "@types/classnames": "^2.2.10",
     "@types/d3-drag": "^1.2.3",
