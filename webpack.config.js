@@ -2,6 +2,9 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const {
+	RelativeCiAgentWebpackPlugin
+} = require('@relative-ci/agent');
 
 const path = require('path');
 
@@ -16,6 +19,15 @@ module.exports = (env, args) => {
 	}
 
 	const plugins = [
+		new RelativeCiAgentWebpackPlugin({
+			stats: {
+				context: './src',
+				assets: true,
+				entrypoints: true,
+				chunks: true,
+				modules: true,
+			}
+		}),
 		new ForkTsCheckerWebpackPlugin(),
 		new CopyWebpackPlugin([{
 			from: '**/*',

@@ -6,6 +6,7 @@ cache:
   - node_modules
 script:
   - npm run build
+  - npx relative-ci-agent
 deploy:
   provider: pages
   skip_cleanup: true
