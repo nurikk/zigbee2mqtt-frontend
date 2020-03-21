@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>SLS Gateway: Zigbee Device: 0x91C9</title>
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            padding-top: 5rem;
+            background-color: #eef5f9 !important;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border-color: #d7dfe3;
+            border-radius: 4px;
+            box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        #editor {
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+        }
+    </style>
+    <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css'
+        integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+    <script src='https://code.jquery.com/jquery-3.4.1.slim.min.js'
+        integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n'
+        crossorigin='anonymous'></script>
+    <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js'
+        integrity='sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6'
+        crossorigin='anonymous'></script>
+    <script src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js'
+        integrity='sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo'
+        crossorigin='anonymous'></script>
+    <script type='text/javascript' src='https://cdn.slsys.io/js/vendor-2020.03.19d2.js'></script>
+    <script type='text/javascript' src='https://cdn.slsys.io/js/main-2020.03.19d2.js'></script>
+    <meta name="viewport" content="width=device-width">
+    <meta name="mobile-web-app-capable" content="yes">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: #1e88e5;"> <a
+            class="navbar-brand" href="/">SLS Gateway</a> <button class="navbar-toggler" type="button"
+            data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault"
+            aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item"> <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a> </li>
+                <li class="nav-item"> <a class="nav-link" href="/zigbee">Zigbee</a> </li>
+                <li class="nav-item"> <a class="nav-link" href="/log">Log</a> </li>
+                <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="dropdown01"
+                        data-toggle="dropdown" aria-expanded="false">Settings</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown01"> <a class="dropdown-item" href="/wifi">WiFi
+                            Setup</a> <a class="dropdown-item" href="/time">Time Setup</a> <a class="dropdown-item"
+                            href="/link">Link Setup</a> <a class="dropdown-item" href="/hw">HW Setup</a> </div>
+                </li>
+                <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="dropdown02"
+                        data-toggle="dropdown" aria-expanded="false">Help</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown02"> <a class="dropdown-item"
+                            href="https://slsys.github.io/Gateway/">WiKi</a> <a class="dropdown-item"
+                            href="https://t.me/slsys">Telegram (Support, discussions)</a> <a class="dropdown-item"
+                            href="https://mjdm.ru/forum/viewtopic.php?t=6700">Forum (Updates, knowledges)</a> </div>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="dropdown03"
+                        data-toggle="dropdown" aria-expanded="false">Actions</a>
+                    <div class="dropdown-menu dropdown-menu-right"> <a class="dropdown-item" href="/update">Update
+                            Firmware</a> <a class="dropdown-item" data-toggle="modal" data-target="#zb_reset_modal"
+                            href="#">Zigbee Reset</a> <a class="dropdown-item" data-toggle="modal"
+                            data-target="#reboot_modal" href="#">Reboot System</a> </div>
+                </li>
+            </ul>
+        </div>
+    </nav><!-- Modal -->
+    <div class="modal fade" id="reboot_modal" tabindex="-1" role="dialog" aria-labelledby="reboot_modalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="reboot_modalLabel">Reboot</h5> <button type="button" class="close"
+                        data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+                </div>
+                <div class="modal-body"> Are you sure you want to reboot the device? </div>
+                <div class="modal-footer"> <button type="button" class="btn btn-danger"
+                        onclick="location.href='/reboot';">Reboot</button> <button type="button"
+                        class="btn btn-secondary" data-dismiss="modal">Cancel</button> </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="zb_reset_modal" tabindex="-1" role="dialog" aria-labelledby="zb_reset_modalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="zb_reset_modalLabel">Zigbee reset</h5> <button type="button"
+                        class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body"> Are you sure you want to reset all zigbee devices? </div>
+                <div class="modal-footer"> <button type="button" class="btn btn-danger"
+                        onclick="location.href='/zigbee/reset';">Reset</button> <button type="button"
+                        class="btn btn-secondary" data-dismiss="modal">Cancel</button> </div>
+            </div>
+        </div>
+    </div>
+    <main role="main" class="h-100"><input type="button" value="Back" onclick="location.href='/zigbee';" /> <input
+            type="button" value="Refresh" onclick="location.href='/zigbee?nwkAddr=0x91C9';" />
+        <hr />
+        <table border="1">
+            <tr align="center">
+                <td><b>N</b></td>
+                <td><b>Name</b></td>
+                <td><b>Value</b></td>
+                <td><b>Actions</b></td>
+            </tr>
+            <tr align="center">
+                <td>1</td>
+                <td>linkquality</td>
+                <td>73</td>
+                <td> <input type="button" value="Set"
+                        onclick="result = prompt('Enter new value', '73');if (result != null) location.href='/zigbee?nwkAddr=0x91C9&name=linkquality&value='+result;" />
+                    <input type="button" value="SimpleBind"
+                        onclick="result = prompt('Enter SimpleBind rules', 'null');if (result != null) location.href='/zigbee?nwkAddr=0x91C9&name=linkquality&SimpleBind='+result;" />
+                </td>
+            </tr>
+            <tr align="center">
+                <td>2</td>
+                <td>trSeqNum</td>
+                <td>49</td>
+                <td> <input type="button" value="Set"
+                        onclick="result = prompt('Enter new value', '49');if (result != null) location.href='/zigbee?nwkAddr=0x91C9&name=trSeqNum&value='+result;" />
+                    <input type="button" value="SimpleBind"
+                        onclick="result = prompt('Enter SimpleBind rules', 'null');if (result != null) location.href='/zigbee?nwkAddr=0x91C9&name=trSeqNum&SimpleBind='+result;" />
+                </td>
+            </tr>
+            <tr align="center">
+                <td>3</td>
+                <td>voltage</td>
+                <td>3.095</td>
+                <td> <input type="button" value="Set"
+                        onclick="result = prompt('Enter new value', '3.095');if (result != null) location.href='/zigbee?nwkAddr=0x91C9&name=voltage&value='+result;" />
+                    <input type="button" value="SimpleBind"
+                        onclick="result = prompt('Enter SimpleBind rules', 'null');if (result != null) location.href='/zigbee?nwkAddr=0x91C9&name=voltage&SimpleBind='+result;" />
+                </td>
+            </tr>
+            <tr align="center">
+                <td>4</td>
+                <td>battery</td>
+                <td>100</td>
+                <td> <input type="button" value="Set"
+                        onclick="result = prompt('Enter new value', '100');if (result != null) location.href='/zigbee?nwkAddr=0x91C9&name=battery&value='+result;" />
+                    <input type="button" value="SimpleBind"
+                        onclick="result = prompt('Enter SimpleBind rules', 'null');if (result != null) location.href='/zigbee?nwkAddr=0x91C9&name=battery&SimpleBind='+result;" />
+                </td>
+            </tr>
+        </table>
+        <hr />ieeeAddr = 00158D0002FD0D07<br />last_seen = 1584763195<br />Interview = {"TS":0,"State":4}<br />type =
+        EndDevice<br />powerSource = Battery<br />Rcf = true<br />ModelId = lumi.remote.b286acn01<br />supported =
+        1<br />ep 1<br /> -- profId = 260<br /> -- In<br /> -- -- 0x0000 GEN_BASIC<br /> -- -- 0x0003 GEN_IDENTIFY<br />
+        -- -- 0x0019 OTA<br /> -- -- 0xFFFF UNK_0xFFFF<br /> -- -- 0x0012 GEN_MULTISTATE_INPUT_BASIC<br /> -- Out<br />
+        -- -- 0x0000 GEN_BASIC<br /> -- -- 0x0004 GEN_GROUPS<br /> -- -- 0x0003 GEN_IDENTIFY<br /> -- -- 0x0005
+        GEN_SCENES<br /> -- -- 0x0019 OTA<br /> -- -- 0xFFFF UNK_0xFFFF<br /> -- -- 0x0012
+        GEN_MULTISTATE_INPUT_BASIC<br /> -- devId = 24321<br />ep 2<br /> -- profId = 260<br /> -- In<br /> -- -- 0x0003
+        GEN_IDENTIFY<br /> -- -- 0x0012 GEN_MULTISTATE_INPUT_BASIC<br /> -- Out<br /> -- -- 0x0004 GEN_GROUPS<br /> --
+        -- 0x0003 GEN_IDENTIFY<br /> -- -- 0x0005 GEN_SCENES<br /> -- -- 0x0012 GEN_MULTISTATE_INPUT_BASIC<br /> --
+        devId = 24322<br />ep 3<br /> -- profId = 260<br /> -- In<br /> -- -- 0x0003 GEN_IDENTIFY<br /> -- -- 0x000C
+        GEN_ANALOG_INPUT_BASIC<br /> -- Out<br /> -- -- 0x0004 GEN_GROUPS<br /> -- -- 0x0003 GEN_IDENTIFY<br /> -- --
+        0x0005 GEN_SCENES<br /> -- -- 0x000C GEN_ANALOG_INPUT_BASIC<br /> -- devId = 24323<br />ManufName = LUMI<br />st
+        = {"linkquality":73,"trSeqNum":49,"voltage":3.095,"battery":100}<br />
+        <hr />
+    </main><!-- /.container -->
+</body>
+
+</html>
