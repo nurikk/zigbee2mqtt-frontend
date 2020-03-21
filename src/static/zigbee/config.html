@@ -113,9 +113,16 @@
     </div>
     <main role="main" class="h-100">
         <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/zigbee">Zigbee</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Config</li>
+                </ol>
+            </nav>
             <form name="zb_setup" method="get" action="/store">
                 <div class="form-group row">
-                    <div class="col-sm-2">
+                    <div class="col">
                         <h3>Zigbee Setup</h3>
                     </div>
                 </div>
