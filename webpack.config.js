@@ -13,22 +13,16 @@ module.exports = (env, args) => {
 
 	if (args && args.mode === 'production') {
 		production = true;
-		console.log('== Production mode');
+		// console.log('== Production mode');
 	} else {
 		console.log('== Development mode');
 	}
 
 	const plugins = [
-		new RelativeCiAgentWebpackPlugin({
-			stats: {
-				context: './src',
-				assets: true,
-				entrypoints: true,
-				chunks: true,
-				modules: true,
-			}
+		new RelativeCiAgentWebpackPlugin(),
+		new ForkTsCheckerWebpackPlugin({
+			silent: true
 		}),
-		new ForkTsCheckerWebpackPlugin(),
 		new CopyWebpackPlugin([{
 			from: '**/*',
 			context: './api-mocks/'
@@ -59,7 +53,8 @@ module.exports = (env, args) => {
 	];
 	if (production) {
 		plugins.push(new BundleAnalyzerPlugin({
-			analyzerMode: 'static'
+			analyzerMode: 'static',
+			logLevel: 'silent'
 		}));
 	}
 
@@ -124,6 +119,14 @@ module.exports = (env, args) => {
 			host: '0.0.0.0',
 			port: 3030
 		},
-		plugins
+		plugins,
+
+		stats: {
+			assets: true,
+			chunks: true,
+			entrypoints: true,
+			modules: true,
+		}
+
 	};
 };
