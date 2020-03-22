@@ -3,6 +3,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const path = require('path');
+const glob = require('glob');
 
 module.exports = (env, args) => {
 	let production = false;
@@ -19,31 +20,19 @@ module.exports = (env, args) => {
 		new CopyWebpackPlugin([{
 			from: '**/*',
 			context: './api-mocks/'
-		}, ]),
-		new HtmlWebpackPlugin({
-			template: 'src/index.ejs'
-		}),
-		new HtmlWebpackPlugin({
-			template: 'src/static/map.html',
-			filename: 'map.html'
-		}),
-		new HtmlWebpackPlugin({
-			template: 'src/static/zigbee.html',
-			filename: 'zigbee.html'
-		}),
-		new HtmlWebpackPlugin({
-			template: 'src/static/join.html',
-			filename: 'join.html'
-		}),
-		new HtmlWebpackPlugin({
-			template: 'src/static/zigbee/config.html',
-			filename: 'zigbee/config.html'
-		}),
-		new HtmlWebpackPlugin({
-			template: 'src/static/0x91C9.html',
-			filename: '0x91C9.html'
-		})
+		}, ])
 	];
+	const basePath = 'src/templates';
+	glob.sync(`${basePath}/**/*.html`).forEach((item) => {
+		plugins.push(
+			new HtmlWebpackPlugin({
+				filename: path.relative(basePath, item),
+				template: item
+			})
+		)
+	});
+
+
 	if (production) {
 		plugins.push(new BundleAnalyzerPlugin({
 			analyzerMode: 'static'
