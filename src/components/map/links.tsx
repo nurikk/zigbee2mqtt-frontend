@@ -1,15 +1,8 @@
-import { LinkI } from './types';
-import {
-    h,
-    Component,
-    ComponentChild,
-    createRef,
-    FunctionalComponent,
-    RefObject
-} from 'preact';
-import { select } from 'd3-selection';
-import * as style from './map.css';
-import cx from 'classnames';
+import { LinkI } from "./types";
+import { Component, ComponentChild, createRef, FunctionalComponent, h, RefObject } from "preact";
+import { select } from "d3-selection";
+import * as style from "./map.css";
+import cx from "classnames";
 
 interface LinkProps {
     link: LinkI;
@@ -39,6 +32,7 @@ class Link extends Component<LinkProps, {}> {
         );
     }
 }
+
 interface LinkLabelProps extends LinkProps {
     xlinkHref: string;
 }
@@ -59,7 +53,7 @@ class LinkLabel extends Component<LinkLabelProps, {}> {
         const textPath = <textPath startOffset="50%" xlinkHref={xlinkHref}>{link.linkQuality}</textPath>;
         return (
             <text
-                filter={'url(#solid)'}
+                filter={"url(#solid)"}
                 className={style.linkLabel}
                 ref={this.ref}
                 dy={4}
@@ -68,17 +62,19 @@ class LinkLabel extends Component<LinkLabelProps, {}> {
         );
     }
 }
+
 interface LinksPros {
     links: LinkI[];
 }
+
 const Links: FunctionalComponent<LinksPros> = props => {
     const { links } = props;
     return (
         <g className={style.links}>
             <defs>
                 <filter x="-0.1" y="0" width="1.2" height="1" id="solid">
-                    <feFlood flood-color="#eef5f9" />
-                    <feComposite in="SourceGraphic" />
+                    <feFlood flood-color="#eef5f9"/>
+                    <feComposite in="SourceGraphic"/>
                 </filter>
             </defs>
             {links.map((link: LinkI, index: number) => (

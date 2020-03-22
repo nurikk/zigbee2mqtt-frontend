@@ -1,86 +1,86 @@
 .container {
-  width: 100%;
-  height: 100%;
-  user-select: none;
+    width: 100%;
+    height: 100%;
+    user-select: none;
 }
 
 .node {
-  stroke: #fff;
-  stroke-width: 2px;
-  cursor: pointer;
+    stroke: #fff;
+    stroke-width: 2px;
+    cursor: pointer;
 }
 
 .link {
-  stroke: #999;
-  stroke-opacity: 1;
+    stroke: #999;
+    stroke-opacity: 1;
 }
 
 .linkLabel {
-  text-anchor: middle;
-  pointer-events: none;
-  font-size: 10px;
-  fill: black;
-  flood-color: #FFFFFF;
-  flood-opacity: 1;
+    text-anchor: middle;
+    pointer-events: none;
+    font-size: 10px;
+    fill: black;
+    flood-color: #FFFFFF;
+    flood-opacity: 1;
 }
 
 .label {
-  font-size: 14px;
-  fill: black;
-  cursor: pointer;
+    font-size: 14px;
+    fill: black;
+    cursor: pointer;
 }
 
 .label.Coordinator {
-  display: none;
+    display: none;
 }
 
 .labels {
-  -custom-noop: noop;
+    -custom-noop: noop;
 }
 
 .links {
-  -custom-noop: noop;
+    -custom-noop: noop;
 }
 
 .nodes {
-  -custom-noop: noop;
+    -custom-noop: noop;
 }
 
 .EndDevice {
-  fill: green;
+    fill: green;
 }
 
 .Router,
 .Coordinator {
-  fill: blue;
+    fill: blue;
 }
 
 .Router2Coordinator {
-  stroke: blue;
+    stroke: blue;
 }
 
 .Router2Router {
-  stroke: blue;
-  stroke-dasharray: 5;
+    stroke: blue;
+    stroke-dasharray: 5;
 }
 
 .EndDevice2Coordinator {
-  stroke: green;
+    stroke: green;
 }
 
 .EndDevice2Router {
-  stroke: green;
-  opacity: 0.8;
-  stroke-dasharray: 5;
+    stroke: green;
+    opacity: 0.8;
+    stroke-dasharray: 5;
 }
 
 .foreignObject {
-  overflow: visible;
-  width: 100%;
-  height: 100%;
+    overflow: visible;
+    width: 100%;
+    height: 100%;
 }
 
 .offline {
-  opacity: 0.5;
-  stroke: gray;
+    opacity: 0.5;
+    stroke: gray;
 }

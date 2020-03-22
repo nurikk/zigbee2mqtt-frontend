@@ -1,10 +1,10 @@
-import { select } from 'd3-selection';
-import { h, Component, ComponentChild, createRef, FunctionalComponent } from 'preact';
-import { NodeI } from './types';
-import style from './map.css';
-import cx from 'classnames';
-import { MouseEventsResponderNode } from '.';
-import { Device } from '../../types';
+import { select } from "d3-selection";
+import { Component, ComponentChild, createRef, FunctionalComponent, h } from "preact";
+import { NodeI } from "./types";
+import style from "./map.css";
+import cx from "classnames";
+import { MouseEventsResponderNode } from ".";
+import { Device } from "../../types";
 
 interface LabelProps extends MouseEventsResponderNode {
     node: NodeI;
@@ -60,15 +60,15 @@ interface LabelsProps extends MouseEventsResponderNode {
 
 const Labels: FunctionalComponent<LabelsProps> = (props) => {
     const { nodes, onMouseOut, onMouseOver, onDblClick } = props;
-        const labels = nodes.map((node: NodeI, index: number) => (
-            <Label
-                onMouseOut={onMouseOut}
-                onMouseOver={onMouseOver}
-                onDblClick={onDblClick}
-                key={index}
-                node={node}
-            />
-        ));
-        return <g className={style.labels}>{labels}</g>;
+    const labels = nodes.map((node: NodeI, index: number) => (
+        <Label
+            onMouseOut={onMouseOut}
+            onMouseOver={onMouseOver}
+            onDblClick={onDblClick}
+            key={index}
+            node={node}
+        />
+    ));
+    return <g className={style.labels}>{labels}</g>;
 };
 export default Labels;

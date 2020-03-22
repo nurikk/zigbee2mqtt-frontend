@@ -1,18 +1,27 @@
-import { h, Component, ComponentChild, createRef } from 'preact';
-import Links from './links';
-import Nodes from './nodes';
-import Labels from './labels';
-import { forceSimulation, Simulation, ForceLink, forceLink, forceManyBody, forceCenter, forceX, forceY } from 'd3-force';
-import { selectAll } from 'd3-selection';
-import { fetchZigbeeDevicesList } from '../actions';
-import style from './map.css';
-import { GraphI, NodeI, LinkI } from './types';
+import { Component, ComponentChild, createRef, h } from "preact";
+import Links from "./links";
+import Nodes from "./nodes";
+import Labels from "./labels";
+import {
+    forceCenter,
+    forceLink,
+    ForceLink,
+    forceManyBody,
+    forceSimulation,
+    forceX,
+    forceY,
+    Simulation
+} from "d3-force";
+import { selectAll } from "d3-selection";
+import { fetchZigbeeDevicesList } from "../actions";
+import style from "./map.css";
+import { GraphI, LinkI, NodeI } from "./types";
 
-import { convert2graph } from './convert';
-import Tooltip from './tooltip';
-import Timed, { TimedProps } from '../time';
-import { Device } from '../../types';
-import { genDeviceDetailsLink } from '../../utils';
+import { convert2graph } from "./convert";
+import Tooltip from "./tooltip";
+import Timed, { TimedProps } from "../time";
+import { Device } from "../../types";
+import { genDeviceDetailsLink } from "../../utils";
 
 export interface MouseEventsResponderNode {
     onMouseOver?: (arg0: NodeI) => void;
@@ -33,22 +42,39 @@ interface State {
     width: number;
     height: number;
 }
+
 const getDistance = (d: LinkI): number => {
     switch (d.type) {
-        case 'Router2Router':
-        case 'Router2Coordinator':
+        case "Router2Router":
+        case "Router2Coordinator":
             return 200;
-        case 'EndDevice2Coordinator':
-        case 'EndDevice2Router':
+        case "EndDevice2Coordinator":
+        case "EndDevice2Router":
             return 100;
         default:
             return 150;
     }
 };
 const MOBILE_SCREEN_THRESHOLD = 400;
+
 export class Map extends Component<TimedProps, State> {
     ref = createRef<HTMLDivElement>();
     simulation!: Simulation<NodeI, LinkI>;
+
+    constructor() {
+        super();
+        this.state = {
+            width: 0,
+            height: 0,
+            graph: {
+                nodes: [],
+                links: []
+            },
+            tooltipNode: false
+        };
+
+        this.simulation = forceSimulation<NodeI>();
+    }
 
     updateNodes(): void {
         this.updateForces();
@@ -67,9 +93,9 @@ export class Map extends Component<TimedProps, State> {
         const linkComputeFn = (d: LinkI): string =>
             `M ${(d.source as NodeI).x} ${(d.source as NodeI).y} L ${(d.target as NodeI).x} ${(d.target as NodeI).y}`;
         const ticked = (): void => {
-            link.attr('d', linkComputeFn);
+            link.attr("d", linkComputeFn);
 
-            linkLabel.attr('transform', function (d) {
+            linkLabel.attr("transform", function(d) {
                 //TODO: add type guard
                 if (((d.target as NodeI).x as number) < ((d.source as NodeI).x as number)) {
                     const bbox = this.getBBox();
@@ -77,19 +103,17 @@ export class Map extends Component<TimedProps, State> {
                     const ry = bbox.y + bbox.height / 2;
                     return `rotate(180 ${rx} ${ry})`;
                 }
-                return 'rotate(0)';
+                return "rotate(0)";
             });
-            node.attr('transform', d => `translate(${d.x}, ${d.y})`);
+            node.attr("transform", d => `translate(${d.x}, ${d.y})`);
             label
-                .attr('x', d => (d.x as number) + 5)
-                .attr('y', d => (d.y as number) + 5);
+                .attr("x", d => (d.x as number) + 5)
+                .attr("y", d => (d.y as number) + 5);
         };
         const { graph } = this.state;
-        this.simulation.nodes(graph.nodes).on('tick', ticked);
-        const linkForce = this.simulation.force('link') as ForceLink<
-            NodeI,
-            LinkI
-        >;
+        this.simulation.nodes(graph.nodes).on("tick", ticked);
+        const linkForce = this.simulation.force("link") as ForceLink<NodeI,
+            LinkI>;
         linkForce.links(graph.links);
         this.simulation.restart();
     }
@@ -97,6 +121,7 @@ export class Map extends Component<TimedProps, State> {
     setTooltip = (tooltipNode: NodeI): void => {
         this.setState({ tooltipNode });
     };
+
     removeTooltip = (): void => {
         this.setState({ tooltipNode: false });
     };
@@ -111,20 +136,6 @@ export class Map extends Component<TimedProps, State> {
                 break;
         }
     };
-    constructor() {
-        super();
-        this.state = {
-            width: 0,
-            height: 0,
-            graph: {
-                nodes: [],
-                links: []
-            },
-            tooltipNode: false
-        };
-
-        this.simulation = forceSimulation<NodeI>();
-    }
 
     updateForces(): void {
         const { width, height } = this.state;
@@ -141,15 +152,16 @@ export class Map extends Component<TimedProps, State> {
                 .strength(-200);
 
         this.simulation
-            .force('link', linkForce)
-            .force('charge', chargeForce)
-            .force('center', forceCenter(width / 2, height / 2));
+            .force("link", linkForce)
+            .force("charge", chargeForce)
+            .force("center", forceCenter(width / 2, height / 2));
 
         if (width < MOBILE_SCREEN_THRESHOLD) {
-            this.simulation.force('x', forceX(width / 2).strength(0.1))
-                .force('y', forceY(height / 2).strength(0.1))
+            this.simulation.force("x", forceX(width / 2).strength(0.1))
+                .force("y", forceY(height / 2).strength(0.1));
         }
     }
+
     componentDidMount(): void {
         fetchZigbeeDevicesList((err, res: Device[]) => {
             const { width, height } = (this.ref.current as HTMLDivElement).getBoundingClientRect();
@@ -165,7 +177,7 @@ export class Map extends Component<TimedProps, State> {
         return (
             <div className={style.container} ref={this.ref}>
                 <svg viewBox={`0 0 ${width} ${height}`}>
-                    <Links links={graph.links} />
+                    <Links links={graph.links}/>
                     <Nodes
                         nodes={graph.nodes}
                         simulation={this.simulation}
@@ -186,7 +198,7 @@ export class Map extends Component<TimedProps, State> {
                             x={tooltipNode.x as number + 10}
                             y={tooltipNode.y as number + 5}
                         >
-                            <Tooltip info={tooltipNode} time={time} />
+                            <Tooltip info={tooltipNode} time={time}/>
                         </foreignObject>
                     ) : null}
                 </svg>

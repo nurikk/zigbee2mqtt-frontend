@@ -1,5 +1,4 @@
-
-import { h, ComponentChild, Component, ComponentType } from "preact";
+import { Component, ComponentChild, ComponentType, h } from "preact";
 import { fetchTimeInfo } from "../actions";
 import { Device } from "../../types";
 
@@ -28,7 +27,7 @@ const toHHMMSS = (secs: number): string => {
     return [hours, minutes, seconds]
         .map(v => v < 10 ? `0${v}` : v)
         .filter((v, i) => v !== "00" || i > 0)
-        .join(":")
+        .join(":");
 };
 export const lastSeen = (device: Device, timeInfo: TimeInfo): string => {
     if (device.last_seen && timeInfo) {
@@ -40,12 +39,14 @@ export const lastSeen = (device: Device, timeInfo: TimeInfo): string => {
 const Timed = (WrappedComponent: ComponentType<TimedProps>): ComponentType => {
     return class TimeProviderHOC extends Component<{}, State> {
         time: TimeInfo | undefined;
+
         constructor(props: unknown) {
             super(props);
             this.state = {
                 time: undefined
             };
         }
+
         componentDidMount(): void {
             fetchTimeInfo((err, time: TimeInfo) => {
                 this.setState({ time });
@@ -54,7 +55,7 @@ const Timed = (WrappedComponent: ComponentType<TimedProps>): ComponentType => {
 
         render(): ComponentChild {
             const { time } = this.state;
-            return <WrappedComponent {...this.props} time={time} />
+            return <WrappedComponent {...this.props} time={time}/>;
         }
     };
 };

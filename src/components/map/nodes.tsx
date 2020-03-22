@@ -1,22 +1,16 @@
-import {
-    h,
-    Component,
-    createRef,
-    ComponentChild,
-    RefObject
-} from 'preact';
+import { Component, ComponentChild, createRef, h, RefObject } from "preact";
 
 
-import { drag } from 'd3-drag';
-import { Simulation } from 'd3-force';
-import { selectAll, event, select } from 'd3-selection';
-import { NodeI, LinkI } from './types';
-import cx from 'classnames';
+import { drag } from "d3-drag";
+import { Simulation } from "d3-force";
+import { event, select, selectAll } from "d3-selection";
+import { LinkI, NodeI } from "./types";
+import cx from "classnames";
 
-import * as style from './map.css';
-import { MouseEventsResponderNode } from '.';
-import { TimedProps, TimeInfo } from '../time';
-import { Device } from '../../types';
+import * as style from "./map.css";
+import { MouseEventsResponderNode } from ".";
+import { TimedProps, TimeInfo } from "../time";
+import { Device } from "../../types";
 
 const calcStarPoints = (
     centerX: number,
@@ -37,7 +31,8 @@ const calcStarPoints = (
         points += `${currX}, ${currY} `;
     }
     return points;
-};;
+};
+
 
 const getStarShape = (innerCircleArms: number, styleStarWidth: number, innerOuterRadiusRatio: number): string => {
     return calcStarPoints(
@@ -60,7 +55,8 @@ export const isOnline = (device: Device, timeInfo: TimeInfo | undefined): boolea
         return true;
     }
     return timeInfo.ts - parseInt(device.last_seen, 10) < offlineTimeout;
-};;
+};
+
 
 class Node extends Component<NodeProps, {}> {
     ref = createRef<SVGPolygonElement | SVGCircleElement>();
@@ -76,16 +72,19 @@ class Node extends Component<NodeProps, {}> {
     onMouseOut = (): void => {
         const { node, onMouseOut } = this.props;
         onMouseOut && onMouseOut(node);
-    };;
+    };
+;
 
     onMouseOver = (): void => {
         const { node, onMouseOver } = this.props;
         onMouseOver && onMouseOver(node);
-    };;
+    };
+;
     onDblClick = (): void => {
         const { node, onDblClick } = this.props;
         onDblClick && onDblClick(node);
-    };;
+    };
+;
 
     render(): ComponentChild {
         const { node, time } = this.props;
@@ -117,6 +116,7 @@ class Node extends Component<NodeProps, {}> {
         }
     }
 }
+
 interface NodesProps extends MouseEventsResponderNode, TimedProps {
     nodes: NodeI[];
     simulation: Simulation<NodeI, LinkI>;
@@ -130,18 +130,18 @@ export default class Nodes extends Component<NodesProps, NodesState> {
     updateDrag(): void {
         const { simulation } = this.props;
         const dragForce = drag<SVGCircleElement, NodeI>()
-            .on('start', d => {
+            .on("start", d => {
                 if (!event.active) {
                     simulation.alphaTarget(0.3).restart();
                 }
                 d.fx = d.x;
                 d.fy = d.y;
             })
-            .on('drag', d => {
+            .on("drag", d => {
                 d.fx = event.x;
                 d.fy = event.y;
             })
-            .on('end', d => {
+            .on("end", d => {
                 if (!event.active) {
                     simulation.alphaTarget(0);
                 }
@@ -157,6 +157,7 @@ export default class Nodes extends Component<NodesProps, NodesState> {
     componentDidMount(): void {
         this.updateDrag();
     }
+
     componentDidUpdate(): void {
         this.updateDrag();
     }

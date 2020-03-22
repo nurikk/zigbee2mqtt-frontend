@@ -1,6 +1,6 @@
 import { NodeI } from "./types";
-import style from './tooltip.css';
-import { h, FunctionalComponent } from "preact";
+import style from "./tooltip.css";
+import { FunctionalComponent, h } from "preact";
 import { isOnline } from "./nodes";
 import { lastSeen, TimedProps, TimeInfo } from "../time";
 import { Device } from "../../types";
@@ -22,7 +22,7 @@ const getTooltip = (device: Device, timeInfo: TimeInfo): string[] => {
         strings.push(`0x${device.ieeeAddr}`);
     }
     if (device?.st?.linkquality) {
-        strings.push(`LinkQuality: ${device.st.linkquality}`)
+        strings.push(`LinkQuality: ${device.st.linkquality}`);
     }
     if (strings.length == 0) {
         strings.push("A very strange device...");
