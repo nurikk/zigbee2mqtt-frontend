@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>SLS Gateway: Log</title>
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            padding-top: 5rem;
+            background-color: #eef5f9 !important;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border-color: #d7dfe3;
+            border-radius: 4px;
+            box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        #editor {
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+        }
+    </style>
+    <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css'
+        integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+    <script src='https://code.jquery.com/jquery-3.4.1.slim.min.js'
+        integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n'
+        crossorigin='anonymous'></script>
+    <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js'
+        integrity='sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6'
+        crossorigin='anonymous'></script>
+    <script src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js'
+        integrity='sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo'
+        crossorigin='anonymous'></script>
+    <script type='text/javascript' src='https://cdn.slsys.io/js/vendor-2020.03.19d2.js'></script>
+    <script type='text/javascript' src='https://cdn.slsys.io/js/main-2020.03.19d2.js'></script>
+    <meta name="viewport" content="width=device-width">
+    <meta name="mobile-web-app-capable" content="yes">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: #1e88e5;"> <a
+            class="navbar-brand" href="/">SLS Gateway</a> <button class="navbar-toggler" type="button"
+            data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault"
+            aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item"> <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a> </li>
+                <li class="nav-item"> <a class="nav-link" href="/zigbee">Zigbee</a> </li>
+                <li class="nav-item"> <a class="nav-link" href="/log">Log</a> </li>
+                <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="dropdown01"
+                        data-toggle="dropdown" aria-expanded="false">Settings</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown01"> <a class="dropdown-item" href="/wifi">WiFi
+                            Setup</a> <a class="dropdown-item" href="/time">Time Setup</a> <a class="dropdown-item"
+                            href="/link">Link Setup</a> <a class="dropdown-item" href="/hw">HW Setup</a> </div>
+                </li>
+                <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="dropdown02"
+                        data-toggle="dropdown" aria-expanded="false">Help</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown02"> <a class="dropdown-item"
+                            href="https://slsys.github.io/Gateway/">WiKi</a> <a class="dropdown-item"
+                            href="https://t.me/slsys">Telegram (Support, discussions)</a> <a class="dropdown-item"
+                            href="https://mjdm.ru/forum/viewtopic.php?t=6700">Forum (Updates, knowledges)</a> </div>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="dropdown03"
+                        data-toggle="dropdown" aria-expanded="false">Actions</a>
+                    <div class="dropdown-menu dropdown-menu-right"> <a class="dropdown-item" href="/update">Update
+                            Firmware</a> <a class="dropdown-item" data-toggle="modal" data-target="#zb_reset_modal"
+                            href="#">Zigbee Reset</a> <a class="dropdown-item" data-toggle="modal"
+                            data-target="#reboot_modal" href="#">Reboot System</a> </div>
+                </li>
+            </ul>
+        </div>
+    </nav><!-- Modal -->
+    <div class="modal fade" id="reboot_modal" tabindex="-1" role="dialog" aria-labelledby="reboot_modalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="reboot_modalLabel">Reboot</h5> <button type="button" class="close"
+                        data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+                </div>
+                <div class="modal-body"> Are you sure you want to reboot the device? </div>
+                <div class="modal-footer"> <button type="button" class="btn btn-danger"
+                        onclick="location.href='/reboot';">Reboot</button> <button type="button"
+                        class="btn btn-secondary" data-dismiss="modal">Cancel</button> </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="zb_reset_modal" tabindex="-1" role="dialog" aria-labelledby="zb_reset_modalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="zb_reset_modalLabel">Zigbee reset</h5> <button type="button"
+                        class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body"> Are you sure you want to reset all zigbee devices? </div>
+                <div class="modal-footer"> <button type="button" class="btn btn-danger"
+                        onclick="location.href='/zigbee/reset';">Reset</button> <button type="button"
+                        class="btn btn-secondary" data-dismiss="modal">Cancel</button> </div>
+            </div>
+        </div>
+    </div>
+    <main role="main" class="h-100">
+        <script>      function WS_Start() { ws = new WebSocket("ws://192.168.1.209:81/log"); ws.onopen = function () { if ("/log" == "/log") document.getElementById('log').value += "[WS] Connected!\n"; else console.log("[WS] Connected!"); }; ws.onclose = function () { setTimeout(function () { if ("/log" == "/log") document.getElementById('log').value += "[WS] Reconnecting...\n"; else console.log("[WS] Reconnecting..."); WS_Start(); }, 1000); }; ws.onmessage = function (evt) { if ("/log" == "/log") { document.getElementById('log').value += evt.data + "\n"; document.getElementById('log').scrollTop = document.getElementById('log').scrollHeight; } else console.log(evt.data); }; } WS_Start();    </script>
+        <button type="button" class="btn btn-simple" onclick="document.getElementById('log').value='';">Clear</button>
+        <hr /><textarea id="log" class="form-control" name="log"
+            style="background-color:#cccccc; font-size:10pt; height:80vh;" readonly="readonly">[12:32:54.142] Leds disabled.
+    [12:32:55.158] [V] [MQTT] Received [led : ] {"mode": "manual", "hex": "#ff0000"}
+    [12:32:55.160] Leds manual, RGB: #ff0000
+    [12:32:56.158] [V] [MQTT] Received [led : ] {"mode": "off"}
+    [12:32:56.159] Leds disabled.
+    [12:32:57.165] [V] [MQTT] Received [led : ] {"mode": "manual", "hex": "#ff0000"}
+    [12:32:57.168] Leds manual, RGB: #ff0000
+    [12:32:58.176] [V] [MQTT] Received [led : ] {"mode": "off"}
+    [12:32:58.178] Leds disabled.
+    [12:32:59.173] [V] [MQTT] Received [led : ] {"mode": "manual", "hex": "#ff0000"}
+    [12:32:59.174] Leds manual, RGB: #ff0000
+    [12:32:59.270] [D]  -- ReceiveCmd: 0x4481 AREQ_AF_INCOMING_MSG, Len: 27, Data: 00000600938501010049006D16A600000718260A0000100093851D
+    [12:32:59.274] [V] AREQ_AF_INCOMING_MSG GroupId: 0x0000, ClusterId: 0x0006 GEN_ON_OFF, SrcAddr: 0x8593, SrcEn: 1, DstEn: 1, WasBr: 0x00, LinkQuality: 73, SecurityUse: 0x00, TimeStamp: 0x00A6166D, TransSeqNum: 0, Len: 7, Data: 18260A00001000
+    [12:32:59.282] [V]   ZCL FrameControl: 0x18, Type: 00, ManuSpecific: 00, Direction: 01, DisableDefaultRsp: 01, TrSeqNum: 38, CmdId: 0x0A REPORT, Payload: 00001000
+    [12:32:59.288] [V]     AttrId: 0x0000, AttrDataType: 0x10, AttrDataLen: 1, AttrValue: false
+    [12:32:59.293] [D] SetDeviceState nwkAddr: 8593, linkquality = UINT8: 73
+    [12:32:59.297] [D] SetDeviceState nwkAddr: 8593, trSeqNum = UINT8: 38
+    [12:32:59.301] [D] SetDeviceState nwkAddr: 8593, contact = BOOL: 1
+    [12:32:59.305] [D] 43824 65536 16
+    [12:32:59.310] FZ [lumi.sensor_magnet : 0x00158D0004318A33]: {"linkquality":73,"trSeqNum":38,"contact":true}
+    [12:32:59.316] QueueMessages start: 1 66424
+    [12:33:00.723] [D]  -- ReceiveCmd: 0x4481 AREQ_AF_INCOMING_MSG, Len: 27, Data: 0000060093850101004900F51BA600000718270A0000100193851D
+    [12:33:00.732] [V] AREQ_AF_INCOMING_MSG GroupId: 0x0000, ClusterId: 0x0006 GEN_ON_OFF, SrcAddr: 0x8593, SrcEn: 1, DstEn: 1, WasBr: 0x00, LinkQuality: 73, SecurityUse: 0x00, TimeStamp: 0x00A61BF5, TransSeqNum: 0, Len: 7, Data: 18270A00001001
+    [12:33:00.743] [V]   ZCL FrameControl: 0x18, Type: 00, ManuSpecific: 00, Direction: 01, DisableDefaultRsp: 01, TrSeqNum: 39, CmdId: 0x0A REPORT, Payload: 00001001
+    [12:33:00.751] [V]     AttrId: 0x0000, AttrDataType: 0x10, AttrDataLen: 1, AttrValue: true
+    [12:33:00.755] [D] SetDeviceState nwkAddr: 8593, linkquality = UINT8: 73
+    [12:33:00.760] [D] SetDeviceState nwkAddr: 8593, trSeqNum = UINT8: 39
+    [12:33:00.766] [D] SetDeviceState nwkAddr: 8593, contact = BOOL: 0
+    [12:33:00.767] [D] 43928 65536 16
+    [12:33:00.773] FZ [lumi.sensor_magnet : 0x00158D0004318A33]: {"linkquality":73,"trSeqNum":39,"contact":false}
+    [12:33:00.779] QueueMessages start: 1 66420
+    [12:33:00.178] [V] [MQTT] Received [led : ] {"mode": "off"}
+    [12:33:00.181] Leds disabled.
+    [12:33:01.167] [V] [MQTT] Received [led : ] {"mode": "manual", "hex": "#ff0000"}
+    [12:33:01.170] Leds manual, RGB: #ff0000
+    [12:33:02.174] [V] [MQTT] Received [led : ] {"mode": "off"}
+    [12:33:02.176] Leds disabled.
+    [12:33:03.187] [V] [MQTT] Received [led : ] {"mode": "manual", "hex": "#ff0000"}
+    [12:33:03.188] Leds manual, RGB: #ff0000
+    [12:33:04.189] [V] [MQTT] Received [led : ] {"mode": "off"}
+    [12:33:04.190] Leds disabled.
+    [12:33:05.199] [V] [MQTT] Received [led : ] {"mode": "manual", "hex": "#ff0000"}
+    [12:33:05.201] Leds manual, RGB: #ff0000
+    [12:33:06.196] [V] [MQTT] Received [led : ] {"mode": "off"}
+    [12:33:06.199] Leds disabled.
+    [12:33:07.205] [V] [MQTT] Received [led : ] {"mode": "manual", "hex": "#ff0000"}
+    [12:33:07.206] Leds manual, RGB: #ff0000
+    [12:33:09.608] [V] [MQTT] Received [led : ] {"mode": "off"}
+    [12:33:09.610] Leds disabled.
+    [12:33:09.615] [V] [MQTT] Received [led : ] {"mode": "manual", "hex": "#ff0000"}
+    [12:33:09.619] Leds manual, RGB: #ff0000
+    [12:33:10.235] [V] [MQTT] Received [led : ] {"mode": "off"}
+    [12:33:10.238] Leds disabled.
+    [12:33:11.223] [V] [MQTT] Received [led : ] {"mode": "manual", "hex": "#ff0000"}
+    [12:33:11.227] Leds manual, RGB: #ff0000
+    [12:33:12.233] [V] [MQTT] Received [led : ] {"mode": "off"}
+    [12:33:12.235] Leds disabled.
+    [12:33:13.224] [V] [MQTT] Received [led : ] {"mode": "manual", "hex": "#ff0000"}
+    [12:33:13.225] Leds manual, RGB: #ff0000
+    [12:33:14.241] [V] [MQTT] Received [led : ] {"mode": "off"}
+    [12:33:14.242] Leds disabled.
+    [12:33:15.238] [V] [MQTT] Received [led : ] {"mode": "manual", "hex": "#ff0000"}
+    [12:33:15.240] Leds manual, RGB: #ff0000
+    [12:33:16.235] [V] [MQTT] Received [led : ] {"mode": "off"}
+    [12:33:16.238] Leds disabled.
+    [12:33:17.259] [V] [MQTT] Received [led : ] {"mode": "manual", "hex": "#ff0000"}
+    [12:33:17.261] Leds manual, RGB: #ff0000
+    [12:33:18.261] [V] [MQTT] Received [led : ] {"mode": "off"}
+    [12:33:18.262] Leds disabled.
+    [12:33:19.270] [V] [MQTT] Received [led : ] {"mode": "manual", "hex": "#ff0000"}
+    [12:33:19.273] Leds manual, RGB: #ff0000
+    [12:33:19.453] [MQTT] Send HB (206) {"Uptime":29644,"UptimeStr":"08:14:04","IP":"192.168.1.209","RSSI":"-68","Version":"2020.03.19d2","FreeMem":119588,"memoryUsage":43928,"LastRxTS":19,"LastTxTS":29642,"log_level":"debug","permit_join":false}
+    [12:33:19.461] QueueMessages start: 1 66280
+    [12:33:20.256] [V] [MQTT] Received [led : ] {"mode": "off"}
+    [12:33:20.259] Leds disabled.
+    [12:33:21.279] [V] [MQTT] Received [led : ] {"mode": "manual", "hex": "#ff0000"}
+    [12:33:21.281] Leds manual, RGB: #ff0000
+    [12:33:22.270] [V] [MQTT] Received [led : ] {"mode": "off"}
+    [12:33:22.273] Leds disabled.
+    [12:33:23.275] [V] [MQTT] Received [led : ] {"mode": "manual", "hex": "#ff0000"}
+    [12:33:23.277] Leds manual, RGB: #ff0000
+    [12:33:24.274] [V] [MQTT] Received [led : ] {"mode": "off"}
+    [12:33:24.277] Leds disabled.
+    [12:33:25.292] [V] [MQTT] Received [led : ] {"mode": "manual", "hex": "#ff0000"}
+    [12:33:25.294] Leds manual, RGB: #ff0000
+    [12:33:26.301] [V] [MQTT] Received [led : ] {"mode": "off"}
+    [12:33:26.303] Leds disabled.
+    [12:33:27.316] [V] [MQTT] Received [led : ] {"mode": "manual", "hex": "#ff0000"}
+    [12:33:27.319] Leds manual, RGB: #ff0000
+    [12:33:28.310] [V] [MQTT] Received [led : ] {"mode": "off"}
+    [12:33:28.312] Leds disabled.
+    [12:33:29.317] [V] [MQTT] Received [led : ] {"mode": "manual", "hex": "#ff0000"}
+    [12:33:29.320] Leds manual, RGB: #ff0000
+    [12:33:30.329] [V] [MQTT] Received [led : ] {"mode": "off"}
+    [12:33:30.331] Leds disabled.
+    [12:33:31.323] [V] [MQTT] Received [led : ] {"mode": "manual", "hex": "#ff0000"}
+    [12:33:31.325] Leds manual, RGB: #ff0000
+    [12:33:32.334] [V] [MQTT] Received [led : ] {"mode": "off"}
+    [12:33:32.335] Leds disabled.
+    [12:33:33.342] [V] [MQTT] Received [led : ] {"mode": "manual", "hex": "#ff0000"}
+    [12:33:33.344] Leds manual, RGB: #ff0000
+    [12:33:34.341] [V] [MQTT] Received [led : ] {"mode": "off"}
+    [12:33:34.345] Leds disabled.
+    [12:33:35.361] [V] [MQTT] Received [led : ] {"mode": "manual", "hex": "#ff0000"}
+    [12:33:35.365] Leds manual, RGB: #ff0000
+    [12:33:36.400] [V] [MQTT] Received [led : ] {"mode": "off"}
+    [12:33:36.403] Leds disabled.
+    [12:33:37.413] [V] [MQTT] Received [led : ] {"mode": "manual", "hex": "#ff0000"}
+    [12:33:37.417] Leds manual, RGB: #ff0000
+    [12:33:38.408] [V] [MQTT] Received [led : ] {"mode": "off"}
+    [12:33:38.412] Leds disabled.
+    [12:33:39.420] [V] [MQTT] Received [led : ] {"mode": "manual", "hex": "#ff0000"}
+    [12:33:39.423] Leds manual, RGB: #ff0000
+    [12:33:40.016] [D]  -- ReceiveCmd: 0x4481 AREQ_AF_INCOMING_MSG, Len: 27, Data: 0000060093850101004C00CE07A800000718280A0000100093851D
+    [12:33:40.023] [V] AREQ_AF_INCOMING_MSG GroupId: 0x0000, ClusterId: 0x0006 GEN_ON_OFF, SrcAddr: 0x8593, SrcEn: 1, DstEn: 1, WasBr: 0x00, LinkQuality: 76, SecurityUse: 0x00, TimeStamp: 0x00A807CE, TransSeqNum: 0, Len: 7, Data: 18280A00001000
+    [12:33:40.036] [V]   ZCL FrameControl: 0x18, Type: 00, ManuSpecific: 00, Direction: 01, DisableDefaultRsp: 01, TrSeqNum: 40, CmdId: 0x0A REPORT, Payload: 00001000
+    [12:33:40.042] [V]     AttrId: 0x0000, AttrDataType: 0x10, AttrDataLen: 1, AttrValue: false
+    [12:33:40.047] [D] SetDeviceState nwkAddr: 8593, linkquality = UINT8: 76
+    [12:33:40.052] [D] SetDeviceState nwkAddr: 8593, trSeqNum = UINT8: 40
+    [12:33:40.056] [D] SetDeviceState nwkAddr: 8593, contact = BOOL: 1
+    [12:33:40.060] [D] 44032 65536 16
+    [12:33:40.063] FZ [lumi.sensor_magnet : 0x00158D0004318A33]: {"linkquality":76,"trSeqNum":40,"contact":true}
+    [12:33:40.069] QueueMessages start: 1 66424
+    [12:33:40.405] [V] [MQTT] Received [led : ] {"mode": "off"}
+    [12:33:40.407] Leds disabled.
+    [12:33:41.151] [V] [MQTT] Received [led : ] {"mode": "off"}
+    [12:33:41.154] Leds disabled.
+    [12:34:19.457] [MQTT] Send HB (206) {"Uptime":29704,"UptimeStr":"08:15:04","IP":"192.168.1.209","RSSI":"-66","Version":"2020.03.19d2","FreeMem":118956,"memoryUsage":44032,"LastRxTS":39,"LastTxTS":29702,"log_level":"debug","permit_join":false}
+    [12:34:19.465] QueueMessages start: 1 65648
+    [12:35:06.308] [D]  -- ReceiveCmd: 0x4481 AREQ_AF_INCOMING_MSG, Len: 49, Data: 00000000E60A01010041001F25AC00001D1C34125D0A02FF4C0600100021BD0B21A8132401000000002192002049E60A1D
+    [12:35:06.320] [V] AREQ_AF_INCOMING_MSG GroupId: 0x0000, ClusterId: 0x0000 GEN_BASIC, SrcAddr: 0x0AE6, SrcEn: 1, DstEn: 1, WasBr: 0x00, LinkQuality: 65, SecurityUse: 0x00, TimeStamp: 0x00AC251F, TransSeqNum: 0, Len: 29, Data: 1C34125D0A02FF4C0600100021BD0B21A8132401000000002192002049
+    [12:35:06.333] [V]   ZCL FrameControl: 0x1C, Type: 00, ManuSpecific: 01, Direction: 01, DisableDefaultRsp: 01, ManuCode: 0x1234, TrSeqNum: 93, CmdId: 0x0A REPORT, Payload: 02FF4C0600100021BD0B21A8132401000000002192002049
+    [12:35:06.347] [V]     AttrId: 0xFF02, AttrDataType: 0x4C, AttrDataLen: 21, AttrValue: null
+    [12:35:06.353] [D] SetDeviceState nwkAddr: 0AE6, linkquality = UINT8: 65
+    [12:35:06.355] [D] SetDeviceState nwkAddr: 0AE6, trSeqNum = UINT8: 93
+    [12:35:06.361] [D] SetDeviceState nwkAddr: 0AE6, voltage = FLOAT: 3.01
+    [12:35:06.366] [D] SetDeviceState nwkAddr: 0AE6, battery = FLOAT: 100.00
+    [12:35:06.368] [D] 44160 65536 16
+    [12:35:06.373] FZ [lumi.sensor_magnet : 0x00158D0003E734DD]: {"linkquality":65,"trSeqNum":93,"voltage":3.005,"battery":100}
+    [12:35:06.379] QueueMessages start: 1 65776
+    [12:35:19.457] [MQTT] Send HB (206) {"Uptime":29764,"UptimeStr":"08:16:04","IP":"192.168.1.209","RSSI":"-70","Version":"2020.03.19d2","FreeMem":118956,"memoryUsage":44160,"LastRxTS":13,"LastTxTS":29762,"log_level":"debug","permit_join":false}
+    [12:35:19.466] QueueMessages start: 1 65648
+    </textarea>
