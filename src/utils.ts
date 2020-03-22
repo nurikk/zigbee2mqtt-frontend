@@ -1,3 +1,4 @@
+import ReconnectingWebSocket from "reconnecting-websocket";
 
 export const genDeviceShortAddress = (deviceKey: string | number): string => {
     let num = deviceKey;
@@ -24,4 +25,12 @@ export function chunkArray<T>(inputArr: T[], chunkSize: number): T[][] {
         results.push(inputArr.splice(0, chunkSize));
     }
     return results;
+}
+
+
+export const WSConnect = (): ReconnectingWebSocket => {
+    const { hostname } = document.location;
+    if (hostname === "localhost") {
+        return  new ReconnectingWebSocket("ws://localhost:8579/");
+    } else return new ReconnectingWebSocket(`ws://${document.location.hostname}:81/log`);
 }
