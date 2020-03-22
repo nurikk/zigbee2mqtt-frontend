@@ -2,7 +2,13 @@ import { DeviceType, PowerSource } from "../../types";
 
 
 export type MessageCategory = "log" | "zigbee";
-export type JoinEvents = "TcDeviceInd" | "DeviceAnnceInd" | "NodeDescRsp" | "ActiveEpRsp" | "ModelRcv" | "SimpleDescRsp";
+export type JoinEvents =
+    "TcDeviceInd"
+    | "DeviceAnnceInd"
+    | "NodeDescRsp"
+    | "ActiveEpRsp"
+    | "ModelRcv"
+    | "SimpleDescRsp";
 export type ZigbeeEvent = "LinkData" | "LeaveInd" | "PermitJoin" | JoinEvents;
 
 export interface ZigbeePayload {
@@ -17,7 +23,6 @@ export interface ZigbeePayload {
     ModelId?: string;
     duration?: number;
 }
-
 
 
 export interface WebsocketMessage {

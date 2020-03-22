@@ -1,109 +1,126 @@
 @import url("https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
 
 .zigbee td, .zigbee th {
-  padding-left: 0.1rem;
-  padding-right: 0.1rem;
+    padding-left: 0.1rem;
+    padding-right: 0.1rem;
 }
 
 .actions {
-	min-width: 150px
+    min-width: 150px
 }
 
 .action-column a {
-	text-decoration: none;
-	border-bottom: 1px dashed black;
+    text-decoration: none;
+    border-bottom: 1px dashed black;
 }
 
 .action-column i {
-	margin-left: 5px;
+    margin-left: 5px;
 }
 
 .invisible {
-	visibility: hidden;
+    visibility: hidden;
 }
 
 
+@media only screen and (max-width: 760px) and (orientation: portrait), (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
+    .adaptive {
+        /* Hide table headers (but not display: none;, for accessibility) */
+        /*
+        Label the data
+        */
+    }
 
-@media only screen and (max-width: 760px) and (orientation : portrait), (min-device-width: 768px) and (max-device-width: 1024px) and (orientation : portrait) {
-  .adaptive {
-    /* Hide table headers (but not display: none;, for accessibility) */
-    /*
-    Label the data
-    */
-  }
-  /* .adaptive table {
-    empty-cells: show;
-  } */
-  .adaptive table,
-.adaptive thead,
-.adaptive tbody,
-.adaptive th,
-.adaptive td,
-.adaptive tr {
-    display: block;
-  }
-  .adaptive thead tr {
-    position: absolute;
-    top: -9999px;
-    left: -9999px;
-  }
-  .adaptive tr {
-    border: 1px solid #ccc;
-  }
-  .adaptive td {
-    /* Behave  like a "row" */
-    border: none;
-    border-bottom: 1px solid #eee;
-    position: relative;
-    padding-left: 30%;
-  }
-  .adaptive td:empty::after {
-    content: "\200B";
-  }
-  .adaptive td:before {
-    /* Now like a table header */
-    position: absolute;
-    /* Top/left values mimic padding */
-    top: 12px;
-    left: 6px;
-/*     width: 45%;
-    padding-right: 10px; */
-    white-space: nowrap;
-  }
-  .adaptive td:nth-of-type(1):before {
-    content: "#";
-  }
-  .adaptive td:nth-of-type(2):before {
-    content: "nwkAddr";
-  }
-  .adaptive td:nth-of-type(3):before {
-    content: "FriendlyName";
-  }
-  .adaptive td:nth-of-type(4):before {
-    content: "ieeeAddr";
-  }
-  .adaptive td:nth-of-type(5):before {
-    content: "ManufName";
-  }
-  .adaptive td:nth-of-type(6):before {
-    content: "ModelId";
-  }
-  .adaptive td:nth-of-type(7):before {
-    content: "LinkQuality";
-  }
-  .adaptive td:nth-of-type(8):before {
-    content: "Interview";
-  }
-  .adaptive td:nth-of-type(9):before {
-    content: "LastSeen";
-  }
-  .adaptive td:nth-of-type(10):before {
-    content: "Routes";
-  }
-  .adaptive td:nth-of-type(11):before {
-    content: "PS";
-  }
-  .adaptive td:nth-of-type(12):before {
-    content: "Actions";
-  }
+    /* .adaptive table {
+      empty-cells: show;
+    } */
+    .adaptive table,
+    .adaptive thead,
+    .adaptive tbody,
+    .adaptive th,
+    .adaptive td,
+    .adaptive tr {
+        display: block;
+    }
+
+    .adaptive thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    .adaptive tr {
+        border: 1px solid #ccc;
+    }
+
+    .adaptive td {
+        /* Behave  like a "row" */
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 30%;
+    }
+
+    .adaptive td:empty::after {
+        content: "\200B";
+    }
+
+    .adaptive td:before {
+        /* Now like a table header */
+        position: absolute;
+        /* Top/left values mimic padding */
+        top: 12px;
+        left: 6px;
+        /*     width: 45%;
+            padding-right: 10px; */
+        white-space: nowrap;
+    }
+
+    .adaptive td:nth-of-type(1):before {
+        content: "#";
+    }
+
+    .adaptive td:nth-of-type(2):before {
+        content: "nwkAddr";
+    }
+
+    .adaptive td:nth-of-type(3):before {
+        content: "FriendlyName";
+    }
+
+    .adaptive td:nth-of-type(4):before {
+        content: "ieeeAddr";
+    }
+
+    .adaptive td:nth-of-type(5):before {
+        content: "ManufName";
+    }
+
+    .adaptive td:nth-of-type(6):before {
+        content: "ModelId";
+    }
+
+    .adaptive td:nth-of-type(7):before {
+        content: "LinkQuality";
+    }
+
+    .adaptive td:nth-of-type(8):before {
+        content: "Interview";
+    }
+
+    .adaptive td:nth-of-type(9):before {
+        content: "LastSeen";
+    }
+
+    .adaptive td:nth-of-type(10):before {
+        content: "Routes";
+    }
+
+    .adaptive td:nth-of-type(11):before {
+        content: "PS";
+    }
+
+    .adaptive td:nth-of-type(12):before {
+        content: "Actions";
+    }
 }

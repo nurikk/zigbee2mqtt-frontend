@@ -1,13 +1,13 @@
-import { h, ComponentChild, Component, FunctionalComponent, Fragment } from "preact";
+import { Component, ComponentChild, Fragment, FunctionalComponent, h } from "preact";
 
 import style from "./style.css";
 import { genDeviceDetailsLink, genDeviceShortAddress } from "../../utils";
-import cx from 'classnames';
-import { ZigbeePayload, ZigbeeEvent } from "./types";
+import cx from "classnames";
+import { ZigbeeEvent, ZigbeePayload } from "./types";
 import groupBy from "lodash/groupBy";
 import isEqual from "lodash/isEqual";
 import uniqWith from "lodash/uniqWith";
-import { Dictionary, Device } from "../../types";
+import { Device, Dictionary } from "../../types";
 import DeviceControlGroup from "../device-control";
 import Button from "../button";
 import { startInterview } from "../actions";
@@ -18,12 +18,12 @@ interface DeviceCardProps {
 }
 
 const EventLabels = new Map<ZigbeeEvent, string>([
-    ['TcDeviceInd', 'Device joined'],
-    ['DeviceAnnceInd', 'Announce received'],
-    ['SimpleDescRsp', 'Endpoints received'],
-    ['ActiveEpRsp', 'Clusters received'],
-    ["ModelRcv", 'Model received'],
-    ['NodeDescRsp', 'Processing interviews']
+    ["TcDeviceInd", "Device joined"],
+    ["DeviceAnnceInd", "Announce received"],
+    ["SimpleDescRsp", "Endpoints received"],
+    ["ActiveEpRsp", "Clusters received"],
+    ["ModelRcv", "Model received"],
+    ["NodeDescRsp", "Processing interviews"]
 ]);
 
 const EventRow: FunctionalComponent<{ eventName: ZigbeeEvent; events: ZigbeePayload[] }> = ({ eventName, events }) => {
@@ -78,8 +78,6 @@ const EventRow: FunctionalComponent<{ eventName: ZigbeeEvent; events: ZigbeePayl
                 </div>
 
 
-
-
             );
 
         // case "ActiveEpRsp":
@@ -103,7 +101,7 @@ export default class DeviceCard extends Component<DeviceCardProps, DeviceCardSta
     constructor() {
         super();
         const updateTimerId = window.setInterval(() => {
-            this.setState({ currentTimestamp: Date.now() })
+            this.setState({ currentTimestamp: Date.now() });
         }, 1000);
 
 
@@ -111,12 +109,14 @@ export default class DeviceCard extends Component<DeviceCardProps, DeviceCardSta
             manualInteviewStarted: false,
             updateTimerId,
             currentTimestamp: Date.now()
-        }
+        };
     }
+
     getLastEvent(): ZigbeePayload {
         const { events } = this.props;
         return events[events.length - 1];
     }
+
     getLastUpdateTime(): number {
         const { timestamp: messageTimestamp } = this.getLastEvent();
         const { currentTimestamp } = this.state;
@@ -127,6 +127,7 @@ export default class DeviceCard extends Component<DeviceCardProps, DeviceCardSta
         const lastMessage = this.getLastUpdateTime();
         return `${lastMessage} sec ago`;
     }
+
     getInterviewText(): string {
         const lastEvent = this.getLastEvent();
         return EventLabels.get(lastEvent.event);
@@ -152,11 +153,13 @@ export default class DeviceCard extends Component<DeviceCardProps, DeviceCardSta
                 <div class={`row ${style["scale-in-center"]}`}>
                     <div class="col-5">Start interview:</div>
                     <div class="col">
-                        <Button<string> className="btn btn-normal btn-sm" onClick={this.onInterviewClick} item={nwkAddr}><i className="fa fa-refresh" /></Button>
+                        <Button<string> className="btn btn-normal btn-sm" onClick={this.onInterviewClick}
+                                        item={nwkAddr}><i className="fa fa-refresh"/></Button>
                     </div>
                 </div>
             );
     }
+
     render(): ComponentChild {
 
         const { updateTimerId } = this.state;
@@ -168,7 +171,7 @@ export default class DeviceCard extends Component<DeviceCardProps, DeviceCardSta
             const { timestamp: tsB, ...restB } = b;
             return isEqual({ ...restA }, { ...restB });
         });
-        const groupedEvents = groupBy(uniqEvents, 'event') as Dictionary<ZigbeePayload[]>;
+        const groupedEvents = groupBy(uniqEvents, "event") as Dictionary<ZigbeePayload[]>;
         let progressValue = 0;
         let isDone = false;
         const lastEvent = this.getLastEvent();
@@ -206,18 +209,21 @@ export default class DeviceCard extends Component<DeviceCardProps, DeviceCardSta
         }
 
 
-
         return (
-            <div className={cx('card', "col-sm-4", style["discovery-card"], style["scale-in-center"])}>
+            <div className={cx("card", "col-sm-4", style["discovery-card"], style["scale-in-center"])}>
                 <div class="card-header">
                     New device <a href={genDeviceDetailsLink(nwkAddr)}>{genDeviceShortAddress(nwkAddr)}</a>
                     <p class="card-text"><small class="text-muted">
-                        {isDone ? 'Successfully joined!' : `Last updated ${this.getLastUpdateTimeMessage()}`}</small></p>
+                        {isDone ? "Successfully joined!" : `Last updated ${this.getLastUpdateTimeMessage()}`}</small>
+                    </p>
                 </div>
                 <div className="card-body">
                     {!isDone ? (<p className="card-text">
                         <div className="progress">
-                            <div className="progress-bar progress-bar-striped progress-bar-animated" style={`width: ${progressValue}%;`} aria-valuenow={progressValue} aria-valuemin="0" aria-valuemax="100" >{progressValue}%</div>
+                            <div className="progress-bar progress-bar-striped progress-bar-animated"
+                                 style={`width: ${progressValue}%;`} aria-valuenow={progressValue} aria-valuemin="0"
+                                 aria-valuemax="100">{progressValue}%
+                            </div>
                         </div>
                     </p>) : null}
 
@@ -230,7 +236,8 @@ export default class DeviceCard extends Component<DeviceCardProps, DeviceCardSta
                     </div>
 
                     {
-                        Object.entries(groupedEvents).map(([eventName, events]) => ((<EventRow key={eventName} eventName={eventName as ZigbeeEvent} events={events} />)))
+                        Object.entries(groupedEvents).map(([eventName, events]) => ((
+                            <EventRow key={eventName} eventName={eventName as ZigbeeEvent} events={events}/>)))
                     }
                     {
                         this.renderManualIterviewHelper()
@@ -240,9 +247,9 @@ export default class DeviceCard extends Component<DeviceCardProps, DeviceCardSta
                     {/* {device.ModelId ? <img class="img-fluid card-img-bottom h-25" src="https://www.zigbee2mqtt.io/images/devices/4713407.jpg" alt="Card image cap" /> : null} */}
                 </div>
                 {isDone ? <div className="card-footer">
-                    <DeviceControlGroup device={{ nwkAddr } as Device} />
+                    <DeviceControlGroup device={{ nwkAddr } as Device}/>
                 </div> : null}
             </div>
-        )
+        );
     }
 }

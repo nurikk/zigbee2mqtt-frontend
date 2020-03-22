@@ -1,4 +1,4 @@
-import { h, ComponentChild, Component, Fragment } from "preact";
+import { Component, ComponentChild, Fragment, h } from "preact";
 import { Dictionary } from "../../types";
 import { WebsocketMessage, ZigbeePayload } from "./types";
 import DeviceCard from "./device-card";
@@ -92,7 +92,7 @@ export default class Discovery extends Component<{}, DiscoveryState> {
         return (<Fragment>
             {this.renderJoinButton()}
             <div className="row no-gutters">{Object.entries(events).map(([nwkAddr, events]) => <DeviceCard
-                nwkAddr={nwkAddr} events={events} />)}</div>
+                nwkAddr={nwkAddr} events={events}/>)}</div>
         </Fragment>);
 
     }
