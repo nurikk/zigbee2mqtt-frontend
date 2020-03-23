@@ -6,6 +6,7 @@ import Map from "./components/map";
 import Header from "./components/header";
 import ZigbeeTable from "./components/zigbee";
 import Discovery from "./components/discovery";
+import LogViewer from "./components/log-viewer";
 
 
 const initWidgets = (): void => {
@@ -26,6 +27,10 @@ const initWidgets = (): void => {
 
     habitat(Discovery).render({
         selector: '[data-widget-host="discovery"]',
+        clean: true
+    });
+    habitat(LogViewer).render({
+        selector: '[data-widget-host="log-viewer"]',
         clean: true
     });
 };

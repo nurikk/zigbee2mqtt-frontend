@@ -1,8 +1,10 @@
 import { convertRawDevices } from "./convert";
 import { Device, Dictionary } from "../types";
 import { TimeInfo } from "./time";
+import { encodeGetParams } from "../utils";
+import { LogLevel } from "./log-viewer";
 
-const encodeData = (data: Dictionary<string | number>): string => Object.keys(data).map((key) => [key, data[key]].map(encodeURIComponent).join("=")).join("&");
+
 
 
 // /api/zigbee/rename?old=X&new=Y
@@ -18,28 +20,42 @@ export const fetchTimeInfo = (callback: CallbackHandler<TimeInfo>): void => {
 };
 
 export const renameDevice = (old: string, newName: string, callback: CallbackHandler<unknown>): void => {
-    fetch(`/api/zigbee/rename?${encodeData({ old, new: newName })}`)
+    fetch(`/api/zigbee/rename?${encodeGetParams({ old, new: newName })}`)
         .then((res) => res.json())
         .then(data => callback(false, data))
         .catch(e => console.error(e));
 };
 
 export const removeDevice = (dev: string, callback: CallbackHandler<unknown>): void => {
-    fetch(`/api/zigbee/remove?${encodeData({ dev })}`)
+    fetch(`/api/zigbee/remove?${encodeGetParams({ dev })}`)
         .then((res) => res.json())
         .then(data => callback(false, data))
         .catch(e => console.error(e));
 };
 
 export const startInterview = (address: string, callback: CallbackHandler<unknown>): void => {
-    fetch(`/zigbee?${encodeData({ intstart: address })}`)
+    fetch(`/zigbee?${encodeGetParams({ intstart: address })}`)
         .then((res) => res.blob())
         .then(data => callback(false, data))
         .catch(e => console.error(e));
 };
 
 export const enableJoin = (duration = 255, target = "", callback: CallbackHandler<unknown>): void => {
-    fetch(`/api/zigbee/join?${encodeData({ duration, target })}`)
+    fetch(`/api/zigbee/join?${encodeGetParams({ duration, target })}`)
+        .then((res) => res.json())
+        .then(data => callback(false, data))
+        .catch(e => console.error(e));
+};
+
+
+export const clearLogsBuffer = (callback: CallbackHandler<unknown>): void => {
+    fetch(`/api/log/config?action=clear`)
+        .then((res) => res.json())
+        .then(data => callback(false, data))
+        .catch(e => console.error(e));
+};
+export const setLogLevel = (logLevel: LogLevel, callback: CallbackHandler<unknown>): void => {
+    fetch(`/api/log/config?action=setLevel&value=${logLevel}`)
         .then((res) => res.json())
         .then(data => callback(false, data))
         .catch(e => console.error(e));

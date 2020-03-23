@@ -75,7 +75,7 @@ export default class Discovery extends Component<{}, DiscoveryState> {
     connectWS = (): void => {
         const ws = WSConnect();
         ws.addEventListener("open", (): void => {
-            console.log("[WS] Connected!");
+            ws.send(JSON.stringify({ action: "subscribe", category: "zigbee" }));
             this.enableJoin();
         });
         ws.addEventListener("message", this.onMessageReceive);

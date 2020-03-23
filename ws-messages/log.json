@@ -1,0 +1,434 @@
+[
+  {
+    "category": "log",
+    "payload": "[16:39:46.039] [V] AREQ_AF_INCOMING_MSG GroupId: 0x0000, ClusterId: 0x0000 GEN_BASIC, SrcAddr: 0xFB31, SrcEn: 1, DstEn: 1, WasBr: 0x00, LinkQuality: 86, SecurityUse: 0x00, TimeStamp: 0x006B1C6A, TransSeqNum: 0, Len: 29, Data: 1C3412A00A02FF4C0600100121280C21A843240200000000211D012058"
+  },
+  {
+    "category": "log",
+    "payload": "[16:39:46.060] [V]   ZCL FrameControl: 0x1C, Type: 00, ManuSpecific: 01, Direction: 01, DisableDefaultRsp: 01, ManuCode: 0x1234, TrSeqNum: 160, CmdId: 0x0A REPORT, Payload: 02FF4C0600100121280C21A843240200000000211D012058"
+  },
+  {
+    "category": "log",
+    "payload": "[16:39:46.077] [V]     AttrId: 0xFF02, AttrDataType: 0x4C, AttrDataLen: 21, AttrValue: null"
+  },
+  {
+    "category": "log",
+    "payload": "[16:39:46.086] [D] SetDeviceState nwkAddr: FB31, linkquality = UINT8: 86"
+  },
+  {
+    "category": "log",
+    "payload": "[16:39:46.090] [D] SetDeviceState nwkAddr: FB31, trSeqNum = UINT8: 160"
+  },
+  {
+    "category": "log",
+    "payload": "[16:39:46.095] [D] SetDeviceState nwkAddr: FB31, voltage = FLOAT: 3.11"
+  },
+  {
+    "category": "log",
+    "payload": "[16:39:46.100] [D] SetDeviceState nwkAddr: FB31, battery = FLOAT: 100.00"
+  },
+  {
+    "category": "log",
+    "payload": "[16:39:46.106] [D] 35932 65536 16"
+  },
+  {
+    "category": "log",
+    "payload": "[16:39:46.119] FZ [lumi.sensor_switch : 0x00158D000224154D]: {\"linkquality\":86,\"trSeqNum\":160,\"voltage\":3.112,\"battery\":100}"
+  },
+  {
+    "category": "log",
+    "payload": "[16:39:46.127] QueueMessages start: 1 50872"
+  },
+  {
+    "category": "log",
+    "payload": "[16:40:05.885] [MQTT] Send HB (204) {\"Uptime\":9546,\"UptimeStr\":\"02:39:06\",\"IP\":\"192.168.1.209\",\"RSSI\":\"-75\",\"Version\":\"2020.03.19d2\",\"FreeMem\":117368,\"memoryUsage\":35932,\"LastRxTS\":19,\"LastTxTS\":9544,\"log_level\":\"debug\",\"permit_join\":false}"
+  },
+  {
+    "category": "log",
+    "payload": "[16:40:05.897] QueueMessages start: 1 60192"
+  },
+  {
+    "category": "log",
+    "payload": "[16:41:05.890] [MQTT] Send HB (204) {\"Uptime\":9606,\"UptimeStr\":\"02:40:06\",\"IP\":\"192.168.1.209\",\"RSSI\":\"-79\",\"Version\":\"2020.03.19d2\",\"FreeMem\":117368,\"memoryUsage\":35932,\"LastRxTS\":79,\"LastTxTS\":9604,\"log_level\":\"debug\",\"permit_join\":false}"
+  },
+  {
+    "category": "log",
+    "payload": "[16:41:05.899] QueueMessages start: 1 62464"
+  },
+  {
+    "category": "log",
+    "payload": "[16:42:05.891] [MQTT] Send HB (205) {\"Uptime\":9666,\"UptimeStr\":\"02:41:06\",\"IP\":\"192.168.1.209\",\"RSSI\":\"-77\",\"Version\":\"2020.03.19d2\",\"FreeMem\":117368,\"memoryUsage\":35932,\"LastRxTS\":139,\"LastTxTS\":9664,\"log_level\":\"debug\",\"permit_join\":false}"
+  },
+  {
+    "category": "log",
+    "payload": "[16:42:05.898] QueueMessages start: 1 61956"
+  },
+  {
+    "category": "log",
+    "payload": "[16:42:15.650] [D]  -- ReceiveCmd: 0x4481 AREQ_AF_INCOMING_MSG, Len: 27, Data: 0000060024C80101004E00AB327200000718FB0A0000100124C81D"
+  },
+  {
+    "category": "log",
+    "payload": "[16:42:15.658] [V] AREQ_AF_INCOMING_MSG GroupId: 0x0000, ClusterId: 0x0006 GEN_ON_OFF, SrcAddr: 0xC824, SrcEn: 1, DstEn: 1, WasBr: 0x00, LinkQuality: 78, SecurityUse: 0x00, TimeStamp: 0x007232AB, TransSeqNum: 0, Len: 7, Data: 18FB0A00001001"
+  },
+  {
+    "category": "log",
+    "payload": "[16:42:15.670] [V]   ZCL FrameControl: 0x18, Type: 00, ManuSpecific: 00, Direction: 01, DisableDefaultRsp: 01, TrSeqNum: 251, CmdId: 0x0A REPORT, Payload: 00001001"
+  },
+  {
+    "category": "log",
+    "payload": "[16:42:15.681] [V]     AttrId: 0x0000, AttrDataType: 0x10, AttrDataLen: 1, AttrValue: true"
+  },
+  {
+    "category": "log",
+    "payload": "[16:42:15.690] [D] SetDeviceState nwkAddr: C824, linkquality = UINT8: 78"
+  },
+  {
+    "category": "log",
+    "payload": "[16:42:15.700] [D] SetDeviceState nwkAddr: C824, trSeqNum = UINT8: 251"
+  },
+  {
+    "category": "log",
+    "payload": "[16:42:15.708] [D] SetDeviceState nwkAddr: C824, contact = BOOL: 0"
+  },
+  {
+    "category": "log",
+    "payload": "[16:42:15.716] [D] 36036 65536 16"
+  },
+  {
+    "category": "log",
+    "payload": "[16:42:15.725] FZ [lumi.sensor_magnet : 0x00158D0003F37913]: {\"linkquality\":78,\"trSeqNum\":251,\"contact\":false}"
+  },
+  {
+    "category": "log",
+    "payload": "[16:42:15.730] QueueMessages start: 1 62252"
+  },
+  {
+    "category": "log",
+    "payload": "[16:42:29.926] [D]  -- ReceiveCmd: 0x4481 AREQ_AF_INCOMING_MSG, Len: 27, Data: 0000060024C80101004E00EAE07200000718FC0A0000100024C81D"
+  },
+  {
+    "category": "log",
+    "payload": "[16:42:29.936] [V] AREQ_AF_INCOMING_MSG GroupId: 0x0000, ClusterId: 0x0006 GEN_ON_OFF, SrcAddr: 0xC824, SrcEn: 1, DstEn: 1, WasBr: 0x00, LinkQuality: 78, SecurityUse: 0x00, TimeStamp: 0x0072E0EA, TransSeqNum: 0, Len: 7, Data: 18FC0A00001000"
+  },
+  {
+    "category": "log",
+    "payload": "[16:42:29.946] [V]   ZCL FrameControl: 0x18, Type: 00, ManuSpecific: 00, Direction: 01, DisableDefaultRsp: 01, TrSeqNum: 252, CmdId: 0x0A REPORT, Payload: 00001000"
+  },
+  {
+    "category": "log",
+    "payload": "[16:42:29.956] [V]     AttrId: 0x0000, AttrDataType: 0x10, AttrDataLen: 1, AttrValue: false"
+  },
+  {
+    "category": "log",
+    "payload": "[16:42:29.962] [D] SetDeviceState nwkAddr: C824, linkquality = UINT8: 78"
+  },
+  {
+    "category": "log",
+    "payload": "[16:42:29.967] [D] SetDeviceState nwkAddr: C824, trSeqNum = UINT8: 252"
+  },
+  {
+    "category": "log",
+    "payload": "[16:42:29.976] [D] SetDeviceState nwkAddr: C824, contact = BOOL: 1"
+  },
+  {
+    "category": "log",
+    "payload": "[16:42:29.984] [D] 36140 65536 16"
+  },
+  {
+    "category": "log",
+    "payload": "[16:42:29.990] FZ [lumi.sensor_magnet : 0x00158D0003F37913]: {\"linkquality\":78,\"trSeqNum\":252,\"contact\":true}"
+  },
+  {
+    "category": "log",
+    "payload": "[16:42:29.040] QueueMessages start: 1 62608"
+  },
+  {
+    "category": "log",
+    "payload": "[16:42:38.219] [D]  -- ReceiveCmd: 0x4481 AREQ_AF_INCOMING_MSG, Len: 27, Data: 0000060024C80101004E005F527300000718FD0A0000100124C81D"
+  },
+  {
+    "category": "log",
+    "payload": "[16:42:38.230] [V] AREQ_AF_INCOMING_MSG GroupId: 0x0000, ClusterId: 0x0006 GEN_ON_OFF, SrcAddr: 0xC824, SrcEn: 1, DstEn: 1, WasBr: 0x00, LinkQuality: 78, SecurityUse: 0x00, TimeStamp: 0x0073525F, TransSeqNum: 0, Len: 7, Data: 18FD0A00001001"
+  },
+  {
+    "category": "log",
+    "payload": "[16:42:38.243] [V]   ZCL FrameControl: 0x18, Type: 00, ManuSpecific: 00, Direction: 01, DisableDefaultRsp: 01, TrSeqNum: 253, CmdId: 0x0A REPORT, Payload: 00001001"
+  },
+  {
+    "category": "log",
+    "payload": "[16:42:38.255] [V]     AttrId: 0x0000, AttrDataType: 0x10, AttrDataLen: 1, AttrValue: true"
+  },
+  {
+    "category": "log",
+    "payload": "[16:42:38.264] [D] SetDeviceState nwkAddr: C824, linkquality = UINT8: 78"
+  },
+  {
+    "category": "log",
+    "payload": "[16:42:38.268] [D] SetDeviceState nwkAddr: C824, trSeqNum = UINT8: 253"
+  },
+  {
+    "category": "log",
+    "payload": "[16:42:38.274] [D] SetDeviceState nwkAddr: C824, contact = BOOL: 0"
+  },
+  {
+    "category": "log",
+    "payload": "[16:42:38.282] [D] 36244 65536 16"
+  },
+  {
+    "category": "log",
+    "payload": "[16:42:38.291] FZ [lumi.sensor_magnet : 0x00158D0003F37913]: {\"linkquality\":78,\"trSeqNum\":253,\"contact\":false}"
+  },
+  {
+    "category": "log",
+    "payload": "[16:42:38.299] QueueMessages start: 1 62608"
+  },
+  {
+    "category": "log",
+    "payload": "[16:42:43.988] [D]  -- ReceiveCmd: 0x4481 AREQ_AF_INCOMING_MSG, Len: 27, Data: 0000060024C80101004E00918C7300000718FE0A0000100024C81D"
+  },
+  {
+    "category": "log",
+    "payload": "[16:42:43.995] [V] AREQ_AF_INCOMING_MSG GroupId: 0x0000, ClusterId: 0x0006 GEN_ON_OFF, SrcAddr: 0xC824, SrcEn: 1, DstEn: 1, WasBr: 0x00, LinkQuality: 78, SecurityUse: 0x00, TimeStamp: 0x00738C91, TransSeqNum: 0, Len: 7, Data: 18FE0A00001000"
+  },
+  {
+    "category": "log",
+    "payload": "[16:42:43.007] [V]   ZCL FrameControl: 0x18, Type: 00, ManuSpecific: 00, Direction: 01, DisableDefaultRsp: 01, TrSeqNum: 254, CmdId: 0x0A REPORT, Payload: 00001000"
+  },
+  {
+    "category": "log",
+    "payload": "[16:42:43.019] [V]     AttrId: 0x0000, AttrDataType: 0x10, AttrDataLen: 1, AttrValue: false"
+  },
+  {
+    "category": "log",
+    "payload": "[16:42:43.030] [D] SetDeviceState nwkAddr: C824, linkquality = UINT8: 78"
+  },
+  {
+    "category": "log",
+    "payload": "[16:42:43.039] [D] SetDeviceState nwkAddr: C824, trSeqNum = UINT8: 254"
+  },
+  {
+    "category": "log",
+    "payload": "[16:42:43.047] [D] SetDeviceState nwkAddr: C824, contact = BOOL: 1"
+  },
+  {
+    "category": "log",
+    "payload": "[16:42:43.054] [D] 36348 65536 16"
+  },
+  {
+    "category": "log",
+    "payload": "[16:42:43.061] FZ [lumi.sensor_magnet : 0x00158D0003F37913]: {\"linkquality\":78,\"trSeqNum\":254,\"contact\":true}"
+  },
+  {
+    "category": "log",
+    "payload": "[16:42:43.069] QueueMessages start: 1 62608"
+  },
+  {
+    "category": "log",
+    "payload": "[16:42:44.209] [D]  -- ReceiveCmd: 0x4481 AREQ_AF_INCOMING_MSG, Len: 49, Data: 0000000024C80101004C00759B7300001D1C3412FF0A02FF4C0600100021C70B21A813240500000000218600205124C81D"
+  },
+  {
+    "category": "log",
+    "payload": "[16:42:44.217] [V] AREQ_AF_INCOMING_MSG GroupId: 0x0000, ClusterId: 0x0000 GEN_BASIC, SrcAddr: 0xC824, SrcEn: 1, DstEn: 1, WasBr: 0x00, LinkQuality: 76, SecurityUse: 0x00, TimeStamp: 0x00739B75, TransSeqNum: 0, Len: 29, Data: 1C3412FF0A02FF4C0600100021C70B21A8132405000000002186002051"
+  },
+  {
+    "category": "log",
+    "payload": "[16:42:44.233] [V]   ZCL FrameControl: 0x1C, Type: 00, ManuSpecific: 01, Direction: 01, DisableDefaultRsp: 01, ManuCode: 0x1234, TrSeqNum: 255, CmdId: 0x0A REPORT, Payload: 02FF4C0600100021C70B21A8132405000000002186002051"
+  },
+  {
+    "category": "log",
+    "payload": "[16:42:44.252] [V]     AttrId: 0xFF02, AttrDataType: 0x4C, AttrDataLen: 21, AttrValue: null"
+  },
+  {
+    "category": "log",
+    "payload": "[16:42:44.264] [D] SetDeviceState nwkAddr: C824, linkquality = UINT8: 76"
+  },
+  {
+    "category": "log",
+    "payload": "[16:42:44.269] [D] SetDeviceState nwkAddr: C824, trSeqNum = UINT8: 255"
+  },
+  {
+    "category": "log",
+    "payload": "[16:42:44.275] [D] SetDeviceState nwkAddr: C824, voltage = FLOAT: 3.02"
+  },
+  {
+    "category": "log",
+    "payload": "[16:42:44.282] [D] SetDeviceState nwkAddr: C824, battery = FLOAT: 100.00"
+  },
+  {
+    "category": "log",
+    "payload": "[16:42:44.288] [D] 36476 65536 16"
+  },
+  {
+    "category": "log",
+    "payload": "[16:42:44.294] FZ [lumi.sensor_magnet : 0x00158D0003F37913]: {\"linkquality\":76,\"trSeqNum\":255,\"voltage\":3.015,\"battery\":100}"
+  },
+  {
+    "category": "log",
+    "payload": "[16:42:44.302] QueueMessages start: 1 62232"
+  },
+  {
+    "category": "log",
+    "payload": "[16:43:05.892] [MQTT] Send HB (204) {\"Uptime\":9726,\"UptimeStr\":\"02:42:06\",\"IP\":\"192.168.1.209\",\"RSSI\":\"-78\",\"Version\":\"2020.03.19d2\",\"FreeMem\":117368,\"memoryUsage\":36476,\"LastRxTS\":21,\"LastTxTS\":9724,\"log_level\":\"debug\",\"permit_join\":false}"
+  },
+  {
+    "category": "log",
+    "payload": "[16:43:05.903] QueueMessages start: 1 62464"
+  },
+  {
+    "category": "log",
+    "payload": "[16:44:05.893] [MQTT] Send HB (204) {\"Uptime\":9786,\"UptimeStr\":\"02:43:06\",\"IP\":\"192.168.1.209\",\"RSSI\":\"-74\",\"Version\":\"2020.03.19d2\",\"FreeMem\":117368,\"memoryUsage\":36476,\"LastRxTS\":81,\"LastTxTS\":9784,\"log_level\":\"debug\",\"permit_join\":false}"
+  },
+  {
+    "category": "log",
+    "payload": "[16:44:05.901] QueueMessages start: 1 62464"
+  },
+  {
+    "category": "log",
+    "payload": "[16:45:02.031] [D]  -- ReceiveCmd: 0x4481 AREQ_AF_INCOMING_MSG, Len: 75, Data: 0000000054170101007600C22D7A0000371C5F11AA0A01FF422E0121E50B03281E0421A8130521240006240300000000082108030A21000098211400992130009A251D002E0052FD54171D"
+  },
+  {
+    "category": "log",
+    "payload": "[16:45:02.043] [V] AREQ_AF_INCOMING_MSG GroupId: 0x0000, ClusterId: 0x0000 GEN_BASIC, SrcAddr: 0x1754, SrcEn: 1, DstEn: 1, WasBr: 0x00, LinkQuality: 118, SecurityUse: 0x00, TimeStamp: 0x007A2DC2, TransSeqNum: 0, Len: 55, Data: 1C5F11AA0A01FF422E0121E50B03281E0421A8130521240006240300000000082108030A21000098211400992130009A251D002E0052FD"
+  },
+  {
+    "category": "log",
+    "payload": "[16:45:02.065] [V]   ZCL FrameControl: 0x1C, Type: 00, ManuSpecific: 01, Direction: 01, DisableDefaultRsp: 01, ManuCode: 0x115F, TrSeqNum: 170, CmdId: 0x0A REPORT, Payload: 01FF422E0121E50B03281E0421A8130521240006240300000000082108030A21000098211400992130009A251D002E0052FD"
+  },
+  {
+    "category": "log",
+    "payload": "[16:45:02.080] [V]     AttrId: 0xFF01, AttrDataType: 0x42, AttrDataLen: 47, AttrValue: null"
+  },
+  {
+    "category": "log",
+    "payload": "[16:45:02.090] [D] SetDeviceState nwkAddr: 1754, linkquality = UINT8: 118"
+  },
+  {
+    "category": "log",
+    "payload": "[16:45:02.096] [D] SetDeviceState nwkAddr: 1754, trSeqNum = UINT8: 170"
+  },
+  {
+    "category": "log",
+    "payload": "[16:45:02.102] [D] SetDeviceState nwkAddr: 1754, voltage = FLOAT: 3.05"
+  },
+  {
+    "category": "log",
+    "payload": "[16:45:02.111] [D] SetDeviceState nwkAddr: 1754, battery = FLOAT: 100.00"
+  },
+  {
+    "category": "log",
+    "payload": "[16:45:02.117] [D] 36604 65536 16"
+  },
+  {
+    "category": "log",
+    "payload": "[16:45:02.125] FZ [lumi.vibration.aq1 : 0x00158D0002C4A78F]: {\"linkquality\":118,\"trSeqNum\":170,\"voltage\":3.045,\"battery\":100}"
+  },
+  {
+    "category": "log",
+    "payload": "[16:45:02.135] QueueMessages start: 1 62596"
+  },
+  {
+    "category": "log",
+    "payload": "[16:45:05.895] [MQTT] Send HB (203) {\"Uptime\":9846,\"UptimeStr\":\"02:44:06\",\"IP\":\"192.168.1.209\",\"RSSI\":\"-76\",\"Version\":\"2020.03.19d2\",\"FreeMem\":117368,\"memoryUsage\":36604,\"LastRxTS\":3,\"LastTxTS\":9844,\"log_level\":\"debug\",\"permit_join\":false}"
+  },
+  {
+    "category": "log",
+    "payload": "[16:45:05.905] QueueMessages start: 1 62464"
+  },
+  {
+    "category": "log",
+    "payload": "[16:46:05.895] [MQTT] Send HB (204) {\"Uptime\":9906,\"UptimeStr\":\"02:45:06\",\"IP\":\"192.168.1.209\",\"RSSI\":\"-78\",\"Version\":\"2020.03.19d2\",\"FreeMem\":117368,\"memoryUsage\":36604,\"LastRxTS\":63,\"LastTxTS\":9904,\"log_level\":\"debug\",\"permit_join\":false}"
+  },
+  {
+    "category": "log",
+    "payload": "[16:46:05.904] QueueMessages start: 1 61956"
+  },
+  {
+    "category": "log",
+    "payload": "[16:46:07.467] [D]  -- ReceiveCmd: 0x4481 AREQ_AF_INCOMING_MSG, Len: 28, Data: 00000204780001010037009C4C7D00000818A50A000029290B78001D"
+  },
+  {
+    "category": "log",
+    "payload": "[16:46:07.474] [V] AREQ_AF_INCOMING_MSG GroupId: 0x0000, ClusterId: 0x0402 MS_TEMPERATURE_MEASUREMENT, SrcAddr: 0x0078, SrcEn: 1, DstEn: 1, WasBr: 0x00, LinkQuality: 55, SecurityUse: 0x00, TimeStamp: 0x007D4C9C, TransSeqNum: 0, Len: 8, Data: 18A50A000029290B"
+  },
+  {
+    "category": "log",
+    "payload": "[16:46:07.484] [V]   ZCL FrameControl: 0x18, Type: 00, ManuSpecific: 00, Direction: 01, DisableDefaultRsp: 01, TrSeqNum: 165, CmdId: 0x0A REPORT, Payload: 000029290B"
+  },
+  {
+    "category": "log",
+    "payload": "[16:46:07.493] [V]     AttrId: 0x0000, AttrDataType: 0x29, AttrDataLen: 2, AttrValue: 2857"
+  },
+  {
+    "category": "log",
+    "payload": "[16:46:07.503] [D] SetDeviceState nwkAddr: 0078, linkquality = UINT8: 55"
+  },
+  {
+    "category": "log",
+    "payload": "[16:46:07.509] [D] SetDeviceState nwkAddr: 0078, trSeqNum = UINT8: 165"
+  },
+  {
+    "category": "log",
+    "payload": "[16:46:07.516] [D] SetDeviceState nwkAddr: 0078, temperature = FLOAT: 28.57"
+  },
+  {
+    "category": "log",
+    "payload": "[16:46:07.525] [D] 36712 65536 16"
+  },
+  {
+    "category": "log",
+    "payload": "[16:46:07.532] FZ [lumi.sens : 0x00158D0001FA4F2F]: {\"linkquality\":55,\"trSeqNum\":165,\"temperature\":28.57}"
+  },
+  {
+    "category": "log",
+    "payload": "[16:46:07.562] QueueMessages start: 1 54356"
+  },
+  {
+    "category": "log",
+    "payload": "[16:46:07.564] [D]  -- ReceiveCmd: 0x4481 AREQ_AF_INCOMING_MSG, Len: 28, Data: 0000050478000101003400A84C7D00000818A60A000021711478001D"
+  },
+  {
+    "category": "log",
+    "payload": "[16:46:07.578] [V] AREQ_AF_INCOMING_MSG GroupId: 0x0000, ClusterId: 0x0405 MS_RELATIVE_HUMIDITY, SrcAddr: 0x0078, SrcEn: 1, DstEn: 1, WasBr: 0x00, LinkQuality: 52, SecurityUse: 0x00, TimeStamp: 0x007D4CA8, TransSeqNum: 0, Len: 8, Data: 18A60A0000217114"
+  },
+  {
+    "category": "log",
+    "payload": "[16:46:07.595] [V]   ZCL FrameControl: 0x18, Type: 00, ManuSpecific: 00, Direction: 01, DisableDefaultRsp: 01, TrSeqNum: 166, CmdId: 0x0A REPORT, Payload: 0000217114"
+  },
+  {
+    "category": "log",
+    "payload": "[16:46:07.604] [V]     AttrId: 0x0000, AttrDataType: 0x21, AttrDataLen: 2, AttrValue: 5233"
+  },
+  {
+    "category": "log",
+    "payload": "[16:46:07.613] [D] SetDeviceState nwkAddr: 0078, linkquality = UINT8: 52"
+  },
+  {
+    "category": "log",
+    "payload": "[16:46:08.621] [D] SetDeviceState nwkAddr: 0078, trSeqNum = UINT8: 166"
+  },
+  {
+    "category": "log",
+    "payload": "[16:46:08.630] [D] SetDeviceState nwkAddr: 0078, humidity = FLOAT: 52.33"
+  },
+  {
+    "category": "log",
+    "payload": "[16:46:08.635] [D] 36817 65536 16"
+  },
+  {
+    "category": "log",
+    "payload": "[16:46:08.643] FZ [lumi.sens : 0x00158D0001FA4F2F]: {\"linkquality\":52,\"trSeqNum\":166,\"humidity\":52.33}"
+  },
+  {
+    "category": "log",
+    "payload": "[16:46:08.654] QueueMessages start: 1 60780"
+  },
+  {
+    "category": "log",
+    "payload": "[16:47:05.944] [MQTT] Send HB (204) {\"Uptime\":9966,\"UptimeStr\":\"02:46:06\",\"IP\":\"192.168.1.209\",\"RSSI\":\"-75\",\"Version\":\"2020.03.19d2\",\"FreeMem\":117368,\"memoryUsage\":36817,\"LastRxTS\":58,\"LastTxTS\":9964,\"log_level\":\"debug\",\"permit_join\":false}"
+  },
+  {
+    "category": "log",
+    "payload": "[16:47:05.953] QueueMessages start: 1 62464"
+  }
+]

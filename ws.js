@@ -1,5 +1,6 @@
 const WebSocket = require("ws");
-const messages = require("./ws.messages.json");
+const zigbeeMessages = require("./ws-messages/zigbee.json");
+const logMessages = require("./ws-messages/log.json");
 
 const wss = new WebSocket.Server({
     port: 8579
@@ -8,18 +9,32 @@ const wss = new WebSocket.Server({
 let messageNum = 0;
 let intervalId = 0;
 wss.on("connection", (ws) => {
-    console.log("Connection!");
-    clearInterval(intervalId);
-    messageNum = 0;
-    console.log("Sending message", messageNum);
-    ws.send(JSON.stringify(messages[messageNum++]));
-    intervalId = setInterval(() => {
-        if (messageNum >= messages.length) {
-            messageNum = 0;
-            clearInterval(intervalId);
-        } else {
-            console.log("Sending message", messageNum);
-            ws.send(JSON.stringify(messages[messageNum++]));
+
+    ws.on("message", (message) => {
+        let messages = [];
+        const msg = JSON.parse(message);
+        switch (msg.category) {
+            case "log":
+                messages = logMessages;
+                break;
+            case "zigbee":
+                messages = zigbeeMessages;
+                break;
+            default:
+                break;
         }
-    }, 1000);
+        clearInterval(intervalId);
+        messageNum = 0;
+        console.log("Sending message", messageNum);
+        ws.send(JSON.stringify(messages[messageNum++]));
+        intervalId = setInterval(() => {
+            if (messageNum >= messages.length) {
+                messageNum = 0;
+                clearInterval(intervalId);
+            } else {
+                console.log("Sending message", messageNum);
+                ws.send(JSON.stringify(messages[messageNum++]));
+            }
+        }, 100);
+    });
 });

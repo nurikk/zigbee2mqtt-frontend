@@ -11,6 +11,10 @@ export type JoinEvents =
     | "SimpleDescRsp";
 export type ZigbeeEvent = "LinkData" | "LeaveInd" | "PermitJoin" | JoinEvents;
 
+export interface LogMessage {
+    category: "log";
+    payload: string;
+}
 export interface ZigbeePayload {
     timestamp: number;
     event: ZigbeeEvent;
