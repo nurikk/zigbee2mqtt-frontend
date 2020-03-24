@@ -5,7 +5,10 @@ import { genDeviceShortAddress } from "../../utils";
 
 const getName = (device: Device): string => {
     const { friendly_name: friendlyName } = device;
-    return friendlyName ?? `${genDeviceShortAddress(device.nwkAddr) ?? "Unknown device"}`;
+    if (friendlyName && friendlyName !== "null") {
+        return friendlyName;
+    }
+    return genDeviceShortAddress(device.nwkAddr);
 };
 export const convert2graph = (devices: Device[]): GraphI => {
     const coordinator: NodeI = {
