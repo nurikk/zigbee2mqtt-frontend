@@ -2,7 +2,7 @@
     /*height:100vh;*/
     background-color: #222222;
     color: #d6d6d6;
-    height: 90vh;
+    /*height: 90vh;*/
     overflow: auto;
     display: flex;
     flex-direction: column;

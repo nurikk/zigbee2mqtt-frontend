@@ -3,9 +3,10 @@ import { WSConnect } from "../../utils";
 import { LogMessage } from "../discovery/types";
 import style from "./style.css";
 import cx from "classnames";
-import { clearLogsBuffer } from "../actions";
+import { clearLogsBuffer, fetchLogsBuffer, getCurrentLogLevel, setLogLevel } from "../actions";
 
 export enum LogLevel {
+    LOG_OFF,
     LOG_NORMAL,
     LOG_VERBOSE,
     LOG_DEBUG
@@ -17,6 +18,12 @@ interface LogViewerState {
     logLevel: LogLevel;
 }
 
+type ResponseStatus = "ok" | "failed";
+
+interface ApiResponse {
+    result: ResponseStatus;
+}
+
 export default class LogViewer extends Component<{}, LogViewerState> {
     ref = createRef<HTMLDivElement>();
 
@@ -25,16 +32,27 @@ export default class LogViewer extends Component<{}, LogViewerState> {
         this.state = {
             logs: [],
             followLog: true,
-            logLevel: LogLevel.LOG_DEBUG
+            logLevel: LogLevel.LOG_NORMAL
         };
     }
 
     componentDidMount(): void {
-        const ws = WSConnect();
-        ws.addEventListener("open", () => {
-            ws.send(JSON.stringify({ action: "subscribe", category: "log" }));
+
+        fetchLogsBuffer((err, logs) => {
+            if (!err) {
+                this.setState({ logs });
+            }
+
+            const ws = WSConnect();
+            ws.addEventListener("open", () => {
+                ws.send(JSON.stringify({ action: "subscribe", category: "log" }));
+            });
+            ws.addEventListener("message", this.onMessageReceive);
         });
-        ws.addEventListener("message", this.onMessageReceive);
+
+        getCurrentLogLevel((err, { value }: { value: LogLevel }) => {
+            this.setState({ logLevel: value });
+        });
     }
 
     onMessageReceive = (wsEvent: MessageEvent): void => {
@@ -65,12 +83,25 @@ export default class LogViewer extends Component<{}, LogViewerState> {
         this.setState({ logs: [] });
     };
     onClearCacheClick = (e: Event) => {
-        clearLogsBuffer(() => alert("Cache cleared"));
+        clearLogsBuffer((err, resp: ApiResponse) => {
+            if (resp.result === "ok") {
+                alert("Cache cleared");
+            } else {
+                alert("Failed");
+            }
+        });
     };
 
     onLogLevelChange = (e: Event) => {
         const { value } = e.target as HTMLInputElement;
-        this.setState({ logLevel: parseInt(value) });
+        const logLevel = parseInt(value);
+        setLogLevel(logLevel, (err, data: ApiResponse) => {
+            if (data.result === "ok") {
+                this.setState({ logLevel });
+            } else {
+                alert("Failed");
+            }
+        });
     };
 
 
@@ -82,7 +113,7 @@ export default class LogViewer extends Component<{}, LogViewerState> {
     render(): ComponentChild {
         const { logs, followLog, logLevel } = this.state;
 
-        return (<div class="container-fluid">
+        return (<div class="container-fluid h-100">
             <div class="row justify-content-around">
                 <div class="col-sm-6 my-1">
                     <div class="btn-group" role="group" aria-label="Basic example">
@@ -93,29 +124,28 @@ export default class LogViewer extends Component<{}, LogViewerState> {
                     </div>
                 </div>
                 <div class="col-sm-6 my-1">
-                    <div class="row">
-                        <div class="col">
+                    <div class="row justify-content-end">
+                        <div class="col-sm-4">
                             <select value={logLevel} class="custom-select" onChange={this.onLogLevelChange}>
+                                <option value={LogLevel.LOG_OFF} selected>LOG_OFF</option>
                                 <option value={LogLevel.LOG_NORMAL} selected>LOG_NORMAL</option>
                                 <option value={LogLevel.LOG_VERBOSE}>LOG_VERBOSE</option>
                                 <option value={LogLevel.LOG_DEBUG}>LOG_DEBUG</option>
                             </select>
                         </div>
-                        <div class="col">
+                        <div class="col-sm2">
                             <div class="form-check form-check-inline">
                                 <input checked={followLog} onChange={this.onFollowLogChange} class="form-check-input"
-                                       type="checkbox" id="followLog" value="true" />
+                                       type="checkbox" id="followLog" value="true"/>
                                 <label class="form-check-label" for="followLog">Follow log</label>
                             </div>
                         </div>
                     </div>
-
-
                 </div>
             </div>
 
 
-            <div ref={this.ref} class={cx(style["log-main"])}>
+            <div ref={this.ref} class={cx("h-100", style["log-main"])}>
                 {logs.map((line, lineNum) =>
                     <div class={style["log-line"]}>
                         <a class={style["log-line-num"]}>{lineNum + 1}</a>

@@ -49,14 +49,32 @@ export const enableJoin = (duration = 255, target = "", callback: CallbackHandle
 
 
 export const clearLogsBuffer = (callback: CallbackHandler<unknown>): void => {
-    fetch(`/api/log/config?action=clear`)
+    fetch(`/api/log?action=clear`)
         .then((res) => res.json())
         .then(data => callback(false, data))
         .catch(e => console.error(e));
 };
+
+
+export const fetchLogsBuffer = (callback: CallbackHandler<string[]>): void => {
+    fetch(`/api/log?action=getBuffer`)
+        .then((res) => res.text())
+        .then(data => callback(false, data.split("\n")))
+        .catch(e => callback(true, undefined));
+};
+
 export const setLogLevel = (logLevel: LogLevel, callback: CallbackHandler<unknown>): void => {
-    fetch(`/api/log/config?action=setLevel&value=${logLevel}`)
+    fetch(`/api/log?action=setLevel&value=${logLevel}`)
         .then((res) => res.json())
         .then(data => callback(false, data))
         .catch(e => console.error(e));
+};
+
+export const getCurrentLogLevel = (callback: CallbackHandler<unknown>): void => {
+    fetch(`/api/log?action=getLevel`, {method: 'POST'})
+        .then((res) => res.json())
+        .then(data => callback(false, data))
+        .catch(e => {
+            console.log(e);
+        });
 };

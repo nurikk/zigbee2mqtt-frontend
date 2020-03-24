@@ -45,7 +45,7 @@ module.exports = (env, args) => {
 			'scripts/main': './src/index.ts',
 		},
 		output: {
-			filename: '[name].[contenthash:4].js',
+			filename: '[name].js',
 			path: path.resolve('./dist'),
 		},
 		target: 'web',

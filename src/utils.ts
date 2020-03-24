@@ -34,9 +34,9 @@ export const WSConnect = (): ReconnectingWebSocket => {
     if (hostname === "localhost") {
         const { search } = document.location;
         if (search.indexOf("gate") > 0) {
-            return new ReconnectingWebSocket(`ws://192.168.1.209:81/log?`);
+            return new ReconnectingWebSocket(`ws://192.168.1.209:81/log`);
         }
-        return new ReconnectingWebSocket(`ws://localhost:8579/`);
-    } else return new ReconnectingWebSocket(`ws://${document.location.hostname}:81/log}`);
+        return new ReconnectingWebSocket(`ws://localhost:8579`);
+    } else return new ReconnectingWebSocket(`ws://${document.location.hostname}:81/log`);
 };
 
