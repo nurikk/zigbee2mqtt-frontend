@@ -40,7 +40,7 @@ export default class LogViewer extends Component<{}, LogViewerState> {
 
         fetchLogsBuffer((err, logs) => {
             if (!err) {
-                this.setState({ logs });
+                this.setState({ logs }, () => setTimeout(this.scrollToBottom, 500));
             }
 
             const ws = WSConnect();
