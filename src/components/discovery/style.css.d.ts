@@ -1,6 +1,7 @@
 declare namespace StyleCssModule {
     export interface IStyleCss {
         blink: string;
+        "device-image": string;
         "scale-in-center": string;
     }
 }

@@ -11,6 +11,7 @@ import { Device, Dictionary } from "../../types";
 import DeviceControlGroup from "../device-control";
 import Button from "../button";
 import { startInterview } from "../actions";
+import SafeImg from "../safe-image";
 
 interface DeviceCardProps {
     nwkAddr: string;
@@ -69,13 +70,16 @@ const EventRow: FunctionalComponent<{ eventName: ZigbeeEvent; events: ZigbeePayl
 
         case "ModelRcv":
             return (
-
-                <div class={`row ${style["scale-in-center"]}`}>
-                    <div class="col-5">Model:</div>
-                    <div class="col">
-                        {events[0].ModelId}
+                <Fragment>
+                    <div class={`row ${style["scale-in-center"]}`}>
+                        <div class="col-5">Model:</div>
+                        <div class="col">
+                            {events[0].ModelId}
+                            <SafeImg class={cx( style["device-image"])}
+                                     src={`https://raw.githubusercontent.com/slsys/Gateway/master/devices/png/${events[0].ModelId}.png`} />
+                        </div>
                     </div>
-                </div>
+                </Fragment>
 
 
             );
