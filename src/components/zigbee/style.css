@@ -58,7 +58,8 @@
         border: none;
         border-bottom: 1px solid #eee;
         position: relative;
-        padding-left: 30%;
+        padding: 1rem 1rem 1rem 30%;
+        box-sizing: border-box;
     }
 
     .adaptive td:empty::after {
@@ -123,4 +124,12 @@
     .adaptive td:nth-of-type(12):before {
         content: "Actions";
     }
+}
+
+
+.device-image {
+    max-height: 56px;
+    position: absolute;
+    right: 0;
+    top: 0;
 }

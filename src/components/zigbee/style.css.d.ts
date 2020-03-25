@@ -3,6 +3,7 @@ declare namespace StyleCssModule {
         "action-column": string;
         actions: string;
         adaptive: string;
+        "device-image": string;
         invisible: string;
         zigbee: string;
     }

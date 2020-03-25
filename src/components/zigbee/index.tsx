@@ -8,6 +8,7 @@ import DeviceControlGroup from "../device-control";
 import cx from "classnames";
 import { Device, DeviceSupportStatus, inteviewsCount } from "../../types";
 import { genDeviceDetailsLink, genDeviceShortAddress } from "../../utils";
+import SafeImg from "../safe-image";
 
 type SortDirection = "asc" | "desc";
 //TODO: proper type alias
@@ -234,9 +235,8 @@ export class ZigbeeTable extends Component<TimedProps, State> {
                     </td>
                     <td>{device.friendly_name}</td>
                     <td>{device.ieeeAddr ? `0x${device.ieeeAddr}` : "<corrupted>"}</td>
-                    <td>{device.ManufName}</td>
-                    <td className={cx({
-                        "table-success": device.supported == DeviceSupportStatus.Supported,
+                    <td title={device.ManufName} className="text-truncate text-nowrap position-relative">{device.ManufName}<SafeImg class={cx( style["device-image"])} src={`https://raw.githubusercontent.com/slsys/Gateway/master/devices/png/${device.ModelId}.png`} /></td>
+                    <td className={cx("text-nowrap", {
                         "table-danger": device.supported == DeviceSupportStatus.UnSupported,
                         "table-warning": device.supported == DeviceSupportStatus.Unknown
                     })}>{device.ModelId}</td>
@@ -249,7 +249,7 @@ export class ZigbeeTable extends Component<TimedProps, State> {
                         href={genDeviceDetailsLink(route)}>{genDeviceShortAddress(route)}</a>)}</td>
                     <td className="text-left">{this.renderPowerSource(device)}</td>
                     <td>
-                        <DeviceControlGroup device={device}/>
+                        <DeviceControlGroup device={device} />
                     </td>
                 </tr>)}
 
