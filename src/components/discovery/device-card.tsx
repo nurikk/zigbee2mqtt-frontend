@@ -74,7 +74,7 @@ const EventRow: FunctionalComponent<{ eventName: ZigbeeEvent; events: ZigbeePayl
                     <div class={`row ${style["scale-in-center"]}`}>
                         <div class="col-5">Model:</div>
                         <div class="col">
-                            {events[0].ModelId}
+                            <div>{events[0].ModelId}</div>
                             <SafeImg class={cx( style["device-image"])}
                                      src={`https://raw.githubusercontent.com/slsys/Gateway/master/devices/png/${events[0].ModelId}.png`} />
                         </div>

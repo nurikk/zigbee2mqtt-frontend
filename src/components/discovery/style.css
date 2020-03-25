@@ -1,5 +1,6 @@
 .device-image {
     max-height: 128px;
+    display: block;
 }
 
 .scale-in-center {
