@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
-<head><title>SLS Gateway: Update</title>
+<head>
+    <title>SLS Gateway: Update</title>
     <style>        html, body {
         height: 100%;
     }
@@ -119,28 +120,65 @@
     </div>
 </div>
 <main role="main" class="h-100">
-    <div class="container">
-
-        <a href="/api/backup?action=create">Download backup</a>
-
-
-        <form class="mt-3" method='POST' action='/update_ota' enctype='multipart/form-data'>
-            <div class="custom-file form-group">
-                <label class="custom-file-label" for="customFile">Choose file</label>
-                <input type="file" class="form-control custom-file-input" name="update" id="customFile">
+    <div class="container card-group">
+        <div class="card">
+            <h5 class="card-header">Backup</h5>
+            <div class="card-body">
+                <form method='POST' action='/api/backup'>
+                    <input type="hidden" name="action" value="create" />
+                    <div class="form-check">
+                        <input name="config" class="form-check-input" type="checkbox" value="1" id="backup-config" checked>
+                        <label class="form-check-label" for="backup-config">
+                            Config
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input name="zigbee" class="form-check-input" type="checkbox" value="1" id="backup-zigbee" checked>
+                        <label class="form-check-label" for="backup-zigbee">
+                            Zigbee
+                        </label>
+                    </div>
+                    <button type="submit" class="mt-3 btn btn-primary">Create</button>
+                </form>
             </div>
-            <button type="submit" class="mt-3 btn btn-primary">Restore backup</button>
-        </form>
-        <script>
-            document.querySelector(".custom-file-input").addEventListener("change", function(e) {
-                var fileName = document.getElementById("customFile").files[0].name;
-                var label = document.querySelector("[for='" + e.target.getAttribute("id") + "']");
-                if (label) {
-                    label.innerText = fileName;
-                }
-            });
-        </script>
-    </div>
+        </div>
+
+
+            <div class="card">
+                <h5 class="card-header">Restore</h5>
+                <div class="card-body">
+                    <form method='POST' action='/api/backup'>
+                        <input type="hidden" name="action" value="restore" />
+                        <div class="form-check">
+                            <input name="config" class="form-check-input" type="checkbox" value="1" id="restore-config" checked>
+                            <label class="form-check-label" for="restore-config">
+                                Config
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input name="zigbee" class="form-check-input" type="checkbox" value="1" id="restore-zigbee" checked>
+                            <label class="form-check-label" for="restore-zigbee">
+                                Zigbee
+                            </label>
+                        </div>
+                        <div class="custom-file form-group">
+                            <label class="custom-file-label" for="customFile">Choose file</label>
+                            <input required type="file" class="form-control custom-file-input" name="backup" id="customFile">
+                        </div>
+                        <button type="submit" class="mt-3 btn btn-primary">Restore</button>
+                    </form>
+                </div>
+            </div>
+            <script>
+                document.querySelector(".custom-file-input").addEventListener("change", function(e) {
+                    var fileName = document.getElementById("customFile").files[0].name;
+                    var label = document.querySelector("[for='" + e.target.getAttribute("id") + "']");
+                    if (label) {
+                        label.innerText = fileName;
+                    }
+                });
+            </script>
+
 
 </main>
 </body>
