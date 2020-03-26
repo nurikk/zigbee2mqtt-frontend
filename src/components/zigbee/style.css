@@ -131,6 +131,11 @@
     .adaptive td:nth-of-type(13):before {
         content: "Actions";
     }
+    .adaptive .device-image {
+        max-height: 3em;
+        position: absolute;
+        top: 4px;
+    }
 }
 .nwk-addr {
     max-width: 75px;
@@ -164,5 +169,5 @@
 }
 
 .device-image:hover {
-    transform: scale(4);
+    transform: scale(4) translate(5px,0);
 }
