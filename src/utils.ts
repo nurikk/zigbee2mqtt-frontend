@@ -11,6 +11,8 @@ export const genDeviceShortAddress = (deviceKey: string | number): string => {
 };
 export const genDeviceDetailsLink = (deviceKey: string | number): string => (`/zigbee?nwkAddr=${genDeviceShortAddress(deviceKey)}`);
 
+export const formatIEEEAddr = (addr: string): string => (`0x${addr}`);
+
 
 /**
  * Returns an array with arrays of the given size.

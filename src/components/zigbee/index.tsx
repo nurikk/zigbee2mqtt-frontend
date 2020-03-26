@@ -7,7 +7,7 @@ import orderBy from "lodash/orderBy";
 import DeviceControlGroup from "../device-control";
 import cx from "classnames";
 import { Device, DeviceSupportStatus, inteviewsCount } from "../../types";
-import { genDeviceDetailsLink, genDeviceShortAddress } from "../../utils";
+import { formatIEEEAddr, genDeviceDetailsLink, genDeviceShortAddress } from "../../utils";
 import SafeImg from "../safe-image";
 
 type SortDirection = "asc" | "desc";
@@ -234,7 +234,7 @@ export class ZigbeeTable extends Component<TimedProps, State> {
                     <td><a href={genDeviceDetailsLink(device.nwkAddr)}>{genDeviceShortAddress(device.nwkAddr)}</a>
                     </td>
                     <td>{device.friendly_name}</td>
-                    <td>{device.ieeeAddr ? `0x${device.ieeeAddr}` : "<corrupted>"}</td>
+                    <td>{device.ieeeAddr ? formatIEEEAddr(device.ieeeAddr) : "<corrupted>"}</td>
                     <td title={device.ManufName} className="text-truncate text-nowrap position-relative">{device.ManufName}<SafeImg class={cx( style["device-image"])} src={`https://raw.githubusercontent.com/slsys/Gateway/master/devices/png/${device.ModelId}.png`} /></td>
                     <td className={cx("text-nowrap", {
                         "table-danger": device.supported == DeviceSupportStatus.UnSupported,
