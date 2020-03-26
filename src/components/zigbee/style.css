@@ -1,11 +1,11 @@
 @import url("https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
 .zigbee {
-    overflow: hidden;
-    text-overflow: ellipsis;
+
 }
 .zigbee td, .zigbee th {
     padding-left: 0.1rem;
     padding-right: 0.1rem;
+    vertical-align: middle;
 }
 
 .actions {
@@ -133,14 +133,17 @@
     }
 }
 .nwk-addr {
-    max-width: 60px;
+    max-width: 75px;
 }
 
 .ieee-addr {
     max-width: 145px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    direction: rtl;
 }
 .manu-name {
-    max-width: 60px;
+    max-width: 75px;
 }
 .device-pic {
     padding-top: 0!important;
@@ -150,8 +153,16 @@
     /*width: 56px;*/
 }
 .device-image {
-    max-height: 56px;
+    max-height: 2em;
     /*position: absolute;*/
     /*right: 0;*/
     /*top: 0;*/
+}
+
+.device-image  {
+    transition: transform .5s ease;
+}
+
+.device-image:hover {
+    transform: scale(4);
 }
