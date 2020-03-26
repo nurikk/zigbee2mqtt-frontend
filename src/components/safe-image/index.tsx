@@ -22,8 +22,8 @@ export default class SafeImg extends Component<SafeImgProps, SafeImgState> {
     };
 
     render(): ComponentChild {
-        const { ...rest } = this.props;
+        const { children, ...rest } = this.props;
         const { isOk } = this.state;
-        return isOk ? <img {...rest} onError={this.onError} /> : undefined;
+        return isOk ? <img {...rest} onError={this.onError} /> : children;
     }
 }

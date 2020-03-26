@@ -4,7 +4,11 @@ declare namespace StyleCssModule {
         actions: string;
         adaptive: string;
         "device-image": string;
+        "device-pic": string;
+        "ieee-addr": string;
         invisible: string;
+        "manu-name": string;
+        "nwk-addr": string;
         zigbee: string;
     }
 }

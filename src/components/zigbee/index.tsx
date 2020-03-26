@@ -182,6 +182,18 @@ export class ZigbeeTable extends Component<TimedProps, State> {
         }
         return <i className="fa fa-question"/>;
     }
+    getSupportTitle(device: Device): string {
+        switch (device.supported) {
+            case DeviceSupportStatus.Supported:
+                return "Supported";
+            case DeviceSupportStatus.Unknown:
+                return "Support unknown";
+            case DeviceSupportStatus.UnSupported:
+                return "Unsupported";
+            default:
+                return "";
+        }
+    }
 
     renderDevicesTable(): ComponentChild {
         const { sortColumn, sortDirection } = this.state;
@@ -191,28 +203,30 @@ export class ZigbeeTable extends Component<TimedProps, State> {
         const { onSortChange } = this;
 
         return (
-            <table className={`table table-striped ${style.adaptive} ${style.zigbee}`}>
+            <table className={`table table-striped table-borderless ${style.adaptive} ${style.zigbee}`}>
                 <thead>
                 <tr className="text-nowrap">
                     <th>#</th>
-                    <ActionTH<SortColumns> className={style["action-column"]} column="nwkAddr"
+                    <th>Pic</th>
+                    <ActionTH<SortColumns> className={cx(style['nwk-addr'], style["action-column"])} column="nwkAddr"
                                            currentDirection={sortDirection} current={sortColumn}
                                            onClick={onSortChange}>nwkAddr</ActionTH>
                     <ActionTH<SortColumns> className={style["action-column"]} column="friendly_name"
                                            currentDirection={sortDirection} current={sortColumn}
                                            onClick={onSortChange}>FriendlyName</ActionTH>
-                    <ActionTH<SortColumns> className={style["action-column"]} column="ieeeAddr"
+                    <ActionTH<SortColumns> className={cx(style['ieee-addr'], style["action-column"])} column="ieeeAddr"
                                            currentDirection={sortDirection} current={sortColumn}
                                            onClick={onSortChange}>ieeeAddr</ActionTH>
-                    <ActionTH<SortColumns> className={style["action-column"]} column="ManufName"
+                    <ActionTH<SortColumns> className={cx(style['manu-name'], style["action-column"])} column="ManufName"
                                            currentDirection={sortDirection} current={sortColumn}
-                                           onClick={onSortChange}>ManufName</ActionTH>
+                                           onClick={onSortChange} titile="ManufName">Manuf</ActionTH>
                     <ActionTH<SortColumns> className={style["action-column"]} column="ModelId"
                                            currentDirection={sortDirection} current={sortColumn}
                                            onClick={onSortChange}>ModelId</ActionTH>
+
                     <ActionTH<SortColumns> className={style["action-column"]} column="st.linkquality"
                                            currentDirection={sortDirection} current={sortColumn}
-                                           onClick={onSortChange}>LinkQuality</ActionTH>
+                                           onClick={onSortChange} title="Link quality">Link</ActionTH>
                     <ActionTH<SortColumns> className={style["action-column"]} column="Interview.State"
                                            currentDirection={sortDirection} current={sortColumn}
                                            onClick={onSortChange}>Interview</ActionTH>
@@ -231,12 +245,13 @@ export class ZigbeeTable extends Component<TimedProps, State> {
                     "table-danger": !device.ieeeAddr
                 })}>
                     <td className="font-weight-bold">{index + 1}</td>
-                    <td><a href={genDeviceDetailsLink(device.nwkAddr)}>{genDeviceShortAddress(device.nwkAddr)}</a>
+                    <td className={style["device-pic"]}><SafeImg class={cx( style["device-image"])} src={`https://raw.githubusercontent.com/slsys/Gateway/master/devices/png/${device.ModelId}.png`} /></td>
+                    <td className={style['nwk-addr']}><a href={genDeviceDetailsLink(device.nwkAddr)}>{genDeviceShortAddress(device.nwkAddr)}</a>
                     </td>
                     <td>{device.friendly_name}</td>
-                    <td>{device.ieeeAddr ? formatIEEEAddr(device.ieeeAddr) : "<corrupted>"}</td>
-                    <td title={device.ManufName} className="text-truncate text-nowrap position-relative">{device.ManufName}<SafeImg class={cx( style["device-image"])} src={`https://raw.githubusercontent.com/slsys/Gateway/master/devices/png/${device.ModelId}.png`} /></td>
-                    <td className={cx("text-nowrap", {
+                    <td className={style['ieee-addr']}>{device.ieeeAddr ? formatIEEEAddr(device.ieeeAddr) : "<corrupted>"}</td>
+                    <td title={device.ManufName} className={cx(style['manu-name'], "text-truncate", "text-nowrap", "position-relative")}>{device.ManufName}</td>
+                    <td title={this.getSupportTitle(device)} className={cx("text-nowrap", {
                         "table-danger": device.supported == DeviceSupportStatus.UnSupported,
                         "table-warning": device.supported == DeviceSupportStatus.Unknown
                     })}>{device.ModelId}</td>
