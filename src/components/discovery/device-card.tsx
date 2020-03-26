@@ -1,7 +1,11 @@
 import { Component, ComponentChild, Fragment, FunctionalComponent, h } from "preact";
 
 import style from "./style.css";
-import { genDeviceDetailsLink, genDeviceShortAddress } from "../../utils";
+import {
+    genDeviceDetailsLink,
+    genDeviceShortAddress,
+    genDeviceImageUrl,
+} from "../../utils";
 import cx from "classnames";
 import { ZigbeeEvent, ZigbeePayload } from "./types";
 import groupBy from "lodash/groupBy";
@@ -75,8 +79,7 @@ const EventRow: FunctionalComponent<{ eventName: ZigbeeEvent; events: ZigbeePayl
                         <div class="col-5">Model:</div>
                         <div class="col">
                             <div>{events[0].ModelId}</div>
-                            <SafeImg class={cx( style["device-image"])}
-                                     src={`https://raw.githubusercontent.com/slsys/Gateway/master/devices/png/${events[0].ModelId}.png`} />
+                            <SafeImg class={cx( style["device-image"])} src={genDeviceImageUrl({ModelId: events[0].ModelId} as Device)} />
                         </div>
                     </div>
                 </Fragment>

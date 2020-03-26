@@ -1,5 +1,5 @@
 import ReconnectingWebSocket from "reconnecting-websocket";
-import { Dictionary } from "./types";
+import { Device, Dictionary } from "./types";
 
 export const genDeviceShortAddress = (deviceKey: string | number): string => {
     let num = deviceKey;
@@ -41,4 +41,11 @@ export const WSConnect = (): ReconnectingWebSocket => {
         return new ReconnectingWebSocket(`ws://localhost:8579`);
     } else return new ReconnectingWebSocket(`ws://${document.location.hostname}:81/log`);
 };
+
+export const sanitizeModelNameForImageUrl = (modelName: string): string => {
+    return modelName.replace("/", "_");
+};
+
+export const genDeviceImageUrl = (device: Device): string => (`https://raw.githubusercontent.com/slsys/Gateway/master/devices/png/${sanitizeModelNameForImageUrl(device.ModelId)}.png`)
+
 

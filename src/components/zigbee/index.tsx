@@ -7,7 +7,12 @@ import orderBy from "lodash/orderBy";
 import DeviceControlGroup from "../device-control";
 import cx from "classnames";
 import { Device, DeviceSupportStatus, inteviewsCount } from "../../types";
-import { formatIEEEAddr, genDeviceDetailsLink, genDeviceShortAddress } from "../../utils";
+import {
+    formatIEEEAddr,
+    genDeviceDetailsLink,
+    genDeviceShortAddress,
+    genDeviceImageUrl
+} from "../../utils";
 import SafeImg from "../safe-image";
 
 type SortDirection = "asc" | "desc";
@@ -246,8 +251,7 @@ export class ZigbeeTable extends Component<TimedProps, State> {
                     "table-danger": !device.ieeeAddr
                 })}>
                     <td className="font-weight-bold">{index + 1}</td>
-                    <td className={style["device-pic"]}><SafeImg class={cx(style["device-image"])}
-                                                                 src={`https://raw.githubusercontent.com/slsys/Gateway/master/devices/png/${device.ModelId}.png`}/>
+                    <td className={style["device-pic"]}><SafeImg class={cx(style["device-image"])} src={genDeviceImageUrl(device)} />
                     </td>
                     <td className={style["nwk-addr"]}><a
                         href={genDeviceDetailsLink(device.nwkAddr)}>{genDeviceShortAddress(device.nwkAddr)}</a>
