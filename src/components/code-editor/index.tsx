@@ -5,9 +5,10 @@ import "codemirror/theme/dracula.css";
 import style from "./style.css";
 import cx from "classnames";
 import TreeView, { File } from "../tree-view";
-import { ApiResponse, evalCode, getFilesList, readFile } from "../actions";
+import { ApiResponse, deleteFile, evalCode, getFilesList, readFile, writeFile } from "../actions";
 
 require("codemirror/mode/lua/lua");
+require("codemirror/mode/javascript/javascript");
 
 
 interface CodeEditorState {
@@ -51,7 +52,10 @@ export default class CodeEditor extends Component<{}, CodeEditorState> {
         });
     };
     onSaveCode = () => {
-        console.log("onSaveCode");
+        const { currentFile, currentFileContent } = this.state;
+        writeFile(currentFile.name, currentFileContent, (err, response) => {
+            err && alert(response);
+        });
     };
 
     clearExecutionResults = () => {
@@ -60,6 +64,31 @@ export default class CodeEditor extends Component<{}, CodeEditorState> {
         });
     };
 
+    onCreateFile = () => {
+        const fileName = prompt("Enter file name");
+        if (fileName) {
+            writeFile(fileName, "", (err, response) => {
+                if (err) {
+                    alert(response);
+                } else if (response.success) {
+                    this.loadFiles("/");
+                }
+            });
+        }
+    };
+
+    onDeleteClick = (file: File): void => {
+        if (confirm(`Delete ${file.name}?`)) {
+            deleteFile(file.name, (err, response) => {
+                if (err) {
+                    alert(response);
+                } else if (response.success) {
+                    this.loadFiles("/");
+                }
+            });
+
+        }
+    };
     loadFile = (file: File): void => {
         this.setState({ currentFileContent: "" });
         readFile(file.name, (error, response) => {
@@ -115,7 +144,7 @@ export default class CodeEditor extends Component<{}, CodeEditorState> {
     }
 
     render(): ComponentChild {
-        const { currentFileContent, executionResults, files, isLoadingFiles } = this.state;
+        const { currentFileContent, executionResults, files, isLoadingFiles, currentFile } = this.state;
         const config = {
             mode: "lua",
             theme: "dracula",
@@ -134,7 +163,7 @@ export default class CodeEditor extends Component<{}, CodeEditorState> {
 
         return (<div className={cx("container-fluid h-100 px-0", style["code-editor"])}>
             <div class="row h-100 no-gutters">
-                <div class="col-1 position-relative">
+                <div class="col-sm-1 position-relative">
                     {
                         isLoadingFiles ? (
                             <div class="text-center">
@@ -142,11 +171,13 @@ export default class CodeEditor extends Component<{}, CodeEditorState> {
                                     <span class="sr-only">Loading...</span>
                                 </div>
                             </div>
-                        ) : <TreeView onFileClick={this.loadFile} files={files} />
+                        ) : <TreeView onFileClick={this.loadFile} onDeleteClick={this.onDeleteClick} files={files} />
                     }
-                    <button type="button" class={cx("btn", "btn-primary", style["new-file"])}>New file</button>
+                    <button onClick={this.onCreateFile} type="button"
+                            class={cx("btn", "btn-primary", style["new-file"])}>New file
+                    </button>
                 </div>
-                <div class="col-11">
+                <div class="col-sm-11">
                     <div class="btn-group" role="group">
                         <button type="button" class="btn btn-success" onClick={this.onSaveCode}>Save(Ctrl-S)</button>
                         {hasCode ? <button type="button" class="btn btn-danger"
@@ -154,6 +185,8 @@ export default class CodeEditor extends Component<{}, CodeEditorState> {
                         {hasExecutionResults ?
                             <button type="button" class="btn btn-primary" onClick={this.clearExecutionResults}>Clear
                                 output</button> : null}
+
+                        {currentFile ? <input type="text" placeholder={currentFile.name} readOnly /> : null}
                     </div>
                     {this.renderCodeExecutionResults()}
 

@@ -91,12 +91,27 @@ export const getFilesList = (path: string, callback: CallbackHandler<ApiResponse
 };
 
 
+export const writeFile = (path: string, content: string, callback: CallbackHandler<ApiResponse<void>>): void => {
+    fetch(`/api/files?${encodeGetParams({ path })}`, {method: 'POST', body: content})
+        .then((res) => res.json())
+        .then(data => callback(false, data))
+        .catch(e => callback(true, e));
+};
+
 export const readFile = (path: string, callback: CallbackHandler<string>): void => {
     fetch(`/api/files?${encodeGetParams({ path })}`)
         .then((res) => res.text())
         .then(data => callback(false, data))
         .catch(e => callback(true, e));
 };
+
+export const deleteFile = (path: string, callback: CallbackHandler<ApiResponse<void>>): void => {
+    fetch(`/api/files?${encodeGetParams({ path })}`, {method: 'DELETE'})
+        .then((res) => res.json())
+        .then(data => callback(false, data))
+        .catch(e => callback(true, e));
+};
+
 
 
 export const evalCode = (code: string, callback: CallbackHandler<ApiResponse<string>>): void => {

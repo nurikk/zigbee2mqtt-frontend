@@ -1,0 +1,8 @@
+.file-link {
+    position: relative;
+}
+.file-link i {
+    position: absolute;
+    right: 0;
+    cursor: pointer;
+}

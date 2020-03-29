@@ -1,4 +1,5 @@
 import { Component, ComponentChild, h } from "preact";
+import styles from "./style.css";
 
 export interface File {
     name: string;
@@ -8,13 +9,16 @@ export interface File {
 
 interface TreeViewProps {
     files: File[];
+
     onFileClick(file: File): void;
+    onDeleteClick(file: File): void;
 }
 
 interface FileLinkProps {
     file: File;
 
     onClick(file: File): void;
+    onDeleteClick(file: File): void;
 }
 
 class FileLink extends Component<FileLinkProps, {}> {
@@ -22,25 +26,26 @@ class FileLink extends Component<FileLinkProps, {}> {
         const { onClick, file } = this.props;
         onClick(file);
     };
+    onDeleteClick = (): void => {
+        const { onDeleteClick, file } = this.props;
+        onDeleteClick(file);
+    };
 
     render(): ComponentChild {
         const { file } = this.props;
-        return <div><a onClick={this.onClick} href={"#"}>{file.name}</a></div>;
+        return <div class={styles['file-link']}>
+            <a onClick={this.onClick} href={"#"}>{file.name}</a>
+            <i onClick={this.onDeleteClick} class="fa fa-trash" />
+        </div>;
     }
 }
 
 export default class TreeView extends Component<TreeViewProps, {}> {
-
-    onFileClick = (file: File): void => {
-        const { onFileClick } = this.props;
-        onFileClick(file);
-    };
-
     render(): ComponentChild {
-        const { files } = this.props;
+        const { files, onDeleteClick, onFileClick } = this.props;
 
         return <div>
-            {files.map(file => (<FileLink file={file} onClick={this.onFileClick}/>))}
+            {files.map(file => (<FileLink onDeleteClick={onDeleteClick} file={file} onClick={onFileClick} />))}
         </div>;
     }
 }
