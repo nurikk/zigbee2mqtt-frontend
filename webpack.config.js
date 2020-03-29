@@ -87,11 +87,24 @@ module.exports = (env, args) => {
 								modules: true
 							}
 						}
+					],
+					exclude: /node_modules/
+				},
+				{
+					test: /\.css$/i,
+					include: /node_modules/,
+					use: [
+						"style-loader",
+						"css-loader"
 					]
 				}
 			],
 		},
 		devServer: {
+			proxy: {
+				'/api/scripts': 'http://192.168.1.209',
+				'/api/files': 'http://192.168.1.209'
+			},
 			headers: {
 				'Access-Control-Allow-Origin': '*'
 			},
@@ -100,7 +113,8 @@ module.exports = (env, args) => {
 			host: '0.0.0.0',
 			port: 3030
 		},
-		plugins
+		plugins,
+		stats: 'errors-only'
 
 	};
 };

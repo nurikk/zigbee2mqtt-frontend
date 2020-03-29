@@ -15,7 +15,6 @@ module.exports = {
         sourceType: "module",
     },
     rules: {
-        // "react/no-unknown-property": ["error", { ignore: ["class"] }],
     },
     settings: {
         react: {

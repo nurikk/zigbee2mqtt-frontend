@@ -7,6 +7,7 @@ import Header from "./components/header";
 import ZigbeeTable from "./components/zigbee";
 import Discovery from "./components/discovery";
 import LogViewer from "./components/log-viewer";
+import CodeEditor from "./components/code-editor";
 
 
 const initWidgets = (): void => {
@@ -31,6 +32,11 @@ const initWidgets = (): void => {
     });
     habitat(LogViewer).render({
         selector: '[data-widget-host="log-viewer"]',
+        clean: true
+    });
+
+    habitat(CodeEditor).render({
+        selector: '[data-widget-host="code-editor"]',
         clean: true
     });
 };

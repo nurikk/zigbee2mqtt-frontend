@@ -1,0 +1,13 @@
+
+/*codemirror/lib/codemirror.css*/
+@import url(~codemirror/lib/codemirror.css);
+
+.code-editor {
+    /*border: 1px solid black;*/
+}
+
+.new-file {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
