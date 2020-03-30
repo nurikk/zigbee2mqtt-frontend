@@ -1,51 +1,51 @@
 import { Component, ComponentChild, h } from "preact";
 import styles from "./style.css";
 
-export interface File {
+export interface Named {
     name: string;
-    size: number;
-    is_dir: boolean;
 }
 
-interface TreeViewProps {
-    files: File[];
+interface TreeViewProps<T extends Named> {
+    items: T[];
 
-    onFileClick(file: File): void;
-    onDeleteClick(file: File): void;
+    onItemClick(item: T): void;
+
+    onDeleteClick(item: T): void;
 }
 
-interface FileLinkProps {
-    file: File;
+interface FileLinkProps<T extends Named> {
+    items: T;
 
-    onClick(file: File): void;
-    onDeleteClick(file: File): void;
+    onClick(item: T): void;
+
+    onDeleteClick(item: T): void;
 }
 
-class FileLink extends Component<FileLinkProps, {}> {
+class TreeItem<T extends Named> extends Component<FileLinkProps<T>, {}> {
     onClick = (): void => {
-        const { onClick, file } = this.props;
-        onClick(file);
+        const { onClick, items } = this.props;
+        onClick(items);
     };
     onDeleteClick = (): void => {
-        const { onDeleteClick, file } = this.props;
-        onDeleteClick(file);
+        const { onDeleteClick, items } = this.props;
+        onDeleteClick(items);
     };
 
     render(): ComponentChild {
-        const { file } = this.props;
-        return <div class={`list-group-item list-group-item-action bg-light ${styles['file-link']}`}>
-            <a onClick={this.onClick} href={"#"}>{file.name}</a>
+        const { items } = this.props;
+        return <div class={`list-group-item list-group-item-action bg-light ${styles["file-link"]}`}>
+            <a onClick={this.onClick} href={"#"}>{items.name}</a>
             <i onClick={this.onDeleteClick} class="fa fa-trash" />
         </div>;
     }
 }
 
-export default class TreeView extends Component<TreeViewProps, {}> {
+export default class TreeView<T extends Named> extends Component<TreeViewProps<T>, {}> {
     render(): ComponentChild {
-        const { files, onDeleteClick, onFileClick } = this.props;
+        const { items, onDeleteClick, onItemClick } = this.props;
 
         return <div>
-            {files.map(file => (<FileLink onDeleteClick={onDeleteClick} file={file} onClick={onFileClick} />))}
+            {items.map(file => (<TreeItem onDeleteClick={onDeleteClick} items={file} onClick={onItemClick} />))}
         </div>;
     }
 }

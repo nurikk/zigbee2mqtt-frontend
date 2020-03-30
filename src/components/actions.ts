@@ -1,9 +1,8 @@
 import { convertRawDevices } from "./convert";
-import { Device } from "../types";
+import { Device, FileDescriptor } from "../types";
 import { TimeInfo } from "./time";
 import { encodeGetParams } from "../utils";
 import { LogLevel } from "./log-viewer";
-import { File } from "./tree-view";
 
 export interface ApiResponse<T> {
     success: boolean;
@@ -84,7 +83,7 @@ export const getCurrentLogLevel = (callback: CallbackHandler<ApiResponse<LogLeve
         .catch(e => callback(true, e));
 };
 
-export const getFilesList = (path: string, callback: CallbackHandler<ApiResponse<File[]>>): void => {
+export const getFilesList = (path: string, callback: CallbackHandler<ApiResponse<FileDescriptor[]>>): void => {
     fetch(`/api/files?${encodeGetParams({ path })}`)
         .then((res) => res.json())
         .then(data => callback(false, data))

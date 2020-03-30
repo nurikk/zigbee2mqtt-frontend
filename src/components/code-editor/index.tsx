@@ -2,26 +2,23 @@ import { Component, ComponentChild, h } from "preact";
 
 import style from "./style.css";
 import cx from "classnames";
-import TreeView, { File } from "../tree-view";
+import TreeView from "../tree-view";
 import { ApiResponse, deleteFile, evalCode, getFilesList, readFile, writeFile } from "../actions";
 import CodeMirror from "./codemirror";
+import { FileDescriptor } from "../../types";
 
 interface CodeEditorState {
     isLoadingFiles: boolean;
-    files: File[];
+    files: FileDescriptor[];
 
     isExecutingCode: boolean;
     executionResults: ApiResponse<string> | null;
 
     currentFileContent: string;
-    currentFile: File;
+    currentFile: FileDescriptor;
 
     sideBarIsVisible: boolean;
 }
-
-const isScript = (file: File): boolean => {
-    return /\.(script|lua)$/.test(file.name);
-};
 
 export default class CodeEditor extends Component<{}, CodeEditorState> {
     constructor() {
@@ -82,7 +79,7 @@ export default class CodeEditor extends Component<{}, CodeEditorState> {
         }
     };
 
-    onDeleteClick = (file: File): void => {
+    onDeleteClick = (file: FileDescriptor): void => {
         if (confirm(`Delete ${file.name}?`)) {
             deleteFile(file.name, (err, response) => {
                 if (err) {
@@ -94,7 +91,7 @@ export default class CodeEditor extends Component<{}, CodeEditorState> {
 
         }
     };
-    loadFile = (file: File): void => {
+    loadFile = (file: FileDescriptor): void => {
         this.setState({ currentFileContent: "" });
         readFile(file.name, (error, response) => {
             if (error) {
@@ -188,8 +185,8 @@ export default class CodeEditor extends Component<{}, CodeEditorState> {
                                         <span class="sr-only">Loading...</span>
                                     </div>
                                 </div>
-                            ) : <TreeView onFileClick={this.loadFile} onDeleteClick={this.onDeleteClick}
-                                          files={files} />
+                            ) : <TreeView onItemClick={this.loadFile} onDeleteClick={this.onDeleteClick}
+                                          items={files} />
                         }
                         <button onClick={this.onCreateFile} type="button"
                                 class={cx("btn", "btn-primary", style["new-file"])}>New file

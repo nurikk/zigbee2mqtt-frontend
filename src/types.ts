@@ -1,3 +1,5 @@
+import { Named } from "./components/tree-view";
+
 export type DeviceType = "EndDevice" | "Router" | "Coordinator";
 
 export type Dictionary<V> = { [index: string]: V }
@@ -74,3 +76,10 @@ export interface Device {
     supported?: DeviceSupportStatus;
 }
 
+
+
+export interface FileDescriptor extends Named {
+    name: string;
+    size: number;
+    is_dir: boolean;
+}
