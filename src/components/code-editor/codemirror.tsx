@@ -1,14 +1,24 @@
 import { Component, createRef, h } from "preact";
 import CM, { EditorFromTextArea } from "codemirror";
+import "codemirror/lib/codemirror.css";
+import "codemirror/addon/dialog/dialog.css";
+import "codemirror/theme/dracula.css";
+
+require("codemirror/addon/search/search");
+require("codemirror/addon/search/searchcursor");
+require("codemirror/addon/search/match-highlighter");
+require("codemirror/addon/dialog/dialog");
+require("codemirror/mode/lua/lua");
+require("codemirror/mode/javascript/javascript");
 
 interface CodeMirrorProps {
     code: string;
     height?: string;
     width?: string;
     config: CM.EditorConfiguration;
-
     onChange?(value: string): void;
 }
+
 
 export default class CodeMirror extends Component<CodeMirrorProps, {}> {
     ref = createRef<HTMLTextAreaElement>();
@@ -32,6 +42,7 @@ export default class CodeMirror extends Component<CodeMirrorProps, {}> {
         this.codeMirror.on("change", this.codemirrorValueChanged);
         this.codeMirror.setValue(code);
         this.codeMirror.setSize(width, height);
+
     }
 
     // eslint-disable-next-line react/no-deprecated

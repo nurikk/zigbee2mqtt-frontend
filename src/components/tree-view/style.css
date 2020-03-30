@@ -3,6 +3,6 @@
 }
 .file-link i {
     position: absolute;
-    right: 0;
+    right: 10px;
     cursor: pointer;
 }

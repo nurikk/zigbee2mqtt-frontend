@@ -33,7 +33,7 @@ class FileLink extends Component<FileLinkProps, {}> {
 
     render(): ComponentChild {
         const { file } = this.props;
-        return <div class={styles['file-link']}>
+        return <div class={`list-group-item list-group-item-action bg-light ${styles['file-link']}`}>
             <a onClick={this.onClick} href={"#"}>{file.name}</a>
             <i onClick={this.onDeleteClick} class="fa fa-trash" />
         </div>;

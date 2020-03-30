@@ -1,15 +1,10 @@
 import { Component, ComponentChild, h } from "preact";
-import CodeMirror from "./codemirror";
-import "codemirror/lib/codemirror.css";
-import "codemirror/theme/dracula.css";
+
 import style from "./style.css";
 import cx from "classnames";
 import TreeView, { File } from "../tree-view";
 import { ApiResponse, deleteFile, evalCode, getFilesList, readFile, writeFile } from "../actions";
-
-require("codemirror/mode/lua/lua");
-require("codemirror/mode/javascript/javascript");
-
+import CodeMirror from "./codemirror";
 
 interface CodeEditorState {
     isLoadingFiles: boolean;
@@ -20,12 +15,19 @@ interface CodeEditorState {
 
     currentFileContent: string;
     currentFile: File;
+
+    sideBarIsVisible: boolean;
 }
+
+const isScript = (file: File): boolean => {
+    return /\.(script|lua)$/.test(file.name);
+};
 
 export default class CodeEditor extends Component<{}, CodeEditorState> {
     constructor() {
         super();
         this.state = {
+            sideBarIsVisible: true,
             isLoadingFiles: false,
             files: [],
             isExecutingCode: false,
@@ -65,8 +67,11 @@ export default class CodeEditor extends Component<{}, CodeEditorState> {
     };
 
     onCreateFile = () => {
-        const fileName = prompt("Enter file name");
+        let fileName = prompt("Enter file name");
         if (fileName) {
+            if (!fileName.startsWith("/")) {
+                fileName = `/${fileName}`;
+            }
             writeFile(fileName, "", (err, response) => {
                 if (err) {
                     alert(response);
@@ -113,10 +118,11 @@ export default class CodeEditor extends Component<{}, CodeEditorState> {
         }
 
         if (executionResults) {
-            return <div class={cx({
+            return <div class={cx("h-24", {
                 "text-success": executionResults.success,
                 "text-danger": !executionResults.success
             })}>
+                Output:
                 <pre><code>{executionResults.result ?? "NO RESPONSE"}</code></pre>
             </div>;
         }
@@ -143,8 +149,13 @@ export default class CodeEditor extends Component<{}, CodeEditorState> {
         });
     }
 
+    toggleSideBar = (): void => {
+        const { sideBarIsVisible } = this.state;
+        this.setState({ sideBarIsVisible: !sideBarIsVisible });
+    };
+
     render(): ComponentChild {
-        const { currentFileContent, executionResults, files, isLoadingFiles, currentFile } = this.state;
+        const { currentFileContent, executionResults, files, isLoadingFiles, currentFile, sideBarIsVisible } = this.state;
         const config = {
             mode: "lua",
             theme: "dracula",
@@ -161,38 +172,58 @@ export default class CodeEditor extends Component<{}, CodeEditorState> {
         const hasCode = currentFileContent && currentFileContent.length;
 
 
-        return (<div className={cx("container-fluid h-100 px-0", style["code-editor"])}>
-            <div class="row h-100 no-gutters">
-                <div class="col-sm-1 position-relative">
-                    {
-                        isLoadingFiles ? (
-                            <div class="text-center">
-                                <div class="spinner-border" role="status">
-                                    <span class="sr-only">Loading...</span>
+        return (<div className={cx("h-100 px-0 d-flex", style["code-editor"])}>
+            <div class={cx("d-flex", style.wrapper, {
+                [style.toggled]: !sideBarIsVisible
+            })}>
+
+                <div class={cx("bg-light border-right position-relative", style["sidebar-wrapper"])}>
+                    <div class={style["sidebar-heading"]}>Files</div>
+                    <div class="list-group list-group-flush">
+
+                        {
+                            isLoadingFiles ? (
+                                <div class="text-center">
+                                    <div class="spinner-border" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
                                 </div>
-                            </div>
-                        ) : <TreeView onFileClick={this.loadFile} onDeleteClick={this.onDeleteClick} files={files} />
-                    }
-                    <button onClick={this.onCreateFile} type="button"
-                            class={cx("btn", "btn-primary", style["new-file"])}>New file
-                    </button>
+                            ) : <TreeView onFileClick={this.loadFile} onDeleteClick={this.onDeleteClick}
+                                          files={files} />
+                        }
+                        <button onClick={this.onCreateFile} type="button"
+                                class={cx("btn", "btn-primary", style["new-file"])}>New file
+                        </button>
+                    </div>
+
                 </div>
-                <div class="col-sm-11">
-                    <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-success" onClick={this.onSaveCode}>Save(Ctrl-S)</button>
+
+                <div class={style["page-content-wrapper"]}>
+
+                    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                        <button onClick={this.toggleSideBar} class="btn btn-primary">Toggle files</button>
+                        {currentFile ? <button type="button" class="btn btn-success"
+                                               onClick={this.onSaveCode}>Save(Ctrl-S)</button> : null}
                         {hasCode ? <button type="button" class="btn btn-danger"
                                            onClick={this.onExecuteCode}>Run(Ctrl-E)</button> : null}
                         {hasExecutionResults ?
                             <button type="button" class="btn btn-primary" onClick={this.clearExecutionResults}>Clear
                                 output</button> : null}
 
-                        {currentFile ? <input type="text" placeholder={currentFile.name} readOnly /> : null}
+                        <div>
+                            {currentFile ? <input type="text" placeholder={currentFile.name} readOnly /> : null}
+                        </div>
+                    </nav>
+
+
+                    <div class="h-100">
+                        <div class={"h-75"}>
+                            <CodeMirror height={"100%"} width={"100%"} code={currentFileContent} config={config}
+                                        onChange={this.onCodeChange} />
+                        </div>
+
+                        {this.renderCodeExecutionResults()}
                     </div>
-                    {this.renderCodeExecutionResults()}
-
-                    <CodeMirror height={"100%"} width={"100%"} code={currentFileContent} config={config}
-                                onChange={this.onCodeChange} />
-
                 </div>
             </div>
         </div>);

@@ -2,6 +2,11 @@ declare namespace StyleCssModule {
     export interface IStyleCss {
         "code-editor": string;
         "new-file": string;
+        "page-content-wrapper": string;
+        "sidebar-heading": string;
+        "sidebar-wrapper": string;
+        toggled: string;
+        wrapper: string;
     }
 }
 
