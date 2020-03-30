@@ -9,6 +9,7 @@ export interface ApiResponse<T> {
     success: boolean;
     result: T;
 }
+
 type CallbackHandler<T> = (err: boolean, res: T) => void;
 
 export const fetchZigbeeDevicesList = (callback: CallbackHandler<Device[]>): void => {
@@ -54,7 +55,7 @@ export const enableJoin = (duration = 255, target = "", callback: CallbackHandle
 };
 
 
-export const clearLogsBuffer = (callback: CallbackHandler<unknown>): void => {
+export const clearLogsBuffer = (callback: CallbackHandler<ApiResponse<void>>): void => {
     fetch(`/api/log?action=clear`)
         .then((res) => res.json())
         .then(data => callback(false, data))
@@ -69,14 +70,14 @@ export const fetchLogsBuffer = (callback: CallbackHandler<string[]>): void => {
         .catch(e => callback(true, e));
 };
 
-export const setLogLevel = (logLevel: LogLevel, callback: CallbackHandler<unknown>): void => {
+export const setLogLevel = (logLevel: LogLevel, callback: CallbackHandler<ApiResponse<void>>): void => {
     fetch(`/api/log?action=setLevel&value=${logLevel}`)
         .then((res) => res.json())
         .then(data => callback(false, data))
         .catch(e => callback(true, e));
 };
 
-export const getCurrentLogLevel = (callback: CallbackHandler<unknown>): void => {
+export const getCurrentLogLevel = (callback: CallbackHandler<ApiResponse<LogLevel>>): void => {
     fetch(`/api/log?action=getLevel`, { method: "POST" })
         .then((res) => res.json())
         .then(data => callback(false, data))
@@ -92,7 +93,7 @@ export const getFilesList = (path: string, callback: CallbackHandler<ApiResponse
 
 
 export const writeFile = (path: string, content: string, callback: CallbackHandler<ApiResponse<void>>): void => {
-    fetch(`/api/files?${encodeGetParams({ path })}`, {method: 'POST', body: content})
+    fetch(`/api/files?${encodeGetParams({ path })}`, { method: "POST", body: content })
         .then((res) => res.json())
         .then(data => callback(false, data))
         .catch(e => callback(true, e));
@@ -106,12 +107,11 @@ export const readFile = (path: string, callback: CallbackHandler<string>): void 
 };
 
 export const deleteFile = (path: string, callback: CallbackHandler<ApiResponse<void>>): void => {
-    fetch(`/api/files?${encodeGetParams({ path })}`, {method: 'DELETE'})
+    fetch(`/api/files?${encodeGetParams({ path })}`, { method: "DELETE" })
         .then((res) => res.json())
         .then(data => callback(false, data))
         .catch(e => callback(true, e));
 };
-
 
 
 export const evalCode = (code: string, callback: CallbackHandler<ApiResponse<string>>): void => {

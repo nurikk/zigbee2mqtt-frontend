@@ -50,8 +50,10 @@ export default class LogViewer extends Component<{}, LogViewerState> {
             ws.addEventListener("message", this.onMessageReceive);
         });
 
-        getCurrentLogLevel((err, { value }: { value: LogLevel }) => {
-            this.setState({ logLevel: value });
+        getCurrentLogLevel((err, response) => {
+            if (response.success) {
+                this.setState({ logLevel: response.result });
+            }
         });
     }
 
@@ -83,8 +85,8 @@ export default class LogViewer extends Component<{}, LogViewerState> {
         this.setState({ logs: [] });
     };
     onClearCacheClick = (e: Event) => {
-        clearLogsBuffer((err, resp: ApiResponse) => {
-            if (resp.result === "ok") {
+        clearLogsBuffer((err, resp) => {
+            if (resp.success) {
                 alert("Cache cleared");
             } else {
                 alert("Failed");
@@ -95,8 +97,8 @@ export default class LogViewer extends Component<{}, LogViewerState> {
     onLogLevelChange = (e: Event) => {
         const { value } = e.target as HTMLInputElement;
         const logLevel = parseInt(value);
-        setLogLevel(logLevel, (err, data: ApiResponse) => {
-            if (data.result === "ok") {
+        setLogLevel(logLevel, (err, data) => {
+            if (data.success) {
                 this.setState({ logLevel });
             } else {
                 alert("Failed");
@@ -136,7 +138,7 @@ export default class LogViewer extends Component<{}, LogViewerState> {
                         <div class="col-sm2">
                             <div class="form-check form-check-inline">
                                 <input checked={followLog} onChange={this.onFollowLogChange} class="form-check-input"
-                                       type="checkbox" id="followLog" value="true"/>
+                                       type="checkbox" id="followLog" value="true" />
                                 <label class="form-check-label" for="followLog">Follow log</label>
                             </div>
                         </div>
