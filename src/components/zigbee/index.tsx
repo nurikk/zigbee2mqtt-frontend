@@ -7,12 +7,7 @@ import orderBy from "lodash/orderBy";
 import DeviceControlGroup from "../device-control";
 import cx from "classnames";
 import { Device, DeviceSupportStatus, inteviewsCount } from "../../types";
-import {
-    formatIEEEAddr,
-    genDeviceDetailsLink,
-    genDeviceShortAddress,
-    genDeviceImageUrl
-} from "../../utils";
+import { formatIEEEAddr, genDeviceDetailsLink, genDeviceImageUrl, genDeviceShortAddress } from "../../utils";
 import SafeImg from "../safe-image";
 
 type SortDirection = "asc" | "desc";
@@ -58,9 +53,9 @@ class ActionTH<T> extends Component<ActionTHProps<T>, {}> {
     renderArrow(): ComponentChild {
         const { currentDirection, current, column } = this.props;
         if (current === column) {
-            return <i className={`fa fa-sort-amount-${currentDirection}`}/>;
+            return <i className={`fa fa-sort-amount-${currentDirection}`} />;
         }
-        return <i className={`fa fa-sort-amount-asc ${style.invisible}`}/>;
+        return <i className={`fa fa-sort-amount-asc ${style.invisible}`} />;
 
     }
 
@@ -128,7 +123,13 @@ export class ZigbeeTable extends Component<TimedProps, State> {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     onInterviewClick = (device: Device): void => {
         if (confirm("Start Interview?")) {
-            startInterview(genDeviceShortAddress(device.nwkAddr), this.loadData);
+            startInterview(genDeviceShortAddress(device.nwkAddr), (err, response) => {
+                if (err) {
+                    alert(err);
+                } else {
+                    this.loadData();
+                }
+            });
         }
     };
 
@@ -164,7 +165,7 @@ export class ZigbeeTable extends Component<TimedProps, State> {
     renderInterviewState(device: Device): ComponentChild {
         const { onInterviewClick } = this;
         const interviewTrigger = <Button<Device> className="btn btn-normal btn-sm" onClick={onInterviewClick}
-                                                 item={device}><i className="fa fa-refresh"/></Button>;
+                                                 item={device}><i className="fa fa-refresh" /></Button>;
 
         if (device.Interview) {
             if (inteviewsCount === device.Interview.State) {
@@ -180,12 +181,12 @@ export class ZigbeeTable extends Component<TimedProps, State> {
             return device.st.battery;
         }
         if (device.powerSource == "Main") {
-            return <i className="fa fa-plug"/>;
+            return <i className="fa fa-plug" />;
         }
         if (device.powerSource == "Battery") {
-            return <i className="fa fa-battery"/>;
+            return <i className="fa fa-battery" />;
         }
-        return <i className="fa fa-question"/>;
+        return <i className="fa fa-question" />;
     }
 
     getSupportTitle(device: Device): string {
@@ -251,7 +252,8 @@ export class ZigbeeTable extends Component<TimedProps, State> {
                     "table-danger": !device.ieeeAddr
                 })}>
                     <td className="font-weight-bold">{index + 1}</td>
-                    <td className={style["device-pic"]}><SafeImg class={cx(style["device-image"])} src={genDeviceImageUrl(device)} />
+                    <td className={style["device-pic"]}><SafeImg class={cx(style["device-image"])}
+                                                                 src={genDeviceImageUrl(device)} />
                     </td>
                     <td className={style["nwk-addr"]}><a
                         href={genDeviceDetailsLink(device.nwkAddr)}>{genDeviceShortAddress(device.nwkAddr)}</a>
@@ -273,7 +275,7 @@ export class ZigbeeTable extends Component<TimedProps, State> {
                         href={genDeviceDetailsLink(route)}>{genDeviceShortAddress(route)}</a>)}</td>
                     <td className="text-left">{this.renderPowerSource(device)}</td>
                     <td>
-                        <DeviceControlGroup device={device}/>
+                        <DeviceControlGroup device={device} />
                     </td>
                 </tr>)}
 

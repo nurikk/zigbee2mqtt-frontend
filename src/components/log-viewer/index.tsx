@@ -39,8 +39,10 @@ export default class LogViewer extends Component<{}, LogViewerState> {
     componentDidMount(): void {
 
         fetchLogsBuffer((err, logs) => {
-            if (!err) {
-                this.setState({ logs }, () => setTimeout(this.scrollToBottom, 500));
+            if (err) {
+                alert(err);
+            } else {
+                this.setState({ logs: logs.split("\n") }, () => setTimeout(this.scrollToBottom, 500));
             }
 
             const ws = WSConnect();
@@ -51,8 +53,12 @@ export default class LogViewer extends Component<{}, LogViewerState> {
         });
 
         getCurrentLogLevel((err, response) => {
-            if (response.success) {
+            if (err) {
+                alert(err);
+            } else if (response.success) {
                 this.setState({ logLevel: response.result });
+            } else {
+                alert("Failed");
             }
         });
     }
@@ -86,11 +92,14 @@ export default class LogViewer extends Component<{}, LogViewerState> {
     };
     onClearCacheClick = (e: Event) => {
         clearLogsBuffer((err, resp) => {
-            if (resp.success) {
+            if (err) {
+                alert(err);
+            } else if (resp.success) {
                 alert("Cache cleared");
             } else {
                 alert("Failed");
             }
+
         });
     };
 
@@ -98,11 +107,14 @@ export default class LogViewer extends Component<{}, LogViewerState> {
         const { value } = e.target as HTMLInputElement;
         const logLevel = parseInt(value);
         setLogLevel(logLevel, (err, data) => {
-            if (data.success) {
-                this.setState({ logLevel });
-            } else {
-                alert("Failed");
-            }
+            if(err) {
+                alert(err);
+            } else if (data.success) {
+                    this.setState({ logLevel });
+                } else {
+                    alert("Failed");
+                }
+
         });
     };
 

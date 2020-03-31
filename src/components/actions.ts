@@ -1,5 +1,5 @@
 import { convertRawDevices } from "./convert";
-import { Device, FileDescriptor } from "../types";
+import { Device, Dictionary, FileDescriptor } from "../types";
 import { TimeInfo } from "./time";
 import { encodeGetParams } from "../utils";
 import { LogLevel } from "./log-viewer";
@@ -10,112 +10,75 @@ export interface ApiResponse<T> {
 }
 
 type CallbackHandler<T> = (err: boolean, res: T) => void;
+type HttMethod = "GET" | "POST" | "DELETE";
+type ContentType = "text" | "json" | "blob";
+
+function callApi<T>(url: string, method: HttMethod, params: Dictionary<any>, payload: any, callback: CallbackHandler<T>, contentType: ContentType = "json"): void {
+    fetch(`${url}?${encodeGetParams(params)}`, { method: method, body: payload })
+        .then((res) => res[contentType]())
+        .then(data => callback(false, data))
+        .catch(e => callback(e, undefined));
+}
 
 export const fetchZigbeeDevicesList = (callback: CallbackHandler<Device[]>): void => {
-    fetch("/api/zigbee/devices")
-        .then((res) => res.json())
-        .then(data => callback(false, convertRawDevices(data)))
-        .catch(e => callback(true, e));
+    callApi("/api/zigbee/devices", "GET", {}, undefined, (err, response: Dictionary<Device>) => {
+        callback(err, !err ? convertRawDevices(response): undefined);
+    });
 };
 
 export const fetchTimeInfo = (callback: CallbackHandler<TimeInfo>): void => {
-    fetch("/api/time")
-        .then((res) => res.json())
-        .then(data => callback(false, data))
-        .catch(e => callback(true, e));
+    callApi("/api/time", "GET", {}, undefined, callback);
 };
 
-export const renameDevice = (old: string, newName: string, callback: CallbackHandler<unknown>): void => {
-    fetch(`/api/zigbee/rename?${encodeGetParams({ old, new: newName })}`)
-        .then((res) => res.json())
-        .then(data => callback(false, data))
-        .catch(e => callback(true, e));
+export const renameDevice = (old: string, newName: string, callback: CallbackHandler<ApiResponse<void>>): void => {
+    callApi("/api/zigbee/rename", "GET", { old, new: newName }, undefined, callback);
 };
 
-export const removeDevice = (dev: string, callback: CallbackHandler<unknown>): void => {
-    fetch(`/api/zigbee/remove?${encodeGetParams({ dev })}`)
-        .then((res) => res.json())
-        .then(data => callback(false, data))
-        .catch(e => callback(true, e));
+export const removeDevice = (dev: string, callback: CallbackHandler<ApiResponse<void>>): void => {
+    callApi("/api/zigbee/remove", "GET", { dev }, undefined, callback);
 };
 
 export const startInterview = (address: string, callback: CallbackHandler<unknown>): void => {
-    fetch(`/zigbee?${encodeGetParams({ intstart: address })}`)
-        .then((res) => res.blob())
-        .then(data => callback(false, data))
-        .catch(e => callback(true, e));
+    callApi("/zigbee", "GET", { intstart: address }, undefined, callback, "blob");
 };
 
-export const enableJoin = (duration = 255, target = "", callback: CallbackHandler<unknown>): void => {
-    fetch(`/api/zigbee/join?${encodeGetParams({ duration, target })}`)
-        .then((res) => res.json())
-        .then(data => callback(false, data))
-        .catch(e => callback(true, e));
+export const enableJoin = (duration = 255, target = "", callback: CallbackHandler<ApiResponse<void>>): void => {
+    callApi("/api/zigbee/join", "GET", { duration, target }, undefined, callback);
 };
 
 
 export const clearLogsBuffer = (callback: CallbackHandler<ApiResponse<void>>): void => {
-    fetch(`/api/log?action=clear`)
-        .then((res) => res.json())
-        .then(data => callback(false, data))
-        .catch(e => callback(true, e));
+    callApi("/api/log", "POST", { action: "clear" }, undefined, callback);
 };
 
-
-export const fetchLogsBuffer = (callback: CallbackHandler<string[]>): void => {
-    fetch(`/api/log?action=getBuffer`)
-        .then((res) => res.text())
-        .then(data => callback(false, data.split("\n")))
-        .catch(e => callback(true, e));
+export const fetchLogsBuffer = (callback: CallbackHandler<string>): void => {
+    callApi("/api/log", "GET", { action: "getBuffer" }, undefined, callback, "text");
 };
 
 export const setLogLevel = (logLevel: LogLevel, callback: CallbackHandler<ApiResponse<void>>): void => {
-    fetch(`/api/log?action=setLevel&value=${logLevel}`)
-        .then((res) => res.json())
-        .then(data => callback(false, data))
-        .catch(e => callback(true, e));
+    callApi("/api/log", "POST", { action: "setLevel", value: logLevel }, undefined, callback);
 };
 
 export const getCurrentLogLevel = (callback: CallbackHandler<ApiResponse<LogLevel>>): void => {
-    fetch(`/api/log?action=getLevel`, { method: "POST" })
-        .then((res) => res.json())
-        .then(data => callback(false, data))
-        .catch(e => callback(true, e));
+    callApi("/api/log", "GET", { action: "getLevel" }, undefined, callback);
 };
 
 export const getFilesList = (path: string, callback: CallbackHandler<ApiResponse<FileDescriptor[]>>): void => {
-    fetch(`/api/files?${encodeGetParams({ path })}`)
-        .then((res) => res.json())
-        .then(data => callback(false, data))
-        .catch(e => callback(true, e));
+    callApi("/api/files", "GET", { path }, undefined, callback);
 };
 
-
 export const writeFile = (path: string, content: string, callback: CallbackHandler<ApiResponse<void>>): void => {
-    fetch(`/api/files?${encodeGetParams({ path })}`, { method: "POST", body: content })
-        .then((res) => res.json())
-        .then(data => callback(false, data))
-        .catch(e => callback(true, e));
+    callApi("/api/files", "POST", { path }, content, callback);
 };
 
 export const readFile = (path: string, callback: CallbackHandler<string>): void => {
-    fetch(`/api/files?${encodeGetParams({ path })}`)
-        .then((res) => res.text())
-        .then(data => callback(false, data))
-        .catch(e => callback(true, e));
+    callApi("/api/files", "GET", { path }, undefined, callback, "text");
 };
 
 export const deleteFile = (path: string, callback: CallbackHandler<ApiResponse<void>>): void => {
-    fetch(`/api/files?${encodeGetParams({ path })}`, { method: "DELETE" })
-        .then((res) => res.json())
-        .then(data => callback(false, data))
-        .catch(e => callback(true, e));
+    callApi("/api/files", "DELETE", { path }, undefined, callback);
 };
 
-
 export const evalCode = (code: string, callback: CallbackHandler<ApiResponse<string>>): void => {
-    fetch(`/api/scripts?action=evalCode`, { method: "POST", body: code })
-        .then((res) => res.json())
-        .then(data => callback(false, data))
-        .catch(e => callback(true, e));
+    callApi("/api/scripts", "POST", { action: "evalCode" }, code, callback);
 };

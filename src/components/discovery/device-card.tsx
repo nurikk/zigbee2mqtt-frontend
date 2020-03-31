@@ -101,7 +101,7 @@ const EventRow: FunctionalComponent<{ eventName: ZigbeeEvent; events: ZigbeePayl
 interface DeviceCardState {
     currentTimestamp: number;
     updateTimerId: number;
-    manualInteviewStarted: boolean;
+    manualInterviewStarted: boolean;
 }
 
 export default class DeviceCard extends Component<DeviceCardProps, DeviceCardState> {
@@ -113,7 +113,7 @@ export default class DeviceCard extends Component<DeviceCardProps, DeviceCardSta
 
 
         this.state = {
-            manualInteviewStarted: false,
+            manualInterviewStarted: false,
             updateTimerId,
             currentTimestamp: Date.now()
         };
@@ -141,21 +141,27 @@ export default class DeviceCard extends Component<DeviceCardProps, DeviceCardSta
     }
 
     onInterviewClick = (nwkAddr: string): void => {
-        startInterview(genDeviceShortAddress(nwkAddr), () => this.setState({ manualInteviewStarted: true }));
+        startInterview(genDeviceShortAddress(nwkAddr), (err, response) => {
+            if(err) {
+                alert(err)
+            } else {
+                this.setState({ manualInterviewStarted: true })
+            }
+        });
     };
 
-    renderManualIterviewHelper(): ComponentChild {
-        const { manualInteviewStarted } = this.state;
+    renderManualInterviewHelper(): ComponentChild {
+        const { manualInterviewStarted } = this.state;
         const { nwkAddr } = this.props;
         const deviceNotRespondingTimeout = 20;
-        const deviceManualWakeupTimeouit = 5;
+        const deviceManualWakeupTimeout = 5;
         const lastUpdateTime = this.getLastUpdateTime();
-        if (manualInteviewStarted && lastUpdateTime > deviceManualWakeupTimeouit) {
+        if (manualInterviewStarted && lastUpdateTime > deviceManualWakeupTimeout) {
             return (<div class={`row ${style["scale-in-center"]}`}>
                 <div class={`col-12 ${style.blink}`}>Press wakeup button</div>
             </div>);
         }
-        if (!manualInteviewStarted && lastUpdateTime > deviceNotRespondingTimeout)
+        if (!manualInterviewStarted && lastUpdateTime > deviceNotRespondingTimeout)
             return (
                 <div class={`row ${style["scale-in-center"]}`}>
                     <div class="col-5">Start interview:</div>
@@ -247,7 +253,7 @@ export default class DeviceCard extends Component<DeviceCardProps, DeviceCardSta
                             <EventRow key={eventName} eventName={eventName as ZigbeeEvent} events={events}/>)))
                     }
                     {
-                        this.renderManualIterviewHelper()
+                        this.renderManualInterviewHelper()
                     }
 
 

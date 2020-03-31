@@ -49,7 +49,12 @@ const Timed = (WrappedComponent: ComponentType<TimedProps>): ComponentType => {
 
         componentDidMount(): void {
             fetchTimeInfo((err, time: TimeInfo) => {
-                this.setState({ time });
+                if(err) {
+                    alert(err)
+                } else {
+                    this.setState({ time });
+                }
+
             });
         }
 

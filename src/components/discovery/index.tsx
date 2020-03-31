@@ -92,19 +92,27 @@ export default class Discovery extends Component<{}, DiscoveryState> {
         return (<Fragment>
             {this.renderJoinButton()}
             <div className="row no-gutters">{Object.entries(events).map(([nwkAddr, events]) => <DeviceCard
-                nwkAddr={nwkAddr} events={events}/>)}</div>
+                nwkAddr={nwkAddr} events={events} />)}</div>
         </Fragment>);
 
     }
 
     enableJoin = (): void => {
-        enableJoin(255, undefined, () => {
-            console.log("Enabled");
+        enableJoin(255, undefined, (err, response) => {
+            if(err) {
+                alert(err)
+            } else {
+                console.log("Join enabled");
+            }
         });
     };
     disableJoin = (): void => {
-        enableJoin(0, undefined, () => {
-            console.log("Disabled");
+        enableJoin(0, undefined, (err, response) => {
+            if (err) {
+                alert(err);
+            } else {
+                console.log("Join disabled");
+            }
         });
     };
 

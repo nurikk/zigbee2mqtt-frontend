@@ -43,7 +43,7 @@ export default class CodeEditor extends Component<{}, CodeEditorState> {
         this.setState({ isExecutingCode: true, executionResults: null });
         evalCode(currentFileContent, (error, response) => {
             if (error) {
-                alert(response);
+                alert(error);
             } else {
                 this.setState({ executionResults: response, isExecutingCode: false });
             }
@@ -134,7 +134,9 @@ export default class CodeEditor extends Component<{}, CodeEditorState> {
     loadFiles(path: string): void {
         this.setState({ isLoadingFiles: true });
         getFilesList(path, (err, response) => {
-            if (!err) {
+            if (err) {
+                alert(err);
+            } else {
                 const { success, result } = response;
                 if (success) {
                     this.setState({

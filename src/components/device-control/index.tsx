@@ -16,13 +16,25 @@ const onBindClick = (device: Device): void => {
 const onRenameClick = (device: Device): void => {
     const newName = prompt("Enter new name", device.friendly_name);
     if (newName !== device.friendly_name) {
-        renameDevice(genDeviceShortAddress(device.nwkAddr), newName, () => window.location.reload());
+        renameDevice(genDeviceShortAddress(device.nwkAddr), newName, (err, response) => {
+            if (err) {
+                alert(err);
+            } else {
+                window.location.reload();
+            }
+        });
     }
 };
 
 const onRemoveClick = (device: Device): void => {
     if (confirm("Remove device?")) {
-        removeDevice(genDeviceShortAddress(device.nwkAddr), () => window.location.reload());
+        removeDevice(genDeviceShortAddress(device.nwkAddr), (err, response) => {
+            if(err) {
+                alert(err);
+            } else {
+                window.location.reload();
+            }
+        });
     }
 };
 
@@ -31,9 +43,9 @@ const DeviceControlGroup: FunctionalComponent<DeviceControlGroupProps> = (props)
     return (
         <div className="btn-group btn-group-sm" role="group">
             <Button<Device> className="btn btn-danger" onClick={onRemoveClick} item={device}><i
-                className="fa fa-trash"/></Button>
+                className="fa fa-trash" /></Button>
             <Button<Device> className="btn btn-secondary" onClick={onRenameClick} item={device}><i
-                className="fa fa-edit"/></Button>
+                className="fa fa-edit" /></Button>
             <Button<Device> className="btn btn-success" onClick={onBindClick} item={device}>Bind</Button>
         </div>
     );
