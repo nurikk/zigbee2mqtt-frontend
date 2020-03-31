@@ -58,7 +58,7 @@
     "eslint-plugin-preact": "^0.1.0",
     "fork-ts-checker-webpack-plugin": "^4.1.1",
     "gh-pages": "^2.2.0",
-    "html-webpack-plugin": "^3.2.0",
+    "html-webpack-plugin": "^4.0.3",
     "husky": "^4.2.1",
     "lint-staged": "^10.0.7",
     "lodash": "^4.17.15",
