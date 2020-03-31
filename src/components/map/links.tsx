@@ -73,8 +73,8 @@ const Links: FunctionalComponent<LinksPros> = props => {
         <g className={style.links}>
             <defs>
                 <filter x="-0.1" y="0" width="1.2" height="1" id="solid">
-                    <feFlood flood-color="#eef5f9"/>
-                    <feComposite in="SourceGraphic"/>
+                    <feFlood flood-color="#eef5f9" />
+                    <feComposite in="SourceGraphic" />
                 </filter>
             </defs>
             {links.map((link: LinkI, index: number) => (

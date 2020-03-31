@@ -1,7 +1,9 @@
 @import url("https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+
 .zigbee {
 
 }
+
 .zigbee td, .zigbee th {
     padding-left: 0.1rem;
     padding-right: 0.1rem;
@@ -84,6 +86,7 @@
     .adaptive td:nth-of-type(1):before {
         content: "#";
     }
+
     .adaptive td:nth-of-type(2):before {
         content: "Picture";
     }
@@ -131,12 +134,14 @@
     .adaptive td:nth-of-type(13):before {
         content: "Actions";
     }
+
     .adaptive .device-image {
         max-height: 3em;
         position: absolute;
         top: 4px;
     }
 }
+
 .nwk-addr {
     max-width: 75px;
 }
@@ -147,16 +152,19 @@
     text-overflow: ellipsis;
     direction: rtl;
 }
+
 .manu-name {
     max-width: 75px;
 }
+
 .device-pic {
-    padding-top: 0!important;
-    padding-bottom: 0!important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
     /*position: relative;*/
     min-height: 56px;
     /*width: 56px;*/
 }
+
 .device-image {
     max-height: 2em;
     /*position: absolute;*/
@@ -164,10 +172,10 @@
     /*top: 0;*/
 }
 
-.device-image  {
+.device-image {
     transition: transform .5s ease;
 }
 
 .device-image:hover {
-    transform: scale(4) translate(5px,0);
+    transform: scale(4) translate(5px, 0);
 }

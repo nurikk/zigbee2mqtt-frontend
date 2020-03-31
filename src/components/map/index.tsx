@@ -177,7 +177,7 @@ export class Map extends Component<TimedProps, State> {
         return (
             <div className={style.container} ref={this.ref}>
                 <svg viewBox={`0 0 ${width} ${height}`}>
-                    <Links links={graph.links}/>
+                    <Links links={graph.links} />
                     <Nodes
                         nodes={graph.nodes}
                         simulation={this.simulation}
@@ -198,7 +198,7 @@ export class Map extends Component<TimedProps, State> {
                             x={tooltipNode.x as number + 10}
                             y={tooltipNode.y as number + 5}
                         >
-                            <Tooltip info={tooltipNode} time={time}/>
+                            <Tooltip info={tooltipNode} time={time} />
                         </foreignObject>
                     ) : null}
                 </svg>

@@ -3,6 +3,7 @@ import { Component, ComponentChild, h } from "preact";
 interface SafeImgState {
     isOk: boolean;
 }
+
 interface SafeImgProps {
     [k: string]: any;
 }
@@ -12,12 +13,13 @@ export default class SafeImg extends Component<SafeImgProps, SafeImgState> {
         super();
         this.state = {
             isOk: true
-        }
+        };
     }
+
     onError = (): void => {
-       this.setState({
-           isOk: false
-       })
+        this.setState({
+            isOk: false
+        });
 
     };
 
