@@ -45,7 +45,7 @@
     "@types/superagent": "^4.1.7",
     "@types/webpack-env": "^1.15.1",
     "@types/ws": "^7.2.3",
-    "@typescript-eslint/eslint-plugin": "^2.24.0",
+    "@typescript-eslint/eslint-plugin": "^2.26.0",
     "@typescript-eslint/parser": "^2.24.0",
     "classnames": "^2.2.6",
     "copy-webpack-plugin": "^5.1.1",
