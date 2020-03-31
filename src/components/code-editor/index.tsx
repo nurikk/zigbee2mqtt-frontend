@@ -162,7 +162,7 @@ export default class CodeEditor extends Component<{}, CodeEditorState> {
 
 
         return (<div className={cx("h-100 px-0 d-flex", style["code-editor"])}>
-            <div class={cx("d-flex", style.wrapper, {
+            <div class={cx("d-flex w-100", style.wrapper, {
                 [style.toggled]: !sideBarIsVisible
             })}>
 
