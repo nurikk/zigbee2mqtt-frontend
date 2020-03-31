@@ -14,27 +14,16 @@
     "clean": "rimraf ./dist",
     "deploy": "gh-pages -d dist"
   },
-  "lint-staged": {
-    "*.{css,md,scss}": [
-      "prettier --write",
-      "git add"
-    ],
-    "*.{js,jsx,ts,tsx}": [
-      "eslint --fix",
-      "git add"
-    ]
-  },
   "eslintIgnore": [
     "dist/*"
   ],
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
     "@types/codemirror": "0.0.88",
     "@types/toastr": "^2.1.37",
     "codemirror": "^5.52.2",
     "preact-codemirror": "^1.0.1",
-    "toastr": "^2.1.4"
-  },
-  "devDependencies": {
+    "toastr": "^2.1.4",
     "@teamsupercell/typings-for-css-modules-loader": "^2.1.0",
     "@types/classnames": "^2.2.10",
     "@types/d3-drag": "^1.2.3",
@@ -59,8 +48,6 @@
     "fork-ts-checker-webpack-plugin": "^4.1.2",
     "gh-pages": "^2.2.0",
     "html-webpack-plugin": "^4.0.3",
-    "husky": "^4.2.1",
-    "lint-staged": "^10.0.7",
     "lodash": "^4.17.15",
     "preact": "^10.3.4",
     "preact-habitat": "^3.3.0",
