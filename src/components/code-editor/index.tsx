@@ -7,6 +7,7 @@ import { ApiResponse, deleteFile, evalCode, getFilesList, readFile, writeFile } 
 import CodeMirror from "./codemirror";
 import { FileDescriptor } from "../../types";
 import toastr from "toastr";
+import orderBy from "lodash/orderBy";
 
 interface CodeEditorState {
     isLoadingFiles: boolean;
@@ -128,10 +129,11 @@ export default class CodeEditor extends Component<{}, CodeEditorState> {
         getFilesList(path, (err, response) => {
             if (!err) {
                 const { success, result } = response;
+
                 if (success) {
                     this.setState({
                         isLoadingFiles: false,
-                        files: result
+                        files: orderBy(result, ['name'])
                     });
                 }
             }
