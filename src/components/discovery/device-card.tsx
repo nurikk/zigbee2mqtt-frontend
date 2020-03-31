@@ -1,11 +1,7 @@
 import { Component, ComponentChild, Fragment, FunctionalComponent, h } from "preact";
 
 import style from "./style.css";
-import {
-    genDeviceDetailsLink,
-    genDeviceShortAddress,
-    genDeviceImageUrl,
-} from "../../utils";
+import { genDeviceDetailsLink, genDeviceImageUrl, genDeviceShortAddress } from "../../utils";
 import cx from "classnames";
 import { ZigbeeEvent, ZigbeePayload } from "./types";
 import groupBy from "lodash/groupBy";
@@ -79,7 +75,8 @@ const EventRow: FunctionalComponent<{ eventName: ZigbeeEvent; events: ZigbeePayl
                         <div class="col-5">Model:</div>
                         <div class="col">
                             <div>{events[0].ModelId}</div>
-                            <SafeImg class={cx( style["device-image"])} src={genDeviceImageUrl({ModelId: events[0].ModelId} as Device)} />
+                            <SafeImg class={cx(style["device-image"])}
+                                     src={genDeviceImageUrl({ ModelId: events[0].ModelId } as Device)} />
                         </div>
                     </div>
                 </Fragment>
@@ -142,8 +139,8 @@ export default class DeviceCard extends Component<DeviceCardProps, DeviceCardSta
 
     onInterviewClick = (nwkAddr: string): void => {
         startInterview(genDeviceShortAddress(nwkAddr), (err, response) => {
-            if(!err) {
-                this.setState({ manualInterviewStarted: true })
+            if (!err) {
+                this.setState({ manualInterviewStarted: true });
             }
         });
     };
@@ -165,7 +162,7 @@ export default class DeviceCard extends Component<DeviceCardProps, DeviceCardSta
                     <div class="col-5">Start interview:</div>
                     <div class="col">
                         <Button<string> className="btn btn-normal btn-sm" onClick={this.onInterviewClick}
-                                        item={nwkAddr}><i className="fa fa-refresh"/></Button>
+                                        item={nwkAddr}><i className="fa fa-refresh" /></Button>
                     </div>
                 </div>
             );
@@ -248,7 +245,7 @@ export default class DeviceCard extends Component<DeviceCardProps, DeviceCardSta
 
                     {
                         Object.entries(groupedEvents).map(([eventName, events]) => ((
-                            <EventRow key={eventName} eventName={eventName as ZigbeeEvent} events={events}/>)))
+                            <EventRow key={eventName} eventName={eventName as ZigbeeEvent} events={events} />)))
                     }
                     {
                         this.renderManualInterviewHelper()
@@ -258,7 +255,7 @@ export default class DeviceCard extends Component<DeviceCardProps, DeviceCardSta
                     {/* {device.ModelId ? <img class="img-fluid card-img-bottom h-25" src="https://www.zigbee2mqtt.io/images/devices/4713407.jpg" alt="Card image cap" /> : null} */}
                 </div>
                 {isDone ? <div className="card-footer">
-                    <DeviceControlGroup device={{ nwkAddr } as Device}/>
+                    <DeviceControlGroup device={{ nwkAddr } as Device} />
                 </div> : null}
             </div>
         );

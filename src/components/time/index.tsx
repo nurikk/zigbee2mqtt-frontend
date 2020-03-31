@@ -49,7 +49,7 @@ const Timed = (WrappedComponent: ComponentType<TimedProps>): ComponentType => {
 
         componentDidMount(): void {
             fetchTimeInfo((err, time: TimeInfo) => {
-                if(!err) {
+                if (!err) {
                     this.setState({ time });
                 }
             });
@@ -57,7 +57,7 @@ const Timed = (WrappedComponent: ComponentType<TimedProps>): ComponentType => {
 
         render(): ComponentChild {
             const { time } = this.state;
-            return <WrappedComponent {...this.props} time={time}/>;
+            return <WrappedComponent {...this.props} time={time} />;
         }
     };
 };

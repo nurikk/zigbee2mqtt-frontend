@@ -15,6 +15,7 @@ export interface LogMessage {
     category: "log";
     payload: string;
 }
+
 export interface ZigbeePayload {
     timestamp: number;
     event: ZigbeeEvent;

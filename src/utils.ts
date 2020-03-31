@@ -46,6 +46,6 @@ export const sanitizeModelNameForImageUrl = (modelName: string): string => {
     return modelName ? modelName.replace("/", "_") : null;
 };
 
-export const genDeviceImageUrl = (device: Device): string => (`https://raw.githubusercontent.com/slsys/Gateway/master/devices/png/${sanitizeModelNameForImageUrl(device.ModelId)}.png`)
+export const genDeviceImageUrl = (device: Device): string => (`https://raw.githubusercontent.com/slsys/Gateway/master/devices/png/${sanitizeModelNameForImageUrl(device.ModelId)}.png`);
 
 

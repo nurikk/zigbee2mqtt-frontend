@@ -1,4 +1,3 @@
-
 @import url(~codemirror/lib/codemirror.css);
 
 .code-editor {
@@ -9,7 +8,6 @@
     bottom: 0;
     width: 100%;
 }
-
 
 
 .sidebar-wrapper {

@@ -27,7 +27,7 @@ const onRenameClick = (device: Device): void => {
 const onRemoveClick = (device: Device): void => {
     if (confirm("Remove device?")) {
         removeDevice(genDeviceShortAddress(device.nwkAddr), (err, response) => {
-            if(!err) {
+            if (!err) {
                 window.location.reload();
             }
         });

@@ -89,8 +89,8 @@ export default class LogViewer extends Component<{}, LogViewerState> {
     };
     onClearCacheClick = (e: Event) => {
         clearLogsBuffer((err, resp) => {
-           if (!err && resp.success) {
-               toastr.success("Cache cleared");
+            if (!err && resp.success) {
+                toastr.success("Cache cleared");
             } else {
                 toastr.error("Failed");
             }

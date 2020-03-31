@@ -99,14 +99,14 @@ export default class Discovery extends Component<{}, DiscoveryState> {
 
     enableJoin = (): void => {
         enableJoin(255, undefined, (err, response) => {
-            if(!err) {
+            if (!err) {
                 toastr.success("Join enabled");
             }
         });
     };
     disableJoin = (): void => {
         enableJoin(0, undefined, (err, response) => {
-            if (!err){
+            if (!err) {
                 toastr.success("Join disabled");
             }
         });

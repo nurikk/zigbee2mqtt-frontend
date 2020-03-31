@@ -12,31 +12,31 @@ import CodeEditor from "./components/code-editor";
 
 const initWidgets = (): void => {
     habitat(ZigbeeTable).render({
-        selector: '[data-widget-host="zigbee"]',
+        selector: "[data-widget-host=\"zigbee\"]",
         clean: true
     });
 
     habitat(Map).render({
-        selector: '[data-widget-host="map"]',
+        selector: "[data-widget-host=\"map\"]",
         clean: true
     });
 
     habitat(Header).render({
-        selector: '[data-widget-host="header"]',
+        selector: "[data-widget-host=\"header\"]",
         clean: true
     });
 
     habitat(Discovery).render({
-        selector: '[data-widget-host="discovery"]',
+        selector: "[data-widget-host=\"discovery\"]",
         clean: true
     });
     habitat(LogViewer).render({
-        selector: '[data-widget-host="log-viewer"]',
+        selector: "[data-widget-host=\"log-viewer\"]",
         clean: true
     });
 
     habitat(CodeEditor).render({
-        selector: '[data-widget-host="code-editor"]',
+        selector: "[data-widget-host=\"code-editor\"]",
         clean: true
     });
 };

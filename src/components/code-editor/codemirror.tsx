@@ -16,6 +16,7 @@ interface CodeMirrorProps {
     height?: string;
     width?: string;
     config: CM.EditorConfiguration;
+
     onChange?(value: string): void;
 }
 

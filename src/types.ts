@@ -22,7 +22,6 @@ export enum InterviewState {
 }
 
 
-
 interface Interview {
     /** Last intreview timestamp */
     TS?: number;
@@ -40,6 +39,7 @@ interface Interview {
 export interface Cluster {
 
 }
+
 export interface Enpoint {
     "profId": number;
     "In": Dictionary<Cluster[]>;
@@ -48,6 +48,7 @@ export interface Enpoint {
 }
 
 export type PowerSource = "Main" | "Battery";
+
 export enum DeviceSupportStatus {
     Unknown = 0,
     Supported = 1,
@@ -75,7 +76,6 @@ export interface Device {
     ep?: Dictionary<Enpoint>;
     supported?: DeviceSupportStatus;
 }
-
 
 
 export interface FileDescriptor extends Named {
