@@ -6,6 +6,7 @@ import TreeView from "../tree-view";
 import { ApiResponse, deleteFile, evalCode, getFilesList, readFile, writeFile } from "../actions";
 import CodeMirror from "./codemirror";
 import { FileDescriptor } from "../../types";
+import toastr from "toastr";
 
 interface CodeEditorState {
     isLoadingFiles: boolean;
@@ -42,18 +43,15 @@ export default class CodeEditor extends Component<{}, CodeEditorState> {
         const { currentFileContent } = this.state;
         this.setState({ isExecutingCode: true, executionResults: null });
         evalCode(currentFileContent, (error, response) => {
-            if (error) {
-                alert(error);
-            } else {
+            if (!error) {
                 this.setState({ executionResults: response, isExecutingCode: false });
             }
-
         });
     };
     onSaveCode = () => {
         const { currentFile, currentFileContent } = this.state;
         writeFile(currentFile.name, currentFileContent, (err, response) => {
-            err && alert(response);
+            toastr.info(`Saved ${currentFile.name}`);
         });
     };
 
@@ -70,9 +68,7 @@ export default class CodeEditor extends Component<{}, CodeEditorState> {
                 fileName = `/${fileName}`;
             }
             writeFile(fileName, "", (err, response) => {
-                if (err) {
-                    alert(response);
-                } else if (response.success) {
+                if (!err && response.success) {
                     this.loadFiles("/");
                 }
             });
@@ -82,9 +78,7 @@ export default class CodeEditor extends Component<{}, CodeEditorState> {
     onDeleteClick = (file: FileDescriptor): void => {
         if (confirm(`Delete ${file.name}?`)) {
             deleteFile(file.name, (err, response) => {
-                if (err) {
-                    alert(response);
-                } else if (response.success) {
+                if (!err && response.success) {
                     this.loadFiles("/");
                 }
             });
@@ -94,9 +88,7 @@ export default class CodeEditor extends Component<{}, CodeEditorState> {
     loadFile = (file: FileDescriptor): void => {
         this.setState({ currentFileContent: "" });
         readFile(file.name, (error, response) => {
-            if (error) {
-                alert(response);
-            } else {
+            if (!error) {
                 this.setState({ currentFileContent: response, currentFile: file });
             }
 
@@ -134,9 +126,7 @@ export default class CodeEditor extends Component<{}, CodeEditorState> {
     loadFiles(path: string): void {
         this.setState({ isLoadingFiles: true });
         getFilesList(path, (err, response) => {
-            if (err) {
-                alert(err);
-            } else {
+            if (!err) {
                 const { success, result } = response;
                 if (success) {
                     this.setState({

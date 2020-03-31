@@ -17,9 +17,7 @@ const onRenameClick = (device: Device): void => {
     const newName = prompt("Enter new name", device.friendly_name);
     if (newName !== device.friendly_name) {
         renameDevice(genDeviceShortAddress(device.nwkAddr), newName, (err, response) => {
-            if (err) {
-                alert(err);
-            } else {
+            if (!err) {
                 window.location.reload();
             }
         });
@@ -29,9 +27,7 @@ const onRenameClick = (device: Device): void => {
 const onRemoveClick = (device: Device): void => {
     if (confirm("Remove device?")) {
         removeDevice(genDeviceShortAddress(device.nwkAddr), (err, response) => {
-            if(err) {
-                alert(err);
-            } else {
+            if(!err) {
                 window.location.reload();
             }
         });

@@ -4,6 +4,7 @@ import { LogMessage } from "../discovery/types";
 import style from "./style.css";
 import cx from "classnames";
 import { clearLogsBuffer, fetchLogsBuffer, getCurrentLogLevel, setLogLevel } from "../actions";
+import toastr from "toastr";
 
 export enum LogLevel {
     LOG_OFF,
@@ -39,9 +40,7 @@ export default class LogViewer extends Component<{}, LogViewerState> {
     componentDidMount(): void {
 
         fetchLogsBuffer((err, logs) => {
-            if (err) {
-                alert(err);
-            } else {
+            if (!err) {
                 this.setState({ logs: logs.split("\n") }, () => setTimeout(this.scrollToBottom, 500));
             }
 
@@ -53,12 +52,10 @@ export default class LogViewer extends Component<{}, LogViewerState> {
         });
 
         getCurrentLogLevel((err, response) => {
-            if (err) {
-                alert(err);
-            } else if (response.success) {
+            if (!err && response.success) {
                 this.setState({ logLevel: response.result });
             } else {
-                alert("Failed");
+                toastr.error("Failed to load current log level");
             }
         });
     }
@@ -68,7 +65,7 @@ export default class LogViewer extends Component<{}, LogViewerState> {
         try {
             event = JSON.parse(wsEvent.data) as LogMessage;
         } catch (e) {
-            console.error("Cant parse json", e);
+            toastr.error(`Cant parse json ${e}`);
         }
         if (event.category === "log") {
             this.processLog(event);
@@ -92,12 +89,10 @@ export default class LogViewer extends Component<{}, LogViewerState> {
     };
     onClearCacheClick = (e: Event) => {
         clearLogsBuffer((err, resp) => {
-            if (err) {
-                alert(err);
-            } else if (resp.success) {
-                alert("Cache cleared");
+           if (!err && resp.success) {
+               toastr.success("Cache cleared");
             } else {
-                alert("Failed");
+                toastr.error("Failed");
             }
 
         });
@@ -107,13 +102,11 @@ export default class LogViewer extends Component<{}, LogViewerState> {
         const { value } = e.target as HTMLInputElement;
         const logLevel = parseInt(value);
         setLogLevel(logLevel, (err, data) => {
-            if(err) {
-                alert(err);
-            } else if (data.success) {
-                    this.setState({ logLevel });
-                } else {
-                    alert("Failed");
-                }
+            if (!err && data.success) {
+                this.setState({ logLevel });
+            } else {
+                toastr.error("Cant set log level");
+            }
 
         });
     };

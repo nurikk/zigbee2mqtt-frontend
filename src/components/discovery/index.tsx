@@ -5,7 +5,7 @@ import DeviceCard from "./device-card";
 import Button from "../button";
 import { enableJoin } from "../actions";
 import { WSConnect } from "../../utils";
-
+import toastr from "toastr";
 
 interface DiscoveryState {
     updateTimerId: number;
@@ -66,7 +66,7 @@ export default class Discovery extends Component<{}, DiscoveryState> {
         try {
             event = JSON.parse(wsEvent.data) as WebsocketMessage;
         } catch (e) {
-            console.error("Cant parse json", e);
+            toastr.error(`Cant parse json, ${e}`);
         }
         if (event.category === "zigbee") {
             this.processZigbeeEvent(event.payload as ZigbeePayload);
@@ -99,19 +99,15 @@ export default class Discovery extends Component<{}, DiscoveryState> {
 
     enableJoin = (): void => {
         enableJoin(255, undefined, (err, response) => {
-            if(err) {
-                alert(err)
-            } else {
-                console.log("Join enabled");
+            if(!err) {
+                toastr.success("Join enabled");
             }
         });
     };
     disableJoin = (): void => {
         enableJoin(0, undefined, (err, response) => {
-            if (err) {
-                alert(err);
-            } else {
-                console.log("Join disabled");
+            if (!err){
+                toastr.success("Join disabled");
             }
         });
     };

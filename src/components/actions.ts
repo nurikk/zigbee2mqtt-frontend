@@ -3,6 +3,7 @@ import { Device, Dictionary, FileDescriptor } from "../types";
 import { TimeInfo } from "./time";
 import { encodeGetParams } from "../utils";
 import { LogLevel } from "./log-viewer";
+import toastr from "toastr";
 
 export interface ApiResponse<T> {
     success: boolean;
@@ -16,13 +17,18 @@ type ContentType = "text" | "json" | "blob";
 function callApi<T>(url: string, method: HttMethod, params: Dictionary<any>, payload: any, callback: CallbackHandler<T>, contentType: ContentType = "json"): void {
     fetch(`${url}?${encodeGetParams(params)}`, { method: method, body: payload })
         .then((res) => res[contentType]())
-        .then(data => callback(false, data))
-        .catch(e => callback(e, undefined));
+        .then(data => {
+            callback(false, data);
+        })
+        .catch(e => {
+            toastr.error(e);
+            callback(e, undefined);
+        });
 }
 
 export const fetchZigbeeDevicesList = (callback: CallbackHandler<Device[]>): void => {
     callApi("/api/zigbee/devices", "GET", {}, undefined, (err, response: Dictionary<Device>) => {
-        callback(err, !err ? convertRawDevices(response): undefined);
+        callback(err, !err ? convertRawDevices(response) : undefined);
     });
 };
 

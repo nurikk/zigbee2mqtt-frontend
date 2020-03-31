@@ -9,6 +9,7 @@ import cx from "classnames";
 import { Device, DeviceSupportStatus, inteviewsCount } from "../../types";
 import { formatIEEEAddr, genDeviceDetailsLink, genDeviceImageUrl, genDeviceShortAddress } from "../../utils";
 import SafeImg from "../safe-image";
+import toastr from "toastr";
 
 type SortDirection = "asc" | "desc";
 //TODO: proper type alias
@@ -89,7 +90,7 @@ export class ZigbeeTable extends Component<TimedProps, State> {
                 const restored: Partial<State> = JSON.parse(storedState);
                 this.setState(restored);
             } catch (e) {
-                console.error(e);
+                toastr.error(e);
             }
         }
     }
@@ -104,7 +105,7 @@ export class ZigbeeTable extends Component<TimedProps, State> {
         try {
             localStorage.setItem(storeKey, JSON.stringify(storeData));
         } catch (e) {
-            console.error(e);
+            toastr.error(e);
         }
     };
     loadData = (): void => {
@@ -124,9 +125,7 @@ export class ZigbeeTable extends Component<TimedProps, State> {
     onInterviewClick = (device: Device): void => {
         if (confirm("Start Interview?")) {
             startInterview(genDeviceShortAddress(device.nwkAddr), (err, response) => {
-                if (err) {
-                    alert(err);
-                } else {
+                if (!err) {
                     this.loadData();
                 }
             });
