@@ -4,7 +4,7 @@ import { LogMessage } from "../discovery/types";
 import style from "./style.css";
 import cx from "classnames";
 import { clearLogsBuffer, fetchLogsBuffer, getCurrentLogLevel, setLogLevel } from "../actions";
-import toastr from "toastr";
+import { Notyf } from "notyf";
 
 export enum LogLevel {
     LOG_OFF,
@@ -55,7 +55,7 @@ export default class LogViewer extends Component<{}, LogViewerState> {
             if (!err && response.success) {
                 this.setState({ logLevel: response.result });
             } else {
-                toastr.error("Failed to load current log level");
+                new Notyf().error("Failed to load current log level");
             }
         });
     }
@@ -65,7 +65,7 @@ export default class LogViewer extends Component<{}, LogViewerState> {
         try {
             event = JSON.parse(wsEvent.data) as LogMessage;
         } catch (e) {
-            toastr.error(`Cant parse json ${e}`);
+            new Notyf().error(`Cant parse json ${e}`);
         }
         if (event.category === "log") {
             this.processLog(event);
@@ -90,9 +90,9 @@ export default class LogViewer extends Component<{}, LogViewerState> {
     onClearCacheClick = (e: Event) => {
         clearLogsBuffer((err, resp) => {
             if (!err && resp.success) {
-                toastr.success("Cache cleared");
+                new Notyf().success("Cache cleared");
             } else {
-                toastr.error("Failed");
+                new Notyf().error("Failed");
             }
 
         });
@@ -105,7 +105,7 @@ export default class LogViewer extends Component<{}, LogViewerState> {
             if (!err && data.success) {
                 this.setState({ logLevel });
             } else {
-                toastr.error("Cant set log level");
+                new Notyf().error("Cant set log level");
             }
 
         });

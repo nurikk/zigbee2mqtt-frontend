@@ -3,7 +3,7 @@ import { Device, Dictionary, FileDescriptor } from "../types";
 import { TimeInfo } from "./time";
 import { encodeGetParams } from "../utils";
 import { LogLevel } from "./log-viewer";
-import toastr from "toastr";
+import { Notyf } from 'notyf';
 
 export interface ApiResponse<T> {
     success: boolean;
@@ -21,7 +21,7 @@ function callApi<T>(url: string, method: HttMethod, params: Dictionary<any>, pay
             callback(false, data);
         })
         .catch(e => {
-            toastr.error(e);
+            new Notyf().error(e);
             callback(e, undefined);
         });
 }

@@ -17,13 +17,14 @@
   "eslintIgnore": [
     "dist/*"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "@types/notyf": "^3.0.0",
+    "notyf": "^3.5.0"
+  },
   "devDependencies": {
     "@types/codemirror": "0.0.88",
-    "@types/toastr": "^2.1.37",
     "codemirror": "^5.52.2",
     "preact-codemirror": "^1.0.1",
-    "toastr": "^2.1.4",
     "@teamsupercell/typings-for-css-modules-loader": "^2.1.0",
     "@types/classnames": "^2.2.10",
     "@types/d3-drag": "^1.2.3",

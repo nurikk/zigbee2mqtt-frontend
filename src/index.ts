@@ -1,5 +1,5 @@
 // const poly = require("preact-cli/lib/lib/webpack/polyfills");
-import "toastr/build/toastr.css";
+import 'notyf/notyf.min.css';
 
 import habitat from "preact-habitat";
 import Map from "./components/map";

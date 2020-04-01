@@ -6,7 +6,7 @@ import TreeView from "../tree-view";
 import { ApiResponse, deleteFile, evalCode, getFilesList, readFile, writeFile } from "../actions";
 import CodeMirror from "./codemirror";
 import { FileDescriptor } from "../../types";
-import toastr from "toastr";
+import { Notyf } from 'notyf';
 import orderBy from "lodash/orderBy";
 
 interface CodeEditorState {
@@ -52,7 +52,7 @@ export default class CodeEditor extends Component<{}, CodeEditorState> {
     onSaveCode = () => {
         const { currentFile, currentFileContent } = this.state;
         writeFile(currentFile.name, currentFileContent, (err, response) => {
-            toastr.info(`Saved ${currentFile.name}`);
+            new Notyf().success(`Saved ${currentFile.name}`);
         });
     };
 
