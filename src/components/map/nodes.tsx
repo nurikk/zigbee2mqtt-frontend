@@ -61,11 +61,12 @@ export const isOnline = (device: Device, timeInfo: TimeInfo | undefined): boolea
 interface NodeState {
     imgUrl: string;
 }
+
 class Node extends Component<NodeProps, NodeState> {
     ref = createRef<SVGPolygonElement | SVGCircleElement | SVGImageElement>();
     state = {
         imgUrl: ""
-    }
+    };
 
     componentDidMount(): void {
         const { current } = this.ref;
@@ -76,7 +77,7 @@ class Node extends Component<NodeProps, NodeState> {
         // eslint-disable-next-line react/no-did-mount-set-state
         this.setState({
             imgUrl: genDeviceImageUrl(node.device)
-        })
+        });
     }
 
 
@@ -99,7 +100,7 @@ class Node extends Component<NodeProps, NodeState> {
     onImageError = (): void => {
         this.setState({
             imgUrl: "https://raw.githubusercontent.com/slsys/Gateway/master/devices/png/generic-zigbee-device.png"
-        })
+        });
     };
 
     render(): ComponentChild {
@@ -108,32 +109,32 @@ class Node extends Component<NodeProps, NodeState> {
         const { onMouseOver, onMouseOut, onDblClick, onImageError } = this;
         const deviceType = (node.device as Device).type as string;
         const cn = cx(style.node, style[deviceType], { [style.offline]: !isOnline(node.device, time) });
+        return (<g class={cn}
+                   ref={this.ref as RefObject<SVGImageElement>}
+                   onMouseOver={onMouseOver}
+                   onMouseOut={onMouseOut}
+                   onDblClick={onDblClick}>
+            {
+                node.device.type === "Coordinator" ? (
+                    <polygon
+                        points={getStarShape(5, 5, 14) as string}
+                    />
+                ) : (
+                    <image
+                        width={32}
+                        height={32}
+                        onError={onImageError}
 
-        if (node.device.type === "Coordinator") {
-            return (
-                <polygon
-                    className={cn}
-                    ref={this.ref as RefObject<SVGPolygonElement>}
-                    points={getStarShape(5, 5, 14) as string}
-                    onMouseOver={onMouseOver}
-                    onMouseOut={onMouseOut}
-                    onDblClick={onDblClick}
-                />
-            );
-        } else {
-            return (
-                <image
-                    width={32}
-                    height={32}
-                    onError={onImageError}
-                    onMouseOver={onMouseOver}
-                    onMouseOut={onMouseOut}
-                    onDblClick={onDblClick}
-                    className={`${style.img} ${cn}`}
-                    ref={this.ref as RefObject<SVGImageElement>}
-                    href={imgUrl}
-                />);
-        }
+                        className={`${style.img}`}
+
+                        href={imgUrl}
+                    />
+                )
+            }
+            <text>{node.name}</text>
+
+        </g>);
+
     }
 }
 

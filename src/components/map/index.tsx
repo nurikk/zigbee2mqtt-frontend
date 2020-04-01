@@ -1,7 +1,6 @@
 import { Component, ComponentChild, createRef, h } from "preact";
 import Links from "./links";
 import Nodes from "./nodes";
-import Labels from "./labels";
 import {
     forceCenter,
     forceCollide,
@@ -94,7 +93,7 @@ export class Map extends Component<TimedProps, State> {
 
             // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
             // @ts-ignore
-            link.attr("d", (d: LinkI): string => `M ${Math.max(radius, Math.min(width - radius, d.source.x))} ${Math.max(radius, Math.min(height - radius, d.source.y))} L ${Math.max(radius, Math.min(height - radius, d.target.x))} ${Math.max(radius, Math.min(height - radius, d.target.y))}`);
+            link.attr("d", (d: LinkI): string => `M ${Math.max(radius, Math.min(width - radius, d.source.x))} ${Math.max(radius, Math.min(height - radius, d.source.y))} L ${Math.max(radius, Math.min(width - radius, d.target.x))} ${Math.max(radius, Math.min(height - radius, d.target.y))}`);
 
             linkLabel.attr("transform", function(d) {
                 //TODO: add type guard
@@ -108,12 +107,8 @@ export class Map extends Component<TimedProps, State> {
             });
             const imgXShift = 32 / 2;
             const imgYShift = 32 / 2;
-
             node.attr("transform", d => `translate(${Math.max(radius, Math.min(width - radius, d.x)) - imgXShift}, ${Math.max(radius, Math.min(height - radius, d.y)) - imgYShift})`);
 
-            label
-                .attr("x", d => Math.max(radius, Math.min(width - radius, d.x)) - 25)
-                .attr("y", d => Math.max(radius, Math.min(height - radius, d.y)) - 15);
         };
         const { graph } = this.state;
         this.simulation.nodes(graph.nodes).on("tick", ticked);
@@ -197,12 +192,6 @@ export class Map extends Component<TimedProps, State> {
                         onMouseOut={removeTooltip}
                         onDblClick={openDetailsWindow}
                         time={time}
-                    />
-                    <Labels
-                        nodes={graph.nodes}
-                        onMouseOver={setTooltip}
-                        onMouseOut={removeTooltip}
-                        onDblClick={openDetailsWindow}
                     />
                     {tooltipNode ? (
                         <foreignObject

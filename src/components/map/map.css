@@ -9,8 +9,6 @@
     opacity: 1;
 }
 .node {
-    stroke: #fff;
-    stroke-width: 2px;
     cursor: pointer;
 }
 
@@ -53,7 +51,14 @@
 .EndDevice {
     fill: green;
 }
+.Coordinator {
+    stroke: #fff;
+    stroke-width: 2px;
+}
+.Coordinator text {
+    display: none;
 
+}
 .Router,
 .Coordinator {
     fill: blue;
