@@ -67,6 +67,7 @@ export default class Discovery extends Component<{}, DiscoveryState> {
             event = JSON.parse(wsEvent.data) as WebsocketMessage;
         } catch (e) {
             toastr.error(`Cant parse json, ${e}`);
+            console.log(`Cant parse json, ${e}`, wsEvent.data);
         }
         if (event.category === "zigbee") {
             this.processZigbeeEvent(event.payload as ZigbeePayload);
