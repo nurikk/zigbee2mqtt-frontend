@@ -84,9 +84,6 @@ export class Map extends Component<TimedProps, State> {
         const linkLabel = selectAll<SVGLineElement, LinkI>(
             `.${style.linkLabel}`
         );
-        const label = selectAll<SVGTextElement, NodeI>(
-            `.${style.label}`
-        );
         const ticked = (): void => {
             const radius = 40;
             const { width, height } = this.state;

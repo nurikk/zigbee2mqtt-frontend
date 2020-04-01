@@ -9,6 +9,7 @@
     opacity: 1;
 }
 .node {
+    font-size: 14px;
     cursor: pointer;
 }
 
@@ -24,20 +25,6 @@
     fill: black;
     flood-color: #FFFFFF;
     flood-opacity: 1;
-}
-
-.label {
-    font-size: 14px;
-    fill: black;
-    cursor: pointer;
-}
-
-.label.Coordinator {
-    display: none;
-}
-
-.labels {
-    -custom-noop: noop;
 }
 
 .links {

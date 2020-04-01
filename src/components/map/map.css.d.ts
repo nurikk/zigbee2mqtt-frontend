@@ -10,8 +10,6 @@ declare namespace MapCssModule {
         container: string;
         foreignObject: string;
         img: string;
-        label: string;
-        labels: string;
         link: string;
         linkLabel: string;
         links: string;
