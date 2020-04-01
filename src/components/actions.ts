@@ -54,19 +54,19 @@ export const enableJoin = (duration = 255, target = "", callback: CallbackHandle
 
 
 export const clearLogsBuffer = (callback: CallbackHandler<ApiResponse<void>>): void => {
-    callApi("/api/log", "POST", { action: "clear" }, undefined, callback);
+    callApi("/api/messages-history", "POST", { action: "clear" }, undefined, callback);
 };
 
 export const fetchLogsBuffer = (callback: CallbackHandler<string>): void => {
-    callApi("/api/log", "GET", { action: "getBuffer" }, undefined, callback, "text");
+    callApi("/api/messages-history", "GET", { action: "getBuffer" }, undefined, callback, "text");
 };
 
 export const setLogLevel = (logLevel: LogLevel, callback: CallbackHandler<ApiResponse<void>>): void => {
-    callApi("/api/log", "POST", { action: "setLevel", value: logLevel }, undefined, callback);
+    callApi("/api/messages-history", "POST", { action: "setLevel", value: logLevel }, undefined, callback);
 };
 
 export const getCurrentLogLevel = (callback: CallbackHandler<ApiResponse<LogLevel>>): void => {
-    callApi("/api/log", "GET", { action: "getLevel" }, undefined, callback);
+    callApi("/api/messages-history", "GET", { action: "getLevel" }, undefined, callback);
 };
 
 export const getFilesList = (path: string, callback: CallbackHandler<ApiResponse<FileDescriptor[]>>): void => {
