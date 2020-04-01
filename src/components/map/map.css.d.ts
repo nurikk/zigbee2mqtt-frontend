@@ -9,6 +9,7 @@ declare namespace MapCssModule {
         Router2Router: string;
         container: string;
         foreignObject: string;
+        img: string;
         label: string;
         labels: string;
         link: string;

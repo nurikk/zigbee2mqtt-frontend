@@ -4,12 +4,11 @@ import Nodes from "./nodes";
 import Labels from "./labels";
 import {
     forceCenter,
+    forceCollide,
     forceLink,
     ForceLink,
     forceManyBody,
     forceSimulation,
-    forceX,
-    forceY,
     Simulation
 } from "d3-force";
 import { selectAll } from "d3-selection";
@@ -47,15 +46,14 @@ const getDistance = (d: LinkI): number => {
     switch (d.type) {
         case "Router2Router":
         case "Router2Coordinator":
-            return 200;
+            return 300;
         case "EndDevice2Coordinator":
         case "EndDevice2Router":
-            return 100;
-        default:
             return 150;
+        default:
+            return 200;
     }
 };
-const MOBILE_SCREEN_THRESHOLD = 400;
 
 export class Map extends Component<TimedProps, State> {
     ref = createRef<HTMLDivElement>();
@@ -90,10 +88,13 @@ export class Map extends Component<TimedProps, State> {
         const label = selectAll<SVGTextElement, NodeI>(
             `.${style.label}`
         );
-        const linkComputeFn = (d: LinkI): string =>
-            `M ${(d.source as NodeI).x} ${(d.source as NodeI).y} L ${(d.target as NodeI).x} ${(d.target as NodeI).y}`;
         const ticked = (): void => {
-            link.attr("d", linkComputeFn);
+            const radius = 40;
+            const { width, height } = this.state;
+
+            // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+            // @ts-ignore
+            link.attr("d", (d: LinkI): string => `M ${Math.max(radius, Math.min(width - radius, d.source.x))} ${Math.max(radius, Math.min(height - radius, d.source.y))} L ${Math.max(radius, Math.min(height - radius, d.target.x))} ${Math.max(radius, Math.min(height - radius, d.target.y))}`);
 
             linkLabel.attr("transform", function(d) {
                 //TODO: add type guard
@@ -105,10 +106,14 @@ export class Map extends Component<TimedProps, State> {
                 }
                 return "rotate(0)";
             });
-            node.attr("transform", d => `translate(${d.x}, ${d.y})`);
+            const imgXShift = 30 / 2;
+            const imgYShift = 30 / 2;
+
+            node.attr("transform", d => `translate(${Math.max(radius, Math.min(width - radius, d.x)) - imgXShift}, ${Math.max(radius, Math.min(height - radius, d.y)) - imgYShift})`);
+
             label
-                .attr("x", d => (d.x as number) + 5)
-                .attr("y", d => (d.y as number) + 5);
+                .attr("x", d => Math.max(radius, Math.min(width - radius, d.x)) - 25)
+                .attr("y", d => Math.max(radius, Math.min(height - radius, d.y)) - 15);
         };
         const { graph } = this.state;
         this.simulation.nodes(graph.nodes).on("tick", ticked);
@@ -143,23 +148,30 @@ export class Map extends Component<TimedProps, State> {
         const linkForce = forceLink<NodeI, LinkI>()
             .id(d => d.id)
             .distance(getDistance)
-            .strength(1);
+            .strength(0.2);
 
-        const chargeForce =
-            forceManyBody()
+        const chargeForce = forceManyBody()
                 .distanceMin(200)
                 .distanceMax(1000)
                 .strength(-200);
 
+        const repelForce = forceManyBody()
+            .strength(-140)
+            .distanceMax(50)
+            .distanceMin(10);
+
+        const collisionForce = forceCollide(40)
+            .strength(1)
+            .iterations(100);
+
+        const centerForce = forceCenter(width / 2, height / 2);
+
         this.simulation
             .force("link", linkForce)
             .force("charge", chargeForce)
-            .force("center", forceCenter(width / 2, height / 2));
-
-        if (width < MOBILE_SCREEN_THRESHOLD) {
-            this.simulation.force("x", forceX(width / 2).strength(0.1))
-                .force("y", forceY(height / 2).strength(0.1));
-        }
+            .force("collisionForce", collisionForce)
+            .force("repelForce", repelForce)
+            .force("center", centerForce);
     }
 
     componentDidMount(): void {

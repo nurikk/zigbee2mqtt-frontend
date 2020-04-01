@@ -32,6 +32,9 @@ const toHHMMSS = (secs: number): string => {
 export const lastSeen = (device: Device, timeInfo: TimeInfo): string => {
     if (device.last_seen && timeInfo) {
         const lastSeen = timeInfo.ts - parseInt(device.last_seen, 10);
+        if (lastSeen < 0) {
+            return 'Few seconds ago'
+        }
         return toHHMMSS(lastSeen);
     }
 };

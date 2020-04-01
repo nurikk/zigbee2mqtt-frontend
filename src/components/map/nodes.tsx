@@ -11,6 +11,7 @@ import * as style from "./map.css";
 import { MouseEventsResponderNode } from ".";
 import { TimedProps, TimeInfo } from "../time";
 import { Device } from "../../types";
+import { genDeviceImageUrl } from "../../utils";
 
 const calcStarPoints = (
     centerX: number,
@@ -36,8 +37,8 @@ const calcStarPoints = (
 
 const getStarShape = (innerCircleArms: number, styleStarWidth: number, innerOuterRadiusRatio: number): string => {
     return calcStarPoints(
-        0,
-        0,
+        15,
+        15,
         innerCircleArms,
         styleStarWidth,
         innerOuterRadiusRatio
@@ -57,15 +58,25 @@ export const isOnline = (device: Device, timeInfo: TimeInfo | undefined): boolea
     return timeInfo.ts - parseInt(device.last_seen, 10) < offlineTimeout;
 };
 
-
-class Node extends Component<NodeProps, {}> {
-    ref = createRef<SVGPolygonElement | SVGCircleElement>();
+interface NodeState {
+    imgUrl: string;
+}
+class Node extends Component<NodeProps, NodeState> {
+    ref = createRef<SVGPolygonElement | SVGCircleElement | SVGImageElement>();
+    state = {
+        imgUrl: ""
+    }
 
     componentDidMount(): void {
         const { current } = this.ref;
         const { node } = this.props;
 
         select(current as SVGElement).data([node]);
+
+        // eslint-disable-next-line react/no-did-mount-set-state
+        this.setState({
+            imgUrl: genDeviceImageUrl(node.device)
+        })
     }
 
 
@@ -73,22 +84,28 @@ class Node extends Component<NodeProps, {}> {
         const { node, onMouseOut } = this.props;
         onMouseOut && onMouseOut(node);
     };
-;
 
     onMouseOver = (): void => {
         const { node, onMouseOver } = this.props;
         onMouseOver && onMouseOver(node);
     };
-;
+
     onDblClick = (): void => {
         const { node, onDblClick } = this.props;
         onDblClick && onDblClick(node);
     };
-;
+
+
+    onImageError = (): void => {
+        this.setState({
+            imgUrl: "https://raw.githubusercontent.com/slsys/Gateway/master/devices/png/generic-zigbee-device.png"
+        })
+    };
 
     render(): ComponentChild {
+        const { imgUrl } = this.state;
         const { node, time } = this.props;
-        const { onMouseOver, onMouseOut, onDblClick } = this;
+        const { onMouseOver, onMouseOut, onDblClick, onImageError } = this;
         const deviceType = (node.device as Device).type as string;
         const cn = cx(style.node, style[deviceType], { [style.offline]: !isOnline(node.device, time) });
 
@@ -105,13 +122,14 @@ class Node extends Component<NodeProps, {}> {
             );
         } else {
             return (
-                <circle
+                <image
+                    onError={onImageError}
                     onMouseOver={onMouseOver}
                     onMouseOut={onMouseOut}
                     onDblClick={onDblClick}
-                    className={cn}
-                    ref={this.ref as RefObject<SVGCircleElement>}
-                    r={5}
+                    className={`${style.img} ${cn}`}
+                    ref={this.ref as RefObject<SVGImageElement>}
+                    href={imgUrl}
                 />);
         }
     }

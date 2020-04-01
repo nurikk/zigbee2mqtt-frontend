@@ -3,7 +3,11 @@
     height: 100%;
     user-select: none;
 }
-
+.img {
+    width: 30px;
+    height: 30px;
+    opacity: 1;
+}
 .node {
     stroke: #fff;
     stroke-width: 2px;
