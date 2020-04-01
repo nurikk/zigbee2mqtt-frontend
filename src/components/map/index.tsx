@@ -106,8 +106,8 @@ export class Map extends Component<TimedProps, State> {
                 }
                 return "rotate(0)";
             });
-            const imgXShift = 30 / 2;
-            const imgYShift = 30 / 2;
+            const imgXShift = 32 / 2;
+            const imgYShift = 32 / 2;
 
             node.attr("transform", d => `translate(${Math.max(radius, Math.min(width - radius, d.x)) - imgXShift}, ${Math.max(radius, Math.min(height - radius, d.y)) - imgYShift})`);
 

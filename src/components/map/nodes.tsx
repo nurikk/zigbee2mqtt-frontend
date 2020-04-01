@@ -123,6 +123,8 @@ class Node extends Component<NodeProps, NodeState> {
         } else {
             return (
                 <image
+                    width={32}
+                    height={32}
                     onError={onImageError}
                     onMouseOver={onMouseOver}
                     onMouseOut={onMouseOut}
