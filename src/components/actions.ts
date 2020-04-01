@@ -21,7 +21,7 @@ function callApi<T>(url: string, method: HttMethod, params: Dictionary<any>, pay
             callback(false, data);
         })
         .catch(e => {
-            new Notyf().error(e);
+            new Notyf().error(e.toString());
             callback(e, undefined);
         });
 }

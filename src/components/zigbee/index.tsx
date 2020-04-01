@@ -90,7 +90,7 @@ export class ZigbeeTable extends Component<TimedProps, State> {
                 const restored: Partial<State> = JSON.parse(storedState);
                 this.setState(restored);
             } catch (e) {
-                new Notyf().error(e);
+                new Notyf().error(e.toString());
             }
         }
     }
@@ -105,13 +105,15 @@ export class ZigbeeTable extends Component<TimedProps, State> {
         try {
             localStorage.setItem(storeKey, JSON.stringify(storeData));
         } catch (e) {
-            new Notyf().error(e);
+            new Notyf().error(e.toString());
         }
     };
     loadData = (): void => {
         this.setState({ isLoading: true }, () => {
             fetchZigbeeDevicesList((err, devices: Device[]) => {
-                this.setState({ isLoading: false, devices });
+                if (!err) {
+                    this.setState({ isLoading: false, devices });
+                }
             });
         });
     };
