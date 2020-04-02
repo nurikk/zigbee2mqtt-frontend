@@ -2,6 +2,7 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const CompressionPlugin = require('compression-webpack-plugin');
 
 const path = require('path');
 const glob = require('glob');
@@ -36,6 +37,7 @@ module.exports = (env, args) => {
 		plugins.push(new BundleAnalyzerPlugin({
 			analyzerMode: 'static'
 		}));
+		plugins.push(new CompressionPlugin());
 	}
 
 
