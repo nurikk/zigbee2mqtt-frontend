@@ -3,6 +3,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const CompressionPlugin = require('compression-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const path = require('path');
 const glob = require('glob');
@@ -18,6 +19,7 @@ module.exports = (env, args) => {
 	}
 
 	const plugins = [
+		new MiniCssExtractPlugin(),
 		new ForkTsCheckerWebpackPlugin(),
 		new CopyWebpackPlugin([{
 			from: '**/*',
@@ -80,7 +82,7 @@ module.exports = (env, args) => {
 				{
 					test: /\.css$/i,
 					use: [
-						"style-loader",
+						MiniCssExtractPlugin.loader,
 						"@teamsupercell/typings-for-css-modules-loader",
 						{
 							loader: "css-loader",
@@ -95,7 +97,7 @@ module.exports = (env, args) => {
 					test: /\.css$/i,
 					include: /node_modules/,
 					use: [
-						"style-loader",
+						MiniCssExtractPlugin.loader,
 						"css-loader"
 					]
 				}

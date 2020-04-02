@@ -44,6 +44,7 @@
     "gh-pages": "^2.2.0",
     "html-webpack-plugin": "^4.0.4",
     "lodash": "^4.17.15",
+    "mini-css-extract-plugin": "^0.9.0",
     "preact": "^10.3.4",
     "preact-habitat": "^3.3.0",
     "prettier": "^2.0.2",
