@@ -1,8 +1,8 @@
 import { LinkI } from "./types";
 import { Component, ComponentChild, createRef, FunctionalComponent, h, RefObject } from "preact";
-import { select } from "d3-selection";
 import * as style from "./map.css";
 import cx from "classnames";
+import * as d3 from "d3";
 
 interface LinkProps {
     link: LinkI;
@@ -15,7 +15,7 @@ class Link extends Component<LinkProps, {}> {
     componentDidMount(): void {
         const { current } = this.ref;
         const { link } = this.props;
-        select(current as SVGPathElement).data([link]);
+        d3.select(current as SVGPathElement).data([link]);
     }
 
     render(): ComponentChild {
@@ -43,7 +43,7 @@ class LinkLabel extends Component<LinkLabelProps, {}> {
     componentDidMount(): void {
         const { current } = this.ref;
         const { link } = this.props;
-        select(current as SVGTextElement).data([link]);
+        d3.select(current as SVGTextElement).data([link]);
     }
 
     render(): ComponentChild {

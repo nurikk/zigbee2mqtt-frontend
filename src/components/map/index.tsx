@@ -1,16 +1,7 @@
 import { Component, ComponentChild, createRef, h } from "preact";
 import Links from "./links";
 import Nodes from "./nodes";
-import {
-    forceCenter,
-    forceCollide,
-    forceLink,
-    ForceLink,
-    forceManyBody,
-    forceSimulation,
-    Simulation
-} from "d3-force";
-import { selectAll } from "d3-selection";
+import * as d3 from "d3";
 import { fetchZigbeeDevicesList } from "../actions";
 import style from "./map.css";
 import { GraphI, LinkI, NodeI } from "./types";
@@ -25,13 +16,6 @@ export interface MouseEventsResponderNode {
     onMouseOver?: (arg0: NodeI) => void;
     onMouseOut?: (arg0: NodeI) => void;
     onDblClick?: (arg0: NodeI) => void;
-}
-
-export interface TimeInfo {
-    ntp_enable: boolean;
-    ntp_server: string;
-    tz: string;
-    ts: number;
 }
 
 interface State {
@@ -56,7 +40,7 @@ const getDistance = (d: LinkI): number => {
 
 export class Map extends Component<TimedProps, State> {
     ref = createRef<HTMLDivElement>();
-    simulation!: Simulation<NodeI, LinkI>;
+    simulation!: d3.Simulation<NodeI, LinkI>;
 
     constructor() {
         super();
@@ -70,18 +54,18 @@ export class Map extends Component<TimedProps, State> {
             tooltipNode: false
         };
 
-        this.simulation = forceSimulation<NodeI>();
+        this.simulation = d3.forceSimulation<NodeI>();
     }
 
     updateNodes(): void {
         this.updateForces();
-        const node = selectAll<SVGGeometryElement, NodeI>(
+        const node = d3.selectAll<SVGGeometryElement, NodeI>(
             `.${style.node}`
         );
-        const link = selectAll<SVGLineElement, LinkI>(
+        const link = d3.selectAll<SVGLineElement, LinkI>(
             `.${style.link}`
         );
-        const linkLabel = selectAll<SVGLineElement, LinkI>(
+        const linkLabel = d3.selectAll<SVGLineElement, LinkI>(
             `.${style.linkLabel}`
         );
         const ticked = (): void => {
@@ -109,7 +93,7 @@ export class Map extends Component<TimedProps, State> {
         };
         const { graph } = this.state;
         this.simulation.nodes(graph.nodes).on("tick", ticked);
-        const linkForce = this.simulation.force("link") as ForceLink<NodeI,
+        const linkForce = this.simulation.force("link") as d3.ForceLink<NodeI,
             LinkI>;
         linkForce.links(graph.links);
         this.simulation.restart();
@@ -137,26 +121,26 @@ export class Map extends Component<TimedProps, State> {
     updateForces(): void {
         const { width, height } = this.state;
 
-        const linkForce = forceLink<NodeI, LinkI>()
+        const linkForce = d3.forceLink<NodeI, LinkI>()
             .id(d => d.id)
             .distance(getDistance)
             .strength(0.2);
 
-        const chargeForce = forceManyBody()
-                .distanceMin(200)
-                .distanceMax(1000)
-                .strength(-200);
+        const chargeForce = d3.forceManyBody()
+            .distanceMin(200)
+            .distanceMax(1000)
+            .strength(-200);
 
-        const repelForce = forceManyBody()
+        const repelForce = d3.forceManyBody()
             .strength(-140)
             .distanceMax(50)
             .distanceMin(10);
 
-        const collisionForce = forceCollide(40)
+        const collisionForce = d3.forceCollide(40)
             .strength(1)
             .iterations(100);
 
-        const centerForce = forceCenter(width / 2, height / 2);
+        const centerForce = d3.forceCenter(width / 2, height / 2);
 
         this.simulation
             .force("link", linkForce)

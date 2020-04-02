@@ -1,9 +1,7 @@
 import { Component, ComponentChild, createRef, h, RefObject } from "preact";
 
 
-import { drag } from "d3-drag";
-import { Simulation } from "d3-force";
-import { event, select, selectAll } from "d3-selection";
+import * as d3 from "d3";
 import { LinkI, NodeI } from "./types";
 import cx from "classnames";
 
@@ -72,7 +70,7 @@ class Node extends Component<NodeProps, NodeState> {
         const { current } = this.ref;
         const { node } = this.props;
 
-        select(current as SVGElement).data([node]);
+        d3.select(current as SVGElement).data([node]);
 
         // eslint-disable-next-line react/no-did-mount-set-state
         this.setState({
@@ -140,7 +138,7 @@ class Node extends Component<NodeProps, NodeState> {
 
 interface NodesProps extends MouseEventsResponderNode, TimedProps {
     nodes: NodeI[];
-    simulation: Simulation<NodeI, LinkI>;
+    simulation: d3.Simulation<NodeI, LinkI>;
 }
 
 interface NodesState {
@@ -150,20 +148,20 @@ interface NodesState {
 export default class Nodes extends Component<NodesProps, NodesState> {
     updateDrag(): void {
         const { simulation } = this.props;
-        const dragForce = drag<SVGCircleElement, NodeI>()
+        const dragForce = d3.drag<SVGCircleElement, NodeI>()
             .on("start", d => {
-                if (!event.active) {
+                if (!d3.event.active) {
                     simulation.alphaTarget(0.3).restart();
                 }
                 d.fx = d.x;
                 d.fy = d.y;
             })
             .on("drag", d => {
-                d.fx = event.x;
-                d.fy = event.y;
+                d.fx = d3.event.x;
+                d.fy = d3.event.y;
             })
             .on("end", d => {
-                if (!event.active) {
+                if (!d3.event.active) {
                     simulation.alphaTarget(0);
                 }
                 d.fx = undefined;
@@ -171,7 +169,7 @@ export default class Nodes extends Component<NodesProps, NodesState> {
             });
 
 
-        selectAll<SVGCircleElement, NodeI>(`.${style.node}`)
+        d3.selectAll<SVGCircleElement, NodeI>(`.${style.node}`)
             .call(dragForce);
     }
 

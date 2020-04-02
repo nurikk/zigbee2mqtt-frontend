@@ -48,4 +48,28 @@ export const sanitizeModelNameForImageUrl = (modelName: string): string => {
 
 export const genDeviceImageUrl = (device: Device): string => (`https://raw.githubusercontent.com/slsys/Gateway/master/devices/png/${sanitizeModelNameForImageUrl(device.ModelId)}.png`);
 
+export type LoadableFileTypes = "js" | "css";
+
+export const fetchJs = (url) => {
+    return new Promise((resolve, reject) => {
+        const scriptElement = document.createElement("script");
+        scriptElement.addEventListener("load", resolve);
+        scriptElement.addEventListener("error", reject);
+        scriptElement.setAttribute("type", "text/javascript");
+        scriptElement.setAttribute("src", url);
+        document.getElementsByTagName("head")[0].appendChild(scriptElement);
+    });
+};
+
+export const fetchStyle = (url) => {
+    return new Promise((resolve, reject) => {
+        const link = document.createElement("link");
+        link.addEventListener("load", resolve);
+        link.addEventListener("error", reject);
+        link.setAttribute("type", "text/css");
+        link.setAttribute("rel", "stylesheet");
+        link.setAttribute("href", url);
+        document.getElementsByTagName("head")[0].appendChild(link)
+    });
+};
 

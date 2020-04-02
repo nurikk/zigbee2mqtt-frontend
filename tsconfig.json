@@ -3,7 +3,7 @@
 		"outDir": "./dist",
 		"target": "es5",
 		"moduleResolution": "node",
-		"module": "ESNext",
+		"module": "esnext",
 		"noImplicitAny": false,
 		"removeComments": true,
 		"sourceMap": true,
