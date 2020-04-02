@@ -108,7 +108,8 @@ module.exports = (env, args) => {
 				'/api/scripts': 'http://192.168.1.209',
 				'/api/zigbee': 'http://192.168.1.209',
 				'/api/files': 'http://192.168.1.209',
-				'/api/log': 'http://192.168.1.209'
+				'/api/log': 'http://192.168.1.209',
+				'/api/wifi': 'http://192.168.1.209',
 			},
 			headers: {
 				'Access-Control-Allow-Origin': '*'
