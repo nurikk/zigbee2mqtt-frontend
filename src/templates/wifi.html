@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head><title>SLS Gateway: WiFi Setup</title>
+    <style>
+
+     /*this rule for offline mode(when AP is enabled), rule will be replaced once bootstrap.min.css is loaded  */
+    .navbar, .modal {display: none}
+        html, body {
+        height: 100%;
+    }
+
+    body {
+        padding-top: 5rem;
+        background-color: #eef5f9 !important;
+    }
+    </style>
+<!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"-->
+<!--          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">-->
+<!--    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"-->
+<!--            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"-->
+<!--            crossorigin="anonymous"></script>-->
+<!--    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"-->
+<!--            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"-->
+<!--            crossorigin="anonymous"></script>-->
+<!--    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"-->
+<!--            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"-->
+<!--            crossorigin="anonymous"></script>-->
+<!--    <script type="text/javascript" src="https://cdn.slsys.io/js/vendor-2020.04.01d1.js"></script>-->
+<!--    <script type="text/javascript" src="https://cdn.slsys.io/js/main-2020.04.01d1.js"></script>-->
+    <meta name="viewport" content="width=device-width">
+    <meta name="mobile-web-app-capable" content="yes">
+</head>
+<body>
+<nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: #1e88e5;">
+    <a class="navbar-brand"
+                                                                                                 href="/">#StayHome
+    Gateway</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+            aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation"><span
+            class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item"><a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a></li>
+            <li class="nav-item">
+            <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="dropdown00"
+                                             data-toggle="dropdown" aria-expanded="false">Zigbee</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown00"><a class="dropdown-item"
+                                                                           href="/zigbee">Devices</a> <a
+                        class="dropdown-item" href="/zigbee/map">Map</a> <a class="dropdown-item" href="/zigbee/groups">Groups</a>
+                    <a class="dropdown-item" href="/zigbee/config">Config</a></div>
+            </li>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="/log">Log</a></li>
+            <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="dropdown01"
+                                             data-toggle="dropdown" aria-expanded="false">Settings</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown01"><a class="dropdown-item" href="/wifi">WiFi
+                    Setup</a> <a class="dropdown-item" href="/time">Time Setup</a> <a class="dropdown-item"
+                                                                                      href="/link">Link Setup</a> <a
+                        class="dropdown-item" href="/hw">HW Setup</a></div>
+            </li>
+            <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="dropdown02"
+                                             data-toggle="dropdown" aria-expanded="false">Help</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown02"><a class="dropdown-item"
+                                                                           href="https://slsys.github.io/Gateway/">WiKi</a>
+                    <a class="dropdown-item" href="https://t.me/slsys">Telegram (Support, discussions)</a> <a
+                            class="dropdown-item" href="https://mjdm.ru/forum/viewtopic.php?t=6700">Forum (Updates,
+                        knowledges)</a></div>
+            </li>
+        </ul>
+        <ul class="navbar-nav">
+            <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="dropdown03"
+                                             data-toggle="dropdown" aria-expanded="false">Actions</a>
+                <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="/scripts">Scripts</a> <a
+                        class="dropdown-item" href="/backup">Backup</a> <a class="dropdown-item" href="/update">Update
+                    Firmware</a> <a class="dropdown-item" data-toggle="modal" data-target="#zb_reset_modal" href="#">Zigbee
+                    Reset</a> <a class="dropdown-item" data-toggle="modal" data-target="#reboot_modal" href="#">Reboot
+                    System</a></div>
+            </li>
+        </ul>
+    </div>
+</nav><!-- Modal -->
+<div class="modal fade" id="reboot_modal" tabindex="-1" role="dialog" aria-labelledby="reboot_modalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title" id="reboot_modalLabel">Reboot</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body"> Are you sure you want to reboot the device?</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" onclick="location.href='/reboot';">Reboot</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="zb_reset_modal" tabindex="-1" role="dialog" aria-labelledby="zb_reset_modalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title" id="zb_reset_modalLabel">Zigbee reset</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body"> Are you sure you want to reset all zigbee devices?</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" onclick="location.href='/zigbee/reset';">Reset</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+<main role="main" class="h-100">
+    <style>
+        .container{width:100%;padding-right:15px;padding-left:15px;margin-right:auto;margin-left:auto}@media (min-width:576px){.container{max-width:540px}}@media (min-width:768px){.container{max-width:720px}}@media (min-width:992px){.container{max-width:960px}}@media (min-width:1200px){.container{max-width:1140px}}.form-group{margin-bottom:1rem}.form-text{display:block;margin-top:.25rem}.form-check{position:relative;display:block;padding-left:1.25rem}.form-check-input{position:absolute;margin-top:.3rem;margin-left:-1.25rem}.btn{display:inline-block;font-weight:400;color:#212529;text-align:center;vertical-align:middle;cursor:pointer;user-select:none;background-color:transparent;border:1px solid transparent;padding:.375rem .75rem;font-size:1rem;line-height:1.5;border-radius:.25rem;transition:color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out}.btn-primary{color:#fff;background-color:#007bff;border-color:#007bff}
+    </style>
+    <div class="container">
+        <form name="wifi" method="get" action="/store">
+            <fieldset>
+                <legend><h3>WiFi Setup</h3></legend>
+            <div class="form-group">
+                <label for="wifi_ssid">SSID:</label>
+                <input id="wifi_ssid" type="text" class="form-control" name="wifi_ssid" maxlength="32"
+                       placeholder="Enter wifi network name" />
+            </div>
+
+            <div class="form-group">
+                <label for="wifi_pwd">Password:</label>
+                <input id="wifi_pwd" type="text" class="form-control" name="wifi_pwd" maxlength="64"
+                       placeholder="Network password" />
+            </div>
+
+            <div class="form-group">
+                <label for="domain_name">mDNS domain:</label>
+                <input id="domain_name" type="text" class="form-control" name="domain_name" maxlength="32"
+                       placeholder="desired mDNS domain" />
+                <small id="emailHelp" class="form-text text-muted">Enter sls for sls.local domain</small>
+
+            </div>
+
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="disable_mdns" name="disable_mdns">
+                <label class="form-check-label" for="disable_mdns">Disable mDNS</label>
+            </div>
+
+            <input type="hidden" name="reboot" value="1" />
+            <button type="submit" class="btn btn-primary">Save</button>
+            </fieldset>
+
+        </form>
+    </div>
+</main>
+</body>
+</html>
