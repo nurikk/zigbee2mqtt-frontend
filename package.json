@@ -42,7 +42,7 @@
     "eslint-plugin-preact": "^0.1.0",
     "fork-ts-checker-webpack-plugin": "^4.1.2",
     "gh-pages": "^2.2.0",
-    "html-webpack-plugin": "^4.0.3",
+    "html-webpack-plugin": "^4.0.4",
     "lodash": "^4.17.15",
     "preact": "^10.3.4",
     "preact-habitat": "^3.3.0",
