@@ -2,7 +2,6 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-const DynamicCdnWebpackPlugin = require('dynamic-cdn-webpack-plugin');
 
 const path = require('path');
 const glob = require('glob');
@@ -118,7 +117,8 @@ module.exports = (env, args) => {
 		plugins,
 		stats: 'errors-only',
 		externals: {
-			d3: 'window.d3'
+			d3: 'window.d3',
+			codemirror: 'window.CodeMirror'
 		}
 
 	};
