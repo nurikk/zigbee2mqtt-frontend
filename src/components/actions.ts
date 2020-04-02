@@ -1,4 +1,3 @@
-import { convertRawDevices } from "./convert";
 import { Device, Dictionary, FileDescriptor } from "../types";
 import { TimeInfo } from "./time";
 import { encodeGetParams } from "../utils";
@@ -27,9 +26,7 @@ function callApi<T>(url: string, method: HttMethod, params: Dictionary<any>, pay
 }
 
 export const fetchZigbeeDevicesList = (callback: CallbackHandler<Device[]>): void => {
-    callApi("/api/zigbee/devices", "GET", {}, undefined, (err, response: Dictionary<Device>) => {
-        callback(err, !err ? convertRawDevices(response) : undefined);
-    });
+    callApi("/api/zigbee/devices", "GET", {}, undefined, callback);
 };
 
 export const fetchTimeInfo = (callback: CallbackHandler<TimeInfo>): void => {
