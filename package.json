@@ -25,7 +25,7 @@
   "devDependencies": {
     "@teamsupercell/typings-for-css-modules-loader": "^2.1.0",
     "@types/classnames": "^2.2.10",
-    "@types/codemirror": "0.0.89",
+    "@types/codemirror": "0.0.90",
     "@types/lodash": "^4.14.149",
     "@types/reconnectingwebsocket": "^1.0.3",
     "@types/superagent": "^4.1.7",
