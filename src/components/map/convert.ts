@@ -1,14 +1,13 @@
 import { GATEWAY } from "./consts";
 import { GraphI, LinkType, NodeI } from "./types";
 import { Device, DeviceType } from "../../types";
-import { genDeviceShortAddress } from "../../utils";
 
 const getName = (device: Device): string => {
     const { friendly_name: friendlyName, nwkAddr } = device;
     if (friendlyName && friendlyName !== "null") {
         return friendlyName;
     }
-    return genDeviceShortAddress(nwkAddr);
+    return nwkAddr;
 };
 export const convert2graph = (devices: Device[]): GraphI => {
     const coordinator: NodeI = {

@@ -1,7 +1,6 @@
 import { FunctionalComponent, h } from "preact";
 import Button from "../button";
 import { Device } from "../../types";
-import { genDeviceShortAddress } from "../../utils";
 import { removeDevice, renameDevice } from "../actions";
 
 interface DeviceControlGroupProps {
@@ -10,13 +9,13 @@ interface DeviceControlGroupProps {
 
 
 const onBindClick = (device: Device): void => {
-    location.href = `/zigbee?bind=${genDeviceShortAddress(device.nwkAddr)}`;
+    location.href = `/zigbee?bind=${encodeURIComponent(device.nwkAddr)}`;
 };
 
 const onRenameClick = (device: Device): void => {
     const newName = prompt("Enter new name", device.friendly_name);
     if (newName !== device.friendly_name) {
-        renameDevice(genDeviceShortAddress(device.nwkAddr), newName, (err, response) => {
+        renameDevice(device.nwkAddr, newName, (err, response) => {
             if (!err) {
                 window.location.reload();
             }
@@ -26,7 +25,7 @@ const onRenameClick = (device: Device): void => {
 
 const onRemoveClick = (device: Device): void => {
     if (confirm("Remove device?")) {
-        removeDevice(genDeviceShortAddress(device.nwkAddr), (err, response) => {
+        removeDevice(device.nwkAddr, (err, response) => {
             if (!err) {
                 window.location.reload();
             }

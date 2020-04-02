@@ -4,7 +4,6 @@ import { FunctionalComponent, h } from "preact";
 import { isOnline } from "./nodes";
 import { lastSeen, TimedProps, TimeInfo } from "../time";
 import { Device } from "../../types";
-import { formatIEEEAddr } from "../../utils";
 
 interface TooltipProps extends TimedProps {
     info: NodeI;
@@ -20,7 +19,7 @@ const getTooltip = (device: Device, timeInfo: TimeInfo): string[] => {
         }
     }
     if (device.ieeeAddr) {
-        strings.push(formatIEEEAddr(device.ieeeAddr));
+        strings.push(device.ieeeAddr);
     }
     if (device?.st?.linkquality) {
         strings.push(`LinkQuality: ${device.st.linkquality}`);

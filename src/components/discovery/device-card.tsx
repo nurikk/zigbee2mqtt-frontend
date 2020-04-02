@@ -1,7 +1,7 @@
 import { Component, ComponentChild, Fragment, FunctionalComponent, h } from "preact";
 
 import style from "./style.css";
-import { genDeviceDetailsLink, genDeviceImageUrl, genDeviceShortAddress } from "../../utils";
+import { genDeviceDetailsLink, genDeviceImageUrl } from "../../utils";
 import cx from "classnames";
 import { ZigbeeEvent, ZigbeePayload } from "./types";
 import groupBy from "lodash/groupBy";
@@ -138,7 +138,7 @@ export default class DeviceCard extends Component<DeviceCardProps, DeviceCardSta
     }
 
     onInterviewClick = (nwkAddr: string): void => {
-        startInterview(genDeviceShortAddress(nwkAddr), (err, response) => {
+        startInterview(nwkAddr, (err, response) => {
             if (!err) {
                 this.setState({ manualInterviewStarted: true });
             }
@@ -220,7 +220,7 @@ export default class DeviceCard extends Component<DeviceCardProps, DeviceCardSta
         return (
             <div className={cx("card", "col-sm-4", style["discovery-card"], style["scale-in-center"])}>
                 <div class="card-header">
-                    New device <a href={genDeviceDetailsLink(nwkAddr)}>{genDeviceShortAddress(nwkAddr)}</a>
+                    New device <a href={genDeviceDetailsLink(nwkAddr)}>{nwkAddr}</a>
                     <p class="card-text"><small class="text-muted">
                         {isDone ? "Successfully joined!" : `Last updated ${this.getLastUpdateTimeMessage()}`}</small>
                     </p>

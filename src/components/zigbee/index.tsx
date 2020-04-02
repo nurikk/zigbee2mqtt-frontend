@@ -7,7 +7,7 @@ import orderBy from "lodash/orderBy";
 import DeviceControlGroup from "../device-control";
 import cx from "classnames";
 import { Device, DeviceSupportStatus, inteviewsCount } from "../../types";
-import { formatIEEEAddr, genDeviceDetailsLink, genDeviceImageUrl, genDeviceShortAddress } from "../../utils";
+import { genDeviceDetailsLink, genDeviceImageUrl } from "../../utils";
 import SafeImg from "../safe-image";
 import { Notyf } from "notyf";
 
@@ -126,7 +126,7 @@ export class ZigbeeTable extends Component<TimedProps, State> {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     onInterviewClick = (device: Device): void => {
         if (confirm("Start Interview?")) {
-            startInterview(genDeviceShortAddress(device.nwkAddr), (err, response) => {
+            startInterview(device.nwkAddr, (err, response) => {
                 if (!err) {
                     this.loadData();
                 }
@@ -257,10 +257,10 @@ export class ZigbeeTable extends Component<TimedProps, State> {
                                                                  src={genDeviceImageUrl(device)} />
                     </td>
                     <td className={style["nwk-addr"]}><a
-                        href={genDeviceDetailsLink(device.nwkAddr)}>{genDeviceShortAddress(device.nwkAddr)}</a>
+                        href={genDeviceDetailsLink(device.nwkAddr)}>{device.nwkAddr}</a>
                     </td>
                     <td>{device.friendly_name}</td>
-                    <td className={style["ieee-addr"]}>{device.ieeeAddr ? formatIEEEAddr(device.ieeeAddr) : "<corrupted>"}</td>
+                    <td className={style["ieee-addr"]}>{device.ieeeAddr ? device.ieeeAddr : "<corrupted>"}</td>
                     <td title={device.ManufName}
                         className={cx(style["manu-name"], "text-truncate", "text-nowrap", "position-relative")}>{device.ManufName}</td>
                     <td title={this.getSupportTitle(device)} className={cx("text-nowrap", {
@@ -273,7 +273,7 @@ export class ZigbeeTable extends Component<TimedProps, State> {
                     })}>{this.renderInterviewState(device)}</td>
                     <td>{lastSeen(device, time)}</td>
                     <td>{device?.Rtg?.map((route) => <a
-                        href={genDeviceDetailsLink(route)}>{genDeviceShortAddress(route)}</a>)}</td>
+                        href={genDeviceDetailsLink(route)}>{route}</a>)}</td>
                     <td className="text-left">{this.renderPowerSource(device)}</td>
                     <td>
                         <DeviceControlGroup device={device} />

@@ -58,6 +58,7 @@ export enum DeviceSupportStatus {
 export interface Device {
     /** A 64-bit IEEE address (also called MAC address or Extended address) */
     ieeeAddr?: string | undefined;
+    /** A 16-bi network address */
     nwkAddr: string;
     /** Node last message timestamp */
     last_seen?: string | undefined;
@@ -69,7 +70,7 @@ export interface Device {
     st?: DeviceStats | undefined;
     friendly_name?: string | undefined;
     /** Routes list, each item is an 16-bit network address (also called logical address or short address). */
-    Rtg?: number[] | undefined;
+    Rtg?: string[] | undefined;
     /** Features discovery status, aka interview */
     Interview?: Interview | undefined;
     powerSource?: PowerSource | undefined;
