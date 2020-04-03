@@ -1,7 +1,7 @@
 import { Component, ComponentChild, Fragment, FunctionalComponent, h } from "preact";
 
 import style from "./style.css";
-import { genDeviceDetailsLink, genDeviceImageUrl } from "../../utils";
+import { arrayUnique, genDeviceDetailsLink, genDeviceImageUrl, last } from "../../utils";
 import cx from "classnames";
 import { ZigbeeEvent, ZigbeePayload } from "./types";
 import groupBy from "lodash/groupBy";
@@ -35,7 +35,7 @@ const EventRow: FunctionalComponent<{ eventName: ZigbeeEvent; events: ZigbeePayl
                 <div class={`row ${style["scale-in-center"]}`}>
                     <div class="col-5">Old nwkAddr:</div>
                     <div class="col">
-                        <del>{events[0].nwkAddr}</del>
+                        <del>{last(events).nwkAddr}</del>
                     </div>
                 </div>
             );
@@ -46,7 +46,7 @@ const EventRow: FunctionalComponent<{ eventName: ZigbeeEvent; events: ZigbeePayl
                 <div class={`row ${style["scale-in-center"]}`}>
                     <div class="col-5">New nwkAddr:</div>
                     <div class="col">
-                        {events[0].nwkAddr}
+                        {last(events).nwkAddr}
                     </div>
                 </div>
             );
@@ -57,13 +57,13 @@ const EventRow: FunctionalComponent<{ eventName: ZigbeeEvent; events: ZigbeePayl
                 <div class={`row ${style["scale-in-center"]}`}>
                     <div class="col-5">Type:</div>
                     <div class="col">
-                        {events[0].type}
+                        {last(events).type}
                     </div>
                 </div>
                 <div class={`row ${style["scale-in-center"]}`}>
                     <div class="col-5">powerSource:</div>
                     <div class="col">
-                        {events[0].powerSource}
+                        {last(events).powerSource}
                     </div>
                 </div>
             </Fragment>);
@@ -72,7 +72,7 @@ const EventRow: FunctionalComponent<{ eventName: ZigbeeEvent; events: ZigbeePayl
             return (<div class={`row ${style["scale-in-center"]}`}>
                 <div class="col-5">Endpoints:</div>
                 <div class="col">
-                    {events.filter(e => e.ep).map(e => e.ep).join(", ")}
+                    {arrayUnique(events.filter(e => e.ep).map(e => e.ep)).join(", ")}
                 </div>
             </div>);
 
@@ -83,9 +83,9 @@ const EventRow: FunctionalComponent<{ eventName: ZigbeeEvent; events: ZigbeePayl
                     <div class={`row ${style["scale-in-center"]}`}>
                         <div class="col-5">Model:</div>
                         <div class="col">
-                            <div>{events[0].ModelId}</div>
+                            <div>{last(events).ModelId}</div>
                             <SafeImg class={cx(style["device-image"])}
-                                     src={genDeviceImageUrl({ ModelId: events[0].ModelId } as Device)} />
+                                     src={genDeviceImageUrl({ ModelId: last(events).ModelId } as Device)} />
                         </div>
                     </div>
                 </Fragment>
@@ -181,14 +181,7 @@ export default class DeviceCard extends Component<DeviceCardProps, DeviceCardSta
 
         const { updateTimerId } = this.state;
         const { events, ieeeAddr } = this.props;
-        const uniqEvents = uniqWith(events, (a, b) => {
-            // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            const { timestamp: tsA, ...restA } = a;
-            // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            const { timestamp: tsB, ...restB } = b;
-            return isEqual({ ...restA }, { ...restB });
-        });
-        const groupedEvents = groupBy(uniqEvents, "event") as Dictionary<ZigbeePayload[]>;
+        const groupedEvents = groupBy(events, "event") as Dictionary<ZigbeePayload[]>;
         let progressValue = 0;
         let isDone = false;
         const lastEvent = this.getLastEvent();

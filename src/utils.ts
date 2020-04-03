@@ -63,3 +63,9 @@ export const fetchStyle = (url) => {
     });
 };
 
+export function last<T>(collection: T[]) {
+    return collection[collection.length - 1];
+}
+export function arrayUnique<T>(input: T[]) {
+    return input.filter((v, i, a) => a.indexOf(v) === i);
+}
