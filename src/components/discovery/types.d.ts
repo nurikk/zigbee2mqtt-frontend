@@ -22,7 +22,7 @@ export interface ZigbeePayload {
     nwkAddr: string;
 
     ep?: number;
-    ieeeAddr?: string;
+    ieeeAddr: string;
     type?: DeviceType;
     powerSource?: PowerSource;
     ModelId?: string;

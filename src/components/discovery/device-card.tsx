@@ -14,11 +14,12 @@ import { startInterview } from "../actions";
 import SafeImg from "../safe-image";
 
 interface DeviceCardProps {
-    nwkAddr: string;
+    ieeeAddr: string;
     events: ZigbeePayload[];
 }
 
 const EventLabels = new Map<ZigbeeEvent, string>([
+    ["LeaveInd", "Left network after reset"],
     ["TcDeviceInd", "Device joined"],
     ["DeviceAnnceInd", "Announce received"],
     ["SimpleDescRsp", "Endpoints received"],
@@ -29,13 +30,23 @@ const EventLabels = new Map<ZigbeeEvent, string>([
 
 const EventRow: FunctionalComponent<{ eventName: ZigbeeEvent; events: ZigbeePayload[] }> = ({ eventName, events }) => {
     switch (eventName) {
+        case "LeaveInd":
+            return (
+                <div class={`row ${style["scale-in-center"]}`}>
+                    <div class="col-5">Old nwkAddr:</div>
+                    <div class="col">
+                        <del>{events[0].nwkAddr}</del>
+                    </div>
+                </div>
+            );
+
+
         case "TcDeviceInd":
             return (
-
                 <div class={`row ${style["scale-in-center"]}`}>
-                    <div class="col-5">ieeeAddr:</div>
+                    <div class="col-5">New nwkAddr:</div>
                     <div class="col">
-                        {events[0].ieeeAddr}
+                        {events[0].nwkAddr}
                     </div>
                 </div>
             );
@@ -58,14 +69,12 @@ const EventRow: FunctionalComponent<{ eventName: ZigbeeEvent; events: ZigbeePayl
             </Fragment>);
 
         case "SimpleDescRsp":
-            return (<Fragment>
-                {events.map((event) => event.ep ? <div class={`row ${style["scale-in-center"]}`}>
-                    <div class="col-5">Endpoint:</div>
-                    <div class="col">
-                        {event.ep}
-                    </div>
-                </div> : null)}
-            </Fragment>);
+            return (<div class={`row ${style["scale-in-center"]}`}>
+                <div class="col-5">Endpoints:</div>
+                <div class="col">
+                    {events.filter(e => e.ep).map(e => e.ep).join(", ")}
+                </div>
+            </div>);
 
 
         case "ModelRcv":
@@ -147,7 +156,7 @@ export default class DeviceCard extends Component<DeviceCardProps, DeviceCardSta
 
     renderManualInterviewHelper(): ComponentChild {
         const { manualInterviewStarted } = this.state;
-        const { nwkAddr } = this.props;
+        const { ieeeAddr } = this.props;
         const deviceNotRespondingTimeout = 20;
         const deviceManualWakeupTimeout = 5;
         const lastUpdateTime = this.getLastUpdateTime();
@@ -162,7 +171,7 @@ export default class DeviceCard extends Component<DeviceCardProps, DeviceCardSta
                     <div class="col-5">Start interview:</div>
                     <div class="col">
                         <Button<string> className="btn btn-normal btn-sm" onClick={this.onInterviewClick}
-                                        item={nwkAddr}><i className="fa fa-refresh" /></Button>
+                                        item={ieeeAddr}><i className="fa fa-refresh" /></Button>
                     </div>
                 </div>
             );
@@ -171,7 +180,7 @@ export default class DeviceCard extends Component<DeviceCardProps, DeviceCardSta
     render(): ComponentChild {
 
         const { updateTimerId } = this.state;
-        const { events, nwkAddr } = this.props;
+        const { events, ieeeAddr } = this.props;
         const uniqEvents = uniqWith(events, (a, b) => {
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
             const { timestamp: tsA, ...restA } = a;
@@ -185,6 +194,9 @@ export default class DeviceCard extends Component<DeviceCardProps, DeviceCardSta
         const lastEvent = this.getLastEvent();
 
         switch (lastEvent.event) {
+            case "LeaveInd":
+                progressValue = 5;
+                break;
             case "TcDeviceInd":
                 progressValue = 16;
                 break;
@@ -220,7 +232,7 @@ export default class DeviceCard extends Component<DeviceCardProps, DeviceCardSta
         return (
             <div className={cx("card", "col-sm-4", style["discovery-card"], style["scale-in-center"])}>
                 <div class="card-header">
-                    New device <a href={genDeviceDetailsLink(nwkAddr)}>{nwkAddr}</a>
+                    New device <a href={genDeviceDetailsLink(ieeeAddr)}>{ieeeAddr}</a>
                     <p class="card-text"><small class="text-muted">
                         {isDone ? "Successfully joined!" : `Last updated ${this.getLastUpdateTimeMessage()}`}</small>
                     </p>
@@ -248,14 +260,11 @@ export default class DeviceCard extends Component<DeviceCardProps, DeviceCardSta
                             <EventRow key={eventName} eventName={eventName as ZigbeeEvent} events={events} />)))
                     }
                     {
-                        this.renderManualInterviewHelper()
+                        isDone ? null : this.renderManualInterviewHelper()
                     }
-
-
-                    {/* {device.ModelId ? <img class="img-fluid card-img-bottom h-25" src="https://www.zigbee2mqtt.io/images/devices/4713407.jpg" alt="Card image cap" /> : null} */}
                 </div>
                 {isDone ? <div className="card-footer">
-                    <DeviceControlGroup device={{ nwkAddr } as Device} />
+                    <DeviceControlGroup device={{ ieeeAddr } as Device} />
                 </div> : null}
             </div>
         );

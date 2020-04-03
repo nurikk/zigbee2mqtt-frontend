@@ -35,6 +35,6 @@ wss.on("connection", (ws) => {
                 console.log("Sending message", messageNum);
                 ws.send(JSON.stringify(messages[messageNum++]));
             }
-        }, 100);
+        }, 1000);
     });
 });

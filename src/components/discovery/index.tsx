@@ -5,7 +5,8 @@ import DeviceCard from "./device-card";
 import Button from "../button";
 import { enableJoin } from "../actions";
 import { WSConnect } from "../../utils";
-import { Notyf } from 'notyf';
+import { Notyf } from "notyf";
+import orderBy from "lodash/orderBy";
 
 interface DiscoveryState {
     updateTimerId: number;
@@ -30,11 +31,10 @@ export default class Discovery extends Component<{}, DiscoveryState> {
         console.log("processZigbeeEvent", message);
         message.timestamp = Date.now();
         const { events } = this.state;
-        const { nwkAddr } = message;
+        const { ieeeAddr } = message;
         let { joinDuration, updateTimerId } = this.state;
         switch (message.event) {
             case "LinkData":
-            case "LeaveInd":
                 break;
             case "PermitJoin":
                 joinDuration = message.duration;
@@ -50,10 +50,10 @@ export default class Discovery extends Component<{}, DiscoveryState> {
                 }, 1000);
                 break;
             default:
-                if (events[nwkAddr]) {
-                    events[nwkAddr].push(message);
+                if (events[ieeeAddr]) {
+                    events[ieeeAddr].push(message);
                 } else {
-                    events[nwkAddr] = [message];
+                    events[ieeeAddr] = [message];
                 }
                 break;
 
@@ -69,7 +69,8 @@ export default class Discovery extends Component<{}, DiscoveryState> {
             new Notyf().error(`Cant parse json, ${e}`);
             console.log(`Cant parse json, ${e}`, wsEvent.data);
         }
-        if (event.category === "zigbee") {
+        if (event.category === "zigbee" && (event.payload as ZigbeePayload).event !== "LinkData") {
+            console.log('wsEvent.data', wsEvent.data);
             this.processZigbeeEvent(event.payload as ZigbeePayload);
         }
     };
@@ -90,10 +91,12 @@ export default class Discovery extends Component<{}, DiscoveryState> {
 
     renderDevices(): ComponentChild {
         const { events } = this.state;
+        const sortedEvents = orderBy(Object.entries(events), ([_, events]) => events[0].timestamp).reverse();
+
         return (<Fragment>
             {this.renderJoinButton()}
-            <div className="row no-gutters">{Object.entries(events).map(([nwkAddr, events]) => <DeviceCard
-                nwkAddr={nwkAddr} events={events} />)}</div>
+            <div className="row no-gutters">{sortedEvents.map(([ieeeAddr, events]) => <DeviceCard
+                ieeeAddr={ieeeAddr} events={events} />)}</div>
         </Fragment>);
 
     }
@@ -101,7 +104,7 @@ export default class Discovery extends Component<{}, DiscoveryState> {
     enableJoin = (): void => {
         enableJoin(255, undefined, (err, response) => {
             if (!err) {
-                new Notyf().success("Join enabled");
+                new Notyf({position: {x: "left", y: "bottom"}}).success("Join enabled");
             }
         });
     };
@@ -125,12 +128,12 @@ export default class Discovery extends Component<{}, DiscoveryState> {
 
     renderEmptyScreen(): ComponentChild {
         return (
-            <div class="container h-100">
+            <Fragment>
                 <div class="row h-100 justify-content-center align-items-center">
                     <h2>Nothing yet happened</h2>
                 </div>
                 {this.renderJoinButton()}
-            </div>
+            </Fragment>
         );
     }
 
@@ -138,7 +141,7 @@ export default class Discovery extends Component<{}, DiscoveryState> {
     render(): ComponentChild {
         const { events } = this.state;
         const hasAnyEvents = Object.keys(events).length !== 0;
-        return hasAnyEvents ? this.renderDevices() : this.renderEmptyScreen();
+        return <div class="container-fluid h-100">{hasAnyEvents ? this.renderDevices() : this.renderEmptyScreen()}</div>
     }
 
 }
