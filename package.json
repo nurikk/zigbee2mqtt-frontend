@@ -20,7 +20,7 @@
   "dependencies": {
     "@types/d3": "^5.7.2",
     "@types/notyf": "^3.0.0",
-    "notyf": "^3.5.0"
+    "notyf": "^3.5.1"
   },
   "devDependencies": {
     "@teamsupercell/typings-for-css-modules-loader": "^2.1.0",
