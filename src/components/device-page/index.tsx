@@ -22,18 +22,21 @@ export default class DevicePage extends Component<DevicePageProps, DevicePageSta
         this.state = {
             device: undefined,
             isLoading: true,
-            activeTab: 'SimpleBind'
+            activeTab: "SimpleBind"
         };
     }
 
     componentDidMount(): void {
-       this.loadDevice();
+        this.initPage();
     }
-    loadDevice(): void {
-        const deviceId = "0x00158D00044E3FAE";
-        this.setState({ isLoading: true });
-        getDeviceInfo(deviceId, (err, device) => {
 
+    initPage(): void {
+        const { activeTab } = this.state;
+        const { searchParams } = new URL(location.href);
+        const deviceId = searchParams.get('dev');
+        const paramActiveTab = searchParams.get('activeTab') || activeTab;
+        this.setState({ isLoading: true, activeTab: paramActiveTab });
+        getDeviceInfo(deviceId, (err, device) => {
             if (!err) {
                 this.setState({ device, isLoading: false });
             }
