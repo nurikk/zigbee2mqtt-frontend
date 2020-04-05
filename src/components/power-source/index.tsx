@@ -27,7 +27,9 @@ const PowerSourceComp: FunctionalComponent<PowerSourceProps> = ({ source, batter
                 } else if (battery >= 50) {
                     batteryClass = "fa-battery-half";
                 } else if (battery >= 25) {
-                    batteryClass = "fa-battery-empty";
+                    batteryClass = "fa-battery-quarter";
+                } else {
+                    batteryClass ="fa-battery-empty"
                 }
             }
             return <i className={`fa ${batteryClass}`}
