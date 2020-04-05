@@ -10,6 +10,7 @@ import { Device, DeviceSupportStatus, inteviewsCount } from "../../types";
 import { genDeviceDetailsLink, genDeviceImageUrl } from "../../utils";
 import SafeImg from "../safe-image";
 import { Notyf } from "notyf";
+import PowerSource from "../power-source";
 
 type SortDirection = "asc" | "desc";
 //TODO: proper type alias
@@ -177,19 +178,6 @@ export class ZigbeeTable extends Component<TimedProps, State> {
         return <div>N/A {interviewTrigger}</div>;
     }
 
-    renderPowerSource(device: Device): ComponentChild {
-        if (device.st && device.st.battery) {
-            return device.st.battery;
-        }
-        if (device.powerSource == "Main") {
-            return <i className="fa fa-plug" />;
-        }
-        if (device.powerSource == "Battery") {
-            return <i className="fa fa-battery-full" />;
-        }
-        return <i className="fa fa-question" />;
-    }
-
     getSupportTitle(device: Device): string {
         switch (device.supported) {
             case DeviceSupportStatus.Supported:
@@ -274,7 +262,7 @@ export class ZigbeeTable extends Component<TimedProps, State> {
                     <td>{lastSeen(device, time)}</td>
                     <td>{device?.Rtg?.map((route) => <a
                         href={genDeviceDetailsLink(route)}>{route}</a>)}</td>
-                    <td className="text-left">{this.renderPowerSource(device)}</td>
+                    <td className="text-left"><PowerSource source={device.PowerSource} /></td>
                     <td>
                         <DeviceControlGroup device={device} />
                     </td>

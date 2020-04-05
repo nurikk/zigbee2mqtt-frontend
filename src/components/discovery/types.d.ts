@@ -1,4 +1,4 @@
-import { DeviceType, PowerSource, PowerSources } from "../../types";
+import { DeviceType, PowerSource } from "../../types";
 
 
 export type MessageCategory = "log" | "zigbee";
@@ -29,7 +29,7 @@ export interface ZigbeePayload {
     ModelId?: string;
     ManufName?: string;
     duration?: number;
-    PowerSource?: PowerSources;
+    PowerSource?: PowerSource;
 }
 
 

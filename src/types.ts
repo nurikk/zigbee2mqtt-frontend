@@ -47,8 +47,6 @@ export interface Enpoint {
     "devId": number;
 }
 
-export type PowerSource = "Main" | "Battery";
-
 export enum DeviceSupportStatus {
     Unknown = 0,
     Supported = 1,
@@ -56,7 +54,7 @@ export enum DeviceSupportStatus {
 }
 
 
-export enum PowerSources {
+export enum PowerSource {
     Unknown = 0,
     MainsSinglePhase = 1,
     MainsThreePhase = 2,
@@ -84,7 +82,7 @@ export interface Device {
     Rtg?: string[] | undefined;
     /** Features discovery status, aka interview */
     Interview?: Interview | undefined;
-    powerSource?: PowerSource | undefined;
+    PowerSource?: PowerSource;
     ep?: Dictionary<Enpoint>;
     supported?: DeviceSupportStatus;
 }

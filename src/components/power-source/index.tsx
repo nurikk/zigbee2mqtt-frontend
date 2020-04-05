@@ -1,8 +1,8 @@
 import { FunctionalComponent, h } from "preact";
-import { PowerSources } from "../../types";
+import { PowerSource } from "../../types";
 
 interface PowerSourceProps {
-    source: PowerSources;
+    source: PowerSource;
 }
 const description = [
     "Unknown",
@@ -14,23 +14,23 @@ const description = [
     "Emergency mains and transfer switch",
 ];
 
-const PowerSource: FunctionalComponent<PowerSourceProps> = ({ source }) => {
+const PowerSourceComp: FunctionalComponent<PowerSourceProps> = ({ source }) => {
     switch (source) {
-        case PowerSources.Battery:
+        case PowerSource.Battery:
             return <i className="fa fa-battery-full" title={description[source]} />;
 
-        case PowerSources.EmergencyMains:
-        case PowerSources.MainsThreePhase:
-        case PowerSources.EmergencyMainsConstantPower:
-        case PowerSources.MainsSinglePhase:
+        case PowerSource.EmergencyMains:
+        case PowerSource.MainsThreePhase:
+        case PowerSource.EmergencyMainsConstantPower:
+        case PowerSource.MainsSinglePhase:
             return <i className="fa fa-plug" title={description[source]} />;
-        case PowerSources.DC:
+        case PowerSource.DC:
             return <i class="fa fa-charging-station" title={description[source]} />;
 
-        case PowerSources.Unknown:
+        case PowerSource.Unknown:
         default:
-            return <i className="fa fa-question" title={description[source]} />;
+            return <i className="fa fa-question" title={description[0]} />;
     }
 };
 
-export default PowerSource;
+export default PowerSourceComp;
