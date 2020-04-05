@@ -5,8 +5,6 @@ import { arrayUnique, genDeviceDetailsLink, genDeviceImageUrl, last } from "../.
 import cx from "classnames";
 import { ZigbeeEvent, ZigbeePayload } from "./types";
 import groupBy from "lodash/groupBy";
-import isEqual from "lodash/isEqual";
-import uniqWith from "lodash/uniqWith";
 import { Device, Dictionary } from "../../types";
 import DeviceControlGroup from "../device-control";
 import Button from "../button";
@@ -19,13 +17,14 @@ interface DeviceCardProps {
 }
 
 const EventLabels = new Map<ZigbeeEvent, string>([
-    ["LeaveInd", "Left network after reset"],
+    ["LeaveInd", "Left network"],
     ["TcDeviceInd", "Device joined"],
     ["DeviceAnnceInd", "Announce received"],
     ["SimpleDescRsp", "Endpoints received"],
     ["ActiveEpRsp", "Clusters received"],
     ["ModelRcv", "Model received"],
-    ["NodeDescRsp", "Processing interviews"]
+    ["NodeDescRsp", "Processing interviews"],
+    ["PowerSrcRcv", "Power source received"],
 ]);
 
 const EventRow: FunctionalComponent<{ eventName: ZigbeeEvent; events: ZigbeePayload[] }> = ({ eventName, events }) => {
@@ -53,20 +52,22 @@ const EventRow: FunctionalComponent<{ eventName: ZigbeeEvent; events: ZigbeePayl
 
 
         case "DeviceAnnceInd":
-            return (<Fragment>
+            return (<div class={`row ${style["scale-in-center"]}`}>
+                <div class="col-5">Type:</div>
+                <div class="col">
+                    {last(events).type}
+                </div>
+            </div>);
+
+        case "PowerSrcRcv":
+            return (
                 <div class={`row ${style["scale-in-center"]}`}>
-                    <div class="col-5">Type:</div>
+                    <div class="col-5">Power source:</div>
                     <div class="col">
-                        {last(events).type}
+                        {last(events).PS}
                     </div>
                 </div>
-                <div class={`row ${style["scale-in-center"]}`}>
-                    <div class="col-5">powerSource:</div>
-                    <div class="col">
-                        {last(events).powerSource}
-                    </div>
-                </div>
-            </Fragment>);
+            );
 
         case "SimpleDescRsp":
             return (<div class={`row ${style["scale-in-center"]}`}>
@@ -80,6 +81,18 @@ const EventRow: FunctionalComponent<{ eventName: ZigbeeEvent; events: ZigbeePayl
         case "ModelRcv":
             return (
                 <Fragment>
+                    {
+                        last(events).ManufName ? (
+                            <div class={`row ${style["scale-in-center"]}`}>
+                                <div class="col-5">ManufName:</div>
+                                <div class="col">
+                                    {last(events).ManufName}
+                                </div>
+                            </div>
+                        ) : undefined
+                    }
+
+
                     <div class={`row ${style["scale-in-center"]}`}>
                         <div class="col-5">Model:</div>
                         <div class="col">

@@ -8,7 +8,9 @@ export type JoinEvents =
     | "NodeDescRsp"
     | "ActiveEpRsp"
     | "ModelRcv"
-    | "SimpleDescRsp";
+    | "SimpleDescRsp"
+    | "PowerSrcRcv";
+
 export type ZigbeeEvent = "LinkData" | "LeaveInd" | "PermitJoin" | JoinEvents;
 
 export interface LogMessage {
@@ -24,9 +26,10 @@ export interface ZigbeePayload {
     ep?: number;
     ieeeAddr: string;
     type?: DeviceType;
-    powerSource?: PowerSource;
     ModelId?: string;
+    ManufName?: string;
     duration?: number;
+    PS?: number;
 }
 
 
