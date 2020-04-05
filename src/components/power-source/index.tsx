@@ -3,6 +3,7 @@ import { PowerSource } from "../../types";
 
 interface PowerSourceProps {
     source: PowerSource;
+    battery?: number;
 }
 const description = [
     "Unknown",
@@ -11,13 +12,26 @@ const description = [
     "Battery",
     "DC source",
     "Emergency mains constantly powered",
-    "Emergency mains and transfer switch",
+    "Emergency mains and transfer switch"
 ];
 
-const PowerSourceComp: FunctionalComponent<PowerSourceProps> = ({ source }) => {
+const PowerSourceComp: FunctionalComponent<PowerSourceProps> = ({ source, battery }) => {
+    let batteryClass = "fa-battery-full";
     switch (source) {
         case PowerSource.Battery:
-            return <i className="fa fa-battery-full" title={description[source]} />;
+            if (typeof battery !== "undefined") {
+                if (battery > 75) {
+                    batteryClass = "fa-battery-full";
+                } else if (battery >= 75) {
+                    batteryClass = "fa-battery-three-quarters";
+                } else if (battery >= 50) {
+                    batteryClass = "fa-battery-half";
+                } else if (battery >= 25) {
+                    batteryClass = "fa-battery-empty";
+                }
+            }
+            return <i className={`fa ${batteryClass}`}
+                      title={`${description[source]} ${battery ? `, power level ${battery}` : null} `} />;
 
         case PowerSource.EmergencyMains:
         case PowerSource.MainsThreePhase:

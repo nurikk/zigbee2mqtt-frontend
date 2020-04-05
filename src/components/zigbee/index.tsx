@@ -55,7 +55,12 @@ class ActionTH<T> extends Component<ActionTHProps<T>, {}> {
     renderArrow(): ComponentChild {
         const { currentDirection, current, column } = this.props;
         if (current === column) {
-            return <i className={`fa fa-sort-amount-${currentDirection}`} />;
+            if (currentDirection == "asc") {
+                return <i className={`fa fa-sort-amount-down-alt`} />;
+            } else  {
+                return <i className={`fa fa-sort-amount-down`} />;
+            }
+
         }
         return <i className={`fa fa-sort-amount-asc ${style.invisible}`} />;
 
@@ -167,7 +172,7 @@ export class ZigbeeTable extends Component<TimedProps, State> {
     renderInterviewState(device: Device): ComponentChild {
         const { onInterviewClick } = this;
         const interviewTrigger = <Button<Device> className="btn btn-normal btn-sm" onClick={onInterviewClick}
-                                                 item={device}><i className="fa fa-refresh" /></Button>;
+                                                 item={device}><i className="fa fa-play" /></Button>;
 
         if (device.Interview) {
             if (inteviewsCount === device.Interview.State) {
@@ -262,7 +267,7 @@ export class ZigbeeTable extends Component<TimedProps, State> {
                     <td>{lastSeen(device, time)}</td>
                     <td>{device?.Rtg?.map((route) => <a
                         href={genDeviceDetailsLink(route)}>{route}</a>)}</td>
-                    <td className="text-left"><PowerSource source={device.PowerSource} /></td>
+                    <td className="text-left"><PowerSource source={device.PowerSource} battery={device.st && device.st.battery} /></td>
                     <td>
                         <DeviceControlGroup device={device} />
                     </td>

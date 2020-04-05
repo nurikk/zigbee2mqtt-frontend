@@ -185,7 +185,7 @@ export default class DeviceCard extends Component<DeviceCardProps, DeviceCardSta
                     <div class="col-5">Start interview:</div>
                     <div class="col">
                         <Button<string> className="btn btn-normal btn-sm" onClick={this.onInterviewClick}
-                                        item={ieeeAddr}><i className="fa fa-refresh" /></Button>
+                                        item={ieeeAddr}><i className="fa fa-play" /></Button>
                     </div>
                 </div>
             );
