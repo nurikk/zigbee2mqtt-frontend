@@ -7,7 +7,7 @@ export type Dictionary<V> = { [index: string]: V }
 export interface DeviceStats {
     linkquality?: number;
     battery?: number;
-    occupancy?: boolean;
+    [k: string]: string | number;
 }
 
 export const inteviewsCount = 4;
@@ -85,6 +85,7 @@ export interface Device {
     PowerSource?: PowerSource;
     ep?: Dictionary<Enpoint>;
     supported?: DeviceSupportStatus;
+    SB?: Dictionary<string>;
 }
 
 

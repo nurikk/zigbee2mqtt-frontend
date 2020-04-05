@@ -85,3 +85,10 @@ export const deleteFile = (path: string, callback: CallbackHandler<ApiResponse<v
 export const evalCode = (code: string, callback: CallbackHandler<ApiResponse<string>>): void => {
     callApi("/api/scripts", "POST", { action: "evalCode" }, code, callback);
 };
+
+export const getDeviceInfo = (dev: string, callback: CallbackHandler<Device>): void => {
+    callApi("/api/zigbee/devices", "GET", { dev }, undefined, (err, devices: Device[]) => {
+        callback(err, devices[0]);
+    });
+};
+

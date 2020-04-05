@@ -8,6 +8,7 @@ import ZigbeeTable from "./components/zigbee";
 import Discovery from "./components/discovery";
 import LogViewer from "./components/log-viewer";
 import CodeEditor from "./components/code-editor";
+import DevicePage from "./components/device-page";
 
 
 const initWidgets = (): void => {
@@ -37,6 +38,11 @@ const initWidgets = (): void => {
 
     habitat(CodeEditor).render({
         selector: "[data-widget-host=\"code-editor\"]",
+        clean: true
+    });
+
+    habitat(DevicePage).render({
+        selector: "[data-widget-host=\"device-page\"]",
         clean: true
     });
 };

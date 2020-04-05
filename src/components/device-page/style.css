@@ -1,0 +1,14 @@
+.dashed-link {
+    border-bottom: 1px dashed #007bff;
+}
+.dashed-link:hover {
+    text-decoration: none;
+}
+
+.value-col {
+    width: 250px;
+    height: 55px;
+}
+
+.props-row {
+}
