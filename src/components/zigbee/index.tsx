@@ -267,7 +267,7 @@ export class ZigbeeTable extends Component<TimedProps, State> {
                     <td>{lastSeen(device, time)}</td>
                     <td>{device?.Rtg?.map((route) => <a
                         href={genDeviceDetailsLink(route)}>{route}</a>)}</td>
-                    <td className="text-left"><PowerSource source={device.PowerSource} battery={device.st && device.st.battery} /></td>
+                    <td className="text-left"><PowerSource source={device.PowerSource} battery={device.st?.battery} /></td>
                     <td>
                         <DeviceControlGroup device={device} />
                     </td>

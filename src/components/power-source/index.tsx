@@ -19,7 +19,7 @@ const PowerSourceComp: FunctionalComponent<PowerSourceProps> = ({ source, batter
     let batteryClass = "fa-battery-full";
     switch (source) {
         case PowerSource.Battery:
-            if (typeof battery !== "undefined") {
+            if (battery) {
                 if (battery > 75) {
                     batteryClass = "fa-battery-full";
                 } else if (battery >= 75) {
