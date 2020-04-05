@@ -2,6 +2,7 @@ import { Component, ComponentChild, createRef, h, RefObject } from "preact";
 import { Device, Dictionary } from "../../types";
 import Editable from "../editable";
 import style from "./style.css";
+import { setState, setSimpleBind } from "../actions";
 
 interface SimpleBindState {
     isOk: boolean;
@@ -56,10 +57,16 @@ export default class SimpleBind extends Component<SimpleBindProps, SimpleBindSta
 
 
     setValue = (name: string, value: string): void => {
-        console.log("setValue", name, value);
+        const { device } = this.props;
+        setState(device.ieeeAddr, name, value, (err, response) => {
+
+        });
     };
     setSimpleBind = (name: string, value: string): void => {
-        console.log("setSimpleBind", name, value);
+        const { device } = this.props;
+        setSimpleBind(device.ieeeAddr, name, value, (err, response) => {
+
+        });
     };
 
 
