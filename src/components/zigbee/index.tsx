@@ -23,7 +23,7 @@ type SortColumns =
     | "st.linkquality"
     | "ModelId"
     | "Interview.State"
-    | "st.battery";
+    | "PowerSource";
 
 
 interface State {
@@ -230,7 +230,7 @@ export class ZigbeeTable extends Component<TimedProps, State> {
                                            currentDirection={sortDirection} current={sortColumn}
                                            onClick={onSortChange}>LastSeen</ActionTH>
                     <th>Routes</th>
-                    <ActionTH<SortColumns> className={style["action-column"]} column="st.battery"
+                    <ActionTH<SortColumns> className={style["action-column"]} column="PowerSource"
                                            currentDirection={sortDirection} current={sortColumn}
                                            onClick={onSortChange}>PS</ActionTH>
                     <th>Actions</th>
