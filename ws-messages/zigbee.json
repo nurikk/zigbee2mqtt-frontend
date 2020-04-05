@@ -14,6 +14,7 @@
 
   {"category":"zigbee","payload":{"event":"SimpleDescRsp","nwkAddr":"0xFC41","ieeeAddr":"0x00158D0002C4A78F"}},
   {"category":"zigbee","payload":{"event":"ModelRcv","nwkAddr":"0xFC41","ieeeAddr":"0x00158D0002C4A78F","ModelId":"lumi.vibration.aq1"}},
+  {"category":"zigbee","payload": {"event":"PowerSrcRcv","nwkAddr":"0xFC41","ieeeAddr":"0x00158D0002C4A78F","PowerSource":0}},
 
 
 
@@ -31,6 +32,7 @@
 
   {"category":"zigbee","payload":{"event":"SimpleDescRsp","nwkAddr":"0x95B8","ieeeAddr":"0x00158D0004261DC7"}},
   {"category":"zigbee","payload":{"event":"ModelRcv","nwkAddr":"0x95B8","ieeeAddr":"0x00158D0004261DC7","ModelId":"lumi.sensor_magnet"}},
+  {"category":"zigbee","payload": {"event":"PowerSrcRcv","nwkAddr":"0x95B8","ieeeAddr":"0x00158D0004261DC7","PowerSource":1}},
 
   {"category":"zigbee","payload":{"event":"LeaveInd","nwkAddr":"0x91C9","ieeeAddr":"0x00158D0002FD0D07"}},
   {"category":"zigbee","payload":{"event":"TcDeviceInd","nwkAddr":"0x347E","ieeeAddr":"0x00158D0002FD0D07"}},
@@ -40,6 +42,7 @@
   {"category":"zigbee","payload":{"event":"SimpleDescRsp","nwkAddr":"0x347E","ep":1,"ieeeAddr":"0x00158D0002FD0D07"}},
   {"category":"zigbee","payload":{"event":"SimpleDescRsp","nwkAddr":"0x347E","ep":2,"ieeeAddr":"0x00158D0002FD0D07"}},
   {"category":"zigbee","payload":{"event":"SimpleDescRsp","nwkAddr":"0x347E","ep":3,"ieeeAddr":"0x00158D0002FD0D07"}},
+  {"category":"zigbee","payload": {"event":"PowerSrcRcv","nwkAddr":"0x347E","ieeeAddr":"0x00158D0002FD0D07","PowerSource":2}},
 
   {"category":"zigbee","payload":{"event":"SimpleDescRsp","nwkAddr":"0x347E","ieeeAddr":"0x00158D0002FD0D07"}},
   {"category":"zigbee","payload":{"event":"ModelRcv","nwkAddr":"0x347E","ieeeAddr":"0x00158D0002FD0D07","ModelId":"lumi.remote.b286acn01"}},
@@ -57,7 +60,7 @@
 
   {"category":"zigbee","payload":{"event":"SimpleDescRsp","nwkAddr":"0x0078","ieeeAddr":"0x00158D0001FA4F2F"}},
   {"category":"zigbee","payload":{"event":"ModelRcv","nwkAddr":"0x0078","ieeeAddr":"0x00158D0001FA4F2F","ModelId":"lumi.sens"}},
-
+  {"category":"zigbee","payload": {"event":"PowerSrcRcv","nwkAddr":"0x0078","ieeeAddr":"0x00158D0001FA4F2F","PowerSource":3}},
 
 
 
@@ -74,6 +77,7 @@
   {"category":"zigbee","payload":{"event":"SimpleDescRsp","nwkAddr":"0xDEAD","ep":2,"ieeeAddr":"0x00158D0002C4A78F"}},
   {"category":"zigbee","payload":{"event":"SimpleDescRsp","nwkAddr":"0xDEAD","ieeeAddr":"0x00158D0002C4A78F"}},
   {"category":"zigbee","payload":{"event":"ModelRcv","nwkAddr":"0xDEAD","ieeeAddr":"0x00158D0002C4A78F","ModelId":"lumi.vibration.aq1"}},
+  {"category":"zigbee","payload": {"event":"PowerSrcRcv","nwkAddr":"0xDEAD","ieeeAddr":"0x00158D0002C4A78F","PowerSource":4}},
 
   {"category":"zigbee","payload":{"event":"PermitJoin","target":65532,"duration":255}},
   {"category":"zigbee","payload":{"event":"LeaveInd","nwkAddr":"0xDEAD","ieeeAddr":"0x00158D0002C4A78F"}},
@@ -86,6 +90,6 @@
   {"category":"zigbee","payload":{"event":"SimpleDescRsp","nwkAddr":"0xBEEF","ep":2,"ieeeAddr":"0x00158D0002C4A78F"}},
   {"category":"zigbee","payload":{"event":"SimpleDescRsp","nwkAddr":"0xBEEF","ep":2,"ieeeAddr":"0x00158D0002C4A78F"}},
   {"category":"zigbee","payload":{"event":"SimpleDescRsp","nwkAddr":"0xBEEF","ieeeAddr":"0x00158D0002C4A78F"}},
-  {"category":"zigbee","payload":{"event":"ModelRcv","nwkAddr":"0xBEEF","ieeeAddr":"0x00158D0002C4A78F","ModelId":"lumi.vibration.aq1"}}
-
+  {"category":"zigbee","payload":{"event":"ModelRcv","nwkAddr":"0xBEEF","ieeeAddr":"0x00158D0002C4A78F","ModelId":"lumi.vibration.aq1"}},
+  {"category":"zigbee","payload": {"event":"PowerSrcRcv","nwkAddr":"0xBEEF","ieeeAddr":"0x00158D0002C4A78F","PowerSource":4}}
 ]

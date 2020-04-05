@@ -55,6 +55,17 @@ export enum DeviceSupportStatus {
     UnSupported = 2
 }
 
+
+export enum PowerSources {
+    Unknown = 0,
+    MainsSinglePhase = 1,
+    MainsThreePhase = 2,
+    Battery = 3,
+    DC = 4,
+    EmergencyMainsConstantPower = 5,
+    EmergencyMains = 6
+}
+
 export interface Device {
     /** A 64-bit IEEE address (also called MAC address or Extended address) */
     ieeeAddr?: string | undefined;

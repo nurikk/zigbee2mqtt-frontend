@@ -185,7 +185,7 @@ export class ZigbeeTable extends Component<TimedProps, State> {
             return <i className="fa fa-plug" />;
         }
         if (device.powerSource == "Battery") {
-            return <i className="fa fa-battery" />;
+            return <i className="fa fa-battery-full" />;
         }
         return <i className="fa fa-question" />;
     }

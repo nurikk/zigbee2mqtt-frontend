@@ -10,6 +10,7 @@ import DeviceControlGroup from "../device-control";
 import Button from "../button";
 import { startInterview } from "../actions";
 import SafeImg from "../safe-image";
+import PowerSource from "../power-source";
 
 interface DeviceCardProps {
     ieeeAddr: string;
@@ -24,7 +25,7 @@ const EventLabels = new Map<ZigbeeEvent, string>([
     ["ActiveEpRsp", "Clusters received"],
     ["ModelRcv", "Model received"],
     ["NodeDescRsp", "Processing interviews"],
-    ["PowerSrcRcv", "Power source received"],
+    ["PowerSrcRcv", "Power source received"]
 ]);
 
 const EventRow: FunctionalComponent<{ eventName: ZigbeeEvent; events: ZigbeePayload[] }> = ({ eventName, events }) => {
@@ -64,7 +65,7 @@ const EventRow: FunctionalComponent<{ eventName: ZigbeeEvent; events: ZigbeePayl
                 <div class={`row ${style["scale-in-center"]}`}>
                     <div class="col-5">Power source:</div>
                     <div class="col">
-                        {last(events).PS}
+                        <PowerSource source={last(events).PowerSource} />
                     </div>
                 </div>
             );
@@ -191,54 +192,27 @@ export default class DeviceCard extends Component<DeviceCardProps, DeviceCardSta
     }
 
     render(): ComponentChild {
+        const INTERVIEW_STEPS_COUNT = 8;
 
         const { updateTimerId } = this.state;
         const { events, ieeeAddr } = this.props;
         const groupedEvents = groupBy(events, "event") as Dictionary<ZigbeePayload[]>;
-        let progressValue = 0;
+        const eventsCount = Object.keys(groupedEvents).length;
+        let progressValue = 100 / INTERVIEW_STEPS_COUNT * eventsCount;
         let isDone = false;
         const lastEvent = this.getLastEvent();
-
-        switch (lastEvent.event) {
-            case "LeaveInd":
-                progressValue = 5;
-                break;
-            case "TcDeviceInd":
-                progressValue = 16;
-                break;
-
-            case "DeviceAnnceInd":
-                progressValue = 32;
-                break;
-
-            case "NodeDescRsp":
-                progressValue = 48;
-                break;
-
-
-            case "ActiveEpRsp":
-                progressValue = 64;
-                break;
-
-            case "SimpleDescRsp":
-                progressValue = 80;
-                break;
-
-            case "ModelRcv":
-                progressValue = 100;
-                isDone = true;
-                window.clearInterval(updateTimerId);
-                break;
-            default:
-                console.log("Unknown event", lastEvent.event);
-                break;
+        if (lastEvent.event === "PowerSrcRcv") {
+            progressValue = 100;
+            isDone = true;
+            window.clearInterval(updateTimerId);
         }
+
 
 
         return (
             <div className={cx("card", "col-sm-4", style["discovery-card"], style["scale-in-center"])}>
                 <div class="card-header">
-                    New device <a href={genDeviceDetailsLink(ieeeAddr)}>{ieeeAddr}</a>
+                    Device <a href={genDeviceDetailsLink(ieeeAddr)}>{ieeeAddr}</a>
                     <p class="card-text"><small class="text-muted">
                         {isDone ? "Successfully joined!" : `Last updated ${this.getLastUpdateTimeMessage()}`}</small>
                     </p>
