@@ -37,9 +37,7 @@ const RowCol: FunctionalComponent<{ title: string; content: ComponentChild }> = 
     return (
         <div class={`row ${style["scale-in-center"]}`}>
             <div class="col-5">{title}</div>
-            <div class="col">
-                {content}
-            </div>
+            <div class="col">{content}</div>
         </div>
     );
 };
