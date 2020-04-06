@@ -265,7 +265,7 @@ export class ZigbeeTable extends Component<TimedProps, State> {
                         "table-warning": device.Interview?.State !== 4
                     })}>{this.renderInterviewState(device)}</td>
                     <td>{lastSeen(device, time)}</td>
-                    <td>{device?.Rtg?.map((route) => <a
+                    <td>{device?.Rtg?.map((route) => <a className={"d-block"}
                         href={genDeviceDetailsLink(route)}>{route}</a>)}</td>
                     <td className="text-left"><PowerSource source={device.PowerSource} battery={device.st?.battery} /></td>
                     <td>
