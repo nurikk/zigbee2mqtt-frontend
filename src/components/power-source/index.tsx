@@ -33,7 +33,7 @@ const PowerSourceComp: FunctionalComponent<PowerSourceProps> = ({ source, batter
                 }
             }
             return <i className={`fa ${batteryClass}`}
-                      title={`${description[source]} ${battery ? `, power level ${battery}` : null} `} />;
+                      title={`${description[source]} ${battery ? `, power level ${battery}` : ""} `} />;
 
         case PowerSource.EmergencyMains:
         case PowerSource.MainsThreePhase:
