@@ -1,5 +1,6 @@
 import { FunctionalComponent, h } from "preact";
 import { PowerSource } from "../../types";
+import style from "./style.css";
 
 interface PowerSourceProps {
     source: PowerSource;
@@ -39,7 +40,7 @@ const PowerSourceComp: FunctionalComponent<PowerSourceProps> = ({ source, batter
         case PowerSource.MainsThreePhase:
         case PowerSource.EmergencyMainsConstantPower:
         case PowerSource.MainsSinglePhase:
-            return <i className="fa fa-plug" title={description[source]} />;
+            return <i className={`fa fa-plug ${style.plug}`} title={description[source]} />;
         case PowerSource.DC:
             return <i class="fa fa-charging-station" title={description[source]} />;
 
