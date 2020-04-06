@@ -1,15 +1,10 @@
-import { Component, ComponentChild, createRef, h, RefObject } from "preact";
+import { Component, ComponentChild, Fragment, FunctionalComponent, h, RefObject } from "preact";
 import { Device, Dictionary } from "../../types";
-import Editable from "../editable";
+import { setSimpleBind, setState } from "../actions";
+import { forwardRef } from "preact/compat";
 import style from "./style.css";
-import { setState, setSimpleBind } from "../actions";
 
 interface SimpleBindState {
-    isOk: boolean;
-
-
-    valueInputRefs: Dictionary<RefObject<HTMLInputElement | HTMLTextAreaElement>>;
-    simpleBindInputRefs: Dictionary<RefObject<HTMLInputElement | HTMLTextAreaElement>>;
 }
 
 
@@ -18,14 +13,43 @@ interface SimpleBindProps {
 
 }
 
-type DeviceParamTuple = [string, string | number];
+type DeviceParamTuple = [string, unknown];
 
-const getInputType = (value: string | number): string => {
-    if (typeof value == "number") {
-        return "number";
+
+interface UniversalEditorProps {
+    value: unknown;
+
+    onChange(value: unknown): void;
+
+    [k: string]: unknown;
+}
+
+const UniversalEditor: FunctionalComponent<UniversalEditorProps> = forwardRef((props, ref: RefObject<HTMLInputElement>) => {
+    const { value, onChange, ...rest } = props;
+    const changeHandler = (event) => {
+        const { target } = event;
+        switch (target.type) {
+            case "checkbox":
+                onChange(target.checked);
+                break;
+            case "number":
+                target.valueAsNumber != value && onChange(target.valueAsNumber);
+                break;
+            default:
+                target.value != value && onChange(target.value);
+                break;
+        }
+    };
+    switch (typeof value) {
+        case "boolean":
+            return <input ref={ref} {...rest} type="checkbox" checked={value} onChange={changeHandler}
+                          class="form-check-input" />;
+        case "number":
+            return <input ref={ref} {...rest} type="number" value={value} onBlur={changeHandler} />;
+        default:
+            return <input ref={ref} {...rest} type="text" value={value as string} onBlur={changeHandler} />;
     }
-    return "text";
-};
+});
 
 export default class SimpleBind extends Component<SimpleBindProps, SimpleBindState> {
 
@@ -33,36 +57,17 @@ export default class SimpleBind extends Component<SimpleBindProps, SimpleBindSta
     constructor() {
         super();
         this.state = {
-            isOk: false,
-            valueInputRefs: {},
-            simpleBindInputRefs: {}
-
         };
     }
 
-    createRefs(): void {
-        const { device } = this.props;
-        const valueInputRefs = {};
-        const simpleBindInputRefs = {};
-        Object.keys(device.st).forEach((name) => {
-            valueInputRefs[name] = createRef<HTMLInputElement | HTMLTextAreaElement>();
-            simpleBindInputRefs[name] = createRef<HTMLInputElement | HTMLTextAreaElement>();
-        });
-        this.setState({ simpleBindInputRefs, valueInputRefs, isOk: true });
-    }
 
-    componentDidMount(): void {
-        this.createRefs();
-    }
-
-
-    setValue = (name: string, value: string): void => {
+    setValue = (name: string, value: unknown): void => {
         const { device } = this.props;
         setState(device.ieeeAddr, name, value, (err, response) => {
 
         });
     };
-    setSimpleBind = (name: string, value: string): void => {
+    setSimpleBind = (name: string, value: unknown): void => {
         const { device } = this.props;
         setSimpleBind(device.ieeeAddr, name, value, (err, response) => {
 
@@ -71,71 +76,44 @@ export default class SimpleBind extends Component<SimpleBindProps, SimpleBindSta
 
 
     render(): ComponentChild {
-        const { valueInputRefs, simpleBindInputRefs, isOk } = this.state;
         const { device } = this.props;
-        if (isOk) {
-            const simpleBindRules: Dictionary<string> = device.SB ?? {};
+        const simpleBindRules: Dictionary<string> = device.SB ?? {};
 
-            const kv = Object.entries(device.st);
+        const kv = Object.entries(device.st);
 
-            return <table class="table table-striped table-borderless">
-                <thead>
-                <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Value</th>
-                    <th scope="col">SB rule</th>
+
+        return <table class="table table-striped table-borderless">
+            <thead>
+            <tr>
+                <th scope="col" />
+                <th scope="col">Value</th>
+                <th scope="col">SB rule</th>
+            </tr>
+            </thead>
+            <tbody>
+            {kv.map((param: DeviceParamTuple) => (
+                <tr class={style["props-row"]}>
+                    <th scope="row">{param[0]}</th>
+                    <td class={style["value-col"]}>
+                        <UniversalEditor
+                            className="form-control-plaintext"
+                            value={param[1]}
+                            onChange={(value) => this.setValue(param[0], value)}
+                        />
+                    </td>
+                    <td>
+                        <UniversalEditor
+                            className="form-control form-control-plaintext"
+                            value={simpleBindRules[param[0]] || ""}
+                            onChange={(value) => this.setSimpleBind(param[0], value)}
+                        />
+                    </td>
                 </tr>
-                </thead>
-                <tbody>
-                {kv.map((param: DeviceParamTuple) => (
-                    <tr class={style["props-row"]}>
-                        <td>{param[0]}</td>
-                        <td class={style["value-col"]}>
-                            <Editable
-                                text={param[1]}
-                                placeholder="Set value"
-                                childRef={valueInputRefs[param[0]]}
-                                type="input"
-                            >
-                                <input
-                                    ref={valueInputRefs[param[0]] as RefObject<HTMLInputElement>}
-                                    type={getInputType(param[1])}
-                                    className="form-control form-control-sm"
-                                    value={param[1]}
-                                    onChange={(e: Event) => this.setValue(param[0], (e.target as HTMLInputElement).value)}
-                                />
-                            </Editable>
-                        </td>
-                        <td>
-                            <Editable
-                                text={simpleBindRules[param[0]]}
-                                placeholder="Click to enter simple bind rule"
-                                childRef={simpleBindInputRefs[param[0]]}
-                                type="textarea"
-                            >
-                                <input
-                                    ref={simpleBindInputRefs[param[0]] as RefObject<HTMLInputElement>}
-                                    type="text"
-                                    className="form-control form-control-sm"
-                                    value={simpleBindRules[param[0]]}
-                                    onChange={(e: Event) => this.setSimpleBind(param[0], (e.target as HTMLInputElement).value)}
-                                />
-                                {/*<textarea*/}
-                                {/*    ref={simpleBindInputRefs[param[0]]}*/}
-                                {/*    name="description"*/}
-                                {/*    className="form-control"*/}
-                                {/*    rows={1}*/}
-                                {/*    value={simpleBindRules[param[0]]}*/}
-                                {/*    onChange={this.setSimpleBind}*/}
-                                {/*/>*/}
-                            </Editable>
-                        </td>
-                    </tr>
-                ))}
+            ))}
 
 
-                </tbody>
-            </table>;
-        }
+            </tbody>
+        </table>;
+
     }
 }

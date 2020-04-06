@@ -92,13 +92,13 @@ export const getDeviceInfo = (dev: string, callback: CallbackHandler<Device>): v
     });
 };
 
-export const setState = (dev: string, name: string, value: string, callback: CallbackHandler<ApiResponse<void>>): void => {
-    console.warn("Set state");
+export const setState = (dev: string, name: string, value: unknown, callback: CallbackHandler<ApiResponse<void>>): void => {
+    console.warn("Set state", {dev, name, value});
     // callApi("/api/scripts", "POST", { action: "evalCode" }, code, callback);
 };
 
-export const setSimpleBind = (dev: string, name: string, value: string, callback: CallbackHandler<ApiResponse<void>>): void => {
-    console.warn("setSimpleBind");
+export const setSimpleBind = (dev: string, name: string, value: unknown, callback: CallbackHandler<ApiResponse<void>>): void => {
+    console.warn("setSimpleBind", {dev, name, value});
     // callApi("/api/scripts", "POST", { action: "evalCode" }, code, callback);
 };
 

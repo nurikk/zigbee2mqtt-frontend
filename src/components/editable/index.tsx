@@ -6,7 +6,7 @@ import { useEffect } from "preact/hooks";
 interface EditableProps {
     type: "input" | "textarea";
     placeholder: string;
-    text: string | number;
+    text: ComponentChild;
     childRef: RefObject<HTMLInputElement | HTMLTextAreaElement>;
 }
 
