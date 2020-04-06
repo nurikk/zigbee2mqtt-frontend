@@ -62,7 +62,7 @@ class ActionTH<T> extends Component<ActionTHProps<T>, {}> {
             }
 
         }
-        return <i className={`fa fa-sort-amount-asc ${style.invisible}`} />;
+        return <i className={`fa fa-sort-amount-down ${style.invisible}`} />;
 
     }
 
