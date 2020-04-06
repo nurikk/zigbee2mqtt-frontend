@@ -1,7 +1,7 @@
-import { Component, ComponentChild, Fragment, FunctionalComponent, h } from "preact";
+import { Component, ComponentChild, Fragment, FunctionalComponent, h, VNode } from "preact";
 
 import style from "./style.css";
-import { arrayUnique, genDeviceDetailsLink, genDeviceImageUrl, last } from "../../utils";
+import { genDeviceDetailsLink, genDeviceImageUrl, last } from "../../utils";
 import cx from "classnames";
 import { ZigbeeEvent, ZigbeePayload } from "./types";
 import groupBy from "lodash/groupBy";
@@ -10,7 +10,11 @@ import DeviceControlGroup from "../device-control";
 import Button from "../button";
 import { startInterview } from "../actions";
 import SafeImg from "../safe-image";
-import PowerSource from "../power-source";
+import PowerSourceComp from "../power-source";
+
+const INTERVIEW_STEPS_COUNT = 9;
+const DEVICE_NOT_RESPONDING_TIMEOUT = 20;
+const DEVICE_MANUAL_WAKEUP_TIMEOUT = 5;
 
 interface DeviceCardProps {
     ieeeAddr: string;
@@ -25,95 +29,80 @@ const EventLabels = new Map<ZigbeeEvent, string>([
     ["ActiveEpRsp", "Clusters received"],
     ["ModelRcv", "Model received"],
     ["NodeDescRsp", "Processing interviews"],
-    ["PowerSrcRcv", "Power source received"]
+    ["PowerSrcRcv", "Power source received"],
+    ["ConfRsp", "Finished interview"]
 ]);
 
-const EventRow: FunctionalComponent<{ eventName: ZigbeeEvent; events: ZigbeePayload[] }> = ({ eventName, events }) => {
+const RowCol: FunctionalComponent<{ title: string; content: ComponentChild }> = ({ title, content }) => {
+    return (
+        <div class={`row ${style["scale-in-center"]}`}>
+            <div class="col-5">{title}</div>
+            <div class="col">
+                {content}
+            </div>
+        </div>
+    );
+};
+
+interface EventRowProps {
+    eventName: ZigbeeEvent;
+    events: ZigbeePayload[];
+}
+
+const EventRow: FunctionalComponent<EventRowProps> = ({ eventName, events }): VNode<any> => {
     switch (eventName) {
         case "LeaveInd":
             return (
-                <div class={`row ${style["scale-in-center"]}`}>
-                    <div class="col-5">Old nwkAddr:</div>
-                    <div class="col">
-                        <del>{last(events).nwkAddr}</del>
-                    </div>
-                </div>
+                <RowCol title="Old nwkAddr:" content={<del>{last(events).nwkAddr}</del>} />
             );
 
 
         case "TcDeviceInd":
             return (
-                <div class={`row ${style["scale-in-center"]}`}>
-                    <div class="col-5">New nwkAddr:</div>
-                    <div class="col">
-                        {last(events).nwkAddr}
-                    </div>
-                </div>
+                <Fragment>
+                    <RowCol title="New nwkAddr:" content={last(events).nwkAddr} />
+                    {
+                        last(events).ParentnwkAddr ? (
+                            <RowCol title="ParentnwkAddr:" content={last(events).ParentnwkAddr} />
+                        ) : null
+                    }
+                </Fragment>
             );
 
 
         case "DeviceAnnceInd":
-            return (<div class={`row ${style["scale-in-center"]}`}>
-                <div class="col-5">Type:</div>
-                <div class="col">
-                    {last(events).type}
-                </div>
-            </div>);
+            return <RowCol title="Type:" content={last(events).type} />;
+
 
         case "PowerSrcRcv":
-            return (
-                <div class={`row ${style["scale-in-center"]}`}>
-                    <div class="col-5">Power source:</div>
-                    <div class="col">
-                        <PowerSource source={last(events).PowerSource} />
-                    </div>
-                </div>
-            );
+            return <RowCol title="Power source:" content={<PowerSourceComp source={last(events).PowerSource} />} />;
 
         case "SimpleDescRsp":
-            return (<div class={`row ${style["scale-in-center"]}`}>
-                <div class="col-5">Endpoints:</div>
-                <div class="col">
-                    {arrayUnique(events.filter(e => e.ep).map(e => e.ep)).join(", ")}
-                </div>
-            </div>);
+            return <Fragment>
+                {events.filter(e => e.ep).map(evt => (
+                    <RowCol title={`Endpoint #${evt.ep}:`}
+                            content={`ProfileId=${evt.ProfileId} DeviceId=${evt.DeviceId}`} />
+                ))}
+            </Fragment>;
 
 
         case "ModelRcv":
             return (
                 <Fragment>
-                    {
-                        last(events).ManufName ? (
-                            <div class={`row ${style["scale-in-center"]}`}>
-                                <div class="col-5">ManufName:</div>
-                                <div class="col">
-                                    {last(events).ManufName}
-                                </div>
-                            </div>
-                        ) : undefined
-                    }
-
-
-                    <div class={`row ${style["scale-in-center"]}`}>
-                        <div class="col-5">Model:</div>
-                        <div class="col">
+                    <RowCol title="ManufName:" content={last(events).ManufName || <small>detecting...</small>} />
+                    <RowCol title="Model:" content={
+                        <Fragment>
                             <div>{last(events).ModelId}</div>
                             <SafeImg class={cx(style["device-image"])}
-                                     src={genDeviceImageUrl({ ModelId: last(events).ModelId } as Device)} />
-                        </div>
-                    </div>
+                                     src={genDeviceImageUrl({ ModelId: last(events).ModelId } as Device)
+                                     } />
+                        </Fragment>
+                    } />
                 </Fragment>
-
-
             );
 
-        // case "ActiveEpRsp":
-        // case "NodeDescRsp":
-        //     return <div>{EventLabels.get(eventName)}</div>
-
         default:
-            break;
-        // return <div>{EventLabels.get(eventName)} <pre>{JSON.stringify(events)}</pre></div>
+            return undefined;
 
     }
 };
@@ -122,6 +111,7 @@ interface DeviceCardState {
     currentTimestamp: number;
     updateTimerId: number;
     manualInterviewStarted: boolean;
+    isDone: boolean;
 }
 
 export default class DeviceCard extends Component<DeviceCardProps, DeviceCardState> {
@@ -133,6 +123,7 @@ export default class DeviceCard extends Component<DeviceCardProps, DeviceCardSta
 
 
         this.state = {
+            isDone: false,
             manualInterviewStarted: false,
             updateTimerId,
             currentTimestamp: Date.now()
@@ -171,15 +162,14 @@ export default class DeviceCard extends Component<DeviceCardProps, DeviceCardSta
     renderManualInterviewHelper(): ComponentChild {
         const { manualInterviewStarted } = this.state;
         const { ieeeAddr } = this.props;
-        const deviceNotRespondingTimeout = 20;
-        const deviceManualWakeupTimeout = 5;
+
         const lastUpdateTime = this.getLastUpdateTime();
-        if (manualInterviewStarted && lastUpdateTime > deviceManualWakeupTimeout) {
+        if (manualInterviewStarted && lastUpdateTime > DEVICE_MANUAL_WAKEUP_TIMEOUT) {
             return (<div class={`row ${style["scale-in-center"]}`}>
                 <div class={`col-12 ${style.blink}`}>Press wakeup button</div>
             </div>);
         }
-        if (!manualInterviewStarted && lastUpdateTime > deviceNotRespondingTimeout)
+        if (!manualInterviewStarted && lastUpdateTime > DEVICE_NOT_RESPONDING_TIMEOUT)
             return (
                 <div class={`row ${style["scale-in-center"]}`}>
                     <div class="col-5">Start interview:</div>
@@ -191,23 +181,25 @@ export default class DeviceCard extends Component<DeviceCardProps, DeviceCardSta
             );
     }
 
-    render(): ComponentChild {
-        const INTERVIEW_STEPS_COUNT = 8;
-
+    // eslint-disable-next-line react/no-deprecated
+    componentWillReceiveProps(nextProps: Readonly<DeviceCardProps>, nextContext: any): void {
+        const { events } = nextProps;
+        const lastEvent = events[events.length - 1];
         const { updateTimerId } = this.state;
+        if (lastEvent && lastEvent.event === "PowerSrcRcv") {
+            // progressValue = 100;
+            window.clearInterval(updateTimerId);
+            this.setState({ isDone: true });
+        }
+    }
+
+    render(): ComponentChild {
+
+        const { isDone } = this.state;
         const { events, ieeeAddr } = this.props;
         const groupedEvents = groupBy(events, "event") as Dictionary<ZigbeePayload[]>;
         const eventsCount = Object.keys(groupedEvents).length;
-        let progressValue = 100 / INTERVIEW_STEPS_COUNT * eventsCount;
-        let isDone = false;
-        const lastEvent = this.getLastEvent();
-        if (lastEvent.event === "PowerSrcRcv") {
-            progressValue = 100;
-            isDone = true;
-            window.clearInterval(updateTimerId);
-        }
-
-
+        const progressValue = Math.round(100 / INTERVIEW_STEPS_COUNT * eventsCount);
 
         return (
             <div className={cx("card", "col-sm-4", style["discovery-card"], style["scale-in-center"])}>

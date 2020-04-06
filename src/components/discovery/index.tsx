@@ -28,7 +28,7 @@ export default class Discovery extends Component<{}, DiscoveryState> {
     }
 
     processZigbeeEvent(message: ZigbeePayload): void {
-        console.log("processZigbeeEvent", message);
+        // console.log("processZigbeeEvent", message);
         message.timestamp = Date.now();
         const { events } = this.state;
         const { ieeeAddr } = message;

@@ -9,7 +9,8 @@ export type JoinEvents =
     | "ActiveEpRsp"
     | "ModelRcv"
     | "SimpleDescRsp"
-    | "PowerSrcRcv";
+    | "PowerSrcRcv"
+    | "ConfRsp";
 
 export type ZigbeeEvent = "LinkData" | "LeaveInd" | "PermitJoin" | JoinEvents;
 
@@ -29,7 +30,11 @@ export interface ZigbeePayload {
     ModelId?: string;
     ManufName?: string;
     duration?: number;
+    Target?: string;
     PowerSource?: PowerSource;
+    ParentnwkAddr?: string;
+    ProfileId?: string;
+    DeviceId?: string;
 }
 
 
