@@ -1,10 +1,11 @@
-import { FunctionalComponent, h } from "preact";
+import { Fragment, FunctionalComponent, h } from "preact";
 import { PowerSource } from "../../types";
 import style from "./style.css";
 
 interface PowerSourceProps {
     source: PowerSource;
     battery?: number;
+    className?: string;
 }
 const description = [
     "Unknown",
@@ -16,7 +17,7 @@ const description = [
     "Emergency mains and transfer switch"
 ];
 
-const PowerSourceComp: FunctionalComponent<PowerSourceProps> = ({ source, battery }) => {
+const PowerSourceComp: FunctionalComponent<PowerSourceProps> = ({ source, battery,className }) => {
     let batteryClass = "fa-battery-full";
     switch (source) {
         case PowerSource.Battery:
@@ -33,20 +34,23 @@ const PowerSourceComp: FunctionalComponent<PowerSourceProps> = ({ source, batter
                     batteryClass ="fa-battery-empty"
                 }
             }
-            return <i className={`fa ${batteryClass}`}
-                      title={`${description[source]} ${battery ? `, power level ${battery}` : ""} `} />;
+            return <i className={`fa ${batteryClass} ${className}`}
+                      title={`${description[source]} ${battery ? `, power level ${battery}%` : ""} `} />;
 
         case PowerSource.EmergencyMains:
         case PowerSource.MainsThreePhase:
         case PowerSource.EmergencyMainsConstantPower:
         case PowerSource.MainsSinglePhase:
-            return <i className={`fa fa-plug ${style.plug}`} title={description[source]} />;
+            return (<Fragment>
+                <i className={`fa fa-plug ${style.plug} ${className}`} title={description[source]} />
+                {battery ? <PowerSourceComp className={'d-block'} source={PowerSource.Battery} battery={battery} /> : null }
+            </Fragment>);
         case PowerSource.DC:
-            return <i class="fa fa-charging-station" title={description[source]} />;
+            return <i class={`fa fa-charging-station ${className}`} title={description[source]} />;
 
         case PowerSource.Unknown:
         default:
-            return <i className="fa fa-question" title={description[0]} />;
+            return <i className={`fa fa-question ${className}`} title={description[0]} />;
     }
 };
 
