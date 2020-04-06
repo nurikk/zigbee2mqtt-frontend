@@ -1,95 +1,226 @@
 [
-
-  {"category":"zigbee","payload":{"event":"PermitJoin","target":65532,"duration":255}},
-  {"category":"zigbee","payload":{"event":"LeaveInd","nwkAddr":"0x16F1","ieeeAddr":"0x00158D0002C4A78F"}},
-  {"category":"zigbee","payload":{"event":"TcDeviceInd","nwkAddr":"0xFC41","ieeeAddr":"0x00158D0002C4A78F"}},
-  {"category":"zigbee","payload":{"event":"DeviceAnnceInd","nwkAddr":"0xFC41","ieeeAddr":"0x00158D0002C4A78F","type":"EndDevice","powerSource":"Battery","ReceiverOnIdle":"OFF","Security":"OFF"}},
-  {"category":"zigbee","payload":{"event":"NodeDescRsp","nwkAddr":"0xFC41","ieeeAddr":"0x00158D0002C4A78F"}},
-  {"category":"zigbee","payload":{"event":"PermitJoin","target":65532,"duration":0}},
-  {"category":"zigbee","payload":{"event":"ActiveEpRsp","nwkAddr":"0xFC41","ieeeAddr":"0x00158D0002C4A78F"}},
-  {"category":"zigbee","payload":{"event":"SimpleDescRsp","nwkAddr":"0xFC41","ep":1,"ieeeAddr":"0x00158D0002C4A78F"}},
-  {"category":"zigbee","payload":{"event":"SimpleDescRsp","nwkAddr":"0xFC41","ep":2,"ieeeAddr":"0x00158D0002C4A78F"}},
-  {"category":"zigbee","payload":{"event":"SimpleDescRsp","nwkAddr":"0xFC41","ep":2,"ieeeAddr":"0x00158D0002C4A78F"}},
-
-
-  {"category":"zigbee","payload":{"event":"SimpleDescRsp","nwkAddr":"0xFC41","ieeeAddr":"0x00158D0002C4A78F"}},
-  {"category":"zigbee","payload":{"event":"ModelRcv","nwkAddr":"0xFC41","ieeeAddr":"0x00158D0002C4A78F","ModelId":"lumi.vibration.aq1"}},
-  {"category":"zigbee","payload": {"event":"PowerSrcRcv","nwkAddr":"0xFC41","ieeeAddr":"0x00158D0002C4A78F","PowerSource":0}},
-
-
-
-
-  {"category":"zigbee","payload":{"event":"LeaveInd","nwkAddr":"0xDA89","ieeeAddr":"0x00158D0004261DC7"}},
-  {"category":"zigbee","payload":{"event":"TcDeviceInd","nwkAddr":"0x0B2A","ieeeAddr":"0x00158D0004261DC7"}},
-  {"category":"zigbee","payload":{"event":"DeviceAnnceInd","nwkAddr":"0x0B2A","ieeeAddr":"0x00158D0004261DC7","type":"EndDevice","powerSource":"Battery","ReceiverOnIdle":"OFF","Security":"OFF"}},
-  {"category":"zigbee","payload":{"event":"NodeDescRsp","nwkAddr":"0x0B2A","ieeeAddr":"0x00158D0004261DC7"}},
-  {"category":"zigbee","payload":{"event":"LeaveInd","nwkAddr":"0x0B2A","ieeeAddr":"0x00158D0004261DC7"}},
-  {"category":"zigbee","payload":{"event":"TcDeviceInd","nwkAddr":"0x95B8","ieeeAddr":"0x00158D0004261DC7"}},
-  {"category":"zigbee","payload":{"event":"DeviceAnnceInd","nwkAddr":"0x95B8","ieeeAddr":"0x00158D0004261DC7","type":"EndDevice","powerSource":"Battery","ReceiverOnIdle":"OFF","Security":"OFF"}},
-  {"category":"zigbee","payload":{"event":"NodeDescRsp","nwkAddr":"0x95B8","ieeeAddr":"0x00158D0004261DC7"}},
-  {"category":"zigbee","payload":{"event":"ActiveEpRsp","nwkAddr":"0x95B8","ieeeAddr":"0x00158D0004261DC7"}},
-  {"category":"zigbee","payload":{"event":"SimpleDescRsp","nwkAddr":"0x95B8","ep":1,"ieeeAddr":"0x00158D0004261DC7"}},
-
-  {"category":"zigbee","payload":{"event":"SimpleDescRsp","nwkAddr":"0x95B8","ieeeAddr":"0x00158D0004261DC7"}},
-  {"category":"zigbee","payload":{"event":"ModelRcv","nwkAddr":"0x95B8","ieeeAddr":"0x00158D0004261DC7","ModelId":"lumi.sensor_magnet"}},
-  {"category":"zigbee","payload": {"event":"PowerSrcRcv","nwkAddr":"0x95B8","ieeeAddr":"0x00158D0004261DC7","PowerSource":1}},
-
-  {"category":"zigbee","payload":{"event":"LeaveInd","nwkAddr":"0x91C9","ieeeAddr":"0x00158D0002FD0D07"}},
-  {"category":"zigbee","payload":{"event":"TcDeviceInd","nwkAddr":"0x347E","ieeeAddr":"0x00158D0002FD0D07"}},
-  {"category":"zigbee","payload":{"event":"DeviceAnnceInd","nwkAddr":"0x347E","ieeeAddr":"0x00158D0002FD0D07","type":"EndDevice","powerSource":"Battery","ReceiverOnIdle":"OFF","Security":"OFF"}},
-  {"category":"zigbee","payload":{"event":"NodeDescRsp","nwkAddr":"0x347E","ieeeAddr":"0x00158D0002FD0D07"}},
-  {"category":"zigbee","payload":{"event":"ActiveEpRsp","nwkAddr":"0x347E","ieeeAddr":"0x00158D0002FD0D07"}},
-  {"category":"zigbee","payload":{"event":"SimpleDescRsp","nwkAddr":"0x347E","ep":1,"ieeeAddr":"0x00158D0002FD0D07"}},
-  {"category":"zigbee","payload":{"event":"SimpleDescRsp","nwkAddr":"0x347E","ep":2,"ieeeAddr":"0x00158D0002FD0D07"}},
-  {"category":"zigbee","payload":{"event":"SimpleDescRsp","nwkAddr":"0x347E","ep":3,"ieeeAddr":"0x00158D0002FD0D07"}},
-  {"category":"zigbee","payload": {"event":"PowerSrcRcv","nwkAddr":"0x347E","ieeeAddr":"0x00158D0002FD0D07","PowerSource":2}},
-
-  {"category":"zigbee","payload":{"event":"SimpleDescRsp","nwkAddr":"0x347E","ieeeAddr":"0x00158D0002FD0D07"}},
-  {"category":"zigbee","payload":{"event":"ModelRcv","nwkAddr":"0x347E","ieeeAddr":"0x00158D0002FD0D07","ModelId":"lumi.remote.b286acn01"}},
-
-
-
-  {"category":"zigbee","payload":{"event":"LeaveInd","nwkAddr":"0x0078","ieeeAddr":"0x00158D0001FA4F2F"}},
-  {"category":"zigbee","payload":{"event":"TcDeviceInd","nwkAddr":"0x3746","ieeeAddr":"0x00158D0001FA4F2F"}},
-  {"category":"zigbee","payload":{"event":"DeviceAnnceInd","nwkAddr":"0x3746","ieeeAddr":"0x00158D0001FA4F2F","type":"EndDevice","powerSource":"Battery","ReceiverOnIdle":"OFF","Security":"OFF"}},
-  {"category":"zigbee","payload":{"event":"NodeDescRsp","nwkAddr":"0x3746","ieeeAddr":"0x00158D0001FA4F2F"}},
-  {"category":"zigbee","payload":{"event":"ActiveEpRsp","nwkAddr":"0x3746","ieeeAddr":"0x00158D0001FA4F2F"}},
-  {"category":"zigbee","payload":{"event":"SimpleDescRsp","nwkAddr":"0x3746","ep":1,"ieeeAddr":"0x00158D0001FA4F2F"}},
-  {"category":"zigbee","payload":{"event":"SimpleDescRsp","nwkAddr":"0x3746","ep":2,"ieeeAddr":"0x00158D0001FA4F2F"}},
-  {"category":"zigbee","payload":{"event":"SimpleDescRsp","nwkAddr":"0x3746","ep":3,"ieeeAddr":"0x00158D0001FA4F2F"}},
-
-  {"category":"zigbee","payload":{"event":"SimpleDescRsp","nwkAddr":"0x0078","ieeeAddr":"0x00158D0001FA4F2F"}},
-  {"category":"zigbee","payload":{"event":"ModelRcv","nwkAddr":"0x0078","ieeeAddr":"0x00158D0001FA4F2F","ModelId":"lumi.sens"}},
-  {"category":"zigbee","payload": {"event":"PowerSrcRcv","nwkAddr":"0x0078","ieeeAddr":"0x00158D0001FA4F2F","PowerSource":3}},
+  {"category":"zigbee","payload":{"event":"PermitJoin","target":"0xFFFC","duration":255}},
+  {"category":"zigbee","payload":{"event":"LeaveInd","nwkAddr":"0xB06A","ieeeAddr":"0x00158D0002C4A78F"}},
+  {"category":"zigbee","payload":{"event":"TcDeviceInd","nwkAddr":"0x475E","ieeeAddr":"0x00158D0002C4A78F","ParentnwkAddr":"0x0000"}},
+  {"category":"zigbee","payload":{"event":"DeviceAnnceInd","nwkAddr":"0x475E","ieeeAddr":"0x00158D0002C4A78F","type":"EndDevice","PS":3,"ReceiverOnIdle":"OFF","Security":"OFF"}},
+  {"category":"zigbee","payload":{"event":"ModelRcv","nwkAddr":"0x475E","ieeeAddr":"0x00158D0002C4A78F","ModelId":"lumi.vibration.aq1","ManufName":""}},
+  {"category":"zigbee","payload":{"event":"NodeDescRsp","nwkAddr":"0x475E","ieeeAddr":"0x00158D0002C4A78F"}},
+  {"category":"zigbee","payload":{"event":"ModelRcv","nwkAddr":"0x475E","ieeeAddr":"0x00158D0002C4A78F","ModelId":"lumi.vibration.aq1","ManufName":""}},
+  {"category":"zigbee","payload":{"event":"ActiveEpRsp","nwkAddr":"0x475E","ieeeAddr":"0x00158D0002C4A78F","epList":[1,2]}},
+  {"category":"zigbee","payload":{"event":"ModelRcv","nwkAddr":"0x475E","ieeeAddr":"0x00158D0002C4A78F","ModelId":"lumi.vibration.aq1","ManufName":""}},
+  {"category":"zigbee","payload":{"event":"SimpleDescRsp","nwkAddr":"0x475E","ieeeAddr":"0x00158D0002C4A78F","ep":1,"ProfileId":260,"DeviceId":10}},
+  {"category":"zigbee","payload":{"event":"ModelRcv","nwkAddr":"0x475E","ieeeAddr":"0x00158D0002C4A78F","ModelId":"lumi.vibration.aq1","ManufName":""}},
+  {"category":"zigbee","payload":{"event":"SimpleDescRsp","nwkAddr":"0x475E","ieeeAddr":"0x00158D0002C4A78F","ep":2,"ProfileId":260,"DeviceId":24322}},
+  {"category":"zigbee","payload":{"event":"SimpleDescRsp","nwkAddr":"0x475E","ieeeAddr":"0x00158D0002C4A78F"}},
+  {"category":"zigbee","payload":{"event":"ModelRcv","nwkAddr":"0x475E","ieeeAddr":"0x00158D0002C4A78F","ModelId":"lumi.vibration.aq1","ManufName":""}},
+  {"category":"zigbee","payload":{"event":"ConfRsp","nwkAddr":"0x475E","ieeeAddr":"0x00158D0002C4A78F"}},
+  {"category":"zigbee","payload":{"event":"ModelRcv","nwkAddr":"0x475E","ieeeAddr":"0x00158D0002C4A78F","ModelId":"lumi.vibration.aq1","ManufName":"LUMI"}},
+  {"category":"zigbee","payload":{"event":"PowerSrcRcv","nwkAddr":"0x475E","ieeeAddr":"0x00158D0002C4A78F","PowerSource":3}},
 
 
 
 
-  {"category":"zigbee","payload":{"event":"PermitJoin","target":65532,"duration":255}},
-  {"category":"zigbee","payload":{"event":"LeaveInd","nwkAddr":"0x16F1","ieeeAddr":"0x00158D0002C4A78F"}},
-  {"category":"zigbee","payload":{"event":"TcDeviceInd","nwkAddr":"0xDEAD","ieeeAddr":"0x00158D0002C4A78F"}},
-  {"category":"zigbee","payload":{"event":"DeviceAnnceInd","nwkAddr":"0xDEAD","ieeeAddr":"0x00158D0002C4A78F","type":"EndDevice","powerSource":"Battery","ReceiverOnIdle":"OFF","Security":"OFF"}},
-  {"category":"zigbee","payload":{"event":"NodeDescRsp","nwkAddr":"0xDEAD","ieeeAddr":"0x00158D0002C4A78F"}},
-  {"category":"zigbee","payload":{"event":"PermitJoin","target":65532,"duration":0}},
-  {"category":"zigbee","payload":{"event":"ActiveEpRsp","nwkAddr":"0xDEAD","ieeeAddr":"0x00158D0002C4A78F"}},
-  {"category":"zigbee","payload":{"event":"SimpleDescRsp","nwkAddr":"0xDEAD","ep":1,"ieeeAddr":"0x00158D0002C4A78F"}},
-  {"category":"zigbee","payload":{"event":"SimpleDescRsp","nwkAddr":"0xDEAD","ep":2,"ieeeAddr":"0x00158D0002C4A78F"}},
-  {"category":"zigbee","payload":{"event":"SimpleDescRsp","nwkAddr":"0xDEAD","ep":2,"ieeeAddr":"0x00158D0002C4A78F"}},
-  {"category":"zigbee","payload":{"event":"SimpleDescRsp","nwkAddr":"0xDEAD","ieeeAddr":"0x00158D0002C4A78F"}},
-  {"category":"zigbee","payload":{"event":"ModelRcv","nwkAddr":"0xDEAD","ieeeAddr":"0x00158D0002C4A78F","ModelId":"lumi.vibration.aq1"}},
-  {"category":"zigbee","payload": {"event":"PowerSrcRcv","nwkAddr":"0xDEAD","ieeeAddr":"0x00158D0002C4A78F","PowerSource":4}},
+    {
+      "category": "zigbee",
+      "payload": {
+        "event": "PermitJoin",
+        "target": "0xFFFC",
+        "duration": 255,
+        "timestamp": 1586214953988
+      }
+    },
+    {
+      "category": "zigbee",
+      "payload": {
+        "event": "LeaveInd",
+        "nwkAddr": "0x7059",
+        "ieeeAddr": "0x00158D0002C4A78F",
+        "timestamp": 1586214965097
+      }
+    },
+    {
+      "category": "zigbee",
+      "payload": {
+        "event": "TcDeviceInd",
+        "nwkAddr": "0xCEEA",
+        "ieeeAddr": "0x00158D0002C4A78F",
+        "ParentnwkAddr": "0x0000",
+        "timestamp": 1586214967166
+      }
+    },
+    {
+      "category": "zigbee",
+      "payload": {
+        "event": "TcDeviceInd",
+        "nwkAddr": "0xCEEA",
+        "ieeeAddr": "0x00158D0002C4A78F",
+        "ParentnwkAddr": "0x0000",
+        "timestamp": 1586214972167
+      }
+    },
+    {
+      "category": "zigbee",
+      "payload": {
+        "event": "DeviceAnnceInd",
+        "nwkAddr": "0xCEEA",
+        "ieeeAddr": "0x00158D0002C4A78F",
+        "type": "EndDevice",
+        "PS": 3,
+        "ReceiverOnIdle": "OFF",
+        "Security": "OFF",
+        "timestamp": 1586214972264
+      }
+    },
+    {
+      "category": "zigbee",
+      "payload": {
+        "event": "ModelRcv",
+        "nwkAddr": "0xCEEA",
+        "ieeeAddr": "0x00158D0002C4A78F",
+        "ModelId": "lumi.vibration.aq1",
+        "ManufName": "",
+        "timestamp": 1586214972363
+      }
+    },
+    {
+      "category": "zigbee",
+      "payload": {
+        "event": "NodeDescRsp",
+        "nwkAddr": "0xCEEA",
+        "ieeeAddr": "0x00158D0002C4A78F",
+        "timestamp": 1586214974168
+      }
+    },
+    {
+      "category": "zigbee",
+      "payload": {
+        "event": "ModelRcv",
+        "nwkAddr": "0xCEEA",
+        "ieeeAddr": "0x00158D0002C4A78F",
+        "ModelId": "lumi.vibration.aq1",
+        "ManufName": "",
+        "timestamp": 1586214976362
+      }
+    },
+    {
+      "category": "zigbee",
+      "payload": {
+        "event": "ActiveEpRsp",
+        "nwkAddr": "0xCEEA",
+        "ieeeAddr": "0x00158D0002C4A78F",
+        "epList": [
+          1,
+          2
+        ],
+        "timestamp": 1586214977716
+      }
+    },
+    {
+      "category": "zigbee",
+      "payload": {
+        "event": "ModelRcv",
+        "nwkAddr": "0xCEEA",
+        "ieeeAddr": "0x00158D0002C4A78F",
+        "ModelId": "lumi.vibration.aq1",
+        "ManufName": "",
+        "timestamp": 1586214980835
+      }
+    },
+    {
+      "category": "zigbee",
+      "payload": {
+        "event": "SimpleDescRsp",
+        "nwkAddr": "0xCEEA",
+        "ieeeAddr": "0x00158D0002C4A78F",
+        "ep": 1,
+        "ProfileId": 260,
+        "DeviceId": 10,
+        "timestamp": 1586214982275
+      }
+    },
+    {
+      "category": "zigbee",
+      "payload": {
+        "event": "ModelRcv",
+        "nwkAddr": "0xCEEA",
+        "ieeeAddr": "0x00158D0002C4A78F",
+        "ModelId": "lumi.vibration.aq1",
+        "ManufName": "",
+        "timestamp": 1586214984456
+      }
+    },
+    {
+      "category": "zigbee",
+      "payload": {
+        "event": "SimpleDescRsp",
+        "nwkAddr": "0xCEEA",
+        "ieeeAddr": "0x00158D0002C4A78F",
+        "ep": 2,
+        "ProfileId": 260,
+        "DeviceId": 24322,
+        "timestamp": 1586214985869
+      }
+    },
+    {
+      "category": "zigbee",
+      "payload": {
+        "event": "SimpleDescRsp",
+        "nwkAddr": "0xCEEA",
+        "ieeeAddr": "0x00158D0002C4A78F",
+        "timestamp": 1586214985907
+      }
+    },
+    {
+      "category": "zigbee",
+      "payload": {
+        "event": "ModelRcv",
+        "nwkAddr": "0xCEEA",
+        "ieeeAddr": "0x00158D0002C4A78F",
+        "ModelId": "lumi.vibration.aq1",
+        "ManufName": "",
+        "timestamp": 1586214986665
+      }
+    },
+    {
+      "category": "zigbee",
+      "payload": {
+        "event": "ConfRsp",
+        "nwkAddr": "0xCEEA",
+        "ieeeAddr": "0x00158D0002C4A78F",
+        "timestamp": 1586214986703
+      }
+    },
+    {
+      "category": "zigbee",
+      "payload": {
+        "event": "ModelRcv",
+        "nwkAddr": "0xCEEA",
+        "ieeeAddr": "0x00158D0002C4A78F",
+        "ModelId": "lumi.vibration.aq1",
+        "ManufName": "LUMI",
+        "timestamp": 1586214989506
+      }
+    },
+    {
+      "category": "zigbee",
+      "payload": {
+        "event": "PowerSrcRcv",
+        "nwkAddr": "0xCEEA",
+        "ieeeAddr": "0x00158D0002C4A78F",
+        "PowerSource": 3,
+        "timestamp": 1586214989509
+      }
+    },
+    {
+      "category": "zigbee",
+      "payload": {
+        "event": "ModelRcv",
+        "nwkAddr": "0xCEEA",
+        "ieeeAddr": "0x00158D0002C4A78F",
+        "ModelId": "lumi.vibration.aq1",
+        "ManufName": "LUMI",
+        "timestamp": 1586214989621
+      }
+    }
 
-  {"category":"zigbee","payload":{"event":"PermitJoin","target":65532,"duration":255}},
-  {"category":"zigbee","payload":{"event":"LeaveInd","nwkAddr":"0xDEAD","ieeeAddr":"0x00158D0002C4A78F"}},
-  {"category":"zigbee","payload":{"event":"TcDeviceInd","nwkAddr":"0xBEEF","ieeeAddr":"0x00158D0002C4A78F"}},
-  {"category":"zigbee","payload":{"event":"DeviceAnnceInd","nwkAddr":"0xBEEF","ieeeAddr":"0x00158D0002C4A78F","type":"EndDevice","powerSource":"Battery","ReceiverOnIdle":"OFF","Security":"OFF"}},
-  {"category":"zigbee","payload":{"event":"NodeDescRsp","nwkAddr":"0xBEEF","ieeeAddr":"0x00158D0002C4A78F"}},
-  {"category":"zigbee","payload":{"event":"PermitJoin","target":65532,"duration":0}},
-  {"category":"zigbee","payload":{"event":"ActiveEpRsp","nwkAddr":"0xBEEF","ieeeAddr":"0x00158D0002C4A78F"}},
-  {"category":"zigbee","payload":{"event":"SimpleDescRsp","nwkAddr":"0xBEEF","ep":1,"ieeeAddr":"0x00158D0002C4A78F"}},
-  {"category":"zigbee","payload":{"event":"SimpleDescRsp","nwkAddr":"0xBEEF","ep":2,"ieeeAddr":"0x00158D0002C4A78F"}},
-  {"category":"zigbee","payload":{"event":"SimpleDescRsp","nwkAddr":"0xBEEF","ep":2,"ieeeAddr":"0x00158D0002C4A78F"}},
-  {"category":"zigbee","payload":{"event":"SimpleDescRsp","nwkAddr":"0xBEEF","ieeeAddr":"0x00158D0002C4A78F"}},
-  {"category":"zigbee","payload":{"event":"ModelRcv","nwkAddr":"0xBEEF","ieeeAddr":"0x00158D0002C4A78F","ModelId":"lumi.vibration.aq1"}},
-  {"category":"zigbee","payload": {"event":"PowerSrcRcv","nwkAddr":"0xBEEF","ieeeAddr":"0x00158D0002C4A78F","PowerSource":4}}
 ]

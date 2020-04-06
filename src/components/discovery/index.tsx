@@ -7,6 +7,8 @@ import { enableJoin } from "../actions";
 import { WSConnect } from "../../utils";
 import { Notyf } from "notyf";
 import orderBy from "lodash/orderBy";
+window["wsEventsData"] = window["wsEventsData"] || [];
+const wsEventsData: object[] = window['wsEventsData'];
 
 interface DiscoveryState {
     updateTimerId: number;
@@ -71,6 +73,9 @@ export default class Discovery extends Component<{}, DiscoveryState> {
         }
         if (event.category === "zigbee" && (event.payload as ZigbeePayload).event !== "LinkData") {
             console.log('wsEvent.data', wsEvent.data);
+            //use copy(wsEventsData)
+            wsEventsData.push(event);
+
             this.processZigbeeEvent(event.payload as ZigbeePayload);
         }
     };

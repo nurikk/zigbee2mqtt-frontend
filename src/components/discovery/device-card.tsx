@@ -11,6 +11,8 @@ import Button from "../button";
 import { startInterview } from "../actions";
 import SafeImg from "../safe-image";
 import PowerSourceComp from "../power-source";
+import uniqWith from "lodash/uniqWith";
+import isEqual from "lodash/isEqual";
 
 const INTERVIEW_STEPS_COUNT = 9;
 const DEVICE_NOT_RESPONDING_TIMEOUT = 20;
@@ -36,7 +38,7 @@ const EventLabels = new Map<ZigbeeEvent, string>([
 const RowCol: FunctionalComponent<{ title: string; content: ComponentChild }> = ({ title, content }) => {
     return (
         <div class={`row ${style["scale-in-center"]}`}>
-            <div class="col-5">{title}</div>
+            <div class="col-5 text-nowrap">{title}</div>
             <div class="col">{content}</div>
         </div>
     );
@@ -77,10 +79,14 @@ const EventRow: FunctionalComponent<EventRowProps> = ({ eventName, events }): VN
 
         case "SimpleDescRsp":
             return <Fragment>
-                {events.filter(e => e.ep).map(evt => (
-                    <RowCol title={`Endpoint #${evt.ep}:`}
-                            content={`ProfileId=${evt.ProfileId} DeviceId=${evt.DeviceId}`} />
-                ))}
+                {uniqWith(events
+                        .filter(e => e.ep)
+                        .map(({ ep, ProfileId, DeviceId }) => ({ ep, ProfileId, DeviceId }))
+                    , isEqual)
+                    .map(evt => (
+                        <RowCol title={`Endpoint #${evt.ep}:`}
+                                content={`ProfileId=${evt.ProfileId} DeviceId=${evt.DeviceId}`} />
+                    ))}
             </Fragment>;
 
 
