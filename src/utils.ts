@@ -69,3 +69,21 @@ export function last<T>(collection: T[]) {
 export function arrayUnique<T>(input: T[]) {
     return input.filter((v, i, a) => a.indexOf(v) === i);
 }
+
+
+
+export const bitOps = {
+    getBit: (n, bitIndex) => {
+        const bitMask = 1 << bitIndex;
+        const result = n & bitMask;
+        return result >>> bitIndex;
+    },
+    setBit: (n, bitIndex) => {
+        const bitMask = 1 << bitIndex;
+        return n | bitMask;
+    },
+    clearBit: (n, bitIndex) => {
+        const bitMask = ~(1 << bitIndex);
+        return n & bitMask;
+    }
+};

@@ -1,6 +1,7 @@
 import { Fragment, FunctionalComponent, h } from "preact";
 import { PowerSource } from "../../types";
 import style from "./style.css";
+import { bitOps } from "../../utils";
 
 interface PowerSourceProps {
     source: PowerSource;
@@ -19,6 +20,13 @@ const description = [
 
 const PowerSourceComp: FunctionalComponent<PowerSourceProps> = ({ source, battery,className }) => {
     let batteryClass = "fa-battery-full";
+    //Bit b7 of this attribute SHALL be set to 1 if the device has a secondary power source in the form of a battery
+    // backup. Otherwise, bit b7 SHALL be set to 0.
+    const hasSecondaryPowerSource = bitOps.getBit(source, 7) == 1;
+    if (hasSecondaryPowerSource) {
+        source = bitOps.clearBit(source, 7);
+    }
+
     switch (source) {
         case PowerSource.Battery:
             if (battery) {
@@ -43,10 +51,13 @@ const PowerSourceComp: FunctionalComponent<PowerSourceProps> = ({ source, batter
         case PowerSource.MainsSinglePhase:
             return (<Fragment>
                 <i className={`fa fa-plug ${style.plug} ${className}`} title={description[source]} />
-                {battery ? <PowerSourceComp className={'d-block'} source={PowerSource.Battery} battery={battery} /> : null }
+                {hasSecondaryPowerSource ? <PowerSourceComp className={'d-block'} source={PowerSource.Battery} battery={battery} /> : null }
             </Fragment>);
         case PowerSource.DC:
-            return <i class={`fa fa-charging-station ${className}`} title={description[source]} />;
+            return (<Fragment>
+                <i class={`fa fa-charging-station ${className}`} title={description[source]} />
+                {hasSecondaryPowerSource ? <PowerSourceComp className={'d-block'} source={PowerSource.Battery} battery={battery} /> : null }
+            </Fragment>);
 
         case PowerSource.Unknown:
         default:
