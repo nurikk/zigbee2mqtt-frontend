@@ -1,16 +1,11 @@
-import { Component, ComponentChild, Fragment, FunctionalComponent, h, RefObject } from "preact";
+import { Component, ComponentChild, FunctionalComponent, h, RefObject } from "preact";
 import { Device, Dictionary } from "../../types";
 import { setSimpleBind, setState } from "../actions";
 import { forwardRef } from "preact/compat";
 import style from "./style.css";
 
-interface SimpleBindState {
-}
-
-
 interface SimpleBindProps {
     device: Device;
-
 }
 
 type DeviceParamTuple = [string, unknown];
@@ -51,33 +46,24 @@ const UniversalEditor: FunctionalComponent<UniversalEditorProps> = forwardRef((p
     }
 });
 
-export default class SimpleBind extends Component<SimpleBindProps, SimpleBindState> {
-
-
-    constructor() {
-        super();
-        this.state = {
-        };
-    }
-
-
+export default class SimpleBind extends Component<SimpleBindProps, {}> {
     setValue = (name: string, value: unknown): void => {
         const { device } = this.props;
         setState(device.ieeeAddr, name, value, (err, response) => {
-
+            //pass
         });
     };
     setSimpleBind = (name: string, value: unknown): void => {
         const { device } = this.props;
         setSimpleBind(device.ieeeAddr, name, value, (err, response) => {
-
+            //pass
         });
     };
 
 
     render(): ComponentChild {
         const { device } = this.props;
-        const simpleBindRules: Dictionary<string> = device.SB ?? {};
+        const simpleBindRules: Dictionary<string> = device.SB ? device.SB : {};
 
         const kv = Object.entries(device.st);
 
@@ -110,8 +96,6 @@ export default class SimpleBind extends Component<SimpleBindProps, SimpleBindSta
                     </td>
                 </tr>
             ))}
-
-
             </tbody>
         </table>;
 
