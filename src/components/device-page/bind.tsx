@@ -1,8 +1,10 @@
 import { Component, ComponentChild, h } from "preact";
 import { Device } from "../../types";
+import { fetchZigbeeDevicesList } from "../actions";
 
 interface BindState {
-    isOk: boolean;
+    isLoading: boolean;
+    devices: Device[];
 }
 
 interface BindProps {
@@ -13,16 +15,25 @@ export default class Bind extends Component<BindProps, BindState> {
     constructor() {
         super();
         this.state = {
-            isOk: true
+            isLoading: false,
+            devices: []
         };
     }
 
-    onError = (): void => {
-        this.setState({
-            isOk: false
-        });
-
-    };
+    componentDidMount(): void {
+        this.init();
+    }
+    init(): void {
+        this.setState({isLoading: true});
+        fetchZigbeeDevicesList((err, devices) => {
+            if (!err) {
+                this.setState({
+                    isLoading: false,
+                    devices
+                });
+            }
+        })
+    }
 
     render(): ComponentChild {
         return (<form>
