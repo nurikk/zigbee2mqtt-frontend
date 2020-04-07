@@ -42,7 +42,7 @@ export const removeDevice = (dev: string, callback: CallbackHandler<ApiResponse<
 };
 
 export const startInterview = (dev: string, state: number | "", callback: CallbackHandler<void>): void => {
-    callApi("/api/zigbee", "POST", { intstart: dev, action: 'setInterview', state }, undefined, callback);
+    callApi("/api/zigbee", "POST", { dev, action: 'setInterview', state }, undefined, callback);
 };
 
 export const enableJoin = (duration = 255, target = "", callback: CallbackHandler<ApiResponse<void>>): void => {
@@ -87,9 +87,7 @@ export const evalCode = (code: string, callback: CallbackHandler<ApiResponse<str
 };
 
 export const getDeviceInfo = (dev: string, callback: CallbackHandler<Device>): void => {
-    callApi("/api/zigbee/devices", "GET", { dev }, undefined, (err, devices: Device[]) => {
-        callback(err, devices[0]);
-    });
+    callApi("/api/zigbee/devices", "GET", { dev }, undefined, callback);
 };
 
 export const setState = (dev: string, name: string, value: unknown, callback: CallbackHandler<ApiResponse<void>>): void => {
