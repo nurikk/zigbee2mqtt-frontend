@@ -184,7 +184,7 @@ export default class Bind extends Component<BindProps, BindState> {
     loadBindsList(): void {
         this.setState({ isLoading: true });
         const { device } = this.props;
-        loadBindsList(device.ieeeAddr, (err, bindRules) => {
+        loadBindsList(device.nwkAddr, (err, bindRules) => {
             this.setState({ bindRules: [{} as BindRule, ...bindRules], isLoading: false });
         });
     }

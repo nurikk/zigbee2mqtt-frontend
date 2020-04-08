@@ -49,13 +49,13 @@ const UniversalEditor: FunctionalComponent<UniversalEditorProps> = forwardRef((p
 export default class SimpleBind extends Component<SimpleBindProps, {}> {
     setValue = (name: string, value: unknown): void => {
         const { device } = this.props;
-        setState(device.ieeeAddr, name, value, (err, response) => {
+        setState(device.nwkAddr, name, value, (err, response) => {
             //pass
         });
     };
     setSimpleBind = (name: string, value: unknown): void => {
         const { device } = this.props;
-        setSimpleBind(device.ieeeAddr, name, value, (err, response) => {
+        setSimpleBind(device.nwkAddr, name, value, (err, response) => {
             //pass
         });
     };

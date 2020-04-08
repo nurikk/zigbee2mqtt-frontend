@@ -15,7 +15,13 @@ type ContentType = "text" | "json" | "blob";
 
 function callApi<T>(url: string, method: HttMethod, params: Dictionary<any>, payload: any, callback: CallbackHandler<T>, contentType: ContentType = "json"): void {
     fetch(`${url}?${encodeGetParams(params)}`, { method: method, body: payload })
-        .then((res) => res[contentType]())
+        .then((res) => {
+            if (res.status === 200) {
+                return res[contentType]();
+            } else {
+                throw new Error(res.statusText);
+            }
+        })
         .then(data => {
             callback(false, data);
         })
@@ -42,7 +48,7 @@ export const removeDevice = (dev: string, callback: CallbackHandler<ApiResponse<
 };
 
 export const startInterview = (dev: string, state: number | "", callback: CallbackHandler<void>): void => {
-    callApi("/api/zigbee", "POST", { dev, action: 'setInterview', state }, undefined, callback);
+    callApi("/api/zigbee", "POST", { dev, action: "setInterview", state }, undefined, callback);
 };
 
 export const enableJoin = (duration = 255, target = "", callback: CallbackHandler<ApiResponse<void>>): void => {
@@ -91,11 +97,11 @@ export const getDeviceInfo = (dev: string, callback: CallbackHandler<Device>): v
 };
 
 export const setState = (dev: string, name: string, value: unknown, callback: CallbackHandler<ApiResponse<void>>): void => {
-    callApi("/api/zigbee/state", "POST", { dev, name, value }, undefined, callback);
+    callApi("/api/zigbee", "POST", { dev, action: "setState", name, value }, undefined, callback);
 };
 
 export const setSimpleBind = (dev: string, name: string, value: unknown, callback: CallbackHandler<ApiResponse<void>>): void => {
-    callApi("/api/zigbee/simplebind", "POST", { dev, name, value }, undefined, callback);
+    callApi("/api/zigbee", "POST", { dev, action: "setSimpleBind", name, value }, undefined, callback);
 };
 
 export const loadBindsList = (dev: string, callback: CallbackHandler<BindRule[]>): void => {
