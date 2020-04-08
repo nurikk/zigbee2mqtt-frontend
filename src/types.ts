@@ -94,3 +94,12 @@ export interface FileDescriptor extends Named {
     size: number;
     is_dir: boolean;
 }
+
+
+export interface BindRule extends Dictionary<string|number> {
+    id?: number;
+    DstNwkAddr: string;
+    ClusterId: number;
+    SrcEp: number;
+    DstEp: number;
+}

@@ -1,8 +1,8 @@
-import { Device, Dictionary, FileDescriptor } from "../types";
+import { BindRule, Device, Dictionary, FileDescriptor } from "../types";
 import { TimeInfo } from "./time";
 import { encodeGetParams } from "../utils";
 import { LogLevel } from "./log-viewer";
-import { Notyf } from 'notyf';
+import { Notyf } from "notyf";
 
 export interface ApiResponse<T> {
     success: boolean;
@@ -91,13 +91,27 @@ export const getDeviceInfo = (dev: string, callback: CallbackHandler<Device>): v
 };
 
 export const setState = (dev: string, name: string, value: unknown, callback: CallbackHandler<ApiResponse<void>>): void => {
-    console.warn("Set state", {dev, name, value});
-    // callApi("/api/scripts", "POST", { action: "evalCode" }, code, callback);
+    callApi("/api/zigbee/state", "POST", { dev, name, value }, undefined, callback);
 };
 
 export const setSimpleBind = (dev: string, name: string, value: unknown, callback: CallbackHandler<ApiResponse<void>>): void => {
-    console.warn("setSimpleBind", {dev, name, value});
-    // callApi("/api/scripts", "POST", { action: "evalCode" }, code, callback);
+    callApi("/api/zigbee/simplebind", "POST", { dev, name, value }, undefined, callback);
 };
 
+export const loadBindsList = (dev: string, callback: CallbackHandler<BindRule[]>): void => {
+    callApi("/api/zigbee/bind", "GET", { action: "list", dev }, undefined, (err, response: BindRule[]) => {
+        if (err) {
+            callback(true, undefined);
+        } else {
+            callback(err, response.map((rule, idx) => ({ ...rule, id: idx })));
+        }
+    });
+};
+
+export const createBind = (dev: string, bindRule: BindRule, callback: CallbackHandler<ApiResponse<void>>): void => {
+    callApi("/api/zigbee/bind", "POST", { action: "bind", dev, ...bindRule }, undefined, callback);
+};
+export const removeBind = (dev: string, bindRule: BindRule, callback: CallbackHandler<ApiResponse<void>>): void => {
+    callApi("/api/zigbee/bind", "POST", { action: "unbind", dev, ...bindRule }, undefined, callback);
+};
 

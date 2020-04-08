@@ -3,6 +3,9 @@ import { Device, Dictionary } from "./types";
 
 export const genDeviceDetailsLink = (deviceIdentifier: string | number): string => (`/zigbee?nwkAddr=${encodeURIComponent(deviceIdentifier)}`);
 
+export const toHex = (input: number, padding = 4): string => {
+    return `0x${(`${'0'.repeat(padding)}${input.toString(16)}`).substr(-1 * padding).toUpperCase()}`;
+};
 
 /**
  * Returns an array with arrays of the given size.
