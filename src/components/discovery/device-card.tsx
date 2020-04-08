@@ -156,7 +156,7 @@ export default class DeviceCard extends Component<DeviceCardProps, DeviceCardSta
     }
 
     onInterviewClick = (nwkAddr: string): void => {
-        startInterview(nwkAddr, (err, response) => {
+        startInterview(nwkAddr, 0,(err, response) => {
             if (!err) {
                 this.setState({ manualInterviewStarted: true });
             }

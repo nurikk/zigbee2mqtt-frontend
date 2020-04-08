@@ -41,8 +41,8 @@ export const removeDevice = (dev: string, callback: CallbackHandler<ApiResponse<
     callApi("/api/zigbee/remove", "GET", { dev }, undefined, callback);
 };
 
-export const startInterview = (address: string, callback: CallbackHandler<unknown>): void => {
-    callApi("/zigbee", "GET", { intstart: address }, undefined, callback, "blob");
+export const startInterview = (dev: string, state: number | "", callback: CallbackHandler<void>): void => {
+    callApi("/api/zigbee", "POST", { intstart: dev, action: 'setInterview', state }, undefined, callback);
 };
 
 export const enableJoin = (duration = 255, target = "", callback: CallbackHandler<ApiResponse<void>>): void => {
