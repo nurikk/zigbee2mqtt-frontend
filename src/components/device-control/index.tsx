@@ -9,7 +9,7 @@ interface DeviceControlGroupProps {
 
 
 const onBindClick = (device: Device): void => {
-    location.href = `/zigbee?bind=${encodeURIComponent(device.nwkAddr)}`;
+    location.href = `/zigbee/device?dev=${encodeURIComponent(device.nwkAddr)}&activeTab=Bind`;
 };
 
 const onRenameClick = (device: Device): void => {
