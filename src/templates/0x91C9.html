@@ -13,20 +13,6 @@
             padding-top: 5rem;
             background-color: #eef5f9 !important;
         }
-
-        .card {
-            background-color: #ffffff;
-            border-color: #d7dfe3;
-            border-radius: 4px;
-            box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05);
-        }
-
-        #editor {
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-        }
     </style>
     <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" rel="stylesheet">
@@ -39,8 +25,6 @@
     <script crossorigin="anonymous"
             integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
             src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.slsys.io/js/vendor-2020.03.19d2.js" type="text/javascript"></script>
-    <script src="https://cdn.slsys.io/js/main-2020.03.19d2.js" type="text/javascript"></script>
     <meta content="width=device-width" name="viewport">
     <meta content="yes" name="mobile-web-app-capable">
 </head>
@@ -138,108 +122,9 @@
     </nav>
 </div>
 <main class="h-100" role="main">
+
     <div class="container">
-        <table class="table">
-            <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>Value</th>
-                <th>Actions</th>
-            </tr>
-            <tr>
-                <th scope="row">1</th>
-                <td>linkquality</td>
-                <td>73</td>
-                <td>
-                    <div aria-label="..." class="btn-group btn-group-sm" role="group">
-
-                        <input class="button btn btn-primary" onclick="result = prompt('Enter new value', '73');if (result != null) location.href='/zigbee?nwkAddr=0x91C9&name=linkquality&value='+result;" type="button"
-                               value="Set" />
-                        <input class="btn btn-secondary" onclick="result = prompt('Enter SimpleBind rules', 'null');if (result != null) location.href='/zigbee?nwkAddr=0x91C9&name=linkquality&SimpleBind='+result;" type="button"
-                               value="SimpleBind" />
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>trSeqNum</td>
-                <td>49</td>
-                <td><input onclick="result = prompt('Enter new value', '49');if (result != null) location.href='/zigbee?nwkAddr=0x91C9&name=trSeqNum&value='+result;" type="button"
-                           value="Set" />
-                    <input onclick="result = prompt('Enter SimpleBind rules', 'null');if (result != null) location.href='/zigbee?nwkAddr=0x91C9&name=trSeqNum&SimpleBind='+result;" type="button"
-                           value="SimpleBind" />
-                </td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>voltage</td>
-                <td>3.095</td>
-                <td><input onclick="result = prompt('Enter new value', '3.095');if (result != null) location.href='/zigbee?nwkAddr=0x91C9&name=voltage&value='+result;" type="button"
-                           value="Set" />
-                    <input onclick="result = prompt('Enter SimpleBind rules', 'null');if (result != null) location.href='/zigbee?nwkAddr=0x91C9&name=voltage&SimpleBind='+result;" type="button"
-                           value="SimpleBind" />
-                </td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>battery</td>
-                <td>100</td>
-                <td><input onclick="result = prompt('Enter new value', '100');if (result != null) location.href='/zigbee?nwkAddr=0x91C9&name=battery&value='+result;" type="button"
-                           value="Set" />
-                    <input onclick="result = prompt('Enter SimpleBind rules', 'null');if (result != null) location.href='/zigbee?nwkAddr=0x91C9&name=battery&SimpleBind='+result;" type="button"
-                           value="SimpleBind" />
-                </td>
-            </tr>
-        </table>
-
-        <hr />
-
-
-        <div>ieeeAddr = 00158D0002FD0D07</div>
-        <div>last_seen = <code>1584763195</code></div>
-        <div>Interview = <code>{
-            "TS": 0,
-            "State": 4
-            }</code></div>
-        <div>ep 1</div>
-        <div>-- profId = 260</div>
-        <div>-- In</div>
-        <div>-- -- 0x0000 GEN_BASIC</div>
-        <div>-- -- 0x0003</div>
-        <div>st= <code>{
-            "linkquality": 73,
-            "trSeqNum": 49,
-            "voltage": 3.095,
-            "battery": 100
-            }</code></div>
-
-        <!-- ieeeAddr = 00158D0002FD0D07<br />last_seen = 1584763195<br />Interview = {"TS":0,"State":4}<br />type
-            =
-            EndDevice<br />powerSource = Battery<br />Rcf = true<br />ModelId = lumi.remote.b286acn01<br />supported
-            =
-            1<br />ep 1<br /> -- profId = 260<br /> -- In<br /> -- -- 0x0000 GEN_BASIC<br /> -- -- 0x0003
-            GEN_IDENTIFY<br />
-            -- -- 0x0019 OTA<br /> -- -- 0xFFFF UNK_0xFFFF<br /> -- -- 0x0012 GEN_MULTISTATE_INPUT_BASIC<br /> --
-            Out<br />
-            -- -- 0x0000 GEN_BASIC<br /> -- -- 0x0004 GEN_GROUPS<br /> -- -- 0x0003 GEN_IDENTIFY<br /> -- -- 0x0005
-            GEN_SCENES<br /> -- -- 0x0019 OTA<br /> -- -- 0xFFFF UNK_0xFFFF<br /> -- -- 0x0012
-            GEN_MULTISTATE_INPUT_BASIC<br /> -- devId = 24321<br />ep 2<br /> -- profId = 260<br /> -- In<br /> --
-            --
-            0x0003
-            GEN_IDENTIFY<br /> -- -- 0x0012 GEN_MULTISTATE_INPUT_BASIC<br /> -- Out<br /> -- -- 0x0004
-            GEN_GROUPS<br />
-            --
-            -- 0x0003 GEN_IDENTIFY<br /> -- -- 0x0005 GEN_SCENES<br /> -- -- 0x0012 GEN_MULTISTATE_INPUT_BASIC<br />
-            --
-            devId = 24322<br />ep 3<br /> -- profId = 260<br /> -- In<br /> -- -- 0x0003 GEN_IDENTIFY<br /> -- --
-            0x000C
-            GEN_ANALOG_INPUT_BASIC<br /> -- Out<br /> -- -- 0x0004 GEN_GROUPS<br /> -- -- 0x0003 GEN_IDENTIFY<br />
-            --
-            --
-            0x0005 GEN_SCENES<br /> -- -- 0x000C GEN_ANALOG_INPUT_BASIC<br /> -- devId = 24323<br />ManufName =
-            LUMI<br />st
-            = {"linkquality":73,"trSeqNum":49,"voltage":3.095,"battery":100}<br /> -->
-
+        <div data-widget-host="device-page"></div>
     </div>
 </main>
 

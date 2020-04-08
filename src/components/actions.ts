@@ -1,8 +1,8 @@
-import { Device, Dictionary, FileDescriptor } from "../types";
+import { BindRule, Device, Dictionary, FileDescriptor } from "../types";
 import { TimeInfo } from "./time";
 import { encodeGetParams } from "../utils";
 import { LogLevel } from "./log-viewer";
-import { Notyf } from 'notyf';
+import { Notyf } from "notyf";
 
 export interface ApiResponse<T> {
     success: boolean;
@@ -15,7 +15,13 @@ type ContentType = "text" | "json" | "blob";
 
 function callApi<T>(url: string, method: HttMethod, params: Dictionary<any>, payload: any, callback: CallbackHandler<T>, contentType: ContentType = "json"): void {
     fetch(`${url}?${encodeGetParams(params)}`, { method: method, body: payload })
-        .then((res) => res[contentType]())
+        .then((res) => {
+            if (res.status === 200) {
+                return res[contentType]();
+            } else {
+                throw new Error(res.statusText);
+            }
+        })
         .then(data => {
             callback(false, data);
         })
@@ -41,8 +47,8 @@ export const removeDevice = (dev: string, callback: CallbackHandler<ApiResponse<
     callApi("/api/zigbee/remove", "GET", { dev }, undefined, callback);
 };
 
-export const startInterview = (address: string, callback: CallbackHandler<unknown>): void => {
-    callApi("/zigbee", "GET", { intstart: address }, undefined, callback, "blob");
+export const startInterview = (dev: string, state: number | "", callback: CallbackHandler<void>): void => {
+    callApi("/api/zigbee", "POST", { dev, action: "setInterview", state }, undefined, callback);
 };
 
 export const enableJoin = (duration = 255, target = "", callback: CallbackHandler<ApiResponse<void>>): void => {
@@ -85,3 +91,33 @@ export const deleteFile = (path: string, callback: CallbackHandler<ApiResponse<v
 export const evalCode = (code: string, callback: CallbackHandler<ApiResponse<string>>): void => {
     callApi("/api/scripts", "POST", { action: "evalCode" }, code, callback);
 };
+
+export const getDeviceInfo = (dev: string, callback: CallbackHandler<Device>): void => {
+    callApi("/api/zigbee/devices", "GET", { dev }, undefined, callback);
+};
+
+export const setState = (dev: string, name: string, value: unknown, callback: CallbackHandler<ApiResponse<void>>): void => {
+    callApi("/api/zigbee", "POST", { dev, action: "setState", name, value }, undefined, callback);
+};
+
+export const setSimpleBind = (dev: string, name: string, value: unknown, callback: CallbackHandler<ApiResponse<void>>): void => {
+    callApi("/api/zigbee", "POST", { dev, action: "setSimpleBind", name, value }, undefined, callback);
+};
+
+export const loadBindsList = (dev: string, callback: CallbackHandler<BindRule[]>): void => {
+    callApi("/api/zigbee/bind", "GET", { action: "list", dev }, undefined, (err, response: BindRule[]) => {
+        if (err) {
+            callback(true, undefined);
+        } else {
+            callback(err, response.map((rule, idx) => ({ ...rule, id: idx })));
+        }
+    });
+};
+
+export const createBind = (dev: string, bindRule: BindRule, callback: CallbackHandler<ApiResponse<void>>): void => {
+    callApi("/api/zigbee/bind", "POST", { action: "bind", dev, ...bindRule }, undefined, callback);
+};
+export const removeBind = (dev: string, bindRule: BindRule, callback: CallbackHandler<ApiResponse<void>>): void => {
+    callApi("/api/zigbee/bind", "POST", { action: "unbind", dev, ...bindRule }, undefined, callback);
+};
+

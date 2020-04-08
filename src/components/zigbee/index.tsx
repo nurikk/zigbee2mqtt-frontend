@@ -132,7 +132,7 @@ export class ZigbeeTable extends Component<TimedProps, State> {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     onInterviewClick = (device: Device): void => {
         if (confirm("Start Interview?")) {
-            startInterview(device.nwkAddr, (err, response) => {
+            startInterview(device.nwkAddr, device?.Interview?.State, (err, response) => {
                 if (!err) {
                     this.loadData();
                 }

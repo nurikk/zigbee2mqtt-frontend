@@ -7,7 +7,7 @@ export type Dictionary<V> = { [index: string]: V }
 export interface DeviceStats {
     linkquality?: number;
     battery?: number;
-    occupancy?: boolean;
+    [k: string]: string | number;
 }
 
 export const inteviewsCount = 4;
@@ -85,6 +85,7 @@ export interface Device {
     PowerSource?: PowerSource;
     ep?: Dictionary<Enpoint>;
     supported?: DeviceSupportStatus;
+    SB?: Dictionary<string>;
 }
 
 
@@ -92,4 +93,13 @@ export interface FileDescriptor extends Named {
     name: string;
     size: number;
     is_dir: boolean;
+}
+
+
+export interface BindRule extends Dictionary<string|number> {
+    id?: number;
+    DstNwkAddr: string;
+    ClusterId: number;
+    SrcEp: number;
+    DstEp: number;
 }
