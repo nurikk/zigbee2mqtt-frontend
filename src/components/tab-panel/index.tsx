@@ -45,6 +45,7 @@ export default class TabPanel extends Component<TabPanelProps, TabPanelState> {
     }
 
     componentDidMount(): void {
+        console.log("tabpannel componentDidMount");
         this.initializeDefaultTab();
     }
 
@@ -62,13 +63,14 @@ export default class TabPanel extends Component<TabPanelProps, TabPanelState> {
 
     render(): ComponentChild {
         const { activeTab } = this.state;
+        console.log("activeTab", activeTab);
         const { tabs } = this.props;
 
         return (<div>
                 <ul class="nav nav-tabs">
                     {
                         tabs.map(({ name }) => (
-                            <li class="nav-item">
+                            <li key={name} class="nav-item">
                                 <TabLink name={name} isActive={name === activeTab} onClick={this.onTabLinkClick} />
                             </li>
                         ))
@@ -77,7 +79,7 @@ export default class TabPanel extends Component<TabPanelProps, TabPanelState> {
                 <div class="tab-content">
                     {
                         tabs.map(({ name, TabComponent }) => (
-                            <div class={cx("tab-pane fade", {
+                            <div key={name} class={cx("tab-pane fade", {
                                 "show active": activeTab === name
                             })}>{TabComponent}</div>
                         ))

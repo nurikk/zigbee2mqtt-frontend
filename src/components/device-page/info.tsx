@@ -14,7 +14,7 @@ interface DeviceInfoProps {
 export default class DeviceInfo extends Component<DeviceInfoProps, {}> {
     render(): ComponentChild {
         const { device } = this.props;
-        const endpoints = Object.entries(device.ep).map(([epName, ep]) => {
+        const endpoints = Object.entries(device.ep ?? {}).map(([epName, ep]) => {
             const inClusters = Object.entries(ep.In ?? {}).map(([clusterId]) => {
                 const cluster = parseInt(clusterId, 10);
                 return <small class={"d-block text-nowrap text-truncate"}

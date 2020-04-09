@@ -1,71 +1,35 @@
-import { Component, ComponentChild, FunctionalComponent, h, RefObject } from "preact";
+import { Component, ComponentChild, h } from "preact";
 import { Device, Dictionary } from "../../types";
-import { setSimpleBind, setState } from "../actions";
-import { forwardRef } from "preact/compat";
 import style from "./style.css";
+import UniversalEditor from "../universal-editor";
 
 interface SimpleBindProps {
+    setStateValue?(dev: string, name: string, value: unknown): void;
+
+    setSimpleBindValue?(dev: string, name: string, value: unknown): void;
+
     device: Device;
 }
 
 type DeviceParamTuple = [string, unknown];
 
 
-interface UniversalEditorProps {
-    value: unknown;
-
-    onChange(value: unknown): void;
-
-    [k: string]: unknown;
-}
-
-const UniversalEditor: FunctionalComponent<UniversalEditorProps> = forwardRef((props, ref: RefObject<HTMLInputElement>) => {
-    const { value, onChange, ...rest } = props;
-    const changeHandler = (event) => {
-        const { target } = event;
-        switch (target.type) {
-            case "checkbox":
-                onChange(target.checked);
-                break;
-            case "number":
-                target.valueAsNumber != value && onChange(target.valueAsNumber);
-                break;
-            default:
-                target.value != value && onChange(target.value);
-                break;
-        }
-    };
-    switch (typeof value) {
-        case "boolean":
-            return <input ref={ref} {...rest} type="checkbox" checked={value} onChange={changeHandler}
-                          class="form-check-input" />;
-        case "number":
-            return <input step="any" ref={ref} {...rest} type="number" value={value} onBlur={changeHandler} />;
-        default:
-            return <input ref={ref} {...rest} type="text" value={value as string} onBlur={changeHandler} />;
-    }
-});
-
 export default class SimpleBind extends Component<SimpleBindProps, {}> {
-    setValue = (name: string, value: unknown): void => {
-        const { device } = this.props;
-        setState(device.nwkAddr, name, value, (err, response) => {
-            //pass
-        });
+    setStateValue = (name: string, value: unknown): void => {
+        const { setStateValue, device } = this.props;
+        setStateValue && setStateValue(device.nwkAddr, name, value);
     };
     setSimpleBind = (name: string, value: unknown): void => {
-        const { device } = this.props;
-        setSimpleBind(device.nwkAddr, name, value, (err, response) => {
-            //pass
-        });
+        const { device, setSimpleBindValue } = this.props;
+        setSimpleBindValue && setSimpleBindValue(device.nwkAddr, name, value);
     };
 
 
     render(): ComponentChild {
         const { device } = this.props;
-        const simpleBindRules: Dictionary<string> = device.SB ? device.SB : {};
+        const simpleBindRules: Dictionary<string> = device.SB ?? {};
 
-        const kv = Object.entries(device.st);
+        const kv = Object.entries(device.st ?? {});
 
 
         return <table class="table table-striped table-borderless">
@@ -84,7 +48,7 @@ export default class SimpleBind extends Component<SimpleBindProps, {}> {
                         <UniversalEditor
                             className="form-control-plaintext"
                             value={param[1]}
-                            onChange={(value) => this.setValue(param[0], value)}
+                            onChange={(value) => this.setStateValue(param[0], value)}
                         />
                     </td>
                     <td>
