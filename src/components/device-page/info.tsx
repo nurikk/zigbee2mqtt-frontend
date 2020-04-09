@@ -14,12 +14,6 @@ interface DeviceInfoProps {
 export default class DeviceInfo extends Component<DeviceInfoProps, {}> {
     render(): ComponentChild {
         const { device } = this.props;
-        const states = Object.entries(device.st).map(([name, value]) => (
-            <Fragment>
-                <dt class="col-5">{name}</dt>
-                <dd class="col-7">{value.toString()}</dd>
-            </Fragment>));
-
         const endpoints = Object.entries(device.ep).map(([epName, ep]) => {
             const inClusters = Object.entries(ep.In ?? {}).map(([clusterId]) => {
                 const cluster = parseInt(clusterId, 10);
@@ -86,7 +80,6 @@ export default class DeviceInfo extends Component<DeviceInfoProps, {}> {
                         <dt class="col-5">Routes</dt>
                         <dd class="col-7">{device?.Rtg?.map((route) => <a className={"d-block"}
                                                                           href={genDeviceDetailsLink(route)}>{route}</a>)}</dd>
-                        {states}
                         {endpoints}
                     </dl>
 

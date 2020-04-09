@@ -23,7 +23,7 @@ export default class DevicePage extends Component<DevicePageProps, DevicePageSta
         this.state = {
             device: undefined,
             isLoading: true,
-            activeTab: "SimpleBind"
+            activeTab: "Info"
         };
     }
 
@@ -59,7 +59,7 @@ export default class DevicePage extends Component<DevicePageProps, DevicePageSta
         if (device) {
             const tabs: TabInfo[] = [
                 {
-                    name: "DeviceInfo",
+                    name: "Info",
                     TabComponent: <DeviceInfo device={device} />
                 },
                 {
@@ -67,7 +67,7 @@ export default class DevicePage extends Component<DevicePageProps, DevicePageSta
                     TabComponent: <Bind device={device} />
                 },
                 {
-                    name: "SimpleBind",
+                    name: "States",
                     TabComponent: <SimpleBind device={device} />
                 }
             ];
