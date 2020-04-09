@@ -27,7 +27,7 @@ class Link extends Component<LinkProps, {}> {
                 {...rest}
                 className={cx(style.link, style[linkType])}
                 ref={this.ref as RefObject<SVGPathElement>}
-                strokeWidth={5}
+                strokeWidth={1}
             />
         );
     }
