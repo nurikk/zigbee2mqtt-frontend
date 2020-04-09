@@ -40,7 +40,7 @@ const UniversalEditor: FunctionalComponent<UniversalEditorProps> = forwardRef((p
             return <input ref={ref} {...rest} type="checkbox" checked={value} onChange={changeHandler}
                           class="form-check-input" />;
         case "number":
-            return <input ref={ref} {...rest} type="number" value={value} onBlur={changeHandler} />;
+            return <input step="any" ref={ref} {...rest} type="number" value={value} onBlur={changeHandler} />;
         default:
             return <input ref={ref} {...rest} type="text" value={value as string} onBlur={changeHandler} />;
     }

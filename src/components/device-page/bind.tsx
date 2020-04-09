@@ -64,7 +64,7 @@ class BindRow extends Component<BindRowProps, BindRowState> {
         const options = devices
             .filter(d => d.nwkAddr !== device.nwkAddr) //exclude self from select
             .filter(d => {
-                const inC = flatten(Object.values(d.ep).map(ep => Object.keys(ep.In ?? {}).map(c => parseInt(c, 10))));
+                const inC = flatten(Object.values(d.ep ?? {}).map(ep => Object.keys(ep.In ?? {}).map(c => parseInt(c, 10))));
                 return inC.includes(rule.ClusterId);
             })
             .map(device => <option selected={device.nwkAddr === rule.DstNwkAddr}
