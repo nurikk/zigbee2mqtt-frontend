@@ -3,6 +3,7 @@ import Bind from "./bind";
 import SimpleBind from "./simple-bind";
 import TabPanel, { TabInfo } from "../tab-panel";
 import { BindRule, Device } from "../../types";
+import style from "./style.css";
 import {
     createBind,
     fetchZigbeeDevicesList,
@@ -122,6 +123,7 @@ export default class DevicePage extends Component<DevicePageProps, DevicePageSta
         setState(dev, name, value, (err, response) => {
             this.setState({ isLoading: false });
             if (!err) {
+                this.fetchZigbeeDeviceInfo();
                 new Notyf().success(`Successfully set state value ${name}=${value}`);
             }
         });
@@ -131,6 +133,7 @@ export default class DevicePage extends Component<DevicePageProps, DevicePageSta
         setSimpleBind(dev, name, value, (err, response) => {
             this.setState({ isLoading: false });
             if (!err) {
+                this.fetchZigbeeDeviceInfo();
                 new Notyf().success(`Successfully set simple bind value ${name}=${value}`);
             }
         });
@@ -157,16 +160,16 @@ export default class DevicePage extends Component<DevicePageProps, DevicePageSta
                                           setSimpleBindValue={this.setSimpleBindValue} device={device} />
             }
         ];
-        return (<Fragment>
+        return (<div class={"position-relative"}>
             {
-                isLoading ? (<div className="d-flex justify-content-center">
-                    <div className="spinner-border" role="status">
+                isLoading ? (
+                    <div className={`${style.loader} spinner-grow text-primary`} role="status">
                         <span className="sr-only">Loading...</span>
                     </div>
-                </div>) : null
+                ) : null
             }
             <TabPanel defaultTab={activeTab} tabs={tabs} />
-        </Fragment>);
+        </div>);
 
     }
 }
