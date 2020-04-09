@@ -82,10 +82,10 @@ export interface Device {
     Rtg?: string[] | undefined;
     /** Features discovery status, aka interview */
     Interview?: Interview | undefined;
-    PowerSource?: PowerSource;
-    ep?: Dictionary<Endpoint>;
-    supported?: DeviceSupportStatus;
-    SB?: Dictionary<string>;
+    PowerSource?: PowerSource | undefined;
+    ep?: Dictionary<Endpoint> | undefined;
+    supported?: DeviceSupportStatus | undefined;
+    SB?: Dictionary<string> | undefined;
 }
 
 

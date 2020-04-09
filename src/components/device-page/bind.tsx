@@ -87,7 +87,7 @@ class BindRow extends Component<BindRowProps, BindRowState> {
 
     renderClusterId(): ComponentChild {
         const { device, rule } = this.props;
-        const optionGroups = Object.entries(device.ep).map(([epNumber, ep]) => {
+        const optionGroups = Object.entries(device.ep ?? {}).map(([epNumber, ep]) => {
             const clusters = Object.keys(ep.Out ?? {}).map(c => parseInt(c, 10));
             return <optgroup label={`Endpoint: #${epNumber}`}>
                 {clusters.map(c => <option selected={c === rule.ClusterId && parseInt(epNumber, 10) == rule.SrcEp}
