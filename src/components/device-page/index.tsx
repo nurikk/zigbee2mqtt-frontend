@@ -4,6 +4,7 @@ import SimpleBind from "./simple-bind";
 import TabPanel, { TabInfo } from "../tab-panel";
 import { Device } from "../../types";
 import { getDeviceInfo } from "../actions";
+import DeviceInfo from "./info";
 
 interface DevicePageState {
     activeTab: string;
@@ -57,6 +58,10 @@ export default class DevicePage extends Component<DevicePageProps, DevicePageSta
         }
         if (device) {
             const tabs: TabInfo[] = [
+                {
+                    name: "DeviceInfo",
+                    TabComponent: <DeviceInfo device={device} />
+                },
                 {
                     name: "Bind",
                     TabComponent: <Bind device={device} />

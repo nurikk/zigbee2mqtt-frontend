@@ -40,7 +40,7 @@ export interface Cluster {
 
 }
 
-export interface Enpoint {
+export interface Endpoint {
     "profId": number;
     "In": Dictionary<Cluster[]>;
     "Out": Dictionary<Cluster[]>;
@@ -83,7 +83,7 @@ export interface Device {
     /** Features discovery status, aka interview */
     Interview?: Interview | undefined;
     PowerSource?: PowerSource;
-    ep?: Dictionary<Enpoint>;
+    ep?: Dictionary<Endpoint>;
     supported?: DeviceSupportStatus;
     SB?: Dictionary<string>;
 }

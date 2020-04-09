@@ -33,10 +33,10 @@ interface BindRowState {
     foo?: number;
 }
 
-const getClusterName = (id: number): string => {
+export const getClusterName = (id: number, addBraces = true): string => {
     if (ZigbeeClusters[id]) {
         const cleanName = (ZigbeeClusters[id] as string).replace(/^ZCL_CLUSTER_ID_/, "");
-        return ` (${cleanName})`;
+        return addBraces ? ` (${cleanName})`: cleanName;
     }
     return "";
 };
@@ -64,7 +64,7 @@ class BindRow extends Component<BindRowProps, BindRowState> {
         const options = devices
             .filter(d => d.nwkAddr !== device.nwkAddr) //exclude self from select
             .filter(d => {
-                const inC = flatten(Object.values(d.ep).map(ep => Object.keys(ep.In).map(c => parseInt(c, 10))));
+                const inC = flatten(Object.values(d.ep).map(ep => Object.keys(ep.In ?? {}).map(c => parseInt(c, 10))));
                 return inC.includes(rule.ClusterId);
             })
             .map(device => <option selected={device.nwkAddr === rule.DstNwkAddr}
@@ -88,10 +88,10 @@ class BindRow extends Component<BindRowProps, BindRowState> {
     renderClusterId(): ComponentChild {
         const { device, rule } = this.props;
         const optionGroups = Object.entries(device.ep).map(([epNumber, ep]) => {
-            const clusters = Object.keys(ep.Out).map(c => parseInt(c, 10));
+            const clusters = Object.keys(ep.Out ?? {}).map(c => parseInt(c, 10));
             return <optgroup label={`Endpoint: #${epNumber}`}>
                 {clusters.map(c => <option selected={c === rule.ClusterId && parseInt(epNumber, 10) == rule.SrcEp}
-                                           value={[epNumber, c.toString()]}>{toHex(c, 4)}{getClusterName(c)}</option>)}
+                                           value={[epNumber, c.toString()]}>{toHex(c, 4)}{getClusterName(c, true)}</option>)}
             </optgroup>;
         });
         optionGroups.unshift(<option hidden>Select cluster</option>);

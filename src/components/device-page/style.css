@@ -14,3 +14,10 @@
     vertical-align: middle;
     line-height: 2;
 }
+
+.device-pic {
+    width: 128px;
+    height: 128px;
+    margin-right: auto;
+    margin-left: auto;
+}
