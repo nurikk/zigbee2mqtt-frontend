@@ -117,17 +117,16 @@ export class ZigbeeTable extends Component<TimedProps, State> {
         }
     };
 
-    loadData = (): void => {
-        this.setState({ isLoading: true }, () => {
-            fetchZigbeeDevicesList((err, devices: Device[]) => {
-                if (!err) {
-                    this.setState({ isLoading: false, devices });
-                }
-            });
+    loadData = (showLoading = true): void => {
+        showLoading && this.setState({ isLoading: true });
+        fetchZigbeeDevicesList((err, devices: Device[]) => {
+            if (!err) {
+                this.setState({ isLoading: false, devices });
+            }
         });
     };
 
-    debouncedLoadData = debounce(this.loadData, 1000);
+    debouncedLoadData = debounce(() => this.loadData(false), 1000);
 
     onMessageReceive = (wsEvent: MessageEvent): void => {
         let event = {} as WebsocketMessage;

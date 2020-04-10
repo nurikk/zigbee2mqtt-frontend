@@ -34,7 +34,7 @@ export const lastSeen = (device: Device, timeInfo: TimeInfo): string => {
     if (device.last_seen && timeInfo) {
         const lastSeen = timeInfo.ts - device.last_seen;
         if (lastSeen < 0) {
-            return "Few seconds ago";
+            return "Now";
         }
         return toHHMMSS(lastSeen);
     }
