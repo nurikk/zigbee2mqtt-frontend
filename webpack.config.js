@@ -52,7 +52,7 @@ module.exports = (env, args) => {
 			path: path.resolve('./dist'),
 		},
 		target: 'web',
-		devtool: production ? false : 'source-map',
+		devtool: 'source-map',
 		optimization: {
 			usedExports: true,
 			moduleIds: 'hashed',
