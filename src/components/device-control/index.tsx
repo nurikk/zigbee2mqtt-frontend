@@ -14,7 +14,7 @@ const onBindClick = (device: Device): void => {
 
 const onRenameClick = (device: Device): void => {
     const newName = prompt("Enter new name", device.friendly_name);
-    if (newName !== device.friendly_name) {
+    if (newName !== null && newName !== device.friendly_name) {
         renameDevice(device.nwkAddr, newName, (err, response) => {
             if (!err) {
                 window.location.reload();
