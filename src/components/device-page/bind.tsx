@@ -1,4 +1,4 @@
-import { Component, ComponentChild, Fragment, h } from "preact";
+import { Component, ComponentChild, h } from "preact";
 import { BindRule, Device } from "../../types";
 import { ZigbeeClusters } from "./clusters";
 import BindRow from "./bind-row";
@@ -73,6 +73,13 @@ export default class Bind extends Component<BindProps, {}> {
     }
 
     render(): ComponentChild {
-        return this.renderBindsTable();
+        const { device, bindRules } = this.props;
+        if (device && bindRules.length) {
+            return this.renderBindsTable();
+        } else {
+            return "Loading...";
+        }
     }
+
+
 }

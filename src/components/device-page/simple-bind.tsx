@@ -8,7 +8,7 @@ interface SimpleBindProps {
 
     setSimpleBindValue?(dev: string, name: string, value: unknown): void;
 
-    device: Device;
+    device: Device | undefined;
 }
 
 type DeviceParamTuple = [string, unknown];
@@ -24,8 +24,16 @@ export default class SimpleBind extends Component<SimpleBindProps, {}> {
         setSimpleBindValue && setSimpleBindValue(device.nwkAddr, name, value);
     };
 
-
     render(): ComponentChild {
+        const { device } = this.props;
+        if (device) {
+            return this.renderSimpleBinds();
+        } else {
+            return "Loading...";
+        }
+
+    }
+    renderSimpleBinds(): ComponentChild {
         const { device } = this.props;
         const simpleBindRules: Dictionary<string> = device.SB ?? {};
 

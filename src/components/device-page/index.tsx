@@ -19,7 +19,7 @@ import { Notyf } from "notyf";
 interface DevicePageState {
     dev: string;
     activeTab: string;
-    device: Device;
+    device: Device | undefined;
     devices: Device[];
     bindRules: BindRule[];
     isLoading: boolean;
@@ -35,7 +35,7 @@ export default class DevicePage extends Component<DevicePageProps, DevicePageSta
         super();
         this.state = {
             dev: undefined,
-            device: {} as Device,
+            device: undefined,
             devices: [],
             isLoading: true,
             activeTab: "Info",

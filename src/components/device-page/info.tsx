@@ -8,11 +8,20 @@ import style from "./style.css";
 import { getClusterName } from "./bind";
 
 interface DeviceInfoProps {
-    device: Device;
+    device: Device|undefined;
 }
 
 export default class DeviceInfo extends Component<DeviceInfoProps, {}> {
     render(): ComponentChild {
+        const { device } = this.props;
+        if (device) {
+            return this.renderDeviceInfo();
+        } else {
+            return "Loading...";
+        }
+    }
+
+    renderDeviceInfo(): ComponentChild {
         const { device } = this.props;
         const endpoints = Object.entries(device.ep ?? {}).map(([epName, ep]) => {
             const inClusters = Object.entries(ep.In ?? {}).map(([clusterId]) => {
