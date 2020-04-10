@@ -4,13 +4,15 @@ import { fetchZigbeeDevicesList, startInterview } from "../actions";
 import Timed, { lastSeen, TimedProps } from "../time";
 import Button from "../button";
 import orderBy from "lodash/orderBy";
+import debounce from "lodash/debounce";
 import DeviceControlGroup from "../device-control";
 import cx from "classnames";
 import { Device, DeviceSupportStatus, inteviewsCount } from "../../types";
-import { genDeviceDetailsLink, genDeviceImageUrl } from "../../utils";
+import { genDeviceDetailsLink, genDeviceImageUrl, WSConnect } from "../../utils";
 import SafeImg from "../safe-image";
 import { Notyf } from "notyf";
 import PowerSource from "../power-source";
+import { WebsocketMessage, ZigbeePayload } from "../discovery/types";
 
 type SortDirection = "asc" | "desc";
 //TODO: proper type alias
@@ -114,6 +116,7 @@ export class ZigbeeTable extends Component<TimedProps, State> {
             new Notyf().error(e.toString());
         }
     };
+
     loadData = (): void => {
         this.setState({ isLoading: true }, () => {
             fetchZigbeeDevicesList((err, devices: Device[]) => {
@@ -124,9 +127,35 @@ export class ZigbeeTable extends Component<TimedProps, State> {
         });
     };
 
+    debouncedLoadData = debounce(this.loadData, 1000);
+
+    onMessageReceive = (wsEvent: MessageEvent): void => {
+        let event = {} as WebsocketMessage;
+        try {
+            event = JSON.parse(wsEvent.data) as WebsocketMessage;
+        } catch (e) {
+            new Notyf().error(`Cant parse json ${e}`);
+        }
+        if (event.category == "zigbee") {
+            const payload  = event.payload as ZigbeePayload;
+            if(payload.event == "LinkData") {
+                this.debouncedLoadData();
+            }
+        }
+
+    };
+    initWs(): void {
+        const ws = WSConnect();
+        ws.addEventListener("open", () => {
+            ws.send(JSON.stringify({ action: "subscribe", category: "zigbee" }));
+        });
+        ws.addEventListener("message", this.onMessageReceive);
+    }
+
     componentDidMount(): void {
         this.restoreState();
         this.loadData();
+        this.initWs();
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
