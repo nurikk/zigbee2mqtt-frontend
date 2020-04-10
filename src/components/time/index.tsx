@@ -1,7 +1,8 @@
 import { Component, ComponentChild, ComponentType, h } from "preact";
 import { fetchTimeInfo } from "../actions";
 import { Device } from "../../types";
-
+import { WSConnect } from "../../utils";
+import debounce from "lodash/debounce";
 
 export interface TimeInfo {
     ntp_enable: boolean;
@@ -33,7 +34,7 @@ export const lastSeen = (device: Device, timeInfo: TimeInfo): string => {
     if (device.last_seen && timeInfo) {
         const lastSeen = timeInfo.ts - device.last_seen;
         if (lastSeen < 0) {
-            return 'Few seconds ago'
+            return "Few seconds ago";
         }
         return toHHMMSS(lastSeen);
     }
@@ -50,12 +51,29 @@ const Timed = (WrappedComponent: ComponentType<TimedProps>): ComponentType => {
             };
         }
 
-        componentDidMount(): void {
+
+
+
+        fetchTime = () => {
             fetchTimeInfo((err, time: TimeInfo) => {
                 if (!err) {
                     this.setState({ time });
                 }
             });
+        };
+        debouncedFetchTime = debounce(this.fetchTime, 10000);
+
+        initWs(): void {
+            const ws = WSConnect();
+            ws.addEventListener("open", () => {
+                ws.send(JSON.stringify({ action: "subscribe", category: "zigbee" }));
+            });
+            ws.addEventListener("message", this.debouncedFetchTime);
+        }
+
+        componentDidMount(): void {
+            this.fetchTime();
+            this.initWs();
         }
 
         render(): ComponentChild {
