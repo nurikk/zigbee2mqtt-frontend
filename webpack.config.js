@@ -20,7 +20,7 @@ module.exports = (env, args) => {
 
 	const plugins = [
 		new MiniCssExtractPlugin(),
-		new ForkTsCheckerWebpackPlugin(),
+
 		new CopyWebpackPlugin([{
 			from: '**/*',
 			context: './api-mocks/'
@@ -40,6 +40,8 @@ module.exports = (env, args) => {
 			analyzerMode: 'static'
 		}));
 		plugins.push(new CompressionPlugin());
+	} else {
+		plugins.push(new ForkTsCheckerWebpackPlugin());
 	}
 
 
