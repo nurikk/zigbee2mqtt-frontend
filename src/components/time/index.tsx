@@ -61,7 +61,7 @@ const Timed = (WrappedComponent: ComponentType<TimedProps>): ComponentType => {
                 }
             });
         };
-        debouncedFetchTime = debounce(this.fetchTime, 10000);
+        debouncedFetchTime = debounce(this.fetchTime, 10000, { maxWait: 10000 });
 
         initWs(): void {
             const ws = WSConnect();
