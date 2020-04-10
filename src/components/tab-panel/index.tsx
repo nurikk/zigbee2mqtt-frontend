@@ -45,7 +45,6 @@ export default class TabPanel extends Component<TabPanelProps, TabPanelState> {
     }
 
     componentDidMount(): void {
-        console.log("tabpannel componentDidMount");
         this.initializeDefaultTab();
     }
 
@@ -63,7 +62,6 @@ export default class TabPanel extends Component<TabPanelProps, TabPanelState> {
 
     render(): ComponentChild {
         const { activeTab } = this.state;
-        console.log("activeTab", activeTab);
         const { tabs } = this.props;
 
         return (<div>

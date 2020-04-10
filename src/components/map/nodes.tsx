@@ -53,7 +53,7 @@ export const isOnline = (device: Device, timeInfo: TimeInfo | undefined): boolea
     if (!timeInfo || !device.last_seen) {
         return true;
     }
-    return timeInfo.ts - parseInt(device.last_seen, 10) < offlineTimeout;
+    return timeInfo.ts - device.last_seen < offlineTimeout;
 };
 
 interface NodeState {

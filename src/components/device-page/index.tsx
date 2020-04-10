@@ -44,7 +44,6 @@ export default class DevicePage extends Component<DevicePageProps, DevicePageSta
     }
 
     componentDidMount(): void {
-        console.log("componentDidMount DevicePage");
         this.initPage();
     }
 

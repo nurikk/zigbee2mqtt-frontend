@@ -41,10 +41,10 @@ export interface Cluster {
 }
 
 export interface Endpoint {
-    "profId": number;
-    "In": Dictionary<Cluster[]>;
-    "Out": Dictionary<Cluster[]>;
-    "devId": number;
+    "profId": string;
+    "In": Dictionary<true>;
+    "Out": Dictionary<true>;
+    "devId": string;
 }
 
 export enum DeviceSupportStatus {
@@ -70,7 +70,7 @@ export interface Device {
     /** A 16-bi network address */
     nwkAddr: string;
     /** Node last message timestamp */
-    last_seen?: string | undefined;
+    last_seen?: number | undefined;
     type?: DeviceType | undefined;
 
     ManufName?: string | undefined;
@@ -86,6 +86,10 @@ export interface Device {
     ep?: Dictionary<Endpoint> | undefined;
     supported?: DeviceSupportStatus | undefined;
     SB?: Dictionary<string> | undefined;
+
+
+
+    Rcf?: unknown;
 }
 
 

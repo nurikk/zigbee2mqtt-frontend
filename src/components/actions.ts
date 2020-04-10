@@ -14,13 +14,13 @@ type HttMethod = "GET" | "POST" | "DELETE";
 type ContentType = "text" | "json" | "blob";
 
 function callApi<T>(url: string, method: HttMethod, params: Dictionary<any>, payload: any, callback: CallbackHandler<T>, contentType: ContentType = "json"): void {
-    fetch(`${url}?${encodeGetParams(params)}`, { method: method, body: payload })
+    fetch(`${url}?${encodeGetParams(params)}`, { method, body: payload })
         .then((res) => {
             if (res.status === 200) {
                 return res[contentType]();
-            } else {
+            } 
                 throw new Error(res.statusText);
-            }
+            
         })
         .then(data => {
             callback(false, data);
