@@ -125,7 +125,8 @@ module.exports = (env, args) => {
 		stats: 'errors-only',
 		externals: {
 			d3: 'window.d3',
-			codemirror: 'window.CodeMirror'
+			codemirror: 'window.CodeMirror',
+			luaparse: 'window.luaparse'
 		}
 
 	};

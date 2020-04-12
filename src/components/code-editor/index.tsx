@@ -1,13 +1,14 @@
-import { Component, ComponentChild, h } from "preact";
+import { Component, ComponentChild, Fragment, h } from "preact";
 
 import style from "./style.css";
 import cx from "classnames";
 import TreeView from "../tree-view";
 import { ApiResponse, deleteFile, evalCode, getFilesList, readFile, writeFile } from "../actions";
 import CodeMirror from "./codemirror";
-import { FileDescriptor } from "../../types";
-import { Notyf } from 'notyf';
+import { Dictionary, FileDescriptor } from "../../types";
+import { Notyf } from "notyf";
 import orderBy from "lodash/orderBy";
+import { parse } from "luaparse";
 
 interface CodeEditorState {
     isLoadingFiles: boolean;
@@ -133,7 +134,7 @@ export default class CodeEditor extends Component<{}, CodeEditorState> {
                 if (success) {
                     this.setState({
                         isLoadingFiles: false,
-                        files: orderBy(result, ['name'])
+                        files: orderBy(result, ["name"])
                     });
                 }
             }
@@ -145,13 +146,59 @@ export default class CodeEditor extends Component<{}, CodeEditorState> {
         this.setState({ sideBarIsVisible: !sideBarIsVisible });
     };
 
+    getFileType(): string {
+        const fileExtPattern = /\.([0-9a-z]+)$/i;
+        const { currentFile } = this.state;
+        if (currentFile) {
+            const { name } = currentFile;
+            if (fileExtPattern.test(name)) {
+                const [extWithDot, ext] = fileExtPattern.exec(name);
+                return ext;
+            }
+        }
+        return "";
+    }
+
+    onFormatClick = (): void => {
+        const { currentFileContent } = this.state;
+        if (this.getFileType() === "json") {
+            try {
+                const res = JSON.parse(currentFileContent);
+                this.setState({ currentFileContent: JSON.stringify(res, null, 2) });
+            } catch (e) {
+                new Notyf().error(e.toString());
+            }
+        } else {
+            new Notyf().error("Not implemented 😢");
+        }
+    };
+
+    getMode(): string | Dictionary<string | boolean> {
+
+        switch (this.getFileType()) {
+            case "json":
+                return {
+                    name: "javascript",
+                    json: true
+                };
+            case "script":
+            case "lua":
+                return "lua";
+            default:
+                return "";
+        }
+
+    }
+
     render(): ComponentChild {
         const { currentFileContent, executionResults, files, isLoadingFiles, currentFile, sideBarIsVisible } = this.state;
         const config = {
-            mode: "lua",
+            mode: this.getMode(),
             theme: "dracula",
             styleActiveLine: true,
             lineNumbers: true,
+            lint: true,
+            gutters: ["CodeMirror-lint-markers"],
             extraKeys: {
                 "Ctrl-E": this.onExecuteCode,
                 "Cmd-E": this.onExecuteCode,
@@ -195,8 +242,19 @@ export default class CodeEditor extends Component<{}, CodeEditorState> {
                         <button onClick={this.toggleSideBar} class="btn btn-primary">Toggle files</button>
                         {currentFile ? <button type="button" class="btn btn-success"
                                                onClick={this.onSaveCode}>Save(Ctrl-S)</button> : null}
-                        {hasCode ? <button type="button" class="btn btn-danger"
-                                           onClick={this.onExecuteCode}>Run(Ctrl-E)</button> : null}
+                        {hasCode ? (
+                            <Fragment>
+                                <button type="button" class="btn btn-danger" onClick={this.onExecuteCode}>Run(Ctrl-E)
+                                </button>
+                                {
+                                    this.getFileType() === "json" ? (
+                                        <button type="button" class="btn btn-primary" onClick={this.onFormatClick}>Format
+                                        </button>
+                                    )  : null
+                                }
+
+                            </Fragment>
+                        ) : null}
                         {hasExecutionResults ?
                             <button type="button" class="btn btn-primary" onClick={this.clearExecutionResults}>Clear
                                 output</button> : null}
