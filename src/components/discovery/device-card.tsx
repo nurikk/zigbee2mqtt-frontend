@@ -240,7 +240,7 @@ export default class DeviceCard extends Component<DeviceCardProps, DeviceCardSta
                     }
                 </div>
                 {isDone ? <div className="card-footer">
-                    <DeviceControlGroup device={{ ieeeAddr } as Device} />
+                    <DeviceControlGroup device={{ nwkAddr: ieeeAddr } as Device} />
                 </div> : null}
             </div>
         );
