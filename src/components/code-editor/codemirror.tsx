@@ -10,7 +10,7 @@ interface CodeMirrorProps {
     onChange?(value: string): void;
 }
 
-CM.registerHelper('lint', 'lua', (text) => {
+CM && CM.registerHelper('lint', 'lua', (text) => {
     const found = [];
     try {
         const parseResult = parse(text);
