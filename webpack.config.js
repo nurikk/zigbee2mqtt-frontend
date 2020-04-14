@@ -47,7 +47,7 @@ module.exports = (env, args) => {
 
 	return {
 		entry: {
-			'scripts/main': './src/index.ts',
+			'scripts/main': './src/index.tsx',
 		},
 		output: {
 			filename: '[name].js',

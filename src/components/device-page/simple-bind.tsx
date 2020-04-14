@@ -2,26 +2,31 @@ import { Component, ComponentChild, h } from "preact";
 import { Device, Dictionary } from "../../types";
 import style from "./style.css";
 import UniversalEditor from "../universal-editor";
+import actions, { Actions } from "../../actions";
+import { Notyf } from "notyf";
+import { connect } from "unistore/preact";
+import { GlobalState } from "../../store";
 
-interface SimpleBindProps {
-    setStateValue?(dev: string, name: string, value: unknown): void;
-
-    setSimpleBindValue?(dev: string, name: string, value: unknown): void;
-
+interface PropsFromStore {
     device: Device | undefined;
 }
 
 type DeviceParamTuple = [string, unknown];
 
 
-export default class SimpleBind extends Component<SimpleBindProps, {}> {
-    setStateValue = (name: string, value: unknown): void => {
-        const { setStateValue, device } = this.props;
-        setStateValue && setStateValue(device.nwkAddr, name, value);
+export class SimpleBind extends Component<PropsFromStore & Actions, {}> {
+    setStateValue = async (name: string, value: unknown) => {
+        const { setStateValue, device, getDeviceInfo } = this.props;
+        await setStateValue(device.nwkAddr, name, value);
+        new Notyf().success(`Successfully updated state value ${name}=${value}`);
+        getDeviceInfo(device.nwkAddr);
+
     };
-    setSimpleBind = (name: string, value: unknown): void => {
-        const { device, setSimpleBindValue } = this.props;
-        setSimpleBindValue && setSimpleBindValue(device.nwkAddr, name, value);
+    setSimpleBind = async (name: string, value: unknown) => {
+        const { device, setSimpleBindValue, getDeviceInfo } = this.props;
+        await setSimpleBindValue(device.nwkAddr, name, value);
+        new Notyf().success(`Successfully updated simple bind value ${name}=${value}`);
+        getDeviceInfo(device.nwkAddr);
     };
 
     render(): ComponentChild {
@@ -33,6 +38,7 @@ export default class SimpleBind extends Component<SimpleBindProps, {}> {
         }
 
     }
+
     renderSimpleBinds(): ComponentChild {
         const { device } = this.props;
         const simpleBindRules: Dictionary<string> = device.SB ?? {};
@@ -73,3 +79,7 @@ export default class SimpleBind extends Component<SimpleBindProps, {}> {
 
     }
 }
+
+const mappedProps = ["device"];
+
+export default connect<{}, {}, GlobalState, PropsFromStore>(mappedProps, actions)(SimpleBind);

@@ -25,6 +25,7 @@ interface BindRowProps {
 
 export default class BindRow extends Component<BindRowProps, {}> {
 
+
     isExistingBinding(): boolean {
         const { rule } = this.props;
         return rule.id !== undefined;
@@ -132,9 +133,7 @@ export default class BindRow extends Component<BindRowProps, {}> {
                 <td>{this.renderClusterId()}</td>
                 <td>{this.renderDstSelect()}</td>
                 <td>{this.renderDstEp()}</td>
-                <td>
-                    {this.renderActionButton()}
-                </td>
+                <td>{this.renderActionButton()}</td>
             </tr>
         );
     }

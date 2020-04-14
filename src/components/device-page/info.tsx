@@ -6,12 +6,14 @@ import DeviceControlGroup from "../device-control";
 import PowerSourceComp from "../power-source";
 import style from "./style.css";
 import { getClusterName } from "./bind";
+import { connect } from "unistore/preact";
+import { GlobalState } from "../../store";
 
-interface DeviceInfoProps {
-    device: Device|undefined;
+interface PropsFromStore {
+    device: Device ;
 }
 
-export default class DeviceInfo extends Component<DeviceInfoProps, {}> {
+export class DeviceInfo extends Component<PropsFromStore, {}> {
     render(): ComponentChild {
         const { device } = this.props;
         if (device) {
@@ -100,3 +102,7 @@ export default class DeviceInfo extends Component<DeviceInfoProps, {}> {
         );
     }
 }
+
+const mappedProps = ["device"];
+
+export default connect<{}, {}, GlobalState, PropsFromStore>(mappedProps)(DeviceInfo);

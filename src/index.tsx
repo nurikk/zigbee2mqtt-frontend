@@ -1,8 +1,13 @@
 // Must be the first import
+
+
+
+
 if (process.env.NODE_ENV==='development') {
     // Must use require here as import statements are only allowed
     // to exist at the top of a file.
     require("preact/debug");
+
 }
 
 // const poly = require("preact-cli/lib/lib/webpack/polyfills");
@@ -15,8 +20,16 @@ import ZigbeeTable from "./components/zigbee";
 import Discovery from "./components/discovery";
 import LogViewer from "./components/log-viewer";
 import CodeEditor from "./components/code-editor";
-import DevicePage from "./components/device-page";
+import ConnectedDevicePage  from "./components/device-page";
+import store from "./store";
+import { Provider } from "unistore/preact";
+import { h } from "preact";
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+// @ts-ignore
+const DevicePageApp = () => (
+    <Provider store={store}><ConnectedDevicePage /></Provider>
+);
 
 const initWidgets = (): void => {
     habitat(ZigbeeTable).render({
@@ -48,7 +61,7 @@ const initWidgets = (): void => {
         clean: true
     });
 
-    habitat(DevicePage).render({
+    habitat(DevicePageApp).render({
         selector: "[data-widget-host=\"device-page\"]",
         clean: true
     });

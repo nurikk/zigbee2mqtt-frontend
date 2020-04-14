@@ -2,6 +2,10 @@ import { Component, ComponentChild, h } from "preact";
 import { BindRule, Device } from "../../types";
 import { ZigbeeClusters } from "./clusters";
 import BindRow from "./bind-row";
+import actions, { Actions } from "../../actions";
+import { connect } from "unistore/preact";
+import { GlobalState } from "../../store";
+import { Notyf } from "notyf";
 
 
 export const getClusterName = (id: number, addBraces = true): string => {
@@ -12,36 +16,33 @@ export const getClusterName = (id: number, addBraces = true): string => {
     return "";
 };
 
-interface BindProps {
+interface PropsFromStore {
     device: Device;
     devices: Device[];
     bindRules: BindRule[];
-
-    createBind(dev: string, rule: BindRule): void;
-
-    removeBind(dev: string, rule: BindRule): void;
 }
 
-export default class Bind extends Component<BindProps, {}> {
-    onRuleChange = (idx: number, rule: BindRule | undefined): void => {
-        const { bindRules } = this.props;
-        if (rule === undefined) {
-            bindRules.splice(idx, 1);
-        } else {
-            bindRules[idx] = rule;
-        }
-
-        this.setState({ bindRules });
+export class Bind extends Component<PropsFromStore & Actions, {}> {
+    onRuleChange = (idx: number, rule: BindRule): void => {
+        const { bindRules, setBindRules } = this.props;
+        const copyRules = [...bindRules];
+        copyRules[idx] = rule;
+        setBindRules(copyRules);
     };
 
-    onBindClick = (rule: BindRule): void => {
-        const { device, createBind } = this.props;
-        createBind && createBind(device.nwkAddr, rule);
+    onBindClick = async (rule: BindRule) => {
+        const { device, createBind, getDeviceBinds } = this.props;
+        await createBind(device.nwkAddr, rule)
+        new Notyf().success(`Created bind rule`);
+        getDeviceBinds(device.nwkAddr);
+
     };
 
-    onUnBindClick = (rule: BindRule): void => {
-        const { device, removeBind } = this.props;
-        removeBind && removeBind(device.nwkAddr, rule);
+    onUnBindClick = async (rule: BindRule) => {
+        const { device, removeBind, getDeviceBinds } = this.props;
+        await removeBind(device.nwkAddr, rule);
+        new Notyf().success(`Removed bind rule`);
+        getDeviceBinds(device.nwkAddr);
     };
 
     renderBindsTable(): ComponentChild {
@@ -60,10 +61,12 @@ export default class Bind extends Component<BindProps, {}> {
                 <tbody>
                 {
                     bindRules.map((rule, idx) => <BindRow
+                        key={idx}
                         onUnBindClick={this.onUnBindClick}
                         onBindClick={this.onBindClick}
                         onChange={this.onRuleChange}
-                        device={device} idx={idx}
+                        device={device}
+                        idx={idx}
                         rule={rule}
                         devices={devices} />)
                 }
@@ -73,13 +76,15 @@ export default class Bind extends Component<BindProps, {}> {
     }
 
     render(): ComponentChild {
-        const { device, bindRules } = this.props;
-        if (device && bindRules.length) {
+        const { device } = this.props;
+        if (device) {
             return this.renderBindsTable();
         } else {
             return "Loading...";
         }
     }
-
-
 }
+
+const mappedProps = ["device", "devices", "bindRules"];
+
+export default connect<{}, {}, GlobalState, PropsFromStore>(mappedProps, actions)(Bind);

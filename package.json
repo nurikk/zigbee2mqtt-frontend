@@ -21,7 +21,8 @@
     "@types/d3": "^5.7.2",
     "@types/luaparse": "^0.2.6",
     "@types/notyf": "^3.0.0",
-    "notyf": "^3.6.0"
+    "notyf": "^3.6.0",
+    "unistore": "^3.5.1"
   },
   "devDependencies": {
     "@teamsupercell/typings-for-css-modules-loader": "^2.1.0",
