@@ -14,7 +14,7 @@ if (process.env.NODE_ENV==='development') {
 import "notyf/notyf.min.css";
 
 import habitat from "preact-habitat";
-import Map from "./components/map";
+import ConnectedMap from "./components/map";
 import ConnectedZigbeeTable from "./components/zigbee";
 import Discovery from "./components/discovery";
 import LogViewer from "./components/log-viewer";
@@ -31,6 +31,10 @@ const ZigbeeTableApp = () => (
     <Provider store={store}><ConnectedZigbeeTable /></Provider>
 );
 
+const MapApp = () => (
+    <Provider store={store}><ConnectedMap /></Provider>
+);
+
 const initWidgets = (): void => {
     habitat(ZigbeeTableApp).render({
         selector: "[data-widget-host=\"zigbee\"]",
@@ -42,7 +46,7 @@ const initWidgets = (): void => {
         clean: true
     });
 
-    habitat(Map).render({
+    habitat(MapApp).render({
         selector: "[data-widget-host=\"map\"]",
         clean: true
     });

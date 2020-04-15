@@ -2,15 +2,14 @@ import { Component, ComponentChild, createRef, h } from "preact";
 import Links from "./links";
 import Nodes from "./nodes";
 import * as d3 from "d3";
-import { fetchZigbeeDevicesList } from "../actions";
 import style from "./map.css";
 import { GraphI, LinkI, NodeI } from "./types";
-
 import { convert2graph } from "./convert";
 import Tooltip from "./tooltip";
-import Timed, { TimedProps } from "../time";
-import { Device } from "../../types";
 import { genDeviceDetailsLink } from "../../utils";
+import { connect } from "unistore/preact";
+import { GlobalState } from "../../store";
+import actions, { Actions } from "../../actions";
 
 export interface MouseEventsResponderNode {
     onMouseOver?: (arg0: NodeI) => void;
@@ -18,7 +17,7 @@ export interface MouseEventsResponderNode {
     onDblClick?: (arg0: NodeI) => void;
 }
 
-interface State {
+interface MapState {
     graph: GraphI;
     tooltipNode: NodeI | false;
     width: number;
@@ -38,12 +37,16 @@ const getDistance = (d: LinkI): number => {
     }
 };
 
-export class Map extends Component<TimedProps, State> {
+export class Map extends Component<GlobalState & Actions, MapState> {
     ref = createRef<HTMLDivElement>();
     simulation!: d3.Simulation<NodeI, LinkI>;
 
     constructor() {
         super();
+
+
+        this.simulation = d3.forceSimulation<NodeI>();
+
         this.state = {
             width: 0,
             height: 0,
@@ -53,8 +56,6 @@ export class Map extends Component<TimedProps, State> {
             },
             tooltipNode: false
         };
-
-        this.simulation = d3.forceSimulation<NodeI>();
     }
 
     updateNodes(): void {
@@ -89,7 +90,6 @@ export class Map extends Component<TimedProps, State> {
             const imgXShift = 32 / 2;
             const imgYShift = 32 / 2;
             node.attr("transform", d => `translate(${Math.max(radius, Math.min(width - radius, d.x)) - imgXShift}, ${Math.max(radius, Math.min(height - radius, d.y)) - imgYShift})`);
-
         };
         const { graph } = this.state;
         this.simulation.nodes(graph.nodes).on("tick", ticked);
@@ -150,12 +150,17 @@ export class Map extends Component<TimedProps, State> {
             .force("center", centerForce);
     }
 
+    async initPage() {
+        const { getZigbeeDevicesList } = this.props;
+        await getZigbeeDevicesList(true);
+        const { devices } = this.props;
+        const graph = convert2graph(devices);
+        const { width, height } = (this.ref.current as HTMLDivElement).getBoundingClientRect();
+        this.setState({ graph, width, height }, this.updateNodes);
+    }
+
     componentDidMount(): void {
-        fetchZigbeeDevicesList((err, res: Device[]) => {
-            const { width, height } = (this.ref.current as HTMLDivElement).getBoundingClientRect();
-            const graph = convert2graph(res);
-            this.setState({ graph, width, height }, this.updateNodes);
-        });
+        this.initPage().then();
     }
 
     render(): ComponentChild {
@@ -189,4 +194,6 @@ export class Map extends Component<TimedProps, State> {
     }
 }
 
-export default Timed(Map);
+const mappedProps = ["time", "devices"];
+const ConnectedMap = connect<{}, MapState, GlobalState, Actions>(mappedProps, actions)(Map);
+export default ConnectedMap;

@@ -23,7 +23,7 @@ export interface Actions {
 
     getDeviceBinds(dev: string): void;
 
-    getZigbeeDevicesList(showLoading: boolean): void;
+    getZigbeeDevicesList(showLoading: boolean): Promise<void>;
 
     removeBind(dev: string, bindRule: BindRule): Promise<void>;
 
@@ -68,15 +68,15 @@ const actions = (store: Store<GlobalState>) => ({
             });
         }).then();
     },
-    getZigbeeDevicesList: (state, showLoading = true): void => {
+    getZigbeeDevicesList: (state, showLoading = true): Promise<void> => {
         showLoading && store.setState({ isLoading: true });
-        fetchZigbeeDevicesList((err, devices) => {
+        return fetchZigbeeDevicesList((err, devices) => {
             store.setState({
                 isError: err,
                 isLoading: false,
                 devices
             });
-        }).then();
+        });
     },
 
     removeBind: (state, dev: string, bindRule: BindRule): Promise<void> => {
