@@ -1,5 +1,6 @@
 import ReconnectingWebSocket from "reconnecting-websocket";
 import { Device, Dictionary } from "./types";
+import { TimeInfo } from "./components/time";
 
 export const genDeviceDetailsLink = (deviceIdentifier: string | number): string => (`/zigbee/device?dev=${encodeURIComponent(deviceIdentifier)}&activeTab=Info`);
 
@@ -88,5 +89,26 @@ export const bitOps = {
     clearBit: (n, bitIndex) => {
         const bitMask = ~(1 << bitIndex);
         return n & bitMask;
+    }
+};
+
+
+export const toHHMMSS = (secs: number): string => {
+    const hours = Math.floor(secs / 3600);
+    const minutes = Math.floor(secs / 60) % 60;
+    const seconds = secs % 60;
+
+    return [hours, minutes, seconds]
+        .map(v => v < 10 ? `0${v}` : v)
+        .filter((v, i) => v !== "00" || i > 0)
+        .join(":");
+};
+export const lastSeen = (device: Device, timeInfo: TimeInfo): string => {
+    if (device.last_seen && timeInfo) {
+        const lastSeen = timeInfo.ts - device.last_seen;
+        if (lastSeen < 0) {
+            return "Now";
+        }
+        return toHHMMSS(lastSeen);
     }
 };

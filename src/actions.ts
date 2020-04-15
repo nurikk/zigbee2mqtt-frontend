@@ -3,8 +3,18 @@
 
 import { GlobalState } from "./store";
 import { Store } from "unistore";
-import { createBind, fetchZigbeeDevicesList, getDeviceInfo, loadBindsList, removeBind, setState, setSimpleBind } from "./components/actions";
-import { BindRule, Device } from "./types";
+import {
+    createBind,
+    fetchZigbeeDevicesList,
+    getDeviceInfo,
+    loadBindsList,
+    removeBind,
+    setState,
+    setSimpleBind,
+    startInterview,
+    fetchTimeInfo
+} from "./components/actions";
+import { BindRule } from "./types";
 
 export interface Actions {
     setLoading(isLoading: boolean): void;
@@ -13,7 +23,7 @@ export interface Actions {
 
     getDeviceBinds(dev: string): void;
 
-    getZigbeeDevicesList(): void;
+    getZigbeeDevicesList(showLoading: boolean): void;
 
     removeBind(dev: string, bindRule: BindRule): Promise<void>;
 
@@ -24,6 +34,10 @@ export interface Actions {
 
     setStateValue(dev: string, name: string, value: unknown): Promise<void>;
     setSimpleBindValue(dev: string, name: string, value: unknown): Promise<void>;
+
+    startInterview(dev: string, state: number | ""): Promise<void>;
+
+    fetchTimeInfo(): void;
 }
 
 const actions = (store: Store<GlobalState>) => ({
@@ -54,8 +68,8 @@ const actions = (store: Store<GlobalState>) => ({
             });
         }).then();
     },
-    getZigbeeDevicesList: (state): void => {
-        store.setState({ isLoading: true });
+    getZigbeeDevicesList: (state, showLoading = true): void => {
+        showLoading && store.setState({ isLoading: true });
         fetchZigbeeDevicesList((err, devices) => {
             store.setState({
                 isError: err,
@@ -101,6 +115,20 @@ const actions = (store: Store<GlobalState>) => ({
                 isError: err,
                 isLoading: false
             });
+        });
+    },
+    startInterview(state, dev: string, currentInterviewState: number | ""): Promise<void> {
+        store.setState({ isLoading: true });
+        return startInterview(dev, currentInterviewState, (err, response) => {
+            store.setState({
+                isError: err,
+                isLoading: false
+            });
+        });
+    },
+    fetchTimeInfo(state): Promise<void> {
+        return fetchTimeInfo((err, time) => {
+            store.setState({time});
         });
     }
 });

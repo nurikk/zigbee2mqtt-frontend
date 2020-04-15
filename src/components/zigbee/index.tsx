@@ -1,20 +1,21 @@
 import style from "./style.css";
 import { Component, ComponentChild, h } from "preact";
-import { fetchZigbeeDevicesList, startInterview } from "../actions";
-import Timed, { lastSeen, TimedProps } from "../time";
 import Button from "../button";
 import orderBy from "lodash/orderBy";
 import debounce from "lodash/debounce";
 import DeviceControlGroup from "../device-control";
 import cx from "classnames";
-import { Device, DeviceSupportStatus, inteviewsCount } from "../../types";
-import { genDeviceDetailsLink, genDeviceImageUrl, WSConnect } from "../../utils";
+import { Device, DeviceSupportStatus, inteviewsCount, SortDirection } from "../../types";
+import { genDeviceDetailsLink, genDeviceImageUrl, lastSeen, WSConnect } from "../../utils";
 import SafeImg from "../safe-image";
 import { Notyf } from "notyf";
 import PowerSource from "../power-source";
 import { WebsocketMessage, ZigbeePayload } from "../discovery/types";
+import { connect } from "unistore/preact";
+import { GlobalState } from "../../store";
+import actions, { Actions } from "../../actions";
+import ActionTH from "./ActionTH";
 
-type SortDirection = "asc" | "desc";
 //TODO: proper type alias
 type SortColumns =
     "last_seen"
@@ -28,66 +29,22 @@ type SortColumns =
     | "PowerSource";
 
 
-interface State {
-    isLoading: boolean;
+interface ZigbeeTableState {
     sortDirection: SortDirection;
     sortColumn: SortColumns;
-    devices: Device[];
 }
 
 
-interface ActionTHProps<T> {
-    column: T;
-    current: T;
-    currentDirection: SortDirection;
 
-    onClick?(arg1: unknown): void;
-
-    [k: string]: unknown;
-}
-
-class ActionTH<T> extends Component<ActionTHProps<T>, {}> {
-    onClick = (event: MouseEvent): void => {
-        event.preventDefault();
-        event.stopPropagation();
-        const { column, onClick } = this.props;
-        onClick && onClick(column);
-    };
-
-    renderArrow(): ComponentChild {
-        const { currentDirection, current, column } = this.props;
-        if (current === column) {
-            if (currentDirection == "asc") {
-                return <i className={`fa fa-sort-amount-down-alt`} />;
-            } else  {
-                return <i className={`fa fa-sort-amount-down`} />;
-            }
-
-        }
-        return <i className={`fa fa-sort-amount-down ${style.invisible}`} />;
-
-    }
-
-    render(): ComponentChild {
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const { children, onClick, current, column, ...rest } = this.props;
-        return <th {...rest}>
-            <a href="#" onClick={this.onClick}>{children}</a>
-            {this.renderArrow()}
-        </th>;
-    }
-}
 
 const storeKey = "ZigbeeTableState";
 
-export class ZigbeeTable extends Component<TimedProps, State> {
+export class ZigbeeTable extends Component<Actions & GlobalState, ZigbeeTableState> {
     constructor() {
         super();
         this.state = {
-            isLoading: false,
             sortDirection: "desc",
-            sortColumn: "last_seen",
-            devices: []
+            sortColumn: "last_seen"
         };
     }
 
@@ -95,7 +52,7 @@ export class ZigbeeTable extends Component<TimedProps, State> {
         const storedState = localStorage.getItem(storeKey);
         if (storedState) {
             try {
-                const restored: Partial<State> = JSON.parse(storedState);
+                const restored: Partial<ZigbeeTableState> = JSON.parse(storedState);
                 this.setState(restored);
             } catch (e) {
                 new Notyf().error(e.toString());
@@ -118,12 +75,9 @@ export class ZigbeeTable extends Component<TimedProps, State> {
     };
 
     loadData = (showLoading = true): void => {
-        showLoading && this.setState({ isLoading: true });
-        fetchZigbeeDevicesList((err, devices: Device[]) => {
-            if (!err) {
-                this.setState({ isLoading: false, devices });
-            }
-        });
+        const {getZigbeeDevicesList, fetchTimeInfo} = this.props;
+        getZigbeeDevicesList(showLoading);
+        fetchTimeInfo();
     };
 
     debouncedLoadData = debounce(() => this.loadData(false), 1000);
@@ -159,12 +113,10 @@ export class ZigbeeTable extends Component<TimedProps, State> {
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     onInterviewClick = (device: Device): void => {
+        const { startInterview } = this.props;
         if (confirm("Start Interview?")) {
-            startInterview(device.nwkAddr, device?.Interview?.State, (err, response) => {
-                if (!err) {
-                    this.loadData();
-                }
-            });
+            startInterview(device.nwkAddr, device?.Interview?.State)
+                .then(() => new Notyf().success("Started interview"));
         }
     };
 
@@ -186,7 +138,7 @@ export class ZigbeeTable extends Component<TimedProps, State> {
     };
 
     render(): ComponentChild {
-        const { devices, isLoading } = this.state;
+        const { devices, isLoading } = this.props;
         if (isLoading) {
             return <div className="d-flex justify-content-center">
                 <div className="spinner-border" role="status">
@@ -226,8 +178,7 @@ export class ZigbeeTable extends Component<TimedProps, State> {
 
     renderDevicesTable(): ComponentChild {
         const { sortColumn, sortDirection } = this.state;
-        const { time } = this.props;
-        const { devices } = this.state;
+        const { time, devices } = this.props;
         const sortedDevices = orderBy<Device>(devices, [sortColumn], [sortDirection]);
         const { onSortChange } = this;
 
@@ -308,5 +259,6 @@ export class ZigbeeTable extends Component<TimedProps, State> {
     }
 }
 
-
-export default Timed(ZigbeeTable);
+const mappedProps = ["isLoading", "isError", "time", "devices"];
+const ConnectedDevicePage = connect<{}, ZigbeeTableState, GlobalState, Actions>(mappedProps, actions)(ZigbeeTable);
+export default ConnectedDevicePage;

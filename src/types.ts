@@ -107,3 +107,5 @@ export interface BindRule extends Dictionary<string|number> {
     SrcEp: number;
     DstEp: number;
 }
+
+export type SortDirection = "asc" | "desc";

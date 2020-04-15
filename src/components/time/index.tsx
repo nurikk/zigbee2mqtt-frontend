@@ -1,6 +1,5 @@
 import { Component, ComponentChild, ComponentType, h } from "preact";
 import { fetchTimeInfo } from "../actions";
-import { Device } from "../../types";
 import { WSConnect } from "../../utils";
 import debounce from "lodash/debounce";
 
@@ -18,27 +17,6 @@ export interface TimedProps {
 interface State {
     time: TimeInfo | undefined;
 }
-
-
-const toHHMMSS = (secs: number): string => {
-    const hours = Math.floor(secs / 3600);
-    const minutes = Math.floor(secs / 60) % 60;
-    const seconds = secs % 60;
-
-    return [hours, minutes, seconds]
-        .map(v => v < 10 ? `0${v}` : v)
-        .filter((v, i) => v !== "00" || i > 0)
-        .join(":");
-};
-export const lastSeen = (device: Device, timeInfo: TimeInfo): string => {
-    if (device.last_seen && timeInfo) {
-        const lastSeen = timeInfo.ts - device.last_seen;
-        if (lastSeen < 0) {
-            return "Now";
-        }
-        return toHHMMSS(lastSeen);
-    }
-};
 
 const Timed = (WrappedComponent: ComponentType<TimedProps>): ComponentType => {
     return class TimeProviderHOC extends Component<{}, State> {

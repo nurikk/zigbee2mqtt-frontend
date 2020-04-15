@@ -11,39 +11,39 @@ if (process.env.NODE_ENV==='development') {
 }
 
 // const poly = require("preact-cli/lib/lib/webpack/polyfills");
-import 'notyf/notyf.min.css';
+import "notyf/notyf.min.css";
 
 import habitat from "preact-habitat";
 import Map from "./components/map";
-import Header from "./components/header";
-import ZigbeeTable from "./components/zigbee";
+import ConnectedZigbeeTable from "./components/zigbee";
 import Discovery from "./components/discovery";
 import LogViewer from "./components/log-viewer";
 import CodeEditor from "./components/code-editor";
-import ConnectedDevicePage  from "./components/device-page";
+import ConnectedDevicePage from "./components/device-page";
 import store from "./store";
 import { Provider } from "unistore/preact";
 import { h } from "preact";
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-// @ts-ignore
 const DevicePageApp = () => (
     <Provider store={store}><ConnectedDevicePage /></Provider>
 );
+const ZigbeeTableApp = () => (
+    <Provider store={store}><ConnectedZigbeeTable /></Provider>
+);
 
 const initWidgets = (): void => {
-    habitat(ZigbeeTable).render({
+    habitat(ZigbeeTableApp).render({
         selector: "[data-widget-host=\"zigbee\"]",
+        clean: true
+    });
+
+    habitat(DevicePageApp).render({
+        selector: "[data-widget-host=\"device-page\"]",
         clean: true
     });
 
     habitat(Map).render({
         selector: "[data-widget-host=\"map\"]",
-        clean: true
-    });
-
-    habitat(Header).render({
-        selector: "[data-widget-host=\"header\"]",
         clean: true
     });
 
@@ -61,9 +61,6 @@ const initWidgets = (): void => {
         clean: true
     });
 
-    habitat(DevicePageApp).render({
-        selector: "[data-widget-host=\"device-page\"]",
-        clean: true
-    });
+
 };
 document.addEventListener("DOMContentLoaded", initWidgets);

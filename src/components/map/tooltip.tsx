@@ -2,8 +2,9 @@ import { NodeI } from "./types";
 import style from "./tooltip.css";
 import { FunctionalComponent, h } from "preact";
 import { isOnline } from "./nodes";
-import { lastSeen, TimedProps, TimeInfo } from "../time";
+import { TimedProps, TimeInfo } from "../time";
 import { Device } from "../../types";
+import { lastSeen } from "../../utils";
 
 interface TooltipProps extends TimedProps {
     info: NodeI;

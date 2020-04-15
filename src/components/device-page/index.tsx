@@ -16,9 +16,12 @@ interface DevicePageState {
 export class DevicePage extends Component<Actions & GlobalState, DevicePageState> {
     constructor() {
         super();
+        const { searchParams } = new URL(location.href);
+        const paramActiveTab = searchParams.get("activeTab");
+        const deviceId = searchParams.get("dev");
         this.state = {
-            dev: undefined,
-            activeTab: "Info"
+            dev: deviceId,
+            activeTab: paramActiveTab ? paramActiveTab : "Info"
         };
     }
 
@@ -27,23 +30,18 @@ export class DevicePage extends Component<Actions & GlobalState, DevicePageState
     }
 
     initPage(): void {
-        const { activeTab } = this.state;
-        const { searchParams } = new URL(location.href);
-        const paramActiveTab = searchParams.get("activeTab") || activeTab;
-        this.setState({
-            activeTab: paramActiveTab
-        });
+        const { dev } = this.state;
         const { getDeviceInfo, getZigbeeDevicesList, getDeviceBinds } = this.props;
-        const deviceId = searchParams.get("dev");
-        getDeviceInfo(deviceId);
-        getDeviceBinds(deviceId);
-        getZigbeeDevicesList();
+
+        getDeviceInfo(dev);
+        getDeviceBinds(dev);
+        getZigbeeDevicesList(true);
+
     }
 
     render(): ComponentChild {
-        const { isLoading, device, isError, devices, bindRules } = this.props;
+        const { isLoading, isError } = this.props;
         const { activeTab } = this.state;
-
 
         const tabs: TabInfo[] = [
             {
@@ -76,6 +74,6 @@ export class DevicePage extends Component<Actions & GlobalState, DevicePageState
     }
 }
 
-const mappedProps = ["isLoading", "isError", "device", "devices", "bindRules"];
+const mappedProps = ["isLoading", "isError"];
 const ConnectedDevicePage = connect<{}, DevicePageState, GlobalState, Actions>(mappedProps, actions)(DevicePage);
 export default ConnectedDevicePage;
