@@ -1,6 +1,7 @@
 import ReconnectingWebSocket from "reconnecting-websocket";
 import { Device, Dictionary } from "./types";
 import { TimeInfo } from "./components/discovery/types";
+import { Notyf } from "notyf";
 
 export const genDeviceDetailsLink = (deviceIdentifier: string | number): string => (`/zigbee/device?dev=${encodeURIComponent(deviceIdentifier)}&activeTab=Info`);
 
@@ -103,6 +104,35 @@ export const toHHMMSS = (secs: number): string => {
         .filter((v, i) => v !== "00" || i > 0)
         .join(":");
 };
+type HttMethod = "GET" | "POST" | "DELETE";
+type ContentType = "text" | "json" | "blob";
+export type CallbackHandler<T> = (err: boolean, res: T) => void;
+export interface ApiResponse<T> {
+    success: boolean;
+    result: T;
+}
+export function callApi<T>(url: string, method: HttMethod, params: Dictionary<any>, payload: any, callback: CallbackHandler<T>, contentType: ContentType = "json"): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+        fetch(`${url}?${encodeGetParams(params)}`, { method, body: payload })
+            .then((res) => {
+                if (res.status === 200) {
+                    return res[contentType]();
+                }
+                throw new Error(res.statusText);
+
+            })
+            .then(data => {
+                callback(false, data);
+                resolve();
+            })
+            .catch(e => {
+                new Notyf().error(e.toString());
+                callback(e.toString(), undefined);
+                reject();
+            });
+    })
+}
+
 export const lastSeen = (device: Device, timeInfo: TimeInfo): string => {
     if (device.last_seen && timeInfo) {
         const lastSeen = timeInfo.ts - device.last_seen;

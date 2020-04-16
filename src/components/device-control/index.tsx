@@ -1,49 +1,55 @@
-import { FunctionalComponent, h } from "preact";
+import { Component, ComponentChild, FunctionalComponent, h } from "preact";
 import Button from "../button";
 import { Device } from "../../types";
-import { removeDevice, renameDevice } from "../actions";
+import { connect } from "unistore/preact";
+import actions, { Actions } from "../../actions";
 
 interface DeviceControlGroupProps {
     device: Device;
 }
 
+export class DeviceControlGroup extends Component<DeviceControlGroupProps & Actions, {}> {
+    onBindClick = (): void => {
+        const { device } = this.props;
+        location.href = `/zigbee/device?dev=${encodeURIComponent(device.nwkAddr)}&activeTab=Bind`;
+    };
 
-const onBindClick = (device: Device): void => {
-    location.href = `/zigbee/device?dev=${encodeURIComponent(device.nwkAddr)}&activeTab=Bind`;
-};
+    onRenameClick = (): void => {
+        const { renameDevice, getZigbeeDevicesList, getDeviceInfo, device } = this.props;
+        const newName = prompt("Enter new name", device.friendly_name);
+        if (newName !== null && newName !== device.friendly_name) {
+            renameDevice(device.nwkAddr, newName).then(() => {
+                getZigbeeDevicesList(true).then();
+                getDeviceInfo(device.nwkAddr);
+            });
+        }
+    };
 
-const onRenameClick = (device: Device): void => {
-    const newName = prompt("Enter new name", device.friendly_name);
-    if (newName !== null && newName !== device.friendly_name) {
-        renameDevice(device.nwkAddr, newName, (err, response) => {
-            if (!err) {
-                window.location.reload();
-            }
-        });
+
+    onRemoveClick = (): void => {
+        const { removeDevice, getZigbeeDevicesList, getDeviceInfo, device  } = this.props;
+        if (confirm("Remove device?")) {
+            removeDevice(device.nwkAddr).then(() => {
+                getZigbeeDevicesList(true).then();
+                getDeviceInfo(device.nwkAddr);
+            })
+        }
+    };
+
+    render(): ComponentChild {
+        return (
+            <div className="btn-group btn-group-sm" role="group">
+                <Button<void> className="btn btn-danger" onClick={this.onRemoveClick}><i
+                    className="fa fa-trash" /></Button>
+                <Button<void> className="btn btn-secondary" onClick={this.onRenameClick}><i
+                    className="fa fa-edit" /></Button>
+                <Button<void> className="btn btn-success" onClick={this.onBindClick}>Bind</Button>
+            </div>
+        );
     }
-};
+}
 
-const onRemoveClick = (device: Device): void => {
-    if (confirm("Remove device?")) {
-        removeDevice(device.nwkAddr, (err, response) => {
-            if (!err) {
-                window.location.reload();
-            }
-        });
-    }
-};
+const mappedProps = [];
+const ConnectedDeviceControlGroup = connect<DeviceControlGroupProps, {}, {}, Actions>(mappedProps, actions)(DeviceControlGroup);
+export default ConnectedDeviceControlGroup;
 
-const DeviceControlGroup: FunctionalComponent<DeviceControlGroupProps> = (props) => {
-    const { device } = props;
-    return (
-        <div className="btn-group btn-group-sm" role="group">
-            <Button<Device> className="btn btn-danger" onClick={onRemoveClick} item={device}><i
-                className="fa fa-trash" /></Button>
-            <Button<Device> className="btn btn-secondary" onClick={onRenameClick} item={device}><i
-                className="fa fa-edit" /></Button>
-            <Button<Device> className="btn btn-success" onClick={onBindClick} item={device}>Bind</Button>
-        </div>
-    );
-};
-
-export default DeviceControlGroup;

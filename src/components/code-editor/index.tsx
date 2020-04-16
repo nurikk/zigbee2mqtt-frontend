@@ -3,110 +3,67 @@ import { Component, ComponentChild, Fragment, h } from "preact";
 import style from "./style.css";
 import cx from "classnames";
 import TreeView from "../tree-view";
-import { ApiResponse, deleteFile, evalCode, getFilesList, readFile, writeFile } from "../actions";
 import CodeMirror from "./codemirror";
 import { Dictionary, FileDescriptor } from "../../types";
 import { Notyf } from "notyf";
-import orderBy from "lodash/orderBy";
-import { parse } from "luaparse";
+import { connect } from "unistore/preact";
+import { GlobalState } from "../../store";
+import actions, { Actions } from "../../actions";
 
 interface CodeEditorState {
-    isLoadingFiles: boolean;
-    files: FileDescriptor[];
-
-    isExecutingCode: boolean;
-    executionResults: ApiResponse<string> | null;
-
-    currentFileContent: string;
-    currentFile: FileDescriptor;
-
     sideBarIsVisible: boolean;
 }
 
-export default class CodeEditor extends Component<{}, CodeEditorState> {
+export class CodeEditor extends Component<GlobalState & Actions, CodeEditorState> {
     constructor() {
         super();
         this.state = {
-            sideBarIsVisible: true,
-            isLoadingFiles: false,
-            files: [],
-            isExecutingCode: false,
-            executionResults: null,
-            currentFileContent: "",
-            currentFile: null
+            sideBarIsVisible: true
         };
     }
 
     onCodeChange = (code) => {
-        this.setState({ currentFileContent: code });
+        const { setCurrentFileContent } = this.props;
+        setCurrentFileContent(code);
     };
 
     onExecuteCode = () => {
-        const { currentFileContent } = this.state;
-        this.setState({ isExecutingCode: true, executionResults: null });
-        evalCode(currentFileContent, (error, response) => {
-            if (!error) {
-                this.setState({ executionResults: response, isExecutingCode: false });
-            }
-        });
+        const { currentFileContent, evalCode } = this.props;
+        evalCode(currentFileContent).then();
     };
     onSaveCode = () => {
-        const { currentFile, currentFileContent } = this.state;
-        writeFile(currentFile.name, currentFileContent, (err, response) => {
-            new Notyf().success(`Saved ${currentFile.name}`);
-        });
+        const { currentFile, currentFileContent, writeFile } = this.props;
+        writeFile(currentFile.name, currentFileContent)
+            .then(() => new Notyf().success(`Saved ${currentFile.name}`));
+
     };
 
-    clearExecutionResults = () => {
-        this.setState({
-            executionResults: null
-        });
-    };
 
     onCreateFile = () => {
+        const { writeFile } = this.props;
         let fileName = prompt("Enter file name");
         if (fileName) {
             if (!fileName.startsWith("/")) {
                 fileName = `/${fileName}`;
             }
-            writeFile(fileName, "", (err, response) => {
-                if (!err && response.success) {
-                    this.loadFiles("/");
-                }
-            });
+            writeFile(fileName, "").then(() => this.loadFiles("/"));
         }
     };
 
     onDeleteClick = (file: FileDescriptor): void => {
+        const { deleteFile } = this.props;
         if (confirm(`Delete ${file.name}?`)) {
-            deleteFile(file.name, (err, response) => {
-                if (!err && response.success) {
-                    this.loadFiles("/");
-                }
-            });
-
+            deleteFile(file).then(() => this.loadFiles("/"));
         }
     };
     loadFile = (file: FileDescriptor): void => {
-        this.setState({ currentFileContent: "" });
-        readFile(file.name, (error, response) => {
-            if (!error) {
-                this.setState({ currentFileContent: response, currentFile: file });
-            }
-
-        });
+        const { readFile } = this.props;
+        readFile(file);
     };
 
 
     renderCodeExecutionResults(): ComponentChild {
-        const { executionResults, isExecutingCode } = this.state;
-        if (isExecutingCode) {
-            return <div class="text-center">
-                <div class="spinner-border" role="status">
-                    <span class="sr-only">Loading...</span>
-                </div>
-            </div>;
-        }
+        const { executionResults } = this.props;
 
         if (executionResults) {
             return <div class={cx("h-24", {
@@ -126,19 +83,8 @@ export default class CodeEditor extends Component<{}, CodeEditorState> {
     }
 
     loadFiles(path: string): void {
-        this.setState({ isLoadingFiles: true });
-        getFilesList(path, (err, response) => {
-            if (!err) {
-                const { success, result } = response;
-
-                if (success) {
-                    this.setState({
-                        isLoadingFiles: false,
-                        files: orderBy(result, ["name"])
-                    });
-                }
-            }
-        });
+        const { getFilesList } = this.props;
+        getFilesList(path);
     }
 
     toggleSideBar = (): void => {
@@ -148,7 +94,7 @@ export default class CodeEditor extends Component<{}, CodeEditorState> {
 
     getFileType(): string {
         const fileExtPattern = /\.([0-9a-z]+)$/i;
-        const { currentFile } = this.state;
+        const { currentFile } = this.props;
         if (currentFile) {
             const { name } = currentFile;
             if (fileExtPattern.test(name)) {
@@ -160,11 +106,11 @@ export default class CodeEditor extends Component<{}, CodeEditorState> {
     }
 
     onFormatClick = (): void => {
-        const { currentFileContent } = this.state;
+        const { currentFileContent, setCurrentFileContent } = this.props;
         if (this.getFileType() === "json") {
             try {
                 const res = JSON.parse(currentFileContent);
-                this.setState({ currentFileContent: JSON.stringify(res, null, 2) });
+                setCurrentFileContent(JSON.stringify(res, null, 2));
             } catch (e) {
                 new Notyf().error(e.toString());
             }
@@ -191,7 +137,9 @@ export default class CodeEditor extends Component<{}, CodeEditorState> {
     }
 
     render(): ComponentChild {
-        const { currentFileContent, executionResults, files, isLoadingFiles, currentFile, sideBarIsVisible } = this.state;
+        const { sideBarIsVisible } = this.state;
+        const { currentFileContent, executionResults, files, currentFile, clearExecutionResults } = this.props;
+
         const config = {
             mode: this.getMode(),
             theme: "dracula",
@@ -219,16 +167,7 @@ export default class CodeEditor extends Component<{}, CodeEditorState> {
                     <div class={style["sidebar-heading"]}>Files</div>
                     <div class="list-group list-group-flush">
 
-                        {
-                            isLoadingFiles ? (
-                                <div class="text-center">
-                                    <div class="spinner-border" role="status">
-                                        <span class="sr-only">Loading...</span>
-                                    </div>
-                                </div>
-                            ) : <TreeView onItemClick={this.loadFile} onDeleteClick={this.onDeleteClick}
-                                          items={files} />
-                        }
+                        <TreeView onItemClick={this.loadFile} onDeleteClick={this.onDeleteClick} items={files} />
                         <button onClick={this.onCreateFile} type="button"
                                 class={cx("btn", "btn-primary", style["new-file"])}>New file
                         </button>
@@ -248,15 +187,16 @@ export default class CodeEditor extends Component<{}, CodeEditorState> {
                                 </button>
                                 {
                                     this.getFileType() === "json" ? (
-                                        <button type="button" class="btn btn-primary" onClick={this.onFormatClick}>Format
+                                        <button type="button" class="btn btn-primary"
+                                                onClick={this.onFormatClick}>Format
                                         </button>
-                                    )  : null
+                                    ) : null
                                 }
 
                             </Fragment>
                         ) : null}
                         {hasExecutionResults ?
-                            <button type="button" class="btn btn-primary" onClick={this.clearExecutionResults}>Clear
+                            <button type="button" class="btn btn-primary" onClick={clearExecutionResults}>Clear
                                 output</button> : null}
 
                         <div>
@@ -279,3 +219,7 @@ export default class CodeEditor extends Component<{}, CodeEditorState> {
     }
 
 }
+
+const mappedProps = ["isLoading", "files", "executionResults", "currentFileContent", "currentFile"];
+const ConnectedCodeEditor = connect<{}, CodeEditorState, GlobalState, Actions>(mappedProps, actions)(CodeEditor);
+export default ConnectedCodeEditor;

@@ -4,20 +4,26 @@
 import { GlobalState } from "./store";
 import { Store } from "unistore";
 import {
-    createBind,
     fetchZigbeeDevicesList,
     getDeviceInfo,
     loadBindsList,
-    removeBind,
     setState,
     setSimpleBind,
     startInterview,
     fetchTimeInfo,
-    enableJoin, fetchLogsBuffer, getCurrentLogLevel, clearLogsBuffer, setLogLevel
-} from "./components/actions";
-import { BindRule } from "./types";
+    enableJoin,
+    fetchLogsBuffer,
+    getCurrentLogLevel,
+    clearLogsBuffer,
+    setLogLevel,
+    evalCode,
+    writeFile,
+} from "./legacy-actions";
+import { BindRule, FileDescriptor } from "./types";
 import { LogLevel } from "./components/log-viewer";
 import WebsocketManager from "./websocket";
+import orderBy from "lodash/orderBy";
+import { ApiResponse, callApi } from "./utils";
 
 export interface Actions {
     setLoading(isLoading: boolean): void;
@@ -48,6 +54,21 @@ export interface Actions {
     clearLogs(): void;
     clearLogsBuffer(): Promise<void>;
     setLogLevel(level: LogLevel): Promise<void>;
+
+    setCurrentFileContent(content: string): void;
+
+    evalCode(code: string): Promise<void>;
+    writeFile(fileName: string, content: string): Promise<void>;
+
+    clearExecutionResults(): void;
+
+    getFilesList(path: string): void;
+
+    readFile(file: FileDescriptor): void;
+    deleteFile(file: FileDescriptor): Promise<void>;
+
+    renameDevice(old: string, newName: string): Promise<void>;
+    removeDevice(old: string): Promise<void>;
 }
 
 const actions = (store: Store<GlobalState>) => ({
@@ -91,16 +112,16 @@ const actions = (store: Store<GlobalState>) => ({
 
     removeBind: (state, dev: string, bindRule: BindRule): Promise<void> => {
         store.setState({ isLoading: true });
-        return removeBind(dev, bindRule, (err, response) => {
+        return callApi("/api/zigbee/bind", "POST", { action: "unbind", dev, ...bindRule }, undefined, (err, response) => {
             store.setState({
                 isError: err,
                 isLoading: false
             });
-        });
+        })
     },
     createBind: (state, dev: string, bindRule: BindRule): Promise<void> => {
         store.setState({ isLoading: true });
-        return createBind(dev, bindRule, (err, response) => {
+        return callApi("/api/zigbee/bind", "POST", { action: "bind", dev, ...bindRule }, undefined, (err, response) => {
             store.setState({
                 isError: err,
                 isLoading: false
@@ -199,7 +220,85 @@ const actions = (store: Store<GlobalState>) => ({
                 isError: err
             });
         });
+    },
+    setCurrentFileContent(state, currentFileContent: string): void {
+        store.setState({ currentFileContent });
+    },
+    evalCode(state, code): Promise<void> {
+        store.setState({ isLoading: true });
+        return evalCode(code,(err, res) => {
+            store.setState({
+                isLoading: false,
+                isError: err,
+                executionResults: res
+            });
+        });
+    },
+    clearExecutionResults(state): void {
+        store.setState({executionResults: null });
+    },
+    writeFile(state, path, content): Promise<void> {
+        store.setState({ isLoading: true });
+        return writeFile(path, content,(err, res) => {
+            store.setState({
+                isLoading: false,
+                isError: err
+            });
+        });
+    },
+    getFilesList(state, path: string): void {
+        store.setState({ isLoading: true });
+        callApi<ApiResponse<FileDescriptor[]>>("/api/files", "GET", { path }, undefined, (err, res) => {
+            store.setState({
+                isLoading: false,
+                isError: err,
+                files: orderBy(res.result, ["name"])
+            });
+        }).then();
+        
+    },
 
-}
+    readFile(state, file: FileDescriptor): void {
+        store.setState({ isLoading: true });
+        callApi<string>("/api/files", "GET", { path: file.name }, undefined, (err, response) => {
+            store.setState({
+                isLoading: false,
+                isError: err,
+                currentFileContent: response,
+                currentFile: file
+            });
+        }, "text").then();
+
+    },
+
+    deleteFile(state, file: FileDescriptor): Promise<void> {
+        store.setState({ isLoading: true });
+        return callApi<void>("/api/files", "DELETE", { path: file.name }, undefined, (err, response) => {
+            store.setState({
+                isLoading: false,
+                isError: err
+            });
+        });
+    },
+    renameDevice: (state, old: string, newName: string): Promise<void> => {
+        store.setState({ isLoading: true });
+        return callApi<ApiResponse<void>>("/api/zigbee/rename", "GET", { old, new: newName }, undefined, (err, res) => {
+            store.setState({
+                isLoading: false,
+                isError: err
+            });
+        });
+    } ,
+    removeDevice: (state, old: string, newName: string): Promise<void> => {
+        store.setState({ isLoading: true });
+        return callApi<ApiResponse<void>>("/api/zigbee/remove", "GET", { old, new: newName }, undefined, (err, res) => {
+            store.setState({
+                isLoading: false,
+                isError: err
+            });
+        });
+    }
+
+
 });
 export default actions;

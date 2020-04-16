@@ -1,7 +1,7 @@
 import { Component, ComponentChild, h } from "preact";
 
 interface ButtonProps<T> {
-    item: T;
+    item?: T;
     className?: string;
 
     onClick?(arg1: T): void;

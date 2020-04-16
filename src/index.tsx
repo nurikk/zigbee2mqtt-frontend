@@ -18,7 +18,7 @@ import ConnectedMap from "./components/map";
 import ConnectedZigbeeTable from "./components/zigbee";
 import ConnectedDiscovery from "./components/discovery";
 import ConnectedLogViewer from "./components/log-viewer";
-import CodeEditor from "./components/code-editor";
+import ConnectedCodeEditor from "./components/code-editor";
 import ConnectedDevicePage from "./components/device-page";
 import store from "./store";
 import { Provider } from "unistore/preact";
@@ -39,6 +39,9 @@ const DiscoveryApp = () => (
 );
 const LogViewerApp = () => (
     <Provider store={store}><ConnectedLogViewer /></Provider>
+);
+const CodeEditorApp = () => (
+    <Provider store={store}><ConnectedCodeEditor /></Provider>
 );
 
 const initWidgets = (): void => {
@@ -66,7 +69,7 @@ const initWidgets = (): void => {
         clean: true
     });
 
-    habitat(CodeEditor).render({
+    habitat(CodeEditorApp).render({
         selector: "[data-widget-host=\"code-editor\"]",
         clean: true
     });

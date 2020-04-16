@@ -74,12 +74,13 @@ export class Discovery extends Component<GlobalState & Actions, DiscoveryState> 
     }
 
     renderDevices(): ComponentChild {
+        const { startInterview } = this.props;
         const { events } = this.state;
         const sortedEvents = orderBy(Object.entries(events), ([_, events]) => events[0].timestamp).reverse();
 
         return (<Fragment>
             {this.renderJoinButton()}
-            <div className="row no-gutters">{sortedEvents.map(([ieeeAddr, events]) => <DeviceCard
+            <div className="row no-gutters">{sortedEvents.map(([ieeeAddr, events]) => <DeviceCard startInterview={startInterview}
                 ieeeAddr={ieeeAddr} events={events} />)}</div>
         </Fragment>);
 

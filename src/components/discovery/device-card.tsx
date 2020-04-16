@@ -8,7 +8,6 @@ import groupBy from "lodash/groupBy";
 import { Device, Dictionary } from "../../types";
 import DeviceControlGroup from "../device-control";
 import Button from "../button";
-import { startInterview } from "../actions";
 import SafeImg from "../safe-image";
 import PowerSourceComp from "../power-source";
 import uniqWith from "lodash/uniqWith";
@@ -21,6 +20,8 @@ const DEVICE_MANUAL_WAKEUP_TIMEOUT = 5;
 interface DeviceCardProps {
     ieeeAddr: string;
     events: ZigbeePayload[];
+
+    startInterview(nwkAddr: string, state: number): void;
 }
 
 const EventLabels = new Map<ZigbeeEvent, string>([
@@ -156,11 +157,8 @@ export default class DeviceCard extends Component<DeviceCardProps, DeviceCardSta
     }
 
     onInterviewClick = (nwkAddr: string): void => {
-        startInterview(nwkAddr, 0,(err, response) => {
-            if (!err) {
-                this.setState({ manualInterviewStarted: true });
-            }
-        });
+        const { startInterview } = this.props;
+        startInterview(nwkAddr, 0);
     };
 
     renderManualInterviewHelper(): ComponentChild {
@@ -226,9 +224,7 @@ export default class DeviceCard extends Component<DeviceCardProps, DeviceCardSta
 
                     <div class={`row ${style["scale-in-center"]}`}>
                         <div class="col-5">Current status:</div>
-                        <div class="col">
-                            {this.getInterviewText()}
-                        </div>
+                        <div class="col">{this.getInterviewText()}</div>
                     </div>
 
                     {
