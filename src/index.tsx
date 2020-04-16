@@ -17,7 +17,7 @@ import habitat from "preact-habitat";
 import ConnectedMap from "./components/map";
 import ConnectedZigbeeTable from "./components/zigbee";
 import ConnectedDiscovery from "./components/discovery";
-import LogViewer from "./components/log-viewer";
+import ConnectedLogViewer from "./components/log-viewer";
 import CodeEditor from "./components/code-editor";
 import ConnectedDevicePage from "./components/device-page";
 import store from "./store";
@@ -36,6 +36,9 @@ const MapApp = () => (
 );
 const DiscoveryApp = () => (
     <Provider store={store}><ConnectedDiscovery /></Provider>
+);
+const LogViewerApp = () => (
+    <Provider store={store}><ConnectedLogViewer /></Provider>
 );
 
 const initWidgets = (): void => {
@@ -58,7 +61,7 @@ const initWidgets = (): void => {
         selector: "[data-widget-host=\"discovery\"]",
         clean: true
     });
-    habitat(LogViewer).render({
+    habitat(LogViewerApp).render({
         selector: "[data-widget-host=\"log-viewer\"]",
         clean: true
     });

@@ -1,10 +1,11 @@
 import { Component, ComponentChild, createRef, h } from "preact";
-import { WSConnect } from "../../utils";
-import { LogMessage } from "../discovery/types";
 import style from "./style.css";
 import cx from "classnames";
-import { clearLogsBuffer, fetchLogsBuffer, getCurrentLogLevel, setLogLevel } from "../actions";
 import { Notyf } from "notyf";
+import { GlobalState } from "../../store";
+import actions, { Actions } from "../../actions";
+import { connect } from "unistore/preact";
+import { useEffect } from "preact/hooks";
 
 export enum LogLevel {
     LOG_OFF,
@@ -13,70 +14,26 @@ export enum LogLevel {
     LOG_DEBUG
 }
 
-interface LogViewerState {
-    logs: string[];
+export interface LogViewerState {
     followLog: boolean;
-    logLevel: LogLevel;
 }
 
-type ResponseStatus = "ok" | "failed";
-
-interface ApiResponse {
-    result: ResponseStatus;
-}
-
-export default class LogViewer extends Component<{}, LogViewerState> {
+export class LogViewer extends Component<GlobalState & Actions, LogViewerState> {
     ref = createRef<HTMLDivElement>();
 
     constructor() {
         super();
         this.state = {
-            logs: [],
-            followLog: true,
-            logLevel: LogLevel.LOG_NORMAL
+            followLog: true
         };
     }
 
     componentDidMount(): void {
-
-        fetchLogsBuffer((err, logs) => {
-            if (!err) {
-                this.setState({ logs: logs.split("\n") }, () => setTimeout(this.scrollToBottom, 500));
-            }
-
-            const ws = WSConnect();
-            ws.addEventListener("open", () => {
-                ws.send(JSON.stringify({ action: "subscribe", category: "log" }));
-            });
-            ws.addEventListener("message", this.onMessageReceive);
-        });
-
-        getCurrentLogLevel((err, response) => {
-            if (!err && response.success) {
-                this.setState({ logLevel: response.result });
-            } else {
-                new Notyf().error("Failed to load current log level");
-            }
-        });
+        const { fetchLogsBuffer, getCurrentLogLevel } = this.props;
+        fetchLogsBuffer().then(() => setTimeout(this.scrollToBottom, 500));
+        getCurrentLogLevel().then();
     }
 
-    onMessageReceive = (wsEvent: MessageEvent): void => {
-        let event = {} as LogMessage;
-        try {
-            event = JSON.parse(wsEvent.data) as LogMessage;
-        } catch (e) {
-            new Notyf().error(`Cant parse json ${e}`);
-        }
-        if (event.category === "log") {
-            this.processLog(event);
-        }
-    };
-
-    processLog(log: LogMessage) {
-        const { logs, followLog } = this.state;
-        logs.push(log.payload);
-        this.setState({ logs }, followLog ? this.scrollToBottom : undefined);
-    }
 
     onFollowLogChange = (e: Event) => {
         e.preventDefault();
@@ -85,30 +42,19 @@ export default class LogViewer extends Component<{}, LogViewerState> {
     };
 
     onClearScreenClick = (e: Event) => {
-        this.setState({ logs: [] });
+        const { clearLogs } = this.props;
+        clearLogs();
     };
     onClearCacheClick = (e: Event) => {
-        clearLogsBuffer((err, resp) => {
-            if (!err && resp.success) {
-                new Notyf().success("Cache cleared");
-            } else {
-                new Notyf().error("Failed");
-            }
-
-        });
+        const { clearLogsBuffer } = this.props;
+        clearLogsBuffer().then(() => new Notyf().success("Cache cleared"));
     };
 
     onLogLevelChange = (e: Event) => {
+        const { setLogLevel, getCurrentLogLevel } = this.props;
         const { value } = e.target as HTMLInputElement;
         const logLevel = parseInt(value);
-        setLogLevel(logLevel, (err, data) => {
-            if (!err && data.success) {
-                this.setState({ logLevel });
-            } else {
-                new Notyf().error("Cant set log level");
-            }
-
-        });
+        setLogLevel(logLevel).then(() => getCurrentLogLevel());
     };
 
 
@@ -116,9 +62,13 @@ export default class LogViewer extends Component<{}, LogViewerState> {
         this.ref.current.scrollTop = this.ref.current.scrollHeight;
     };
 
-
     render(): ComponentChild {
-        const { logs, followLog, logLevel } = this.state;
+        const { followLog } = this.state;
+        const { logLevel, logs } = this.props;
+
+        useEffect(() => {
+            followLog && this.scrollToBottom();
+        }, [followLog, logs.length]);
 
         return (<div class="container-fluid h-100">
             <div class="row justify-content-around">
@@ -162,3 +112,7 @@ export default class LogViewer extends Component<{}, LogViewerState> {
         </div>);
     }
 }
+
+const mappedProps = ["logs", "logLevel"];
+const ConnectedLogViewer = connect<{}, LogViewerState, GlobalState, Actions>(mappedProps, actions)(LogViewer);
+export default ConnectedLogViewer;

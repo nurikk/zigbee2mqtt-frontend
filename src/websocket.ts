@@ -2,11 +2,46 @@ import ReconnectingWebSocket from "reconnecting-websocket";
 import { WebsocketMessage } from "./components/discovery/types";
 import { Notyf } from "notyf";
 import {PubSub} from "pubsub-ts";
+import { Dictionary } from "./types";
 type ZigbeeCallback = (payload: WebsocketMessage) => void;
+
+class EventEmitter {
+    events: Dictionary<Function[]>;
+    constructor() {
+        this.events = {};
+    }
+    on(event: string, listener: Function): Function {
+        if (typeof this.events[event] !== 'object') {
+            this.events[event] = [];
+        }
+        this.events[event].push(listener);
+        return () => this.removeListener(event, listener);
+    }
+    removeListener(event: string, listener: Function): void {
+        if (typeof this.events[event] === 'object') {
+            const idx = this.events[event].indexOf(listener);
+            if (idx > -1) {
+                this.events[event].splice(idx, 1);
+            }
+        }
+    }
+    emit(event: string, ...args) {
+        if (typeof this.events[event] === 'object') {
+            this.events[event].forEach(listener => listener.apply(this, args));
+        }
+    }
+    once(event: string, listener: Function) {
+        const remove = this.on(event, (...args) => {
+            remove();
+            listener.apply(this, args);
+        });
+    }
+}
 
 export default class WebsocketManager {
     ws: ReconnectingWebSocket;
     publisher: PubSub.Publisher;
+    em: EventEmitter;
     categories: string[];
 
     remoteSubscribe = (category: string): void => {
@@ -38,13 +73,15 @@ export default class WebsocketManager {
 
     constructor() {
         this.categories = [];
+        this.em = new EventEmitter();
+        // this.publisher = new PubSub.Publisher();
         this.connect();
-        this.publisher = new PubSub.Publisher();
     }
     onMessageReceive = (wsEvent: MessageEvent): void => {
         try {
             const event = JSON.parse(wsEvent.data) as WebsocketMessage;
-            this.publisher.notify(event.category, event);
+            this.em.emit(event.category, event);
+            // this.publisher.notify(event.category, event);
         } catch (e) {
             new Notyf().error(`Cant parse json, ${e}`);
             console.log(`Cant parse json, ${e}`, wsEvent.data);
@@ -52,12 +89,10 @@ export default class WebsocketManager {
     };
 
     subscribe(eventCategory: string, consumer: ZigbeeCallback) {
-        const subscriber = new PubSub.Subscriber();
-        subscriber.on(eventCategory, (notification: PubSub.Notification) => {
-            consumer(notification.body);
-        });
-        this.publisher.add(subscriber);
+
+
+
         this.remoteSubscribe(eventCategory);
-        return subscriber;
+        return this.em.on(eventCategory, consumer)
     }
 }

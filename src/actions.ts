@@ -13,9 +13,11 @@ import {
     setSimpleBind,
     startInterview,
     fetchTimeInfo,
-    enableJoin
+    enableJoin, fetchLogsBuffer, getCurrentLogLevel, clearLogsBuffer, setLogLevel
 } from "./components/actions";
 import { BindRule } from "./types";
+import { LogLevel } from "./components/log-viewer";
+import WebsocketManager from "./websocket";
 
 export interface Actions {
     setLoading(isLoading: boolean): void;
@@ -41,6 +43,11 @@ export interface Actions {
     fetchTimeInfo(): void;
 
     setJoinDuration(duration: number, target: string): Promise<void>;
+    fetchLogsBuffer(): Promise<void>;
+    getCurrentLogLevel(): Promise<void>;
+    clearLogs(): void;
+    clearLogsBuffer(): Promise<void>;
+    setLogLevel(level: LogLevel): Promise<void>;
 }
 
 const actions = (store: Store<GlobalState>) => ({
@@ -140,7 +147,59 @@ const actions = (store: Store<GlobalState>) => ({
         return enableJoin(duration,target, (err, time) => {
             store.setState({ isLoading: false });
         });
-    }
+    },
+    fetchLogsBuffer(state): Promise<void> {
+        return new Promise((resolve, reject) => {
+            store.setState({ isLoading: true });
+            fetchLogsBuffer((err, logs) => {
+                store.setState({
+                    isError: err,
+                    isLoading: false,
+                    logs: logs.split("\n")
+                });
+                resolve();
+            }).then(() => {
+                const wsManager = new WebsocketManager();
+                wsManager.subscribe("log", (data) => {
+                    const { logs } = store.getState();
+                    const copyLogs = [...logs, data.payload as string];
+                    store.setState({logs: copyLogs});
+                });
+            })
+        })
 
+    },
+    getCurrentLogLevel(state): Promise<void> {
+        store.setState({ isLoading: true });
+        return getCurrentLogLevel((err, response) => {
+            store.setState({
+                isError: err,
+                isLoading: false,
+                logLevel: response.result
+            });
+        });
+    },
+    clearLogs(state): void {
+        store.setState({logs: []});
+    },
+    clearLogsBuffer(state): Promise<void> {
+        store.setState({ isLoading: true });
+        return clearLogsBuffer((err, res) => {
+          store.setState({
+              isLoading: false,
+              isError: err
+          });
+        });
+    },
+    setLogLevel (state, level: LogLevel): Promise<void> {
+        store.setState({ isLoading: true });
+        return setLogLevel(level,(err, res) => {
+            store.setState({
+                isLoading: false,
+                isError: err
+            });
+        });
+
+}
 });
 export default actions;
