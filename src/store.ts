@@ -2,7 +2,7 @@ import createStore from 'unistore';
 import devtools    from 'unistore/devtools'
 
 import { BindRule, Device } from "./types";
-import { TimeInfo } from "./components/time";
+import { TimeInfo } from "./components/discovery/types";
 export interface GlobalState {
     isLoading: boolean;
     isError: boolean | string;

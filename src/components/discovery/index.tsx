@@ -1,23 +1,24 @@
 import { Component, ComponentChild, Fragment, h } from "preact";
 import { Dictionary } from "../../types";
-import { WebsocketMessage, ZigbeePayload } from "./types";
+import { ZigbeePayload } from "./types";
 import DeviceCard from "./device-card";
 import Button from "../button";
-import { enableJoin } from "../actions";
-import { WSConnect } from "../../utils";
 import { Notyf } from "notyf";
 import orderBy from "lodash/orderBy";
+import { connect } from "unistore/preact";
+import { GlobalState } from "../../store";
+import actions, { Actions } from "../../actions";
+import WebsocketManager from "../../websocket";
 window["wsEventsData"] = window["wsEventsData"] || [];
 const wsEventsData: object[] = window['wsEventsData'];
 
 interface DiscoveryState {
     updateTimerId: number;
-
     joinDuration: number;
     events: Dictionary<ZigbeePayload[]>;
 }
 
-export default class Discovery extends Component<{}, DiscoveryState> {
+export class Discovery extends Component<GlobalState & Actions, DiscoveryState> {
     constructor() {
         super();
 
@@ -29,7 +30,10 @@ export default class Discovery extends Component<{}, DiscoveryState> {
 
     }
 
-    processZigbeeEvent(message: ZigbeePayload): void {
+    processZigbeeEvent = ({category, payload}): void => {
+        wsEventsData.push({category, payload})
+
+        const message = {...payload};
         // console.log("processZigbeeEvent", message);
         message.timestamp = Date.now();
         const { events } = this.state;
@@ -63,35 +67,10 @@ export default class Discovery extends Component<{}, DiscoveryState> {
         this.setState({ events, joinDuration, updateTimerId });
     }
 
-    onMessageReceive = (wsEvent: MessageEvent): void => {
-        let event = {} as WebsocketMessage;
-        try {
-            event = JSON.parse(wsEvent.data) as WebsocketMessage;
-        } catch (e) {
-            new Notyf().error(`Cant parse json, ${e}`);
-            console.log(`Cant parse json, ${e}`, wsEvent.data);
-        }
-        if (event.category === "zigbee" && (event.payload as ZigbeePayload).event !== "LinkData") {
-            console.log('wsEvent.data', wsEvent.data);
-            //use copy(wsEventsData)
-            wsEventsData.push(event);
-
-            this.processZigbeeEvent(event.payload as ZigbeePayload);
-        }
-    };
-    connectWS = (): void => {
-        const ws = WSConnect();
-        ws.addEventListener("open", (): void => {
-            ws.send(JSON.stringify({ action: "subscribe", category: "zigbee" }));
-            this.enableJoin();
-        });
-        ws.addEventListener("message", this.onMessageReceive);
-    };
-
-
     componentDidMount(): void {
-        this.connectWS();
-
+        const manager = new WebsocketManager();
+        console.log("use `copy(wsEventsData)` to copy events log");
+        manager.subscribe("zigbee", this.processZigbeeEvent).start();
     }
 
     renderDevices(): ComponentChild {
@@ -106,19 +85,15 @@ export default class Discovery extends Component<{}, DiscoveryState> {
 
     }
 
-    enableJoin = (): void => {
-        enableJoin(255, undefined, (err, response) => {
-            if (!err) {
-                new Notyf({position: {x: "left", y: "bottom"}}).success("Join enabled");
-            }
-        });
+    enableJoin = async () => {
+        const { setJoinDuration } = this.props;
+        await setJoinDuration(255, undefined)
+        new Notyf({ position: { x: "left", y: "bottom" } }).success("Join enabled");
     };
-    disableJoin = (): void => {
-        enableJoin(0, undefined, (err, response) => {
-            if (!err) {
-                new Notyf().success("Join disabled");
-            }
-        });
+    disableJoin = async () => {
+        const { setJoinDuration } = this.props;
+        await setJoinDuration(0, undefined)
+        new Notyf({ position: { x: "left", y: "bottom" } }).success("Join disabled");
     };
 
     renderJoinButton(): ComponentChild {
@@ -148,5 +123,8 @@ export default class Discovery extends Component<{}, DiscoveryState> {
         const hasAnyEvents = Object.keys(events).length !== 0;
         return <div class="container-fluid h-100">{hasAnyEvents ? this.renderDevices() : this.renderEmptyScreen()}</div>
     }
-
 }
+
+const mappedProps = ["isLoading", "time", "devices"];
+const ConnectedDiscovery = connect<{}, DiscoveryState, GlobalState, Actions>(mappedProps, actions)(Discovery);
+export default ConnectedDiscovery;

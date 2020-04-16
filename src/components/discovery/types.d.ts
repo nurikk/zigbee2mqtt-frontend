@@ -43,3 +43,10 @@ export interface WebsocketMessage {
     payload: string | ZigbeePayload;
 }
 
+export interface TimeInfo {
+    ntp_enable: boolean;
+    ntp_server: string;
+    tz: string;
+    ts: number;
+}
+

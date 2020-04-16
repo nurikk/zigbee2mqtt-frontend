@@ -1,8 +1,8 @@
 import { BindRule, Device, Dictionary, FileDescriptor } from "../types";
-import { TimeInfo } from "./time";
 import { encodeGetParams } from "../utils";
 import { LogLevel } from "./log-viewer";
 import { Notyf } from "notyf";
+import { TimeInfo } from "./discovery/types";
 
 export interface ApiResponse<T> {
     success: boolean;

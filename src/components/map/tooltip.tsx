@@ -2,12 +2,13 @@ import { NodeI } from "./types";
 import style from "./tooltip.css";
 import { FunctionalComponent, h } from "preact";
 import { isOnline } from "./nodes";
-import { TimedProps, TimeInfo } from "../time";
 import { Device } from "../../types";
 import { lastSeen } from "../../utils";
+import { TimeInfo } from "../discovery/types";
 
-interface TooltipProps extends TimedProps {
+interface TooltipProps {
     info: NodeI;
+    time: TimeInfo;
 }
 
 const getTooltip = (device: Device, timeInfo: TimeInfo): string[] => {

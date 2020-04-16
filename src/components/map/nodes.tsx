@@ -7,9 +7,9 @@ import cx from "classnames";
 
 import * as style from "./map.css";
 import { MouseEventsResponderNode } from ".";
-import { TimedProps, TimeInfo } from "../time";
 import { Device } from "../../types";
 import { genDeviceImageUrl } from "../../utils";
+import { TimeInfo } from "../discovery/types";
 
 const calcStarPoints = (
     centerX: number,
@@ -43,7 +43,8 @@ const getStarShape = (innerCircleArms: number, styleStarWidth: number, innerOute
     );
 };
 
-interface NodeProps extends MouseEventsResponderNode, TimedProps {
+interface NodeProps extends MouseEventsResponderNode {
+    time: TimeInfo;
     node: NodeI;
 }
 
@@ -136,7 +137,8 @@ class Node extends Component<NodeProps, NodeState> {
     }
 }
 
-interface NodesProps extends MouseEventsResponderNode, TimedProps {
+interface NodesProps extends MouseEventsResponderNode {
+    time: TimeInfo;
     nodes: NodeI[];
     simulation: d3.Simulation<NodeI, LinkI>;
 }

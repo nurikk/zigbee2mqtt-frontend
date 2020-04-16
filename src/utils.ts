@@ -1,6 +1,6 @@
 import ReconnectingWebSocket from "reconnecting-websocket";
 import { Device, Dictionary } from "./types";
-import { TimeInfo } from "./components/time";
+import { TimeInfo } from "./components/discovery/types";
 
 export const genDeviceDetailsLink = (deviceIdentifier: string | number): string => (`/zigbee/device?dev=${encodeURIComponent(deviceIdentifier)}&activeTab=Info`);
 

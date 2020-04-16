@@ -12,7 +12,8 @@ import {
     setState,
     setSimpleBind,
     startInterview,
-    fetchTimeInfo
+    fetchTimeInfo,
+    enableJoin
 } from "./components/actions";
 import { BindRule } from "./types";
 
@@ -38,6 +39,8 @@ export interface Actions {
     startInterview(dev: string, state: number | ""): Promise<void>;
 
     fetchTimeInfo(): void;
+
+    setJoinDuration(duration: number, target: string): Promise<void>;
 }
 
 const actions = (store: Store<GlobalState>) => ({
@@ -130,6 +133,14 @@ const actions = (store: Store<GlobalState>) => ({
         return fetchTimeInfo((err, time) => {
             store.setState({time});
         });
+    },
+
+    setJoinDuration(state, duration = 255, target = ""): Promise<void> {
+        store.setState({ isLoading: true });
+        return enableJoin(duration,target, (err, time) => {
+            store.setState({ isLoading: false });
+        });
     }
+
 });
 export default actions;

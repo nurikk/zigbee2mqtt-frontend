@@ -16,7 +16,7 @@ import "notyf/notyf.min.css";
 import habitat from "preact-habitat";
 import ConnectedMap from "./components/map";
 import ConnectedZigbeeTable from "./components/zigbee";
-import Discovery from "./components/discovery";
+import ConnectedDiscovery from "./components/discovery";
 import LogViewer from "./components/log-viewer";
 import CodeEditor from "./components/code-editor";
 import ConnectedDevicePage from "./components/device-page";
@@ -33,6 +33,9 @@ const ZigbeeTableApp = () => (
 
 const MapApp = () => (
     <Provider store={store}><ConnectedMap /></Provider>
+);
+const DiscoveryApp = () => (
+    <Provider store={store}><ConnectedDiscovery /></Provider>
 );
 
 const initWidgets = (): void => {
@@ -51,7 +54,7 @@ const initWidgets = (): void => {
         clean: true
     });
 
-    habitat(Discovery).render({
+    habitat(DiscoveryApp).render({
         selector: "[data-widget-host=\"discovery\"]",
         clean: true
     });
