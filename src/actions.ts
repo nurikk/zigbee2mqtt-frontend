@@ -68,11 +68,11 @@ export interface Actions {
     deleteFile(file: FileDescriptor): Promise<void>;
 
     renameDevice(old: string, newName: string): Promise<void>;
-    removeDevice(old: string): Promise<void>;
+    removeDevice(dev: string): Promise<void>;
 }
 
-const actions = (store: Store<GlobalState>) => ({
-    setLoading(state, isLoading: boolean) {
+const actions = (store: Store<GlobalState>): object => ({
+    setLoading(state, isLoading: boolean): void {
         store.setState({ isLoading });
     },
     getDeviceInfo: (state, dev: string): void => {
@@ -81,12 +81,12 @@ const actions = (store: Store<GlobalState>) => ({
             store.setState({
                 isError: err,
                 isLoading: false,
-                device: device
+                device
             });
         }).then();
     },
 
-    setBindRules(state, bindRules: BindRule[]) {
+    setBindRules(state, bindRules: BindRule[]): void {
         store.setState({ bindRules });
     },
     getDeviceBinds: (state, dev: string): void => {
@@ -255,7 +255,6 @@ const actions = (store: Store<GlobalState>) => ({
                 files: orderBy(res.result, ["name"])
             });
         }).then();
-        
     },
 
     readFile(state, file: FileDescriptor): void {
@@ -289,9 +288,9 @@ const actions = (store: Store<GlobalState>) => ({
             });
         });
     } ,
-    removeDevice: (state, old: string, newName: string): Promise<void> => {
+    removeDevice: (state, dev: string): Promise<void> => {
         store.setState({ isLoading: true });
-        return callApi<ApiResponse<void>>("/api/zigbee/remove", "GET", { old, new: newName }, undefined, (err, res) => {
+        return callApi<ApiResponse<void>>("/api/zigbee/remove", "DELETE", { dev }, undefined, (err, res) => {
             store.setState({
                 isLoading: false,
                 isError: err
