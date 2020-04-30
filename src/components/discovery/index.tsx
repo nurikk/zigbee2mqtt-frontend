@@ -71,6 +71,7 @@ export class Discovery extends Component<GlobalState & Actions, DiscoveryState> 
         const manager = new WebsocketManager();
         console.log("use `copy(wsEventsData)` to copy events log");
         manager.subscribe("zigbee", this.processZigbeeEvent);
+        this.enableJoin();
     }
 
     renderDevices(): ComponentChild {
