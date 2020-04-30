@@ -91,7 +91,7 @@ export default class BindRow extends Component<BindRowProps, {}> {
         let options = [];
 
         if (dstDevice) {
-            const dstEndpoints = Object.entries(dstDevice.ep)
+            const dstEndpoints = Object.entries(dstDevice.ep ?? {})
                 .filter(([epName, ep]) => Object.prototype.hasOwnProperty.call(ep.In, rule.ClusterId.toString()));
             options = options.concat(dstEndpoints.map(([epName, ep]) => <option
                 selected={parseInt(epName, 10) === rule.DstEp} value={epName}>{epName}</option>));
