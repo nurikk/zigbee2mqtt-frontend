@@ -1,4 +1,4 @@
-import { Component, ComponentChild, h } from "preact";
+import { Component, ComponentChild, h, Fragment } from "preact";
 import Button from "../button";
 import { Device } from "../../types";
 import { connect } from "unistore/preact";
@@ -27,27 +27,42 @@ export class DeviceControlGroup extends Component<DeviceControlGroupProps & Acti
     };
 
 
-    onRemoveClick = (): void => {
-        const { removeDevice, getZigbeeDevicesList, device  } = this.props;
-        const leaveSend = isLeaveReqSend(device.flags) || !device.ieeeAddr;
-        const message = leaveSend ? "Remove device?" : "Send leave request?";
+    onRemoveClick = (force = false): void => {
+        const { removeDevice, getZigbeeDevicesList, device } = this.props;
+        const message = force ? "Remove device?" : "Send leave request?";
         if (confirm(message)) {
-            removeDevice(device.nwkAddr, leaveSend).then(() => {
+            removeDevice(device.nwkAddr, force).then(() => {
                 getZigbeeDevicesList(true).then();
             });
         }
     };
 
     render(): ComponentChild {
-        const {device} = this.props;
+        const { device } = this.props;
         const leaveSend = isLeaveReqSend(device.flags);
+        const validDevice = !!device.ieeeAddr;
+
         return (
             <div className="btn-group btn-group-sm" role="group">
-                <Button<void> className="btn btn-danger" onClick={this.onRemoveClick}><i
-                    className={cx("fa", {"fa-trash": leaveSend, "fa-sign-out-alt": !leaveSend})} /></Button>
                 <Button<void> className="btn btn-secondary" onClick={this.onRenameClick}><i
                     className="fa fa-edit" /></Button>
                 <Button<void> className="btn btn-success" onClick={this.onBindClick}>Bind</Button>
+                {
+
+
+                    <Fragment>
+                        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i className={cx("fa", "fa-trash")} /></button>
+                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                            {validDevice ? <a class="dropdown-item" href="#" onClick={(): void => this.onRemoveClick(false)}>Send leave req</a> : null}
+                            <a class="dropdown-item" href="#" onClick={(): void => this.onRemoveClick(true)}>Remove</a>
+                        </div>
+                    </Fragment>
+
+
+                }
+
+
+
             </div>
         );
     }
