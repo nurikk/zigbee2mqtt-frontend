@@ -29,7 +29,7 @@ export class DeviceControlGroup extends Component<DeviceControlGroupProps & Acti
 
     onRemoveClick = (): void => {
         const { removeDevice, getZigbeeDevicesList, device  } = this.props;
-        const leaveSend = isLeaveReqSend(device.flags);
+        const leaveSend = isLeaveReqSend(device.flags) || !device.ieeeAddr;
         const message = leaveSend ? "Remove device?" : "Send leave request?";
         if (confirm(message)) {
             removeDevice(device.nwkAddr, leaveSend).then(() => {
