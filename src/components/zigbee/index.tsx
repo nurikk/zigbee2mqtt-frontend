@@ -15,6 +15,7 @@ import { connect } from "unistore/preact";
 import { GlobalState } from "../../store";
 import actions, { Actions } from "../../actions";
 import ActionTH from "./ActionTH";
+import { isLeaveReqSend } from "../../binaryUtils";
 
 //TODO: proper type alias
 type SortColumns =
@@ -222,7 +223,8 @@ export class ZigbeeTable extends Component<Actions & GlobalState, ZigbeeTableSta
                 </thead>
                 <tbody>
                 {sortedDevices.map((device: Device, index) => <tr className={cx({
-                    "table-danger": !device.ieeeAddr
+                    "table-danger": !device.ieeeAddr,
+                    "table-warning": isLeaveReqSend(device.flags)
                 })}>
                     <td className="font-weight-bold">{index + 1}</td>
                     <td className={style["device-pic"]}><SafeImg class={cx(style["device-image"])}

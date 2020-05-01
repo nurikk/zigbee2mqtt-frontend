@@ -88,7 +88,7 @@ export interface Device {
     SB?: Dictionary<string> | undefined;
 
 
-
+    flags?: number | undefined;
     Rcf?: unknown;
 }
 

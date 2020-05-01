@@ -78,16 +78,16 @@ export function arrayUnique<T>(input: T[]) {
 
 
 export const bitOps = {
-    getBit: (n, bitIndex) => {
+    getBit: (n: number, bitIndex: number): number => {
         const bitMask = 1 << bitIndex;
         const result = n & bitMask;
         return result >>> bitIndex;
     },
-    setBit: (n, bitIndex) => {
+    setBit: (n: number, bitIndex: number): number => {
         const bitMask = 1 << bitIndex;
         return n | bitMask;
     },
-    clearBit: (n, bitIndex) => {
+    clearBit: (n: number, bitIndex: number): number => {
         const bitMask = ~(1 << bitIndex);
         return n & bitMask;
     }

@@ -68,7 +68,7 @@ export interface Actions {
     deleteFile(file: FileDescriptor): Promise<void>;
 
     renameDevice(old: string, newName: string): Promise<void>;
-    removeDevice(dev: string): Promise<void>;
+    removeDevice(dev: string, force: boolean): Promise<void>;
 }
 
 const actions = (store: Store<GlobalState>): object => ({
@@ -159,13 +159,13 @@ const actions = (store: Store<GlobalState>): object => ({
     },
     fetchTimeInfo(state): Promise<void> {
         return fetchTimeInfo((err, time) => {
-            store.setState({time});
+            store.setState({ time });
         });
     },
 
     setJoinDuration(state, duration = 255, target = ""): Promise<void> {
         store.setState({ isLoading: true });
-        return enableJoin(duration,target, (err, time) => {
+        return enableJoin(duration, target, (err, time) => {
             store.setState({ isLoading: false });
         });
     },
@@ -184,7 +184,7 @@ const actions = (store: Store<GlobalState>): object => ({
                 wsManager.subscribe("log", (data) => {
                     const { logs } = store.getState();
                     const copyLogs = [...logs, data.payload as string];
-                    store.setState({logs: copyLogs});
+                    store.setState({ logs: copyLogs });
                 });
             })
         })
@@ -201,20 +201,20 @@ const actions = (store: Store<GlobalState>): object => ({
         });
     },
     clearLogs(state): void {
-        store.setState({logs: []});
+        store.setState({ logs: [] });
     },
     clearLogsBuffer(state): Promise<void> {
         store.setState({ isLoading: true });
         return clearLogsBuffer((err, res) => {
-          store.setState({
-              isLoading: false,
-              isError: err
-          });
+            store.setState({
+                isLoading: false,
+                isError: err
+            });
         });
     },
-    setLogLevel (state, level: LogLevel): Promise<void> {
+    setLogLevel(state, level: LogLevel): Promise<void> {
         store.setState({ isLoading: true });
-        return setLogLevel(level,(err, res) => {
+        return setLogLevel(level, (err, res) => {
             store.setState({
                 isLoading: false,
                 isError: err
@@ -226,7 +226,7 @@ const actions = (store: Store<GlobalState>): object => ({
     },
     evalCode(state, code): Promise<void> {
         store.setState({ isLoading: true });
-        return evalCode(code,(err, res) => {
+        return evalCode(code, (err, res) => {
             store.setState({
                 isLoading: false,
                 isError: err,
@@ -235,11 +235,11 @@ const actions = (store: Store<GlobalState>): object => ({
         });
     },
     clearExecutionResults(state): void {
-        store.setState({executionResults: null });
+        store.setState({ executionResults: null });
     },
     writeFile(state, path, content): Promise<void> {
         store.setState({ isLoading: true });
-        return writeFile(path, content,(err, res) => {
+        return writeFile(path, content, (err, res) => {
             store.setState({
                 isLoading: false,
                 isError: err
@@ -287,10 +287,14 @@ const actions = (store: Store<GlobalState>): object => ({
                 isError: err
             });
         });
-    } ,
-    removeDevice: (state, dev: string): Promise<void> => {
+    },
+    removeDevice: (state, dev: string, force: boolean): Promise<void> => {
         store.setState({ isLoading: true });
-        return callApi<ApiResponse<void>>("/api/zigbee/remove", "DELETE", { dev }, undefined, (err, res) => {
+        const params = { dev };
+        if (force) {
+            params['force'] = 1;
+        }
+        return callApi<ApiResponse<void>>("/api/zigbee/remove", "DELETE", params, undefined, (err, res) => {
             store.setState({
                 isLoading: false,
                 isError: err

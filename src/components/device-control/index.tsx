@@ -1,9 +1,10 @@
-import { Component, ComponentChild, FunctionalComponent, h } from "preact";
+import { Component, ComponentChild, h } from "preact";
 import Button from "../button";
 import { Device } from "../../types";
 import { connect } from "unistore/preact";
 import actions, { Actions } from "../../actions";
-
+import { isLeaveReqSend } from "../../binaryUtils";
+import cx from "classnames";
 interface DeviceControlGroupProps {
     device: Device;
 }
@@ -27,20 +28,23 @@ export class DeviceControlGroup extends Component<DeviceControlGroupProps & Acti
 
 
     onRemoveClick = (): void => {
-        const { removeDevice, getZigbeeDevicesList, getDeviceInfo, device  } = this.props;
-        if (confirm("Remove device?")) {
-            removeDevice(device.nwkAddr).then(() => {
+        const { removeDevice, getZigbeeDevicesList, device  } = this.props;
+        const leaveSend = isLeaveReqSend(device.flags);
+        const message = leaveSend ? "Remove device?" : "Send leave request?";
+        if (confirm(message)) {
+            removeDevice(device.nwkAddr, leaveSend).then(() => {
                 getZigbeeDevicesList(true).then();
-                getDeviceInfo(device.nwkAddr);
-            })
+            });
         }
     };
 
     render(): ComponentChild {
+        const {device} = this.props;
+        const leaveSend = isLeaveReqSend(device.flags);
         return (
             <div className="btn-group btn-group-sm" role="group">
                 <Button<void> className="btn btn-danger" onClick={this.onRemoveClick}><i
-                    className="fa fa-trash" /></Button>
+                    className={cx("fa", {"fa-trash": leaveSend, "fa-sign-out-alt": !leaveSend})} /></Button>
                 <Button<void> className="btn btn-secondary" onClick={this.onRenameClick}><i
                     className="fa fa-edit" /></Button>
                 <Button<void> className="btn btn-success" onClick={this.onBindClick}>Bind</Button>
