@@ -3,7 +3,6 @@ import Button from "../button";
 import { Device } from "../../types";
 import { connect } from "unistore/preact";
 import actions, { Actions } from "../../actions";
-import { isLeaveReqSend } from "../../binaryUtils";
 import cx from "classnames";
 interface DeviceControlGroupProps {
     device: Device;
@@ -39,7 +38,6 @@ export class DeviceControlGroup extends Component<DeviceControlGroupProps & Acti
 
     render(): ComponentChild {
         const { device } = this.props;
-        const leaveSend = isLeaveReqSend(device.flags);
         const validDevice = !!device.ieeeAddr;
 
         return (
@@ -48,8 +46,6 @@ export class DeviceControlGroup extends Component<DeviceControlGroupProps & Acti
                     className="fa fa-edit" /></Button>
                 <Button<void> className="btn btn-success" onClick={this.onBindClick}>Bind</Button>
                 {
-
-
                     <Fragment>
                         <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i className={cx("fa", "fa-trash")} /></button>
                         <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
@@ -57,12 +53,7 @@ export class DeviceControlGroup extends Component<DeviceControlGroupProps & Acti
                             <a class="dropdown-item" href="#" onClick={(): void => this.onRemoveClick(true)}>Remove</a>
                         </div>
                     </Fragment>
-
-
                 }
-
-
-
             </div>
         );
     }
