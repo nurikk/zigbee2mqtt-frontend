@@ -89,12 +89,12 @@ export class Discovery extends Component<GlobalState & Actions, DiscoveryState> 
 
     enableJoin = async () => {
         const { setJoinDuration } = this.props;
-        await setJoinDuration(255, undefined)
+        await setJoinDuration(255, '0x0000');
         new Notyf({ position: { x: "left", y: "bottom" } }).success("Join enabled");
     };
     disableJoin = async () => {
         const { setJoinDuration } = this.props;
-        await setJoinDuration(0, undefined)
+        await setJoinDuration(0, '0x0000');
         new Notyf({ position: { x: "left", y: "bottom" } }).success("Join disabled");
     };
 
