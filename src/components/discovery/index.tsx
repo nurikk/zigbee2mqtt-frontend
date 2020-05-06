@@ -9,10 +9,12 @@ import { connect } from "unistore/preact";
 import { GlobalState } from "../../store";
 import actions, { Actions } from "../../actions";
 import WebsocketManager from "../../websocket";
+import { getDeviceDisplayName } from "../device-page/bind-row";
 window["wsEventsData"] = window["wsEventsData"] || [];
 const wsEventsData: object[] = window['wsEventsData'];
 
 interface DiscoveryState {
+    targetRouter: string;
     updateTimerId: number;
     joinDuration: number;
     events: Dictionary<ZigbeePayload[]>;
@@ -23,6 +25,7 @@ export class Discovery extends Component<GlobalState & Actions, DiscoveryState> 
         super();
 
         this.state = {
+            targetRouter: '0x0000',
             updateTimerId: 0,
             joinDuration: 0,
             events: {}
@@ -30,10 +33,10 @@ export class Discovery extends Component<GlobalState & Actions, DiscoveryState> 
 
     }
 
-    processZigbeeEvent = ({category, payload}): void => {
-        wsEventsData.push({category, payload})
+    processZigbeeEvent = ({ category, payload }): void => {
+        wsEventsData.push({ category, payload })
 
-        const message = {...payload};
+        const message = { ...payload };
         // console.log("processZigbeeEvent", message);
         message.timestamp = Date.now();
         const { events } = this.state;
@@ -68,9 +71,11 @@ export class Discovery extends Component<GlobalState & Actions, DiscoveryState> 
     }
 
     componentDidMount(): void {
+        const { getZigbeeDevicesList } = this.props;
         const manager = new WebsocketManager();
         console.log("use `copy(wsEventsData)` to copy events log");
         manager.subscribe("zigbee", this.processZigbeeEvent);
+        getZigbeeDevicesList(true);
         setTimeout(() => this.enableJoin(), 500);
     }
 
@@ -87,25 +92,45 @@ export class Discovery extends Component<GlobalState & Actions, DiscoveryState> 
 
     }
 
-    enableJoin = async () => {
+    enableJoin = (targetRouter = '0x0000'): void => {
         const { setJoinDuration } = this.props;
-        await setJoinDuration(255, '0x0000');
-        new Notyf({ position: { x: "left", y: "bottom" } }).success("Join enabled");
+
+        setJoinDuration(255, targetRouter).then(() => {
+            this.setState({ targetRouter });
+            new Notyf({ position: { x: "left", y: "bottom" } }).success(`Join enabled on ${targetRouter}`);
+        })
+
     };
     disableJoin = async () => {
+        const { targetRouter } = this.state;
         const { setJoinDuration } = this.props;
-        await setJoinDuration(0, '0x0000');
+        await setJoinDuration(0, targetRouter);
         new Notyf({ position: { x: "left", y: "bottom" } }).success("Join disabled");
     };
 
     renderJoinButton(): ComponentChild {
         const { joinDuration } = this.state;
-
+        const { devices } = this.props;
+        const routers = devices.filter(d => d.type == "Router");
         return (<div class="row h-100 justify-content-center align-items-center">
-            {joinDuration <= 0 ? <Button<void> className="btn btn-success" onClick={this.enableJoin} item={undefined}>Enable
-                    join</Button> :
-                <div>Join enabled for {joinDuration} seconds, <a href="#" onClick={this.disableJoin}>Stop</a></div>}
-        </div>);
+            {joinDuration <= 0 ? (
+                <div class="btn-group">
+                    <Button<string> className="btn btn-success" onClick={this.enableJoin} item={'0x0000'}>Enable
+                     join</Button>
+                    <button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="sr-only">Toggle</span>
+                    </button>
+                    <div class="dropdown-menu">
+                        {
+                            routers.map(router => <a onClick={(): void => this.enableJoin(router.nwkAddr)} class="dropdown-item" href="#">{getDeviceDisplayName(router)}</a>)
+                        }
+                    </div>
+                </div>
+            ) : (<div>Join enabled for {joinDuration} seconds, <a href="#" onClick={this.disableJoin}>Stop</a></div>)
+            }
+
+        </div>
+        );
     }
 
     renderEmptyScreen(): ComponentChild {

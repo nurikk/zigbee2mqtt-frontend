@@ -10,6 +10,9 @@ const fields = ["DstNwkAddr", "ClusterId", "SrcEp", "DstEp"];
 function isValidBindRule(rule: BindRule): rule is BindRule {
     return fields.some(key => rule[key] !== undefined);
 }
+export const getDeviceDisplayName = (device: Device): string => {
+    return `${device.nwkAddr} (${device.friendly_name ? device.friendly_name : device.ModelId})`;
+};
 interface BindRowProps {
     onChange?(idx: number, rule: BindRule): void;
 
@@ -46,8 +49,7 @@ export default class BindRow extends Component<BindRowProps, {}> {
                 return inC.includes(rule.ClusterId);
             })
             .map(device => <option selected={device.nwkAddr === rule.DstNwkAddr}
-                                   value={device.nwkAddr}>
-                {device.nwkAddr} ({device.friendly_name ? device.friendly_name : device.ModelId})</option>);
+                                   value={device.nwkAddr}>{getDeviceDisplayName(device)}</option>);
 
         options.unshift(<option hidden>Select device ({options.length})</option>);
 
