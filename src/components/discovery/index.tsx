@@ -121,6 +121,7 @@ export class Discovery extends Component<GlobalState & Actions, DiscoveryState> 
                         <span class="sr-only">Toggle</span>
                     </button>
                     <div class="dropdown-menu">
+                        <a onClick={(): void => this.enableJoin("")} class="dropdown-item" href="#">All devices</a>
                         {
                             routers.map(router => <a onClick={(): void => this.enableJoin(router.nwkAddr)} class="dropdown-item" href="#">{getDeviceDisplayName(router)}</a>)
                         }
