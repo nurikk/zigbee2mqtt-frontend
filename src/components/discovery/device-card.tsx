@@ -14,7 +14,7 @@ import uniqWith from "lodash/uniqWith";
 import isEqual from "lodash/isEqual";
 
 const INTERVIEW_STEPS_COUNT = 9;
-const DEVICE_NOT_RESPONDING_TIMEOUT = 20;
+const DEVICE_NOT_RESPONDING_TIMEOUT = 5;
 const DEVICE_MANUAL_WAKEUP_TIMEOUT = 5;
 
 interface DeviceCardProps {
