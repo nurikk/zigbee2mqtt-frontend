@@ -205,7 +205,7 @@ export class CodeEditor extends Component<GlobalState & Actions, CodeEditorState
                     </nav>
 
 
-                    <div class="h-100">
+                    <div class="h-75">
                         <div class={"h-75"}>
                             <CodeMirror height={"100%"} width={"100%"} code={currentFileContent} config={config}
                                         onChange={this.onCodeChange} />
