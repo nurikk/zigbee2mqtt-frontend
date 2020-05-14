@@ -1,5 +1,7 @@
 import { Component, ComponentChild, h } from "preact";
 import flatten from "lodash/flatten";
+import groupBy from "lodash/groupBy";
+import sortBy from "lodash/sortBy";
 import cx from "classnames";
 import { toHex } from "../../utils";
 import { getClusterName } from "./bind";
@@ -42,19 +44,23 @@ export default class BindRow extends Component<BindRowProps, {}> {
 
     renderDstSelect(): ComponentChild {
         const { devices, rule, device } = this.props;
-        const options = devices
-            .filter(d => d.nwkAddr !== device.nwkAddr) //exclude self from select
-            .filter(d => {
-                const inC = flatten(Object.values(d.ep ?? {}).map(ep => Object.keys(ep.In ?? {}).map(c => parseInt(c, 10))));
-                return inC.includes(rule.ClusterId);
-            })
-            .map(device => <option selected={device.nwkAddr === rule.DstNwkAddr}
-                                   value={device.nwkAddr}>{getDeviceDisplayName(device)}</option>);
+        //exclude self from select
+        const options = sortBy(Object.entries(groupBy(devices.filter(d => d.nwkAddr !== device.nwkAddr), d => {
+            const inC = flatten(Object.values(d.ep ?? {}).map(ep => Object.keys(ep.In ?? {}).map(c => parseInt(c, 10))));
+            return inC.includes(rule.ClusterId);
+        })), (kvp) => kvp[0] !== "true")
+        .map(([hasSelectedEpStr, devices]) => {
+            const hasSelectedEp = hasSelectedEpStr === "true";
+            const label = hasSelectedEp ? "Cluster found" : "Cluster not found"
+            return <optgroup label={label}>{
+                devices.map(device => <option selected={device.nwkAddr === rule.DstNwkAddr} value={device.nwkAddr}>{getDeviceDisplayName(device)}</option>)
+            }</optgroup>
+        });
 
         options.unshift(<option hidden>Select device ({options.length})</option>);
 
         return <select disabled={this.isExistingBinding()} onChange={this.onDstChange}
-                       class={cx("form-control", { "form-control-plaintext": this.isExistingBinding() })}>{options}</select>;
+            class={cx("form-control", { "form-control-plaintext": this.isExistingBinding() })}>{options}</select>;
     }
 
 
@@ -71,16 +77,16 @@ export default class BindRow extends Component<BindRowProps, {}> {
             const clusters = Object.keys(ep.Out ?? {}).map(c => parseInt(c, 10));
             return <optgroup label={`Endpoint: #${epNumber}`}>
                 {clusters.map(c => <option selected={c === rule.ClusterId && parseInt(epNumber, 10) == rule.SrcEp}
-                                           value={[epNumber, c.toString()]}>{toHex(c, 4)}{getClusterName(c, true)}</option>)}
+                    value={[epNumber, c.toString()]}>{toHex(c, 4)}{getClusterName(c, true)}</option>)}
             </optgroup>;
         });
         optionGroups.unshift(<option hidden>Select cluster</option>);
 
         return <select disabled={this.isExistingBinding()} onChange={this.onClusterChange}
-                       class={cx("form-control", { "form-control-plaintext": this.isExistingBinding() })}>{optionGroups}</select>;
+            class={cx("form-control", { "form-control-plaintext": this.isExistingBinding() })}>{optionGroups}</select>;
     }
 
-    onDstEpChange = (evt) => {
+    onDstEpChange = (evt): void => {
         const { onChange, rule, idx } = this.props;
         const { value } = evt.target;
         onChange && onChange(idx, { ...rule, DstEp: parseInt(value, 10) });
@@ -93,15 +99,27 @@ export default class BindRow extends Component<BindRowProps, {}> {
         let options = [];
 
         if (dstDevice) {
-            const dstEndpoints = Object.entries(dstDevice.ep ?? {})
-                .filter(([epName, ep]) => Object.prototype.hasOwnProperty.call(ep.In, rule.ClusterId.toString()));
-            options = options.concat(dstEndpoints.map(([epName, ep]) => <option
-                selected={parseInt(epName, 10) === rule.DstEp} value={epName}>{epName}</option>));
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            const dstEndpoints = groupBy(Object.entries(dstDevice.ep ?? {}), ([epName, ep]) => Object.prototype.hasOwnProperty.call(ep.In, rule.ClusterId.toString()));
+
+
+            options = options.concat(
+                sortBy(Object.entries(dstEndpoints), (kvp) => kvp[0] !== "true")
+                    .map(([has, endpoints]) =>
+                        <optgroup label={(has == "true" ? 'Cluster found' : "Cluster not found")}>
+                            {
+                                endpoints
+                                    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                                    .map(([epName, ep]) => <option
+                                        value={epName}
+                                        selected={parseInt(epName, 10) === rule.DstEp}>{epName}</option>)
+                            }
+                        </optgroup>));
         }
         options.unshift(<option hidden>Select destination ({options.length})</option>);
 
         return <select disabled={this.isExistingBinding()} onChange={this.onDstEpChange}
-                       class={cx("form-control", { "form-control-plaintext": this.isExistingBinding() })}>{options}</select>;
+            class={cx("form-control", { "form-control-plaintext": this.isExistingBinding() })}>{options}</select>;
 
     }
 
@@ -120,9 +138,9 @@ export default class BindRow extends Component<BindRowProps, {}> {
             this.isExistingBinding() ? (
                 <button onClick={this.onUnBindClick} type="button" class="btn btn-danger w-100">Unbind</button>
             ) : (
-                <button disabled={!isValidBindRule(rule)} onClick={this.onBindClick} type="button"
+                    <button disabled={!isValidBindRule(rule)} onClick={this.onBindClick} type="button"
                         class="btn btn-primary w-100">Bind</button>
-            )
+                )
 
         );
     }
