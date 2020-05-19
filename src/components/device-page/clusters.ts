@@ -107,6 +107,6 @@ export enum ZigbeeClusters {
     ZCL_CLUSTER_ID_HA_ELECTRICAL_MEASUREMENT=             0x0B04,
     ZCL_CLUSTER_ID_HA_DIAGNOSTIC=                         0x0B05,
 
-// Light Link cluster
-    ZCL_CLUSTER_ID_LIGHT_LINK=                           0x1000
+    // Light Link cluster
+    ZCL_CLUSTER_ID_TOUCHLINK=                           0x1000
 }
