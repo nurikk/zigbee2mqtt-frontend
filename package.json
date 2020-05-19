@@ -29,7 +29,7 @@
     "@teamsupercell/typings-for-css-modules-loader": "^2.2.0",
     "@types/classnames": "^2.2.10",
     "@types/codemirror": "0.0.93",
-    "@types/lodash": "^4.14.149",
+    "@types/lodash": "^4.14.152",
     "@types/reconnectingwebsocket": "^1.0.3",
     "@types/superagent": "^4.1.7",
     "@types/webpack-env": "^1.15.1",
