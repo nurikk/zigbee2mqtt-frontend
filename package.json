@@ -26,7 +26,7 @@
     "unistore": "^3.5.1"
   },
   "devDependencies": {
-    "@teamsupercell/typings-for-css-modules-loader": "^2.1.0",
+    "@teamsupercell/typings-for-css-modules-loader": "^2.2.0",
     "@types/classnames": "^2.2.10",
     "@types/codemirror": "0.0.90",
     "@types/lodash": "^4.14.149",
