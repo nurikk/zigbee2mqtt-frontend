@@ -92,16 +92,13 @@ export class Discovery extends Component<GlobalState & Actions, DiscoveryState> 
 
     }
 
-    enableJoin = (targetRouter = '0x0000'): void => {
+    enableJoin =async (targetRouter = '0x0000'): Promise<void> => {
         const { setJoinDuration } = this.props;
-
-        setJoinDuration(255, targetRouter).then(() => {
-            this.setState({ targetRouter });
-            new Notyf({ position: { x: "left", y: "bottom" } }).success(`Join enabled on ${targetRouter}`);
-        })
-
+        await setJoinDuration(255, targetRouter);
+        this.setState({ targetRouter });
+        new Notyf({ position: { x: "left", y: "bottom" } }).success(`Join enabled on ${targetRouter}`);
     };
-    disableJoin = async () => {
+    disableJoin = async (): Promise<void> => {
         const { targetRouter } = this.state;
         const { setJoinDuration } = this.props;
         await setJoinDuration(0, targetRouter);
@@ -121,9 +118,9 @@ export class Discovery extends Component<GlobalState & Actions, DiscoveryState> 
                         <span class="sr-only">Toggle</span>
                     </button>
                     <div class="dropdown-menu">
-                        <a onClick={(): void => this.enableJoin("")} class="dropdown-item" href="#">All devices</a>
+                        <a onClick={(): Promise<void> => this.enableJoin("")} class="dropdown-item" href="#">All devices</a>
                         {
-                            routers.map(router => <a onClick={(): void => this.enableJoin(router.nwkAddr)} class="dropdown-item" href="#">{getDeviceDisplayName(router)}</a>)
+                            routers.map(router => <a onClick={(): Promise<void> => this.enableJoin(router.nwkAddr)} class="dropdown-item" href="#">{getDeviceDisplayName(router)}</a>)
                         }
                     </div>
                 </div>

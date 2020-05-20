@@ -14,25 +14,23 @@ export class DeviceControlGroup extends Component<DeviceControlGroupProps & Acti
         location.href = `/zigbee/device?dev=${encodeURIComponent(device.nwkAddr)}&activeTab=Bind`;
     };
 
-    onRenameClick = (): void => {
+    onRenameClick = async (): Promise<void> => {
         const { renameDevice, getZigbeeDevicesList, getDeviceInfo, device } = this.props;
         const newName = prompt("Enter new name", device.friendly_name);
         if (newName !== null && newName !== device.friendly_name) {
-            renameDevice(device.nwkAddr, newName).then(() => {
-                getZigbeeDevicesList(true).then();
-                getDeviceInfo(device.nwkAddr);
-            });
+            await renameDevice(device.nwkAddr, newName);
+            await getZigbeeDevicesList(true);
+            await getDeviceInfo(device.nwkAddr);
         }
     };
 
 
-    onRemoveClick = (force = false): void => {
+    onRemoveClick = async (force = false): Promise<void> => {
         const { removeDevice, getZigbeeDevicesList, device } = this.props;
         const message = force ? "Remove device?" : "Send leave request?";
         if (confirm(message)) {
-            removeDevice(device.nwkAddr, force).then(() => {
-                getZigbeeDevicesList(true).then();
-            });
+            await removeDevice(device.nwkAddr, force);
+            await getZigbeeDevicesList(true);
         }
     };
 
@@ -49,8 +47,8 @@ export class DeviceControlGroup extends Component<DeviceControlGroupProps & Acti
                     <Fragment>
                         <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i className={cx("fa", "fa-trash")} /></button>
                         <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                            {validDevice ? <a class="dropdown-item" href="#" onClick={(): void => this.onRemoveClick(false)}>Send leave req</a> : null}
-                            <a class="dropdown-item" href="#" onClick={(): void => this.onRemoveClick(true)}>Remove</a>
+                            {validDevice ? <a class="dropdown-item" href="#" onClick={(): Promise<void> => this.onRemoveClick(false)}>Send leave req</a> : null}
+                            <a class="dropdown-item" href="#" onClick={(): Promise<void> => this.onRemoveClick(true)}>Remove</a>
                         </div>
                     </Fragment>
                 }

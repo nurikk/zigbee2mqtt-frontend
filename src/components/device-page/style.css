@@ -7,7 +7,30 @@
 
 .value-col {
     max-width: 50px;
-    /*height: 55px;*/
+    position: relative;
+}
+
+
+.value-col > input::-webkit-outer-spin-button,
+.value-col > input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+.value-col > input[type=number] {
+    -moz-appearance:textfield; /* Firefox */
+}
+
+.refresh-btn {
+    visibility: hidden;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+.value-col:hover > .refresh-btn {
+    visibility: visible;
 }
 
 .props-row {
@@ -29,3 +52,4 @@
     /*margin-left: auto;*/
     /*margin-right: auto;*/
 }
+

@@ -7,6 +7,7 @@ import Bind from "./bind";
 import DeviceInfo from "./info";
 import TabPanel, { TabInfo } from "../tab-panel";
 import style from "./style.css";
+import WebsocketManager from "../../websocket";
 
 interface DevicePageState {
     dev: string;
@@ -29,6 +30,10 @@ export class DevicePage extends Component<Actions & GlobalState, DevicePageState
         this.initPage();
     }
 
+    processZigbeeEvent = ({ category, payload }): void => {
+        console.log({category, payload});
+    }
+
     initPage(): void {
         const { dev } = this.state;
         const { getDeviceInfo, getZigbeeDevicesList, getDeviceBinds } = this.props;
@@ -36,6 +41,10 @@ export class DevicePage extends Component<Actions & GlobalState, DevicePageState
         getDeviceInfo(dev);
         getDeviceBinds(dev);
         getZigbeeDevicesList(true);
+
+        const manager = new WebsocketManager();
+        console.log("use `copy(wsEventsData)` to copy events log");
+        manager.subscribe("zigbee", this.processZigbeeEvent);
 
     }
 

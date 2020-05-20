@@ -26,11 +26,11 @@ import orderBy from "lodash/orderBy";
 import { ApiResponse, callApi } from "./utils";
 
 export interface Actions {
-    setLoading(isLoading: boolean): void;
+    setLoading(isLoading: boolean): Promise<void>;
 
-    getDeviceInfo(dev: string): void;
+    getDeviceInfo(dev: string): Promise<void>;
 
-    getDeviceBinds(dev: string): void;
+    getDeviceBinds(dev: string): Promise<void>;
 
     getZigbeeDevicesList(showLoading: boolean): Promise<void>;
 
@@ -38,7 +38,7 @@ export interface Actions {
 
     createBind(dev: string, bindRule: BindRule): Promise<void>;
 
-    setBindRules(bindRules: BindRule[]): void;
+    setBindRules(bindRules: BindRule[]): Promise<void>;
 
 
     setStateValue(dev: string, name: string, value: unknown): Promise<void>;
@@ -46,58 +46,59 @@ export interface Actions {
 
     startInterview(dev: string, state: number | ""): Promise<void>;
 
-    fetchTimeInfo(): void;
+    fetchTimeInfo(): Promise<void>;
 
     setJoinDuration(duration: number, target: string): Promise<void>;
     fetchLogsBuffer(): Promise<void>;
     getCurrentLogLevel(): Promise<void>;
-    clearLogs(): void;
+    clearLogs(): Promise<void>;
     clearLogsBuffer(): Promise<void>;
     setLogLevel(level: LogLevel): Promise<void>;
 
-    setCurrentFileContent(content: string): void;
+    setCurrentFileContent(content: string): Promise<void>;
 
     evalCode(code: string): Promise<void>;
     writeFile(fileName: string, content: string): Promise<void>;
 
-    clearExecutionResults(): void;
+    clearExecutionResults(): Promise<void>;
 
-    getFilesList(path: string): void;
+    getFilesList(path: string): Promise<void>;
 
-    readFile(file: FileDescriptor): void;
+    readFile(file: FileDescriptor): Promise<void>;
     deleteFile(file: FileDescriptor): Promise<void>;
 
     renameDevice(old: string, newName: string): Promise<void>;
     removeDevice(dev: string, force: boolean): Promise<void>;
+    refreshState(dev: string, name: string): Promise<void>;
 }
 
 const actions = (store: Store<GlobalState>): object => ({
     setLoading(state, isLoading: boolean): void {
         store.setState({ isLoading });
     },
-    getDeviceInfo: (state, dev: string): void => {
+    getDeviceInfo: async (state, dev: string): Promise<void> => {
         store.setState({ isLoading: true });
-        getDeviceInfo(dev, (err, device) => {
+        await getDeviceInfo(dev, (err, device) => {
             store.setState({
                 isError: err,
                 isLoading: false,
                 device
             });
-        }).then();
+        });
     },
 
     setBindRules(state, bindRules: BindRule[]): void {
         store.setState({ bindRules });
     },
-    getDeviceBinds: (state, dev: string): void => {
+    getDeviceBinds: async (state, dev: string): Promise<void> => {
         store.setState({ isLoading: true });
-        loadBindsList(dev, (err, bindRules: []) => {
+        await loadBindsList(dev, (err, bindRules: []) => {
             store.setState({
                 isError: err,
                 isLoading: false,
                 bindRules: [{} as BindRule, ...bindRules]
             });
-        }).then();
+        })
     },
     getZigbeeDevicesList: (state, showLoading = true): Promise<void> => {
         showLoading && store.setState({ isLoading: true });
@@ -169,26 +170,22 @@ const actions = (store: Store<GlobalState>): object => ({
             store.setState({ isLoading: false });
         });
     },
-    fetchLogsBuffer(state): Promise<void> {
-        return new Promise((resolve, reject) => {
-            store.setState({ isLoading: true });
-            fetchLogsBuffer((err, logs) => {
-                store.setState({
-                    isError: err,
-                    isLoading: false,
-                    logs: logs.split("\n")
-                });
-                resolve();
-            }).then(() => {
-                const wsManager = new WebsocketManager();
-                wsManager.subscribe("log", (data) => {
-                    const { logs } = store.getState();
-                    const copyLogs = [...logs, data.payload as string];
-                    store.setState({ logs: copyLogs });
-                });
-            })
+    async fetchLogsBuffer(state): Promise<void> {
+        store.setState({ isLoading: true });
+        await fetchLogsBuffer((err, logs) => {
+            store.setState({
+                isError: err,
+                isLoading: false,
+                logs: logs.split("\n")
+            });
         })
 
+        const wsManager = new WebsocketManager();
+        wsManager.subscribe("log", (data) => {
+            const { logs } = store.getState();
+            const copyLogs = [...logs, data.payload as string];
+            store.setState({ logs: copyLogs });
+        });
     },
     getCurrentLogLevel(state): Promise<void> {
         store.setState({ isLoading: true });
@@ -246,28 +243,27 @@ const actions = (store: Store<GlobalState>): object => ({
             });
         });
     },
-    getFilesList(state, path: string): void {
+    async getFilesList(state, path: string): Promise<void> {
         store.setState({ isLoading: true });
-        callApi<ApiResponse<FileDescriptor[]>>("/api/files", "GET", { path }, undefined, (err, res) => {
+        await callApi<ApiResponse<FileDescriptor[]>>("/api/files", "GET", { path }, undefined, (err, res) => {
             store.setState({
                 isLoading: false,
                 isError: err,
                 files: orderBy(res.result, ["name"])
             });
-        }).then();
+        })
     },
 
-    readFile(state, file: FileDescriptor): void {
+    async readFile(state, file: FileDescriptor): Promise<void> {
         store.setState({ isLoading: true });
-        callApi<string>("/api/files", "GET", { path: file.name }, undefined, (err, response) => {
+        await callApi<string>("/api/files", "GET", { path: file.name }, undefined, (err, response) => {
             store.setState({
                 isLoading: false,
                 isError: err,
                 currentFileContent: response,
                 currentFile: file
             });
-        }, "text").then();
-
+        }, "text");
     },
 
     deleteFile(state, file: FileDescriptor): Promise<void> {
@@ -295,6 +291,21 @@ const actions = (store: Store<GlobalState>): object => ({
             params['force'] = 1;
         }
         return callApi<ApiResponse<void>>("/api/zigbee/remove", "DELETE", params, undefined, (err, res) => {
+            store.setState({
+                isLoading: false,
+                isError: err
+            });
+        });
+    },
+
+
+    refreshState: (state, dev: string, name: string): Promise<void> => {
+        store.setState({ isLoading: true });
+        const params = {
+            dev, name,
+            action: 'getState'
+        }
+        return callApi<ApiResponse<void>>("/api/zigbee", "GET", params, undefined, (err, res) => {
             store.setState({
                 isLoading: false,
                 isError: err

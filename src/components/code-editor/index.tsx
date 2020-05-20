@@ -22,38 +22,38 @@ export class CodeEditor extends Component<GlobalState & Actions, CodeEditorState
         };
     }
 
-    onCodeChange = (code) => {
+    onCodeChange = (code): void => {
         const { setCurrentFileContent } = this.props;
         setCurrentFileContent(code);
     };
 
-    onExecuteCode = () => {
+    onExecuteCode = (): void => {
         const { currentFileContent, evalCode } = this.props;
         evalCode(currentFileContent).then();
     };
-    onSaveCode = () => {
+    onSaveCode = (): void => {
         const { currentFile, currentFileContent, writeFile } = this.props;
-        writeFile(currentFile.name, currentFileContent)
-            .then(() => new Notyf().success(`Saved ${currentFile.name}`));
-
+        writeFile(currentFile.name, currentFileContent).then(() => new Notyf().success(`Saved ${currentFile.name}`));
     };
 
 
-    onCreateFile = () => {
+    onCreateFile = async (): Promise<void> => {
         const { writeFile } = this.props;
         let fileName = prompt("Enter file name");
         if (fileName) {
             if (!fileName.startsWith("/")) {
                 fileName = `/${fileName}`;
             }
-            writeFile(fileName, "").then(() => this.loadFiles("/"));
+            await writeFile(fileName, "");
+            this.loadFiles("/");
         }
     };
 
-    onDeleteClick = (file: FileDescriptor): void => {
+    onDeleteClick = async (file: FileDescriptor): Promise<void> => {
         const { deleteFile } = this.props;
         if (confirm(`Delete ${file.name}?`)) {
-            deleteFile(file).then(() => this.loadFiles("/"));
+            await deleteFile(file);
+            this.loadFiles("/");
         }
     };
     loadFile = (file: FileDescriptor): void => {
@@ -169,7 +169,7 @@ export class CodeEditor extends Component<GlobalState & Actions, CodeEditorState
 
                         <TreeView onItemClick={this.loadFile} onDeleteClick={this.onDeleteClick} items={files} />
                         <button onClick={this.onCreateFile} type="button"
-                                class={cx("btn", "btn-primary", style["new-file"])}>New file
+                            class={cx("btn", "btn-primary", style["new-file"])}>New file
                         </button>
                     </div>
 
@@ -180,7 +180,7 @@ export class CodeEditor extends Component<GlobalState & Actions, CodeEditorState
                     <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
                         <button onClick={this.toggleSideBar} class="btn btn-primary">Toggle files</button>
                         {currentFile ? <button type="button" class="btn btn-success"
-                                               onClick={this.onSaveCode}>Save(Ctrl-S)</button> : null}
+                            onClick={this.onSaveCode}>Save(Ctrl-S)</button> : null}
                         {hasCode ? (
                             <Fragment>
                                 <button type="button" class="btn btn-danger" onClick={this.onExecuteCode}>Run(Ctrl-E)
@@ -188,7 +188,7 @@ export class CodeEditor extends Component<GlobalState & Actions, CodeEditorState
                                 {
                                     this.getFileType() === "json" ? (
                                         <button type="button" class="btn btn-primary"
-                                                onClick={this.onFormatClick}>Format
+                                            onClick={this.onFormatClick}>Format
                                         </button>
                                     ) : null
                                 }
@@ -208,7 +208,7 @@ export class CodeEditor extends Component<GlobalState & Actions, CodeEditorState
                     <div class="h-75">
                         <div class={"h-75"}>
                             <CodeMirror height={"100%"} width={"100%"} code={currentFileContent} config={config}
-                                        onChange={this.onCodeChange} />
+                                onChange={this.onCodeChange} />
                         </div>
 
                         {this.renderCodeExecutionResults()}

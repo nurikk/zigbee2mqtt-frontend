@@ -30,20 +30,21 @@ export class Bind extends Component<PropsFromStore & Actions, {}> {
         setBindRules(copyRules);
     };
 
-    onBindClick = (rule: BindRule): void => {
+    onBindClick = async (rule: BindRule): Promise<void> => {
         const { device, createBind, getDeviceBinds } = this.props;
-        createBind(device.nwkAddr, rule).then(() => {
-            new Notyf().success(`Created bind rule`);
-            getDeviceBinds(device.nwkAddr);
-        });
+        await createBind(device.nwkAddr, rule)
+
+        await getDeviceBinds(device.nwkAddr);
+        new Notyf().success(`Created bind rule`);
+
     };
 
-    onUnBindClick = (rule: BindRule): void => {
+    onUnBindClick = async (rule: BindRule): Promise<void> => {
         const { device, removeBind, getDeviceBinds } = this.props;
-        removeBind(device.nwkAddr, rule).then(() => {
-            new Notyf().success(`Removed bind rule`);
-            getDeviceBinds(device.nwkAddr);
-        });
+        await removeBind(device.nwkAddr, rule);
+        await getDeviceBinds(device.nwkAddr);
+        new Notyf().success(`Removed bind rule`);
+
     };
 
     renderBindsTable(): ComponentChild {

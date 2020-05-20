@@ -113,11 +113,11 @@ export class ZigbeeTable extends Component<Actions & GlobalState, ZigbeeTableSta
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    onInterviewClick = (device: Device): void => {
+    onInterviewClick = async (device: Device): Promise<void> => {
         const { startInterview } = this.props;
         if (confirm("Start Interview?")) {
-            startInterview(device.nwkAddr, device?.Interview?.State)
-                .then(() => new Notyf().success("Started interview"));
+            await startInterview(device.nwkAddr, device?.Interview?.State)
+            new Notyf().success("Started interview");
         }
     };
 

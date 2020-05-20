@@ -18,9 +18,8 @@ export class DeviceInfo extends Component<PropsFromStore, {}> {
         const { device } = this.props;
         if (device) {
             return this.renderDeviceInfo();
-        } else {
-            return "Loading...";
         }
+        return "Loading...";
     }
 
     renderDeviceInfo(): ComponentChild {

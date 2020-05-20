@@ -150,7 +150,7 @@ export class Map extends Component<GlobalState & Actions, MapState> {
             .force("center", centerForce);
     }
 
-    async initPage() {
+    async initPage(): Promise<void> {
         const { getZigbeeDevicesList } = this.props;
         await getZigbeeDevicesList(true);
         const { devices } = this.props;
@@ -159,8 +159,8 @@ export class Map extends Component<GlobalState & Actions, MapState> {
         this.setState({ graph, width, height }, this.updateNodes);
     }
 
-    componentDidMount(): void {
-        this.initPage().then();
+    async componentDidMount(): Promise<void> {
+        await this.initPage()
     }
 
     render(): ComponentChild {

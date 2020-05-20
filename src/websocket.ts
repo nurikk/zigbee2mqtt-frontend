@@ -51,7 +51,7 @@ export default class WebsocketManager {
         this.ws.send(JSON.stringify({ action: "subscribe", category }))
     }
 
-    private connect() {
+    private connect(): void {
         const { hostname } = document.location;
         let wsUrl = `ws://${document.location.hostname}:81/log`;
         if (hostname === "localhost") {
@@ -88,10 +88,7 @@ export default class WebsocketManager {
         }
     };
 
-    subscribe(eventCategory: string, consumer: ZigbeeCallback) {
-
-
-
+    subscribe(eventCategory: string, consumer: ZigbeeCallback): Function {
         this.remoteSubscribe(eventCategory);
         return this.em.on(eventCategory, consumer)
     }
