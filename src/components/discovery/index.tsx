@@ -44,6 +44,8 @@ export class Discovery extends Component<GlobalState & Actions, DiscoveryState> 
         const { ieeeAddr } = message;
         let { joinDuration, updateTimerId } = this.state;
         switch (message.event) {
+            case "stateChange":
+                break;
             case "PermitJoin":
                 joinDuration = message.duration;
                 window.clearInterval(updateTimerId);
