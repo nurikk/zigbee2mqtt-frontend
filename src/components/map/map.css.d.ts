@@ -1,4 +1,4 @@
-declare namespace MapCssModule {
+declare namespace MapCssNamespace {
     export interface IMapCss {
         Coordinator: string;
         EndDevice: string;
@@ -19,9 +19,9 @@ declare namespace MapCssModule {
     }
 }
 
-declare const MapCssModule: MapCssModule.IMapCss & {
+declare const MapCssModule: MapCssNamespace.IMapCss & {
     /** WARNING: Only available when `css-loader` is used without `style-loader` or `mini-css-extract-plugin` */
-    locals: MapCssModule.IMapCss;
+    locals: MapCssNamespace.IMapCss;
 };
 
 export = MapCssModule;

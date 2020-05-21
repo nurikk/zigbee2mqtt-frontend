@@ -21,10 +21,12 @@ module.exports = (env, args) => {
 	const plugins = [
 		new MiniCssExtractPlugin(),
 
-		new CopyWebpackPlugin([{
-			from: '**/*',
-			context: './api-mocks/'
-		}])
+		new CopyWebpackPlugin({
+			patterns: [{
+				from: '**/*',
+				context: './api-mocks/'
+			}]
+		})
 	];
 	const basePath = 'src/templates';
 	glob.sync(`${basePath}/**/*.html`).forEach((item) => {

@@ -1,12 +1,12 @@
-declare namespace TooltipCssModule {
+declare namespace TooltipCssNamespace {
     export interface ITooltipCss {
         tooltip: string;
     }
 }
 
-declare const TooltipCssModule: TooltipCssModule.ITooltipCss & {
+declare const TooltipCssModule: TooltipCssNamespace.ITooltipCss & {
     /** WARNING: Only available when `css-loader` is used without `style-loader` or `mini-css-extract-plugin` */
-    locals: TooltipCssModule.ITooltipCss;
+    locals: TooltipCssNamespace.ITooltipCss;
 };
 
 export = TooltipCssModule;
