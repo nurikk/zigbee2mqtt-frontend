@@ -158,7 +158,7 @@ export class Discovery extends Component<GlobalState & Actions, DiscoveryState> 
     }
     fetchTlResults = async (): Promise<void> => {
         const { touchlinkList, touchlinkResuts } = this.props;
-        if (!touchlinkResuts || touchlinkResuts.status !== 0) {
+        if (!touchlinkResuts || touchlinkResuts.currentChannel !== 0) {
             await touchlinkList();
             setTimeout(this.fetchTlResults, 1000);
         }

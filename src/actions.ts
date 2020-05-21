@@ -341,7 +341,7 @@ const actions = (store: Store<GlobalState>): object => ({
             store.setState({
                 isLoading: false,
                 isError: err,
-                touchlinkScanInProgress: result.status !== 0,
+                touchlinkScanInProgress: result.currentChannel !== 0,
                 touchlinkResuts: result
             });
         });

@@ -120,5 +120,5 @@ export interface TouchLinkDevice {
 export interface TouchLinkScanApiResponse {
     TS: number;
     devices: TouchLinkDevice[];
-    status: number;
+    currentChannel: number;
 }
