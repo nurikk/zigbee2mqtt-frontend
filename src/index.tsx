@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/camelcase */
 // Must be the first import
 
 
@@ -38,15 +39,17 @@ const applyStateChange = (data: StateChangePayload): void => {
 
     let { devices, forceRender } = state
     const { device } = state;
-
+    const ts = Date.now() / 1000;
     if (device && device.ieeeAddr === data.ieeeAddr) {
-        forceRender = Date.now();
+        forceRender = ts;
         device.st && (device.st[data.name] = data.value);
+        device.last_seen = ts;
     }
     devices = devices.map(d => {
         if (d.ieeeAddr === data.ieeeAddr) {
-            forceRender = Date.now();
+            forceRender = ts;
             d.st && (d.st[data.name] = data.value);
+            d.last_seen = ts;
         }
         return d;
     });
