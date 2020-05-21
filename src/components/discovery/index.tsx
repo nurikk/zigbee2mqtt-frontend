@@ -10,6 +10,7 @@ import { GlobalState } from "../../store";
 import actions, { Actions } from "../../actions";
 import WebsocketManager from "../../websocket";
 import { getDeviceDisplayName } from "../device-page/bind-row";
+import TouchlinkDeviceCard from "./touchlink-device-card";
 window["wsEventsData"] = window["wsEventsData"] || [];
 const wsEventsData: object[] = window['wsEventsData'];
 
@@ -78,21 +79,34 @@ export class Discovery extends Component<GlobalState & Actions, DiscoveryState> 
         getZigbeeDevicesList(true);
         setTimeout(() => this.enableJoin(), 500);
     }
-
+    renderTLdevices(): ComponentChild {
+        const { touchlinkResuts, touchlinkRest, touchlinkIdentify } = this.props;
+        if (touchlinkResuts) {
+            return touchlinkResuts.devices.map(device => <TouchlinkDeviceCard
+                device={device}
+                touchlinkRest={touchlinkRest}
+                touchlinkIdentify={touchlinkIdentify}
+            />);
+        }
+        return null;
+    }
     renderDevices(): ComponentChild {
         const { startInterview } = this.props;
         const { events } = this.state;
         const sortedEvents = orderBy(Object.entries(events), ([_, events]) => events[0].timestamp).reverse();
 
+
         return (<Fragment>
             {this.renderJoinButton()}
-            <div className="row no-gutters">{sortedEvents.map(([ieeeAddr, events]) => <DeviceCard startInterview={startInterview}
-                ieeeAddr={ieeeAddr} events={events} />)}</div>
+            <div className="row no-gutters">
+                {this.renderTLdevices()}
+                {sortedEvents.map(([ieeeAddr, events]) => <DeviceCard startInterview={startInterview}
+                    ieeeAddr={ieeeAddr} events={events} />)}</div>
         </Fragment>);
 
     }
 
-    enableJoin =async (targetRouter = '0x0000'): Promise<void> => {
+    enableJoin = async (targetRouter = '0x0000'): Promise<void> => {
         const { setJoinDuration } = this.props;
         await setJoinDuration(255, targetRouter);
         this.setState({ targetRouter });
@@ -124,9 +138,10 @@ export class Discovery extends Component<GlobalState & Actions, DiscoveryState> 
                         }
                     </div>
                 </div>
+
             ) : (<div>Join enabled for {joinDuration} seconds, <a href="#" onClick={this.disableJoin}>Stop</a></div>)
             }
-
+            {this.renderTlStartButton()}
         </div>
         );
     }
@@ -141,15 +156,35 @@ export class Discovery extends Component<GlobalState & Actions, DiscoveryState> 
             </Fragment>
         );
     }
+    fetchTlResults = async (): Promise<void> => {
+        const { touchlinkList, touchlinkResuts } = this.props;
+        if (!touchlinkResuts || touchlinkResuts.status !== 0) {
+            await touchlinkList();
+            setTimeout(this.fetchTlResults, 1000);
+        }
 
+    }
+    scanTL = async (): Promise<void> => {
+        const { touchlinkScan } = this.props;
+        await touchlinkScan();
+        await this.fetchTlResults();
+
+    }
+    renderTlStartButton(): ComponentChild {
+        const { touchlinkScanInProgress } = this.props;
+        return (
+        <span class="ml-5">{touchlinkScanInProgress ? 'Scanning...' : <a href="#" onClick={this.scanTL}>Scan TL</a>}</span>
+        );
+    }
 
     render(): ComponentChild {
+        const { touchlinkResuts } = this.props;
         const { events } = this.state;
-        const hasAnyEvents = Object.keys(events).length !== 0;
+        const hasAnyEvents = (Object.keys(events).length !== 0) || (touchlinkResuts && touchlinkResuts.devices.length > 0);
         return <div class="container-fluid h-100">{hasAnyEvents ? this.renderDevices() : this.renderEmptyScreen()}</div>
     }
 }
 
-const mappedProps = ["isLoading", "time", "devices"];
+const mappedProps = ["isLoading", "time", "devices", "touchlinkResuts", "touchlinkScanInProgress"];
 const ConnectedDiscovery = connect<{}, DiscoveryState, GlobalState, Actions>(mappedProps, actions)(Discovery);
 export default ConnectedDiscovery;

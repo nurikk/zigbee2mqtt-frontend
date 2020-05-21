@@ -19,7 +19,7 @@ import {
     evalCode,
     writeFile,
 } from "./legacy-actions";
-import { BindRule, FileDescriptor } from "./types";
+import { BindRule, FileDescriptor, TouchLinkScanApiResponse } from "./types";
 import { LogLevel } from "./components/log-viewer";
 import WebsocketManager from "./websocket";
 import orderBy from "lodash/orderBy";
@@ -70,6 +70,11 @@ export interface Actions {
     renameDevice(old: string, newName: string): Promise<void>;
     removeDevice(dev: string, force: boolean): Promise<void>;
     refreshState(dev: string, name: string): Promise<void>;
+
+    touchlinkScan(): Promise<void>;
+    touchlinkList(): Promise<void>;
+    touchlinkIdentify(dev: string): Promise<void>;
+    touchlinkRest(dev: string): Promise<void>;
 }
 
 const actions = (store: Store<GlobalState>): object => ({
@@ -311,8 +316,62 @@ const actions = (store: Store<GlobalState>): object => ({
                 isError: err
             });
         });
+    },
+
+    touchlinkScan: (state): Promise<void> => {
+        store.setState({ isLoading: true, touchlinkResuts: null });
+        const params = {
+            action: 'scan'
+        };
+        return callApi<ApiResponse<void>>("/api/zigbee/touchlink", "GET", params, undefined, (err, res) => {
+            store.setState({
+                touchlinkScanInProgress: true,
+                isLoading: false,
+                isError: err
+            });
+        });
+    },
+
+    touchlinkList: (state): Promise<void> => {
+        store.setState({ isLoading: true });
+        const params = {
+            action: 'list'
+        };
+        return callApi<ApiResponse<TouchLinkScanApiResponse>>("/api/zigbee/touchlink", "GET", params, undefined, (err, { result }) => {
+            store.setState({
+                isLoading: false,
+                isError: err,
+                touchlinkScanInProgress: result.status !== 0,
+                touchlinkResuts: result
+            });
+        });
+    },
+
+    touchlinkIdentify: (state, dev: string): Promise<void> => {
+        store.setState({ isLoading: true });
+        const params = {
+            action: 'identify',
+            dev
+        };
+        return callApi<ApiResponse<TouchLinkScanApiResponse>>("/api/zigbee/touchlink", "GET", params, undefined, (err, res) => {
+            store.setState({
+                isLoading: false,
+                isError: err
+            });
+        });
+    },
+    touchlinkRest: (state, dev: string): Promise<void> => {
+        store.setState({ isLoading: true });
+        const params = {
+            action: 'reset',
+            dev
+        };
+        return callApi<ApiResponse<TouchLinkScanApiResponse>>("/api/zigbee/touchlink", "GET", params, undefined, (err, res) => {
+            store.setState({
+                isLoading: false,
+                isError: err
+            });
+        });
     }
-
-
 });
 export default actions;

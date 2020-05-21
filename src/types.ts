@@ -100,7 +100,7 @@ export interface FileDescriptor extends Named {
 }
 
 
-export interface BindRule extends Dictionary<string|number> {
+export interface BindRule extends Dictionary<string | number> {
     id?: number;
     DstNwkAddr: string;
     ClusterId: number;
@@ -109,3 +109,16 @@ export interface BindRule extends Dictionary<string|number> {
 }
 
 export type SortDirection = "asc" | "desc";
+
+export interface TouchLinkDevice {
+    Channel: number;
+    LinkQuality: number;
+    PanId: number;
+    TS: number;
+    ieeeAddr: string;
+}
+export interface TouchLinkScanApiResponse {
+    TS: number;
+    devices: TouchLinkDevice[];
+    status: number;
+}
