@@ -32,7 +32,7 @@ export default class TouchlinkDeviceCard extends Component<DeviceCardProps, {}> 
                 <div class="card-header">
                     Device <a href={genDeviceDetailsLink(device.ieeeAddr)}>{device.ieeeAddr}</a>
                     <p class="card-text"><small class="text-muted">
-                        Discovered TL device</small>
+                        Discovered TouchLink device</small>
                     </p>
 
                 </div>

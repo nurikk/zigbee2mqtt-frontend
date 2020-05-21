@@ -173,7 +173,7 @@ export class Discovery extends Component<GlobalState & Actions, DiscoveryState> 
     renderTlStartButton(): ComponentChild {
         const { touchlinkScanInProgress } = this.props;
         return (
-        <span class="ml-5">{touchlinkScanInProgress ? 'Scanning...' : <a href="#" onClick={this.scanTL}>Scan TL</a>}</span>
+        <span class="ml-5">{touchlinkScanInProgress ? 'Scanning...' : <a href="#" onClick={this.scanTL}>Scan TouchLink</a>}</span>
         );
     }
 
