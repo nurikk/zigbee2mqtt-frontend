@@ -11,7 +11,7 @@ const getName = (device: Device): string => {
 };
 export const convert2graph = (devices: Device[]): GraphI => {
     const coordinator: NodeI = {
-        id: "SLS GW",
+        id: GATEWAY.nwkAddr,
         device: GATEWAY,
         name: "GW"
     };
@@ -30,11 +30,12 @@ export const convert2graph = (devices: Device[]): GraphI => {
         });
         if (Array.isArray(deviceData.Rtg) && deviceData.Rtg.length) {
             deviceData.Rtg.forEach(route => {
+                const destination = devices.find(d => d.nwkAddr == route.toString()) || GATEWAY;
                 graph.links.push({
                     source: deviceData.nwkAddr,
-                    target: route.toString(),
+                    target: destination.nwkAddr,
                     linkQuality: deviceData?.st?.linkquality,
-                    type: getLinkType(deviceData.type, devices.find(d => d.nwkAddr == route.toString()).type)
+                    type: getLinkType(deviceData.type, destination.type)
                 });
             });
         } else {
