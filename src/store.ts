@@ -8,6 +8,7 @@ import { ApiResponse } from "./utils";
 
 
 export interface GlobalState {
+    forceRender: number;
     isLoading: boolean;
     isError: boolean | string;
     device: Device | undefined;
@@ -31,6 +32,7 @@ export interface GlobalState {
 }
 
 const initialState: GlobalState = {
+    forceRender: Date.now(),
     device: undefined,
     isLoading: false,
     isError: false,

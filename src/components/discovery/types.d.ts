@@ -12,7 +12,7 @@ export type JoinEvents =
     | "PowerSrcRcv"
     | "ConfRsp";
 
-export type ZigbeeEvent = "LinkData" | "LeaveInd" | "PermitJoin" | JoinEvents;
+export type ZigbeeEvent = "stateChange" | "LinkData" | "LeaveInd" | "PermitJoin" | JoinEvents;
 
 export interface LogMessage {
     category: "log";

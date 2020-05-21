@@ -7,7 +7,7 @@ export type Dictionary<V> = { [index: string]: V }
 export interface DeviceStats {
     linkquality?: number;
     battery?: number;
-    [k: string]: string | number;
+    [k: string]: string | number| boolean;
 }
 
 export const inteviewsCount = 4;
@@ -65,6 +65,7 @@ export enum PowerSource {
 }
 
 export interface Device {
+    change?: number;
     /** A 64-bit IEEE address (also called MAC address or Extended address) */
     ieeeAddr?: string | undefined;
     /** A 16-bi network address */

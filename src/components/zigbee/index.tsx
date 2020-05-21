@@ -2,15 +2,13 @@ import style from "./style.css";
 import { Component, ComponentChild, h } from "preact";
 import Button from "../button";
 import orderBy from "lodash/orderBy";
-import debounce from "lodash/debounce";
 import DeviceControlGroup from "../device-control";
 import cx from "classnames";
 import { Device, DeviceSupportStatus, inteviewsCount, SortDirection } from "../../types";
-import { genDeviceDetailsLink, genDeviceImageUrl, lastSeen, WSConnect } from "../../utils";
+import { genDeviceDetailsLink, genDeviceImageUrl, lastSeen } from "../../utils";
 import SafeImg from "../safe-image";
 import { Notyf } from "notyf";
 import PowerSource from "../power-source";
-import { WebsocketMessage, ZigbeePayload } from "../discovery/types";
 import { connect } from "unistore/preact";
 import { GlobalState } from "../../store";
 import actions, { Actions } from "../../actions";
@@ -81,35 +79,10 @@ export class ZigbeeTable extends Component<Actions & GlobalState, ZigbeeTableSta
         fetchTimeInfo();
     };
 
-    debouncedLoadData = debounce(() => this.loadData(false), 1000);
-
-    onMessageReceive = (wsEvent: MessageEvent): void => {
-        let event = {} as WebsocketMessage;
-        try {
-            event = JSON.parse(wsEvent.data) as WebsocketMessage;
-        } catch (e) {
-            new Notyf().error(`Cant parse json ${e}`);
-        }
-        if (event.category == "zigbee") {
-            const payload  = event.payload as ZigbeePayload;
-            if(payload.event == "LinkData") {
-                this.debouncedLoadData();
-            }
-        }
-
-    };
-    initWs(): void {
-        const ws = WSConnect();
-        ws.addEventListener("open", () => {
-            ws.send(JSON.stringify({ action: "subscribe", category: "zigbee" }));
-        });
-        ws.addEventListener("message", this.onMessageReceive);
-    }
 
     componentDidMount(): void {
         this.restoreState();
         this.loadData();
-        this.initWs();
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -261,6 +234,6 @@ export class ZigbeeTable extends Component<Actions & GlobalState, ZigbeeTableSta
     }
 }
 
-const mappedProps = ["isLoading", "time", "devices"];
+const mappedProps = ["isLoading", "time", "devices", "forceRender"];
 const ConnectedDevicePage = connect<{}, ZigbeeTableState, GlobalState, Actions>(mappedProps, actions)(ZigbeeTable);
 export default ConnectedDevicePage;

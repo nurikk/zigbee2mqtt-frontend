@@ -3,7 +3,7 @@
 
 
 
-if (process.env.NODE_ENV==='development') {
+if (process.env.NODE_ENV === 'development') {
     // Must use require here as import statements are only allowed
     // to exist at the top of a file.
     require("preact/debug");
@@ -23,6 +23,64 @@ import ConnectedDevicePage from "./components/device-page";
 import store from "./store";
 import { Provider } from "unistore/preact";
 import { h } from "preact";
+import WebsocketManager from "./websocket";
+
+
+interface StateChangePayload {
+    name: string;
+    value: string | number | boolean;
+    ieeeAddr: string;
+
+}
+
+const applyStateChange = (data: StateChangePayload): void => {
+    const state = store.getState();
+
+    let { devices, forceRender } = state
+    const { device } = state;
+
+    if (device && device.ieeeAddr === data.ieeeAddr) {
+        forceRender = Date.now();
+        device.st && (device.st[data.name] = data.value);
+    }
+    devices = devices.map(d => {
+        if (d.ieeeAddr === data.ieeeAddr) {
+            forceRender = Date.now();
+            d.st && (d.st[data.name] = data.value);
+        }
+        return d;
+    });
+    store.setState({ device, devices, forceRender });
+}
+
+const processZigbeData = (data): void => {
+    const { event, ...payload } = data;
+    switch (event) {
+        case "stateChange":
+            applyStateChange(payload as StateChangePayload);
+            break;
+        default:
+            break;
+
+    }
+}
+const processZigbeeEvent = ({ category, payload }): void => {
+    switch (category) {
+        case "zigbee":
+            processZigbeData(payload);
+            break;
+
+        default:
+            break;
+    }
+}
+
+const manager = new WebsocketManager();
+console.log("use `copy(wsEventsData)` to copy events log");
+manager.subscribe("zigbee", processZigbeeEvent);
+
+
+
 
 const DevicePageApp = () => (
     <Provider store={store}><ConnectedDevicePage /></Provider>

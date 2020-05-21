@@ -30,9 +30,7 @@ export class DevicePage extends Component<Actions & GlobalState, DevicePageState
         this.initPage();
     }
 
-    processZigbeeEvent = ({ category, payload }): void => {
-        console.log({category, payload});
-    }
+
 
     initPage(): void {
         const { dev } = this.state;
@@ -41,11 +39,6 @@ export class DevicePage extends Component<Actions & GlobalState, DevicePageState
         getDeviceInfo(dev);
         getDeviceBinds(dev);
         getZigbeeDevicesList(true);
-
-        const manager = new WebsocketManager();
-        console.log("use `copy(wsEventsData)` to copy events log");
-        manager.subscribe("zigbee", this.processZigbeeEvent);
-
     }
 
     render(): ComponentChild {
@@ -83,6 +76,6 @@ export class DevicePage extends Component<Actions & GlobalState, DevicePageState
     }
 }
 
-const mappedProps = ["isLoading", "isError"];
+const mappedProps = ["isLoading", "isError", "device"];
 const ConnectedDevicePage = connect<{}, DevicePageState, GlobalState, Actions>(mappedProps, actions)(DevicePage);
 export default ConnectedDevicePage;
