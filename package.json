@@ -52,7 +52,7 @@
     "preact-habitat": "^3.3.0",
     "reconnecting-websocket": "^4.4.0",
     "style-loader": "^1.2.1",
-    "ts-loader": "^7.0.4",
+    "ts-loader": "^7.0.5",
     "typescript": "^3.9.3",
     "webpack": "^4.43.0",
     "webpack-bundle-analyzer": "^3.8.0",
