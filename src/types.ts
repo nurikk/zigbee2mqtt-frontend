@@ -42,8 +42,8 @@ export interface Cluster {
 
 export interface Endpoint {
     "profId": string;
-    "In": Dictionary<true>;
-    "Out": Dictionary<true>;
+    "In"?: Dictionary<true>;
+    "Out"?: Dictionary<true>;
     "devId": string;
 }
 

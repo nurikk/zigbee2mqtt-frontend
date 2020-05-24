@@ -31,7 +31,6 @@ export class SimpleBind extends Component<PropsFromStore & Actions, {}> {
 
     render(): ComponentChild {
         const { device } = this.props;
-        console.log(device?.st?.state);
         if (device) {
             return this.renderSimpleBinds();
         }

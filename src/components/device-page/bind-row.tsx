@@ -57,7 +57,7 @@ export default class BindRow extends Component<BindRowProps, {}> {
             }</optgroup>
         });
 
-        options.unshift(<option hidden>Select device ({options.length})</option>);
+        options.unshift(<option hidden>Select device</option>);
 
         return <select disabled={this.isExistingBinding()} onChange={this.onDstChange}
             class={cx("form-control", { "form-control-plaintext": this.isExistingBinding() })}>{options}</select>;
@@ -100,7 +100,7 @@ export default class BindRow extends Component<BindRowProps, {}> {
 
         if (dstDevice) {
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            const dstEndpoints = groupBy(Object.entries(dstDevice.ep ?? {}), ([epName, ep]) => Object.prototype.hasOwnProperty.call(ep.In, rule.ClusterId.toString()));
+            const dstEndpoints = groupBy(Object.entries(dstDevice.ep ?? {}), ([epName, ep]) => Object.prototype.hasOwnProperty.call(ep.In ?? {}, rule.ClusterId));
 
 
             options = options.concat(
@@ -116,7 +116,7 @@ export default class BindRow extends Component<BindRowProps, {}> {
                             }
                         </optgroup>));
         }
-        options.unshift(<option hidden>Select destination ({options.length})</option>);
+        options.unshift(<option hidden>Select destination</option>);
 
         return <select disabled={this.isExistingBinding()} onChange={this.onDstEpChange}
             class={cx("form-control", { "form-control-plaintext": this.isExistingBinding() })}>{options}</select>;
