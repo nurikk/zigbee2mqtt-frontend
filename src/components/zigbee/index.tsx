@@ -31,6 +31,7 @@ type SortColumns =
 interface ZigbeeTableState {
     sortDirection: SortDirection;
     sortColumn: SortColumns;
+    currentTime: number;
 }
 
 
@@ -43,7 +44,8 @@ export class ZigbeeTable extends Component<Actions & GlobalState, ZigbeeTableSta
         super();
         this.state = {
             sortDirection: "desc",
-            sortColumn: "last_seen"
+            sortColumn: "last_seen",
+            currentTime: Date.now()
         };
     }
 
@@ -77,6 +79,7 @@ export class ZigbeeTable extends Component<Actions & GlobalState, ZigbeeTableSta
         const {getZigbeeDevicesList, fetchTimeInfo} = this.props;
         getZigbeeDevicesList(showLoading);
         fetchTimeInfo();
+        setInterval(fetchTimeInfo, 5000);
     };
 
 
