@@ -38,7 +38,7 @@
     "@typescript-eslint/parser": "^2.34.0",
     "classnames": "^2.2.6",
     "compression-webpack-plugin": "^4.0.0",
-    "copy-webpack-plugin": "^6.0.1",
+    "copy-webpack-plugin": "^6.0.2",
     "css-loader": "^3.5.3",
     "eslint": "^6.8.0",
     "eslint-config-preact": "^1.1.1",
