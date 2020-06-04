@@ -33,7 +33,7 @@
     "@types/reconnectingwebsocket": "^1.0.4",
     "@types/superagent": "^4.1.7",
     "@types/webpack-env": "^1.15.2",
-    "@types/ws": "^7.2.4",
+    "@types/ws": "^7.2.5",
     "@typescript-eslint/eslint-plugin": "^2.34.0",
     "@typescript-eslint/parser": "^2.34.0",
     "classnames": "^2.2.6",
