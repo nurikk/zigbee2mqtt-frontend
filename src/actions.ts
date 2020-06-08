@@ -183,13 +183,6 @@ const actions = (store: Store<GlobalState>): object => ({
                 isLoading: false,
                 logs: logs.split("\n")
             });
-        })
-
-        const wsManager = new WebsocketManager();
-        wsManager.subscribe("log", (data) => {
-            const { logs } = store.getState();
-            const copyLogs = [...logs, data.payload as string];
-            store.setState({ logs: copyLogs });
         });
     },
     getCurrentLogLevel(state): Promise<void> {

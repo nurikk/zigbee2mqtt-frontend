@@ -23,7 +23,7 @@ import ConnectedCodeEditor from "./components/code-editor";
 import ConnectedDevicePage from "./components/device-page";
 import store from "./store";
 import { Provider } from "unistore/preact";
-import { h } from "preact";
+import { h, FunctionalComponent } from "preact";
 import WebsocketManager from "./websocket";
 
 
@@ -82,26 +82,32 @@ const manager = new WebsocketManager();
 console.log("use `copy(wsEventsData)` to copy events log");
 manager.subscribe("zigbee", processZigbeeEvent);
 
+manager.subscribe("log", (data) => {
+    const { logs } = store.getState();
+    const copyLogs = [...logs, data.payload as string];
+    store.setState({ logs: copyLogs });
+});
 
 
 
-const DevicePageApp = () => (
+
+const DevicePageApp: FunctionalComponent<{}> = () => (
     <Provider store={store}><ConnectedDevicePage /></Provider>
 );
-const ZigbeeTableApp = () => (
+const ZigbeeTableApp: FunctionalComponent<{}> = () => (
     <Provider store={store}><ConnectedZigbeeTable /></Provider>
 );
 
-const MapApp = () => (
+const MapApp: FunctionalComponent<{}> = () => (
     <Provider store={store}><ConnectedMap /></Provider>
 );
-const DiscoveryApp = () => (
+const DiscoveryApp: FunctionalComponent<{}> = () => (
     <Provider store={store}><ConnectedDiscovery /></Provider>
 );
-const LogViewerApp = () => (
+const LogViewerApp : FunctionalComponent<{}> = () => (
     <Provider store={store}><ConnectedLogViewer /></Provider>
 );
-const CodeEditorApp = () => (
+const CodeEditorApp : FunctionalComponent<{}> = () => (
     <Provider store={store}><ConnectedCodeEditor /></Provider>
 );
 
