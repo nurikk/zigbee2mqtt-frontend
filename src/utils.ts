@@ -134,7 +134,7 @@ export function callApi<T>(url: string, method: HttMethod, params: Dictionary<an
 
 export const lastSeen = (device: Device): string => {
 
-    const lastSeen =  Date.now() - device.lastSeen;
+    const lastSeen = Date.now() - device.lastSeen;
 
     if (lastSeen < 0) {
         return "Now";
@@ -142,3 +142,7 @@ export const lastSeen = (device: Device): string => {
     return toHHMMSS(lastSeen / 1000);
 
 };
+
+export const isObject = (obj: unknown): boolean => {
+    return obj === Object(obj);
+}

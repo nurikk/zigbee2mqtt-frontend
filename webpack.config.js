@@ -52,7 +52,7 @@ module.exports = (env, args) => {
 			'scripts/main': './src/index.tsx',
 		},
 		output: {
-			filename: '[name].js',
+			filename: '[name].[hast].js',
 			path: path.resolve('./dist'),
 		},
 		target: 'web',

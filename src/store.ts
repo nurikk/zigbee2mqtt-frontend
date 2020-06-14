@@ -4,7 +4,7 @@ import devtools from "unistore/devtools";
 import { BindRule, Device, FileDescriptor, TouchLinkScanApiResponse, Dictionary, DeviceStats } from "./types";
 // import { TimeInfo } from "./components/discovery/types";
 
-import { ApiResponse } from "./utils";
+import { ApiResponse, isObject } from "./utils";
 import { GraphI } from "./components/map/types";
 
 export interface Settings {
@@ -56,15 +56,19 @@ const toD3 = (inGraph: GraphI): GraphI => {
     return inGraph;
 };
 let settings = {} as Settings;
+
 try {
     settings = JSON.parse(localStorage.getItem('config'));
-} catch(e) {
+    if (!isObject(settings)) {
+        settings = {} as Settings;
+    }
+} catch (e) {
 
 }
 
 
 const initialState: GlobalState = {
-    settings, 
+    settings,
     forceRender: Date.now(),
     device: undefined,
     isLoading: false,
@@ -194,83 +198,83 @@ const initialState: GlobalState = {
             sourceNwkAddr: 39666,
             lqi: 113,
             relationship: 1
-        }, 
-        
-        // {
-        //     source: {
-        //         ieeeAddr: "0x086bd7fffe51e05e",
-        //         networkAddress: 11850
-        //     },
-        //     target: {
-        //         ieeeAddr: "0x00124b00194a233e",
-        //         networkAddress: 0
-        //     },
-        //     linkquality: 0,
-        //     depth: 255,
-        //     routes: [],
-        //     sourceIeeeAddr: "0x086bd7fffe51e05e",
-        //     targetIeeeAddr: "0x00124b00194a233e",
-        //     sourceNwkAddr: 11850,
-        //     lqi: 0,
-        //     relationship: 3
-        // }, 
-        // {
-        //     source: {
-        //         ieeeAddr: "0x000d6ffffe9a0f69",
-        //         networkAddress: 57017
-        //     },
-        //     target: {
-        //         ieeeAddr: "0x00124b00194a233e",
-        //         networkAddress: 0
-        //     },
-        //     linkquality: 0,
-        //     depth: 255,
-        //     routes: [],
-        //     sourceIeeeAddr: "0x000d6ffffe9a0f69",
-        //     targetIeeeAddr: "0x00124b00194a233e",
-        //     sourceNwkAddr: 57017,
-        //     lqi: 0,
-        //     relationship: 3
-        // }
-        
-        // {
-        //     source: {
-        //         ieeeAddr: "0x0000000000000000",
-        //         networkAddress: 48918
-        //     },
-        //     target: {
-        //         ieeeAddr: "0x00124b00194a233e",
-        //         networkAddress: 0
-        //     },
-        //     linkquality: 0,
-        //     depth: 255,
-        //     routes: [],
-        //     sourceIeeeAddr: "0x0000000000000000",
-        //     targetIeeeAddr: "0x00124b00194a233e",
-        //     sourceNwkAddr: 48918,
-        //     lqi: 0,
-        //     relationship: 3
-        // },
-        
-        // {
-        //     source: {
-        //         ieeeAddr: "0x00124b00193b054d",
-        //         networkAddress: 0
-        //     },
-        //     target: {
-        //         ieeeAddr: "0x00124b00194a233e",
-        //         networkAddress: 0
-        //     },
-        //     linkquality: 0,
-        //     depth: 255,
-        //     routes: [],
-        //     sourceIeeeAddr: "0x00124b00193b054d",
-        //     targetIeeeAddr: "0x00124b00194a233e",
-        //     sourceNwkAddr: 0,
-        //     lqi: 0,
-        //     relationship: 3
-        // }
-    ]
+        },
+
+            // {
+            //     source: {
+            //         ieeeAddr: "0x086bd7fffe51e05e",
+            //         networkAddress: 11850
+            //     },
+            //     target: {
+            //         ieeeAddr: "0x00124b00194a233e",
+            //         networkAddress: 0
+            //     },
+            //     linkquality: 0,
+            //     depth: 255,
+            //     routes: [],
+            //     sourceIeeeAddr: "0x086bd7fffe51e05e",
+            //     targetIeeeAddr: "0x00124b00194a233e",
+            //     sourceNwkAddr: 11850,
+            //     lqi: 0,
+            //     relationship: 3
+            // }, 
+            // {
+            //     source: {
+            //         ieeeAddr: "0x000d6ffffe9a0f69",
+            //         networkAddress: 57017
+            //     },
+            //     target: {
+            //         ieeeAddr: "0x00124b00194a233e",
+            //         networkAddress: 0
+            //     },
+            //     linkquality: 0,
+            //     depth: 255,
+            //     routes: [],
+            //     sourceIeeeAddr: "0x000d6ffffe9a0f69",
+            //     targetIeeeAddr: "0x00124b00194a233e",
+            //     sourceNwkAddr: 57017,
+            //     lqi: 0,
+            //     relationship: 3
+            // }
+
+            // {
+            //     source: {
+            //         ieeeAddr: "0x0000000000000000",
+            //         networkAddress: 48918
+            //     },
+            //     target: {
+            //         ieeeAddr: "0x00124b00194a233e",
+            //         networkAddress: 0
+            //     },
+            //     linkquality: 0,
+            //     depth: 255,
+            //     routes: [],
+            //     sourceIeeeAddr: "0x0000000000000000",
+            //     targetIeeeAddr: "0x00124b00194a233e",
+            //     sourceNwkAddr: 48918,
+            //     lqi: 0,
+            //     relationship: 3
+            // },
+
+            // {
+            //     source: {
+            //         ieeeAddr: "0x00124b00193b054d",
+            //         networkAddress: 0
+            //     },
+            //     target: {
+            //         ieeeAddr: "0x00124b00194a233e",
+            //         networkAddress: 0
+            //     },
+            //     linkquality: 0,
+            //     depth: 255,
+            //     routes: [],
+            //     sourceIeeeAddr: "0x00124b00193b054d",
+            //     targetIeeeAddr: "0x00124b00194a233e",
+            //     sourceNwkAddr: 0,
+            //     lqi: 0,
+            //     relationship: 3
+            // }
+        ]
     })
 };
 

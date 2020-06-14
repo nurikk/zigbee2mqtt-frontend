@@ -1,8 +1,7 @@
-[![Build Status](https://travis-ci.com/nurikk/sls-frontend.svg?branch=master)](https://travis-ci.com/nurikk/sls-frontend)
+[![Build Status](https://travis-ci.com/nurikk/sls-frontend.svg?branch=master)](https://travis-ci.com/nurikk/z2m-frontend)
 
 # Demo
-[Demo](https://nurikk.github.io/sls-frontend/)
-[Map](https://nurikk.github.io/sls-frontend/map.html)
+[Demo](https://nurikk.github.io/z2m-frontend/)
 
 
 # Build
