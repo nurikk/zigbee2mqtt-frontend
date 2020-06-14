@@ -3,25 +3,25 @@
 
 import { GlobalState } from "./store";
 import { Store } from "unistore";
+import { sendMessage2Z2M } from './mqtt';
 import {
-    fetchZigbeeDevicesList,
     getDeviceInfo,
     loadBindsList,
     setState,
     setSimpleBind,
     startInterview,
-    fetchTimeInfo,
+
     enableJoin,
     fetchLogsBuffer,
-    getCurrentLogLevel,
+
     clearLogsBuffer,
-    setLogLevel,
+
     evalCode,
     writeFile,
 } from "./legacy-actions";
 import { BindRule, FileDescriptor, TouchLinkScanApiResponse } from "./types";
-import { LogLevel } from "./components/log-viewer";
-import WebsocketManager from "./websocket";
+// import { LogLevel } from "./components/log-viewer";
+
 import orderBy from "lodash/orderBy";
 import { ApiResponse, callApi } from "./utils";
 
@@ -46,14 +46,14 @@ export interface Actions {
 
     startInterview(dev: string, state: number | ""): Promise<void>;
 
-    fetchTimeInfo(): Promise<void>;
+
 
     setJoinDuration(duration: number, target: string): Promise<void>;
     fetchLogsBuffer(): Promise<void>;
-    getCurrentLogLevel(): Promise<void>;
+    // getCurrentLogLevel(): Promise<void>;
     clearLogs(): Promise<void>;
     clearLogsBuffer(): Promise<void>;
-    setLogLevel(level: LogLevel): Promise<void>;
+    // setLogLevel(level: LogLevel): Promise<void>;
 
     setCurrentFileContent(content: string): Promise<void>;
 
@@ -107,13 +107,8 @@ const actions = (store: Store<GlobalState>): object => ({
     },
     getZigbeeDevicesList: (state, showLoading = true): Promise<void> => {
         showLoading && store.setState({ isLoading: true });
-        return fetchZigbeeDevicesList((err, devices) => {
-            store.setState({
-                isError: err,
-                isLoading: false,
-                devices
-            });
-        });
+        sendMessage2Z2M('bridge/config/devices/get', '');
+        return Promise.resolve();
     },
 
     removeBind: (state, dev: string, bindRule: BindRule): Promise<void> => {
@@ -163,11 +158,7 @@ const actions = (store: Store<GlobalState>): object => ({
             });
         });
     },
-    fetchTimeInfo(state): Promise<void> {
-        return fetchTimeInfo((err, time) => {
-            store.setState({ time });
-        });
-    },
+
 
     setJoinDuration(state, duration = 255, target = ""): Promise<void> {
         store.setState({ isLoading: true });
@@ -185,16 +176,16 @@ const actions = (store: Store<GlobalState>): object => ({
             });
         });
     },
-    getCurrentLogLevel(state): Promise<void> {
-        store.setState({ isLoading: true });
-        return getCurrentLogLevel((err, response) => {
-            store.setState({
-                isError: err,
-                isLoading: false,
-                logLevel: response.result
-            });
-        });
-    },
+    // getCurrentLogLevel(state): Promise<void> {
+    //     store.setState({ isLoading: true });
+    //     return getCurrentLogLevel((err, response) => {
+    //         store.setState({
+    //             isError: err,
+    //             isLoading: false,
+    //             logLevel: response.result
+    //         });
+    //     });
+    // },
     clearLogs(state): void {
         store.setState({ logs: [] });
     },
@@ -207,15 +198,15 @@ const actions = (store: Store<GlobalState>): object => ({
             });
         });
     },
-    setLogLevel(state, level: LogLevel): Promise<void> {
-        store.setState({ isLoading: true });
-        return setLogLevel(level, (err, res) => {
-            store.setState({
-                isLoading: false,
-                isError: err
-            });
-        });
-    },
+    // setLogLevel(state, level: LogLevel): Promise<void> {
+    //     store.setState({ isLoading: true });
+    //     return setLogLevel(level, (err, res) => {
+    //         store.setState({
+    //             isLoading: false,
+    //             isError: err
+    //         });
+    //     });
+    // },
     setCurrentFileContent(state, currentFileContent: string): void {
         store.setState({ currentFileContent });
     },
@@ -275,25 +266,20 @@ const actions = (store: Store<GlobalState>): object => ({
     },
     renameDevice: (state, old: string, newName: string): Promise<void> => {
         store.setState({ isLoading: true });
-        return callApi<ApiResponse<void>>("/api/zigbee/rename", "GET", { old, new: newName }, undefined, (err, res) => {
-            store.setState({
-                isLoading: false,
-                isError: err
-            });
-        });
+        sendMessage2Z2M('bridge/config/rename', JSON.stringify({
+            old, new: newName
+        }));
+        return Promise.resolve();
     },
     removeDevice: (state, dev: string, force: boolean): Promise<void> => {
-        store.setState({ isLoading: true });
-        const params = { dev };
+        // store.setState({ isLoading: true });
+
         if (force) {
-            params['force'] = 1;
+            sendMessage2Z2M('bridge/config/force_remove', dev);
+        } else {
+            sendMessage2Z2M('bridge/config/remove', dev);
         }
-        return callApi<ApiResponse<void>>("/api/zigbee/remove", "DELETE", params, undefined, (err, res) => {
-            store.setState({
-                isLoading: false,
-                isError: err
-            });
-        });
+        return Promise.resolve();
     },
 
 

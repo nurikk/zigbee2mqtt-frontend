@@ -13,19 +13,19 @@
   },
   {
     "category": "log",
-    "payload": "[16:39:46.086] [D] SetDeviceState nwkAddr: FB31, linkquality = UINT8: 86"
+    "payload": "[16:39:46.086] [D] SetDeviceState networkAddress: FB31, linkquality = UINT8: 86"
   },
   {
     "category": "log",
-    "payload": "[16:39:46.090] [D] SetDeviceState nwkAddr: FB31, trSeqNum = UINT8: 160"
+    "payload": "[16:39:46.090] [D] SetDeviceState networkAddress: FB31, trSeqNum = UINT8: 160"
   },
   {
     "category": "log",
-    "payload": "[16:39:46.095] [D] SetDeviceState nwkAddr: FB31, voltage = FLOAT: 3.11"
+    "payload": "[16:39:46.095] [D] SetDeviceState networkAddress: FB31, voltage = FLOAT: 3.11"
   },
   {
     "category": "log",
-    "payload": "[16:39:46.100] [D] SetDeviceState nwkAddr: FB31, battery = FLOAT: 100.00"
+    "payload": "[16:39:46.100] [D] SetDeviceState networkAddress: FB31, battery = FLOAT: 100.00"
   },
   {
     "category": "log",
@@ -81,15 +81,15 @@
   },
   {
     "category": "log",
-    "payload": "[16:42:15.690] [D] SetDeviceState nwkAddr: C824, linkquality = UINT8: 78"
+    "payload": "[16:42:15.690] [D] SetDeviceState networkAddress: C824, linkquality = UINT8: 78"
   },
   {
     "category": "log",
-    "payload": "[16:42:15.700] [D] SetDeviceState nwkAddr: C824, trSeqNum = UINT8: 251"
+    "payload": "[16:42:15.700] [D] SetDeviceState networkAddress: C824, trSeqNum = UINT8: 251"
   },
   {
     "category": "log",
-    "payload": "[16:42:15.708] [D] SetDeviceState nwkAddr: C824, contact = BOOL: 0"
+    "payload": "[16:42:15.708] [D] SetDeviceState networkAddress: C824, contact = BOOL: 0"
   },
   {
     "category": "log",
@@ -121,15 +121,15 @@
   },
   {
     "category": "log",
-    "payload": "[16:42:29.962] [D] SetDeviceState nwkAddr: C824, linkquality = UINT8: 78"
+    "payload": "[16:42:29.962] [D] SetDeviceState networkAddress: C824, linkquality = UINT8: 78"
   },
   {
     "category": "log",
-    "payload": "[16:42:29.967] [D] SetDeviceState nwkAddr: C824, trSeqNum = UINT8: 252"
+    "payload": "[16:42:29.967] [D] SetDeviceState networkAddress: C824, trSeqNum = UINT8: 252"
   },
   {
     "category": "log",
-    "payload": "[16:42:29.976] [D] SetDeviceState nwkAddr: C824, contact = BOOL: 1"
+    "payload": "[16:42:29.976] [D] SetDeviceState networkAddress: C824, contact = BOOL: 1"
   },
   {
     "category": "log",
@@ -161,15 +161,15 @@
   },
   {
     "category": "log",
-    "payload": "[16:42:38.264] [D] SetDeviceState nwkAddr: C824, linkquality = UINT8: 78"
+    "payload": "[16:42:38.264] [D] SetDeviceState networkAddress: C824, linkquality = UINT8: 78"
   },
   {
     "category": "log",
-    "payload": "[16:42:38.268] [D] SetDeviceState nwkAddr: C824, trSeqNum = UINT8: 253"
+    "payload": "[16:42:38.268] [D] SetDeviceState networkAddress: C824, trSeqNum = UINT8: 253"
   },
   {
     "category": "log",
-    "payload": "[16:42:38.274] [D] SetDeviceState nwkAddr: C824, contact = BOOL: 0"
+    "payload": "[16:42:38.274] [D] SetDeviceState networkAddress: C824, contact = BOOL: 0"
   },
   {
     "category": "log",
@@ -201,15 +201,15 @@
   },
   {
     "category": "log",
-    "payload": "[16:42:43.030] [D] SetDeviceState nwkAddr: C824, linkquality = UINT8: 78"
+    "payload": "[16:42:43.030] [D] SetDeviceState networkAddress: C824, linkquality = UINT8: 78"
   },
   {
     "category": "log",
-    "payload": "[16:42:43.039] [D] SetDeviceState nwkAddr: C824, trSeqNum = UINT8: 254"
+    "payload": "[16:42:43.039] [D] SetDeviceState networkAddress: C824, trSeqNum = UINT8: 254"
   },
   {
     "category": "log",
-    "payload": "[16:42:43.047] [D] SetDeviceState nwkAddr: C824, contact = BOOL: 1"
+    "payload": "[16:42:43.047] [D] SetDeviceState networkAddress: C824, contact = BOOL: 1"
   },
   {
     "category": "log",
@@ -241,19 +241,19 @@
   },
   {
     "category": "log",
-    "payload": "[16:42:44.264] [D] SetDeviceState nwkAddr: C824, linkquality = UINT8: 76"
+    "payload": "[16:42:44.264] [D] SetDeviceState networkAddress: C824, linkquality = UINT8: 76"
   },
   {
     "category": "log",
-    "payload": "[16:42:44.269] [D] SetDeviceState nwkAddr: C824, trSeqNum = UINT8: 255"
+    "payload": "[16:42:44.269] [D] SetDeviceState networkAddress: C824, trSeqNum = UINT8: 255"
   },
   {
     "category": "log",
-    "payload": "[16:42:44.275] [D] SetDeviceState nwkAddr: C824, voltage = FLOAT: 3.02"
+    "payload": "[16:42:44.275] [D] SetDeviceState networkAddress: C824, voltage = FLOAT: 3.02"
   },
   {
     "category": "log",
-    "payload": "[16:42:44.282] [D] SetDeviceState nwkAddr: C824, battery = FLOAT: 100.00"
+    "payload": "[16:42:44.282] [D] SetDeviceState networkAddress: C824, battery = FLOAT: 100.00"
   },
   {
     "category": "log",
@@ -301,19 +301,19 @@
   },
   {
     "category": "log",
-    "payload": "[16:45:02.090] [D] SetDeviceState nwkAddr: 1754, linkquality = UINT8: 118"
+    "payload": "[16:45:02.090] [D] SetDeviceState networkAddress: 1754, linkquality = UINT8: 118"
   },
   {
     "category": "log",
-    "payload": "[16:45:02.096] [D] SetDeviceState nwkAddr: 1754, trSeqNum = UINT8: 170"
+    "payload": "[16:45:02.096] [D] SetDeviceState networkAddress: 1754, trSeqNum = UINT8: 170"
   },
   {
     "category": "log",
-    "payload": "[16:45:02.102] [D] SetDeviceState nwkAddr: 1754, voltage = FLOAT: 3.05"
+    "payload": "[16:45:02.102] [D] SetDeviceState networkAddress: 1754, voltage = FLOAT: 3.05"
   },
   {
     "category": "log",
-    "payload": "[16:45:02.111] [D] SetDeviceState nwkAddr: 1754, battery = FLOAT: 100.00"
+    "payload": "[16:45:02.111] [D] SetDeviceState networkAddress: 1754, battery = FLOAT: 100.00"
   },
   {
     "category": "log",
@@ -361,15 +361,15 @@
   },
   {
     "category": "log",
-    "payload": "[16:46:07.503] [D] SetDeviceState nwkAddr: 0078, linkquality = UINT8: 55"
+    "payload": "[16:46:07.503] [D] SetDeviceState networkAddress: 0078, linkquality = UINT8: 55"
   },
   {
     "category": "log",
-    "payload": "[16:46:07.509] [D] SetDeviceState nwkAddr: 0078, trSeqNum = UINT8: 165"
+    "payload": "[16:46:07.509] [D] SetDeviceState networkAddress: 0078, trSeqNum = UINT8: 165"
   },
   {
     "category": "log",
-    "payload": "[16:46:07.516] [D] SetDeviceState nwkAddr: 0078, temperature = FLOAT: 28.57"
+    "payload": "[16:46:07.516] [D] SetDeviceState networkAddress: 0078, temperature = FLOAT: 28.57"
   },
   {
     "category": "log",
@@ -401,15 +401,15 @@
   },
   {
     "category": "log",
-    "payload": "[16:46:07.613] [D] SetDeviceState nwkAddr: 0078, linkquality = UINT8: 52"
+    "payload": "[16:46:07.613] [D] SetDeviceState networkAddress: 0078, linkquality = UINT8: 52"
   },
   {
     "category": "log",
-    "payload": "[16:46:08.621] [D] SetDeviceState nwkAddr: 0078, trSeqNum = UINT8: 166"
+    "payload": "[16:46:08.621] [D] SetDeviceState networkAddress: 0078, trSeqNum = UINT8: 166"
   },
   {
     "category": "log",
-    "payload": "[16:46:08.630] [D] SetDeviceState nwkAddr: 0078, humidity = FLOAT: 52.33"
+    "payload": "[16:46:08.630] [D] SetDeviceState networkAddress: 0078, humidity = FLOAT: 52.33"
   },
   {
     "category": "log",

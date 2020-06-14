@@ -1,9 +1,8 @@
 import ReconnectingWebSocket from "reconnecting-websocket";
 import { Device, Dictionary } from "./types";
-import { TimeInfo } from "./components/discovery/types";
 import { Notyf } from "notyf";
 
-export const genDeviceDetailsLink = (deviceIdentifier: string | number): string => (`/zigbee/device?dev=${encodeURIComponent(deviceIdentifier)}&activeTab=Info`);
+export const genDeviceDetailsLink = (deviceIdentifier: string | number): string => (`/device/${encodeURIComponent(deviceIdentifier)}`);
 
 export const toHex = (input: number, padding = 4): string => {
     return `0x${(`${'0'.repeat(padding)}${input.toString(16)}`).substr(-1 * padding).toUpperCase()}`;
@@ -41,11 +40,11 @@ export const sanitizeModelNameForImageUrl = (modelName: string): string => {
     return modelName ? modelName.replace("/", "_") : null;
 };
 
-export const genDeviceImageUrl = (device: Device): string => (`https://raw.githubusercontent.com/slsys/Gateway/master/devices/png/${sanitizeModelNameForImageUrl(device.ModelId)}.png`);
+export const genDeviceImageUrl = (modelID: string): string => (`https://raw.githubusercontent.com/slsys/Gateway/master/devices/png/${sanitizeModelNameForImageUrl(modelID)}.png`);
 
 export type LoadableFileTypes = "js" | "css";
 
-export const fetchJs = (url) => {
+export const fetchJs = (url: string): Promise<unknown> => {
     return new Promise((resolve, reject) => {
         const scriptElement = document.createElement("script");
         scriptElement.addEventListener("load", resolve);
@@ -133,12 +132,13 @@ export function callApi<T>(url: string, method: HttMethod, params: Dictionary<an
     })
 }
 
-export const lastSeen = (device: Device, timeInfo: TimeInfo): string => {
-    if (device.last_seen && timeInfo) {
-        const lastSeen = timeInfo.ts - device.last_seen;
-        if (lastSeen < 0) {
-            return "Now";
-        }
-        return toHHMMSS(lastSeen);
+export const lastSeen = (device: Device): string => {
+
+    const lastSeen =  Date.now() - device.lastSeen;
+
+    if (lastSeen < 0) {
+        return "Now";
     }
+    return toHHMMSS(lastSeen / 1000);
+
 };

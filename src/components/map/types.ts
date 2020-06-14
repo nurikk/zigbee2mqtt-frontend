@@ -1,10 +1,14 @@
 import { SimulationLinkDatum, SimulationNodeDatum } from "d3-force";
-import { Device } from "../../types";
 
 export interface NodeI extends SimulationNodeDatum {
-    id: string;
-    name: string;
-    device: Device;
+    ieeeAddr: string;
+    friendlyName?: string;
+    type?: string;
+    networkAddress: number;
+    manufacturerName?: string;
+    modelID?: string;
+    failed?: string[];
+    lastSeen?: number;
 }
 
 export type LinkType =
@@ -13,9 +17,29 @@ export type LinkType =
     | "EndDevice2Coordinator"
     | "EndDevice2Router";
 
+
+export interface Source {
+    ieeeAddr: string;
+    networkAddress: number;
+}
+
+export interface Target {
+    ieeeAddr: string;
+    networkAddress: number;
+}
+
+
 export interface LinkI extends SimulationLinkDatum<NodeI> {
-    linkQuality: number | undefined;
-    type: LinkType;
+    source: Source | string;
+    target: Target | string;
+    linkquality: number;
+    depth: number;
+    routes: unknown[];
+    sourceIeeeAddr: string;
+    targetIeeeAddr: string;
+    sourceNwkAddr: number;
+    lqi: number;
+    relationship: number;
 }
 
 export interface GraphI {

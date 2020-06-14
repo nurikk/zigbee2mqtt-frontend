@@ -1,11 +1,10 @@
 import style from "./style.css";
 import { Component, ComponentChild, h } from "preact";
-import Button from "../button";
 import orderBy from "lodash/orderBy";
 import DeviceControlGroup from "../device-control";
 import cx from "classnames";
-import { Device, DeviceSupportStatus, inteviewsCount, SortDirection } from "../../types";
-import { genDeviceDetailsLink, genDeviceImageUrl, lastSeen } from "../../utils";
+import { Device, SortDirection } from "../../types";
+import { genDeviceDetailsLink, genDeviceImageUrl, lastSeen, toHex } from "../../utils";
 import SafeImg from "../safe-image";
 import { Notyf } from "notyf";
 import PowerSource from "../power-source";
@@ -13,17 +12,17 @@ import { connect } from "unistore/preact";
 import { GlobalState } from "../../store";
 import actions, { Actions } from "../../actions";
 import ActionTH from "./ActionTH";
-import { isLeaveReqSend } from "../../binaryUtils";
+
 
 //TODO: proper type alias
 type SortColumns =
-    "last_seen"
-    | "nwkAddr"
+    "lastSeen"
+    | "networkAddress"
     | "friendly_name"
     | "ieeeAddr"
-    | "ManufName"
+    | "manufacturerName"
     | "st.linkquality"
-    | "ModelId"
+    | "modelID"
     | "Interview.State"
     | "PowerSource";
 
@@ -44,7 +43,7 @@ export class ZigbeeTable extends Component<Actions & GlobalState, ZigbeeTableSta
         super();
         this.state = {
             sortDirection: "desc",
-            sortColumn: "last_seen",
+            sortColumn: "lastSeen",
             currentTime: Date.now()
         };
     }
@@ -76,10 +75,9 @@ export class ZigbeeTable extends Component<Actions & GlobalState, ZigbeeTableSta
     };
 
     loadData = (showLoading = true): void => {
-        const {getZigbeeDevicesList, fetchTimeInfo} = this.props;
+        const { getZigbeeDevicesList } = this.props;
         getZigbeeDevicesList(showLoading);
-        fetchTimeInfo();
-        setInterval(fetchTimeInfo, 5000);
+
     };
 
 
@@ -88,14 +86,7 @@ export class ZigbeeTable extends Component<Actions & GlobalState, ZigbeeTableSta
         this.loadData();
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    onInterviewClick = async (device: Device): Promise<void> => {
-        const { startInterview } = this.props;
-        if (confirm("Start Interview?")) {
-            await startInterview(device.nwkAddr, device?.Interview?.State)
-            new Notyf().success("Started interview");
-        }
-    };
+
 
     onSortChange = (column: SortColumns, sortDir: SortDirection | undefined = undefined): void => {
         const { sortColumn } = this.state;
@@ -126,109 +117,68 @@ export class ZigbeeTable extends Component<Actions & GlobalState, ZigbeeTableSta
         return (devices.length ? this.renderDevicesTable() : <div>No data</div>);
     }
 
-    renderInterviewState(device: Device): ComponentChild {
-        const { onInterviewClick } = this;
-        const interviewTrigger = <Button<Device> className="btn btn-normal btn-sm" onClick={onInterviewClick}
-                                                 item={device}><i className="fa fa-play" /></Button>;
-
-        if (device.Interview) {
-            if (inteviewsCount === device.Interview.State) {
-                return "Ok";
-            }
-            return <div>{device.Interview.State ?? 0}/{inteviewsCount} {interviewTrigger}</div>;
-        }
-        return <div>N/A {interviewTrigger}</div>;
-    }
-
-    getSupportTitle(device: Device): string {
-        switch (device.supported) {
-            case DeviceSupportStatus.Supported:
-                return "Supported";
-            case DeviceSupportStatus.Unknown:
-                return "Support unknown";
-            case DeviceSupportStatus.UnSupported:
-                return "Unsupported";
-            default:
-                return "";
-        }
-    }
 
     renderDevicesTable(): ComponentChild {
         const { sortColumn, sortDirection } = this.state;
-        const { time, devices } = this.props;
+        const { devices, deviceStates } = this.props;
         const sortedDevices = orderBy<Device>(devices, [sortColumn], [sortDirection]);
         const { onSortChange } = this;
 
         return (
             <table className={`table table-striped table-borderless ${style.adaptive} ${style.zigbee}`}>
                 <thead>
-                <tr className="text-nowrap">
-                    <th>#</th>
-                    <th>Pic</th>
-                    <ActionTH<SortColumns> className={cx(style["nwk-addr"], style["action-column"])} column="nwkAddr"
-                                           currentDirection={sortDirection} current={sortColumn}
-                                           onClick={onSortChange}>nwkAddr</ActionTH>
-                    <ActionTH<SortColumns> className={style["action-column"]} column="friendly_name"
-                                           currentDirection={sortDirection} current={sortColumn}
-                                           onClick={onSortChange}>FriendlyName</ActionTH>
-                    <ActionTH<SortColumns> className={cx(style["ieee-addr"], style["action-column"])} column="ieeeAddr"
-                                           currentDirection={sortDirection} current={sortColumn}
-                                           onClick={onSortChange}>ieeeAddr</ActionTH>
-                    <ActionTH<SortColumns> className={cx(style["manu-name"], style["action-column"])} column="ManufName"
-                                           currentDirection={sortDirection} current={sortColumn}
-                                           onClick={onSortChange} titile="ManufName">Manuf</ActionTH>
-                    <ActionTH<SortColumns> className={style["action-column"]} column="ModelId"
-                                           currentDirection={sortDirection} current={sortColumn}
-                                           onClick={onSortChange}>ModelId</ActionTH>
+                    <tr className="text-nowrap">
+                        <th>#</th>
+                        <th>Pic</th>
+                        <ActionTH<SortColumns> className={cx(style["nwk-addr"], style["action-column"])} column="networkAddress"
+                            currentDirection={sortDirection} current={sortColumn}
+                            onClick={onSortChange}>nwkAddr</ActionTH>
+                        <ActionTH<SortColumns> className={style["action-column"]} column="friendly_name"
+                            currentDirection={sortDirection} current={sortColumn}
+                            onClick={onSortChange}>Friendly name</ActionTH>
+                        <ActionTH<SortColumns> className={cx(style["ieee-addr"], style["action-column"])} column="ieeeAddr"
+                            currentDirection={sortDirection} current={sortColumn}
+                            onClick={onSortChange}>ieeeAddr</ActionTH>
+                        <ActionTH<SortColumns> className={cx(style["manu-name"], style["action-column"])} column="manufacturerName"
+                            currentDirection={sortDirection} current={sortColumn}
+                            onClick={onSortChange} titile="manufacturerName">Manufacturer</ActionTH>
+                        <ActionTH<SortColumns> className={style["action-column"]} column="modelID"
+                            currentDirection={sortDirection} current={sortColumn}
+                            onClick={onSortChange}>Model</ActionTH>
+                        <ActionTH<SortColumns> className={style["action-column"]} column="st.linkquality"
+                            currentDirection={sortDirection} current={sortColumn}
+                            onClick={onSortChange} title="Link quality">LQI</ActionTH>
+                        <ActionTH<SortColumns> className={style["action-column"]} column="lastSeen"
+                            currentDirection={sortDirection} current={sortColumn}
+                            onClick={onSortChange}>Last seen</ActionTH>
 
-                    <ActionTH<SortColumns> className={style["action-column"]} column="st.linkquality"
-                                           currentDirection={sortDirection} current={sortColumn}
-                                           onClick={onSortChange} title="Link quality">Link</ActionTH>
-                    <ActionTH<SortColumns> className={style["action-column"]} column="Interview.State"
-                                           currentDirection={sortDirection} current={sortColumn}
-                                           onClick={onSortChange}>Interview</ActionTH>
-                    <ActionTH<SortColumns> className={style["action-column"]} column="last_seen"
-                                           currentDirection={sortDirection} current={sortColumn}
-                                           onClick={onSortChange}>LastSeen</ActionTH>
-                    <th>Routes</th>
-                    <ActionTH<SortColumns> className={style["action-column"]} column="PowerSource"
-                                           currentDirection={sortDirection} current={sortColumn}
-                                           onClick={onSortChange}>PS</ActionTH>
-                    <th>Actions</th>
-                </tr>
+                        <th>Power</th>
+                        <th>Actions</th>
+                    </tr>
                 </thead>
                 <tbody>
-                {sortedDevices.map((device: Device, index) => <tr className={cx({
-                    "table-danger": !device.ieeeAddr,
-                    "table-warning": isLeaveReqSend(device.flags)
-                })}>
-                    <td className="font-weight-bold">{index + 1}</td>
-                    <td className={style["device-pic"]}><SafeImg class={cx(style["device-image"])}
-                                                                 src={genDeviceImageUrl(device)} />
-                    </td>
-                    <td className={style["nwk-addr"]}><a
-                        href={genDeviceDetailsLink(device.nwkAddr)}>{device.nwkAddr}</a>
-                    </td>
-                    <td>{device.friendly_name}</td>
-                    <td className={style["ieee-addr"]}>{device.ieeeAddr ? device.ieeeAddr : "<corrupted>"}</td>
-                    <td title={device.ManufName}
-                        className={cx(style["manu-name"], "text-truncate", "text-nowrap", "position-relative")}>{device.ManufName}</td>
-                    <td title={this.getSupportTitle(device)} className={cx("text-nowrap", {
-                        "table-danger": device.supported == DeviceSupportStatus.UnSupported,
-                        "table-warning": device.supported == DeviceSupportStatus.Unknown
-                    })}>{device.ModelId}</td>
-                    <td>{device.st?.linkquality}</td>
-                    <td className={cx({
-                        "table-warning": device.Interview?.State !== 4
-                    })}>{this.renderInterviewState(device)}</td>
-                    <td>{lastSeen(device, time)}</td>
-                    <td>{device?.Rtg?.map((route) => <a className={"d-block"}
-                        href={genDeviceDetailsLink(route)}>{route}</a>)}</td>
-                    <td className="text-left"><PowerSource source={device.PowerSource} battery={device.st?.battery} /></td>
-                    <td>
-                        <DeviceControlGroup device={device} />
-                    </td>
-                </tr>)}
+                    {sortedDevices.map((device: Device, index) => <tr>
+                        <td className="font-weight-bold">{index + 1}</td>
+                        <td className={style["device-pic"]}><SafeImg class={cx(style["device-image"])}
+                            src={genDeviceImageUrl(device.modelID)} />
+                        </td>
+                        <td className={style["nwk-addr"]}><a
+                            href={genDeviceDetailsLink(device.networkAddress)}>{toHex(device.networkAddress)}</a>
+                        </td>
+                        <td>{device.friendly_name}</td>
+                        <td className={style["ieee-addr"]}>{device.ieeeAddr ? device.ieeeAddr : "<corrupted>"}</td>
+                        <td title={device.manufacturerName}
+                            className={cx(style["manu-name"], "text-truncate", "text-nowrap", "position-relative")}>{device.manufacturerName}</td>
+                        <td>{device.modelID}</td>
+                        <td>{deviceStates[device.friendly_name]?.linkquality}</td>
+                        <td>{lastSeen(device)}</td>
+                        <td className="text-left">
+                            <PowerSource source={device.powerSource} battery={deviceStates[device.friendly_name]?.battery} />
+                        </td>
+                        <td>
+                            <DeviceControlGroup device={device} />
+                        </td>
+                    </tr>)}
 
                 </tbody>
             </table>
@@ -237,6 +187,6 @@ export class ZigbeeTable extends Component<Actions & GlobalState, ZigbeeTableSta
     }
 }
 
-const mappedProps = ["isLoading", "time", "devices", "forceRender"];
+const mappedProps = ["isLoading", "time", "devices", "forceRender", "deviceStates"];
 const ConnectedDevicePage = connect<{}, ZigbeeTableState, GlobalState, Actions>(mappedProps, actions)(ZigbeeTable);
 export default ConnectedDevicePage;

@@ -93,7 +93,7 @@
     }
 
     .adaptive td:nth-of-type(3):before {
-        content: "nwkAddr";
+        content: "networkAddress";
     }
 
     .adaptive td:nth-of-type(4):before {
@@ -105,11 +105,11 @@
     }
 
     .adaptive td:nth-of-type(6):before {
-        content: "ManufName";
+        content: "manufacturerName";
     }
 
     .adaptive td:nth-of-type(7):before {
-        content: "ModelId";
+        content: "modelID";
     }
 
     .adaptive td:nth-of-type(8):before {

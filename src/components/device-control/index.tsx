@@ -11,16 +11,16 @@ interface DeviceControlGroupProps {
 export class DeviceControlGroup extends Component<DeviceControlGroupProps & Actions, {}> {
     onBindClick = (): void => {
         const { device } = this.props;
-        location.href = `/zigbee/device?dev=${encodeURIComponent(device.nwkAddr)}&activeTab=Bind`;
+        location.href = `/zigbee/device?dev=${encodeURIComponent(device.friendly_name)}&activeTab=Bind`;
     };
 
     onRenameClick = async (): Promise<void> => {
         const { renameDevice, getZigbeeDevicesList, getDeviceInfo, device } = this.props;
         const newName = prompt("Enter new name", device.friendly_name);
         if (newName !== null && newName !== device.friendly_name) {
-            await renameDevice(device.nwkAddr, newName);
+            await renameDevice(device.friendly_name, newName);
             await getZigbeeDevicesList(true);
-            await getDeviceInfo(device.nwkAddr);
+            await getDeviceInfo(device.friendly_name);
         }
     };
 
@@ -29,7 +29,7 @@ export class DeviceControlGroup extends Component<DeviceControlGroupProps & Acti
         const { removeDevice, getZigbeeDevicesList, device } = this.props;
         const message = force ? "Remove device?" : "Send leave request?";
         if (confirm(message)) {
-            await removeDevice(device.nwkAddr, force);
+            await removeDevice(device.friendly_name, force);
             await getZigbeeDevicesList(true);
         }
     };
@@ -42,7 +42,6 @@ export class DeviceControlGroup extends Component<DeviceControlGroupProps & Acti
             <div className="btn-group btn-group-sm" role="group">
                 <Button<void> className="btn btn-secondary" onClick={this.onRenameClick}><i
                     className="fa fa-edit" /></Button>
-                <Button<void> className="btn btn-success" onClick={this.onBindClick}>Bind</Button>
                 {
                     <Fragment>
                         <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i className={cx("fa", "fa-trash")} /></button>

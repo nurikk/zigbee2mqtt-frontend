@@ -20,12 +20,14 @@ class Link extends Component<LinkProps, {}> {
 
     render(): ComponentChild {
         const { link, id, ...rest } = this.props;
-        const linkType = link.type as string;
+        
+        // const linkType = link.type as string;
+        // debugger
         return (
             <path
                 id={id}
                 {...rest}
-                className={cx(style.link, style[linkType])}
+                className={cx(style.link)}
                 ref={this.ref as RefObject<SVGPathElement>}
                 strokeWidth={1}
             />

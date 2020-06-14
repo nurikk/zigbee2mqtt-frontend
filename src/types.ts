@@ -54,43 +54,24 @@ export enum DeviceSupportStatus {
 }
 
 
-export enum PowerSource {
-    Unknown = 0,
-    MainsSinglePhase = 1,
-    MainsThreePhase = 2,
-    Battery = 3,
-    DC = 4,
-    EmergencyMainsConstantPower = 5,
-    EmergencyMains = 6
-}
+export type PowerSource = "Battery" | "Mains (single phase)";
 
 export interface Device {
-    change?: number;
-    /** A 64-bit IEEE address (also called MAC address or Extended address) */
-    ieeeAddr?: string | undefined;
-    /** A 16-bi network address */
-    nwkAddr: string;
-    /** Node last message timestamp */
-    last_seen?: number | undefined;
-    type?: DeviceType | undefined;
-
-    ManufName?: string | undefined;
-    ModelId?: string | undefined;
-    /** Device status */
-    st?: DeviceStats | undefined;
-    friendly_name?: string | undefined;
-    /** Routes list, each item is an 16-bit network address (also called logical address or short address). */
-    Rtg?: string[] | undefined;
-    /** Features discovery status, aka interview */
-    Interview?: Interview | undefined;
-    PowerSource?: PowerSource | undefined;
-    ep?: Dictionary<Endpoint> | undefined;
-    supported?: DeviceSupportStatus | undefined;
-    SB?: Dictionary<string> | undefined;
-
-
-    flags?: number | undefined;
-    Rcf?: unknown;
+    ieeeAddr: string;
+    type: DeviceType;
+    networkAddress: number;
+    model: string;
+    vendor: string;
+    description: string;
+    friendly_name: string;
+    manufacturerID: number;
+    manufacturerName: string;
+    powerSource: PowerSource;
+    modelID: string;
+    hardwareVersion: number;
+    softwareBuildID: number;
+    dateCode: string;
+    lastSeen: number;
 }
 
 
@@ -103,7 +84,7 @@ export interface FileDescriptor extends Named {
 
 export interface BindRule extends Dictionary<string | number> {
     id?: number;
-    DstNwkAddr: string;
+    DstnetworkAddress: string;
     ClusterId: number;
     SrcEp: number;
     DstEp: number;

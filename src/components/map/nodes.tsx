@@ -9,7 +9,7 @@ import * as style from "./map.css";
 import { MouseEventsResponderNode } from ".";
 import { Device } from "../../types";
 import { genDeviceImageUrl } from "../../utils";
-import { TimeInfo } from "../discovery/types";
+
 
 const calcStarPoints = (
     centerX: number,
@@ -44,17 +44,14 @@ const getStarShape = (innerCircleArms: number, styleStarWidth: number, innerOute
 };
 
 interface NodeProps extends MouseEventsResponderNode {
-    time: TimeInfo;
     node: NodeI;
 }
 
 const offlineTimeout = 3600 * 2;
 
-export const isOnline = (device: Device, timeInfo: TimeInfo | undefined): boolean => {
-    if (!timeInfo || !device.last_seen) {
-        return true;
-    }
-    return timeInfo.ts - device.last_seen < offlineTimeout;
+export const isOnline = (device: Device): boolean => {
+
+    return Date.now() - device.lastSeen < offlineTimeout;
 };
 
 interface NodeState {
@@ -75,7 +72,7 @@ class Node extends Component<NodeProps, NodeState> {
 
         // eslint-disable-next-line react/no-did-mount-set-state
         this.setState({
-            imgUrl: genDeviceImageUrl(node.device)
+            imgUrl: genDeviceImageUrl(node.modelID)
         });
     }
 
@@ -104,17 +101,17 @@ class Node extends Component<NodeProps, NodeState> {
 
     render(): ComponentChild {
         const { imgUrl } = this.state;
-        const { node, time } = this.props;
+        const { node } = this.props;
         const { onMouseOver, onMouseOut, onDblClick, onImageError } = this;
-        const deviceType = (node.device as Device).type as string;
-        const cn = cx(style.node, style[deviceType], { [style.offline]: !isOnline(node.device, time) });
+        const deviceType = node.type as string;
+        const cn = cx(style.node, style[deviceType]); //{ [style.offline]: !isOnline(node.device, time) }
         return (<g class={cn}
                    ref={this.ref as RefObject<SVGImageElement>}
                    onMouseOver={onMouseOver}
                    onMouseOut={onMouseOut}
                    onDblClick={onDblClick}>
             {
-                node.device.type === "Coordinator" ? (
+                node.type === "Coordinator" ? (
                     <polygon
                         points={getStarShape(5, 5, 14) as string}
                     />
@@ -130,7 +127,7 @@ class Node extends Component<NodeProps, NodeState> {
                     />
                 )
             }
-            <text>{node.name}</text>
+            <text>{node.friendlyName}</text>
 
         </g>);
 
@@ -138,7 +135,6 @@ class Node extends Component<NodeProps, NodeState> {
 }
 
 interface NodesProps extends MouseEventsResponderNode {
-    time: TimeInfo;
     nodes: NodeI[];
     simulation: d3.Simulation<NodeI, LinkI>;
 }
@@ -184,12 +180,11 @@ export default class Nodes extends Component<NodesProps, NodesState> {
     }
 
     render(): ComponentChild {
-        const { nodes, onMouseOut, onMouseOver, onDblClick, time } = this.props;
+        const { nodes, onMouseOut, onMouseOver, onDblClick } = this.props;
         return (
             <g className={style.nodes}>
                 {nodes.map((node: NodeI, index: number) => (
                     <Node
-                        time={time}
                         onMouseOut={onMouseOut}
                         onMouseOver={onMouseOver}
                         onDblClick={onDblClick}

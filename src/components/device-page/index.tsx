@@ -2,12 +2,11 @@ import { Component, ComponentChild, h } from "preact";
 import { connect } from "unistore/preact";
 import actions, { Actions } from "../../actions";
 import { GlobalState } from "../../store";
-import SimpleBind from "./simple-bind";
-import Bind from "./bind";
-import DeviceInfo from "./info";
-import TabPanel, { TabInfo } from "../tab-panel";
-import style from "./style.css";
-import WebsocketManager from "../../websocket";
+// import SimpleBind from "./simple-bind";
+// import Bind from "./bind";
+// import DeviceInfo from "./info";
+// import TabPanel, { TabInfo } from "../tab-panel";
+// import style from "./style.css";
 
 interface DevicePageState {
     dev: string;
@@ -16,6 +15,7 @@ interface DevicePageState {
 
 export class DevicePage extends Component<Actions & GlobalState, DevicePageState> {
     constructor() {
+
         super();
         const { searchParams } = new URL(location.href);
         const paramActiveTab = searchParams.get("activeTab");
@@ -27,7 +27,9 @@ export class DevicePage extends Component<Actions & GlobalState, DevicePageState
     }
 
     componentDidMount(): void {
-        this.initPage();
+        // this.initPage();
+        // console.log(this.props);
+        
     }
 
 
@@ -42,25 +44,26 @@ export class DevicePage extends Component<Actions & GlobalState, DevicePageState
     }
 
     render(): ComponentChild {
-        const { isLoading, isError } = this.props;
-        const { activeTab } = this.state;
+        // const { isLoading, isError } = this.props;
+        // const { activeTab } = this.state;
 
-        const tabs: TabInfo[] = [
-            {
-                name: "Info",
-                TabComponent: <DeviceInfo />
-            },
-            {
-                name: "Bind",
-                TabComponent: <Bind />
-            },
-            {
-                name: "States",
-                TabComponent: <SimpleBind />
-            }
-        ];
+        // const tabs: TabInfo[] = [
+        //     {
+        //         name: "Info",
+        //         TabComponent: <DeviceInfo />
+        //     },
+        //     {
+        //         name: "Bind",
+        //         TabComponent: <Bind />
+        //     },
+        //     {
+        //         name: "States",
+        //         TabComponent: <SimpleBind />
+        //     }
+        // ];
         return (<div class={"position-relative"}>
-            {
+            <h1>NOT IMPLEMENTED YET</h1>
+            {/* {
                 isError ? <h1>{isError}</h1> : (
                     isLoading ? (
                         <div className={`${style.loader} spinner-grow text-primary`} role="status">
@@ -70,7 +73,7 @@ export class DevicePage extends Component<Actions & GlobalState, DevicePageState
                 )
 
             }
-            <TabPanel defaultTab={activeTab} tabs={tabs} />
+            <TabPanel defaultTab={activeTab} tabs={tabs} /> */}
         </div>);
 
     }

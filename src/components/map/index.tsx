@@ -3,8 +3,7 @@ import Links from "./links";
 import Nodes from "./nodes";
 import * as d3 from "d3";
 import style from "./map.css";
-import { GraphI, LinkI, NodeI } from "./types";
-import { convert2graph } from "./convert";
+import { LinkI, NodeI, GraphI } from "./types";
 import Tooltip from "./tooltip";
 import { genDeviceDetailsLink } from "../../utils";
 import { connect } from "unistore/preact";
@@ -18,24 +17,24 @@ export interface MouseEventsResponderNode {
 }
 
 interface MapState {
-    graph: GraphI;
     tooltipNode: NodeI | false;
     width: number;
     height: number;
+    graph: GraphI;
 }
 
-const getDistance = (d: LinkI): number => {
-    switch (d.type) {
-        case "Router2Router":
-        case "Router2Coordinator":
-            return 300;
-        case "EndDevice2Coordinator":
-        case "EndDevice2Router":
-            return 150;
-        default:
-            return 200;
-    }
-};
+// const getDistance = (d: LinkI): number => {
+//     switch (d.type) {
+//         case "Router2Router":
+//         case "Router2Coordinator":
+//             return 300;
+//         case "EndDevice2Coordinator":
+//         case "EndDevice2Router":
+//             return 150;
+//         default:
+//             return 200;
+//     }
+// };
 
 export class Map extends Component<GlobalState & Actions, MapState> {
     ref = createRef<HTMLDivElement>();
@@ -50,11 +49,11 @@ export class Map extends Component<GlobalState & Actions, MapState> {
         this.state = {
             width: 0,
             height: 0,
+            tooltipNode: false,
             graph: {
                 nodes: [],
                 links: []
-            },
-            tooltipNode: false
+            }
         };
     }
 
@@ -108,10 +107,10 @@ export class Map extends Component<GlobalState & Actions, MapState> {
     };
 
     openDetailsWindow = (node: NodeI): void => {
-        switch (node.device.type) {
+        switch (node.type) {
             case "EndDevice":
             case "Router":
-                window.open(genDeviceDetailsLink(node.id));
+                window.open(genDeviceDetailsLink(node.friendlyName));
                 break;
             default:
                 break;
@@ -122,10 +121,9 @@ export class Map extends Component<GlobalState & Actions, MapState> {
         const { width, height } = this.state;
 
         const linkForce = d3.forceLink<NodeI, LinkI>()
-            .id(d => d.id)
-            .distance(getDistance)
+            .id(d => d.ieeeAddr)
+            .distance(d => d.linkquality)
             .strength(0.2);
-
         const chargeForce = d3.forceManyBody()
             .distanceMin(200)
             .distanceMax(1000)
@@ -151,12 +149,13 @@ export class Map extends Component<GlobalState & Actions, MapState> {
     }
 
     async initPage(): Promise<void> {
-        const { getZigbeeDevicesList } = this.props;
-        await getZigbeeDevicesList(true);
-        const { devices } = this.props;
-        const graph = convert2graph(devices);
+        // const { getZigbeeDevicesList } = this.props;
+        // await getZigbeeDevicesList(true);
+        // const { devices } = this.props;
+        // const graph = convert2graph(devices);
+        const { networkGraph } = this.props;
         const { width, height } = (this.ref.current as HTMLDivElement).getBoundingClientRect();
-        this.setState({ graph, width, height }, this.updateNodes);
+        this.setState({ width, height, graph: Object.assign({}, networkGraph) }, this.updateNodes);
     }
 
     async componentDidMount(): Promise<void> {
@@ -164,8 +163,9 @@ export class Map extends Component<GlobalState & Actions, MapState> {
     }
 
     render(): ComponentChild {
-        const { width, height, graph, tooltipNode } = this.state;
-        const { time } = this.props;
+        const { width, height, tooltipNode, graph } = this.state;
+
+        console.log('graph', graph);
         const { setTooltip, removeTooltip, openDetailsWindow } = this;
         return (
             <div className={style.container} ref={this.ref}>
@@ -177,7 +177,6 @@ export class Map extends Component<GlobalState & Actions, MapState> {
                         onMouseOver={setTooltip}
                         onMouseOut={removeTooltip}
                         onDblClick={openDetailsWindow}
-                        time={time}
                     />
                     {tooltipNode ? (
                         <foreignObject
@@ -185,7 +184,7 @@ export class Map extends Component<GlobalState & Actions, MapState> {
                             x={tooltipNode.x as number + 10}
                             y={tooltipNode.y as number + 5}
                         >
-                            <Tooltip info={tooltipNode} time={time} />
+                            <Tooltip info={tooltipNode} />
                         </foreignObject>
                     ) : null}
                 </svg>
@@ -194,6 +193,6 @@ export class Map extends Component<GlobalState & Actions, MapState> {
     }
 }
 
-const mappedProps = ["time", "devices"];
+const mappedProps = ["networkGraph"];
 const ConnectedMap = connect<{}, MapState, GlobalState, Actions>(mappedProps, actions)(Map);
 export default ConnectedMap;

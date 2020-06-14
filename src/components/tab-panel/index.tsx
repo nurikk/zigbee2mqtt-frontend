@@ -1,5 +1,5 @@
 import { Component, ComponentChild, h } from "preact";
-import Bind from "../device-page/bind";
+// import Bind from "../device-page/bind";
 import cx from "classnames";
 
 export interface TabInfo {

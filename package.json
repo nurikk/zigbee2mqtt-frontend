@@ -18,11 +18,18 @@
     "dist/*"
   ],
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.13.0",
+    "@shelacek/formica": "^1.5.0",
     "@types/d3": "^5.7.2",
+    "@types/history": "^4.7.6",
     "@types/luaparse": "^0.2.6",
     "@types/notyf": "^3.0.0",
+    "history": "^5.0.0",
+    "mqtt": "^4.1.0",
     "notyf": "^3.7.0",
+    "preact-router": "^3.2.1",
     "pubsub-ts": "^0.2.0",
+    "uninformed": "^0.1.4",
     "unistore": "^3.5.1"
   },
   "devDependencies": {

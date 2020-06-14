@@ -1,14 +1,12 @@
 import { BindRule, Device } from "./types";
 import { ApiResponse, callApi, CallbackHandler } from "./utils";
-import { LogLevel } from "./components/log-viewer";
-import { TimeInfo } from "./components/discovery/types";
+// import { LogLevel } from "./components/log-viewer";
+// import { TimeInfo } from "./components/discovery/types";
 
 export const fetchZigbeeDevicesList = (callback: CallbackHandler<Device[]>): Promise<void> => {
     return callApi("/api/zigbee/devices", "GET", {}, undefined, callback);
 };
-export const fetchTimeInfo = (callback: CallbackHandler<TimeInfo>): Promise<void> => {
-    return callApi("/api/time", "GET", {}, undefined, callback);
-};
+
 export const startInterview = (dev: string, state: number | "", callback: CallbackHandler<void>): Promise<void> => {
     return callApi("/api/zigbee", "POST", { dev, action: "setInterview", state }, undefined, callback);
 };
@@ -24,13 +22,13 @@ export const fetchLogsBuffer = (callback: CallbackHandler<string>): Promise<void
     return callApi("/api/messages-history", "GET", { action: "getBuffer" }, undefined, callback, "text");
 };
 
-export const setLogLevel = (logLevel: LogLevel, callback: CallbackHandler<ApiResponse<void>>): Promise<void> => {
-    return callApi("/api/messages-history", "POST", { action: "setLevel", value: logLevel }, undefined, callback);
-};
+// export const setLogLevel = (logLevel: LogLevel, callback: CallbackHandler<ApiResponse<void>>): Promise<void> => {
+//     return callApi("/api/messages-history", "POST", { action: "setLevel", value: logLevel }, undefined, callback);
+// };
 
-export const getCurrentLogLevel = (callback: CallbackHandler<ApiResponse<LogLevel>>): Promise<void> => {
-    return callApi("/api/messages-history", "GET", { action: "getLevel" }, undefined, callback);
-};
+// export const getCurrentLogLevel = (callback: CallbackHandler<ApiResponse<LogLevel>>): Promise<void> => {
+//     return callApi("/api/messages-history", "GET", { action: "getLevel" }, undefined, callback);
+// };
 
 export const writeFile = (path: string, content: string, callback: CallbackHandler<ApiResponse<void>>): Promise<void> => {
     return callApi("/api/files", "POST", { path }, content, callback);
