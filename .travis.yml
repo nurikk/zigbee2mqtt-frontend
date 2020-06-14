@@ -11,5 +11,6 @@ deploy:
   skip_cleanup: true
   github_token: $GITHUB_TOKEN
   local_dir: dist
-  on:
-    branch: master
+   on:
+    all_branches: true
+    condition: $TRAVIS_BRANCH =~ ^(master|z2m)$
