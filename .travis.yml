@@ -7,9 +7,17 @@ cache:
 script:
   - npm run build
 deploy:
-  provider: pages
-  skip_cleanup: true
-  github_token: $GITHUB_TOKEN
-  local_dir: dist
-  on:
-    branch: master
+  - provider: pages
+    skip_cleanup: true
+    github_token: $GITHUB_TOKEN
+    local_dir: dist
+    on:
+      branch: master
+  -
+    provider: releases
+    api_key: $GITHUB_TOKEN
+    file_glob: true
+    file: dist/*
+    skip_cleanup: true
+    on:
+      tags: true
