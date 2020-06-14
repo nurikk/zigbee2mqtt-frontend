@@ -97,6 +97,7 @@ try {
 
     client.on('message', processMessage);
 
+
     sendMessage2Z2M = (topic: string, message: string | Buffer): void => {
         client.publish(`${baseTopic}${topic}`, message);
     }
