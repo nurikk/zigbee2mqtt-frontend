@@ -1,10 +1,10 @@
 import createStore from "unistore";
 import devtools from "unistore/devtools";
-// import graph from "./graph";
-const graph: GraphI = {
-    links:[],
-    nodes: []
-};
+import graph from "./graph";
+// const graph: GraphI = {
+//     links:[],
+//     nodes: []
+// };
 
 import { BindRule, Device, FileDescriptor, TouchLinkScanApiResponse, Dictionary, DeviceStats } from "./types";
 // import { TimeInfo } from "./components/discovery/types";
@@ -15,8 +15,8 @@ import { GraphI } from "./components/map/types";
 export interface Settings {
     mqtt_host: string;
     mqtt_user: string;
+    mqtt_topic_preffix: string;
     mqtt_password: string;
-    // [k: SettingsKey]: string;
 
 }
 export interface GlobalState {

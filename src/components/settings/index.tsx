@@ -28,10 +28,8 @@ export class SettingsPage extends Component<Actions & GlobalState, SettingsPageS
     changeHandler = (event): void => {
         const name: SettingsKey = event.target.name;
         const value: string = event.target.value;
-        // debugger
         const { form } = this.state;
         this.setState({
-            //@ts-ignore
             form: {
                 ...form, ...{ [name]: value }
             }
@@ -39,10 +37,9 @@ export class SettingsPage extends Component<Actions & GlobalState, SettingsPageS
 
 
     }
-    onSubmit = (): void => {
+    onSubmit = (e: Event): void => {
+        e.preventDefault();
         const { form } = this.state;
-        console.log('form', form);
-
         localStorage.setItem('config', JSON.stringify(form));
         new Notyf().success("Saved!");
     }
@@ -56,10 +53,15 @@ export class SettingsPage extends Component<Actions & GlobalState, SettingsPageS
                     <div class="col-sm-10">
                         <div class="form-group col-md-6">
                             <label for="mqtt_host">Host and port</label>
-                            <input value={form.mqtt_host} onChange={this.changeHandler} required type="text" class="form-control" id="mqtt_host" name="mqtt_host" placeholder="mqtt://192.168.1.200:1884" />
+                            <input required value={form.mqtt_host} onChange={this.changeHandler} type="text" class="form-control" id="mqtt_host" name="mqtt_host" placeholder="mqtt://192.168.1.200:1884" />
                             <small class="form-text text-muted">
                                 This is websocket port, check for <b>Opening websockets listen socket on port</b> in moqsqitto log
 </small>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label for="mqtt_user">Topic preffix</label>
+                            <input required value={form.mqtt_topic_preffix} onChange={this.changeHandler} type="text" class="form-control" id="mqtt_topic_preffix" name="mqtt_topic_preffix" placeholder="zigbee2mqtt/" />
                         </div>
 
 

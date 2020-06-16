@@ -1,5 +1,6 @@
 declare namespace MapCssNamespace {
     export interface IMapCss {
+        BrokenLink: string;
         Coordinator: string;
         EndDevice: string;
         EndDevice2Coordinator: string;

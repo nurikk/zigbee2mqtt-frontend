@@ -1,7 +1,7 @@
 import ReconnectingWebSocket from "reconnecting-websocket";
 import { Device, Dictionary } from "./types";
 import { Notyf } from "notyf";
-import { GraphI, ZigbeeRelationship } from "./components/map/types";
+import { GraphI, ZigbeeRelationship, NodeI } from "./components/map/types";
 
 export const genDeviceDetailsLink = (deviceIdentifier: string | number): string => (`/device/${encodeURIComponent(deviceIdentifier)}`);
 
@@ -149,30 +149,42 @@ export const sanitizeGraph = (inGraph: GraphI): GraphI => {
     const existingLinks = {};
     const nodes = {};
     const links = [];
-    const linkTypes = {};
+    const nodesWithLinks = {};
+    let coordinatorNode = {} as NodeI;
+
 
     inGraph.nodes.forEach(node => {
         nodes[node.ieeeAddr] = node;
+        if (node.type == "Coordinator") {
+            coordinatorNode = node;
+        }
     });
  
 
     inGraph.links.forEach(link => {
-        const src = nodes[link.sourceIeeeAddr];
-        const dst = nodes[link.targetIeeeAddr];
+        const src: NodeI = nodes[link.sourceIeeeAddr];
+        const dst: NodeI = nodes[link.targetIeeeAddr];
 
         if (src && dst) {
             const linkType = [src.type, dst.type].sort().join('2');
-            linkTypes[linkType] = 1;
             const linkId = [link.sourceIeeeAddr, link.sourceIeeeAddr].sort().join();
-
+            nodesWithLinks[src.ieeeAddr] = 1;
+            nodesWithLinks[dst.ieeeAddr] = 1;
             if (!existingLinks[linkId]) {
                 links.push({ ...link, ...{ source: link.sourceIeeeAddr, target: link.targetIeeeAddr, linkType } });
                 existingLinks[linkId] = true;
             }
         }
-
     });
-    console.log(Object.keys(linkTypes));
+
+    inGraph.nodes.forEach(node => {
+        if (!nodesWithLinks[node.ieeeAddr]) {
+            //this node has no links, lets connect it to coordinator manually
+            // const linkType = ""
+            links.push({ source: node.ieeeAddr, target: coordinatorNode.ieeeAddr, linkType: "BrokenLink" } );
+        }
+    });
+
     inGraph.links = links;
     return inGraph;
 };

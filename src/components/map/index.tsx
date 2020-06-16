@@ -27,6 +27,8 @@ interface MapState {
 const getDistance = (d: LinkI): number => {
 
     switch (d.linkType) {
+        case "BrokenLink":
+            return 450;
         case "Router2Router":
         case "Coordinator2Router":
             return 300;
@@ -135,7 +137,7 @@ export class Map extends Component<GlobalState & Actions, MapState> {
         const repelForce = d3.forceManyBody()
             .strength(-140)
             .distanceMax(50)
-            .distanceMin(10);
+            .distanceMin(20);
 
         const collisionForce = d3.forceCollide(40)
             .strength(1)

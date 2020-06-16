@@ -1,9 +1,10 @@
 import { SimulationLinkDatum, SimulationNodeDatum } from "d3-force";
+import { DeviceType } from "../../types";
 
 export interface NodeI extends SimulationNodeDatum {
     ieeeAddr: string;
     friendlyName?: string;
-    type?: string;
+    type?: DeviceType;
     networkAddress: number;
     manufacturerName?: string;
     modelID?: string;
@@ -15,7 +16,8 @@ export type LinkType =
     "Coordinator2EndDevice" |
     "Coordinator2Router" |
     "EndDevice2Router" |
-    "Router2Router";
+    "Router2Router" |
+    "BrokenLink";
 
 export interface Source {
     ieeeAddr: string;

@@ -14,10 +14,13 @@ let sendMessage2Z2M = (topic: string, message: string | Buffer): void => {
     new Notyf().error("Not yet connected");
 }
 
-const baseTopic = 'zigbee2mqtt/';
-const cleanTopic = (topic: string): string => topic.replace(baseTopic, '');
+
+
 const { settings } = store.getState();
 try {
+    const baseTopic = settings.mqtt_topic_preffix;
+    const cleanTopic = (topic: string): string => topic.replace(baseTopic, '');
+
     const client = connect(settings.mqtt_host, {
         username: settings.mqtt_user,
         password: settings.mqtt_password,

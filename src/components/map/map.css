@@ -51,6 +51,10 @@
     fill: blue;
 }
 
+.BrokenLink {
+    stroke: red;
+    stroke-dasharray: 15;
+}
 .Router2Coordinator {
     stroke: blue;
 }
