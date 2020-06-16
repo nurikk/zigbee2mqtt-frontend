@@ -4,7 +4,7 @@
     "*.css"
   ],
   "name": "z2m-frontend",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "license": "MIT",
   "scripts": {
     "build": "npm run clean && webpack --config ./webpack.config.js --mode production",
@@ -14,9 +14,6 @@
     "clean": "rimraf ./dist",
     "deploy": "gh-pages -d dist",
     "release": "release-it"
-  },
-  "hooks": {
-    "after:bump": "npm run build"
   },
   "eslintIgnore": [
     "dist/*"

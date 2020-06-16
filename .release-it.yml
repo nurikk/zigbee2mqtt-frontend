@@ -7,3 +7,7 @@ github:
 
 npm:
   publish: false
+
+hooks:
+  "after:git:release": "npm run build"
+  "after:release": "echo Successfully released ${name} v${version} to ${repo.repository}."
