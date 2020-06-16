@@ -93,7 +93,7 @@
     }
 
     .adaptive td:nth-of-type(3):before {
-        content: "networkAddress";
+        content: "nwkAddr";
     }
 
     .adaptive td:nth-of-type(4):before {
@@ -105,34 +105,29 @@
     }
 
     .adaptive td:nth-of-type(6):before {
-        content: "manufacturerName";
+        content: "Manuf";
     }
 
     .adaptive td:nth-of-type(7):before {
-        content: "modelID";
+        content: "Model";
     }
 
     .adaptive td:nth-of-type(8):before {
-        content: "LinkQuality";
+        content: "LQI";
     }
 
+ 
     .adaptive td:nth-of-type(9):before {
-        content: "Interview";
-    }
-
-    .adaptive td:nth-of-type(10):before {
         content: "LastSeen";
     }
 
-    .adaptive td:nth-of-type(11):before {
-        content: "Routes";
-    }
+   
 
-    .adaptive td:nth-of-type(12):before {
+    .adaptive td:nth-of-type(10):before {
         content: "PS";
     }
 
-    .adaptive td:nth-of-type(13):before {
+    .adaptive td:nth-of-type(11):before {
         content: "Actions";
     }
 
@@ -144,18 +139,18 @@
 }
 
 .nwk-addr {
-    max-width: 75px;
+    /* max-width: 75px; */
 }
 
 .ieee-addr {
-    max-width: 145px;
+    /* max-width: 145px; */
     overflow: hidden;
     text-overflow: ellipsis;
-    direction: rtl;
+    /* direction: rtl; */
 }
 
 .manu-name {
-    max-width: 75px;
+    /* max-width: 75px; */
 }
 
 .device-pic {

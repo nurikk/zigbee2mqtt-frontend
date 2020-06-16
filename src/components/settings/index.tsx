@@ -49,7 +49,7 @@ export class SettingsPage extends Component<Actions & GlobalState, SettingsPageS
     render(): ComponentChild {
         const { form } = this.state;
 
-        return <form onSubmit={this.onSubmit}>
+        return <div className="container"><form onSubmit={this.onSubmit}>
             <fieldset class="form-group">
                 <div class="row">
                     <legend class="col-form-label col-sm-2 pt-0">Mqtt connetion</legend>
@@ -78,6 +78,7 @@ export class SettingsPage extends Component<Actions & GlobalState, SettingsPageS
             <button type="submit" class="btn btn-primary">Submit</button>
 
         </form>
+        </div>
 
     }
 }

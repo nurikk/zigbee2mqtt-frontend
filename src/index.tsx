@@ -13,11 +13,11 @@ if (process.env.NODE_ENV === 'development') {
 // const poly = require("preact-cli/lib/lib/webpack/polyfills");
 import "notyf/notyf.min.css";
 
-import { render,  h, FunctionalComponent } from 'preact';
+import { render, h, Component, ComponentChild, Fragment } from 'preact';
 
 import ConnectedMap from "./components/map";
 import ConnectedZigbeeTable from "./components/zigbee";
-import Router, { CustomHistory } from 'preact-router';
+import Router, { CustomHistory, route } from 'preact-router';
 
 // import ConnectedDiscovery from "./components/discovery";
 // import ConnectedLogViewer from "./components/log-viewer";
@@ -32,29 +32,48 @@ import { createHashHistory } from 'history';
 
 import './mqtt';
 import ConnectedSettingsPage from "./components/settings";
+import NavBar from "./components/navbar";
 
 
+class Main extends Component {
+    settingsConfigured(): boolean {
+        const { settings } = store.getState();
+        return !!settings.mqtt_host;
+    }
+    handleRoute = (e): void => {
 
+        switch (e.url) {
+            case '/settings':
+                break;
+            default:
+                if (!this.settingsConfigured()) {
 
+                    route('/settings', true);
+                }
+                break;
+        }
+    };
 
+    render(): ComponentChild {
+        return (
+            <Provider store={store}>
+                <Fragment>
+                    <NavBar />
+                    <Router history={(createHashHistory() as unknown as CustomHistory)} onChange={this.handleRoute}>
+                        <ConnectedZigbeeTable path="/" />
+                        <ConnectedMap path="/map" />
+                        <ConnectedDevicePage path="/device/:dev" />
+                        <ConnectedSettingsPage path="/settings" />
+                    </Router>
+                </Fragment>
 
-// const DevicePageApp: FunctionalComponent<{}> = () => (
-//     <Provider store={store}><ConnectedDevicePage /></Provider>
-// );
+            </Provider>
 
+        );
+    }
 
+}
 
-const Main: FunctionalComponent<{}> = () => (
-    <Provider store={store}>
-        <Router history={(createHashHistory() as unknown as CustomHistory)}>
-            <ConnectedZigbeeTable path="/" />
-            <ConnectedMap path="/map" />
-            <ConnectedDevicePage path="/device/:dev" />
-            <ConnectedSettingsPage path="/settings" />
-        </Router>
-    </Provider>
-
-);
 
 render(<Main />, document.body);
 

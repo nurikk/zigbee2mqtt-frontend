@@ -6,6 +6,7 @@ import {
 import store from "./store";
 
 import { Notyf } from 'notyf';
+import { toD3 } from './components/map';
 
 let sendMessage2Z2M = (topic: string, message: string | Buffer) => {
     new Notyf().error("Not yet connected");
@@ -74,7 +75,7 @@ try {
             case 'bridge/networkmap/raw':
                 store.setState({
                     isLoading: false,
-                    networkGraph: JSON.parse(message.toString())
+                    networkGraph: toD3(JSON.parse(message.toString()))
                 });
                 break;
 

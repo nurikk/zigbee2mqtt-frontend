@@ -1,5 +1,4 @@
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const CompressionPlugin = require('compression-webpack-plugin');
@@ -19,14 +18,7 @@ module.exports = (env, args) => {
 	}
 
 	const plugins = [
-		new MiniCssExtractPlugin(),
-
-		new CopyWebpackPlugin({
-			patterns: [{
-				from: '**/*',
-				context: './api-mocks/'
-			}]
-		})
+		new MiniCssExtractPlugin()
 	];
 	const basePath = 'src/templates';
 	glob.sync(`${basePath}/**/*.html`).forEach((item) => {
@@ -38,10 +30,10 @@ module.exports = (env, args) => {
 		)
 	});
 	if (production) {
-		plugins.push(new BundleAnalyzerPlugin({
-			analyzerMode: 'static'
-		}));
-		plugins.push(new CompressionPlugin());
+		// plugins.push(new BundleAnalyzerPlugin({
+		// 	analyzerMode: 'static'
+		// }));
+		// plugins.push(new CompressionPlugin());
 	} else {
 		plugins.push(new ForkTsCheckerWebpackPlugin());
 	}
@@ -52,7 +44,7 @@ module.exports = (env, args) => {
 			'scripts/main': './src/index.tsx',
 		},
 		output: {
-			filename: '[name].[hast].js',
+			filename: '[name].[hash].js',
 			path: path.resolve('./dist'),
 		},
 		target: 'web',

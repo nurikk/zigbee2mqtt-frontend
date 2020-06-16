@@ -146,3 +146,5 @@ export const lastSeen = (device: Device): string => {
 export const isObject = (obj: unknown): boolean => {
     return obj === Object(obj);
 }
+
+

@@ -27,10 +27,8 @@ export default class ActionTH<T> extends Component<ActionTHProps<T>, {}> {
         if (current === column) {
             if (currentDirection == "asc") {
                 return <i className={`fa fa-sort-amount-down-alt`} />;
-            } else  {
-                return <i className={`fa fa-sort-amount-down`} />;
             }
-
+            return <i className={`fa fa-sort-amount-down`} />;
         }
         return <i className={`fa fa-sort-amount-down ${style.invisible}`} />;
 
@@ -40,7 +38,7 @@ export default class ActionTH<T> extends Component<ActionTHProps<T>, {}> {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { children, onClick, current, column, ...rest } = this.props;
         return <th {...rest}>
-            <a href="#" onClick={this.onClick}>{children}</a>
+            <span className="btn btn-link" onClick={this.onClick}>{children}</span>
             {this.renderArrow()}
         </th>;
     }

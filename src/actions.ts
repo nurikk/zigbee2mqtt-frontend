@@ -75,6 +75,9 @@ export interface Actions {
     touchlinkList(): Promise<void>;
     touchlinkIdentify(dev: string): Promise<void>;
     touchlinkRest(dev: string): Promise<void>;
+
+
+    networkMapRequest(): Promise<void>;
 }
 
 const actions = (store: Store<GlobalState>): object => ({
@@ -232,38 +235,10 @@ const actions = (store: Store<GlobalState>): object => ({
             });
         });
     },
-    async getFilesList(state, path: string): Promise<void> {
-        store.setState({ isLoading: true });
-        await callApi<ApiResponse<FileDescriptor[]>>("/api/files", "GET", { path }, undefined, (err, res) => {
-            store.setState({
-                isLoading: false,
-                isError: err,
-                files: orderBy(res.result, ["name"])
-            });
-        })
-    },
 
-    async readFile(state, file: FileDescriptor): Promise<void> {
-        store.setState({ isLoading: true });
-        await callApi<string>("/api/files", "GET", { path: file.name }, undefined, (err, response) => {
-            store.setState({
-                isLoading: false,
-                isError: err,
-                currentFileContent: response,
-                currentFile: file
-            });
-        }, "text");
-    },
 
-    deleteFile(state, file: FileDescriptor): Promise<void> {
-        store.setState({ isLoading: true });
-        return callApi<void>("/api/files", "DELETE", { path: file.name }, undefined, (err, response) => {
-            store.setState({
-                isLoading: false,
-                isError: err
-            });
-        });
-    },
+ 
+
     renameDevice: (state, old: string, newName: string): Promise<void> => {
         store.setState({ isLoading: true });
         sendMessage2Z2M('bridge/config/rename', JSON.stringify({
@@ -282,19 +257,10 @@ const actions = (store: Store<GlobalState>): object => ({
         return Promise.resolve();
     },
 
-
-    refreshState: (state, dev: string, name: string): Promise<void> => {
+    networkMapRequest: (state): Promise<void> => {
         store.setState({ isLoading: true });
-        const params = {
-            dev, name,
-            action: 'getState'
-        }
-        return callApi<ApiResponse<void>>("/api/zigbee", "GET", params, undefined, (err, res) => {
-            store.setState({
-                isLoading: false,
-                isError: err
-            });
-        });
+        sendMessage2Z2M('bridge/networkmap', 'raw');
+        return Promise.resolve();
     },
 
     touchlinkScan: (state): Promise<void> => {
