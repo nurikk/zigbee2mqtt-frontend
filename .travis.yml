@@ -13,10 +13,3 @@ deploy:
     local_dir: dist
     on:
       branch: master
-  -
-    provider: releases
-    api_key: $GITHUB_TOKEN
-    file: dist/release.zip
-    skip_cleanup: true
-    on:
-      branch: master
