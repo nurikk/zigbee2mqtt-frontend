@@ -4,7 +4,7 @@
     "*.css"
   ],
   "name": "z2m-frontend",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "MIT",
   "scripts": {
     "build": "npm run clean && webpack --config ./webpack.config.js --mode production",
