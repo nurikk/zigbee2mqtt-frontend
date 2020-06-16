@@ -6,9 +6,11 @@ import {
 import store from "./store";
 
 import { Notyf } from 'notyf';
-import { toD3 } from './components/map';
+import { sanitizeGraph } from './utils';
 
-let sendMessage2Z2M = (topic: string, message: string | Buffer) => {
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+let sendMessage2Z2M = (topic: string, message: string | Buffer): void => {
     new Notyf().error("Not yet connected");
 }
 
@@ -75,7 +77,7 @@ try {
             case 'bridge/networkmap/raw':
                 store.setState({
                     isLoading: false,
-                    networkGraph: toD3(JSON.parse(message.toString()))
+                    networkGraph: sanitizeGraph(JSON.parse(message.toString()))
                 });
                 break;
 

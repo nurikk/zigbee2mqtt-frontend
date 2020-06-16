@@ -20,14 +20,12 @@ class Link extends Component<LinkProps, {}> {
 
     render(): ComponentChild {
         const { link, id, ...rest } = this.props;
-        
-        // const linkType = link.type as string;
-        // debugger
+        const { linkType } = link;
         return (
             <path
                 id={id}
                 {...rest}
-                className={cx(style.link)}
+                className={cx(style.link, style[linkType])}
                 ref={this.ref as RefObject<SVGPathElement>}
                 strokeWidth={1}
             />
@@ -52,10 +50,9 @@ class LinkLabel extends Component<LinkLabelProps, {}> {
         const { link, xlinkHref } = this.props;
         /* eslint-disable @typescript-eslint/ban-ts-ignore */
         //@ts-ignore
-        const textPath = <textPath startOffset="50%" xlinkHref={xlinkHref}>{link.linkQuality}</textPath>;
+        const textPath = <textPath startOffset="50%" xlinkHref={xlinkHref}>{link.linkquality}</textPath>;
         return (
             <text
-                filter={"url(#solid)"}
                 className={style.linkLabel}
                 ref={this.ref}
                 dy={4}

@@ -12,11 +12,10 @@ export interface NodeI extends SimulationNodeDatum {
 }
 
 export type LinkType =
-    | "Router2Coordinator"
-    | "Router2Router"
-    | "EndDevice2Coordinator"
-    | "EndDevice2Router";
-
+    "Coordinator2EndDevice" |
+    "Coordinator2Router" |
+    "EndDevice2Router" |
+    "Router2Router";
 
 export interface Source {
     ieeeAddr: string;
@@ -27,7 +26,13 @@ export interface Target {
     ieeeAddr: string;
     networkAddress: number;
 }
-
+export enum ZigbeeRelationship {
+    NeigbhorIsParent,
+    NeigbhorIsAChild,
+    NeigbhorIsASibling,
+    NoneOfTheAbove,
+    NeigbhorIsAFormerChild
+}
 
 export interface LinkI extends SimulationLinkDatum<NodeI> {
     source: Source | string;
@@ -39,7 +44,8 @@ export interface LinkI extends SimulationLinkDatum<NodeI> {
     targetIeeeAddr: string;
     sourceNwkAddr: number;
     lqi: number;
-    relationship: number;
+    relationship: ZigbeeRelationship;
+    linkType: LinkType;
 }
 
 export interface GraphI {

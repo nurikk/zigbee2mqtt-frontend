@@ -1,5 +1,10 @@
 import createStore from "unistore";
 import devtools from "unistore/devtools";
+// import graph from "./graph";
+const graph: GraphI = {
+    links:[],
+    nodes: []
+};
 
 import { BindRule, Device, FileDescriptor, TouchLinkScanApiResponse, Dictionary, DeviceStats } from "./types";
 // import { TimeInfo } from "./components/discovery/types";
@@ -77,11 +82,7 @@ const initialState: GlobalState = {
     currentFile: null,
     touchlinkResuts: null,
     touchlinkScanInProgress: false,
-
-    networkGraph: {
-        nodes: [],
-        links: []
-    }
+    networkGraph: graph
 };
 
 const store = process.env.NODE_ENV === 'production' ? createStore(initialState) : devtools(createStore(initialState));

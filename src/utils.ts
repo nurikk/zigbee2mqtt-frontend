@@ -1,6 +1,7 @@
 import ReconnectingWebSocket from "reconnecting-websocket";
 import { Device, Dictionary } from "./types";
 import { Notyf } from "notyf";
+import { GraphI, ZigbeeRelationship } from "./components/map/types";
 
 export const genDeviceDetailsLink = (deviceIdentifier: string | number): string => (`/device/${encodeURIComponent(deviceIdentifier)}`);
 
@@ -141,6 +142,39 @@ export const lastSeen = (device: Device): string => {
     }
     return toHHMMSS(lastSeen / 1000);
 
+};
+
+
+export const sanitizeGraph = (inGraph: GraphI): GraphI => {
+    const existingLinks = {};
+    const nodes = {};
+    const links = [];
+    const linkTypes = {};
+
+    inGraph.nodes.forEach(node => {
+        nodes[node.ieeeAddr] = node;
+    });
+ 
+
+    inGraph.links.forEach(link => {
+        const src = nodes[link.sourceIeeeAddr];
+        const dst = nodes[link.targetIeeeAddr];
+
+        if (src && dst) {
+            const linkType = [src.type, dst.type].sort().join('2');
+            linkTypes[linkType] = 1;
+            const linkId = [link.sourceIeeeAddr, link.sourceIeeeAddr].sort().join();
+
+            if (!existingLinks[linkId]) {
+                links.push({ ...link, ...{ source: link.sourceIeeeAddr, target: link.targetIeeeAddr, linkType } });
+                existingLinks[linkId] = true;
+            }
+        }
+
+    });
+    console.log(Object.keys(linkTypes));
+    inGraph.links = links;
+    return inGraph;
 };
 
 export const isObject = (obj: unknown): boolean => {

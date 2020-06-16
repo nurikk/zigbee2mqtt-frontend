@@ -3,7 +3,7 @@ import Links from "./links";
 import Nodes from "./nodes";
 import * as d3 from "d3";
 import style from "./map.css";
-import { LinkI, NodeI, GraphI } from "./types";
+import { LinkI, NodeI } from "./types";
 import Tooltip from "./tooltip";
 import { genDeviceDetailsLink } from "../../utils";
 import { connect } from "unistore/preact";
@@ -24,18 +24,19 @@ interface MapState {
 
 }
 
-// const getDistance = (d: LinkI): number => {
-//     switch (d.type) {
-//         case "Router2Router":
-//         case "Router2Coordinator":
-//             return 300;
-//         case "EndDevice2Coordinator":
-//         case "EndDevice2Router":
-//             return 150;
-//         default:
-//             return 200;
-//     }
-// };
+const getDistance = (d: LinkI): number => {
+
+    switch (d.linkType) {
+        case "Router2Router":
+        case "Coordinator2Router":
+            return 300;
+        case "Coordinator2EndDevice":
+        case "EndDevice2Router":
+            return 150;
+        default:
+            return 200;
+    }
+};
 
 export class Map extends Component<GlobalState & Actions, MapState> {
     ref = createRef<HTMLDivElement>();
@@ -124,7 +125,7 @@ export class Map extends Component<GlobalState & Actions, MapState> {
 
         const linkForce = d3.forceLink<NodeI, LinkI>()
             .id(d => d.ieeeAddr)
-            .distance(d => d.linkquality)
+            .distance(getDistance)
             .strength(0.2);
         const chargeForce = d3.forceManyBody()
             .distanceMin(200)
@@ -221,24 +222,8 @@ export class Map extends Component<GlobalState & Actions, MapState> {
         );
     }
 }
-export const toD3 = (inGraph: GraphI): GraphI => {
 
-    const nodes = {};
-    const links = [];
 
-    inGraph.nodes.forEach(node => {
-        nodes[node.ieeeAddr] = true;
-    });
-
-    inGraph.links.forEach(link => {
-        if (nodes[link.sourceIeeeAddr] && nodes[link.targetIeeeAddr]) {
-            links.push({ ...link, ...{ source: link.sourceIeeeAddr, target: link.targetIeeeAddr } });
-        }
-
-    });
-    inGraph.links = links;
-    return inGraph;
-};
 const mappedProps = ["networkGraph", "isLoading"];
 const ConnectedMap = connect<{}, MapState, GlobalState, Actions>(mappedProps, actions)(Map);
 export default ConnectedMap;
