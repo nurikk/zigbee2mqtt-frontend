@@ -16,8 +16,7 @@ deploy:
   -
     provider: releases
     api_key: $GITHUB_TOKEN
-    file_glob: true
-    file: dist/*
+    file: dist/release.zip
     skip_cleanup: true
     on:
       branch: master

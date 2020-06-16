@@ -3,6 +3,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const CompressionPlugin = require('compression-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+var ZipPlugin = require('zip-webpack-plugin');
+
 
 const path = require('path');
 const glob = require('glob');
@@ -34,6 +36,12 @@ module.exports = (env, args) => {
 		// 	analyzerMode: 'static'
 		// }));
 		// plugins.push(new CompressionPlugin());
+
+		plugins.push(new ZipPlugin({
+			// OPTIONAL: defaults to the Webpack output path (above)
+			// can be relative (to Webpack output path) or absolute
+			filename: 'release.zip',
+		}));
 	} else {
 		plugins.push(new ForkTsCheckerWebpackPlugin());
 	}
