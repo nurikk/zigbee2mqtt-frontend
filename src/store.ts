@@ -1,10 +1,10 @@
 import createStore from "unistore";
 import devtools from "unistore/devtools";
-import graph from "./graph";
-// const graph: GraphI = {
-//     links:[],
-//     nodes: []
-// };
+// import graph from "./graph";
+const graph: GraphI = {
+    links:[],
+    nodes: []
+};
 
 import { BindRule, Device, FileDescriptor, TouchLinkScanApiResponse, Dictionary, DeviceStats } from "./types";
 // import { TimeInfo } from "./components/discovery/types";
