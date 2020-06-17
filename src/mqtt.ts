@@ -20,12 +20,17 @@ const { settings } = store.getState();
 try {
     const baseTopic = settings.mqtt_topic_preffix;
     const cleanTopic = (topic: string): string => topic.replace(baseTopic, '');
+    const connectionProps = {
+    };
+    if (settings.mqtt_user) {
+        connectionProps['username'] = settings.mqtt_user;
+    }
+    if (settings.mqtt_password) {
+        connectionProps['password'] = settings.mqtt_password;
+    }
 
-    const client = connect(settings.mqtt_host, {
-        username: settings.mqtt_user,
-        password: settings.mqtt_password,
-        protocolVersion: 5
-    });
+
+    const client = connect(settings.mqtt_host, connectionProps);
 
     client.on('connect', () => {
         client.subscribe(`${baseTopic}#`, { rh: 1, rap: true, qos: 2 }, (err) => {
