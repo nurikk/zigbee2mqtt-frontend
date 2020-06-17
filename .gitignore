@@ -2,3 +2,10 @@ node_modules
 /build
 /*.log
 dist
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+out/
