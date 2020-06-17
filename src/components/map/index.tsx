@@ -1,4 +1,4 @@
-import { Component, ComponentChild, createRef, h, Fragment } from "preact";
+import { Component, ComponentChild, createRef, h } from "preact";
 import Links from "./links";
 import Nodes from "./nodes";
 import * as d3 from "d3";
@@ -46,8 +46,8 @@ const getDistance = (d: LinkI): number => {
             distance = 200;
             break;
     }
-    // console.log('distance', 20 * d.depth + distance);
-    return distance;
+    const depth = ~~(Math.min(4, d.depth));
+    return  50 * depth + distance;
 };
 
 export class Map extends Component<GlobalState & Actions, MapState> {
