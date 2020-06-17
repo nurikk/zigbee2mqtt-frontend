@@ -25,19 +25,29 @@ interface MapState {
 }
 
 const getDistance = (d: LinkI): number => {
-
+    let distance = 200;
     switch (d.linkType) {
         case "BrokenLink":
-            return 450;
+            distance = 450;
+            break;
         case "Router2Router":
+            distance = 300;
+            break;
         case "Coordinator2Router":
-            return 300;
+            distance = 300;
+            break;
         case "Coordinator2EndDevice":
+            distance = 150;
+            break;
         case "EndDevice2Router":
-            return 150;
+            distance = 150;
+            break;
         default:
-            return 200;
+            distance = 200;
+            break;
     }
+    // console.log('distance', 20 * d.depth + distance);
+    return distance;
 };
 
 export class Map extends Component<GlobalState & Actions, MapState> {
@@ -141,7 +151,7 @@ export class Map extends Component<GlobalState & Actions, MapState> {
 
         const collisionForce = d3.forceCollide(40)
             .strength(1)
-            .iterations(100);
+            .iterations(50);
 
         const centerForce = d3.forceCenter(width / 2, height / 2);
 
@@ -198,18 +208,59 @@ export class Map extends Component<GlobalState & Actions, MapState> {
     }
     renderMessage(): ComponentChild {
         const { isLoading } = this.props;
-        return (<div class="container">
-            {
-                isLoading ? (
-                    "Loading, please wait.Depending on the size of your network this can take somewhere between 10 seconds and 2 minutes.") : (
-                        <Fragment>No map data.
-                            <button onClick={this.onRequestClick} className="btn btn-primary">Requests?</button>
-                        </Fragment>
 
-                    )
-            }
+        return (
+            <div class="container h-100">
+                <div class="row h-100 justify-content-center align-items-center">
+                    {
+                        isLoading ? (
 
-        </div>);
+                            <div class=" justify-content-center align-items-centerr">
+                                <div class="row">
+                                    <div class="col-12">
+                                        Loading, please wait.
+                                        <div class="spinner-border" role="status">
+                                            <span class="sr-only">Loading...</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        Depending on the size of your network this can take somewhere between 10 seconds and 2 minutes.
+                                        </div>
+                                </div>
+
+                            </div>
+                        ) : (
+                                <div class=" justify-content-center align-items-centerr">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            No map data.
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <button onClick={this.onRequestClick} className="btn btn-primary d-block">Requests?</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            )
+                    }
+                </div>
+            </div>
+        )
+        // return (<div class="container">
+        //     {
+        //         isLoading ? (
+        //             "Loading, please wait.Depending on the size of your network this can take somewhere between 10 seconds and 2 minutes.") : (
+        //                 <Fragment>No map data.
+        //                     <button onClick={this.onRequestClick} className="btn btn-primary">Requests?</button>
+        //                 </Fragment>
+
+        //             )
+        //     }
+
+        // </div>);
     }
     render(): ComponentChild {
         const { networkGraph } = this.props;

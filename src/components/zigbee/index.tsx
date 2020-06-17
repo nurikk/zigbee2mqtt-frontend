@@ -107,14 +107,22 @@ export class ZigbeeTable extends Component<Actions & GlobalState, ZigbeeTableSta
 
     render(): ComponentChild {
         const { devices, isLoading } = this.props;
-        if (isLoading) {
-            return <div className="d-flex justify-content-center">
-                <div className="spinner-border" role="status">
-                    <span className="sr-only">Loading...</span>
-                </div>
-            </div>;
+        if (devices.length) {
+            return this.renderDevicesTable();
+
         }
-        return (devices.length ? this.renderDevicesTable() : <div>No data</div>);
+        return <div class="container h-100"><div class="row h-100 justify-content-center align-items-center">
+
+            {isLoading ? (<div class="row ">
+                <div class="col-12">
+                    Loading, please wait.
+                                        <div class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+            </div>) : 'No data'}
+        </div></div>
+
     }
 
 

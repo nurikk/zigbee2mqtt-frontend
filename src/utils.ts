@@ -27,19 +27,8 @@ export function chunkArray<T>(inputArr: T[], chunkSize: number): T[][] {
 
 export const encodeGetParams = (data: Dictionary<string | number>): string => Object.keys(data).map((key) => [key, data[key]].map(encodeURIComponent).join("=")).join("&");
 
-export const WSConnect = (): ReconnectingWebSocket => {
-    const { hostname } = document.location;
-    if (hostname === "localhost") {
-        const { search } = document.location;
-        if (search.indexOf("gate") > 0) {
-            return new ReconnectingWebSocket(`ws://192.168.1.209:81/log`);
-        }
-        return new ReconnectingWebSocket(`ws://localhost:8579`);
-    } else return new ReconnectingWebSocket(`ws://${document.location.hostname}:81/log`);
-};
-
 export const sanitizeModelNameForImageUrl = (modelName: string): string => {
-    return modelName ? modelName.replace("/", "_") : null;
+    return encodeURIComponent(modelName ? modelName.replace("/", "_") : null);
 };
 
 export const genDeviceImageUrl = (modelID: string): string => (`https://raw.githubusercontent.com/slsys/Gateway/master/devices/png/${sanitizeModelNameForImageUrl(modelID)}.png`);
@@ -57,7 +46,7 @@ export const fetchJs = (url: string): Promise<unknown> => {
     });
 };
 
-export const fetchStyle = (url) => {
+export const fetchStyle = (url: string): Promise<unknown> => {
     return new Promise((resolve, reject) => {
         const link = document.createElement("link");
         link.addEventListener("load", resolve);
@@ -69,10 +58,10 @@ export const fetchStyle = (url) => {
     });
 };
 
-export function last<T>(collection: T[]) {
+export function last<T>(collection: T[]): T {
     return collection[collection.length - 1];
 }
-export function arrayUnique<T>(input: T[]) {
+export function arrayUnique<T>(input: T[]): T[] {
     return input.filter((v, i, a) => a.indexOf(v) === i);
 }
 

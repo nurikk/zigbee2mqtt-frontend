@@ -8,8 +8,6 @@ const graph: GraphI = {
 };
 
 import { BindRule, Device, FileDescriptor, TouchLinkScanApiResponse, Dictionary, DeviceStats } from "./types";
-// import { TimeInfo } from "./components/discovery/types";
-
 import { ApiResponse, isObject } from "./utils";
 import { GraphI } from "./components/map/types";
 
