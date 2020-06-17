@@ -146,12 +146,16 @@ export const lastSeen = (device: Device): string => {
 
 
 export const sanitizeGraph = (inGraph: GraphI): GraphI => {
-    const existingLinks = {};
     const nodes = {};
     const links = [];
     const nodesWithLinks = {};
     let coordinatorNode = {} as NodeI;
 
+    const properRelations: ZigbeeRelationship[] = [
+        ZigbeeRelationship.NeigbhorIsAChild,
+        ZigbeeRelationship.NeigbhorIsParent,
+        // ZigbeeRelationship.NoneOfTheAbove
+    ];
 
     inGraph.nodes.forEach(node => {
         nodes[node.ieeeAddr] = node;
@@ -159,21 +163,18 @@ export const sanitizeGraph = (inGraph: GraphI): GraphI => {
             coordinatorNode = node;
         }
     });
- 
+
 
     inGraph.links.forEach(link => {
         const src: NodeI = nodes[link.sourceIeeeAddr];
         const dst: NodeI = nodes[link.targetIeeeAddr];
 
-        if (src && dst) {
+        if (src && dst && properRelations.includes(link.relationship)) {
             const linkType = [src.type, dst.type].sort().join('2');
-            const linkId = [link.sourceIeeeAddr, link.sourceIeeeAddr].sort().join();
             nodesWithLinks[src.ieeeAddr] = 1;
             nodesWithLinks[dst.ieeeAddr] = 1;
-            if (!existingLinks[linkId]) {
-                links.push({ ...link, ...{ source: link.sourceIeeeAddr, target: link.targetIeeeAddr, linkType } });
-                existingLinks[linkId] = true;
-            }
+
+            links.push({ ...link, ...{ source: link.sourceIeeeAddr, target: link.targetIeeeAddr, linkType } });
         }
     });
 
@@ -181,7 +182,7 @@ export const sanitizeGraph = (inGraph: GraphI): GraphI => {
         if (!nodesWithLinks[node.ieeeAddr]) {
             //this node has no links, lets connect it to coordinator manually
             // const linkType = ""
-            links.push({ source: node.ieeeAddr, target: coordinatorNode.ieeeAddr, linkType: "BrokenLink" } );
+            links.push({ source: node.ieeeAddr, target: coordinatorNode.ieeeAddr, linkType: "BrokenLink" });
         }
     });
 
