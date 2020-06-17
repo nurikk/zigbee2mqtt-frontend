@@ -1,7 +1,8 @@
 import ReconnectingWebSocket from "reconnecting-websocket";
 import { Device, Dictionary } from "./types";
 import { Notyf } from "notyf";
-import { GraphI, ZigbeeRelationship, NodeI } from "./components/map/types";
+import { GraphI, ZigbeeRelationship, NodeI, Target, Source } from "./components/map/types";
+import { link } from "./components/map/map.css";
 
 export const genDeviceDetailsLink = (deviceIdentifier: string | number): string => (`/device/${encodeURIComponent(deviceIdentifier)}`);
 
@@ -150,39 +151,49 @@ export const sanitizeGraph = (inGraph: GraphI): GraphI => {
     const links = [];
     const nodesWithLinks = {};
     let coordinatorNode = {} as NodeI;
+    const filteredOutLinks = [];
+    const siblings = [];
 
-    const properRelations: ZigbeeRelationship[] = [
-        ZigbeeRelationship.NeigbhorIsAChild,
-        ZigbeeRelationship.NeigbhorIsParent,
-        // ZigbeeRelationship.NoneOfTheAbove
-    ];
 
     inGraph.nodes.forEach(node => {
-        nodes[node.ieeeAddr] = node;
+        nodes[node.networkAddress] = node;
         if (node.type == "Coordinator") {
             coordinatorNode = node;
         }
     });
+    inGraph.links = inGraph.links.sort((a, b) => a.relationship - b.relationship);
 
 
     inGraph.links.forEach(link => {
-        const src: NodeI = nodes[link.sourceIeeeAddr];
-        const dst: NodeI = nodes[link.targetIeeeAddr];
+        const src: NodeI = nodes[(link.source as Source).networkAddress];
+        const dst: NodeI = nodes[(link.target as Target).networkAddress];
 
-        if (src && dst && properRelations.includes(link.relationship)) {
+        if (src && dst && link.relationship != ZigbeeRelationship.NeigbhorIsASibling) {
             const linkType = [src.type, dst.type].sort().join('2');
-            nodesWithLinks[src.ieeeAddr] = 1;
-            nodesWithLinks[dst.ieeeAddr] = 1;
+            nodesWithLinks[src.networkAddress] = 1;
+            nodesWithLinks[dst.networkAddress] = 1;
 
-            links.push({ ...link, ...{ source: link.sourceIeeeAddr, target: link.targetIeeeAddr, linkType } });
+            links.push({ ...link, ...{ source: (link.source as Source).networkAddress, target: (link.target as Target).networkAddress, linkType } });
+        } else {
+            switch (link.relationship) {
+                case ZigbeeRelationship.NeigbhorIsASibling:
+                    siblings.push(link)
+                    break;
+                default:
+                    filteredOutLinks.push(link);
+                    break;
+            }
+
         }
     });
+    console.log('siblings', siblings);
+    console.log('filteredOutLinks', filteredOutLinks);
 
     inGraph.nodes.forEach(node => {
-        if (!nodesWithLinks[node.ieeeAddr]) {
+        if (!nodesWithLinks[node.networkAddress]) {
             //this node has no links, lets connect it to coordinator manually
             // const linkType = ""
-            links.push({ source: node.ieeeAddr, target: coordinatorNode.ieeeAddr, linkType: "BrokenLink" });
+            links.push({ source: node.networkAddress, target: coordinatorNode.networkAddress, linkType: "BrokenLink" });
         }
     });
 

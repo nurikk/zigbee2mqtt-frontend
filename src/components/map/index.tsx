@@ -126,7 +126,7 @@ export class Map extends Component<GlobalState & Actions, MapState> {
         const { width, height } = this.state;
 
         const linkForce = d3.forceLink<NodeI, LinkI>()
-            .id(d => d.ieeeAddr)
+            .id(d => d.networkAddress.toString())
             .distance(getDistance)
             .strength(0.2);
         const chargeForce = d3.forceManyBody()
@@ -213,10 +213,6 @@ export class Map extends Component<GlobalState & Actions, MapState> {
     }
     render(): ComponentChild {
         const { networkGraph } = this.props;
-
-        console.log('graph', networkGraph);
-
-
         return (
             <div className={style.container} ref={this.ref}>
                 {networkGraph.nodes.length ? this.renderMap() : this.renderMessage()}

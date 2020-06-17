@@ -1,6 +1,7 @@
 import createStore from "unistore";
 import devtools from "unistore/devtools";
-// import graph from "./graph";
+// import graph from "./to4ko";
+// import graph from "./hackercb";
 const graph: GraphI = {
     links:[],
     nodes: []
