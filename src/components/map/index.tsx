@@ -34,13 +34,13 @@ const getDistance = (d: LinkI): number => {
             distance = 300;
             break;
         case "Coordinator2Router":
-            distance = 300;
+            distance = 400;
             break;
         case "Coordinator2EndDevice":
-            distance = 150;
+            distance = 100;
             break;
         case "EndDevice2Router":
-            distance = 150;
+            distance = 100;
             break;
         default:
             distance = 200;
