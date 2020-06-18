@@ -59,7 +59,7 @@ try {
                 break;
 
             default:
-                new Notyf().success(JSON.stringify(message));
+                new Notyf().success(message.type);
                 break;
         }
     }
