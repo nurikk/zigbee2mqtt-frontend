@@ -80,7 +80,7 @@ class DeviceGroup extends Component<DeviceGroupPropts, {}> {
                     <th scope="col">friendlyName</th>
                     <th scope="col">ieeeAddr</th>
                     <th scope="col">Endpint</th>
-                    <th scope="col">Action</th>
+                    <th scope="col" className="text-right">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -182,17 +182,17 @@ export class GroupsPage extends Component<Actions & GlobalState, GroupsPageState
             <div id="accordion">
                 {
                     groups.map(group => (
-                        <div class="card">
+                        <div class="card mb-1">
                             <div class="card-header" id={`heading${group.ID}`}>
                                 <h5 class="mb-0">
-                                    <button class="btn btn-link btn-sm" data-toggle="collapse" data-target={`#group${group.ID}`} aria-expanded="true" aria-controls={`group${group.ID}`} >
-                                        {group.friendly_name} ({group.ID})
+                                    <button class="btn btn-link btn-sm">
+                                        {group.friendly_name} (#{group.ID})
                                     </button>
                                     <Button<string> item={group.friendly_name} onClick={this.removeGroup} className="btn btn-danger btn-sm float-right"><i className="fa fa-trash" /></Button>
                                 </h5>
                             </div>
 
-                            <div id={`group${group.ID}`} class="collapse show" aria-labelledby={`heading${group.ID}`} data-parent="#accordion">
+                            <div>
                                 <div class="card-body">
                                     <DeviceGroup group={group} devices={devices} removeDeviceFromGroup={this.removeDeviceFromGroup} />
                                 </div>
