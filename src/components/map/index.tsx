@@ -10,6 +10,7 @@ import { connect } from "unistore/preact";
 import { GlobalState } from "../../store";
 import actions, { Actions } from "../../actions";
 import { useEffect } from "preact/hooks";
+import Button from "../button";
 
 export interface MouseEventsResponderNode {
     onMouseOver?: (arg0: NodeI) => void;
@@ -240,7 +241,7 @@ export class Map extends Component<GlobalState & Actions, MapState> {
                                     </div>
                                     <div class="row">
                                         <div class="col-12">
-                                            <button onClick={this.onRequestClick} className="btn btn-primary d-block">Requests?</button>
+                                            <Button onClick={this.onRequestClick} className="btn btn-primary d-block">Requests?</Button>
                                         </div>
                                     </div>
                                 </div>

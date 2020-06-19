@@ -194,4 +194,4 @@ export const isObject = (obj: unknown): boolean => {
     return obj === Object(obj);
 }
 
-
+export const noCoordinator = (device: Device): boolean => device.type !== "Coordinator";

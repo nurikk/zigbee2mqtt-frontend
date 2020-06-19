@@ -4,7 +4,7 @@ import orderBy from "lodash/orderBy";
 import DeviceControlGroup from "../device-control";
 import cx from "classnames";
 import { Device, SortDirection } from "../../types";
-import { genDeviceDetailsLink, genDeviceImageUrl, lastSeen, toHex } from "../../utils";
+import { genDeviceDetailsLink, genDeviceImageUrl, lastSeen, toHex, noCoordinator } from "../../utils";
 import SafeImg from "../safe-image";
 import { Notyf } from "notyf";
 import PowerSource from "../power-source";
@@ -129,7 +129,7 @@ export class ZigbeeTable extends Component<Actions & GlobalState, ZigbeeTableSta
     renderDevicesTable(): ComponentChild {
         const { sortColumn, sortDirection } = this.state;
         const { devices, deviceStates } = this.props;
-        const sortedDevices = orderBy<Device>(devices, [sortColumn], [sortDirection]);
+        const sortedDevices = orderBy<Device>(devices, [sortColumn], [sortDirection]).filter(noCoordinator);
         const { onSortChange } = this;
 
         return (

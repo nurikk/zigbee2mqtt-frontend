@@ -3,17 +3,23 @@
 import {
     connect
 } from 'mqtt';
-import store from "./store";
+import store, { Group } from "./store";
 
 import { Notyf } from 'notyf';
 import { sanitizeGraph } from './utils';
+import actions, { Actions } from './actions';
 
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 let sendMessage2Z2M = (topic: string, message: string | Buffer): void => {
     new Notyf().error("Not yet connected");
 }
-
+type MessageType = "log" | "groups" | "group_added" | "group_removed";
+interface TypesMessage {
+    type: MessageType;
+    message: unknown;
+    [k: string]: unknown;
+}
 
 
 const { settings } = store.getState();
@@ -40,6 +46,7 @@ try {
         });
     });
     type MessageTypes = "devices" | "device_removed_failed" | "device_renamed" | "device_force_removed_failed";
+
     interface LogMessage {
         type: MessageTypes;
         message: string;
@@ -65,7 +72,14 @@ try {
     }
 
     const processMessage = (_topic: string, message: string): void => {
+
         const topic = cleanTopic(_topic);
+        let _messageObje = {} as TypesMessage;
+        try {
+            _messageObje = JSON.parse(message.toString())
+        } catch (e) {
+            console.error(_messageObje);
+        }
 
         switch (topic) {
             case 'bridge/config/devices':
@@ -75,7 +89,22 @@ try {
                 });
                 break;
             case 'bridge/log':
-                showNotity(JSON.parse(message.toString()));
+                switch (_messageObje.type) {
+
+                    case "groups":
+                        store.setState({
+                            isLoading: false,
+                            groups: _messageObje.message as Group[]
+                        })
+                        break;
+                    case "group_added":
+                    case "group_removed":
+                        (actions(store) as Actions).groupsRequest();
+                    // eslint-disable-next-line no-fallthrough
+                    default:
+                        showNotity(JSON.parse(message.toString()));
+                        break;
+                }
                 // debugger
                 // new Notyf().error(`Cant parse json, ${e}`);
                 break;

@@ -53,14 +53,19 @@ export interface Actions {
     renameDevice(old: string, newName: string): Promise<void>;
     removeDevice(dev: string, force: boolean): Promise<void>;
     refreshState(dev: string, name: string): Promise<void>;
+    configureDevice(name: string): Promise<void>;
 
-    touchlinkScan(): Promise<void>;
-    touchlinkList(): Promise<void>;
-    touchlinkIdentify(dev: string): Promise<void>;
-    touchlinkRest(dev: string): Promise<void>;
+
+    touchlinkReset(): Promise<void>;
+    ZNPReset(): Promise<void>;
 
 
     networkMapRequest(): Promise<void>;
+    groupsRequest(): Promise<void>;
+    createGroup(name: string): Promise<void>;
+    removeGroup(name: string): Promise<void>;
+    addDeviceToGroup(deviceName: string, groupName: string): Promise<void>;
+    removeDeviceFromGroup(deviceName: string, groupName: string): Promise<void>;
 }
 
 const actions = (store: Store<GlobalState>): object => ({
@@ -109,14 +114,58 @@ const actions = (store: Store<GlobalState>): object => ({
         return Promise.resolve();
     },
 
+
+    configureDevice: (state, name: string): Promise<void> => {
+        store.setState({ isLoading: true });
+        sendMessage2Z2M('bridge/configure', name);
+        return Promise.resolve();
+    },
+
     networkMapRequest: (state): Promise<void> => {
         store.setState({ isLoading: true });
         sendMessage2Z2M('bridge/networkmap', 'raw');
         return Promise.resolve();
     },
 
-    touchlinkScan: (state): Promise<void> => {
-        store.setState({ isLoading: true, touchlinkResuts: null });
+    groupsRequest: (state): Promise<void> => {
+        store.setState({ isLoading: true });
+        sendMessage2Z2M('bridge/config/groups', 'doesn’t matter');
+        return Promise.resolve();
+    },
+    createGroup: (state, name: string): Promise<void> => {
+        store.setState({ isLoading: true });
+        sendMessage2Z2M('bridge/config/add_group', name);
+        return Promise.resolve();
+    },
+
+    removeGroup: (state, name: string): Promise<void> => {
+        store.setState({ isLoading: true });
+        sendMessage2Z2M('bridge/config/remove_group', name);
+        return Promise.resolve();
+    },
+
+
+    addDeviceToGroup: (state, deviceName: string, groupName: string): Promise<void> => {
+        store.setState({ isLoading: true });
+        sendMessage2Z2M(`bridge/group/${groupName}/add`, deviceName);
+        return Promise.resolve();
+    },
+
+    removeDeviceFromGroup: (state, deviceName: string, groupName: string): Promise<void> => {
+        store.setState({ isLoading: true });
+        sendMessage2Z2M(`bridge/group/${groupName}/remove`, deviceName);
+        return Promise.resolve();
+    },
+
+
+    touchlinkReset: (state): Promise<void> => {
+        store.setState({ isLoading: true });
+        sendMessage2Z2M('bridge/config/touchlink/factory_reset', '');
+        return Promise.resolve();
+    },
+    ZNPReset: (state): Promise<void> => {
+        store.setState({ isLoading: true });
+        sendMessage2Z2M('bridge/config/reset', '');
         return Promise.resolve();
     }
  

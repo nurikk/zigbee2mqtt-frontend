@@ -18,6 +18,13 @@ export interface Settings {
     mqtt_password: string;
 
 }
+export interface Group {
+    optimistic: boolean;
+    devices: string[];
+    friendly_name: string;
+    ID: number;
+}
+
 export interface GlobalState {
     forceRender: number;
     isLoading: boolean;
@@ -45,6 +52,8 @@ export interface GlobalState {
     networkGraph: GraphI;
 
     settings: Settings;
+
+    groups: Group[];
 
 }
 
@@ -81,7 +90,8 @@ const initialState: GlobalState = {
     currentFile: null,
     touchlinkResuts: null,
     touchlinkScanInProgress: false,
-    networkGraph: graph
+    networkGraph: graph,
+    groups: []
 };
 
 const store = process.env.NODE_ENV === 'production' ? createStore(initialState) : devtools(createStore(initialState));

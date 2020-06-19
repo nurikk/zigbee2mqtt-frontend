@@ -34,8 +34,6 @@ export class SettingsPage extends Component<Actions & GlobalState, SettingsPageS
                 ...form, ...{ [name]: value }
             }
         });
-
-
     }
     onSubmit = (e: Event): void => {
         e.preventDefault();
@@ -49,7 +47,7 @@ export class SettingsPage extends Component<Actions & GlobalState, SettingsPageS
         return <div className="container"><form onSubmit={this.onSubmit}>
             <fieldset class="form-group">
                 <div class="row">
-                    <legend class="col-form-label col-sm-2 pt-0">Mqtt connetion</legend>
+                    <legend class="col-form-label col-sm-2 pt-0">Mqtt connection</legend>
                     <div class="col-sm-10">
                         <div class="form-group col-md-6">
                             <label for="mqtt_host">Host and port</label>

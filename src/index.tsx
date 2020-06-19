@@ -33,6 +33,7 @@ import { createHashHistory } from 'history';
 import './mqtt';
 import ConnectedSettingsPage from "./components/settings";
 import NavBar from "./components/navbar";
+import ConnectedGroupsPage from "./components/groups";
 
 
 class Main extends Component {
@@ -64,6 +65,7 @@ class Main extends Component {
                         <ConnectedMap path="/map" />
                         <ConnectedDevicePage path="/device/:dev" />
                         <ConnectedSettingsPage path="/settings" />
+                        <ConnectedGroupsPage path="/groups" />
                     </Router>
                 </Fragment>
 

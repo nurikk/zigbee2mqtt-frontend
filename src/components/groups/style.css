@@ -1,0 +1,22 @@
+.device-pic {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    /*position: relative;*/
+    min-height: 56px;
+    /*width: 56px;*/
+}
+
+.device-image {
+    max-height: 2em;
+    /*position: absolute;*/
+    /*right: 0;*/
+    /*top: 0;*/
+}
+
+.device-image {
+    transition: transform .5s ease;
+}
+
+.device-image:hover {
+    transform: scale(4) translate(5px, 0);
+}

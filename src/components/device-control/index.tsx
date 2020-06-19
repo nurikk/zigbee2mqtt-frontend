@@ -15,27 +15,27 @@ export class DeviceControlGroup extends Component<DeviceControlGroupProps & Acti
     };
 
     onRenameClick = async (): Promise<void> => {
-        const { renameDevice, getZigbeeDevicesList, getDeviceInfo, device } = this.props;
+        const { renameDevice, getZigbeeDevicesList, device } = this.props;
         const newName = prompt("Enter new name", device.friendly_name);
         if (newName !== null && newName !== device.friendly_name) {
             await renameDevice(device.friendly_name, newName);
             await getZigbeeDevicesList(true);
-            await getDeviceInfo(device.friendly_name);
+            // await getDeviceInfo(device.friendly_name);
         }
     };
 
 
     onRemoveClick = async (force = false): Promise<void> => {
         const { removeDevice, getZigbeeDevicesList, device } = this.props;
-        const message = force ? "Remove device?" : "Send leave request?";
-        if (confirm(message)) {
-            await removeDevice(device.friendly_name, force);
-            await getZigbeeDevicesList(true);
-        }
+
+
+        await removeDevice(device.friendly_name, force);
+        await getZigbeeDevicesList(true);
+
     };
 
     render(): ComponentChild {
-        const { device } = this.props;
+        const { device, configureDevice } = this.props;
         const validDevice = !!device.ieeeAddr;
 
         return (
@@ -44,10 +44,11 @@ export class DeviceControlGroup extends Component<DeviceControlGroupProps & Acti
                     className="fa fa-edit" /></Button>
                 {
                     <Fragment>
-                        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i className={cx("fa", "fa-trash")} /></button>
+                        <Button class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i className={cx("fa", "fa-trash")} /></Button>
                         <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                            {validDevice ? <a class="dropdown-item" href="#" onClick={(): Promise<void> => this.onRemoveClick(false)}>Send leave req</a> : null}
-                            <a class="dropdown-item" href="#" onClick={(): Promise<void> => this.onRemoveClick(true)}>Remove</a>
+                            {validDevice ? <Button promt class="dropdown-item" onClick={this.onRemoveClick} item={false}>Remove</Button> : null}
+                            <Button<boolean> promt class="dropdown-item" onClick={this.onRemoveClick} item={true}>Remove(force)</Button>
+                            <Button<string> class="dropdown-item" onClick={configureDevice} item={device.friendly_name}>Reconfigure</Button>
                         </div>
                     </Fragment>
                 }
