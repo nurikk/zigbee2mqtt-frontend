@@ -23,6 +23,7 @@ interface AddDeviceToGroupProps {
 
 interface AddDeviceToGroupState {
     device: string;
+    endpint: string;
 }
 
 interface DeviceGroupRowProps {
@@ -43,6 +44,7 @@ class DeviceGroupRow extends Component<DeviceGroupRowProps, {}> {
     render(): ComponentChild {
         const { rowNumber, groupAddress, removeDeviceFromGroup } = this.props;
         const device = this.getDeviceObj();
+        const [ieeeAddr, endpint] = groupAddress.split('/');
 
         return <tr>
             <th scope="row">{rowNumber + 1}</th>
@@ -50,7 +52,8 @@ class DeviceGroupRow extends Component<DeviceGroupRowProps, {}> {
                 src={genDeviceImageUrl(device.modelID)} />}
             </td>
             <td>{device && device.friendly_name}</td>
-            <td>{groupAddress}</td>
+            <td>{ieeeAddr}</td>
+            <td>{endpint}</td>
             <td>{device && <Button<string> promt item={device.friendly_name} onClick={removeDeviceFromGroup} className="btn btn-danger btn-sm float-right"><i className="fa fa-trash" /></Button>}</td>
         </tr>;
     }
@@ -75,7 +78,8 @@ class DeviceGroup extends Component<DeviceGroupPropts, {}> {
                     <th scope="col">#</th>
                     <th scope="col">Pic</th>
                     <th scope="col">friendlyName</th>
-                    <th scope="col">ieeAddr</th>
+                    <th scope="col">ieeeAddr</th>
+                    <th scope="col">Endpint</th>
                     <th scope="col">Action</th>
                 </tr>
             </thead>
@@ -91,8 +95,8 @@ class DeviceGroup extends Component<DeviceGroupPropts, {}> {
 class AddDeviceToGroup extends Component<AddDeviceToGroupProps, AddDeviceToGroupState> {
     onSubmit = (): void => {
         const { addDeviceToGroup, group } = this.props;
-        const { device } = this.state;
-        addDeviceToGroup(device, group.friendly_name);
+        const { device, endpint } = this.state;
+        addDeviceToGroup(endpint ? `${device}/${endpint}` : device, group.friendly_name);
 
     }
     onDeviceSelect = (e: Event): void => {
@@ -106,13 +110,24 @@ class AddDeviceToGroup extends Component<AddDeviceToGroupProps, AddDeviceToGroup
             {devices.filter(noCoordinator).map(device => <option value={device.friendly_name} title={device.description}>{`${device.friendly_name} (${device.modelID})`}</option>)}
         </select>;
     }
+    onEpChange = (e: Event): void => {
+        const { value } = e.target as HTMLInputElement;
+        this.setState({ endpint: value });
+    }
     render(): ComponentChild {
         return <form class="form-inline">
             <div class="form-group">
                 <div class="form-group mx-sm-3">
                     {this.renderDevicePicker()}
-                    <Button onClick={this.onSubmit} class="btn btn-primary btn-sm">Add to group</Button>
                 </div>
+                <div class="form-group mx-sm-3">
+                    <input onChange={this.onEpChange} title="In case you want to add a device to a group with multiple endpoints, e.g. a QBKG03LM with 2 buttons you can specify it here" class="form-control form-control-sm" type="text" placeholder="Endpoint name" />
+                </div>
+
+                <div>
+                    <Button type="button" onClick={this.onSubmit} class="btn btn-primary btn-sm">Add to group</Button>
+                </div>
+
             </div>
         </form>
     }
@@ -163,7 +178,6 @@ export class GroupsPage extends Component<Actions & GlobalState, GroupsPageState
     }
     renderGroups(): ComponentChild {
         const { groups, devices, addDeviceToGroup } = this.props;
-        console.log(groups);
         return (
             <div id="accordion">
                 {
