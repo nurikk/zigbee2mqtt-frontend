@@ -13,11 +13,11 @@ if (process.env.NODE_ENV === 'development') {
 // const poly = require("preact-cli/lib/lib/webpack/polyfills");
 import "notyf/notyf.min.css";
 
-import { render, h, Component, ComponentChild, Fragment } from 'preact';
+import { render, h, Component, ComponentChild, Fragment, FunctionalComponent } from 'preact';
 
 import ConnectedMap from "./components/map";
 import ConnectedZigbeeTable from "./components/zigbee";
-import Router, { CustomHistory, route } from 'preact-router';
+import Router, { CustomHistory, route, Route } from 'preact-router';
 
 // import ConnectedDiscovery from "./components/discovery";
 // import ConnectedLogViewer from "./components/log-viewer";
@@ -34,6 +34,12 @@ import './mqtt';
 import ConnectedSettingsPage from "./components/settings";
 import NavBar from "./components/navbar";
 import ConnectedGroupsPage from "./components/groups";
+
+
+const ConnectedDevicePageWrap: FunctionalComponent<{dev: string}> = ({dev}) => (
+    <ConnectedDevicePageWrap dev={dev} />
+);
+
 
 
 class Main extends Component {
@@ -60,10 +66,11 @@ class Main extends Component {
             <Provider store={store}>
                 <Fragment>
                     <NavBar />
-                    <Router history={(createHashHistory() as unknown as CustomHistory)} onChange={this.handleRoute}>
-                        <ConnectedZigbeeTable path="/" />
+                    <Router path="/" history={(createHashHistory() as unknown as CustomHistory)} onChange={this.handleRoute}>
+                        <ConnectedZigbeeTable path="/" default />
                         <ConnectedMap path="/map" />
-                        <ConnectedDevicePage path="/device/:dev" />
+                        <ConnectedDevicePage activeTab="Info" path="/device/:dev" />
+
                         <ConnectedSettingsPage path="/settings" />
                         <ConnectedGroupsPage path="/groups" />
                     </Router>

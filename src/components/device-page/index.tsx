@@ -4,29 +4,30 @@ import actions, { Actions } from "../../actions";
 import { GlobalState } from "../../store";
 // import SimpleBind from "./simple-bind";
 // import Bind from "./bind";
-// import DeviceInfo from "./info";
-// import TabPanel, { TabInfo } from "../tab-panel";
-// import style from "./style.css";
+import DeviceInfo from "./info";
+import TabPanel, { TabInfo } from "../tab-panel";
+import style from "./style.css";
 
-interface DevicePageState {
-    dev: string;
+interface DevicePageProps {
+    dev?: string;
     activeTab: string;
 }
 
-export class DevicePage extends Component<Actions & GlobalState, DevicePageState> {
-    constructor() {
+export class DevicePage extends Component<DevicePageProps & Actions & GlobalState, {}> {
+    // constructor() {
 
-        super();
-        const { searchParams } = new URL(location.href);
-        const paramActiveTab = searchParams.get("activeTab");
-        const deviceId = searchParams.get("dev");
-        this.state = {
-            dev: deviceId,
-            activeTab: paramActiveTab ? paramActiveTab : "Info"
-        };
-    }
+    //     super();
+    //     const { searchParams } = new URL(location.href);
+    //     const paramActiveTab = searchParams.get("activeTab");
+    //     const deviceId = searchParams.get("dev");
+    //     this.state = {
+    //         dev: deviceId,
+    //         activeTab: paramActiveTab ? paramActiveTab : "Info"
+    //     };
+    // }
 
     componentDidMount(): void {
+        console.log(this.props);
         // this.initPage();
         // console.log(this.props);
         
@@ -35,7 +36,7 @@ export class DevicePage extends Component<Actions & GlobalState, DevicePageState
 
 
     initPage(): void {
-        const { dev } = this.state;
+        const { dev } = this.props;
         const { getDeviceInfo, getZigbeeDevicesList, getDeviceBinds } = this.props;
 
         getDeviceInfo(dev);
@@ -44,26 +45,25 @@ export class DevicePage extends Component<Actions & GlobalState, DevicePageState
     }
 
     render(): ComponentChild {
-        // const { isLoading, isError } = this.props;
-        // const { activeTab } = this.state;
+        const { isLoading, isError } = this.props;
+        const { activeTab } = this.props;
 
-        // const tabs: TabInfo[] = [
-        //     {
-        //         name: "Info",
-        //         TabComponent: <DeviceInfo />
-        //     },
-        //     {
-        //         name: "Bind",
-        //         TabComponent: <Bind />
-        //     },
-        //     {
-        //         name: "States",
-        //         TabComponent: <SimpleBind />
-        //     }
-        // ];
+        const tabs: TabInfo[] = [
+            {
+                name: "Info",
+                TabComponent: <DeviceInfo />
+            },
+            // {
+            //     name: "Bind",
+            //     TabComponent: <Bind />
+            // },
+            // {
+            //     name: "States",
+            //     TabComponent: <SimpleBind />
+            // }
+        ];
         return (<div class={"position-relative"}>
-            <h1>NOT IMPLEMENTED YET</h1>
-            {/* {
+            {
                 isError ? <h1>{isError}</h1> : (
                     isLoading ? (
                         <div className={`${style.loader} spinner-grow text-primary`} role="status">
@@ -73,12 +73,12 @@ export class DevicePage extends Component<Actions & GlobalState, DevicePageState
                 )
 
             }
-            <TabPanel defaultTab={activeTab} tabs={tabs} /> */}
+            <TabPanel defaultTab={activeTab} tabs={tabs} />
         </div>);
 
     }
 }
 
 const mappedProps = ["isLoading", "isError", "device"];
-const ConnectedDevicePage = connect<{}, DevicePageState, GlobalState, Actions>(mappedProps, actions)(DevicePage);
+const ConnectedDevicePage = connect<DevicePageProps, {}, GlobalState, Actions>(mappedProps, actions)(DevicePage);
 export default ConnectedDevicePage;
