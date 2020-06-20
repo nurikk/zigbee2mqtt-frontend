@@ -134,7 +134,7 @@ try {
             case (topic.match(/^[A-z0-9]+$/) || {}).input:
                 // eslint-disable-next-line no-case-declarations
                 const { deviceStates, devices } = store.getState();
-                deviceStates[topic] = JSON.parse(message.toString());
+                deviceStates[topic] = {...deviceStates[topic], ...JSON.parse(message.toString())};
                 if (devices.length) {
                     devices.forEach(d => {
                         if (d.friendly_name === topic) {
