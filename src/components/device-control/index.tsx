@@ -42,7 +42,7 @@ export class DeviceControlGroup extends Component<DeviceControlGroupProps & Acti
             <div className="btn-group btn-group-sm" role="group">
                 <Button<void> className="btn btn-secondary" onClick={this.onRenameClick}><i
                     className="fa fa-edit" /></Button>
-                <div class="btn-group" role="group">
+                <div class="btn-group btn-group-sm" role="group">
                     <Button id="btnGroupDrop0" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i className={cx("fa", "fa-cogs")} /></Button>
                     <div class="dropdown-menu" aria-labelledby="btnGroupDrop0">
@@ -50,7 +50,7 @@ export class DeviceControlGroup extends Component<DeviceControlGroupProps & Acti
                         <Button<string> class="dropdown-item" onClick={checkOTA} item={device.friendly_name}>Check OTA</Button>
                     </div>
                 </div>
-                <div class="btn-group" role="group">
+                <div class="btn-group btn-group-sm" role="group">
 
                     <Button id="btnGroupDrop1" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i className={cx("fa", "fa-trash")} /></Button>
