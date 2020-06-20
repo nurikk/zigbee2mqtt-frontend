@@ -142,7 +142,7 @@ export const sanitizeGraph = (inGraph: GraphI): GraphI => {
     let coordinatorNode = {} as NodeI;
     const filteredOutLinks = [];
     const siblings = [];
-
+    const createdLinks = {};
 
     inGraph.nodes.forEach(node => {
         nodes[node.networkAddress] = node;
@@ -157,12 +157,16 @@ export const sanitizeGraph = (inGraph: GraphI): GraphI => {
         const src: NodeI = nodes[(link.source as Source).networkAddress];
         const dst: NodeI = nodes[(link.target as Target).networkAddress];
 
-        if (src && dst && link.relationship != ZigbeeRelationship.NeigbhorIsASibling) {
-            const linkType = [src.type, dst.type].sort().join('2');
+        if (src && dst) {
+            const linkType = [src.type, dst.type].join('2');
             nodesWithLinks[src.networkAddress] = 1;
             nodesWithLinks[dst.networkAddress] = 1;
-
-            links.push({ ...link, ...{ source: (link.source as Source).networkAddress, target: (link.target as Target).networkAddress, linkType } });
+            const linkId = [src.networkAddress, dst.networkAddress].sort().join('');
+            const repeatedLink = createdLinks[linkId] || false;
+            if (!repeatedLink) {
+                createdLinks[linkId] = true;
+            }
+            links.push({ ...link, ...{ source: (link.source as Source).networkAddress, target: (link.target as Target).networkAddress, linkType, repeated: repeatedLink } });
         } else {
             switch (link.relationship) {
                 case ZigbeeRelationship.NeigbhorIsASibling:

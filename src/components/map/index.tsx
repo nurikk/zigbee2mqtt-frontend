@@ -1,9 +1,9 @@
-import { Component, ComponentChild, createRef, h } from "preact";
+import { Component, ComponentChild, createRef, h, Fragment } from "preact";
 import Links from "./links";
 import Nodes from "./nodes";
 import * as d3 from "d3";
 import style from "./map.css";
-import { LinkI, NodeI } from "./types";
+import { LinkI, NodeI, ZigbeeRelationship } from "./types";
 import Tooltip from "./tooltip";
 import { genDeviceDetailsLink } from "../../utils";
 import { connect } from "unistore/preact";
@@ -22,7 +22,7 @@ interface MapState {
     tooltipNode: NodeI | false;
     width: number;
     height: number;
-
+    visibleLinks: ZigbeeRelationship[];
 }
 
 const getDistance = (d: LinkI): number => {
@@ -48,7 +48,7 @@ const getDistance = (d: LinkI): number => {
             break;
     }
     const depth = ~~(Math.min(4, d.depth));
-    return  50 * depth + distance;
+    return 50 * depth + distance;
 };
 
 export class Map extends Component<GlobalState & Actions, MapState> {
@@ -64,7 +64,8 @@ export class Map extends Component<GlobalState & Actions, MapState> {
         this.state = {
             width: 0,
             height: 0,
-            tooltipNode: false
+            tooltipNode: false,
+            visibleLinks: [ZigbeeRelationship.NeigbhorIsAChild]
         };
     }
 
@@ -89,6 +90,13 @@ export class Map extends Component<GlobalState & Actions, MapState> {
                 const y1 = Math.max(radius, Math.min(height - radius, src.y));
                 const x2 = Math.max(radius, Math.min(width - radius, dst.x));
                 const y2 = Math.max(radius, Math.min(height - radius, dst.y));
+
+                const dx = x2 - x1,
+                    dy = y2 - y1;
+                const dr = Math.sqrt(dx * dx + dy * dy) * 2;
+                if (d.repeated) {
+                    return `M${x1},${y1} A${dr},${dr} 0 0, 1${x2},${y2}`;
+                }
                 return `M ${x1} ${y1} L ${x2} ${y2}`;
             });
 
@@ -174,16 +182,23 @@ export class Map extends Component<GlobalState & Actions, MapState> {
     }
 
     renderMap(): ComponentChild {
-        const { width, height, tooltipNode } = this.state;
+        const { width, height, tooltipNode, visibleLinks } = this.state;
         const { networkGraph } = this.props;
         const { setTooltip, removeTooltip, openDetailsWindow } = this;
+        const visibleLinksGlued = visibleLinks.join('');
 
         useEffect(() => {
             this.updateNodes();
-        }, [networkGraph.nodes.length]);
+        }, [networkGraph.nodes.length, visibleLinksGlued]);
         return (
-            <svg viewBox={`0 0 ${width} ${height}`}>
-                <Links links={networkGraph.links} />
+            <svg viewBox={`0 0 ${width} ${height}`} key={visibleLinksGlued}>
+                <defs>
+
+                    <marker viewBox="-0 -5 10 10" id="arrowhead" markerWidth="13" markerHeight="13" refX="13" refY="0" orient="auto" markerUnits="strokeWidth">
+                        <path d="M 0 0 L 10 4 L 0 8 L2 4 z" fill="#999" />
+                    </marker>
+                </defs>
+                <Links visible={visibleLinks} links={networkGraph.links} />
                 <Nodes
                     nodes={networkGraph.nodes}
                     simulation={this.simulation}
@@ -191,16 +206,18 @@ export class Map extends Component<GlobalState & Actions, MapState> {
                     onMouseOut={removeTooltip}
                     onDblClick={openDetailsWindow}
                 />
-                {tooltipNode ? (
-                    <foreignObject
-                        className={style.foreignObject}
-                        x={tooltipNode.x as number + 10}
-                        y={tooltipNode.y as number + 5}
-                    >
-                        <Tooltip info={tooltipNode} />
-                    </foreignObject>
-                ) : null}
-            </svg>
+                {
+                    tooltipNode ? (
+                        <foreignObject
+                            className={style.foreignObject}
+                            x={tooltipNode.x as number + 10}
+                            y={tooltipNode.y as number + 5}
+                        >
+                            <Tooltip info={tooltipNode} />
+                        </foreignObject>
+                    ) : null
+                }
+            </svg >
         )
     }
     onRequestClick = (): void => {
@@ -263,11 +280,60 @@ export class Map extends Component<GlobalState & Actions, MapState> {
 
         // </div>);
     }
+    onLinkTypeFilterChange = (e: Event): void => {
+        let { visibleLinks } = this.state;
+        const { checked, value } = e.target as HTMLInputElement;
+        const inValue = parseInt(value, 10);
+        if (checked) {
+            visibleLinks.push(inValue);
+        } else {
+            visibleLinks = visibleLinks.filter((v) => v !== inValue);
+        }
+        this.setState({ visibleLinks });
+    }
+    renderMapControls(): ComponentChild {
+        const { visibleLinks } = this.state;
+        interface LinkType {
+            title: string;
+            relationship: ZigbeeRelationship;
+        }
+        const linkTypes: LinkType[] = [
+            {
+                title: 'IsParent',
+                relationship: ZigbeeRelationship.NeigbhorIsParent
+            },
+            {
+                title: 'IsAChild',
+                relationship: ZigbeeRelationship.NeigbhorIsAChild
+            },
+            {
+                title: 'IsASibling',
+                relationship: ZigbeeRelationship.NeigbhorIsASibling
+            },
+            {
+                title: 'NoneOfTheAbove',
+                relationship: ZigbeeRelationship.NoneOfTheAbove
+            }
+
+        ];
+        return <div className={style.controls}>
+            {
+                linkTypes.map(linkType => (
+                    <div class="form-check form-check-inline">
+                        <input onChange={this.onLinkTypeFilterChange} class="form-check-input" type="checkbox" id={linkType.title} value={linkType.relationship} checked={visibleLinks.includes(linkType.relationship)} />
+                        <label class="form-check-label" for={linkType.title}>{linkType.title}</label>
+                    </div>
+                ))
+            }
+
+
+        </div>
+    }
     render(): ComponentChild {
         const { networkGraph } = this.props;
         return (
             <div className={style.container} ref={this.ref}>
-                {networkGraph.nodes.length ? this.renderMap() : this.renderMessage()}
+                {networkGraph.nodes.length ? <Fragment>{this.renderMapControls()} {this.renderMap()}</Fragment> : this.renderMessage()}
             </div>
         );
     }

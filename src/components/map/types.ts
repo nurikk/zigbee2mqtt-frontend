@@ -14,9 +14,16 @@ export interface NodeI extends SimulationNodeDatum {
 
 export type LinkType =
     "Coordinator2EndDevice" |
+    "EndDevice2Coordinator" |
+
     "Coordinator2Router" |
+    "Router2Coordinator" |
+
     "EndDevice2Router" |
+    "Router2EndDevice" |
+
     "Router2Router" |
+
     "BrokenLink";
 
 export interface Source {
@@ -48,6 +55,7 @@ export interface LinkI extends SimulationLinkDatum<NodeI> {
     lqi: number;
     relationship: ZigbeeRelationship;
     linkType: LinkType;
+    repeated?: boolean;
 }
 
 export interface GraphI {

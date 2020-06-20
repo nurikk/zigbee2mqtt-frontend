@@ -2,6 +2,7 @@
     width: 100%;
     height: 100%;
     user-select: none;
+    position: relative;
 }
 .img {
     width: 32px;
@@ -55,6 +56,7 @@
     stroke: red;
     stroke-dasharray: 15;
 }
+.Coordinator2Router,
 .Router2Coordinator {
     stroke: blue;
 }
@@ -63,11 +65,12 @@
     stroke: blue;
     stroke-dasharray: 5;
 }
-
+.Coordinator2EndDevice,
 .EndDevice2Coordinator {
     stroke: green;
 }
 
+.Router2EndDevice,
 .EndDevice2Router {
     stroke: green;
     opacity: 0.8;
@@ -83,4 +86,9 @@
 .offline {
     opacity: 0.5;
     stroke: gray;
+}
+
+.controls {
+    position: absolute;
+    right: 0;
 }

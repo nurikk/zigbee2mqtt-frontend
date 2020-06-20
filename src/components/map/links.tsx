@@ -1,4 +1,4 @@
-import { LinkI } from "./types";
+import { LinkI, ZigbeeRelationship } from "./types";
 import { Component, ComponentChild, createRef, FunctionalComponent, h, RefObject } from "preact";
 import * as style from "./map.css";
 import cx from "classnames";
@@ -21,6 +21,16 @@ class Link extends Component<LinkProps, {}> {
     render(): ComponentChild {
         const { link, id, ...rest } = this.props;
         const { linkType } = link;
+        let markerEnd = "url(#arrowhead)"
+        switch (linkType) {
+            case "EndDevice2Coordinator":
+            case "Router2Coordinator":
+                markerEnd = null;
+                break;
+            default:
+                break;
+        }
+
         return (
             <path
                 id={id}
@@ -28,6 +38,8 @@ class Link extends Component<LinkProps, {}> {
                 className={cx(style.link, style[linkType])}
                 ref={this.ref as RefObject<SVGPathElement>}
                 strokeWidth={1}
+                fill="transparent"
+                marker-end={markerEnd}
             />
         );
     }
@@ -64,10 +76,11 @@ class LinkLabel extends Component<LinkLabelProps, {}> {
 
 interface LinksPros {
     links: LinkI[];
+    visible: ZigbeeRelationship[];
 }
 
 const Links: FunctionalComponent<LinksPros> = props => {
-    const { links } = props;
+    const { links, visible } = props;
     return (
         <g className={style.links}>
             <defs>
@@ -76,15 +89,13 @@ const Links: FunctionalComponent<LinksPros> = props => {
                     <feComposite in="SourceGraphic" />
                 </filter>
             </defs>
+            {links.map((link: LinkI, index: number) => visible.includes(link.relationship) && <Link
+                id={`edgepath${index}`}
+                key={`link${index}`}
+                link={link}
+            />)}
             {links.map((link: LinkI, index: number) => (
-                <Link
-                    id={`edgepath${index}`}
-                    key={`link${index}`}
-                    link={link}
-                />
-            ))}
-            {links.map((link: LinkI, index: number) => (
-                <LinkLabel
+                visible.includes(link.relationship) && <LinkLabel
                     xlinkHref={`#edgepath${index}`}
                     key={`label${index}`}
                     link={link}
