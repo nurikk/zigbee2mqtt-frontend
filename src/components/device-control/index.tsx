@@ -1,4 +1,4 @@
-import { Component, ComponentChild, h, Fragment } from "preact";
+import { Component, ComponentChild, h } from "preact";
 import Button from "../button";
 import { Device } from "../../types";
 import { connect } from "unistore/preact";

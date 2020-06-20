@@ -153,9 +153,7 @@ export class ZigbeeTable extends Component<Actions & GlobalState, ZigbeeTableSta
                         <ActionTH<SortColumns> className={style["action-column"]} column="modelID"
                             currentDirection={sortDirection} current={sortColumn}
                             onClick={onSortChange}>Model</ActionTH>
-                        <ActionTH<SortColumns> className={style["action-column"]} column="st.linkquality"
-                            currentDirection={sortDirection} current={sortColumn}
-                            onClick={onSortChange} title="Link quality">LQI</ActionTH>
+                        <th>LQI</th>
                         <ActionTH<SortColumns> className={style["action-column"]} column="lastSeen"
                             currentDirection={sortDirection} current={sortColumn}
                             onClick={onSortChange}>Last seen</ActionTH>
