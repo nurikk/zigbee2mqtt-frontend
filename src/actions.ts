@@ -58,6 +58,9 @@ export interface Actions {
 
     touchlinkReset(): Promise<void>;
     ZNPReset(): Promise<void>;
+    checkOTA(deviceName: string): Promise<void>;
+
+    OTAUpdate(): Promise<void>;
 
 
     networkMapRequest(): Promise<void>;
@@ -168,7 +171,16 @@ const actions = (store: Store<GlobalState>): object => ({
         store.setState({ isLoading: true });
         sendMessage2Z2M('bridge/config/reset', '');
         return Promise.resolve();
-    }
- 
+    },
+
+
+    checkOTA: (state, deviceName: string): Promise<void> => {
+        sendMessage2Z2M(`bridge/ota_update/check`, deviceName);
+        return Promise.resolve();
+    },
+
+
+
+
 });
 export default actions;

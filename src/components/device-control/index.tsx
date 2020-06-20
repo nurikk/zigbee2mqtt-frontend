@@ -35,7 +35,7 @@ export class DeviceControlGroup extends Component<DeviceControlGroupProps & Acti
     };
 
     render(): ComponentChild {
-        const { device, configureDevice } = this.props;
+        const { device, configureDevice, checkOTA } = this.props;
         const validDevice = !!device.ieeeAddr;
 
         return (
@@ -43,12 +43,32 @@ export class DeviceControlGroup extends Component<DeviceControlGroupProps & Acti
                 <Button<void> className="btn btn-secondary" onClick={this.onRenameClick}><i
                     className="fa fa-edit" /></Button>
                 {
+
+
+
+
                     <Fragment>
-                        <Button class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i className={cx("fa", "fa-trash")} /></Button>
+
+                        <Button class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i className={cx("fa", "fa-cogs")} /></Button>
+
+
+                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop0">
+                            <Button<string> class="dropdown-item" onClick={configureDevice} item={device.friendly_name}>Reconfigure</Button>
+                            <Button<string> class="dropdown-item" onClick={checkOTA} item={device.friendly_name}>Check OTA</Button>
+                        </div>
+
+
+
+
+
+                        <Button class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i className={cx("fa", "fa-trash")} /></Button>
+
                         <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                             {validDevice ? <Button promt class="dropdown-item" onClick={this.onRemoveClick} item={false}>Remove</Button> : null}
                             <Button<boolean> promt class="dropdown-item" onClick={this.onRemoveClick} item={true}>Remove(force)</Button>
-                            <Button<string> class="dropdown-item" onClick={configureDevice} item={device.friendly_name}>Reconfigure</Button>
+
                         </div>
                     </Fragment>
                 }

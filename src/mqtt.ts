@@ -67,7 +67,7 @@ try {
                 break;
 
             default:
-                new Notyf().success(message.type);
+                new Notyf().success({type: 'success', message: message.message, duration: 4000});
                 break;
         }
     }
