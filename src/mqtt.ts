@@ -123,12 +123,18 @@ try {
                 console.log('bridge message', topic);
                 break;
             case (topic.match(/^[A-z0-9]+$/) || {}).input:
-                console.log('device state?', topic, message.toString());
                 // eslint-disable-next-line no-case-declarations
-                const { deviceStates } = store.getState();
+                const { deviceStates, devices } = store.getState();
                 deviceStates[topic] = JSON.parse(message.toString());
-                console.log('topic', topic);
-                store.setState({ deviceStates });
+                if (devices.length) {
+                    devices.forEach(d => {
+                        if (d.friendly_name === topic) {
+                            d.lastSeen = Date.now() * 1000;
+                        }
+                    })
+                }
+
+                store.setState({ deviceStates, forceRender: Math.random(), devices });
                 break;
 
             default: break;
