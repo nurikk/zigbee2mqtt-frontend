@@ -8,6 +8,7 @@ import store, { Group } from "./store";
 import { Notyf } from 'notyf';
 import { sanitizeGraph } from './utils';
 import actions, { Actions } from './actions';
+import { BridgeConfig } from './types';
 
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -119,8 +120,16 @@ try {
                 break;
 
 
+            case 'bridge/config':
+                store.setState({
+                    bridgeConfig: JSON.parse(message.toString()) as BridgeConfig
+                });
+                break;
+
+
+
             case (topic.match(/^bridge/) || {}).input:
-                console.log('bridge message', topic);
+                console.log('bridge message', topic, message.toString());
                 break;
             case (topic.match(/^[A-z0-9]+$/) || {}).input:
                 // eslint-disable-next-line no-case-declarations

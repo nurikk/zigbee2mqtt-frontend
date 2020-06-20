@@ -31,7 +31,7 @@ export interface Actions {
 
 
 
-    setJoinDuration(duration: number, target: string): Promise<void>;
+    setPermitJoin(permit: boolean): Promise<void>;
     fetchLogsBuffer(): Promise<void>;
     // getCurrentLogLevel(): Promise<void>;
     clearLogs(): Promise<void>;
@@ -90,8 +90,9 @@ const actions = (store: Store<GlobalState>): object => ({
     },
 
 
-    setJoinDuration(state, duration = 255, target = ""): Promise<void> {
+    setPermitJoin(state, permit = true): Promise<void> {
         store.setState({ isLoading: true });
+        sendMessage2Z2M('bridge/config/permit_join', JSON.stringify(permit));
         return Promise.resolve();
     },
 

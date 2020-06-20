@@ -7,7 +7,7 @@ export type Dictionary<V> = { [index: string]: V }
 export interface DeviceStats {
     linkquality?: number;
     battery?: number;
-    [k: string]: string | number| boolean;
+    [k: string]: string | number | boolean;
 }
 
 export const inteviewsCount = 4;
@@ -54,7 +54,38 @@ export enum DeviceSupportStatus {
 }
 
 
+
+
+export interface Meta {
+    transportrev: number;
+    product: number;
+    majorrel: number;
+    minorrel: number;
+    maintrel: number;
+    revision: number;
+}
+
+export interface Coordinator {
+    type: string;
+    meta: Meta;
+}
+
+export interface BridgeConfig {
+    version: string;
+    commit: string;
+    coordinator: Coordinator;
+    log_level: string;
+    permit_join: boolean;
+}
+
+
+
+
+
+
+
 export type PowerSource = "Battery" | "Mains (single phase)";
+
 
 export interface Device {
     ieeeAddr: string;
