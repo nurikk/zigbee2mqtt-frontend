@@ -28,10 +28,10 @@ export function chunkArray<T>(inputArr: T[], chunkSize: number): T[][] {
 export const encodeGetParams = (data: Dictionary<string | number>): string => Object.keys(data).map((key) => [key, data[key]].map(encodeURIComponent).join("=")).join("&");
 
 export const sanitizeModelNameForImageUrl = (modelName: string): string => {
-    return encodeURIComponent(modelName ? modelName.replace("/", "_") : null);
+    return modelName ? modelName.replace("/", "_") : null;
 };
 
-export const genDeviceImageUrl = (modelID: string): string => (`https://raw.githubusercontent.com/slsys/Gateway/master/devices/png/${sanitizeModelNameForImageUrl(modelID)}.png`);
+export const genDeviceImageUrl = (modelID: string): string => (`https://slsys.github.io/Gateway/devices/png/${sanitizeModelNameForImageUrl(modelID)}.png`);
 
 export type LoadableFileTypes = "js" | "css";
 
