@@ -10,14 +10,19 @@ if (process.env.NODE_ENV === 'development') {
 
 }
 
-// const poly = require("preact-cli/lib/lib/webpack/polyfills");
+//TODO: get rid of this crap
 import "notyf/notyf.min.css";
+import "bootstrap/dist/js/bootstrap.min.js";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "popper.js";
+import "bootstrap/js/dist/button.js";
+
 
 import { render, h, Component, ComponentChild, Fragment, FunctionalComponent } from 'preact';
 
 import ConnectedMap from "./components/map";
 import ConnectedZigbeeTable from "./components/zigbee";
-import Router, { CustomHistory, route, Route } from 'preact-router';
+import Router, { CustomHistory, route } from 'preact-router';
 
 // import ConnectedDiscovery from "./components/discovery";
 // import ConnectedLogViewer from "./components/log-viewer";

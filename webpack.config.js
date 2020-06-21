@@ -48,11 +48,9 @@ module.exports = (env, args) => {
 
 
 	return {
-		entry: {
-			'scripts/main': './src/index.tsx',
-		},
+		entry: './src/index.tsx',
 		output: {
-			filename: '[name].[hash].js',
+			filename: '[name].js',
 			path: path.resolve('./dist'),
 		},
 		target: 'web',
@@ -61,16 +59,16 @@ module.exports = (env, args) => {
 			usedExports: true,
 			moduleIds: 'hashed',
 			// runtimeChunk: 'single',
-			splitChunks: {
-				cacheGroups: {
-					vendor: {
-						test: /node_modules/,
-						name: 'scripts/vendor',
-						chunks: 'all',
-						enforce: true,
-					},
-				},
-			},
+			// splitChunks: {
+			// 	cacheGroups: {
+			// 		vendor: {
+			// 			test: /node_modules/,
+			// 			name: 'scripts/vendor',
+			// 			chunks: 'all',
+			// 			enforce: true,
+			// 		},
+			// 	},
+			// },
 		},
 		resolve: {
 			mainFields: ['module', 'main'],
@@ -122,9 +120,6 @@ module.exports = (env, args) => {
 		plugins,
 		stats: 'errors-only',
 		externals: {
-			d3: 'window.d3',
-			codemirror: 'window.CodeMirror',
-			luaparse: 'window.luaparse'
 		}
 
 	};
