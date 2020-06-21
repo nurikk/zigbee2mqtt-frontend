@@ -3,8 +3,6 @@ Hello world!
 """
 DOMAIN = "z2m_light_admin"
 
-
-bundle_file_names = ["main.js"]
 async def async_setup(hass, config):
     """Set up this integration using yaml."""
 
