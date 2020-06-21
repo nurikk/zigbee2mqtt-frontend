@@ -14,7 +14,7 @@ async def async_setup(hass, config):
     hass.components.frontend.async_register_built_in_panel(
         component_name="custom",
         sidebar_title="Z2M",
-        sidebar_icon="mdi:math-log",
+        sidebar_icon="mdi:zigbee",
         frontend_url_path="z2m-la",
         config={
             "_panel_custom": {
