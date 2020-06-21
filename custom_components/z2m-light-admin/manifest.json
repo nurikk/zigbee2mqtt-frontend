@@ -1,6 +1,6 @@
 {
-    "domain": "integration-hacs",
-    "name": "z2m-light-admin",
+    "domain": "z2m-light-admin",
+    "name": "z2m light admin",
     "documentation": "https://github.com/nurikk/z2m-frontend",
     "dependencies": [],
     "codeowners": ["@nurikk"],
