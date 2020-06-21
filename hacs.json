@@ -1,5 +1,5 @@
 {
-  "name": "z2m light admin",
+  "name": "z2m-light-admin",
   "zip_release": true,
   "hide_default_branch": true,
   "homeassistant": "0.110.0",
