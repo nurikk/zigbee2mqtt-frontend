@@ -8,8 +8,8 @@ bundle_file_names = ["main.js", "main.css"]
 async def async_setup(hass, config):
     """Set up this integration using yaml."""
     for bundle_file_name in bundle_file_names:
-        url = f'/api/panel_custom/${DOMAIN}/${bundle_file_name}'
-        location = hass.config.path(f'custom_components/${DOMAIN}/${bundle_file_name}')
+        url = f'/api/panel_custom/{DOMAIN}/{bundle_file_name}'
+        location = hass.config.path(f'custom_components/{DOMAIN}/${bundle_file_name}')
         hass.http.register_static_path(url, location)
     hass.components.frontend.async_register_built_in_panel(
         component_name="custom",
@@ -21,7 +21,7 @@ async def async_setup(hass, config):
                 "name": "z2m-light-admin",
                 "embed_iframe": False,
                 "trust_external": True,
-                "js_url": f'/api/panel_custom/${DOMAIN}/main.js'
+                "js_url": f'/api/panel_custom/{DOMAIN}/main.js'
             }
         },
         require_admin=True,
