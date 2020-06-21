@@ -21,7 +21,7 @@ async def async_setup(hass, config):
                 "name": "z2m-light-admin",
                 "embed_iframe": False,
                 "trust_external": True,
-                "js_url": url,
+                "js_url": f'/api/panel_custom/${DOMAIN}/main.js'
             }
         },
         require_admin=True,
