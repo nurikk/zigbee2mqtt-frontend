@@ -19,7 +19,7 @@ async def async_setup(hass, config):
         config={
             "_panel_custom": {
                 "name": "z2m-light-admin",
-                "embed_iframe": False,
+                "embed_iframe": True,
                 "trust_external": True,
                 "js_url": f'/api/panel_custom/{DOMAIN}/main.js'
             }
