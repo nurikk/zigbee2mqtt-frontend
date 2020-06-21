@@ -1,7 +1,7 @@
 """
 Hello world!
 """
-preffix = "z2m-light-admin"
+preffix = "z2m_light_admin"
 bundle_file_names = ["main.js", "main.css"]
 async def async_setup(hass, config):
     """Set up this integration using yaml."""
