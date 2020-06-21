@@ -21,7 +21,7 @@ module.exports = (env, args) => {
 	}
 
 	const plugins = [
-		new MiniCssExtractPlugin()
+		// new MiniCssExtractPlugin()
 	];
 	const basePath = 'src/templates';
 	glob.sync(`${basePath}/**/*.html`).forEach((item) => {
@@ -91,7 +91,8 @@ module.exports = (env, args) => {
 				{
 					test: /\.css$/i,
 					use: [
-						MiniCssExtractPlugin.loader,
+						// MiniCssExtractPlugin.loader,
+						"style-loader",
 						"@teamsupercell/typings-for-css-modules-loader",
 						{
 							loader: "css-loader",
@@ -106,7 +107,8 @@ module.exports = (env, args) => {
 					test: /\.css$/i,
 					include: /node_modules/,
 					use: [
-						MiniCssExtractPlugin.loader,
+						// MiniCssExtractPlugin.loader,
+						"style-loader",
 						"css-loader"
 					]
 				}
