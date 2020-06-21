@@ -9,6 +9,7 @@ if (process.env.NODE_ENV === 'development') {
     require("preact/debug");
 
 }
+import "./main.css";
 
 //TODO: get rid of this crap
 import "notyf/notyf.min.css";
