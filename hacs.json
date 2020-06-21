@@ -1,5 +1,8 @@
 {
   "name": "z2m light admin",
-  "render_readme": true,
-  "homeassistant": "0.100.0"
+  "zip_release": true,
+  "hide_default_branch": true,
+  "homeassistant": "0.110.0",
+  "hacs": "0.19.0",
+  "filename": "release.zip"
 }

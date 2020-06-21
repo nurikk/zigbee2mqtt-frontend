@@ -4,6 +4,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 const CompressionPlugin = require('compression-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ZipPlugin = require('zip-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 
 const path = require('path');
@@ -31,11 +32,17 @@ module.exports = (env, args) => {
 			})
 		)
 	});
+	console.log(__dirname);
 	if (production) {
 		// plugins.push(new BundleAnalyzerPlugin({
 		// 	analyzerMode: 'static'
 		// }));
 		// plugins.push(new CompressionPlugin());
+		plugins.push(new CopyPlugin({
+			patterns: [
+				path.resolve(__dirname, 'custom_components', 'z2m-light-admin')
+			],
+		}));
 
 		plugins.push(new ZipPlugin({
 			// OPTIONAL: defaults to the Webpack output path (above)
@@ -119,8 +126,7 @@ module.exports = (env, args) => {
 		},
 		plugins,
 		stats: 'errors-only',
-		externals: {
-		}
+		externals: {}
 
 	};
 };
