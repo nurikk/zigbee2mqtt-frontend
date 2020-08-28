@@ -22,6 +22,8 @@ open http://localhost:3030/
 ![](images/screenshot_map.png)
 
 # Installation and usage
+0. Also avaliable as *HACS* intefration. Just add this repo into custom repo list
+
 1. Check Mosquitto Broker logs right after a startup. You should be able to determine a websocket port in this log entry:
 ```
 Opening websockets listen socket on port 1884
