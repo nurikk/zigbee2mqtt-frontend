@@ -1,0 +1,8 @@
+{
+    "domain": "z2m_light_admin",
+    "name": "z2m light admin",
+    "documentation": "https://github.com/nurikk/z2m-frontend",
+    "dependencies": [],
+    "codeowners": ["@nurikk"],
+    "requirements": []
+  }
