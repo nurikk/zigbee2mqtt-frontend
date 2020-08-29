@@ -13,7 +13,7 @@
 //     return fields.some(key => rule[key] !== undefined);
 // }
 // export const getDeviceDisplayName = (device: Device): string => {
-//     return `${device.networkAddress} (${device.friendly_name ? device.friendly_name : device.modelID})`;
+//     return `${device.network_address} (${device.friendly_name ? device.friendly_name : device.definition.model})`;
 // };
 // interface BindRowProps {
 //     onChange?(idx: number, rule: BindRule): void;
@@ -45,7 +45,7 @@
 //     renderDstSelect(): ComponentChild {
 //         const { devices, rule, device } = this.props;
 //         //exclude self from select
-//         const options = sortBy(Object.entries(groupBy(devices.filter(d => d.networkAddress !== device.networkAddress), d => {
+//         const options = sortBy(Object.entries(groupBy(devices.filter(d => d.network_address !== device.network_address), d => {
 //             const inC = flatten(Object.values(d.ep ?? {}).map(ep => Object.keys(ep.In ?? {}).map(c => parseInt(c, 10))));
 //             return inC.includes(rule.ClusterId);
 //         })), (kvp) => kvp[0] !== "true")
@@ -53,7 +53,7 @@
 //             const hasSelectedEp = hasSelectedEpStr === "true";
 //             const label = hasSelectedEp ? "Cluster found" : "Cluster not found"
 //             return <optgroup label={label}>{
-//                 devices.map(device => <option selected={device.networkAddress === rule.DstnetworkAddress} value={device.networkAddress}>{getDeviceDisplayName(device)}</option>)
+//                 devices.map(device => <option selected={device.network_address === rule.DstnetworkAddress} value={device.network_address}>{getDeviceDisplayName(device)}</option>)
 //             }</optgroup>
 //         });
 
@@ -94,7 +94,7 @@
 
 //     renderDstEp(): ComponentChild {
 //         const { devices, rule } = this.props;
-//         const dstDevice = devices.find((d) => d.networkAddress === rule.DstnetworkAddress);
+//         const dstDevice = devices.find((d) => d.network_address === rule.DstnetworkAddress);
 
 //         let options = [];
 

@@ -1,21 +1,21 @@
 [
   {"category":"zigbee","payload":{"event":"PermitJoin","target":"0xFFFC","duration":255}},
-  {"category":"zigbee","payload":{"event":"LeaveInd","networkAddress":"0xB06A","ieeeAddr":"0x00158D0002C4A78F"}},
-  {"category":"zigbee","payload":{"event":"TcDeviceInd","networkAddress":"0x475E","ieeeAddr":"0x00158D0002C4A78F","ParentnetworkAddress":"0x0000"}},
-  {"category":"zigbee","payload":{"event":"DeviceAnnceInd","networkAddress":"0x475E","ieeeAddr":"0x00158D0002C4A78F","type":"EndDevice","PS":3,"ReceiverOnIdle":"OFF","Security":"OFF"}},
-  {"category":"zigbee","payload":{"event":"ModelRcv","networkAddress":"0x475E","ieeeAddr":"0x00158D0002C4A78F","modelID":"lumi.vibration.aq1","manufacturerName":""}},
-  {"category":"zigbee","payload":{"event":"NodeDescRsp","networkAddress":"0x475E","ieeeAddr":"0x00158D0002C4A78F"}},
-  {"category":"zigbee","payload":{"event":"ModelRcv","networkAddress":"0x475E","ieeeAddr":"0x00158D0002C4A78F","modelID":"lumi.vibration.aq1","manufacturerName":""}},
-  {"category":"zigbee","payload":{"event":"ActiveEpRsp","networkAddress":"0x475E","ieeeAddr":"0x00158D0002C4A78F","epList":[1,2]}},
-  {"category":"zigbee","payload":{"event":"ModelRcv","networkAddress":"0x475E","ieeeAddr":"0x00158D0002C4A78F","modelID":"lumi.vibration.aq1","manufacturerName":""}},
-  {"category":"zigbee","payload":{"event":"SimpleDescRsp","networkAddress":"0x475E","ieeeAddr":"0x00158D0002C4A78F","ep":1,"ProfileId":260,"DeviceId":10}},
-  {"category":"zigbee","payload":{"event":"ModelRcv","networkAddress":"0x475E","ieeeAddr":"0x00158D0002C4A78F","modelID":"lumi.vibration.aq1","manufacturerName":""}},
-  {"category":"zigbee","payload":{"event":"SimpleDescRsp","networkAddress":"0x475E","ieeeAddr":"0x00158D0002C4A78F","ep":2,"ProfileId":260,"DeviceId":24322}},
-  {"category":"zigbee","payload":{"event":"SimpleDescRsp","networkAddress":"0x475E","ieeeAddr":"0x00158D0002C4A78F"}},
-  {"category":"zigbee","payload":{"event":"ModelRcv","networkAddress":"0x475E","ieeeAddr":"0x00158D0002C4A78F","modelID":"lumi.vibration.aq1","manufacturerName":""}},
-  {"category":"zigbee","payload":{"event":"ConfRsp","networkAddress":"0x475E","ieeeAddr":"0x00158D0002C4A78F"}},
-  {"category":"zigbee","payload":{"event":"ModelRcv","networkAddress":"0x475E","ieeeAddr":"0x00158D0002C4A78F","modelID":"lumi.vibration.aq1","manufacturerName":"LUMI"}},
-  {"category":"zigbee","payload":{"event":"PowerSrcRcv","networkAddress":"0x475E","ieeeAddr":"0x00158D0002C4A78F","powerSource":3}},
+  {"category":"zigbee","payload":{"event":"LeaveInd","network_address":"0xB06A","ieee_addr":"0x00158D0002C4A78F"}},
+  {"category":"zigbee","payload":{"event":"TcDeviceInd","network_address":"0x475E","ieee_addr":"0x00158D0002C4A78F","ParentnetworkAddress":"0x0000"}},
+  {"category":"zigbee","payload":{"event":"DeviceAnnceInd","network_address":"0x475E","ieee_addr":"0x00158D0002C4A78F","type":"EndDevice","PS":3,"ReceiverOnIdle":"OFF","Security":"OFF"}},
+  {"category":"zigbee","payload":{"event":"ModelRcv","network_address":"0x475E","ieee_addr":"0x00158D0002C4A78F","definition.model":"lumi.vibration.aq1","definition.vendor":""}},
+  {"category":"zigbee","payload":{"event":"NodeDescRsp","network_address":"0x475E","ieee_addr":"0x00158D0002C4A78F"}},
+  {"category":"zigbee","payload":{"event":"ModelRcv","network_address":"0x475E","ieee_addr":"0x00158D0002C4A78F","definition.model":"lumi.vibration.aq1","definition.vendor":""}},
+  {"category":"zigbee","payload":{"event":"ActiveEpRsp","network_address":"0x475E","ieee_addr":"0x00158D0002C4A78F","epList":[1,2]}},
+  {"category":"zigbee","payload":{"event":"ModelRcv","network_address":"0x475E","ieee_addr":"0x00158D0002C4A78F","definition.model":"lumi.vibration.aq1","definition.vendor":""}},
+  {"category":"zigbee","payload":{"event":"SimpleDescRsp","network_address":"0x475E","ieee_addr":"0x00158D0002C4A78F","ep":1,"ProfileId":260,"DeviceId":10}},
+  {"category":"zigbee","payload":{"event":"ModelRcv","network_address":"0x475E","ieee_addr":"0x00158D0002C4A78F","definition.model":"lumi.vibration.aq1","definition.vendor":""}},
+  {"category":"zigbee","payload":{"event":"SimpleDescRsp","network_address":"0x475E","ieee_addr":"0x00158D0002C4A78F","ep":2,"ProfileId":260,"DeviceId":24322}},
+  {"category":"zigbee","payload":{"event":"SimpleDescRsp","network_address":"0x475E","ieee_addr":"0x00158D0002C4A78F"}},
+  {"category":"zigbee","payload":{"event":"ModelRcv","network_address":"0x475E","ieee_addr":"0x00158D0002C4A78F","definition.model":"lumi.vibration.aq1","definition.vendor":""}},
+  {"category":"zigbee","payload":{"event":"ConfRsp","network_address":"0x475E","ieee_addr":"0x00158D0002C4A78F"}},
+  {"category":"zigbee","payload":{"event":"ModelRcv","network_address":"0x475E","ieee_addr":"0x00158D0002C4A78F","definition.model":"lumi.vibration.aq1","definition.vendor":"LUMI"}},
+  {"category":"zigbee","payload":{"event":"PowerSrcRcv","network_address":"0x475E","ieee_addr":"0x00158D0002C4A78F","power_source":3}},
 
 
 
@@ -33,8 +33,8 @@
       "category": "zigbee",
       "payload": {
         "event": "LeaveInd",
-        "networkAddress": "0x7059",
-        "ieeeAddr": "0x00158D0002C4A78F",
+        "network_address": "0x7059",
+        "ieee_addr": "0x00158D0002C4A78F",
         "timestamp": 1586214965097
       }
     },
@@ -42,8 +42,8 @@
       "category": "zigbee",
       "payload": {
         "event": "TcDeviceInd",
-        "networkAddress": "0xCEEA",
-        "ieeeAddr": "0x00158D0002C4A78F",
+        "network_address": "0xCEEA",
+        "ieee_addr": "0x00158D0002C4A78F",
         "ParentnetworkAddress": "0x0000",
         "timestamp": 1586214967166
       }
@@ -52,8 +52,8 @@
       "category": "zigbee",
       "payload": {
         "event": "TcDeviceInd",
-        "networkAddress": "0xCEEA",
-        "ieeeAddr": "0x00158D0002C4A78F",
+        "network_address": "0xCEEA",
+        "ieee_addr": "0x00158D0002C4A78F",
         "ParentnetworkAddress": "0x0000",
         "timestamp": 1586214972167
       }
@@ -62,8 +62,8 @@
       "category": "zigbee",
       "payload": {
         "event": "DeviceAnnceInd",
-        "networkAddress": "0xCEEA",
-        "ieeeAddr": "0x00158D0002C4A78F",
+        "network_address": "0xCEEA",
+        "ieee_addr": "0x00158D0002C4A78F",
         "type": "EndDevice",
         "PS": 3,
         "ReceiverOnIdle": "OFF",
@@ -75,10 +75,10 @@
       "category": "zigbee",
       "payload": {
         "event": "ModelRcv",
-        "networkAddress": "0xCEEA",
-        "ieeeAddr": "0x00158D0002C4A78F",
-        "modelID": "lumi.vibration.aq1",
-        "manufacturerName": "",
+        "network_address": "0xCEEA",
+        "ieee_addr": "0x00158D0002C4A78F",
+        "definition.model": "lumi.vibration.aq1",
+        "definition.vendor": "",
         "timestamp": 1586214972363
       }
     },
@@ -86,8 +86,8 @@
       "category": "zigbee",
       "payload": {
         "event": "NodeDescRsp",
-        "networkAddress": "0xCEEA",
-        "ieeeAddr": "0x00158D0002C4A78F",
+        "network_address": "0xCEEA",
+        "ieee_addr": "0x00158D0002C4A78F",
         "timestamp": 1586214974168
       }
     },
@@ -95,10 +95,10 @@
       "category": "zigbee",
       "payload": {
         "event": "ModelRcv",
-        "networkAddress": "0xCEEA",
-        "ieeeAddr": "0x00158D0002C4A78F",
-        "modelID": "lumi.vibration.aq1",
-        "manufacturerName": "",
+        "network_address": "0xCEEA",
+        "ieee_addr": "0x00158D0002C4A78F",
+        "definition.model": "lumi.vibration.aq1",
+        "definition.vendor": "",
         "timestamp": 1586214976362
       }
     },
@@ -106,8 +106,8 @@
       "category": "zigbee",
       "payload": {
         "event": "ActiveEpRsp",
-        "networkAddress": "0xCEEA",
-        "ieeeAddr": "0x00158D0002C4A78F",
+        "network_address": "0xCEEA",
+        "ieee_addr": "0x00158D0002C4A78F",
         "epList": [
           1,
           2
@@ -119,10 +119,10 @@
       "category": "zigbee",
       "payload": {
         "event": "ModelRcv",
-        "networkAddress": "0xCEEA",
-        "ieeeAddr": "0x00158D0002C4A78F",
-        "modelID": "lumi.vibration.aq1",
-        "manufacturerName": "",
+        "network_address": "0xCEEA",
+        "ieee_addr": "0x00158D0002C4A78F",
+        "definition.model": "lumi.vibration.aq1",
+        "definition.vendor": "",
         "timestamp": 1586214980835
       }
     },
@@ -130,8 +130,8 @@
       "category": "zigbee",
       "payload": {
         "event": "SimpleDescRsp",
-        "networkAddress": "0xCEEA",
-        "ieeeAddr": "0x00158D0002C4A78F",
+        "network_address": "0xCEEA",
+        "ieee_addr": "0x00158D0002C4A78F",
         "ep": 1,
         "ProfileId": 260,
         "DeviceId": 10,
@@ -142,10 +142,10 @@
       "category": "zigbee",
       "payload": {
         "event": "ModelRcv",
-        "networkAddress": "0xCEEA",
-        "ieeeAddr": "0x00158D0002C4A78F",
-        "modelID": "lumi.vibration.aq1",
-        "manufacturerName": "",
+        "network_address": "0xCEEA",
+        "ieee_addr": "0x00158D0002C4A78F",
+        "definition.model": "lumi.vibration.aq1",
+        "definition.vendor": "",
         "timestamp": 1586214984456
       }
     },
@@ -153,8 +153,8 @@
       "category": "zigbee",
       "payload": {
         "event": "SimpleDescRsp",
-        "networkAddress": "0xCEEA",
-        "ieeeAddr": "0x00158D0002C4A78F",
+        "network_address": "0xCEEA",
+        "ieee_addr": "0x00158D0002C4A78F",
         "ep": 2,
         "ProfileId": 260,
         "DeviceId": 24322,
@@ -165,8 +165,8 @@
       "category": "zigbee",
       "payload": {
         "event": "SimpleDescRsp",
-        "networkAddress": "0xCEEA",
-        "ieeeAddr": "0x00158D0002C4A78F",
+        "network_address": "0xCEEA",
+        "ieee_addr": "0x00158D0002C4A78F",
         "timestamp": 1586214985907
       }
     },
@@ -174,10 +174,10 @@
       "category": "zigbee",
       "payload": {
         "event": "ModelRcv",
-        "networkAddress": "0xCEEA",
-        "ieeeAddr": "0x00158D0002C4A78F",
-        "modelID": "lumi.vibration.aq1",
-        "manufacturerName": "",
+        "network_address": "0xCEEA",
+        "ieee_addr": "0x00158D0002C4A78F",
+        "definition.model": "lumi.vibration.aq1",
+        "definition.vendor": "",
         "timestamp": 1586214986665
       }
     },
@@ -185,8 +185,8 @@
       "category": "zigbee",
       "payload": {
         "event": "ConfRsp",
-        "networkAddress": "0xCEEA",
-        "ieeeAddr": "0x00158D0002C4A78F",
+        "network_address": "0xCEEA",
+        "ieee_addr": "0x00158D0002C4A78F",
         "timestamp": 1586214986703
       }
     },
@@ -194,10 +194,10 @@
       "category": "zigbee",
       "payload": {
         "event": "ModelRcv",
-        "networkAddress": "0xCEEA",
-        "ieeeAddr": "0x00158D0002C4A78F",
-        "modelID": "lumi.vibration.aq1",
-        "manufacturerName": "LUMI",
+        "network_address": "0xCEEA",
+        "ieee_addr": "0x00158D0002C4A78F",
+        "definition.model": "lumi.vibration.aq1",
+        "definition.vendor": "LUMI",
         "timestamp": 1586214989506
       }
     },
@@ -205,9 +205,9 @@
       "category": "zigbee",
       "payload": {
         "event": "PowerSrcRcv",
-        "networkAddress": "0xCEEA",
-        "ieeeAddr": "0x00158D0002C4A78F",
-        "powerSource": 3,
+        "network_address": "0xCEEA",
+        "ieee_addr": "0x00158D0002C4A78F",
+        "power_source": 3,
         "timestamp": 1586214989509
       }
     },
@@ -215,10 +215,10 @@
       "category": "zigbee",
       "payload": {
         "event": "ModelRcv",
-        "networkAddress": "0xCEEA",
-        "ieeeAddr": "0x00158D0002C4A78F",
-        "modelID": "lumi.vibration.aq1",
-        "manufacturerName": "LUMI",
+        "network_address": "0xCEEA",
+        "ieee_addr": "0x00158D0002C4A78F",
+        "definition.model": "lumi.vibration.aq1",
+        "definition.vendor": "LUMI",
         "timestamp": 1586214989621
       }
     }

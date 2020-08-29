@@ -32,17 +32,17 @@
 
 //     onBindClick = async (rule: BindRule): Promise<void> => {
 //         const { device, createBind, getDeviceBinds } = this.props;
-//         await createBind(device.networkAddress, rule)
+//         await createBind(device.network_address, rule)
 
-//         await getDeviceBinds(device.networkAddress);
+//         await getDeviceBinds(device.network_address);
 //         new Notyf().success(`Created bind rule`);
 
 //     };
 
 //     onUnBindClick = async (rule: BindRule): Promise<void> => {
 //         const { device, removeBind, getDeviceBinds } = this.props;
-//         await removeBind(device.networkAddress, rule);
-//         await getDeviceBinds(device.networkAddress);
+//         await removeBind(device.network_address, rule);
+//         await getDeviceBinds(device.network_address);
 //         new Notyf().success(`Removed bind rule`);
 
 //     };

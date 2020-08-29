@@ -38,21 +38,21 @@ class DeviceGroupRow extends Component<DeviceGroupRowProps, {}> {
     getDeviceObj(): Device | undefined {
         const { groupAddress, devices } = this.props;
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const [ieeeAddr, _] = groupAddress.split('/');
-        return devices.find(d => d.ieeeAddr === ieeeAddr);
+        const [ieee_addr, _] = groupAddress.split('/');
+        return devices.find(d => d.ieee_address === ieee_addr);
     }
     render(): ComponentChild {
         const { rowNumber, groupAddress, removeDeviceFromGroup } = this.props;
         const device = this.getDeviceObj();
-        const [ieeeAddr, endpint] = groupAddress.split('/');
+        const [ieee_addr, endpint] = groupAddress.split('/');
 
         return <tr>
             <th scope="row">{rowNumber + 1}</th>
             <td className={style["device-pic"]}>{device && <SafeImg class={cx(style["device-image"])}
-                src={genDeviceImageUrl(device.modelID)} />}
+                src={genDeviceImageUrl(device.definition.model)} />}
             </td>
             <td>{device && device.friendly_name}</td>
-            <td>{ieeeAddr}</td>
+            <td>{ieee_addr}</td>
             <td>{endpint}</td>
             <td>{device && <Button<string> promt item={device.friendly_name} onClick={removeDeviceFromGroup} className="btn btn-danger btn-sm float-right"><i className="fa fa-trash" /></Button>}</td>
         </tr>;
@@ -78,7 +78,7 @@ class DeviceGroup extends Component<DeviceGroupPropts, {}> {
                     <th scope="col">#</th>
                     <th scope="col">Pic</th>
                     <th scope="col">friendlyName</th>
-                    <th scope="col">ieeeAddr</th>
+                    <th scope="col">ieee_addr</th>
                     <th scope="col">Endpint</th>
                     <th scope="col" className="text-right">Action</th>
                 </tr>
@@ -107,7 +107,7 @@ class AddDeviceToGroup extends Component<AddDeviceToGroupProps, AddDeviceToGroup
         const { devices } = this.props;
         return <select class="form-control form-control-sm" onChange={this.onDeviceSelect}>
             <option hidden>Select device</option>
-            {devices.filter(noCoordinator).map(device => <option value={device.friendly_name} title={device.description}>{`${device.friendly_name} (${device.modelID})`}</option>)}
+            {devices.filter(noCoordinator).map(device => <option value={device.friendly_name} title={device.definition.description}>{`${device.friendly_name} (${device.definition.model})`}</option>)}
         </select>;
     }
     onEpChange = (e: Event): void => {
@@ -138,10 +138,10 @@ export class GroupsPage extends Component<Actions & GlobalState, GroupsPageState
         newGroupName: ''
     }
     componentDidMount(): void {
-        const { groupsRequest, getZigbeeDevicesList } = this.props;
-        groupsRequest();
+        // const { groupsRequest, getZigbeeDevicesList } = this.props;
+        // groupsRequest();
 
-        getZigbeeDevicesList(false);
+        // getZigbeeDevicesList(false);
     }
 
     changeHandler = (event): void => {
@@ -178,6 +178,7 @@ export class GroupsPage extends Component<Actions & GlobalState, GroupsPageState
     }
     renderGroups(): ComponentChild {
         const { groups, devices, addDeviceToGroup } = this.props;
+        console.log(groups);
         return (
             <div id="accordion">
                 {
@@ -212,7 +213,6 @@ export class GroupsPage extends Component<Actions & GlobalState, GroupsPageState
         return <div class="container">
             {this.renderGroupCreationForm()}
             {this.renderGroups()}
-
         </div>
 
     }

@@ -55,7 +55,7 @@ export class DeviceInfo extends Component<PropsFromStore, {}> {
         // });
         return (
             <div class="card mb-3">
-                <SafeImg class={`card-img-top ${style["device-pic"]}`} src={genDeviceImageUrl(device.modelID)} />
+                <SafeImg class={`card-img-top ${style["device-pic"]}`} src={genDeviceImageUrl(device.definition.model)} />
                 <div class="card-body">
                     <h5 class="card-title">{device.type}</h5>
 
@@ -70,21 +70,21 @@ export class DeviceInfo extends Component<PropsFromStore, {}> {
                         }
 
 
-                        <dt class="col-5">ieeeAddr</dt>
-                        <dd class="col-7">{device.ieeeAddr}</dd>
+                        <dt class="col-5">ieee_addr</dt>
+                        <dd class="col-7">{device.ieee_address}</dd>
 
-                        <dt class="col-5">networkAddress</dt>
-                        <dd class="col-7">{device.networkAddress}</dd>
+                        <dt class="col-5">network_address</dt>
+                        <dd class="col-7">{device.network_address}</dd>
 
                         {/* <dt class="col-5">Power source</dt>
-                        <dd class="col-7"><PowerSourceComp source={device.powerSource}
+                        <dd class="col-7"><PowerSourceComp source={device.power_source}
                                                            battery={device?.st?.battery} /></dd> */}
 
-                        <dt class="col-5">manufacturerName</dt>
-                        <dd class="col-7">{device.manufacturerName}</dd>
+                        <dt class="col-5">vendor</dt>
+                        <dd class="col-7">{device.definition.vendor}</dd>
 
-                        <dt class="col-5">modelID</dt>
-                        <dd class="col-7">{device.modelID}</dd>
+                        <dt class="col-5">definition.model</dt>
+                        <dd class="col-7">{device.definition.model}</dd>
 
 
 

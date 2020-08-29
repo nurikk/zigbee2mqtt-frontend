@@ -17,12 +17,12 @@ import ActionTH from "./ActionTH";
 //TODO: proper type alias
 type SortColumns =
     "lastSeen"
-    | "networkAddress"
+    | "network_address"
     | "friendly_name"
-    | "ieeeAddr"
-    | "manufacturerName"
+    | "ieee_addr"
+    | "definition.vendor"
     | "st.linkquality"
-    | "modelID"
+    | "definition.model"
     | "Interview.State"
     | "PowerSource";
 
@@ -138,19 +138,19 @@ export class ZigbeeTable extends Component<Actions & GlobalState, ZigbeeTableSta
                     <tr className="text-nowrap">
                         <th>#</th>
                         <th>Pic</th>
-                        <ActionTH<SortColumns> className={cx(style["nwk-addr"], style["action-column"])} column="networkAddress"
+                        <ActionTH<SortColumns> className={cx(style["nwk-addr"], style["action-column"])} column="network_address"
                             currentDirection={sortDirection} current={sortColumn}
                             onClick={onSortChange}>nwkAddr</ActionTH>
                         <ActionTH<SortColumns> className={style["action-column"]} column="friendly_name"
                             currentDirection={sortDirection} current={sortColumn}
                             onClick={onSortChange}>Friendly name</ActionTH>
-                        <ActionTH<SortColumns> className={cx(style["ieee-addr"], style["action-column"])} column="ieeeAddr"
+                        <ActionTH<SortColumns> className={cx(style["ieee-addr"], style["action-column"])} column="ieee_addr"
                             currentDirection={sortDirection} current={sortColumn}
-                            onClick={onSortChange}>ieeeAddr</ActionTH>
-                        <ActionTH<SortColumns> className={cx(style["manu-name"], style["action-column"])} column="manufacturerName"
+                            onClick={onSortChange}>ieee_addr</ActionTH>
+                        <ActionTH<SortColumns> className={cx(style["manu-name"], style["action-column"])} column="definition.vendor"
                             currentDirection={sortDirection} current={sortColumn}
-                            onClick={onSortChange} titile="manufacturerName">Manufacturer</ActionTH>
-                        <ActionTH<SortColumns> className={style["action-column"]} column="modelID"
+                            onClick={onSortChange} titile="definition.vendor">Manufacturer</ActionTH>
+                        <ActionTH<SortColumns> className={style["action-column"]} column="definition.model"
                             currentDirection={sortDirection} current={sortColumn}
                             onClick={onSortChange}>Model</ActionTH>
                         <th>LQI</th>
@@ -166,20 +166,20 @@ export class ZigbeeTable extends Component<Actions & GlobalState, ZigbeeTableSta
                     {sortedDevices.map((device: Device, index) => <tr>
                         <td className="font-weight-bold">{index + 1}</td>
                         <td className={style["device-pic"]}><SafeImg class={cx(style["device-image"])}
-                            src={genDeviceImageUrl(device.modelID)} />
+                            src={genDeviceImageUrl(device.definition.model)} />
                         </td>
                         <td className={style["nwk-addr"]}><a
-                            href={genDeviceDetailsLink(device.friendly_name)}>{toHex(device.networkAddress)}</a>
+                            href={genDeviceDetailsLink(device.friendly_name)}>{toHex(device.network_address)}</a>
                         </td>
                         <td>{device.friendly_name}</td>
-                        <td className={style["ieee-addr"]}>{device.ieeeAddr ? device.ieeeAddr : "<corrupted>"}</td>
-                        <td title={device.manufacturerName}
-                            className={cx(style["manu-name"], "text-truncate", "text-nowrap", "position-relative")}>{device.manufacturerName}</td>
-                        <td>{device.modelID}</td>
+                        <td className={style["ieee-addr"]}>{device.ieee_address ? device.ieee_address : "<corrupted>"}</td>
+                        <td title={device.definition.vendor}
+                            className={cx(style["manu-name"], "text-truncate", "text-nowrap", "position-relative")}>{device.definition.vendor}</td>
+                        <td>{device.definition.model}</td>
                         <td>{deviceStates[device.friendly_name]?.linkquality}</td>
                         <td>{lastSeen(device)}</td>
                         <td className="text-left">
-                            <PowerSource source={device.powerSource} battery={deviceStates[device.friendly_name]?.battery} />
+                            <PowerSource source={device.power_source} battery={deviceStates[device.friendly_name]?.battery} />
                         </td>
                         <td>
                             <DeviceControlGroup device={device} />

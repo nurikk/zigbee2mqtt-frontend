@@ -36,7 +36,7 @@ export class DeviceControlGroup extends Component<DeviceControlGroupProps & Acti
 
     render(): ComponentChild {
         const { device, configureDevice, checkOTA } = this.props;
-        const validDevice = !!device.ieeeAddr;
+        const validDevice = !!device.ieee_address;
 
         return (
             <div className="btn-group btn-group-sm" role="group">

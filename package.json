@@ -3,7 +3,7 @@
   "sideEffects": [
     "*.css"
   ],
-  "name": "z2m-frontend",
+  "name": "zigbee2mqtt-frontend",
   "version": "0.1.11",
   "license": "MIT",
   "scripts": {
@@ -24,11 +24,14 @@
     "@types/history": "^4.7.6",
     "@types/luaparse": "^0.2.6",
     "@types/notyf": "^3.0.0",
+    "@types/reconnectingwebsocket": "^1.0.4",
     "history": "^5.0.0",
     "mqtt": "^4.1.0",
     "notyf": "^3.7.0",
     "preact-router": "^3.2.1",
     "pubsub-ts": "^0.2.0",
+    "reconnecting-websocket": "^4.4.0",
+    "reconnectingwebsocket": "^1.0.0",
     "unistore": "^3.5.1"
   },
   "devDependencies": {

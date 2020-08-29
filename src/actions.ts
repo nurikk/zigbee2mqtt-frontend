@@ -3,8 +3,9 @@
 
 import { GlobalState } from "./store";
 import { Store } from "unistore";
-import { sendMessage2Z2M } from './mqtt';
+
 import { BindRule, FileDescriptor } from "./types";
+import api from './api';
 
 
 
@@ -78,8 +79,8 @@ const actions = (store: Store<GlobalState>): object => ({
 
 
     getZigbeeDevicesList: (state, showLoading = true): Promise<void> => {
-        showLoading && store.setState({ isLoading: true });
-        sendMessage2Z2M('bridge/config/devices/get', '');
+        // showLoading && store.setState({ isLoading: true });
+        // api.send('bridge/config/devices/get', '');
         return Promise.resolve();
     },
 
@@ -95,14 +96,14 @@ const actions = (store: Store<GlobalState>): object => ({
 
     setPermitJoin(state, permit = true): Promise<void> {
         store.setState({ isLoading: true });
-        sendMessage2Z2M('bridge/config/permit_join', JSON.stringify(permit));
+        api.send('bridge/config/permit_join', JSON.stringify(permit));
         return Promise.resolve();
     },
 
 
     renameDevice: (state, old: string, newName: string): Promise<void> => {
         store.setState({ isLoading: true });
-        sendMessage2Z2M('bridge/config/rename', JSON.stringify({
+        api.send('bridge/config/rename', JSON.stringify({
             old, new: newName
         }));
         return Promise.resolve();
@@ -111,9 +112,9 @@ const actions = (store: Store<GlobalState>): object => ({
         store.setState({ isLoading: true });
 
         if (force) {
-            sendMessage2Z2M('bridge/config/force_remove', dev);
+            api.send('bridge/config/force_remove', dev);
         } else {
-            sendMessage2Z2M('bridge/config/remove', dev);
+            api.send('bridge/config/remove', dev);
         }
         return Promise.resolve();
     },
@@ -121,61 +122,61 @@ const actions = (store: Store<GlobalState>): object => ({
 
     configureDevice: (state, name: string): Promise<void> => {
         store.setState({ isLoading: true });
-        sendMessage2Z2M('bridge/configure', name);
+        api.send('bridge/configure', name);
         return Promise.resolve();
     },
 
     networkMapRequest: (state): Promise<void> => {
         store.setState({ isLoading: true });
-        sendMessage2Z2M('bridge/networkmap', 'raw');
+        api.send('bridge/request/networkmap', {type: "raw", routes: true});
         return Promise.resolve();
     },
 
     groupsRequest: (state): Promise<void> => {
         store.setState({ isLoading: true });
-        sendMessage2Z2M('bridge/config/groups', 'doesn’t matter');
+        api.send('bridge/config/groups', 'doesn’t matter');
         return Promise.resolve();
     },
     createGroup: (state, name: string): Promise<void> => {
         store.setState({ isLoading: true });
-        sendMessage2Z2M('bridge/config/add_group', name);
+        api.send('bridge/request/group/add', name);
         return Promise.resolve();
     },
 
     removeGroup: (state, name: string): Promise<void> => {
         store.setState({ isLoading: true });
-        sendMessage2Z2M('bridge/config/remove_group', name);
+        api.send('bridge/config/remove_group', name);
         return Promise.resolve();
     },
 
 
     addDeviceToGroup: (state, deviceName: string, groupName: string): Promise<void> => {
         store.setState({ isLoading: true });
-        sendMessage2Z2M(`bridge/group/${groupName}/add`, deviceName);
+        api.send(`bridge/group/${groupName}/add`, deviceName);
         return Promise.resolve();
     },
 
     removeDeviceFromGroup: (state, deviceName: string, groupName: string): Promise<void> => {
         store.setState({ isLoading: true });
-        sendMessage2Z2M(`bridge/group/${groupName}/remove`, deviceName);
+        api.send(`bridge/group/${groupName}/remove`, deviceName);
         return Promise.resolve();
     },
 
 
     touchlinkReset: (state): Promise<void> => {
         store.setState({ isLoading: true });
-        sendMessage2Z2M('bridge/config/touchlink/factory_reset', '');
+        api.send('bridge/config/touchlink/factory_reset', '');
         return Promise.resolve();
     },
     ZNPReset: (state): Promise<void> => {
         store.setState({ isLoading: true });
-        sendMessage2Z2M('bridge/config/reset', '');
+        api.send('bridge/config/reset', '');
         return Promise.resolve();
     },
 
 
     checkOTA: (state, deviceName: string): Promise<void> => {
-        sendMessage2Z2M(`bridge/ota_update/check`, deviceName);
+        api.send(`bridge/ota_update/check`, deviceName);
         return Promise.resolve();
     },
 

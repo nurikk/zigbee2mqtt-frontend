@@ -35,8 +35,9 @@ import { createHashHistory } from 'history';
 
 
 
+import api from './api';
 
-import './mqtt';
+
 import ConnectedSettingsPage from "./components/settings";
 import NavBar from "./components/navbar";
 import ConnectedGroupsPage from "./components/groups";
@@ -47,6 +48,7 @@ const ConnectedDevicePageWrap: FunctionalComponent<{dev: string}> = ({dev}) => (
 );
 
 
+api.connect();
 
 class Main extends Component {
     settingsConfigured(): boolean {
@@ -72,7 +74,7 @@ class Main extends Component {
             <Provider store={store}>
                 <Fragment>
                     <NavBar />
-                    <Router path="/" history={(createHashHistory() as unknown as CustomHistory)} onChange={this.handleRoute}>
+                    <Router path="/" history={(createHashHistory() as unknown as CustomHistory)}>
                         <ConnectedZigbeeTable path="/" default />
                         <ConnectedMap path="/map" />
                         <ConnectedDevicePage activeTab="Info" path="/device/:dev" />

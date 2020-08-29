@@ -86,23 +86,41 @@ export interface BridgeConfig {
 
 export type PowerSource = "Battery" | "Mains (single phase)";
 
+/*
 
-export interface Device {
-    ieeeAddr: string;
-    type: DeviceType;
-    networkAddress: number;
-    model: string;
-    vendor: string;
+"date_code": "27/08/2020 07:00",
+"definition": {
+    "description": "[Air quality sensor](http://modkam.ru/?p=xxxx)",
+    "model": "DIYRuZ_AirSense",
+    "supports": "",
+    "vendor": "DIYRuZ"
+},
+
+*/
+export interface DeviceDefinition {
     description: string;
+    model: string;
+    supports: string;
+    vendor: string;
+}
+export interface Device {
+    ieee_address: string;
+    type: DeviceType;
+    network_address: number;
+    model: string;
+    lastSeen: number;//to remove
+
+
     friendly_name: string;
-    manufacturerID: number;
-    manufacturerName: string;
-    powerSource: PowerSource;
-    modelID: string;
-    hardwareVersion: number;
-    softwareBuildID: number;
-    dateCode: string;
-    lastSeen: number;
+    power_source: PowerSource;
+
+    // lastSeen: number;
+    interviewing: boolean;
+    interview_completed: boolean;
+    software_build_id: number;
+    supported: boolean;
+    definition: DeviceDefinition;
+    date_code: string;
 }
 
 
@@ -128,7 +146,7 @@ export interface TouchLinkDevice {
     LinkQuality: number;
     PanId: number;
     TS: number;
-    ieeeAddr: string;
+    ieee_addr: string;
 }
 export interface TouchLinkScanApiResponse {
     TS: number;
