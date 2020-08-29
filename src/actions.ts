@@ -59,17 +59,17 @@ export interface Actions {
 
     touchlinkReset(): Promise<void>;
     ZNPReset(): Promise<void>;
-    checkOTA(deviceName: string): Promise<void>;
 
-    OTAUpdate(): Promise<void>;
+    checkOTA(deviceName: string): Promise<void>;
+    updateOTA(deviceName): Promise<void>;
 
 
     networkMapRequest(): Promise<void>;
-    groupsRequest(): Promise<void>;
+
     createGroup(name: string): Promise<void>;
     removeGroup(name: string): Promise<void>;
-    addDeviceToGroup(deviceName: string, groupName: string): Promise<void>;
-    removeDeviceFromGroup(deviceName: string, groupName: string): Promise<void>;
+    addDeviceToGroup(device: string, group: string): Promise<void>;
+    removeDeviceFromGroup(device: string, group: string): Promise<void>;
 }
 
 const actions = (store: Store<GlobalState>): object => ({
@@ -96,45 +96,32 @@ const actions = (store: Store<GlobalState>): object => ({
 
     setPermitJoin(state, permit = true): Promise<void> {
         store.setState({ isLoading: true });
-        api.send('bridge/config/permit_join', JSON.stringify(permit));
+        api.send('bridge/request/permit_join', {value: permit});
         return Promise.resolve();
     },
 
 
-    renameDevice: (state, old: string, newName: string): Promise<void> => {
+    renameDevice: (state, from: string, to: string): Promise<void> => {
         store.setState({ isLoading: true });
-        api.send('bridge/config/rename', JSON.stringify({
-            old, new: newName
-        }));
+        api.send('bridge/request/device/rename', {from, to});
         return Promise.resolve();
     },
     removeDevice: (state, dev: string, force: boolean): Promise<void> => {
         store.setState({ isLoading: true });
-
-        if (force) {
-            api.send('bridge/config/force_remove', dev);
-        } else {
-            api.send('bridge/config/remove', dev);
-        }
+        api.send('bridge/request/device/remove', {id: dev, force});
         return Promise.resolve();
     },
 
 
     configureDevice: (state, name: string): Promise<void> => {
         store.setState({ isLoading: true });
-        api.send('bridge/configure', name);
+        api.send('bridge/request/device/configure', {id: name});
         return Promise.resolve();
     },
 
     networkMapRequest: (state): Promise<void> => {
         store.setState({ isLoading: true });
         api.send('bridge/request/networkmap', {type: "raw", routes: true});
-        return Promise.resolve();
-    },
-
-    groupsRequest: (state): Promise<void> => {
-        store.setState({ isLoading: true });
-        api.send('bridge/config/groups', 'doesn’t matter');
         return Promise.resolve();
     },
     createGroup: (state, name: string): Promise<void> => {
@@ -150,22 +137,22 @@ const actions = (store: Store<GlobalState>): object => ({
     },
 
 
-    addDeviceToGroup: (state, deviceName: string, groupName: string): Promise<void> => {
+    addDeviceToGroup: (state, device: string, group: string): Promise<void> => {
         store.setState({ isLoading: true });
-        api.send(`bridge/group/${groupName}/add`, deviceName);
+        api.send('bridge/request/group/members/add', {group, device});
         return Promise.resolve();
     },
 
-    removeDeviceFromGroup: (state, deviceName: string, groupName: string): Promise<void> => {
+    removeDeviceFromGroup: (state, device: string, group: string): Promise<void> => {
         store.setState({ isLoading: true });
-        api.send(`bridge/group/${groupName}/remove`, deviceName);
+        api.send('bridge/request/group/members/remove', {device, group});
         return Promise.resolve();
     },
 
 
     touchlinkReset: (state): Promise<void> => {
         store.setState({ isLoading: true });
-        api.send('bridge/config/touchlink/factory_reset', '');
+        api.send('bridge/request/touchlink/factory_reset', '');
         return Promise.resolve();
     },
     ZNPReset: (state): Promise<void> => {
@@ -176,12 +163,12 @@ const actions = (store: Store<GlobalState>): object => ({
 
 
     checkOTA: (state, deviceName: string): Promise<void> => {
-        api.send(`bridge/ota_update/check`, deviceName);
+        api.send('bridge/request/device/ota_update/check', {id: deviceName});
         return Promise.resolve();
     },
-
-
-
-
+    updateOTA: (state, deviceName: string): Promise<void> => {
+        api.send('bridge/request/device/ota_update/update', {id: deviceName});
+        return Promise.resolve();
+    }
 });
 export default actions;

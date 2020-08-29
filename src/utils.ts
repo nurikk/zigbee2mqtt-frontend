@@ -27,11 +27,11 @@ export function chunkArray<T>(inputArr: T[], chunkSize: number): T[][] {
 
 export const encodeGetParams = (data: Dictionary<string | number>): string => Object.keys(data).map((key) => [key, data[key]].map(encodeURIComponent).join("=")).join("&");
 
-export const sanitizeModelNameForImageUrl = (modelName: string): string => {
-    return modelName ? modelName.replace("/", "_") : null;
+export const sanitizeModelNameForImageUrl = (model: string): string => {
+    return model ? `${model.replace(/:|\s|\//g, "-")}.jpg` : 'generic.jpg';
 };
 
-export const genDeviceImageUrl = (modelID: string): string => (`https://slsys.github.io/Gateway/devices/png/${sanitizeModelNameForImageUrl(modelID)}.png`);
+export const genDeviceImageUrl = (modelID: string): string => (`https://www.zigbee2mqtt.io/images/devices/${sanitizeModelNameForImageUrl(modelID)}`);
 
 export type LoadableFileTypes = "js" | "css";
 

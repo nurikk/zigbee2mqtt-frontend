@@ -56,13 +56,14 @@ export enum DeviceSupportStatus {
 
 
 
+
 export interface Meta {
+    revision: number;
     transportrev: number;
     product: number;
     majorrel: number;
     minorrel: number;
     maintrel: number;
-    revision: number;
 }
 
 export interface Coordinator {
@@ -70,10 +71,17 @@ export interface Coordinator {
     meta: Meta;
 }
 
+export interface Network {
+    channel: number;
+    pan_id: number;
+    extended_pan_id: number[];
+}
+
 export interface BridgeConfig {
     version: string;
     commit: string;
     coordinator: Coordinator;
+    network: Network;
     log_level: string;
     permit_join: boolean;
 }
@@ -119,7 +127,7 @@ export interface Device {
     interview_completed: boolean;
     software_build_id: number;
     supported: boolean;
-    definition: DeviceDefinition;
+    definition?: DeviceDefinition;
     date_code: string;
 }
 

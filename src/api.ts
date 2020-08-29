@@ -62,6 +62,9 @@ class Api  {
                 });
                 break;
             case "bridge/info":
+                store.setState({
+                    bridgeConfig: JSON.parse(data.message as string) as BridgeConfig
+                });
                 break;
             case "bridge/devices":
                 store.setState({
@@ -93,7 +96,11 @@ class Api  {
                 showNotity(JSON.parse(data.message as string));
                 break;
             default:
-                debugger
+                if (data.topic.startsWith("bridge/request/")){
+
+                } else {
+                    debugger
+                }
                 break;
         }
         // if (data.topic.endsWith('/bridge/info')) {

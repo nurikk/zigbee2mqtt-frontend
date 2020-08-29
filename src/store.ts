@@ -16,11 +16,16 @@ export interface Settings {
     mqtt_password: string;
 
 }
+
+
+export interface GroupAddress {
+    endpoint: number;
+    ieee_address: string;
+}
 export interface Group {
-    optimistic: boolean;
-    devices: string[];
+    members: GroupAddress[];
     friendly_name: string;
-    ID: number;
+    id: number;
 }
 
 export interface GlobalState {

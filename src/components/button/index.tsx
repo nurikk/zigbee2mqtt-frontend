@@ -19,6 +19,6 @@ export default class Button<T> extends Component<ButtonProps<T>, {}> {
 
     render(): ComponentChild {
         const { children, ...rest } = this.props;
-        return <button {...rest} onClick={this.onClick}>{children}</button>;
+        return <button type="button" {...rest} onClick={this.onClick}>{children}</button>;
     }
 }

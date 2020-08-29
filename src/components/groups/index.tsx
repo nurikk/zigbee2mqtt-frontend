@@ -1,7 +1,7 @@
 import { Component, ComponentChild, h } from "preact";
 import { connect } from "unistore/preact";
 import actions, { Actions } from "../../actions";
-import { GlobalState, Group } from "../../store";
+import { GlobalState, Group, GroupAddress } from "../../store";
 import Button from "../button";
 import { Device } from "../../types";
 import SafeImg from "../safe-image";
@@ -28,7 +28,7 @@ interface AddDeviceToGroupState {
 
 interface DeviceGroupRowProps {
     rowNumber: number;
-    groupAddress: string;
+    groupAddress: GroupAddress;
     devices: Device[];
     removeDeviceFromGroup(deviceFriendlyName: string): void;
 }
@@ -37,14 +37,11 @@ interface DeviceGroupRowProps {
 class DeviceGroupRow extends Component<DeviceGroupRowProps, {}> {
     getDeviceObj(): Device | undefined {
         const { groupAddress, devices } = this.props;
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const [ieee_addr, _] = groupAddress.split('/');
-        return devices.find(d => d.ieee_address === ieee_addr);
+        return devices.find(d => d.ieee_address === groupAddress.ieee_address);
     }
     render(): ComponentChild {
         const { rowNumber, groupAddress, removeDeviceFromGroup } = this.props;
         const device = this.getDeviceObj();
-        const [ieee_addr, endpint] = groupAddress.split('/');
 
         return <tr>
             <th scope="row">{rowNumber + 1}</th>
@@ -52,8 +49,8 @@ class DeviceGroupRow extends Component<DeviceGroupRowProps, {}> {
                 src={genDeviceImageUrl(device.definition.model)} />}
             </td>
             <td>{device && device.friendly_name}</td>
-            <td>{ieee_addr}</td>
-            <td>{endpint}</td>
+            <td>{groupAddress.ieee_address}</td>
+            <td>{groupAddress.endpoint}</td>
             <td>{device && <Button<string> promt item={device.friendly_name} onClick={removeDeviceFromGroup} className="btn btn-danger btn-sm float-right"><i className="fa fa-trash" /></Button>}</td>
         </tr>;
     }
@@ -84,9 +81,7 @@ class DeviceGroup extends Component<DeviceGroupPropts, {}> {
                 </tr>
             </thead>
             <tbody>
-                {
-                    group.devices.map((groupAddress, idx) => <DeviceGroupRow removeDeviceFromGroup={this.onRemove} rowNumber={idx} devices={devices} groupAddress={groupAddress} />)
-                }
+                {group.members.map((groupMemebershipInfo, idx) => <DeviceGroupRow removeDeviceFromGroup={this.onRemove} rowNumber={idx} devices={devices} groupAddress={groupMemebershipInfo} />)}
             </tbody>
         </table>;
     }
@@ -184,12 +179,12 @@ export class GroupsPage extends Component<Actions & GlobalState, GroupsPageState
                 {
                     groups.map(group => (
                         <div class="card mb-1">
-                            <div class="card-header" id={`heading${group.ID}`}>
+                            <div class="card-header" id={`heading${group.id}`}>
                                 <h5 class="mb-0">
                                     <button class="btn btn-link btn-sm">
-                                        {group.friendly_name} (#{group.ID})
+                                        {group.friendly_name} (#{group.id})
                                     </button>
-                                    <Button<string> item={group.friendly_name} onClick={this.removeGroup} className="btn btn-danger btn-sm float-right"><i className="fa fa-trash" /></Button>
+                                    <Button<string> title="Remove group" item={group.friendly_name} onClick={this.removeGroup} className="btn btn-danger btn-sm float-right"><i className="fa fa-trash" /></Button>
                                 </h5>
                             </div>
 
