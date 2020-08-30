@@ -36,16 +36,9 @@ interface Interview {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface Cluster {
+export type Cluster = string;
 
-}
-
-export interface Endpoint {
-    "profId": string;
-    "In"?: Dictionary<true>;
-    "Out"?: Dictionary<true>;
-    "devId": string;
-}
+export type Endpoint = string | number;
 
 export enum DeviceSupportStatus {
     Unknown = 0,
@@ -129,6 +122,7 @@ export interface Device {
     supported: boolean;
     definition?: DeviceDefinition;
     date_code: string;
+    endpoints: Endpoint[];
 }
 
 
@@ -139,12 +133,12 @@ export interface FileDescriptor extends Named {
 }
 
 
-export interface BindRule extends Dictionary<string | number> {
-    id?: number;
-    DstnetworkAddress: string;
-    ClusterId: number;
-    SrcEp: number;
-    DstEp: number;
+export interface BindParams {
+    source: Device;
+    sourceEp: Endpoint;
+    destination: Device;
+    destinationEp: Endpoint;
+    clusters: Cluster[];
 }
 
 export type SortDirection = "asc" | "desc";

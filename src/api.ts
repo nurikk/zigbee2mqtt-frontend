@@ -29,8 +29,9 @@ const showNotity = (message: LogMessage): void => {
 }
 
 interface ResponseWithStatus {
-    status: "ok";
+    status: "ok" | "error";
     data: unknown;
+    error?: string;
 }
 class Api  {
     url: string;
@@ -82,13 +83,21 @@ class Api  {
             case "bridge/response/networkmap":
                 response = JSON.parse(data.message as string);
                 if (response.status == "ok") {
-
                     store.setState({
                         isLoading: false,
                         networkGraph: sanitizeGraph(JSON.parse((response.data as {value: string}).value as string) as GraphI)
                     });
                 } else {
                     store.setState({isLoading: false});
+                }
+                break;
+
+            case "bridge/response/device/bind":
+                response = JSON.parse(data.message as string);
+                if (response.status == "ok") {
+                    new Notyf().success("ok");
+                } else {
+                    new Notyf().error(response.error);
                 }
                 break;
 

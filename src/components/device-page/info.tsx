@@ -1,30 +1,31 @@
 import { Component, ComponentChild, Fragment, h } from "preact";
 import { Device } from "../../types";
 import SafeImg from "../safe-image";
-import { genDeviceDetailsLink, genDeviceImageUrl } from "../../utils";
+import { genDeviceImageUrl } from "../../utils";
 import DeviceControlGroup from "../device-control";
-
+import cx from "classnames";
 import style from "./style.css";
 // import { getClusterName } from "./bind";
 import { connect } from "unistore/preact";
 import { GlobalState } from "../../store";
 import PowerSourceComp from "../power-source";
 
-interface PropsFromStore {
-    device: Device ;
+interface DeviceInfoProps {
+    dev: string;
 }
 
-export class DeviceInfo extends Component<PropsFromStore, {}> {
-    render(): ComponentChild {
-        const { device } = this.props;
-        if (device) {
-            return this.renderDeviceInfo();
-        }
-        return "Keep opening, I'm really working on it :) Stay tuned :P";
-    }
+interface PropsFromStore {
+    devices: Device[];
+}
 
-    renderDeviceInfo(): ComponentChild {
-        const { device } = this.props;
+// eslint-disable-next-line react/prefer-stateless-function
+export class DeviceInfo extends Component<DeviceInfoProps & PropsFromStore, {}> {
+    render(): ComponentChild {
+        const { dev, devices } = this.props;
+        const device = devices.find(d => d.ieee_address == dev);
+        if (!device) {
+            return "Unknown device";
+        }
         // const endpoints = Object.entries(device.ep ?? {}).map(([epName, ep]) => {
         //     // const inClusters = Object.entries(ep.In ?? {}).map(([clusterId]) => {
         //     //     const cluster = parseInt(clusterId, 10);
@@ -70,20 +71,23 @@ export class DeviceInfo extends Component<PropsFromStore, {}> {
                         }
 
 
-                        <dt class="col-5">ieee_addr</dt>
+                        <dt class="col-5">IEEE address</dt>
                         <dd class="col-7">{device.ieee_address}</dd>
 
-                        <dt class="col-5">network_address</dt>
+                        <dt class="col-5">Network address</dt>
                         <dd class="col-7">{device.network_address}</dd>
 
-                        {/* <dt class="col-5">Power source</dt>
-                        <dd class="col-7"><PowerSourceComp source={device.power_source}
-                                                           battery={device?.st?.battery} /></dd> */}
 
-                        <dt class="col-5">vendor</dt>
+                        <dt class="col-5">Support status</dt>
+                        <dd class="col-7" className={cx('col-7', {'bg-danger': !device.supported, 'text-success': device.supported})}>{device.supported ? 'Supported' : 'Unsupported'}</dd>
+
+                        <dt class="col-5">Power source</dt>
+                        <dd class="col-7"><PowerSourceComp source={device.power_source} /></dd>
+
+                        <dt class="col-5">Vendor</dt>
                         <dd class="col-7">{device.definition?.vendor}</dd>
 
-                        <dt class="col-5">definition.model</dt>
+                        <dt class="col-5">Model</dt>
                         <dd class="col-7">{device.definition?.model}</dd>
 
 
@@ -103,6 +107,7 @@ export class DeviceInfo extends Component<PropsFromStore, {}> {
     }
 }
 
-const mappedProps = ["device"];
+const mappedProps = ["devices"];
 
-export default connect<{}, {}, GlobalState, PropsFromStore>(mappedProps)(DeviceInfo);
+const ConnectedDeviceInfoPage = connect<{}, {}, GlobalState, DeviceInfoProps & PropsFromStore>(mappedProps)(DeviceInfo);
+export default ConnectedDeviceInfoPage;

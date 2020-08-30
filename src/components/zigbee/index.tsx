@@ -170,7 +170,7 @@ export class ZigbeeTable extends Component<Actions & GlobalState, ZigbeeTableSta
                             src={genDeviceImageUrl(device.definition?.model)} />
                         </td>
                         <td className={style["nwk-addr"]}><a
-                            href={genDeviceDetailsLink(device.friendly_name)}>{toHex(device.network_address)}</a>
+                            href={genDeviceDetailsLink(device.ieee_address)}>{toHex(device.network_address)}</a>
                         </td>
                         <td>{device.friendly_name}</td>
                         <td className={style["ieee-addr"]}>{device.ieee_address}</td>

@@ -173,7 +173,6 @@ export class GroupsPage extends Component<Actions & GlobalState, GroupsPageState
     }
     renderGroups(): ComponentChild {
         const { groups, devices, addDeviceToGroup } = this.props;
-        console.log(groups);
         return (
             <div id="accordion">
                 {

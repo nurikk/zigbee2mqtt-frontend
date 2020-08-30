@@ -5,7 +5,7 @@ const graph: GraphI = {
     nodes: []
 };
 
-import { BindRule, Device, FileDescriptor, TouchLinkScanApiResponse, Dictionary, DeviceStats, BridgeConfig } from "./types";
+import { Device, FileDescriptor, TouchLinkScanApiResponse, Dictionary, DeviceStats, BridgeConfig, BindParams } from "./types";
 import { ApiResponse, isObject } from "./utils";
 import { GraphI } from "./components/map/types";
 
@@ -32,10 +32,9 @@ export interface GlobalState {
     forceRender: number;
     isLoading: boolean;
     isError: boolean | string;
-    device: Device | undefined;
     devices: Device[];
     deviceStates: Dictionary<DeviceStats>;
-    bindRules: BindRule[];
+    bindRules: BindParams[];
     // time: TimeInfo | undefined;
     logs: string[];
     // logLevel: LogLevel;
@@ -78,12 +77,11 @@ try {
 const initialState: GlobalState = {
     settings,
     forceRender: Date.now(),
-    device: undefined,
     isLoading: false,
     isError: false,
     devices: [],
     deviceStates: {},
-    bindRules: [{} as BindRule],
+    bindRules: [{} as BindParams],
     // time: undefined,
     logs: [],
     // logLevel: LogLevel.LOG_DEBUG,

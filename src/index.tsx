@@ -28,7 +28,9 @@ import Router, { CustomHistory, route } from 'preact-router';
 // import ConnectedDiscovery from "./components/discovery";
 // import ConnectedLogViewer from "./components/log-viewer";
 // import ConnectedCodeEditor from "./components/code-editor";
-import ConnectedDevicePage from "./components/device-page";
+// import ConnectedDevicePage from "./components/device-page";
+import ConnectedDeviceInfoPage from "./components/device-page/info";
+import ConnectedDeviceBindPage  from "./components/device-page/bind";
 import store from "./store";
 import { Provider } from "unistore/preact";
 import { createHashHistory } from 'history';
@@ -77,8 +79,8 @@ class Main extends Component {
                     <Router path="/" history={(createHashHistory() as unknown as CustomHistory)}>
                         <ConnectedZigbeeTable path="/" default />
                         <ConnectedMap path="/map" />
-                        <ConnectedDevicePage activeTab="Info" path="/device/:dev" />
-
+                        <ConnectedDeviceInfoPage path="/device/:dev" />
+                        <ConnectedDeviceBindPage path="/bind/:dev?" />
                         <ConnectedSettingsPage path="/settings" />
                         <ConnectedGroupsPage path="/groups" />
                     </Router>

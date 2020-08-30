@@ -4,8 +4,9 @@
 import { GlobalState } from "./store";
 import { Store } from "unistore";
 
-import { BindRule, FileDescriptor } from "./types";
+import {  FileDescriptor, BindParams, Endpoint, Dictionary } from "./types";
 import api from './api';
+
 
 
 
@@ -18,11 +19,10 @@ export interface Actions {
 
     getZigbeeDevicesList(showLoading: boolean): Promise<void>;
 
-    removeBind(dev: string, bindRule: BindRule): Promise<void>;
+    bindReqest(isBind: boolean, params: BindParams): Promise<void>;
 
-    createBind(dev: string, bindRule: BindRule): Promise<void>;
 
-    setBindRules(bindRules: BindRule[]): Promise<void>;
+    setBindRules(bindRules: BindParams[]): Promise<void>;
 
 
     setStateValue(dev: string, name: string, value: unknown): Promise<void>;
@@ -71,6 +71,12 @@ export interface Actions {
     addDeviceToGroup(device: string, group: string): Promise<void>;
     removeDeviceFromGroup(device: string, group: string): Promise<void>;
 }
+const friendlyNameAndEnpoint = (friendlyName: string, endpoint: Endpoint): string => {
+    if (endpoint) {
+        return `${friendlyName}/${endpoint}`;
+    }
+    return friendlyName;
+}
 
 const actions = (store: Store<GlobalState>): object => ({
     setLoading(state, isLoading: boolean): void {
@@ -84,12 +90,25 @@ const actions = (store: Store<GlobalState>): object => ({
         return Promise.resolve();
     },
 
-    removeBind: (state, dev: string, bindRule: BindRule): Promise<void> => {
+    removeBind: (state, params: BindParams): Promise<void> => {
         store.setState({ isLoading: true });
         return Promise.resolve();
     },
-    createBind: (state, dev: string, bindRule: BindRule): Promise<void> => {
+    bindReqest: (state, isBind: boolean, params: BindParams): Promise<void> => {
         store.setState({ isLoading: true });
+        const bindParams: Dictionary<unknown> = {
+            from: friendlyNameAndEnpoint(params.source.friendly_name, params.sourceEp),
+            to: friendlyNameAndEnpoint(params.destination.friendly_name, params.destinationEp)
+        };
+        if (params.clusters && params.clusters.length) {
+            bindParams.clusters = params.clusters;
+        }
+        if (isBind) {
+            api.send("bridge/request/device/bind", bindParams)
+        } else {
+            api.send("bridge/request/device/unbind", bindParams)
+        }
+        
         return Promise.resolve();
     },
 

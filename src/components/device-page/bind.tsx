@@ -1,92 +1,86 @@
-// import { Component, ComponentChild, h } from "preact";
-// import { BindRule, Device } from "../../types";
-// import { ZigbeeClusters } from "./clusters";
-// import BindRow from "./bind-row";
-// import actions, { Actions } from "../../actions";
-// import { connect } from "unistore/preact";
-// import { GlobalState } from "../../store";
-// import { Notyf } from "notyf";
+import { Component, ComponentChild, h } from "preact";
+import { BindParams, Device } from "../../types";
+import { ZigbeeClusters } from "./clusters";
+import BindRow from "./bind-row";
+import actions, { Actions } from "../../actions";
+import { connect } from "unistore/preact";
+import { GlobalState, Group } from "../../store";
 
 
-// export const getClusterName = (id: number, addBraces = true): string => {
-//     if (ZigbeeClusters[id]) {
-//         const cleanName = (ZigbeeClusters[id] as string).replace(/^ZCL_CLUSTER_ID_/, "");
-//         return addBraces ? ` (${cleanName})` : cleanName;
-//     }
-//     return "";
-// };
 
-// interface PropsFromStore {
-//     device: Device;
-//     devices: Device[];
-//     bindRules: BindRule[];
-// }
+export const getClusterName = (id: number, addBraces = true): string => {
+    if (ZigbeeClusters[id]) {
+        const cleanName = (ZigbeeClusters[id] as string).replace(/^ZCL_CLUSTER_ID_/, "");
+        return addBraces ? ` (${cleanName})` : cleanName;
+    }
+    return "";
+};
 
-// export class Bind extends Component<PropsFromStore & Actions, {}> {
-//     onRuleChange = (idx: number, rule: BindRule): void => {
-//         const { bindRules, setBindRules } = this.props;
-//         const copyRules = [...bindRules];
-//         copyRules[idx] = rule;
-//         setBindRules(copyRules);
-//     };
+interface PropsFromStore {
+    devices: Device[];
+    groups: Group[];
+    bindRules: BindParams[];
+}
+interface BindProps {
+    dev?: string;
+}
+export class Bind extends Component<BindProps & PropsFromStore & Actions, {}> {
 
-//     onBindClick = async (rule: BindRule): Promise<void> => {
-//         const { device, createBind, getDeviceBinds } = this.props;
-//         await createBind(device.network_address, rule)
+    onRuleChange = (idx: number, rule: BindParams): void => {
+        const { bindRules, setBindRules } = this.props;
+        const copyRules = [...bindRules];
+        copyRules[idx] = rule;
+        setBindRules(copyRules);
+    };
 
-//         await getDeviceBinds(device.network_address);
-//         new Notyf().success(`Created bind rule`);
+    onBindClick = (params: BindParams): void => {
+        console.log(params);
+        const { bindReqest } = this.props;
+        bindReqest(true, params);
 
-//     };
 
-//     onUnBindClick = async (rule: BindRule): Promise<void> => {
-//         const { device, removeBind, getDeviceBinds } = this.props;
-//         await removeBind(device.network_address, rule);
-//         await getDeviceBinds(device.network_address);
-//         new Notyf().success(`Removed bind rule`);
+    };
 
-//     };
+    onUnBindClick = async (params: BindParams): Promise<void> => {
+        console.log(params);
+        const { bindReqest } = this.props;
+        bindReqest(false, params);
+    };
 
-//     renderBindsTable(): ComponentChild {
-//         const { bindRules, devices, device } = this.props;
-//         return (
-//             <table class="table table-striped table-borderless">
-//                 <thead>
-//                     <tr>
-//                         <th scope="col">#</th>
-//                         <th scope="col">Source Cluster/Ep</th>
-//                         <th scope="col">DstnetworkAddress</th>
-//                         <th scope="col">DstEp</th>
-//                         <th scope="col">Action</th>
-//                     </tr>
-//                 </thead>
-//                 <tbody>
-//                     {
-//                         bindRules.map((rule, idx) => <BindRow
-//                             key={idx}
-//                             onUnBindClick={this.onUnBindClick}
-//                             onBindClick={this.onBindClick}
-//                             onChange={this.onRuleChange}
-//                             device={device}
-//                             idx={idx}
-//                             rule={rule}
-//                             devices={devices} />)
-//                     }
-//                 </tbody>
-//             </table>
-//         );
-//     }
+    render(): ComponentChild {
+        const { dev, devices, bindRules, groups } = this.props;
+        const device = devices.find(d => d.ieee_address == dev);
 
-//     render(): ComponentChild {
-//         const { device } = this.props;
-//         if (device) {
-//             return this.renderBindsTable();
-//         }
-//         return "Loading...";
+        return (
+            <table class="table table-striped table-borderless">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Source</th>
+                        <th scope="col">Source EP</th>
+                        <th scope="col">Destination</th>
+                        <th scope="col">Destination EP</th>
+                        <th scope="col">Clusters</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        bindRules.map((rule, idx) => <BindRow
+                            key={idx}
+                            groups={groups}
+                            onUnBind={this.onUnBindClick}
+                            onBind={this.onBindClick}
+                            device={device}
+                            idx={idx}
+                            devices={devices} />)
+                    }
+                </tbody>
+            </table>
+        );
+    }
+}
 
-//     }
-// }
-
-// const mappedProps = ["device", "devices", "bindRules"];
-
-// export default connect<{}, {}, GlobalState, PropsFromStore>(mappedProps, actions)(Bind);
+const mappedProps = ["devices", "bindRules", "groups"];
+const ConnectedBindPage = connect<{}, {}, GlobalState, BindProps & PropsFromStore & Actions>(mappedProps, actions)(Bind);
+export default ConnectedBindPage
