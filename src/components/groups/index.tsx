@@ -184,7 +184,7 @@ export class GroupsPage extends Component<Actions & GlobalState, GroupsPageState
                                     <button class="btn btn-link btn-sm">
                                         {group.friendly_name} (#{group.id})
                                     </button>
-                                    <Button<string> title="Remove group" item={group.friendly_name} onClick={this.removeGroup} className="btn btn-danger btn-sm float-right"><i className="fa fa-trash" /></Button>
+                                    <Button<string> promt title="Remove group" item={group.friendly_name} onClick={this.removeGroup} className="btn btn-danger btn-sm float-right"><i className="fa fa-trash" /></Button>
                                 </h5>
                             </div>
 

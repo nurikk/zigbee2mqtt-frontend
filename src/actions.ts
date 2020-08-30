@@ -124,15 +124,15 @@ const actions = (store: Store<GlobalState>): object => ({
         api.send('bridge/request/networkmap', {type: "raw", routes: true});
         return Promise.resolve();
     },
-    createGroup: (state, name: string): Promise<void> => {
+    createGroup: (state, group: string): Promise<void> => {
         store.setState({ isLoading: true });
-        api.send('bridge/request/group/add', name);
+        api.send('bridge/request/group/add', group);
         return Promise.resolve();
     },
 
-    removeGroup: (state, name: string): Promise<void> => {
+    removeGroup: (state, group: string): Promise<void> => {
         store.setState({ isLoading: true });
-        api.send('bridge/config/remove_group', name);
+        api.send('bridge/request/group/remove', group);
         return Promise.resolve();
     },
 
