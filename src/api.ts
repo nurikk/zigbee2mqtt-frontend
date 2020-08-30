@@ -33,7 +33,7 @@ interface ResponseWithStatus {
     data: unknown;
     error?: string;
 }
-class Api  {
+class Api {
     url: string;
     socket: ReconnectingWebSocket;
     constructor(url: string) {
@@ -42,7 +42,7 @@ class Api  {
     }
     send = (topic: string, payload: unknown): void => {
         console.log(topic, payload);
-        this.socket.send(JSON.stringify({topic, payload}));
+        this.socket.send(JSON.stringify({ topic, payload }));
     }
 
     connect(): void {
@@ -54,69 +54,75 @@ class Api  {
     private onMessage = (event: MessageEvent): void => {
         const data = JSON.parse(event.data) as Message;
         let response: ResponseWithStatus;
-        switch (data.topic) {
-            case "bridge/state":
-                break;
-            case "bridge/config":
-                store.setState({
-                    bridgeConfig: JSON.parse(data.message as string) as BridgeConfig
-                });
-                break;
-            case "bridge/info":
-                store.setState({
-                    bridgeConfig: JSON.parse(data.message as string) as BridgeConfig
-                });
-                break;
-            case "bridge/devices":
-                store.setState({
-                    isLoading: false,
-                    devices: JSON.parse(data.message as string) as Device[]
-                });
-                break;
-
-            case "bridge/groups":
-                store.setState({
-                    isLoading: false,
-                    groups: JSON.parse(data.message as string)  as Group[]
-                })
-                break;
-            case "bridge/response/networkmap":
-                response = JSON.parse(data.message as string);
-                if (response.status == "ok") {
+        if (data.topic.indexOf("/") == -1) {
+            const { deviceStates } = store.getState();
+            deviceStates[data.topic] = { ...deviceStates[data.topic], ...JSON.parse(data.message as string) };
+            store.setState({ deviceStates, forceRender: Date.now() });
+        } else {
+            switch (data.topic) {
+                case "bridge/state":
+                    break;
+                case "bridge/config":
+                    store.setState({
+                        bridgeConfig: JSON.parse(data.message as string) as BridgeConfig
+                    });
+                    break;
+                case "bridge/info":
+                    store.setState({
+                        bridgeConfig: JSON.parse(data.message as string) as BridgeConfig
+                    });
+                    break;
+                case "bridge/devices":
                     store.setState({
                         isLoading: false,
-                        networkGraph: sanitizeGraph(JSON.parse((response.data as {value: string}).value as string) as GraphI)
+                        devices: JSON.parse(data.message as string) as Device[]
                     });
-                } else {
-                    store.setState({isLoading: false});
-                }
-                break;
+                    break;
 
-            case "bridge/response/device/bind":
-                response = JSON.parse(data.message as string);
-                if (response.status == "ok") {
-                    new Notyf().success("ok");
-                } else {
-                    new Notyf().error(response.error);
-                }
-                break;
+                case "bridge/groups":
+                    store.setState({
+                        isLoading: false,
+                        groups: JSON.parse(data.message as string) as Group[]
+                    })
+                    break;
+                case "bridge/response/networkmap":
+                    response = JSON.parse(data.message as string);
+                    if (response.status == "ok") {
+                        store.setState({
+                            isLoading: false,
+                            networkGraph: sanitizeGraph(JSON.parse((response.data as { value: string }).value as string) as GraphI)
+                        });
+                    } else {
+                        store.setState({ isLoading: false });
+                    }
+                    break;
 
-            case "bridge/logging":
-                showNotity(JSON.parse(data.message as string));
-                break;
-            default:
-                if (data.topic.startsWith("bridge/request/")){
+                case "bridge/response/device/bind":
+                    response = JSON.parse(data.message as string);
+                    if (response.status == "ok") {
+                        new Notyf().success("ok");
+                    } else {
+                        new Notyf().error(response.error);
+                    }
+                    break;
 
-                } else {
-                    debugger
-                }
-                break;
+                case "bridge/event":
+                    break;
+
+                case "bridge/logging":
+                    showNotity(JSON.parse(data.message as string));
+                    break;
+                default:
+                    if (data.topic.startsWith("bridge/request/")) {
+
+                    } else {
+                        debugger
+                    }
+                    break;
+            }
         }
-        // if (data.topic.endsWith('/bridge/info')) {
-        //     this.emit('info', JSON.parse(data.message));
-        // } else if (data.topic.endsWith('/bridge/devices')) {
-        //     this.emit('devices', JSON.parse(data.message));
-        // }
+
+
     }
 }
 const api = new Api(`ws://${window.location.host}/api`);

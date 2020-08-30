@@ -5,8 +5,9 @@ export type DeviceType = "EndDevice" | "Router" | "Coordinator";
 export type Dictionary<V> = { [index: string]: V }
 
 export interface DeviceStats {
-    linkquality?: number;
-    battery?: number;
+    battery: number;
+    last_seen: string;
+    linkquality: number;
     [k: string]: string | number | boolean;
 }
 
@@ -109,7 +110,7 @@ export interface Device {
     type: DeviceType;
     network_address: number;
     model: string;
-    lastSeen: number;//to remove
+
 
 
     friendly_name: string;

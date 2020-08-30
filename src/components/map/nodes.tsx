@@ -51,7 +51,7 @@ const offlineTimeout = 3600 * 2;
 
 export const isOnline = (device: Device): boolean => {
 
-    return Date.now() - device.lastSeen < offlineTimeout;
+    return true; //Date.now() - device.lastSeen < offlineTimeout;
 };
 
 interface NodeState {

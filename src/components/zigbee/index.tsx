@@ -21,7 +21,6 @@ type SortColumns =
     | "friendly_name"
     | "ieee_addr"
     | "definition.vendor"
-    | "st.linkquality"
     | "definition.model"
     | "Interview.State"
     | "PowerSource";
@@ -129,6 +128,7 @@ export class ZigbeeTable extends Component<Actions & GlobalState, ZigbeeTableSta
     renderDevicesTable(): ComponentChild {
         const { sortColumn, sortDirection } = this.state;
         const { devices, deviceStates } = this.props;
+        
         const sortedDevices = orderBy<Device>(devices, [sortColumn], [sortDirection]).filter(noCoordinator);
         const { onSortChange } = this;
 
@@ -146,7 +146,7 @@ export class ZigbeeTable extends Component<Actions & GlobalState, ZigbeeTableSta
                             onClick={onSortChange}>Friendly name</ActionTH>
                         <ActionTH<SortColumns> className={cx(style["ieee-addr"], style["action-column"])} column="ieee_addr"
                             currentDirection={sortDirection} current={sortColumn}
-                            onClick={onSortChange}>ieee_addr</ActionTH>
+                            onClick={onSortChange}>IEEE address</ActionTH>
                         <ActionTH<SortColumns> className={cx(style["manu-name"], style["action-column"])} column="definition.vendor"
                             currentDirection={sortDirection} current={sortColumn}
                             onClick={onSortChange} titile="definition.vendor">Manufacturer</ActionTH>
@@ -154,9 +154,7 @@ export class ZigbeeTable extends Component<Actions & GlobalState, ZigbeeTableSta
                             currentDirection={sortDirection} current={sortColumn}
                             onClick={onSortChange}>Model</ActionTH>
                         <th>LQI</th>
-                        <ActionTH<SortColumns> className={style["action-column"]} column="lastSeen"
-                            currentDirection={sortDirection} current={sortColumn}
-                            onClick={onSortChange}>Last seen</ActionTH>
+                        <th>Last seen</th>
 
                         <th>Power</th>
                         <th>Actions</th>
@@ -177,8 +175,8 @@ export class ZigbeeTable extends Component<Actions & GlobalState, ZigbeeTableSta
                         <td title={device.definition?.vendor ?? 'Unsupported'}
                             className={cx(style["manu-name"], "text-truncate", "text-nowrap", "position-relative")}>{device.definition?.vendor ?? 'Unsupported'}</td>
                         <td>{device.definition?.model ?? 'Unsupported'}</td>
-                        <td>{deviceStates[device.friendly_name]?.linkquality}</td>
-                        <td>{lastSeen(device)}</td>
+                        <td>{deviceStates[device.friendly_name]?.linkquality ?? "N/A"}</td>
+                        <td>{lastSeen(deviceStates[device.friendly_name]?.last_seen)}</td>
                         <td className="text-left">
                             <PowerSource source={device.power_source} battery={deviceStates[device.friendly_name]?.battery} />
                         </td>

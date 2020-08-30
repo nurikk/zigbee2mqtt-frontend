@@ -1,5 +1,5 @@
 
-import { Device, Dictionary } from "./types";
+import { Device, Dictionary, DeviceStats } from "./types";
 import { Notyf } from "notyf";
 import { GraphI, ZigbeeRelationship, NodeI, Target, Source } from "./components/map/types";
 
@@ -123,14 +123,17 @@ export function callApi<T>(url: string, method: HttMethod, params: Dictionary<an
     })
 }
 
-export const lastSeen = (device: Device): string => {
+export const lastSeen = (lastSeen: string): string => {
+    if (!lastSeen) {
+        return "N/A";
+    }
 
-    const lastSeen = Date.now() - device.lastSeen;
+    const diff = Date.now() - Date.parse(lastSeen);
 
-    if (lastSeen < 0) {
+    if (diff < 0) {
         return "Now";
     }
-    return toHHMMSS(lastSeen / 1000);
+    return toHHMMSS(diff / 1000);
 
 };
 
