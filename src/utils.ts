@@ -182,8 +182,6 @@ export const sanitizeGraph = (inGraph: GraphI): GraphI => {
 
         }
     });
-    console.log('siblings', siblings);
-    console.log('filteredOutLinks', filteredOutLinks);
 
     inGraph.nodes.forEach(node => {
         if (!nodesWithLinks[node.networkAddress]) {

@@ -16,14 +16,11 @@ import ActionTH from "./ActionTH";
 
 //TODO: proper type alias
 type SortColumns =
-    "lastSeen"
     | "network_address"
     | "friendly_name"
     | "ieee_addr"
     | "definition.vendor"
-    | "definition.model"
-    | "Interview.State"
-    | "PowerSource";
+    | "definition.model";
 
 
 interface ZigbeeTableState {
@@ -42,7 +39,7 @@ export class ZigbeeTable extends Component<Actions & GlobalState, ZigbeeTableSta
         super();
         this.state = {
             sortDirection: "desc",
-            sortColumn: "lastSeen",
+            sortColumn: "network_address",
             currentTime: Date.now()
         };
     }
@@ -128,7 +125,6 @@ export class ZigbeeTable extends Component<Actions & GlobalState, ZigbeeTableSta
     renderDevicesTable(): ComponentChild {
         const { sortColumn, sortDirection } = this.state;
         const { devices, deviceStates } = this.props;
-        
         const sortedDevices = orderBy<Device>(devices, [sortColumn], [sortDirection]).filter(noCoordinator);
         const { onSortChange } = this;
 
