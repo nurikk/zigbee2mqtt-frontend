@@ -325,8 +325,12 @@ export class Map extends Component<GlobalState & Actions, MapState> {
                     </div>
                 ))
             }
-
-
+            {
+                <div className="btn-group btn-group-sm" role="group">
+                    <Button<void> title="Refresh data" className="btn btn-primary" onClick={this.onRequestClick}><i
+                        className="fa fa-sync" /></Button>
+                </div>
+            }
         </div>
     }
     render(): ComponentChild {
@@ -340,6 +344,6 @@ export class Map extends Component<GlobalState & Actions, MapState> {
 }
 
 
-const mappedProps = ["networkGraph", "isLoading"];
+const mappedProps = ["networkGraph", "isLoading", "forceRender"];
 const ConnectedMap = connect<{}, MapState, GlobalState, Actions>(mappedProps, actions)(Map);
 export default ConnectedMap;

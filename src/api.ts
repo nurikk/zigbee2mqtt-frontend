@@ -90,7 +90,8 @@ class Api {
                     if (response.status == "ok") {
                         store.setState({
                             isLoading: false,
-                            networkGraph: sanitizeGraph(JSON.parse((response.data as { value: string }).value as string) as GraphI)
+                            forceRender: Date.now(),
+                            networkGraph: sanitizeGraph(JSON.parse((response.data as { value: string }).value) as GraphI)
                         });
                     } else {
                         store.setState({ isLoading: false });
