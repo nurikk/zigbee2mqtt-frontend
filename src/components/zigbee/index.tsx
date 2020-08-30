@@ -177,7 +177,7 @@ export class ZigbeeTable extends Component<Actions & GlobalState, ZigbeeTableSta
                             <PowerSource source={device.power_source} battery={deviceStates[device.friendly_name]?.battery} />
                         </td>
                         <td>
-                            <DeviceControlGroup device={device} />
+                            <DeviceControlGroup device={device} state={deviceStates[device.friendly_name]} />
                         </td>
                     </tr>)}
 
@@ -189,5 +189,5 @@ export class ZigbeeTable extends Component<Actions & GlobalState, ZigbeeTableSta
 }
 
 const mappedProps = ["isLoading", "time", "devices", "forceRender", "deviceStates"];
-const ConnectedDevicePage = connect<{}, ZigbeeTableState, GlobalState, Actions>(mappedProps, actions)(ZigbeeTable);
-export default ConnectedDevicePage;
+const ConnectedZigbeePage = connect<{}, ZigbeeTableState, GlobalState, Actions>(mappedProps, actions)(ZigbeeTable);
+export default ConnectedZigbeePage;

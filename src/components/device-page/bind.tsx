@@ -56,7 +56,6 @@ export class Bind extends Component<BindProps & PropsFromStore & Actions, {}> {
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Source</th>
                         <th scope="col">Source EP</th>
                         <th scope="col">Destination</th>
                         <th scope="col">Destination EP</th>

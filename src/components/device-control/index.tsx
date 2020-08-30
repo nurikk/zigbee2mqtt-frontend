@@ -1,11 +1,12 @@
 import { Component, ComponentChild, h } from "preact";
 import Button from "../button";
-import { Device } from "../../types";
+import { Device, DeviceStats } from "../../types";
 import { connect } from "unistore/preact";
 import actions, { Actions } from "../../actions";
 import cx from "classnames";
 interface DeviceControlGroupProps {
     device: Device;
+    state?: DeviceStats;
 }
 
 export class DeviceControlGroup extends Component<DeviceControlGroupProps & Actions, {}> {
@@ -35,7 +36,8 @@ export class DeviceControlGroup extends Component<DeviceControlGroupProps & Acti
     };
 
     render(): ComponentChild {
-        const { device, configureDevice, checkOTA } = this.props;
+        const { device, configureDevice, checkOTA, updateOTA, state } = this.props;
+        const OTAAvaliable =  state?.update?.state == "available";
         const validDevice = !!device.ieee_address;
 
         return (
@@ -48,6 +50,7 @@ export class DeviceControlGroup extends Component<DeviceControlGroupProps & Acti
                     <div class="dropdown-menu" aria-labelledby="btnGroupDrop0">
                         <Button<string> class="dropdown-item" onClick={configureDevice} item={device.friendly_name}>Reconfigure</Button>
                         <Button<string> class="dropdown-item" onClick={checkOTA} item={device.friendly_name}>Check OTA</Button>
+                        {OTAAvaliable ? <Button<string> promt class="dropdown-item" onClick={updateOTA} item={device.friendly_name}>Update OTA</Button> : null}
                     </div>
                 </div>
                 <div class="btn-group btn-group-sm" role="group">

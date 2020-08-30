@@ -3,12 +3,15 @@ import { Named } from "./components/tree-view";
 export type DeviceType = "EndDevice" | "Router" | "Coordinator";
 
 export type Dictionary<V> = { [index: string]: V }
-
+interface OTAState {
+    state: "available";
+}
 export interface DeviceStats {
     battery: number;
     last_seen: string;
     linkquality: number;
-    [k: string]: string | number | boolean;
+    update?: OTAState;
+    [k: string]: string | number | boolean | OTAState;
 }
 
 export const inteviewsCount = 4;

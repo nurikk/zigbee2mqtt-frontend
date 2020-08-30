@@ -1,42 +1,45 @@
-// import { Component, ComponentChild, h } from "preact";
-// import { connect } from "unistore/preact";
-// import actions, { Actions } from "../../actions";
-// import { GlobalState } from "../../store";
-// // import SimpleBind from "./simple-bind";
-// // import Bind from "./bind";
-// import DeviceInfo from "./info";
-// import TabPanel, { TabInfo } from "../tab-panel";
-// import style from "./style.css";
-// import Tabs from "../tab-panel/Tabs";
-// import { Bind } from "./bind";
+import { Component, ComponentChild, h } from "preact";
+import { connect } from "unistore/preact";
+import actions, { Actions } from "../../actions";
+import { GlobalState } from "../../store";
+import DeviceInfo from "./info";
+import Bind from "./bind";
+import Router from "preact-router";
+import { Link } from "preact-router/match";
+import Redirect from "../Redirect";
 
-// interface DevicePageProps {
-//     dev?: string;
+interface DevicePageProps {
+    dev?: string;
+    tab?: string;
 
-// }
+}
 
-// // eslint-disable-next-line react/prefer-stateless-function
-// export class DevicePage extends Component<DevicePageProps & Actions & GlobalState, {}> {
+// eslint-disable-next-line react/prefer-stateless-function
+export class DevicePage extends Component<DevicePageProps & Actions & GlobalState, {}> {
 
-//     render(): ComponentChild {
+    render(): ComponentChild {
 
-//         const { dev, devices } = this.props;
-//         const device = devices.find(d => d.ieee_address == dev);
-//         return (<div class={"position-relative"}>
-//             <Tabs>
-//                 <div label="Info">
-//                     <DeviceInfo device={device} />
-//                 </div>
-//                 <div label="Bind">
-//                     <Bind device={device} />
-//                 </div>
-//             </Tabs>
-//             {/* <TabPanel defaultTab={activeTab} tabs={tabs} /> */}
-//         </div>);
+        const { dev } = this.props;
 
-//     }
-// }
+        return (<div class={"position-relative"}>
+            <div className="tabs">
+                <ul class="nav nav-tabs nav-justified">
+                    <Link className="nav-link" activeClassName="active" href={`/device/${dev}/info`}>About</Link>
+                    <Link className="nav-link" activeClassName="active" href={`/device/${dev}/bind`}>Bind</Link>
+                </ul>
+            </div>
+            <div className="tab-content">
+                <Router>
+                    <Redirect to={`/device/${dev}/info`} default />
+                    <DeviceInfo path="/device/:dev/info" dev={dev} />
+                    <Bind path="/device/:dev/bind" />
+                </Router>
+            </div>
+        </div>);
 
-// const mappedProps = ["isLoading", "isError", "devices"];
-// const ConnectedDevicePage = connect<DevicePageProps, {}, GlobalState, Actions>(mappedProps, actions)(DevicePage);
-// export default ConnectedDevicePage;
+    }
+}
+
+const mappedProps = ["isLoading", "isError", "devices"];
+const ConnectedDevicePage = connect<DevicePageProps, {}, GlobalState, Actions>(mappedProps, actions)(DevicePage);
+export default ConnectedDevicePage;

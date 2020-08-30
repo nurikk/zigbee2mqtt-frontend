@@ -22,15 +22,13 @@ import "bootstrap/js/dist/button.js";
 import { render, h, Component, ComponentChild, Fragment, FunctionalComponent } from 'preact';
 
 import ConnectedMap from "./components/map";
-import ConnectedZigbeeTable from "./components/zigbee";
+
 import Router, { CustomHistory, route } from 'preact-router';
 
 // import ConnectedDiscovery from "./components/discovery";
 // import ConnectedLogViewer from "./components/log-viewer";
 // import ConnectedCodeEditor from "./components/code-editor";
-// import ConnectedDevicePage from "./components/device-page";
-import ConnectedDeviceInfoPage from "./components/device-page/info";
-import ConnectedDeviceBindPage  from "./components/device-page/bind";
+import ConnectedDevicePage from "./components/device-page";
 import store from "./store";
 import { Provider } from "unistore/preact";
 import { createHashHistory } from 'history';
@@ -43,9 +41,10 @@ import api from './api';
 import ConnectedSettingsPage from "./components/settings";
 import NavBar from "./components/navbar";
 import ConnectedGroupsPage from "./components/groups";
+import ConnectedZigbeePage from "./components/zigbee";
 
 
-const ConnectedDevicePageWrap: FunctionalComponent<{dev: string}> = ({dev}) => (
+const ConnectedDevicePageWrap: FunctionalComponent<{ dev: string }> = ({ dev }) => (
     <ConnectedDevicePageWrap dev={dev} />
 );
 
@@ -77,10 +76,12 @@ class Main extends Component {
                 <Fragment>
                     <NavBar />
                     <Router path="/" history={(createHashHistory() as unknown as CustomHistory)}>
-                        <ConnectedZigbeeTable path="/" default />
+                        <ConnectedZigbeePage path="/" default />
                         <ConnectedMap path="/map" />
-                        <ConnectedDeviceInfoPage path="/device/:dev" />
-                        <ConnectedDeviceBindPage path="/bind/:dev?" />
+                        <ConnectedDevicePage path="/device/:dev/:tab?" />
+                        {/* <ConnectedDeviceInfoPage path="/device/:dev/info" />
+                        <ConnectedDeviceBindPage path="/device/:dev/bind" /> */}
+
                         <ConnectedSettingsPage path="/settings" />
                         <ConnectedGroupsPage path="/groups" />
                     </Router>

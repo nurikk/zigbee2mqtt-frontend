@@ -1,5 +1,5 @@
 import { Component, ComponentChild, Fragment, h } from "preact";
-import { Device } from "../../types";
+import { Device, DeviceStats } from "../../types";
 import SafeImg from "../safe-image";
 import { genDeviceImageUrl } from "../../utils";
 import DeviceControlGroup from "../device-control";
@@ -9,23 +9,26 @@ import style from "./style.css";
 import { connect } from "unistore/preact";
 import { GlobalState } from "../../store";
 import PowerSourceComp from "../power-source";
-
+import get from 'lodash/get';
 interface DeviceInfoProps {
     dev: string;
 }
 
 interface PropsFromStore {
     devices: Device[];
+    deviceStates: DeviceStats[];
 }
 
 // eslint-disable-next-line react/prefer-stateless-function
 export class DeviceInfo extends Component<DeviceInfoProps & PropsFromStore, {}> {
     render(): ComponentChild {
-        const { dev, devices } = this.props;
+        const { dev, devices, deviceStates } = this.props;
         const device = devices.find(d => d.ieee_address == dev);
+        console.log(device);
         if (!device) {
             return "Unknown device";
         }
+        
         // const endpoints = Object.entries(device.ep ?? {}).map(([epName, ep]) => {
         //     // const inClusters = Object.entries(ep.In ?? {}).map(([clusterId]) => {
         //     //     const cluster = parseInt(clusterId, 10);
@@ -54,6 +57,57 @@ export class DeviceInfo extends Component<DeviceInfoProps & PropsFromStore, {}> 
 
         //     </Fragment>);
         // });
+        const displayProps = [
+            {
+                key: 'friendly_name',
+                label: 'Friendly name'
+            },
+            {
+                render: (device: Device): ComponentChild => <dd class="col-7" ><p className={cx('mb-0', 'font-weight-bold', { 'text-danger': !device.supported, 'text-success': device.supported })}>{device.supported ? 'Supported' : 'Unsupported'}</p></dd>,
+                label: 'Support status'
+            },
+            {
+                render: (device: Device): ComponentChild => <dd class="col-7">{device.definition.supports}</dd>,
+                label: 'Supports',
+                if: 'supported'
+            },
+            {
+                key: 'ieee_address',
+                label: 'IEEE address'
+            },
+            {
+                key: 'network_address',
+                label: 'Network address'
+            },
+            {
+                key: 'date_code',
+                label: 'Firmware build date'
+            },
+            {
+                key: 'software_build_id',
+                label: 'Firmware version'
+            },
+
+            {
+                key: 'definition.vendor',
+                label: 'Vendor',
+                if: 'supported'
+            },
+            {
+                key: 'definition.model',
+                label: 'Model',
+                if: 'supported'
+            },
+
+            {
+                label: 'Power source',
+                render: (device: Device): ComponentChild => <dd class="col-7"><PowerSourceComp source={device.power_source} /></dd>
+            },
+            {
+                label: 'Interview completed',
+                render: (device: Device): ComponentChild => <dd class="col-7">{device.interview_completed ? 'Yes' : 'No'}</dd>
+            }
+        ];
         return (
             <div class="card mb-3">
                 <SafeImg class={`card-img-top ${style["device-pic"]}`} src={genDeviceImageUrl(device.definition?.model)} />
@@ -62,34 +116,15 @@ export class DeviceInfo extends Component<DeviceInfoProps & PropsFromStore, {}> 
 
                     <dl class="row">
                         {
-                            device.friendly_name ? (
+                            displayProps.filter(prop => get(device, prop.if, true)).map(prop => (
                                 <Fragment>
-                                    <dt class="col-5">Friendly name</dt>
-                                    <dd class="col-7">{device.friendly_name}</dd>
+                                    <dt class="col-5">{prop.label}</dt>
+                                    {prop.render ?
+                                        prop.render(device) : <dd class="col-7">{get(device, prop.key)}</dd>}
+
                                 </Fragment>
-                            ) : null
+                            ))
                         }
-
-
-                        <dt class="col-5">IEEE address</dt>
-                        <dd class="col-7">{device.ieee_address}</dd>
-
-                        <dt class="col-5">Network address</dt>
-                        <dd class="col-7">{device.network_address}</dd>
-
-
-                        <dt class="col-5">Support status</dt>
-                        <dd class="col-7" className={cx('col-7', {'bg-danger': !device.supported, 'text-success': device.supported})}>{device.supported ? 'Supported' : 'Unsupported'}</dd>
-
-                        <dt class="col-5">Power source</dt>
-                        <dd class="col-7"><PowerSourceComp source={device.power_source} /></dd>
-
-                        <dt class="col-5">Vendor</dt>
-                        <dd class="col-7">{device.definition?.vendor}</dd>
-
-                        <dt class="col-5">Model</dt>
-                        <dd class="col-7">{device.definition?.model}</dd>
-
 
 
                         {/* <dt class="col-5">Routes</dt>
@@ -100,14 +135,14 @@ export class DeviceInfo extends Component<DeviceInfoProps & PropsFromStore, {}> 
 
                 </div>
                 <div class="card-footer">
-                    <DeviceControlGroup device={device} />
+                    <DeviceControlGroup device={device} state={deviceStates[device.friendly_name]} />
                 </div>
             </div>
         );
     }
 }
 
-const mappedProps = ["devices"];
+const mappedProps = ["devices", "deviceStates"];
 
 const ConnectedDeviceInfoPage = connect<{}, {}, GlobalState, DeviceInfoProps & PropsFromStore>(mappedProps)(DeviceInfo);
 export default ConnectedDeviceInfoPage;

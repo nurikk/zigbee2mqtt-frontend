@@ -34,11 +34,6 @@ const NavBar: FunctionalComponent<Actions & GlobalState> = ({ setPermitJoin, tou
                 <li class="nav-item">
                     <Link className="nav-link waves-effect waves-light" activeClassName="active" href="/groups">Groups</Link>
                 </li>
-                <li class="nav-item">
-                    <Link className="nav-link waves-effect waves-light" activeClassName="active" href="/bind">Binding</Link>
-                </li>
-
-
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

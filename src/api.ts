@@ -10,17 +10,19 @@ interface Message {
     message: unknown;
 }
 interface LogMessage {
-    level: "error" | "info";
+    level: "error" | "info" | "warning";
     message: string;
 }
 const showNotity = (message: LogMessage): void => {
     switch (message.level) {
         case "error":
+        case "warning":
             new Notyf().error(message.message);
             break;
         case "info":
             new Notyf().success(message.message);
             break;
+
 
         default:
             debugger
@@ -32,6 +34,10 @@ interface ResponseWithStatus {
     status: "ok" | "error";
     data: unknown;
     error?: string;
+}
+interface OtaUpdateResponse {
+    id: string;
+    updateAvailable: boolean;
 }
 class Api {
     url: string;
@@ -109,6 +115,14 @@ class Api {
 
                 case "bridge/event":
                     break;
+
+                case "bridge/response/device/ota_update/check":
+
+                    break;
+
+
+
+
 
                 case "bridge/logging":
                     showNotity(JSON.parse(data.message as string));

@@ -23,9 +23,7 @@ interface BindRowState extends BindParams {
 }
 
 export default class BindRow extends Component<BindRowProps, BindRowState> {
-    setSource = (source: Device): void => {
-        this.setState({ source });
-    }
+
     setSourceEp = (sourceEp: Endpoint): void => {
         this.setState({ sourceEp });
     }
@@ -42,20 +40,20 @@ export default class BindRow extends Component<BindRowProps, BindRowState> {
         this.setState({ clusters });
     }
     onBindClick = (): void => {
-        const { onBind } = this.props;
-        const { source, sourceEp, destination, destinationEp, clusters } = this.state;
-        onBind({ source, sourceEp, destination, destinationEp, clusters });
+        const { onBind, device } = this.props;
+        const {  sourceEp, destination, destinationEp, clusters } = this.state;
+        onBind({ source: device, sourceEp, destination, destinationEp, clusters });
     }
 
     onUnBindClick = (): void => {
-        const { onUnBind } = this.props;
-        const { source, sourceEp, destination, destinationEp, clusters } = this.state;
-        onUnBind({ source, sourceEp, destination, destinationEp, clusters });
+        const { onUnBind, device } = this.props;
+        const { sourceEp, destination, destinationEp, clusters } = this.state;
+        onUnBind({ source: device, sourceEp, destination, destinationEp, clusters });
     }
 
     isValidRule(): boolean {
-        const { source, destination,  clusters } = this.state;
-        return source && destination && (clusters === undefined || clusters.length > 0);
+        const { destination,  clusters } = this.state;
+        return destination && (clusters === undefined || clusters.length > 0);
     }
 
     render(): ComponentChild {
@@ -64,7 +62,6 @@ export default class BindRow extends Component<BindRowProps, BindRowState> {
         return (
             <tr>
                 <th scope="row">{idx + 1}</th>
-                <td><DevicePicker devices={devices} onSelect={this.setSource} /></td>
                 <td><EndpointPicker value={sourceEp} onSelect={this.setSourceEp} /></td>
                 <td><DevicePicker devices={devices} groups={groups} onSelect={this.setDestination} /></td>
                 <td><EndpointPicker value={destinationEp} onSelect={this.setDestinationEp} /></td>
