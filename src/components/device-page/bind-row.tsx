@@ -13,7 +13,7 @@
 //     return fields.some(key => rule[key] !== undefined);
 // }
 // export const getDeviceDisplayName = (device: Device): string => {
-//     return `${device.network_address} (${device.friendly_name ? device.friendly_name : device.definition.model})`;
+//     return `${device.network_address} (${device.friendly_name ? device.friendly_name : device.definition?.model})`;
 // };
 // interface BindRowProps {
 //     onChange?(idx: number, rule: BindRule): void;

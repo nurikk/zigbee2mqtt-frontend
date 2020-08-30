@@ -55,7 +55,7 @@ export class DeviceInfo extends Component<PropsFromStore, {}> {
         // });
         return (
             <div class="card mb-3">
-                <SafeImg class={`card-img-top ${style["device-pic"]}`} src={genDeviceImageUrl(device.definition.model)} />
+                <SafeImg class={`card-img-top ${style["device-pic"]}`} src={genDeviceImageUrl(device.definition?.model)} />
                 <div class="card-body">
                     <h5 class="card-title">{device.type}</h5>
 
@@ -81,10 +81,10 @@ export class DeviceInfo extends Component<PropsFromStore, {}> {
                                                            battery={device?.st?.battery} /></dd> */}
 
                         <dt class="col-5">vendor</dt>
-                        <dd class="col-7">{device.definition.vendor}</dd>
+                        <dd class="col-7">{device.definition?.vendor}</dd>
 
                         <dt class="col-5">definition.model</dt>
-                        <dd class="col-7">{device.definition.model}</dd>
+                        <dd class="col-7">{device.definition?.model}</dd>
 
 
 

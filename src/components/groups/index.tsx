@@ -46,7 +46,7 @@ class DeviceGroupRow extends Component<DeviceGroupRowProps, {}> {
         return <tr>
             <th scope="row">{rowNumber + 1}</th>
             <td className={style["device-pic"]}>{device && <SafeImg class={cx(style["device-image"])}
-                src={genDeviceImageUrl(device.definition.model)} />}
+                src={genDeviceImageUrl(device.definition?.model)} />}
             </td>
             <td>{device && device.friendly_name}</td>
             <td>{groupAddress.ieee_address}</td>
@@ -102,7 +102,7 @@ class AddDeviceToGroup extends Component<AddDeviceToGroupProps, AddDeviceToGroup
         const { devices } = this.props;
         return <select class="form-control form-control-sm" onChange={this.onDeviceSelect}>
             <option hidden>Select device</option>
-            {devices.filter(noCoordinator).map(device => <option value={device.friendly_name} title={device.definition.description}>{`${device.friendly_name} (${device.definition.model})`}</option>)}
+            {devices.filter(noCoordinator).map(device => <option value={device.friendly_name} title={device.definition?.description}>{`${device.friendly_name} (${device.definition?.model ?? 'Unsupported'})`}</option>)}
         </select>;
     }
     onEpChange = (e: Event): void => {

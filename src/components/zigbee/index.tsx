@@ -163,19 +163,20 @@ export class ZigbeeTable extends Component<Actions & GlobalState, ZigbeeTableSta
                     </tr>
                 </thead>
                 <tbody>
-                    {sortedDevices.map((device: Device, index) => <tr>
+                    {sortedDevices.map((device: Device, index) => 
+                    <tr className={cx({'table-danger': !device.supported})}>
                         <td className="font-weight-bold">{index + 1}</td>
                         <td className={style["device-pic"]}><SafeImg class={cx(style["device-image"])}
-                            src={genDeviceImageUrl(device.definition.model)} />
+                            src={genDeviceImageUrl(device.definition?.model)} />
                         </td>
                         <td className={style["nwk-addr"]}><a
                             href={genDeviceDetailsLink(device.friendly_name)}>{toHex(device.network_address)}</a>
                         </td>
                         <td>{device.friendly_name}</td>
-                        <td className={style["ieee-addr"]}>{device.ieee_address ? device.ieee_address : "<corrupted>"}</td>
-                        <td title={device.definition.vendor}
-                            className={cx(style["manu-name"], "text-truncate", "text-nowrap", "position-relative")}>{device.definition.vendor}</td>
-                        <td>{device.definition.model}</td>
+                        <td className={style["ieee-addr"]}>{device.ieee_address}</td>
+                        <td title={device.definition?.vendor ?? 'Unsupported'}
+                            className={cx(style["manu-name"], "text-truncate", "text-nowrap", "position-relative")}>{device.definition?.vendor ?? 'Unsupported'}</td>
+                        <td>{device.definition?.model ?? 'Unsupported'}</td>
                         <td>{deviceStates[device.friendly_name]?.linkquality}</td>
                         <td>{lastSeen(device)}</td>
                         <td className="text-left">
