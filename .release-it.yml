@@ -1,10 +1,5 @@
 git:
   requireCleanWorkingDir: false
-github:
-  release: true
-  assets: ["dist/release.zip"]
-  draft: false
-
 npm:
   publish: true
 
