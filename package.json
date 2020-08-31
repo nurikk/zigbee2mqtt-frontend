@@ -6,7 +6,7 @@
   "sideEffects": [
     "*.css"
   ],
-  "name": "@nurikkodd/zigbee2mqtt-frontend",
+  "name": "zigbee2mqtt-frontend",
   "version": "0.1.12",
   "license": "MIT",
   "scripts": {
