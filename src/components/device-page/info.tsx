@@ -28,7 +28,8 @@ export class DeviceInfo extends Component<DeviceInfoProps & PropsFromStore, {}> 
         if (!device) {
             return "Unknown device";
         }
-        
+        const deviceStatus: DeviceStats = deviceStates[device.friendly_name];
+
         // const endpoints = Object.entries(device.ep ?? {}).map(([epName, ep]) => {
         //     // const inClusters = Object.entries(ep.In ?? {}).map(([clusterId]) => {
         //     //     const cluster = parseInt(clusterId, 10);
@@ -108,6 +109,7 @@ export class DeviceInfo extends Component<DeviceInfoProps & PropsFromStore, {}> 
                 render: (device: Device): ComponentChild => <dd class="col-7">{device.interview_completed ? 'Yes' : 'No'}</dd>
             }
         ];
+        console.log(deviceStatus);
         return (
             <div class="card mb-3">
                 <SafeImg class={`card-img-top ${style["device-pic"]}`} src={genDeviceImageUrl(device.definition?.model)} />
@@ -131,18 +133,31 @@ export class DeviceInfo extends Component<DeviceInfoProps & PropsFromStore, {}> 
                         <dd class="col-7">{device?.Rtg?.map((route) => <a className={"d-block"}
                                                                           href={genDeviceDetailsLink(route)}>{route}</a>)}</dd> */}
                         {/* {endpoints} */}
+
+                        {
+                            deviceStatus?.update?.state === "updating" ? (
+                                <Fragment>
+                                    <dt class="col-5">Updating firmware</dt>
+                                    <dd class="col-7"><div class="progress">
+                                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style={`width: ${deviceStatus.update.progress}%`} />
+                                    </div></dd>
+                                </Fragment>
+                            ) : null
+                        }
                     </dl>
+
+
 
                 </div>
                 <div class="card-footer">
-                    <DeviceControlGroup device={device} state={deviceStates[device.friendly_name]} />
+                    <DeviceControlGroup device={device} state={deviceStatus} />
                 </div>
             </div>
         );
     }
 }
 
-const mappedProps = ["devices", "deviceStates"];
+const mappedProps = ["devices", "deviceStates", "forceRender"];
 
 const ConnectedDeviceInfoPage = connect<{}, {}, GlobalState, DeviceInfoProps & PropsFromStore>(mappedProps)(DeviceInfo);
 export default ConnectedDeviceInfoPage;

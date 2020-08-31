@@ -3,8 +3,12 @@ import { Named } from "./components/tree-view";
 export type DeviceType = "EndDevice" | "Router" | "Coordinator";
 
 export type Dictionary<V> = { [index: string]: V }
+
+// :{"progress":27.3,"remaining":1203,"state":"updating"}
 interface OTAState {
-    state: "available";
+    state: "available" | "updating";
+    progress: number;
+    remaining: number;
 }
 export interface DeviceStats {
     battery: number;
