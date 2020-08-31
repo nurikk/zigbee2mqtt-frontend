@@ -79,9 +79,6 @@ class Main extends Component {
                         <ConnectedZigbeePage path="/" default />
                         <ConnectedMap path="/map" />
                         <ConnectedDevicePage path="/device/:dev/:tab?" />
-                        {/* <ConnectedDeviceInfoPage path="/device/:dev/info" />
-                        <ConnectedDeviceBindPage path="/device/:dev/bind" /> */}
-
                         <ConnectedSettingsPage path="/settings" />
                         <ConnectedGroupsPage path="/groups" />
                     </Router>

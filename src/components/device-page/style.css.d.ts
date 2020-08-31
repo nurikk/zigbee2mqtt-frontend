@@ -4,7 +4,6 @@ declare namespace StyleCssNamespace {
         "device-pic": string;
         loader: string;
         "props-row": string;
-        "refresh-btn": string;
         "value-col": string;
     }
 }

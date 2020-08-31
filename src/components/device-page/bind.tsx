@@ -50,7 +50,9 @@ export class Bind extends Component<BindProps & PropsFromStore & Actions, {}> {
     render(): ComponentChild {
         const { dev, devices, bindRules, groups } = this.props;
         const device = devices.find(d => d.ieee_address == dev);
-
+        if (!device) {
+            return "Unknown device";
+        }
         return (
             <table class="table table-striped table-borderless">
                 <thead>

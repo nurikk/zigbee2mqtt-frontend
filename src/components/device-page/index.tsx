@@ -7,6 +7,7 @@ import Bind from "./bind";
 import Router from "preact-router";
 import { Link } from "preact-router/match";
 import Redirect from "../Redirect";
+import States from "./states";
 
 interface DevicePageProps {
     dev?: string;
@@ -26,13 +27,15 @@ export class DevicePage extends Component<DevicePageProps & Actions & GlobalStat
                 <ul class="nav nav-tabs nav-justified">
                     <Link className="nav-link" activeClassName="active" href={`/device/${dev}/info`}>About</Link>
                     <Link className="nav-link" activeClassName="active" href={`/device/${dev}/bind`}>Bind</Link>
+                    <Link className="nav-link" activeClassName="active" href={`/device/${dev}/state`}>State</Link>
                 </ul>
             </div>
             <div className="tab-content">
                 <Router>
                     <Redirect to={`/device/${dev}/info`} default />
-                    <DeviceInfo path="/device/:dev/info" dev={dev} />
+                    <DeviceInfo path="/device/:dev/info" />
                     <Bind path="/device/:dev/bind" />
+                    <States path="/device/:dev/state" />
                 </Router>
             </div>
         </div>);

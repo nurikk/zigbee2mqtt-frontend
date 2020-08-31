@@ -4,7 +4,7 @@
 import { GlobalState } from "./store";
 import { Store } from "unistore";
 
-import {  FileDescriptor, BindParams, Endpoint, Dictionary } from "./types";
+import { FileDescriptor, BindParams, Endpoint, Dictionary } from "./types";
 import api from './api';
 
 
@@ -26,30 +26,17 @@ export interface Actions {
 
 
     setStateValue(dev: string, name: string, value: unknown): Promise<void>;
-    setSimpleBindValue(dev: string, name: string, value: unknown): Promise<void>;
-
-    startInterview(dev: string, state: number | ""): Promise<void>;
 
 
 
     setPermitJoin(permit: boolean): Promise<void>;
-    fetchLogsBuffer(): Promise<void>;
-    // getCurrentLogLevel(): Promise<void>;
-    clearLogs(): Promise<void>;
-    clearLogsBuffer(): Promise<void>;
-    // setLogLevel(level: LogLevel): Promise<void>;
 
-    setCurrentFileContent(content: string): Promise<void>;
 
-    evalCode(code: string): Promise<void>;
-    writeFile(fileName: string, content: string): Promise<void>;
 
-    clearExecutionResults(): Promise<void>;
 
-    getFilesList(path: string): Promise<void>;
 
-    readFile(file: FileDescriptor): Promise<void>;
-    deleteFile(file: FileDescriptor): Promise<void>;
+
+
 
     renameDevice(old: string, newName: string): Promise<void>;
     removeDevice(dev: string, force: boolean): Promise<void>;
@@ -108,39 +95,44 @@ const actions = (store: Store<GlobalState>): object => ({
         } else {
             api.send("bridge/request/device/unbind", bindParams)
         }
-        
+
+        return Promise.resolve();
+    },
+
+    setStateValue(state, dev: string, name: string, value: unknown): Promise<void> {
+        api.send(`${dev}/set`, { [name]: value });
         return Promise.resolve();
     },
 
 
     setPermitJoin(state, permit = true): Promise<void> {
         store.setState({ isLoading: true });
-        api.send('bridge/request/permit_join', {value: permit});
+        api.send('bridge/request/permit_join', { value: permit });
         return Promise.resolve();
     },
 
 
     renameDevice: (state, from: string, to: string): Promise<void> => {
         store.setState({ isLoading: true });
-        api.send('bridge/request/device/rename', {from, to});
+        api.send('bridge/request/device/rename', { from, to });
         return Promise.resolve();
     },
     removeDevice: (state, dev: string, force: boolean): Promise<void> => {
         store.setState({ isLoading: true });
-        api.send('bridge/request/device/remove', {id: dev, force});
+        api.send('bridge/request/device/remove', { id: dev, force });
         return Promise.resolve();
     },
 
 
     configureDevice: (state, name: string): Promise<void> => {
         store.setState({ isLoading: true });
-        api.send('bridge/request/device/configure', {id: name});
+        api.send('bridge/request/device/configure', { id: name });
         return Promise.resolve();
     },
 
     networkMapRequest: (state): Promise<void> => {
         store.setState({ isLoading: true });
-        api.send('bridge/request/networkmap', {type: "raw", routes: true});
+        api.send('bridge/request/networkmap', { type: "raw", routes: true });
         return Promise.resolve();
     },
     createGroup: (state, group: string): Promise<void> => {
@@ -158,13 +150,13 @@ const actions = (store: Store<GlobalState>): object => ({
 
     addDeviceToGroup: (state, device: string, group: string): Promise<void> => {
         store.setState({ isLoading: true });
-        api.send('bridge/request/group/members/add', {group, device});
+        api.send('bridge/request/group/members/add', { group, device });
         return Promise.resolve();
     },
 
     removeDeviceFromGroup: (state, device: string, group: string): Promise<void> => {
         store.setState({ isLoading: true });
-        api.send('bridge/request/group/members/remove', {device, group});
+        api.send('bridge/request/group/members/remove', { device, group });
         return Promise.resolve();
     },
 
@@ -182,11 +174,11 @@ const actions = (store: Store<GlobalState>): object => ({
 
 
     checkOTA: (state, deviceName: string): Promise<void> => {
-        api.send('bridge/request/device/ota_update/check', {id: deviceName});
+        api.send('bridge/request/device/ota_update/check', { id: deviceName });
         return Promise.resolve();
     },
     updateOTA: (state, deviceName: string): Promise<void> => {
-        api.send('bridge/request/device/ota_update/update', {id: deviceName});
+        api.send('bridge/request/device/ota_update/update', { id: deviceName });
         return Promise.resolve();
     }
 });

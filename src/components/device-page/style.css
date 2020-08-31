@@ -22,17 +22,6 @@
     -moz-appearance:textfield; /* Firefox */
 }
 
-.refresh-btn {
-    visibility: hidden;
-    position: absolute;
-    right: 0;
-    top: 0;
-    bottom: 0;
-}
-.value-col:hover > .refresh-btn {
-    visibility: visible;
-}
-
 .props-row {
     vertical-align: middle;
     line-height: 2;

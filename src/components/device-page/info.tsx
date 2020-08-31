@@ -24,7 +24,6 @@ export class DeviceInfo extends Component<DeviceInfoProps & PropsFromStore, {}> 
     render(): ComponentChild {
         const { dev, devices, deviceStates } = this.props;
         const device = devices.find(d => d.ieee_address == dev);
-        console.log(device);
         if (!device) {
             return "Unknown device";
         }
@@ -114,7 +113,6 @@ export class DeviceInfo extends Component<DeviceInfoProps & PropsFromStore, {}> 
                 render: (device: Device): ComponentChild => <dd class="col-7">{device.interview_completed ? 'Yes' : 'No'}</dd>
             }
         ];
-        console.log(deviceStatus);
         return (
             <div class="card mb-3">
                 <SafeImg class={`card-img-top ${style["device-pic"]}`} src={genDeviceImageUrl(device.definition?.model)} />
