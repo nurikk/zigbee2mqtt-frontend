@@ -139,7 +139,9 @@ export class DeviceInfo extends Component<DeviceInfoProps & PropsFromStore, {}> 
                                 <Fragment>
                                     <dt class="col-5">Updating firmware</dt>
                                     <dd class="col-7"><div class="progress">
-                                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style={`width: ${deviceStatus.update.progress}%`} />
+                                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style={`width: ${deviceStatus.update.progress}%`} >
+                                        {deviceStatus.update.progress}%
+                                        </div>
                                     </div></dd>
                                 </Fragment>
                             ) : null
