@@ -64,6 +64,11 @@ export class DeviceInfo extends Component<DeviceInfoProps & PropsFromStore, {}> 
                 label: 'Friendly name'
             },
             {
+                key: 'definition.description',
+                label: 'Description',
+                if: 'supported'
+            },
+            {
                 render: (device: Device): ComponentChild => <dd class="col-7" ><p className={cx('mb-0', 'font-weight-bold', { 'text-danger': !device.supported, 'text-success': device.supported })}>{device.supported ? 'Supported' : 'Unsupported'}</p></dd>,
                 label: 'Support status'
             },
