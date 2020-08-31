@@ -3,7 +3,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const CompressionPlugin = require('compression-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const ZipPlugin = require('zip-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 
 
@@ -32,23 +31,11 @@ module.exports = (env, args) => {
 			})
 		)
 	});
-	console.log(__dirname);
 	if (production) {
 		// plugins.push(new BundleAnalyzerPlugin({
 		// 	analyzerMode: 'static'
 		// }));
 		// plugins.push(new CompressionPlugin());
-		plugins.push(new CopyPlugin({
-			patterns: [
-				path.resolve(__dirname, 'custom_components', 'z2m-light-admin')
-			],
-		}));
-
-		plugins.push(new ZipPlugin({
-			// OPTIONAL: defaults to the Webpack output path (above)
-			// can be relative (to Webpack output path) or absolute
-			filename: 'release.zip',
-		}));
 	} else {
 		plugins.push(new ForkTsCheckerWebpackPlugin());
 	}
