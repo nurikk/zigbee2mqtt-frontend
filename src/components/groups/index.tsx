@@ -132,12 +132,6 @@ export class GroupsPage extends Component<Actions & GlobalState, GroupsPageState
     state = {
         newGroupName: ''
     }
-    componentDidMount(): void {
-        // const { groupsRequest, getZigbeeDevicesList } = this.props;
-        // groupsRequest();
-
-        // getZigbeeDevicesList(false);
-    }
 
     changeHandler = (event): void => {
         const name: string = event.target.name;

@@ -16,23 +16,17 @@ export class DeviceControlGroup extends Component<DeviceControlGroupProps & Acti
     };
 
     onRenameClick = async (): Promise<void> => {
-        const { renameDevice, getZigbeeDevicesList, device } = this.props;
+        const { renameDevice, device } = this.props;
         const newName = prompt("Enter new name", device.friendly_name);
         if (newName !== null && newName !== device.friendly_name) {
-            await renameDevice(device.friendly_name, newName);
-            await getZigbeeDevicesList(true);
-            // await getDeviceInfo(device.friendly_name);
+            renameDevice(device.friendly_name, newName);
         }
     };
 
 
     onRemoveClick = async (force = false): Promise<void> => {
-        const { removeDevice, getZigbeeDevicesList, device } = this.props;
-
-
+        const { removeDevice, device } = this.props;
         await removeDevice(device.friendly_name, force);
-        await getZigbeeDevicesList(true);
-
     };
 
     render(): ComponentChild {

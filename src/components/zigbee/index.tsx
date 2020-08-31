@@ -70,16 +70,8 @@ export class ZigbeeTable extends Component<Actions & GlobalState, ZigbeeTableSta
         }
     };
 
-    loadData = (showLoading = true): void => {
-        const { getZigbeeDevicesList } = this.props;
-        getZigbeeDevicesList(showLoading);
-
-    };
-
-
     componentDidMount(): void {
         this.restoreState();
-        this.loadData();
     }
 
 
@@ -102,22 +94,14 @@ export class ZigbeeTable extends Component<Actions & GlobalState, ZigbeeTableSta
     };
 
     render(): ComponentChild {
-        const { devices, isLoading } = this.props;
+        const { devices } = this.props;
         if (devices.length) {
             return this.renderDevicesTable();
 
         }
-        return <div class="container h-100"><div class="row h-100 justify-content-center align-items-center">
-
-            {isLoading ? (<div class="row ">
-                <div class="col-12">
-                    Loading, please wait.
-                                        <div class="spinner-border" role="status">
-                        <span class="sr-only">Loading...</span>
-                    </div>
-                </div>
-            </div>) : 'No data'}
-        </div></div>
+        return (<div class="container h-100">
+            <div class="row h-100 justify-content-center align-items-center">No data</div>
+        </div>);
 
     }
 
@@ -157,29 +141,29 @@ export class ZigbeeTable extends Component<Actions & GlobalState, ZigbeeTableSta
                     </tr>
                 </thead>
                 <tbody>
-                    {sortedDevices.map((device: Device, index) => 
-                    <tr className={cx({'table-danger': !device.supported})}>
-                        <td className="font-weight-bold">{index + 1}</td>
-                        <td className={style["device-pic"]}><SafeImg class={cx(style["device-image"])}
-                            src={genDeviceImageUrl(device.definition?.model)} />
-                        </td>
-                        <td className={style["nwk-addr"]}><a
-                            href={genDeviceDetailsLink(device.ieee_address)}>{toHex(device.network_address)}</a>
-                        </td>
-                        <td>{device.friendly_name}</td>
-                        <td className={style["ieee-addr"]}>{device.ieee_address}</td>
-                        <td title={device.definition?.vendor ?? 'Unsupported'}
-                            className={cx(style["manu-name"], "text-truncate", "text-nowrap", "position-relative")}>{device.definition?.vendor ?? 'Unsupported'}</td>
-                        <td>{device.definition?.model ?? 'Unsupported'}</td>
-                        <td>{deviceStates[device.friendly_name]?.linkquality ?? "N/A"}</td>
-                        <td>{lastSeen(deviceStates[device.friendly_name]?.last_seen)}</td>
-                        <td className="text-left">
-                            <PowerSource source={device.power_source} battery={deviceStates[device.friendly_name]?.battery} />
-                        </td>
-                        <td>
-                            <DeviceControlGroup device={device} state={deviceStates[device.friendly_name]} />
-                        </td>
-                    </tr>)}
+                    {sortedDevices.map((device: Device, index) =>
+                        <tr className={cx({ 'table-danger': !device.supported })}>
+                            <td className="font-weight-bold">{index + 1}</td>
+                            <td className={style["device-pic"]}><SafeImg class={cx(style["device-image"])}
+                                src={genDeviceImageUrl(device.definition?.model)} />
+                            </td>
+                            <td className={style["nwk-addr"]}><a
+                                href={genDeviceDetailsLink(device.ieee_address)}>{toHex(device.network_address)}</a>
+                            </td>
+                            <td>{device.friendly_name}</td>
+                            <td className={style["ieee-addr"]}>{device.ieee_address}</td>
+                            <td title={device.definition?.vendor ?? 'Unsupported'}
+                                className={cx(style["manu-name"], "text-truncate", "text-nowrap", "position-relative")}>{device.definition?.vendor ?? 'Unsupported'}</td>
+                            <td>{device.definition?.model ?? 'Unsupported'}</td>
+                            <td>{deviceStates[device.friendly_name]?.linkquality ?? "N/A"}</td>
+                            <td>{lastSeen(deviceStates[device.friendly_name]?.last_seen)}</td>
+                            <td className="text-left">
+                                <PowerSource source={device.power_source} battery={deviceStates[device.friendly_name]?.battery} />
+                            </td>
+                            <td>
+                                <DeviceControlGroup device={device} state={deviceStates[device.friendly_name]} />
+                            </td>
+                        </tr>)}
 
                 </tbody>
             </table>

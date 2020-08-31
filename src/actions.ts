@@ -17,7 +17,7 @@ export interface Actions {
 
     getDeviceBinds(dev: string): Promise<void>;
 
-    getZigbeeDevicesList(showLoading: boolean): Promise<void>;
+
 
     bindReqest(isBind: boolean, params: BindParams): Promise<void>;
 
@@ -45,7 +45,7 @@ export interface Actions {
 
 
     touchlinkReset(): Promise<void>;
-    ZNPReset(): Promise<void>;
+    // ZNPReset(): Promise<void>;
 
     checkOTA(deviceName: string): Promise<void>;
     updateOTA(deviceName): Promise<void>;
@@ -68,13 +68,6 @@ const friendlyNameAndEnpoint = (friendlyName: string, endpoint: Endpoint): strin
 const actions = (store: Store<GlobalState>): object => ({
     setLoading(state, isLoading: boolean): void {
         store.setState({ isLoading });
-    },
-
-
-    getZigbeeDevicesList: (state, showLoading = true): Promise<void> => {
-        // showLoading && store.setState({ isLoading: true });
-        // api.send('bridge/config/devices/get', '');
-        return Promise.resolve();
     },
 
     removeBind: (state, params: BindParams): Promise<void> => {
@@ -111,7 +104,6 @@ const actions = (store: Store<GlobalState>): object => ({
         return Promise.resolve();
     },
 
-
     renameDevice: (state, from: string, to: string): Promise<void> => {
         store.setState({ isLoading: true });
         api.send('bridge/request/device/rename', { from, to });
@@ -122,7 +114,6 @@ const actions = (store: Store<GlobalState>): object => ({
         api.send('bridge/request/device/remove', { id: dev, force });
         return Promise.resolve();
     },
-
 
     configureDevice: (state, name: string): Promise<void> => {
         store.setState({ isLoading: true });
@@ -147,7 +138,6 @@ const actions = (store: Store<GlobalState>): object => ({
         return Promise.resolve();
     },
 
-
     addDeviceToGroup: (state, device: string, group: string): Promise<void> => {
         store.setState({ isLoading: true });
         api.send('bridge/request/group/members/add', { group, device });
@@ -160,17 +150,16 @@ const actions = (store: Store<GlobalState>): object => ({
         return Promise.resolve();
     },
 
-
     touchlinkReset: (state): Promise<void> => {
         store.setState({ isLoading: true });
         api.send('bridge/request/touchlink/factory_reset', '');
         return Promise.resolve();
     },
-    ZNPReset: (state): Promise<void> => {
-        store.setState({ isLoading: true });
-        api.send('bridge/config/reset', '');
-        return Promise.resolve();
-    },
+    // ZNPReset: (state): Promise<void> => {
+    //     store.setState({ isLoading: true });
+    //     api.send('bridge/config/reset', '');
+    //     return Promise.resolve();
+    // },
 
 
     checkOTA: (state, deviceName: string): Promise<void> => {
