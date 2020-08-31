@@ -1,9 +1,12 @@
 {
-  "private": true,
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "sideEffects": [
     "*.css"
   ],
-  "name": "zigbee2mqtt-frontend",
+  "name": "@nurikkodd/zigbee2mqtt-frontend",
   "version": "0.1.11",
   "license": "MIT",
   "scripts": {
