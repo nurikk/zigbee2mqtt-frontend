@@ -7,7 +7,7 @@
     "*.css"
   ],
   "name": "zigbee2mqtt-frontend",
-  "version": "0.1.13",
+  "version": "0.1.14",
   "license": "MIT",
   "scripts": {
     "build": "npm run clean && webpack --config ./webpack.config.js --mode production",
@@ -21,8 +21,7 @@
   "eslintIgnore": [
     "dist/*"
   ],
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.13.0",
     "@types/d3": "^5.7.2",
