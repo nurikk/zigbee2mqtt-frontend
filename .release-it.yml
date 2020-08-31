@@ -6,7 +6,7 @@ github:
   draft: false
 
 npm:
-  publish: false
+  publish: true
 
 hooks:
   "after:git:release": "npm run build"
