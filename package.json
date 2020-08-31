@@ -22,6 +22,8 @@
     "dist/*"
   ],
   "dependencies": {
+  },
+  "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.13.0",
     "@types/d3": "^5.7.2",
     "@types/history": "^4.7.6",
@@ -35,9 +37,7 @@
     "pubsub-ts": "^0.2.0",
     "reconnecting-websocket": "^4.4.0",
     "reconnectingwebsocket": "^1.0.0",
-    "unistore": "^3.5.1"
-  },
-  "devDependencies": {
+    "unistore": "^3.5.1",
     "@teamsupercell/typings-for-css-modules-loader": "^2.2.0",
     "@types/classnames": "^2.2.10",
     "@types/codemirror": "0.0.95",
