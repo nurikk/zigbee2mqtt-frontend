@@ -130,12 +130,19 @@ export default class BindRow extends Component<BindRowProps, BindRowState> {
         const targetType: ObjectType = stateRule.target.type === "endpoint" ? "device" : "group";
 
         const sourceEndpoints = getEndpoints(device);
-        const destinationEndpoints = getEndpoints(getTarget(stateRule, devices, groups));
+        const target = getTarget(stateRule, devices, groups);
+        const destinationEndpoints = getEndpoints(target);
         const sourceClusters = device.endpoints[stateRule.source.endpoint]?.clusters?.output;
         console.log('stateRule', stateRule, groups);
         // const destinationClusters = device.endpoints[stateRule.de.endpoint]?.clusters?.output;
         // let intersection = devices.filter(x => arrB.includes(x));
         const possibleClusters: Cluster[] = sourceClusters;
+        // if (targetType === "device") {
+        //     const targetEP = (target as Device).endpoints[stateRule.target.endpoint];
+        //     if (targetEP) {
+        //         possibleClusters = possibleClusters.filter(cluster => targetEP.clusters.input.includes(cluster))
+        //     }
+        // }
         return (
             <tr>
                 <th scope="row">{idx + 1}</th>
