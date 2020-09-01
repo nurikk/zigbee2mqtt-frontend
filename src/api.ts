@@ -13,19 +13,24 @@ interface LogMessage {
     level: "error" | "info" | "warning";
     message: string;
 }
-const showNotity = (message: LogMessage): void => {
-    switch (message.level) {
+const showNotity = (data: LogMessage): void => {
+    // eslint-disable-next-line prefer-const
+    let { message, level } = data;
+    if (message.length > 50) {
+        message = message.split(' ').slice(0, 5).join(' ');
+    }
+    switch (level) {
         case "error":
         case "warning":
-            new Notyf().error(message.message);
+            new Notyf().error(message);
             break;
         case "info":
-            new Notyf().success(message.message);
+            new Notyf().success(message);
             break;
 
 
         default:
-            debugger
+            // debugger
             break;
     }
 }
@@ -136,7 +141,7 @@ class Api {
                     if (data.topic.startsWith("bridge/request/")) {
 
                     } else {
-                        debugger
+                        // debugger
                     }
                     break;
             }
