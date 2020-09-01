@@ -90,7 +90,8 @@ export default class BindRow extends Component<BindRowProps, BindRowState> {
         let to: string;
         if (stateRule.target.type === "group") {
             const targetGroup = groups.find(group => group.id === stateRule.target.id);
-            to = `${targetGroup.friendly_name}/${stateRule.target.endpoint}`;
+            to = `${targetGroup.friendly_name}`;
+
         } else if (stateRule.target.type === "endpoint") {
             const targeDevice = devices.find(d => d.ieee_address === stateRule.target.ieee_address);
             to = `${targeDevice.friendly_name}/${stateRule.target.endpoint}`;
@@ -107,7 +108,7 @@ export default class BindRow extends Component<BindRowProps, BindRowState> {
         let to: string;
         if (stateRule.target.type === "group") {
             const targetGroup = groups.find(group => group.id === stateRule.target.id);
-            to = `${targetGroup.friendly_name}/${stateRule.target.endpoint}`;
+            to = `${targetGroup.friendly_name}`;
         } else if (stateRule.target.type === "endpoint") {
             const targeDevice = devices.find(d => d.ieee_address === stateRule.target.ieee_address);
             to = `${targeDevice.friendly_name}/${stateRule.target.endpoint}`;
@@ -140,7 +141,7 @@ export default class BindRow extends Component<BindRowProps, BindRowState> {
                 <th scope="row">{idx + 1}</th>
                 <td><EndpointPicker values={sourceEndpoints} value={stateRule.source.endpoint} onSelect={this.setSourceEp} /></td>
                 <td><DevicePicker type={targetType} value={stateRule.target.ieee_address || stateRule.target.id} devices={devices} groups={groups} onSelect={this.setDestination} /></td>
-                <td><EndpointPicker values={destinationEndpoints} value={stateRule.target.endpoint} onSelect={this.setDestinationEp} /></td>
+                <td>{stateRule.target.type === "endpoint" ? <EndpointPicker values={destinationEndpoints} value={stateRule.target.endpoint} onSelect={this.setDestinationEp} /> : null}</td>
                 <td><ClusterPicker clusters={possibleClusters} value={clusters} onSelect={this.setClusters} /></td>
                 <td>
                     <div class="btn-group btn-group-sm">
