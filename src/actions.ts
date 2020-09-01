@@ -4,7 +4,7 @@
 import { GlobalState } from "./store";
 import { Store } from "unistore";
 
-import {  BindParams, Endpoint, Dictionary, Cluster } from "./types";
+import { Dictionary, Cluster } from "./types";
 import api from './api';
 
 
@@ -30,6 +30,7 @@ export interface Actions {
     removeGroup(name: string): Promise<void>;
     addDeviceToGroup(device: string, group: string): Promise<void>;
     removeDeviceFromGroup(device: string, group: string): Promise<void>;
+    updateConfigValue(name: string, value: unknown): Promise<void>;
 }
 
 
@@ -40,7 +41,7 @@ const actions = (store: Store<GlobalState>): object => ({
     bindReqest: (state, isBind: boolean, from: string, to: string, clusters: Cluster[]): Promise<void> => {
         store.setState({ isLoading: true });
         const bindParams: Dictionary<unknown> = {
-           from, to, clusters
+            from, to, clusters
         };
         if (isBind) {
             api.send("bridge/request/device/bind", bindParams)
@@ -126,6 +127,10 @@ const actions = (store: Store<GlobalState>): object => ({
     },
     updateOTA: (state, deviceName: string): Promise<void> => {
         api.send('bridge/request/device/ota_update/update', { id: deviceName });
+        return Promise.resolve();
+    },
+    updateConfigValue(state, name: string, value: unknown): Promise<void> {
+        api.send(`bridge/request/config/${name}`, value);
         return Promise.resolve();
     }
 });

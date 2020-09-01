@@ -12,7 +12,8 @@ interface OTAState {
 }
 export interface DeviceStats {
     battery: number;
-    last_seen: string;
+    last_seen?: string;
+    elapsed?: number;
     linkquality: number;
     update?: OTAState;
     [k: string]: string | number | boolean | OTAState;
@@ -77,7 +78,9 @@ export interface Network {
     pan_id: number;
     extended_pan_id: number[];
 }
-
+export interface Z2MConfig {
+    [k: string]: unknown;
+}
 export interface BridgeConfig {
     version: string;
     commit: string;
@@ -85,9 +88,13 @@ export interface BridgeConfig {
     network: Network;
     log_level: string;
     permit_join: boolean;
+
 }
 
-
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface BridgeInfo {
+    config: Z2MConfig;
+}
 
 
 
@@ -162,14 +169,6 @@ export interface BindRule {
         type: "endpoint" | "group";
     };
 
-}
-
-export interface BindParams {
-    source: Device;
-    sourceEp: Endpoint;
-    destination: Device;
-    destinationEp: Endpoint;
-    clusters: Cluster[];
 }
 
 export type SortDirection = "asc" | "desc";

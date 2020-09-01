@@ -1,5 +1,5 @@
 import { Component, ComponentChild, h } from "preact";
-import { Device, Endpoint, Cluster, BindParams, BindRule, ObjectType } from "../../types";
+import { Device, Endpoint, Cluster, BindRule, ObjectType } from "../../types";
 import DevicePicker from "../device-picker";
 import EndpointPicker from "../endpoint-picker";
 import ClusterPicker from "../cluster-picker";

@@ -5,7 +5,7 @@ const graph: GraphI = {
     nodes: []
 };
 
-import { Device, FileDescriptor, TouchLinkScanApiResponse, Dictionary, DeviceStats, BridgeConfig, BindParams } from "./types";
+import { Device, FileDescriptor, TouchLinkScanApiResponse, Dictionary, DeviceStats, BridgeConfig, BridgeInfo } from "./types";
 import { ApiResponse, isObject } from "./utils";
 import { GraphI } from "./components/map/types";
 
@@ -57,6 +57,7 @@ export interface GlobalState {
     groups: Group[];
 
     bridgeConfig: BridgeConfig;
+    bridgeInfo: BridgeInfo;
 
 }
 
@@ -93,7 +94,8 @@ const initialState: GlobalState = {
     touchlinkScanInProgress: false,
     networkGraph: graph,
     groups: [],
-    bridgeConfig: {} as BridgeConfig
+    bridgeConfig: {} as BridgeConfig,
+    bridgeInfo: {} as BridgeInfo
 };
 
 const store = process.env.NODE_ENV === 'production' ? createStore(initialState) : devtools(createStore(initialState));

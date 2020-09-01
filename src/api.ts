@@ -1,6 +1,6 @@
 import ReconnectingWebSocket from "reconnecting-websocket";
 import store, { Group } from "./store";
-import { BridgeConfig, Device } from './types';
+import { BridgeConfig, Device, BridgeInfo } from './types';
 
 import { sanitizeGraph } from "./utils";
 import { Notyf } from "notyf";
@@ -88,7 +88,7 @@ class Api {
                     break;
                 case "bridge/info":
                     store.setState({
-                        bridgeConfig: data.payload as BridgeConfig
+                        bridgeInfo: data.payload as BridgeInfo
                     });
                     break;
                 case "bridge/devices":

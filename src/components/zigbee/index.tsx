@@ -157,7 +157,7 @@ export class ZigbeeTable extends Component<Actions & GlobalState, ZigbeeTableSta
                                     className={cx(style["manu-name"], "text-truncate", "text-nowrap", "position-relative")}>{device.definition?.vendor ?? 'Unsupported'}</td>
                                 <td>{device.definition?.model ?? 'Unsupported'}</td>
                                 <td>{deviceStates[device.friendly_name]?.linkquality ?? "N/A"}</td>
-                                <td>{lastSeen(deviceStates[device.friendly_name]?.last_seen)}</td>
+                                <td>{lastSeen(deviceStates[device.friendly_name]?.last_seen, deviceStates[device.friendly_name]?.elapsed)}</td>
                                 <td className="text-left">
                                     <PowerSource source={device.power_source} battery={deviceStates[device.friendly_name]?.battery} />
                                 </td>

@@ -28,9 +28,9 @@ const NavBar: FunctionalComponent<Actions & GlobalState> = ({ setPermitJoin, tou
                 <li class="nav-item">
                     <Link className="nav-link waves-effect waves-light" activeClassName="active" href="/map">Map</Link>
                 </li>
-                {/* <li class="nav-item">
+                <li class="nav-item">
                     <Link className="nav-link waves-effect waves-light" activeClassName="active" href="/settings">Settings</Link>
-                </li> */}
+                </li>
                 <li class="nav-item">
                     <Link className="nav-link waves-effect waves-light" activeClassName="active" href="/groups">Groups</Link>
                 </li>

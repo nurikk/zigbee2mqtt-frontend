@@ -123,12 +123,12 @@ export function callApi<T>(url: string, method: HttMethod, params: Dictionary<an
     })
 }
 
-export const lastSeen = (lastSeen: string): string => {
+export const lastSeen = (lastSeen: string, elapsed: number): string => {
     if (!lastSeen) {
         return "N/A";
     }
 
-    const diff = Date.now() - Date.parse(lastSeen);
+    const diff = elapsed ? elapsed : Date.now() - Date.parse(lastSeen);
 
     if (diff < 0) {
         return "Now";
