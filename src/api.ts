@@ -70,16 +70,7 @@ class Api {
         }
 
         let response: ResponseWithStatus;
-        let parsedMessage = {};
-        try {
-            if (data.message) {
-                parsedMessage = JSON.parse(data.message as string)
-            }
-
-        } catch (e) {
-            new Notyf().error(e.message);
-            new Notyf().error(data.message);
-        }
+    
 
         let parsedPayload = {};
         try {
@@ -97,7 +88,7 @@ class Api {
             const { deviceStates } = store.getState();
 
 
-            deviceStates[data.topic] = { ...deviceStates[data.topic], ...parsedMessage };
+            deviceStates[data.topic] = { ...deviceStates[data.topic], ...parsedPayload };
             store.setState({ deviceStates, forceRender: Date.now() });
         } else {
             switch (data.topic) {
@@ -105,29 +96,29 @@ class Api {
                     break;
                 case "bridge/config":
                     store.setState({
-                        bridgeConfig: parsedMessage as BridgeConfig
+                        bridgeConfig: parsedPayload as BridgeConfig
                     });
                     break;
                 case "bridge/info":
                     store.setState({
-                        bridgeConfig: parsedMessage as BridgeConfig
+                        bridgeConfig: parsedPayload as BridgeConfig
                     });
                     break;
                 case "bridge/devices":
                     store.setState({
                         isLoading: false,
-                        devices: parsedMessage as Device[]
+                        devices: parsedPayload as Device[]
                     });
                     break;
 
                 case "bridge/groups":
                     store.setState({
                         isLoading: false,
-                        groups: parsedMessage as Group[]
+                        groups: parsedPayload as Group[]
                     })
                     break;
                 case "bridge/response/networkmap":
-                    response = parsedMessage as ResponseWithStatus;
+                    response = parsedPayload as ResponseWithStatus;
                     if (response.status == "ok") {
                         store.setState({
                             isLoading: false,
@@ -140,7 +131,7 @@ class Api {
                     break;
 
                 case "bridge/response/device/bind":
-                    response = parsedMessage as ResponseWithStatus;
+                    response = parsedPayload as ResponseWithStatus;
                     if (response.status == "ok") {
                         new Notyf().success("ok");
                     } else {
