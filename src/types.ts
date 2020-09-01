@@ -112,6 +112,13 @@ export interface DeviceDefinition {
     supports: string;
     vendor: string;
 }
+
+export interface EndpointDescription {
+    clusters: {
+        input: Cluster[];
+        output: Cluster[];
+    };
+};
 export interface Device {
     ieee_address: string;
     type: DeviceType;
@@ -130,14 +137,7 @@ export interface Device {
     supported: boolean;
     definition?: DeviceDefinition;
     date_code: string;
-    endpoints: {
-        [k: string]: {
-            clusters: {
-                input: Cluster[];
-                output: Cluster[];
-            };
-        };
-    };
+    endpoints: Dictionary<EndpointDescription>;
     bindings: BindRule[];
 }
 
@@ -150,7 +150,8 @@ export interface FileDescriptor extends Named {
 
 export type ObjectType = "device" | "group";
 export interface BindRule {
-    cluster: Cluster;
+    isNew: boolean;
+    clusters: Cluster[];
     source: {
         endpoint: Endpoint;
     };

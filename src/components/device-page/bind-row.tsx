@@ -22,7 +22,6 @@ interface BindRowProps {
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface BindRowState {
     stateRule: BindRule;
-    clusters: Cluster[];
 }
 
 const getEndpoints = (obj: Device | Group): Endpoint[] => {
@@ -44,10 +43,8 @@ const getTarget = (rule: BindRule, devices: Device[], groups: Group[]) => {
 
 export default class BindRow extends Component<BindRowProps, BindRowState> {
 
-    constructor(props: BindRowProps) {
-        super(props);
-        const { rule } = props;
-        this.state = { stateRule: rule, clusters: rule.cluster ? [rule.cluster] : [] } as Readonly<BindRowState>;
+    state: Readonly<BindRowState> = {
+        stateRule: this.props.rule,
     }
 
     setSourceEp = (sourceEp: Endpoint): void => {
@@ -68,7 +65,7 @@ export default class BindRow extends Component<BindRowProps, BindRowState> {
             stateRule.target.type = "group";
             delete stateRule.target.ieee_address;
         }
-        stateRule.cluster = undefined;
+        stateRule.clusters = [];
 
         this.setState({ stateRule });
     }
@@ -77,15 +74,18 @@ export default class BindRow extends Component<BindRowProps, BindRowState> {
 
         const { stateRule } = this.state;
         stateRule.target.endpoint = destinationEp;
+        stateRule.clusters = [];
         this.setState({ stateRule });
     }
 
     setClusters = (clusters: Cluster[]): void => {
-        this.setState({ clusters });
+        const { stateRule } = this.state;
+        stateRule.clusters = clusters;
+        this.setState({ stateRule });
     }
     onBindClick = (): void => {
         const { onBind, device, groups, devices } = this.props;
-        const { stateRule, clusters } = this.state;
+        const { stateRule } = this.state;
         const from = `${device.friendly_name}/${stateRule.source.endpoint}`;
         let to: string;
         if (stateRule.target.type === "group") {
@@ -97,13 +97,13 @@ export default class BindRow extends Component<BindRowProps, BindRowState> {
             to = `${targeDevice.friendly_name}/${stateRule.target.endpoint}`;
         }
 
-        onBind(from, to, clusters);
+        onBind(from, to, stateRule.clusters);
 
     }
 
     onUnBindClick = (): void => {
         const { onUnBind, device, groups, devices } = this.props;
-        const { stateRule, clusters } = this.state;
+        const { stateRule } = this.state;
         const from = `${device.friendly_name}/${stateRule.source.endpoint}`;
         let to: string;
         if (stateRule.target.type === "group") {
@@ -114,47 +114,54 @@ export default class BindRow extends Component<BindRowProps, BindRowState> {
             to = `${targeDevice.friendly_name}/${stateRule.target.endpoint}`;
         }
 
-        onUnBind(from, to, clusters);
+        onUnBind(from, to, stateRule.clusters);
     }
 
     isValidRule(): boolean {
-        return true;
+        const { stateRule } = this.state;
+        let valid = false;
+        if (stateRule.target.type == "endpoint") {
+            valid = stateRule.source.endpoint
+                && stateRule.target.ieee_address
+                && stateRule.target.endpoint
+                && stateRule.clusters.length > 0;
+        } else if (stateRule.target.type == "group") {
+            valid = stateRule.source.endpoint
+                && stateRule.target.id
+                && stateRule.clusters.length > 0;
+        }
+        debugger
+        console.log({valid});
+
+
+        return valid;
         // const { destination, clusters } = this.state;
         // return destination && (clusters === undefined || clusters.length > 0);
     }
 
     render(): ComponentChild {
         const { devices, groups, idx, device } = this.props;
-        const { stateRule, clusters } = this.state;
+        const { stateRule } = this.state;
 
         const targetType: ObjectType = stateRule.target.type === "endpoint" ? "device" : "group";
 
         const sourceEndpoints = getEndpoints(device);
         const target = getTarget(stateRule, devices, groups);
         const destinationEndpoints = getEndpoints(target);
-        const sourceClusters = device.endpoints[stateRule.source.endpoint]?.clusters?.output;
-        console.log('stateRule', stateRule, groups);
-        // const destinationClusters = device.endpoints[stateRule.de.endpoint]?.clusters?.output;
-        // let intersection = devices.filter(x => arrB.includes(x));
+        const sourceClusters = device.endpoints[stateRule.source.endpoint]?.clusters?.output ?? [];
         const possibleClusters: Cluster[] = sourceClusters;
-        // if (targetType === "device") {
-        //     const targetEP = (target as Device).endpoints[stateRule.target.endpoint];
-        //     if (targetEP) {
-        //         possibleClusters = possibleClusters.filter(cluster => targetEP.clusters.input.includes(cluster))
-        //     }
-        // }
         return (
             <tr>
                 <th scope="row">{idx + 1}</th>
                 <td><EndpointPicker values={sourceEndpoints} value={stateRule.source.endpoint} onSelect={this.setSourceEp} /></td>
                 <td><DevicePicker type={targetType} value={stateRule.target.ieee_address || stateRule.target.id} devices={devices} groups={groups} onSelect={this.setDestination} /></td>
                 <td>{stateRule.target.type === "endpoint" ? <EndpointPicker values={destinationEndpoints} value={stateRule.target.endpoint} onSelect={this.setDestinationEp} /> : null}</td>
-                <td><ClusterPicker clusters={possibleClusters} value={clusters} onSelect={this.setClusters} /></td>
+                <td><ClusterPicker clusters={possibleClusters} value={stateRule.clusters} onSelect={this.setClusters} /></td>
                 <td>
                     <div class="btn-group btn-group-sm">
                         <Button<void> disabled={!this.isValidRule()} title="Bind" className="btn btn-primary" onClick={this.onBindClick}><i
                             className="fa fa-heart" /></Button>
-                        <Button<void> disabled={!this.isValidRule()} title="Unbind" className="btn btn-secondary" onClick={this.onUnBindClick}><i
+                        <Button<void> disabled={!stateRule.isNew && !this.isValidRule()} title="Unbind" className="btn btn-secondary" onClick={this.onUnBindClick}><i
                             className="fa fa-heart-broken" /></Button>
                     </div>
                 </td>

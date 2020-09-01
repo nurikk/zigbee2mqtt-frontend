@@ -122,7 +122,7 @@ class AddDeviceToGroup extends Component<AddDeviceToGroupProps, AddDeviceToGroup
                 </div>
 
                 <div>
-                    <Button type="button" onClick={this.onSubmit} class="btn btn-primary btn-sm">Add to group</Button>
+                    <Button type="button" onClick={this.onSubmit} class="btn btn-primary">Add to group</Button>
                 </div>
 
             </div>

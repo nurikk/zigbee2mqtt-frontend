@@ -44,7 +44,7 @@ export class Bind extends Component<BindProps & PropsFromStore & Actions, {}> {
             return "Unknown device";
         }
         const nonCoordinatorBindings = device.bindings.filter(b => b.target.ieee_address !== coordinator.ieee_address);
-        nonCoordinatorBindings.push({ target: {}, source: {} } as BindRule);
+        nonCoordinatorBindings.push({isNew: true, target: {}, source: {}, clusters: [] } as BindRule);
         return (
             <table class="table table-striped table-borderless">
                 <thead>
