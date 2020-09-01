@@ -11,6 +11,7 @@ import { GlobalState } from "../../store";
 import actions, { Actions } from "../../actions";
 import { useEffect } from "preact/hooks";
 import Button from "../button";
+import { route } from "preact-router";
 
 export interface MouseEventsResponderNode {
     onMouseOver?: (arg0: NodeI) => void;
@@ -134,7 +135,7 @@ export class Map extends Component<GlobalState & Actions, MapState> {
         switch (node.type) {
             case "EndDevice":
             case "Router":
-                window.open(genDeviceDetailsLink(node.friendlyName));
+                route(genDeviceDetailsLink(node.friendlyName), true);
                 break;
             default:
                 break;
