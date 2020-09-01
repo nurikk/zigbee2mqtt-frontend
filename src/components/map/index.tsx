@@ -232,8 +232,7 @@ export class Map extends Component<GlobalState & Actions, MapState> {
                 <div class="row h-100 justify-content-center align-items-center">
                     {
                         isLoading ? (
-
-                            <div class=" justify-content-center align-items-centerr">
+                            <div class="justify-content-center align-items-center">
                                 <div class="row">
                                     <div class="col-12">
                                         Loading, please wait.

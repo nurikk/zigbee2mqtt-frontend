@@ -111,21 +111,23 @@ class AddDeviceToGroup extends Component<AddDeviceToGroupProps, AddDeviceToGroup
 
         const endpoints = Object.keys(deviceObj?.endpoints ?? {});
 
-        return <form class="form-inline">
-            <div class="form-group">
-                <div class="form-group mx-sm-3">
+        return <form class="row">
 
+            <div class="col">
+                <div class="input-group mb-3">
                     <DevicePicker type="device" value={device} devices={devices} onSelect={this.onDeviceSelect} />
-                </div>
-                <div class="form-group mx-sm-3">
+
+
                     <EndpointPicker values={endpoints} value={endpoint} onSelect={this.onEpChange} />
                 </div>
 
-                <div>
-                    <Button type="button" onClick={this.onSubmit} class="btn btn-primary">Add to group</Button>
-                </div>
-
             </div>
+
+            <div class="col">
+                <Button type="button" onClick={this.onSubmit} class="btn btn-primary">Add to group</Button>
+            </div>
+
+
         </form>
     }
 }
@@ -150,12 +152,15 @@ export class GroupsPage extends Component<Actions & GlobalState, GroupsPageState
     renderGroupCreationForm(): ComponentChild {
         const { newGroupName } = this.state;
         return (
-            <form class="form-inline mt-2">
-                <div class="form-group mx-sm-3 mb-2">
+            <form class="row mt-2">
+                <div class="col">
                     <label for="newGroupName" class="sr-only">Group name</label>
                     <input onChange={this.changeHandler} value={newGroupName} required type="text" name="newGroupName" class="form-control" id="newGroupName" placeholder="bedroom_lamps" />
                 </div>
-                <Button<void> onClick={this.onGroupCreateSubmit} className="btn btn-primary mb-2">Create group</Button>
+                <div class="col">
+                    <Button<void> onClick={this.onGroupCreateSubmit} className="btn btn-primary mb-2">Create group</Button>
+                </div>
+
             </form>
         )
     }
