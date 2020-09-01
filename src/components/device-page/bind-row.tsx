@@ -130,13 +130,7 @@ export default class BindRow extends Component<BindRowProps, BindRowState> {
                 && stateRule.target.id
                 && stateRule.clusters.length > 0;
         }
-        debugger
-        console.log({valid});
-
-
         return valid;
-        // const { destination, clusters } = this.state;
-        // return destination && (clusters === undefined || clusters.length > 0);
     }
 
     render(): ComponentChild {
