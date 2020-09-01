@@ -190,7 +190,9 @@ export class GroupsPage extends Component<Actions & GlobalState, GroupsPageState
 
                             <div>
                                 <div class="card-body">
-                                    <DeviceGroup group={group} devices={devices} removeDeviceFromGroup={this.removeDeviceFromGroup} />
+                                    <div class="table-responsive">
+                                        <DeviceGroup group={group} devices={devices} removeDeviceFromGroup={this.removeDeviceFromGroup} />
+                                    </div>
                                 </div>
                             </div>
                             <div class="card-footer">
