@@ -1,5 +1,5 @@
 
-import { Device, Dictionary } from "./types";
+import { Device, Dictionary, DeviceStats } from "./types";
 import { Notyf } from "notyf";
 import { GraphI, ZigbeeRelationship, NodeI, Target, Source } from "./components/map/types";
 
@@ -27,11 +27,11 @@ export function chunkArray<T>(inputArr: T[], chunkSize: number): T[][] {
 
 export const encodeGetParams = (data: Dictionary<string | number>): string => Object.keys(data).map((key) => [key, data[key]].map(encodeURIComponent).join("=")).join("&");
 
-export const sanitizeModelNameForImageUrl = (modelName: string): string => {
-    return modelName ? modelName.replace("/", "_") : null;
+export const sanitizeModelNameForImageUrl = (model: string): string => {
+    return model ? `${model.replace(/:|\s|\//g, "-")}.jpg` : 'generic.jpg';
 };
 
-export const genDeviceImageUrl = (modelID: string): string => (`https://slsys.github.io/Gateway/devices/png/${sanitizeModelNameForImageUrl(modelID)}.png`);
+export const genDeviceImageUrl = (modelID: string): string => (`https://www.zigbee2mqtt.io/images/devices/${sanitizeModelNameForImageUrl(modelID)}`);
 
 export type LoadableFileTypes = "js" | "css";
 
@@ -123,14 +123,17 @@ export function callApi<T>(url: string, method: HttMethod, params: Dictionary<an
     })
 }
 
-export const lastSeen = (device: Device): string => {
+export const lastSeen = (lastSeen: string): string => {
+    if (!lastSeen) {
+        return "N/A";
+    }
 
-    const lastSeen = Date.now() - device.lastSeen;
+    const diff = Date.now() - Date.parse(lastSeen);
 
-    if (lastSeen < 0) {
+    if (diff < 0) {
         return "Now";
     }
-    return toHHMMSS(lastSeen / 1000);
+    return toHHMMSS(diff / 1000);
 
 };
 
@@ -179,8 +182,6 @@ export const sanitizeGraph = (inGraph: GraphI): GraphI => {
 
         }
     });
-    console.log('siblings', siblings);
-    console.log('filteredOutLinks', filteredOutLinks);
 
     inGraph.nodes.forEach(node => {
         if (!nodesWithLinks[node.networkAddress]) {
@@ -199,3 +200,10 @@ export const isObject = (obj: unknown): boolean => {
 }
 
 export const noCoordinator = (device: Device): boolean => device.type !== "Coordinator";
+
+
+export const getDeviceDisplayName = (device: Device): string => {
+    return `${toHex(device.network_address)} (${device.friendly_name ? device.friendly_name : device.definition?.model})`;
+};
+
+export const randomString = (len: number): string => Math.random().toString(36).substr(2, len);

@@ -1,10 +1,13 @@
 {
-  "private": true,
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "sideEffects": [
     "*.css"
   ],
-  "name": "z2m-frontend",
-  "version": "0.1.11",
+  "name": "zigbee2mqtt-frontend",
+  "version": "0.1.19",
   "license": "MIT",
   "scripts": {
     "build": "npm run clean && webpack --config ./webpack.config.js --mode production",
@@ -18,20 +21,22 @@
   "eslintIgnore": [
     "dist/*"
   ],
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.13.0",
     "@types/d3": "^5.7.2",
     "@types/history": "^4.7.6",
     "@types/luaparse": "^0.2.6",
     "@types/notyf": "^3.0.0",
+    "@types/reconnectingwebsocket": "^1.0.4",
     "history": "^5.0.0",
     "mqtt": "^4.1.0",
     "notyf": "^3.7.0",
     "preact-router": "^3.2.1",
     "pubsub-ts": "^0.2.0",
-    "unistore": "^3.5.1"
-  },
-  "devDependencies": {
+    "reconnecting-websocket": "^4.4.0",
+    "reconnectingwebsocket": "^1.0.0",
+    "unistore": "^3.5.1",
     "@teamsupercell/typings-for-css-modules-loader": "^2.2.0",
     "@types/classnames": "^2.2.10",
     "@types/codemirror": "0.0.95",
@@ -67,5 +72,10 @@
     "webpack-dev-server": "3.11.0",
     "ws": "^7.3.0",
     "zip-webpack-plugin": "^3.0.0"
-  }
+  },
+  "main": "index.js",
+  "files": [
+    "index.js",
+    "dist/**/*"
+  ]
 }

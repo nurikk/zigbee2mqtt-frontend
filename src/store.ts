@@ -1,13 +1,11 @@
 import createStore from "unistore";
 import devtools from "unistore/devtools";
-// import graph from "./to4ko";
-// import graph from "./hackercb";
 const graph: GraphI = {
     links:[],
     nodes: []
 };
 
-import { BindRule, Device, FileDescriptor, TouchLinkScanApiResponse, Dictionary, DeviceStats, BridgeConfig } from "./types";
+import { Device, FileDescriptor, TouchLinkScanApiResponse, Dictionary, DeviceStats, BridgeConfig, BindParams } from "./types";
 import { ApiResponse, isObject } from "./utils";
 import { GraphI } from "./components/map/types";
 
@@ -18,21 +16,24 @@ export interface Settings {
     mqtt_password: string;
 
 }
+
+
+export interface GroupAddress {
+    endpoint: number;
+    ieee_address: string;
+}
 export interface Group {
-    optimistic: boolean;
-    devices: string[];
+    members: GroupAddress[];
     friendly_name: string;
-    ID: number;
+    id: number;
 }
 
 export interface GlobalState {
     forceRender: number;
     isLoading: boolean;
     isError: boolean | string;
-    device: Device | undefined;
     devices: Device[];
     deviceStates: Dictionary<DeviceStats>;
-    bindRules: BindRule[];
     // time: TimeInfo | undefined;
     logs: string[];
     // logLevel: LogLevel;
@@ -75,12 +76,10 @@ try {
 const initialState: GlobalState = {
     settings,
     forceRender: Date.now(),
-    device: undefined,
     isLoading: false,
     isError: false,
     devices: [],
     deviceStates: {},
-    bindRules: [{} as BindRule],
     // time: undefined,
     logs: [],
     // logLevel: LogLevel.LOG_DEBUG,

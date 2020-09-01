@@ -3,6 +3,7 @@ import { forwardRef } from "preact/compat";
 
 
 interface UniversalEditorProps {
+    readonly: boolean;
     value: unknown;
     onChange(value: unknown): void;
     [k: string]: unknown;
@@ -11,8 +12,8 @@ interface UniversalEditorProps {
 
 const UniversalEditor: FunctionalComponent<UniversalEditorProps> = forwardRef((props, ref: RefObject<HTMLInputElement>) => {
     const { value, onChange, ...rest } = props;
-    const changeHandler = (event) => {
-        const { target } = event;
+    const changeHandler = (event: Event) => {
+        const { target } = event as unknown as {target: HTMLInputElement};
         switch (target.type) {
             case "checkbox":
                 onChange(target.checked);

@@ -101,7 +101,7 @@
     }
 
     .adaptive td:nth-of-type(5):before {
-        content: "ieeeAddr";
+        content: "ieee_addr";
     }
 
     .adaptive td:nth-of-type(6):before {

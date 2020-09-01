@@ -40,7 +40,7 @@ export default class TabPanel extends Component<TabPanelProps, TabPanelState> {
     constructor() {
         super();
         this.state = {
-            activeTab: "Bind"
+            activeTab: "Info"
         };
     }
 

@@ -15,6 +15,7 @@ module.exports = {
         sourceType: "module",
     },
     rules: {
+        "react/display-name": "off"
     },
     settings: {
         react: {
@@ -23,7 +24,7 @@ module.exports = {
         },
     },
     overrides: [{
-        files: ["*.js"],
+        files: ["*.js", "*.ts", "*.tsx"],
         rules: {
             "@typescript-eslint/explicit-function-return-type": "off",
         }

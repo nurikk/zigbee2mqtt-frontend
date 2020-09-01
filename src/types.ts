@@ -4,10 +4,18 @@ export type DeviceType = "EndDevice" | "Router" | "Coordinator";
 
 export type Dictionary<V> = { [index: string]: V }
 
+// :{"progress":27.3,"remaining":1203,"state":"updating"}
+interface OTAState {
+    state: "available" | "updating";
+    progress: number;
+    remaining: number;
+}
 export interface DeviceStats {
-    linkquality?: number;
-    battery?: number;
-    [k: string]: string | number | boolean;
+    battery: number;
+    last_seen: string;
+    linkquality: number;
+    update?: OTAState;
+    [k: string]: string | number | boolean | OTAState;
 }
 
 export const inteviewsCount = 4;
@@ -36,16 +44,9 @@ interface Interview {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface Cluster {
+export type Cluster = string;
 
-}
-
-export interface Endpoint {
-    "profId": string;
-    "In"?: Dictionary<true>;
-    "Out"?: Dictionary<true>;
-    "devId": string;
-}
+export type Endpoint = string | number;
 
 export enum DeviceSupportStatus {
     Unknown = 0,
@@ -56,13 +57,14 @@ export enum DeviceSupportStatus {
 
 
 
+
 export interface Meta {
+    revision: number;
     transportrev: number;
     product: number;
     majorrel: number;
     minorrel: number;
     maintrel: number;
-    revision: number;
 }
 
 export interface Coordinator {
@@ -70,10 +72,17 @@ export interface Coordinator {
     meta: Meta;
 }
 
+export interface Network {
+    channel: number;
+    pan_id: number;
+    extended_pan_id: number[];
+}
+
 export interface BridgeConfig {
     version: string;
     commit: string;
     coordinator: Coordinator;
+    network: Network;
     log_level: string;
     permit_join: boolean;
 }
@@ -86,23 +95,50 @@ export interface BridgeConfig {
 
 export type PowerSource = "Battery" | "Mains (single phase)";
 
+/*
 
-export interface Device {
-    ieeeAddr: string;
-    type: DeviceType;
-    networkAddress: number;
-    model: string;
-    vendor: string;
+"date_code": "27/08/2020 07:00",
+"definition": {
+    "description": "[Air quality sensor](http://modkam.ru/?p=xxxx)",
+    "model": "DIYRuZ_AirSense",
+    "supports": "",
+    "vendor": "DIYRuZ"
+},
+
+*/
+export interface DeviceDefinition {
     description: string;
+    model: string;
+    supports: string;
+    vendor: string;
+}
+export interface Device {
+    ieee_address: string;
+    type: DeviceType;
+    network_address: number;
+    model: string;
+
+
+
     friendly_name: string;
-    manufacturerID: number;
-    manufacturerName: string;
-    powerSource: PowerSource;
-    modelID: string;
-    hardwareVersion: number;
-    softwareBuildID: number;
-    dateCode: string;
-    lastSeen: number;
+    power_source: PowerSource;
+
+    // lastSeen: number;
+    interviewing: boolean;
+    interview_completed: boolean;
+    software_build_id: number;
+    supported: boolean;
+    definition?: DeviceDefinition;
+    date_code: string;
+    endpoints: {
+        [k: string]: {
+            clusters: {
+                input: Cluster[];
+                output: Cluster[];
+            };
+        };
+    };
+    bindings: BindRule[];
 }
 
 
@@ -112,13 +148,27 @@ export interface FileDescriptor extends Named {
     is_dir: boolean;
 }
 
+export type ObjectType = "device" | "group";
+export interface BindRule {
+    cluster: Cluster;
+    source: {
+        endpoint: Endpoint;
+    };
+    target: {
+        id?: number;
+        endpoint?: Endpoint;
+        ieee_address?: string;
+        type: "endpoint" | "group";
+    };
 
-export interface BindRule extends Dictionary<string | number> {
-    id?: number;
-    DstnetworkAddress: string;
-    ClusterId: number;
-    SrcEp: number;
-    DstEp: number;
+}
+
+export interface BindParams {
+    source: Device;
+    sourceEp: Endpoint;
+    destination: Device;
+    destinationEp: Endpoint;
+    clusters: Cluster[];
 }
 
 export type SortDirection = "asc" | "desc";
@@ -128,7 +178,7 @@ export interface TouchLinkDevice {
     LinkQuality: number;
     PanId: number;
     TS: number;
-    ieeeAddr: string;
+    ieee_addr: string;
 }
 export interface TouchLinkScanApiResponse {
     TS: number;

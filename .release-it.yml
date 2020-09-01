@@ -1,13 +1,6 @@
 git:
   requireCleanWorkingDir: false
-github:
-  release: true
-  assets: ["dist/release.zip"]
-  draft: false
-
 npm:
   publish: false
-
 hooks:
-  "after:git:release": "npm run build"
   "after:release": "echo Successfully released ${name} v${version} to ${repo.repository}."

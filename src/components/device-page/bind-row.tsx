@@ -1,160 +1,164 @@
-// import { Component, ComponentChild, h } from "preact";
-// import flatten from "lodash/flatten";
-// import groupBy from "lodash/groupBy";
-// import sortBy from "lodash/sortBy";
-// import cx from "classnames";
-// import { toHex } from "../../utils";
-// import { getClusterName } from "./bind";
-// import { BindRule, Device } from "../../types";
-
-// const fields = ["DstnetworkAddress", "ClusterId", "SrcEp", "DstEp"];
-
-// function isValidBindRule(rule: BindRule): rule is BindRule {
-//     return fields.some(key => rule[key] !== undefined);
-// }
-// export const getDeviceDisplayName = (device: Device): string => {
-//     return `${device.networkAddress} (${device.friendly_name ? device.friendly_name : device.modelID})`;
-// };
-// interface BindRowProps {
-//     onChange?(idx: number, rule: BindRule): void;
-
-//     onBindClick?(rule: BindRule): void;
-
-//     onUnBindClick?(rule: BindRule): void;
-
-//     idx: number;
-//     rule: BindRule;
-//     devices: Device[];
-//     device: Device;
-// }
-
-// export default class BindRow extends Component<BindRowProps, {}> {
+import { Component, ComponentChild, h } from "preact";
+import { Device, Endpoint, Cluster, BindParams, BindRule, ObjectType } from "../../types";
+import DevicePicker from "../device-picker";
+import EndpointPicker from "../endpoint-picker";
+import ClusterPicker from "../cluster-picker";
+import Button from "../button";
+import { Group } from "../../store";
 
 
-//     isExistingBinding(): boolean {
-//         const { rule } = this.props;
-//         return rule.id !== undefined;
-//     }
-
-//     onDstChange = (evt) => {
-//         const { idx, rule, onChange } = this.props;
-//         const { value } = evt.target;
-//         onChange && onChange(idx, { ...rule, DstnetworkAddress: value, DstEp: undefined });
-//     };
-
-//     renderDstSelect(): ComponentChild {
-//         const { devices, rule, device } = this.props;
-//         //exclude self from select
-//         const options = sortBy(Object.entries(groupBy(devices.filter(d => d.networkAddress !== device.networkAddress), d => {
-//             const inC = flatten(Object.values(d.ep ?? {}).map(ep => Object.keys(ep.In ?? {}).map(c => parseInt(c, 10))));
-//             return inC.includes(rule.ClusterId);
-//         })), (kvp) => kvp[0] !== "true")
-//         .map(([hasSelectedEpStr, devices]) => {
-//             const hasSelectedEp = hasSelectedEpStr === "true";
-//             const label = hasSelectedEp ? "Cluster found" : "Cluster not found"
-//             return <optgroup label={label}>{
-//                 devices.map(device => <option selected={device.networkAddress === rule.DstnetworkAddress} value={device.networkAddress}>{getDeviceDisplayName(device)}</option>)
-//             }</optgroup>
-//         });
-
-//         options.unshift(<option hidden>Select device</option>);
-
-//         return <select disabled={this.isExistingBinding()} onChange={this.onDstChange}
-//             class={cx("form-control", { "form-control-plaintext": this.isExistingBinding() })}>{options}</select>;
-//     }
 
 
-//     onClusterChange = (evt): void => {
-//         const { onChange, rule, idx } = this.props;
-//         const { value } = evt.target;
-//         const [SrcEp, ClusterId] = value.split(",").map(p => parseInt(p, 10));
-//         onChange && onChange(idx, { ...rule, SrcEp, ClusterId, DstnetworkAddress: undefined });
-//     };
+interface BindRowProps {
+    rule: BindRule;
+    idx: number;
+    devices: Device[];
+    groups: Group[];
+    device: Device;
+    onBind(from: string, to: string, clusters: Cluster[]): void;
+    onUnBind(from: string, to: string, clusters: Cluster[]): void;
+}
 
-//     renderClusterId(): ComponentChild {
-//         const { device, rule } = this.props;
-//         const optionGroups = Object.entries(device.ep ?? {}).map(([epNumber, ep]) => {
-//             const clusters = Object.keys(ep.Out ?? {}).map(c => parseInt(c, 10));
-//             return <optgroup label={`Endpoint: #${epNumber}`}>
-//                 {clusters.map(c => <option selected={c === rule.ClusterId && parseInt(epNumber, 10) == rule.SrcEp}
-//                     value={[epNumber, c.toString()]}>{toHex(c, 4)}{getClusterName(c, true)}</option>)}
-//             </optgroup>;
-//         });
-//         optionGroups.unshift(<option hidden>Select cluster</option>);
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+interface BindRowState {
+    stateRule: BindRule;
+    clusters: Cluster[];
+}
 
-//         return <select disabled={this.isExistingBinding()} onChange={this.onClusterChange}
-//             class={cx("form-control", { "form-control-plaintext": this.isExistingBinding() })}>{optionGroups}</select>;
-//     }
+const getEndpoints = (obj: Device | Group): Endpoint[] => {
+    if (!obj) {
+        return []
+    } else if ((obj as Device).endpoints) {
+        return Object.keys((obj as Device).endpoints);
+    } else if ((obj as Group).members) {
+        return (obj as Group).members.map(g => g.endpoint);
+    }
+    return [];
+}
+const getTarget = (rule: BindRule, devices: Device[], groups: Group[]) => {
+    if (rule.target.type === "group") {
+        return groups.find(g => g.id === rule.target.id);
+    }
+    return devices.find(d => d.ieee_address === rule.target.ieee_address);
+}
 
-//     onDstEpChange = (evt): void => {
-//         const { onChange, rule, idx } = this.props;
-//         const { value } = evt.target;
-//         onChange && onChange(idx, { ...rule, DstEp: parseInt(value, 10) });
-//     };
+export default class BindRow extends Component<BindRowProps, BindRowState> {
 
-//     renderDstEp(): ComponentChild {
-//         const { devices, rule } = this.props;
-//         const dstDevice = devices.find((d) => d.networkAddress === rule.DstnetworkAddress);
+    constructor(props: BindRowProps) {
+        super(props);
+        const { rule } = props;
+        this.state = { stateRule: rule, clusters: rule.cluster ? [rule.cluster] : [] } as Readonly<BindRowState>;
+    }
 
-//         let options = [];
+    setSourceEp = (sourceEp: Endpoint): void => {
+        const { stateRule } = this.state;
+        stateRule.source.endpoint = sourceEp;
+        this.setState({ stateRule });
+    }
 
-//         if (dstDevice) {
-//             // eslint-disable-next-line @typescript-eslint/no-unused-vars
-//             const dstEndpoints = groupBy(Object.entries(dstDevice.ep ?? {}), ([epName, ep]) => Object.prototype.hasOwnProperty.call(ep.In ?? {}, rule.ClusterId));
+    setDestination = (destination: Device | Group, type: ObjectType): void => {
+        const { stateRule } = this.state;
+        if (type === "device") {
+            // eslint-disable-next-line @typescript-eslint/camelcase
+            stateRule.target.ieee_address = (destination as Device).ieee_address;
+            stateRule.target.type = "endpoint";
+            delete stateRule.target.id;
+        } else if (type === "group") {
+            stateRule.target.id = (destination as Group).id;
+            stateRule.target.type = "group";
+            delete stateRule.target.ieee_address;
+        }
+        stateRule.cluster = undefined;
 
+        this.setState({ stateRule });
+    }
 
-//             options = options.concat(
-//                 sortBy(Object.entries(dstEndpoints), (kvp) => kvp[0] !== "true")
-//                     .map(([has, endpoints]) =>
-//                         <optgroup label={(has == "true" ? 'Cluster found' : "Cluster not found")}>
-//                             {
-//                                 endpoints
-//                                     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-//                                     .map(([epName, ep]) => <option
-//                                         value={epName}
-//                                         selected={parseInt(epName, 10) === rule.DstEp}>{epName}</option>)
-//                             }
-//                         </optgroup>));
-//         }
-//         options.unshift(<option hidden>Select destination</option>);
+    setDestinationEp = (destinationEp: Endpoint): void => {
 
-//         return <select disabled={this.isExistingBinding()} onChange={this.onDstEpChange}
-//             class={cx("form-control", { "form-control-plaintext": this.isExistingBinding() })}>{options}</select>;
+        const { stateRule } = this.state;
+        stateRule.target.endpoint = destinationEp;
+        this.setState({ stateRule });
+    }
 
-//     }
+    setClusters = (clusters: Cluster[]): void => {
+        this.setState({ clusters });
+    }
+    onBindClick = (): void => {
+        const { onBind, device, groups, devices } = this.props;
+        const { stateRule, clusters } = this.state;
+        const from = `${device.friendly_name}/${stateRule.source.endpoint}`;
+        let to: string;
+        if (stateRule.target.type === "group") {
+            const targetGroup = groups.find(group => group.id === stateRule.target.id);
+            to = `${targetGroup.friendly_name}`;
 
-//     onBindClick = (): void => {
-//         const { onBindClick, rule } = this.props;
-//         onBindClick && onBindClick(rule);
-//     };
-//     onUnBindClick = (): void => {
-//         const { onUnBindClick, rule } = this.props;
-//         onUnBindClick && onUnBindClick(rule);
-//     };
+        } else if (stateRule.target.type === "endpoint") {
+            const targeDevice = devices.find(d => d.ieee_address === stateRule.target.ieee_address);
+            to = `${targeDevice.friendly_name}/${stateRule.target.endpoint}`;
+        }
 
-//     renderActionButton(): ComponentChild {
-//         const { rule } = this.props;
-//         return (
-//             this.isExistingBinding() ? (
-//                 <button onClick={this.onUnBindClick} type="button" class="btn btn-danger w-100">Unbind</button>
-//             ) : (
-//                     <button disabled={!isValidBindRule(rule)} onClick={this.onBindClick} type="button"
-//                         class="btn btn-primary w-100">Bind</button>
-//                 )
+        onBind(from, to, clusters);
 
-//         );
-//     }
+    }
 
-//     render(): ComponentChild {
-//         const { idx } = this.props;
-//         return (
-//             <tr>
-//                 <th scope="row">{idx + 1}</th>
-//                 <td>{this.renderClusterId()}</td>
-//                 <td>{this.renderDstSelect()}</td>
-//                 <td>{this.renderDstEp()}</td>
-//                 <td>{this.renderActionButton()}</td>
-//             </tr>
-//         );
-//     }
-// }
+    onUnBindClick = (): void => {
+        const { onUnBind, device, groups, devices } = this.props;
+        const { stateRule, clusters } = this.state;
+        const from = `${device.friendly_name}/${stateRule.source.endpoint}`;
+        let to: string;
+        if (stateRule.target.type === "group") {
+            const targetGroup = groups.find(group => group.id === stateRule.target.id);
+            to = `${targetGroup.friendly_name}`;
+        } else if (stateRule.target.type === "endpoint") {
+            const targeDevice = devices.find(d => d.ieee_address === stateRule.target.ieee_address);
+            to = `${targeDevice.friendly_name}/${stateRule.target.endpoint}`;
+        }
+
+        onUnBind(from, to, clusters);
+    }
+
+    isValidRule(): boolean {
+        return true;
+        // const { destination, clusters } = this.state;
+        // return destination && (clusters === undefined || clusters.length > 0);
+    }
+
+    render(): ComponentChild {
+        const { devices, groups, idx, device } = this.props;
+        const { stateRule, clusters } = this.state;
+
+        const targetType: ObjectType = stateRule.target.type === "endpoint" ? "device" : "group";
+
+        const sourceEndpoints = getEndpoints(device);
+        const target = getTarget(stateRule, devices, groups);
+        const destinationEndpoints = getEndpoints(target);
+        const sourceClusters = device.endpoints[stateRule.source.endpoint]?.clusters?.output;
+        console.log('stateRule', stateRule, groups);
+        // const destinationClusters = device.endpoints[stateRule.de.endpoint]?.clusters?.output;
+        // let intersection = devices.filter(x => arrB.includes(x));
+        const possibleClusters: Cluster[] = sourceClusters;
+        // if (targetType === "device") {
+        //     const targetEP = (target as Device).endpoints[stateRule.target.endpoint];
+        //     if (targetEP) {
+        //         possibleClusters = possibleClusters.filter(cluster => targetEP.clusters.input.includes(cluster))
+        //     }
+        // }
+        return (
+            <tr>
+                <th scope="row">{idx + 1}</th>
+                <td><EndpointPicker values={sourceEndpoints} value={stateRule.source.endpoint} onSelect={this.setSourceEp} /></td>
+                <td><DevicePicker type={targetType} value={stateRule.target.ieee_address || stateRule.target.id} devices={devices} groups={groups} onSelect={this.setDestination} /></td>
+                <td>{stateRule.target.type === "endpoint" ? <EndpointPicker values={destinationEndpoints} value={stateRule.target.endpoint} onSelect={this.setDestinationEp} /> : null}</td>
+                <td><ClusterPicker clusters={possibleClusters} value={clusters} onSelect={this.setClusters} /></td>
+                <td>
+                    <div class="btn-group btn-group-sm">
+                        <Button<void> disabled={!this.isValidRule()} title="Bind" className="btn btn-primary" onClick={this.onBindClick}><i
+                            className="fa fa-heart" /></Button>
+                        <Button<void> disabled={!this.isValidRule()} title="Unbind" className="btn btn-secondary" onClick={this.onUnBindClick}><i
+                            className="fa fa-heart-broken" /></Button>
+                    </div>
+                </td>
+            </tr>
+        );
+    }
+}

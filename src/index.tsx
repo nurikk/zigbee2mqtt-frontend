@@ -22,7 +22,7 @@ import "bootstrap/js/dist/button.js";
 import { render, h, Component, ComponentChild, Fragment, FunctionalComponent } from 'preact';
 
 import ConnectedMap from "./components/map";
-import ConnectedZigbeeTable from "./components/zigbee";
+
 import Router, { CustomHistory, route } from 'preact-router';
 
 // import ConnectedDiscovery from "./components/discovery";
@@ -35,18 +35,21 @@ import { createHashHistory } from 'history';
 
 
 
+import api from './api';
 
-import './mqtt';
+
 import ConnectedSettingsPage from "./components/settings";
 import NavBar from "./components/navbar";
 import ConnectedGroupsPage from "./components/groups";
+import ConnectedZigbeePage from "./components/zigbee";
 
 
-const ConnectedDevicePageWrap: FunctionalComponent<{dev: string}> = ({dev}) => (
+const ConnectedDevicePageWrap: FunctionalComponent<{ dev: string }> = ({ dev }) => (
     <ConnectedDevicePageWrap dev={dev} />
 );
 
 
+api.connect();
 
 class Main extends Component {
     settingsConfigured(): boolean {
@@ -72,11 +75,10 @@ class Main extends Component {
             <Provider store={store}>
                 <Fragment>
                     <NavBar />
-                    <Router path="/" history={(createHashHistory() as unknown as CustomHistory)} onChange={this.handleRoute}>
-                        <ConnectedZigbeeTable path="/" default />
+                    <Router path="/" history={(createHashHistory() as unknown as CustomHistory)}>
+                        <ConnectedZigbeePage path="/" default />
                         <ConnectedMap path="/map" />
-                        <ConnectedDevicePage activeTab="Info" path="/device/:dev" />
-
+                        <ConnectedDevicePage path="/device/:dev/:tab?" />
                         <ConnectedSettingsPage path="/settings" />
                         <ConnectedGroupsPage path="/groups" />
                     </Router>
