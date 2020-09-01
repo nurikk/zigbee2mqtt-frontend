@@ -16,7 +16,7 @@ const StartStopJoin: FunctionalComponent<StartStopJoinProps> = ({ joinEnabled, s
 
 const NavBar: FunctionalComponent<Actions & GlobalState> = ({ setPermitJoin, touchlinkReset, bridgeConfig }) => (
     <nav class="navbar navbar-expand-sm navbar-dark info-color  navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Zigbe2MQTT admin</a>
+        <a class="navbar-brand" href="#">z2m admin</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon" />
         </button>
