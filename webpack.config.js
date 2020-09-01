@@ -1,10 +1,7 @@
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-const CompressionPlugin = require('compression-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CopyPlugin = require('copy-webpack-plugin');
-
 
 const path = require('path');
 const glob = require('glob');
@@ -20,7 +17,7 @@ module.exports = (env, args) => {
 	}
 
 	const plugins = [
-		// new MiniCssExtractPlugin()
+		new MiniCssExtractPlugin()
 	];
 	const basePath = 'src/templates';
 	glob.sync(`${basePath}/**/*.html`).forEach((item) => {
@@ -32,10 +29,9 @@ module.exports = (env, args) => {
 		)
 	});
 	if (production) {
-		// plugins.push(new BundleAnalyzerPlugin({
-		// 	analyzerMode: 'static'
-		// }));
-		// plugins.push(new CompressionPlugin());
+		plugins.push(new BundleAnalyzerPlugin({
+			analyzerMode: 'static'
+		}));
 	} else {
 		plugins.push(new ForkTsCheckerWebpackPlugin());
 	}
@@ -52,17 +48,17 @@ module.exports = (env, args) => {
 		optimization: {
 			usedExports: true,
 			moduleIds: 'hashed',
-			// runtimeChunk: 'single',
-			// splitChunks: {
-			// 	cacheGroups: {
-			// 		vendor: {
-			// 			test: /node_modules/,
-			// 			name: 'scripts/vendor',
-			// 			chunks: 'all',
-			// 			enforce: true,
-			// 		},
-			// 	},
-			// },
+			runtimeChunk: 'single',
+			splitChunks: {
+				cacheGroups: {
+					vendor: {
+						test: /node_modules/,
+						name: 'scripts/vendor',
+						chunks: 'all',
+						enforce: true,
+					},
+				},
+			},
 		},
 		resolve: {
 			mainFields: ['module', 'main'],
@@ -78,8 +74,8 @@ module.exports = (env, args) => {
 				{
 					test: /\.css$/i,
 					use: [
-						// MiniCssExtractPlugin.loader,
-						"style-loader",
+						MiniCssExtractPlugin.loader,
+
 						"@teamsupercell/typings-for-css-modules-loader",
 						{
 							loader: "css-loader",
@@ -94,17 +90,13 @@ module.exports = (env, args) => {
 					test: /\.css$/i,
 					include: /node_modules/,
 					use: [
-						// MiniCssExtractPlugin.loader,
-						"style-loader",
+						MiniCssExtractPlugin.loader,
 						"css-loader"
 					]
 				}
 			],
 		},
 		devServer: {
-			proxy: {
-				'/api': 'http://192.168.1.209'
-			},
 			headers: {
 				'Access-Control-Allow-Origin': '*'
 			},
