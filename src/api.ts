@@ -7,8 +7,7 @@ import { Notyf } from "notyf";
 import { GraphI } from "./components/map/types";
 interface Message {
     topic: string;
-    message?: unknown;
-    payload?: unknown;
+    payload: string | object | object[] | string[];
 }
 interface LogMessage {
     level: "error" | "info" | "warning";
@@ -61,34 +60,17 @@ class Api {
     private onMessage = (event: MessageEvent): void => {
         let data = {} as Message;
         try {
-            if (event.data) {
-                data = JSON.parse(event.data) as Message;
-            }
+            data = JSON.parse(event.data) as Message;
         } catch (e) {
             new Notyf().error(e.message);
             new Notyf().error(event.data);
         }
 
         let response: ResponseWithStatus;
-    
-
-        let parsedPayload = {};
-        try {
-            if (data.payload) {
-                parsedPayload = JSON.parse(data.payload as string)
-            }
-        } catch (e) {
-            // debugger
-            new Notyf().error(e.message);
-            new Notyf().error(data.payload);
-        }
-
 
         if (data.topic.indexOf("/") == -1) {
             const { deviceStates } = store.getState();
-
-
-            deviceStates[data.topic] = { ...deviceStates[data.topic], ...parsedPayload };
+            deviceStates[data.topic] = { ...deviceStates[data.topic], ...(data.payload as object) };
             store.setState({ deviceStates, forceRender: Date.now() });
         } else {
             switch (data.topic) {
@@ -96,29 +78,29 @@ class Api {
                     break;
                 case "bridge/config":
                     store.setState({
-                        bridgeConfig: parsedPayload as BridgeConfig
+                        bridgeConfig: data.payload as BridgeConfig
                     });
                     break;
                 case "bridge/info":
                     store.setState({
-                        bridgeConfig: parsedPayload as BridgeConfig
+                        bridgeConfig: data.payload as BridgeConfig
                     });
                     break;
                 case "bridge/devices":
                     store.setState({
                         isLoading: false,
-                        devices: parsedPayload as Device[]
+                        devices: data.payload as Device[]
                     });
                     break;
 
                 case "bridge/groups":
                     store.setState({
                         isLoading: false,
-                        groups: parsedPayload as Group[]
+                        groups: data.payload as Group[]
                     })
                     break;
                 case "bridge/response/networkmap":
-                    response = parsedPayload as ResponseWithStatus;
+                    response = data.payload as ResponseWithStatus;
                     if (response.status == "ok") {
                         store.setState({
                             isLoading: false,
@@ -131,7 +113,7 @@ class Api {
                     break;
 
                 case "bridge/response/device/bind":
-                    response = parsedPayload as ResponseWithStatus;
+                    response = data.payload as ResponseWithStatus;
                     if (response.status == "ok") {
                         new Notyf().success("ok");
                     } else {
@@ -148,7 +130,7 @@ class Api {
 
 
                 case "bridge/logging":
-                    showNotity(parsedPayload as LogMessage);
+                    showNotity(data.payload as LogMessage);
                     break;
                 default:
                     if (data.topic.startsWith("bridge/request/")) {
