@@ -1,6 +1,6 @@
 import { Component, ComponentChild, h } from "preact";
 import { Device, ObjectType } from "../../types";
-import { getDeviceDisplayName } from "../../utils";
+import { getDeviceDisplayName, noCoordinator } from "../../utils";
 import { Group } from "../../store";
 const DELIMITER = '|';
 interface DevicePickerProps {
@@ -27,7 +27,7 @@ export default class DevicePicker extends Component<DevicePickerProps, {}> {
         const { devices, groups = [], value, type } = this.props;
         let options = [<option hidden>Select device</option>];
 
-        const devicesOptions = devices.map(device => <option selected={type === "device" && value == device.ieee_address} value={`device${DELIMITER}${device.ieee_address}`}>{getDeviceDisplayName(device)}</option>);
+        const devicesOptions = devices.filter(noCoordinator).map(device => <option selected={type === "device" && value == device.ieee_address} value={`device${DELIMITER}${device.ieee_address}`}>{getDeviceDisplayName(device)}</option>);
         if (groups.length) {
             options.push(<optgroup label="Devices">{devicesOptions}</optgroup>);
             const groupOptions = groups.map(group => <option selected={type === "group" && value == group.id} value={`group${DELIMITER}${group.friendly_name}`}>{group.friendly_name}</option>);

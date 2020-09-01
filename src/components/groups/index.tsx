@@ -3,11 +3,13 @@ import { connect } from "unistore/preact";
 import actions, { Actions } from "../../actions";
 import { GlobalState, Group, GroupAddress } from "../../store";
 import Button from "../button";
-import { Device } from "../../types";
+import { Device, Endpoint } from "../../types";
 import SafeImg from "../safe-image";
-import { genDeviceImageUrl, noCoordinator } from "../../utils";
+import { genDeviceImageUrl } from "../../utils";
 import style from './style.css';
 import cx from 'classnames';
+import EndpointPicker from "../endpoint-picker";
+import DevicePicker from "../device-picker";
 
 
 interface GroupsPageState {
@@ -23,7 +25,7 @@ interface AddDeviceToGroupProps {
 
 interface AddDeviceToGroupState {
     device: string;
-    endpint: string;
+    endpoint: Endpoint;
 }
 
 interface DeviceGroupRowProps {
@@ -76,7 +78,7 @@ class DeviceGroup extends Component<DeviceGroupPropts, {}> {
                     <th scope="col">Pic</th>
                     <th scope="col">friendlyName</th>
                     <th scope="col">ieee_addr</th>
-                    <th scope="col">Endpint</th>
+                    <th scope="col">Endpoint</th>
                     <th scope="col" className="text-right">Action</th>
                 </tr>
             </thead>
@@ -90,33 +92,33 @@ class DeviceGroup extends Component<DeviceGroupPropts, {}> {
 class AddDeviceToGroup extends Component<AddDeviceToGroupProps, AddDeviceToGroupState> {
     onSubmit = (): void => {
         const { addDeviceToGroup, group } = this.props;
-        const { device, endpint } = this.state;
-        addDeviceToGroup(endpint ? `${device}/${endpint}` : device, group.friendly_name);
+        const { device, endpoint } = this.state;
+        addDeviceToGroup(endpoint ? `${device}/${endpoint}` : device, group.friendly_name);
 
     }
-    onDeviceSelect = (e: Event): void => {
-        const { value } = e.target as HTMLSelectElement;
-        this.setState({ device: value });
+    onDeviceSelect = (device: Device): void => {
+
+        this.setState({ device: device.ieee_address });
     }
-    renderDevicePicker(): ComponentChild {
-        const { devices } = this.props;
-        return <select class="form-control form-control-sm" onChange={this.onDeviceSelect}>
-            <option hidden>Select device</option>
-            {devices.filter(noCoordinator).map(device => <option value={device.friendly_name} title={device.definition?.description}>{`${device.friendly_name} (${device.definition?.model ?? 'Unsupported'})`}</option>)}
-        </select>;
-    }
-    onEpChange = (e: Event): void => {
-        const { value } = e.target as HTMLInputElement;
-        this.setState({ endpint: value });
+
+    onEpChange = (endpoint: Endpoint): void => {
+        this.setState({ endpoint });
     }
     render(): ComponentChild {
+        const { device, endpoint } = this.state;
+        const { devices } = this.props;
+        const deviceObj = devices.find(d => d.ieee_address === device);
+
+        const endpoints = Object.keys(deviceObj?.endpoints ?? {});
+
         return <form class="form-inline">
             <div class="form-group">
                 <div class="form-group mx-sm-3">
-                    {this.renderDevicePicker()}
+
+                    <DevicePicker type="device" value={device} devices={devices} onSelect={this.onDeviceSelect} />
                 </div>
                 <div class="form-group mx-sm-3">
-                    <input onChange={this.onEpChange} title="In case you want to add a device to a group with multiple endpoints, e.g. a QBKG03LM with 2 buttons you can specify it here" class="form-control form-control-sm" type="text" placeholder="Endpoint name" />
+                    <EndpointPicker values={endpoints} value={endpoint} onSelect={this.onEpChange} />
                 </div>
 
                 <div>
