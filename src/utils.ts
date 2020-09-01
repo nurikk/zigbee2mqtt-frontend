@@ -1,10 +1,10 @@
 
-import { Device, Dictionary, DeviceStats } from "./types";
+import { Device, Dictionary } from "./types";
 import { Notyf } from "notyf";
 import { GraphI, ZigbeeRelationship, NodeI, Target, Source } from "./components/map/types";
 
 
-export const genDeviceDetailsLink = (deviceIdentifier: string | number): string => (`/device/${encodeURIComponent(deviceIdentifier)}`);
+export const genDeviceDetailsLink = (deviceIdentifier: string | number): string => (`/#/device/${deviceIdentifier}/info`);
 
 export const toHex = (input: number, padding = 4): string => {
     return `0x${(`${'0'.repeat(padding)}${input.toString(16)}`).substr(-1 * padding).toUpperCase()}`;
