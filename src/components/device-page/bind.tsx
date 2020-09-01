@@ -1,5 +1,5 @@
 import { Component, ComponentChild, h } from "preact";
-import { BindParams, Device } from "../../types";
+import { Device, BindRule, Cluster } from "../../types";
 import { ZigbeeClusters } from "./clusters";
 import BindRow from "./bind-row";
 import actions, { Actions } from "../../actions";
@@ -19,40 +19,32 @@ export const getClusterName = (id: number, addBraces = true): string => {
 interface PropsFromStore {
     devices: Device[];
     groups: Group[];
-    bindRules: BindParams[];
 }
 interface BindProps {
     dev?: string;
 }
 export class Bind extends Component<BindProps & PropsFromStore & Actions, {}> {
 
-    onRuleChange = (idx: number, rule: BindParams): void => {
-        const { bindRules, setBindRules } = this.props;
-        const copyRules = [...bindRules];
-        copyRules[idx] = rule;
-        setBindRules(copyRules);
+
+    onBindClick = (from: string, to: string, clusters: Cluster[]): void => {
+        const { bindReqest } = this.props;
+        bindReqest(true, from, to, clusters);
     };
 
-    onBindClick = (params: BindParams): void => {
-        console.log(params);
+    onUnBindClick = (from: string, to: string, clusters: Cluster[]): void => {
         const { bindReqest } = this.props;
-        bindReqest(true, params);
-
-
-    };
-
-    onUnBindClick = async (params: BindParams): Promise<void> => {
-        console.log(params);
-        const { bindReqest } = this.props;
-        bindReqest(false, params);
+        bindReqest(false, from, to, clusters);
     };
 
     render(): ComponentChild {
-        const { dev, devices, bindRules, groups } = this.props;
+        const { dev, devices, groups } = this.props;
+        const coordinator = devices.find(d => d.type === "Coordinator");
         const device = devices.find(d => d.ieee_address == dev);
         if (!device) {
             return "Unknown device";
         }
+        const nonCoordinatorBindings = device.bindings.filter(b => b.target.ieee_address !== coordinator.ieee_address);
+        nonCoordinatorBindings.push({ target: {}, source: {} } as BindRule);
         return (
             <table class="table table-striped table-borderless">
                 <thead>
@@ -67,7 +59,8 @@ export class Bind extends Component<BindProps & PropsFromStore & Actions, {}> {
                 </thead>
                 <tbody>
                     {
-                        bindRules.map((rule, idx) => <BindRow
+                        nonCoordinatorBindings.map((rule, idx) => <BindRow
+                            rule={rule}
                             key={idx}
                             groups={groups}
                             onUnBind={this.onUnBindClick}
@@ -82,6 +75,6 @@ export class Bind extends Component<BindProps & PropsFromStore & Actions, {}> {
     }
 }
 
-const mappedProps = ["devices", "bindRules", "groups"];
+const mappedProps = ["devices", "groups"];
 const ConnectedBindPage = connect<{}, {}, GlobalState, BindProps & PropsFromStore & Actions>(mappedProps, actions)(Bind);
 export default ConnectedBindPage

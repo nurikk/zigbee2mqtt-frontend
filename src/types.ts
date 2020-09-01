@@ -130,7 +130,15 @@ export interface Device {
     supported: boolean;
     definition?: DeviceDefinition;
     date_code: string;
-    endpoints: Endpoint[];
+    endpoints: {
+        [k: string]: {
+            clusters: {
+                input: Cluster[];
+                output: Cluster[];
+            };
+        };
+    };
+    bindings: BindRule[];
 }
 
 
@@ -140,6 +148,20 @@ export interface FileDescriptor extends Named {
     is_dir: boolean;
 }
 
+export type ObjectType = "device" | "group";
+export interface BindRule {
+    cluster: Cluster;
+    source: {
+        endpoint: Endpoint;
+    };
+    target: {
+        id?: number;
+        endpoint?: Endpoint;
+        ieee_address?: string;
+        type: "endpoint" | "group";
+    };
+
+}
 
 export interface BindParams {
     source: Device;

@@ -7,7 +7,8 @@ import { Notyf } from "notyf";
 import { GraphI } from "./components/map/types";
 interface Message {
     topic: string;
-    message: unknown;
+    message?: unknown;
+    payload?: unknown;
 }
 interface LogMessage {
     level: "error" | "info" | "warning";
@@ -58,11 +59,45 @@ class Api {
     }
 
     private onMessage = (event: MessageEvent): void => {
-        const data = JSON.parse(event.data) as Message;
+        let data = {} as Message;
+        try {
+            if (event.data) {
+                data = JSON.parse(event.data) as Message;
+            }
+        } catch (e) {
+            new Notyf().error(e.message);
+            new Notyf().error(event.data);
+        }
+
         let response: ResponseWithStatus;
+        let parsedMessage = {};
+        try {
+            if (data.message) {
+                parsedMessage = JSON.parse(data.message as string)
+            }
+
+        } catch (e) {
+            new Notyf().error(e.message);
+            new Notyf().error(data.message);
+        }
+
+        let parsedPayload = {};
+        try {
+            if (data.payload) {
+                parsedPayload = JSON.parse(data.payload as string)
+            }
+        } catch (e) {
+            // debugger
+            new Notyf().error(e.message);
+            new Notyf().error(data.payload);
+        }
+
+
         if (data.topic.indexOf("/") == -1) {
             const { deviceStates } = store.getState();
-            deviceStates[data.topic] = { ...deviceStates[data.topic], ...JSON.parse(data.message as string) };
+
+
+            deviceStates[data.topic] = { ...deviceStates[data.topic], ...parsedMessage };
             store.setState({ deviceStates, forceRender: Date.now() });
         } else {
             switch (data.topic) {
@@ -70,29 +105,29 @@ class Api {
                     break;
                 case "bridge/config":
                     store.setState({
-                        bridgeConfig: JSON.parse(data.message as string) as BridgeConfig
+                        bridgeConfig: parsedMessage as BridgeConfig
                     });
                     break;
                 case "bridge/info":
                     store.setState({
-                        bridgeConfig: JSON.parse(data.message as string) as BridgeConfig
+                        bridgeConfig: parsedMessage as BridgeConfig
                     });
                     break;
                 case "bridge/devices":
                     store.setState({
                         isLoading: false,
-                        devices: JSON.parse(data.message as string) as Device[]
+                        devices: parsedMessage as Device[]
                     });
                     break;
 
                 case "bridge/groups":
                     store.setState({
                         isLoading: false,
-                        groups: JSON.parse(data.message as string) as Group[]
+                        groups: parsedMessage as Group[]
                     })
                     break;
                 case "bridge/response/networkmap":
-                    response = JSON.parse(data.message as string);
+                    response = parsedMessage as ResponseWithStatus;
                     if (response.status == "ok") {
                         store.setState({
                             isLoading: false,
@@ -105,7 +140,7 @@ class Api {
                     break;
 
                 case "bridge/response/device/bind":
-                    response = JSON.parse(data.message as string);
+                    response = parsedMessage as ResponseWithStatus;
                     if (response.status == "ok") {
                         new Notyf().success("ok");
                     } else {
@@ -121,11 +156,8 @@ class Api {
                     break;
 
 
-
-
-
                 case "bridge/logging":
-                    showNotity(JSON.parse(data.message as string));
+                    showNotity(parsedPayload as LogMessage);
                     break;
                 default:
                     if (data.topic.startsWith("bridge/request/")) {

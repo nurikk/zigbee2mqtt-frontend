@@ -6,6 +6,7 @@ import { Endpoint } from "../../types";
 interface EndpointPickerProps {
     onSelect(endpoint: Endpoint): void;
     value: Endpoint;
+    values: Endpoint[];
 }
 
 export default class EndpointPicker extends Component<EndpointPickerProps, {}> {
@@ -16,9 +17,12 @@ export default class EndpointPicker extends Component<EndpointPickerProps, {}> {
     }
     render(): ComponentChild {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const { onSelect, value, ...rest } = this.props;
-
-        return <input placeholder="ex: 1 or btn1" type="text" value={value} class="form-control" {...rest} onInput={this.onSelect} />;
+        const { onSelect, value, values, ...rest } = this.props;
+        const options = values.map(ep => <option value={ep} selected={ep===value}>{ep}</option>)
+        options.unshift(<option hidden>Select endpoint</option>);
+        return <select value={value} class="form-control" {...rest} onInput={this.onSelect} >
+            {options}
+        </select>;
 
     }
 }

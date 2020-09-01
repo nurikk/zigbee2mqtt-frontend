@@ -34,7 +34,6 @@ export interface GlobalState {
     isError: boolean | string;
     devices: Device[];
     deviceStates: Dictionary<DeviceStats>;
-    bindRules: BindParams[];
     // time: TimeInfo | undefined;
     logs: string[];
     // logLevel: LogLevel;
@@ -81,7 +80,6 @@ const initialState: GlobalState = {
     isError: false,
     devices: [],
     deviceStates: {},
-    bindRules: [{} as BindParams],
     // time: undefined,
     logs: [],
     // logLevel: LogLevel.LOG_DEBUG,
