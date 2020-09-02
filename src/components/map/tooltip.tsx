@@ -12,12 +12,8 @@ interface TooltipProps {
 
 const getTooltip = (device: NodeI): string[] => {
     const strings: string[] = [];
-    if (device.manufacturerName) {
-        if (device.modelID) {
-            strings.push(`${device.manufacturerName} ${device.modelID}`);
-        } else {
-            strings.push(device.manufacturerName);
-        }
+    if (device.definition) {
+        strings.push(`${device.definition.vendor} ${device.definition.model}`);
     }
     if (device.ieeeAddr) {
         strings.push(device.ieeeAddr);

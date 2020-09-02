@@ -71,7 +71,7 @@ class Node extends Component<NodeProps, NodeState> {
 
         // eslint-disable-next-line react/no-did-mount-set-state
         this.setState({
-            imgUrl: genDeviceImageUrl(node.modelID)
+            imgUrl: genDeviceImageUrl(node.definition?.model)
         });
     }
 
