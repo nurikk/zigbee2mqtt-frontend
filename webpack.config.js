@@ -17,7 +17,10 @@ module.exports = (env, args) => {
 	}
 
 	const plugins = [
-		new MiniCssExtractPlugin()
+		new MiniCssExtractPlugin({
+			filename: '[name].[contenthash].css',
+			chunkFilename: '[id].[contenthash].css',
+		})
 	];
 	const basePath = 'src/templates';
 	glob.sync(`${basePath}/**/*.html`).forEach((item) => {
@@ -40,7 +43,7 @@ module.exports = (env, args) => {
 	return {
 		entry: './src/index.tsx',
 		output: {
-			filename: '[name].js',
+			filename: '[name].[contenthash].js',
 			path: path.resolve('./dist'),
 		},
 		target: 'web',
