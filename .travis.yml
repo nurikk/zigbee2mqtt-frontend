@@ -6,10 +6,6 @@ cache:
   - node_modules
 script:
   - npm run build
-after_deploy:
-  - VERSION=$(node -p "require('./package.json').version")
-  - 'curl -XPOST -H "Authorization: token $GITHUB_TOKEN" -H "Accept: application/vnd.github.everest-preview+json" -H "Content-Type: application/json" https://api.github.com/repos/koenkk/zigbee2mqtt/dispatches --data "{\"event_type\": \"update_frontend\", \"client_payload\": { \"version\": \"$VERSION\"}}"'
-
 deploy:
   - provider: npm
     skip_cleanup: true
@@ -18,3 +14,6 @@ deploy:
     local_dir: dist
     on:
       tags: true
+after_deploy:
+  - VERSION=$(node -p "require('./package.json').version")
+  - 'curl -XPOST -H "Authorization: token $GITHUB_TOKEN" -H "Accept: application/vnd.github.everest-preview+json" -H "Content-Type: application/json" https://api.github.com/repos/koenkk/zigbee2mqtt/dispatches --data "{\"event_type\": \"update_frontend\", \"client_payload\": { \"version\": \"$VERSION\"}}"'
