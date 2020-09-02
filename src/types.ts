@@ -186,3 +186,9 @@ export interface TouchLinkScanApiResponse {
     devices: TouchLinkDevice[];
     currentChannel: number;
 }
+
+
+// declare module "generic-zigbee-device.png" {
+//     const content: string;
+//     export default content;
+//   }

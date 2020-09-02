@@ -1,6 +1,4 @@
 import { Component, ComponentChild, createRef, h, RefObject } from "preact";
-
-
 import * as d3 from "d3";
 import { LinkI, NodeI } from "./types";
 import cx from "classnames";
@@ -9,6 +7,7 @@ import * as style from "./map.css";
 import { MouseEventsResponderNode } from ".";
 import { Device } from "../../types";
 import { genDeviceImageUrl } from "../../utils";
+import genericDevice from "./../../images/generic-zigbee-device.png";
 
 
 const calcStarPoints = (
@@ -95,7 +94,7 @@ class Node extends Component<NodeProps, NodeState> {
 
     onImageError = (): void => {
         this.setState({
-            imgUrl: "https://raw.githubusercontent.com/slsys/Gateway/master/devices/png/generic-zigbee-device.png"
+            imgUrl: genericDevice
         });
     };
 

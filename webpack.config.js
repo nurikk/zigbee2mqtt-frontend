@@ -68,7 +68,16 @@ module.exports = (env, args) => {
 			extensions: ['.ts', '.tsx', '.js', '.html', '.txt']
 		},
 		module: {
-			rules: [{
+			rules: [
+				{
+					test: /\.(png|jpe?g|gif)$/i,
+					use: [
+					  {
+						loader: 'file-loader',
+					  },
+					],
+				},
+				{
 					test: /\.tsx?$/,
 					use: [{
 						loader: 'ts-loader'

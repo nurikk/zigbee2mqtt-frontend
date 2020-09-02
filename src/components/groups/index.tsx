@@ -47,8 +47,8 @@ class DeviceGroupRow extends Component<DeviceGroupRowProps, {}> {
 
         return <tr>
             <th scope="row">{rowNumber + 1}</th>
-            <td className={style["device-pic"]}>{device && <SafeImg class={cx(style["device-image"])}
-                src={genDeviceImageUrl(device.definition?.model)} />}
+            <td className={style["device-pic"]}>{<SafeImg class={cx(style["device-image"])}
+                src={genDeviceImageUrl(device?.definition?.model)} />}
             </td>
             <td>{device && device.friendly_name}</td>
             <td>{groupAddress.ieee_address}</td>

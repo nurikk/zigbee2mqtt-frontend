@@ -1,11 +1,12 @@
 import { Component, ComponentChild, h } from "preact";
+import genericDevice from "../../images/generic-zigbee-device.png";
 
 interface SafeImgState {
     isOk: boolean;
 }
 
 interface SafeImgProps {
-    [k: string]: any;
+    [k: string]: unknown;
 }
 
 export default class SafeImg extends Component<SafeImgProps, SafeImgState> {
@@ -24,8 +25,8 @@ export default class SafeImg extends Component<SafeImgProps, SafeImgState> {
     };
 
     render(): ComponentChild {
-        const { children, ...rest } = this.props;
+        const { ...rest } = this.props;
         const { isOk } = this.state;
-        return isOk ? <img {...rest} onError={this.onError} /> : children;
+        return isOk ? <img {...rest} onError={this.onError} /> : <img {...rest} src={genericDevice} />;
     }
 }
