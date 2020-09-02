@@ -27,7 +27,7 @@ export function chunkArray<T>(inputArr: T[], chunkSize: number): T[][] {
 
 export const encodeGetParams = (data: Dictionary<string | number>): string => Object.keys(data).map((key) => [key, data[key]].map(encodeURIComponent).join("=")).join("&");
 
-export const sanitizeModelNameForImageUrl = (model=""): string => {
+export const sanitizeModelNameForImageUrl = (model = ""): string => {
     return `${model.replace(/:|\s|\//g, "-")}.jpg`;
 };
 
