@@ -15,7 +15,8 @@
     "start": "webpack-dev-server --config ./webpack.config.js --mode development",
     "start:ws": "node ws.js",
     "clean": "rimraf ./dist",
-    "release": "release-it"
+    "release": "release-it",
+    "postversion": "git push && git push --tags"
   },
   "eslintIgnore": [
     "dist/*"
