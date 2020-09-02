@@ -94,6 +94,7 @@ export interface BridgeConfig {
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface BridgeInfo {
     config: Z2MConfig;
+    permit_join: boolean;
 }
 
 
