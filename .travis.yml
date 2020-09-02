@@ -10,6 +10,7 @@ deploy:
   -
     provider: script
     script: npm run release -- minor --ci
+    skip_cleanup: true
     on:
       branch: master
   # - provider: npm
