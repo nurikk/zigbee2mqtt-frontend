@@ -33,7 +33,8 @@ const readonlyFields = [
     "last_seen",
     "linkquality",
     "voltage",
-    "elapsed"
+    "elapsed",
+    "contact"
 ];
 
 const defaultInitialStates = [
