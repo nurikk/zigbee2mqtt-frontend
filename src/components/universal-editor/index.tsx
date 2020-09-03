@@ -62,11 +62,9 @@ const UniversalEditor: FunctionalComponent<UniversalEditorProps> = forwardRef((p
                 return (
                     <div class="row">
                         <div class="col-3">
-                            <div class="form-check form-switch">
-                                <Button<string> class="btn btn-primary" item={toggleCommand} title="Toggle" value="Toggle" onClick={onChange}>
-                                    <i className="fa fa-exchange-alt" />
-                                </Button>
-                            </div>
+                            <Button<string> class="btn btn-primary" item={toggleCommand} title="Toggle" value="Toggle" onClick={onChange}>
+                                <i className="fa fa-exchange-alt" />
+                            </Button>
                         </div>
                         <div class="col-9">
                             <input className="form-control" ref={ref as RefObject<HTMLInputElement>} {...rest} type="text" value={value as string} onBlur={changeHandler} />
