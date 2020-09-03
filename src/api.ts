@@ -154,5 +154,5 @@ class Api {
 
     }
 }
-const api = new Api(`ws://192.168.1.200:8080/api`);
+const api = new Api(`ws://${window.location.host}/api`);
 export default api;
