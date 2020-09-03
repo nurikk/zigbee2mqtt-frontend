@@ -16,7 +16,6 @@ export interface DeviceStats {
     elapsed?: number;
     linkquality: number;
     update?: OTAState;
-    update_available?: boolean;
     [k: string]: string | number | boolean | OTAState;
 }
 

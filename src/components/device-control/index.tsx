@@ -43,7 +43,7 @@ export class DeviceControlGroup extends Component<DeviceControlGroupProps & Acti
                     <div class="dropdown-menu" aria-labelledby="btnGroupDrop0">
                         <Button<string> class="dropdown-item" onClick={configureDevice} item={device.friendly_name}>Reconfigure</Button>
                         <Button<string> class="dropdown-item" onClick={checkOTA} item={device.friendly_name}>Check OTA</Button>
-                        {state?.update_available ? <Button<string> promt class="dropdown-item" onClick={updateOTA} item={device.friendly_name}>Update OTA</Button> : null}
+                        {state?.update?.state === "available" ? <Button<string> promt class="dropdown-item" onClick={updateOTA} item={device.friendly_name}>Update OTA</Button> : null}
                     </div>
                 </div>
                 <div class="btn-group btn-group-sm" role="group">

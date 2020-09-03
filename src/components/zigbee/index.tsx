@@ -143,7 +143,7 @@ export class ZigbeeTable extends Component<Actions & GlobalState, ZigbeeTableSta
                     </thead>
                     <tbody>
                         {sortedDevices.map((device: Device, index) =>
-                            <tr className={cx({ 'table-danger': !device.supported })}>
+                            <tr title={deviceStates[device.friendly_name]?.update?.state == "available" ? 'Avaliable OTA update' : device.definition?.description} className={cx({ 'table-danger': !device.supported, 'table-info': deviceStates[device.friendly_name]?.update?.state == "available" })}>
                                 <td className="font-weight-bold">{index + 1}</td>
                                 <td className={style["device-pic"]}><SafeImg class={cx(style["device-image"])}
                                     src={genDeviceImageUrl(device.definition?.model)} />
