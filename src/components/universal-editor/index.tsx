@@ -48,10 +48,10 @@ const UniversalEditor: FunctionalComponent<UniversalEditorProps> = forwardRef((p
             );
         case "number":
             return (<div class="row">
-                <div class="col-10">
+                <div class="col-9">
                     <input type="range" class="form-range align-middle" value={value} onChange={changeHandler} {...rest} />
                 </div>
-                <div class="col-2">
+                <div class="col-3">
                     <input className="form-control col-2" step="any" ref={ref as RefObject<HTMLInputElement>} {...rest} type="number" value={value} onBlur={changeHandler} />
                 </div>
 
@@ -61,14 +61,14 @@ const UniversalEditor: FunctionalComponent<UniversalEditorProps> = forwardRef((p
             if (isToggleParameter) {
                 return (
                     <div class="row">
-                        <div class="col-2">
+                        <div class="col-3">
                             <div class="form-check form-switch">
                                 <Button<string> class="btn btn-primary" item={toggleCommand} title="Toggle" value="Toggle" onClick={onChange}>
                                     <i className="fa fa-exchange-alt" />
                                 </Button>
                             </div>
                         </div>
-                        <div class="col-10">
+                        <div class="col-9">
                             <input className="form-control" ref={ref as RefObject<HTMLInputElement>} {...rest} type="text" value={value as string} onBlur={changeHandler} />
                         </div>
                     </div>
