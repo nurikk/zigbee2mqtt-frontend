@@ -22,11 +22,22 @@ const readonlyFields = [
     "battery",
     "last_seen",
     "linkquality",
-    "voltage"
+    "voltage",
+    "elapsed"
 ];
 
+const defaultInitialStates = [
+    'state', 'brightness', 'color', 'color_temp'
+];//.concat(readonlyFields);
 
 class States extends Component<StatesProps & PropsFromStore & Actions, {}> {
+    componentDidMount(): void {
+        this.loadDefaultStates();
+    }
+    loadDefaultStates(): void {
+        const { dev, getStateValue } = this.props;
+        getStateValue(dev, defaultInitialStates);
+    }
     setStateValue = (name: string, value: unknown): void => {
         const { setStateValue, dev, devices } = this.props;
         const device = devices.find(d => d.ieee_address == dev);
@@ -56,8 +67,7 @@ class States extends Component<StatesProps & PropsFromStore & Actions, {}> {
                         <th scope="row">{param[0]}</th>
                         <td class={style["value-col"]}>
                             <UniversalEditor
-                                readonly={readonlyFields.includes(param[0])}
-                                className="form-control"
+                                disabled={readonlyFields.includes(param[0])}
                                 value={param[1]}
                                 onChange={(value): void => this.setStateValue(param[0], value)}
                             />

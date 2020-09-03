@@ -16,6 +16,7 @@ export interface Actions {
     getDeviceBinds(dev: string): Promise<void>;
     bindReqest(isBind: boolean, from: string, to: string, clusters: Cluster[]): Promise<void>;
     setStateValue(dev: string, name: string, value: unknown): Promise<void>;
+    getStateValue(dev: string, name: string | string[]): Promise<void>;
     setPermitJoin(permit: boolean): Promise<void>;
     renameDevice(old: string, newName: string): Promise<void>;
     removeDevice(dev: string, force: boolean): Promise<void>;
@@ -53,6 +54,18 @@ const actions = (store: Store<GlobalState>): object => ({
 
     setStateValue(state, dev: string, name: string, value: unknown): Promise<void> {
         api.send(`${dev}/set`, { [name]: value });
+        return Promise.resolve();
+    },
+    getStateValue(state, dev: string, name: string | string[]): Promise<void> {
+        const payload = {};
+        if (typeof name === "string") {
+            payload[name] = "";
+        } else if (Array.isArray(name)) {
+            name.forEach(n => {
+                payload[n] = "";
+            });
+        }
+        api.send(`${dev}/get`, payload);
         return Promise.resolve();
     },
 

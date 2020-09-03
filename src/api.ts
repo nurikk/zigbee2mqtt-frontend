@@ -48,11 +48,9 @@ class Api {
     url: string;
     socket: ReconnectingWebSocket;
     constructor(url: string) {
-
         this.url = url;
     }
     send = (topic: string, payload: unknown): void => {
-        console.log(topic, payload);
         this.socket.send(JSON.stringify({ topic, payload }));
     }
 
