@@ -13,6 +13,9 @@ interface LogMessage {
     level: "error" | "info" | "warning";
     message: string;
 }
+const blaclistedMessages: RegExp[] = [
+    /MQTT publish/
+]
 const showNotity = (data: LogMessage): void => {
     // eslint-disable-next-line prefer-const
     let { message, level } = data;
@@ -25,7 +28,10 @@ const showNotity = (data: LogMessage): void => {
             new Notyf().error(message);
             break;
         case "info":
-            new Notyf().success(message);
+            if (blaclistedMessages.every(val => !val.test(message))) {
+                new Notyf().success(message);
+            }
+
             break;
 
 
@@ -148,5 +154,5 @@ class Api {
 
     }
 }
-const api = new Api(`ws://${window.location.host}/api`);
+const api = new Api(`ws://192.168.1.200:8080/api`);
 export default api;
