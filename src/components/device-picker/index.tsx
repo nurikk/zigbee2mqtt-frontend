@@ -29,9 +29,9 @@ export default class DevicePicker extends Component<DevicePickerProps, {}> {
 
         const devicesOptions = devices.filter(noCoordinator).map(device => <option selected={type === "device" && value == device.ieee_address} value={`device${DELIMITER}${device.ieee_address}`}>{getDeviceDisplayName(device)}</option>);
         if (groups.length) {
-            options.push(<optgroup label="Devices">{devicesOptions}</optgroup>);
             const groupOptions = groups.map(group => <option selected={type === "group" && value == group.id} value={`group${DELIMITER}${group.friendly_name}`}>{group.friendly_name}</option>);
             options.push(<optgroup label="Groups">{groupOptions}</optgroup>);
+            options.push(<optgroup label="Devices">{devicesOptions}</optgroup>);
         } else {
             options = options.concat(devicesOptions);
         }
