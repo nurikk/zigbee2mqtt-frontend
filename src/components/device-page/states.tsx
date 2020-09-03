@@ -16,7 +16,17 @@ interface StatesProps {
     dev?: string;
 }
 type DeviceParamTuple = [string, unknown];
-
+const fieldProps = {
+    brightness: {
+        min: 0,
+        max: 255
+    },
+    // eslint-disable-next-line @typescript-eslint/camelcase
+    color_temp: {
+        min: 0,
+        max: 512
+    }
+}
 
 const readonlyFields = [
     "battery",
@@ -28,7 +38,7 @@ const readonlyFields = [
 
 const defaultInitialStates = [
     'state', 'brightness', 'color', 'color_temp'
-];//.concat(readonlyFields);
+];
 
 class States extends Component<StatesProps & PropsFromStore & Actions, {}> {
     componentDidMount(): void {
@@ -70,6 +80,7 @@ class States extends Component<StatesProps & PropsFromStore & Actions, {}> {
                                 disabled={readonlyFields.includes(param[0])}
                                 value={param[1]}
                                 onChange={(value): void => this.setStateValue(param[0], value)}
+                                {...fieldProps[param[0]]}
                             />
                         </td>
                     </tr>
