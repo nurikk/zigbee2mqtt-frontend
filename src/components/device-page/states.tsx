@@ -37,18 +37,7 @@ const readonlyFields = [
     "contact"
 ];
 
-const defaultInitialStates = [
-    'state', 'brightness', 'color', 'color_temp'
-];
-
 class States extends Component<StatesProps & PropsFromStore & Actions, {}> {
-    componentDidMount(): void {
-        this.loadDefaultStates();
-    }
-    loadDefaultStates(): void {
-        const { dev, getStateValue } = this.props;
-        getStateValue(dev, defaultInitialStates);
-    }
     setStateValue = (name: string, value: unknown): void => {
         const { setStateValue, dev, devices } = this.props;
         const device = devices.find(d => d.ieee_address == dev);
