@@ -34,7 +34,9 @@ const readonlyFields = [
     "linkquality",
     "voltage",
     "elapsed",
-    "contact"
+    "contact",
+    "action",
+    "click"
 ];
 
 class States extends Component<StatesProps & PropsFromStore & Actions, {}> {
