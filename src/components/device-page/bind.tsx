@@ -1,5 +1,5 @@
 import { Component, ComponentChild, h } from "preact";
-import { Device, BindRule, Cluster } from "../../types";
+import { Device, Cluster, Endpoint, Dictionary } from "../../types";
 import { ZigbeeClusters } from "./clusters";
 import BindRow from "./bind-row";
 import actions, { Actions } from "../../actions";
@@ -23,6 +23,47 @@ interface PropsFromStore {
 interface BindProps {
     dev?: string;
 }
+
+export interface NiceBindingRule {
+    isNew?: boolean;
+    source: {
+        ieee_address: string;
+        endpoint: Endpoint;
+    };
+    target: {
+        id?: number;
+        endpoint?: Endpoint;
+        ieee_address?: string;
+        type: "endpoint" | "group";
+    };
+
+    clusters: Cluster[];
+}
+const convertBidningsIntoNiceStructure = (device: Device, coordinator: Device): NiceBindingRule[] => {
+    const bindings: Dictionary<NiceBindingRule> = {};
+    Object.entries(device.endpoints).forEach(([endpoint, description]) => {
+        description.bindings
+            .filter(b => b.target.ieee_address !== coordinator.ieee_address)
+            .forEach(b => {
+                const targetId = b.target.id ?? b.target.ieee_address;
+                if (bindings[targetId]) {
+                    bindings[targetId].clusters.push(b.cluster);
+                } else {
+                    bindings[targetId] = {
+                        source: {
+                            // eslint-disable-next-line @typescript-eslint/camelcase
+                            ieee_address: device.ieee_address,
+                            endpoint
+                        },
+                        target: b.target,
+                        clusters: [b.cluster]
+                    }
+                }
+            });
+    });
+    return Object.values(bindings);
+}
+
 export class Bind extends Component<BindProps & PropsFromStore & Actions, {}> {
 
 
@@ -43,8 +84,17 @@ export class Bind extends Component<BindProps & PropsFromStore & Actions, {}> {
         if (!device) {
             return "Unknown device";
         }
-        const nonCoordinatorBindings = device.bindings.filter(b => b.target.ieee_address !== coordinator.ieee_address);
-        nonCoordinatorBindings.push({isNew: true, target: {}, source: {}, clusters: [] } as BindRule);
+        // const nonCoordinatorBindings = Object.entries(device.endpoints).map(([endpoint, description]) => {
+        //     description.bindings = description.bindings.filter(b => b.target.ieee_address !== coordinator.ieee_address);
+        //     return [endpoint, description];
+        // }).reduce((prev, [endpoint, description]) => {
+        //     prev[endpoint as string] = description;
+        //     return prev;
+        // }, {});
+
+        
+        const niceBindingRules = convertBidningsIntoNiceStructure(device, coordinator);
+        niceBindingRules.push({isNew: true, target: {}, source: {}, clusters: [] } as NiceBindingRule);
         return (
             <table class="table table-striped table-borderless">
                 <thead>
@@ -59,7 +109,7 @@ export class Bind extends Component<BindProps & PropsFromStore & Actions, {}> {
                 </thead>
                 <tbody>
                     {
-                        nonCoordinatorBindings.map((rule, idx) => <BindRow
+                        niceBindingRules.map((rule, idx) => <BindRow
                             rule={rule}
                             key={idx}
                             groups={groups}

@@ -1,16 +1,17 @@
 import { Component, ComponentChild, h } from "preact";
-import { Device, Endpoint, Cluster, BindRule, ObjectType } from "../../types";
+import { Device, Endpoint, Cluster, ObjectType } from "../../types";
 import DevicePicker from "../device-picker";
 import EndpointPicker from "../endpoint-picker";
 import ClusterPicker from "../cluster-picker";
 import Button from "../button";
 import { Group } from "../../store";
+import { NiceBindingRule } from "./bind";
 
 
 
 
 interface BindRowProps {
-    rule: BindRule;
+    rule: NiceBindingRule;
     idx: number;
     devices: Device[];
     groups: Group[];
@@ -21,7 +22,7 @@ interface BindRowProps {
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface BindRowState {
-    stateRule: BindRule;
+    stateRule: NiceBindingRule;
 }
 
 const getEndpoints = (obj: Device | Group): Endpoint[] => {
@@ -34,7 +35,7 @@ const getEndpoints = (obj: Device | Group): Endpoint[] => {
     }
     return [];
 }
-const getTarget = (rule: BindRule, devices: Device[], groups: Group[]) => {
+const getTarget = (rule: NiceBindingRule, devices: Device[], groups: Group[]) => {
     if (rule.target.type === "group") {
         return groups.find(g => g.id === rule.target.id);
     }

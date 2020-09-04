@@ -122,11 +122,13 @@ export interface DeviceDefinition {
 }
 
 export interface EndpointDescription {
+    bindings: BindRule[];
     clusters: {
         input: Cluster[];
         output: Cluster[];
     };
-};
+}
+
 export interface Device {
     ieee_address: string;
     type: DeviceType;
@@ -146,7 +148,6 @@ export interface Device {
     definition?: DeviceDefinition;
     date_code: string;
     endpoints: Dictionary<EndpointDescription>;
-    bindings: BindRule[];
 }
 
 
@@ -158,11 +159,7 @@ export interface FileDescriptor extends Named {
 
 export type ObjectType = "device" | "group";
 export interface BindRule {
-    isNew: boolean;
-    clusters: Cluster[];
-    source: {
-        endpoint: Endpoint;
-    };
+    cluster: Cluster;
     target: {
         id?: number;
         endpoint?: Endpoint;
@@ -186,9 +183,3 @@ export interface TouchLinkScanApiResponse {
     devices: TouchLinkDevice[];
     currentChannel: number;
 }
-
-
-// declare module "generic-zigbee-device.png" {
-//     const content: string;
-//     export default content;
-//   }
