@@ -123,9 +123,7 @@ class Api {
 
                 case "bridge/response/device/bind":
                     response = data.payload as ResponseWithStatus;
-                    if (response.status == "ok") {
-                        new Notyf().success("ok");
-                    } else {
+                    if (response.status == "error") {
                         new Notyf().error(response.error);
                     }
                     break;
