@@ -5,6 +5,7 @@ import { connect } from "unistore/preact";
 import actions, { Actions } from "../../actions";
 import cx from "classnames";
 import Modal, { ModalHeader, ModalBody, ModalFooter } from "../modal";
+import { GlobalState } from "../../store";
 interface DeviceControlGroupProps {
     device: Device;
     state?: DeviceStats;
@@ -14,7 +15,7 @@ interface DeviceControlGroupState {
     friendlyName: string;
     isHassRename: boolean;
 }
-export class DeviceControlGroup extends Component<DeviceControlGroupProps & Actions, DeviceControlGroupState> {
+export class DeviceControlGroup extends Component<DeviceControlGroupProps & Actions & GlobalState, DeviceControlGroupState> {
     state = {
         isRenameModalOpened: false,
         friendlyName: this.props.device.friendly_name,
@@ -56,10 +57,10 @@ export class DeviceControlGroup extends Component<DeviceControlGroupProps & Acti
     }
 
     render(): ComponentChild {
-        const { device, configureDevice, checkOTA, updateOTA, state } = this.props;
+        const { device, configureDevice, checkOTA, updateOTA, state, bridgeInfo } = this.props;
         const { isRenameModalOpened, friendlyName, isHassRename } = this.state;
         const validDevice = !!device.ieee_address;
-
+        console.log(bridgeInfo);
         return (
             <div className="btn-group btn-group-sm" role="group">
                 <Button<void> className="btn btn-secondary" onClick={this.toggleRenameModal}><i className="fa fa-edit" /></Button>
@@ -80,10 +81,13 @@ export class DeviceControlGroup extends Component<DeviceControlGroupProps & Acti
                             <label for={`fn${device.ieee_address}`} class="form-label">Friendly name</label>
                             <input id={`fn${device.ieee_address}`} onChange={this.onFriendlyNameChange} type="text" class="form-control" value={friendlyName} />
                         </div>
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" checked={isHassRename} type="checkbox" id={`hass${device.ieee_address}`} onChange={this.onHassEntityIdChange} />
-                            <label class="form-check-label" for={`hass${device.ieee_address}`}>Update Home Assistant entity ID</label>
-                        </div>
+                        {bridgeInfo.config.homeassistant ? (
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" checked={isHassRename} type="checkbox" id={`hass${device.ieee_address}`} onChange={this.onHassEntityIdChange} />
+                                <label class="form-check-label" for={`hass${device.ieee_address}`}>Update Home Assistant entity ID</label>
+                            </div>
+                        ) : null}
+
                     </ModalBody>
                     <ModalFooter>
                         <button
@@ -126,7 +130,7 @@ export class DeviceControlGroup extends Component<DeviceControlGroupProps & Acti
     }
 }
 
-const mappedProps = [];
-const ConnectedDeviceControlGroup = connect<DeviceControlGroupProps, {}, {}, Actions>(mappedProps, actions)(DeviceControlGroup);
+const mappedProps = ["bridgeInfo"];
+const ConnectedDeviceControlGroup = connect<DeviceControlGroupProps, {}, GlobalState, Actions>(mappedProps, actions)(DeviceControlGroup);
 export default ConnectedDeviceControlGroup;
 

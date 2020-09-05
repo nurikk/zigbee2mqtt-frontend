@@ -79,6 +79,7 @@ export interface Network {
     extended_pan_id: number[];
 }
 export interface Z2MConfig {
+    homeassistant: boolean;
     [k: string]: unknown;
 }
 export interface BridgeConfig {
