@@ -115,7 +115,13 @@ module.exports = (env, args) => {
 			contentBase: './dist',
 			compress: true,
 			host: '0.0.0.0',
-			port: 3030
+			port: 3030,
+			proxy: {
+				'/api': {
+				   target: 'ws://localhost:8579',
+				   ws: true
+				},
+			}
 		},
 		plugins,
 		stats: 'errors-only',

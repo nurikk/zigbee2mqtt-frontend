@@ -12,7 +12,8 @@
   "scripts": {
     "build": "npm run clean && webpack --config ./webpack.config.js --mode production",
     "dev": "npm run clean && webpack --config ./webpack.config.js --mode development",
-    "start": "webpack-dev-server --config ./webpack.config.js --mode development",
+    "start": "concurrently 'npm run start:ws' 'npm run start:dev'",
+    "start:dev": "webpack-dev-server --config ./webpack.config.js --mode development",
     "start:ws": "node ws.js",
     "clean": "rimraf ./dist",
     "release": "release-it",
@@ -40,6 +41,7 @@
     "@typescript-eslint/parser": "^2.34.0",
     "bootstrap": "^5.0.0-alpha1",
     "classnames": "^2.2.6",
+    "concurrently": "^5.3.0",
     "css-loader": "^3.5.3",
     "d3": "^5.16.0",
     "eslint": "^6.8.0",
