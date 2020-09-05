@@ -29,6 +29,8 @@ import Router, { CustomHistory, route } from 'preact-router';
 // import ConnectedLogViewer from "./components/log-viewer";
 // import ConnectedCodeEditor from "./components/code-editor";
 import ConnectedDevicePage from "./components/device-page";
+import TouchlinkPage from "./components/touchlink-page";
+
 import store from "./store";
 import { Provider } from "unistore/preact";
 import { createHashHistory } from 'history';
@@ -81,6 +83,7 @@ class Main extends Component {
                         <ConnectedDevicePage path="/device/:dev/:tab?" />
                         <ConnectedSettingsPage path="/settings" />
                         <ConnectedGroupsPage path="/groups" />
+                        <TouchlinkPage path="/touchlink" />
                     </Router>
                 </Fragment>
             </Provider>

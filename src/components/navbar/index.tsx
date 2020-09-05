@@ -35,16 +35,11 @@ const NavBar: FunctionalComponent<Actions & GlobalState> = ({ setPermitJoin, tou
                     <li class="nav-item">
                         <Link className="nav-link" activeClassName="active" href="/groups">Groups</Link>
                     </li>
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Actions</a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <Button className="dropdown-item btn btn-link" onClick={touchlinkReset}>Touchlink Reset</Button>
-                            <StartStopJoin className="dropdown-item btn btn-link" setPermitJoin={setPermitJoin} joinEnabled={bridgeInfo.permit_join} />
-                        </div>
+                    <li class="nav-item">
+                        <Link className="nav-link" activeClassName="active" href="/touchlink">Touchlink</Link>
                     </li>
                 </ul>
+                <StartStopJoin className="btn btn-primary" setPermitJoin={setPermitJoin} joinEnabled={bridgeInfo.permit_join} />
             </div>
         </div>
     </nav>
