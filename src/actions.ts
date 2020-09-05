@@ -18,7 +18,7 @@ export interface Actions {
     setStateValue(dev: string, name: string, value: unknown): Promise<void>;
     getStateValue(dev: string, name: string | string[]): Promise<void>;
     setPermitJoin(permit: boolean): Promise<void>;
-    renameDevice(old: string, newName: string): Promise<void>;
+    renameDevice(old: string, newName: string, homeassistantRename: boolean): Promise<void>;
     removeDevice(dev: string, force: boolean): Promise<void>;
     refreshState(dev: string, name: string): Promise<void>;
     configureDevice(name: string): Promise<void>;
@@ -76,9 +76,10 @@ const actions = (store: Store<GlobalState>): object => ({
         return Promise.resolve();
     },
 
-    renameDevice: (state, from: string, to: string): Promise<void> => {
+    renameDevice: (state, from: string, to: string, homeassistantRename: boolean): Promise<void> => {
         store.setState({ isLoading: true });
-        api.send('bridge/request/device/rename', { from, to });
+        // eslint-disable-next-line @typescript-eslint/camelcase
+        api.send('bridge/request/device/rename', { from, to, homeassistant_rename: homeassistantRename });
         return Promise.resolve();
     },
     removeDevice: (state, dev: string, force: boolean): Promise<void> => {
