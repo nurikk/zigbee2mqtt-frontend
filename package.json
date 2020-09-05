@@ -24,6 +24,8 @@
   ],
   "dependencies": {},
   "devDependencies": {
+    "@commitlint/cli": "^9.1.2",
+    "@commitlint/config-conventional": "^9.1.2",
     "@fortawesome/fontawesome-free": "^5.13.0",
     "@teamsupercell/typings-for-css-modules-loader": "^2.2.0",
     "@types/classnames": "^2.2.10",
@@ -51,6 +53,7 @@
     "fork-ts-checker-webpack-plugin": "^4.1.6",
     "history": "^5.0.0",
     "html-webpack-plugin": "^4.3.0",
+    "husky": "^4.2.5",
     "lodash": "^4.17.19",
     "mini-css-extract-plugin": "^0.9.0",
     "notyf": "^3.7.0",
@@ -74,5 +77,10 @@
   "files": [
     "index.js",
     "dist/**/*"
-  ]
+  ],
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  }
 }
