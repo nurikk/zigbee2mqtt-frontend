@@ -235,7 +235,7 @@ export class Map extends Component<GlobalState & Actions, MapState> {
                         isLoading ? (
                             <div class="justify-content-center align-items-center">
                                 <div class="row">
-                                    <div class="col-12">
+                                    <div class="col-6 mx-auto">
                                         Loading, please wait.
                                         <div class="spinner-border" role="status">
                                             <span class="sr-only">Loading...</span>
@@ -243,7 +243,7 @@ export class Map extends Component<GlobalState & Actions, MapState> {
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-12">
+                                    <div class="col-6 mx-auto">
                                         Depending on the size of your network this can take somewhere between 10 seconds and 2 minutes.
                                         </div>
                                 </div>
@@ -252,12 +252,12 @@ export class Map extends Component<GlobalState & Actions, MapState> {
                         ) : (
                                 <div class=" justify-content-center align-items-centerr">
                                     <div class="row">
-                                        <div class="col-12">
+                                        <div class="col-6 mx-auto">
                                             No map data.
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-12">
+                                        <div class="col-6 mx-auto">
                                             <Button onClick={this.onRequestClick} className="btn btn-primary d-block">Requests?</Button>
                                         </div>
                                     </div>
