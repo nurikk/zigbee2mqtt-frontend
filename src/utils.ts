@@ -154,7 +154,6 @@ export const sanitizeGraph = (inGraph: GraphI): GraphI => {
         }
     });
     inGraph.links = inGraph.links.sort((a, b) => a.relationship - b.relationship);
-    debugger
 
     inGraph.links.forEach(link => {
         const src: NodeI = nodes[(link.source as Source).networkAddress];

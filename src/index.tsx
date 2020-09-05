@@ -83,7 +83,6 @@ class Main extends Component {
                         <ConnectedGroupsPage path="/groups" />
                     </Router>
                 </Fragment>
-
             </Provider>
 
         );
