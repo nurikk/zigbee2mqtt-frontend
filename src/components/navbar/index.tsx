@@ -1,5 +1,5 @@
 import { h, FunctionalComponent } from 'preact';
-import { Link, Match } from 'preact-router/match';
+import { Link } from 'preact-router/match';
 import { GlobalState } from '../../store';
 import actions, { Actions } from '../../actions';
 import { connect } from 'unistore/preact';
@@ -14,7 +14,7 @@ const StartStopJoin: FunctionalComponent<StartStopJoinProps> = ({ joinEnabled, s
     return <Button<boolean> item={!joinEnabled} onClick={setPermitJoin} {...rest}>{joinEnabled ? "Disable join" : "Permit join"}</Button>
 }
 
-const NavBar: FunctionalComponent<Actions & GlobalState> = ({ setPermitJoin, touchlinkReset, bridgeInfo }) => (
+const NavBar: FunctionalComponent<Actions & GlobalState> = ({ setPermitJoin, bridgeInfo }) => (
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">z2m admin</a>
