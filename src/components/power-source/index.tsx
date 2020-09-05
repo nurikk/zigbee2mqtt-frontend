@@ -1,17 +1,17 @@
 import { FunctionalComponent, h } from "preact";
-import { PowerSource } from "../../types";
+import { PowerSource as PowerSourceType } from "../../types";
 import style from "./style.css";
 
 
 interface PowerSourceProps {
-    source: PowerSource;
+    source: PowerSourceType;
     battery?: number;
-    className?: string;
 }
 
 
-const PowerSourceComp: FunctionalComponent<PowerSourceProps> = ({ source, battery, className }) => {
+const PowerSource: FunctionalComponent<PowerSourceProps> = ({ source, battery, ...rest }) => {
     let batteryClass = "fa-battery-full";
+
     switch (source) {
         case "Battery":
             if (battery) {
@@ -27,14 +27,14 @@ const PowerSourceComp: FunctionalComponent<PowerSourceProps> = ({ source, batter
                     batteryClass = "fa-battery-empty"
                 }
             }
-            return <i className={`fa ${batteryClass} ${className}`}
-                title={`${source} ${battery ? `, power level ${battery}%` : ""} `} />;
+            return <i className={`fa ${batteryClass}`}
+                title={`${source} ${battery ? `, power level ${battery}%` : ""} `} {...rest} />;
 
         case "Mains (single phase)":
-            return <i className={`fa fa-plug ${style.plug} ${className}`} title={source} />;
+            return <i className={`fa fa-plug ${style.plug}`} title={source} {...rest} />;
         default:
-            return <i className={`fa fa-question ${className}`} title={source} />;
+            return <i className={`fa fa-question`} title={source} {...rest} />;
     }
 };
 
-export default PowerSourceComp;
+export default PowerSource;
