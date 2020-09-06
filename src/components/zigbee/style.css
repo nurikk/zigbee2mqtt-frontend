@@ -1,13 +1,7 @@
 /*@import url("https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");*/
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css");
 
-.zigbee {
-
-}
-
 .zigbee td, .zigbee th {
-    padding-left: 0.1rem;
-    padding-right: 0.1rem;
     vertical-align: middle;
 }
 
@@ -15,9 +9,8 @@
     min-width: 150px
 }
 
-.action-column a {
-    text-decoration: none;
-    border-bottom: 1px dashed black;
+.action-column span {
+    padding: 0;
 }
 
 .action-column i {
@@ -116,12 +109,9 @@
         content: "LQI";
     }
 
- 
     .adaptive td:nth-of-type(9):before {
         content: "LastSeen";
     }
-
-   
 
     .adaptive td:nth-of-type(10):before {
         content: "PS";
@@ -138,10 +128,6 @@
     }
 }
 
-.nwk-addr {
-    /* max-width: 75px; */
-}
-
 .ieee-addr {
     /* max-width: 145px; */
     overflow: hidden;
@@ -149,9 +135,6 @@
     /* direction: rtl; */
 }
 
-.manu-name {
-    /* max-width: 75px; */
-}
 
 .device-pic {
     padding-top: 0 !important;
@@ -163,9 +146,6 @@
 
 .device-image {
     max-height: 2em;
-    /*position: absolute;*/
-    /*right: 0;*/
-    /*top: 0;*/
 }
 
 .device-image {
