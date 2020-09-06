@@ -7,7 +7,7 @@ interface OTAState {
     progress: number;
     remaining: number;
 }
-export interface DeviceStat {
+export interface DeviceState {
     battery: number;
     last_seen?: string;
     elapsed?: number;

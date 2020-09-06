@@ -3,7 +3,7 @@ import { Component, ComponentChild, h } from "preact";
 import orderBy from "lodash/orderBy";
 import DeviceControlGroup from "../device-control";
 import cx from "classnames";
-import { Device, SortDirection, DeviceStat } from "../../types";
+import { Device, SortDirection, DeviceState } from "../../types";
 import { genDeviceDetailsLink, genDeviceImageUrl, lastSeen, toHex, noCoordinator } from "../../utils";
 import SafeImg from "../safe-image";
 import { Notyf } from "notyf";
@@ -35,7 +35,7 @@ interface ZigbeeTableState {
 
 interface ZigbeeTableData {
     device: Device;
-    state: DeviceStat;
+    state: DeviceState;
 }
 
 

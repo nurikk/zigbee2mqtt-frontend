@@ -2,7 +2,7 @@ import createStore from "unistore";
 import devtools from "unistore/devtools";
 
 
-import { Device, TouchLinkScanApiResponse, Dictionary, DeviceStat, BridgeConfig, BridgeInfo } from "./types";
+import { Device, TouchLinkScanApiResponse, Dictionary, DeviceState, BridgeConfig, BridgeInfo } from "./types";
 import { GraphI } from "./components/map/types";
 
 export interface GroupAddress {
@@ -21,7 +21,7 @@ export interface GlobalState {
     isLoading: boolean;
     isError: boolean | string;
     devices: Device[];
-    deviceStates: Dictionary<DeviceStat>;
+    deviceStates: Dictionary<DeviceState>;
     touchlinkResuts: TouchLinkScanApiResponse | null;
     touchlinkScanInProgress: boolean;
     networkGraph: GraphI;
