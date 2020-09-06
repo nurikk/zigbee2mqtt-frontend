@@ -4,39 +4,47 @@ import actions, { Actions } from "../../actions";
 import { GlobalState } from "../../store";
 import DeviceInfo from "./info";
 import Bind from "./bind";
-import Router from "preact-router";
+import cx from "classnames";
 import { Link } from "preact-router/match";
 import Redirect from "../Redirect";
 import States from "./states";
 
 interface DevicePageProps {
     dev?: string;
-    tab?: string;
+    tab?: TabName;
 
 }
-
+type TabName = "info" | "bind" | "state";
 // eslint-disable-next-line react/prefer-stateless-function
 export class DevicePage extends Component<DevicePageProps & Actions & GlobalState, {}> {
+    renderContent(): ComponentChild {
+        const { tab, dev } = this.props;
+        switch (tab) {
+            case "info":
+                return <DeviceInfo dev={dev} />;
+            case "bind":
+                return <Bind dev={dev} />;
+            case "state":
+                return <States dev={dev} />;
+            default:
+                return <Redirect to={`/device/${dev}/info`} />;
+        }
 
+    }
     render(): ComponentChild {
 
-        const { dev } = this.props;
+        const { dev, tab } = this.props;
 
         return (<Fragment>
             <div className="tabs">
                 <ul class="nav nav-tabs nav-justified">
-                    <Link className="nav-link" activeClassName="active" href={`/device/${dev}/info`}>About</Link>
-                    <Link className="nav-link" activeClassName="active" href={`/device/${dev}/bind`}>Bind</Link>
-                    <Link className="nav-link" activeClassName="active" href={`/device/${dev}/state`}>State</Link>
+                    <Link className={cx("nav-link", { active: tab === "info" })} href={`/device/${dev}/info`}>About</Link>
+                    <Link className={cx("nav-link", { active: tab === "bind" })} href={`/device/${dev}/bind`}>Bind</Link>
+                    <Link className={cx("nav-link", { active: tab === "state" })} href={`/device/${dev}/state`}>State</Link>
                 </ul>
             </div>
             <div className="tab-content">
-                <Router>
-                    <Redirect to={`/device/${dev}/info`} default />
-                    <DeviceInfo path="/device/:dev/info" />
-                    <Bind path="/device/:dev/bind" />
-                    <States path="/device/:dev/state" />
-                </Router>
+                {this.renderContent()}
             </div>
         </Fragment>);
 

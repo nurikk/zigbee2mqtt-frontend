@@ -126,5 +126,5 @@ export class Bind extends Component<BindProps & PropsFromStore & Actions, {}> {
 }
 
 const mappedProps = ["devices", "groups"];
-const ConnectedBindPage = connect<{}, {}, GlobalState, BindProps & PropsFromStore & Actions>(mappedProps, actions)(Bind);
+const ConnectedBindPage = connect<BindProps, {}, GlobalState, PropsFromStore & Actions>(mappedProps, actions)(Bind);
 export default ConnectedBindPage

@@ -5,7 +5,6 @@ import { genDeviceImageUrl } from "../../utils";
 import DeviceControlGroup from "../device-control";
 import cx from "classnames";
 import style from "./style.css";
-// import { getClusterName } from "./bind";
 import { connect } from "unistore/preact";
 import { GlobalState } from "../../store";
 import PowerSourceComp from "../power-source";
@@ -29,34 +28,6 @@ export class DeviceInfo extends Component<DeviceInfoProps & PropsFromStore, {}> 
         }
         const deviceStatus: DeviceStats = deviceStates[device.friendly_name];
 
-        // const endpoints = Object.entries(device.ep ?? {}).map(([epName, ep]) => {
-        //     // const inClusters = Object.entries(ep.In ?? {}).map(([clusterId]) => {
-        //     //     const cluster = parseInt(clusterId, 10);
-        //     //     return <small class={"d-block text-nowrap text-truncate"}
-        //     //                   title={toHex(cluster, 4)}>{getClusterName(cluster, false)}</small>;
-        //     // });
-        //     // const outClusters = Object.entries(ep.Out ?? {}).map(([clusterId]) => {
-        //     //     const cluster = parseInt(clusterId, 10);
-        //     //     return <small class={"d-block text-nowrap text-truncate"}
-        //     //                   title={toHex(cluster, 4)}>{getClusterName(cluster, false)}</small>;
-        //     // });
-        //     return (<Fragment>
-        //         <dt class="col-5">Endpoint #{epName}</dt>
-        //         <dl class={"col-6"} />
-
-        //         {/* <dd class="col-5">ProfileId</dd>
-        //         <dl class={"col-7"}>{ep.profId}</dl>
-
-        //         <dd class="col-5">DeviceId</dd>
-        //         <dl class={"col-7"}>{ep.devId}</dl> */}
-
-        //         <dd class={"col-5 text-nowrap"}>Input clusters</dd>
-        //         <dl class="col-7">{inClusters.length ? inClusters : <b>None</b>}</dl>
-        //         <dd class={"col-5 text-nowrap"}>Output clusters</dd>
-        //         <dl class="col-7">{outClusters.length ? outClusters : <b>None</b>}</dl>
-
-        //     </Fragment>);
-        // });
         const displayProps = [
             {
                 key: 'friendly_name',
@@ -132,10 +103,6 @@ export class DeviceInfo extends Component<DeviceInfoProps & PropsFromStore, {}> 
                         }
 
 
-                        {/* <dt class="col-5">Routes</dt>
-                        <dd class="col-7">{device?.Rtg?.map((route) => <a className={"d-block"}
-                                                                          href={genDeviceDetailsLink(route)}>{route}</a>)}</dd> */}
-                        {/* {endpoints} */}
 
                         {
                             deviceStatus?.update?.state === "updating" ? (
@@ -164,5 +131,5 @@ export class DeviceInfo extends Component<DeviceInfoProps & PropsFromStore, {}> 
 
 const mappedProps = ["devices", "deviceStates", "forceRender"];
 
-const ConnectedDeviceInfoPage = connect<{}, {}, GlobalState, DeviceInfoProps & PropsFromStore>(mappedProps)(DeviceInfo);
+const ConnectedDeviceInfoPage = connect<DeviceInfoProps, {}, GlobalState, PropsFromStore>(mappedProps)(DeviceInfo);
 export default ConnectedDeviceInfoPage;
