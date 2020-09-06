@@ -1,3 +1,13 @@
+## [0.1.47](https://github.com/nurikk/z2m-frontend/compare/0.1.46...0.1.47) (2020-09-06)
+
+
+### Bug Fixes
+
+* **device page:** add active class to tabs ([c32a087](https://github.com/nurikk/z2m-frontend/commit/c32a08735d7fc908fa081e28acc0bae0fb01c957))
+* **zigbee:** fix vertial allign ([77db8b6](https://github.com/nurikk/z2m-frontend/commit/77db8b6e7936e6cb6c1a28a6c7d649c933625e14))
+
+
+
 ## [0.1.46](https://github.com/nurikk/z2m-frontend/compare/v0.1.45...v0.1.46) (2020-09-06)
 
 
