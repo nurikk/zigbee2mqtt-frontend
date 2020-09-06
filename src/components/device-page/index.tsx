@@ -1,4 +1,4 @@
-import { Component, ComponentChild, h } from "preact";
+import { Component, ComponentChild, h, Fragment } from "preact";
 import { connect } from "unistore/preact";
 import actions, { Actions } from "../../actions";
 import { GlobalState } from "../../store";
@@ -22,7 +22,7 @@ export class DevicePage extends Component<DevicePageProps & Actions & GlobalStat
 
         const { dev } = this.props;
 
-        return (<div class={"position-relative"}>
+        return (<Fragment>
             <div className="tabs">
                 <ul class="nav nav-tabs nav-justified">
                     <Link className="nav-link" activeClassName="active" href={`/device/${dev}/info`}>About</Link>
@@ -38,7 +38,7 @@ export class DevicePage extends Component<DevicePageProps & Actions & GlobalStat
                     <States path="/device/:dev/state" />
                 </Router>
             </div>
-        </div>);
+        </Fragment>);
 
     }
 }
