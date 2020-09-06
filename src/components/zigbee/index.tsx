@@ -136,72 +136,69 @@ export class ZigbeeTable extends Component<Actions & GlobalState, ZigbeeTableSta
         const { onSortChange } = this;
 
         return (
-            <div class="table-responsive">
-                <table className={`table table-striped table-borderless ${style.adaptive}`}>
-                    <thead>
-                        <tr className="text-nowrap">
-                            <th>#</th>
-                            <th>Pic</th>
-                            <ActionTH<SortColumns> className={cx(style["action-column"])} column="device.network_address"
-                                currentDirection={sortDirection} current={sortColumn}
-                                onClick={onSortChange}>nwkAddr</ActionTH>
-                            <ActionTH<SortColumns> className={style["action-column"]} column="device.friendly_name"
-                                currentDirection={sortDirection} current={sortColumn}
-                                onClick={onSortChange}>Friendly name</ActionTH>
-                            <ActionTH<SortColumns> className={cx(style["ieee-addr"], style["action-column"])} column="device.ieee_address"
-                                currentDirection={sortDirection} current={sortColumn}
-                                onClick={onSortChange}>IEEE address</ActionTH>
-                            <ActionTH<SortColumns> className={cx(style["action-column"])} column="device.definition.vendor"
-                                currentDirection={sortDirection} current={sortColumn}
-                                onClick={onSortChange} titile="definition.vendor">Manufacturer</ActionTH>
-                            <ActionTH<SortColumns> className={style["action-column"]} column="device.definition.model"
-                                currentDirection={sortDirection} current={sortColumn}
-                                onClick={onSortChange}>Model</ActionTH>
+            <table className={`table table-striped table-borderless ${style.adaptive} ${style.zigbee}`}>
+                <thead>
+                    <tr className="text-nowrap">
+                        <th>#</th>
+                        <th>Pic</th>
+                        <ActionTH<SortColumns> className={cx(style["action-column"])} column="device.network_address"
+                            currentDirection={sortDirection} current={sortColumn}
+                            onClick={onSortChange}>nwkAddr</ActionTH>
+                        <ActionTH<SortColumns> className={style["action-column"]} column="device.friendly_name"
+                            currentDirection={sortDirection} current={sortColumn}
+                            onClick={onSortChange}>Friendly name</ActionTH>
+                        <ActionTH<SortColumns> className={cx(style["ieee-addr"], style["action-column"])} column="device.ieee_address"
+                            currentDirection={sortDirection} current={sortColumn}
+                            onClick={onSortChange}>IEEE address</ActionTH>
+                        <ActionTH<SortColumns> className={cx(style["action-column"])} column="device.definition.vendor"
+                            currentDirection={sortDirection} current={sortColumn}
+                            onClick={onSortChange} titile="definition.vendor">Manufacturer</ActionTH>
+                        <ActionTH<SortColumns> className={style["action-column"]} column="device.definition.model"
+                            currentDirection={sortDirection} current={sortColumn}
+                            onClick={onSortChange}>Model</ActionTH>
 
-                            <ActionTH<SortColumns> className={style["action-column"]} column="state.linkquality"
-                                currentDirection={sortDirection} current={sortColumn}
-                                onClick={onSortChange}>LQI</ActionTH>
+                        <ActionTH<SortColumns> className={style["action-column"]} column="state.linkquality"
+                            currentDirection={sortDirection} current={sortColumn}
+                            onClick={onSortChange}>LQI</ActionTH>
 
-                            <ActionTH<SortColumns> className={style["action-column"]} column="state.last_seen"
-                                currentDirection={sortDirection} current={sortColumn}
-                                onClick={onSortChange}>Last seen</ActionTH>
+                        <ActionTH<SortColumns> className={style["action-column"]} column="state.last_seen"
+                            currentDirection={sortDirection} current={sortColumn}
+                            onClick={onSortChange}>Last seen</ActionTH>
 
-                            <ActionTH<SortColumns> className={style["action-column"]} column="state.battery"
-                                currentDirection={sortDirection} current={sortColumn}
-                                onClick={onSortChange}>Power</ActionTH>
+                        <ActionTH<SortColumns> className={style["action-column"]} column="state.battery"
+                            currentDirection={sortDirection} current={sortColumn}
+                            onClick={onSortChange}>Power</ActionTH>
 
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {sortedTableData.map(({ device, state }, id) =>
-                            <tr title={state?.update?.state == "available" ? 'Avaliable OTA update' : device.definition?.description} className={cx({ 'table-danger': !device.supported, 'table-info': state?.update?.state == "available" })}>
-                                <td className="font-weight-bold">{id + 1}</td>
-                                <td className={style["device-pic"]}><SafeImg class={cx(style["device-image"])}
-                                    src={genDeviceImageUrl(device.definition?.model)} />
-                                </td>
-                                <td><a
-                                    href={genDeviceDetailsLink(device.ieee_address)}>{toHex(device.network_address)}</a>
-                                </td>
-                                <td>{device.friendly_name}</td>
-                                <td className={style["ieee-addr"]}>{device.ieee_address}</td>
-                                <td title={device.definition?.vendor ?? 'Unsupported'}
-                                    className={cx("text-truncate", "text-nowrap", "position-relative")}>{device.definition?.vendor ?? 'Unsupported'}</td>
-                                <td>{device.definition?.model ?? 'Unsupported'}</td>
-                                <td>{state?.linkquality ?? "N/A"}</td>
-                                <td>{lastSeen(state?.last_seen, state?.elapsed)}</td>
-                                <td className="text-left">
-                                    <PowerSource source={device.power_source} battery={state?.battery} />
-                                </td>
-                                <td>
-                                    <DeviceControlGroup device={device} state={state} />
-                                </td>
-                            </tr>)}
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {sortedTableData.map(({ device, state }, id) =>
+                        <tr title={state?.update?.state == "available" ? 'Avaliable OTA update' : device.definition?.description} className={cx({ 'table-danger': !device.supported, 'table-info': state?.update?.state == "available" })}>
+                            <td className="font-weight-bold">{id + 1}</td>
+                            <td className={style["device-pic"]}><SafeImg class={cx(style["device-image"])}
+                                src={genDeviceImageUrl(device.definition?.model)} />
+                            </td>
+                            <td><a
+                                href={genDeviceDetailsLink(device.ieee_address)}>{toHex(device.network_address)}</a>
+                            </td>
+                            <td>{device.friendly_name}</td>
+                            <td className={style["ieee-addr"]}>{device.ieee_address}</td>
+                            <td title={device.definition?.vendor ?? 'Unsupported'}
+                                className={cx("text-truncate", "text-nowrap", "position-relative")}>{device.definition?.vendor ?? 'Unsupported'}</td>
+                            <td>{device.definition?.model ?? 'Unsupported'}</td>
+                            <td>{state?.linkquality ?? "N/A"}</td>
+                            <td>{lastSeen(state?.last_seen, state?.elapsed)}</td>
+                            <td className="text-left">
+                                <PowerSource source={device.power_source} battery={state?.battery} />
+                            </td>
+                            <td>
+                                <DeviceControlGroup device={device} state={state} />
+                            </td>
+                        </tr>)}
 
-                    </tbody>
-                </table>
-            </div>
-
+                </tbody>
+            </table>
         );
     }
 }
