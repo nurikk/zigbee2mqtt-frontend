@@ -1,6 +1,6 @@
 import { Component, ComponentChild, h } from "preact";
 import Button from "../button";
-import { Device, DeviceStats } from "../../types";
+import { Device, DeviceStat } from "../../types";
 import { connect } from "unistore/preact";
 import actions, { Actions } from "../../actions";
 import cx from "classnames";
@@ -8,7 +8,7 @@ import Modal, { ModalHeader, ModalBody, ModalFooter } from "../modal";
 import { GlobalState } from "../../store";
 interface DeviceControlGroupProps {
     device: Device;
-    state?: DeviceStats;
+    state?: DeviceStat;
 }
 interface DeviceRenameParams {
     friendlyName: string;

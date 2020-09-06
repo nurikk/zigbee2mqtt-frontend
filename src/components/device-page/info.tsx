@@ -1,5 +1,5 @@
 import { Component, ComponentChild, Fragment, h } from "preact";
-import { Device, DeviceStats } from "../../types";
+import { Device, DeviceStat } from "../../types";
 import SafeImg from "../safe-image";
 import { genDeviceImageUrl } from "../../utils";
 import DeviceControlGroup from "../device-control";
@@ -15,7 +15,7 @@ interface DeviceInfoProps {
 
 interface PropsFromStore {
     devices: Device[];
-    deviceStates: DeviceStats[];
+    deviceStates: DeviceStat[];
 }
 
 // eslint-disable-next-line react/prefer-stateless-function
@@ -26,7 +26,7 @@ export class DeviceInfo extends Component<DeviceInfoProps & PropsFromStore, {}> 
         if (!device) {
             return "Unknown device";
         }
-        const deviceStatus: DeviceStats = deviceStates[device.friendly_name];
+        const deviceStatus: DeviceStat = deviceStates[device.friendly_name];
 
         const displayProps = [
             {
