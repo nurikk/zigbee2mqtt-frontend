@@ -1,7 +1,7 @@
 import { Component, ComponentChild, Fragment, h } from "preact";
 import { Device, DeviceState } from "../../types";
 import SafeImg from "../safe-image";
-import { genDeviceImageUrl } from "../../utils";
+import { genDeviceImageUrl, toHex } from "../../utils";
 import DeviceControlGroup from "../device-control";
 import cx from "classnames";
 import style from "./style.css";
@@ -30,10 +30,6 @@ export class DeviceInfo extends Component<DeviceInfoProps & PropsFromStore, {}> 
 
         const displayProps = [
             {
-                key: 'friendly_name',
-                label: 'Friendly name'
-            },
-            {
                 key: 'definition.description',
                 label: 'Description',
                 if: 'supported'
@@ -53,15 +49,18 @@ export class DeviceInfo extends Component<DeviceInfoProps & PropsFromStore, {}> 
             },
             {
                 key: 'network_address',
-                label: 'Network address'
+                label: 'Network address',
+                render: (device: Device): ComponentChild => <dd class="col-7">{toHex(device.network_address)}</dd>,
             },
             {
                 key: 'date_code',
-                label: 'Firmware build date'
+                label: 'Firmware build date',
+                if: 'date_code'
             },
             {
                 key: 'software_build_id',
-                label: 'Firmware version'
+                label: 'Firmware version',
+                if: 'software_build_id'
             },
 
             {
@@ -85,14 +84,14 @@ export class DeviceInfo extends Component<DeviceInfoProps & PropsFromStore, {}> 
             }
         ];
         return (
-            <div class="card mb-3">
+            <div class="card">
                 <SafeImg class={`card-img-top ${style["device-pic"]}`} src={genDeviceImageUrl(device.definition?.model)} />
                 <div class="card-body">
                     <h5 class="card-title">{device.type}</h5>
 
                     <dl class="row">
                         {
-                            displayProps.filter(prop => get(device, prop.if, true)).map(prop => (
+                            displayProps.filter(prop => get(device, prop.if, false)).map(prop => (
                                 <Fragment>
                                     <dt class="col-5">{prop.label}</dt>
                                     {prop.render ?

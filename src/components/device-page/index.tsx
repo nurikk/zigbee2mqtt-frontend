@@ -33,20 +33,34 @@ export class DevicePage extends Component<DevicePageProps & Actions & GlobalStat
     }
     render(): ComponentChild {
 
-        const { dev, tab } = this.props;
+        const { dev, tab, devices } = this.props;
+        const device = devices.find(d => d.ieee_address == dev);
+        if (!device) {
+            return "Unknown device";
+        }
 
-        return (<Fragment>
-            <div className="tabs">
-                <ul class="nav nav-tabs nav-justified">
-                    <Link className={cx("nav-link", { active: tab === "info" })} href={`/device/${dev}/info`}>About</Link>
-                    <Link className={cx("nav-link", { active: tab === "bind" })} href={`/device/${dev}/bind`}>Bind</Link>
-                    <Link className={cx("nav-link", { active: tab === "state" })} href={`/device/${dev}/state`}>State</Link>
+        return (<div class="card h-100">
+            <div class="card-header">
+                <ul class="nav nav-tabs card-header-tabs">
+                    <li class="nav-item">
+                        <Link className={cx("nav-link", { active: tab === "info" })} href={`/device/${dev}/info`}>About</Link>
+                    </li>
+                    <li class="nav-item">
+                        <Link className={cx("nav-link", { active: tab === "bind" })} href={`/device/${dev}/bind`}>Bind</Link>
+                    </li>
+                    <li class="nav-item">
+                        <Link className={cx("nav-link", { active: tab === "state" })} href={`/device/${dev}/state`}>State</Link>
+                    </li>
                 </ul>
+                {/* <div class="d-inline float-right">{dev}</div> */}
+
             </div>
-            <div className="tab-content">
+
+            <div className="card-body">
+            <h5 class="card-title">{device.friendly_name}</h5>
                 {this.renderContent()}
             </div>
-        </Fragment>);
+        </div>);
 
     }
 }

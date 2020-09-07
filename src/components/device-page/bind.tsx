@@ -84,43 +84,37 @@ export class Bind extends Component<BindProps & PropsFromStore & Actions, {}> {
         if (!device) {
             return "Unknown device";
         }
-        // const nonCoordinatorBindings = Object.entries(device.endpoints).map(([endpoint, description]) => {
-        //     description.bindings = description.bindings.filter(b => b.target.ieee_address !== coordinator.ieee_address);
-        //     return [endpoint, description];
-        // }).reduce((prev, [endpoint, description]) => {
-        //     prev[endpoint as string] = description;
-        //     return prev;
-        // }, {});
 
-        
         const niceBindingRules = convertBidningsIntoNiceStructure(device, coordinator);
-        niceBindingRules.push({isNew: true, target: {}, source: {}, clusters: [] } as NiceBindingRule);
+        niceBindingRules.push({ isNew: true, target: {}, source: {}, clusters: [] } as NiceBindingRule);
         return (
-            <table class="table table-striped table-borderless">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Source EP</th>
-                        <th scope="col">Destination</th>
-                        <th scope="col">Destination EP</th>
-                        <th scope="col">Clusters</th>
-                        <th scope="col">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        niceBindingRules.map((rule, idx) => <BindRow
-                            rule={rule}
-                            key={idx}
-                            groups={groups}
-                            onUnBind={this.onUnBindClick}
-                            onBind={this.onBindClick}
-                            device={device}
-                            idx={idx}
-                            devices={devices} />)
-                    }
-                </tbody>
-            </table>
+            <div class="card">
+                <table class="table table-striped table-borderless">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Source EP</th>
+                            <th scope="col">Destination</th>
+                            <th scope="col">Destination EP</th>
+                            <th scope="col">Clusters</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            niceBindingRules.map((rule, idx) => <BindRow
+                                rule={rule}
+                                key={idx}
+                                groups={groups}
+                                onUnBind={this.onUnBindClick}
+                                onBind={this.onBindClick}
+                                device={device}
+                                idx={idx}
+                                devices={devices} />)
+                        }
+                    </tbody>
+                </table>
+            </div>
         );
     }
 }

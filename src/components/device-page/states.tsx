@@ -56,29 +56,33 @@ class States extends Component<StatesProps & PropsFromStore & Actions, {}> {
 
         const kv = Object.entries(deviceState).filter(kvp => !isObject(kvp[1]))
 
-        return <table class="table table-striped table-borderless">
-            <thead>
-                <tr>
-                    <th scope="col" />
-                    <th scope="col">Value</th>
-                </tr>
-            </thead>
-            <tbody>
-                {kv.map((param: DeviceParamTuple) => (
-                    <tr class={style["props-row"]}>
-                        <th scope="row">{param[0]}</th>
-                        <td class={style["value-col"]}>
-                            <UniversalEditor
-                                disabled={readonlyFields.includes(param[0])}
-                                value={param[1]}
-                                onChange={(value): void => this.setStateValue(param[0], value)}
-                                {...fieldProps[param[0]]}
-                            />
-                        </td>
-                    </tr>
-                ))}
-            </tbody>
-        </table>;
+        return (
+            <div class="card">
+                <table class="table table-borderless">
+                    <thead>
+                        <tr>
+                            <th scope="col" />
+                            <th scope="col">Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {kv.map((param: DeviceParamTuple) => (
+                            <tr class={style["props-row"]}>
+                                <th scope="row">{param[0]}</th>
+                                <td class={style["value-col"]}>
+                                    <UniversalEditor
+                                        disabled={readonlyFields.includes(param[0])}
+                                        value={param[1]}
+                                        onChange={(value): void => this.setStateValue(param[0], value)}
+                                        {...fieldProps[param[0]]}
+                                    />
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+        );
 
     }
 }
