@@ -18,6 +18,8 @@ interface Message {
 const blacklistedMessages: RegExp[] = [
     /MQTT publish/
 ]
+const errorNotyf = new Notyf();
+const successNotyf = new Notyf();
 const showNotity = (data: LogMessage): void => {
     // eslint-disable-next-line prefer-const
     let { message, level } = data;
@@ -27,11 +29,12 @@ const showNotity = (data: LogMessage): void => {
     switch (level) {
         case "error":
         case "warning":
-            new Notyf().error(message);
+
+            errorNotyf.error(message);
             break;
         case "info":
             if (blacklistedMessages.every(val => !val.test(message))) {
-                new Notyf().success(message);
+                successNotyf.success(message);
             }
             break;
 
@@ -40,7 +43,7 @@ const showNotity = (data: LogMessage): void => {
             // debugger
             break;
     }
-}
+};
 
 interface ResponseWithStatus {
     status: "ok" | "error";
@@ -84,8 +87,6 @@ class Api {
             store.setState({ deviceStates, forceRender: Date.now() });
         } else {
             switch (data.topic) {
-                case "bridge/state":
-                    break;
                 case "bridge/config":
                     store.setState({
                         bridgeConfig: data.payload as BridgeConfig
@@ -122,19 +123,9 @@ class Api {
                     }
                     break;
 
-                case "bridge/response/device/bind":
-                    response = data.payload as ResponseWithStatus;
-                    if (response.status == "error") {
-                        new Notyf().error(response.error);
-                    }
-                    break;
-
                 case "bridge/event":
                     break;
 
-                case "bridge/response/device/ota_update/check":
-
-                    break;
 
 
                 case "bridge/logging":
