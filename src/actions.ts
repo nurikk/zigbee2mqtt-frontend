@@ -4,11 +4,16 @@
 import { GlobalState } from "./store";
 import { Store } from "unistore";
 
-import { Dictionary, Cluster } from "./types";
+import { Dictionary, Cluster, TouchLinkDevice } from "./types";
 import api from './api';
 
 
-
+export interface TouchlinkApi {
+    touchlinkReset(): Promise<void>;
+    scanRequest(): Promise<void>;
+    identifyRequest(device: TouchLinkDevice): Promise<void>;
+    resetToFactoryNew(device: TouchLinkDevice): Promise<void>;
+}
 
 export interface Actions {
     setLoading(isLoading: boolean): Promise<void>;
@@ -22,7 +27,7 @@ export interface Actions {
     removeDevice(dev: string, force: boolean, block: boolean): Promise<void>;
     refreshState(dev: string, name: string): Promise<void>;
     configureDevice(name: string): Promise<void>;
-    touchlinkReset(): Promise<void>;
+
     // ZNPReset(): Promise<void>;
     checkOTA(deviceName: string): Promise<void>;
     updateOTA(deviceName): Promise<void>;
