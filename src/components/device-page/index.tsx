@@ -65,6 +65,6 @@ export class DevicePage extends Component<DevicePageProps & Actions & GlobalStat
     }
 }
 
-const mappedProps = ["isLoading", "isError", "devices"];
+const mappedProps = ["devices"];
 const ConnectedDevicePage = connect<DevicePageProps, {}, GlobalState, Actions>(mappedProps, actions)(DevicePage);
 export default ConnectedDevicePage;

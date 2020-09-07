@@ -203,6 +203,6 @@ export class ZigbeeTable extends Component<Actions & GlobalState, ZigbeeTableSta
     }
 }
 
-const mappedProps = ["isLoading", "time", "devices", "forceRender", "deviceStates"];
+const mappedProps = ["devices", "deviceStates", "forceRender"];
 const ConnectedZigbeePage = connect<{}, ZigbeeTableState, GlobalState, Actions>(mappedProps, actions)(ZigbeeTable);
 export default ConnectedZigbeePage;
