@@ -1,7 +1,6 @@
 import ReconnectingWebSocket from "reconnecting-websocket";
 import store, { Group, LogMessage } from "./store";
-import { BridgeConfig, Device, BridgeInfo } from './types';
-
+import { BridgeConfig, Device, BridgeInfo, TouchLinkDevice } from './types';
 import { sanitizeGraph } from "./utils";
 import { Notyf } from "notyf";
 import { GraphI } from "./components/map/types";
@@ -40,7 +39,6 @@ const showNotity = (data: LogMessage): void => {
 
 
         default:
-            // debugger
             break;
     }
 };
@@ -124,6 +122,10 @@ class Api {
                     break;
 
                 case "bridge/event":
+                    break;
+
+                case "bridge/touchlinkScanResults":
+                    store.setState({ touchlinkDevices: data.payload as TouchLinkDevice[] });
                     break;
 
 

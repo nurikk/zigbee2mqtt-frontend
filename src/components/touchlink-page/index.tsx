@@ -25,10 +25,12 @@ export class TouchlinkPage extends Component<TouchlinkApi & GlobalState, {}> {
             <div class="table-responsive">
                 <table class="table">
                     <thead>
-                        <th scope="col">#</th>
-                        <th scope="col">ieee_address</th>
-                        <th scope="col">linkquality</th>
-                        <th scope="col">Actions</th>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">ieee_address</th>
+                            <th scope="col">linkquality</th>
+                            <th scope="col">Actions</th>
+                        </tr>
                     </thead>
                     <tbody>
                         {touchlinkDevices.map((touchlinkDevice, idx) => (
@@ -39,8 +41,8 @@ export class TouchlinkPage extends Component<TouchlinkApi & GlobalState, {}> {
                                 <td>
                                     <div class="btn-group" role="group" aria-label="Basic example">
                                         <Button<TouchLinkDevice> item={touchlinkDevice} title="Identify" className="btn btn-primary" onClick={this.onIdentifyClick}><i
-                                            className="fa fa-exclamation" /></Button>
-                                        <Button<TouchLinkDevice> item={touchlinkDevice} title="Identify" className="btn btn-danger" onClick={this.onResetClick}><i
+                                            className="fa fa-exclamation-triangle" /></Button>
+                                        <Button<TouchLinkDevice> item={touchlinkDevice} title="Factory reset" className="btn btn-danger" onClick={this.onResetClick}><i
                                             className="fa fa-broom" /></Button>
                                     </div>
                                 </td>

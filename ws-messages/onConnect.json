@@ -271,5 +271,23 @@
 {"payload":{"level":"info","message":"MQTT publish: topic 'zigbee2mqtt/opple_3key', payload '{\"battery\":100,\"last_seen\":\"2020-09-06T05:31:56+08:00\",\"linkquality\":92,\"voltage\":3121}'"},"topic":"bridge/logging"},
 {"payload":{"level":"debug","message":"MQTT publish: topic 'zigbee2mqtt/opple_3key', payload '{\"battery\":100,\"last_seen\":\"2020-09-06T05:31:56+08:00\",\"linkquality\":92,\"voltage\":3121}'"},"topic":"bridge/logging"},
 {"payload":{"level":"error","message":"MQTT publish: topic 'zigbee2mqtt/opple_3key', payload '{\"battery\":100,\"last_seen\":\"2020-09-06T05:31:56+08:00\",\"linkquality\":92,\"voltage\":3121}'"},"topic":"bridge/logging"},
-{"payload":{"battery":100,"last_seen":"2020-09-06T05:31:56+08:00","linkquality":92,"voltage":3121},"topic":"opple_3key"}
+{"payload":{"battery":100,"last_seen":"2020-09-06T05:31:56+08:00","linkquality":92,"voltage":3121},"topic":"opple_3key"},
+{"payload": [{
+    "channel": 1,
+    "linkquality": 29,
+    "pan_id": 43,
+    "ieee_address": "0x414141414141"
+}, {
+    "channel": 1,
+    "linkquality": 29,
+    "pan_id": 43,
+    "ieee_address": "0xdeadbeef"
+},
+{
+    "channel": 1,
+    "linkquality": 29,
+    "pan_id": 43,
+    "ieee_address": "0xABADBABE"
+
+}], "topic": "bridge/touchlinkScanResults"}
 ]
