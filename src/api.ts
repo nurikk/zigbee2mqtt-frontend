@@ -5,7 +5,7 @@ import { BridgeConfig, Device, BridgeInfo, TouchLinkDevice } from './types';
 import { sanitizeGraph } from "./utils";
 import { Notyf } from "notyf";
 import { GraphI } from "./components/map/types";
-import throttle from "lodash/throttle"
+import debounce from "lodash/debounce"
 
 
 const MAX_LOGS_RECORDS_IN_BUFFER = 100;
@@ -21,7 +21,7 @@ const blacklistedMessages: RegExp[] = [
 ]
 const errorNotyf = new Notyf();
 const successNotyf = new Notyf();
-const showNotity = throttle((data: LogMessage): void => {
+const showNotity = debounce((data: LogMessage): void => {
     // eslint-disable-next-line prefer-const
     let { message, level } = data;
     if (message.length > 50) {
@@ -43,7 +43,7 @@ const showNotity = throttle((data: LogMessage): void => {
         default:
             break;
     }
-}, 200);
+}, 200, {trailing: true});
 
 interface ResponseWithStatus {
     status: "ok" | "error";
