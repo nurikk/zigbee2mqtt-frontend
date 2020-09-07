@@ -344,6 +344,6 @@ export class Map extends Component<GlobalState & Actions, MapState> {
 }
 
 
-const mappedProps = ["networkGraph", "isLoading", "forceRender"];
+const mappedProps = ["networkGraph", "isLoading"];
 const ConnectedMap = connect<{}, MapState, GlobalState, Actions>(mappedProps, actions)(Map);
 export default ConnectedMap;

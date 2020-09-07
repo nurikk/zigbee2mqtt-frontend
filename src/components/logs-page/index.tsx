@@ -18,6 +18,6 @@ export class LogsPage extends Component<Actions & GlobalState, {}> {
     }
 }
 
-const mappedProps = ["logs", "forceRender"];
+const mappedProps = ["logs"];
 
 export default connect<{}, {}, GlobalState, Actions>(mappedProps, actions)(LogsPage);

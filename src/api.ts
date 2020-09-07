@@ -1,3 +1,4 @@
+/* eslint-disable no-case-declarations */
 import ReconnectingWebSocket from "reconnecting-websocket";
 import store, { Group, LogMessage } from "./store";
 import { BridgeConfig, Device, BridgeInfo, TouchLinkDevice } from './types';
@@ -82,8 +83,9 @@ class Api {
 
         if (data.topic.indexOf("/") == -1) {
             const { deviceStates } = store.getState();
-            deviceStates[data.topic] = { ...deviceStates[data.topic], ...(data.payload as object) };
-            store.setState({ deviceStates, forceRender: Date.now() });
+            const newDeviceStates = {...deviceStates};
+            newDeviceStates[data.topic] = { ...newDeviceStates[data.topic], ...(data.payload as object) };
+            store.setState({ deviceStates: newDeviceStates});
         } else {
             switch (data.topic) {
                 case "bridge/config":
@@ -98,14 +100,12 @@ class Api {
                     break;
                 case "bridge/devices":
                     store.setState({
-                        isLoading: false,
                         devices: data.payload as Device[]
                     });
                     break;
 
                 case "bridge/groups":
                     store.setState({
-                        isLoading: false,
                         groups: data.payload as Group[]
                     })
                     break;
@@ -114,7 +114,6 @@ class Api {
                     if (response.status == "ok") {
                         store.setState({
                             isLoading: false,
-                            forceRender: Date.now(),
                             networkGraph: sanitizeGraph(JSON.parse((response.data as { value: string }).value) as GraphI)
                         });
                     } else {
@@ -126,7 +125,7 @@ class Api {
                     break;
 
                 case "bridge/touchlinkScanResults":
-                    store.setState({ touchlinkDevices: data.payload as TouchLinkDevice[] });
+                    store.setState({ isLoading: false, touchlinkDevices: data.payload as TouchLinkDevice[] });
                     break;
 
 
@@ -134,11 +133,9 @@ class Api {
                 case "bridge/logging":
                     // eslint-disable-next-line no-case-declarations
                     const { logs } = store.getState();
-                    if (logs.length === MAX_LOGS_RECORDS_IN_BUFFER) {
-                        logs.shift();
-                    }
-                    logs.push(data.payload as LogMessage);
-                    store.setState({ logs, forceRender: Date.now() });
+                    const newLogs = [...logs.slice(-MAX_LOGS_RECORDS_IN_BUFFER)];
+                    newLogs.push(data.payload as LogMessage);
+                    store.setState({ logs: newLogs});
                     showNotity(data.payload as LogMessage);
                     break;
                 default:

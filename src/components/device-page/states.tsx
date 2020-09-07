@@ -87,7 +87,7 @@ class States extends Component<StatesProps & PropsFromStore & Actions, {}> {
     }
 }
 
-const mappedProps = ["devices", "forceRender", "deviceStates"];
+const mappedProps = ["devices", "deviceStates"];
 
 const ConnectedDeviceStates = connect<StatesProps, {}, GlobalState, PropsFromStore>(mappedProps, actions)(States);
 export default ConnectedDeviceStates;

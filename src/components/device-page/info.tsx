@@ -128,7 +128,7 @@ export class DeviceInfo extends Component<DeviceInfoProps & PropsFromStore, {}> 
     }
 }
 
-const mappedProps = ["devices", "deviceStates", "forceRender"];
+const mappedProps = ["devices", "deviceStates"];
 
 const ConnectedDeviceInfoPage = connect<DeviceInfoProps, {}, GlobalState, PropsFromStore>(mappedProps)(DeviceInfo);
 export default ConnectedDeviceInfoPage;

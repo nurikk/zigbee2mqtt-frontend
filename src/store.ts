@@ -22,7 +22,6 @@ export interface LogMessage {
 }
 
 export interface GlobalState {
-    forceRender: number;
     isLoading: boolean;
     isError: boolean | string;
     devices: Device[];
@@ -36,7 +35,6 @@ export interface GlobalState {
 }
 
 const initialState: GlobalState = {
-    forceRender: Date.now(),
     isLoading: false,
     isError: false,
     devices: [],
