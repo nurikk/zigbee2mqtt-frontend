@@ -60,7 +60,7 @@ export class TouchlinkPage extends Component<TouchlinkApi & GlobalState, {}> {
     render(): ComponentChild {
         const { touchlinkDevices, touchlinkReset } = this.props;
         return (
-            <div class="container-fluid">
+            <div class="container">
                 <div class="card">
                     <div class="card-header allign-middle">
                         Detected {touchlinkDevices.length} touchlink devices.
