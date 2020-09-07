@@ -1,10 +1,10 @@
 import { h, FunctionalComponent } from 'preact';
-import { Link } from 'preact-router/match';
+import Match from 'preact-router/match';
 import { GlobalState } from '../../store';
 import actions, { Actions } from '../../actions';
 import { connect } from 'unistore/preact';
 import Button from '../button';
-
+import cx from "classnames";
 interface StartStopJoinProps {
     setPermitJoin(permit: boolean): void;
     joinEnabled: boolean;
@@ -13,6 +13,32 @@ interface StartStopJoinProps {
 const StartStopJoin: FunctionalComponent<StartStopJoinProps> = ({ joinEnabled, setPermitJoin, ...rest }) => {
     return <Button<boolean> item={!joinEnabled} onClick={setPermitJoin} {...rest}>{joinEnabled ? "Disable join" : "Permit join"}</Button>
 }
+const urls = [
+    {
+        href: '/',
+        title: 'Home'
+    },
+    {
+        href: '/map',
+        title: 'Map'
+    },
+    {
+        href: '/settings',
+        title: 'Settings'
+    },
+    {
+        href: '/groups',
+        title: 'Groups'
+    },
+    {
+        href: '/touchlink',
+        title: 'Touchlink'
+    },
+    {
+        href: '/logs',
+        title: 'Logs'
+    }
+];
 
 const NavBar: FunctionalComponent<Actions & GlobalState> = ({ setPermitJoin, bridgeInfo }) => (
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
@@ -23,24 +49,17 @@ const NavBar: FunctionalComponent<Actions & GlobalState> = ({ setPermitJoin, bri
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto mb-2 mb-md-0">
-                    <li class="nav-item">
-                        <Link className="nav-link" activeClassName="active" href="/">Home</Link>
-                    </li>
-                    <li class="nav-item">
-                        <Link className="nav-link" activeClassName="active" href="/map">Map</Link>
-                    </li>
-                    <li class="nav-item">
-                        <Link className="nav-link" activeClassName="active" href="/settings">Settings</Link>
-                    </li>
-                    <li class="nav-item">
-                        <Link className="nav-link" activeClassName="active" href="/groups">Groups</Link>
-                    </li>
-                    <li class="nav-item">
-                        <Link className="nav-link" activeClassName="active" href="/touchlink">Touchlink</Link>
-                    </li>
-                    <li class="nav-item">
-                        <Link className="nav-link" activeClassName="active" href="/logs">Logs</Link>
-                    </li>
+                    {
+                        urls.map(url => <li class="nav-item">
+                            <Match path={url.href}>
+                                {({ matches }) => (
+                                    <a className={cx("nav-link", { active: matches })} href={url.href}>{url.title}</a>
+                                )}
+                            </Match>
+                        </li>)
+                    }
+
+
                 </ul>
                 <StartStopJoin className="btn btn-primary" setPermitJoin={setPermitJoin} joinEnabled={bridgeInfo.permit_join} />
             </div>
