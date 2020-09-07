@@ -43,6 +43,7 @@ import ConnectedSettingsPage from "./components/settings";
 import NavBar from "./components/navbar";
 import ConnectedGroupsPage from "./components/groups";
 import ConnectedZigbeePage from "./components/zigbee";
+import LogsPage from "./components/logs-page";
 
 
 const ConnectedDevicePageWrap: FunctionalComponent<{ dev: string }> = ({ dev }) => (
@@ -65,6 +66,7 @@ class Main extends Component {
                         <ConnectedDevicePage path="/device/:dev/:tab?" />
                         <ConnectedSettingsPage path="/settings" />
                         <ConnectedGroupsPage path="/groups" />
+                        <LogsPage path="/logs" />
                         <TouchlinkPage path="/touchlink" />
                     </Router>
                 </Fragment>

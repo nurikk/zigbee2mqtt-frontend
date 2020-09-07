@@ -38,6 +38,9 @@ const NavBar: FunctionalComponent<Actions & GlobalState> = ({ setPermitJoin, bri
                     <li class="nav-item">
                         <Link className="nav-link" activeClassName="active" href="/touchlink">Touchlink</Link>
                     </li>
+                    <li class="nav-item">
+                        <Link className="nav-link" activeClassName="active" href="/logs">Logs</Link>
+                    </li>
                 </ul>
                 <StartStopJoin className="btn btn-primary" setPermitJoin={setPermitJoin} joinEnabled={bridgeInfo.permit_join} />
             </div>

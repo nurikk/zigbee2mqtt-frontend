@@ -1,19 +1,21 @@
 import ReconnectingWebSocket from "reconnecting-websocket";
-import store, { Group } from "./store";
+import store, { Group, LogMessage } from "./store";
 import { BridgeConfig, Device, BridgeInfo } from './types';
 
 import { sanitizeGraph } from "./utils";
 import { Notyf } from "notyf";
 import { GraphI } from "./components/map/types";
+
+
+const MAX_LOGS_RECORDS_IN_BUFFER = 100;
+
+
 interface Message {
     topic: string;
     payload: string | object | object[] | string[];
 }
-interface LogMessage {
-    level: "error" | "info" | "warning";
-    message: string;
-}
-const blaclistedMessages: RegExp[] = [
+
+const blacklistedMessages: RegExp[] = [
     /MQTT publish/
 ]
 const showNotity = (data: LogMessage): void => {
@@ -28,10 +30,9 @@ const showNotity = (data: LogMessage): void => {
             new Notyf().error(message);
             break;
         case "info":
-            if (blaclistedMessages.every(val => !val.test(message))) {
+            if (blacklistedMessages.every(val => !val.test(message))) {
                 new Notyf().success(message);
             }
-
             break;
 
 
@@ -137,6 +138,13 @@ class Api {
 
 
                 case "bridge/logging":
+                    // eslint-disable-next-line no-case-declarations
+                    const { logs } = store.getState();
+                    if (logs.length === MAX_LOGS_RECORDS_IN_BUFFER) {
+                        logs.shift();
+                    }
+                    logs.push(data.payload as LogMessage);
+                    store.setState({ logs, forceRender: Date.now() });
                     showNotity(data.payload as LogMessage);
                     break;
                 default:

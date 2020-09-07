@@ -16,6 +16,11 @@ export interface Group {
     members: GroupAddress[];
 }
 
+export interface LogMessage {
+    level: "error" | "info" | "warning";
+    message: string;
+}
+
 export interface GlobalState {
     forceRender: number;
     isLoading: boolean;
@@ -28,6 +33,7 @@ export interface GlobalState {
     groups: Group[];
     bridgeConfig: BridgeConfig;
     bridgeInfo: BridgeInfo;
+    logs: LogMessage[];
 }
 
 const initialState: GlobalState = {
@@ -44,7 +50,8 @@ const initialState: GlobalState = {
     },
     groups: [],
     bridgeConfig: {} as BridgeConfig,
-    bridgeInfo: {} as BridgeInfo
+    bridgeInfo: {} as BridgeInfo,
+    logs: []
 };
 
 const store = process.env.NODE_ENV === 'production' ? createStore(initialState) : devtools(createStore(initialState));
