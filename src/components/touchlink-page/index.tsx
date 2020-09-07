@@ -29,7 +29,8 @@ export class TouchlinkPage extends Component<TouchlinkApi & GlobalState, {}> {
                             <th scope="col">#</th>
                             <th scope="col">ieee_address</th>
                             <th scope="col">linkquality</th>
-                            <th scope="col">Actions</th>
+                            <th scope="col">pan_id</th>
+                            <th scope="col">&nbsp;</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -38,8 +39,9 @@ export class TouchlinkPage extends Component<TouchlinkApi & GlobalState, {}> {
                                 <td>{idx + 1}</td>
                                 <td>{touchlinkDevice.ieee_address}</td>
                                 <td>{touchlinkDevice.linkquality}</td>
+                                <td>{touchlinkDevice.pan_id}</td>
                                 <td>
-                                    <div class="btn-group" role="group" aria-label="Basic example">
+                                    <div class="btn-group float-right" role="group" aria-label="Basic example">
                                         <Button<TouchLinkDevice> item={touchlinkDevice} title="Identify" className="btn btn-primary" onClick={this.onIdentifyClick}><i
                                             className="fa fa-exclamation-triangle" /></Button>
                                         <Button<TouchLinkDevice> item={touchlinkDevice} title="Factory reset" className="btn btn-danger" onClick={this.onResetClick}><i
