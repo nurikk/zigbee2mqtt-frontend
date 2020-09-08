@@ -108,8 +108,6 @@ export interface BindRule {
 export type SortDirection = "asc" | "desc";
 
 export interface TouchLinkDevice {
-    channel: number;
-    linkquality: number;
-    pan_id: number;
     ieee_address: string;
+    channel: number;
 }

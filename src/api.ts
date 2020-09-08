@@ -43,12 +43,17 @@ const showNotity = debounce((data: LogMessage): void => {
         default:
             break;
     }
-}, 200, {trailing: true});
+}, 200, { trailing: true });
 
 interface ResponseWithStatus {
     status: "ok" | "error";
     data: unknown;
     error?: string;
+}
+interface TouchllinkScanResponse extends ResponseWithStatus {
+    data: {
+        found: TouchLinkDevice[];
+    };
 }
 interface OtaUpdateResponse {
     id: string;
@@ -83,9 +88,9 @@ class Api {
 
         if (data.topic.indexOf("/") == -1) {
             const { deviceStates } = store.getState();
-            const newDeviceStates = {...deviceStates};
+            const newDeviceStates = { ...deviceStates };
             newDeviceStates[data.topic] = { ...newDeviceStates[data.topic], ...(data.payload as object) };
-            store.setState({ deviceStates: newDeviceStates});
+            store.setState({ deviceStates: newDeviceStates });
         } else {
             switch (data.topic) {
                 case "bridge/config":
@@ -124,18 +129,21 @@ class Api {
                 case "bridge/event":
                     break;
 
-                case "bridge/touchlinkScanResults":
-                    store.setState({ isLoading: false, touchlinkDevices: data.payload as TouchLinkDevice[] });
+                case "bridge/response/touchlink/scan":
+                    const { status, data: payloadData } = data.payload as TouchllinkScanResponse;
+                    if (status === "ok") {
+                        store.setState({ touchlinkScanInProgress: false, touchlinkDevices: payloadData.found });
+                    } else {
+                        store.setState({touchlinkScanInProgress: false});
+                    }
                     break;
-
-
 
                 case "bridge/logging":
                     // eslint-disable-next-line no-case-declarations
                     const { logs } = store.getState();
                     const newLogs = [...logs.slice(-MAX_LOGS_RECORDS_IN_BUFFER)];
                     newLogs.push(data.payload as LogMessage);
-                    store.setState({ logs: newLogs});
+                    store.setState({ logs: newLogs });
                     showNotity(data.payload as LogMessage);
                     break;
                 default:

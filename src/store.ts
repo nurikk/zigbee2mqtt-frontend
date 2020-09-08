@@ -27,6 +27,7 @@ export interface GlobalState {
     devices: Device[];
     deviceStates: Dictionary<DeviceState>;
     touchlinkDevices: TouchLinkDevice[];
+    touchlinkScanInProgress: boolean;
     networkGraph: GraphI;
     groups: Group[];
     bridgeConfig: BridgeConfig;
@@ -40,6 +41,7 @@ const initialState: GlobalState = {
     devices: [],
     deviceStates: {},
     touchlinkDevices: [],
+    touchlinkScanInProgress: false,
     networkGraph: {
         links: [],
         nodes: []

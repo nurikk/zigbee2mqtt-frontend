@@ -10,10 +10,9 @@ import { Notyf } from "notyf";
 
 
 export interface TouchlinkApi {
-    touchlinkReset(): Promise<void>;
-    scanRequest(): Promise<void>;
-    identifyRequest(device: TouchLinkDevice): Promise<void>;
-    resetToFactoryNew(device: TouchLinkDevice): Promise<void>;
+    touchlinkScan(): Promise<void>;
+    touchlinkIdentify(device: TouchLinkDevice): Promise<void>;
+    touchlinkReset(device: TouchLinkDevice): Promise<void>;
 }
 
 export interface Actions {
@@ -129,25 +128,20 @@ const actions = (store: Store<GlobalState>): object => ({
         return Promise.resolve();
     },
 
-    touchlinkReset: (state): Promise<void> => {
-        store.setState({ isLoading: true });
-        api.send('bridge/request/touchlink/factory_reset', '');
+    touchlinkScan(): Promise<void> {
+        store.setState({ touchlinkScanInProgress: true, touchlinkDevices: [] });
+        api.send('bridge/request/touchlink/scan', '');
         return Promise.resolve();
     },
-    scanRequest(): Promise<void> {
-        new Notyf().error("Not implemented");
-        return Promise.resolve();
-    },
-    identifyRequest(device: TouchLinkDevice): Promise<void> {
-        new Notyf().error("Not implemented");
+    touchlinkIdentify(state, device: TouchLinkDevice): Promise<void> {
+        api.send('bridge/request/touchlink/identify', device);
         return Promise.resolve();
 
     },
-    resetToFactoryNew(device: TouchLinkDevice): Promise<void> {
-        new Notyf().error("Not implemented");
+    touchlinkReset(state, device: TouchLinkDevice): Promise<void> {
+        api.send('bridge/request/touchlink/factory_reset', device);
         return Promise.resolve();
     },
-
 
     checkOTA: (state, deviceName: string): Promise<void> => {
         api.send('bridge/request/device/ota_update/check', { id: deviceName });

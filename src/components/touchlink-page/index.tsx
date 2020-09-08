@@ -1,26 +1,28 @@
 import { Component, ComponentChild, h } from "preact";
 import { connect } from "unistore/preact";
-import actions, { Actions, TouchlinkApi } from "../../actions";
+import actions, { TouchlinkApi } from "../../actions";
 import { GlobalState } from "../../store";
 import Button from "../button";
 import { TouchLinkDevice } from "../../types";
+import { genDeviceDetailsLink } from "../../utils";
+
 
 
 
 // eslint-disable-next-line react/prefer-stateless-function
 export class TouchlinkPage extends Component<TouchlinkApi & GlobalState, {}> {
     onIdentifyClick = (device: TouchLinkDevice): void => {
-        const { identifyRequest } = this.props;
-        identifyRequest(device);
+        const { touchlinkIdentify } = this.props;
+        touchlinkIdentify(device);
     }
 
     onResetClick = (device: TouchLinkDevice): void => {
-        const { resetToFactoryNew } = this.props;
-        resetToFactoryNew(device);
+        const { touchlinkReset } = this.props;
+        touchlinkReset(device);
     }
 
     renderTouchlinkDevices(): ComponentChild {
-        const { touchlinkDevices } = this.props;
+        const { touchlinkDevices, devices } = this.props;
         return (
             <div class="table-responsive">
                 <table class="table align-middle">
@@ -28,8 +30,8 @@ export class TouchlinkPage extends Component<TouchlinkApi & GlobalState, {}> {
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">ieee_address</th>
-                            <th scope="col">linkquality</th>
-                            <th scope="col">pan_id</th>
+                            <th scope="col">friendly_name</th>
+                            <th scope="col">channel</th>
                             <th scope="col">&nbsp;</th>
                         </tr>
                     </thead>
@@ -37,9 +39,11 @@ export class TouchlinkPage extends Component<TouchlinkApi & GlobalState, {}> {
                         {touchlinkDevices.map((touchlinkDevice, idx) => (
                             <tr>
                                 <td>{idx + 1}</td>
-                                <td>{touchlinkDevice.ieee_address}</td>
-                                <td>{touchlinkDevice.linkquality}</td>
-                                <td>{touchlinkDevice.pan_id}</td>
+                                <td>{
+                                    devices.find(d => d.ieee_address === touchlinkDevice.ieee_address) ?
+                                        (<a href={genDeviceDetailsLink(touchlinkDevice.ieee_address)}>{touchlinkDevice.ieee_address}</a>) : touchlinkDevice.ieee_address}</td>
+                                <td>{devices.find(d => d.ieee_address === touchlinkDevice.ieee_address)?.friendly_name}</td>
+                                <td>{touchlinkDevice.channel}</td>
                                 <td>
                                     <div class="btn-group float-right" role="group" aria-label="Basic example">
                                         <Button<TouchLinkDevice> item={touchlinkDevice} title="Identify" className="btn btn-primary" onClick={this.onIdentifyClick}><i
@@ -56,24 +60,31 @@ export class TouchlinkPage extends Component<TouchlinkApi & GlobalState, {}> {
         );
     }
     renderNoDevices(): ComponentChild {
-        const { touchlinkReset } = this.props;
+        const { touchlinkScan } = this.props;
         return (
-            <Button className="btn btn-primary mx-auto d-block" onClick={touchlinkReset}>Touchlink Reset</Button>
+            <Button className="btn btn-primary mx-auto d-block" onClick={touchlinkScan}>Scan</Button>
         );
     }
     render(): ComponentChild {
-        const { touchlinkDevices, scanRequest } = this.props;
+        const { touchlinkDevices, touchlinkScanInProgress, touchlinkScan } = this.props;
         return (
             <div class="container">
                 <div class="card">
                     <div class="card-header allign-middle">
                         Detected {touchlinkDevices.length} touchlink devices.
-                        <Button title="Rescan" className="btn btn-primary btn-sm float-right" onClick={scanRequest}><i class="fa fa-sync" /></Button>
+                        <Button title="Rescan" className="btn btn-primary btn-sm float-right" onClick={touchlinkScan}><i class="fa fa-sync" /></Button>
                     </div>
 
                     <div>
                         <div class="card-body">
-                            {touchlinkDevices.length === 0 ? this.renderNoDevices() : this.renderTouchlinkDevices()}
+                            {touchlinkScanInProgress ? (
+                                <div class="d-flex justify-content-center">
+                                    <div class="spinner-border" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                </div>
+                            ) : touchlinkDevices.length === 0 ? this.renderNoDevices() : this.renderTouchlinkDevices()}
+
                         </div>
                     </div>
                 </div>
@@ -81,6 +92,6 @@ export class TouchlinkPage extends Component<TouchlinkApi & GlobalState, {}> {
         );
     }
 }
-const mappedProps = ["touchlinkDevices"];
+const mappedProps = ["touchlinkDevices", "devices", "touchlinkScanInProgress"];
 
 export default connect<{}, {}, GlobalState, TouchlinkApi>(mappedProps, actions)(TouchlinkPage);
