@@ -206,3 +206,5 @@ export const getDeviceDisplayName = (device: Device): string => {
 };
 
 export const randomString = (len: number): string => Math.random().toString(36).substr(2, len);
+
+export const isSecurePage = (): boolean => location.protocol === 'https:';
