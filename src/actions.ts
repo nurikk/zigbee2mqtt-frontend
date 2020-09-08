@@ -6,6 +6,7 @@ import { Store } from "unistore";
 
 import { Dictionary, Cluster, TouchLinkDevice } from "./types";
 import api from './api';
+import { Notyf } from "notyf";
 
 
 export interface TouchlinkApi {
@@ -133,11 +134,19 @@ const actions = (store: Store<GlobalState>): object => ({
         api.send('bridge/request/touchlink/factory_reset', '');
         return Promise.resolve();
     },
-    // ZNPReset: (state): Promise<void> => {
-    //     store.setState({ isLoading: true });
-    //     api.send('bridge/config/reset', '');
-    //     return Promise.resolve();
-    // },
+    scanRequest(): Promise<void> {
+        new Notyf().error("Not implemented");
+        return Promise.resolve();
+    },
+    identifyRequest(device: TouchLinkDevice): Promise<void> {
+        new Notyf().error("Not implemented");
+        return Promise.resolve();
+
+    },
+    resetToFactoryNew(device: TouchLinkDevice): Promise<void> {
+        new Notyf().error("Not implemented");
+        return Promise.resolve();
+    },
 
 
     checkOTA: (state, deviceName: string): Promise<void> => {

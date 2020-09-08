@@ -62,13 +62,13 @@ export class TouchlinkPage extends Component<TouchlinkApi & GlobalState, {}> {
         );
     }
     render(): ComponentChild {
-        const { touchlinkDevices, touchlinkReset } = this.props;
+        const { touchlinkDevices, scanRequest } = this.props;
         return (
             <div class="container">
                 <div class="card">
                     <div class="card-header allign-middle">
                         Detected {touchlinkDevices.length} touchlink devices.
-                        <Button title="Rescan" className="btn btn-primary btn-sm float-right" onClick={touchlinkReset}><i class="fa fa-sync" /></Button>
+                        <Button title="Rescan" className="btn btn-primary btn-sm float-right" onClick={scanRequest}><i class="fa fa-sync" /></Button>
                     </div>
 
                     <div>
