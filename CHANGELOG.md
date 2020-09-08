@@ -1,3 +1,12 @@
+## [0.1.49](https://github.com/nurikk/z2m-frontend/compare/0.1.48...0.1.49) (2020-09-08)
+
+
+### Bug Fixes
+
+* **websoket:** fix wss support ([762eadd](https://github.com/nurikk/z2m-frontend/commit/762eadd8e795cf3323d2f2305022a603daf1a610))
+
+
+
 ## [0.1.48](https://github.com/nurikk/z2m-frontend/compare/0.1.47...0.1.48) (2020-09-08)
 
 
