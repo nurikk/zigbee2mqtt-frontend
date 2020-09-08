@@ -2,7 +2,7 @@ import { Component, ComponentChild, h } from "preact";
 import Button from "../button";
 import { Device, DeviceState } from "../../types";
 import { connect } from "unistore/preact";
-import actions, { Actions } from "../../actions";
+import actions, { OtaApi, DeviceApi } from "../../actions";
 import cx from "classnames";
 import Modal, { ModalHeader, ModalBody, ModalFooter } from "../modal";
 import { GlobalState } from "../../store";
@@ -28,7 +28,7 @@ interface DeviceControlGroupState {
 
 }
 
-export class DeviceControlGroup extends Component<DeviceControlGroupProps & Actions & GlobalState, DeviceControlGroupState> {
+export class DeviceControlGroup extends Component<DeviceControlGroupProps & DeviceApi & OtaApi & GlobalState, DeviceControlGroupState> {
     state = {
         isRenameModalOpened: false,
         isDeviceRemovalModalOpened: false,
@@ -207,6 +207,6 @@ export class DeviceControlGroup extends Component<DeviceControlGroupProps & Acti
 }
 
 const mappedProps = ["bridgeInfo"];
-const ConnectedDeviceControlGroup = connect<DeviceControlGroupProps, {}, GlobalState, Actions>(mappedProps, actions)(DeviceControlGroup);
+const ConnectedDeviceControlGroup = connect<DeviceControlGroupProps, {}, GlobalState, DeviceApi & OtaApi>(mappedProps, actions)(DeviceControlGroup);
 export default ConnectedDeviceControlGroup;
 

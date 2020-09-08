@@ -1,6 +1,6 @@
 import { Component, ComponentChild, h } from "preact";
 import { connect } from "unistore/preact";
-import actions, { Actions } from "../../actions";
+import actions, { GroupsApi } from "../../actions";
 import { GlobalState, Group, GroupAddress } from "../../store";
 import Button from "../button";
 import { Device, Endpoint } from "../../types";
@@ -132,7 +132,7 @@ class AddDeviceToGroup extends Component<AddDeviceToGroupProps, AddDeviceToGroup
     }
 }
 
-export class GroupsPage extends Component<Actions & GlobalState, GroupsPageState> {
+export class GroupsPage extends Component<GroupsApi & GlobalState, GroupsPageState> {
     state = {
         newGroupName: ''
     }
@@ -216,5 +216,5 @@ export class GroupsPage extends Component<Actions & GlobalState, GroupsPageState
 }
 
 const mappedProps = ["groups", "devices"];
-const ConnectedGroupsPage = connect<{}, {}, GlobalState, Actions>(mappedProps, actions)(GroupsPage);
+const ConnectedGroupsPage = connect<{}, {}, GlobalState, GroupsApi>(mappedProps, actions)(GroupsPage);
 export default ConnectedGroupsPage;

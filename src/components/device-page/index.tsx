@@ -1,6 +1,6 @@
-import { Component, ComponentChild, h, Fragment } from "preact";
+import { Component, ComponentChild, h } from "preact";
 import { connect } from "unistore/preact";
-import actions, { Actions } from "../../actions";
+import actions from "../../actions";
 import { GlobalState } from "../../store";
 import DeviceInfo from "./info";
 import Bind from "./bind";
@@ -16,7 +16,7 @@ interface DevicePageProps {
 }
 type TabName = "info" | "bind" | "state";
 // eslint-disable-next-line react/prefer-stateless-function
-export class DevicePage extends Component<DevicePageProps & Actions & GlobalState, {}> {
+export class DevicePage extends Component<DevicePageProps & GlobalState, {}> {
     renderContent(): ComponentChild {
         const { tab, dev } = this.props;
         switch (tab) {
@@ -66,5 +66,5 @@ export class DevicePage extends Component<DevicePageProps & Actions & GlobalStat
 }
 
 const mappedProps = ["devices"];
-const ConnectedDevicePage = connect<DevicePageProps, {}, GlobalState, Actions>(mappedProps, actions)(DevicePage);
+const ConnectedDevicePage = connect<DevicePageProps, {}, GlobalState, {}>(mappedProps, actions)(DevicePage);
 export default ConnectedDevicePage;

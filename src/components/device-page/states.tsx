@@ -2,7 +2,7 @@ import { Component, ComponentChild, h } from "preact";
 import { Device, Dictionary } from "../../types";
 import style from "./style.css";
 import UniversalEditor from "../universal-editor";
-import actions, { Actions } from "../../actions";
+import actions, { StateApi } from "../../actions";
 import isObject from "lodash/isObject";
 import { connect } from "unistore/preact";
 import { GlobalState } from "../../store";
@@ -39,7 +39,7 @@ const readonlyFields = [
     "click"
 ];
 
-class States extends Component<StatesProps & PropsFromStore & Actions, {}> {
+class States extends Component<StatesProps & PropsFromStore & StateApi, {}> {
     setStateValue = (name: string, value: unknown): void => {
         const { setStateValue, dev, devices } = this.props;
         const device = devices.find(d => d.ieee_address == dev);
@@ -89,5 +89,5 @@ class States extends Component<StatesProps & PropsFromStore & Actions, {}> {
 
 const mappedProps = ["devices", "deviceStates"];
 
-const ConnectedDeviceStates = connect<StatesProps, {}, GlobalState, PropsFromStore>(mappedProps, actions)(States);
+const ConnectedDeviceStates = connect<StatesProps, {}, GlobalState, StateApi>(mappedProps, actions)(States);
 export default ConnectedDeviceStates;

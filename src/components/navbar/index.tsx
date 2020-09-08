@@ -1,7 +1,7 @@
 import { h, FunctionalComponent } from 'preact';
 import Match from 'preact-router/match';
 import { GlobalState } from '../../store';
-import actions, { Actions } from '../../actions';
+import actions, { BridgeApi } from '../../actions';
 import { connect } from 'unistore/preact';
 import Button from '../button';
 import cx from "classnames";
@@ -40,7 +40,7 @@ const urls = [
     }
 ];
 
-const NavBar: FunctionalComponent<Actions & GlobalState> = ({ setPermitJoin, bridgeInfo }) => (
+const NavBar: FunctionalComponent<BridgeApi & GlobalState> = ({ setPermitJoin, bridgeInfo }) => (
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">z2m admin</a>
@@ -67,6 +67,6 @@ const NavBar: FunctionalComponent<Actions & GlobalState> = ({ setPermitJoin, bri
     </nav>
 );
 const mappedProps = ["bridgeInfo"];
-const ConnectedNavBar = connect<{}, {}, GlobalState, Actions>(mappedProps, actions)(NavBar);
+const ConnectedNavBar = connect<{}, {}, GlobalState, BridgeApi>(mappedProps, actions)(NavBar);
 export default ConnectedNavBar;
 

@@ -10,7 +10,7 @@ import { Notyf } from "notyf";
 import PowerSource from "../power-source";
 import { connect } from "unistore/preact";
 import { GlobalState } from "../../store";
-import actions, { Actions } from "../../actions";
+import actions from "../../actions";
 import ActionTH from "./ActionTH";
 
 
@@ -42,7 +42,7 @@ interface ZigbeeTableData {
 
 const storeKey = "ZigbeeTableState";
 
-export class ZigbeeTable extends Component<Actions & GlobalState, ZigbeeTableState> {
+export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
     constructor() {
         super();
         this.state = {
@@ -87,7 +87,7 @@ export class ZigbeeTable extends Component<Actions & GlobalState, ZigbeeTableSta
         this.restoreState();
     }
 
-    static getDerivedStateFromProps(props: Readonly<GlobalState & Actions>, state: ZigbeeTableState): Partial<ZigbeeTableState> {
+    static getDerivedStateFromProps(props: Readonly<GlobalState>, state: ZigbeeTableState): Partial<ZigbeeTableState> {
         const { sortColumn, sortDirection } = state;
         const { devices, deviceStates } = props;
         const tableData: ZigbeeTableData[] = devices.filter(noCoordinator).map((device) => {
@@ -204,5 +204,5 @@ export class ZigbeeTable extends Component<Actions & GlobalState, ZigbeeTableSta
 }
 
 const mappedProps = ["devices", "deviceStates"];
-const ConnectedZigbeePage = connect<{}, ZigbeeTableState, GlobalState, Actions>(mappedProps, actions)(ZigbeeTable);
+const ConnectedZigbeePage = connect<{}, ZigbeeTableState, GlobalState, {}>(mappedProps, actions)(ZigbeeTable);
 export default ConnectedZigbeePage;

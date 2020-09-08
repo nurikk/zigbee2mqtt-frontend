@@ -8,7 +8,7 @@ import Tooltip from "./tooltip";
 import { genDeviceDetailsLink } from "../../utils";
 import { connect } from "unistore/preact";
 import { GlobalState } from "../../store";
-import actions, { Actions } from "../../actions";
+import actions, { MapApi } from "../../actions";
 import { useEffect } from "preact/hooks";
 import Button from "../button";
 import { route } from "preact-router";
@@ -52,7 +52,7 @@ const getDistance = (d: LinkI): number => {
     return 50 * depth + distance;
 };
 
-export class Map extends Component<GlobalState & Actions, MapState> {
+export class Map extends Component<GlobalState & MapApi, MapState> {
     ref = createRef<HTMLDivElement>();
     simulation!: d3.Simulation<NodeI, LinkI>;
 
@@ -333,5 +333,5 @@ export class Map extends Component<GlobalState & Actions, MapState> {
 
 
 const mappedProps = ["networkGraph", "networkGraphIsLoading"];
-const ConnectedMap = connect<{}, MapState, GlobalState, Actions>(mappedProps, actions)(Map);
+const ConnectedMap = connect<{}, MapState, GlobalState, {}>(mappedProps, actions)(Map);
 export default ConnectedMap;

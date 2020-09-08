@@ -2,7 +2,7 @@ import { Component, ComponentChild, h } from "preact";
 import { Device, Cluster, Endpoint, Dictionary } from "../../types";
 import { ZigbeeClusters } from "./clusters";
 import BindRow from "./bind-row";
-import actions, { Actions } from "../../actions";
+import actions, { BindApi } from "../../actions";
 import { connect } from "unistore/preact";
 import { GlobalState, Group } from "../../store";
 
@@ -64,19 +64,15 @@ const convertBidningsIntoNiceStructure = (device: Device, coordinator: Device): 
     return Object.values(bindings);
 }
 
-export class Bind extends Component<BindProps & PropsFromStore & Actions, {}> {
-
-
+export class Bind extends Component<BindProps & PropsFromStore & BindApi, {}> {
     onBindClick = (from: string, to: string, clusters: Cluster[]): void => {
-        const { bindReqest } = this.props;
-        bindReqest(true, from, to, clusters);
+        const { addBind } = this.props;
+        addBind(from, to, clusters);
     };
-
     onUnBindClick = (from: string, to: string, clusters: Cluster[]): void => {
-        const { bindReqest } = this.props;
-        bindReqest(false, from, to, clusters);
+        const { removeBind } = this.props;
+        removeBind(from, to, clusters);
     };
-
     render(): ComponentChild {
         const { dev, devices, groups } = this.props;
         const coordinator = devices.find(d => d.type === "Coordinator");
@@ -120,5 +116,5 @@ export class Bind extends Component<BindProps & PropsFromStore & Actions, {}> {
 }
 
 const mappedProps = ["devices", "groups"];
-const ConnectedBindPage = connect<BindProps, {}, GlobalState, PropsFromStore & Actions>(mappedProps, actions)(Bind);
+const ConnectedBindPage = connect<BindProps, {}, GlobalState, PropsFromStore & BindApi>(mappedProps, actions)(Bind);
 export default ConnectedBindPage

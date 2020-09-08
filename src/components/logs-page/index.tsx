@@ -1,11 +1,11 @@
 import { Component, ComponentChild, h } from "preact";
 import { connect } from "unistore/preact";
-import actions, { Actions } from "../../actions";
+import actions  from "../../actions";
 import { GlobalState } from "../../store";
 import cx from "classnames";
 
 // eslint-disable-next-line react/prefer-stateless-function
-export class LogsPage extends Component<Actions & GlobalState, {}> {
+export class LogsPage extends Component<GlobalState, {}> {
     render(): ComponentChild {
         const { logs } = this.props;
         return <div class="container-fluid">{
@@ -20,4 +20,4 @@ export class LogsPage extends Component<Actions & GlobalState, {}> {
 
 const mappedProps = ["logs"];
 
-export default connect<{}, {}, GlobalState, Actions>(mappedProps, actions)(LogsPage);
+export default connect<{}, {}, GlobalState, {}>(mappedProps, actions)(LogsPage);

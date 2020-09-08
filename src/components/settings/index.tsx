@@ -1,6 +1,6 @@
 import { Component, ComponentChild, h } from "preact";
 import { connect } from "unistore/preact";
-import actions, { Actions } from "../../actions";
+import actions, { BridgeApi } from "../../actions";
 import { GlobalState } from "../../store";
 import get from "lodash/get";
 import UniversalEditor from "../universal-editor";
@@ -43,10 +43,7 @@ const settings = [
 
 ]
 
-export class SettingsPage extends Component<Actions & GlobalState> {
-
-
-
+export class SettingsPage extends Component<BridgeApi & GlobalState> {
     updateConfig = (name: string, value: unknown): void => {
         const { updateConfigValue } = this.props;
         updateConfigValue(name, value);
@@ -81,5 +78,5 @@ export class SettingsPage extends Component<Actions & GlobalState> {
 }
 
 const mappedProps = ["bridgeInfo"];
-const ConnectedSettingsPage = connect<{}, {}, GlobalState, Actions>(mappedProps, actions)(SettingsPage);
+const ConnectedSettingsPage = connect<{}, {}, GlobalState, BridgeApi>(mappedProps, actions)(SettingsPage);
 export default ConnectedSettingsPage;

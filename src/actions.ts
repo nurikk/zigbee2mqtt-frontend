@@ -4,9 +4,8 @@
 import { GlobalState } from "./store";
 import { Store } from "unistore";
 
-import { Dictionary, Cluster, TouchLinkDevice } from "./types";
+import { Cluster, TouchLinkDevice } from "./types";
 import api from './api';
-import { Notyf } from "notyf";
 
 
 export interface TouchlinkApi {
@@ -15,40 +14,52 @@ export interface TouchlinkApi {
     touchlinkReset(device: TouchLinkDevice): Promise<void>;
 }
 
-export interface Actions {
-    getDeviceInfo(dev: string): Promise<void>;
-    getDeviceBinds(dev: string): Promise<void>;
-    bindReqest(isBind: boolean, from: string, to: string, clusters: Cluster[]): Promise<void>;
-    setStateValue(dev: string, name: string, value: unknown): Promise<void>;
-    getStateValue(dev: string, name: string | string[]): Promise<void>;
-    setPermitJoin(permit: boolean): Promise<void>;
+export interface OtaApi {
+    checkOTA(deviceName: string): Promise<void>;
+    updateOTA(deviceName: string): Promise<void>;
+}
+export interface DeviceApi {
     renameDevice(old: string, newName: string, homeassistantRename: boolean): Promise<void>;
     removeDevice(dev: string, force: boolean, block: boolean): Promise<void>;
-    refreshState(dev: string, name: string): Promise<void>;
     configureDevice(name: string): Promise<void>;
+}
 
-    // ZNPReset(): Promise<void>;
-    checkOTA(deviceName: string): Promise<void>;
-    updateOTA(deviceName): Promise<void>;
-    networkMapRequest(): Promise<void>;
+export interface StateApi {
+    setStateValue(dev: string, name: string, value: unknown): Promise<void>;
+    getStateValue(dev: string, name: string | string[]): Promise<void>;
+}
+
+export interface GroupsApi {
     createGroup(name: string): Promise<void>;
     removeGroup(name: string): Promise<void>;
     addDeviceToGroup(device: string, group: string): Promise<void>;
     removeDeviceFromGroup(device: string, group: string): Promise<void>;
+}
+export interface BindApi {
+    addBind(from: string, to: string, clusters: Cluster[]): Promise<void>;
+    removeBind(from: string, to: string, clusters: Cluster[]): Promise<void>;
+}
+export interface BridgeApi {
+    setPermitJoin(permit: boolean): Promise<void>;
     updateConfigValue(name: string, value: unknown): Promise<void>;
 }
-
+export interface MapApi {
+    networkMapRequest(): Promise<void>;
+}
 
 const actions = (store: Store<GlobalState>): object => ({
-    bindReqest: (state, isBind: boolean, from: string, to: string, clusters: Cluster[]): Promise<void> => {
-        const bindParams: Dictionary<unknown> = {
+    addBind: (state, from: string, to: string, clusters: Cluster[]): Promise<void> => {
+        const bindParams = {
             from, to, clusters
         };
-        if (isBind) {
-            api.send("bridge/request/device/bind", bindParams)
-        } else {
-            api.send("bridge/request/device/unbind", bindParams)
-        }
+        api.send("bridge/request/device/bind", bindParams)
+        return Promise.resolve();
+    },
+    removeBind: (state, from: string, to: string, clusters: Cluster[]): Promise<void> => {
+        const bindParams = {
+            from, to, clusters
+        };
+        api.send("bridge/request/device/unbind", bindParams);
         return Promise.resolve();
     },
 
@@ -56,6 +67,7 @@ const actions = (store: Store<GlobalState>): object => ({
         api.send(`${dev}/set`, { [name]: value });
         return Promise.resolve();
     },
+
     getStateValue(state, dev: string, name: string | string[]): Promise<void> {
         const payload = {};
         if (typeof name === "string") {
@@ -68,7 +80,6 @@ const actions = (store: Store<GlobalState>): object => ({
         api.send(`${dev}/get`, payload);
         return Promise.resolve();
     },
-
 
     setPermitJoin(state, permit = true): Promise<void> {
         api.send('bridge/request/permit_join', { value: permit });
