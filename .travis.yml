@@ -14,17 +14,6 @@ deploy:
     local_dir: dist
     on:
       tags: true
-  - provider: npm
-    tag: beta
-    skip_cleanup: true
-    email: $NPM_EMAIL
-    api_key: $NPM_TOKEN
-    local_dir: dist
-    on:
-      branch: master
-stages:
-  - name: after_deploy
-    if: tag IS present
 after_deploy:
   - VERSION=$(node -p "require('./package.json').version")
-  - '[ "${TRAVIS_TAG}" != "" ] && curl -XPOST -H "Authorization: token $GITHUB_TOKEN" -H "Accept: application/vnd.github.everest-preview+json" -H "Content-Type: application/json" https://api.github.com/repos/koenkk/zigbee2mqtt/dispatches --data "{\"event_type\": \"update_frontend\", \"client_payload\": { \"version\": \"$VERSION\"}}"'
+  - 'curl -XPOST -H "Authorization: token $GITHUB_TOKEN" -H "Accept: application/vnd.github.everest-preview+json" -H "Content-Type: application/json" https://api.github.com/repos/koenkk/zigbee2mqtt/dispatches --data "{\"event_type\": \"update_frontend\", \"client_payload\": { \"version\": \"$VERSION\"}}"'
