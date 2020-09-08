@@ -1,3 +1,12 @@
+## [0.1.50](https://github.com/nurikk/z2m-frontend/compare/0.1.49...0.1.50) (2020-09-08)
+
+
+### Features
+
+* **touchlink:** implement api calls ([d2776e7](https://github.com/nurikk/z2m-frontend/commit/d2776e76982323acabf8cf330bf039691ab8b848))
+
+
+
 ## [0.1.49](https://github.com/nurikk/z2m-frontend/compare/0.1.48...0.1.49) (2020-09-08)
 
 
