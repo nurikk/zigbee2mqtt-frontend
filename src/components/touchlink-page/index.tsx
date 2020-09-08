@@ -23,7 +23,7 @@ export class TouchlinkPage extends Component<TouchlinkApi & GlobalState, {}> {
         const { touchlinkDevices } = this.props;
         return (
             <div class="table-responsive">
-                <table class="table">
+                <table class="table align-middle">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
