@@ -1,6 +1,6 @@
 import { Component, ComponentChild, h } from "preact";
 import { connect } from "unistore/preact";
-import actions  from "../../actions";
+import actions from "../../actions";
 import { GlobalState } from "../../store";
 import cx from "classnames";
 
@@ -8,12 +8,12 @@ import cx from "classnames";
 export class LogsPage extends Component<GlobalState, {}> {
     render(): ComponentChild {
         const { logs } = this.props;
-        return <div class="container-fluid">{
-            logs.map(l => <pre class={cx("pre-scrollable mb-0", {
+        return <div class="container-fluid h-100 overflow-auto pt-2">{
+            logs.map(l => <div><span class={cx({
                 'text-danger': l.level === 'error',
                 'text-warning': l.level === 'warning',
                 'text-info': l.level === 'info'
-            })} >{l.level.toUpperCase()}: <code>{l.message}</code></pre>)
+            })} >{l.level.toUpperCase()}</span>:&nbsp;<code>{l.message}</code></div>)
         }</div>
     }
 }

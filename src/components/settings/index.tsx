@@ -5,12 +5,6 @@ import { GlobalState } from "../../store";
 import get from "lodash/get";
 import UniversalEditor from "../universal-editor";
 
-
-
-
-
-
-
 const settings = [
     {
         key: 'last_seen',
@@ -52,26 +46,27 @@ export class SettingsPage extends Component<BridgeApi & GlobalState> {
     render(): ComponentChild {
 
         const { bridgeInfo } = this.props;
-        return <div className="container"><form>
-            {
-                settings.map(setting => (
-                    <div class="row">
-                        <div class="col">
+        return <div className="container">
+            <form class="mt-2">
+                {
+                    settings.map(setting => (
+                        <div class="row">
+                            <div class="col">
 
-                            <label for={setting.key}>{setting.title}</label>
-                            <UniversalEditor
-                                value={get(bridgeInfo.config, setting.path)}
-                                values={setting.values}
-                                onChange={(value): void => this.updateConfig(setting.key, value)}
-                            />
-                            <div class="form-text">{setting.description}</div>
+                                <label for={setting.key}>{setting.title}</label>
+                                <UniversalEditor
+                                    value={get(bridgeInfo.config, setting.path)}
+                                    values={setting.values}
+                                    onChange={(value): void => this.updateConfig(setting.key, value)}
+                                />
+                                <div class="form-text">{setting.description}</div>
 
+                            </div>
                         </div>
-                    </div>
-                ))
-            }
+                    ))
+                }
 
-        </form>
+            </form>
         </div>
 
     }
