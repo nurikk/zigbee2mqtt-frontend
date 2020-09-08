@@ -16,7 +16,6 @@ export interface TouchlinkApi {
 }
 
 export interface Actions {
-    setLoading(isLoading: boolean): Promise<void>;
     getDeviceInfo(dev: string): Promise<void>;
     getDeviceBinds(dev: string): Promise<void>;
     bindReqest(isBind: boolean, from: string, to: string, clusters: Cluster[]): Promise<void>;
@@ -41,11 +40,7 @@ export interface Actions {
 
 
 const actions = (store: Store<GlobalState>): object => ({
-    setLoading(state, isLoading: boolean): void {
-        store.setState({ isLoading });
-    },
     bindReqest: (state, isBind: boolean, from: string, to: string, clusters: Cluster[]): Promise<void> => {
-        store.setState({ isLoading: true });
         const bindParams: Dictionary<unknown> = {
             from, to, clusters
         };
@@ -76,54 +71,46 @@ const actions = (store: Store<GlobalState>): object => ({
 
 
     setPermitJoin(state, permit = true): Promise<void> {
-        store.setState({ isLoading: true });
         api.send('bridge/request/permit_join', { value: permit });
         return Promise.resolve();
     },
 
     renameDevice: (state, from: string, to: string, homeassistantRename: boolean): Promise<void> => {
-        store.setState({ isLoading: true });
         // eslint-disable-next-line @typescript-eslint/camelcase
         api.send('bridge/request/device/rename', { from, to, homeassistant_rename: homeassistantRename });
         return Promise.resolve();
     },
     removeDevice: (state, dev: string, force: boolean, block: boolean): Promise<void> => {
-        store.setState({ isLoading: true });
         api.send('bridge/request/device/remove', { id: dev, force, block });
         return Promise.resolve();
     },
 
     configureDevice: (state, name: string): Promise<void> => {
-        store.setState({ isLoading: true });
         api.send('bridge/request/device/configure', { id: name });
         return Promise.resolve();
     },
 
     networkMapRequest: (state): Promise<void> => {
-        store.setState({ isLoading: true });
+        store.setState({ networkGraphIsLoading: true });
         api.send('bridge/request/networkmap', { type: "raw", routes: true });
         return Promise.resolve();
     },
     createGroup: (state, group: string): Promise<void> => {
-        store.setState({ isLoading: true });
         api.send('bridge/request/group/add', group);
         return Promise.resolve();
     },
 
     removeGroup: (state, group: string): Promise<void> => {
-        store.setState({ isLoading: true });
         api.send('bridge/request/group/remove', group);
         return Promise.resolve();
     },
 
     addDeviceToGroup: (state, device: string, group: string): Promise<void> => {
-        store.setState({ isLoading: true });
         api.send('bridge/request/group/members/add', { group, device });
         return Promise.resolve();
     },
 
     removeDeviceFromGroup: (state, device: string, group: string): Promise<void> => {
-        store.setState({ isLoading: true });
         api.send('bridge/request/group/members/remove', { device, group });
         return Promise.resolve();
     },

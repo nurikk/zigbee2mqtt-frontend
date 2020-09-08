@@ -22,13 +22,12 @@ export interface LogMessage {
 }
 
 export interface GlobalState {
-    isLoading: boolean;
-    isError: boolean | string;
     devices: Device[];
     deviceStates: Dictionary<DeviceState>;
     touchlinkDevices: TouchLinkDevice[];
     touchlinkScanInProgress: boolean;
     networkGraph: GraphI;
+    networkGraphIsLoading: boolean;
     groups: Group[];
     bridgeConfig: BridgeConfig;
     bridgeInfo: BridgeInfo;
@@ -36,8 +35,6 @@ export interface GlobalState {
 }
 
 const initialState: GlobalState = {
-    isLoading: false,
-    isError: false,
     devices: [],
     deviceStates: {},
     touchlinkDevices: [],
@@ -46,6 +43,7 @@ const initialState: GlobalState = {
         links: [],
         nodes: []
     },
+    networkGraphIsLoading: false,
     groups: [],
     bridgeConfig: {} as BridgeConfig,
     bridgeInfo: {} as BridgeInfo,

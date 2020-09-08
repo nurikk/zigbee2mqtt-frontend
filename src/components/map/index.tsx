@@ -226,13 +226,13 @@ export class Map extends Component<GlobalState & Actions, MapState> {
         networkMapRequest();
     }
     renderMessage(): ComponentChild {
-        const { isLoading } = this.props;
+        const { networkGraphIsLoading } = this.props;
 
         return (
             <div class="container h-100">
                 <div class="row h-100 justify-content-center align-items-center">
                     {
-                        isLoading ? (
+                        networkGraphIsLoading ? (
                             <div class="justify-content-center align-items-center">
                                 <div class="row">
                                     <div class="col-6 mx-auto">
@@ -266,19 +266,7 @@ export class Map extends Component<GlobalState & Actions, MapState> {
                     }
                 </div>
             </div>
-        )
-        // return (<div class="container">
-        //     {
-        //         isLoading ? (
-        //             "Loading, please wait.Depending on the size of your network this can take somewhere between 10 seconds and 2 minutes.") : (
-        //                 <Fragment>No map data.
-        //                     <button onClick={this.onRequestClick} className="btn btn-primary">Requests?</button>
-        //                 </Fragment>
-
-        //             )
-        //     }
-
-        // </div>);
+        );
     }
     onLinkTypeFilterChange = (e: Event): void => {
         let { visibleLinks } = this.state;
@@ -344,6 +332,6 @@ export class Map extends Component<GlobalState & Actions, MapState> {
 }
 
 
-const mappedProps = ["networkGraph", "isLoading"];
+const mappedProps = ["networkGraph", "networkGraphIsLoading"];
 const ConnectedMap = connect<{}, MapState, GlobalState, Actions>(mappedProps, actions)(Map);
 export default ConnectedMap;
