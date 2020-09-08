@@ -57,7 +57,7 @@ export class DevicePage extends Component<DevicePageProps & GlobalState, {}> {
             </div>
 
             <div className="card-body">
-            <h5 class="card-title">{device.friendly_name}</h5>
+                <h5 class="card-title">{device.friendly_name}</h5>
                 {this.renderContent()}
             </div>
         </div>);

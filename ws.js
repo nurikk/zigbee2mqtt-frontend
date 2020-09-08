@@ -1,12 +1,12 @@
 const WebSocket = require("ws");
 
 const wss = new WebSocket.Server({
-    port: 8579
+    port: 8579,
 });
 
 wss.on("connection", (ws) => {
     const onConnect = require("./ws-messages/onConnect.json");
-    onConnect.forEach(msg => {
+    onConnect.forEach((msg) => {
         ws.send(JSON.stringify(msg));
     });
     ws.addEventListener("message", (message) => {
@@ -19,7 +19,6 @@ wss.on("connection", (ws) => {
             default:
                 break;
         }
-        response.forEach(r => ws.send(JSON.stringify(r)));
-
-    })
+        response.forEach((r) => ws.send(JSON.stringify(r)));
+    });
 });

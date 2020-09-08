@@ -1,24 +1,19 @@
 {
-	"compilerOptions": {
-		"outDir": "./dist",
-		"target": "es5",
-		"moduleResolution": "node",
-		"module": "esnext",
-		"noImplicitAny": false,
-		"removeComments": true,
-		"sourceMap": true,
-		"jsx": "react",
-		"jsxFactory": "h",
-		"experimentalDecorators": true,
-		"allowSyntheticDefaultImports": true
-	},
-	"suppressImplicitAnyIndexErrors": true,
-	"lib": [
-		"dom",
-		"es2017"
-	],
-	"baseUrl": ".",
-	"exclude": [
-		"dist"
-	]
+    "compilerOptions": {
+        "outDir": "./dist",
+        "target": "es5",
+        "moduleResolution": "node",
+        "module": "esnext",
+        "noImplicitAny": false,
+        "removeComments": true,
+        "sourceMap": true,
+        "jsx": "react",
+        "jsxFactory": "h",
+        "experimentalDecorators": true,
+        "allowSyntheticDefaultImports": true
+    },
+    "suppressImplicitAnyIndexErrors": true,
+    "lib": ["dom", "es2017"],
+    "baseUrl": ".",
+    "exclude": ["dist"]
 }
