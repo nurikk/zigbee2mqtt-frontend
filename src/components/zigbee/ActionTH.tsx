@@ -30,7 +30,7 @@ export default class ActionTH<T> extends Component<ActionTHProps<T>, {}> {
             }
             return <i className={`fa fa-sort-amount-down`} />;
         }
-        return <i className={`fa fa-sort-amount-down ${style.invisible}`} />;
+        return <i className={`fa fa-sort-amount-down invisible`} />;
 
     }
 

@@ -136,7 +136,7 @@ export class ZigbeeTable extends Component<Actions & GlobalState, ZigbeeTableSta
         const { onSortChange } = this;
 
         return (
-            <table className={`table table-striped table-borderless ${style.adaptive} ${style.zigbee}`}>
+            <table className={cx("table table-striped table-borderless align-middle", style.adaptive)}>
                 <thead>
                     <tr className="text-nowrap">
                         <th>#</th>
@@ -147,7 +147,7 @@ export class ZigbeeTable extends Component<Actions & GlobalState, ZigbeeTableSta
                         <ActionTH<SortColumns> className={style["action-column"]} column="device.friendly_name"
                             currentDirection={sortDirection} current={sortColumn}
                             onClick={onSortChange}>Friendly name</ActionTH>
-                        <ActionTH<SortColumns> className={cx(style["ieee-addr"], style["action-column"])} column="device.ieee_address"
+                        <ActionTH<SortColumns> className={cx(style["action-column"])} column="device.ieee_address"
                             currentDirection={sortDirection} current={sortColumn}
                             onClick={onSortChange}>IEEE address</ActionTH>
                         <ActionTH<SortColumns> className={cx(style["action-column"])} column="device.definition.vendor"
@@ -183,7 +183,7 @@ export class ZigbeeTable extends Component<Actions & GlobalState, ZigbeeTableSta
                                 href={genDeviceDetailsLink(device.ieee_address)}>{toHex(device.network_address)}</a>
                             </td>
                             <td>{device.friendly_name}</td>
-                            <td className={style["ieee-addr"]}>{device.ieee_address}</td>
+                            <td>{device.ieee_address}</td>
                             <td title={device.definition?.vendor ?? 'Unsupported'}
                                 className={cx("text-truncate", "text-nowrap", "position-relative")}>{device.definition?.vendor ?? 'Unsupported'}</td>
                             <td>{device.definition?.model ?? 'Unsupported'}</td>

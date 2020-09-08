@@ -1,12 +1,3 @@
-
-.zigbee td, .zigbee th {
-    vertical-align: middle;
-}
-
-.actions {
-    min-width: 150px
-}
-
 .action-column span {
     padding: 0;
 }
@@ -14,9 +5,19 @@
 .action-column i {
     margin-left: 5px;
 }
+.device-pic {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    min-height: 56px;
+}
 
-.invisible {
-    visibility: hidden;
+.device-image {
+    max-height: 2em;
+    transition: transform .5s ease;
+}
+
+.device-image:hover {
+    transform: scale(4) translate(5px, 0);
 }
 
 
@@ -126,30 +127,3 @@
     }
 }
 
-.ieee-addr {
-    /* max-width: 145px; */
-    overflow: hidden;
-    text-overflow: ellipsis;
-    /* direction: rtl; */
-}
-
-
-.device-pic {
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-    /*position: relative;*/
-    min-height: 56px;
-    /*width: 56px;*/
-}
-
-.device-image {
-    max-height: 2em;
-}
-
-.device-image {
-    transition: transform .5s ease;
-}
-
-.device-image:hover {
-    transform: scale(4) translate(5px, 0);
-}

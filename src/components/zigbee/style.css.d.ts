@@ -1,13 +1,9 @@
 declare namespace StyleCssNamespace {
     export interface IStyleCss {
         "action-column": string;
-        actions: string;
         adaptive: string;
         "device-image": string;
         "device-pic": string;
-        "ieee-addr": string;
-        invisible: string;
-        zigbee: string;
     }
 }
 
