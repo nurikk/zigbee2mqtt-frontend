@@ -1,3 +1,32 @@
+## [0.1.48](https://github.com/nurikk/z2m-frontend/compare/0.1.47...0.1.48) (2020-09-08)
+
+
+### Bug Fixes
+
+* **build:** don't trigger gh pipeline non tagged ([62fbf62](https://github.com/nurikk/z2m-frontend/commit/62fbf622cd7e280dbf58c4994a98e298073a1d35))
+* **build:** move .npmignore ([53d06e0](https://github.com/nurikk/z2m-frontend/commit/53d06e0760e8dc5939f813e6d21b877a3c0bc3d3))
+* **build:** npmignore dist/report.html ([e8bdd33](https://github.com/nurikk/z2m-frontend/commit/e8bdd331b23c3ea7b90b3d3ce54901b1f27846f7))
+* **build:** remove next build from travis.yaml ([348522b](https://github.com/nurikk/z2m-frontend/commit/348522b339bcb6286d60489b94cfbf1e25ddedd3))
+* **device page:** fix styling ([8ec6f74](https://github.com/nurikk/z2m-frontend/commit/8ec6f7452b1e12ad91cd82f125382d93acf449f8))
+* **navbar:** add active class to urls ([4bec116](https://github.com/nurikk/z2m-frontend/commit/4bec116cba8ce18f5845d15a7bad061ebb45f730))
+* **notify:** add throttling ([43a20bb](https://github.com/nurikk/z2m-frontend/commit/43a20bb366caf1f4825456d0e920c94ee6591033))
+* **notify:** create only two notify instances ([8c4e7ae](https://github.com/nurikk/z2m-frontend/commit/8c4e7ae8865565cf52319c33a504419e0e161244))
+* **notify:** use debouce(trailing) ([4f51a19](https://github.com/nurikk/z2m-frontend/commit/4f51a196b92306c70d98bae93f8377011ae7a1a8))
+* **store:** fix original state mutations ([6ed9e78](https://github.com/nurikk/z2m-frontend/commit/6ed9e78201d5608390b547c016e8479342bd431e))
+* **touchlink:** fix rows aligment ([aca6d78](https://github.com/nurikk/z2m-frontend/commit/aca6d78a732e1dbf5f7245e8b5afb07326bf7d50))
+* **touchlink:** make table nicier ([06b2b46](https://github.com/nurikk/z2m-frontend/commit/06b2b4665cd37d124b1f999752e46503dd30281e))
+* **touchlink:** use container class ([db36ba5](https://github.com/nurikk/z2m-frontend/commit/db36ba5def117b40719484fb23244c9ebf9de94a))
+
+
+### Features
+
+* **logs:** intruduce logs page ([c0a6a81](https://github.com/nurikk/z2m-frontend/commit/c0a6a81435bdb0172608a61c074daf79c315a79f))
+* **mocks:** add touchlink results mocks ([4fd4023](https://github.com/nurikk/z2m-frontend/commit/4fd4023fc46f919219aa9de431501f95aa049a89))
+* **touchlink:** add not implemented notifications ([ee62c89](https://github.com/nurikk/z2m-frontend/commit/ee62c89daddc24d00ea00d35b78d42572df250bc))
+* **touchlink:** implement touchlink devices table ([8b5c6aa](https://github.com/nurikk/z2m-frontend/commit/8b5c6aa738d564d4682d51710bda97570867a1ac))
+
+
+
 ## [0.1.47](https://github.com/nurikk/z2m-frontend/compare/0.1.46...0.1.47) (2020-09-06)
 
 
