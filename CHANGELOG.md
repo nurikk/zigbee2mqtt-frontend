@@ -1,3 +1,12 @@
+## [0.1.51](https://github.com/nurikk/z2m-frontend/compare/0.1.50...0.1.51) (2020-09-09)
+
+
+### Features
+
+* **groups:** add link to device page ([c140f33](https://github.com/nurikk/z2m-frontend/commit/c140f33a04c5dd542f3a226c9c23c705795ca569))
+
+
+
 ## [0.1.50](https://github.com/nurikk/z2m-frontend/compare/0.1.49...0.1.50) (2020-09-08)
 
 
