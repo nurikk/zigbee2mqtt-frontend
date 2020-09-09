@@ -5,7 +5,7 @@ import { GlobalState, Group, GroupAddress } from "../../store";
 import Button from "../button";
 import { Device, Endpoint } from "../../types";
 import SafeImg from "../safe-image";
-import { genDeviceImageUrl } from "../../utils";
+import { genDeviceImageUrl, genDeviceDetailsLink } from "../../utils";
 import style from './style.css';
 import cx from 'classnames';
 import EndpointPicker from "../endpoint-picker";
@@ -50,7 +50,7 @@ class DeviceGroupRow extends Component<DeviceGroupRowProps, {}> {
             <td className={style["device-pic"]}>{<SafeImg class={cx(style["device-image"])}
                 src={genDeviceImageUrl(device?.definition?.model)} />}
             </td>
-            <td>{device && device.friendly_name}</td>
+            <td><a href={genDeviceDetailsLink(device.ieee_address)}>{device.friendly_name}</a></td>
             <td>{groupAddress.ieee_address}</td>
             <td>{groupAddress.endpoint}</td>
             <td>{device && <Button<string> promt item={device.friendly_name} onClick={removeDeviceFromGroup} className="btn btn-danger btn-sm float-right"><i className="fa fa-trash" /></Button>}</td>
