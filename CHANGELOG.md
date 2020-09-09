@@ -1,3 +1,12 @@
+## [0.1.52](https://github.com/nurikk/z2m-frontend/compare/0.1.51...0.1.52) (2020-09-09)
+
+
+### Bug Fixes
+
+* **api:** fix device state topic detection ([08f505d](https://github.com/nurikk/z2m-frontend/commit/08f505d84d2ca40a57bb5ba9d383e7d5e2e2c4fb))
+
+
+
 ## [0.1.51](https://github.com/nurikk/z2m-frontend/compare/0.1.50...0.1.51) (2020-09-09)
 
 
