@@ -86,12 +86,7 @@ class Api {
 
         let response: ResponseWithStatus;
 
-        if (data.topic.indexOf("/") == -1) {
-            const { deviceStates } = store.getState();
-            const newDeviceStates = { ...deviceStates };
-            newDeviceStates[data.topic] = { ...newDeviceStates[data.topic], ...(data.payload as object) };
-            store.setState({ deviceStates: newDeviceStates });
-        } else {
+        if (data.topic.startsWith("bridge/")) {
             switch (data.topic) {
                 case "bridge/config":
                     store.setState({
@@ -154,6 +149,11 @@ class Api {
                     }
                     break;
             }
+        } else {
+            const { deviceStates } = store.getState();
+            const newDeviceStates = { ...deviceStates };
+            newDeviceStates[data.topic] = { ...newDeviceStates[data.topic], ...(data.payload as object) };
+            store.setState({ deviceStates: newDeviceStates });
         }
 
 
