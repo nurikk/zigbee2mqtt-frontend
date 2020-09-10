@@ -18,12 +18,36 @@ interface Message {
 const blacklistedMessages: RegExp[] = [
     /MQTT publish/
 ];
-const showNotity = debounce((data: LogMessage): void => {
-    // eslint-disable-next-line prefer-const
-    let { message, level } = data;
+
+const isLogMessage = (msg: LogMessage | ResponseWithStatus): msg is LogMessage => {
+    return (msg as LogMessage).level !== undefined && (msg as LogMessage).message !== undefined;
+}
+
+const isResponseWithStatus = (msg: LogMessage | ResponseWithStatus): msg is ResponseWithStatus => {
+    return (msg as ResponseWithStatus).status !== undefined;
+}
+
+const showNotity = debounce((data: LogMessage | ResponseWithStatus): void => {
+    let message = "", level = "";
+    if (isLogMessage(data)) {
+        message = data.message;
+        level = data.level;
+    } else if (isResponseWithStatus(data)) {
+        switch (data.status) {
+            case "error":
+                level = "error";
+                message = data.error;
+                break;
+            default:
+                break;
+        }
+    }
+
+
     switch (level) {
         case "error":
         case "warning":
+
             new Notyf().error(message);
             break;
         case "info":
@@ -80,11 +104,13 @@ class Api {
                         bridgeConfig: data.payload as BridgeConfig
                     });
                     break;
+
                 case "bridge/info":
                     store.setState({
                         bridgeInfo: data.payload as BridgeInfo
                     });
                     break;
+
                 case "bridge/devices":
                     {
                         const devicesMap = new Map();
@@ -102,6 +128,20 @@ class Api {
                         groups: data.payload as Group[]
                     })
                     break;
+
+                case "bridge/event":
+                    break;
+
+                case "bridge/logging":
+                    {
+                        const { logs } = store.getState();
+                        const newLogs = [...logs.slice(-MAX_LOGS_RECORDS_IN_BUFFER)];
+                        newLogs.push(data.payload as LogMessage);
+                        store.setState({ logs: newLogs });
+                        showNotity(data.payload as LogMessage);
+                    }
+                    break;
+
                 case "bridge/response/networkmap":
                     {
                         const response = data.payload as ResponseWithStatus;
@@ -114,11 +154,8 @@ class Api {
                             store.setState({ networkGraphIsLoading: false });
                         }
                     }
-                    break;
 
-                case "bridge/event":
-                    break;
-
+                // eslint-disable-next-line no-fallthrough
                 case "bridge/response/touchlink/scan":
                     {
                         const { status, data: payloadData } = data.payload as TouchllinkScanResponse;
@@ -128,25 +165,20 @@ class Api {
                             store.setState({ touchlinkScanInProgress: false });
                         }
                     }
-                    break;
 
-                case "bridge/logging":
-                    {
-                        const { logs } = store.getState();
-                        const newLogs = [...logs.slice(-MAX_LOGS_RECORDS_IN_BUFFER)];
-                        newLogs.push(data.payload as LogMessage);
-                        store.setState({ logs: newLogs });
-                        showNotity(data.payload as LogMessage);
-                    }
-                    break;
+                // eslint-disable-next-line no-fallthrough
                 case "bridge/response/touchlink/identify":
                     store.setState({ touchlinkIdentifyInProgress: false });
-                    break;
+
+                // eslint-disable-next-line no-fallthrough
                 case "bridge/response/touchlink/factory_reset":
                     store.setState({ touchlinkResetInProgress: false });
-                    break;
 
+                // eslint-disable-next-line no-fallthrough
                 default:
+                    if (data.topic.startsWith("bridge/response/")) {
+                        showNotity(data.payload as ResponseWithStatus);
+                    }
                     break;
             }
         } else {
@@ -155,8 +187,6 @@ class Api {
             newDeviceStates.set(data.topic, { ...newDeviceStates[data.topic], ...(data.payload as object) });
             store.setState({ deviceStates: newDeviceStates });
         }
-
-
     }
 }
 const api = new Api(`${isSecurePage() ? 'wss' : 'ws'}://${window.location.host}/api`);
