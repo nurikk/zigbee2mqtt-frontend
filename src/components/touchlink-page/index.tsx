@@ -5,7 +5,7 @@ import { GlobalState } from "../../store";
 import Button from "../button";
 import { TouchLinkDevice } from "../../types";
 import { genDeviceDetailsLink } from "../../utils";
-
+import cx from "classnames";
 
 
 
@@ -22,7 +22,8 @@ export class TouchlinkPage extends Component<TouchlinkApi & GlobalState, {}> {
     }
 
     renderTouchlinkDevices(): ComponentChild {
-        const { touchlinkDevices, devices } = this.props;
+        const { touchlinkDevices, devices, touchlinkIdentifyInProgress, touchlinkResetInProgress } = this.props;
+        const touchlinkInProgress = touchlinkIdentifyInProgress || touchlinkResetInProgress;
         return (
             <div class="table-responsive">
                 <table class="table align-middle">
@@ -46,10 +47,10 @@ export class TouchlinkPage extends Component<TouchlinkApi & GlobalState, {}> {
                                 <td>{touchlinkDevice.channel}</td>
                                 <td>
                                     <div class="btn-group float-right" role="group" aria-label="Basic example">
-                                        <Button<TouchLinkDevice> item={touchlinkDevice} title="Identify" className="btn btn-primary" onClick={this.onIdentifyClick}><i
-                                            className="fa fa-exclamation-triangle" /></Button>
-                                        <Button<TouchLinkDevice> item={touchlinkDevice} title="Factory reset" className="btn btn-danger" onClick={this.onResetClick}><i
-                                            className="fa fa-broom" /></Button>
+                                        <Button<TouchLinkDevice> disabled={touchlinkInProgress} item={touchlinkDevice} title="Identify" className="btn btn-primary" onClick={this.onIdentifyClick}><i
+                                            className={cx("fa", { "fa-exclamation-triangle": !touchlinkIdentifyInProgress, "fas fa-circle-notch fa-spin": touchlinkIdentifyInProgress })} /></Button>
+                                        <Button<TouchLinkDevice> disabled={touchlinkInProgress} item={touchlinkDevice} title="Factory reset" className="btn btn-danger" onClick={this.onResetClick}><i
+                                            className={cx("fa", { "fa-broom": !touchlinkResetInProgress, "fas fa-circle-notch fa-spin": touchlinkResetInProgress })} /></Button>
                                     </div>
                                 </td>
                             </tr>
@@ -92,6 +93,6 @@ export class TouchlinkPage extends Component<TouchlinkApi & GlobalState, {}> {
         );
     }
 }
-const mappedProps = ["touchlinkDevices", "devices", "touchlinkScanInProgress"];
+const mappedProps = ["touchlinkDevices", "devices", "touchlinkScanInProgress", "touchlinkIdentifyInProgress", "touchlinkResetInProgress"];
 
 export default connect<{}, {}, GlobalState, TouchlinkApi>(mappedProps, actions)(TouchlinkPage);

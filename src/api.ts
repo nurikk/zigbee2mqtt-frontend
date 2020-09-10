@@ -1,4 +1,3 @@
-/* eslint-disable no-case-declarations */
 import ReconnectingWebSocket from "reconnecting-websocket";
 import store, { Group, LogMessage } from "./store";
 import { BridgeConfig, BridgeInfo, TouchLinkDevice, Device } from './types';
@@ -73,7 +72,6 @@ class Api {
             new Notyf().error(event.data);
         }
 
-        let response: ResponseWithStatus;
 
         if (data.topic.startsWith("bridge/")) {
             switch (data.topic) {
@@ -88,13 +86,15 @@ class Api {
                     });
                     break;
                 case "bridge/devices":
-                    const devicesMap = new Map();
-                    (data.payload as Device[]).forEach((device) => {
-                        devicesMap.set(device.ieee_address, device);
-                    });
-                    store.setState({
-                        devices: devicesMap
-                    });
+                    {
+                        const devicesMap = new Map();
+                        (data.payload as Device[]).forEach((device) => {
+                            devicesMap.set(device.ieee_address, device);
+                        });
+                        store.setState({
+                            devices: devicesMap
+                        })
+                    }
                     break;
 
                 case "bridge/groups":
@@ -103,14 +103,16 @@ class Api {
                     })
                     break;
                 case "bridge/response/networkmap":
-                    response = data.payload as ResponseWithStatus;
-                    if (response.status == "ok") {
-                        store.setState({
-                            networkGraphIsLoading: false,
-                            networkGraph: sanitizeGraph(JSON.parse((response.data as { value: string }).value) as GraphI)
-                        });
-                    } else {
-                        store.setState({ networkGraphIsLoading: false });
+                    {
+                        const response = data.payload as ResponseWithStatus;
+                        if (response.status == "ok") {
+                            store.setState({
+                                networkGraphIsLoading: false,
+                                networkGraph: sanitizeGraph(JSON.parse((response.data as { value: string }).value) as GraphI)
+                            });
+                        } else {
+                            store.setState({ networkGraphIsLoading: false });
+                        }
                     }
                     break;
 
@@ -118,21 +120,32 @@ class Api {
                     break;
 
                 case "bridge/response/touchlink/scan":
-                    const { status, data: payloadData } = data.payload as TouchllinkScanResponse;
-                    if (status === "ok") {
-                        store.setState({ touchlinkScanInProgress: false, touchlinkDevices: payloadData.found });
-                    } else {
-                        store.setState({ touchlinkScanInProgress: false });
+                    {
+                        const { status, data: payloadData } = data.payload as TouchllinkScanResponse;
+                        if (status === "ok") {
+                            store.setState({ touchlinkScanInProgress: false, touchlinkDevices: payloadData.found });
+                        } else {
+                            store.setState({ touchlinkScanInProgress: false });
+                        }
                     }
                     break;
 
                 case "bridge/logging":
-                    const { logs } = store.getState();
-                    const newLogs = [...logs.slice(-MAX_LOGS_RECORDS_IN_BUFFER)];
-                    newLogs.push(data.payload as LogMessage);
-                    store.setState({ logs: newLogs });
-                    showNotity(data.payload as LogMessage);
+                    {
+                        const { logs } = store.getState();
+                        const newLogs = [...logs.slice(-MAX_LOGS_RECORDS_IN_BUFFER)];
+                        newLogs.push(data.payload as LogMessage);
+                        store.setState({ logs: newLogs });
+                        showNotity(data.payload as LogMessage);
+                    }
                     break;
+                case "bridge/response/touchlink/identify":
+                    store.setState({ touchlinkIdentifyInProgress: false });
+                    break;
+                case "bridge/response/touchlink/factory_reset":
+                    store.setState({ touchlinkResetInProgress: false });
+                    break;
+
                 default:
                     break;
             }

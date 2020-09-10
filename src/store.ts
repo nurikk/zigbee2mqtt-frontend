@@ -26,6 +26,8 @@ export interface GlobalState {
     deviceStates: Map<string, DeviceState>;
     touchlinkDevices: TouchLinkDevice[];
     touchlinkScanInProgress: boolean;
+    touchlinkIdentifyInProgress: boolean;
+    touchlinkResetInProgress: boolean;
     networkGraph: GraphI;
     networkGraphIsLoading: boolean;
     groups: Group[];
@@ -39,6 +41,8 @@ const initialState: GlobalState = {
     deviceStates: new Map(),
     touchlinkDevices: [],
     touchlinkScanInProgress: false,
+    touchlinkIdentifyInProgress: false,
+    touchlinkResetInProgress: false,
     networkGraph: {
         links: [],
         nodes: []

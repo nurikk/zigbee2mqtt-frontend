@@ -132,11 +132,13 @@ const actions = (store: Store<GlobalState>): object => ({
         return Promise.resolve();
     },
     touchlinkIdentify(state, device: TouchLinkDevice): Promise<void> {
+        store.setState({ touchlinkIdentifyInProgress: true });
         api.send('bridge/request/touchlink/identify', device);
         return Promise.resolve();
 
     },
     touchlinkReset(state, device: TouchLinkDevice): Promise<void> {
+        store.setState({ touchlinkResetInProgress: true });
         api.send('bridge/request/touchlink/factory_reset', device);
         return Promise.resolve();
     },
