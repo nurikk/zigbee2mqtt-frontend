@@ -41,10 +41,6 @@ export class DeviceControlGroup extends Component<DeviceControlGroupProps & Devi
             force: false
         }
     }
-    onBindClick = (): void => {
-        const { device } = this.props;
-        location.href = `/zigbee/device?dev=${encodeURIComponent(device.friendly_name)}&activeTab=Bind`;
-    };
 
     onRenameClick = async (): Promise<void> => {
         const { renameDevice, device } = this.props;
@@ -103,7 +99,7 @@ export class DeviceControlGroup extends Component<DeviceControlGroupProps & Devi
 
         return (
             <div className="btn-group btn-group-sm" role="group">
-                <Button<void> className="btn btn-secondary" onClick={this.toggleRenameModal}><i className="fa fa-edit" /></Button>
+                <Button<void> className="btn btn-secondary" onClick={this.toggleRenameModal} title="Rename device"><i className="fa fa-edit" /></Button>
                 <Modal isOpen={isRenameModalOpened}>
                     <ModalHeader>
                         <h3>Rename device</h3>
@@ -146,17 +142,12 @@ export class DeviceControlGroup extends Component<DeviceControlGroupProps & Devi
             </button>
                     </ModalFooter>
                 </Modal>
-                <div class="btn-group btn-group-sm" role="group">
-                    <Button id="btnGroupDrop0" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i className={cx("fa", "fa-cogs")} /></Button>
-                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop0">
-                        <Button<string> class="dropdown-item" onClick={configureDevice} item={device.friendly_name}>Reconfigure</Button>
-                        <Button<string> class="dropdown-item" onClick={checkOTA} item={device.friendly_name}>Check OTA</Button>
-                        {state?.update?.state === "available" ? <Button<string> promt class="dropdown-item" onClick={updateOTA} item={device.friendly_name}>Update OTA</Button> : null}
-                    </div>
-                </div>
-
-
+                <Button<string> class="btn btn-secondary" onClick={configureDevice} item={device.friendly_name} title="Reconfigure" promt><i className={cx("fa", "fa-cogs")} /></Button>
+                {
+                    state?.update?.state === "available" ?
+                        <Button<string> class="btn btn-secondary" onClick={updateOTA} item={device.friendly_name} title="Update OTA" promt><i className={cx("fa", "fa-cloud-download-alt")} /></Button>
+                        : <Button<string> class="btn btn-secondary" onClick={checkOTA} item={device.friendly_name} title="Check OTA"><i className={cx("fa", "fa-cloud")} /></Button>
+                }
                 <Modal isOpen={isDeviceRemovalModalOpened}>
                     <ModalHeader>
                         <h3>Remove device</h3>
@@ -198,7 +189,7 @@ export class DeviceControlGroup extends Component<DeviceControlGroupProps & Devi
             </button>
                     </ModalFooter>
                 </Modal>
-                <button onClick={this.toggleDeviceRemovalModal} class="btn btn-danger"><i className={cx("fa", "fa-trash")} /></button>
+                <button onClick={this.toggleDeviceRemovalModal} class="btn btn-danger" title="Remove device"><i className={cx("fa", "fa-trash")} /></button>
 
 
             </div>

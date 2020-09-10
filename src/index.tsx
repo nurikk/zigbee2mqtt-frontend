@@ -12,10 +12,8 @@ if (process.env.NODE_ENV === 'development') {
 import "./main.css";
 
 import "notyf/notyf.min.css";
-import "bootstrap/dist/js/bootstrap.min.js";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "popper.js";
-import "bootstrap/js/dist/button.js";
+
 
 
 import { render, h, Component, ComponentChild, Fragment, FunctionalComponent } from 'preact';

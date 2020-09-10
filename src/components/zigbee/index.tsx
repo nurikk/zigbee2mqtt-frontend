@@ -175,7 +175,7 @@ export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
                             currentDirection={sortDirection} current={sortColumn}
                             onClick={onSortChange}>Power</ActionTH>
 
-                        <th>Actions</th>
+                        <th>&nbsp;</th>
                     </tr>
                 </thead>
                 <tbody>
