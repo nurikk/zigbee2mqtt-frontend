@@ -37,6 +37,7 @@ const readonlyFields = [
     "contact",
     "action",
     "click",
+    "update",
     "update_available"
 ];
 
