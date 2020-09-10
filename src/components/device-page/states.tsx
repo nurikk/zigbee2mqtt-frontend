@@ -36,7 +36,10 @@ const readonlyFields = [
     "elapsed",
     "contact",
     "action",
-    "click"
+    "click",
+    "update",
+    "update_available",
+    "power"
 ];
 
 class States extends Component<StatesProps & PropsFromStore & StateApi, {}> {
