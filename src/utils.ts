@@ -176,8 +176,6 @@ export const isObject = (obj: unknown): boolean => {
     return obj === Object(obj);
 }
 
-export const noCoordinator = (device: Device): boolean => device.type !== "Coordinator";
-
 
 export const getDeviceDisplayName = (device: Device): string => {
     return `${toHex(device.network_address)} (${device.friendly_name ? device.friendly_name : device.definition?.model})`;

@@ -4,7 +4,7 @@ import orderBy from "lodash/orderBy";
 import DeviceControlGroup from "../device-control";
 import cx from "classnames";
 import { Device, SortDirection, DeviceState } from "../../types";
-import { genDeviceDetailsLink, genDeviceImageUrl, lastSeen, toHex, noCoordinator } from "../../utils";
+import { genDeviceDetailsLink, genDeviceImageUrl, lastSeen, toHex } from "../../utils";
 import SafeImg from "../safe-image";
 import { Notyf } from "notyf";
 import PowerSource from "../power-source";
