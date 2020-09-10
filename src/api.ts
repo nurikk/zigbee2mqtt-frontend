@@ -18,24 +18,20 @@ interface Message {
 
 const blacklistedMessages: RegExp[] = [
     /MQTT publish/
-]
-const errorNotyf = new Notyf();
-const successNotyf = new Notyf();
+];
 const showNotity = debounce((data: LogMessage): void => {
     // eslint-disable-next-line prefer-const
     let { message, level } = data;
     switch (level) {
         case "error":
         case "warning":
-
-            errorNotyf.error(message);
+            new Notyf().error(message);
             break;
         case "info":
             if (blacklistedMessages.every(val => !val.test(message))) {
-                successNotyf.success(message);
+                new Notyf().success(message);
             }
             break;
-
 
         default:
             break;
