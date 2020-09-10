@@ -1,3 +1,13 @@
+## [0.1.54](https://github.com/nurikk/z2m-frontend/compare/0.1.53...0.1.54) (2020-09-10)
+
+
+### Features
+
+* **notyf:** better notifications bridge/response ([8844039](https://github.com/nurikk/z2m-frontend/commit/88440393595068b20cc2d232d73425a5f0f267d7))
+* **touchlink:** display touchlink status ([3e9115d](https://github.com/nurikk/z2m-frontend/commit/3e9115d844f94ee638f61a629f294adc7385a77c))
+
+
+
 ## [0.1.53](https://github.com/nurikk/z2m-frontend/compare/0.1.52...0.1.53) (2020-09-10)
 
 
