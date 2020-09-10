@@ -1,3 +1,18 @@
+## [0.1.53](https://github.com/nurikk/z2m-frontend/compare/0.1.52...0.1.53) (2020-09-10)
+
+
+### Bug Fixes
+
+* **noty:** fix notifications ([0773309](https://github.com/nurikk/z2m-frontend/commit/077330920ad11d69bc4395ff7bece01ec24397eb))
+
+
+### Features
+
+* **device control:** don't use bloody dropdown ([8f04d60](https://github.com/nurikk/z2m-frontend/commit/8f04d60e3fd04142f781aa40b8abec9b30053a53))
+* **zigbee:** hide lastSeen column if it disabled ([0de3763](https://github.com/nurikk/z2m-frontend/commit/0de3763e1d1863bf4467230dc52b37e499ec217e))
+
+
+
 ## [0.1.52](https://github.com/nurikk/z2m-frontend/compare/0.1.51...0.1.52) (2020-09-09)
 
 
