@@ -148,9 +148,6 @@ export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
                     <tr className="text-nowrap">
                         <th>#</th>
                         <th>Pic</th>
-                        <ActionTH<SortColumn> className={cx(style["action-column"])} column="device.network_address"
-                            currentDirection={sortDirection} current={sortColumn}
-                            onClick={onSortChange}>nwkAddr</ActionTH>
                         <ActionTH<SortColumn> className={style["action-column"]} column="device.friendly_name"
                             currentDirection={sortDirection} current={sortColumn}
                             onClick={onSortChange}>Friendly name</ActionTH>
@@ -189,9 +186,7 @@ export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
                                 src={genDeviceImageUrl(device.definition?.model)} />
                             </td>
                             <td><a
-                                href={genDeviceDetailsLink(device.ieee_address)}>{toHex(device.network_address)}</a>
-                            </td>
-                            <td>{device.friendly_name}</td>
+                                href={genDeviceDetailsLink(device.ieee_address)}>{device.friendly_name}</a></td>
                             <td>{device.ieee_address}</td>
                             <td title={device.definition?.vendor ?? 'Unsupported'}
                                 className={cx("text-truncate", "text-nowrap", "position-relative")}>{device.definition?.vendor ?? 'Unsupported'}</td>
