@@ -1,15 +1,14 @@
 import { Component, ComponentChild, h } from "preact";
-import style from "./style.css";
 import { SortDirection } from "../../types";
-
+import isEqual from "lodash/isEqual";
 
 
 interface ActionTHProps<T> {
-    column: T;
-    current: T;
+    column: T | T[];
+    current: T | T[];
     currentDirection: SortDirection;
 
-    onClick?(arg1: unknown): void;
+    onClick?(arg1: T | T[]): void;
 
     [k: string]: unknown;
 }
@@ -24,7 +23,7 @@ export default class ActionTH<T> extends Component<ActionTHProps<T>, {}> {
 
     renderArrow(): ComponentChild {
         const { currentDirection, current, column } = this.props;
-        if (current === column) {
+        if (isEqual(current, column)) {
             if (currentDirection == "asc") {
                 return <i className={`fa fa-sort-amount-down-alt`} />;
             }

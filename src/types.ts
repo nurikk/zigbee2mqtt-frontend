@@ -44,6 +44,10 @@ export interface Network {
 }
 export interface Z2MConfig {
     homeassistant: boolean;
+    advanced: {
+        elapsed: boolean;
+        last_seen: 'disable' | 'ISO_8601' | 'ISO_8601_local'| 'epoch';
+    };
     [k: string]: unknown;
 }
 export interface BridgeConfig {

@@ -122,9 +122,8 @@ export function callApi<T>(url: string, method: HttMethod, params: Dictionary<an
             });
     })
 }
-
 export const lastSeen = (lastSeen: string, elapsed: number): string => {
-    if (!lastSeen) {
+    if (!lastSeen && !elapsed) {
         return "N/A";
     }
 
