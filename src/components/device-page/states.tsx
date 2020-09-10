@@ -1,5 +1,5 @@
 import { Component, ComponentChild, h } from "preact";
-import { Device, Dictionary } from "../../types";
+import { Device } from "../../types";
 import style from "./style.css";
 import UniversalEditor from "../universal-editor";
 import actions, { StateApi } from "../../actions";
@@ -8,8 +8,8 @@ import { connect } from "unistore/preact";
 import { GlobalState } from "../../store";
 
 interface PropsFromStore {
-    devices: Device[];
-    deviceStates: Dictionary<Device>;
+    devices: Map<string, Device>;
+    deviceStates: Map<string, Device>;
 
 }
 interface StatesProps {
@@ -45,13 +45,13 @@ const readonlyFields = [
 class States extends Component<StatesProps & PropsFromStore & StateApi, {}> {
     setStateValue = (name: string, value: unknown): void => {
         const { setStateValue, dev, devices } = this.props;
-        const device = devices.find(d => d.ieee_address == dev);
+        const device = devices.get(dev);
         setStateValue(device.friendly_name, name, value);
     };
 
     render(): ComponentChild {
         const { dev, devices, deviceStates } = this.props;
-        const device = devices.find(d => d.ieee_address == dev);
+        const device = devices.get(dev);
         if (!device) {
             return "Unknown device";
         }

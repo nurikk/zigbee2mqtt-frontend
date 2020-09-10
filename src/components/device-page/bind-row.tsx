@@ -13,7 +13,7 @@ import { NiceBindingRule } from "./bind";
 interface BindRowProps {
     rule: NiceBindingRule;
     idx: number;
-    devices: Device[];
+    devices: Map<string, Device>;
     groups: Group[];
     device: Device;
     onBind(from: string, to: string, clusters: Cluster[]): void;
@@ -35,11 +35,11 @@ const getEndpoints = (obj: Device | Group): Endpoint[] => {
     }
     return [];
 }
-const getTarget = (rule: NiceBindingRule, devices: Device[], groups: Group[]) => {
+const getTarget = (rule: NiceBindingRule, devices: Map<string, Device>, groups: Group[]) => {
     if (rule.target.type === "group") {
         return groups.find(g => g.id === rule.target.id);
     }
-    return devices.find(d => d.ieee_address === rule.target.ieee_address);
+    return devices.get(rule.target.ieee_address);
 }
 
 export default class BindRow extends Component<BindRowProps, BindRowState> {
@@ -94,7 +94,7 @@ export default class BindRow extends Component<BindRowProps, BindRowState> {
             to = `${targetGroup.friendly_name}`;
 
         } else if (stateRule.target.type === "endpoint") {
-            const targeDevice = devices.find(d => d.ieee_address === stateRule.target.ieee_address);
+            const targeDevice = devices.get(stateRule.target.ieee_address);
             to = `${targeDevice.friendly_name}/${stateRule.target.endpoint}`;
         }
 
@@ -111,7 +111,7 @@ export default class BindRow extends Component<BindRowProps, BindRowState> {
             const targetGroup = groups.find(group => group.id === stateRule.target.id);
             to = `${targetGroup.friendly_name}`;
         } else if (stateRule.target.type === "endpoint") {
-            const targeDevice = devices.find(d => d.ieee_address === stateRule.target.ieee_address);
+            const targeDevice = devices.get(stateRule.target.ieee_address);
             to = `${targeDevice.friendly_name}/${stateRule.target.endpoint}`;
         }
 

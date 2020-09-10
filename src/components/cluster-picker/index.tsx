@@ -1,10 +1,10 @@
 import { Component, ComponentChild, h } from "preact";
-import { Cluster, Dictionary } from "../../types";
+import { Cluster } from "../../types";
 import { randomString } from "../../utils";
 
 
 
-const clusterDescriptions: Dictionary<string> = {
+const clusterDescriptions = {
     genScenes: "Scenes",
     genOnOff: "OnOff",
     genLevelCtrl: "LevelCtrl",

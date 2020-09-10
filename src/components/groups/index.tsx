@@ -18,7 +18,7 @@ interface GroupsPageState {
 
 
 interface AddDeviceToGroupProps {
-    devices: Device[];
+    devices: Map<string, Device>;
     group: Group;
     addDeviceToGroup(deviceName: string, groupName: string): void;
 }
@@ -31,7 +31,7 @@ interface AddDeviceToGroupState {
 interface DeviceGroupRowProps {
     rowNumber: number;
     groupAddress: GroupAddress;
-    devices: Device[];
+    devices: Map<string, Device>;
     removeDeviceFromGroup(deviceFriendlyName: string): void;
 }
 
@@ -39,7 +39,7 @@ interface DeviceGroupRowProps {
 class DeviceGroupRow extends Component<DeviceGroupRowProps, {}> {
     getDeviceObj(): Device | undefined {
         const { groupAddress, devices } = this.props;
-        return devices.find(d => d.ieee_address === groupAddress.ieee_address);
+        return devices.get(groupAddress.ieee_address);
     }
     render(): ComponentChild {
         const { rowNumber, groupAddress, removeDeviceFromGroup } = this.props;
@@ -59,7 +59,7 @@ class DeviceGroupRow extends Component<DeviceGroupRowProps, {}> {
 }
 interface DeviceGroupPropts {
     group: Group;
-    devices: Device[];
+    devices: Map<string, Device>;
     removeDeviceFromGroup(groupFriendlyName: string, deviceFriendlyName: string): void;
 }
 
@@ -107,7 +107,7 @@ class AddDeviceToGroup extends Component<AddDeviceToGroupProps, AddDeviceToGroup
     render(): ComponentChild {
         const { device, endpoint } = this.state;
         const { devices } = this.props;
-        const deviceObj = devices.find(d => d.ieee_address === device);
+        const deviceObj = devices.get(device);
 
         const endpoints = Object.keys(deviceObj?.endpoints ?? {});
 

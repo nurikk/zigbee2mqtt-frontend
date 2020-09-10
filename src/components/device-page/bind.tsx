@@ -1,5 +1,5 @@
 import { Component, ComponentChild, h } from "preact";
-import { Device, Cluster, Endpoint, Dictionary } from "../../types";
+import { Device, Cluster, Endpoint } from "../../types";
 import { ZigbeeClusters } from "./clusters";
 import BindRow from "./bind-row";
 import actions, { BindApi } from "../../actions";
@@ -17,7 +17,7 @@ export const getClusterName = (id: number, addBraces = true): string => {
 };
 
 interface PropsFromStore {
-    devices: Device[];
+    devices: Map<string, Device>;
     groups: Group[];
 }
 interface BindProps {
@@ -40,7 +40,7 @@ export interface NiceBindingRule {
     clusters: Cluster[];
 }
 const convertBidningsIntoNiceStructure = (device: Device, coordinator: Device): NiceBindingRule[] => {
-    const bindings: Dictionary<NiceBindingRule> = {};
+    const bindings = {};
     Object.entries(device.endpoints).forEach(([endpoint, description]) => {
         description.bindings
             .filter(b => b.target.ieee_address !== coordinator.ieee_address)
@@ -75,8 +75,9 @@ export class Bind extends Component<BindProps & PropsFromStore & BindApi, {}> {
     };
     render(): ComponentChild {
         const { dev, devices, groups } = this.props;
-        const coordinator = devices.find(d => d.type === "Coordinator");
-        const device = devices.find(d => d.ieee_address == dev);
+
+        const coordinator = Array.from(devices.values()).find(d => d.type === "Coordinator");
+        const device = devices.get(dev);
         if (!device) {
             return "Unknown device";
         }

@@ -1,7 +1,7 @@
 /* eslint-disable no-case-declarations */
 import ReconnectingWebSocket from "reconnecting-websocket";
 import store, { Group, LogMessage } from "./store";
-import { BridgeConfig, Device, BridgeInfo, TouchLinkDevice } from './types';
+import { BridgeConfig, BridgeInfo, TouchLinkDevice, Device } from './types';
 import { sanitizeGraph, isSecurePage } from "./utils";
 import { Notyf } from "notyf";
 import { GraphI } from "./components/map/types";
@@ -24,9 +24,6 @@ const successNotyf = new Notyf();
 const showNotity = debounce((data: LogMessage): void => {
     // eslint-disable-next-line prefer-const
     let { message, level } = data;
-    if (message.length > 50) {
-        message = message.split(' ').slice(0, 5).join(' ');
-    }
     switch (level) {
         case "error":
         case "warning":
@@ -54,10 +51,6 @@ interface TouchllinkScanResponse extends ResponseWithStatus {
     data: {
         found: TouchLinkDevice[];
     };
-}
-interface OtaUpdateResponse {
-    id: string;
-    updateAvailable: boolean;
 }
 class Api {
     url: string;
@@ -99,8 +92,12 @@ class Api {
                     });
                     break;
                 case "bridge/devices":
+                    const devicesMap = new Map();
+                    (data.payload as Device[]).forEach((device) => {
+                        devicesMap.set(device.ieee_address, device);
+                    });
                     store.setState({
-                        devices: data.payload as Device[]
+                        devices: devicesMap
                     });
                     break;
 
@@ -129,12 +126,11 @@ class Api {
                     if (status === "ok") {
                         store.setState({ touchlinkScanInProgress: false, touchlinkDevices: payloadData.found });
                     } else {
-                        store.setState({touchlinkScanInProgress: false});
+                        store.setState({ touchlinkScanInProgress: false });
                     }
                     break;
 
                 case "bridge/logging":
-                    // eslint-disable-next-line no-case-declarations
                     const { logs } = store.getState();
                     const newLogs = [...logs.slice(-MAX_LOGS_RECORDS_IN_BUFFER)];
                     newLogs.push(data.payload as LogMessage);
@@ -142,17 +138,12 @@ class Api {
                     showNotity(data.payload as LogMessage);
                     break;
                 default:
-                    if (data.topic.startsWith("bridge/request/")) {
-
-                    } else {
-                        // debugger
-                    }
                     break;
             }
         } else {
             const { deviceStates } = store.getState();
-            const newDeviceStates = { ...deviceStates };
-            newDeviceStates[data.topic] = { ...newDeviceStates[data.topic], ...(data.payload as object) };
+            const newDeviceStates = new Map(deviceStates);
+            newDeviceStates.set(data.topic, { ...newDeviceStates[data.topic], ...(data.payload as object) });
             store.setState({ deviceStates: newDeviceStates });
         }
 

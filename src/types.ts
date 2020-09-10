@@ -1,6 +1,5 @@
 export type DeviceType = "EndDevice" | "Router" | "Coordinator";
 
-export type Dictionary<V> = { [index: string]: V }
 
 interface OTAState {
     state: "available" | "updating";
@@ -95,7 +94,7 @@ export interface Device {
     supported: boolean;
     definition?: DeviceDefinition;
     date_code: string;
-    endpoints: Dictionary<EndpointDescription>;
+    endpoints: Map<string, EndpointDescription>;
 }
 
 export type ObjectType = "device" | "group";

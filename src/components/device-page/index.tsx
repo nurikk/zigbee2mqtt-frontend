@@ -34,7 +34,7 @@ export class DevicePage extends Component<DevicePageProps & GlobalState, {}> {
     render(): ComponentChild {
 
         const { dev, tab, devices } = this.props;
-        const device = devices.find(d => d.ieee_address == dev);
+        const device = devices.get(dev);
         if (!device) {
             return "Unknown device";
         }

@@ -92,11 +92,14 @@ export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
     static getDerivedStateFromProps(props: Readonly<GlobalState>, state: ZigbeeTableState): Partial<ZigbeeTableState> {
         const { sortColumn, sortDirection } = state;
         const { devices, deviceStates } = props;
-        const tableData: ZigbeeTableData[] = devices.filter(noCoordinator).map((device) => {
-            return {
-                device,
-                state: deviceStates[device.friendly_name]
+        const tableData: ZigbeeTableData[] = [];
+        devices.forEach((device) => {
+            if (device.type !== "Coordinator") {
+                tableData.push({
+                    device,
+                    state: deviceStates.get(device.friendly_name)
 
+                });
             }
         });
         return { sortedTableData: orderBy<ZigbeeTableData>(tableData, sortColumn, [sortDirection]) };
@@ -122,7 +125,7 @@ export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
 
     render(): ComponentChild {
         const { devices } = this.props;
-        if (devices.length) {
+        if (devices.size) {
             return this.renderDevicesTable();
 
         }

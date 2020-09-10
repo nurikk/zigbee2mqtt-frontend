@@ -1,5 +1,5 @@
 
-import { Device, Dictionary } from "./types";
+import { Device } from "./types";
 import { Notyf } from "notyf";
 import { GraphI, ZigbeeRelationship, NodeI, Target, Source } from "./components/map/types";
 
@@ -25,7 +25,7 @@ export function chunkArray<T>(inputArr: T[], chunkSize: number): T[][] {
     return results;
 }
 
-export const encodeGetParams = (data: Dictionary<string | number>): string => Object.keys(data).map((key) => [key, data[key]].map(encodeURIComponent).join("=")).join("&");
+export const encodeGetParams = (data: Map<string, string | number>): string => Object.keys(data).map((key) => [key, data[key]].map(encodeURIComponent).join("=")).join("&");
 
 export const sanitizeModelNameForImageUrl = (model = ""): string => {
     return `${model.replace(/:|\s|\//g, "-")}.jpg`;
@@ -94,34 +94,13 @@ export const toHHMMSS = (secs: number): string => {
         .filter((v, i) => v !== "00" || i > 0)
         .join(":");
 };
-type HttMethod = "GET" | "POST" | "DELETE";
-type ContentType = "text" | "json" | "blob";
+
 export type CallbackHandler<T> = (err: boolean, res: T) => void;
 export interface ApiResponse<T> {
     success: boolean;
     result: T;
 }
-export function callApi<T>(url: string, method: HttMethod, params: Dictionary<any>, payload: any, callback: CallbackHandler<T>, contentType: ContentType = "json"): Promise<void> {
-    return new Promise<void>((resolve, reject) => {
-        fetch(`${url}?${encodeGetParams(params)}`, { method, body: payload })
-            .then((res) => {
-                if (res.status === 200) {
-                    return res[contentType]();
-                }
-                throw new Error(res.statusText);
 
-            })
-            .then(data => {
-                callback(false, data);
-                resolve();
-            })
-            .catch(e => {
-                new Notyf().error(e.toString());
-                callback(e.toString(), undefined);
-                reject();
-            });
-    })
-}
 export const lastSeen = (lastSeen: string, elapsed: number): string => {
     if (!lastSeen && !elapsed) {
         return "N/A";

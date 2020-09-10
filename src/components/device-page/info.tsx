@@ -14,7 +14,7 @@ interface DeviceInfoProps {
 }
 
 interface PropsFromStore {
-    devices: Device[];
+    devices: Map<string, Device>;
     deviceStates: DeviceState[];
 }
 
@@ -22,7 +22,7 @@ interface PropsFromStore {
 export class DeviceInfo extends Component<DeviceInfoProps & PropsFromStore, {}> {
     render(): ComponentChild {
         const { dev, devices, deviceStates } = this.props;
-        const device = devices.find(d => d.ieee_address == dev);
+        const device = devices.get(dev);
         if (!device) {
             return "Unknown device";
         }
