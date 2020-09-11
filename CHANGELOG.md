@@ -1,3 +1,17 @@
+## [0.1.56](https://github.com/nurikk/z2m-frontend/compare/0.1.55...0.1.56) (2020-09-11)
+
+
+### Bug Fixes
+
+* **state:** fix device states and typings ([0b74339](https://github.com/nurikk/z2m-frontend/commit/0b743396f5510870d507a268cacec0d3b5dd1e9d))
+
+
+### Features
+
+* **webpack:** add Z2M_API_URI env variable ([ceb436f](https://github.com/nurikk/z2m-frontend/commit/ceb436fad7dff3c130355a64935d4d4e97325e28))
+
+
+
 ## [0.1.55](https://github.com/nurikk/z2m-frontend/compare/0.1.54...0.1.55) (2020-09-11)
 
 
