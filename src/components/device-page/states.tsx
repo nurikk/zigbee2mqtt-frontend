@@ -58,7 +58,6 @@ class States extends Component<StatesProps & PropsFromStore & StateApi, {}> {
         const deviceState = deviceStates.get(device.friendly_name) ?? {};
 
         const kv = Object.entries(deviceState).filter(kvp => !isObject(kvp[1]))
-        console.log(kv);
         return (
             <div class="card">
                 <table class="table table-borderless">
