@@ -1,3 +1,19 @@
+## [0.1.55](https://github.com/nurikk/z2m-frontend/compare/0.1.54...0.1.55) (2020-09-11)
+
+
+### Bug Fixes
+
+* **device image:** load generic image ([f9c732d](https://github.com/nurikk/z2m-frontend/commit/f9c732dd48c95e63a2782785f3c48125860e6f07))
+* **zigbee:** remove rows color coding ([165a731](https://github.com/nurikk/z2m-frontend/commit/165a7312cd2622fb7ee07b350360707ad7e370e6))
+
+
+### Features
+
+* **zigbee:** show description on model ([c78b3f2](https://github.com/nurikk/z2m-frontend/commit/c78b3f20f8737173ca2bc9bf809c32ef142930c5))
+* **zigbee:** update titles ([ed2faf5](https://github.com/nurikk/z2m-frontend/commit/ed2faf52b2f56b448f344ad1f196c878867aebb0))
+
+
+
 ## [0.1.54](https://github.com/nurikk/z2m-frontend/compare/0.1.53...0.1.54) (2020-09-10)
 
 
