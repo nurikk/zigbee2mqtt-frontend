@@ -15,7 +15,7 @@ interface DeviceInfoProps {
 
 interface PropsFromStore {
     devices: Map<string, Device>;
-    deviceStates: DeviceState[];
+    deviceStates: Map<string, DeviceState>;
 }
 
 // eslint-disable-next-line react/prefer-stateless-function
@@ -26,7 +26,7 @@ export class DeviceInfo extends Component<DeviceInfoProps & PropsFromStore, {}> 
         if (!device) {
             return "Unknown device";
         }
-        const deviceStatus: DeviceState = deviceStates[device.friendly_name];
+        const deviceStatus: DeviceState = deviceStates.get(device.friendly_name);
 
         const displayProps = [
             {

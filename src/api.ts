@@ -184,7 +184,7 @@ class Api {
         } else {
             const { deviceStates } = store.getState();
             const newDeviceStates = new Map(deviceStates);
-            newDeviceStates.set(data.topic, { ...newDeviceStates[data.topic], ...(data.payload as object) });
+            newDeviceStates.set(data.topic, { ...newDeviceStates.get(data.topic), ...(data.payload as object) });
             store.setState({ deviceStates: newDeviceStates });
         }
     }

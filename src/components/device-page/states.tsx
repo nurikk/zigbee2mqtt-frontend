@@ -1,5 +1,5 @@
 import { Component, ComponentChild, h } from "preact";
-import { Device } from "../../types";
+import { Device, DeviceState } from "../../types";
 import style from "./style.css";
 import UniversalEditor from "../universal-editor";
 import actions, { StateApi } from "../../actions";
@@ -9,7 +9,7 @@ import { GlobalState } from "../../store";
 
 interface PropsFromStore {
     devices: Map<string, Device>;
-    deviceStates: Map<string, Device>;
+    deviceStates: Map<string, DeviceState>;
 
 }
 interface StatesProps {
@@ -55,10 +55,10 @@ class States extends Component<StatesProps & PropsFromStore & StateApi, {}> {
         if (!device) {
             return "Unknown device";
         }
-        const deviceState = deviceStates[device.friendly_name] ?? {};
+        const deviceState = deviceStates.get(device.friendly_name) ?? {};
 
         const kv = Object.entries(deviceState).filter(kvp => !isObject(kvp[1]))
-
+        console.log(kv);
         return (
             <div class="card">
                 <table class="table table-borderless">
