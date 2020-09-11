@@ -1,6 +1,6 @@
 
 import { Device } from "./types";
-import { Notyf } from "notyf";
+import genericDevicePic from "./images/generic-zigbee-device.png";
 import { GraphI, ZigbeeRelationship, NodeI, Target, Source } from "./components/map/types";
 
 
@@ -31,7 +31,12 @@ export const sanitizeModelNameForImageUrl = (model = ""): string => {
     return `${model.replace(/:|\s|\//g, "-")}.jpg`;
 };
 
-export const genDeviceImageUrl = (modelID: string): string => (`https://www.zigbee2mqtt.io/images/devices/${sanitizeModelNameForImageUrl(modelID)}`);
+export const genDeviceImageUrl = (modelID: string): string => {
+    if (modelID) {
+        return `https://www.zigbee2mqtt.io/images/devices/${sanitizeModelNameForImageUrl(modelID)}`
+    }
+    return genericDevicePic;
+};
 
 export type LoadableFileTypes = "js" | "css";
 
