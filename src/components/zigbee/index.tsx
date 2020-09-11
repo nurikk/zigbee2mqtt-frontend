@@ -190,7 +190,7 @@ export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
                             <td>{device.ieee_address}</td>
                             <td title={device.definition?.vendor ?? 'Unsupported'}
                                 className={cx("text-truncate", "text-nowrap", "position-relative")}>{device.definition?.vendor ?? 'Unsupported'}</td>
-                            <td>{device.definition?.model ?? 'Unsupported'}</td>
+                            <td title={device?.definition?.description}>{device.definition?.model ?? 'Unsupported'}</td>
                             <td>{state?.linkquality ?? "N/A"}</td>
                             {lastSeenIsAvaliable && <td>{lastSeen(state?.last_seen, state?.elapsed)}</td>}
                             <td className="text-left">
