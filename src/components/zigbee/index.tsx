@@ -185,11 +185,11 @@ export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
                             <td className={style["device-pic"]}><SafeImg class={cx(style["device-image"])}
                                 src={genDeviceImageUrl(device.definition?.model)} />
                             </td>
-                            <td><a
-                                href={genDeviceDetailsLink(device.ieee_address)}>{device.friendly_name}</a></td>
-                            <td>{device.ieee_address}</td>
-                            <td title={device.definition?.vendor ?? 'Unsupported'}
-                                className={cx("text-truncate", "text-nowrap", "position-relative")}>{device.definition?.vendor ?? 'Unsupported'}</td>
+                            <td>
+                                <a href={genDeviceDetailsLink(device.ieee_address)}>{device.friendly_name}</a>
+                            </td>
+                            <td title={toHex(device.network_address)}>{device.ieee_address}</td>
+                            <td className={cx("text-truncate", "text-nowrap", "position-relative")}>{device.definition?.vendor ?? 'Unsupported'}</td>
                             <td title={device?.definition?.description}>{device.definition?.model ?? 'Unsupported'}</td>
                             <td>{state?.linkquality ?? "N/A"}</td>
                             {lastSeenIsAvaliable && <td>{lastSeen(state?.last_seen, state?.elapsed)}</td>}
