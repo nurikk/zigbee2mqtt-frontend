@@ -4,6 +4,9 @@ import actions, { BridgeApi } from "../../actions";
 import { GlobalState } from "../../store";
 import get from "lodash/get";
 import UniversalEditor from "../universal-editor";
+import { Link } from "preact-router/match";
+import cx from "classnames";
+import Redirect from "../Redirect";
 
 const settings = [
     {
@@ -34,16 +37,58 @@ const settings = [
         description: 'Home Assistant integration (MQTT discovery)',
 
     }
-
 ]
+type SettingsTab = "settings" | "bridge"
+interface SettingsPageProps {
+    tab?: SettingsTab;
+}
 
-export class SettingsPage extends Component<BridgeApi & GlobalState> {
+
+export class SettingsPage extends Component<SettingsPageProps & BridgeApi & GlobalState, {}> {
     updateConfig = (name: string, value: unknown): void => {
         const { updateConfigValue } = this.props;
         updateConfigValue(name, value);
     }
 
     render(): ComponentChild {
+        const { tab } = this.props;
+        return (
+            <div class="card h-100">
+                <div class="card-header">
+                    <ul class="nav nav-tabs card-header-tabs">
+                        <li class="nav-item">
+                            <Link className={cx("nav-link", { active: tab === "settings" })} href={`/settings/settings`}>Settings</Link>
+                        </li>
+                        <li class="nav-item">
+                            <Link className={cx("nav-link", { active: tab === "bridge" })} href={`/settings/bridge`}>Bridge</Link>
+                        </li>
+                    </ul>
+
+                </div>
+
+                <div className="card-body">
+                    {this.renderSwitcher()}
+                </div>
+            </div>
+        )
+    }
+    renderSwitcher() {
+        const { tab } = this.props;
+        switch (tab) {
+            case "settings":
+                return this.renderSettings();
+            case "bridge":
+                return this.renderBridgeInfo();
+            default:
+                return <Redirect to={`/settings/settings`} />;
+        }
+    }
+
+    renderBridgeInfo() {
+        const { bridgeInfo } = this.props;
+        return <pre>{JSON.stringify(bridgeInfo, null, 4)}</pre>
+    }
+    renderSettings(): ComponentChild {
 
         const { bridgeInfo } = this.props;
         return <div className="container">
@@ -73,5 +118,5 @@ export class SettingsPage extends Component<BridgeApi & GlobalState> {
 }
 
 const mappedProps = ["bridgeInfo"];
-const ConnectedSettingsPage = connect<{}, {}, GlobalState, BridgeApi>(mappedProps, actions)(SettingsPage);
+const ConnectedSettingsPage = connect<SettingsPageProps, {}, GlobalState, BridgeApi>(mappedProps, actions)(SettingsPage);
 export default ConnectedSettingsPage;
