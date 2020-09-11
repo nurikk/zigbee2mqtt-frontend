@@ -27,7 +27,7 @@ const isResponseWithStatus = (msg: LogMessage | ResponseWithStatus): msg is Resp
     return (msg as ResponseWithStatus).status !== undefined;
 }
 
-const showNotity = debounce((data: LogMessage | ResponseWithStatus): void => {
+const showNotity = (data: LogMessage | ResponseWithStatus): void => {
     let message = "", level = "";
     if (isLogMessage(data)) {
         message = data.message;
@@ -43,23 +43,19 @@ const showNotity = debounce((data: LogMessage | ResponseWithStatus): void => {
         }
     }
 
-
     switch (level) {
         case "error":
         case "warning":
-
             new Notyf().error(message);
             break;
         case "info":
-            if (blacklistedMessages.every(val => !val.test(message))) {
-                new Notyf().success(message);
-            }
+            new Notyf().success(message);
             break;
 
         default:
             break;
     }
-}, 200, { trailing: true });
+};
 
 interface ResponseWithStatus {
     status: "ok" | "error";
@@ -138,7 +134,10 @@ class Api {
                         const newLogs = [...logs.slice(-MAX_LOGS_RECORDS_IN_BUFFER)];
                         newLogs.push(data.payload as LogMessage);
                         store.setState({ logs: newLogs });
-                        showNotity(data.payload as LogMessage);
+                        const log = data.payload as LogMessage;
+                        if (blacklistedMessages.every(val => !val.test(log.message))) {
+                            showNotity(log);
+                        }
                     }
                     break;
 
