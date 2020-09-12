@@ -1,6 +1,6 @@
 import ReconnectingWebSocket from "reconnecting-websocket";
 import store, { Group, LogMessage } from "./store";
-import { BridgeConfig, BridgeInfo, TouchLinkDevice, Device } from './types';
+import { BridgeConfig, BridgeInfo, TouchLinkDevice, Device, DeviceState } from './types';
 import { sanitizeGraph, isSecurePage } from "./utils";
 import { Notyf } from "notyf";
 import { GraphI } from "./components/map/types";
@@ -183,7 +183,7 @@ class Api {
         } else {
             const { deviceStates } = store.getState();
             const newDeviceStates = new Map(deviceStates);
-            newDeviceStates.set(data.topic, { ...newDeviceStates.get(data.topic), ...(data.payload as object) });
+            newDeviceStates.set(data.topic, { ...newDeviceStates.get(data.topic), ...(data.payload as DeviceState) });
             store.setState({ deviceStates: newDeviceStates });
         }
     }

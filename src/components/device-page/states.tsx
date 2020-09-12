@@ -1,4 +1,4 @@
-import React, { Component} from "react";
+import React, { Component } from "react";
 import { Device, DeviceState } from "../../types";
 import style from "./style.css";
 import UniversalEditor from "../universal-editor";
@@ -6,6 +6,7 @@ import actions, { StateApi } from "../../actions";
 import isObject from "lodash/isObject";
 import { connect } from "unistore/react";
 import { GlobalState } from "../../store";
+import debounce from "lodash/debounce";
 
 interface PropsFromStore {
     deviceStates: Map<string, DeviceState>;
@@ -42,10 +43,10 @@ const readonlyFields = [
 ];
 
 class States extends Component<StatesProps & PropsFromStore & StateApi, {}> {
-    setStateValue = (name: string, value: unknown): void => {
+    setStateValue = debounce((name: string, value: unknown): void => {
         const { setStateValue, device } = this.props;
         setStateValue(device.friendly_name, name, value);
-    };
+    }, 200, { leading: false, trailing: true });
 
     render() {
         const { device, deviceStates } = this.props;
@@ -69,7 +70,7 @@ class States extends Component<StatesProps & PropsFromStore & StateApi, {}> {
                                     <UniversalEditor
                                         disabled={readonlyFields.includes(param[0])}
                                         value={param[1]}
-                                        onChange={(value): void => this.setStateValue(param[0], value)}
+                                        onChange={(value) => this.setStateValue(param[0], value)}
                                         {...fieldProps[param[0]]}
                                     />
                                 </td>

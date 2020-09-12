@@ -1,11 +1,10 @@
-import React, { Component} from "react";
+import React, { Component } from "react";
 import { connect } from "unistore/react";
 import actions, { BridgeApi } from "../../actions";
 import { GlobalState } from "../../store";
 import get from "lodash/get";
 import UniversalEditor from "../universal-editor";
-// import { NavLink } from "react-router";
-import cx from "classnames";
+import debounce from "lodash/debounce";
 import { Redirect } from "react-router-dom";
 
 
@@ -46,10 +45,10 @@ interface SettingsPageProps {
 
 
 export class SettingsPage extends Component<SettingsPageProps & BridgeApi & GlobalState, {}> {
-    updateConfig = (name: string, value: unknown): void => {
+    updateConfig = debounce((name: string, value: unknown): void => {
         const { updateConfigValue } = this.props;
         updateConfigValue(name, value);
-    }
+    }, 200, { leading: false, trailing: true });
 
     render() {
         const { tab } = this.props;
@@ -101,9 +100,9 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
 
                                 <label htmlFor={setting.key}>{setting.title}</label>
                                 <UniversalEditor
-                                    value={get(bridgeInfo.config, setting.path)}
+                                    value={get(bridgeInfo.config, setting.path) as string | ReadonlyArray<string> | number}
                                     values={setting.values}
-                                    onChange={(value): void => this.updateConfig(setting.key, value)}
+                                    onChange={(value) => this.updateConfig(setting.key, value)}
                                 />
                                 <div className="form-text">{setting.description}</div>
 

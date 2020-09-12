@@ -1,40 +1,39 @@
-import React, { RefObject, forwardRef, FocusEvent, ChangeEvent } from "react";
-// import { forwardRef } from "react/compat";
+import React, { useState, ChangeEvent, InputHTMLAttributes } from "react";
+
 import Button from "../button";
 
 interface UniversalEditorProps {
-    value: unknown;
     values?: unknown[];
-    readonly?: boolean;
-    onChange(value: unknown): void;
-    [k: string]: unknown;
+    onChange(arg1: unknown): void;
 }
 
-const toggleCommand = 'TOGGLE';
-const togglableValues = ['ON', 'OFF'];
+const togglePairs = new Map<string | boolean, string | boolean>([
+    ['ON', 'OFF'],
+    ['OFF', 'ON'],
+    ['OPEN', 'CLOSE'],
+    ['CLOSE', 'OPEN'],
+    ['LOCK', 'UNLOCK'],
+    ['UNLOCK', 'LOCK'],
+    [true, false],
+    [false, true]
+]);
 
 
-const UniversalEditor: React.FunctionComponent<UniversalEditorProps> = (props) => {
-    const { value, values, onChange, ...rest } = props;
-    const isToggleParameter = togglableValues.includes(value as string);
-    const changeHandler = (event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+const UniversalEditor: React.FunctionComponent<InputHTMLAttributes<unknown> & UniversalEditorProps> = (props) => {
+    const { value, values, onChange, disabled, ...rest } = props;
+    const [innerValue, setInnerValue] = useState<unknown>(value);
+    const isToggleParameter = togglePairs.has(value as string | boolean);
 
-        const { target } = event;
-        switch (target.type) {
-            case "checkbox":
-                onChange((target as HTMLInputElement).checked);
+    if (innerValue != value && !disabled) {
+        console.log({ innerValue, value });
+        onChange(innerValue);
+    }
 
-                break;
-            case "number":
-                (target as HTMLInputElement).valueAsNumber != value && onChange((target as HTMLInputElement).valueAsNumber);
-                break;
-            default:
-                target.value != value && onChange(target.value);
-                break;
-        }
-    };
     if (values) {
-        return (<select defaultValue={value as string} className="form-select" onChange={changeHandler}>
+        return (<select className="form-select"
+            disabled={disabled}
+            value={value as string}
+            onChange={e => setInnerValue(e.target.value)}>
             {values.map(val => <option key={val as string} value={val as string}>{val as string}</option>)}
         </select>)
     }
@@ -42,16 +41,28 @@ const UniversalEditor: React.FunctionComponent<UniversalEditorProps> = (props) =
         case "boolean":
             return (
                 <div className="form-check form-switch">
-                    <input className="form-check-input" type="checkbox" {...rest} defaultChecked={value} onChange={changeHandler} />
+                    <input type="checkbox" className="form-check-input"
+                        disabled={disabled}
+                        checked={innerValue as boolean}
+                        onChange={e => setInnerValue(e.target.checked)}
+                        {...rest} />
                 </div>
             );
         case "number":
             return (<div className="row">
                 <div className="col-9">
-                    <input type="range" className="form-range align-middle" value={value} onBlur={changeHandler} {...rest} />
+                    <input type="range" className="form-range align-middle"
+                        disabled={disabled}
+                        value={innerValue as number}
+                        onChange={e => setInnerValue(e.target.valueAsNumber)}
+                        {...rest} />
                 </div>
                 <div className="col-3">
-                    <input className="form-control col-2" step="any" {...rest} type="number" defaultValue={value} onBlur={changeHandler} />
+                    <input type="number" step="any" className="form-control col-2"
+                        disabled={disabled}
+                        value={innerValue as number}
+                        onChange={e => setInnerValue(e.target.valueAsNumber)}
+                        {...rest} />
                 </div>
 
 
@@ -61,17 +72,30 @@ const UniversalEditor: React.FunctionComponent<UniversalEditorProps> = (props) =
                 return (
                     <div className="row">
                         <div className="col-3">
-                            <Button<string> className="btn btn-primary" item={toggleCommand} title="Toggle" value="Toggle" onClick={onChange}>
+                            <Button<string | boolean> title="Toggle" value="Toggle"
+                                className="btn btn-primary"
+                                disabled={disabled}
+                                item={togglePairs.get(value as string | boolean)}
+                                onClick={payload => setInnerValue(payload)}>
                                 <i className="fa fa-exchange-alt" />
                             </Button>
                         </div>
                         <div className="col-9">
-                            <input className="form-control" {...rest} type="text" defaultValue={value as string} onBlur={changeHandler} />
+                            <input type="text" className="form-control"
+                                disabled={disabled}
+                                value={innerValue as string}
+                                onChange={e => setInnerValue(e.target.value)}
+                                {...rest}
+                            />
                         </div>
                     </div>
                 );
             }
-            return (<input className="form-control" {...rest} type="text" defaultValue={value as string} onBlur={changeHandler} />);
+            return (<input type="text" className="form-control"
+                disabled={disabled}
+                value={innerValue as string}
+                onChange={e => setInnerValue(e.target.value)}
+                {...rest} />);
 
 
     }
