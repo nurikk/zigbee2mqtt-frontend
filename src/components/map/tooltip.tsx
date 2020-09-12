@@ -40,7 +40,7 @@ const Tooltip: FunctionComponent<TooltipProps> = (props: TooltipProps) => {
 
     return (
         <div className={style.tooltip}>
-            {getTooltip(info).map((s) => <div>{s}</div>)}
+            {getTooltip(info).map((s) => <div key={s}>{s}</div>)}
         </div>
 
     );

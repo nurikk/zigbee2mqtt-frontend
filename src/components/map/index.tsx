@@ -1,4 +1,4 @@
-import React, { ChangeEvent, Component, createRef, Fragment, useEffect } from "react";
+import React, { ChangeEvent, Component, createRef, Fragment, FunctionComponent, useEffect } from "react";
 import Links from "./links";
 import Nodes from "./nodes";
 import * as d3 from "d3";
@@ -12,6 +12,7 @@ import actions, { MapApi } from "../../actions";
 
 import Button from "../button";
 import { Route } from "react-router";
+import { rest } from "lodash";
 
 
 export interface MouseEventsResponderNode {
@@ -53,6 +54,17 @@ const getDistance = (d: LinkI): number => {
     return 50 * depth + distance;
 };
 
+type ObserverProps = {
+    didUpdate(): void;
+    params: unknown[];
+}
+const Observer: FunctionComponent<ObserverProps> = ({ didUpdate, params }) => {
+    useEffect(() => {
+        didUpdate()
+    }, params)
+    return null
+}
+
 export class Map extends Component<GlobalState & MapApi, MapState> {
     ref = createRef<HTMLDivElement>();
     simulation!: d3.Simulation<NodeI, LinkI>;
@@ -71,7 +83,7 @@ export class Map extends Component<GlobalState & MapApi, MapState> {
         };
     }
 
-    updateNodes(): void {
+    updateNodes = (): void => {
         this.updateForces();
         const node = d3.selectAll<SVGGeometryElement, NodeI>(
             `.${style.node}`
@@ -190,11 +202,11 @@ export class Map extends Component<GlobalState & MapApi, MapState> {
         const { setTooltip, removeTooltip, openDetailsWindow } = this;
         const visibleLinksGlued = visibleLinks.join('');
 
-        useEffect(() => {
-            this.updateNodes();
-        }, [networkGraph.nodes.length, visibleLinksGlued]);
+
         return (
             <svg viewBox={`0 0 ${width} ${height}`} key={visibleLinksGlued}>
+                <Observer params={[networkGraph.nodes.length, visibleLinksGlued]} didUpdate={this.updateNodes} />
+
                 <defs>
 
                     <marker viewBox="-0 -5 10 10" id="arrowhead" markerWidth="13" markerHeight="13" refX="13" refY="0" orient="auto" markerUnits="strokeWidth">
@@ -209,7 +221,7 @@ export class Map extends Component<GlobalState & MapApi, MapState> {
                     onMouseOut={removeTooltip}
                     onDblClick={openDetailsWindow}
                 />
-                {
+                {/* {
                     tooltipNode ? (
                         <foreignObject
                             className={style.foreignObject}
@@ -219,7 +231,7 @@ export class Map extends Component<GlobalState & MapApi, MapState> {
                             <Tooltip info={tooltipNode} />
                         </foreignObject>
                     ) : null
-                }
+                } */}
             </svg >
         )
     }
@@ -309,7 +321,7 @@ export class Map extends Component<GlobalState & MapApi, MapState> {
         return <div className={style.controls}>
             {
                 linkTypes.map(linkType => (
-                    <div className="form-check form-check-inline">
+                    <div key={linkType.title} className="form-check form-check-inline">
                         <input onChange={this.onLinkTypeFilterChange} className="form-check-input" type="checkbox" id={linkType.title} value={linkType.relationship} checked={visibleLinks.includes(linkType.relationship)} />
                         <label className="form-check-label" htmlFor={linkType.title}>{linkType.title}</label>
                     </div>

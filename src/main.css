@@ -6,3 +6,6 @@ html, body {
 body {
     padding-top: 3.5rem;
 }
+:global(#root) {
+    height: 100%;
+}

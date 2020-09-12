@@ -188,7 +188,7 @@ export default class Nodes extends Component<NodesProps, NodesState> {
                         onMouseOut={onMouseOut}
                         onMouseOver={onMouseOver}
                         onDblClick={onDblClick}
-                        key={index}
+                        key={node.ieeeAddr}
                         node={node}
                     />
                 ))}
