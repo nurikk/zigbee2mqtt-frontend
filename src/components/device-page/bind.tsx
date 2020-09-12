@@ -1,9 +1,9 @@
-import { Component, ComponentChild, h } from "preact";
+import React, { Component } from "react";
 import { Device, Cluster, Endpoint } from "../../types";
 import { ZigbeeClusters } from "./clusters";
 import BindRow from "./bind-row";
 import actions, { BindApi } from "../../actions";
-import { connect } from "unistore/preact";
+import { connect } from "unistore/react";
 import { GlobalState, Group } from "../../store";
 
 
@@ -21,7 +21,7 @@ interface PropsFromStore {
     groups: Group[];
 }
 interface BindProps {
-    dev?: string;
+    device: Device;
 }
 
 export interface NiceBindingRule {
@@ -73,20 +73,17 @@ export class Bind extends Component<BindProps & PropsFromStore & BindApi, {}> {
         const { removeBind } = this.props;
         removeBind(from, to, clusters);
     };
-    render(): ComponentChild {
-        const { dev, devices, groups } = this.props;
+    render() {
+        const { device, devices, groups } = this.props;
 
         const coordinator = Array.from(devices.values()).find(d => d.type === "Coordinator");
-        const device = devices.get(dev);
-        if (!device) {
-            return "Unknown device";
-        }
+
 
         const niceBindingRules = convertBidningsIntoNiceStructure(device, coordinator);
         niceBindingRules.push({ isNew: true, target: {}, source: {}, clusters: [] } as NiceBindingRule);
         return (
-            <div class="card">
-                <table class="table table-striped table-borderless">
+            <div className="card">
+                <table className="table table-striped table-borderless">
                     <thead>
                         <tr>
                             <th scope="col">#</th>

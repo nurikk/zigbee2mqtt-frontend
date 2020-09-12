@@ -1,14 +1,4 @@
 /* eslint-disable @typescript-eslint/camelcase */
-// Must be the first import
-
-
-
-if (process.env.NODE_ENV === 'development') {
-    // Must use require here as import statements are only allowed
-    // to exist at the top of a file.
-    require("preact/debug");
-
-}
 import "./main.css";
 
 import "notyf/notyf.min.css";
@@ -16,11 +6,17 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 
 
-import { render, h, Component, ComponentChild, Fragment, FunctionalComponent } from 'preact';
+import React, { Component, Fragment, FunctionComponent } from 'react';
 
 import ConnectedMap from "./components/map";
 
-import Router, { CustomHistory } from 'preact-router';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link,
+    HashRouter
+} from "react-router-dom";
 
 // import ConnectedDiscovery from "./components/discovery";
 // import ConnectedLogViewer from "./components/log-viewer";
@@ -29,8 +25,7 @@ import ConnectedDevicePage from "./components/device-page";
 import TouchlinkPage from "./components/touchlink-page";
 
 import store from "./store";
-import { Provider } from "unistore/preact";
-import { createHashHistory } from 'history';
+import { Provider } from "unistore/react";
 
 
 
@@ -42,9 +37,10 @@ import NavBar from "./components/navbar";
 import ConnectedGroupsPage from "./components/groups";
 import ConnectedZigbeePage from "./components/zigbee";
 import LogsPage from "./components/logs-page";
+import ReactDOM from "react-dom";
 
 
-const ConnectedDevicePageWrap: FunctionalComponent<{ dev: string }> = ({ dev }) => (
+const ConnectedDevicePageWrap: FunctionComponent<{ dev: string }> = ({ dev }) => (
     <ConnectedDevicePageWrap dev={dev} />
 );
 
@@ -53,20 +49,49 @@ api.connect();
 
 // eslint-disable-next-line react/prefer-stateless-function
 class Main extends Component {
-    render(): ComponentChild {
+    render() {
         return (
             <Provider store={store}>
                 <Fragment>
-                    <NavBar />
-                    <Router path="/" history={(createHashHistory() as unknown as CustomHistory)}>
-                        <ConnectedZigbeePage path="/" default />
-                        <ConnectedMap path="/map" />
-                        <ConnectedDevicePage path="/device/:dev/:tab?" />
-                        <ConnectedSettingsPage path="/settings/:tab?" />
-                        <ConnectedGroupsPage path="/groups" />
-                        <LogsPage path="/logs" />
-                        <TouchlinkPage path="/touchlink" />
-                    </Router>
+
+                    <HashRouter>
+                        <NavBar />
+                        <Switch>
+
+
+
+                            <Route path="/map">
+                                <ConnectedMap />
+                            </Route>
+
+                            {/* <Route path="/device/:dev/:tab?"> */}
+                            <Route path="/device/:dev/:tab?" component={ConnectedDevicePage} />
+
+                            {/* </Route> */}
+
+                            <Route path="/settings/:tab?">
+                                <ConnectedSettingsPage />
+                            </Route>
+
+
+                            <Route path="/groups">
+                                <ConnectedGroupsPage />
+                            </Route>
+
+                            <Route path="/logs">
+                                <LogsPage />
+                            </Route>
+
+                            <Route path="/touchlink">
+                                <TouchlinkPage />
+                            </Route>
+
+
+                            <Route path="/">
+                                <ConnectedZigbeePage />
+                            </Route>
+                        </Switch>
+                    </HashRouter>
                 </Fragment>
             </Provider>
 
@@ -75,4 +100,4 @@ class Main extends Component {
 }
 
 
-render(<Main />, document.body);
+ReactDOM.render(<Main />, document.getElementById("root"));

@@ -1,4 +1,4 @@
-import { Component, ComponentChild, h } from "preact";
+import React, { Component } from "react";
 import cx from "classnames";
 interface TabProps {
     activeTab: string;
@@ -16,7 +16,7 @@ class Tab extends Component<TabProps, TabState> {
         onClick(label);
     }
 
-    render(): ComponentChild {
+    render() {
         const {
             activeTab,
             label

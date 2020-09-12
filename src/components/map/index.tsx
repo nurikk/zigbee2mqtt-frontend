@@ -1,4 +1,4 @@
-import { Component, ComponentChild, createRef, h, Fragment } from "preact";
+import React, { ChangeEvent, Component, createRef, Fragment, useEffect } from "react";
 import Links from "./links";
 import Nodes from "./nodes";
 import * as d3 from "d3";
@@ -6,12 +6,13 @@ import style from "./map.css";
 import { LinkI, NodeI, ZigbeeRelationship } from "./types";
 import Tooltip from "./tooltip";
 import { genDeviceDetailsLink } from "../../utils";
-import { connect } from "unistore/preact";
+import { connect } from "unistore/react";
 import { GlobalState } from "../../store";
 import actions, { MapApi } from "../../actions";
-import { useEffect } from "preact/hooks";
+
 import Button from "../button";
-import { route } from "preact-router";
+import { Route } from "react-router";
+
 
 export interface MouseEventsResponderNode {
     onMouseOver?: (arg0: NodeI) => void;
@@ -56,8 +57,8 @@ export class Map extends Component<GlobalState & MapApi, MapState> {
     ref = createRef<HTMLDivElement>();
     simulation!: d3.Simulation<NodeI, LinkI>;
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
 
         this.simulation = d3.forceSimulation<NodeI>();
@@ -135,7 +136,8 @@ export class Map extends Component<GlobalState & MapApi, MapState> {
         switch (node.type) {
             case "EndDevice":
             case "Router":
-                route(genDeviceDetailsLink(node.friendlyName), true);
+                debugger
+                // route(genDeviceDetailsLink(node.friendlyName), true);
                 break;
             default:
                 break;
@@ -182,7 +184,7 @@ export class Map extends Component<GlobalState & MapApi, MapState> {
         await this.initPage()
     }
 
-    renderMap(): ComponentChild {
+    renderMap() {
         const { width, height, tooltipNode, visibleLinks } = this.state;
         const { networkGraph } = this.props;
         const { setTooltip, removeTooltip, openDetailsWindow } = this;
@@ -225,39 +227,39 @@ export class Map extends Component<GlobalState & MapApi, MapState> {
         const { networkMapRequest } = this.props;
         networkMapRequest();
     }
-    renderMessage(): ComponentChild {
+    renderMessage() {
         const { networkGraphIsLoading } = this.props;
 
         return (
-            <div class="container h-100">
-                <div class="row h-100 justify-content-center align-items-center">
+            <div className="container h-100">
+                <div className="row h-100 justify-content-center align-items-center">
                     {
                         networkGraphIsLoading ? (
-                            <div class="justify-content-center align-items-center">
-                                <div class="row">
-                                    <div class="col-6 mx-auto">
+                            <div className="justify-content-center align-items-center">
+                                <div className="row">
+                                    <div className="col-6 mx-auto">
                                         Loading, please wait.
-                                        <div class="spinner-border" role="status">
-                                            <span class="sr-only">Loading...</span>
+                                        <div className="spinner-border" role="status">
+                                            <span className="sr-only">Loading...</span>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-6 mx-auto">
+                                <div className="row">
+                                    <div className="col-6 mx-auto">
                                         Depending on the size of your network this can take somewhere between 10 seconds and 2 minutes.
                                         </div>
                                 </div>
 
                             </div>
                         ) : (
-                                <div class=" justify-content-center align-items-centerr">
-                                    <div class="row">
-                                        <div class="col-6 mx-auto">
+                                <div className=" justify-content-center align-items-centerr">
+                                    <div className="row">
+                                        <div className="col-6 mx-auto">
                                             No map data.
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-6 mx-auto">
+                                    <div className="row">
+                                        <div className="col-6 mx-auto">
                                             <Button onClick={this.onRequestClick} className="btn btn-primary d-block">Requests?</Button>
                                         </div>
                                     </div>
@@ -268,9 +270,9 @@ export class Map extends Component<GlobalState & MapApi, MapState> {
             </div>
         );
     }
-    onLinkTypeFilterChange = (e: Event): void => {
+    onLinkTypeFilterChange = (e: ChangeEvent<HTMLInputElement>): void => {
         let { visibleLinks } = this.state;
-        const { checked, value } = e.target as HTMLInputElement;
+        const { checked, value } = e.target;
         const inValue = parseInt(value, 10);
         if (checked) {
             visibleLinks.push(inValue);
@@ -279,7 +281,7 @@ export class Map extends Component<GlobalState & MapApi, MapState> {
         }
         this.setState({ visibleLinks });
     }
-    renderMapControls(): ComponentChild {
+    renderMapControls() {
         const { visibleLinks } = this.state;
         interface LinkType {
             title: string;
@@ -307,9 +309,9 @@ export class Map extends Component<GlobalState & MapApi, MapState> {
         return <div className={style.controls}>
             {
                 linkTypes.map(linkType => (
-                    <div class="form-check form-check-inline">
-                        <input onChange={this.onLinkTypeFilterChange} class="form-check-input" type="checkbox" id={linkType.title} value={linkType.relationship} checked={visibleLinks.includes(linkType.relationship)} />
-                        <label class="form-check-label" for={linkType.title}>{linkType.title}</label>
+                    <div className="form-check form-check-inline">
+                        <input onChange={this.onLinkTypeFilterChange} className="form-check-input" type="checkbox" id={linkType.title} value={linkType.relationship} checked={visibleLinks.includes(linkType.relationship)} />
+                        <label className="form-check-label" htmlFor={linkType.title}>{linkType.title}</label>
                     </div>
                 ))
             }
@@ -321,7 +323,7 @@ export class Map extends Component<GlobalState & MapApi, MapState> {
             }
         </div>
     }
-    render(): ComponentChild {
+    render() {
         const { networkGraph } = this.props;
         return (
             <div className={style.container} ref={this.ref}>

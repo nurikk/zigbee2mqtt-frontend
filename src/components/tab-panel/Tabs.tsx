@@ -1,4 +1,4 @@
-import { Component, ComponentChild, h, VNode } from "preact";
+import React, { Component, ReactChild, ReactElement, ReactNode } from "react";
 import Tab from "./Tab";
 interface TabsProps {
 
@@ -24,15 +24,16 @@ class Tabs extends Component<TabsProps, TabsState> {
     onClickTabItem = (tab: string): void => {
         this.setState({ activeTab: tab });
     }
-    render(): ComponentChild {
+    render() {
         const { children } = this.props;
         const { activeTab } = this.state;
+        const childArray = React.Children.toArray(children);
         return (
 
             <div className="tabs">
-                <ul class="nav nav-tabs">
-                    {(children as ComponentChild[]).map((child) => {
-                        const { label } = (child as VNode<WithLabel>).props;
+                <ul className="nav nav-tabs">
+                    {childArray.map((child) => {
+                        const { label } = (child as ReactElement).props;
                         return (
                             <Tab
                                 activeTab={activeTab}
@@ -43,12 +44,12 @@ class Tabs extends Component<TabsProps, TabsState> {
                         );
                     })}
                 </ul>
-                <div class="tab-content">
-                    {(children as ComponentChild[]).map((child) => {
-                        if ((child as VNode<WithLabel>).props.label !== activeTab) {
+                <div className="tab-content">
+                    {childArray.map((child) => {
+                        if ((child as ReactElement).props.label !== activeTab) {
                             return undefined;
                         }
-                        return (child as VNode<WithLabel>).props.children;
+                        return (child as ReactElement).props.children;
                     })}
                 </div>
             </div>

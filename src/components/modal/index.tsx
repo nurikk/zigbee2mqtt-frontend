@@ -1,17 +1,17 @@
-import { Component, FunctionalComponent, h, Fragment } from "preact";
+import React, { Component, FunctionComponent,  Fragment } from "react";
 import cx from "classnames";
 // import * as style from "./style.css";
 
 
-export const ModalHeader: FunctionalComponent<{}> = props => {
+export const ModalHeader: FunctionComponent<{}> = props => {
     return <div className="modal-header">{props.children}</div>;
 };
 
-export const ModalBody: FunctionalComponent<{}> = props => {
+export const ModalBody: FunctionComponent<{}> = props => {
     return <div className="modal-body">{props.children}</div>;
 };
 
-export const ModalFooter: FunctionalComponent<{}> = props => {
+export const ModalFooter: FunctionComponent<{}> = props => {
     return <div className="modal-footer">{props.children}</div>;
 };
 interface ModalProps {
@@ -82,29 +82,29 @@ export default Modal;
 //     onOk(): void;
 //     onCancel(): void;
 // }
-// const Modal: FunctionalComponent<Props> = (props: Props) => {
+// const Modal: FunctionComponent<Props> = (props: Props) => {
 //     const { onOk, onCancel } = props;
 //     return (
 //         <Fragment>
 
-//             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+//             <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
 //                 Launch demo modal
 // </button>
-//             <div class="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
-//                 <div class="modal-dialog">
-//                     <div class="modal-content">
-//                         <div class="modal-header">
-//                             <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-//                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+//             <div className="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+//                 <div className="modal-dialog">
+//                     <div className="modal-content">
+//                         <div className="modal-header">
+//                             <h5 className="modal-title" id="exampleModalLabel">Modal title</h5>
+//                             <button type="button" className="close" data-dismiss="modal" aria-label="Close">
 //                                 <span aria-hidden="true">&times;</span>
 //                             </button>
 //                         </div>
-//                         <div class="modal-body">
+//                         <div className="modal-body">
 //                             ...
 //                         </div>
-//                         <div class="modal-footer">
-//                             <button onClick={onOk} type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-//                             <button onClick={onCancel} type="button" class="btn btn-primary">Ok</button>
+//                         <div className="modal-footer">
+//                             <button onClick={onOk} type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+//                             <button onClick={onCancel} type="button" className="btn btn-primary">Ok</button>
 //                         </div>
 //                     </div>
 //                 </div>

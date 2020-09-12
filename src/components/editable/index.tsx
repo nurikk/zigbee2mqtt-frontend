@@ -1,12 +1,12 @@
-import { Component, ComponentChild, h, RefObject } from "preact";
+import React, { Component, ReactNode, RefObject, useEffect } from "react";
 import style from "./style.css";
-import { useEffect } from "preact/hooks";
+// import { useEffect } from "react/hooks";
 
 
 interface EditableProps {
     type: "input" | "textarea";
     placeholder: string;
-    text: ComponentChild;
+    text: ReactNode;
     childRef: RefObject<HTMLInputElement | HTMLTextAreaElement>;
 }
 
@@ -15,8 +15,8 @@ interface EditableState {
 }
 
 export default class Editable extends Component<EditableProps, EditableState> {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             isEditing: false
         };
@@ -39,7 +39,7 @@ export default class Editable extends Component<EditableProps, EditableState> {
         }
     };
 
-    render(): ComponentChild {
+    render() {
         const { children, type, text, placeholder, childRef } = this.props;
         const { isEditing } = this.state;
 

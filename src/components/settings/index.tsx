@@ -1,12 +1,13 @@
-import { Component, ComponentChild, h } from "preact";
-import { connect } from "unistore/preact";
+import React, { Component} from "react";
+import { connect } from "unistore/react";
 import actions, { BridgeApi } from "../../actions";
 import { GlobalState } from "../../store";
 import get from "lodash/get";
 import UniversalEditor from "../universal-editor";
-import { Link } from "preact-router/match";
+// import { NavLink } from "react-router";
 import cx from "classnames";
-import Redirect from "../Redirect";
+import { Redirect } from "react-router-dom";
+
 
 const settings = [
     {
@@ -50,17 +51,17 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
         updateConfigValue(name, value);
     }
 
-    render(): ComponentChild {
+    render() {
         const { tab } = this.props;
         return (
-            <div class="card h-100">
-                <div class="card-header">
-                    <ul class="nav nav-tabs card-header-tabs">
-                        <li class="nav-item">
-                            <Link className={cx("nav-link", { active: tab === "settings" })} href={`/settings/settings`}>Settings</Link>
+            <div className="card h-100">
+                <div className="card-header">
+                    <ul className="nav nav-tabs card-header-tabs">
+                        <li className="nav-item">
+                            {/* <Link className={cx("nav-link", { active: tab === "settings" })} href={`/settings/settings`}>Settings</Link> */}
                         </li>
-                        <li class="nav-item">
-                            <Link className={cx("nav-link", { active: tab === "bridge" })} href={`/settings/bridge`}>Bridge</Link>
+                        <li className="nav-item">
+                            {/* <Link className={cx("nav-link", { active: tab === "bridge" })} href={`/settings/bridge`}>Bridge</Link> */}
                         </li>
                     </ul>
 
@@ -88,23 +89,23 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
         const { bridgeInfo } = this.props;
         return <pre>{JSON.stringify(bridgeInfo, null, 4)}</pre>
     }
-    renderSettings(): ComponentChild {
+    renderSettings() {
 
         const { bridgeInfo } = this.props;
         return <div className="container">
-            <form class="mt-2">
+            <form className="mt-2">
                 {
                     settings.map(setting => (
-                        <div class="row">
-                            <div class="col">
+                        <div className="row">
+                            <div className="col">
 
-                                <label for={setting.key}>{setting.title}</label>
+                                <label htmlFor={setting.key}>{setting.title}</label>
                                 <UniversalEditor
                                     value={get(bridgeInfo.config, setting.path)}
                                     values={setting.values}
                                     onChange={(value): void => this.updateConfig(setting.key, value)}
                                 />
-                                <div class="form-text">{setting.description}</div>
+                                <div className="form-text">{setting.description}</div>
 
                             </div>
                         </div>

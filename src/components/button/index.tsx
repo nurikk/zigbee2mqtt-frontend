@@ -1,4 +1,4 @@
-import { Component, ComponentChild, h } from "preact";
+import React, { Component} from "react";
 
 interface ButtonProps<T> {
     item?: T;
@@ -17,8 +17,8 @@ export default class Button<T> extends Component<ButtonProps<T>, {}> {
         confirmed && onClick && onClick(item);
     };
 
-    render(): ComponentChild {
-        const { children, ...rest } = this.props;
+    render() {
+        const { children, item, promt, ...rest } = this.props;
         return <button type="button" {...rest} onClick={this.onClick}>{children}</button>;
     }
 }

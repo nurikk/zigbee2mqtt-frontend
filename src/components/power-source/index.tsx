@@ -1,4 +1,4 @@
-import { FunctionalComponent, h } from "preact";
+import  React, { FunctionComponent} from "react";
 import { PowerSource as PowerSourceType } from "../../types";
 import style from "./style.css";
 
@@ -9,7 +9,7 @@ interface PowerSourceProps {
 }
 
 
-const PowerSource: FunctionalComponent<PowerSourceProps> = ({ source, battery, ...rest }) => {
+const PowerSource: FunctionComponent<PowerSourceProps> = ({ source, battery, ...rest }) => {
     let batteryClass = "fa-battery-full";
 
     switch (source) {
