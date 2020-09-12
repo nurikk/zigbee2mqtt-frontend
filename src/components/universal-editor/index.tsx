@@ -24,8 +24,7 @@ const UniversalEditor: React.FunctionComponent<InputHTMLAttributes<unknown> & Un
     const [innerValue, setInnerValue] = useState<unknown>(value);
     const isToggleParameter = togglePairs.has(value as string | boolean);
 
-    if (innerValue != value && !disabled) {
-        console.log({ innerValue, value });
+    if (innerValue != value && !disabled && innerValue !== undefined) {
         onChange(innerValue);
     }
 

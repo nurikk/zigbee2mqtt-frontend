@@ -5,7 +5,8 @@ import { GlobalState } from "../../store";
 import get from "lodash/get";
 import UniversalEditor from "../universal-editor";
 import debounce from "lodash/debounce";
-import { Redirect } from "react-router-dom";
+import isEmpty from "lodash/isEmpty";
+import { NavLink, Redirect, RouteComponentProps, withRouter } from "react-router-dom";
 
 
 const settings = [
@@ -20,8 +21,7 @@ const settings = [
         key: 'elapsed',
         path: 'advanced.elapsed',
         title: 'Elapsed',
-        description: 'Add an elapsed attribute to MQTT messages, contains milliseconds since the previous msg',
-
+        description: 'Add an elapsed attribute to MQTT messages, contains milliseconds since the previous msg'
     },
     {
         key: 'log_level',
@@ -34,15 +34,15 @@ const settings = [
         key: 'homeassistant',
         path: 'homeassistant',
         title: 'Homeassistant support',
-        description: 'Home Assistant integration (MQTT discovery)',
-
+        description: 'Home Assistant integration (MQTT discovery)'
     }
 ]
 type SettingsTab = "settings" | "bridge"
-interface SettingsPageProps {
-    tab?: SettingsTab;
-}
 
+type UrlParams = {
+    tab?: SettingsTab;
+};
+type SettingsPageProps = RouteComponentProps<UrlParams>;
 
 export class SettingsPage extends Component<SettingsPageProps & BridgeApi & GlobalState, {}> {
     updateConfig = debounce((name: string, value: unknown): void => {
@@ -51,16 +51,15 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
     }, 200, { leading: false, trailing: true });
 
     render() {
-        const { tab } = this.props;
         return (
             <div className="card h-100">
                 <div className="card-header">
                     <ul className="nav nav-tabs card-header-tabs">
                         <li className="nav-item">
-                            {/* <Link className={cx("nav-link", { active: tab === "settings" })} href={`/settings/settings`}>Settings</Link> */}
+                            <NavLink className="nav-link" activeClassName="active" to={`/settings/settings`}>Settings</NavLink>
                         </li>
                         <li className="nav-item">
-                            {/* <Link className={cx("nav-link", { active: tab === "bridge" })} href={`/settings/bridge`}>Bridge</Link> */}
+                            <NavLink className="nav-link" activeClassName="active" to={`/settings/bridge`}>Bridge</NavLink>
                         </li>
                     </ul>
 
@@ -73,7 +72,8 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
         )
     }
     renderSwitcher() {
-        const { tab } = this.props;
+        const { match } = this.props;
+        const { tab } = match.params;
         switch (tab) {
             case "settings":
                 return this.renderSettings();
@@ -89,23 +89,22 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
         return <pre>{JSON.stringify(bridgeInfo, null, 4)}</pre>
     }
     renderSettings() {
-
         const { bridgeInfo } = this.props;
         return <div className="container">
+
             <form className="mt-2">
                 {
-                    settings.map(setting => (
-                        <div className="row">
+                    !isEmpty(bridgeInfo) && settings.map(setting => (
+                        <div key={setting.key} className="row">
                             <div className="col">
-
                                 <label htmlFor={setting.key}>{setting.title}</label>
                                 <UniversalEditor
+                                    disabled={get(bridgeInfo.config, setting.path) === undefined}
                                     value={get(bridgeInfo.config, setting.path) as string | ReadonlyArray<string> | number}
                                     values={setting.values}
                                     onChange={(value) => this.updateConfig(setting.key, value)}
                                 />
                                 <div className="form-text">{setting.description}</div>
-
                             </div>
                         </div>
                     ))
@@ -116,7 +115,7 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
 
     }
 }
-
+const SettingsPageWithRouter = withRouter(SettingsPage);
 const mappedProps = ["bridgeInfo"];
-const ConnectedSettingsPage = connect<SettingsPageProps, {}, GlobalState, BridgeApi>(mappedProps, actions)(SettingsPage);
+const ConnectedSettingsPage = connect<{}, {}, GlobalState, BridgeApi>(mappedProps, actions)(SettingsPageWithRouter);
 export default ConnectedSettingsPage;
