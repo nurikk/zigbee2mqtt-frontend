@@ -47,7 +47,7 @@ export default class ClusterPicker extends Component<ClusterPickerProps, Cluster
         const { clusters, value } = this.props;
 
         const options = clusters.map(cluster => (
-            <div className="form-check form-check-inline">
+            <div key={cluster} className="form-check form-check-inline">
                 <input className="form-check-input" type="checkbox" checked={value.includes(cluster)} name={cluster} id={`${pickerId}_${cluster}`} value={cluster} onChange={this.onSelect} />
                 <label className="form-check-label" htmlFor={`${pickerId}_${cluster}`} title={cluster}>{clusterDescriptions[cluster] ?? cluster}</label>
             </div>

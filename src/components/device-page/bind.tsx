@@ -97,8 +97,8 @@ export class Bind extends Component<BindProps & PropsFromStore & BindApi, {}> {
                     <tbody>
                         {
                             niceBindingRules.map((rule, idx) => <BindRow
+                                key={`${rule.source}-${rule.target}-${rule.clusters.join('-')}`}
                                 rule={rule}
-                                key={idx}
                                 groups={groups}
                                 onUnBind={this.onUnBindClick}
                                 onBind={this.onBindClick}
