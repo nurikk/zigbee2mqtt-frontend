@@ -1,4 +1,4 @@
-import React, { ChangeEvent, Component} from "react";
+import React, { ChangeEvent, Component } from "react";
 import { Device, ObjectType } from "../../types";
 import { getDeviceDisplayName } from "../../utils";
 import { Group } from "../../store";
@@ -30,7 +30,11 @@ export default class DevicePicker extends Component<DevicePickerProps, {}> {
         const devicesOptions = [];
         devices.forEach((device) => {
             if (device.type !== "Coordinator") {
-                devicesOptions.push(<option key={device.ieee_address} value={`device${DELIMITER}${device.ieee_address}`}>{getDeviceDisplayName(device)}</option>);
+                devicesOptions.push(<option
+                    title={device.definition?.description}
+                    key={device.ieee_address}
+                    value={`device${DELIMITER}${device.ieee_address}`}
+                >{getDeviceDisplayName(device)}</option>);
             }
 
         });
