@@ -57,14 +57,9 @@ class Main extends Component {
                     <HashRouter>
                         <NavBar />
                         <Switch>
-
-
-
                             <Route path="/map">
                                 <ConnectedMap />
                             </Route>
-
-                            {/* <Route path="/device/:dev/:tab?"> */}
                             <Route path="/device/:dev/:tab?" component={ConnectedDevicePage} />
 
                             {/* </Route> */}
@@ -85,8 +80,6 @@ class Main extends Component {
                             <Route path="/touchlink">
                                 <TouchlinkPage />
                             </Route>
-
-
                             <Route path="/">
                                 <ConnectedZigbeePage />
                             </Route>
