@@ -71,7 +71,7 @@ class States extends Component<StatesProps & PropsFromStore & StateApi, {}> {
                                         disabled={readonlyFields.includes(param[0])}
                                         value={param[1]}
                                         name={param[0]}
-                                        onChange={(value) => this.setStateValue(param[0], value)}
+                                        onChange={(value: unknown) => this.setStateValue(param[0], value)}
                                         {...fieldProps[param[0]]}
                                     />
                                 </td>

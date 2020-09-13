@@ -1,20 +1,10 @@
 import React, { Component } from "react";
 import { Device, Cluster, Endpoint } from "../../types";
-import { ZigbeeClusters } from "./clusters";
 import BindRow from "./bind-row";
 import actions, { BindApi } from "../../actions";
 import { connect } from "unistore/react";
 import { GlobalState, Group } from "../../store";
 
-
-
-export const getClusterName = (id: number, addBraces = true): string => {
-    if (ZigbeeClusters[id]) {
-        const cleanName = (ZigbeeClusters[id] as string).replace(/^ZCL_CLUSTER_ID_/, "");
-        return addBraces ? ` (${cleanName})` : cleanName;
-    }
-    return "";
-};
 
 interface PropsFromStore {
     devices: Map<string, Device>;

@@ -46,7 +46,7 @@ export class DeviceControlGroup extends Component<DeviceControlGroupProps & Devi
         const { renameDevice, device } = this.props;
         const { renameParams } = this.state;
 
-        renameDevice(device.friendly_name, renameParams.friendlyName, renameParams.isHassRename);
+        await renameDevice(device.friendly_name, renameParams.friendlyName, renameParams.isHassRename);
         this.setState({
             isRenameModalOpened: false
         });
