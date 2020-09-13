@@ -61,6 +61,7 @@ export interface BridgeConfig {
 
 export interface BridgeInfo {
     config: Z2MConfig;
+    configSchema: {};
     permit_join: boolean;
 }
 

@@ -8,6 +8,21 @@ import debounce from "lodash/debounce";
 import isEmpty from "lodash/isEmpty";
 import { NavLink, Redirect, RouteComponentProps, withRouter } from "react-router-dom";
 
+import Ajv from 'ajv';
+import { JSONSchemaBridge } from 'uniforms-bridge-json-schema';
+import { AutoForm } from 'uniforms-bootstrap4';
+
+
+const ajv = new Ajv({ allErrors: true, useDefaults: true });
+
+function createValidator(schema: object) {
+    const validator = ajv.compile(schema);
+
+    return (model: object) => {
+        validator(model);
+        return validator.errors?.length ? { details: validator.errors } : null;
+    };
+}
 
 const settings = [
     {
@@ -86,7 +101,11 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
 
     renderBridgeInfo() {
         const { bridgeInfo } = this.props;
-        return <pre>{JSON.stringify(bridgeInfo, null, 4)}</pre>
+        if (bridgeInfo.configSchema) {
+            const schemaValidator = createValidator(bridgeInfo.configSchema);
+            const bridge = new JSONSchemaBridge(bridgeInfo.configSchema, schemaValidator);
+            return <AutoForm schema={bridge} onSubmit={console.log} />
+        }
     }
     renderSettings() {
         const { bridgeInfo } = this.props;
