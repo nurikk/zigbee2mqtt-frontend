@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent, InputHTMLAttributes } from "react";
+import React, { useState, ChangeEvent, InputHTMLAttributes, useEffect } from "react";
 
 import Button from "../button";
 
@@ -18,21 +18,32 @@ const togglePairs = new Map<string | boolean, string | boolean>([
     [false, true]
 ]);
 
+const BluringInput: React.FunctionComponent<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>> = (props) => {
+    const { onChange, value, ...rest } = props;
+    const [internalValue, setInternalValue] = useState(value);
+    useEffect(() => {
+        setInternalValue(value);
+    }, [value]);
+
+
+    return <input
+        value={internalValue}
+        onBlur={() => onChange({ target: { value: internalValue } } as ChangeEvent<HTMLInputElement>)}
+        onChange={e => setInternalValue(e.target.value)}
+        {...rest} />
+}
 
 const UniversalEditor: React.FunctionComponent<InputHTMLAttributes<unknown> & UniversalEditorProps> = (props) => {
-    const { value, values, onChange, disabled, ...rest } = props;
-    const [innerValue, setInnerValue] = useState<unknown>(value);
+    const { value, values, onChange, disabled, name, ...rest } = props;
+
     const isToggleParameter = togglePairs.has(value as string | boolean);
 
-    if (innerValue != value && !disabled && innerValue !== undefined) {
-        onChange(innerValue);
-    }
 
     if (values) {
         return (<select className="form-select"
             disabled={disabled}
             value={value as string}
-            onChange={e => setInnerValue(e.target.value)}>
+            onChange={e => onChange(e.target.value)}>
             {values.map(val => <option key={val as string} value={val as string}>{val as string}</option>)}
         </select>)
     }
@@ -42,8 +53,8 @@ const UniversalEditor: React.FunctionComponent<InputHTMLAttributes<unknown> & Un
                 <div className="form-check form-switch">
                     <input type="checkbox" className="form-check-input"
                         disabled={disabled}
-                        checked={innerValue as boolean}
-                        onChange={e => setInnerValue(e.target.checked)}
+                        checked={value as boolean}
+                        onChange={e => onChange(e.target.checked)}
                         {...rest} />
                 </div>
             );
@@ -52,15 +63,15 @@ const UniversalEditor: React.FunctionComponent<InputHTMLAttributes<unknown> & Un
                 <div className="col-9">
                     <input type="range" className="form-range align-middle"
                         disabled={disabled}
-                        value={innerValue as number}
-                        onChange={e => setInnerValue(e.target.valueAsNumber)}
+                        value={value as number}
+                        onChange={e => onChange(e.target.valueAsNumber)}
                         {...rest} />
                 </div>
                 <div className="col-3">
                     <input type="number" step="any" className="form-control col-2"
                         disabled={disabled}
-                        value={innerValue as number}
-                        onChange={e => setInnerValue(e.target.valueAsNumber)}
+                        value={value as number}
+                        onChange={e => onChange(e.target.valueAsNumber)}
                         {...rest} />
                 </div>
 
@@ -75,25 +86,25 @@ const UniversalEditor: React.FunctionComponent<InputHTMLAttributes<unknown> & Un
                                 className="btn btn-primary"
                                 disabled={disabled}
                                 item={togglePairs.get(value as string | boolean)}
-                                onClick={payload => setInnerValue(payload)}>
+                                onClick={payload => onChange(payload)}>
                                 <i className="fa fa-exchange-alt" />
                             </Button>
                         </div>
                         <div className="col-9">
-                            <input type="text" className="form-control"
+                            <BluringInput type="text" className="form-control"
                                 disabled={disabled}
-                                value={innerValue as string}
-                                onChange={e => setInnerValue(e.target.value)}
+                                value={value as string}
+                                onChange={e => onChange(e.target.value)}
                                 {...rest}
                             />
                         </div>
                     </div>
                 );
             }
-            return (<input type="text" className="form-control"
+            return (<BluringInput type="text" className="form-control"
                 disabled={disabled}
-                value={innerValue as string}
-                onChange={e => setInnerValue(e.target.value)}
+                value={value as string}
+                onChange={e => onChange(e.target.value)}
                 {...rest} />);
 
 

@@ -63,8 +63,14 @@ const actions = (store: Store<GlobalState>): object => ({
         return Promise.resolve();
     },
 
-    setStateValue(state, dev: string, name: string, value: unknown): Promise<void> {
-        api.send(`${dev}/set`, { [name]: value });
+    setStateValue(state, dev: string, name: string, value: string | number | boolean): Promise<void> {
+        const { deviceStates } = store.getState();
+        const deviceState = { ...deviceStates.get(dev) };
+        deviceState[name] = value;
+        const updatedDeviceStates = new Map(deviceStates);
+        updatedDeviceStates.set(dev, deviceState);
+        store.setState({deviceStates: updatedDeviceStates});
+        api.sendDebounced(`${dev}/set`, { [name]: value });
         return Promise.resolve();
     },
 

@@ -43,10 +43,10 @@ const readonlyFields = [
 ];
 
 class States extends Component<StatesProps & PropsFromStore & StateApi, {}> {
-    setStateValue = debounce((name: string, value: unknown): void => {
+    setStateValue = (name: string, value: unknown): void => {
         const { setStateValue, device } = this.props;
         setStateValue(device.friendly_name, name, value);
-    }, 200, { leading: false, trailing: true });
+    };
 
     render() {
         const { device, deviceStates } = this.props;
@@ -70,6 +70,7 @@ class States extends Component<StatesProps & PropsFromStore & StateApi, {}> {
                                     <UniversalEditor
                                         disabled={readonlyFields.includes(param[0])}
                                         value={param[1]}
+                                        name={param[0]}
                                         onChange={(value) => this.setStateValue(param[0], value)}
                                         {...fieldProps[param[0]]}
                                     />

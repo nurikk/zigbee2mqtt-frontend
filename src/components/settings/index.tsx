@@ -52,7 +52,7 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
 
     render() {
         return (
-            <div className="card h-100">
+            <div className="card">
                 <div className="card-header">
                     <ul className="nav nav-tabs card-header-tabs">
                         <li className="nav-item">
