@@ -1,3 +1,17 @@
+## [0.1.57](https://github.com/nurikk/z2m-frontend/compare/0.1.56...0.1.57) (2020-09-13)
+
+
+### Bug Fixes
+
+* **notif:** fix notifications ([ba8c257](https://github.com/nurikk/z2m-frontend/commit/ba8c257f8616e209851679bcf80f2a823dcb2624))
+
+
+### Features
+
+* **settings:** experimental brdinge info page ([1586dab](https://github.com/nurikk/z2m-frontend/commit/1586dab8415ce60cc18215402e919521d1450cc7))
+
+
+
 ## [0.1.56](https://github.com/nurikk/z2m-frontend/compare/0.1.55...0.1.56) (2020-09-11)
 
 
