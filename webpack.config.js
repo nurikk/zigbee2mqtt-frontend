@@ -6,7 +6,9 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const path = require("path");
 const glob = require("glob");
-const proxyTo = process.env.Z2M_API_URI ? process.env.Z2M_API_URI : "ws://localhost:8579";
+const proxyTo = process.env.Z2M_API_URI
+    ? process.env.Z2M_API_URI
+    : "ws://localhost:8579";
 module.exports = (env, args) => {
     let production = false;
 
@@ -70,17 +72,22 @@ module.exports = (env, args) => {
             extensions: [".ts", ".tsx", ".js", ".html", ".txt"],
         },
         module: {
-            rules: [{
+            rules: [
+                {
                     test: /\.(png|jpe?g|gif)$/i,
-                    use: [{
-                        loader: "file-loader",
-                    }, ],
+                    use: [
+                        {
+                            loader: "file-loader",
+                        },
+                    ],
                 },
                 {
                     test: /\.tsx?$/,
-                    use: [{
-                        loader: "ts-loader",
-                    }, ],
+                    use: [
+                        {
+                            loader: "ts-loader",
+                        },
+                    ],
                 },
                 {
                     test: /\.css$/i,
