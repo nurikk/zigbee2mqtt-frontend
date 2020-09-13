@@ -1,13 +1,11 @@
+import { Device } from './types';
+import genericDevicePic from './images/generic-zigbee-device.png';
+import { GraphI, ZigbeeRelationship, NodeI, Target, Source } from './components/map/types';
 
-import { Device } from "./types";
-import genericDevicePic from "./images/generic-zigbee-device.png";
-import { GraphI, ZigbeeRelationship, NodeI, Target, Source } from "./components/map/types";
-
-
-export const genDeviceDetailsLink = (deviceIdentifier: string | number): string => (`/device/${deviceIdentifier}`);
+export const genDeviceDetailsLink = (deviceIdentifier: string | number): string => `/device/${deviceIdentifier}`;
 
 export const toHex = (input: number, padding = 4): string => {
-    return `0x${(`${'0'.repeat(padding)}${input.toString(16)}`).substr(-1 * padding).toUpperCase()}`;
+    return `0x${`${'0'.repeat(padding)}${input.toString(16)}`.substr(-1 * padding).toUpperCase()}`;
 };
 
 /**
@@ -17,7 +15,6 @@ export const toHex = (input: number, padding = 4): string => {
  * @param chunkSize {Integer} Size of every group
  */
 export function chunkArray<T>(inputArr: T[], chunkSize: number): T[][] {
-
     const results = [];
     while (inputArr.length) {
         results.push(inputArr.splice(0, chunkSize));
@@ -25,41 +22,44 @@ export function chunkArray<T>(inputArr: T[], chunkSize: number): T[][] {
     return results;
 }
 
-export const encodeGetParams = (data: Map<string, string | number>): string => Object.keys(data).map((key) => [key, data[key]].map(encodeURIComponent).join("=")).join("&");
+export const encodeGetParams = (data: Map<string, string | number>): string =>
+    Object.keys(data)
+        .map((key) => [key, data[key]].map(encodeURIComponent).join('='))
+        .join('&');
 
-export const sanitizeModelNameForImageUrl = (model = ""): string => {
-    return `${model.replace(/:|\s|\//g, "-")}.jpg`;
+export const sanitizeModelNameForImageUrl = (model = ''): string => {
+    return `${model.replace(/:|\s|\//g, '-')}.jpg`;
 };
 
 export const genDeviceImageUrl = (modelID: string): string => {
     if (modelID) {
-        return `https://www.zigbee2mqtt.io/images/devices/${sanitizeModelNameForImageUrl(modelID)}`
+        return `https://www.zigbee2mqtt.io/images/devices/${sanitizeModelNameForImageUrl(modelID)}`;
     }
     return genericDevicePic;
 };
 
-export type LoadableFileTypes = "js" | "css";
+export type LoadableFileTypes = 'js' | 'css';
 
 export const fetchJs = (url: string): Promise<unknown> => {
     return new Promise((resolve, reject) => {
-        const scriptElement = document.createElement("script");
-        scriptElement.addEventListener("load", resolve);
-        scriptElement.addEventListener("error", reject);
-        scriptElement.setAttribute("type", "text/javascript");
-        scriptElement.setAttribute("src", url);
-        document.getElementsByTagName("head")[0].appendChild(scriptElement);
+        const scriptElement = document.createElement('script');
+        scriptElement.addEventListener('load', resolve);
+        scriptElement.addEventListener('error', reject);
+        scriptElement.setAttribute('type', 'text/javascript');
+        scriptElement.setAttribute('src', url);
+        document.getElementsByTagName('head')[0].appendChild(scriptElement);
     });
 };
 
 export const fetchStyle = (url: string): Promise<unknown> => {
     return new Promise((resolve, reject) => {
-        const link = document.createElement("link");
-        link.addEventListener("load", resolve);
-        link.addEventListener("error", reject);
-        link.setAttribute("type", "text/css");
-        link.setAttribute("rel", "stylesheet");
-        link.setAttribute("href", url);
-        document.getElementsByTagName("head")[0].appendChild(link)
+        const link = document.createElement('link');
+        link.addEventListener('load', resolve);
+        link.addEventListener('error', reject);
+        link.setAttribute('type', 'text/css');
+        link.setAttribute('rel', 'stylesheet');
+        link.setAttribute('href', url);
+        document.getElementsByTagName('head')[0].appendChild(link);
     });
 };
 
@@ -69,8 +69,6 @@ export function last<T>(collection: T[]): T {
 export function arrayUnique<T>(input: T[]): T[] {
     return input.filter((v, i, a) => a.indexOf(v) === i);
 }
-
-
 
 export const bitOps = {
     getBit: (n: number, bitIndex: number): number => {
@@ -85,9 +83,8 @@ export const bitOps = {
     clearBit: (n: number, bitIndex: number): number => {
         const bitMask = ~(1 << bitIndex);
         return n & bitMask;
-    }
+    },
 };
-
 
 export const toHHMMSS = (secs: number): string => {
     const hours = Math.floor(secs / 3600);
@@ -95,9 +92,9 @@ export const toHHMMSS = (secs: number): string => {
     const seconds = Math.floor(secs % 60);
 
     return [hours, minutes, seconds]
-        .map(v => v < 10 ? `0${v}` : v)
-        .filter((v, i) => v !== "00" || i > 0)
-        .join(":");
+        .map((v) => (v < 10 ? `0${v}` : v))
+        .filter((v, i) => v !== '00' || i > 0)
+        .join(':');
 };
 
 export type CallbackHandler<T> = (err: boolean, res: T) => void;
@@ -108,18 +105,16 @@ export interface ApiResponse<T> {
 
 export const lastSeen = (lastSeen: string, elapsed: number): string => {
     if (!lastSeen && !elapsed) {
-        return "N/A";
+        return 'N/A';
     }
 
     const diff = elapsed ? elapsed : Date.now() - Date.parse(lastSeen);
 
     if (diff < 0) {
-        return "Now";
+        return 'Now';
     }
     return toHHMMSS(diff / 1000);
-
 };
-
 
 export const sanitizeGraph = (inGraph: GraphI): GraphI => {
     const nodes = {};
@@ -130,15 +125,15 @@ export const sanitizeGraph = (inGraph: GraphI): GraphI => {
     const siblings = [];
     const createdLinks = {};
 
-    inGraph.nodes.forEach(node => {
+    inGraph.nodes.forEach((node) => {
         nodes[node.networkAddress] = node;
-        if (node.type == "Coordinator") {
+        if (node.type == 'Coordinator') {
             coordinatorNode = node;
         }
     });
     inGraph.links = inGraph.links.sort((a, b) => a.relationship - b.relationship);
 
-    inGraph.links.forEach(link => {
+    inGraph.links.forEach((link) => {
         const src: NodeI = nodes[(link.source as Source).networkAddress];
         const dst: NodeI = nodes[(link.target as Target).networkAddress];
 
@@ -151,25 +146,32 @@ export const sanitizeGraph = (inGraph: GraphI): GraphI => {
             if (!repeatedLink) {
                 createdLinks[linkId] = true;
             }
-            links.push({ ...link, ...{ source: (link.source as Source).networkAddress, target: (link.target as Target).networkAddress, linkType, repeated: repeatedLink } });
+            links.push({
+                ...link,
+                ...{
+                    source: (link.source as Source).networkAddress,
+                    target: (link.target as Target).networkAddress,
+                    linkType,
+                    repeated: repeatedLink,
+                },
+            });
         } else {
             switch (link.relationship) {
                 case ZigbeeRelationship.NeigbhorIsASibling:
-                    siblings.push(link)
+                    siblings.push(link);
                     break;
                 default:
                     filteredOutLinks.push(link);
                     break;
             }
-
         }
     });
 
-    inGraph.nodes.forEach(node => {
+    inGraph.nodes.forEach((node) => {
         if (!nodesWithLinks[node.networkAddress]) {
             //this node has no links, lets connect it to coordinator manually
             // const linkType = ""
-            links.push({ source: node.networkAddress, target: coordinatorNode.networkAddress, linkType: "BrokenLink" });
+            links.push({ source: node.networkAddress, target: coordinatorNode.networkAddress, linkType: 'BrokenLink' });
         }
     });
 
@@ -179,8 +181,7 @@ export const sanitizeGraph = (inGraph: GraphI): GraphI => {
 
 export const isObject = (obj: unknown): boolean => {
     return obj === Object(obj);
-}
-
+};
 
 export const getDeviceDisplayName = (device: Device): string => {
     return `${device.friendly_name} ${device.definition ? `(${device.definition?.model})` : null}`;

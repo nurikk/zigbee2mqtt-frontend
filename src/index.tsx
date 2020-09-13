@@ -1,49 +1,34 @@
 /* eslint-disable @typescript-eslint/camelcase */
-import "./main.css";
+import './main.css';
 
-import "notyf/notyf.min.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-
-
+import 'notyf/notyf.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import React, { Component, Fragment, FunctionComponent } from 'react';
 
-import ConnectedMap from "./components/map";
+import ConnectedMap from './components/map';
 
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link,
-    HashRouter
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link, HashRouter } from 'react-router-dom';
 
 // import ConnectedDiscovery from "./components/discovery";
 // import ConnectedLogViewer from "./components/log-viewer";
 // import ConnectedCodeEditor from "./components/code-editor";
-import ConnectedDevicePage from "./components/device-page";
-import TouchlinkPage from "./components/touchlink-page";
+import ConnectedDevicePage from './components/device-page';
+import TouchlinkPage from './components/touchlink-page';
 
-import store from "./store";
-import { Provider } from "unistore/react";
-
-
+import store from './store';
+import { Provider } from 'unistore/react';
 
 import api from './api';
 
+import ConnectedSettingsPage from './components/settings';
+import NavBar from './components/navbar';
+import ConnectedGroupsPage from './components/groups';
+import ConnectedZigbeePage from './components/zigbee';
+import LogsPage from './components/logs-page';
+import ReactDOM from 'react-dom';
 
-import ConnectedSettingsPage from "./components/settings";
-import NavBar from "./components/navbar";
-import ConnectedGroupsPage from "./components/groups";
-import ConnectedZigbeePage from "./components/zigbee";
-import LogsPage from "./components/logs-page";
-import ReactDOM from "react-dom";
-
-
-const ConnectedDevicePageWrap: FunctionComponent<{ dev: string }> = ({ dev }) => (
-    <ConnectedDevicePageWrap dev={dev} />
-);
-
+const ConnectedDevicePageWrap: FunctionComponent<{ dev: string }> = ({ dev }) => <ConnectedDevicePageWrap dev={dev} />;
 
 api.connect();
 
@@ -53,7 +38,6 @@ class Main extends Component {
         return (
             <Provider store={store}>
                 <Fragment>
-
                     <HashRouter>
                         <NavBar />
                         <Switch>
@@ -67,7 +51,6 @@ class Main extends Component {
                             <Route path="/settings/:tab?">
                                 <ConnectedSettingsPage />
                             </Route>
-
 
                             <Route path="/groups">
                                 <ConnectedGroupsPage />
@@ -87,10 +70,8 @@ class Main extends Component {
                     </HashRouter>
                 </Fragment>
             </Provider>
-
         );
     }
 }
 
-
-ReactDOM.render(<Main />, document.getElementById("root"));
+ReactDOM.render(<Main />, document.getElementById('root'));

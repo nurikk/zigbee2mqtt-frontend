@@ -1,75 +1,72 @@
-const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
-    .BundleAnalyzerPlugin;
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-const path = require("path");
-const glob = require("glob");
-const proxyTo = process.env.Z2M_API_URI
-    ? process.env.Z2M_API_URI
-    : "ws://localhost:8579";
+const path = require('path');
+const glob = require('glob');
+const proxyTo = process.env.Z2M_API_URI ? process.env.Z2M_API_URI : 'ws://localhost:8579';
 module.exports = (env, args) => {
     let production = false;
 
-    if (args && args.mode === "production") {
+    if (args && args.mode === 'production') {
         production = true;
         // console.log('== Production mode');
     } else {
-        console.log("== Development mode");
+        console.log('== Development mode');
     }
 
     const plugins = [
         new MiniCssExtractPlugin({
-            filename: "[name].[contenthash].css",
-            chunkFilename: "[id].[contenthash].css",
+            filename: '[name].[contenthash].css',
+            chunkFilename: '[id].[contenthash].css',
         }),
     ];
-    const basePath = "src/templates";
+    const basePath = 'src/templates';
     glob.sync(`${basePath}/**/*.html`).forEach((item) => {
         plugins.push(
             new HtmlWebpackPlugin({
                 filename: path.relative(basePath, item),
                 template: item,
-            })
+            }),
         );
     });
     if (production) {
         plugins.push(
             new BundleAnalyzerPlugin({
-                analyzerMode: "static",
-            })
+                analyzerMode: 'static',
+            }),
         );
     } else {
         plugins.push(new ForkTsCheckerWebpackPlugin());
     }
 
     return {
-        entry: "./src/index.tsx",
+        entry: './src/index.tsx',
         output: {
-            filename: "[name].[contenthash].js",
-            path: path.resolve("./dist"),
+            filename: '[name].[contenthash].js',
+            path: path.resolve('./dist'),
         },
-        target: "web",
-        devtool: "source-map",
+        target: 'web',
+        devtool: 'source-map',
         optimization: {
             usedExports: true,
-            moduleIds: "hashed",
-            runtimeChunk: "single",
+            moduleIds: 'hashed',
+            runtimeChunk: 'single',
             splitChunks: {
                 cacheGroups: {
                     vendor: {
                         test: /node_modules/,
-                        name: "scripts/vendor",
-                        chunks: "all",
+                        name: 'scripts/vendor',
+                        chunks: 'all',
                         enforce: true,
                     },
                 },
             },
         },
         resolve: {
-            mainFields: ["module", "main"],
-            extensions: [".ts", ".tsx", ".js", ".html", ".txt"],
+            mainFields: ['module', 'main'],
+            extensions: ['.ts', '.tsx', '.js', '.html', '.txt'],
         },
         module: {
             rules: [
@@ -77,7 +74,7 @@ module.exports = (env, args) => {
                     test: /\.(png|jpe?g|gif)$/i,
                     use: [
                         {
-                            loader: "file-loader",
+                            loader: 'file-loader',
                         },
                     ],
                 },
@@ -85,7 +82,7 @@ module.exports = (env, args) => {
                     test: /\.tsx?$/,
                     use: [
                         {
-                            loader: "ts-loader",
+                            loader: 'ts-loader',
                         },
                     ],
                 },
@@ -94,9 +91,9 @@ module.exports = (env, args) => {
                     use: [
                         MiniCssExtractPlugin.loader,
 
-                        "@teamsupercell/typings-for-css-modules-loader",
+                        '@teamsupercell/typings-for-css-modules-loader',
                         {
-                            loader: "css-loader",
+                            loader: 'css-loader',
                             options: {
                                 modules: true,
                             },
@@ -107,27 +104,27 @@ module.exports = (env, args) => {
                 {
                     test: /\.css$/i,
                     include: /node_modules/,
-                    use: [MiniCssExtractPlugin.loader, "css-loader"],
+                    use: [MiniCssExtractPlugin.loader, 'css-loader'],
                 },
             ],
         },
         devServer: {
             headers: {
-                "Access-Control-Allow-Origin": "*",
+                'Access-Control-Allow-Origin': '*',
             },
-            contentBase: "./dist",
+            contentBase: './dist',
             compress: true,
-            host: "0.0.0.0",
+            host: '0.0.0.0',
             port: 3030,
             proxy: {
-                "/api": {
+                '/api': {
                     target: proxyTo,
                     ws: true,
                 },
             },
         },
         plugins,
-        stats: "errors-only",
+        stats: 'errors-only',
         externals: {},
     };
 };

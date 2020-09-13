@@ -1,8 +1,7 @@
-export type DeviceType = "EndDevice" | "Router" | "Coordinator";
-
+export type DeviceType = 'EndDevice' | 'Router' | 'Coordinator';
 
 interface OTAState {
-    state: "available" | "updating";
+    state: 'available' | 'updating';
     progress: number;
     remaining: number;
 }
@@ -18,9 +17,6 @@ export interface DeviceState {
 export type Cluster = string;
 
 export type Endpoint = string | number;
-
-
-
 
 export interface Meta {
     revision: number;
@@ -45,7 +41,7 @@ export interface Z2MConfig {
     homeassistant: boolean;
     advanced: {
         elapsed: boolean;
-        last_seen: 'disable' | 'ISO_8601' | 'ISO_8601_local'| 'epoch';
+        last_seen: 'disable' | 'ISO_8601' | 'ISO_8601_local' | 'epoch';
     };
     [k: string]: unknown;
 }
@@ -56,7 +52,6 @@ export interface BridgeConfig {
     network: Network;
     log_level: string;
     permit_join: boolean;
-
 }
 
 export interface BridgeInfo {
@@ -64,7 +59,7 @@ export interface BridgeInfo {
     permit_join: boolean;
 }
 
-export type PowerSource = "Battery" | "Mains (single phase)";
+export type PowerSource = 'Battery' | 'Mains (single phase)';
 
 export interface DeviceDefinition {
     description: string;
@@ -97,18 +92,17 @@ export interface Device {
     endpoints: Map<string, EndpointDescription>;
 }
 
-export type ObjectType = "device" | "group";
+export type ObjectType = 'device' | 'group';
 export interface BindRule {
     cluster: Cluster;
     target: {
         id?: number;
         endpoint?: Endpoint;
         ieee_address?: string;
-        type: "endpoint" | "group";
+        type: 'endpoint' | 'group';
     };
-
 }
-export type SortDirection = "asc" | "desc";
+export type SortDirection = 'asc' | 'desc';
 
 export interface TouchLinkDevice {
     ieee_address: string;

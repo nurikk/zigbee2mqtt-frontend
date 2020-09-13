@@ -1,10 +1,9 @@
-import React, { Component } from "react";
-import { Device, Cluster, Endpoint } from "../../types";
-import BindRow from "./bind-row";
-import actions, { BindApi } from "../../actions";
-import { connect } from "unistore/react";
-import { GlobalState, Group } from "../../store";
-
+import React, { Component } from 'react';
+import { Device, Cluster, Endpoint } from '../../types';
+import BindRow from './bind-row';
+import actions, { BindApi } from '../../actions';
+import { connect } from 'unistore/react';
+import { GlobalState, Group } from '../../store';
 
 interface PropsFromStore {
     devices: Map<string, Device>;
@@ -24,7 +23,7 @@ export interface NiceBindingRule {
         id?: number;
         endpoint?: Endpoint;
         ieee_address?: string;
-        type: "endpoint" | "group";
+        type: 'endpoint' | 'group';
     };
 
     clusters: Cluster[];
@@ -33,8 +32,8 @@ const convertBidningsIntoNiceStructure = (device: Device, coordinator: Device): 
     const bindings = {};
     Object.entries(device.endpoints).forEach(([endpoint, description]) => {
         description.bindings
-            .filter(b => b.target.ieee_address !== coordinator.ieee_address)
-            .forEach(b => {
+            .filter((b) => b.target.ieee_address !== coordinator.ieee_address)
+            .forEach((b) => {
                 const targetId = b.target.id ?? b.target.ieee_address;
                 if (bindings[targetId]) {
                     bindings[targetId].clusters.push(b.cluster);
@@ -43,16 +42,16 @@ const convertBidningsIntoNiceStructure = (device: Device, coordinator: Device): 
                         source: {
                             // eslint-disable-next-line @typescript-eslint/camelcase
                             ieee_address: device.ieee_address,
-                            endpoint
+                            endpoint,
                         },
                         target: b.target,
-                        clusters: [b.cluster]
-                    }
+                        clusters: [b.cluster],
+                    };
                 }
             });
     });
     return Object.values(bindings);
-}
+};
 
 export class Bind extends Component<BindProps & PropsFromStore & BindApi, {}> {
     onBindClick = (from: string, to: string, clusters: Cluster[]): void => {
@@ -66,8 +65,7 @@ export class Bind extends Component<BindProps & PropsFromStore & BindApi, {}> {
     render() {
         const { device, devices, groups } = this.props;
 
-        const coordinator = Array.from(devices.values()).find(d => d.type === "Coordinator");
-
+        const coordinator = Array.from(devices.values()).find((d) => d.type === 'Coordinator');
 
         const niceBindingRules = convertBidningsIntoNiceStructure(device, coordinator);
         niceBindingRules.push({ isNew: true, target: {}, source: {}, clusters: [] } as NiceBindingRule);
@@ -85,8 +83,8 @@ export class Bind extends Component<BindProps & PropsFromStore & BindApi, {}> {
                         </tr>
                     </thead>
                     <tbody>
-                        {
-                            niceBindingRules.map((rule, idx) => <BindRow
+                        {niceBindingRules.map((rule, idx) => (
+                            <BindRow
                                 key={`${rule.source}-${rule.target}-${rule.clusters.join('-')}`}
                                 rule={rule}
                                 groups={groups}
@@ -94,8 +92,9 @@ export class Bind extends Component<BindProps & PropsFromStore & BindApi, {}> {
                                 onBind={this.onBindClick}
                                 device={device}
                                 idx={idx}
-                                devices={devices} />)
-                        }
+                                devices={devices}
+                            />
+                        ))}
                     </tbody>
                 </table>
             </div>
@@ -103,6 +102,6 @@ export class Bind extends Component<BindProps & PropsFromStore & BindApi, {}> {
     }
 }
 
-const mappedProps = ["devices", "groups"];
+const mappedProps = ['devices', 'groups'];
 const ConnectedBindPage = connect<BindProps, {}, GlobalState, PropsFromStore & BindApi>(mappedProps, actions)(Bind);
-export default ConnectedBindPage
+export default ConnectedBindPage;
