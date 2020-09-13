@@ -4,7 +4,6 @@ import actions, { BridgeApi } from "../../actions";
 import { GlobalState } from "../../store";
 import get from "lodash/get";
 import UniversalEditor from "../universal-editor";
-import debounce from "lodash/debounce";
 import isEmpty from "lodash/isEmpty";
 import { NavLink, Redirect, RouteComponentProps, withRouter } from "react-router-dom";
 
@@ -45,10 +44,10 @@ type UrlParams = {
 type SettingsPageProps = RouteComponentProps<UrlParams>;
 
 export class SettingsPage extends Component<SettingsPageProps & BridgeApi & GlobalState, {}> {
-    updateConfig = debounce((name: string, value: unknown): void => {
+    updateConfig = (name: string, value: unknown): void => {
         const { updateConfigValue } = this.props;
         updateConfigValue(name, value);
-    }, 200, { leading: false, trailing: true });
+    }
 
     render() {
         return (
