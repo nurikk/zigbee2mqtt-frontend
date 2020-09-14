@@ -1,5 +1,5 @@
-import { SimulationLinkDatum, SimulationNodeDatum } from 'd3-force';
-import { DeviceType, DeviceDefinition } from '../../types';
+import { SimulationLinkDatum, SimulationNodeDatum } from "d3-force";
+import { DeviceType, DeviceDefinition } from "../../types";
 
 export interface NodeI extends SimulationNodeDatum {
     ieeeAddr: string;
@@ -12,14 +12,18 @@ export interface NodeI extends SimulationNodeDatum {
 }
 
 export type LinkType =
-    | 'Coordinator2EndDevice'
-    | 'EndDevice2Coordinator'
-    | 'Coordinator2Router'
-    | 'Router2Coordinator'
-    | 'EndDevice2Router'
-    | 'Router2EndDevice'
-    | 'Router2Router'
-    | 'BrokenLink';
+    "Coordinator2EndDevice" |
+    "EndDevice2Coordinator" |
+
+    "Coordinator2Router" |
+    "Router2Coordinator" |
+
+    "EndDevice2Router" |
+    "Router2EndDevice" |
+
+    "Router2Router" |
+
+    "BrokenLink";
 
 export interface Source {
     ieeeAddr: string;
@@ -35,7 +39,7 @@ export enum ZigbeeRelationship {
     NeigbhorIsAChild,
     NeigbhorIsASibling,
     NoneOfTheAbove,
-    NeigbhorIsAFormerChild,
+    NeigbhorIsAFormerChild
 }
 
 export interface LinkI extends SimulationLinkDatum<NodeI> {

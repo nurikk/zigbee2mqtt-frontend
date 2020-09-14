@@ -1,6 +1,10 @@
 declare namespace StyleCssNamespace {
     export interface IStyleCss {
-        'device-pic': string;
+        "dashed-link": string;
+        "device-pic": string;
+        loader: string;
+        "props-row": string;
+        "value-col": string;
     }
 }
 

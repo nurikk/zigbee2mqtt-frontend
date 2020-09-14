@@ -1,8 +1,8 @@
-import { LinkI, ZigbeeRelationship } from './types';
-import React, { Component, createRef, FunctionComponent, RefObject } from 'react';
-import * as style from './map.css';
-import cx from 'classnames';
-import * as d3 from 'd3';
+import { LinkI, ZigbeeRelationship } from "./types";
+import React, { Component, createRef, FunctionComponent, RefObject } from "react";
+import * as style from "./map.css";
+import cx from "classnames";
+import * as d3 from "d3";
 
 interface LinkProps {
     link: LinkI;
@@ -21,10 +21,10 @@ class Link extends Component<LinkProps, {}> {
     render() {
         const { link, id, ...rest } = this.props;
         const { linkType } = link;
-        let markerEnd = 'url(#arrowhead)';
+        let markerEnd = "url(#arrowhead)"
         switch (linkType) {
-            case 'EndDevice2Coordinator':
-            case 'Router2Coordinator':
+            case "EndDevice2Coordinator":
+            case "Router2Coordinator":
                 markerEnd = null;
                 break;
             default:
@@ -62,14 +62,13 @@ class LinkLabel extends Component<LinkLabelProps, {}> {
         const { link, xlinkHref } = this.props;
         /* eslint-disable @typescript-eslint/ban-ts-ignore */
         //@ts-ignore
-        const textPath = (
-            <textPath startOffset="50%" xlinkHref={xlinkHref}>
-                {link.linkquality}
-            </textPath>
-        );
+        const textPath = <textPath startOffset="50%" xlinkHref={xlinkHref}>{link.linkquality}</textPath>;
         return (
-            <text className={style.linkLabel} ref={this.ref} dy={4}>
-                {textPath}
+            <text
+                className={style.linkLabel}
+                ref={this.ref}
+                dy={4}
+            >{textPath}
             </text>
         );
     }
@@ -80,7 +79,7 @@ interface LinksPros {
     visible: ZigbeeRelationship[];
 }
 
-const Links: FunctionComponent<LinksPros> = (props) => {
+const Links: FunctionComponent<LinksPros> = props => {
     const { links, visible } = props;
     return (
         <g className={style.links}>
@@ -90,18 +89,18 @@ const Links: FunctionComponent<LinksPros> = (props) => {
                     <feComposite in="SourceGraphic" />
                 </filter>
             </defs>
-            {links.map(
-                (link: LinkI, index: number) =>
-                    visible.includes(link.relationship) && (
-                        <Link id={`edgepath${index}`} key={`link${index}`} link={link} />
-                    ),
-            )}
-            {links.map(
-                (link: LinkI, index: number) =>
-                    visible.includes(link.relationship) && (
-                        <LinkLabel xlinkHref={`#edgepath${index}`} key={`label${index}`} link={link} />
-                    ),
-            )}
+            {links.map((link: LinkI, index: number) => visible.includes(link.relationship) && <Link
+                id={`edgepath${index}`}
+                key={`link${index}`}
+                link={link}
+            />)}
+            {links.map((link: LinkI, index: number) => (
+                visible.includes(link.relationship) && <LinkLabel
+                    xlinkHref={`#edgepath${index}`}
+                    key={`label${index}`}
+                    link={link}
+                />
+            ))}
         </g>
     );
 };

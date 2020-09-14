@@ -1,7 +1,7 @@
 declare namespace StyleCssNamespace {
     export interface IStyleCss {
-        'device-image': string;
-        'device-pic': string;
+        "device-image": string;
+        "device-pic": string;
     }
 }
 

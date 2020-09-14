@@ -1,11 +1,14 @@
-import React, { Component } from 'react';
-import { Device, Endpoint, Cluster, ObjectType } from '../../types';
-import DevicePicker from '../device-picker';
-import EndpointPicker from '../endpoint-picker';
-import ClusterPicker from '../cluster-picker';
-import Button from '../button';
-import { Group } from '../../store';
-import { NiceBindingRule } from './bind';
+import React, { Component} from "react";
+import { Device, Endpoint, Cluster, ObjectType } from "../../types";
+import DevicePicker from "../device-picker";
+import EndpointPicker from "../endpoint-picker";
+import ClusterPicker from "../cluster-picker";
+import Button from "../button";
+import { Group } from "../../store";
+import { NiceBindingRule } from "./bind";
+
+
+
 
 interface BindRowProps {
     rule: NiceBindingRule;
@@ -24,104 +27,109 @@ interface BindRowState {
 
 const getEndpoints = (obj: Device | Group): Endpoint[] => {
     if (!obj) {
-        return [];
+        return []
     } else if ((obj as Device).endpoints) {
         return Object.keys((obj as Device).endpoints);
     } else if ((obj as Group).members) {
-        return (obj as Group).members.map((g) => g.endpoint);
+        return (obj as Group).members.map(g => g.endpoint);
     }
     return [];
-};
+}
 const getTarget = (rule: NiceBindingRule, devices: Map<string, Device>, groups: Group[]) => {
-    if (rule.target.type === 'group') {
-        return groups.find((g) => g.id === rule.target.id);
+    if (rule.target.type === "group") {
+        return groups.find(g => g.id === rule.target.id);
     }
     return devices.get(rule.target.ieee_address);
-};
+}
 
 export default class BindRow extends Component<BindRowProps, BindRowState> {
+
     state: Readonly<BindRowState> = {
         stateRule: this.props.rule,
-    };
+    }
 
     setSourceEp = (sourceEp: Endpoint): void => {
         const { stateRule } = this.state;
         stateRule.source.endpoint = sourceEp;
         this.setState({ stateRule });
-    };
+    }
 
     setDestination = (destination: Device | Group, type: ObjectType): void => {
         const { stateRule } = this.state;
-        if (type === 'device') {
+        if (type === "device") {
             // eslint-disable-next-line @typescript-eslint/camelcase
             stateRule.target.ieee_address = (destination as Device).ieee_address;
-            stateRule.target.type = 'endpoint';
+            stateRule.target.type = "endpoint";
             delete stateRule.target.id;
-        } else if (type === 'group') {
+        } else if (type === "group") {
             stateRule.target.id = (destination as Group).id;
-            stateRule.target.type = 'group';
+            stateRule.target.type = "group";
             delete stateRule.target.ieee_address;
         }
         stateRule.clusters = [];
 
         this.setState({ stateRule });
-    };
+    }
 
     setDestinationEp = (destinationEp: Endpoint): void => {
+
         const { stateRule } = this.state;
         stateRule.target.endpoint = destinationEp;
         stateRule.clusters = [];
         this.setState({ stateRule });
-    };
+    }
 
     setClusters = (clusters: Cluster[]): void => {
         const { stateRule } = this.state;
         stateRule.clusters = clusters;
         this.setState({ stateRule });
-    };
+    }
     onBindClick = (): void => {
         const { onBind, device, groups, devices } = this.props;
         const { stateRule } = this.state;
         const from = `${device.friendly_name}/${stateRule.source.endpoint}`;
         let to: string;
-        if (stateRule.target.type === 'group') {
-            const targetGroup = groups.find((group) => group.id === stateRule.target.id);
+        if (stateRule.target.type === "group") {
+            const targetGroup = groups.find(group => group.id === stateRule.target.id);
             to = `${targetGroup.friendly_name}`;
-        } else if (stateRule.target.type === 'endpoint') {
+
+        } else if (stateRule.target.type === "endpoint") {
             const targeDevice = devices.get(stateRule.target.ieee_address);
             to = `${targeDevice.friendly_name}/${stateRule.target.endpoint}`;
         }
 
         onBind(from, to, stateRule.clusters);
-    };
+
+    }
 
     onUnBindClick = (): void => {
         const { onUnBind, device, groups, devices } = this.props;
         const { stateRule } = this.state;
         const from = `${device.friendly_name}/${stateRule.source.endpoint}`;
         let to: string;
-        if (stateRule.target.type === 'group') {
-            const targetGroup = groups.find((group) => group.id === stateRule.target.id);
+        if (stateRule.target.type === "group") {
+            const targetGroup = groups.find(group => group.id === stateRule.target.id);
             to = `${targetGroup.friendly_name}`;
-        } else if (stateRule.target.type === 'endpoint') {
+        } else if (stateRule.target.type === "endpoint") {
             const targeDevice = devices.get(stateRule.target.ieee_address);
             to = `${targeDevice.friendly_name}/${stateRule.target.endpoint}`;
         }
 
         onUnBind(from, to, stateRule.clusters);
-    };
+    }
 
     isValidRule(): boolean {
         const { stateRule } = this.state;
         let valid = false;
-        if (stateRule.target.type == 'endpoint') {
-            valid =
-                stateRule.source.endpoint &&
-                stateRule.target.ieee_address &&
-                stateRule.target.endpoint &&
-                stateRule.clusters.length > 0;
-        } else if (stateRule.target.type == 'group') {
-            valid = stateRule.source.endpoint && stateRule.target.id && stateRule.clusters.length > 0;
+        if (stateRule.target.type == "endpoint") {
+            valid = stateRule.source.endpoint
+                && stateRule.target.ieee_address
+                && stateRule.target.endpoint
+                && stateRule.clusters.length > 0;
+        } else if (stateRule.target.type == "group") {
+            valid = stateRule.source.endpoint
+                && stateRule.target.id
+                && stateRule.clusters.length > 0;
         }
         return valid;
     }
@@ -130,7 +138,7 @@ export default class BindRow extends Component<BindRowProps, BindRowState> {
         const { devices, groups, idx, device } = this.props;
         const { stateRule } = this.state;
 
-        const targetType: ObjectType = stateRule.target.type === 'endpoint' ? 'device' : 'group';
+        const targetType: ObjectType = stateRule.target.type === "endpoint" ? "device" : "group";
 
         const sourceEndpoints = getEndpoints(device);
         const target = getTarget(stateRule, devices, groups);
@@ -140,52 +148,16 @@ export default class BindRow extends Component<BindRowProps, BindRowState> {
         return (
             <tr>
                 <th scope="row">{idx + 1}</th>
-                <td>
-                    <EndpointPicker
-                        values={sourceEndpoints}
-                        value={stateRule.source.endpoint}
-                        onSelect={this.setSourceEp}
-                    />
-                </td>
-                <td>
-                    <DevicePicker
-                        type={targetType}
-                        value={stateRule.target.ieee_address || stateRule.target.id}
-                        devices={devices}
-                        groups={groups}
-                        onSelect={this.setDestination}
-                    />
-                </td>
-                <td>
-                    {stateRule.target.type === 'endpoint' ? (
-                        <EndpointPicker
-                            values={destinationEndpoints}
-                            value={stateRule.target.endpoint}
-                            onSelect={this.setDestinationEp}
-                        />
-                    ) : null}
-                </td>
-                <td>
-                    <ClusterPicker clusters={possibleClusters} value={stateRule.clusters} onSelect={this.setClusters} />
-                </td>
+                <td><EndpointPicker values={sourceEndpoints} value={stateRule.source.endpoint} onSelect={this.setSourceEp} /></td>
+                <td><DevicePicker type={targetType} value={stateRule.target.ieee_address || stateRule.target.id} devices={devices} groups={groups} onSelect={this.setDestination} /></td>
+                <td>{stateRule.target.type === "endpoint" ? <EndpointPicker values={destinationEndpoints} value={stateRule.target.endpoint} onSelect={this.setDestinationEp} /> : null}</td>
+                <td><ClusterPicker clusters={possibleClusters} value={stateRule.clusters} onSelect={this.setClusters} /></td>
                 <td>
                     <div className="btn-group btn-group-sm">
-                        <Button<void>
-                            disabled={!this.isValidRule()}
-                            title="Bind"
-                            className="btn btn-primary"
-                            onClick={this.onBindClick}
-                        >
-                            <i className="fa fa-heart" />
-                        </Button>
-                        <Button<void>
-                            disabled={!stateRule.isNew && !this.isValidRule()}
-                            title="Unbind"
-                            className="btn btn-secondary"
-                            onClick={this.onUnBindClick}
-                        >
-                            <i className="fa fa-heart-broken" />
-                        </Button>
+                        <Button<void> disabled={!this.isValidRule()} title="Bind" className="btn btn-primary" onClick={this.onBindClick}><i
+                            className="fa fa-heart" /></Button>
+                        <Button<void> disabled={!stateRule.isNew && !this.isValidRule()} title="Unbind" className="btn btn-secondary" onClick={this.onUnBindClick}><i
+                            className="fa fa-heart-broken" /></Button>
                     </div>
                 </td>
             </tr>

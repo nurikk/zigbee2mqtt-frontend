@@ -1,6 +1,6 @@
-import { NodeI } from './types';
-import style from './tooltip.css';
-import React, { FunctionComponent } from 'react';
+import { NodeI } from "./types";
+import style from "./tooltip.css";
+import React, { FunctionComponent} from "react";
 // import { isOnline } from "./nodes";
 // import { Device } from "../../types";
 // import { lastSeen } from "../../utils";
@@ -24,7 +24,7 @@ const getTooltip = (device: NodeI): string[] => {
     // if (strings.length == 0) {
     //     strings.push("A very strange device...");
     // }
-    if (device.type !== 'Coordinator') {
+    if (device.type !== "Coordinator") {
         // if (device.lastSeen && timeInfo) {
         //     strings.push(`Last seen: ${lastSeen(device)}`);
         // }
@@ -40,10 +40,9 @@ const Tooltip: FunctionComponent<TooltipProps> = (props: TooltipProps) => {
 
     return (
         <div className={style.tooltip}>
-            {getTooltip(info).map((s) => (
-                <div key={s}>{s}</div>
-            ))}
+            {getTooltip(info).map((s) => <div key={s}>{s}</div>)}
         </div>
+
     );
 };
 export default Tooltip;

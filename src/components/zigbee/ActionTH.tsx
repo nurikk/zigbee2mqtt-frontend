@@ -1,7 +1,10 @@
-import React, { Component, MouseEvent } from 'react';
+import React, { Component, MouseEvent} from "react";
 
-import { SortDirection } from '../../types';
-import isEqual from 'lodash/isEqual';
+
+
+import { SortDirection } from "../../types";
+import isEqual from "lodash/isEqual";
+
 
 interface ActionTHProps<T> {
     column: T | T[];
@@ -21,10 +24,10 @@ export default class ActionTH<T> extends React.Component<ActionTHProps<T>, {}> {
         onClick && onClick(column);
     };
 
-    renderArrow() {
+    renderArrow () {
         const { currentDirection, current, column } = this.props;
         if (isEqual(current, column)) {
-            if (currentDirection == 'asc') {
+            if (currentDirection == "asc") {
                 return <i className={`fa fa-sort-amount-down-alt`} />;
             }
             return <i className={`fa fa-sort-amount-down`} />;
@@ -32,16 +35,12 @@ export default class ActionTH<T> extends React.Component<ActionTHProps<T>, {}> {
         return <i className={`fa fa-sort-amount-down invisible`} />;
     }
 
-    render() {
+    render () {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { children, onClick, current, column, currentDirection, ...rest } = this.props;
-        return (
-            <th {...rest}>
-                <span className="btn btn-link" onClick={this.onClick}>
-                    {children}
-                </span>
-                {this.renderArrow()}
-            </th>
-        );
+        return (<th {...rest}>
+            <span className="btn btn-link" onClick={this.onClick}>{children}</span>
+            {this.renderArrow()}
+        </th>);
     }
 }

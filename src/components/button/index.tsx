@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component} from "react";
 
 interface ButtonProps<T> {
     item?: T;
@@ -12,17 +12,13 @@ export default class Button<T> extends Component<ButtonProps<T>, {}> {
         const { item, onClick, promt } = this.props;
         let confirmed = true;
         if (promt) {
-            confirmed = confirm(typeof promt === 'string' ? promt : 'Are you sure?');
+            confirmed = confirm(typeof promt === "string" ? promt : "Are you sure?");
         }
         confirmed && onClick && onClick(item);
     };
 
     render() {
         const { children, item, promt, ...rest } = this.props;
-        return (
-            <button type="button" {...rest} onClick={this.onClick}>
-                {children}
-            </button>
-        );
+        return <button type="button" {...rest} onClick={this.onClick}>{children}</button>;
     }
 }

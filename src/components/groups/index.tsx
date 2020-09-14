@@ -1,20 +1,22 @@
-import React, { Component } from 'react';
-import { connect } from 'unistore/react';
-import actions, { GroupsApi } from '../../actions';
-import { GlobalState, Group, GroupAddress } from '../../store';
-import Button from '../button';
-import { Device, Endpoint } from '../../types';
-import SafeImg from '../safe-image';
-import { genDeviceImageUrl, genDeviceDetailsLink } from '../../utils';
+import React, { Component } from "react";
+import { connect } from "unistore/react";
+import actions, { GroupsApi } from "../../actions";
+import { GlobalState, Group, GroupAddress } from "../../store";
+import Button from "../button";
+import { Device, Endpoint } from "../../types";
+import SafeImg from "../safe-image";
+import { genDeviceImageUrl, genDeviceDetailsLink } from "../../utils";
 import style from './style.css';
 import cx from 'classnames';
-import EndpointPicker from '../endpoint-picker';
-import DevicePicker from '../device-picker';
-import { Link } from 'react-router-dom';
+import EndpointPicker from "../endpoint-picker";
+import DevicePicker from "../device-picker";
+import { Link } from "react-router-dom";
+
 
 interface GroupsPageState {
     newGroupName: string;
 }
+
 
 interface AddDeviceToGroupProps {
     devices: Map<string, Device>;
@@ -44,36 +46,16 @@ class DeviceGroupRow extends Component<DeviceGroupRowProps, {}> {
         const { rowNumber, groupAddress, removeDeviceFromGroup } = this.props;
         const device = this.getDeviceObj();
 
-        return (
-            <tr>
-                <th scope="row">{rowNumber + 1}</th>
-                <td className={style['device-pic']}>
-                    {
-                        <SafeImg
-                            className={cx(style['device-image'])}
-                            src={genDeviceImageUrl(device?.definition?.model)}
-                        />
-                    }
-                </td>
-                <td>
-                    <Link to={genDeviceDetailsLink(device.ieee_address)}>{device.friendly_name}</Link>
-                </td>
-                <td>{groupAddress.ieee_address}</td>
-                <td>{groupAddress.endpoint}</td>
-                <td>
-                    {device && (
-                        <Button<string>
-                            promt
-                            item={device.friendly_name}
-                            onClick={removeDeviceFromGroup}
-                            className="btn btn-danger btn-sm float-right"
-                        >
-                            <i className="fa fa-trash" />
-                        </Button>
-                    )}
-                </td>
-            </tr>
-        );
+        return <tr>
+            <th scope="row">{rowNumber + 1}</th>
+            <td className={style["device-pic"]}>{<SafeImg className={cx(style["device-image"])}
+                src={genDeviceImageUrl(device?.definition?.model)} />}
+            </td>
+            <td><Link to={genDeviceDetailsLink(device.ieee_address)}>{device.friendly_name}</Link></td>
+            <td>{groupAddress.ieee_address}</td>
+            <td>{groupAddress.endpoint}</td>
+            <td>{device && <Button<string> promt item={device.friendly_name} onClick={removeDeviceFromGroup} className="btn btn-danger btn-sm float-right"><i className="fa fa-trash" /></Button>}</td>
+        </tr>;
     }
 }
 interface DeviceGroupPropts {
@@ -87,57 +69,47 @@ class DeviceGroup extends Component<DeviceGroupPropts, {}> {
     onRemove = (deviceFriendlyName: string): void => {
         const { group, removeDeviceFromGroup } = this.props;
         removeDeviceFromGroup(group.friendly_name, deviceFriendlyName);
-    };
+    }
     render() {
         const { group, devices } = this.props;
-        return (
-            <table className="table table-sm">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Pic</th>
-                        <th scope="col">friendlyName</th>
-                        <th scope="col">ieee_addr</th>
-                        <th scope="col">Endpoint</th>
-                        <th scope="col" className="text-right">
-                            Action
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {group.members.map((groupMemebershipInfo, idx) => (
-                        <DeviceGroupRow
-                            key={groupMemebershipInfo.ieee_address}
-                            removeDeviceFromGroup={this.onRemove}
-                            rowNumber={idx}
-                            devices={devices}
-                            groupAddress={groupMemebershipInfo}
-                        />
-                    ))}
-                </tbody>
-            </table>
-        );
+        return <table className="table table-sm">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Pic</th>
+                    <th scope="col">friendlyName</th>
+                    <th scope="col">ieee_addr</th>
+                    <th scope="col">Endpoint</th>
+                    <th scope="col" className="text-right">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {group.members.map((groupMemebershipInfo, idx) => <DeviceGroupRow key={groupMemebershipInfo.ieee_address} removeDeviceFromGroup={this.onRemove} rowNumber={idx} devices={devices} groupAddress={groupMemebershipInfo} />)}
+            </tbody>
+        </table>;
     }
 }
 
 class AddDeviceToGroup extends Component<AddDeviceToGroupProps, AddDeviceToGroupState> {
     state = {
         device: undefined,
-        endpoint: undefined,
+        endpoint: undefined
     };
+
 
     onSubmit = (): void => {
         const { addDeviceToGroup, group } = this.props;
         const { device, endpoint } = this.state;
         addDeviceToGroup(endpoint ? `${device}/${endpoint}` : device, group.friendly_name);
-    };
+
+    }
     onDeviceSelect = (device: Device): void => {
         this.setState({ device: device.ieee_address });
-    };
+    }
 
     onEpChange = (endpoint: Endpoint): void => {
         this.setState({ endpoint });
-    };
+    }
     render() {
         const { device, endpoint } = this.state;
         const { devices } = this.props;
@@ -145,131 +117,112 @@ class AddDeviceToGroup extends Component<AddDeviceToGroupProps, AddDeviceToGroup
 
         const endpoints = Object.keys(deviceObj?.endpoints ?? {});
 
-        return (
-            <form className="row">
-                <div className="col">
-                    <div className="input-group mb-3">
-                        <DevicePicker type="device" value={device} devices={devices} onSelect={this.onDeviceSelect} />
+        return <form className="row">
 
-                        <EndpointPicker values={endpoints} value={endpoint} onSelect={this.onEpChange} />
-                    </div>
+            <div className="col">
+                <div className="input-group mb-3">
+                    <DevicePicker type="device" value={device} devices={devices} onSelect={this.onDeviceSelect} />
+
+
+                    <EndpointPicker values={endpoints} value={endpoint} onSelect={this.onEpChange} />
                 </div>
 
-                <div className="col">
-                    <Button<void> type="button" onClick={this.onSubmit} className="btn btn-primary">
-                        Add to group
-                    </Button>
-                </div>
-            </form>
-        );
+            </div>
+
+            <div className="col">
+                <Button<void> type="button" onClick={this.onSubmit} className="btn btn-primary">Add to group</Button>
+            </div>
+
+
+        </form>
     }
 }
 
 export class GroupsPage extends Component<GroupsApi & GlobalState, GroupsPageState> {
     state = {
-        newGroupName: undefined,
-    };
+        newGroupName: undefined
+    }
+
+
 
     changeHandler = (event): void => {
         const name: string = event.target.name;
         const value: string = event.target.value;
-        this.setState({ [name]: value } as Pick<GroupsPageState, 'newGroupName'>);
-    };
+        this.setState({ [name]: value } as Pick<GroupsPageState, "newGroupName">);
+    }
 
     onGroupCreateSubmit = (): void => {
         const { newGroupName } = this.state;
         const { createGroup } = this.props;
         createGroup(newGroupName);
-    };
+    }
 
     renderGroupCreationForm() {
         const { newGroupName } = this.state;
         return (
             <form className="row mt-2">
                 <div className="col">
-                    <label htmlFor="newGroupName" className="sr-only">
-                        Group name
-                    </label>
-                    <input
-                        onChange={this.changeHandler}
-                        value={newGroupName}
-                        required
-                        type="text"
-                        name="newGroupName"
-                        className="form-control"
-                        id="newGroupName"
-                        placeholder="bedroom_lamps"
-                    />
+                    <label htmlFor="newGroupName" className="sr-only">Group name</label>
+                    <input onChange={this.changeHandler} value={newGroupName} required type="text" name="newGroupName" className="form-control" id="newGroupName" placeholder="bedroom_lamps" />
                 </div>
                 <div className="col">
-                    <Button<void> onClick={this.onGroupCreateSubmit} className="btn btn-primary mb-2">
-                        Create group
-                    </Button>
+                    <Button<void> onClick={this.onGroupCreateSubmit} className="btn btn-primary mb-2">Create group</Button>
                 </div>
+
             </form>
-        );
+        )
     }
     removeGroup = (friendlyName: string): void => {
         const { removeGroup } = this.props;
         removeGroup(friendlyName);
-    };
+    }
     removeDeviceFromGroup = (groupFriendlyName: string, deviceFriendlyName: string): void => {
         const { removeDeviceFromGroup } = this.props;
         removeDeviceFromGroup(deviceFriendlyName, groupFriendlyName);
-    };
+    }
     renderGroups() {
         const { groups, devices, addDeviceToGroup } = this.props;
         return (
             <div id="accordion">
-                {groups.map((group) => (
-                    <div key={group.id} className="card mb-1">
-                        <div className="card-header" id={`heading${group.id}`}>
-                            <h5 className="mb-0">
-                                <button className="btn btn-link btn-sm">
-                                    {group.friendly_name} (#{group.id})
-                                </button>
-                                <Button<string>
-                                    promt
-                                    title="Remove group"
-                                    item={group.friendly_name}
-                                    onClick={this.removeGroup}
-                                    className="btn btn-danger btn-sm float-right"
-                                >
-                                    <i className="fa fa-trash" />
-                                </Button>
-                            </h5>
-                        </div>
+                {
+                    groups.map(group => (
+                        <div key={group.id} className="card mb-1">
+                            <div className="card-header" id={`heading${group.id}`}>
+                                <h5 className="mb-0">
+                                    <button className="btn btn-link btn-sm">
+                                        {group.friendly_name} (#{group.id})
+                                    </button>
+                                    <Button<string> promt title="Remove group" item={group.friendly_name} onClick={this.removeGroup} className="btn btn-danger btn-sm float-right"><i className="fa fa-trash" /></Button>
+                                </h5>
+                            </div>
 
-                        <div>
-                            <div className="card-body">
-                                <div className="table-responsive">
-                                    <DeviceGroup
-                                        group={group}
-                                        devices={devices}
-                                        removeDeviceFromGroup={this.removeDeviceFromGroup}
-                                    />
+                            <div>
+                                <div className="card-body">
+                                    <div className="table-responsive">
+                                        <DeviceGroup group={group} devices={devices} removeDeviceFromGroup={this.removeDeviceFromGroup} />
+                                    </div>
                                 </div>
                             </div>
+                            <div className="card-footer">
+                                <AddDeviceToGroup addDeviceToGroup={addDeviceToGroup} devices={devices} group={group} />
+                            </div>
                         </div>
-                        <div className="card-footer">
-                            <AddDeviceToGroup addDeviceToGroup={addDeviceToGroup} devices={devices} group={group} />
-                        </div>
-                    </div>
-                ))}
+                    ))
+                }
+
             </div>
-        );
+        )
     }
 
     render() {
-        return (
-            <div className="container">
-                {this.renderGroupCreationForm()}
-                {this.renderGroups()}
-            </div>
-        );
+        return <div className="container">
+            {this.renderGroupCreationForm()}
+            {this.renderGroups()}
+        </div>
+
     }
 }
 
-const mappedProps = ['groups', 'devices'];
+const mappedProps = ["groups", "devices"];
 const ConnectedGroupsPage = connect<{}, {}, GlobalState, GroupsApi>(mappedProps, actions)(GroupsPage);
 export default ConnectedGroupsPage;

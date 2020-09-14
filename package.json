@@ -19,7 +19,7 @@
         "release": "release-it",
         "postversion": "git push && git push --tags",
         "version": "conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md",
-        "pretty": "prettier --write \"./src/**/*.{js,jsx,json,ts,tsx}\""
+        "pretty": "prettier --write \"./**/*.{js,jsx,json}\""
     },
     "eslintIgnore": [
         "dist/*"

@@ -1,16 +1,17 @@
-import React, { Component, FunctionComponent, Fragment } from 'react';
-import cx from 'classnames';
+import React, { Component, FunctionComponent,  Fragment } from "react";
+import cx from "classnames";
 // import * as style from "./style.css";
 
-export const ModalHeader: FunctionComponent<{}> = (props) => {
+
+export const ModalHeader: FunctionComponent<{}> = props => {
     return <div className="modal-header">{props.children}</div>;
 };
 
-export const ModalBody: FunctionComponent<{}> = (props) => {
+export const ModalBody: FunctionComponent<{}> = props => {
     return <div className="modal-body">{props.children}</div>;
 };
 
-export const ModalFooter: FunctionComponent<{}> = (props) => {
+export const ModalFooter: FunctionComponent<{}> = props => {
     return <div className="modal-footer">{props.children}</div>;
 };
 interface ModalProps {
@@ -26,7 +27,7 @@ class Modal extends Component<ModalProps, ModalState> {
         super(props);
         this.state = {
             modalShow: '',
-            display: 'none',
+            display: 'none'
         };
         this.openModal = this.openModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
@@ -35,14 +36,14 @@ class Modal extends Component<ModalProps, ModalState> {
     openModal() {
         this.setState({
             modalShow: 'show',
-            display: 'block',
+            display: 'block'
         });
     }
 
     closeModal() {
         this.setState({
             modalShow: '',
-            display: 'none',
+            display: 'none'
         });
     }
 
@@ -59,7 +60,8 @@ class Modal extends Component<ModalProps, ModalState> {
     render() {
         return (
             <div
-                className={`modal fade ${this.state.modalShow}`}
+                className={`modal fade ${ this.state.modalShow}`}
+
                 role="dialog"
                 aria-hidden="true"
                 style={{ display: this.state.display }}
@@ -73,6 +75,8 @@ class Modal extends Component<ModalProps, ModalState> {
 }
 
 export default Modal;
+
+
 
 // interface Props {
 //     onOk(): void;

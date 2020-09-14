@@ -1,8 +1,9 @@
-import createStore from 'unistore';
-import devtools from 'unistore/devtools';
+import createStore from "unistore";
+import devtools from "unistore/devtools";
 
-import { Device, DeviceState, BridgeConfig, BridgeInfo, TouchLinkDevice } from './types';
-import { GraphI } from './components/map/types';
+
+import { Device, DeviceState, BridgeConfig, BridgeInfo, TouchLinkDevice } from "./types";
+import { GraphI } from "./components/map/types";
 
 export interface GroupAddress {
     endpoint: number;
@@ -16,7 +17,7 @@ export interface Group {
 }
 
 export interface LogMessage {
-    level: 'error' | 'info' | 'warning';
+    level: "error" | "info" | "warning";
     message: string;
 }
 
@@ -44,13 +45,13 @@ const initialState: GlobalState = {
     touchlinkResetInProgress: false,
     networkGraph: {
         links: [],
-        nodes: [],
+        nodes: []
     },
     networkGraphIsLoading: false,
     groups: [],
     bridgeConfig: {} as BridgeConfig,
     bridgeInfo: {} as BridgeInfo,
-    logs: [],
+    logs: []
 };
 
 const store = process.env.NODE_ENV === 'production' ? createStore(initialState) : devtools(createStore(initialState));
