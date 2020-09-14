@@ -1,3 +1,12 @@
+## [0.1.58](https://github.com/nurikk/z2m-frontend/compare/0.1.57...0.1.58) (2020-09-14)
+
+
+### Bug Fixes
+
+* **zigbee:** fix zigbee table rows indexing ([cdb8155](https://github.com/nurikk/z2m-frontend/commit/cdb8155343589f2a375ee1ea8e2caa08a578539e))
+
+
+
 ## [0.1.57](https://github.com/nurikk/z2m-frontend/compare/0.1.56...0.1.57) (2020-09-13)
 
 
