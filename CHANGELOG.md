@@ -1,3 +1,12 @@
+## [0.2.1](https://github.com/nurikk/z2m-frontend/compare/0.2.0...0.2.1) (2020-09-14)
+
+
+### Bug Fixes
+
+* **device page:** fix image style ([be2dcf4](https://github.com/nurikk/z2m-frontend/commit/be2dcf41c305fac52e3052b30a7f13398082adfc))
+
+
+
 # [0.2.0](https://github.com/nurikk/z2m-frontend/compare/0.1.56...0.2.0) (2020-09-13)
 
 
