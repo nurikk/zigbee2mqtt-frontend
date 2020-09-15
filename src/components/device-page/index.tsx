@@ -1,20 +1,17 @@
 import React, { Component } from "react";
+import { NavLink, Redirect, RouteComponentProps, withRouter } from "react-router-dom";
 import { connect } from "unistore/react";
 import actions from "../../actions";
 import { GlobalState } from "../../store";
 import DeviceInfo from "./info";
 import Bind from "./bind";
-
 import States from "./states";
-import { NavLink, Redirect, RouteComponentProps, Router, useParams, withRouter } from "react-router-dom";
 
 type UrlParams = {
     dev: string;
     tab?: TabName;
 };
 type DevicePageProps = RouteComponentProps<UrlParams>;
-
-
 
 
 type TabName = "info" | "bind" | "state";

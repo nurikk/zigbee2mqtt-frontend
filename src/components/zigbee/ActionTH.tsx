@@ -1,4 +1,4 @@
-import React, { Component, MouseEvent} from "react";
+import React, { Component, MouseEvent, ThHTMLAttributes} from "react";
 
 
 
@@ -10,13 +10,10 @@ interface ActionTHProps<T> {
     column: T | T[];
     current: T | T[];
     currentDirection: SortDirection;
-
     onClick?(arg1: T | T[]): void;
-
-    [k: string]: unknown;
 }
 
-export default class ActionTH<T> extends React.Component<ActionTHProps<T>, {}> {
+export default class ActionTH<T> extends React.Component<ActionTHProps<T> & Omit<ThHTMLAttributes<HTMLTableHeaderCellElement>, 'onClick'>, {}> {
     onClick = (event: MouseEvent): void => {
         event.preventDefault();
         event.stopPropagation();

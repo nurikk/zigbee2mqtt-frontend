@@ -6,7 +6,6 @@ import actions, { StateApi } from "../../actions";
 import isObject from "lodash/isObject";
 import { connect } from "unistore/react";
 import { GlobalState } from "../../store";
-import debounce from "lodash/debounce";
 
 interface PropsFromStore {
     deviceStates: Map<string, DeviceState>;

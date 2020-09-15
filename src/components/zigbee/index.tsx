@@ -142,7 +142,6 @@ export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
         const { sortColumn, sortDirection, sortedTableData } = this.state;
         const { onSortChange } = this;
         const lastSeenIsAvaliable = bridgeInfo?.config?.advanced?.elapsed || bridgeInfo?.config?.advanced?.last_seen != "disable";
-
         return (
             <table className={cx("table table-striped table-borderless align-middle", style.adaptive)}>
                 <thead>
@@ -157,11 +156,10 @@ export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
                             onClick={onSortChange}>IEEE address</ActionTH>
                         <ActionTH<SortColumn> className={cx(style["action-column"])} column="device.definition.vendor"
                             currentDirection={sortDirection} current={sortColumn}
-                            onClick={onSortChange} titile="definition.vendor">Manufacturer</ActionTH>
+                            onClick={onSortChange} title="definition.vendor">Manufacturer</ActionTH>
                         <ActionTH<SortColumn> className={style["action-column"]} column="device.definition.model"
                             currentDirection={sortDirection} current={sortColumn}
                             onClick={onSortChange}>Model</ActionTH>
-
                         <ActionTH<SortColumn> className={style["action-column"]} column="state.linkquality"
                             currentDirection={sortDirection} current={sortColumn}
                             onClick={onSortChange}>LQI</ActionTH>
@@ -170,12 +168,9 @@ export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
                                 currentDirection={sortDirection} current={sortColumn}
                                 onClick={onSortChange}>Last seen</ActionTH>
                         }
-
-
                         <ActionTH<SortColumn> className={style["action-column"]} column="state.battery"
                             currentDirection={sortDirection} current={sortColumn}
                             onClick={onSortChange}>Power</ActionTH>
-
                         <th>&nbsp;</th>
                     </tr>
                 </thead>
