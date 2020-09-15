@@ -1,3 +1,35 @@
+## [0.2.2](https://github.com/nurikk/z2m-frontend/compare/0.2.1...0.2.2) (2020-09-15)
+
+
+### Bug Fixes
+
+* **mobile:** fix navbar toggler ([9486aeb](https://github.com/nurikk/z2m-frontend/commit/9486aeb6f9873170c6d3f3de4caed8fdf05b72b6))
+
+
+### Features
+
+* **ota:** display remaining update time ([be9c1a2](https://github.com/nurikk/z2m-frontend/commit/be9c1a20cde5fe50e3daf8bc10bcfd6e9e8824dd))
+
+
+### Reverts
+
+* Revert "chore(code): pretier" ([ccaa09d](https://github.com/nurikk/z2m-frontend/commit/ccaa09d720ddd8267d389a3719a6fcc11a366378))
+
+
+
+## [0.1.58](https://github.com/nurikk/z2m-frontend/compare/0.2.0...0.1.58) (2020-09-14)
+
+
+### Bug Fixes
+
+* **zigbee:** fix zigbee table rows indexing ([cdb8155](https://github.com/nurikk/z2m-frontend/commit/cdb8155343589f2a375ee1ea8e2caa08a578539e))
+
+
+
+## [0.1.57](https://github.com/nurikk/z2m-frontend/compare/0.1.56...0.1.57) (2020-09-13)
+
+
+
 ## [0.2.1](https://github.com/nurikk/z2m-frontend/compare/0.2.0...0.2.1) (2020-09-14)
 
 
