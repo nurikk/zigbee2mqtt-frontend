@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { Device, DeviceState } from "../../types";
 import SafeImg from "../safe-image";
-import { genDeviceImageUrl, toHex } from "../../utils";
+import { genDeviceImageUrl, toHex, toHHMMSS } from "../../utils";
 import DeviceControlGroup from "../device-control";
 import cx from "classnames";
 import style from "./style.css";
@@ -102,11 +102,14 @@ export class DeviceInfo extends Component<DeviceInfoProps & PropsFromStore, {}> 
                             deviceStatus?.update?.state === "updating" ? (
                                 <Fragment>
                                     <dt className="col-5">Updating firmware</dt>
-                                    <dd className="col-7"><div className="progress">
-                                        <div className="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuemax={100} aria-valuemin={0} style={{ width: `${deviceStatus.update.progress}%` }} >
-                                            {deviceStatus.update.progress}%
+                                    <dd className="col-7">
+                                        <div className="progress">
+                                            <div className="progress-bar progress-bar-striped progress-bar-animated" style={{ width: `${deviceStatus.update.progress}%` }}>
+                                                {deviceStatus.update.progress}%
                                         </div>
-                                    </div></dd>
+                                        </div>
+                                        <div>Remaining time {toHHMMSS(deviceStatus.update.remaining)}</div>
+                                    </dd>
                                 </Fragment>
                             ) : null
                         }
