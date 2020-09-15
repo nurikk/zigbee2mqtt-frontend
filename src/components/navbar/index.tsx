@@ -54,7 +54,7 @@ const NavBar: FunctionComponent<BridgeApi & GlobalState> = ({ setPermitJoin, bri
                             </li>)
                     }
                 </ul>
-                <Button<boolean> item={!bridgeInfo.permit_join} onClick={setPermitJoin}>{bridgeInfo.permit_join ? "Disable join" : "Permit join"}</Button>
+                <Button<boolean> className="btn btn-primary" item={!bridgeInfo.permit_join} onClick={setPermitJoin}>{bridgeInfo.permit_join ? "Disable join" : "Permit join"}</Button>
             </div>
         </div>
     </nav>)
