@@ -1,4 +1,4 @@
-import { Component, ComponentChild, h } from "preact";
+import React, { Component} from "react";
 import { Device, Endpoint, Cluster, ObjectType } from "../../types";
 import DevicePicker from "../device-picker";
 import EndpointPicker from "../endpoint-picker";
@@ -134,7 +134,7 @@ export default class BindRow extends Component<BindRowProps, BindRowState> {
         return valid;
     }
 
-    render(): ComponentChild {
+    render() {
         const { devices, groups, idx, device } = this.props;
         const { stateRule } = this.state;
 
@@ -153,7 +153,7 @@ export default class BindRow extends Component<BindRowProps, BindRowState> {
                 <td>{stateRule.target.type === "endpoint" ? <EndpointPicker values={destinationEndpoints} value={stateRule.target.endpoint} onSelect={this.setDestinationEp} /> : null}</td>
                 <td><ClusterPicker clusters={possibleClusters} value={stateRule.clusters} onSelect={this.setClusters} /></td>
                 <td>
-                    <div class="btn-group btn-group-sm">
+                    <div className="btn-group btn-group-sm">
                         <Button<void> disabled={!this.isValidRule()} title="Bind" className="btn btn-primary" onClick={this.onBindClick}><i
                             className="fa fa-heart" /></Button>
                         <Button<void> disabled={!stateRule.isNew && !this.isValidRule()} title="Unbind" className="btn btn-secondary" onClick={this.onUnBindClick}><i

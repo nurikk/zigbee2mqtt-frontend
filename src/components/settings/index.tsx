@@ -1,12 +1,12 @@
-import { Component, ComponentChild, h } from "preact";
-import { connect } from "unistore/preact";
+import React, { Component } from "react";
+import { connect } from "unistore/react";
 import actions, { BridgeApi } from "../../actions";
 import { GlobalState } from "../../store";
 import get from "lodash/get";
 import UniversalEditor from "../universal-editor";
-import { Link } from "preact-router/match";
-import cx from "classnames";
-import Redirect from "../Redirect";
+import isEmpty from "lodash/isEmpty";
+import { NavLink, Redirect, RouteComponentProps, withRouter } from "react-router-dom";
+
 
 const settings = [
     {
@@ -20,8 +20,7 @@ const settings = [
         key: 'elapsed',
         path: 'advanced.elapsed',
         title: 'Elapsed',
-        description: 'Add an elapsed attribute to MQTT messages, contains milliseconds since the previous msg',
-
+        description: 'Add an elapsed attribute to MQTT messages, contains milliseconds since the previous msg'
     },
     {
         key: 'log_level',
@@ -34,15 +33,15 @@ const settings = [
         key: 'homeassistant',
         path: 'homeassistant',
         title: 'Homeassistant support',
-        description: 'Home Assistant integration (MQTT discovery)',
-
+        description: 'Home Assistant integration (MQTT discovery)'
     }
 ]
 type SettingsTab = "settings" | "bridge"
-interface SettingsPageProps {
-    tab?: SettingsTab;
-}
 
+type UrlParams = {
+    tab?: SettingsTab;
+};
+type SettingsPageProps = RouteComponentProps<UrlParams>;
 
 export class SettingsPage extends Component<SettingsPageProps & BridgeApi & GlobalState, {}> {
     updateConfig = (name: string, value: unknown): void => {
@@ -50,17 +49,16 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
         updateConfigValue(name, value);
     }
 
-    render(): ComponentChild {
-        const { tab } = this.props;
+    render() {
         return (
-            <div class="card h-100">
-                <div class="card-header">
-                    <ul class="nav nav-tabs card-header-tabs">
-                        <li class="nav-item">
-                            <Link className={cx("nav-link", { active: tab === "settings" })} href={`/settings/settings`}>Settings</Link>
+            <div className="card">
+                <div className="card-header">
+                    <ul className="nav nav-tabs card-header-tabs">
+                        <li className="nav-item">
+                            <NavLink className="nav-link" activeClassName="active" to={`/settings/settings`}>Settings</NavLink>
                         </li>
-                        <li class="nav-item">
-                            <Link className={cx("nav-link", { active: tab === "bridge" })} href={`/settings/bridge`}>Bridge</Link>
+                        <li className="nav-item">
+                            <NavLink className="nav-link" activeClassName="active" to={`/settings/bridge`}>Bridge</NavLink>
                         </li>
                     </ul>
 
@@ -73,7 +71,8 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
         )
     }
     renderSwitcher() {
-        const { tab } = this.props;
+        const { match } = this.props;
+        const { tab } = match.params;
         switch (tab) {
             case "settings":
                 return this.renderSettings();
@@ -88,24 +87,23 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
         const { bridgeInfo } = this.props;
         return <pre>{JSON.stringify(bridgeInfo, null, 4)}</pre>
     }
-    renderSettings(): ComponentChild {
-
+    renderSettings() {
         const { bridgeInfo } = this.props;
         return <div className="container">
-            <form class="mt-2">
+
+            <form className="mt-2">
                 {
-                    settings.map(setting => (
-                        <div class="row">
-                            <div class="col">
-
-                                <label for={setting.key}>{setting.title}</label>
+                    !isEmpty(bridgeInfo) && settings.map(setting => (
+                        <div key={setting.key} className="row">
+                            <div className="col">
+                                <label htmlFor={setting.key}>{setting.title}</label>
                                 <UniversalEditor
-                                    value={get(bridgeInfo.config, setting.path)}
+                                    disabled={get(bridgeInfo.config, setting.path) === undefined}
+                                    value={get(bridgeInfo.config, setting.path) as string | ReadonlyArray<string> | number}
                                     values={setting.values}
-                                    onChange={(value): void => this.updateConfig(setting.key, value)}
+                                    onChange={(value) => this.updateConfig(setting.key, value)}
                                 />
-                                <div class="form-text">{setting.description}</div>
-
+                                <div className="form-text">{setting.description}</div>
                             </div>
                         </div>
                     ))
@@ -116,7 +114,7 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
 
     }
 }
-
+const SettingsPageWithRouter = withRouter(SettingsPage);
 const mappedProps = ["bridgeInfo"];
-const ConnectedSettingsPage = connect<SettingsPageProps, {}, GlobalState, BridgeApi>(mappedProps, actions)(SettingsPage);
+const ConnectedSettingsPage = connect<{}, {}, GlobalState, BridgeApi>(mappedProps, actions)(SettingsPageWithRouter);
 export default ConnectedSettingsPage;

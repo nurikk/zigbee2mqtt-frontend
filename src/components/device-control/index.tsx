@@ -1,7 +1,7 @@
-import { Component, ComponentChild, h } from "preact";
+import React, { ChangeEvent, Component} from "react";
 import Button from "../button";
 import { Device, DeviceState } from "../../types";
-import { connect } from "unistore/preact";
+import { connect } from "unistore/react";
 import actions, { OtaApi, DeviceApi } from "../../actions";
 import cx from "classnames";
 import Modal, { ModalHeader, ModalBody, ModalFooter } from "../modal";
@@ -46,7 +46,7 @@ export class DeviceControlGroup extends Component<DeviceControlGroupProps & Devi
         const { renameDevice, device } = this.props;
         const { renameParams } = this.state;
 
-        renameDevice(device.friendly_name, renameParams.friendlyName, renameParams.isHassRename);
+        await renameDevice(device.friendly_name, renameParams.friendlyName, renameParams.isHassRename);
         this.setState({
             isRenameModalOpened: false
         });
@@ -72,27 +72,27 @@ export class DeviceControlGroup extends Component<DeviceControlGroupProps & Devi
         this.setState({ isDeviceRemovalModalOpened: !isDeviceRemovalModalOpened });
     }
 
-    onHassEntityIdChange = (e: Event): void => {
+    onHassEntityIdChange = (e: ChangeEvent<HTMLInputElement>): void => {
         const { renameParams } = this.state;
-        const { checked } = e.target as HTMLInputElement;
+        const { checked } = e.target;
         renameParams.isHassRename = checked;
         this.setState({ renameParams });
     }
-    onFriendlyNameChange = (e: Event): void => {
+    onFriendlyNameChange = (e: ChangeEvent<HTMLInputElement>): void => {
         const { renameParams } = this.state;
-        const { value } = e.target as HTMLInputElement;
+        const { value } = e.target;
         renameParams.friendlyName = value;
         this.setState({ renameParams });
     }
 
-    onDeviceRemovalParamChange = (e: Event): void => {
+    onDeviceRemovalParamChange = (e: ChangeEvent<HTMLInputElement>): void => {
         const { removeParams } = this.state;
-        const { checked, name } = e.target as HTMLInputElement;
+        const { checked, name } = e.target;
         removeParams[name] = checked;
         this.setState({ removeParams });
     }
 
-    render(): ComponentChild {
+    render() {
         const { device, configureDevice, checkOTA, updateOTA, state, bridgeInfo } = this.props;
         const { isRenameModalOpened, isDeviceRemovalModalOpened, renameParams, removeParams } = this.state;
 
@@ -113,14 +113,14 @@ export class DeviceControlGroup extends Component<DeviceControlGroupProps & Devi
                         </button>
                     </ModalHeader>
                     <ModalBody>
-                        <div class="mb-3">
-                            <label for={`fn${device.ieee_address}`} class="form-label">Friendly name</label>
-                            <input id={`fn${device.ieee_address}`} onChange={this.onFriendlyNameChange} type="text" class="form-control" value={renameParams.friendlyName} />
+                        <div className="mb-3">
+                            <label htmlFor={`fn${device.ieee_address}`} className="form-label">Friendly name</label>
+                            <input id={`fn${device.ieee_address}`} onChange={this.onFriendlyNameChange} type="text" className="form-control" value={renameParams.friendlyName} />
                         </div>
                         {bridgeInfo.config.homeassistant ? (
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" checked={renameParams.isHassRename} type="checkbox" id={`hass${device.ieee_address}`} onChange={this.onHassEntityIdChange} />
-                                <label class="form-check-label" for={`hass${device.ieee_address}`}>Update Home Assistant entity ID</label>
+                            <div className="form-check form-switch">
+                                <input className="form-check-input" checked={renameParams.isHassRename} type="checkbox" id={`hass${device.ieee_address}`} onChange={this.onHassEntityIdChange} />
+                                <label className="form-check-label" htmlFor={`hass${device.ieee_address}`}>Update Home Assistant entity ID</label>
                             </div>
                         ) : null}
 
@@ -142,11 +142,11 @@ export class DeviceControlGroup extends Component<DeviceControlGroupProps & Devi
             </button>
                     </ModalFooter>
                 </Modal>
-                <Button<string> class="btn btn-secondary" onClick={configureDevice} item={device.friendly_name} title="Reconfigure" promt><i className={cx("fa", "fa-cogs")} /></Button>
+                <Button<string> className="btn btn-secondary" onClick={configureDevice} item={device.friendly_name} title="Reconfigure" promt><i className={cx("fa", "fa-cogs")} /></Button>
                 {
                     state?.update?.state === "available" ?
-                        <Button<string> class="btn btn-secondary" onClick={updateOTA} item={device.friendly_name} title="Update OTA" promt><i className={cx("fa", "fa-cloud-download-alt")} /></Button>
-                        : <Button<string> class="btn btn-secondary" onClick={checkOTA} item={device.friendly_name} title="Check OTA"><i className={cx("fa", "fa-cloud")} /></Button>
+                        <Button<string> className="btn btn-secondary" onClick={updateOTA} item={device.friendly_name} title="Update OTA" promt><i className={cx("fa", "fa-cloud-download-alt")} /></Button>
+                        : <Button<string> className="btn btn-secondary" onClick={checkOTA} item={device.friendly_name} title="Check OTA"><i className={cx("fa", "fa-cloud")} /></Button>
                 }
                 <Modal isOpen={isDeviceRemovalModalOpened}>
                     <ModalHeader>
@@ -161,13 +161,13 @@ export class DeviceControlGroup extends Component<DeviceControlGroupProps & Devi
                         </button>
                     </ModalHeader>
                     <ModalBody>
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" name="force" checked={removeParams.force} type="checkbox" id={`force${device.ieee_address}`} onChange={this.onDeviceRemovalParamChange} />
-                            <label class="form-check-label" for={`force${device.ieee_address}`}>Force remove</label>
+                        <div className="form-check form-switch">
+                            <input className="form-check-input" name="force" checked={removeParams.force} type="checkbox" id={`force${device.ieee_address}`} onChange={this.onDeviceRemovalParamChange} />
+                            <label className="form-check-label" htmlFor={`force${device.ieee_address}`}>Force remove</label>
                         </div>
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" name="block" checked={removeParams.block} type="checkbox" id={`block${device.ieee_address}`} onChange={this.onDeviceRemovalParamChange} />
-                            <label class="form-check-label" for={`block${device.ieee_address}`}>Block from joining again</label>
+                        <div className="form-check form-switch">
+                            <input className="form-check-input" name="block" checked={removeParams.block} type="checkbox" id={`block${device.ieee_address}`} onChange={this.onDeviceRemovalParamChange} />
+                            <label className="form-check-label" htmlFor={`block${device.ieee_address}`}>Block from joining again</label>
                         </div>
 
 
@@ -189,7 +189,7 @@ export class DeviceControlGroup extends Component<DeviceControlGroupProps & Devi
             </button>
                     </ModalFooter>
                 </Modal>
-                <button onClick={this.toggleDeviceRemovalModal} class="btn btn-danger" title="Remove device"><i className={cx("fa", "fa-trash")} /></button>
+                <button onClick={this.toggleDeviceRemovalModal} className="btn btn-danger" title="Remove device"><i className={cx("fa", "fa-trash")} /></button>
 
 
             </div>

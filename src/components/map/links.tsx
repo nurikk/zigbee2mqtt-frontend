@@ -1,5 +1,5 @@
 import { LinkI, ZigbeeRelationship } from "./types";
-import { Component, ComponentChild, createRef, FunctionalComponent, h, RefObject } from "preact";
+import React, { Component, createRef, FunctionComponent, RefObject } from "react";
 import * as style from "./map.css";
 import cx from "classnames";
 import * as d3 from "d3";
@@ -18,7 +18,7 @@ class Link extends Component<LinkProps, {}> {
         d3.select(current as SVGPathElement).data([link]);
     }
 
-    render(): ComponentChild {
+    render() {
         const { link, id, ...rest } = this.props;
         const { linkType } = link;
         let markerEnd = "url(#arrowhead)"
@@ -39,7 +39,7 @@ class Link extends Component<LinkProps, {}> {
                 ref={this.ref as RefObject<SVGPathElement>}
                 strokeWidth={1}
                 fill="transparent"
-                marker-end={markerEnd}
+                markerEnd={markerEnd}
             />
         );
     }
@@ -58,7 +58,7 @@ class LinkLabel extends Component<LinkLabelProps, {}> {
         d3.select(current as SVGTextElement).data([link]);
     }
 
-    render(): ComponentChild {
+    render() {
         const { link, xlinkHref } = this.props;
         /* eslint-disable @typescript-eslint/ban-ts-ignore */
         //@ts-ignore
@@ -79,13 +79,13 @@ interface LinksPros {
     visible: ZigbeeRelationship[];
 }
 
-const Links: FunctionalComponent<LinksPros> = props => {
+const Links: FunctionComponent<LinksPros> = props => {
     const { links, visible } = props;
     return (
         <g className={style.links}>
             <defs>
                 <filter x="-0.1" y="0" width="1.2" height="1" id="solid">
-                    <feFlood flood-color="#eef5f9" />
+                    <feFlood floodColor="#eef5f9" />
                     <feComposite in="SourceGraphic" />
                 </filter>
             </defs>

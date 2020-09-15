@@ -1,58 +1,78 @@
-import { FunctionalComponent, h, RefObject } from "preact";
-import { forwardRef } from "preact/compat";
+import React, { useState, ChangeEvent, InputHTMLAttributes, useEffect } from "react";
+
 import Button from "../button";
 
 interface UniversalEditorProps {
-    value: unknown;
     values?: unknown[];
-    readonly?: boolean;
-    onChange(value: unknown): void;
-    [k: string]: unknown;
+    onChange(arg1: unknown): void;
 }
 
-const toggleCommand = 'TOGGLE';
-const togglableValues = ['ON', 'OFF'];
+const togglePairs = new Map<string | boolean, string | boolean>([
+    ['ON', 'OFF'],
+    ['OFF', 'ON'],
+    ['OPEN', 'CLOSE'],
+    ['CLOSE', 'OPEN'],
+    ['LOCK', 'UNLOCK'],
+    ['UNLOCK', 'LOCK'],
+    [true, false],
+    [false, true]
+]);
+
+const BluringInput: React.FunctionComponent<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>> = (props) => {
+    const { onChange, value, ...rest } = props;
+    const [internalValue, setInternalValue] = useState(value);
+    useEffect(() => {
+        setInternalValue(value);
+    }, [value]);
 
 
+    return <input
+        value={internalValue}
+        onBlur={() => onChange({ target: { value: internalValue } } as ChangeEvent<HTMLInputElement>)}
+        onChange={e => setInternalValue(e.target.value)}
+        {...rest} />
+}
 
-const UniversalEditor: FunctionalComponent<UniversalEditorProps> = forwardRef((props, ref: RefObject<HTMLInputElement | HTMLSelectElement>) => {
-    const { value, values, onChange, ...rest } = props;
-    const isToggleParameter = togglableValues.includes(value as string);
-    const changeHandler = (event: Event) => {
+const UniversalEditor: React.FunctionComponent<InputHTMLAttributes<unknown> & UniversalEditorProps> = (props) => {
+    const { value, values, onChange, disabled, name, ...rest } = props;
 
-        const { target } = event as unknown as { target: HTMLInputElement | HTMLSelectElement };
-        switch (target.type) {
-            case "checkbox":
-                onChange((target as HTMLInputElement).checked);
+    const isToggleParameter = togglePairs.has(value as string | boolean);
 
-                break;
-            case "number":
-                (target as HTMLInputElement).valueAsNumber != value && onChange((target as HTMLInputElement).valueAsNumber);
-                break;
-            default:
-                target.value != value && onChange(target.value);
-                break;
-        }
-    };
+
     if (values) {
-        return (<select ref={ref as RefObject<HTMLSelectElement>} class="form-select" onChange={changeHandler}>
-            {values.map(val => <option selected={val === value} value={val as string}>{val as string}</option>)}
+        return (<select className="form-select"
+            disabled={disabled}
+            value={value as string}
+            onChange={e => onChange(e.target.value)}>
+            {values.map(val => <option key={val as string} value={val as string}>{val as string}</option>)}
         </select>)
     }
     switch (typeof value) {
         case "boolean":
             return (
-                <div class="form-check form-switch">
-                    <input ref={ref as RefObject<HTMLInputElement>} class="form-check-input" type="checkbox" {...rest} checked={value} onChange={changeHandler} />
+                <div className="form-check form-switch">
+                    <input type="checkbox" className="form-check-input"
+                        disabled={disabled}
+                        checked={value as boolean}
+                        onChange={e => onChange(e.target.checked)}
+                        {...rest} />
                 </div>
             );
         case "number":
-            return (<div class="row">
-                <div class="col-9">
-                    <input type="range" class="form-range align-middle" value={value} onChange={changeHandler} {...rest} />
+            return (<div className="row">
+                <div className="col-9">
+                    <input type="range" className="form-range align-middle"
+                        disabled={disabled}
+                        value={value as number}
+                        onChange={e => onChange(e.target.valueAsNumber)}
+                        {...rest} />
                 </div>
-                <div class="col-3">
-                    <input className="form-control col-2" step="any" ref={ref as RefObject<HTMLInputElement>} {...rest} type="number" value={value} onBlur={changeHandler} />
+                <div className="col-3">
+                    <input type="number" step="any" className="form-control col-2"
+                        disabled={disabled}
+                        value={value as number}
+                        onChange={e => onChange(e.target.valueAsNumber)}
+                        {...rest} />
                 </div>
 
 
@@ -60,21 +80,34 @@ const UniversalEditor: FunctionalComponent<UniversalEditorProps> = forwardRef((p
         default:
             if (isToggleParameter) {
                 return (
-                    <div class="row">
-                        <div class="col-3">
-                            <Button<string> class="btn btn-primary" item={toggleCommand} title="Toggle" value="Toggle" onClick={onChange}>
+                    <div className="row">
+                        <div className="col-3">
+                            <Button<string | boolean> title="Toggle" value="Toggle"
+                                className="btn btn-primary"
+                                disabled={disabled}
+                                item={togglePairs.get(value as string | boolean)}
+                                onClick={payload => onChange(payload)}>
                                 <i className="fa fa-exchange-alt" />
                             </Button>
                         </div>
-                        <div class="col-9">
-                            <input className="form-control" ref={ref as RefObject<HTMLInputElement>} {...rest} type="text" value={value as string} onBlur={changeHandler} />
+                        <div className="col-9">
+                            <BluringInput type="text" className="form-control"
+                                disabled={disabled}
+                                value={value as string}
+                                onChange={e => onChange(e.target.value)}
+                                {...rest}
+                            />
                         </div>
                     </div>
                 );
             }
-            return (<input className="form-control" ref={ref as RefObject<HTMLInputElement>} {...rest} type="text" value={value as string} onBlur={changeHandler} />);
+            return (<BluringInput type="text" className="form-control"
+                disabled={disabled}
+                value={value as string}
+                onChange={e => onChange(e.target.value)}
+                {...rest} />);
 
 
     }
-});
+};
 export default UniversalEditor;

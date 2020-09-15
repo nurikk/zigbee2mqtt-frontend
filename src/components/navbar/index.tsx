@@ -1,17 +1,18 @@
-import { h, FunctionalComponent } from 'preact';
-import Match from 'preact-router/match';
+import React, { FunctionComponent } from 'react';
+import Match from 'react-router';
 import { GlobalState } from '../../store';
 import actions, { BridgeApi } from '../../actions';
-import { connect } from 'unistore/preact';
+import { connect } from 'unistore/react';
 import Button from '../button';
 import cx from "classnames";
+import { Link, NavLink } from 'react-router-dom';
 interface StartStopJoinProps {
     setPermitJoin(permit: boolean): void;
     joinEnabled: boolean;
     [k: string]: unknown;
 }
-const StartStopJoin: FunctionalComponent<StartStopJoinProps> = ({ joinEnabled, setPermitJoin, ...rest }) => {
-    return <Button<boolean> item={!joinEnabled} onClick={setPermitJoin} {...rest}>{joinEnabled ? "Disable join" : "Permit join"}</Button>
+const StartStopJoin: FunctionComponent<StartStopJoinProps> = ({ joinEnabled, setPermitJoin, ...rest }) => {
+    return <Button<boolean> {...rest} item={!joinEnabled} onClick={setPermitJoin}>{joinEnabled ? "Disable join" : "Permit join"}</Button>
 }
 const urls = [
     {
@@ -40,23 +41,22 @@ const urls = [
     }
 ];
 
-const NavBar: FunctionalComponent<BridgeApi & GlobalState> = ({ setPermitJoin, bridgeInfo }) => (
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">z2m admin</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon" />
+const NavBar: FunctionComponent<BridgeApi & GlobalState> = ({ setPermitJoin, bridgeInfo }) => (
+    <nav className="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+        <div className="container-fluid">
+            <a className="navbar-brand" href="#">z2m admin</a>
+            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span className="navbar-toggler-icon" />
             </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto mb-2 mb-md-0">
+            <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul className="navbar-nav mr-auto mb-2 mb-md-0">
                     {
-                        urls.map(url => <li class="nav-item">
-                            <Match path={url.href}>
-                                {({ matches }) => (
-                                    <a className={cx("nav-link", { active: matches })} href={url.href}>{url.title}</a>
-                                )}
-                            </Match>
-                        </li>)
+                        urls.map(url =>
+                            <li key={url.href} className="nav-item">
+                                <NavLink className="nav-link" to={url.href} activeClassName="active">
+                                    {url.title}
+                                </NavLink>
+                            </li>)
                     }
 
 

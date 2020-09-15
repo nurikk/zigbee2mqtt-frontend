@@ -1,70 +1,76 @@
-import { Component, ComponentChild, h } from "preact";
-import { connect } from "unistore/preact";
+import React, { Component } from "react";
+import { connect } from "unistore/react";
 import actions from "../../actions";
 import { GlobalState } from "../../store";
 import DeviceInfo from "./info";
 import Bind from "./bind";
-import cx from "classnames";
-import { Link } from "preact-router/match";
-import Redirect from "../Redirect";
+
 import States from "./states";
+import { NavLink, Redirect, RouteComponentProps, Router, useParams, withRouter } from "react-router-dom";
 
-interface DevicePageProps {
-    dev?: string;
+type UrlParams = {
+    dev: string;
     tab?: TabName;
+};
+type DevicePageProps = RouteComponentProps<UrlParams>;
 
-}
+
+
+
 type TabName = "info" | "bind" | "state";
 // eslint-disable-next-line react/prefer-stateless-function
 export class DevicePage extends Component<DevicePageProps & GlobalState, {}> {
-    renderContent(): ComponentChild {
-        const { tab, dev } = this.props;
+    renderContent() {
+        const { match, devices } = this.props;
+        const { tab, dev } = match.params;
+        const device = devices.get(dev);
+
         switch (tab) {
             case "info":
-                return <DeviceInfo dev={dev} />;
+                return <DeviceInfo device={device} />;
             case "bind":
-                return <Bind dev={dev} />;
+                return <Bind device={device} />;
             case "state":
-                return <States dev={dev} />;
+                return <States device={device} />;
             default:
                 return <Redirect to={`/device/${dev}/info`} />;
         }
 
     }
-    render(): ComponentChild {
+    render() {
 
-        const { dev, tab, devices } = this.props;
+        const { devices, match } = this.props;
+        const { dev } = match.params;
         const device = devices.get(dev);
         if (!device) {
             return "Unknown device";
         }
 
-        return (<div class="card h-100">
-            <div class="card-header">
-                <ul class="nav nav-tabs card-header-tabs">
-                    <li class="nav-item">
-                        <Link className={cx("nav-link", { active: tab === "info" })} href={`/device/${dev}/info`}>About</Link>
+        return (<div className="card h-100">
+            <div className="card-header">
+                <ul className="nav nav-tabs card-header-tabs">
+                    <li className="nav-item">
+                        <NavLink activeClassName="active" className="nav-link" to={`/device/${dev}/info`}>About</NavLink>
                     </li>
-                    <li class="nav-item">
-                        <Link className={cx("nav-link", { active: tab === "bind" })} href={`/device/${dev}/bind`}>Bind</Link>
+                    <li className="nav-item">
+                        <NavLink activeClassName="active" className="nav-link" to={`/device/${dev}/bind`}>Bind</NavLink>
+
                     </li>
-                    <li class="nav-item">
-                        <Link className={cx("nav-link", { active: tab === "state" })} href={`/device/${dev}/state`}>State</Link>
+                    <li className="nav-item">
+                        <NavLink activeClassName="active" className="nav-link" to={`/device/${dev}/state`}>State</NavLink>
                     </li>
                 </ul>
-                {/* <div class="d-inline float-right">{dev}</div> */}
-
             </div>
 
             <div className="card-body">
-                <h5 class="card-title">{device.friendly_name}</h5>
+                <h5 className="card-title">{device.friendly_name}</h5>
                 {this.renderContent()}
             </div>
         </div>);
 
     }
 }
-
+const devicePageWithRouter = withRouter(DevicePage);
 const mappedProps = ["devices"];
-const ConnectedDevicePage = connect<DevicePageProps, {}, GlobalState, {}>(mappedProps, actions)(DevicePage);
+const ConnectedDevicePage = connect<{}, {}, GlobalState, {}>(mappedProps, actions)(devicePageWithRouter);
 export default ConnectedDevicePage;

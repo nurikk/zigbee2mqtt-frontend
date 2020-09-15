@@ -1,6 +1,6 @@
 import ReconnectingWebSocket from "reconnecting-websocket";
 import store, { Group, LogMessage } from "./store";
-import { BridgeConfig, BridgeInfo, TouchLinkDevice, Device } from './types';
+import { BridgeConfig, BridgeInfo, TouchLinkDevice, Device, DeviceState } from './types';
 import { sanitizeGraph, isSecurePage } from "./utils";
 import { Notyf } from "notyf";
 import { GraphI } from "./components/map/types";
@@ -74,8 +74,10 @@ class Api {
         this.url = url;
     }
     send = (topic: string, payload: unknown): void => {
+        console.log("Api call", { topic, payload });
         this.socket.send(JSON.stringify({ topic, payload }));
     }
+    sendDebounced = debounce(this.send, 200, { trailing: true, leading: false });
 
     connect(): void {
         this.socket = new ReconnectingWebSocket(this.url);
@@ -183,7 +185,7 @@ class Api {
         } else {
             const { deviceStates } = store.getState();
             const newDeviceStates = new Map(deviceStates);
-            newDeviceStates.set(data.topic, { ...newDeviceStates.get(data.topic), ...(data.payload as object) });
+            newDeviceStates.set(data.topic, { ...newDeviceStates.get(data.topic), ...(data.payload as DeviceState) });
             store.setState({ deviceStates: newDeviceStates });
         }
     }

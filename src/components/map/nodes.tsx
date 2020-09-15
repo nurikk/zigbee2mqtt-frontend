@@ -1,4 +1,4 @@
-import { Component, ComponentChild, createRef, h, RefObject } from "preact";
+import React, { Component, createRef, RefObject } from "react";
 import * as d3 from "d3";
 import { LinkI, NodeI } from "./types";
 import cx from "classnames";
@@ -98,17 +98,18 @@ class Node extends Component<NodeProps, NodeState> {
         });
     };
 
-    render(): ComponentChild {
+    render() {
         const { imgUrl } = this.state;
         const { node } = this.props;
         const { onMouseOver, onMouseOut, onDblClick, onImageError } = this;
         const deviceType = node.type as string;
         const cn = cx(style.node, style[deviceType]); //{ [style.offline]: !isOnline(node.device, time) }
-        return (<g class={cn}
+        return (<g className={cn}
                    ref={this.ref as RefObject<SVGImageElement>}
                    onMouseOver={onMouseOver}
                    onMouseOut={onMouseOut}
-                   onDblClick={onDblClick}>
+                   onDoubleClick={onDblClick}
+                >
             {
                 node.type === "Coordinator" ? (
                     <polygon
@@ -178,7 +179,7 @@ export default class Nodes extends Component<NodesProps, NodesState> {
         this.updateDrag();
     }
 
-    render(): ComponentChild {
+    render() {
         const { nodes, onMouseOut, onMouseOver, onDblClick } = this.props;
         return (
             <g className={style.nodes}>
@@ -187,7 +188,7 @@ export default class Nodes extends Component<NodesProps, NodesState> {
                         onMouseOut={onMouseOut}
                         onMouseOver={onMouseOver}
                         onDblClick={onDblClick}
-                        key={index}
+                        key={node.ieeeAddr}
                         node={node}
                     />
                 ))}

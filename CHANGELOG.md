@@ -1,22 +1,30 @@
-## [0.1.58](https://github.com/nurikk/z2m-frontend/compare/0.1.57...0.1.58) (2020-09-14)
+## [0.2.1](https://github.com/nurikk/z2m-frontend/compare/0.2.0...0.2.1) (2020-09-14)
 
 
 ### Bug Fixes
 
-* **zigbee:** fix zigbee table rows indexing ([cdb8155](https://github.com/nurikk/z2m-frontend/commit/cdb8155343589f2a375ee1ea8e2caa08a578539e))
+* **device page:** fix image style ([be2dcf4](https://github.com/nurikk/z2m-frontend/commit/be2dcf41c305fac52e3052b30a7f13398082adfc))
 
 
 
-## [0.1.57](https://github.com/nurikk/z2m-frontend/compare/0.1.56...0.1.57) (2020-09-13)
+# [0.2.0](https://github.com/nurikk/z2m-frontend/compare/0.1.56...0.2.0) (2020-09-13)
 
 
 ### Bug Fixes
 
+* **bidings:** add keys ([6fb1402](https://github.com/nurikk/z2m-frontend/commit/6fb1402a0a4117c148e8a4174469d71a446d55c7))
+* **logs page:** add key ([7f6d959](https://github.com/nurikk/z2m-frontend/commit/7f6d959f2102b2e733572126a8278a44b2fbe807))
+* **map:** fix keys and rendering ([52d9778](https://github.com/nurikk/z2m-frontend/commit/52d9778b74bc92455eedfab071174244204c457a))
 * **notif:** fix notifications ([ba8c257](https://github.com/nurikk/z2m-frontend/commit/ba8c257f8616e209851679bcf80f2a823dcb2624))
+* **settings:** fix settings page ([97f4f61](https://github.com/nurikk/z2m-frontend/commit/97f4f617c610463f6d464911a64a8bfd067b46e2))
+* **settings:** remove debouncing ([ce88a3d](https://github.com/nurikk/z2m-frontend/commit/ce88a3d605794a682e0558bd1de1d36ed661e5a1))
+* **universal editor:** fix component ([9ab3a08](https://github.com/nurikk/z2m-frontend/commit/9ab3a08da2ebffd583493bb9a70ba42646bf1d0c))
+* **universal editor:** fix logic ([74fb233](https://github.com/nurikk/z2m-frontend/commit/74fb2334de9813706926326a975776ad7bb5ed22))
 
 
 ### Features
 
+* **device picker:** use FN + model ([3144ec7](https://github.com/nurikk/z2m-frontend/commit/3144ec74053748e6cbcdd29aa3ff57f5bfd40176))
 * **settings:** experimental brdinge info page ([1586dab](https://github.com/nurikk/z2m-frontend/commit/1586dab8415ce60cc18215402e919521d1450cc7))
 
 

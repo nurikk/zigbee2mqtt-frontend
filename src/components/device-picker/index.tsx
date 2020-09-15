@@ -1,4 +1,4 @@
-import { Component, ComponentChild, h } from "preact";
+import React, { ChangeEvent, Component } from "react";
 import { Device, ObjectType } from "../../types";
 import { getDeviceDisplayName } from "../../utils";
 import { Group } from "../../store";
@@ -11,7 +11,7 @@ interface DevicePickerProps {
     onSelect(device: Device | Group, type: ObjectType): void;
 }
 export default class DevicePicker extends Component<DevicePickerProps, {}> {
-    onSelect = (e: Event): void => {
+    onSelect = (e: ChangeEvent<HTMLSelectElement>): void => {
         const { onSelect, devices, groups = [] } = this.props;
         const { value } = e.target as HTMLSelectElement;
         const [type, identificator] = value.split(DELIMITER) as [ObjectType, string];
@@ -23,26 +23,31 @@ export default class DevicePicker extends Component<DevicePickerProps, {}> {
             onSelect(device, type);
         }
     }
-    render(): ComponentChild {
-        const { devices, groups = [], value, type } = this.props;
-        let options = [<option hidden>Select device</option>];
+    render() {
+        const { devices, groups, value, type } = this.props;
+        let options = [<option key="hidden" hidden>Select device</option>];
 
         const devicesOptions = [];
         devices.forEach((device) => {
             if (device.type !== "Coordinator") {
-                devicesOptions.push(<option selected={type === "device" && value == device.ieee_address} value={`device${DELIMITER}${device.ieee_address}`}>{getDeviceDisplayName(device)}</option>);
+                devicesOptions.push(<option
+                    title={device.definition?.description}
+                    key={device.ieee_address}
+                    value={`device${DELIMITER}${device.ieee_address}`}
+                >{getDeviceDisplayName(device)}</option>);
             }
 
         });
-        if (groups.length) {
-            const groupOptions = groups.map(group => <option selected={type === "group" && value == group.id} value={`group${DELIMITER}${group.friendly_name}`}>{group.friendly_name}</option>);
-            options.push(<optgroup label="Groups">{groupOptions}</optgroup>);
-            options.push(<optgroup label="Devices">{devicesOptions}</optgroup>);
+        if (groups && groups.length) {
+            const groupOptions = groups.map(group => <option key={group.id} value={`group${DELIMITER}${group.friendly_name}`}>{group.friendly_name}</option>);
+            options.push(<optgroup key="Groups" label="Groups">{groupOptions}</optgroup>);
+            options.push(<optgroup key="Devices" label="Devices">{devicesOptions}</optgroup>);
         } else {
             options = options.concat(devicesOptions);
         }
 
-        return <select onChange={this.onSelect} class="form-control">{options}</select>;
+
+        return <select defaultValue={`${type}${DELIMITER}${value}`} onChange={this.onSelect} className="form-control">{options}</select>;
 
     }
 }

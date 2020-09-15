@@ -1,6 +1,6 @@
 import { NodeI } from "./types";
 import style from "./tooltip.css";
-import { FunctionalComponent, h } from "preact";
+import React, { FunctionComponent} from "react";
 // import { isOnline } from "./nodes";
 // import { Device } from "../../types";
 // import { lastSeen } from "../../utils";
@@ -35,12 +35,12 @@ const getTooltip = (device: NodeI): string[] => {
     return strings;
 };
 
-const Tooltip: FunctionalComponent<TooltipProps> = (props: TooltipProps) => {
+const Tooltip: FunctionComponent<TooltipProps> = (props: TooltipProps) => {
     const { info } = props;
 
     return (
         <div className={style.tooltip}>
-            {getTooltip(info).map((s) => <div>{s}</div>)}
+            {getTooltip(info).map((s) => <div key={s}>{s}</div>)}
         </div>
 
     );
