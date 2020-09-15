@@ -1,13 +1,12 @@
-import React, { Component} from "react";
+import React, { ButtonHTMLAttributes, Component } from "react";
 
 interface ButtonProps<T> {
     item?: T;
     onClick?(arg1: T): void;
     promt?: boolean | string;
-    [k: string]: unknown;
 }
 
-export default class Button<T> extends Component<ButtonProps<T>, {}> {
+export default class Button<T> extends Component<ButtonProps<T> & Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'onClick'>, {}> {
     onClick = (): void => {
         const { item, onClick, promt } = this.props;
         let confirmed = true;

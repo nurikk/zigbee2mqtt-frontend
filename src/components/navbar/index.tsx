@@ -8,14 +8,6 @@ import cx from "classnames";
 import { NavLink } from 'react-router-dom';
 import useComponentVisible from '../../hooks/useComponentVisible';
 
-interface StartStopJoinProps {
-    setPermitJoin(permit: boolean): void;
-    joinEnabled: boolean;
-    [k: string]: unknown;
-}
-const StartStopJoin: FunctionComponent<StartStopJoinProps> = ({ joinEnabled, setPermitJoin, ...rest }) => {
-    return <Button<boolean> {...rest} item={!joinEnabled} onClick={setPermitJoin}>{joinEnabled ? "Disable join" : "Permit join"}</Button>
-}
 const urls = [
     {
         href: '/',
@@ -62,7 +54,7 @@ const NavBar: FunctionComponent<BridgeApi & GlobalState> = ({ setPermitJoin, bri
                             </li>)
                     }
                 </ul>
-                <StartStopJoin className="btn btn-primary" setPermitJoin={setPermitJoin} joinEnabled={bridgeInfo.permit_join} />
+                <Button<boolean> item={!bridgeInfo.permit_join} onClick={setPermitJoin}>{bridgeInfo.permit_join ? "Disable join" : "Permit join"}</Button>
             </div>
         </div>
     </nav>)
