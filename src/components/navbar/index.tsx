@@ -1,11 +1,13 @@
 import React, { FunctionComponent } from 'react';
-import Match from 'react-router';
+
 import { GlobalState } from '../../store';
 import actions, { BridgeApi } from '../../actions';
 import { connect } from 'unistore/react';
 import Button from '../button';
 import cx from "classnames";
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import useComponentVisible from '../../hooks/useComponentVisible';
+
 interface StartStopJoinProps {
     setPermitJoin(permit: boolean): void;
     joinEnabled: boolean;
@@ -41,14 +43,15 @@ const urls = [
     }
 ];
 
-const NavBar: FunctionComponent<BridgeApi & GlobalState> = ({ setPermitJoin, bridgeInfo }) => (
-    <nav className="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+const NavBar: FunctionComponent<BridgeApi & GlobalState> = ({ setPermitJoin, bridgeInfo }) => {
+    const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(false);
+    return (<nav className="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
         <div className="container-fluid">
             <a className="navbar-brand" href="#">z2m admin</a>
-            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <Button<boolean> onClick={setIsComponentVisible} item={!isComponentVisible} className={cx("navbar-toggler")} type="button">
                 <span className="navbar-toggler-icon" />
-            </button>
-            <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            </Button>
+            <div ref={ref} className={cx("navbar-collapse collapse", { show: isComponentVisible })}>
                 <ul className="navbar-nav mr-auto mb-2 mb-md-0">
                     {
                         urls.map(url =>
@@ -58,14 +61,12 @@ const NavBar: FunctionComponent<BridgeApi & GlobalState> = ({ setPermitJoin, bri
                                 </NavLink>
                             </li>)
                     }
-
-
                 </ul>
                 <StartStopJoin className="btn btn-primary" setPermitJoin={setPermitJoin} joinEnabled={bridgeInfo.permit_join} />
             </div>
         </div>
-    </nav>
-);
+    </nav>)
+}
 const mappedProps = ["bridgeInfo"];
 const ConnectedNavBar = connect<{}, {}, GlobalState, BridgeApi>(mappedProps, actions)(NavBar);
 export default ConnectedNavBar;
