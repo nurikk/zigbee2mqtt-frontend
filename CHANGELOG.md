@@ -1,3 +1,13 @@
+## [0.2.4](https://github.com/nurikk/z2m-frontend/compare/0.2.3...0.2.4) (2020-09-16)
+
+
+### Bug Fixes
+
+* **binding:** add .table-responsive ([48e50f0](https://github.com/nurikk/z2m-frontend/commit/48e50f08d973bb0099c175f1e15a3b8e3043d1ff))
+* **zigbe:** labels positions ([47fb066](https://github.com/nurikk/z2m-frontend/commit/47fb06675fe8c3a4fba8a4b9809e55510ebb314e))
+
+
+
 ## [0.2.3](https://github.com/nurikk/z2m-frontend/compare/0.2.2...0.2.3) (2020-09-16)
 
 
