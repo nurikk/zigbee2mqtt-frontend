@@ -74,7 +74,6 @@ class Api {
         this.url = url;
     }
     send = (topic: string, payload: unknown): void => {
-        console.log("Api call", { topic, payload });
         this.socket.send(JSON.stringify({ topic, payload }));
     }
     sendDebounced = debounce(this.send, 200, { trailing: true, leading: false });
@@ -113,6 +112,7 @@ class Api {
                     {
                         const devicesMap = new Map();
                         (data.payload as Device[]).forEach((device) => {
+                            device.endpoints = new Map(Object.entries(device.endpoints));
                             devicesMap.set(device.ieee_address, device);
                         });
                         store.setState({

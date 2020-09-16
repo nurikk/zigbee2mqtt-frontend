@@ -32,7 +32,7 @@ export interface NiceBindingRule {
 const rule2key = (rule: NiceBindingRule): string => `${rule.isNew}${rule.source.ieee_address}-${rule.target.id}-${rule.target.ieee_address}-${rule.clusters.join('-')}`;
 const convertBidningsIntoNiceStructure = (device: Device, coordinator: Device): NiceBindingRule[] => {
     const bindings = {};
-    Object.entries(device.endpoints).forEach(([endpoint, description]) => {
+    device.endpoints.forEach((description, endpoint) => {
         description.bindings
             .filter(b => b.target.ieee_address !== coordinator.ieee_address)
             .forEach(b => {
@@ -86,7 +86,6 @@ export class Bind extends Component<BindProps & PropsFromStore & BindApi, BindSt
                 <table className="table table-striped table-borderless">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
                             <th scope="col">#</th>
                             <th scope="col">Source EP</th>
                             <th scope="col">Destination</th>

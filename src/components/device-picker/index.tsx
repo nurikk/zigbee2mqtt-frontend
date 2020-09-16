@@ -48,8 +48,6 @@ export default class DevicePicker extends Component<DevicePickerProps & Omit<Sel
         } else {
             options = options.concat(devicesOptions);
         }
-
-        console.log(value);
         return <select
             value={value}
             onChange={this.onSelect}

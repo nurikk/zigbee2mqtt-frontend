@@ -29,7 +29,7 @@ const getEndpoints = (obj: Device | Group): Endpoint[] => {
     if (!obj) {
         return []
     } else if ((obj as Device).endpoints) {
-        return Object.keys((obj as Device).endpoints);
+        return Array.from((obj as Device).endpoints.keys());
     } else if ((obj as Group).members) {
         return (obj as Group).members.map(g => g.endpoint);
     }
@@ -145,8 +145,12 @@ export default class BindRow extends Component<BindRowProps, BindRowState> {
         const sourceEndpoints = getEndpoints(device);
         const target = getTarget(stateRule, devices, groups);
         const destinationEndpoints = getEndpoints(target);
-        const sourceClusters = device.endpoints[stateRule.source.endpoint]?.clusters?.output ?? [];
-        const possibleClusters: Cluster[] = sourceClusters;
+
+
+        let possibleClusters: Cluster[];
+        if (device.endpoints.has(stateRule.source.endpoint)) {
+            possibleClusters = device.endpoints.get(stateRule.source.endpoint).clusters.output;
+        }
         return (
             <tr>
                 <th scope="row">{idx + 1}</th>
