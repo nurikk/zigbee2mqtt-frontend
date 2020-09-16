@@ -16,7 +16,6 @@
         "start:dev": "webpack-dev-server --config ./webpack.config.js --mode development",
         "start:ws": "node ws.js",
         "clean": "rimraf ./dist",
-        "release": "release-it",
         "postversion": "git push && git push --tags",
         "version": "conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md",
         "pretty": "prettier --write \"./**/*.{js,jsx,json}\""
@@ -68,7 +67,6 @@
         "react-dom": "^16.13.1",
         "react-router-dom": "^5.2.0",
         "reconnecting-websocket": "^4.4.0",
-        "release-it": "^13.7.1",
         "rimraf": "^3.0.2",
         "ts-loader": "^7.0.5",
         "typescript": "^3.9.7",

@@ -1,7 +1,0 @@
-git:
-  requireCleanWorkingDir: false
-# npm:
-#   publish: false
-#   ignoreVersion: true
-hooks:
-  "after:release": "echo Successfully released ${name} v${version} to ${repo.repository}."
