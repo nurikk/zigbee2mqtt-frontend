@@ -17,6 +17,7 @@ export default class Button<T> extends Component<ButtonProps<T> & Omit<ButtonHTM
     };
 
     render() {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { children, item, promt, ...rest } = this.props;
         return <button type="button" {...rest} onClick={this.onClick}>{children}</button>;
     }

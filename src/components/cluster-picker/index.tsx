@@ -1,4 +1,4 @@
-import React, { ChangeEvent, Component} from "react";
+import React, { ChangeEvent, Component, InputHTMLAttributes } from "react";
 import { Cluster } from "../../types";
 import { randomString } from "../../utils";
 
@@ -13,7 +13,7 @@ const clusterDescriptions = {
 }
 interface ClusterPickerProps {
     value: Cluster[];
-    onSelect(arg1: Cluster[] | undefined): void;
+    onChange(arg1: Cluster[] | undefined): void;
     clusters: Cluster[];
 
 }
@@ -22,7 +22,7 @@ interface ClusterPickerState {
 }
 
 // eslint-disable-next-line react/prefer-stateless-function
-export default class ClusterPicker extends Component<ClusterPickerProps, ClusterPickerState> {
+export default class ClusterPicker extends Component<ClusterPickerProps & Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'>, ClusterPickerState> {
     public static defaultProps = {
         clusters: []
     };
@@ -30,8 +30,8 @@ export default class ClusterPicker extends Component<ClusterPickerProps, Cluster
         pickerId: randomString(5)
     }
 
-    onSelect = (e: ChangeEvent<HTMLInputElement>): void => {
-        const { onSelect } = this.props;
+    onChange = (e: ChangeEvent<HTMLInputElement>): void => {
+        const { onChange } = this.props;
         let { value } = this.props;
         const { checked: isChecked, name } = e.target;
         if (isChecked) {
@@ -40,15 +40,24 @@ export default class ClusterPicker extends Component<ClusterPickerProps, Cluster
             value = value.filter(v => v !== name);
         }
 
-        onSelect(value);
+        onChange(value);
     }
     render() {
         const { pickerId } = this.state;
-        const { clusters, value } = this.props;
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const { clusters, value, onChange, ...rest } = this.props;
 
         const options = clusters.map(cluster => (
             <div key={cluster} className="form-check form-check-inline">
-                <input className="form-check-input" type="checkbox" checked={value.includes(cluster)} name={cluster} id={`${pickerId}_${cluster}`} value={cluster} onChange={this.onSelect} />
+                <input className="form-check-input"
+                    type="checkbox"
+                    checked={value.includes(cluster)}
+                    name={cluster}
+                    id={`${pickerId}_${cluster}`}
+                    value={cluster}
+                    onChange={this.onChange}
+                    {...rest}
+                />
                 <label className="form-check-label" htmlFor={`${pickerId}_${cluster}`} title={cluster}>{clusterDescriptions[cluster] ?? cluster}</label>
             </div>
         ));

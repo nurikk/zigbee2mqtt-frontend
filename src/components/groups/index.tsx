@@ -121,10 +121,10 @@ class AddDeviceToGroup extends Component<AddDeviceToGroupProps, AddDeviceToGroup
 
             <div className="col">
                 <div className="input-group mb-3">
-                    <DevicePicker type="device" value={device} devices={devices} onSelect={this.onDeviceSelect} />
+                    <DevicePicker type="device" value={device} devices={devices} onChange={this.onDeviceSelect} />
 
 
-                    <EndpointPicker values={endpoints} value={endpoint} onSelect={this.onEpChange} />
+                    <EndpointPicker values={endpoints} value={endpoint} onChange={this.onEpChange} />
                 </div>
 
             </div>

@@ -15,7 +15,8 @@ interface BindProps {
 }
 
 export interface NiceBindingRule {
-    isNew?: boolean;
+    id?: number;
+    isNew?: number;
     source: {
         ieee_address: string;
         endpoint: Endpoint;
@@ -26,9 +27,9 @@ export interface NiceBindingRule {
         ieee_address?: string;
         type: "endpoint" | "group";
     };
-
     clusters: Cluster[];
 }
+const rule2key = (rule: NiceBindingRule): string => `${rule.isNew}${rule.source.ieee_address}-${rule.target.id}-${rule.target.ieee_address}-${rule.clusters.join('-')}`;
 const convertBidningsIntoNiceStructure = (device: Device, coordinator: Device): NiceBindingRule[] => {
     const bindings = {};
     Object.entries(device.endpoints).forEach(([endpoint, description]) => {
@@ -53,8 +54,13 @@ const convertBidningsIntoNiceStructure = (device: Device, coordinator: Device): 
     });
     return Object.values(bindings);
 }
-
-export class Bind extends Component<BindProps & PropsFromStore & BindApi, {}> {
+type BindState = {
+    bidingRules: NiceBindingRule[];
+}
+export class Bind extends Component<BindProps & PropsFromStore & BindApi, BindState> {
+    state: BindState = {
+        bidingRules: []
+    }
     onBindClick = (from: string, to: string, clusters: Cluster[]): void => {
         const { addBind } = this.props;
         addBind(from, to, clusters);
@@ -63,19 +69,24 @@ export class Bind extends Component<BindProps & PropsFromStore & BindApi, {}> {
         const { removeBind } = this.props;
         removeBind(from, to, clusters);
     };
+    static getDerivedStateFromProps(props: Readonly<BindProps & PropsFromStore>, state: BindState): Partial<BindState> {
+        const { devices, device } = props;
+        const coordinator = Array.from(devices.values()).find(d => d.type === "Coordinator");
+        const bidingRules = convertBidningsIntoNiceStructure(device, coordinator);
+        bidingRules.push({ isNew: Date.now(), target: {}, source: {}, clusters: [] } as NiceBindingRule);
+        return {
+            bidingRules
+        };
+    }
     render() {
         const { device, devices, groups } = this.props;
-
-        const coordinator = Array.from(devices.values()).find(d => d.type === "Coordinator");
-
-
-        const niceBindingRules = convertBidningsIntoNiceStructure(device, coordinator);
-        niceBindingRules.push({ isNew: true, target: {}, source: {}, clusters: [] } as NiceBindingRule);
+        const { bidingRules } = this.state;
         return (
             <div className="card">
                 <table className="table table-striped table-borderless">
                     <thead>
                         <tr>
+                            <th scope="col">#</th>
                             <th scope="col">#</th>
                             <th scope="col">Source EP</th>
                             <th scope="col">Destination</th>
@@ -86,8 +97,8 @@ export class Bind extends Component<BindProps & PropsFromStore & BindApi, {}> {
                     </thead>
                     <tbody>
                         {
-                            niceBindingRules.map((rule, idx) => <BindRow
-                                key={`${rule.source}-${rule.target}-${rule.clusters.join('-')}`}
+                            bidingRules.map((rule, idx) => <BindRow
+                                key={rule2key(rule)}
                                 rule={rule}
                                 groups={groups}
                                 onUnBind={this.onUnBindClick}
@@ -97,6 +108,7 @@ export class Bind extends Component<BindProps & PropsFromStore & BindApi, {}> {
                                 devices={devices} />)
                         }
                     </tbody>
+
                 </table>
             </div>
         );

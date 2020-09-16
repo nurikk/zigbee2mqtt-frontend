@@ -1,19 +1,19 @@
-import React, { ChangeEvent, Component } from "react";
+import React, { ChangeEvent, Component, SelectHTMLAttributes } from "react";
 import { Endpoint } from "../../types";
 
 
 
 interface EndpointPickerProps {
-    onSelect(endpoint: Endpoint): void;
+    onChange(endpoint: Endpoint): void;
     value: Endpoint;
     values: Endpoint[];
 }
 
-export default class EndpointPicker extends Component<EndpointPickerProps, {}> {
+export default class EndpointPicker extends Component<EndpointPickerProps & Omit<SelectHTMLAttributes<HTMLSelectElement>, 'onChange'>, {}> {
     onSelect = (e: ChangeEvent<HTMLSelectElement>): void => {
-        const { onSelect } = this.props;
+        const { onChange } = this.props;
         const { value } = e.target as HTMLSelectElement;
-        onSelect(value);
+        onChange(value);
     }
     render() {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
