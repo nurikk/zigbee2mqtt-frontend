@@ -82,7 +82,7 @@ export class Bind extends Component<BindProps & PropsFromStore & BindApi, BindSt
         const { device, devices, groups } = this.props;
         const { bidingRules } = this.state;
         return (
-            <div className="card">
+            <div className="card table-responsive">
                 <table className="table table-striped table-borderless">
                     <thead>
                         <tr>
