@@ -1,3 +1,13 @@
+## [0.2.3](https://github.com/nurikk/z2m-frontend/compare/0.2.2...0.2.3) (2020-09-16)
+
+
+### Bug Fixes
+
+* **bidings:** fix device picker ([10c3d69](https://github.com/nurikk/z2m-frontend/commit/10c3d694090cf676974b3aa24a180764a8419128))
+* **mobile:** fix devices table labels ([1775636](https://github.com/nurikk/z2m-frontend/commit/1775636b508fce0d0513caa3980d4295c06d9880))
+
+
+
 ## [0.2.2](https://github.com/nurikk/z2m-frontend/compare/0.2.1...0.2.2) (2020-09-15)
 
 
