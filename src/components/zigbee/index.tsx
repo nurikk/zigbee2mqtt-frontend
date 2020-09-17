@@ -163,11 +163,9 @@ export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
                         <ActionTH<SortColumn> className={style["action-column"]} column="state.linkquality"
                             currentDirection={sortDirection} current={sortColumn}
                             onClick={onSortChange}>LQI</ActionTH>
-                        {lastSeenIsAvaliable &&
-                            <ActionTH<SortColumn> className={style["action-column"]} column={["state.last_seen", "state.elapsed"]}
-                                currentDirection={sortDirection} current={sortColumn}
-                                onClick={onSortChange}>Last seen</ActionTH>
-                        }
+                        <ActionTH<SortColumn> className={cx(style["action-column"], { 'd-none': !lastSeenIsAvaliable })} column={["state.last_seen", "state.elapsed"]}
+                            currentDirection={sortDirection} current={sortColumn}
+                            onClick={onSortChange}>Last seen</ActionTH>
                         <ActionTH<SortColumn> className={style["action-column"]} column="state.battery"
                             currentDirection={sortDirection} current={sortColumn}
                             onClick={onSortChange}>Power</ActionTH>
@@ -189,7 +187,7 @@ export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
                             <td className={cx("text-truncate", "text-nowrap", "position-relative")}>{device.definition?.vendor ?? 'Unsupported'}</td>
                             <td title={device?.definition?.description}>{device.definition?.model ?? 'Unsupported'}</td>
                             <td>{state?.linkquality ?? "N/A"}</td>
-                            {lastSeenIsAvaliable && <td>{lastSeen(state?.last_seen, state?.elapsed)}</td>}
+                            <td className={cx({ 'd-none': !lastSeenIsAvaliable })}>{lastSeen(state?.last_seen, state?.elapsed)}</td>
                             <td className="text-left">
                                 <PowerSource source={device.power_source} battery={state?.battery} />
                             </td>
