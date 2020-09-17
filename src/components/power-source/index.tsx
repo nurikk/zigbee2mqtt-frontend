@@ -23,8 +23,10 @@ const PowerSource: FunctionComponent<PowerSourceProps> = ({ source, battery, ...
                     batteryClass = "fa-battery-half";
                 } else if (battery >= 25) {
                     batteryClass = "fa-battery-quarter";
-                } else {
+                } else if (battery >= 10) {
                     batteryClass = "fa-battery-empty"
+                } else {
+                    return <span className={`${style.blinking} text-danger`} role="alert">{battery}%</span>
                 }
             }
             return <i className={`fa ${batteryClass}`}
