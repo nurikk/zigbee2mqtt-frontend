@@ -1,3 +1,17 @@
+## [0.2.5](https://github.com/nurikk/z2m-frontend/compare/0.2.4...0.2.5) (2020-09-17)
+
+
+### Bug Fixes
+
+* **zigbee:** fix mobile devices view label ([2f1f009](https://github.com/nurikk/z2m-frontend/commit/2f1f0090da1c2544e41ef2fab8b686f2b82d74da))
+
+
+### Reverts
+
+* Revert "chore(travis): tun travis config" ([7cdef7a](https://github.com/nurikk/z2m-frontend/commit/7cdef7ac257fbb45ff982f2e4db1edf099147f03))
+
+
+
 ## [0.2.4](https://github.com/nurikk/z2m-frontend/compare/0.2.3...0.2.4) (2020-09-16)
 
 
