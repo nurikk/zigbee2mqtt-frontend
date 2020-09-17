@@ -112,8 +112,9 @@ class Api {
                     {
                         const devicesMap = new Map();
                         (data.payload as Device[]).forEach((device) => {
-                            device.endpoints = new Map(Object.entries(device.endpoints));
-                            devicesMap.set(device.ieee_address, device);
+                            const dev = { ...device };
+                            dev.endpoints = new Map(Object.entries(device.endpoints));
+                            devicesMap.set(device.ieee_address, dev);
                         });
                         store.setState({
                             devices: devicesMap

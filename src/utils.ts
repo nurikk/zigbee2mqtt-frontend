@@ -183,7 +183,7 @@ export const isObject = (obj: unknown): boolean => {
 
 
 export const getDeviceDisplayName = (device: Device): string => {
-    return `${device.friendly_name} ${device.definition ? `(${device.definition?.model})` : null}`;
+    return `${device.friendly_name} ${device.definition?.model ? `(${device.definition?.model})` : ''}`;
 };
 
 export const randomString = (len: number): string => Math.random().toString(36).substr(2, len);

@@ -29,14 +29,11 @@ export default class DevicePicker extends Component<DevicePickerProps & Omit<Sel
 
         const devicesOptions = [];
         devices.forEach((device) => {
-            if (device.type !== "Coordinator") {
-                devicesOptions.push(<option
-                    title={device.definition?.description}
-                    key={device.ieee_address}
-                    value={device.ieee_address}
-                >{getDeviceDisplayName(device)}</option>);
-            }
-
+            devicesOptions.push(<option
+                title={device.definition?.description}
+                key={device.ieee_address}
+                value={device.ieee_address}
+            >{getDeviceDisplayName(device)}</option>);
         });
         if (groups && groups.length) {
             const groupOptions = groups.map(group => <option
