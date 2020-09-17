@@ -1,3 +1,12 @@
+## [0.2.7](https://github.com/nurikk/z2m-frontend/compare/0.2.6...0.2.7) (2020-09-17)
+
+
+### Bug Fixes
+
+* **groups:** fix groups endpoint picker ([b59fd42](https://github.com/nurikk/z2m-frontend/commit/b59fd421268c70e85ab93551ee8e9f581318f94e))
+
+
+
 ## [0.2.6](https://github.com/nurikk/z2m-frontend/compare/0.2.5...0.2.6) (2020-09-17)
 
 
