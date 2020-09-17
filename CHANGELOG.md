@@ -1,3 +1,12 @@
+## [0.2.6](https://github.com/nurikk/z2m-frontend/compare/0.2.5...0.2.6) (2020-09-17)
+
+
+### Features
+
+* **battery:** add % on < 10% chanrge ([158079e](https://github.com/nurikk/z2m-frontend/commit/158079e17214c5b40e9e4ad200d4f080110de7ba))
+
+
+
 ## [0.2.5](https://github.com/nurikk/z2m-frontend/compare/0.2.4...0.2.5) (2020-09-17)
 
 
