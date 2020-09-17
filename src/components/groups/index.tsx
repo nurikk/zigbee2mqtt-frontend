@@ -11,6 +11,7 @@ import cx from 'classnames';
 import EndpointPicker from "../endpoint-picker";
 import DevicePicker from "../device-picker";
 import { Link } from "react-router-dom";
+import { getEndpoints } from "../device-page/bind-row";
 
 
 interface GroupsPageState {
@@ -115,7 +116,7 @@ class AddDeviceToGroup extends Component<AddDeviceToGroupProps, AddDeviceToGroup
         const { devices } = this.props;
         const deviceObj = devices.get(device);
 
-        const endpoints = Object.keys(deviceObj?.endpoints ?? {});
+        const endpoints = getEndpoints(deviceObj);
 
         return <form className="row">
 

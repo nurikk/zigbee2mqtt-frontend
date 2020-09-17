@@ -25,7 +25,7 @@ interface BindRowState {
     stateRule: NiceBindingRule;
 }
 
-const getEndpoints = (obj: Device | Group): Endpoint[] => {
+export const getEndpoints = (obj: Device | Group): Endpoint[] => {
     if (!obj) {
         return []
     } else if ((obj as Device).endpoints) {
