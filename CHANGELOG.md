@@ -1,3 +1,13 @@
+## [0.2.8](https://github.com/nurikk/z2m-frontend/compare/0.2.7...0.2.8) (2020-09-19)
+
+
+### Features
+
+* **bind:** don't hide coordinator bindings ([25e0b15](https://github.com/nurikk/z2m-frontend/commit/25e0b15344426c9d88c12446f9a5e0b326d80733))
+* **bindings:** show clusters from bidning record ([6d99d6f](https://github.com/nurikk/z2m-frontend/commit/6d99d6f16cce0de202c8658a6235372911012d91))
+
+
+
 ## [0.2.7](https://github.com/nurikk/z2m-frontend/compare/0.2.6...0.2.7) (2020-09-17)
 
 
