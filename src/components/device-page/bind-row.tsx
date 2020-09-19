@@ -1,4 +1,4 @@
-import React, { Component} from "react";
+import React, { Component } from "react";
 import { Device, Endpoint, Cluster, ObjectType } from "../../types";
 import DevicePicker from "../device-picker";
 import EndpointPicker from "../endpoint-picker";
@@ -43,13 +43,15 @@ const getTarget = (rule: NiceBindingRule, devices: Map<string, Device>, groups: 
 }
 
 export default class BindRow extends Component<BindRowProps, BindRowState> {
-
     state: Readonly<BindRowState> = {
-        stateRule: this.props.rule,
+        stateRule: null
     }
-
-
-
+    static getDerivedStateFromProps(props: Readonly<BindRowProps>, state: BindRowState): Partial<BindRowState> {
+        const { rule } = props;
+        return {
+            stateRule: rule
+        };
+    }
     setSourceEp = (sourceEp: Endpoint): void => {
         const { stateRule } = this.state;
         stateRule.source.endpoint = sourceEp;
@@ -86,38 +88,37 @@ export default class BindRow extends Component<BindRowProps, BindRowState> {
         stateRule.clusters = clusters;
         this.setState({ stateRule });
     }
-    onBindClick = (): void => {
-        const { onBind, device, groups, devices } = this.props;
+
+    getBidningParams(): { from: string; to: string; clusters: string[] } {
+        const { device, groups, devices } = this.props;
         const { stateRule } = this.state;
         const from = `${device.friendly_name}/${stateRule.source.endpoint}`;
         let to: string;
         if (stateRule.target.type === "group") {
             const targetGroup = groups.find(group => group.id === stateRule.target.id);
             to = `${targetGroup.friendly_name}`;
-
         } else if (stateRule.target.type === "endpoint") {
             const targeDevice = devices.get(stateRule.target.ieee_address);
-            to = `${targeDevice.friendly_name}/${stateRule.target.endpoint}`;
+            if (targeDevice.type === "Coordinator") {
+                to = `${targeDevice.friendly_name}`;
+            } else {
+                to = `${targeDevice.friendly_name}/${stateRule.target.endpoint}`;
+            }
         }
+        return { from, to, clusters: stateRule.clusters };
+    }
 
-        onBind(from, to, stateRule.clusters);
-
+    onBindClick = (): void => {
+        const { onBind } = this.props;
+        const { from, to, clusters } = this.getBidningParams();
+        onBind(from, to, clusters);
     }
 
     onUnBindClick = (): void => {
-        const { onUnBind, device, groups, devices } = this.props;
-        const { stateRule } = this.state;
-        const from = `${device.friendly_name}/${stateRule.source.endpoint}`;
-        let to: string;
-        if (stateRule.target.type === "group") {
-            const targetGroup = groups.find(group => group.id === stateRule.target.id);
-            to = `${targetGroup.friendly_name}`;
-        } else if (stateRule.target.type === "endpoint") {
-            const targeDevice = devices.get(stateRule.target.ieee_address);
-            to = `${targeDevice.friendly_name}/${stateRule.target.endpoint}`;
-        }
+        const { onUnBind } = this.props;
+        const { from, to, clusters } = this.getBidningParams();
+        onUnBind(from, to, clusters);
 
-        onUnBind(from, to, stateRule.clusters);
     }
 
     isValidRule(): boolean {
@@ -146,10 +147,9 @@ export default class BindRow extends Component<BindRowProps, BindRowState> {
         const target = getTarget(stateRule, devices, groups);
         const destinationEndpoints = getEndpoints(target);
 
-
-        let possibleClusters: Cluster[];
+        const possibleClusters: Set<Cluster> = new Set(stateRule.clusters);
         if (device.endpoints.has(stateRule.source.endpoint)) {
-            possibleClusters = device.endpoints.get(stateRule.source.endpoint).clusters.output;
+            device.endpoints.get(stateRule.source.endpoint).clusters.output.forEach(cluster => possibleClusters.add(cluster));
         }
         return (
             <tr>
@@ -157,7 +157,7 @@ export default class BindRow extends Component<BindRowProps, BindRowState> {
                 <td><EndpointPicker disabled={!stateRule.isNew} values={sourceEndpoints} value={stateRule.source.endpoint} onChange={this.setSourceEp} /></td>
                 <td><DevicePicker disabled={!stateRule.isNew} type={targetType} value={stateRule.target.ieee_address || stateRule.target.id} devices={devices} groups={groups} onChange={this.setDestination} /></td>
                 <td>{stateRule.target.type === "endpoint" ? <EndpointPicker disabled={!stateRule.isNew} values={destinationEndpoints} value={stateRule.target.endpoint} onChange={this.setDestinationEp} /> : null}</td>
-                <td><ClusterPicker clusters={possibleClusters} value={stateRule.clusters} onChange={this.setClusters} /></td>
+                <td><ClusterPicker clusters={Array.from(possibleClusters)} value={stateRule.clusters} onChange={this.setClusters} /></td>
                 <td>
                     <div className="btn-group btn-group-sm">
                         <Button<void> disabled={!this.isValidRule()} title="Bind" className="btn btn-primary" onClick={this.onBindClick}><i
