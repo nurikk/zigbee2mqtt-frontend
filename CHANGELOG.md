@@ -1,3 +1,20 @@
+## [0.2.10](https://github.com/nurikk/z2m-frontend/compare/0.2.9...0.2.10) (2020-09-21)
+
+
+### Bug Fixes
+
+* **navbar:** fix home active class ([f77477d](https://github.com/nurikk/z2m-frontend/commit/f77477df541584a570b09c5c04cf0cbcaa0cc422))
+
+
+### Features
+
+* **map:** center no-data messages ([c0deb91](https://github.com/nurikk/z2m-frontend/commit/c0deb91ab30f5859ca3db7c1a4af69a349601db5))
+* **settings:** rename Bridge to Raw ([d6af30f](https://github.com/nurikk/z2m-frontend/commit/d6af30f8a59c05a1e2e85ec152ec86fb552e735d))
+* **title:** rename to Zigbee2MQTT ([eb4557c](https://github.com/nurikk/z2m-frontend/commit/eb4557cbcb64bfc257a892ca902180efe6a9b74f))
+* **zigbee:** change no data to spinner ([330e591](https://github.com/nurikk/z2m-frontend/commit/330e591bd0837376b640a444afaf1431f33d58a9))
+
+
+
 ## [0.2.9](https://github.com/nurikk/z2m-frontend/compare/0.2.8...0.2.9) (2020-09-20)
 
 
