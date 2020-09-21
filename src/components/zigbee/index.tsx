@@ -128,12 +128,15 @@ export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
         const { devices } = this.props;
         if (devices.size) {
             return this.renderDevicesTable();
-
         }
-        return (<div className="container h-100">
-            <div className="row h-100 justify-content-center align-items-center">No data</div>
+        return (<div className="h-100 d-flex justify-content-center align-items-center">
+            <div className="d-flex align-items-center">
+                <strong>Loading, please wait.</strong>
+                <div className="spinner-border ml-2" role="status">
+                    <span className="sr-only">Loading...</span>
+                </div>
+            </div>
         </div>);
-
     }
 
 
