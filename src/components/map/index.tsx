@@ -241,44 +241,22 @@ export class Map extends Component<GlobalState & MapApi, MapState> {
     }
     renderMessage() {
         const { networkGraphIsLoading } = this.props;
-
         return (
-            <div className="container h-100">
-                <div className="row h-100 justify-content-center align-items-center">
-                    {
-                        networkGraphIsLoading ? (
-                            <div className="justify-content-center align-items-center">
-                                <div className="row">
-                                    <div className="col-6 mx-auto">
-                                        Loading, please wait.
-                                        <div className="spinner-border" role="status">
-                                            <span className="sr-only">Loading...</span>
-                                        </div>
-                                    </div>
+            <div className="h-100 d-flex justify-content-center align-items-center">
+                {
+                    networkGraphIsLoading ? (
+                        <div>
+                            <div className="d-flex align-items-center">
+                                <strong>Loading, please wait.</strong>
+                                <div className="spinner-border ml-2" role="status">
+                                    <span className="sr-only">Loading...</span>
                                 </div>
-                                <div className="row">
-                                    <div className="col-6 mx-auto">
-                                        Depending on the size of your network this can take somewhere between 10 seconds and 2 minutes.
-                                        </div>
-                                </div>
-
                             </div>
-                        ) : (
-                                <div className=" justify-content-center align-items-centerr">
-                                    <div className="row">
-                                        <div className="col-6 mx-auto">
-                                            No map data.
-                                        </div>
-                                    </div>
-                                    <div className="row">
-                                        <div className="col-6 mx-auto">
-                                            <Button onClick={this.onRequestClick} className="btn btn-primary d-block">Requests?</Button>
-                                        </div>
-                                    </div>
-                                </div>
-                            )
-                    }
-                </div>
+                            <div>Depending on the size of your network this can take somewhere between 10 seconds and 2 minutes.</div>
+                        </div>
+
+                    ) : <Button onClick={this.onRequestClick} className="btn btn-primary d-block">Load map</Button>
+                }
             </div>
         );
     }
