@@ -39,7 +39,7 @@ const NavBar: FunctionComponent<BridgeApi & GlobalState> = ({ setPermitJoin, bri
     const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(false);
     return (<nav className="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
         <div className="container-fluid">
-            <a className="navbar-brand" href="#">z2m admin</a>
+            <a className="navbar-brand" href="/">Zigbee2MQTT</a>
             <Button<boolean> onClick={setIsComponentVisible} item={!isComponentVisible} className={cx("navbar-toggler")} type="button">
                 <span className="navbar-toggler-icon" />
             </Button>
