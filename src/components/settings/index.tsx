@@ -58,7 +58,7 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
                             <NavLink className="nav-link" activeClassName="active" to={`/settings/settings`}>Settings</NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink className="nav-link" activeClassName="active" to={`/settings/bridge`}>Bridge</NavLink>
+                            <NavLink className="nav-link" activeClassName="active" to={`/settings/bridge`}>Raw</NavLink>
                         </li>
                     </ul>
 
