@@ -11,10 +11,8 @@ import React, { Component, Fragment, FunctionComponent } from 'react';
 import ConnectedMap from "./components/map";
 
 import {
-    BrowserRouter as Router,
     Switch,
     Route,
-    Link,
     HashRouter
 } from "react-router-dom";
 

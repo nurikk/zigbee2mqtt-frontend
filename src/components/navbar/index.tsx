@@ -11,7 +11,8 @@ import useComponentVisible from '../../hooks/useComponentVisible';
 const urls = [
     {
         href: '/',
-        title: 'Home'
+        title: 'Home',
+        exact: true
     },
     {
         href: '/map',
@@ -48,7 +49,7 @@ const NavBar: FunctionComponent<BridgeApi & GlobalState> = ({ setPermitJoin, bri
                     {
                         urls.map(url =>
                             <li key={url.href} className="nav-item">
-                                <NavLink className="nav-link" to={url.href} activeClassName="active">
+                                <NavLink exact={url.exact} className="nav-link" to={url.href} activeClassName="active">
                                     {url.title}
                                 </NavLink>
                             </li>)
