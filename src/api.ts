@@ -156,8 +156,9 @@ class Api {
                             store.setState({ networkGraphIsLoading: false });
                         }
                     }
+                    break;
 
-                // eslint-disable-next-line no-fallthrough
+
                 case "bridge/response/touchlink/scan":
                     {
                         const { status, data: payloadData } = data.payload as TouchllinkScanResponse;
@@ -167,23 +168,23 @@ class Api {
                             store.setState({ touchlinkScanInProgress: false });
                         }
                     }
+                    break;
 
-                // eslint-disable-next-line no-fallthrough
                 case "bridge/response/touchlink/identify":
                     store.setState({ touchlinkIdentifyInProgress: false });
+                    break;
 
-                // eslint-disable-next-line no-fallthrough
                 case "bridge/response/touchlink/factory_reset":
                     store.setState({ touchlinkResetInProgress: false });
+                    break;
 
-                // eslint-disable-next-line no-fallthrough
                 default:
-                    if (data.topic.startsWith("bridge/response/")) {
-                        showNotity(data.payload as ResponseWithStatus);
-                    }
                     break;
             }
-        } else {
+            if (data.topic.startsWith("bridge/response/")) {
+                showNotity(data.payload as ResponseWithStatus);
+            }
+        }  else {
             const { deviceStates } = store.getState();
             const newDeviceStates = new Map(deviceStates);
             newDeviceStates.set(data.topic, { ...newDeviceStates.get(data.topic), ...(data.payload as DeviceState) });
