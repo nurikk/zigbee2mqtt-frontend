@@ -1,3 +1,12 @@
+## [0.2.11](https://github.com/nurikk/z2m-frontend/compare/0.2.10...0.2.11) (2020-09-24)
+
+
+### Features
+
+* **hassio:** add ingress support ([3f78004](https://github.com/nurikk/z2m-frontend/commit/3f780043a61f01a2937ede2156b36b5496433fbf))
+
+
+
 ## [0.2.10](https://github.com/nurikk/z2m-frontend/compare/0.2.9...0.2.10) (2020-09-21)
 
 
