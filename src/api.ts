@@ -191,6 +191,6 @@ class Api {
         }
     }
 }
-const apiUrl = `${window.location.host}${isHassioIngressPage() ? document.location.pathname : '/'}api`;
+const apiUrl = `${window.location.host}${document.location.pathname}api`;
 const api = new Api(`${isSecurePage() ? 'wss' : 'ws'}://${apiUrl}`);
 export default api;
