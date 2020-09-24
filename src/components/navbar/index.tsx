@@ -5,7 +5,7 @@ import actions, { BridgeApi } from '../../actions';
 import { connect } from 'unistore/react';
 import Button from '../button';
 import cx from "classnames";
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import useComponentVisible from '../../hooks/useComponentVisible';
 
 const urls = [
@@ -40,7 +40,7 @@ const NavBar: FunctionComponent<BridgeApi & GlobalState> = ({ setPermitJoin, bri
     const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(false);
     return (<nav className="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
         <div className="container-fluid">
-            <a className="navbar-brand" href="/">Zigbee2MQTT</a>
+            <Link className="navbar-brand" to="/">Zigbee2MQTT</Link>
             <Button<boolean> onClick={setIsComponentVisible} item={!isComponentVisible} className={cx("navbar-toggler")} type="button">
                 <span className="navbar-toggler-icon" />
             </Button>
