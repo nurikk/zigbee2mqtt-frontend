@@ -1,3 +1,13 @@
+## [0.2.14](https://github.com/nurikk/z2m-frontend/compare/0.2.13...0.2.14) (2020-09-24)
+
+
+### Bug Fixes
+
+* **api:** correct state handling ([852c776](https://github.com/nurikk/z2m-frontend/commit/852c776923f49eb99e65918b3fbd99c0e0970e80))
+* **ingress:** fix header link ([29654fc](https://github.com/nurikk/z2m-frontend/commit/29654fca957b03030152a29d089a1f6a2b8876df))
+
+
+
 ## [0.2.13](https://github.com/nurikk/z2m-frontend/compare/0.2.12...0.2.13) (2020-09-24)
 
 
