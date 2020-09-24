@@ -1,7 +1,7 @@
 import ReconnectingWebSocket from "reconnecting-websocket";
 import store, { Group, LogMessage } from "./store";
 import { BridgeConfig, BridgeInfo, TouchLinkDevice, Device, DeviceState } from './types';
-import { sanitizeGraph, isSecurePage } from "./utils";
+import { sanitizeGraph, isSecurePage, isHassioIngressPage } from "./utils";
 import { Notyf } from "notyf";
 import { GraphI } from "./components/map/types";
 import debounce from "lodash/debounce"
@@ -191,5 +191,6 @@ class Api {
         }
     }
 }
-const api = new Api(`${isSecurePage() ? 'wss' : 'ws'}://${window.location.host}/api`);
+const apiUrl = `${window.location.host}${isHassioIngressPage() ? document.location.pathname : '/'}api`;
+const api = new Api(`${isSecurePage() ? 'wss' : 'ws'}://${apiUrl}`);
 export default api;
