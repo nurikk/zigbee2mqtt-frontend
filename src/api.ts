@@ -1,7 +1,7 @@
 import ReconnectingWebSocket from "reconnecting-websocket";
 import store, { Group, LogMessage } from "./store";
 import { BridgeConfig, BridgeInfo, TouchLinkDevice, Device, DeviceState } from './types';
-import { sanitizeGraph, isSecurePage, isHassioIngressPage } from "./utils";
+import { sanitizeGraph, isSecurePage } from "./utils";
 import { Notyf } from "notyf";
 import { GraphI } from "./components/map/types";
 import debounce from "lodash/debounce"
