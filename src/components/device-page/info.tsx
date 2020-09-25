@@ -36,7 +36,7 @@ export class DeviceInfo extends Component<DeviceInfoProps & PropsFromStore, {}> 
             {
                 render: (device: Device) => <dd className="col-7">{device.definition.supports}</dd>,
                 label: 'Supports',
-                if: 'supported'
+                if: 'definition.supports'
             },
             {
                 key: 'ieee_address',
