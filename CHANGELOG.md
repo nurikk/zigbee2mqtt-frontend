@@ -1,3 +1,17 @@
+## [0.2.15](https://github.com/nurikk/z2m-frontend/compare/0.2.14...0.2.15) (2020-09-25)
+
+
+### Bug Fixes
+
+* **info page:** don't show empty supports attr ([82dfa96](https://github.com/nurikk/z2m-frontend/commit/82dfa96190ccaf4afe0ab56da5719db6dbbe3905))
+
+
+### Features
+
+* **device info:** show in/out clusters ([de8d815](https://github.com/nurikk/z2m-frontend/commit/de8d815a7be7717313d3c05e964e1fc11d2ffb9a))
+
+
+
 ## [0.2.14](https://github.com/nurikk/z2m-frontend/compare/0.2.13...0.2.14) (2020-09-24)
 
 
