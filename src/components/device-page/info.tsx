@@ -9,6 +9,7 @@ import { connect } from "unistore/react";
 import { GlobalState } from "../../store";
 import PowerSourceComp from "../power-source";
 import get from 'lodash/get';
+import treeStyle from "./tree.css";
 
 type DeviceInfoProps = {
     device: Device;
@@ -78,6 +79,7 @@ export class DeviceInfo extends Component<DeviceInfoProps & PropsFromStore, {}> 
                 render: (device: Device) => <dd className="col-7">{device.interview_completed ? 'Yes' : 'No'}</dd>
             }
         ];
+
         return (
             <div className="card">
                 <SafeImg className={`card-img-top ${style["device-pic"]}`} src={genDeviceImageUrl(device.definition?.model)} />
@@ -114,9 +116,44 @@ export class DeviceInfo extends Component<DeviceInfoProps & PropsFromStore, {}> 
                             ) : null
                         }
                     </dl>
+                    <dl className={`${treeStyle.tree} row`}>
+                        <ul>
+                            <li>
+                                <span>{device.ieee_address}</span>
+                                <ul>
+                                    {Array.from(device.endpoints.entries()).map(([epName, epData]) => {
+                                        return (
 
+                                            <li key={epName}>
 
+                                                <span>Endpoint <strong>{epName}</strong></span>
+                                                <ul>
+                                                    {epData.clusters.output.length ? <li>
+                                                        <span>Output clusters</span>
+                                                        <ul>
+                                                            {
+                                                                epData.clusters.output.map(cluster => <li key={cluster}><span>{cluster}</span></li>)
+                                                            }
+                                                        </ul>
+                                                    </li> : null}
+                                                    {epData.clusters.input.length ? <li>
+                                                        <span>Input clusters</span>
+                                                        <ul>
+                                                            {
+                                                                epData.clusters.input.map(cluster => <li key={cluster}><span>{cluster}</span></li>)
+                                                            }
+                                                        </ul>
+                                                    </li> : null}
 
+                                                </ul>
+                                            </li>
+
+                                        );
+                                    })}
+                                </ul>
+                            </li>
+                        </ul>
+                    </dl>
                 </div>
                 <div className="card-footer">
                     <DeviceControlGroup device={device} state={deviceStatus} />
