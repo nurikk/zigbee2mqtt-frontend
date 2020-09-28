@@ -54,13 +54,7 @@ class States extends Component<StatesProps & PropsFromStore & StateApi, {}> {
         const kv = Object.entries(deviceState).filter(kvp => !isObject(kvp[1]))
         return (
             <div className="card">
-                <table className="table table-borderless">
-                    <thead>
-                        <tr>
-                            <th scope="col" />
-                            <th scope="col">Value</th>
-                        </tr>
-                    </thead>
+                <table className="table table-borderless align-middle">
                     <tbody>
                         {kv.map((param: DeviceParamTuple) => (
                             <tr key={param[0]} className={style["props-row"]}>
