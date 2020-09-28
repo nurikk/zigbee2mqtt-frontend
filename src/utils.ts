@@ -2,7 +2,7 @@
 import { Device } from "./types";
 import genericDevicePic from "./images/generic-zigbee-device.png";
 import { GraphI, ZigbeeRelationship, NodeI, Target, Source } from "./components/map/types";
-
+import { format } from 'timeago.js';
 
 export const genDeviceDetailsLink = (deviceIdentifier: string | number): string => (`/device/${deviceIdentifier}`);
 
@@ -110,14 +110,8 @@ export const lastSeen = (lastSeen: string, elapsed: number): string => {
     if (!lastSeen && !elapsed) {
         return "N/A";
     }
-
-    const diff = elapsed ? elapsed : Date.now() - Date.parse(lastSeen);
-
-    if (diff < 0) {
-        return "Now";
-    }
-    return toHHMMSS(diff / 1000);
-
+    const diff = elapsed ? Date.now() - elapsed : Date.parse(lastSeen);
+    return format(diff);
 };
 
 
