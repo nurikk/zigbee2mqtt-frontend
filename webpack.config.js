@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
     .BundleAnalyzerPlugin;
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CopyPlugin = require('copy-webpack-plugin');
 
 const path = require("path");
 const glob = require("glob");
@@ -24,6 +25,11 @@ module.exports = (env, args) => {
             filename: "[name].[contenthash].css",
             chunkFilename: "[id].[contenthash].css",
         }),
+        new CopyPlugin({
+            patterns: [
+              { from: 'src/images/favicon.ico' },
+            ],
+          }),
     ];
     const basePath = "src/templates";
     glob.sync(`${basePath}/**/*.html`).forEach((item) => {
