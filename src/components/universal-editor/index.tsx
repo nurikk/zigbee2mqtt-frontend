@@ -61,7 +61,7 @@ const UniversalEditor: React.FunctionComponent<InputHTMLAttributes<unknown> & Un
         case "number":
             return (<div className="row">
                 <div className="col-9">
-                    <input type="range" className="form-range align-middle"
+                    <input type="range" className="form-range form-control border-0"
                         disabled={disabled}
                         value={value as number}
                         onChange={e => onChange(e.target.valueAsNumber)}
