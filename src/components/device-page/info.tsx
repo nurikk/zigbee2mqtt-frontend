@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { Device, DeviceState } from "../../types";
-import SafeImg from "../safe-image";
-import { genDeviceImageUrl, toHex, toHHMMSS } from "../../utils";
+import { toHex, toHHMMSS } from "../../utils";
 import DeviceControlGroup from "../device-control";
 import cx from "classnames";
 import style from "./style.css";
@@ -10,6 +9,7 @@ import { GlobalState } from "../../store";
 import PowerSourceComp from "../power-source";
 import get from 'lodash/get';
 import treeStyle from "./tree.css";
+import DeviceImage from "../device-image";
 
 type DeviceInfoProps = {
     device: Device;
@@ -82,7 +82,7 @@ export class DeviceInfo extends Component<DeviceInfoProps & PropsFromStore, {}> 
 
         return (
             <div className="card">
-                <SafeImg className={`card-img-top ${style["device-pic"]}`} src={genDeviceImageUrl(device.definition?.model)} />
+                <DeviceImage className={`card-img-top ${style["device-pic"]}`} device={device} />
                 <div className="card-body">
                     <h5 className="card-title">{device.type}</h5>
 

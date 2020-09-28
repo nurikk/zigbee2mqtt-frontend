@@ -2,13 +2,10 @@ import React, { Component, createRef, RefObject } from "react";
 import * as d3 from "d3";
 import { LinkI, NodeI } from "./types";
 import cx from "classnames";
-
-import * as style from "./map.css";
+import style from "./map.css";
 import { MouseEventsResponderNode } from ".";
 import { Device } from "../../types";
-import { genDeviceImageUrl } from "../../utils";
-import genericDevice from "./../../images/generic-zigbee-device.png";
-
+import { DeviceSvgImage } from "../device-image";
 
 const calcStarPoints = (
     centerX: number,
@@ -53,28 +50,14 @@ export const isOnline = (device: Device): boolean => {
     return true; //Date.now() - device.lastSeen < offlineTimeout;
 };
 
-interface NodeState {
-    imgUrl: string;
-}
-
-class Node extends Component<NodeProps, NodeState> {
+class Node extends Component<NodeProps, {}> {
     ref = createRef<SVGPolygonElement | SVGCircleElement | SVGImageElement>();
-    state = {
-        imgUrl: ""
-    };
 
     componentDidMount(): void {
         const { current } = this.ref;
         const { node } = this.props;
-
         d3.select(current as SVGElement).data([node]);
-
-        // eslint-disable-next-line react/no-did-mount-set-state
-        this.setState({
-            imgUrl: genDeviceImageUrl(node.definition?.model)
-        });
     }
-
 
     onMouseOut = (): void => {
         const { node, onMouseOut } = this.props;
@@ -91,41 +74,31 @@ class Node extends Component<NodeProps, NodeState> {
         onDblClick && onDblClick(node);
     };
 
-
-    onImageError = (): void => {
-        this.setState({
-            imgUrl: genericDevice
-        });
-    };
-
     render() {
-        const { imgUrl } = this.state;
+
         const { node } = this.props;
-        const { onMouseOver, onMouseOut, onDblClick, onImageError } = this;
+        const { onMouseOver, onMouseOut, onDblClick } = this;
         const deviceType = node.type as string;
         const cn = cx(style.node, style[deviceType]); //{ [style.offline]: !isOnline(node.device, time) }
         return (<g className={cn}
-                   ref={this.ref as RefObject<SVGImageElement>}
-                   onMouseOver={onMouseOver}
-                   onMouseOut={onMouseOut}
-                   onDoubleClick={onDblClick}
-                >
+            ref={this.ref as RefObject<SVGImageElement>}
+            onMouseOver={onMouseOver}
+            onMouseOut={onMouseOut}
+            onDoubleClick={onDblClick}
+        >
             {
                 node.type === "Coordinator" ? (
                     <polygon
                         points={getStarShape(5, 5, 14) as string}
                     />
                 ) : (
-                    <image
-                        width={32}
-                        height={32}
-                        onError={onImageError}
-
-                        className={`${style.img}`}
-
-                        href={imgUrl}
-                    />
-                )
+                        <DeviceSvgImage
+                            width={32}
+                            height={32}
+                            device={{ definition: node.definition } as unknown as Device}
+                            className={`${style.img}`}
+                        />
+                    )
             }
             <text>{node.friendlyName}</text>
 

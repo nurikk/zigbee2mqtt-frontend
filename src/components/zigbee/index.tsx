@@ -4,8 +4,8 @@ import orderBy from "lodash/orderBy";
 import DeviceControlGroup from "../device-control";
 import cx from "classnames";
 import { Device, SortDirection, DeviceState } from "../../types";
-import { genDeviceDetailsLink, genDeviceImageUrl, lastSeen, toHex } from "../../utils";
-import SafeImg from "../safe-image";
+import { genDeviceDetailsLink, lastSeen, toHex } from "../../utils";
+
 import { Notyf } from "notyf";
 import PowerSource from "../power-source";
 import { connect } from "unistore/react";
@@ -14,6 +14,7 @@ import actions from "../../actions";
 import ActionTH from "./ActionTH";
 import isEqual from "lodash/isEqual";
 import { Link } from "react-router-dom";
+import DeviceImage from "../device-image";
 
 
 type SortColumn =
@@ -180,8 +181,7 @@ export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
                         <tr key={device.friendly_name} title={state?.update?.state == "available" ? 'Avaliable OTA update' : device.definition?.description}>
                             <td className="font-weight-bold">{id + 1}</td>
                             <td className={style["device-pic"]}>
-                                <SafeImg className={cx(style["device-image"])}
-                                    src={genDeviceImageUrl(device.definition?.model)} />
+                                <DeviceImage className={cx(style["device-image"])} device={device} />
                             </td>
                             <td>
                                 <Link to={genDeviceDetailsLink(device.ieee_address)}>{device.friendly_name}</Link>

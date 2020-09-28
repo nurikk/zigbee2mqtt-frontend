@@ -4,14 +4,14 @@ import actions, { GroupsApi } from "../../actions";
 import { GlobalState, Group, GroupAddress } from "../../store";
 import Button from "../button";
 import { Device, Endpoint } from "../../types";
-import SafeImg from "../safe-image";
-import { genDeviceImageUrl, genDeviceDetailsLink } from "../../utils";
+import { genDeviceDetailsLink } from "../../utils";
 import style from './style.css';
 import cx from 'classnames';
 import EndpointPicker from "../endpoint-picker";
 import DevicePicker from "../device-picker";
 import { Link } from "react-router-dom";
 import { getEndpoints } from "../device-page/bind-row";
+import DeviceImage from "../device-image";
 
 
 interface GroupsPageState {
@@ -49,8 +49,8 @@ class DeviceGroupRow extends Component<DeviceGroupRowProps, {}> {
 
         return <tr>
             <th scope="row">{rowNumber + 1}</th>
-            <td className={style["device-pic"]}>{<SafeImg className={cx(style["device-image"])}
-                src={genDeviceImageUrl(device?.definition?.model)} />}
+            <td className={style["device-pic"]}>
+                <DeviceImage className={cx(style["device-image"])} device={device} />
             </td>
             <td><Link to={genDeviceDetailsLink(device.ieee_address)}>{device.friendly_name}</Link></td>
             <td>{groupAddress.ieee_address}</td>
