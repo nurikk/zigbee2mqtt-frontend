@@ -1,3 +1,16 @@
+## [0.2.16](https://github.com/nurikk/z2m-frontend/compare/0.2.15...0.2.16) (2020-09-28)
+
+
+### Features
+
+* **html:** add favicon ([903077d](https://github.com/nurikk/z2m-frontend/commit/903077d9378c8b587ccf1b5a6cc74246b4decd86))
+* **last-seen:** add timeago.js ([1eb4fbc](https://github.com/nurikk/z2m-frontend/commit/1eb4fbcff4b047f58141b8533d0c75a8efe1bbca))
+* **tables:** uniform tables look ([8a34ae0](https://github.com/nurikk/z2m-frontend/commit/8a34ae0420a69325a86aa225c0f0ea9eada11312))
+* **universal editor:** range vertical allighment ([4183520](https://github.com/nurikk/z2m-frontend/commit/41835204f940d4b652ee2d0aae859924ab16812a))
+* **zigbee:** remove stripes from zigbee table ([bc1a882](https://github.com/nurikk/z2m-frontend/commit/bc1a882c1b5ce9b755628d30c8e361a5377f53ee))
+
+
+
 ## [0.2.15](https://github.com/nurikk/z2m-frontend/compare/0.2.14...0.2.15) (2020-09-25)
 
 
