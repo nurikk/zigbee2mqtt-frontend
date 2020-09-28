@@ -1,3 +1,12 @@
+## [0.2.17](https://github.com/nurikk/z2m-frontend/compare/0.2.16...0.2.17) (2020-09-28)
+
+
+### Features
+
+* **device image:** add sls image fallback source ([e6f5da8](https://github.com/nurikk/z2m-frontend/commit/e6f5da8bf9630017f3d5f224faeea7b5c1a807cc))
+
+
+
 ## [0.2.16](https://github.com/nurikk/z2m-frontend/compare/0.2.15...0.2.16) (2020-09-28)
 
 
