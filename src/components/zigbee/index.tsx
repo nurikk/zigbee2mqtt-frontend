@@ -146,7 +146,7 @@ export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
         const { onSortChange } = this;
         const lastSeenIsAvaliable = bridgeInfo?.config?.advanced?.elapsed || bridgeInfo?.config?.advanced?.last_seen != "disable";
         return (
-            <table className={cx("table table-striped table-borderless align-middle", style.adaptive)}>
+            <table className={cx("table align-middle", style.adaptive)}>
                 <thead>
                     <tr className="text-nowrap">
                         <th>#</th>
