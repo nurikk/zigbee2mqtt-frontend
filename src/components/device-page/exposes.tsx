@@ -32,7 +32,7 @@ class Exposes extends Component<ExposesProps & PropsFromStore & StateApi, {}> {
                             />
                         </div>
                     default:
-                        return <div key={JSON.stringify(exposeDetails)}>Unnknown feature ${exposeDetails.type}</div>
+                        return <div key={JSON.stringify(exposeDetails)}>Unnknown feature {JSON.stringify(exposeDetails, null, 4)}</div>
                 }
             })
         } else {
