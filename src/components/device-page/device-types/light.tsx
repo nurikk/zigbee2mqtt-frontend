@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { StateApi } from "../../../actions";
-import { Device, DeviceState, LightFeatures, XYColor } from "../../../types";
+import { Device, DeviceState, Endpoint, LightFeatures } from "../../../types";
 import Toggle from "../../toggle";
 import Range, { RangeStep } from "../../range";
 import Color from "../../color";
@@ -11,14 +11,15 @@ interface LightProps extends StateApi {
   device: Device;
   features: LightFeatures[];
   deviceState: DeviceState;
+  endpoint?: Endpoint;
 
 }
 const colorTemSteps = [1000, 2000, 3000, 4000, 5000, 6500].map<RangeStep>(kelvin => ({ stepValue: 1000000.0 / kelvin, title: kelvin + 'K' }));
 const brighnessSteps = [0, 25, 50, 75, 100].map<RangeStep>(item => ({ stepValue: scale(item, [0, 100], [0, 255]), title: item + '%' }));
 export default class Light extends Component<LightProps, {}> {
   onFeatureChange = (name: string, value: string | number | boolean | object) => {
-    const { setStateValue, device } = this.props;
-    setStateValue(device.friendly_name, name, value);
+    const { setStateValue, device, endpoint } = this.props;
+    setStateValue(`${device.friendly_name}${endpoint ? `/${endpoint}` : ''}`, name, value);
   }
   render() {
     const { features, deviceState } = this.props;

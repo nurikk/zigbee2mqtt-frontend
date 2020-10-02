@@ -84,6 +84,7 @@ export type DeviceClassType = "light";
 export type LightFeatures = "state" | "brightness" | "color_temp" | "color_xy";
 
 export interface DeviceClass {
+    endpoint?: Endpoint;
     type: DeviceClassType;
     features: string[] | LightFeatures[];
 }

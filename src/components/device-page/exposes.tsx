@@ -23,6 +23,7 @@ class Exposes extends Component<ExposesProps & PropsFromStore & StateApi, {}> {
                     case "light":
                         return <div className="card" key={JSON.stringify(exposeDetails)}>
                             <Light
+                                endpoint={exposeDetails.endpoint}
                                 device={device}
                                 deviceState={deviceState}
                                 features={exposeDetails.features as LightFeatures[]}
