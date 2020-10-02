@@ -5,6 +5,8 @@ import actions, { StateApi } from "../../actions";
 import { connect } from "unistore/react";
 import { GlobalState } from "../../store";
 import Light from "./device-types/light";
+import Switch from "./device-types/switch";
+
 
 interface PropsFromStore {
     deviceStates: Map<string, DeviceState>;
@@ -31,6 +33,16 @@ class Exposes extends Component<ExposesProps & PropsFromStore & StateApi, {}> {
                                 getStateValue={getStateValue}
                             />
                         </div>
+                    case "switch":
+                            return <div className="card" key={JSON.stringify(exposeDetails)}>
+                                <Switch
+                                    endpoint={exposeDetails.endpoint}
+                                    device={device}
+                                    deviceState={deviceState}
+                                    setStateValue={setStateValue}
+                                    getStateValue={getStateValue}
+                                />
+                            </div>
                     default:
                         return <div key={JSON.stringify(exposeDetails)}>Unnknown feature {JSON.stringify(exposeDetails, null, 4)}</div>
                 }

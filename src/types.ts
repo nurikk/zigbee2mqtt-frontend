@@ -79,14 +79,14 @@ export interface BridgeInfo {
 }
 
 export type PowerSource = "Battery" | "Mains (single phase)";
-export type DeviceClassType = "light";
 
+export type DeviceClassType = "light" | "switch";
 export type LightFeatures = "state" | "brightness" | "color_temp" | "color_xy";
 
 export interface DeviceClass {
     endpoint?: Endpoint;
     type: DeviceClassType;
-    features: string[] | LightFeatures[];
+    features?: LightFeatures[];
 }
 
 export interface DeviceDefinition {

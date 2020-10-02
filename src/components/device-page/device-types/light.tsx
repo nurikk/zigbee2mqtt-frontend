@@ -26,7 +26,7 @@ export default class Light extends Component<LightProps, {}> {
     return <table className="table table-borderless align-middle">
       <tbody>
         {
-          features.map(feature => {
+          features?.map(feature => {
             switch (feature) {
               case "state":
                 return <tr key={feature}>
