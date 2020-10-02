@@ -1,3 +1,13 @@
+## [0.2.20](https://github.com/nurikk/z2m-frontend/compare/0.2.19...0.2.20) (2020-10-02)
+
+
+### Features
+
+* **color temp:** add 6500k ([902d967](https://github.com/nurikk/z2m-frontend/commit/902d96702cf65004bf631c529ced6985ff0b49cc))
+* **color widget:** generalise ([29d3880](https://github.com/nurikk/z2m-frontend/commit/29d38805b487c84557e04024ea67932f6c73a242))
+
+
+
 ## [0.2.19](https://github.com/nurikk/z2m-frontend/compare/0.2.18...0.2.19) (2020-10-02)
 
 
