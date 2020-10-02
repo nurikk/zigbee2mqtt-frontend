@@ -1,3 +1,14 @@
+## [0.2.19](https://github.com/nurikk/z2m-frontend/compare/0.2.18...0.2.19) (2020-10-02)
+
+
+### Features
+
+* **devices:** default order for devices by FN ([508bd65](https://github.com/nurikk/z2m-frontend/commit/508bd65fa6d3b0413986301d5aecd1a41c31663c))
+* **endpoin picker:** pick first ep by default ([5630bb5](https://github.com/nurikk/z2m-frontend/commit/5630bb5243037bd143aa10b8d05ae43359ad7b70))
+* **enpointpicker:** disable select with single ep ([cb57106](https://github.com/nurikk/z2m-frontend/commit/cb57106733aa41b569167ce184aab0a918778c0c))
+
+
+
 ## [0.2.18](https://github.com/nurikk/z2m-frontend/compare/0.2.17...0.2.18) (2020-10-02)
 
 
