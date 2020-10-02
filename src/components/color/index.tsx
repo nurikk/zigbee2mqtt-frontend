@@ -6,7 +6,7 @@ import { cie_to_rgb, rgb_to_cie } from "../../utils";
 import Button from "../button";
 type Payload = AnyColor;
 
-export type ColorFormat = "xy" | "xs";
+export type ColorFormat = "color_xy";
 type ColorProps = {
   value: Payload;
   steps?: string[];
@@ -18,7 +18,7 @@ type ColorProps = {
 const hexToTargetFormat = (value: string, format: ColorFormat) => {
   let color;
   switch (format) {
-    case "xy":
+    case "color_xy":
       {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const [r, g, b] = convertColors.hex.rgb(value);
@@ -39,7 +39,7 @@ const Color: FunctionComponent<ColorProps & Omit<InputHTMLAttributes<HTMLInputEl
   const { onChange, name, value = {}, brightness = 255, format, steps = pridePallete, ...rest } = props;
   let hexValue = '#000000';
   switch (format) {
-    case "xy":
+    case "color_xy":
       const { x, y } = value as XYColor;
       hexValue = '#' + convertColors.rgb.hex(cie_to_rgb(x, y, brightness));
       break;

@@ -80,7 +80,7 @@ export default class Light extends Component<LightProps, {}> {
                         name="color"
                         value={color}
                         brightness={brightness}
-                        format={"xy"}
+                        format={feature}
                       />
                     </td>
                   </tr>
