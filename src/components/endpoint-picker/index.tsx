@@ -17,10 +17,17 @@ export default class EndpointPicker extends Component<EndpointPickerProps & Omit
     }
     render() {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const { onSelect, value, values, ...rest } = this.props;
+        const { onSelect, value, values, disabled, onChange, ...rest } = this.props;
+        const hasOnlyOneEP = values.length == 1;
+
         const options = values.map(ep => <option key={ep} value={ep}>{ep}</option>)
         options.unshift(<option key="hidded" hidden>Select endpoint</option>);
-        return <select value={value} className="form-control" {...rest} onChange={this.onSelect} >
+        return <select disabled={value && hasOnlyOneEP || disabled}
+            value={value}
+            className="form-control"
+            title={hasOnlyOneEP ? 'The only endpoint' : null}
+            onChange={this.onSelect}
+            {...rest}>
             {options}
         </select>;
 
