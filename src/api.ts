@@ -5,6 +5,7 @@ import { sanitizeGraph, isSecurePage } from "./utils";
 import { Notyf } from "notyf";
 import { GraphI } from "./components/map/types";
 import debounce from "lodash/debounce"
+import orderBy from "lodash/orderBy";
 
 
 const MAX_LOGS_RECORDS_IN_BUFFER = 100;
@@ -111,7 +112,7 @@ class Api {
                 case "bridge/devices":
                     {
                         const devicesMap = new Map();
-                        (data.payload as Device[]).forEach((device) => {
+                        orderBy((data.payload as Device[]), "friendly_name").forEach((device) => {
                             const dev = { ...device };
                             dev.endpoints = new Map(Object.entries(device.endpoints));
                             devicesMap.set(device.ieee_address, dev);
