@@ -13,7 +13,7 @@ interface LightProps extends StateApi {
   deviceState: DeviceState;
 
 }
-const colorTemSteps = [1000, 2000, 3000, 4000, 5000].map<RangeStep>(kelvin => ({ stepValue: 1000000.0 / kelvin, title: kelvin + 'K' }));
+const colorTemSteps = [1000, 2000, 3000, 4000, 5000, 6500].map<RangeStep>(kelvin => ({ stepValue: 1000000.0 / kelvin, title: kelvin + 'K' }));
 const brighnessSteps = [0, 25, 50, 75, 100].map<RangeStep>(item => ({ stepValue: scale(item, [0, 100], [0, 255]), title: item + '%' }));
 export default class Light extends Component<LightProps, {}> {
   onFeatureChange = (name: string, value: string | number | boolean | object) => {
