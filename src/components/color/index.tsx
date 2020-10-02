@@ -1,12 +1,12 @@
 import React, { FunctionComponent, InputHTMLAttributes } from "react";
 import * as convertColors from "color-convert";
 
-import { AnyColor, XYColor } from "../../types";
-import { cie_to_rgb, rgb_to_cie } from "../../utils";
+import { AnyColor, HueSaturationColor, XYColor } from "../../types";
+import { cie_to_rgb, rgb_to_cie, scale } from "../../utils";
 import Button from "../button";
 type Payload = AnyColor;
 
-export type ColorFormat = "color_xy";
+export type ColorFormat = "color_xy" | "color_hs";
 type ColorProps = {
   value: Payload;
   steps?: string[];
@@ -27,6 +27,15 @@ const hexToTargetFormat = (value: string, format: ColorFormat) => {
           x, y
         }
       }
+    case "color_hs":
+      {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const [hue, saturation, l] = convertColors.hex.hsl(value);
+        debugger
+        return {
+          hue, saturation
+        }
+      }
 
     default:
       break;
@@ -36,12 +45,16 @@ const hexToTargetFormat = (value: string, format: ColorFormat) => {
 }
 const pridePallete = ['#FF0018', '#FFA52C', '#FFFF41', '#008018', '#0000F9', '#86007D'];
 const Color: FunctionComponent<ColorProps & Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'value'>> = (props) => {
-  const { onChange, name, value = {}, brightness = 255, format, steps = pridePallete, ...rest } = props;
+  const { onChange, name, value = {}, format, steps = pridePallete, ...rest } = props;
   let hexValue = '#000000';
   switch (format) {
     case "color_xy":
       const { x, y } = value as XYColor;
-      hexValue = '#' + convertColors.rgb.hex(cie_to_rgb(x, y, brightness));
+      hexValue = '#' + convertColors.rgb.hex(cie_to_rgb(x, y, 254));
+      break;
+    case "color_hs":
+      const { hue, saturation } = value as HueSaturationColor;
+      hexValue = '#' + convertColors.hsl.hex([hue, saturation, 50]);
       break;
     default:
       break;

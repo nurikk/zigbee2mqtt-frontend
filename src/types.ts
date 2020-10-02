@@ -11,6 +11,11 @@ export type RGBColor = {
     g: number;
     b: number;
 }
+export type HueSaturationColor = {
+    hue: number;
+    saturation: number;
+}
+
 export type XYColor = {
     x: number;
     y: number;
@@ -81,7 +86,7 @@ export interface BridgeInfo {
 export type PowerSource = "Battery" | "Mains (single phase)";
 
 export type DeviceClassType = "light" | "switch";
-export type LightFeatures = "state" | "brightness" | "color_temp" | "color_xy";
+export type LightFeatures = "state" | "brightness" | "color_temp" | "color_xy" | "color_hs";
 
 export interface DeviceClass {
     endpoint?: Endpoint;

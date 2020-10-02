@@ -70,10 +70,11 @@ export default class Light extends Component<LightProps, {}> {
                 </tr>
 
               case "color_xy":
+              case "color_hs":
                 {
                   const { color, brightness } = deviceState;
                   return <tr key={feature}>
-                    <td>Color</td>
+                    <td>Color ({feature})</td>
                     <td>
                       <Color
                         key={feature}
