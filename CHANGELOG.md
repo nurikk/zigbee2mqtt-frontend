@@ -1,3 +1,12 @@
+## [0.2.18](https://github.com/nurikk/z2m-frontend/compare/0.2.17...0.2.18) (2020-10-02)
+
+
+### Features
+
+* **exposes:** implement light control ([08c94c1](https://github.com/nurikk/z2m-frontend/commit/08c94c10e20e15fcd860a11ac4d93a509c9d94f2))
+
+
+
 ## [0.2.17](https://github.com/nurikk/z2m-frontend/compare/0.2.16...0.2.17) (2020-09-28)
 
 
