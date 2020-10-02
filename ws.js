@@ -1,24 +1,26 @@
 const WebSocket = require("ws");
+const lineReader = require('line-reader');
 
 const wss = new WebSocket.Server({
     port: 8579,
 });
 
 wss.on("connection", (ws) => {
-    const onConnect = require("./ws-messages/onConnect.json");
-    onConnect.forEach((msg) => {
-        ws.send(JSON.stringify(msg));
+
+    lineReader.eachLine('./ws-messages/onConnect.json', (line, last) => {
+        ws.send(line);
     });
+
     ws.addEventListener("message", (message) => {
         const msg = JSON.parse(message.data);
-        let response = [];
         switch (msg.topic) {
             case "bridge/request/networkmap":
-                response = require("./ws-messages/networkMapRequest.json");
+                lineReader.eachLine('./ws-messages/networkMapRequest.json', (line, last) => {
+                    ws.send(line);
+                });
                 break;
             default:
                 break;
         }
-        response.forEach((r) => ws.send(JSON.stringify(r)));
     });
 });
