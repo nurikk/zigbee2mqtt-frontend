@@ -6,13 +6,27 @@ interface OTAState {
     progress: number;
     remaining: number;
 }
+export type RGBColor = {
+    r: number;
+    g: number;
+    b: number;
+}
+export type XYColor = {
+    x: number;
+    y: number;
+}
+export type AnyColor = RGBColor | XYColor;
 export interface DeviceState {
     battery: number;
     last_seen?: string;
     elapsed?: number;
     linkquality: number;
     update?: OTAState;
-    [k: string]: string | number | boolean | OTAState;
+    state?: string;
+    brightness?: number;
+    color_temp?: number;
+    color?: AnyColor;
+    [k: string]: string | number | boolean | OTAState | AnyColor;
 }
 
 export type Cluster = string;
@@ -65,12 +79,21 @@ export interface BridgeInfo {
 }
 
 export type PowerSource = "Battery" | "Mains (single phase)";
+export type DeviceClassType = "light";
+
+export type LightFeatures = "state" | "brightness" | "color_temp" | "color_xy";
+
+export interface DeviceClass {
+    type: DeviceClassType;
+    features: string[] | LightFeatures[];
+}
 
 export interface DeviceDefinition {
     description: string;
     model: string;
     supports: string;
     vendor: string;
+    exposes: DeviceClass[];
 }
 
 export interface EndpointDescription {

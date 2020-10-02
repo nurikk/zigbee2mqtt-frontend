@@ -6,6 +6,7 @@ import { GlobalState } from "../../store";
 import DeviceInfo from "./info";
 import Bind from "./bind";
 import States from "./states";
+import ConnectedDeviceExposes from "./exposes";
 
 type UrlParams = {
     dev: string;
@@ -14,7 +15,7 @@ type UrlParams = {
 type DevicePageProps = RouteComponentProps<UrlParams>;
 
 
-type TabName = "info" | "bind" | "state";
+type TabName = "info" | "bind" | "state" | "exposes";
 // eslint-disable-next-line react/prefer-stateless-function
 export class DevicePage extends Component<DevicePageProps & GlobalState, {}> {
     renderContent() {
@@ -29,6 +30,8 @@ export class DevicePage extends Component<DevicePageProps & GlobalState, {}> {
                 return <Bind device={device} />;
             case "state":
                 return <States device={device} />;
+            case "exposes":
+                return <ConnectedDeviceExposes device={device} />;
             default:
                 return <Redirect to={`/device/${dev}/info`} />;
         }
@@ -55,6 +58,9 @@ export class DevicePage extends Component<DevicePageProps & GlobalState, {}> {
                     </li>
                     <li className="nav-item">
                         <NavLink activeClassName="active" className="nav-link" to={`/device/${dev}/state`}>State</NavLink>
+                    </li>
+                    <li className="nav-item">
+                        <NavLink activeClassName="active" className="nav-link" to={`/device/${dev}/exposes`}>Exposes</NavLink>
                     </li>
                 </ul>
             </div>
