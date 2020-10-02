@@ -1,18 +1,14 @@
-import React, { ChangeEvent, Component, createRef, Fragment, FunctionComponent, useEffect } from "react";
+import React, { ChangeEvent, Component, createRef, Fragment } from "react";
 import Links from "./links";
 import Nodes from "./nodes";
 import * as d3 from "d3";
 import style from "./map.css";
 import { LinkI, NodeI, ZigbeeRelationship } from "./types";
-import Tooltip from "./tooltip";
-import { genDeviceDetailsLink } from "../../utils";
 import { connect } from "unistore/react";
 import { GlobalState } from "../../store";
 import actions, { MapApi } from "../../actions";
 
 import Button from "../button";
-import { Route } from "react-router";
-import { rest } from "lodash";
 
 
 export interface MouseEventsResponderNode {
@@ -53,35 +49,15 @@ const getDistance = (d: LinkI): number => {
     const depth = ~~(Math.min(4, d.depth));
     return 50 * depth + distance;
 };
-
-type ObserverProps = {
-    didUpdate(): void;
-    params: unknown[];
-}
-const Observer: FunctionComponent<ObserverProps> = ({ didUpdate, params }) => {
-    useEffect(() => {
-        didUpdate()
-    }, params)
-    return null
-}
-
 export class Map extends Component<GlobalState & MapApi, MapState> {
     ref = createRef<HTMLDivElement>();
     simulation!: d3.Simulation<NodeI, LinkI>;
-
-    constructor(props) {
-        super(props);
-
-
-        this.simulation = d3.forceSimulation<NodeI>();
-
-        this.state = {
-            width: 0,
-            height: 0,
-            tooltipNode: false,
-            visibleLinks: [ZigbeeRelationship.NeigbhorIsAChild]
-        };
-    }
+    state: Readonly<MapState> = {
+        width: 0,
+        height: 0,
+        tooltipNode: false,
+        visibleLinks: [ZigbeeRelationship.NeigbhorIsAChild]
+    };
 
     updateNodes = (): void => {
         this.updateForces();
@@ -189,24 +165,23 @@ export class Map extends Component<GlobalState & MapApi, MapState> {
 
     async initPage(): Promise<void> {
         const { width, height } = (this.ref.current as HTMLDivElement).getBoundingClientRect();
+        this.simulation = d3.forceSimulation<NodeI>();
         this.setState({ width, height });
     }
 
     async componentDidMount(): Promise<void> {
         await this.initPage()
     }
+    componentDidUpdate(): void {
+        this.updateNodes();
+    }
 
     renderMap() {
-        const { width, height, tooltipNode, visibleLinks } = this.state;
+        const { width, height, visibleLinks } = this.state;
         const { networkGraph } = this.props;
         const { setTooltip, removeTooltip, openDetailsWindow } = this;
-        const visibleLinksGlued = visibleLinks.join('');
-
-
         return (
-            <svg viewBox={`0 0 ${width} ${height}`} key={visibleLinksGlued}>
-                <Observer params={[networkGraph.nodes.length, visibleLinksGlued]} didUpdate={this.updateNodes} />
-
+            <svg viewBox={`0 0 ${width} ${height}`}>
                 <defs>
 
                     <marker viewBox="-0 -5 10 10" id="arrowhead" markerWidth="13" markerHeight="13" refX="13" refY="0" orient="auto" markerUnits="strokeWidth">
@@ -221,17 +196,6 @@ export class Map extends Component<GlobalState & MapApi, MapState> {
                     onMouseOut={removeTooltip}
                     onDblClick={openDetailsWindow}
                 />
-                {/* {
-                    tooltipNode ? (
-                        <foreignObject
-                            className={style.foreignObject}
-                            x={tooltipNode.x as number + 10}
-                            y={tooltipNode.y as number + 5}
-                        >
-                            <Tooltip info={tooltipNode} />
-                        </foreignObject>
-                    ) : null
-                } */}
             </svg >
         )
     }
