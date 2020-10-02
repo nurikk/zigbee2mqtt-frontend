@@ -105,7 +105,8 @@ class AddDeviceToGroup extends Component<AddDeviceToGroupProps, AddDeviceToGroup
 
     }
     onDeviceSelect = (device: Device): void => {
-        this.setState({ device: device.ieee_address });
+        const endpoints = getEndpoints(device);
+        this.setState({ device: device.ieee_address, endpoint: endpoints[0] });
     }
 
     onEpChange = (endpoint: Endpoint): void => {

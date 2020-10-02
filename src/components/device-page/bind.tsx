@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Device, Cluster, Endpoint } from "../../types";
-import BindRow from "./bind-row";
+import BindRow, { getEndpoints } from "./bind-row";
 import actions, { BindApi } from "../../actions";
 import { connect } from "unistore/react";
 import { GlobalState, Group } from "../../store";
@@ -70,8 +70,10 @@ export class Bind extends Component<BindProps & PropsFromStore & BindApi, BindSt
     };
     static getDerivedStateFromProps(props: Readonly<BindProps & PropsFromStore>, state: BindState): Partial<BindState> {
         const { device } = props;
+        const endpoints = getEndpoints(device);
         const bidingRules = convertBidningsIntoNiceStructure(device);
-        bidingRules.push({ isNew: Date.now(), target: {}, source: {}, clusters: [] } as NiceBindingRule);
+        // eslint-disable-next-line @typescript-eslint/camelcase
+        bidingRules.push({ isNew: Date.now(), target: {}, source: {ieee_address: device.ieee_address, endpoint: endpoints[0]}, clusters: [] } as NiceBindingRule);
         return {
             bidingRules
         };

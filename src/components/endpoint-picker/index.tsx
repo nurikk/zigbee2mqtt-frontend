@@ -20,7 +20,7 @@ export default class EndpointPicker extends Component<EndpointPickerProps & Omit
         const { onSelect, value, values, ...rest } = this.props;
         const options = values.map(ep => <option key={ep} value={ep}>{ep}</option>)
         options.unshift(<option key="hidded" hidden>Select endpoint</option>);
-        return <select defaultValue={value} className="form-control" {...rest} onChange={this.onSelect} >
+        return <select value={value} className="form-control" {...rest} onChange={this.onSelect} >
             {options}
         </select>;
 
