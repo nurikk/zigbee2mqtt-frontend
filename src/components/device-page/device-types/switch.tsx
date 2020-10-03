@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { ChangeEvent, Component } from "react";
 import { StateApi } from "../../../actions";
 import { Device, DeviceState, Endpoint } from "../../../types";
 import Toggle from "../../toggle";
@@ -11,10 +11,14 @@ interface SwitchProps extends StateApi {
 
 }
 
+
 export default class Switch extends Component<SwitchProps, {}> {
   onFeatureChange = (name: string, value: string | number | boolean | object) => {
     const { setStateValue, device, endpoint } = this.props;
     setStateValue(`${device.friendly_name}${endpoint ? `/${endpoint}` : ''}`, name, value);
+  }
+  onSwitchToggle = (e: ChangeEvent<HTMLInputElement>) => {
+    this.onFeatureChange("state", e.target.checked ? "ON" : "OFF");
   }
   render() {
     const { deviceState } = this.props;
@@ -23,11 +27,13 @@ export default class Switch extends Component<SwitchProps, {}> {
         <tr>
           <td>Switch</td>
           <td>
-            <Toggle
-              onChange={this.onFeatureChange}
-              name="state"
-              value={deviceState["state"] ?? 'OFF' as string}
-            />
+            <div className="form-check form-switch">
+              <input
+                type="checkbox"
+                checked={deviceState["state"] == 'ON'}
+                className="form-check-input"
+                onChange={this.onSwitchToggle} />
+            </div>
           </td>
         </tr>
       </tbody>
