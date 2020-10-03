@@ -1,3 +1,22 @@
+## [0.2.21](https://github.com/nurikk/z2m-frontend/compare/0.2.20...0.2.21) (2020-10-03)
+
+
+### Bug Fixes
+
+* **map:** fix map rendering after changing tab ([743c655](https://github.com/nurikk/z2m-frontend/commit/743c6550ac4977e9d736cce6e62ff7ab579d7b69))
+
+
+### Features
+
+* **color:** add hs color support ([31e0b69](https://github.com/nurikk/z2m-frontend/commit/31e0b69073415ea117fb02f182d54abf1fd32416))
+* **exposes:** better unsupported report ([e2c546a](https://github.com/nurikk/z2m-frontend/commit/e2c546a3a2548a534c151e641269590685641eac))
+* **exposes:** implement switch type ([7e5f71b](https://github.com/nurikk/z2m-frontend/commit/7e5f71bf27d0b0954e24b228a04caab4b27cd0f7))
+* **light:** add endpoint support ([3172140](https://github.com/nurikk/z2m-frontend/commit/31721403f6df3eaf177c96d26936536ae867a924))
+* **mocks:** update mock data ([2a95a1b](https://github.com/nurikk/z2m-frontend/commit/2a95a1b3f985c3b49332be72530ff3030a3b43e3))
+* **switch:** change implementation ([a1c6c17](https://github.com/nurikk/z2m-frontend/commit/a1c6c177f56952965b28a22d5fb3599166202a1c))
+
+
+
 ## [0.2.20](https://github.com/nurikk/z2m-frontend/compare/0.2.19...0.2.20) (2020-10-02)
 
 
