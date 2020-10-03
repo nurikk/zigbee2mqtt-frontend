@@ -21,7 +21,7 @@ export default class Switch extends Component<SwitchProps, {}> {
     return <table className="table table-borderless align-middle">
       <tbody>
         <tr>
-          <td>State</td>
+          <td>Switch</td>
           <td>
             <Toggle
               onChange={this.onFeatureChange}
