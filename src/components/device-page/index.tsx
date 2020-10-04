@@ -7,6 +7,7 @@ import DeviceInfo from "./info";
 import Bind from "./bind";
 import States from "./states";
 import ConnectedDeviceExposes from "./exposes";
+import Clusters from "./clusters";
 
 type UrlParams = {
     dev: string;
@@ -15,7 +16,7 @@ type UrlParams = {
 type DevicePageProps = RouteComponentProps<UrlParams>;
 
 
-type TabName = "info" | "bind" | "state" | "exposes";
+type TabName = "info" | "bind" | "state" | "exposes" | "clusters";
 // eslint-disable-next-line react/prefer-stateless-function
 export class DevicePage extends Component<DevicePageProps & GlobalState, {}> {
     renderContent() {
@@ -32,6 +33,8 @@ export class DevicePage extends Component<DevicePageProps & GlobalState, {}> {
                 return <States device={device} />;
             case "exposes":
                 return <ConnectedDeviceExposes device={device} />;
+            case "clusters":
+                return <Clusters device={device} />
             default:
                 return <Redirect to={`/device/${dev}/info`} />;
         }
@@ -61,6 +64,9 @@ export class DevicePage extends Component<DevicePageProps & GlobalState, {}> {
                     </li>
                     <li className="nav-item">
                         <NavLink activeClassName="active" className="nav-link" to={`/device/${dev}/exposes`}>Exposes</NavLink>
+                    </li>
+                    <li className="nav-item">
+                        <NavLink activeClassName="active" className="nav-link" to={`/device/${dev}/clusters`}>Clusters</NavLink>
                     </li>
                 </ul>
             </div>
