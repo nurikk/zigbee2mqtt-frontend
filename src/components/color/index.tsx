@@ -3,7 +3,7 @@ import * as convertColors from "color-convert";
 
 import { AnyColor, HueSaturationColor, XYColor } from "../../types";
 
-import { cie_to_rgb, scale } from "../../utils";
+import { scale } from "../../utils";
 import Button from "../button";
 type Payload = AnyColor;
 
@@ -21,7 +21,11 @@ const toRGB = (source: AnyColor, brightness: number, sourceFormat: ColorFormat):
     case "color_xy":
       {
         const { x, y } = source as XYColor;
-        return '#' + convertColors.rgb.hex(cie_to_rgb(x, y, brightness));
+        const z = 1.0 - x - y;
+        const Y = parseFloat((brightness / 254).toFixed(2));
+        const X = (Y / y) * x;
+        const Z = (Y / y) * z;
+        return '#' + convertColors.xyz.hex([X * 100.0, Y * 100.0, Z * 100.0]);
       }
 
     case "color_hs":
@@ -43,7 +47,7 @@ const Color: FunctionComponent<ColorProps & Omit<InputHTMLAttributes<HTMLInputEl
   }, [value, brightness, format]);
 
   return <div className="input-group mb-3">
-     <div className="btn-group mr-2">
+    <div className="btn-group mr-2">
       {
         steps.map(step => <Button<string>
           className="btn"
@@ -51,7 +55,7 @@ const Color: FunctionComponent<ColorProps & Omit<InputHTMLAttributes<HTMLInputEl
           key={step}
           item={step}
           title={step}
-          onClick={(item) => onChange({[name]: item})}>&nbsp;&nbsp;&nbsp;</Button>)
+          onClick={(item) => onChange({ [name]: item })}>&nbsp;&nbsp;&nbsp;</Button>)
       }
     </div>
     <input
@@ -59,7 +63,7 @@ const Color: FunctionComponent<ColorProps & Omit<InputHTMLAttributes<HTMLInputEl
       className="form-control form-control-color border-0 p-0"
       value={currentColor}
       onChange={e => {
-        onChange({[name]: e.target.value})
+        onChange({ [name]: e.target.value })
       }}
       {...rest}
     />
