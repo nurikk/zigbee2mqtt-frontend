@@ -149,9 +149,10 @@ class Api {
                     {
                         const response = data.payload as ResponseWithStatus;
                         if (response.status == "ok") {
+                            const { value } = response.data as {value: unknown};
                             store.setState({
                                 networkGraphIsLoading: false,
-                                networkGraph: sanitizeGraph(JSON.parse((response.data as { value: string }).value) as GraphI)
+                                networkGraph: sanitizeGraph(value as GraphI)
                             });
                         } else {
                             store.setState({ networkGraphIsLoading: false });
