@@ -1,3 +1,12 @@
+## [0.2.22](https://github.com/nurikk/z2m-frontend/compare/0.2.21...0.2.22) (2020-10-04)
+
+
+### Bug Fixes
+
+* **map:** fix double encoded map response ([f907a0a](https://github.com/nurikk/z2m-frontend/commit/f907a0ad6be767d5bd0bee6246fcf6f4c5e61d17))
+
+
+
 ## [0.2.21](https://github.com/nurikk/z2m-frontend/compare/0.2.20...0.2.21) (2020-10-03)
 
 
