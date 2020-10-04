@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "unistore/react";
-import actions, { BridgeApi } from "../../actions";
+import actions, { BridgeApi, LegacyApi } from "../../actions";
 import { GlobalState } from "../../store";
 import get from "lodash/get";
 import UniversalEditor from "../universal-editor";
 import isEmpty from "lodash/isEmpty";
 import { NavLink, Redirect, RouteComponentProps, withRouter } from "react-router-dom";
+import Button from "../button";
 
 
 const settings = [
@@ -43,7 +44,8 @@ type UrlParams = {
 };
 type SettingsPageProps = RouteComponentProps<UrlParams>;
 
-export class SettingsPage extends Component<SettingsPageProps & BridgeApi & GlobalState, {}> {
+
+export class SettingsPage extends Component<SettingsPageProps & BridgeApi & GlobalState & LegacyApi, {}> {
     updateConfig = (name: string, value: unknown): void => {
         const { updateConfigValue } = this.props;
         updateConfigValue(name, value);
@@ -87,6 +89,16 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
         const { bridgeInfo } = this.props;
         return <pre>{JSON.stringify(bridgeInfo, null, 4)}</pre>
     }
+    renderLegacyApiSettings() {
+        const { resetZnp } = this.props;
+        return [
+            <div key={"znp-rest"} className="row">
+                <div className="col">
+                    <Button<void> className="btn btn-danger" promt onClick={() => resetZnp()}>Reset coordinator</Button>
+                </div>
+            </div>
+        ];
+    }
     renderSettings() {
         const { bridgeInfo } = this.props;
         return <div className="container">
@@ -107,6 +119,9 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
                             </div>
                         </div>
                     ))
+                }
+                {
+                    bridgeInfo.config?.advanced.legacy_api !== false ? this.renderLegacyApiSettings() : null
                 }
 
             </form>

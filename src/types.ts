@@ -64,7 +64,8 @@ export interface Z2MConfig {
     homeassistant: boolean;
     advanced: {
         elapsed: boolean;
-        last_seen: 'disable' | 'ISO_8601' | 'ISO_8601_local'| 'epoch';
+        last_seen: 'disable' | 'ISO_8601' | 'ISO_8601_local' | 'epoch';
+        legacy_api: boolean;
     };
     [k: string]: unknown;
 }

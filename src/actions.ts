@@ -50,6 +50,10 @@ export interface MapApi {
     networkMapRequest(): Promise<void>;
 }
 
+export interface LegacyApi {
+    resetZnp(): Promise<void>;
+}
+
 const actions = (store: Store<GlobalState>): object => ({
     addBind: (
         state,
@@ -198,5 +202,10 @@ const actions = (store: Store<GlobalState>): object => ({
         api.send(`bridge/request/config/${name}`, value);
         return Promise.resolve();
     },
+
+    resetZnp(state): Promise<void> {
+        api.send(`bridge/config/reset`, "");
+        return Promise.resolve();
+    }
 });
 export default actions;
