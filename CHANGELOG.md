@@ -1,3 +1,15 @@
+## [0.2.23](https://github.com/nurikk/z2m-frontend/compare/0.2.22...0.2.23) (2020-10-04)
+
+
+### Features
+
+* **color:** remove cie_to_rgb code ([324e1b6](https://github.com/nurikk/z2m-frontend/commit/324e1b6d2969b9d50491785f47c1d63beef663fe))
+* **color:** simplify target color conversion ([a29199c](https://github.com/nurikk/z2m-frontend/commit/a29199ccfa6ed438579ce8693909f75d962ddb9b))
+* **device-page:** move clusters to separate tab ([e20d398](https://github.com/nurikk/z2m-frontend/commit/e20d398b13713a4a3058713c2a688c84d271845b))
+* **settings:** add reset znp button ([561e5a9](https://github.com/nurikk/z2m-frontend/commit/561e5a91e04e0fb00fd21fd36541c7980abf9a5f))
+
+
+
 ## [0.2.22](https://github.com/nurikk/z2m-frontend/compare/0.2.21...0.2.22) (2020-10-04)
 
 
