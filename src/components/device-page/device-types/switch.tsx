@@ -1,18 +1,15 @@
 import React, { ChangeEvent, Component } from "react";
 import { StateApi } from "../../../actions";
 import { Device, DeviceState, Endpoint } from "../../../types";
-import Toggle from "../../toggle";
 
-
-interface SwitchProps extends StateApi {
+interface SwitchProps {
   device: Device;
   deviceState: DeviceState;
   endpoint?: Endpoint;
 
 }
 
-
-export default class Switch extends Component<SwitchProps, {}> {
+export default class Switch extends Component<SwitchProps & Pick<StateApi, 'setStateValue'>, {}> {
   onFeatureChange = (name: string, value: string | number | boolean | object) => {
     const { setStateValue, device, endpoint } = this.props;
     setStateValue(`${device.friendly_name}${endpoint ? `/${endpoint}` : ''}`, name, value);

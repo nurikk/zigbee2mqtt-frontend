@@ -17,7 +17,7 @@ interface ExposesProps {
 
 class Exposes extends Component<ExposesProps & PropsFromStore & StateApi, {}> {
     render() {
-        const { device, deviceStates, setStateValue, getStateValue } = this.props;
+        const { device, deviceStates, setStateValue, setDeviceState } = this.props;
         if (device.definition?.exposes) {
             const deviceState = deviceStates.get(device.friendly_name) ?? {} as DeviceState;
             return device.definition?.exposes.map(exposeDetails => {
@@ -29,8 +29,7 @@ class Exposes extends Component<ExposesProps & PropsFromStore & StateApi, {}> {
                                 device={device}
                                 deviceState={deviceState}
                                 features={exposeDetails.features as LightFeatures[]}
-                                setStateValue={setStateValue}
-                                getStateValue={getStateValue}
+                                setDeviceState={setDeviceState}
                             />
                         </div>
                     case "switch":
@@ -40,7 +39,6 @@ class Exposes extends Component<ExposesProps & PropsFromStore & StateApi, {}> {
                                     device={device}
                                     deviceState={deviceState}
                                     setStateValue={setStateValue}
-                                    getStateValue={getStateValue}
                                 />
                             </div>
                     default:

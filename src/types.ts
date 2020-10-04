@@ -20,7 +20,7 @@ export type XYColor = {
     x: number;
     y: number;
 }
-export type AnyColor = RGBColor | XYColor;
+export type AnyColor = RGBColor | XYColor | HueSaturationColor;
 export interface DeviceState {
     battery: number;
     last_seen?: string;

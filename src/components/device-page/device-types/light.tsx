@@ -7,7 +7,7 @@ import Color from "../../color";
 import { scale } from "../../../utils";
 
 
-interface LightProps extends StateApi {
+interface LightProps {
   device: Device;
   features: LightFeatures[];
   deviceState: DeviceState;
@@ -16,10 +16,10 @@ interface LightProps extends StateApi {
 }
 const colorTemSteps = [1000, 2000, 3000, 4000, 5000, 6500].map<RangeStep>(kelvin => ({ stepValue: 1000000.0 / kelvin, title: kelvin + 'K' }));
 const brighnessSteps = [0, 25, 50, 75, 100].map<RangeStep>(item => ({ stepValue: scale(item, [0, 100], [0, 255]), title: item + '%' }));
-export default class Light extends Component<LightProps, {}> {
-  onFeatureChange = (name: string, value: string | number | boolean | object) => {
-    const { setStateValue, device, endpoint } = this.props;
-    setStateValue(`${device.friendly_name}${endpoint ? `/${endpoint}` : ''}`, name, value);
+export default class Light extends Component<LightProps & Pick<StateApi, 'setDeviceState'>, {}> {
+  onFeatureChange = (value: object) => {
+    const { setDeviceState, device, endpoint } = this.props;
+    setDeviceState(`${device.friendly_name}${endpoint ? `/${endpoint}` : ''}`, value);
   }
   render() {
     const { features, deviceState } = this.props;
@@ -49,7 +49,7 @@ export default class Light extends Component<LightProps, {}> {
                       name="brightness"
                       value={deviceState["brightness"] ?? 0}
                       min={0}
-                      max={255}
+                      max={254}
                       steps={brighnessSteps}
                     />
                   </td>

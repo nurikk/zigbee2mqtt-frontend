@@ -17,7 +17,7 @@ type Payload = string | boolean;
 type ToggleProps = {
   name: string;
   value: Payload;
-  onChange(name: string, value: Payload): void;
+  onChange(value: object): void;
 }
 
 
@@ -29,7 +29,7 @@ const Toggle: FunctionComponent<ToggleProps> = (props) => {
       <Button<string | boolean> title="Toggle" value="Toggle"
         className="btn btn-primary"
         item={togglePairs.get(value as string | boolean)}
-        onClick={payload => onChange(name, payload)}>
+        onClick={payload => onChange({ [name]: payload })}>
         <i className="fa fa-exchange-alt" />
       </Button>
     </div>

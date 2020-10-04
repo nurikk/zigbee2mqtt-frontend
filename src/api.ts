@@ -77,7 +77,6 @@ class Api {
     send = (topic: string, payload: unknown): void => {
         this.socket.send(JSON.stringify({ topic, payload }));
     }
-    sendDebounced = debounce(this.send, 200, { trailing: true, leading: false });
 
     connect(): void {
         this.socket = new ReconnectingWebSocket(this.url);

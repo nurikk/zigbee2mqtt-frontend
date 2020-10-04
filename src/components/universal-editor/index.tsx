@@ -1,5 +1,5 @@
 import React, { useState, ChangeEvent, InputHTMLAttributes, useEffect } from "react";
-
+import Range from '../range/index';
 import Button from "../button";
 
 interface UniversalEditorProps {
@@ -61,11 +61,7 @@ const UniversalEditor: React.FunctionComponent<InputHTMLAttributes<unknown> & Un
         case "number":
             return (<div className="row">
                 <div className="col-9">
-                    <input type="range" className="form-range form-control border-0"
-                        disabled={disabled}
-                        value={value as number}
-                        onChange={e => onChange(e.target.valueAsNumber)}
-                        {...rest} />
+                    <Range disabled={disabled} value={value} onChange={v => onChange(v)} {...rest} />
                 </div>
                 <div className="col-3">
                     <input type="number" step="any" className="form-control col-2"

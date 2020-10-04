@@ -1,4 +1,4 @@
-import React, { FunctionComponent, InputHTMLAttributes } from "react";
+import React, { FunctionComponent, InputHTMLAttributes, useEffect, useState } from "react";
 import Button from "../button";
 
 type Payload = number;
@@ -8,7 +8,7 @@ export type RangeStep = {
 }
 type RangeProps = {
   value: Payload;
-  onChange(name: string, value: Payload): void;
+  onChange(value: object | number): void;
   steps?: number[] | RangeStep[];
 }
 
@@ -18,7 +18,11 @@ function isStep(step: number | RangeStep): step is RangeStep {
 
 const Range: FunctionComponent<RangeProps & Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'>> = (props) => {
   const { onChange, name, value, min = 0, max = 100, steps, ...rest } = props;
+  const [currentValue, setCurrentValue] = useState<number>(value)
   const stepEls = [];
+  useEffect(() => {
+    setCurrentValue(value)
+  }, [value]);
   steps && steps.forEach((step: number | RangeStep) => {
     let stepValue: number, title: string;
     if (isStep(step)) {
@@ -30,7 +34,7 @@ const Range: FunctionComponent<RangeProps & Omit<InputHTMLAttributes<HTMLInputEl
     }
     stepEls.push(<Button<number>
       className="btn btn-outline-secondary"
-      onClick={item => onChange(name, item)}
+      onClick={item => onChange(name ? { [name]: item }: item)}
       key={title}
       item={stepValue}
     >{title as string}</Button>);
@@ -45,8 +49,9 @@ const Range: FunctionComponent<RangeProps & Omit<InputHTMLAttributes<HTMLInputEl
       max={max}
       type="range"
       className="form-range form-control border-0"
-      value={value}
-      onChange={e => onChange(name, e.target.valueAsNumber)}
+      value={currentValue}
+      onChange={e => setCurrentValue(e.target.valueAsNumber)}
+      onMouseUp={(() => onChange(name ? {[name]: currentValue} : currentValue))}
       {...rest}
     />
   </div>

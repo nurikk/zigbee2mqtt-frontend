@@ -29,6 +29,7 @@ export interface DeviceApi {
 export interface StateApi {
     setStateValue(dev: string, name: string, value: unknown): Promise<void>;
     getStateValue(dev: string, name: string | string[]): Promise<void>;
+    setDeviceState(dev: string, value: object): Promise<void>;
 }
 
 export interface GroupsApi {
@@ -85,13 +86,11 @@ const actions = (store: Store<GlobalState>): object => ({
         name: string,
         value: string | number | boolean
     ): Promise<void> {
-        const { deviceStates } = store.getState();
-        const deviceState = { ...deviceStates.get(dev) };
-        deviceState[name] = value;
-        const updatedDeviceStates = new Map(deviceStates);
-        updatedDeviceStates.set(dev, deviceState);
-        store.setState({ deviceStates: updatedDeviceStates });
-        api.sendDebounced(`${dev}/set`, { [name]: value });
+        api.send(`${dev}/set`, { [name]: value });
+        return Promise.resolve();
+    },
+    setDeviceState( state, dev: string, value: object) {
+        api.send(`${dev}/set`, value);
         return Promise.resolve();
     },
 
