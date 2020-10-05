@@ -4,22 +4,33 @@
 [Demo](https://nurikk.github.io/z2m-frontend/)
 
 
+
+
+# Develop
+Install dependencies
+```bash
+npm install
+````
+
+Develop using mock data
+```bash
+npm run start
+open http://localhost:3030/
+````
+
+Develop using your z2m instance
+```bash
+Z2M_API_URI="ws://192.168.1.200:8080" npm run start
+open http://localhost:3030/
+```
+
 # Build
 ```bash
 npm install
 npm run build //compiled files at ./dist
 ```
 
-# Develop
-```bash
-npm install
-npm run start
-open http://localhost:3030/
-```
-
 # Screenshots
 ![](images/screenshot_home.png)
 ![](images/screenshot_map.png)
-
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/4wA-cpXasAI/0.jpg)](https://www.youtube.com/watch?v=4wA-cpXasAI)
 
