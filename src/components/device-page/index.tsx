@@ -46,7 +46,7 @@ export class DevicePage extends Component<DevicePageProps & GlobalState, {}> {
         const { dev } = match.params;
         const device = devices.get(dev);
         if (!device) {
-            return "Unknown device";
+            return <div className="h-100 d-flex justify-content-center align-items-center">Unknown device</div>
         }
 
         return (<div className="card h-100">
