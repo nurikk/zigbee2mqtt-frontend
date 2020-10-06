@@ -1,3 +1,20 @@
+## [0.2.24](https://github.com/nurikk/z2m-frontend/compare/0.2.23...0.2.24) (2020-10-06)
+
+
+### Bug Fixes
+
+* **device-page:** allign message center ([1c4f16e](https://github.com/nurikk/z2m-frontend/commit/1c4f16e8da7d9adb8cb0c2bd79a973b0d8edbfbf))
+* **groups:** default controlled input ([e6e1bb2](https://github.com/nurikk/z2m-frontend/commit/e6e1bb277e54f385c7e79017032d3aede96842ba))
+* **notyf:** use single Notyf instance ([fb670e3](https://github.com/nurikk/z2m-frontend/commit/fb670e31839809cb2742b0ccdf88bccf8d24967a))
+
+
+### Features
+
+* **power-source:** add DC Source ([d798293](https://github.com/nurikk/z2m-frontend/commit/d79829379c0c35ec01340dc5613e7d8c7788efdc))
+* **readme:** update developer readme ([7bf3f3d](https://github.com/nurikk/z2m-frontend/commit/7bf3f3db4f677b9c7e8edb60b548277d8240eb2f))
+
+
+
 ## [0.2.23](https://github.com/nurikk/z2m-frontend/compare/0.2.22...0.2.23) (2020-10-04)
 
 
