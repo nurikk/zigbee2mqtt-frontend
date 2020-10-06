@@ -140,7 +140,7 @@ class AddDeviceToGroup extends Component<AddDeviceToGroupProps, AddDeviceToGroup
 
 export class GroupsPage extends Component<GroupsApi & GlobalState, GroupsPageState> {
     state = {
-        newGroupName: undefined
+        newGroupName: ''
     }
 
 
