@@ -33,6 +33,7 @@ const PowerSource: FunctionComponent<PowerSourceProps> = ({ source, battery, ...
                 title={`${source} ${battery ? `, power level ${battery}%` : ""} `} {...rest} />;
 
         case "Mains (single phase)":
+        case "DC Source":
             return <i className={`fa fa-plug ${style.plug}`} title={source} {...rest} />;
         default:
             return <i className={`fa fa-question`} title={source} {...rest} />;

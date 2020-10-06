@@ -84,7 +84,7 @@ export interface BridgeInfo {
     permit_join: boolean;
 }
 
-export type PowerSource = "Battery" | "Mains (single phase)";
+export type PowerSource = "Battery" | "Mains (single phase)" | "DC Source";
 
 export type DeviceClassType = "light" | "switch";
 export type LightFeatures = "state" | "brightness" | "color_temp" | "color_xy" | "color_hs";
