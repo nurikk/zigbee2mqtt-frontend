@@ -4,12 +4,13 @@ import { BridgeConfig, BridgeInfo, TouchLinkDevice, Device, DeviceState } from '
 import { sanitizeGraph, isSecurePage } from "./utils";
 import { Notyf } from "notyf";
 import { GraphI } from "./components/map/types";
-import debounce from "lodash/debounce"
+
 import orderBy from "lodash/orderBy";
 
 
 const MAX_LOGS_RECORDS_IN_BUFFER = 100;
 
+const notyf = new Notyf();
 
 interface Message {
     topic: string;
@@ -47,10 +48,10 @@ const showNotity = (data: LogMessage | ResponseWithStatus): void => {
     switch (level) {
         case "error":
         case "warning":
-            new Notyf().error(message);
+            notyf.error(message);
             break;
         case "info":
-            new Notyf().success(message);
+            notyf.success(message);
             break;
 
         default:
@@ -89,8 +90,8 @@ class Api {
         try {
             data = JSON.parse(event.data) as Message;
         } catch (e) {
-            new Notyf().error(e.message);
-            new Notyf().error(event.data);
+            notyf.error(e.message);
+            notyf.error(event.data);
         }
 
 
