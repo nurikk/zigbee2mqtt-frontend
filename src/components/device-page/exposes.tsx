@@ -7,6 +7,7 @@ import { GlobalState } from "../../store";
 import Light from "./device-types/light";
 import Switch from "./device-types/switch";
 import Numeric from "./device-types/numeric";
+import Boolean from "./device-types/boolean";
 import groupBy from "lodash/groupBy";
 
 
@@ -35,15 +36,49 @@ class Exposes extends Component<ExposesProps & PropsFromStore & StateApi, {}> {
                             />
                         </div>);
                     case "switch":
-                        return exposes.map(exposeDetails => <div className="card" key={JSON.stringify(exposeDetails)}>
-                            <Switch
-                                endpoint={exposeDetails.endpoint}
-                                device={device}
-                                deviceState={deviceState}
-                                setStateValue={setStateValue}
-                                property={exposeDetails.property}
-                            />
-                        </div>)
+                        return <div key={type} className="card">
+                            <table className="table table-borderless align-middle">
+                                <tbody>
+                                    {
+                                        exposes.map(exposeDetails =>
+                                            <tr key={JSON.stringify(exposeDetails)}>
+                                                <th scope="row">{exposeDetails.property}</th>
+                                                <td>
+                                                    <Switch
+                                                        endpoint={exposeDetails.endpoint}
+                                                        device={device}
+                                                        deviceState={deviceState}
+                                                        setStateValue={setStateValue}
+                                                        property={exposeDetails.property}
+                                                    />
+                                                </td>
+                                            </tr>)
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    case "boolean":
+                        return <div key={type} className="card">
+                            <table className="table table-borderless align-middle">
+                                <tbody>
+                                    {
+                                        exposes.map(exposeDetails =>
+                                            <tr key={JSON.stringify(exposeDetails)}>
+                                                <th scope="row">{exposeDetails.property}</th>
+                                                <td>
+                                                    <Boolean
+                                                        endpoint={exposeDetails.endpoint}
+                                                        device={device}
+                                                        deviceState={deviceState}
+                                                        property={exposeDetails.property}
+                                                    />
+                                                </td>
+                                            </tr>
+                                        )
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
                     case "numeric":
                         return <div className="card" key="numeric">
                             <table className="table table-borderless align-middle">
@@ -52,13 +87,15 @@ class Exposes extends Component<ExposesProps & PropsFromStore & StateApi, {}> {
                                         exposes.map(exposeDetails =>
                                             <tr key={JSON.stringify(exposeDetails)}>
                                                 <th scope="row">{exposeDetails.property}</th>
-                                                <td><Numeric
-                                                    endpoint={exposeDetails.endpoint}
-                                                    device={device}
-                                                    deviceState={deviceState}
-                                                    property={exposeDetails.property}
-                                                    unit={exposeDetails.unit}
-                                                /></td>
+                                                <td>
+                                                    <Numeric
+                                                        endpoint={exposeDetails.endpoint}
+                                                        device={device}
+                                                        deviceState={deviceState}
+                                                        property={exposeDetails.property}
+                                                        unit={exposeDetails.unit}
+                                                    />
+                                                </td>
                                             </tr>
                                         )
                                     }

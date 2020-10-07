@@ -24,21 +24,12 @@ export default class Switch extends Component<SwitchProps & Pick<StateApi, 'setS
   }
   render() {
     const { deviceState, property = 'state' } = this.props;
-    return <table className="table table-borderless align-middle">
-      <tbody>
-        <tr>
-          <th scope="row">{property}</th>
-          <td>
-            <div className="form-check form-switch">
-              <input
-                type="checkbox"
-                checked={isOn(deviceState[property] as string | number | boolean)}
-                className="form-check-input"
-                onChange={this.onSwitchToggle} />
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    return <div className="form-check form-switch">
+      <input
+        type="checkbox"
+        checked={isOn(deviceState[property] as string | number | boolean)}
+        className="form-check-input"
+        onChange={this.onSwitchToggle} />
+    </div>;
   }
 }
