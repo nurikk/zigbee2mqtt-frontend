@@ -6,8 +6,11 @@ interface SwitchProps {
   device: Device;
   deviceState: DeviceState;
   endpoint?: Endpoint;
+  property: string;
 
 }
+
+const isOn = (value: string | number | boolean): boolean => value === "ON" || value === true || value === 1;
 
 export default class Switch extends Component<SwitchProps & Pick<StateApi, 'setStateValue'>, {}> {
   onFeatureChange = (name: string, value: string | number | boolean | object) => {
@@ -15,19 +18,21 @@ export default class Switch extends Component<SwitchProps & Pick<StateApi, 'setS
     setStateValue(`${device.friendly_name}${endpoint ? `/${endpoint}` : ''}`, name, value);
   }
   onSwitchToggle = (e: ChangeEvent<HTMLInputElement>) => {
-    this.onFeatureChange("state", e.target.checked ? "ON" : "OFF");
+    //TODO: fix this
+    const { property = 'state' } = this.props;
+    this.onFeatureChange(property, e.target.checked ? "ON" : "OFF");
   }
   render() {
-    const { deviceState } = this.props;
+    const { deviceState, property = 'state' } = this.props;
     return <table className="table table-borderless align-middle">
       <tbody>
         <tr>
-          <td>Switch</td>
+          <th scope="row">{property}</th>
           <td>
             <div className="form-check form-switch">
               <input
                 type="checkbox"
-                checked={deviceState["state"] == 'ON'}
+                checked={isOn(deviceState[property] as string | number | boolean)}
                 className="form-check-input"
                 onChange={this.onSwitchToggle} />
             </div>
