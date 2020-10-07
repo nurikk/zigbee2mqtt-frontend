@@ -1,3 +1,12 @@
+## [0.2.25](https://github.com/nurikk/z2m-frontend/compare/0.2.24...0.2.25) (2020-10-07)
+
+
+### Features
+
+* **exposes:** implement numeric props ([a89e988](https://github.com/nurikk/z2m-frontend/commit/a89e9888006bb1c30dbe8df2e03387ffb9810e7e))
+
+
+
 ## [0.2.24](https://github.com/nurikk/z2m-frontend/compare/0.2.23...0.2.24) (2020-10-06)
 
 
