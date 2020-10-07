@@ -1,3 +1,12 @@
+## [0.2.26](https://github.com/nurikk/z2m-frontend/compare/0.2.25...0.2.26) (2020-10-07)
+
+
+### Features
+
+* **exposes:** add boolean feature ([6aa9a4b](https://github.com/nurikk/z2m-frontend/commit/6aa9a4ba4cb66d74e03717963fb71db9e0760070))
+
+
+
 ## [0.2.25](https://github.com/nurikk/z2m-frontend/compare/0.2.24...0.2.25) (2020-10-07)
 
 
