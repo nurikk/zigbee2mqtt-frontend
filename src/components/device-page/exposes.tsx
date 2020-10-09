@@ -42,14 +42,13 @@ class Exposes extends Component<ExposesProps & PropsFromStore & StateApi, {}> {
                                     {
                                         exposes.map(exposeDetails =>
                                             <tr key={JSON.stringify(exposeDetails)}>
-                                                <th scope="row">{exposeDetails.property}</th>
+                                                <th scope="row">{Switch.getPropName(exposeDetails.endpoint)}</th>
                                                 <td>
                                                     <Switch
                                                         endpoint={exposeDetails.endpoint}
                                                         device={device}
                                                         deviceState={deviceState}
                                                         setStateValue={setStateValue}
-                                                        property={exposeDetails.property}
                                                     />
                                                 </td>
                                             </tr>)

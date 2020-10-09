@@ -6,28 +6,29 @@ interface SwitchProps {
   device: Device;
   deviceState: DeviceState;
   endpoint?: Endpoint;
-  property: string;
-
 }
 
 const isOn = (value: string | number | boolean): boolean => value === "ON" || value === true || value === 1;
+const PROP_NAME = 'state';
 
 export default class Switch extends Component<SwitchProps & Pick<StateApi, 'setStateValue'>, {}> {
+
+  static getPropName(endpoint: Endpoint) { return endpoint === undefined ? PROP_NAME : `${PROP_NAME}_${endpoint}` };
+
   onFeatureChange = (name: string, value: string | number | boolean | object) => {
-    const { setStateValue, device, endpoint } = this.props;
-    setStateValue(`${device.friendly_name}${endpoint ? `/${endpoint}` : ''}`, name, value);
+    const { setStateValue, device } = this.props;
+    setStateValue(device.friendly_name, name, value);
   }
   onSwitchToggle = (e: ChangeEvent<HTMLInputElement>) => {
-    //TODO: fix this
-    const { property = 'state' } = this.props;
-    this.onFeatureChange(property, e.target.checked ? "ON" : "OFF");
+    const { endpoint } = this.props;
+    this.onFeatureChange(Switch.getPropName(endpoint), e.target.checked ? "ON" : "OFF");
   }
   render() {
-    const { deviceState, property = 'state' } = this.props;
+    const { deviceState, endpoint } = this.props;
     return <div className="form-check form-switch">
       <input
         type="checkbox"
-        checked={isOn(deviceState[property] as string | number | boolean)}
+        checked={isOn(deviceState[Switch.getPropName(endpoint)] as string | number | boolean)}
         className="form-check-input"
         onChange={this.onSwitchToggle} />
     </div>;
