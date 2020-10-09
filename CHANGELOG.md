@@ -1,3 +1,12 @@
+## [0.2.27](https://github.com/nurikk/z2m-frontend/compare/0.2.26...0.2.27) (2020-10-09)
+
+
+### Features
+
+* **groups:** render group list in reverse order ([0426cd3](https://github.com/nurikk/z2m-frontend/commit/0426cd345e9728ba59fbd0cb07dc4f29597d6ce8))
+
+
+
 ## [0.2.26](https://github.com/nurikk/z2m-frontend/compare/0.2.25...0.2.26) (2020-10-07)
 
 
