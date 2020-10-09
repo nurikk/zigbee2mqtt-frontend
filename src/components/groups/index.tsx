@@ -207,7 +207,7 @@ export class GroupsPage extends Component<GroupsApi & GlobalState, GroupsPageSta
                                 <AddDeviceToGroup addDeviceToGroup={addDeviceToGroup} devices={devices} group={group} />
                             </div>
                         </div>
-                    ))
+                    )).reverse()
                 }
 
             </div>
