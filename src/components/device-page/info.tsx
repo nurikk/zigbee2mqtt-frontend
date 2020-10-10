@@ -10,6 +10,7 @@ import PowerSourceComp from "../power-source";
 import get from 'lodash/get';
 import DeviceImage from "../device-image";
 
+
 type DeviceInfoProps = {
     device: Device;
 }

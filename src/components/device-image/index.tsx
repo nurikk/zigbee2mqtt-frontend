@@ -3,6 +3,7 @@ import genericDevice from "../../images/generic-zigbee-device.png";
 import { Device } from "../../types";
 type DeviceImageProps = {
     device: Device;
+    type?: "img" | "svg";
 }
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const genericDeiviceImageFallback = (device: Device): string => genericDevice;
@@ -13,26 +14,21 @@ const AVALIABLE_GENERATORS = [
     genSlsDeviceImageUrlZ2M, genSlsDeviceImageUrlSLS, genericDeiviceImageFallback
 ]
 
-const DeviceImage: FunctionComponent<DeviceImageProps & ImgHTMLAttributes<HTMLImageElement>> = (props) => {
+const DeviceImage: FunctionComponent<DeviceImageProps & ImgHTMLAttributes<HTMLImageElement | SVGImageElement>> = (props) => {
     const [imageGenerators, setimageGenerators] = useState(AVALIABLE_GENERATORS);
-    const { device, ...rest } = props;
+    const { device, type = "img", ...rest } = props;
     const src = imageGenerators.length ? imageGenerators[0](device) : false;
-    return src ? <img {...rest} onError={() => {
+    const onImageError = () => {
         const newGenerators = [...imageGenerators];
         newGenerators.shift();
         setimageGenerators(newGenerators);
-    }} src={src} /> : null;
-}
-
-const DeviceSvgImage: FunctionComponent<DeviceImageProps & ImgHTMLAttributes<SVGImageElement>> = (props) => {
-    const [imageGenerators, setimageGenerators] = useState(AVALIABLE_GENERATORS);
-    const { device, ...rest } = props;
-    const src = imageGenerators.length ? imageGenerators[0](device) : false;
-    return src ? <image {...rest} onError={() => {
-        const newGenerators = [...imageGenerators];
-        newGenerators.shift();
-        setimageGenerators(newGenerators);
-    }} href={src} /> : null;
+    };
+    switch (type) {
+        case "svg":
+            return src ? <image {...rest} onError={onImageError} href={src} /> : null;
+        case "img":
+        default:
+            return src ? <img {...rest} onError={onImageError} src={src} /> : null;
+    }
 }
 export default DeviceImage;
-export { DeviceSvgImage };

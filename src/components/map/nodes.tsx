@@ -5,7 +5,8 @@ import cx from "classnames";
 import style from "./map.css";
 import { MouseEventsResponderNode } from ".";
 import { Device } from "../../types";
-import { DeviceSvgImage } from "../device-image";
+import DeviceImage from "../device-image";
+
 
 const calcStarPoints = (
     centerX: number,
@@ -92,7 +93,8 @@ class Node extends Component<NodeProps, {}> {
                         points={getStarShape(5, 5, 14) as string}
                     />
                 ) : (
-                        <DeviceSvgImage
+                        <DeviceImage
+                            type="svg"
                             width={32}
                             height={32}
                             device={{ definition: node.definition } as unknown as Device}
