@@ -84,6 +84,98 @@ class Api {
 
         this.socket.addEventListener("message", this.onMessage);
     }
+    private procsessBridgeMessage = (data: Message): void => {
+        switch (data.topic) {
+            case "bridge/config":
+                store.setState({
+                    bridgeConfig: data.payload as BridgeConfig
+                });
+                break;
+
+            case "bridge/info":
+                store.setState({
+                    bridgeInfo: data.payload as BridgeInfo
+                });
+                break;
+
+            case "bridge/devices":
+                {
+                    const devicesMap = new Map();
+                    orderBy((data.payload as Device[]), "friendly_name").forEach((device) => {
+                        const dev = { ...device };
+                        dev.endpoints = new Map(Object.entries(device.endpoints));
+                        devicesMap.set(device.ieee_address, dev);
+                    });
+                    store.setState({
+                        devices: devicesMap
+                    })
+                }
+                break;
+
+            case "bridge/groups":
+                store.setState({
+                    groups: data.payload as Group[]
+                })
+                break;
+
+            case "bridge/event":
+                break;
+
+            case "bridge/logging":
+                {
+                    const { logs } = store.getState();
+                    const newLogs = [...logs.slice(-MAX_LOGS_RECORDS_IN_BUFFER)];
+                    newLogs.push(data.payload as LogMessage);
+                    store.setState({ logs: newLogs });
+                    const log = data.payload as LogMessage;
+                    if (blacklistedMessages.every(val => !val.test(log.message))) {
+                        showNotity(log);
+                    }
+                }
+                break;
+
+            case "bridge/response/networkmap":
+                {
+                    const response = data.payload as ResponseWithStatus;
+                    if (response.status == "ok") {
+                        const { value } = response.data as {value: unknown};
+                        store.setState({
+                            networkGraphIsLoading: false,
+                            networkGraph: sanitizeGraph(value as GraphI)
+                        });
+                    } else {
+                        store.setState({ networkGraphIsLoading: false });
+                    }
+                }
+                break;
+
+
+            case "bridge/response/touchlink/scan":
+                {
+                    const { status, data: payloadData } = data.payload as TouchllinkScanResponse;
+                    if (status === "ok") {
+                        store.setState({ touchlinkScanInProgress: false, touchlinkDevices: payloadData.found });
+                    } else {
+                        store.setState({ touchlinkScanInProgress: false });
+                    }
+                }
+                break;
+
+            case "bridge/response/touchlink/identify":
+                store.setState({ touchlinkIdentifyInProgress: false });
+                break;
+
+            case "bridge/response/touchlink/factory_reset":
+                store.setState({ touchlinkResetInProgress: false });
+                break;
+
+            default:
+                break;
+        }
+        if (data.topic.startsWith("bridge/response/")) {
+            showNotity(data.payload as ResponseWithStatus);
+        }
+    }
 
     private onMessage = (event: MessageEvent): void => {
         let data = {} as Message;
@@ -94,98 +186,8 @@ class Api {
             notyf.error(event.data);
         }
 
-
         if (data.topic.startsWith("bridge/")) {
-            switch (data.topic) {
-                case "bridge/config":
-                    store.setState({
-                        bridgeConfig: data.payload as BridgeConfig
-                    });
-                    break;
-
-                case "bridge/info":
-                    store.setState({
-                        bridgeInfo: data.payload as BridgeInfo
-                    });
-                    break;
-
-                case "bridge/devices":
-                    {
-                        const devicesMap = new Map();
-                        orderBy((data.payload as Device[]), "friendly_name").forEach((device) => {
-                            const dev = { ...device };
-                            dev.endpoints = new Map(Object.entries(device.endpoints));
-                            devicesMap.set(device.ieee_address, dev);
-                        });
-                        store.setState({
-                            devices: devicesMap
-                        })
-                    }
-                    break;
-
-                case "bridge/groups":
-                    store.setState({
-                        groups: data.payload as Group[]
-                    })
-                    break;
-
-                case "bridge/event":
-                    break;
-
-                case "bridge/logging":
-                    {
-                        const { logs } = store.getState();
-                        const newLogs = [...logs.slice(-MAX_LOGS_RECORDS_IN_BUFFER)];
-                        newLogs.push(data.payload as LogMessage);
-                        store.setState({ logs: newLogs });
-                        const log = data.payload as LogMessage;
-                        if (blacklistedMessages.every(val => !val.test(log.message))) {
-                            showNotity(log);
-                        }
-                    }
-                    break;
-
-                case "bridge/response/networkmap":
-                    {
-                        const response = data.payload as ResponseWithStatus;
-                        if (response.status == "ok") {
-                            const { value } = response.data as {value: unknown};
-                            store.setState({
-                                networkGraphIsLoading: false,
-                                networkGraph: sanitizeGraph(value as GraphI)
-                            });
-                        } else {
-                            store.setState({ networkGraphIsLoading: false });
-                        }
-                    }
-                    break;
-
-
-                case "bridge/response/touchlink/scan":
-                    {
-                        const { status, data: payloadData } = data.payload as TouchllinkScanResponse;
-                        if (status === "ok") {
-                            store.setState({ touchlinkScanInProgress: false, touchlinkDevices: payloadData.found });
-                        } else {
-                            store.setState({ touchlinkScanInProgress: false });
-                        }
-                    }
-                    break;
-
-                case "bridge/response/touchlink/identify":
-                    store.setState({ touchlinkIdentifyInProgress: false });
-                    break;
-
-                case "bridge/response/touchlink/factory_reset":
-                    store.setState({ touchlinkResetInProgress: false });
-                    break;
-
-                default:
-                    break;
-            }
-            if (data.topic.startsWith("bridge/response/")) {
-                showNotity(data.payload as ResponseWithStatus);
-            }
+            this.procsessBridgeMessage(data);
         }  else {
             const { deviceStates } = store.getState();
             const newDeviceStates = new Map(deviceStates);
