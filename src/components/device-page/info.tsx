@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 import React, { Component, Fragment } from "react";
 import { Device, DeviceState } from "../../types";
 import { toHex, toHHMMSS } from "../../utils";
@@ -18,67 +19,66 @@ interface PropsFromStore {
     deviceStates: Map<string, DeviceState>;
 }
 
+const displayProps = [
+    {
+        key: 'definition.description',
+        label: 'Description',
+        if: 'supported'
+    },
+    {
+        render: (device: Device) => <dd className="col-7" ><p className={cx('mb-0', 'font-weight-bold', { 'text-danger': !device.supported, 'text-success': device.supported })}>{device.supported ? 'Supported' : 'Unsupported'}</p></dd>,
+        label: 'Support status'
+    },
+    {
+        render: (device: Device) => <dd className="col-7">{device.definition.supports}</dd>,
+        label: 'Supports',
+        if: 'definition.supports'
+    },
+    {
+        key: 'ieee_address',
+        label: 'IEEE address'
+    },
+    {
+        key: 'network_address',
+        label: 'Network address',
+        render: (device: Device) => <dd className="col-7">{toHex(device.network_address)}</dd>,
+    },
+    {
+        key: 'date_code',
+        label: 'Firmware build date',
+        if: 'date_code'
+    },
+    {
+        key: 'software_build_id',
+        label: 'Firmware version',
+        if: 'software_build_id'
+    },
+
+    {
+        key: 'definition.vendor',
+        label: 'Vendor',
+        if: 'supported'
+    },
+    {
+        key: 'definition.model',
+        label: 'Model',
+        if: 'supported'
+    },
+
+    {
+        label: 'Power source',
+        render: (device: Device) => <dd className="col-7"><PowerSourceComp source={device.power_source} /></dd>
+    },
+    {
+        label: 'Interview completed',
+        render: (device: Device) => <dd className="col-7">{device.interview_completed ? 'Yes' : 'No'}</dd>
+    }
+];
 // eslint-disable-next-line react/prefer-stateless-function
 export class DeviceInfo extends Component<DeviceInfoProps & PropsFromStore, {}> {
     render() {
         const { device, deviceStates } = this.props;
         const deviceStatus: DeviceState = deviceStates.get(device.friendly_name);
-
-        const displayProps = [
-            {
-                key: 'definition.description',
-                label: 'Description',
-                if: 'supported'
-            },
-            {
-                render: (device: Device) => <dd className="col-7" ><p className={cx('mb-0', 'font-weight-bold', { 'text-danger': !device.supported, 'text-success': device.supported })}>{device.supported ? 'Supported' : 'Unsupported'}</p></dd>,
-                label: 'Support status'
-            },
-            {
-                render: (device: Device) => <dd className="col-7">{device.definition.supports}</dd>,
-                label: 'Supports',
-                if: 'definition.supports'
-            },
-            {
-                key: 'ieee_address',
-                label: 'IEEE address'
-            },
-            {
-                key: 'network_address',
-                label: 'Network address',
-                render: (device: Device) => <dd className="col-7">{toHex(device.network_address)}</dd>,
-            },
-            {
-                key: 'date_code',
-                label: 'Firmware build date',
-                if: 'date_code'
-            },
-            {
-                key: 'software_build_id',
-                label: 'Firmware version',
-                if: 'software_build_id'
-            },
-
-            {
-                key: 'definition.vendor',
-                label: 'Vendor',
-                if: 'supported'
-            },
-            {
-                key: 'definition.model',
-                label: 'Model',
-                if: 'supported'
-            },
-
-            {
-                label: 'Power source',
-                render: (device: Device) => <dd className="col-7"><PowerSourceComp source={device.power_source} /></dd>
-            },
-            {
-                label: 'Interview completed',
-                render: (device: Device) => <dd className="col-7">{device.interview_completed ? 'Yes' : 'No'}</dd>
-            }
-        ];
 
         return (
             <div className="card">
@@ -97,9 +97,6 @@ export class DeviceInfo extends Component<DeviceInfoProps & PropsFromStore, {}> 
                                 </Fragment>
                             ))
                         }
-
-
-
                         {
                             deviceStatus?.update?.state === "updating" ? (
                                 <Fragment>
