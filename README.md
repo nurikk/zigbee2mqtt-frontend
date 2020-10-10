@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.com/nurikk/sls-frontend.svg?branch=master)](https://travis-ci.com/nurikk/z2m-frontend)
 [![CodeFactor](https://www.codefactor.io/repository/github/nurikk/z2m-frontend/badge/master)](https://www.codefactor.io/repository/github/nurikk/z2m-frontend/overview/master)
+[![codebeat badge](https://codebeat.co/badges/f71685ee-16e0-4ac5-b016-23b6a9888aa6)](https://codebeat.co/projects/github-com-nurikk-z2m-frontend-master)
 
 # Demo
 [Demo](https://nurikk.github.io/z2m-frontend/)
