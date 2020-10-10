@@ -1,4 +1,4 @@
-import React, { ChangeEvent, Component} from "react";
+import React, { ChangeEvent, Component } from "react";
 import Button from "../button";
 import { Device, DeviceState } from "../../types";
 import { connect } from "unistore/react";
@@ -91,15 +91,11 @@ export class DeviceControlGroup extends Component<DeviceControlGroupProps & Devi
         removeParams[name] = checked;
         this.setState({ removeParams });
     }
-
-    render() {
-        const { device, configureDevice, checkOTA, updateOTA, state, bridgeInfo } = this.props;
-        const { isRenameModalOpened, isDeviceRemovalModalOpened, renameParams, removeParams } = this.state;
-
-
+    renderRenameButton() {
+        const { bridgeInfo, device } = this.props;
+        const { isRenameModalOpened, renameParams } = this.state;
         return (
-            <div className="btn-group btn-group-sm" role="group">
-                <Button<void> className="btn btn-secondary" onClick={this.toggleRenameModal} title="Rename device"><i className="fa fa-edit" /></Button>
+            <><Button<void> className="btn btn-secondary" onClick={this.toggleRenameModal} title="Rename device"><i className="fa fa-edit" /></Button>
                 <Modal isOpen={isRenameModalOpened}>
                     <ModalHeader>
                         <h3>Rename device</h3>
@@ -132,64 +128,78 @@ export class DeviceControlGroup extends Component<DeviceControlGroupProps & Devi
                             onClick={this.toggleRenameModal}
                         >
                             Close
-            </button>
+                        </button>
                         <button
                             type="button"
                             className="btn btn-primary"
                             onClick={this.onRenameClick}
                         >
                             Save changes
-            </button>
+                        </button>
                     </ModalFooter>
-                </Modal>
+                </Modal></>
+        )
+    }
+    renderDeviceRemovalButton() {
+        const { device } = this.props;
+        const { isDeviceRemovalModalOpened, removeParams } = this.state;
+        return (
+            <><Modal isOpen={isDeviceRemovalModalOpened}>
+                <ModalHeader>
+                    <h3>Remove device</h3>
+                    <button
+                        type="button"
+                        className="close"
+                        aria-label="Close"
+                        onClick={this.toggleDeviceRemovalModal}
+                    >
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </ModalHeader>
+                <ModalBody>
+                    <div className="form-check form-switch">
+                        <input className="form-check-input" name="force" checked={removeParams.force} type="checkbox" id={`force${device.ieee_address}`} onChange={this.onDeviceRemovalParamChange} />
+                        <label className="form-check-label" htmlFor={`force${device.ieee_address}`}>Force remove</label>
+                    </div>
+                    <div className="form-check form-switch">
+                        <input className="form-check-input" name="block" checked={removeParams.block} type="checkbox" id={`block${device.ieee_address}`} onChange={this.onDeviceRemovalParamChange} />
+                        <label className="form-check-label" htmlFor={`block${device.ieee_address}`}>Block from joining again</label>
+                    </div>
+
+
+                </ModalBody>
+                <ModalFooter>
+                    <button
+                        type="button"
+                        className="btn btn-secondary"
+                        onClick={this.toggleDeviceRemovalModal}
+                    >
+                        Close
+                    </button>
+                    <button
+                        type="button"
+                        className="btn btn-danger"
+                        onClick={this.onRemoveClick}
+                    >
+                        Delete
+                    </button>
+                </ModalFooter>
+            </Modal>
+                <button onClick={this.toggleDeviceRemovalModal} className="btn btn-danger" title="Remove device"><i className={cx("fa", "fa-trash")} /></button></>
+        )
+    }
+    render() {
+        const { device, configureDevice, checkOTA, updateOTA, state } = this.props;
+        return (
+            <div className="btn-group btn-group-sm" role="group">
+                {this.renderRenameButton()}
                 <Button<string> className="btn btn-secondary" onClick={configureDevice} item={device.friendly_name} title="Reconfigure" promt><i className={cx("fa", "fa-cogs")} /></Button>
                 {
                     state?.update?.state === "available" ?
                         <Button<string> className="btn btn-secondary" onClick={updateOTA} item={device.friendly_name} title="Update OTA" promt><i className={cx("fa", "fa-cloud-download-alt")} /></Button>
                         : <Button<string> className="btn btn-secondary" onClick={checkOTA} item={device.friendly_name} title="Check OTA"><i className={cx("fa", "fa-cloud")} /></Button>
                 }
-                <Modal isOpen={isDeviceRemovalModalOpened}>
-                    <ModalHeader>
-                        <h3>Remove device</h3>
-                        <button
-                            type="button"
-                            className="close"
-                            aria-label="Close"
-                            onClick={this.toggleDeviceRemovalModal}
-                        >
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </ModalHeader>
-                    <ModalBody>
-                        <div className="form-check form-switch">
-                            <input className="form-check-input" name="force" checked={removeParams.force} type="checkbox" id={`force${device.ieee_address}`} onChange={this.onDeviceRemovalParamChange} />
-                            <label className="form-check-label" htmlFor={`force${device.ieee_address}`}>Force remove</label>
-                        </div>
-                        <div className="form-check form-switch">
-                            <input className="form-check-input" name="block" checked={removeParams.block} type="checkbox" id={`block${device.ieee_address}`} onChange={this.onDeviceRemovalParamChange} />
-                            <label className="form-check-label" htmlFor={`block${device.ieee_address}`}>Block from joining again</label>
-                        </div>
-
-
-                    </ModalBody>
-                    <ModalFooter>
-                        <button
-                            type="button"
-                            className="btn btn-secondary"
-                            onClick={this.toggleDeviceRemovalModal}
-                        >
-                            Close
-            </button>
-                        <button
-                            type="button"
-                            className="btn btn-danger"
-                            onClick={this.onRemoveClick}
-                        >
-                            Delete
-            </button>
-                    </ModalFooter>
-                </Modal>
-                <button onClick={this.toggleDeviceRemovalModal} className="btn btn-danger" title="Remove device"><i className={cx("fa", "fa-trash")} /></button>
+                {this.renderDeviceRemovalButton()}
 
 
             </div>
