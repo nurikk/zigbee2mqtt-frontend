@@ -8,12 +8,6 @@
 
 .device-image {
     max-height: 2em;
-    /*position: absolute;*/
-    /*right: 0;*/
-    /*top: 0;*/
-}
-
-.device-image {
     transition: transform .5s ease;
 }
 
