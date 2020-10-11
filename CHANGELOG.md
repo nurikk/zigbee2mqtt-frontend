@@ -1,3 +1,12 @@
+## [0.2.29](https://github.com/nurikk/z2m-frontend/compare/0.2.28...0.2.29) (2020-10-11)
+
+
+### Bug Fixes
+
+* **join-button:** make menu scrollable ([e47269d](https://github.com/nurikk/z2m-frontend/commit/e47269d11a23535859644a0215cfad4da06ad401))
+
+
+
 ## [0.2.28](https://github.com/nurikk/z2m-frontend/compare/0.2.27...0.2.28) (2020-10-11)
 
 
