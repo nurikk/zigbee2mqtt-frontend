@@ -1,3 +1,13 @@
+## [0.2.28](https://github.com/nurikk/z2m-frontend/compare/0.2.27...0.2.28) (2020-10-11)
+
+
+### Features
+
+* **device-image:** add inverview state indicator ([00e38ab](https://github.com/nurikk/z2m-frontend/commit/00e38ab36eb6f979c7e6e206bce7adbfc30281ff))
+* **join:** allo joining on specific device ([2cd38a2](https://github.com/nurikk/z2m-frontend/commit/2cd38a21dcf4d7371b503ccf08d206c3023aec9f))
+
+
+
 ## [0.2.27](https://github.com/nurikk/z2m-frontend/compare/0.2.26...0.2.27) (2020-10-09)
 
 
