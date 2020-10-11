@@ -1,9 +1,10 @@
 import React, { FunctionComponent, ImgHTMLAttributes, useState } from "react";
 import genericDevice from "../../images/generic-zigbee-device.png";
-import { Device } from "../../types";
+import { Device, DeviceState } from "../../types";
 import cx from "classnames";
 type DeviceImageProps = {
     device: Device;
+    deviceStatus?: DeviceState;
     type?: "img" | "svg";
 }
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -17,13 +18,14 @@ const AVALIABLE_GENERATORS = [
 
 const DeviceImage: FunctionComponent<DeviceImageProps & ImgHTMLAttributes<HTMLDivElement | SVGImageElement>> = (props) => {
     const [imageGenerators, setimageGenerators] = useState(AVALIABLE_GENERATORS);
-    const { device, type = "img", className, ...rest } = props;
+    const { device, deviceStatus, type = "img", className, ...rest } = props;
     const src = imageGenerators.length ? imageGenerators[0](device) : false;
     const onImageError = () => {
         const newGenerators = [...imageGenerators];
         newGenerators.shift();
         setimageGenerators(newGenerators);
     };
+    const otaSpinner = deviceStatus?.update?.state === "updating" ? <i title="Updating firmware" className="fa fa-sync fa-spin position-absolute bottom-0 right-0" /> : null;
     const interviewSpinner = device.interviewing ? <i title="Interviewing" className="fa fa-spinner fa-spin position-absolute bottom-0 right-0" /> : null;
     const unseccessfullInterview = !device.interviewing && !device.interview_completed ? <i title="Interview failed" className="fa fa-exclamation-triangle position-absolute top-0 right-0 text-danger" /> : null;
     switch (type) {
@@ -34,6 +36,7 @@ const DeviceImage: FunctionComponent<DeviceImageProps & ImgHTMLAttributes<HTMLDi
             return src ? <div className={cx(className, "position-relative")} {...rest}>
                 <img  onError={onImageError} src={src} className={"position-relative"} />
                 {interviewSpinner}
+                {otaSpinner}
                 {unseccessfullInterview}
             </div> : null;
     }

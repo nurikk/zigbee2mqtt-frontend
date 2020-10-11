@@ -82,7 +82,7 @@ export class DeviceInfo extends Component<DeviceInfoProps & PropsFromStore, {}> 
 
         return (
             <div className="card">
-                <DeviceImage className={`card-img-top ${style["device-pic"]}`} device={device} />
+                <DeviceImage className={`card-img-top ${style["device-pic"]}`} device={device} deviceStatus={deviceStatus} />
                 <div className="card-body">
                     <h5 className="card-title">{device.type}</h5>
 

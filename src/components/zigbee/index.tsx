@@ -181,7 +181,7 @@ export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
                         <tr key={device.friendly_name} title={state?.update?.state == "available" ? 'Avaliable OTA update' : device.definition?.description}>
                             <td className="font-weight-bold">{id + 1}</td>
                             <td className={style["device-pic"]}>
-                                <DeviceImage className={cx(style["device-image"])} device={device} />
+                                <DeviceImage className={cx(style["device-image"])} device={device} deviceStatus={state} />
                             </td>
                             <td>
                                 <Link to={genDeviceDetailsLink(device.ieee_address)}>{device.friendly_name}</Link>
