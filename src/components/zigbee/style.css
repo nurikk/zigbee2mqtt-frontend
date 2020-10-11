@@ -11,13 +11,14 @@
     min-height: 56px;
 }
 
-.device-image {
+.device-image img {
     max-height: 2em;
     transition: transform .5s ease;
 }
 
-.device-image:hover {
+.device-image img:hover {
     transform: scale(4) translate(5px, 0);
+    z-index: 10;
 }
 
 
