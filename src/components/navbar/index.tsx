@@ -8,6 +8,7 @@ import cx from "classnames";
 import { Link, NavLink } from 'react-router-dom';
 import useComponentVisible from '../../hooks/useComponentVisible';
 import { Device } from '../../types';
+import style from "./style.css";
 
 const urls = [
     {
@@ -58,7 +59,7 @@ const StartStopJoinButton: FunctionComponent<StartStopJoinButtonProps & Pick<Bri
             {routers.length ? (<><Button<boolean> type="button" onClick={setIsComponentVisible} item={!isComponentVisible} className="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-expanded="false">
                 <span className="visually-hidden">Toggle Dropdown</span>
             </Button>
-                <ul ref={ref} className={cx('dropdown-menu', { show: isComponentVisible })}>
+                <ul ref={ref} className={cx('dropdown-menu', style['scrollable-menu'], { show: isComponentVisible })}>
                     <li key='all'><a className="dropdown-item" onClick={() => selectAndHide(null)} href="#">All</a></li>
                     {routers}
                 </ul></>) : null}
