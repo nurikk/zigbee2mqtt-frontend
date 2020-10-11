@@ -3,7 +3,7 @@
 import { GlobalState } from "./store";
 import { Store } from "unistore";
 
-import { Cluster, TouchLinkDevice } from "./types";
+import { Cluster, Device, TouchLinkDevice } from "./types";
 import api from "./api";
 
 export interface TouchlinkApi {
@@ -43,7 +43,7 @@ export interface BindApi {
     removeBind(from: string, to: string, clusters: Cluster[]): Promise<void>;
 }
 export interface BridgeApi {
-    setPermitJoin(permit: boolean): Promise<void>;
+    setPermitJoin(permit: boolean, device: Device): Promise<void>;
     updateConfigValue(name: string, value: unknown): Promise<void>;
 }
 export interface MapApi {
@@ -111,8 +111,8 @@ const actions = (store: Store<GlobalState>): object => ({
         return Promise.resolve();
     },
 
-    setPermitJoin(state, permit = true): Promise<void> {
-        api.send("bridge/request/permit_join", { value: permit });
+    setPermitJoin(state, permit = true, device: Device): Promise<void> {
+        api.send("bridge/request/permit_join", { value: permit, device: device?.friendly_name });
         return Promise.resolve();
     },
 
