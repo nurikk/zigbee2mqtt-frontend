@@ -10,11 +10,11 @@ interface PowerSourceProps {
 
 
 const PowerSource: FunctionComponent<PowerSourceProps> = ({ source, battery, ...rest }) => {
-    let batteryClass = "fa-battery-full";
+    let batteryClass = "fa-battery-slash";
 
     switch (source) {
         case "Battery":
-            if (battery) {
+            if (battery || (battery === 0)) {
                 if (battery > 75) {
                     batteryClass = "fa-battery-full";
                 } else if (battery >= 75) {
