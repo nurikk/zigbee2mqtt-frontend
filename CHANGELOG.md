@@ -1,3 +1,12 @@
+## [0.2.31](https://github.com/nurikk/z2m-frontend/compare/0.2.30...0.2.31) (2020-10-13)
+
+
+### Bug Fixes
+
+* **color:** convert colors to target namespace ([c9de07a](https://github.com/nurikk/z2m-frontend/commit/c9de07a98b8d8b9434dd41f8433d8c9f278176db))
+
+
+
 ## [0.2.30](https://github.com/nurikk/z2m-frontend/compare/0.2.29...0.2.30) (2020-10-13)
 
 
