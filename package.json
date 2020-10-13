@@ -40,7 +40,7 @@
         "@types/react-dom": "^16.9.8",
         "@types/react-router-dom": "^5.1.5",
         "@types/reconnectingwebsocket": "^1.0.4",
-        "@types/superagent": "^4.1.7",
+        "@types/superagent": "^4.1.10",
         "@types/webpack-env": "^1.15.2",
         "@types/ws": "^7.2.5",
         "@typescript-eslint/eslint-plugin": "^2.34.0",
