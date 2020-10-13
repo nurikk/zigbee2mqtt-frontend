@@ -1,3 +1,20 @@
+## [0.2.30](https://github.com/nurikk/z2m-frontend/compare/0.2.29...0.2.30) (2020-10-13)
+
+
+### Bug Fixes
+
+* **device-page:** fix image sizing ([69f1a1f](https://github.com/nurikk/z2m-frontend/commit/69f1a1fc029874fd8ee06c445740ba4b93dfbea1))
+* **groups:** fix image size ([b2f798a](https://github.com/nurikk/z2m-frontend/commit/b2f798a17465e423cdf4e594ebf6da4c43f3b132))
+
+
+### Features
+
+* **battery:** fix 0% value ([a4851d4](https://github.com/nurikk/z2m-frontend/commit/a4851d4e8b134c443c9adae32a8d33a797bd3273))
+* **device:** add ota update status indicator ([bd6676b](https://github.com/nurikk/z2m-frontend/commit/bd6676bf27de77edccf690f14a3a8a96d86a07d0))
+* **exposes:** implement cover type ([f49280e](https://github.com/nurikk/z2m-frontend/commit/f49280e97e240f799aa59488a5224113cf7fc3ca))
+
+
+
 ## [0.2.29](https://github.com/nurikk/z2m-frontend/compare/0.2.28...0.2.29) (2020-10-11)
 
 
