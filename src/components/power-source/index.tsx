@@ -10,24 +10,22 @@ interface PowerSourceProps {
 
 
 const PowerSource: FunctionComponent<PowerSourceProps> = ({ source, battery, ...rest }) => {
-    let batteryClass = "fa-battery-full";
+    let batteryClass = "";
 
     switch (source) {
         case "Battery":
-            if (battery) {
-                if (battery > 75) {
-                    batteryClass = "fa-battery-full";
-                } else if (battery >= 75) {
-                    batteryClass = "fa-battery-three-quarters";
-                } else if (battery >= 50) {
-                    batteryClass = "fa-battery-half";
-                } else if (battery >= 25) {
-                    batteryClass = "fa-battery-quarter";
-                } else if (battery >= 10) {
-                    batteryClass = "fa-battery-empty"
-                } else {
-                    return <span className={`${style.blinking} text-danger`} role="alert">{battery}%</span>
-                }
+            if (battery >= 85) {
+                batteryClass = "fa-battery-full";
+            } else if (battery >= 75) {
+                batteryClass = "fa-battery-three-quarters";
+            } else if (battery >= 50) {
+                batteryClass = "fa-battery-half";
+            } else if (battery >= 25) {
+                batteryClass = "fa-battery-quarter";
+            } else if (battery >= 10) {
+                batteryClass = `fa-battery-empty ${style.blinking}`
+            } else {
+                return <span className={`${style.blinking} text-danger`} role="alert">{battery}%</span>
             }
             return <i className={`fa ${batteryClass}`}
                 title={`${source} ${battery ? `, power level ${battery}%` : ""} `} {...rest} />;
