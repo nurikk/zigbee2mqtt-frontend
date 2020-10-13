@@ -23,79 +23,76 @@ export default class Light extends Component<LightProps & Pick<StateApi, 'setDev
   }
   render() {
     const { features, deviceState } = this.props;
-    return <table className="table table-borderless align-middle">
-      <tbody>
-        {
-          features?.map(feature => {
-            switch (feature) {
-              case "state":
-                return <tr key={feature}>
-                  <td>State</td>
-                  <td>
-                    <Toggle
-                      onChange={this.onFeatureChange}
-                      name="state"
-                      value={deviceState["state"] ?? 'OFF' as string}
-                    />
-                  </td>
-                </tr>
-              case "brightness":
-                return <tr key={feature}>
-                  <td>Brightness</td>
-                  <td>
-                    <Range
-                      key={feature}
-                      onChange={this.onFeatureChange}
-                      name="brightness"
-                      value={deviceState["brightness"] ?? 0}
-                      min={0}
-                      max={254}
-                      steps={brighnessSteps}
-                    />
-                  </td>
-                </tr>
-              case "color_temp":
-                return <tr key={feature}>
-                  <td>Color temp</td>
-                  <td><Range
-                    key={feature}
-                    onChange={this.onFeatureChange}
-                    name="color_temp"
-                    value={deviceState["color_temp"] ?? 0}
-                    min={0}
-                    max={512}
-                    steps={colorTemSteps}
-                  />
-                  </td>
-                </tr>
+    return features?.map(feature => {
+      switch (feature) {
+        case "state":
+          return <div className="row mb-3" key={feature}>
+            <label className="col-3 col-form-label">State</label>
+            <div className="col-9">
+              <Toggle
+                onChange={this.onFeatureChange}
+                name="state"
+                value={deviceState["state"] ?? 'OFF' as string}
+              />
+            </div>
+          </div>
+        case "brightness":
+          return <div className="row mb-3" key={feature}>
+            <label className="col-3 col-form-label">Brightness</label>
+            <div className="col-9">
+              <Range
+                key={feature}
+                onChange={this.onFeatureChange}
+                name="brightness"
+                value={deviceState["brightness"] ?? 0}
+                min={0}
+                max={254}
+                steps={brighnessSteps}
+              />
+            </div>
+          </div>
+        case "color_temp":
+          return <div className="row mb-3" key={feature}>
+            <label className="col-3 col-form-label">Color temp</label>
+            <div className="col-9"><Range
+              key={feature}
+              onChange={this.onFeatureChange}
+              name="color_temp"
+              value={deviceState["color_temp"] ?? 0}
+              min={0}
+              max={512}
+              steps={colorTemSteps}
+            />
+            </div>
+          </div>
 
-              case "color_xy":
-              case "color_hs":
-                {
-                  const { color, brightness } = deviceState;
-                  return <tr key={feature}>
-                    <td>Color ({feature})</td>
-                    <td>
-                      <Color
-                        key={feature}
-                        onChange={this.onFeatureChange}
-                        name="color"
-                        value={color}
-                        brightness={brightness}
-                        format={feature}
-                      />
-                    </td>
-                  </tr>
-                }
+        case "color_xy":
+        case "color_hs":
+          {
+            const { color, brightness } = deviceState;
+            return <div className="row mb-3" key={feature}>
+              <label className="col-3 col-form-label">Color ({feature})</label>
+              <div className="col-9">
+                <Color
+                  key={feature}
+                  onChange={this.onFeatureChange}
+                  name="color"
+                  value={color}
+                  brightness={brightness}
+                  format={feature}
+                />
+              </div>
+            </div>
+          }
 
 
-              default:
-                return <tr key={feature}><td>Unknown feature</td><td>{feature}{JSON.stringify(deviceState)}</td></tr>
-                break;
-            }
-          })
-        }
-      </tbody>
-    </table>
+        default:
+          return (<div className="row mb-3" key={feature}>
+            <label className="col-3 col-form-label">Unknown feature</label>
+            <div className="col-9">{feature}{JSON.stringify(deviceState)}</div>
+          </div>);
+      }
+    })
+
   }
 }

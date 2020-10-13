@@ -31,6 +31,8 @@ export interface DeviceState {
     brightness?: number;
     color_temp?: number;
     color?: AnyColor;
+    tilt?: number;
+    position?: number;
     [k: string]: string | number | boolean | OTAState | AnyColor;
 }
 
@@ -86,13 +88,14 @@ export interface BridgeInfo {
 
 export type PowerSource = "Battery" | "Mains (single phase)" | "DC Source";
 
-export type DeviceClassType = "light" | "switch" | "numeric";
+export type DeviceClassType = "light" | "switch" | "numeric" | "boolean"| "cover";
 export type LightFeatures = "state" | "brightness" | "color_temp" | "color_xy" | "color_hs";
+export type CoverFeatures = "state" | "position" | "tilt";
 
 export interface DeviceClass {
     endpoint?: Endpoint;
     type: DeviceClassType;
-    features?: LightFeatures[];
+    features?: LightFeatures[] | CoverFeatures[];
     unit?: string;
     property?: string;
 }
