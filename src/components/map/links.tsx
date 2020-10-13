@@ -1,6 +1,6 @@
 import { LinkI, ZigbeeRelationship } from "./types";
 import React, { Component, createRef, FunctionComponent, RefObject } from "react";
-import * as style from "./map.css";
+import style from "./map.css";
 import cx from "classnames";
 import * as d3 from "d3";
 
@@ -60,8 +60,6 @@ class LinkLabel extends Component<LinkLabelProps, {}> {
 
     render() {
         const { link, xlinkHref } = this.props;
-        /* eslint-disable @typescript-eslint/ban-ts-ignore */
-        //@ts-ignore
         const textPath = <textPath startOffset="50%" xlinkHref={xlinkHref}>{link.linkquality}</textPath>;
         return (
             <text
