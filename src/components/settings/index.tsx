@@ -12,27 +12,27 @@ import Button from "../button";
 const settings = [
     {
         key: 'last_seen',
-        path: 'advanced.last_seen',
+        path: 'config.advanced.last_seen',
         title: 'Last seen',
         description: 'Add a last_seen attribute to MQTT messages, contains date/time of last Zigbee message',
         values: ['disable', 'ISO_8601', 'ISO_8601_local', 'epoch']
     },
     {
         key: 'elapsed',
-        path: 'advanced.elapsed',
+        path: 'config.advanced.elapsed',
         title: 'Elapsed',
         description: 'Add an elapsed attribute to MQTT messages, contains milliseconds since the previous msg'
     },
     {
         key: 'log_level',
-        path: 'advanced.log_level',
+        path: 'log_level',
         title: 'Log level',
         description: 'Logging level',
         values: ['debug', 'info', 'warn', 'error']
     },
     {
         key: 'homeassistant',
-        path: 'homeassistant',
+        path: 'config.homeassistant',
         title: 'Homeassistant support',
         description: 'Home Assistant integration (MQTT discovery)'
     }
@@ -110,8 +110,8 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
                             <div className="col">
                                 <label htmlFor={setting.key}>{setting.title}</label>
                                 <UniversalEditor
-                                    disabled={get(bridgeInfo.config, setting.path) === undefined}
-                                    value={get(bridgeInfo.config, setting.path) as string | ReadonlyArray<string> | number}
+                                    disabled={get(bridgeInfo, setting.path) === undefined}
+                                    value={get(bridgeInfo, setting.path) as string | ReadonlyArray<string> | number}
                                     values={setting.values}
                                     onChange={(value) => this.updateConfig(setting.key, value)}
                                 />
