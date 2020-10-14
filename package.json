@@ -26,7 +26,7 @@
     "dependencies": {},
     "devDependencies": {
         "@commitlint/cli": "^9.1.2",
-        "@commitlint/config-conventional": "^9.1.2",
+        "@commitlint/config-conventional": "^11.0.0",
         "@fortawesome/fontawesome-free": "^5.13.0",
         "@teamsupercell/typings-for-css-modules-loader": "^2.2.0",
         "@types/classnames": "^2.2.10",
