@@ -1,6 +1,11 @@
 declare namespace MainCssNamespace {
     export interface IMainCss {
-        root: string;
+        mappings: string;
+        names: string;
+        sourceRoot: string;
+        sources: string;
+        sourcesContent: string;
+        version: string;
     }
 }
 

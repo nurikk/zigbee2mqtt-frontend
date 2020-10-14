@@ -18,9 +18,15 @@ declare namespace MapCssNamespace {
         link: string;
         linkLabel: string;
         links: string;
+        mappings: string;
+        names: string;
         node: string;
         nodes: string;
         offline: string;
+        sourceRoot: string;
+        sources: string;
+        sourcesContent: string;
+        version: string;
     }
 }
 

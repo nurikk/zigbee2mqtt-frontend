@@ -1,6 +1,12 @@
 declare namespace TreeCssNamespace {
     export interface ITreeCss {
+        mappings: string;
+        names: string;
+        sourceRoot: string;
+        sources: string;
+        sourcesContent: string;
         tree: string;
+        version: string;
     }
 }
 
