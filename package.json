@@ -32,7 +32,7 @@
         "@types/classnames": "^2.2.10",
         "@types/codemirror": "0.0.95",
         "@types/color-convert": "^1.9.0",
-        "@types/d3": "^5.7.2",
+        "@types/d3": "^5.16.3",
         "@types/lodash": "^4.14.155",
         "@types/luaparse": "^0.2.6",
         "@types/notyf": "^3.0.0",
