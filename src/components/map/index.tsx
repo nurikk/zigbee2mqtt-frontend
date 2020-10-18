@@ -1,15 +1,17 @@
 import React, { ChangeEvent, Component, createRef, Fragment } from "react";
 import Links from "./links";
 import Nodes from "./nodes";
-import * as d3 from "d3";
 import style from "./map.css";
-import { LinkI, NodeI, ZigbeeRelationship } from "./types";
+import { LinkI, NodeI, Source, Target, ZigbeeRelationship } from "./types";
 import { connect } from "unistore/react";
 import { GlobalState } from "../../store";
 import actions, { MapApi } from "../../actions";
 
 import Button from "../button";
-
+import { Simulation, SimulationNodeDatum, ForceLink, forceLink, forceCollide, forceCenter, forceSimulation, forceX, forceY } from "d3-force";
+import { select, selectAll } from "d3-selection";
+import { forceManyBodyReuse } from "d3-force-reuse"
+import { zoom } from "d3-zoom";
 
 export interface MouseEventsResponderNode {
     onMouseOver?: (arg0: NodeI) => void;
@@ -18,7 +20,6 @@ export interface MouseEventsResponderNode {
 }
 
 interface MapState {
-    tooltipNode: NodeI | false;
     width: number;
     height: number;
     visibleLinks: ZigbeeRelationship[];
@@ -51,38 +52,43 @@ const getDistance = (d: LinkI): number => {
 };
 export class Map extends Component<GlobalState & MapApi, MapState> {
     ref = createRef<HTMLDivElement>();
-    simulation!: d3.Simulation<NodeI, LinkI>;
+    svgRef = createRef<SVGSVGElement>();
+    simulation = forceSimulation<NodeI, LinkI>();
     state: Readonly<MapState> = {
         width: 0,
         height: 0,
-        tooltipNode: false,
         visibleLinks: [ZigbeeRelationship.NeigbhorIsAChild]
     };
 
     updateNodes = (): void => {
-        this.updateForces();
-        const node = d3.selectAll<SVGGeometryElement, NodeI>(
+
+        const { networkGraph } = this.props;
+        const { visibleLinks, width, height } = this.state;
+
+        console.log("updateNodes", this.state, this.props);
+
+
+        const node = selectAll<SVGGeometryElement, NodeI>(
             `.${style.node}`
         );
-        const link = d3.selectAll<SVGLineElement, LinkI>(
+        const link = selectAll<SVGLineElement, LinkI>(
             `.${style.link}`
         );
-        const linkLabel = d3.selectAll<SVGLineElement, LinkI>(
+        const linkLabel = selectAll<SVGLineElement, LinkI>(
             `.${style.linkLabel}`
         );
         const ticked = (): void => {
             const radius = 40;
             const { width, height } = this.state;
             link.attr("d", (d: LinkI): string => {
-                const src = d.source as d3.SimulationNodeDatum;
-                const dst = d.target as d3.SimulationNodeDatum;
+                const src = d.source as SimulationNodeDatum;
+                const dst = d.target as SimulationNodeDatum;
                 const x1 = Math.max(radius, Math.min(width - radius, src.x));
                 const y1 = Math.max(radius, Math.min(height - radius, src.y));
                 const x2 = Math.max(radius, Math.min(width - radius, dst.x));
                 const y2 = Math.max(radius, Math.min(height - radius, dst.y));
 
-                const dx = x2 - x1,
-                    dy = y2 - y1;
+                const dx = x2 - x1, dy = y2 - y1;
                 const dr = Math.sqrt(dx * dx + dy * dy) * 2;
                 if (d.repeated) {
                     return `M${x1},${y1} A${dr},${dr} 0 0, 1${x2},${y2}`;
@@ -90,88 +96,86 @@ export class Map extends Component<GlobalState & MapApi, MapState> {
                 return `M ${x1} ${y1} L ${x2} ${y2}`;
             });
 
-            linkLabel.attr("transform", function (d) {
-                //TODO: add type guard
-                if (((d.target as NodeI).x as number) < ((d.source as NodeI).x as number)) {
-                    const bbox = this.getBBox();
-                    const rx = bbox.x + bbox.width / 2;
-                    const ry = bbox.y + bbox.height / 2;
-                    return `rotate(180 ${rx} ${ry})`;
-                }
-                return "rotate(0)";
-            });
+
+            function xpos(s: Source, t: Target) {
+                const angle = Math.atan2(t.y - s.y, t.x - s.x);
+                return 60 * Math.cos(angle) + s.x;
+            };
+
+            function ypos(s: Source, t: Target) {
+                const angle = Math.atan2(t.y - s.y, t.x - s.x);
+                return 60 * Math.sin(angle) + s.y;
+            };
+
+            linkLabel
+                .attr('x', function (d) { return xpos(d.source, d.target); })
+                .attr('y', function (d) { return ypos(d.source, d.target); });
+
             const imgXShift = 32 / 2;
             const imgYShift = 32 / 2;
             node.attr("transform", d => `translate(${Math.max(radius, Math.min(width - radius, d.x)) - imgXShift}, ${Math.max(radius, Math.min(height - radius, d.y)) - imgYShift})`);
         };
-        const { networkGraph } = this.props;
+
         this.simulation.nodes(networkGraph.nodes).on("tick", ticked);
-        const linkForce = this.simulation.force("link") as d3.ForceLink<NodeI,
+        const linkForce = this.simulation.force("link") as ForceLink<NodeI,
             LinkI>;
-        linkForce.links(networkGraph.links);
-        this.simulation.restart();
+        const links = networkGraph.links.filter(l => visibleLinks.includes(l.relationship));
+        linkForce.links(links);
+
+
+        //add zoom capabilities
+        const everything = select<SVGGeometryElement, NodeI>('.everything');
+        const zoomHandler = zoom().on("zoom", (event) => everything.attr("transform", event.transform));
+        zoomHandler(select(this.svgRef.current));
+
+        this.simulation.alphaTarget(0.3).restart();
     }
 
-    setTooltip = (tooltipNode: NodeI): void => {
-        this.setState({ tooltipNode });
-    };
 
-    removeTooltip = (): void => {
-        this.setState({ tooltipNode: false });
-    };
+    updateForces(width: number, height: number): void {
 
-    openDetailsWindow = (node: NodeI): void => {
-        switch (node.type) {
-            case "EndDevice":
-            case "Router":
-                debugger
-                // route(genDeviceDetailsLink(node.friendlyName), true);
-                break;
-            default:
-                break;
-        }
-    };
 
-    updateForces(): void {
-        const { width, height } = this.state;
-
-        const linkForce = d3.forceLink<NodeI, LinkI>()
-            .id(d => d.networkAddress.toString())
+        const linkForce = forceLink<NodeI, LinkI>()
+            .id(d => d.ieeeAddr)
             .distance(getDistance)
             .strength(0.2);
-        const chargeForce = d3.forceManyBody()
+
+        const chargeForce = forceManyBodyReuse()
             .distanceMin(200)
             .distanceMax(1000)
             .strength(-200);
 
-        const repelForce = d3.forceManyBody()
+        const repelForce = forceManyBodyReuse()
             .strength(-140)
             .distanceMax(50)
             .distanceMin(20);
 
-        const collisionForce = d3.forceCollide(40)
+        const collisionForce = forceCollide(40)
             .strength(1)
-            .iterations(50);
+        // .iterations(50);
 
-        const centerForce = d3.forceCenter(width / 2, height / 2);
+        const centerForce = forceCenter(width / 2, height / 2);
 
         this.simulation
             .force("link", linkForce)
             .force("charge", chargeForce)
             .force("collisionForce", collisionForce)
             .force("repelForce", repelForce)
-            .force("center", centerForce);
+            .force("center", centerForce)
+            .force("x", forceX())
+            .force("y", forceY())
     }
 
-    async initPage(): Promise<void> {
+    initPage(): void {
         const { width, height } = (this.ref.current as HTMLDivElement).getBoundingClientRect();
-        this.simulation = d3.forceSimulation<NodeI>();
+        this.updateForces(width, height);
         this.setState({ width, height });
     }
 
-    async componentDidMount(): Promise<void> {
-        await this.initPage()
+    componentDidMount(): void {
+        this.initPage()
     }
+
     componentDidUpdate(): void {
         this.updateNodes();
     }
@@ -179,23 +183,16 @@ export class Map extends Component<GlobalState & MapApi, MapState> {
     renderMap() {
         const { width, height, visibleLinks } = this.state;
         const { networkGraph } = this.props;
-        const { setTooltip, removeTooltip, openDetailsWindow } = this;
+        const links = networkGraph.links.filter(l => visibleLinks.includes(l.relationship));
         return (
-            <svg viewBox={`0 0 ${width} ${height}`}>
-                <defs>
-
-                    <marker viewBox="-0 -5 10 10" id="arrowhead" markerWidth="13" markerHeight="13" refX="13" refY="0" orient="auto" markerUnits="strokeWidth">
-                        <path d="M 0 0 L 10 4 L 0 8 L2 4 z" fill="#999" />
-                    </marker>
-                </defs>
-                <Links visible={visibleLinks} links={networkGraph.links} />
-                <Nodes
-                    nodes={networkGraph.nodes}
-                    simulation={this.simulation}
-                    onMouseOver={setTooltip}
-                    onMouseOut={removeTooltip}
-                    onDblClick={openDetailsWindow}
-                />
+            <svg ref={this.svgRef} viewBox={`0 0 ${width} ${height}`}>
+                <g className="everything">
+                    <Links links={links} />
+                    <Nodes
+                        nodes={networkGraph.nodes}
+                        simulation={this.simulation}
+                    />
+                </g>
             </svg >
         )
     }
@@ -225,9 +222,10 @@ export class Map extends Component<GlobalState & MapApi, MapState> {
         );
     }
     onLinkTypeFilterChange = (e: ChangeEvent<HTMLInputElement>): void => {
-        let { visibleLinks } = this.state;
+        const { visibleLinks: stateVisibleLinks } = this.state;
         const { checked, value } = e.target;
         const inValue = parseInt(value, 10);
+        let visibleLinks = [...stateVisibleLinks];
         if (checked) {
             visibleLinks.push(inValue);
         } else {

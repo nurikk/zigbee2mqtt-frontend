@@ -109,33 +109,29 @@ export const sanitizeGraph = (inGraph: GraphI): GraphI => {
     const nodes = {};
     const links = [];
     const nodesWithLinks = {};
-    let coordinatorNode = {} as NodeI;
     const filteredOutLinks = [];
     const siblings = [];
     const createdLinks = {};
 
     inGraph.nodes.forEach(node => {
-        nodes[node.networkAddress] = node;
-        if (node.type == "Coordinator") {
-            coordinatorNode = node;
-        }
+        nodes[node.ieeeAddr] = node;
     });
     inGraph.links = inGraph.links.sort((a, b) => a.relationship - b.relationship);
 
     inGraph.links.forEach(link => {
-        const src: NodeI = nodes[(link.source as Source).networkAddress];
-        const dst: NodeI = nodes[(link.target as Target).networkAddress];
+        const src: NodeI = nodes[(link.source as Source).ieeeAddr];
+        const dst: NodeI = nodes[(link.target as Target).ieeeAddr];
 
         if (src && dst) {
             const linkType = [src.type, dst.type].join('2');
-            nodesWithLinks[src.networkAddress] = 1;
-            nodesWithLinks[dst.networkAddress] = 1;
-            const linkId = [src.networkAddress, dst.networkAddress].sort().join('');
+            nodesWithLinks[src.ieeeAddr] = 1;
+            nodesWithLinks[dst.ieeeAddr] = 1;
+            const linkId = [src.ieeeAddr, dst.ieeeAddr].sort().join('');
             const repeatedLink = createdLinks[linkId] || false;
             if (!repeatedLink) {
                 createdLinks[linkId] = true;
             }
-            links.push({ ...link, ...{ source: (link.source as Source).networkAddress, target: (link.target as Target).networkAddress, linkType, repeated: repeatedLink } });
+            links.push({ ...link, ...{ source: (link.source as Source).ieeeAddr, target: (link.target as Target).ieeeAddr, linkType, repeated: repeatedLink } });
         } else {
             switch (link.relationship) {
                 case ZigbeeRelationship.NeigbhorIsASibling:
@@ -149,13 +145,13 @@ export const sanitizeGraph = (inGraph: GraphI): GraphI => {
         }
     });
 
-    inGraph.nodes.forEach(node => {
-        if (!nodesWithLinks[node.networkAddress]) {
-            //this node has no links, lets connect it to coordinator manually
-            // const linkType = ""
-            links.push({ source: node.networkAddress, target: coordinatorNode.networkAddress, linkType: "BrokenLink" });
-        }
-    });
+    // inGraph.nodes.forEach(node => {
+    //     // if (!nodesWithLinks[node.networkAddress]) {
+    //     //     //this node has no links, lets connect it to coordinator manually
+    //     //     // const linkType = ""
+    //     //     links.push({ source: node.networkAddress, target: coordinatorNode.networkAddress, linkType: "BrokenLink" });
+    //     // }
+    // });
 
     inGraph.links = links;
     return inGraph;

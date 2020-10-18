@@ -5,7 +5,6 @@ export interface NodeI extends SimulationNodeDatum {
     ieeeAddr: string;
     friendlyName?: string;
     type?: DeviceType;
-    networkAddress: number;
     failed?: string[];
     lastSeen?: number;
     definition?: DeviceDefinition;
@@ -25,14 +24,12 @@ export type LinkType =
 
     "BrokenLink";
 
-export interface Source {
+export interface Source extends SimulationNodeDatum {
     ieeeAddr: string;
-    networkAddress: number;
 }
 
-export interface Target {
+export interface Target extends SimulationNodeDatum {
     ieeeAddr: string;
-    networkAddress: number;
 }
 export enum ZigbeeRelationship {
     NeigbhorIsParent,
@@ -43,8 +40,8 @@ export enum ZigbeeRelationship {
 }
 
 export interface LinkI extends SimulationLinkDatum<NodeI> {
-    source: Source | string;
-    target: Target | string;
+    source: Source;
+    target: Target;
     linkquality: number;
     depth: number;
     routes: unknown[];

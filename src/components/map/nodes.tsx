@@ -1,11 +1,13 @@
 import React, { Component, createRef, RefObject } from "react";
-import * as d3 from "d3";
 import { LinkI, NodeI } from "./types";
 import cx from "classnames";
 import style from "./map.css";
 import { MouseEventsResponderNode } from ".";
 import { Device } from "../../types";
 import DeviceImage from "../device-image";
+import { Simulation } from "d3-force";
+import { select, selectAll } from "d3-selection";
+import { drag } from "d3-drag";
 
 
 const calcStarPoints = (
@@ -57,7 +59,7 @@ class Node extends Component<NodeProps, {}> {
     componentDidMount(): void {
         const { current } = this.ref;
         const { node } = this.props;
-        d3.select(current as SVGElement).data([node]);
+        select(current as SVGElement).data([node]);
     }
 
     onMouseOut = (): void => {
@@ -97,7 +99,7 @@ class Node extends Component<NodeProps, {}> {
                             type="svg"
                             width={32}
                             height={32}
-                            device={{ definition: node.definition } as unknown as Device}
+                            device={node as unknown as Device}
                             className={`${style.img}`}
                         />
                     )
@@ -111,30 +113,27 @@ class Node extends Component<NodeProps, {}> {
 
 interface NodesProps extends MouseEventsResponderNode {
     nodes: NodeI[];
-    simulation: d3.Simulation<NodeI, LinkI>;
+    simulation: Simulation<NodeI, LinkI>;
 }
 
-interface NodesState {
-    tooltipNode: NodeI | undefined;
-}
 
-export default class Nodes extends Component<NodesProps, NodesState> {
+export default class Nodes extends Component<NodesProps> {
     updateDrag(): void {
         const { simulation } = this.props;
-        const dragForce = d3.drag<SVGCircleElement, NodeI>()
-            .on("start", d => {
-                if (!d3.event.active) {
+        const dragForce = drag<SVGCircleElement, NodeI>()
+            .on("start", (event, d) => {
+                if (!event.active) {
                     simulation.alphaTarget(0.3).restart();
                 }
                 d.fx = d.x;
                 d.fy = d.y;
             })
-            .on("drag", d => {
-                d.fx = d3.event.x;
-                d.fy = d3.event.y;
+            .on("drag", (event, d) => {
+                d.fx = event.x;
+                d.fy = event.y;
             })
-            .on("end", d => {
-                if (!d3.event.active) {
+            .on("end", (event, d) => {
+                if (!event.active) {
                     simulation.alphaTarget(0);
                 }
                 d.fx = undefined;
@@ -142,7 +141,7 @@ export default class Nodes extends Component<NodesProps, NodesState> {
             });
 
 
-        d3.selectAll<SVGCircleElement, NodeI>(`.${style.node}`)
+        selectAll<SVGCircleElement, NodeI>(`.${style.node}`)
             .call(dragForce);
     }
 
@@ -158,7 +157,7 @@ export default class Nodes extends Component<NodesProps, NodesState> {
         const { nodes, onMouseOut, onMouseOver, onDblClick } = this.props;
         return (
             <g className={style.nodes}>
-                {nodes.map((node: NodeI, index: number) => (
+                {nodes.map((node: NodeI) => (
                     <Node
                         onMouseOut={onMouseOut}
                         onMouseOver={onMouseOver}
