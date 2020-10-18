@@ -1,3 +1,18 @@
+## [0.2.32](https://github.com/nurikk/z2m-frontend/compare/0.2.31...0.2.32) (2020-10-18)
+
+
+### Bug Fixes
+
+* **settings:** fix config keys ([bb83a4a](https://github.com/nurikk/z2m-frontend/commit/bb83a4aea82333f1872566e18174b6d4ba1fc260))
+
+
+### Features
+
+* **map:** higlight neibhour nodes on click ([2860884](https://github.com/nurikk/z2m-frontend/commit/286088437fd732c6a3e11cc1a72f201555e6d2b0))
+* **map:** optimize for large networks ([ca45cdb](https://github.com/nurikk/z2m-frontend/commit/ca45cdbaef40445df6e902b8fc124cc7758a7b86))
+
+
+
 ## [0.2.31](https://github.com/nurikk/z2m-frontend/compare/0.2.30...0.2.31) (2020-10-13)
 
 
