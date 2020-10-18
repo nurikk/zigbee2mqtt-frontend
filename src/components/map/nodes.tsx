@@ -1,5 +1,5 @@
 import React, { Component, createRef, RefObject } from "react";
-import { LinkI, NodeI } from "./types";
+import { LinkI, NodeI, Source, Target } from "./types";
 import cx from "classnames";
 import style from "./map.css";
 import { MouseEventsResponderNode } from ".";
@@ -64,17 +64,17 @@ class Node extends Component<NodeProps, {}> {
 
     onMouseOut = (): void => {
         const { node, onMouseOut } = this.props;
-        onMouseOut && onMouseOut(node);
+        onMouseOut && onMouseOut(node, this.ref.current);
     };
 
     onMouseOver = (): void => {
         const { node, onMouseOver } = this.props;
-        onMouseOver && onMouseOver(node);
+        onMouseOver && onMouseOver(node, this.ref.current);
     };
 
     onDblClick = (): void => {
         const { node, onDblClick } = this.props;
-        onDblClick && onDblClick(node);
+        onDblClick && onDblClick(node, this.ref.current);
     };
 
     render() {
@@ -116,8 +116,14 @@ interface NodesProps extends MouseEventsResponderNode {
     simulation: Simulation<NodeI, LinkI>;
 }
 
+type NodesState = {
+    toggle: boolean;
+}
 
-export default class Nodes extends Component<NodesProps> {
+export default class Nodes extends Component<NodesProps, NodesState> {
+    state: Readonly<NodesState> = {
+        toggle: false
+    }
     updateDrag(): void {
         const { simulation } = this.props;
         const dragForce = drag<SVGCircleElement, NodeI>()
@@ -153,15 +159,16 @@ export default class Nodes extends Component<NodesProps> {
         this.updateDrag();
     }
 
+   
+
     render() {
-        const { nodes, onMouseOut, onMouseOver, onDblClick } = this.props;
+        const { nodes, onMouseOut, onMouseOver } = this.props;
         return (
             <g className={style.nodes}>
                 {nodes.map((node: NodeI) => (
                     <Node
                         onMouseOut={onMouseOut}
                         onMouseOver={onMouseOver}
-                        onDblClick={onDblClick}
                         key={node.ieeeAddr}
                         node={node}
                     />

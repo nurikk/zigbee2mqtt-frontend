@@ -8,15 +8,15 @@ import { GlobalState } from "../../store";
 import actions, { MapApi } from "../../actions";
 
 import Button from "../button";
-import { Simulation, SimulationNodeDatum, ForceLink, forceLink, forceCollide, forceCenter, forceSimulation, forceX, forceY } from "d3-force";
+import { SimulationNodeDatum, ForceLink, forceLink, forceCollide, forceCenter, forceSimulation, forceX, forceY } from "d3-force";
 import { select, selectAll } from "d3-selection";
 import { forceManyBodyReuse } from "d3-force-reuse"
 import { zoom } from "d3-zoom";
 
 export interface MouseEventsResponderNode {
-    onMouseOver?: (arg0: NodeI) => void;
-    onMouseOut?: (arg0: NodeI) => void;
-    onDblClick?: (arg0: NodeI) => void;
+    onMouseOver?: (arg0: NodeI, el: SVGPolygonElement | SVGCircleElement | SVGImageElement) => void;
+    onMouseOut?: (arg0: NodeI, el: SVGPolygonElement | SVGCircleElement | SVGImageElement) => void;
+    onDblClick?: (arg0: NodeI, el: SVGPolygonElement | SVGCircleElement | SVGImageElement) => void;
 }
 
 interface MapState {
@@ -50,7 +50,12 @@ const getDistance = (d: LinkI): number => {
     const depth = ~~(Math.min(4, d.depth));
     return 50 * depth + distance;
 };
-export class Map extends Component<GlobalState & MapApi, MapState> {
+
+function isLink(obj: NodeI | LinkI): obj is LinkI {
+    return (obj as LinkI).linkType !== undefined;
+}
+
+export class MapComponent extends Component<GlobalState & MapApi, MapState> {
     ref = createRef<HTMLDivElement>();
     svgRef = createRef<SVGSVGElement>();
     simulation = forceSimulation<NodeI, LinkI>();
@@ -63,26 +68,26 @@ export class Map extends Component<GlobalState & MapApi, MapState> {
     updateNodes = (): void => {
 
         const { networkGraph } = this.props;
-        const { visibleLinks, width, height } = this.state;
+        const { visibleLinks } = this.state;
 
         console.log("updateNodes", this.state, this.props);
 
 
-        const node = selectAll<SVGGeometryElement, NodeI>(
+        const node = selectAll<SVGElement, NodeI>(
             `.${style.node}`
         );
-        const link = selectAll<SVGLineElement, LinkI>(
+        const link = selectAll<SVGElement, LinkI>(
             `.${style.link}`
         );
-        const linkLabel = selectAll<SVGLineElement, LinkI>(
+        const linkLabel = selectAll<SVGElement, LinkI>(
             `.${style.linkLabel}`
         );
         const ticked = (): void => {
             const radius = 40;
             const { width, height } = this.state;
             link.attr("d", (d: LinkI): string => {
-                const src = d.source as SimulationNodeDatum;
-                const dst = d.target as SimulationNodeDatum;
+                const src = d.source;
+                const dst = d.target;
                 const x1 = Math.max(radius, Math.min(width - radius, src.x));
                 const y1 = Math.max(radius, Math.min(height - radius, src.y));
                 const x2 = Math.max(radius, Math.min(width - radius, dst.x));
@@ -97,19 +102,20 @@ export class Map extends Component<GlobalState & MapApi, MapState> {
             });
 
 
-            function xpos(s: Source, t: Target) {
+            function xpos(offset: number, s: Source, t: Target) {
                 const angle = Math.atan2(t.y - s.y, t.x - s.x);
-                return 60 * Math.cos(angle) + s.x;
+                return offset * Math.cos(angle) + s.x;
             };
 
-            function ypos(s: Source, t: Target) {
+            function ypos(offset: number, s: Source, t: Target) {
                 const angle = Math.atan2(t.y - s.y, t.x - s.x);
-                return 60 * Math.sin(angle) + s.y;
+                return offset * Math.sin(angle) + s.y;
             };
 
             linkLabel
-                .attr('x', function (d) { return xpos(d.source, d.target); })
-                .attr('y', function (d) { return ypos(d.source, d.target); });
+                .attr('text-anchor', (d) => d.repeated ? 'start' : 'end')
+                .attr('x', function (d) { return xpos(d.repeated ? 30 : 60, d.source, d.target); })
+                .attr('y', function (d) { return ypos(d.repeated ? 30 : 60, d.source, d.target); });
 
             const imgXShift = 32 / 2;
             const imgYShift = 32 / 2;
@@ -129,6 +135,30 @@ export class Map extends Component<GlobalState & MapApi, MapState> {
         zoomHandler(select(this.svgRef.current));
 
         this.simulation.alphaTarget(0.3).restart();
+
+
+        const linkedByIndex = new Set<string>();
+        networkGraph.nodes.forEach(n => linkedByIndex.add(n.ieeeAddr + "," + n.ieeeAddr));
+        links.forEach((l) => linkedByIndex.add(l.sourceIeeeAddr + "," + l.targetIeeeAddr));
+
+        function neighboring(a: Source, b: Target) {
+            return linkedByIndex.has(a.ieeeAddr + "," + b.ieeeAddr);
+        }
+        let toggle = false;
+        const connectedNodes = (event, d: NodeI): void => {
+            if (!toggle) {
+                node.style("opacity", (o: NodeI) => neighboring(d, o) || neighboring(o, d) ? 1 : 0.15);
+                link.style("stroke-opacity", (l: LinkI) => (l.source === d || l.target === d ? 1 : 0.15));
+                linkLabel.style("opacity", (l: LinkI) => (l.source === d || l.target === d ? 1 : 0.15));
+                toggle = true;
+            } else {
+                node.style("opacity", 1);
+                link.style("stroke-opacity", 1);
+                linkLabel.style("opacity", 1);
+                toggle = false;
+            }
+        }
+        node.on("click", connectedNodes);
     }
 
 
@@ -184,6 +214,10 @@ export class Map extends Component<GlobalState & MapApi, MapState> {
         const { width, height, visibleLinks } = this.state;
         const { networkGraph } = this.props;
         const links = networkGraph.links.filter(l => visibleLinks.includes(l.relationship));
+
+
+
+
         return (
             <svg ref={this.svgRef} viewBox={`0 0 ${width} ${height}`}>
                 <g className="everything">
@@ -287,5 +321,5 @@ export class Map extends Component<GlobalState & MapApi, MapState> {
 
 
 const mappedProps = ["networkGraph", "networkGraphIsLoading"];
-const ConnectedMap = connect<{}, MapState, GlobalState, {}>(mappedProps, actions)(Map);
+const ConnectedMap = connect<{}, MapState, GlobalState, {}>(mappedProps, actions)(MapComponent);
 export default ConnectedMap;

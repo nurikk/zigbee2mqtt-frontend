@@ -109,41 +109,37 @@ export const sanitizeGraph = (inGraph: GraphI): GraphI => {
     const nodes = {};
     const links = [];
     const nodesWithLinks = {};
-    const filteredOutLinks = [];
-    const siblings = [];
     const createdLinks = {};
 
     inGraph.nodes.forEach(node => {
         nodes[node.ieeeAddr] = node;
     });
-    inGraph.links = inGraph.links.sort((a, b) => a.relationship - b.relationship);
 
-    inGraph.links.forEach(link => {
-        const src: NodeI = nodes[(link.source as Source).ieeeAddr];
-        const dst: NodeI = nodes[(link.target as Target).ieeeAddr];
-
+    inGraph.links.sort((a, b) => a.relationship - b.relationship).forEach(link => {
+        const src: NodeI = nodes[link.sourceIeeeAddr];
+        const dst: NodeI = nodes[link.targetIeeeAddr];
         if (src && dst) {
             const linkType = [src.type, dst.type].join('2');
-            nodesWithLinks[src.ieeeAddr] = 1;
-            nodesWithLinks[dst.ieeeAddr] = 1;
-            const linkId = [src.ieeeAddr, dst.ieeeAddr].sort().join('');
-            const repeatedLink = createdLinks[linkId] || false;
-            if (!repeatedLink) {
-                createdLinks[linkId] = true;
-            }
-            links.push({ ...link, ...{ source: (link.source as Source).ieeeAddr, target: (link.target as Target).ieeeAddr, linkType, repeated: repeatedLink } });
+            nodesWithLinks[link.sourceIeeeAddr] = 1;
+            nodesWithLinks[link.targetIeeeAddr] = 1;
+            const linkId = [link.sourceIeeeAddr, link.targetIeeeAddr].sort().join('');
+            const repeatedLink = createdLinks[linkId] ?? false;
+            createdLinks[linkId] = true;
+            links.push({ ...link, ...{ source: link.sourceIeeeAddr, target: link.targetIeeeAddr, linkType, repeated: repeatedLink } });
         } else {
-            switch (link.relationship) {
-                case ZigbeeRelationship.NeigbhorIsASibling:
-                    siblings.push(link)
-                    break;
-                default:
-                    filteredOutLinks.push(link);
-                    break;
-            }
+            console.warn("Broken link", link);
+            // switch (link.relationship) {
+            //     case ZigbeeRelationship.NeigbhorIsASibling:
+            //         siblings.push(link)
+            //         break;
+            //     default:
+            //         filteredOutLinks.push(link);
+            //         break;
+            // }
 
         }
     });
+    // console.log({ siblings, filteredOutLinks });
 
     // inGraph.nodes.forEach(node => {
     //     // if (!nodesWithLinks[node.networkAddress]) {

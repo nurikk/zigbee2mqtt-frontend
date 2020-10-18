@@ -69,15 +69,15 @@ const Links: FunctionComponent<LinksPros> = props => {
     const { links } = props;
     return (
         <g className={style.links}>
-            {links.map((link: LinkI, index: number) => <Link
-                id={`edgepath${index}`}
-                key={`link${index}`}
+            {links.map((link: LinkI) => <Link
+                id={`edgepath${link.sourceIeeeAddr}-${link.targetIeeeAddr}-${link.linkType}`}
+                key={`link${link.sourceIeeeAddr}-${link.targetIeeeAddr}-${link.linkType}`}
                 link={link}
             />)}
-            {links.map((link: LinkI, index: number) => (
+            {links.map((link: LinkI) => (
                 <LinkLabel
-                    xlinkHref={`#edgepath${index}`}
-                    key={`label${index}`}
+                    xlinkHref={`#edgepath${link.sourceIeeeAddr}-${link.targetIeeeAddr}-${link.linkType}`}
+                    key={`label${link.sourceIeeeAddr}-${link.targetIeeeAddr}-${link.linkType}`}
                     link={link}
                 />
             ))}
