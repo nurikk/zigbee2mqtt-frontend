@@ -8,7 +8,7 @@ import { GlobalState } from "../../store";
 import actions, { MapApi } from "../../actions";
 
 import Button from "../button";
-import { SimulationNodeDatum, ForceLink, forceLink, forceCollide, forceCenter, forceSimulation, forceX, forceY } from "d3-force";
+import { ForceLink, forceLink, forceCollide, forceCenter, forceSimulation, forceX, forceY } from "d3-force";
 import { select, selectAll } from "d3-selection";
 import { forceManyBodyReuse } from "d3-force-reuse"
 import { zoom } from "d3-zoom";
@@ -20,6 +20,7 @@ export interface MouseEventsResponderNode {
 }
 
 interface MapState {
+    selectedNode: NodeI;
     width: number;
     height: number;
     visibleLinks: ZigbeeRelationship[];
@@ -51,15 +52,13 @@ const getDistance = (d: LinkI): number => {
     return 50 * depth + distance;
 };
 
-function isLink(obj: NodeI | LinkI): obj is LinkI {
-    return (obj as LinkI).linkType !== undefined;
-}
 
 export class MapComponent extends Component<GlobalState & MapApi, MapState> {
     ref = createRef<HTMLDivElement>();
     svgRef = createRef<SVGSVGElement>();
     simulation = forceSimulation<NodeI, LinkI>();
     state: Readonly<MapState> = {
+        selectedNode: null,
         width: 0,
         height: 0,
         visibleLinks: [ZigbeeRelationship.NeigbhorIsAChild]
@@ -68,7 +67,7 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
     updateNodes = (): void => {
 
         const { networkGraph } = this.props;
-        const { visibleLinks } = this.state;
+        const { visibleLinks, selectedNode } = this.state;
 
         console.log("updateNodes", this.state, this.props);
 
@@ -144,21 +143,21 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
         function neighboring(a: Source, b: Target) {
             return linkedByIndex.has(a.ieeeAddr + "," + b.ieeeAddr);
         }
-        let toggle = false;
-        const connectedNodes = (event, d: NodeI): void => {
-            if (!toggle) {
-                node.style("opacity", (o: NodeI) => neighboring(d, o) || neighboring(o, d) ? 1 : 0.15);
-                link.style("stroke-opacity", (l: LinkI) => (l.source === d || l.target === d ? 1 : 0.15));
-                linkLabel.style("opacity", (l: LinkI) => (l.source === d || l.target === d ? 1 : 0.15));
-                toggle = true;
-            } else {
-                node.style("opacity", 1);
-                link.style("stroke-opacity", 1);
-                linkLabel.style("opacity", 1);
-                toggle = false;
-            }
+
+        if (selectedNode) {
+            node.style("opacity", (o: NodeI) => neighboring(selectedNode, o) || neighboring(o, selectedNode) ? 1 : 0.15);
+            link.style("stroke-opacity", (l: LinkI) => (l.source === selectedNode || l.target === selectedNode ? 1 : 0.15));
+            linkLabel.style("opacity", (l: LinkI) => (l.source === selectedNode || l.target === selectedNode ? 1 : 0.15));
+        } else {
+            node.style("opacity", 1);
+            link.style("stroke-opacity", 1);
+            linkLabel.style("opacity", 1);
+
         }
-        node.on("click", connectedNodes);
+        node.on("click", (event, d: NodeI) => {
+            const { selectedNode } = this.state;
+            this.setState({ selectedNode: selectedNode ? null : d });
+        });
     }
 
 
