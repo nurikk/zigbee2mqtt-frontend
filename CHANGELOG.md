@@ -1,3 +1,12 @@
+## [0.2.33](https://github.com/nurikk/z2m-frontend/compare/0.2.32...0.2.33) (2020-10-19)
+
+
+### Features
+
+* **map:** use state.selectedNode ([46a1001](https://github.com/nurikk/z2m-frontend/commit/46a1001ae765ad837d6023318099a55a4da7e51b))
+
+
+
 ## [0.2.32](https://github.com/nurikk/z2m-frontend/compare/0.2.31...0.2.32) (2020-10-18)
 
 
