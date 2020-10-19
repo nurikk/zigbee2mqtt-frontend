@@ -26,6 +26,15 @@ interface MapState {
     visibleLinks: ZigbeeRelationship[];
 }
 
+const xpos = (offset: number, s: Source, t: Target) => {
+    const angle = Math.atan2(t.y - s.y, t.x - s.x);
+    return offset * Math.cos(angle) + s.x;
+};
+
+const ypos = (offset: number, s: Source, t: Target) => {
+    const angle = Math.atan2(t.y - s.y, t.x - s.x);
+    return offset * Math.sin(angle) + s.y;
+};
 const getDistance = (d: LinkI): number => {
     let distance = 200;
     switch (d.linkType) {
@@ -65,12 +74,8 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
     };
 
     updateNodes = (): void => {
-
         const { networkGraph } = this.props;
         const { visibleLinks, selectedNode } = this.state;
-
-        console.log("updateNodes", this.state, this.props);
-
 
         const node = selectAll<SVGElement, NodeI>(
             `.${style.node}`
@@ -100,21 +105,10 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
                 return `M ${x1} ${y1} L ${x2} ${y2}`;
             });
 
-
-            function xpos(offset: number, s: Source, t: Target) {
-                const angle = Math.atan2(t.y - s.y, t.x - s.x);
-                return offset * Math.cos(angle) + s.x;
-            };
-
-            function ypos(offset: number, s: Source, t: Target) {
-                const angle = Math.atan2(t.y - s.y, t.x - s.x);
-                return offset * Math.sin(angle) + s.y;
-            };
-
             linkLabel
                 .attr('text-anchor', (d) => d.repeated ? 'start' : 'end')
-                .attr('x', function (d) { return xpos(d.repeated ? 30 : 60, d.source, d.target); })
-                .attr('y', function (d) { return ypos(d.repeated ? 30 : 60, d.source, d.target); });
+                .attr('x', (d) => xpos(d.repeated ? 30 : 60, d.source, d.target))
+                .attr('y', (d) => ypos(d.repeated ? 30 : 60, d.source, d.target));
 
             const imgXShift = 32 / 2;
             const imgYShift = 32 / 2;
@@ -133,16 +127,12 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
         const zoomHandler = zoom().on("zoom", (event) => everything.attr("transform", event.transform));
         zoomHandler(select(this.svgRef.current));
 
-        this.simulation.alphaTarget(0.3).restart();
-
 
         const linkedByIndex = new Set<string>();
         networkGraph.nodes.forEach(n => linkedByIndex.add(n.ieeeAddr + "," + n.ieeeAddr));
         links.forEach((l) => linkedByIndex.add(l.sourceIeeeAddr + "," + l.targetIeeeAddr));
 
-        function neighboring(a: Source, b: Target) {
-            return linkedByIndex.has(a.ieeeAddr + "," + b.ieeeAddr);
-        }
+        const neighboring = (a: Source, b: Target): boolean => linkedByIndex.has(a.ieeeAddr + "," + b.ieeeAddr)
 
         if (selectedNode) {
             node.style("opacity", (o: NodeI) => neighboring(selectedNode, o) || neighboring(o, selectedNode) ? 1 : 0.15);
@@ -158,6 +148,8 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
             const { selectedNode } = this.state;
             this.setState({ selectedNode: selectedNode ? null : d });
         });
+
+        this.simulation.alphaTarget(0.3).restart();
     }
 
 
