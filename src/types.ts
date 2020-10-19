@@ -88,16 +88,62 @@ export interface BridgeInfo {
 
 export type PowerSource = "Battery" | "Mains (single phase)" | "DC Source";
 
-export type DeviceClassType = "light" | "switch" | "numeric" | "boolean"| "cover";
-export type LightFeatures = "state" | "brightness" | "color_temp" | "color_xy" | "color_hs";
-export type CoverFeatures = "state" | "position" | "tilt";
-
-export interface DeviceClass {
+export type GenericFeatureType = "numeric" | "binary" | "enum" | "json";
+export type ComposeiteFeatureType = "light" | "switch" | "cover" | "lock";
+export type AllPossibleFeatures = GenericFeatureType & ComposeiteFeatureType;
+export type FeatureAccessMode = "r" | "w" | "rw";
+export interface GenericExposedFeature {
+    type: GenericFeatureType;
+    name: string;
+    access?: FeatureAccessMode;
     endpoint?: Endpoint;
-    type: DeviceClassType;
-    features?: LightFeatures[] | CoverFeatures[];
-    unit?: string;
-    property?: string;
+}
+
+export interface BinaryFeature extends GenericExposedFeature {
+    type: "binary";
+    value_on: unknown;
+    value_off: unknown;
+    value_toggle?: unknown;
+}
+export interface CompositeFeature extends Omit<GenericExposedFeature, "type"> {
+    type: ComposeiteFeatureType;
+    features: GenericExposedFeature[];
+}
+
+export type GenericOrCompositeFeature = GenericExposedFeature & CompositeFeature;
+
+export interface NumericFeature extends GenericExposedFeature {
+    type: "numeric";
+    unit?: "string";
+    value_min?: number;
+    value_max?: number;
+}
+
+export interface EnumFeature extends GenericExposedFeature {
+    type: "enum";
+    values: unknown[];
+}
+
+export interface JsonFeature extends GenericExposedFeature {
+    type: "json";
+    schema: object;
+}
+
+
+export interface LightFeature extends  CompositeFeature {
+    type: "light";
+}
+
+export interface SwitchFeature extends CompositeFeature {
+    type: "switch";
+}
+
+export interface CoverFeature extends CompositeFeature {
+    type: "cover";
+}
+
+export interface LockFeature extends Omit<GenericExposedFeature, "type">, CompositeFeature {
+    type: "lock";
 }
 
 export interface DeviceDefinition {
@@ -105,7 +151,7 @@ export interface DeviceDefinition {
     model: string;
     supports: string;
     vendor: string;
-    exposes: DeviceClass[];
+    exposes: GenericExposedFeature[] | CompositeFeature[];
 }
 
 export interface EndpointDescription {
