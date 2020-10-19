@@ -1,3 +1,12 @@
+## [0.2.34](https://github.com/nurikk/z2m-frontend/compare/0.2.33...0.2.34) (2020-10-19)
+
+
+### Features
+
+* **exposes:** adopt new expose  format ([e9276dc](https://github.com/nurikk/z2m-frontend/commit/e9276dcbe68ca6ff96d6a3d2a36d9d8a521f086f))
+
+
+
 ## [0.2.33](https://github.com/nurikk/z2m-frontend/compare/0.2.32...0.2.33) (2020-10-19)
 
 
