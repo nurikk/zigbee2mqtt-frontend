@@ -11,7 +11,7 @@ import Button from "../button";
 import { ForceLink, forceLink, forceCollide, forceCenter, forceSimulation, forceX, forceY } from "d3-force";
 import { select, selectAll } from "d3-selection";
 import { forceManyBodyReuse } from "d3-force-reuse"
-import { zoom } from "d3-zoom";
+import { zoom, zoomIdentity, ZoomTransform } from "d3-zoom";
 
 export interface MouseEventsResponderNode {
     onMouseOver?: (arg0: NodeI, el: SVGPolygonElement | SVGCircleElement | SVGImageElement) => void;
@@ -72,6 +72,7 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
         height: 0,
         visibleLinks: [ZigbeeRelationship.NeigbhorIsAChild]
     };
+    transform = zoomIdentity;
 
     updateNodes = (): void => {
         const { networkGraph } = this.props;
@@ -87,16 +88,16 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
         const linkLabel = selectAll<SVGElement, LinkI>(
             `.${style.linkLabel}`
         );
-        const ticked = (): void => {
+        const ticked = (transform: ZoomTransform): void => {
             const radius = 40;
             const { width, height } = this.state;
             link.attr("d", (d: LinkI): string => {
                 const src = d.source;
                 const dst = d.target;
-                const x1 = Math.max(radius, Math.min(width - radius, src.x));
-                const y1 = Math.max(radius, Math.min(height - radius, src.y));
-                const x2 = Math.max(radius, Math.min(width - radius, dst.x));
-                const y2 = Math.max(radius, Math.min(height - radius, dst.y));
+                const x1 = transform.applyX(Math.max(radius, Math.min(width - radius, src.x)));
+                const y1 = transform.applyY(Math.max(radius, Math.min(height - radius, src.y)));
+                const x2 = transform.applyX(Math.max(radius, Math.min(width - radius, dst.x)));
+                const y2 = transform.applyY(Math.max(radius, Math.min(height - radius, dst.y)));
 
                 const dx = x2 - x1, dy = y2 - y1;
                 const dr = Math.sqrt(dx * dx + dy * dy) * 2;
@@ -108,15 +109,19 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
 
             linkLabel
                 .attr('text-anchor', (d) => d.repeated ? 'start' : 'end')
-                .attr('x', (d) => xpos(d.repeated ? 30 : 60, d.source, d.target))
-                .attr('y', (d) => ypos(d.repeated ? 30 : 60, d.source, d.target));
+                .attr('x', (d) => transform.applyX(xpos(d.repeated ? 30 : 60, d.source, d.target)))
+                .attr('y', (d) => transform.applyY(ypos(d.repeated ? 30 : 60, d.source, d.target)))
 
             const imgXShift = 32 / 2;
             const imgYShift = 32 / 2;
-            node.attr("transform", d => `translate(${Math.max(radius, Math.min(width - radius, d.x)) - imgXShift}, ${Math.max(radius, Math.min(height - radius, d.y)) - imgYShift})`);
+            node.attr("transform", d => {
+                const nodeX = Math.max(radius, Math.min(width - radius, transform.applyX(d.x))) - imgXShift;
+                const nodeY = Math.max(radius, Math.min(height - radius, transform.applyY(d.y))) - imgYShift;
+                return `translate(${nodeX}, ${nodeY})`;
+            });
         };
 
-        this.simulation.nodes(networkGraph.nodes).on("tick", ticked);
+        this.simulation.nodes(networkGraph.nodes).on("tick", () => ticked(this.transform));
         const linkForce = this.simulation.force("link") as ForceLink<NodeI,
             LinkI>;
         const links = networkGraph.links.filter(l => visibleLinks.includes(l.relationship));
@@ -125,7 +130,11 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
 
         //add zoom capabilities
         const everything = select<SVGGeometryElement, NodeI>('.everything');
-        const zoomHandler = zoom().on("zoom", (event) => everything.attr("transform", event.transform));
+        const zoomHandler = zoom().on("zoom", ({ transform }) => {
+            everything.attr("transform", transform);
+            this.transform = transform;
+            // node.attr("transform", d => `translate(${transform.apply(d)})`);
+        });
         zoomHandler(select(this.svgRef.current));
 
 
