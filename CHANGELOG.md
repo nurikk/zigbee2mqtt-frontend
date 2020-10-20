@@ -1,3 +1,22 @@
+## [0.2.36](https://github.com/nurikk/z2m-frontend/compare/0.2.35...0.2.36) (2020-10-20)
+
+
+### Bug Fixes
+
+* **map:** don't recreate force sumulation on updat ([6d3ec29](https://github.com/nurikk/z2m-frontend/commit/6d3ec293233feeef99fd33f127b0f6f282ab297f))
+* **map:** don't request routes ([3cae627](https://github.com/nurikk/z2m-frontend/commit/3cae6270ef80849362061fd2181437aa67f0c671))
+* **map:** don't use deprecated properties ([d2cf791](https://github.com/nurikk/z2m-frontend/commit/d2cf791a4d0167d6abc4abfe379e90038f307cc7))
+* **map:** fix map rerendering ([17ec8e3](https://github.com/nurikk/z2m-frontend/commit/17ec8e3c73c5d41d4ec1d4ecdae6c2c4c0217cca))
+* **map:** recalculate forces on zoom ([11356b3](https://github.com/nurikk/z2m-frontend/commit/11356b318dbeb02eed568edaef210a1999b1d925))
+* **map:** use true elliptical paths ([9f4b01e](https://github.com/nurikk/z2m-frontend/commit/9f4b01ea93ab453dcfa19f5e6dd83c6826c97377))
+
+
+### Features
+
+* **map:** rescale map on zoom ([e48a8f6](https://github.com/nurikk/z2m-frontend/commit/e48a8f65f83d1b22789adde209f654df1c7ed182))
+
+
+
 ## [0.2.35](https://github.com/nurikk/z2m-frontend/compare/0.2.34...0.2.35) (2020-10-19)
 
 
