@@ -99,7 +99,7 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
                 const y2 = transform.applyY(Math.max(radius, Math.min(height - radius, dst.y)));
 
                 const dx = x2 - x1, dy = y2 - y1;
-                const dr = Math.sqrt(dx * dx + dy * dy) * 2;
+                const dr = Math.sqrt(dx * dx + dy * dy);
                 if (d.repeated) {
                     return `M${x1},${y1} A${dr},${dr} 0 0, 1${x2},${y2}`;
                 }
