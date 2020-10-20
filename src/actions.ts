@@ -147,7 +147,7 @@ const actions = (store: Store<GlobalState>): object => ({
 
     networkMapRequest: (state): Promise<void> => {
         store.setState({ networkGraphIsLoading: true });
-        api.send("bridge/request/networkmap", { type: "raw", routes: true });
+        api.send("bridge/request/networkmap", { type: "raw", routes: false });
         return Promise.resolve();
     },
     createGroup: (state, group: string): Promise<void> => {
