@@ -75,7 +75,8 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
 
     updateNodes = (): void => {
         const { networkGraph } = this.props;
-        const { visibleLinks, selectedNode } = this.state;
+        const { visibleLinks, selectedNode, width, height } = this.state;
+        this.updateForces(width, height);
 
         const node = selectAll<SVGElement, NodeI>(
             `.${style.node}`
@@ -154,8 +155,6 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
 
 
     updateForces(width: number, height: number): void {
-
-
         const linkForce = forceLink<NodeI, LinkI>()
             .id(d => d.ieeeAddr)
             .distance(getDistance)
@@ -172,12 +171,11 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
             .distanceMin(20);
 
         const collisionForce = forceCollide(40)
-            .strength(1)
-        // .iterations(50);
+            .strength(1);
 
         const centerForce = forceCenter(width / 2, height / 2);
 
-        this.simulation
+        this.simulation = forceSimulation<NodeI, LinkI>()
             .force("link", linkForce)
             .force("charge", chargeForce)
             .force("collisionForce", collisionForce)
@@ -189,7 +187,6 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
 
     initPage(): void {
         const { width, height } = (this.ref.current as HTMLDivElement).getBoundingClientRect();
-        this.updateForces(width, height);
         this.setState({ width, height });
     }
 
