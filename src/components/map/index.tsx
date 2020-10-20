@@ -133,7 +133,7 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
         const zoomHandler = zoom().on("zoom", ({ transform }) => {
             everything.attr("transform", transform);
             this.transform = transform;
-            // node.attr("transform", d => `translate(${transform.apply(d)})`);
+            ticked(transform);
         });
         zoomHandler(select(this.svgRef.current));
 
@@ -158,8 +158,6 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
             const { selectedNode } = this.state;
             this.setState({ selectedNode: selectedNode ? null : d });
         });
-
-        this.simulation.alphaTarget(0.3).restart();
     }
 
 
