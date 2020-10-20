@@ -76,8 +76,7 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
 
     updateNodes = (): void => {
         const { networkGraph } = this.props;
-        const { visibleLinks, selectedNode, width, height } = this.state;
-        this.updateForces(width, height);
+        const { visibleLinks, selectedNode } = this.state;
 
         const node = selectAll<SVGElement, NodeI>(
             `.${style.node}`
@@ -121,11 +120,11 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
             });
         };
 
-        this.simulation.nodes(networkGraph.nodes).on("tick", () => ticked(this.transform));
-        const linkForce = this.simulation.force("link") as ForceLink<NodeI,
-            LinkI>;
         const links = networkGraph.links.filter(l => visibleLinks.includes(l.relationship));
-        linkForce.links(links);
+        this.simulation.nodes(networkGraph.nodes);
+        this.simulation.force<ForceLink<NodeI, LinkI>>("link").links(links);
+        this.simulation.on("tick", () => ticked(this.transform));
+        this.simulation.restart();
 
 
         //add zoom capabilities
@@ -195,6 +194,7 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
     initPage(): void {
         const { width, height } = (this.ref.current as HTMLDivElement).getBoundingClientRect();
         this.setState({ width, height });
+        this.updateForces(width, height);
     }
 
     componentDidMount(): void {
