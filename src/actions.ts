@@ -93,7 +93,7 @@ const actions = (store: Store<GlobalState>): object => ({
         api.send(`${dev}/set`, { [name]: value });
         return Promise.resolve();
     },
-    setDeviceState( state, dev: string, value: object) {
+    setDeviceState(state, dev: string, value: object) {
         api.send(`${dev}/set`, value);
         return Promise.resolve();
     },
