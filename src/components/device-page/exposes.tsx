@@ -21,7 +21,7 @@ class Exposes extends Component<ExposesProps & PropsFromStore & StateApi, {}> {
         if (device.definition?.exposes) {
             return <div className="card">
                 <div className="card-body">
-                    <Composite feature={{ features: device.definition.exposes } as CompositeFeature} type="device" device={device} deviceState={deviceState}
+                    <Composite feature={{ features: device.definition.exposes } as CompositeFeature} type="composite" device={device} deviceState={deviceState}
                         onChange={(endpoint, value) => {
                             setDeviceState(`${device.friendly_name}${endpoint ? `/${endpoint}` : ''}`, value)
                         }}

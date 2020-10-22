@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/camelcase */
 import React, { Component } from "react";
-import { CompositeFeature, EnumFeature, GenericExposedFeature, GenericOrCompositeFeature } from "../../../types";
+import { CompositeFeature, EnumFeature } from "../../../types";
 import { scale } from "../../../utils";
 import { isBinaryFeature, isCoverFeature, isEnumFeature, isLightFeature, isLockFeature, isNumericFeature, isSwitchFeature } from "../../device-page/type-guards";
 
@@ -15,7 +15,7 @@ import Switch from "../switch/switch";
 import Cover from "../cover/cover";
 import Lock from "../lock/lock";
 
-type CompositeType = "device" | "light" | "switch" | "cover" | "lock";
+type CompositeType = "composite" | "light" | "switch" | "cover" | "lock";
 
 interface CompositeProps extends BaseFeatureProps<CompositeFeature> {
   type: CompositeType;
