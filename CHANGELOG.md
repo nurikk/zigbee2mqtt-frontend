@@ -1,3 +1,12 @@
+## [0.2.39](https://github.com/nurikk/z2m-frontend/compare/0.2.38...0.2.39) (2020-10-22)
+
+
+### Features
+
+* **exposes:** rename device to composite type ([5ac075f](https://github.com/nurikk/z2m-frontend/commit/5ac075fd6050cbac2ae7c8283808b708161d19a5))
+
+
+
 ## [0.2.38](https://github.com/nurikk/z2m-frontend/compare/0.2.36...0.2.38) (2020-10-22)
 
 
