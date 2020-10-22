@@ -41,7 +41,7 @@ export default class Composite extends Component<CompositeProps, {}> {
     return features?.map(feature => {
       if (isBinaryFeature(feature)) {
         return <div className="row mb-3" key={JSON.stringify(feature)}>
-          <label className="col-3 col-form-label">{feature.name}</label>
+          <label className="col-3 col-form-label"><strong>{feature.name}</strong></label>
           <div className="col-9">
             <Binary
               feature={feature}
@@ -53,7 +53,7 @@ export default class Composite extends Component<CompositeProps, {}> {
         </div>
       } else if (isNumericFeature(feature)) {
         return <div className="row mb-3" key={JSON.stringify(feature)}>
-          <label className="col-3 col-form-label">{feature.name}</label>
+          <label className="col-3 col-form-label"><strong>{feature.name}</strong></label>
           <div className="col-9">
             <Numeric
               feature={feature}
@@ -66,7 +66,7 @@ export default class Composite extends Component<CompositeProps, {}> {
         </div>
       } else if (isEnumFeature(feature)) {
         return <div className="row mb-3" key={JSON.stringify(feature)}>
-          <label className="col-3 col-form-label">{feature.name}</label>
+          <label className="col-3 col-form-label"><strong>{feature.name}</strong></label>
           <div className="col-9">
             <Enum
               feature={feature as EnumFeature}
@@ -79,66 +79,50 @@ export default class Composite extends Component<CompositeProps, {}> {
         </div>
       } else if (isLightFeature(feature)) {
         return (
-          <div className="card" key={JSON.stringify(feature)}>
-            <div className="card-body">
-              <h5 className="card-title">Light</h5>
-              <Light
-                feature={feature}
-                device={device}
-                deviceState={deviceState}
-                onChange={onChange}
-              />
-            </div>
-          </div>
+          <Light key={JSON.stringify(feature)}
+            feature={feature}
+            device={device}
+            deviceState={deviceState}
+            onChange={onChange}
+          />
+
         )
       } else if (isSwitchFeature(feature)) {
         return (
-          <div className="card" key={JSON.stringify(feature)}>
-            <div className="card-body">
-              <h5 className="card-title">Switch</h5>
-              <Switch
-                feature={feature}
-                device={device}
-                deviceState={deviceState}
-                onChange={onChange}
-              />
-            </div>
-          </div>
+          <Switch key={JSON.stringify(feature)}
+            feature={feature}
+            device={device}
+            deviceState={deviceState}
+            onChange={onChange}
+          />
         )
       }
       else if (isCoverFeature(feature)) {
         return (
-          <div className="card" key={JSON.stringify(feature)}>
-            <div className="card-body">
-              <h5 className="card-title">Cover</h5>
-              <Cover
-                feature={feature}
-                device={device}
-                deviceState={deviceState}
-                onChange={onChange}
-              />
-            </div>
-          </div>
+          <Cover key={JSON.stringify(feature)}
+            feature={feature}
+            device={device}
+            deviceState={deviceState}
+            onChange={onChange}
+          />
+
         )
       }
       else if (isLockFeature(feature)) {
         return (
-          <div className="card" key={JSON.stringify(feature)}>
-            <div className="card-body">
-              <h5 className="card-title">Lock</h5>
-              <Lock
-                feature={feature}
-                device={device}
-                deviceState={deviceState}
-                onChange={onChange}
-              />
-            </div>
-          </div>
+          <Lock
+            key={JSON.stringify(feature)}
+            feature={feature}
+            device={device}
+            deviceState={deviceState}
+            onChange={onChange}
+          />
+
         )
       }
       else {
         return (<div className="row mb-3" key={JSON.stringify(feature)}>
-          <label className="col-3 col-form-label">Unknown feature {feature.type}({feature.name})</label>
+          <label className="col-3 col-form-label">Unknown feature {feature.type}(<strong>{feature.name}</strong>)</label>
           <div className="col-9">{JSON.stringify(feature)}{JSON.stringify(deviceState)}</div>
         </div>);
       }
@@ -165,7 +149,7 @@ export default class Composite extends Component<CompositeProps, {}> {
 
       //   default:
       //     return (<div className="row mb-3" key={JSON.stringify(feature)}>
-      //       <label className="col-3 col-form-label">Unknown feature {feature.type}({feature.name})</label>
+      //       <label className="col-3 col-form-label">Unknown feature {feature.type}(<strong>{feature.name}</strong>)</label>
       //       <div className="col-9">{JSON.stringify(feature)}{JSON.stringify(deviceState)}</div>
       //     </div>);
 

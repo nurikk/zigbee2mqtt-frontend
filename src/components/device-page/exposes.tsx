@@ -19,11 +19,15 @@ class Exposes extends Component<ExposesProps & PropsFromStore & StateApi, {}> {
         const { device, deviceStates, setDeviceState } = this.props;
         const deviceState = deviceStates.get(device.friendly_name) ?? {} as DeviceState;
         if (device.definition?.exposes) {
-            return <Composite feature={{ features: device.definition.exposes } as CompositeFeature} type="device" device={device} deviceState={deviceState}
-                onChange={(endpoint, value) => {
-                    setDeviceState(`${device.friendly_name}${endpoint ? `/${endpoint}` : ''}`, value)
-                }}
-            />
+            return <div className="card">
+                <div className="card-body">
+                    <Composite feature={{ features: device.definition.exposes } as CompositeFeature} type="device" device={device} deviceState={deviceState}
+                        onChange={(endpoint, value) => {
+                            setDeviceState(`${device.friendly_name}${endpoint ? `/${endpoint}` : ''}`, value)
+                        }}
+                    />
+                </div>
+            </div>
         } else {
             return "Device doesn't expose anything"
         }
