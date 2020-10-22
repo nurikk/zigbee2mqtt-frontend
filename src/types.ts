@@ -105,12 +105,13 @@ export interface BinaryFeature extends GenericExposedFeature {
     value_off: unknown;
     value_toggle?: unknown;
 }
+
 export interface CompositeFeature extends Omit<GenericExposedFeature, "type"> {
     type: ComposeiteFeatureType;
-    features: GenericExposedFeature[];
+    features: (GenericExposedFeature | CompositeFeature)[];
 }
 
-export type GenericOrCompositeFeature = GenericExposedFeature & CompositeFeature;
+export type GenericOrCompositeFeature = GenericExposedFeature | CompositeFeature;
 
 export interface NumericFeature extends GenericExposedFeature {
     type: "numeric";
@@ -130,7 +131,7 @@ export interface JsonFeature extends GenericExposedFeature {
 }
 
 
-export interface LightFeature extends  CompositeFeature {
+export interface LightFeature extends CompositeFeature {
     type: "light";
 }
 
@@ -142,7 +143,7 @@ export interface CoverFeature extends CompositeFeature {
     type: "cover";
 }
 
-export interface LockFeature extends Omit<GenericExposedFeature, "type">, CompositeFeature {
+export interface LockFeature extends CompositeFeature {
     type: "lock";
 }
 

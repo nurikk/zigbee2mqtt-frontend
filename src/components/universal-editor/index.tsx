@@ -1,6 +1,7 @@
 import React, { useState, ChangeEvent, InputHTMLAttributes, useEffect } from "react";
-import Range from '../range/index';
+
 import Button from "../button";
+import RangeEditor from "../range-editor/range-editor";
 
 interface UniversalEditorProps {
     values?: unknown[];
@@ -61,7 +62,7 @@ const UniversalEditor: React.FunctionComponent<InputHTMLAttributes<unknown> & Un
         case "number":
             return (<div className="row">
                 <div className="col-9">
-                    <Range disabled={disabled} value={value} onChange={v => onChange(v)} {...rest} />
+                    <RangeEditor disabled={disabled} value={value} onChange={v => onChange(v)} {...rest} />
                 </div>
                 <div className="col-3">
                     <input type="number" step="any" className="form-control col-2"
