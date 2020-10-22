@@ -75,7 +75,7 @@
         "notyf": "^3.9.0",
         "prettier": "^2.1.1",
         "react": "^16.14.0",
-        "react-dom": "^16.13.1",
+        "react-dom": "^16.14.0",
         "react-router-dom": "^5.2.0",
         "reconnecting-websocket": "^4.4.0",
         "rimraf": "^3.0.2",
