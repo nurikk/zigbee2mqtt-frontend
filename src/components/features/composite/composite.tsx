@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/camelcase */
 import React, { Component } from "react";
-import { CompositeFeature, EnumFeature } from "../../../types";
+import { CompositeFeature, EnumFeature, GenericExposedFeature } from "../../../types";
 import { scale } from "../../../utils";
 import { isBinaryFeature, isCoverFeature, isEnumFeature, isLightFeature, isLockFeature, isNumericFeature, isSwitchFeature } from "../../device-page/type-guards";
 
@@ -35,126 +35,102 @@ const stepsConfiguration = {
 
 
 export default class Composite extends Component<CompositeProps, {}> {
-  render() {
-    const { type, deviceState, device, feature: { features }, onChange } = this.props;
+  renderFeature = (feature: CompositeFeature | GenericExposedFeature) => {
+    const { type, deviceState, device, onChange } = this.props;
     const steps = stepsConfiguration[type] ?? {};
-    return features?.map(feature => {
-      if (isBinaryFeature(feature)) {
-        return <div className="row mb-3" key={JSON.stringify(feature)}>
-          <label className="col-3 col-form-label"><strong>{feature.name}</strong></label>
-          <div className="col-9">
-            <Binary
-              feature={feature}
-              device={device}
-              deviceState={deviceState}
-              onChange={onChange}
-            />
-          </div>
+
+    if (isBinaryFeature(feature)) {
+      return <div className="row mb-3" key={JSON.stringify(feature)}>
+        <label className="col-3 col-form-label"><strong>{feature.name}</strong></label>
+        <div className="col-9">
+          <Binary
+            feature={feature}
+            device={device}
+            deviceState={deviceState}
+            onChange={onChange}
+          />
         </div>
-      } else if (isNumericFeature(feature)) {
-        return <div className="row mb-3" key={JSON.stringify(feature)}>
-          <label className="col-3 col-form-label"><strong>{feature.name}</strong></label>
-          <div className="col-9">
-            <Numeric
-              feature={feature}
-              device={device}
-              deviceState={deviceState}
-              onChange={onChange}
-              steps={steps[feature.name]}
-            />
-          </div>
+      </div>
+    } else if (isNumericFeature(feature)) {
+      return <div className="row mb-3" key={JSON.stringify(feature)}>
+        <label className="col-3 col-form-label"><strong>{feature.name}</strong></label>
+        <div className="col-9">
+          <Numeric
+            feature={feature}
+            device={device}
+            deviceState={deviceState}
+            onChange={onChange}
+            steps={steps[feature.name]}
+          />
         </div>
-      } else if (isEnumFeature(feature)) {
-        return <div className="row mb-3" key={JSON.stringify(feature)}>
-          <label className="col-3 col-form-label"><strong>{feature.name}</strong></label>
-          <div className="col-9">
-            <Enum
-              feature={feature as EnumFeature}
-              device={device}
-              deviceState={deviceState}
-              onChange={onChange}
+      </div>
+    } else if (isEnumFeature(feature)) {
+      return <div className="row mb-3" key={JSON.stringify(feature)}>
+        <label className="col-3 col-form-label"><strong>{feature.name}</strong></label>
+        <div className="col-9">
+          <Enum
+            feature={feature as EnumFeature}
+            device={device}
+            deviceState={deviceState}
+            onChange={onChange}
 
-            />
-          </div>
+          />
         </div>
-      } else if (isLightFeature(feature)) {
-        return (
-          <Light key={JSON.stringify(feature)}
-            feature={feature}
-            device={device}
-            deviceState={deviceState}
-            onChange={onChange}
-          />
+      </div>
+    } else if (isLightFeature(feature)) {
+      return (
+        <Light key={JSON.stringify(feature)}
+          feature={feature}
+          device={device}
+          deviceState={deviceState}
+          onChange={onChange}
+        />
 
-        )
-      } else if (isSwitchFeature(feature)) {
-        return (
-          <Switch key={JSON.stringify(feature)}
-            feature={feature}
-            device={device}
-            deviceState={deviceState}
-            onChange={onChange}
-          />
-        )
-      }
-      else if (isCoverFeature(feature)) {
-        return (
-          <Cover key={JSON.stringify(feature)}
-            feature={feature}
-            device={device}
-            deviceState={deviceState}
-            onChange={onChange}
-          />
+      )
+    } else if (isSwitchFeature(feature)) {
+      return (
+        <Switch key={JSON.stringify(feature)}
+          feature={feature}
+          device={device}
+          deviceState={deviceState}
+          onChange={onChange}
+        />
+      )
+    }
+    else if (isCoverFeature(feature)) {
+      return (
+        <Cover key={JSON.stringify(feature)}
+          feature={feature}
+          device={device}
+          deviceState={deviceState}
+          onChange={onChange}
+        />
 
-        )
-      }
-      else if (isLockFeature(feature)) {
-        return (
-          <Lock
-            key={JSON.stringify(feature)}
-            feature={feature}
-            device={device}
-            deviceState={deviceState}
-            onChange={onChange}
-          />
+      )
+    }
+    else if (isLockFeature(feature)) {
+      return (
+        <Lock
+          key={JSON.stringify(feature)}
+          feature={feature}
+          device={device}
+          deviceState={deviceState}
+          onChange={onChange}
+        />
 
-        )
-      }
-      else {
-        return (<div className="row mb-3" key={JSON.stringify(feature)}>
-          <label className="col-3 col-form-label">Unknown feature {feature.type}(<strong>{feature.name}</strong>)</label>
-          <div className="col-9">{JSON.stringify(feature)}{JSON.stringify(deviceState)}</div>
-        </div>);
-      }
-      // switch (feature.type) {
-      //   // case "color_xy":
-      //   // case "color_hs":
-      //   //   {
-      //   //     const { color, brightness } = deviceState;
-      //   //     return <div className="row mb-3" key={feature}>
-      //   //       <label className="col-3 col-form-label">Color ({feature})</label>
-      //   //       <div className="col-9">
-      //   //         <Color
-      //   //           key={feature}
-      //   //           onChange={this.onFeatureChange}
-      //   //           name="color"
-      //   //           value={color}
-      //   //           brightness={brightness}
-      //   //           format={feature}
-      //   //         />
-      //   //       </div>
-      //   //     </div>
-      //   //   }
+      )
+    }
+    else {
+      return (<div className="row mb-3" key={JSON.stringify(feature)}>
+        <label className="col-3 col-form-label">Unknown feature {feature.type}(<strong>{feature.name}</strong>)</label>
+        <div className="col-9">{JSON.stringify(feature)}{JSON.stringify(deviceState)}</div>
+      </div>);
+    }
+  }
+  render() {
+    const { feature: { features } } = this.props;
 
-
-      //   default:
-      //     return (<div className="row mb-3" key={JSON.stringify(feature)}>
-      //       <label className="col-3 col-form-label">Unknown feature {feature.type}(<strong>{feature.name}</strong>)</label>
-      //       <div className="col-9">{JSON.stringify(feature)}{JSON.stringify(deviceState)}</div>
-      //     </div>);
-
-      // }
-    })
+    return features?.map(this.renderFeature);
 
   }
 }
