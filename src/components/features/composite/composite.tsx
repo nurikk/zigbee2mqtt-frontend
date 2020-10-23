@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/camelcase */
-import React, { Component } from "react";
+import React, { Component, FunctionComponent, PropsWithChildren } from "react";
 import { CompositeFeature, EnumFeature, GenericExposedFeature } from "../../../types";
 import { scale } from "../../../utils";
 import { isBinaryFeature, isCoverFeature, isEnumFeature, isLightFeature, isLockFeature, isNumericFeature, isSwitchFeature } from "../../device-page/type-guards";
@@ -33,6 +33,15 @@ const stepsConfiguration = {
   }
 };
 
+const FeatureWrapper: FunctionComponent<PropsWithChildren<{ name: string }>> = (props) => {
+  const { children, name } = props;
+  return <div className="row mb-3">
+    <label className="col-3 col-form-label"><strong>{name}</strong></label>
+    <div className="col-9">
+      {children}
+    </div>
+  </div>
+}
 
 export default class Composite extends Component<CompositeProps, {}> {
   renderFeature = (feature: CompositeFeature | GenericExposedFeature) => {
@@ -40,43 +49,41 @@ export default class Composite extends Component<CompositeProps, {}> {
     const steps = stepsConfiguration[type] ?? {};
 
     if (isBinaryFeature(feature)) {
-      return <div className="row mb-3" key={JSON.stringify(feature)}>
-        <label className="col-3 col-form-label"><strong>{feature.name}</strong></label>
-        <div className="col-9">
-          <Binary
-            feature={feature}
-            device={device}
-            deviceState={deviceState}
-            onChange={onChange}
-          />
-        </div>
-      </div>
-    } else if (isNumericFeature(feature)) {
-      return <div className="row mb-3" key={JSON.stringify(feature)}>
-        <label className="col-3 col-form-label"><strong>{feature.name}</strong></label>
-        <div className="col-9">
-          <Numeric
-            feature={feature}
-            device={device}
-            deviceState={deviceState}
-            onChange={onChange}
-            steps={steps[feature.name]}
-          />
-        </div>
-      </div>
-    } else if (isEnumFeature(feature)) {
-      return <div className="row mb-3" key={JSON.stringify(feature)}>
-        <label className="col-3 col-form-label"><strong>{feature.name}</strong></label>
-        <div className="col-9">
-          <Enum
-            feature={feature as EnumFeature}
-            device={device}
-            deviceState={deviceState}
-            onChange={onChange}
+      return <FeatureWrapper
+        key={JSON.stringify(feature)}
+        name={feature.name}>
+        <Binary
+          feature={feature}
+          device={device}
+          deviceState={deviceState}
+          onChange={onChange}
+        />
+      </FeatureWrapper>
 
-          />
-        </div>
-      </div>
+    } else if (isNumericFeature(feature)) {
+      return <FeatureWrapper
+        key={JSON.stringify(feature)}
+        name={feature.name}>
+        <Numeric
+          feature={feature}
+          device={device}
+          deviceState={deviceState}
+          onChange={onChange}
+          steps={steps[feature.name]}
+        />
+      </FeatureWrapper>
+    } else if (isEnumFeature(feature)) {
+      return <FeatureWrapper
+        key={JSON.stringify(feature)}
+        name={feature.name}>
+        <Enum
+          feature={feature as EnumFeature}
+          device={device}
+          deviceState={deviceState}
+          onChange={onChange}
+
+        />
+      </FeatureWrapper>
     } else if (isLightFeature(feature)) {
       return (
         <Light key={JSON.stringify(feature)}
@@ -105,7 +112,6 @@ export default class Composite extends Component<CompositeProps, {}> {
           deviceState={deviceState}
           onChange={onChange}
         />
-
       )
     }
     else if (isLockFeature(feature)) {
@@ -117,14 +123,15 @@ export default class Composite extends Component<CompositeProps, {}> {
           deviceState={deviceState}
           onChange={onChange}
         />
-
       )
     }
     else {
-      return (<div className="row mb-3" key={JSON.stringify(feature)}>
+      return (<FeatureWrapper
+        key={JSON.stringify(feature)}
+        name={feature.name}>
         <label className="col-3 col-form-label">Unknown feature {feature.type}(<strong>{feature.name}</strong>)</label>
         <div className="col-9">{JSON.stringify(feature)}{JSON.stringify(deviceState)}</div>
-      </div>);
+      </FeatureWrapper>);
     }
   }
   render() {
