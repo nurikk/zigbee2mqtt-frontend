@@ -73,7 +73,7 @@
         "lodash": "^4.17.20",
         "mini-css-extract-plugin": "^1.0.0",
         "notyf": "^3.9.0",
-        "prettier": "^2.1.1",
+        "prettier": "^2.1.2",
         "react": "^16.14.0",
         "react-dom": "^16.14.0",
         "react-router-dom": "^5.2.0",
