@@ -1,3 +1,17 @@
+## [0.2.47](https://github.com/nurikk/z2m-frontend/compare/0.2.46...0.2.47) (2020-10-25)
+
+
+### Bug Fixes
+
+* **toggle:** remove left padding from button ([911f5f2](https://github.com/nurikk/z2m-frontend/commit/911f5f2284b559521d7121acf537cd3836726ec1))
+
+
+### Features
+
+* **toggle:** add state labels ([82d8aeb](https://github.com/nurikk/z2m-frontend/commit/82d8aeb6765e94e406e0a8b1892cea5da80683d1))
+
+
+
 ## [0.2.46](https://github.com/nurikk/z2m-frontend/compare/0.2.45...0.2.46) (2020-10-25)
 
 
