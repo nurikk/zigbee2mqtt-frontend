@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { AnyColor, ColorXYFeature } from "../../../../types";
+import { withEndpoint } from "../../../../utils";
 import ColorEditor from "../../../color-editor/color-editor";
 
 import { BaseFeatureProps } from "../../base";
@@ -12,7 +13,7 @@ export default class Light extends Component<ColorProps, {}> {
     const { deviceState, feature, onChange } = this.props;
     const value = {};
     for (const innerFeature of feature.features) {
-      value[innerFeature.property] = deviceState[feature.property]?.[innerFeature.property];
+      value[innerFeature.property] = deviceState[withEndpoint(feature.property, feature.endpoint)]?.[withEndpoint(innerFeature.property, innerFeature.endpoint)];
     }
 
     return <ColorEditor

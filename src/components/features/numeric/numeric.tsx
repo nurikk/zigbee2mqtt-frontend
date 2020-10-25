@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 
 import { NumericFeature } from "../../../types";
+import { withEndpoint } from "../../../utils";
 import { ValueWithLabelOrPrimitive } from "../../enum-editor/enum-editor";
 import RangeEditor from "../../range-editor/range-editor";
 import { BaseFeatureProps } from "../base";
@@ -15,15 +16,15 @@ export default class Numeric extends Component<NumericProps> {
     return <RangeEditor
       onChange={(value) => onChange(endpoint, { [property]: value as object })}
       name={name}
-      value={deviceState[property] as number ?? 0}
+      value={deviceState[withEndpoint(property, endpoint)] as number ?? 0}
       min={valueMin}
       max={valueMax}
       steps={steps}
     />
   }
   renderView() {
-    const { feature: { property, unit }, deviceState } = this.props;
-    return <Fragment><strong>{deviceState[property] ?? "N/A"}</strong> {unit ? <small className="text-muted">{unit}</small> : null}</Fragment>
+    const { feature: { property, endpoint, unit }, deviceState } = this.props;
+    return <Fragment><strong>{deviceState[withEndpoint(property, endpoint)] ?? "N/A"}</strong> {unit ? <small className="text-muted">{unit}</small> : null}</Fragment>
   }
   render() {
     const { feature: { access } } = this.props;

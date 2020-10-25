@@ -7,6 +7,7 @@ type SwitchProps = BaseFeatureProps<SwitchFeature>
 export default class Switch extends Component<SwitchProps> {
   render() {
     const { deviceState, device, feature, onChange } = this.props;
-    return <Composite type="switch" feature={feature} device={device} deviceState={deviceState} onChange={onChange} />
+
+    return <Composite endpoint={feature.endpoint} type="switch" feature={feature} device={device} deviceState={deviceState} onChange={onChange} />
   }
 }

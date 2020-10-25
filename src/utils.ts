@@ -1,81 +1,12 @@
 
-import { Device } from "./types";
-import { GraphI, ZigbeeRelationship, NodeI, Target, Source } from "./components/map/types";
+import { Device, Endpoint } from "./types";
+import { GraphI, NodeI } from "./components/map/types";
 import { format } from 'timeago.js';
 
 export const genDeviceDetailsLink = (deviceIdentifier: string | number): string => (`/device/${deviceIdentifier}`);
 
 export const toHex = (input: number, padding = 4): string => {
     return `0x${(`${'0'.repeat(padding)}${input.toString(16)}`).substr(-1 * padding).toUpperCase()}`;
-};
-
-/**
- * Returns an array with arrays of the given size.
- *
- * @param inputArr {Array} array to split
- * @param chunkSize {Integer} Size of every group
- */
-export function chunkArray<T>(inputArr: T[], chunkSize: number): T[][] {
-
-    const results = [];
-    while (inputArr.length) {
-        results.push(inputArr.splice(0, chunkSize));
-    }
-    return results;
-}
-
-export const encodeGetParams = (data: Map<string, string | number>): string => Object.keys(data).map((key) => [key, data[key]].map(encodeURIComponent).join("=")).join("&");
-
-
-
-export type LoadableFileTypes = "js" | "css";
-
-export const fetchJs = (url: string): Promise<unknown> => {
-    return new Promise((resolve, reject) => {
-        const scriptElement = document.createElement("script");
-        scriptElement.addEventListener("load", resolve);
-        scriptElement.addEventListener("error", reject);
-        scriptElement.setAttribute("type", "text/javascript");
-        scriptElement.setAttribute("src", url);
-        document.getElementsByTagName("head")[0].appendChild(scriptElement);
-    });
-};
-
-export const fetchStyle = (url: string): Promise<unknown> => {
-    return new Promise((resolve, reject) => {
-        const link = document.createElement("link");
-        link.addEventListener("load", resolve);
-        link.addEventListener("error", reject);
-        link.setAttribute("type", "text/css");
-        link.setAttribute("rel", "stylesheet");
-        link.setAttribute("href", url);
-        document.getElementsByTagName("head")[0].appendChild(link)
-    });
-};
-
-export function last<T>(collection: T[]): T {
-    return collection[collection.length - 1];
-}
-export function arrayUnique<T>(input: T[]): T[] {
-    return input.filter((v, i, a) => a.indexOf(v) === i);
-}
-
-
-
-export const bitOps = {
-    getBit: (n: number, bitIndex: number): number => {
-        const bitMask = 1 << bitIndex;
-        const result = n & bitMask;
-        return result >>> bitIndex;
-    },
-    setBit: (n: number, bitIndex: number): number => {
-        const bitMask = 1 << bitIndex;
-        return n | bitMask;
-    },
-    clearBit: (n: number, bitIndex: number): number => {
-        const bitMask = ~(1 << bitIndex);
-        return n & bitMask;
-    }
 };
 
 
@@ -132,11 +63,6 @@ export const sanitizeGraph = (inGraph: GraphI): GraphI => {
     return inGraph;
 };
 
-export const isObject = (obj: unknown): boolean => {
-    return obj === Object(obj);
-}
-
-
 export const getDeviceDisplayName = (device: Device): string => {
     return `${device.friendly_name} ${device.definition?.model ? `(${device.definition?.model})` : ''}`;
 };
@@ -155,3 +81,5 @@ export const scale = (inputY: number, yRange: Array<number>, xRange: Array<numbe
 
     return outputX;
 };
+
+export const withEndpoint = (name: string, endpoint: Endpoint) => endpoint ? `${name}_${endpoint}` : name;

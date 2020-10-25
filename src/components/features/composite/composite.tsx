@@ -1,6 +1,6 @@
 import React, { Component, FunctionComponent, PropsWithChildren } from "react";
-import { ColorXYFeature, CompositeFeature, EnumFeature, GenericExposedFeature } from "../../../types";
-import { scale } from "../../../utils";
+import { ColorXYFeature, CompositeFeature, Endpoint, EnumFeature, GenericExposedFeature } from "../../../types";
+import { scale, withEndpoint } from "../../../utils";
 import { isBinaryFeature, isCompositeFeature, isCoverFeature, isEnumFeature, isLightFeature, isLockFeature, isNumericFeature, isSwitchFeature } from "../../device-page/type-guards";
 
 import Numeric from "../numeric/numeric";
@@ -20,6 +20,7 @@ type CompositeType = "composite" | "light" | "switch" | "cover" | "lock";
 
 interface CompositeProps extends BaseFeatureProps<CompositeFeature> {
   type: CompositeType;
+  endpoint?: Endpoint;
 }
 
 
@@ -37,7 +38,7 @@ const stepsConfiguration = {
 const FeatureWrapper: FunctionComponent<PropsWithChildren<{ feature: CompositeFeature | GenericExposedFeature }>> = (props) => {
   const { children, feature } = props;
   return <div className="row mb-3">
-    <label className="col-3 col-form-label"><strong title={JSON.stringify(feature)}>{feature.name}</strong></label>
+    <label className="col-3 col-form-label"><strong title={JSON.stringify(feature)}>{withEndpoint(feature.name, feature.endpoint)}</strong></label>
     <div className="col-9">
       {children}
     </div>
@@ -45,14 +46,16 @@ const FeatureWrapper: FunctionComponent<PropsWithChildren<{ feature: CompositeFe
 }
 
 export default class Composite extends Component<CompositeProps, {}> {
-  renderFeature = (feature: CompositeFeature | GenericExposedFeature) => {
-    const { type, deviceState, device, onChange } = this.props;
+  renderFeature = (originalFeature: CompositeFeature | GenericExposedFeature) => {
+    const { endpoint, type, deviceState, device, onChange } = this.props;
+    const feature = { endpoint, ...originalFeature };
+
     if (isBinaryFeature(feature)) {
       return <FeatureWrapper
         key={JSON.stringify(feature)}
         feature={feature}>
         <Binary
-          feature={feature}
+          feature={{ endpoint, ...feature }}
           device={device}
           deviceState={deviceState}
           onChange={onChange}
