@@ -12,6 +12,7 @@ import { ForceLink, forceLink, forceCollide, forceCenter, forceSimulation, force
 import { select, selectAll } from "d3-selection";
 import { forceManyBodyReuse } from "d3-force-reuse"
 import { zoom, zoomIdentity, ZoomTransform } from "d3-zoom";
+import { linkTypes } from "./consts";
 
 export interface MouseEventsResponderNode {
     onMouseOver?: (arg0: NodeI, el: SVGPolygonElement | SVGCircleElement | SVGImageElement) => void;
@@ -25,7 +26,7 @@ interface MapState {
     height: number;
     visibleLinks: ZigbeeRelationship[];
 }
-const angle = ( s: Source, t: Target) => Math.atan2(t.y - s.y, t.x - s.x);
+const angle = (s: Source, t: Target) => Math.atan2(t.y - s.y, t.x - s.x);
 const xpos = (offset: number, s: Source, t: Target) => offset * Math.cos(angle(s, t)) + s.x;
 const ypos = (offset: number, s: Source, t: Target) => offset * Math.sin(angle(s, t)) + s.y;
 
@@ -69,10 +70,11 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
         const linkLabel = selectAll<SVGElement, LinkI>(
             `.${style.linkLabel}`
         );
+
         const ticked = (transform: ZoomTransform): void => {
             const radius = 40;
             const { width, height } = this.state;
-            link.attr("d", (d: LinkI): string => {
+            const computeLink = (d: LinkI): string => {
                 const src = d.source;
                 const dst = d.target;
                 const x1 = transform.applyX(Math.max(radius, Math.min(width - radius, src.x)));
@@ -86,7 +88,8 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
                     return `M${x1},${y1} A${dr},${dr} 0 0, 1${x2},${y2}`;
                 }
                 return `M ${x1} ${y1} L ${x2} ${y2}`;
-            });
+            }
+            link.attr("d", computeLink);
 
             linkLabel
                 .attr('text-anchor', (d) => d.repeated ? 'start' : 'end')
@@ -95,11 +98,12 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
 
             const imgXShift = 32 / 2;
             const imgYShift = 32 / 2;
-            node.attr("transform", d => {
+            const computeTransform = (d: NodeI) => {
                 const nodeX = Math.max(radius, Math.min(width - radius, transform.applyX(d.x))) - imgXShift;
                 const nodeY = Math.max(radius, Math.min(height - radius, transform.applyY(d.y))) - imgYShift;
                 return `translate(${nodeX}, ${nodeY})`;
-            });
+            }
+            node.attr("transform", computeTransform);
         };
 
         const links = networkGraph.links.filter(l => visibleLinks.includes(l.relationship));
@@ -191,10 +195,6 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
         const { width, height, visibleLinks } = this.state;
         const { networkGraph } = this.props;
         const links = networkGraph.links.filter(l => visibleLinks.includes(l.relationship));
-
-
-
-
         return (
             <svg ref={this.svgRef} viewBox={`0 0 ${width} ${height}`}>
                 <g className="everything">
@@ -246,29 +246,6 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
     }
     renderMapControls() {
         const { visibleLinks } = this.state;
-        interface LinkType {
-            title: string;
-            relationship: ZigbeeRelationship;
-        }
-        const linkTypes: LinkType[] = [
-            {
-                title: 'IsParent',
-                relationship: ZigbeeRelationship.NeigbhorIsParent
-            },
-            {
-                title: 'IsAChild',
-                relationship: ZigbeeRelationship.NeigbhorIsAChild
-            },
-            {
-                title: 'IsASibling',
-                relationship: ZigbeeRelationship.NeigbhorIsASibling
-            },
-            {
-                title: 'NoneOfTheAbove',
-                relationship: ZigbeeRelationship.NoneOfTheAbove
-            }
-
-        ];
         return <div className={style.controls}>
             {
                 linkTypes.map(linkType => (
