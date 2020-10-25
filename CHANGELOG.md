@@ -1,3 +1,19 @@
+## [0.2.41](https://github.com/nurikk/z2m-frontend/compare/0.2.40...0.2.41) (2020-10-25)
+
+
+### Bug Fixes
+
+* **color:** deprecate brightness parameter ([7601d8a](https://github.com/nurikk/z2m-frontend/commit/7601d8abc4633d546ba344ed95d5490a51058477))
+* **color:** remove margin ([3190e59](https://github.com/nurikk/z2m-frontend/commit/3190e5984b190cda443bb0fc85a61ceffbac3a55))
+* **numeric:** fix value setter ([deb255d](https://github.com/nurikk/z2m-frontend/commit/deb255d1ee010675a984ebba8cf5d476e5157aad))
+
+
+### Features
+
+* **exposes:** adopt property attribute ([75757cc](https://github.com/nurikk/z2m-frontend/commit/75757ccb0b28c4493c3cd4aa93cde31d3d3e180a))
+
+
+
 ## [0.2.40](https://github.com/nurikk/z2m-frontend/compare/0.2.39...0.2.40) (2020-10-25)
 
 
