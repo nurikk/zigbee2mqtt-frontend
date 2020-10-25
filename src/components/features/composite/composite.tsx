@@ -139,22 +139,17 @@ export default class Composite extends Component<CompositeProps, {}> {
               onChange={onChange} />
           </FeatureWrapper>
         default:
-          return (<FeatureWrapper
-            key={JSON.stringify(feature)}
-            feature={feature}>
-            <label className="col-3 col-form-label">Unknown feature {feature.type}(<strong>{feature.name}</strong>)</label>
-            <div className="col-9">{JSON.stringify(feature)}{JSON.stringify(deviceState)}</div>
-          </FeatureWrapper>);
+          break;
       }
     }
-    else {
-      return (<FeatureWrapper
-        key={JSON.stringify(feature)}
-        feature={feature}>
-        <label className="col-3 col-form-label">Unknown feature {feature.type}(<strong>{feature.name}</strong>)</label>
-        <div className="col-9">{JSON.stringify(feature)}{JSON.stringify(deviceState)}</div>
-      </FeatureWrapper>);
-    }
+
+    return (<FeatureWrapper
+      key={JSON.stringify(feature)}
+      feature={feature}>
+      <label className="col-3 col-form-label">Unknown feature {feature.type}(<strong>{feature.name}</strong>)</label>
+      <div className="col-9">{JSON.stringify(feature)}{JSON.stringify(deviceState)}</div>
+    </FeatureWrapper>);
+
   }
   render() {
     const { feature: { features } } = this.props;

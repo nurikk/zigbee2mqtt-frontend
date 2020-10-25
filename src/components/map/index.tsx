@@ -25,38 +25,20 @@ interface MapState {
     height: number;
     visibleLinks: ZigbeeRelationship[];
 }
+const angle = ( s: Source, t: Target) => Math.atan2(t.y - s.y, t.x - s.x);
+const xpos = (offset: number, s: Source, t: Target) => offset * Math.cos(angle(s, t)) + s.x;
+const ypos = (offset: number, s: Source, t: Target) => offset * Math.sin(angle(s, t)) + s.y;
 
-const xpos = (offset: number, s: Source, t: Target) => {
-    const angle = Math.atan2(t.y - s.y, t.x - s.x);
-    return offset * Math.cos(angle) + s.x;
+const distancesMap = {
+    BrokenLink: 450,
+    Router2Router: 300,
+    Coordinator2Router: 400,
+    Coordinator2EndDevice: 100,
+    EndDevice2Router: 100
 };
 
-const ypos = (offset: number, s: Source, t: Target) => {
-    const angle = Math.atan2(t.y - s.y, t.x - s.x);
-    return offset * Math.sin(angle) + s.y;
-};
 const getDistance = (d: LinkI): number => {
-    let distance = 200;
-    switch (d.linkType) {
-        case "BrokenLink":
-            distance = 450;
-            break;
-        case "Router2Router":
-            distance = 300;
-            break;
-        case "Coordinator2Router":
-            distance = 400;
-            break;
-        case "Coordinator2EndDevice":
-            distance = 100;
-            break;
-        case "EndDevice2Router":
-            distance = 100;
-            break;
-        default:
-            distance = 200;
-            break;
-    }
+    const distance = distancesMap[d.linkType] ?? 200;
     const depth = ~~(Math.min(4, d.depth));
     return 50 * depth + distance;
 };
