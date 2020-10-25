@@ -1,4 +1,4 @@
-import React, { Component, MouseEvent, ThHTMLAttributes} from "react";
+import React, { MouseEvent, ThHTMLAttributes} from "react";
 
 
 
