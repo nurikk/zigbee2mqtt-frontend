@@ -11,9 +11,8 @@
     "license": "MIT",
     "scripts": {
         "build": "npm run clean && webpack --config ./webpack.config.js --mode production",
-        "dev": "npm run clean && webpack --config ./webpack.config.js --mode development",
         "start": "concurrently 'npm run start:ws' 'npm run start:dev'",
-        "start:dev": "webpack-dev-server --config ./webpack.config.js --mode development",
+        "start:dev": "webpack serve --config ./webpack.config.js --mode development",
         "start:ws": "node ws.js",
         "clean": "rimraf ./dist",
         "postversion": "git push && git push --tags",

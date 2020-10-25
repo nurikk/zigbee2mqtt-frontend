@@ -4,12 +4,6 @@ declare namespace StyleCssNamespace {
         adaptive: string;
         'device-image': string;
         'device-pic': string;
-        mappings: string;
-        names: string;
-        sourceRoot: string;
-        sources: string;
-        sourcesContent: string;
-        version: string;
     }
 }
 
