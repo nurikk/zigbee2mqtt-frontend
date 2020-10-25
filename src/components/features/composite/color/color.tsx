@@ -18,7 +18,6 @@ export default class Light extends Component<ColorProps, {}> {
     return <ColorEditor
       onChange={(v) => onChange(feature.endpoint, { [feature.property]: v })}
       value={value as AnyColor}
-      brightness={deviceState.brightness}
       format={feature.name} />
   }
 }
