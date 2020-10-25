@@ -19,7 +19,7 @@ const Toggle: FunctionComponent<ToggleProps> = (props) => {
   const onCheckboxChange = (e: ChangeEvent<HTMLInputElement>) => onChange({ [name]: e.target.checked ? valueOn : valueOff });
   return (
     <Fragment>
-      <Button<unknown> className="btn btn-link" item={valueOff} onClick={(item) => onChange({ [name]: item })}>{valueOff}</Button>
+      <Button<unknown> className="btn btn-link pl-0" item={valueOff} onClick={(item) => onChange({ [name]: item })}>{valueOff}</Button>
       <div className="form-check form-switch d-inline-block">
         <input className="form-check-input" type="checkbox" id={id} checked={value === valueOn} onChange={onCheckboxChange} />
         {label ? <label className="form-check-label" htmlFor={id}>{label}</label> : null}
