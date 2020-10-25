@@ -14,7 +14,7 @@ export default class Numeric extends Component<NumericProps> {
   renderEditor() {
     const { feature: { endpoint, property, value_max, value_min }, deviceState, steps, onChange } = this.props;
     return <RangeEditor
-      onChange={(value) => onChange(endpoint, value as object)}
+      onChange={(value) => onChange(endpoint, { [property]: value as object })}
       name={name}
       value={deviceState[property] as number ?? 0}
       min={value_min}
