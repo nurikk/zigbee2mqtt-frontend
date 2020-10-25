@@ -88,8 +88,8 @@ export interface BridgeInfo {
 
 export type PowerSource = "Battery" | "Mains (single phase)" | "DC Source";
 
-export type GenericFeatureType = "numeric" | "binary" | "enum" | "json";
-export type ComposeiteFeatureType = "light" | "switch" | "cover" | "lock";
+export type GenericFeatureType = "numeric" | "binary" | "enum";
+export type ComposeiteFeatureType = "light" | "switch" | "cover" | "lock" | "composite";
 export type AllPossibleFeatures = GenericFeatureType & ComposeiteFeatureType;
 export type FeatureAccessMode = "r" | "w" | "rw";
 export interface GenericExposedFeature {
@@ -97,6 +97,7 @@ export interface GenericExposedFeature {
     name: string;
     access?: FeatureAccessMode;
     endpoint?: Endpoint;
+    property?: string;
 }
 
 export interface BinaryFeature extends GenericExposedFeature {
@@ -125,12 +126,6 @@ export interface EnumFeature extends GenericExposedFeature {
     values: unknown[];
 }
 
-export interface JsonFeature extends GenericExposedFeature {
-    type: "json";
-    schema: object;
-}
-
-
 export interface LightFeature extends CompositeFeature {
     type: "light";
 }
@@ -145,6 +140,12 @@ export interface CoverFeature extends CompositeFeature {
 
 export interface LockFeature extends CompositeFeature {
     type: "lock";
+}
+
+export interface ColorXYFeature extends CompositeFeature {
+    type: "composite";
+    name: "color_xy";
+    features: NumericFeature[];
 }
 
 export interface DeviceDefinition {

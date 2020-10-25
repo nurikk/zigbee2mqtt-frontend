@@ -11,7 +11,7 @@ type RangeProps = {
 }
 
 const RangeEditor: FunctionComponent<RangeProps & Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'>> = (props) => {
-  const { onChange, name, value, min = 0, max = 100, steps, ...rest } = props;
+  const { onChange, name, value, min, max, steps, ...rest } = props;
   const [currentValue, setCurrentValue] = useState<number>(value)
 
   useEffect(() => {
@@ -19,7 +19,7 @@ const RangeEditor: FunctionComponent<RangeProps & Omit<InputHTMLAttributes<HTMLI
   }, [value]);
   return <div className="input-group">
     {steps ? <EnumEditor name={name} values={steps} onChange={onChange} /> : null}
-    <input
+    {min !== undefined && max !== undefined ? <input
       min={min}
       max={max}
       type="range"
@@ -28,7 +28,15 @@ const RangeEditor: FunctionComponent<RangeProps & Omit<InputHTMLAttributes<HTMLI
       onChange={e => setCurrentValue(e.target.valueAsNumber)}
       onMouseUp={(() => onChange(name ? { [name]: currentValue } : currentValue))}
       {...rest}
-    />
+    /> :
+      <input
+        type="number"
+        className="form-control"
+        value={currentValue}
+        onChange={e => setCurrentValue(e.target.valueAsNumber)}
+        {...rest}
+      />
+    }
   </div>
 }
 

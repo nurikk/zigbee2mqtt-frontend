@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/camelcase */
 import React, { Component, FunctionComponent, PropsWithChildren } from "react";
-import { CompositeFeature, EnumFeature, GenericExposedFeature } from "../../../types";
+import { ColorXYFeature, CompositeFeature, EnumFeature, GenericExposedFeature } from "../../../types";
 import { scale } from "../../../utils";
-import { isBinaryFeature, isCoverFeature, isEnumFeature, isLightFeature, isLockFeature, isNumericFeature, isSwitchFeature } from "../../device-page/type-guards";
+import { isBinaryFeature, isCompositeFeature, isCoverFeature, isEnumFeature, isLightFeature, isLockFeature, isNumericFeature, isSwitchFeature } from "../../device-page/type-guards";
 
 import Numeric from "../numeric/numeric";
 
@@ -14,6 +14,8 @@ import Light from "../light/light";
 import Switch from "../switch/switch";
 import Cover from "../cover/cover";
 import Lock from "../lock/lock";
+import Color from "../composite/color/color";
+
 
 type CompositeType = "composite" | "light" | "switch" | "cover" | "lock";
 
@@ -33,10 +35,10 @@ const stepsConfiguration = {
   }
 };
 
-const FeatureWrapper: FunctionComponent<PropsWithChildren<{ name: string }>> = (props) => {
-  const { children, name } = props;
+const FeatureWrapper: FunctionComponent<PropsWithChildren<{ feature: CompositeFeature | GenericExposedFeature }>> = (props) => {
+  const { children, feature } = props;
   return <div className="row mb-3">
-    <label className="col-3 col-form-label"><strong>{name}</strong></label>
+    <label className="col-3 col-form-label"><strong title={JSON.stringify(feature)}>{feature.name}</strong></label>
     <div className="col-9">
       {children}
     </div>
@@ -46,12 +48,10 @@ const FeatureWrapper: FunctionComponent<PropsWithChildren<{ name: string }>> = (
 export default class Composite extends Component<CompositeProps, {}> {
   renderFeature = (feature: CompositeFeature | GenericExposedFeature) => {
     const { type, deviceState, device, onChange } = this.props;
-    const steps = stepsConfiguration[type] ?? {};
-
     if (isBinaryFeature(feature)) {
       return <FeatureWrapper
         key={JSON.stringify(feature)}
-        name={feature.name}>
+        feature={feature}>
         <Binary
           feature={feature}
           device={device}
@@ -63,19 +63,19 @@ export default class Composite extends Component<CompositeProps, {}> {
     } else if (isNumericFeature(feature)) {
       return <FeatureWrapper
         key={JSON.stringify(feature)}
-        name={feature.name}>
+        feature={feature}>
         <Numeric
           feature={feature}
           device={device}
           deviceState={deviceState}
           onChange={onChange}
-          steps={steps[feature.name]}
+          steps={stepsConfiguration[type]?.[feature.name]}
         />
       </FeatureWrapper>
     } else if (isEnumFeature(feature)) {
       return <FeatureWrapper
         key={JSON.stringify(feature)}
-        name={feature.name}>
+        feature={feature}>
         <Enum
           feature={feature as EnumFeature}
           device={device}
@@ -124,11 +124,24 @@ export default class Composite extends Component<CompositeProps, {}> {
           onChange={onChange}
         />
       )
+    } else if (isCompositeFeature(feature)) {
+      switch (feature.name) {
+        case "color_xy":
+          return <FeatureWrapper
+            key={JSON.stringify(feature)}
+            feature={feature}>
+            <Color key={JSON.stringify(feature)}
+              feature={feature as ColorXYFeature}
+              device={device}
+              deviceState={deviceState}
+              onChange={onChange} />
+          </FeatureWrapper>
+      }
     }
     else {
       return (<FeatureWrapper
         key={JSON.stringify(feature)}
-        name={feature.name}>
+        feature={feature}>
         <label className="col-3 col-form-label">Unknown feature {feature.type}(<strong>{feature.name}</strong>)</label>
         <div className="col-9">{JSON.stringify(feature)}{JSON.stringify(deviceState)}</div>
       </FeatureWrapper>);

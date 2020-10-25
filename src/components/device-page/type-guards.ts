@@ -27,3 +27,7 @@ export function isCoverFeature(feature: GenericExposedFeature | CompositeFeature
 export function isLockFeature(feature: GenericExposedFeature | CompositeFeature): feature is LockFeature {
   return feature.type === "lock";
 }
+
+export function isCompositeFeature(feature: GenericExposedFeature | CompositeFeature): feature is CompositeFeature {
+  return feature.type === "composite";
+}

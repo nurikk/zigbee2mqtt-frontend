@@ -1,10 +1,10 @@
 import React, { FunctionComponent, InputHTMLAttributes, useEffect, useState } from "react";
 import * as convertColors from "color-convert";
-
-import { AnyColor, HueSaturationColor, XYColor } from "../../types";
-
+import { AnyColor, XYColor, HueSaturationColor } from "../../types";
 import { scale } from "../../utils";
 import Button from "../button";
+
+
 type Payload = AnyColor;
 
 export type ColorFormat = "color_xy" | "color_hs";
@@ -57,9 +57,9 @@ const rgbToTargetFormat = (source: string, brightness: number, targetFormat: Col
 
 }
 const pridePallete = ['#FF0018', '#FFA52C', '#FFFF41', '#008018', '#0000F9', '#86007D'];
-const Color: FunctionComponent<ColorProps & Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'value'>> = (props) => {
+const ColorEditor: FunctionComponent<ColorProps & Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'value'>> = (props) => {
 
-  const { onChange, value = {} as AnyColor, format, brightness = 254, name = 'color', steps = pridePallete, ...rest } = props;
+  const { onChange, value = {} as AnyColor, format, brightness = 254, steps = pridePallete, ...rest } = props;
   const [currentColor, setCurrentColor] = useState<string>(toRGB(value, brightness, format));
   useEffect(() => {
     setCurrentColor(toRGB(value, brightness, format))
@@ -74,7 +74,7 @@ const Color: FunctionComponent<ColorProps & Omit<InputHTMLAttributes<HTMLInputEl
           key={step}
           item={step}
           title={step}
-          onClick={(item) => onChange({ [name]: rgbToTargetFormat(item, brightness, format) })}>&nbsp;&nbsp;&nbsp;</Button>)
+          onClick={(item) => onChange(rgbToTargetFormat(item, brightness, format))}>&nbsp;&nbsp;&nbsp;</Button>)
       }
     </div>
     <input
@@ -82,7 +82,7 @@ const Color: FunctionComponent<ColorProps & Omit<InputHTMLAttributes<HTMLInputEl
       className="form-control form-control-color border-0 p-0"
       value={currentColor}
       onChange={e => {
-        onChange({ [name]: rgbToTargetFormat(e.target.value, brightness, format) })
+        onChange(rgbToTargetFormat(e.target.value, brightness, format))
       }}
       {...rest}
     />
@@ -90,4 +90,4 @@ const Color: FunctionComponent<ColorProps & Omit<InputHTMLAttributes<HTMLInputEl
 
 }
 
-export default Color;
+export default ColorEditor;
