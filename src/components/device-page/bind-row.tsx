@@ -62,8 +62,8 @@ export default class BindRow extends Component<BindRowProps, BindRowState> {
         const { stateRule } = this.state;
         if (type === "device") {
             const endpoints = getEndpoints(destination);
-            // eslint-disable-next-line @typescript-eslint/camelcase
-            stateRule.target.ieee_address = (destination as Device).ieee_address;
+
+            stateRule.target['ieee_address'] = (destination as Device)['ieee_address'];
             stateRule.target.type = "endpoint";
             stateRule.target.endpoint = endpoints[0];
             delete stateRule.target.id;

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/camelcase */
 import "./main.css";
 
 import "notyf/notyf.min.css";

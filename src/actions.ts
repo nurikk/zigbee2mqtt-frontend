@@ -122,11 +122,10 @@ const actions = (store: Store<GlobalState>): object => ({
         to: string,
         homeassistantRename: boolean
     ): Promise<void> => {
-        // eslint-disable-next-line @typescript-eslint/camelcase
         api.send("bridge/request/device/rename", {
             from,
             to,
-            homeassistant_rename: homeassistantRename,
+            'homeassistant_rename': homeassistantRename,
         });
         return Promise.resolve();
     },
