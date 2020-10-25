@@ -1,3 +1,12 @@
+## [0.2.40](https://github.com/nurikk/z2m-frontend/compare/0.2.39...0.2.40) (2020-10-25)
+
+
+### Features
+
+* **exposes:** implement color_xy feature ([9ba97a8](https://github.com/nurikk/z2m-frontend/commit/9ba97a82e0ed7c1509f35cd32fa9d07023109d43))
+
+
+
 ## [0.2.39](https://github.com/nurikk/z2m-frontend/compare/0.2.38...0.2.39) (2020-10-22)
 
 
