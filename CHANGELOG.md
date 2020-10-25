@@ -1,3 +1,12 @@
+## [0.2.46](https://github.com/nurikk/z2m-frontend/compare/0.2.45...0.2.46) (2020-10-25)
+
+
+### Bug Fixes
+
+* **exposes:** better feature endpoint handling ([bbb02ca](https://github.com/nurikk/z2m-frontend/commit/bbb02caf8646755bdb7f964ab29c56193b2c8ef0))
+
+
+
 ## [0.2.45](https://github.com/nurikk/z2m-frontend/compare/0.2.43...0.2.45) (2020-10-25)
 
 
