@@ -39,7 +39,7 @@ const FeatureWrapper: FunctionComponent<PropsWithChildren<{ feature: CompositeFe
   const { children, feature } = props;
   return <div className="row mb-3">
     <label className="col-3 col-form-label"><strong title={JSON.stringify(feature)}>{withEndpoint(feature.name, feature.endpoint)}</strong></label>
-    <div className="col-9">
+    <div className="col-9 d-flex align-items-center">
       {children}
     </div>
   </div>
