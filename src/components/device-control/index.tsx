@@ -50,7 +50,6 @@ export class DeviceControlGroup extends Component<DeviceControlGroupProps & Devi
         this.setState({
             isRenameModalOpened: false
         });
-
     };
 
 
@@ -99,12 +98,7 @@ export class DeviceControlGroup extends Component<DeviceControlGroupProps & Devi
                 <Modal isOpen={isRenameModalOpened}>
                     <ModalHeader>
                         <h3>Rename device</h3>
-                        <button
-                            type="button"
-                            className="close"
-                            aria-label="Close"
-                            onClick={this.toggleRenameModal}
-                        >
+                        <button type="button" className="close" aria-label="Close" onClick={this.toggleRenameModal}>
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </ModalHeader>
@@ -119,23 +113,10 @@ export class DeviceControlGroup extends Component<DeviceControlGroupProps & Devi
                                 <label className="form-check-label" htmlFor={`hass${device.ieee_address}`}>Update Home Assistant entity ID</label>
                             </div>
                         ) : null}
-
                     </ModalBody>
                     <ModalFooter>
-                        <button
-                            type="button"
-                            className="btn btn-secondary"
-                            onClick={this.toggleRenameModal}
-                        >
-                            Close
-                        </button>
-                        <button
-                            type="button"
-                            className="btn btn-primary"
-                            onClick={this.onRenameClick}
-                        >
-                            Save changes
-                        </button>
+                        <button type="button" className="btn btn-secondary" onClick={this.toggleRenameModal}>Close</button>
+                        <button type="button" className="btn btn-primary" onClick={this.onRenameClick}>Save changes</button>
                     </ModalFooter>
                 </Modal></>
         )
@@ -147,14 +128,7 @@ export class DeviceControlGroup extends Component<DeviceControlGroupProps & Devi
             <><Modal isOpen={isDeviceRemovalModalOpened}>
                 <ModalHeader>
                     <h3>Remove device</h3>
-                    <button
-                        type="button"
-                        className="close"
-                        aria-label="Close"
-                        onClick={this.toggleDeviceRemovalModal}
-                    >
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <button type="button" className="close" aria-label="Close" onClick={this.toggleDeviceRemovalModal}><span aria-hidden="true">&times;</span></button>
                 </ModalHeader>
                 <ModalBody>
                     <div className="form-check form-switch">
@@ -165,24 +139,10 @@ export class DeviceControlGroup extends Component<DeviceControlGroupProps & Devi
                         <input className="form-check-input" name="block" checked={removeParams.block} type="checkbox" id={`block${device.ieee_address}`} onChange={this.onDeviceRemovalParamChange} />
                         <label className="form-check-label" htmlFor={`block${device.ieee_address}`}>Block from joining again</label>
                     </div>
-
-
                 </ModalBody>
                 <ModalFooter>
-                    <button
-                        type="button"
-                        className="btn btn-secondary"
-                        onClick={this.toggleDeviceRemovalModal}
-                    >
-                        Close
-                    </button>
-                    <button
-                        type="button"
-                        className="btn btn-danger"
-                        onClick={this.onRemoveClick}
-                    >
-                        Delete
-                    </button>
+                    <button type="button" className="btn btn-secondary" onClick={this.toggleDeviceRemovalModal}>Close</button>
+                    <button type="button" className="btn btn-danger" onClick={this.onRemoveClick}>Delete</button>
                 </ModalFooter>
             </Modal>
                 <button onClick={this.toggleDeviceRemovalModal} className="btn btn-danger" title="Remove device"><i className={cx("fa", "fa-trash")} /></button></>
