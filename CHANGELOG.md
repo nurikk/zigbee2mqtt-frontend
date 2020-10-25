@@ -1,3 +1,12 @@
+## [0.2.45](https://github.com/nurikk/z2m-frontend/compare/0.2.43...0.2.45) (2020-10-25)
+
+
+### Bug Fixes
+
+* **exposes:** fix unknow color features ([9f81828](https://github.com/nurikk/z2m-frontend/commit/9f818288ef4206c7e4ddb819fcc54bc858ca5f88))
+
+
+
 ## [0.2.44](https://github.com/nurikk/z2m-frontend/compare/0.2.43...0.2.44) (2020-10-25)
 
 
