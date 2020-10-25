@@ -9,10 +9,10 @@ type ColorProps = BaseFeatureProps<ColorXYFeature>;
 
 export default class Light extends Component<ColorProps, {}> {
   render() {
-    const { deviceState, device, feature, onChange } = this.props;
+    const { deviceState, feature, onChange } = this.props;
     const value = {};
     for (const innerFeature of feature.features) {
-      value[innerFeature.name] = deviceState[feature.property]?.[innerFeature.name];
+      value[innerFeature.property] = deviceState[feature.property]?.[innerFeature.property];
     }
 
     return <ColorEditor

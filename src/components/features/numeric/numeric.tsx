@@ -12,20 +12,19 @@ interface NumericProps extends BaseFeatureProps<NumericFeature> {
 export default class Numeric extends Component<NumericProps> {
 
   renderEditor() {
-    const { feature: { endpoint, name, value_max, value_min }, deviceState, steps, onChange } = this.props;
+    const { feature: { endpoint, property, value_max, value_min }, deviceState, steps, onChange } = this.props;
     return <RangeEditor
       onChange={(value) => onChange(endpoint, value as object)}
       name={name}
-      value={deviceState[name] as number ?? 0}
+      value={deviceState[property] as number ?? 0}
       min={value_min}
       max={value_max}
       steps={steps}
     />
   }
   renderView() {
-    const { feature, deviceState } = this.props;
-    const { name, unit } = feature;
-    return <Fragment><strong>{deviceState[name] ?? "N/A"}</strong> {unit ? <small className="text-muted">{unit}</small> : null}</Fragment>
+    const { feature: { property, unit }, deviceState } = this.props;
+    return <Fragment><strong>{deviceState[property] ?? "N/A"}</strong> {unit ? <small className="text-muted">{unit}</small> : null}</Fragment>
   }
   render() {
     const { feature: { access } } = this.props;
