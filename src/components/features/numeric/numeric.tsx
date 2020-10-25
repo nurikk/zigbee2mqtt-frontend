@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/camelcase */
 import React, { Component, Fragment } from "react";
 
 import { NumericFeature } from "../../../types";
@@ -12,13 +11,13 @@ interface NumericProps extends BaseFeatureProps<NumericFeature> {
 export default class Numeric extends Component<NumericProps> {
 
   renderEditor() {
-    const { feature: { endpoint, property, value_max, value_min }, deviceState, steps, onChange } = this.props;
+    const { feature: { endpoint, property, value_max: valueMax, value_min: valueMin }, deviceState, steps, onChange } = this.props;
     return <RangeEditor
       onChange={(value) => onChange(endpoint, { [property]: value as object })}
       name={name}
       value={deviceState[property] as number ?? 0}
-      min={value_min}
-      max={value_max}
+      min={valueMin}
+      max={valueMax}
       steps={steps}
     />
   }

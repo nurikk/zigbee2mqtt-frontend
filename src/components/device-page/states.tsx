@@ -20,7 +20,6 @@ const fieldProps = {
         min: 0,
         max: 255
     },
-    // eslint-disable-next-line @typescript-eslint/camelcase
     color_temp: {
         min: 0,
         max: 512

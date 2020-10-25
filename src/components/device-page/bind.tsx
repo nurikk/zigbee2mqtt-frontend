@@ -72,8 +72,8 @@ export class Bind extends Component<BindProps & PropsFromStore & BindApi, BindSt
         const { device } = props;
         const endpoints = getEndpoints(device);
         const bidingRules = convertBidningsIntoNiceStructure(device);
-        // eslint-disable-next-line @typescript-eslint/camelcase
-        bidingRules.push({ isNew: Date.now(), target: {}, source: {ieee_address: device.ieee_address, endpoint: endpoints[0]}, clusters: [] } as NiceBindingRule);
+
+        bidingRules.push({ isNew: Date.now(), target: {}, source: {'ieee_address': device.ieee_address, endpoint: endpoints[0]}, clusters: [] } as NiceBindingRule);
         return {
             bidingRules
         };

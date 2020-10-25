@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/camelcase */
 import React, { Component } from "react";
 import { LockFeature } from "../../../types";
 import { BaseFeatureProps } from "../base";

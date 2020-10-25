@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/camelcase */
 import React, { Component } from "react";
 
 import { BinaryFeature } from "../../../types";
@@ -10,13 +9,13 @@ type BinaryProps = BaseFeatureProps<BinaryFeature>
 export default class Binary extends Component<BinaryProps> {
 
   renderEditor() {
-    const { feature: { endpoint, name, property, value_off, value_on }, deviceState, onChange } = this.props;
+    const { feature: { endpoint, name, property, value_off: valueOff, value_on: valueOn }, deviceState, onChange } = this.props;
     return <Toggle
       onChange={(value) => onChange(endpoint, value)}
       name={name}
       value={deviceState[property]}
-      value_on={value_on}
-      value_off={value_off}
+      valueOn={valueOn}
+      valueOff={valueOff}
     />
   }
   renderView() {
