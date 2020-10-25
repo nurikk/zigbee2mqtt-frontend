@@ -135,6 +135,13 @@ export default class Composite extends Component<CompositeProps, {}> {
               deviceState={deviceState}
               onChange={onChange} />
           </FeatureWrapper>
+        default:
+          return (<FeatureWrapper
+            key={JSON.stringify(feature)}
+            feature={feature}>
+            <label className="col-3 col-form-label">Unknown feature {feature.type}(<strong>{feature.name}</strong>)</label>
+            <div className="col-9">{JSON.stringify(feature)}{JSON.stringify(deviceState)}</div>
+          </FeatureWrapper>);
       }
     }
     else {
