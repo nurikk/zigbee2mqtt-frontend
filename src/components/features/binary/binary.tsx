@@ -10,19 +10,18 @@ type BinaryProps = BaseFeatureProps<BinaryFeature>
 export default class Binary extends Component<BinaryProps> {
 
   renderEditor() {
-    const { feature: {endpoint, name, value_off, value_on}, deviceState, onChange } = this.props;
+    const { feature: { endpoint, name, property, value_off, value_on }, deviceState, onChange } = this.props;
     return <Toggle
       onChange={(value) => onChange(endpoint, value)}
       name={name}
-      value={deviceState[name]}
+      value={deviceState[property]}
       value_on={value_on}
       value_off={value_off}
     />
   }
   renderView() {
-    const { feature, deviceState } = this.props;
-    const { name } = feature;
-    return <strong>{deviceState[name] ? 'TRUE' : 'FALSE'}</strong>
+    const { feature: { property }, deviceState } = this.props;
+    return <strong>{deviceState[property] ? 'TRUE' : 'FALSE'}</strong>
   }
   render() {
     const { feature: { access } } = this.props;
