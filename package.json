@@ -87,10 +87,6 @@
         "zip-webpack-plugin": "^3.0.0"
     },
     "main": "index.js",
-    "files": [
-        "index.js",
-        "dist/**/*"
-    ],
     "husky": {
         "hooks": {
             "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
