@@ -16,6 +16,8 @@ const ClustersComp: FunctionComponent<ClustersComp> = (props) => {
             <span>{label}</span>
             <ul>{clusters.map(cluster => <li key={cluster}><span>{cluster}</span></li>)}</ul>
         </li>)
+    } else {
+        return null;
     }
 
 }
