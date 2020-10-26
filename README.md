@@ -5,9 +5,6 @@
 # Demo
 [Demo](https://nurikk.github.io/z2m-frontend/)
 
-
-
-
 # Develop
 Install dependencies
 ```bash
