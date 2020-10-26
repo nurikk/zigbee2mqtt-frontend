@@ -1,20 +1,55 @@
 version: 2.1
 orbs:
   node: circleci/node@4.1.0
+
+defaults: &defaults
+  working_directory: ~/repo
+  docker:
+    - image: 'cimg/node:current'
+      auth:
+        username: nurikk
+        password: $DOCKERHUB_PASSWORD
 jobs:
   build:
-    docker:
-      - image: 'cimg/node:current'
-        auth:
-          username: nurikk
-          password: $DOCKERHUB_PASSWORD
+    <<: *defaults
     steps:
       - checkout
       - node/install-packages
       - run:
           name: Build
           command: npm run build
+      - persist_to_workspace:
+          root: ~/repo
+          paths: .
       - store_artifacts:
           path: dist/report.html
           destination: report.html
-
+  publish:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: Publish package
+          command: npm publish
+workflows:
+  version: 2
+  on_branch:
+    jobs:
+      - build
+  on_tags:
+    jobs:
+      - build:
+          filters:
+            tags:
+              only: /.*/
+            branches:
+              ignore: /.*/
+      - publish:
+          filters:
+            tags:
+              only: /.*/
+            branches:
+              ignore: /.*/
+          requires:
+            - build
