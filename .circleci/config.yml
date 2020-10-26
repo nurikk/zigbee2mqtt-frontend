@@ -23,7 +23,7 @@ jobs:
       - image: 'cimg/node:current'
     steps:
       - attach_workspace:
-            at: .
+          at: .
       - run:
         name: Publish to npm
         command: npm run publish
