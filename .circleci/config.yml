@@ -14,3 +14,26 @@ jobs:
       - store_artifacts:
           path: dist/report.html
           destination: report.html
+      - persist_to_workspace:
+        root: .
+          paths:
+            - '*'
+  publish:
+    docker:
+      - image: 'cimg/node:current'
+    steps:
+      - attach_workspace:
+            at: .
+      - run:
+        name: Publish to npm
+        command: npm run publish
+workflows:
+  build_and_publish:
+    filters:
+      tags:
+        only: /^\d+\.\d+\.\d+$/
+    jobs:
+      - build
+      - publish:
+          requires:
+            - build
