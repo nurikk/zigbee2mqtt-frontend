@@ -5,6 +5,9 @@ jobs:
   build:
     docker:
       - image: 'cimg/node:current'
+        auth:
+          username: nurikk
+          password: $DOCKERHUB_PASSWORD
     steps:
       - checkout
       - node/install-packages
