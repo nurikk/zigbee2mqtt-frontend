@@ -24,7 +24,7 @@ export default class Numeric extends Component<NumericProps> {
   }
   renderView() {
     const { feature: { property, endpoint, unit }, deviceState } = this.props;
-    return <Fragment><strong>{deviceState[withEndpoint(property, endpoint)] ?? "N/A"}</strong> {unit ? <small className="text-muted">{unit}</small> : null}</Fragment>
+    return <Fragment><strong>{deviceState[withEndpoint(property, endpoint)] ?? "N/A"}</strong> {unit ? <small className="text-muted ml-1">{unit}</small> : null}</Fragment>
   }
   render() {
     const { feature: { access } } = this.props;
