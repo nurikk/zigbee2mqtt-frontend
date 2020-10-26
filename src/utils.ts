@@ -81,5 +81,3 @@ export const scale = (inputY: number, yRange: Array<number>, xRange: Array<numbe
 
     return outputX;
 };
-
-export const withEndpoint = (name: string, endpoint: Endpoint) => endpoint ? `${name}_${endpoint}` : name;

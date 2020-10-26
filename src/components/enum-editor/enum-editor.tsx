@@ -9,7 +9,6 @@ export type ValueWithLabelOrPrimitive = {
 } | Primitive;
 
 type EnumProps = {
-  name?: string;
   onChange(value: unknown): void;
   values: ValueWithLabelOrPrimitive[];
 }
@@ -20,12 +19,12 @@ function isPrimitive(step: ValueWithLabelOrPrimitive): step is Primitive {
 }
 
 const EnumEditor: FunctionComponent<EnumProps> = (props) => {
-  const { name, onChange, values } = props;
+  const { onChange, values } = props;
   return <div className="btn-group mr-2">
     {
       values.map(v => <Button<ValueWithLabelOrPrimitive>
         className="btn btn-outline-secondary"
-        onClick={item => onChange(name ? { [name]: item } : item)}
+        onClick={item => onChange(item)}
         key={isPrimitive(v) ? v : v.title}
         item={isPrimitive(v) ? v : v.value}
       >{isPrimitive(v) ? v : v.title}</Button>)

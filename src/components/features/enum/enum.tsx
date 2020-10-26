@@ -11,8 +11,7 @@ export default class Enum extends Component<EnumProps> {
     const { onChange, feature: { name, values, endpoint } } = this.props;
     return (
       <EnumEditor
-        onChange={(value) => onChange(endpoint, value as object)}
-        name={name}
+        onChange={(value) => onChange(endpoint, {[name]: value})}
         values={values as unknown as ValueWithLabelOrPrimitive[]}
       />
     )

@@ -1,6 +1,6 @@
 import React, { Component, FunctionComponent, PropsWithChildren } from "react";
-import { ColorFeature, CompositeFeature, Endpoint, EnumFeature, GenericExposedFeature } from "../../../types";
-import { scale, withEndpoint } from "../../../utils";
+import { ColorFeature, CompositeFeature, EnumFeature, GenericExposedFeature } from "../../../types";
+import { scale } from "../../../utils";
 import { isBinaryFeature, isCompositeFeature, isCoverFeature, isEnumFeature, isLightFeature, isLockFeature, isNumericFeature, isSwitchFeature } from "../../device-page/type-guards";
 
 import Numeric from "../numeric/numeric";
@@ -37,7 +37,7 @@ const stepsConfiguration = {
 const FeatureWrapper: FunctionComponent<PropsWithChildren<{ feature: CompositeFeature | GenericExposedFeature }>> = (props) => {
   const { children, feature } = props;
   return <div className="row mb-3">
-    <label className="col-3 col-form-label"><strong title={JSON.stringify(feature)}>{withEndpoint(feature.name, feature.endpoint)}</strong></label>
+    <label className="col-3 col-form-label"><strong title={JSON.stringify(feature)}>{feature.name}{feature.endpoint ? `_${feature.endpoint}` : null}</strong></label>
     <div className="col-9 d-flex align-items-center">
       {children}
     </div>
