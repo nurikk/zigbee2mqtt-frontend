@@ -30,10 +30,10 @@ jobs:
 workflows:
   build_and_publish:
     jobs:
-      - build
+      - build:
         filters:
           tags:
             only: /^\d+\.\d+\.\d+$/
       - publish:
-          requires:
-            - build
+        requires:
+          - build
