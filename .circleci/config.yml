@@ -29,11 +29,11 @@ jobs:
         command: npm run publish
 workflows:
   build_and_publish:
-    filters:
-      tags:
-        only: /^\d+\.\d+\.\d+$/
     jobs:
       - build
+        filters:
+          tags:
+            only: /^\d+\.\d+\.\d+$/
       - publish:
           requires:
             - build
