@@ -1,7 +1,7 @@
 import React, { Component, FunctionComponent, PropsWithChildren } from "react";
 import { ColorFeature, CompositeFeature, EnumFeature, GenericExposedFeature } from "../../../types";
 import { scale } from "../../../utils";
-import { isBinaryFeature, isCompositeFeature, isCoverFeature, isEnumFeature, isLightFeature, isLockFeature, isNumericFeature, isSwitchFeature } from "../../device-page/type-guards";
+import { isBinaryFeature, isColorFeature, isCompositeFeature, isCoverFeature, isEnumFeature, isLightFeature, isLockFeature, isNumericFeature, isSwitchFeature } from "../../device-page/type-guards";
 
 import Numeric from "../numeric/numeric";
 
@@ -47,109 +47,39 @@ const FeatureWrapper: FunctionComponent<PropsWithChildren<{ feature: CompositeFe
 export default class Composite extends Component<CompositeProps, {}> {
   renderFeature = (feature: CompositeFeature | GenericExposedFeature) => {
     const { type, deviceState, device, onChange } = this.props;
-
+    const genericParams = { device, deviceState, onChange };
+    const wrapperParams = { key: JSON.stringify(feature), feature };
 
     if (isBinaryFeature(feature)) {
-      return <FeatureWrapper
-        key={JSON.stringify(feature)}
-        feature={feature}>
-        <Binary
-          feature={feature}
-          device={device}
-          deviceState={deviceState}
-          onChange={onChange}
-        />
+      return <FeatureWrapper {...wrapperParams}>
+        <Binary feature={feature} {...genericParams} />
       </FeatureWrapper>
-
     } else if (isNumericFeature(feature)) {
-      return <FeatureWrapper
-        key={JSON.stringify(feature)}
-        feature={feature}>
-        <Numeric
-          feature={feature}
-          device={device}
-          deviceState={deviceState}
-          onChange={onChange}
-          steps={stepsConfiguration[type]?.[feature.name]}
-        />
+      return <FeatureWrapper {...wrapperParams}>
+        <Numeric feature={feature} {...genericParams}
+          steps={stepsConfiguration[type]?.[feature.name]} />
       </FeatureWrapper>
     } else if (isEnumFeature(feature)) {
-      return <FeatureWrapper
-        key={JSON.stringify(feature)}
-        feature={feature}>
-        <Enum
-          feature={feature as EnumFeature}
-          device={device}
-          deviceState={deviceState}
-          onChange={onChange}
-
-        />
+      return <FeatureWrapper {...wrapperParams}>
+        <Enum feature={feature} {...genericParams} />
       </FeatureWrapper>
     } else if (isLightFeature(feature)) {
-      return (
-        <Light key={JSON.stringify(feature)}
-          feature={feature}
-          device={device}
-          deviceState={deviceState}
-          onChange={onChange}
-        />
-
-      )
+      return <Light feature={feature} {...genericParams} />
     } else if (isSwitchFeature(feature)) {
-      return (
-        <Switch key={JSON.stringify(feature)}
-          feature={feature}
-          device={device}
-          deviceState={deviceState}
-          onChange={onChange}
-        />
-      )
+      return <Switch feature={feature} {...genericParams} />
+    } else if (isCoverFeature(feature)) {
+      return <Cover feature={feature} {...genericParams} />
+    } else if (isLockFeature(feature)) {
+      return <Lock feature={feature} {...genericParams} />
+    } else if (isColorFeature(feature)) {
+      return <FeatureWrapper {...wrapperParams}>
+        <Color feature={feature} {...genericParams} />
+      </FeatureWrapper>
     }
-    else if (isCoverFeature(feature)) {
-      return (
-        <Cover key={JSON.stringify(feature)}
-          feature={feature}
-          device={device}
-          deviceState={deviceState}
-          onChange={onChange}
-        />
-      )
-    }
-    else if (isLockFeature(feature)) {
-      return (
-        <Lock
-          key={JSON.stringify(feature)}
-          feature={feature}
-          device={device}
-          deviceState={deviceState}
-          onChange={onChange}
-        />
-      )
-    } else if (isCompositeFeature(feature)) {
-      switch (feature.name) {
-        case "color_xy":
-        case "color_hs":
-          return <FeatureWrapper
-            key={JSON.stringify(feature)}
-            feature={feature}>
-            <Color key={JSON.stringify(feature)}
-              feature={feature as ColorFeature}
-              device={device}
-              deviceState={deviceState}
-              onChange={onChange} />
-          </FeatureWrapper>
-        default:
-          break;
-      }
-    }
-
-    return (<FeatureWrapper
-      key={JSON.stringify(feature)}
-      feature={feature}>
+    return (<FeatureWrapper {...wrapperParams}>
       <label className="col-3 col-form-label">Unknown feature {feature.type}(<strong>{feature.name}</strong>)</label>
       <div className="col-9">{JSON.stringify(feature)}{JSON.stringify(deviceState)}</div>
     </FeatureWrapper>);
-
   }
   render() {
     const { feature: { features } } = this.props;
