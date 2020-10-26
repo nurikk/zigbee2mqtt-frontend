@@ -1,7 +1,6 @@
 version: 2.1
 jobs:
   build:
-    working_directory: ~/mern-starter
     docker:
       - image: circleci/node:12.6.0
     steps:
@@ -21,3 +20,6 @@ jobs:
       - run:
           name: build
           command: npm run build
+      - store_artifacts:
+          path: dist/report.html
+          destination: report.html
