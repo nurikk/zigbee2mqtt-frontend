@@ -3,19 +3,13 @@ orbs:
   node: circleci/node@4.1.0
 jobs:
   build:
+    docker:
+      - image: 'cimg/node:stable'
     steps:
       - checkout
-      - restore_cache:
-          key: dependency-cache-{{ checksum "package-lock.json" }}
+      - node/install-packages
       - run:
-          name: install-npm-wee
-          command: npm install
-      - save_cache:
-          key: dependency-cache-{{ checksum "package-lock.json" }}
-          paths:
-            - ./node_modules
-      - run:
-          name: build
+          name: Build
           command: npm run build
       - store_artifacts:
           path: dist/report.html
