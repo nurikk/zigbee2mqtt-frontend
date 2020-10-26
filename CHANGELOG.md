@@ -1,3 +1,20 @@
+## [0.2.49](https://github.com/nurikk/z2m-frontend/compare/0.2.48...0.2.49) (2020-10-26)
+
+
+### Bug Fixes
+
+* **clusters:** fix empty clusters rendering ([8c70a00](https://github.com/nurikk/z2m-frontend/commit/8c70a00aae228f8bcdec2078363982e93180c790))
+* **exposes:** deprecate property name computation ([cbfee91](https://github.com/nurikk/z2m-frontend/commit/cbfee916142b6a2f5a72e96497f75e9372a98596))
+
+
+### Features
+
+* **composite:** deprecate endpoint from composite ([4fe1cbc](https://github.com/nurikk/z2m-frontend/commit/4fe1cbc9be8c02d172434ee5d6af8bc0e3dd0ab6))
+* **exposes:** implement color_hs ([e0fefef](https://github.com/nurikk/z2m-frontend/commit/e0fefef9ef7885de30ad2c86e9c19773ff29c44d))
+* **numeric:** add margin to unit ([208fdf9](https://github.com/nurikk/z2m-frontend/commit/208fdf9d36096491c51f8abe1c3c445d15f61974))
+
+
+
 ## [0.2.48](https://github.com/nurikk/z2m-frontend/compare/0.2.47...0.2.48) (2020-10-25)
 
 
