@@ -12,6 +12,6 @@ export default class Cover extends Component<CoverProps, {}> {
 
   render() {
     const { deviceState, device, feature, onChange } = this.props;
-    return <Composite endpoint={feature.endpoint} type="cover" feature={feature} device={device} deviceState={deviceState} onChange={onChange} />
+    return <Composite type="cover" feature={feature} device={device} deviceState={deviceState} onChange={onChange} />
   }
 }

@@ -20,7 +20,6 @@ type CompositeType = "composite" | "light" | "switch" | "cover" | "lock";
 
 interface CompositeProps extends BaseFeatureProps<CompositeFeature> {
   type: CompositeType;
-  endpoint?: Endpoint;
 }
 
 
@@ -46,16 +45,16 @@ const FeatureWrapper: FunctionComponent<PropsWithChildren<{ feature: CompositeFe
 }
 
 export default class Composite extends Component<CompositeProps, {}> {
-  renderFeature = (originalFeature: CompositeFeature | GenericExposedFeature) => {
-    const { endpoint, type, deviceState, device, onChange } = this.props;
-    const feature = { endpoint, ...originalFeature };
+  renderFeature = (feature: CompositeFeature | GenericExposedFeature) => {
+    const { type, deviceState, device, onChange } = this.props;
+
 
     if (isBinaryFeature(feature)) {
       return <FeatureWrapper
         key={JSON.stringify(feature)}
         feature={feature}>
         <Binary
-          feature={{ endpoint, ...feature }}
+          feature={feature}
           device={device}
           deviceState={deviceState}
           onChange={onChange}
