@@ -1,3 +1,12 @@
+## [0.2.50](https://github.com/nurikk/z2m-frontend/compare/0.2.49...0.2.50) (2020-10-26)
+
+
+### Bug Fixes
+
+* **composite:** add key to generic params ([07cae19](https://github.com/nurikk/z2m-frontend/commit/07cae198edfc1acf490e8e5b52b2fc734679eb18))
+
+
+
 ## [0.2.49](https://github.com/nurikk/z2m-frontend/compare/0.2.48...0.2.49) (2020-10-26)
 
 
