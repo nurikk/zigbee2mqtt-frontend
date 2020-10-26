@@ -16,8 +16,8 @@ jobs:
           destination: report.html
       - persist_to_workspace:
         root: .
-          paths:
-            - '*'
+        paths:
+          - '*'
   publish:
     docker:
       - image: 'cimg/node:current'
