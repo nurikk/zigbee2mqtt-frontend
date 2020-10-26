@@ -1,5 +1,5 @@
 import React, { Component, FunctionComponent, PropsWithChildren } from "react";
-import { ColorXYFeature, CompositeFeature, Endpoint, EnumFeature, GenericExposedFeature } from "../../../types";
+import { ColorFeature, CompositeFeature, Endpoint, EnumFeature, GenericExposedFeature } from "../../../types";
 import { scale, withEndpoint } from "../../../utils";
 import { isBinaryFeature, isCompositeFeature, isCoverFeature, isEnumFeature, isLightFeature, isLockFeature, isNumericFeature, isSwitchFeature } from "../../device-page/type-guards";
 
@@ -129,11 +129,12 @@ export default class Composite extends Component<CompositeProps, {}> {
     } else if (isCompositeFeature(feature)) {
       switch (feature.name) {
         case "color_xy":
+        case "color_hs":
           return <FeatureWrapper
             key={JSON.stringify(feature)}
             feature={feature}>
             <Color key={JSON.stringify(feature)}
-              feature={feature as ColorXYFeature}
+              feature={feature as ColorFeature}
               device={device}
               deviceState={deviceState}
               onChange={onChange} />

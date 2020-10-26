@@ -39,8 +39,8 @@ const toRGB = (source: AnyColor, sourceFormat: ColorFormat): string => {
 const rgbToTargetFormat = (source: string, targetFormat: ColorFormat): object => {
   switch (targetFormat) {
     case "color_hs":
-      const [h, s, v] = convertColors.hex.hsv(source);
-      return { h, s };
+      const [hue, saturation, v] = convertColors.hex.hsv(source);
+      return { hue, saturation };
 
 
     case "color_xy":

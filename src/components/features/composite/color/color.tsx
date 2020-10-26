@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import { AnyColor, ColorXYFeature } from "../../../../types";
+import { AnyColor, ColorFeature } from "../../../../types";
 import { withEndpoint } from "../../../../utils";
 import ColorEditor from "../../../color-editor/color-editor";
 
 import { BaseFeatureProps } from "../../base";
 
 
-type ColorProps = BaseFeatureProps<ColorXYFeature>;
+type ColorProps = BaseFeatureProps<ColorFeature>;
 
 export default class Light extends Component<ColorProps, {}> {
   render() {

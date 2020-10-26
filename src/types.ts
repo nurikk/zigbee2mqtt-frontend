@@ -142,9 +142,9 @@ export interface LockFeature extends CompositeFeature {
     type: "lock";
 }
 
-export interface ColorXYFeature extends CompositeFeature {
+export interface ColorFeature extends CompositeFeature {
     type: "composite";
-    name: "color_xy";
+    name: "color_xy" | "color_hs";
     features: NumericFeature[];
 }
 
