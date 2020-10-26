@@ -47,7 +47,7 @@ const FeatureWrapper: FunctionComponent<PropsWithChildren<{ feature: CompositeFe
 export default class Composite extends Component<CompositeProps, {}> {
   renderFeature = (feature: CompositeFeature | GenericExposedFeature) => {
     const { type, deviceState, device, onChange } = this.props;
-    const genericParams = { device, deviceState, onChange };
+    const genericParams = { key: JSON.stringify(feature), device, deviceState, onChange };
     const wrapperParams = { key: JSON.stringify(feature), feature };
 
     if (isBinaryFeature(feature)) {
