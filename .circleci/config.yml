@@ -31,4 +31,15 @@ jobs:
                name: Trigger GH action
                command: 'curl -XPOST -H "Authorization: token $GITHUB_TOKEN" -H "Accept: application/vnd.github.everest-preview+json" -H "Content-Type: application/json" https://api.github.com/repos/koenkk/zigbee2mqtt/dispatches --data "{\"event_type\": \"update_frontend\", \"client_payload\": { \"version\": \"$(node -p "require(\"./package.json\").version")\"}}"'
 
+workflows:
+  version: 2
+  untagged-build:
+    jobs:
+      - build
+  tagged-build:
+    jobs:
+      - build:
+          filters:
+            tags:
+              only: /^v.*/
 
