@@ -24,32 +24,11 @@ jobs:
       - store_artifacts:
           path: dist/report.html
           destination: report.html
-  publish:
-    <<: *defaults
-    steps:
-      - attach_workspace:
-          at: ~/repo
-      - run:
-          name: Publish package
-          command: npm publish
-workflows:
-  version: 2
-  on_branch:
-    jobs:
-      - build
-  on_tags:
-    jobs:
-      - build:
-          filters:
-            tags:
-              only: /.*/
-            branches:
-              ignore: /.*/
-      - publish:
-          filters:
-            tags:
-              only: /.*/
-            branches:
-              ignore: /.*/
-          requires:
-            - build
+      - when:
+          condition:
+            - << pipeline.git.tag >>
+          steps:
+            - run:
+              name: Publish package
+              command: npm publish
+
