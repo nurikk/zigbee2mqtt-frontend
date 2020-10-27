@@ -26,7 +26,7 @@ jobs:
           destination: report.html
       - when:
           condition:
-            - equal: [ true, << pipeline.git.tag >> ]
+            - << pipeline.git.tag >>
           steps:
             - run:
               name: Publish package
