@@ -27,7 +27,8 @@ jobs:
       - when:
           condition: << pipeline.git.tag >>
           steps:
-            - run:
-              name: Publish package
-              command: npm publish
+            - run: echo "my custom checkout"
+            # - run:
+            #   name: Publish package
+            #   command: npm publish
 
