@@ -30,4 +30,8 @@ jobs:
             - run:
                 name: Publish package
                 command: npm publish
+            - run:
+               name: Trigger GH action
+               command: 'curl -XPOST -H "Authorization: token $GITHUB_TOKEN" -H "Accept: application/vnd.github.everest-preview+json" -H "Content-Type: application/json" https://api.github.com/repos/koenkk/zigbee2mqtt/dispatches --data "{\"event_type\": \"update_frontend\", \"client_payload\": { \"version\": \"$(node -p "require(\"./package.json\").version")\"}}"'
+
 
