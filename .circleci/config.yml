@@ -18,9 +18,6 @@ jobs:
       - run:
           name: Build
           command: npm run build
-      - persist_to_workspace:
-          root: ~/repo
-          paths: .
       - store_artifacts:
           path: dist/report.html
           destination: report.html
