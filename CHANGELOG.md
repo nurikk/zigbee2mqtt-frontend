@@ -1,3 +1,15 @@
+## [0.2.51](https://github.com/nurikk/z2m-frontend/compare/0.2.50...0.2.51) (2020-10-27)
+
+
+### Bug Fixes
+
+* **build:** change node tag ([e939633](https://github.com/nurikk/z2m-frontend/commit/e93963336b4d73ea4569c49002bf57bfe568dae1))
+* **build:** fix ci build ([b93be45](https://github.com/nurikk/z2m-frontend/commit/b93be45e633b8ba3d7ccffff32ce81aa43a8eb65))
+* **build:** fix orbs ([5b17c67](https://github.com/nurikk/z2m-frontend/commit/5b17c67bc838c68725278e552a1ec8eecb60c6a7))
+* **build:** use prebuild image ([bf2393c](https://github.com/nurikk/z2m-frontend/commit/bf2393c7d243c8a33511422c8a2aa8493d0c680a))
+
+
+
 ## [0.2.50](https://github.com/nurikk/z2m-frontend/compare/0.2.49...0.2.50) (2020-10-26)
 
 
