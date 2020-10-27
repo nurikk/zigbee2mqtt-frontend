@@ -7,7 +7,7 @@
         "*.css"
     ],
     "name": "zigbee2mqtt-frontend",
-    "version": "0.2.57",
+    "version": "0.2.58",
     "license": "MIT",
     "scripts": {
         "build": "npm run clean && webpack --config ./webpack.config.js --mode production",
