@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "unistore/react";
-import actions, { BridgeApi, LegacyApi } from "../../actions";
+import actions, { BridgeApi, LegacyApi, UtilsApi } from "../../actions";
 import { GlobalState } from "../../store";
 import get from "lodash/get";
 import UniversalEditor from "../universal-editor";
 import isEmpty from "lodash/isEmpty";
 import { NavLink, Redirect, RouteComponentProps, withRouter } from "react-router-dom";
 import Button from "../button";
+import { download } from "../../utils";
 
 
 const settings = [
@@ -45,7 +46,7 @@ type UrlParams = {
 type SettingsPageProps = RouteComponentProps<UrlParams>;
 
 
-export class SettingsPage extends Component<SettingsPageProps & BridgeApi & GlobalState & LegacyApi, {}> {
+export class SettingsPage extends Component<SettingsPageProps & BridgeApi & GlobalState & LegacyApi & UtilsApi, {}> {
     updateConfig = (name: string, value: unknown): void => {
         const { updateConfigValue } = this.props;
         updateConfigValue(name, value);
@@ -100,10 +101,9 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
         ];
     }
     renderSettings() {
-        const { bridgeInfo } = this.props;
+        const { bridgeInfo, exportState } = this.props;
         return <div className="container">
-
-            <form className="mt-2">
+            <div className="mt-2">
                 {
                     !isEmpty(bridgeInfo) && settings.map(setting => (
                         <div key={setting.key} className="row">
@@ -123,8 +123,8 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
                 {
                     bridgeInfo.config?.advanced.legacy_api !== false ? this.renderLegacyApiSettings() : null
                 }
-
-            </form>
+            </div>
+            <Button<void> className="mt-2 btn btn-primary" onClick={exportState}>Download state</Button>
         </div>
 
     }

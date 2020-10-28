@@ -5,6 +5,12 @@ import { Store } from "unistore";
 
 import { Cluster, Device, TouchLinkDevice } from "./types";
 import api from "./api";
+import { endDevice2Router } from "./components/map/map.module.css";
+import { download } from "./utils";
+
+export interface UtilsApi {
+    exportState(): Promise<void>;
+}
 
 export interface TouchlinkApi {
     touchlinkScan(): Promise<void>;
@@ -204,6 +210,10 @@ const actions = (store: Store<GlobalState>): object => ({
 
     resetZnp(state): Promise<void> {
         api.send(`bridge/config/reset`, "");
+        return Promise.resolve();
+    },
+    exportState(state): Promise<void> {
+        download(JSON.stringify(state, null, 4), 'state.json');
         return Promise.resolve();
     }
 });
