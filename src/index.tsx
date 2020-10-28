@@ -57,9 +57,8 @@ class Main extends Component {
                             <Route path="/map">
                                 <ConnectedMap />
                             </Route>
-                            <Route path="/device/:dev/:tab?" component={ConnectedDevicePage} />
 
-                            {/* </Route> */}
+                            <Route path="/device/:dev/:tab?" component={ConnectedDevicePage} />
 
                             <Route path="/settings/:tab?">
                                 <ConnectedSettingsPage />
@@ -77,6 +76,7 @@ class Main extends Component {
                             <Route path="/touchlink">
                                 <TouchlinkPage />
                             </Route>
+
                             <Route path="/">
                                 <ConnectedZigbeePage />
                             </Route>
