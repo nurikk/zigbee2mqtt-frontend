@@ -1,3 +1,13 @@
+## [0.2.60](https://github.com/nurikk/z2m-frontend/compare/0.2.59...0.2.60) (2020-10-28)
+
+
+### Features
+
+* **error-boundry:** implement error boundry ([143fc40](https://github.com/nurikk/z2m-frontend/commit/143fc402c3ef2670c3fa68dcb62355db56cd76f1))
+* **utils:** add save state funtionality ([d1e08a6](https://github.com/nurikk/z2m-frontend/commit/d1e08a6ec81c01c586021608ec4cbb9962d83621))
+
+
+
 ## [0.2.59](https://github.com/nurikk/z2m-frontend/compare/0.2.58...0.2.59) (2020-10-27)
 
 
