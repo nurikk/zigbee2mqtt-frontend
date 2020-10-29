@@ -1,5 +1,5 @@
 import style from "./style.css";
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import orderBy from "lodash/orderBy";
 import DeviceControlGroup from "../device-control";
 import cx from "classnames";
@@ -34,6 +34,7 @@ interface ZigbeeTableState {
     sortColumn: SortColumn | SortColumn[];
     currentTime: number;
     sortedTableData: ZigbeeTableData[];
+    error?: object;
 }
 
 
@@ -45,6 +46,7 @@ interface ZigbeeTableData {
 
 
 const storeKey = "ZigbeeTableState";
+const longLoadingTimeout = 15 * 1000;
 
 export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
     constructor(props) {
@@ -86,8 +88,19 @@ export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
             new Notyf().error(e.toString());
         }
     };
+    handleLongLoading = () => {
+        const { devices } = this.props;
 
+        if (devices.size == 0) {
+            const error = <Fragment>
+                <strong>Loading devices takes too long time.</strong>
+                <div>Consider reading <a href="https://www.zigbee2mqtt.io/information/frontend.html">documentation</a></div>
+            </Fragment>;
+            this.setState({ error });
+        }
+    }
     componentDidMount(): void {
+        setTimeout(this.handleLongLoading, longLoadingTimeout);
         this.restoreState();
     }
 
@@ -125,10 +138,23 @@ export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
         this.setState({ sortColumn: column, sortDirection }, this.saveState);
     };
 
+    renderError() {
+        const { error } = this.state;
+        return (<div className="h-100 d-flex justify-content-center align-items-center">
+            <div className="d-flex align-items-center">
+                {error}
+            </div>
+        </div>);
+    }
+
     render() {
+        const { error } = this.state;
         const { devices } = this.props;
         if (devices.size) {
             return this.renderDevicesTable();
+        }
+        if (error) {
+            return this.renderError();
         }
         return (<div className="h-100 d-flex justify-content-center align-items-center">
             <div className="d-flex align-items-center">
