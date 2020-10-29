@@ -1,3 +1,12 @@
+## [0.2.63](https://github.com/nurikk/z2m-frontend/compare/0.2.62...0.2.63) (2020-10-29)
+
+
+### Bug Fixes
+
+* **color:** fix missing color componenents ([20958bb](https://github.com/nurikk/z2m-frontend/commit/20958bbfaf372b16e489c1bbee949593ff5d5631))
+
+
+
 ## [0.2.62](https://github.com/nurikk/z2m-frontend/compare/0.2.61...0.2.62) (2020-10-29)
 
 
