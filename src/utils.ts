@@ -83,8 +83,40 @@ export const scale = (inputY: number, yRange: Array<number>, xRange: Array<numbe
 };
 
 
-export const download = (data: string, filename: string): void => {
-    const blob = new Blob([data], { type: 'octet/stream' });
+
+
+function replacer(key: string, value: object) {
+    const originalObject = this[key];
+    if (originalObject instanceof Map) {
+        return {
+            dataType: 'Map',
+            value: Array.from(originalObject.entries()),
+        };
+    } else {
+        return value;
+    }
+}
+
+function reviver(key: string, value: { dataType: string; value: Iterable<readonly [unknown, unknown]>; }) {
+    if (typeof value === 'object' && value !== null) {
+        if (value.dataType === 'Map') {
+            return new Map(value.value);
+        }
+    }
+    return value;
+}
+
+export const serialize = (data: object) => {
+    return JSON.stringify(data, replacer);
+}
+
+export const deSerialize = (str: string) => {
+    return JSON.parse(str, reviver);
+}
+
+
+export const download = (data: object, filename: string): void => {
+    const blob = new Blob([serialize(data)], { type: 'octet/stream' });
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');
     document.body.appendChild(a);

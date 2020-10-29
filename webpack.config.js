@@ -80,6 +80,10 @@ module.exports = (env, args) => {
         module: {
             rules: [
                 {
+                    test: /\.txt$/i,
+                    use: 'raw-loader',
+                },
+                {
                     test: /\.(png|jpe?g|gif)$/i,
                     use: [
                         {

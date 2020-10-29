@@ -213,7 +213,7 @@ const actions = (store: Store<GlobalState>): object => ({
         return Promise.resolve();
     },
     exportState(state): Promise<void> {
-        download(JSON.stringify(state, null, 4), 'state.json');
+        download(state, 'state.json');
         return Promise.resolve();
     }
 });

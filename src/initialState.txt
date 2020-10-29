@@ -1,0 +1,17 @@
+{
+  "devices": {"dataType":"Map","value":[]},
+  "deviceStates": {"dataType":"Map","value":[]},
+  "touchlinkDevices": [],
+  "touchlinkScanInProgress": false,
+  "touchlinkIdentifyInProgress": false,
+  "touchlinkResetInProgress": false,
+  "networkGraph": {
+    "links": [],
+    "nodes": []
+  },
+  "networkGraphIsLoading": false,
+  "groups": [],
+  "bridgeConfig": {},
+  "bridgeInfo": {},
+  "logs": []
+}

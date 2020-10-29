@@ -17,7 +17,7 @@ export default class ErrorBoundary extends React.Component<ErrorBoundaryProps, E
     }
 
     donwloadState = () => {
-        download(JSON.stringify(store.getState(), null, 4), 'state.json');
+        download(store.getState(), 'state.json');
     }
 
     render() {
