@@ -1,3 +1,13 @@
+## [0.2.62](https://github.com/nurikk/z2m-frontend/compare/0.2.61...0.2.62) (2020-10-29)
+
+
+### Features
+
+* **state-export:** serialize Map as well ([d0709f9](https://github.com/nurikk/z2m-frontend/commit/d0709f90d611de067e33dee128456d008867807c))
+* **zigbee:** show long loading error message ([75c744b](https://github.com/nurikk/z2m-frontend/commit/75c744b124e36bbf3432dd2971f65323bf369547))
+
+
+
 ## [0.2.61](https://github.com/nurikk/z2m-frontend/compare/0.2.59...0.2.61) (2020-10-28)
 
 
