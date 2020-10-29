@@ -12,7 +12,7 @@ export default class Light extends Component<ColorProps, {}> {
     const { deviceState, feature, onChange } = this.props;
     const value = {};
     for (const innerFeature of feature.features) {
-      value[innerFeature.name] = deviceState[feature.property]?.[innerFeature.property];
+      value[innerFeature.name] = deviceState[feature.property]?.[innerFeature.property] ?? 0;
     }
 
     return <ColorEditor
