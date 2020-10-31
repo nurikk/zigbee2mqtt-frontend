@@ -1,3 +1,13 @@
+## [0.2.65](https://github.com/nurikk/z2m-frontend/compare/0.2.64...0.2.65) (2020-10-31)
+
+
+### Features
+
+* **enum:** implement read only ([a7c2ea1](https://github.com/nurikk/z2m-frontend/commit/a7c2ea1734fb0e6bec4a422595f660c0c15263d0))
+* **enum:** show active value ([5bf025f](https://github.com/nurikk/z2m-frontend/commit/5bf025f056f340fccfa3ba1cb792340228763517))
+
+
+
 ## [0.2.64](https://github.com/nurikk/z2m-frontend/compare/0.2.63...0.2.64) (2020-10-31)
 
 
