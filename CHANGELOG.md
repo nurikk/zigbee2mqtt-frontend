@@ -1,3 +1,13 @@
+## [0.2.64](https://github.com/nurikk/z2m-frontend/compare/0.2.63...0.2.64) (2020-10-31)
+
+
+### Features
+
+* **exposes:** add Fan device type ([d738c75](https://github.com/nurikk/z2m-frontend/commit/d738c75e7e37b579f6e7aa4dde86bbad0e8e5cf7))
+* **exposes:** add Textual feature ([0e30fc3](https://github.com/nurikk/z2m-frontend/commit/0e30fc3bf8ea0c65a3bd26d13d31483268896dd7))
+
+
+
 ## [0.2.63](https://github.com/nurikk/z2m-frontend/compare/0.2.62...0.2.63) (2020-10-29)
 
 
