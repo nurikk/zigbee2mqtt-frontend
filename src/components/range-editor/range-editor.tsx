@@ -1,4 +1,4 @@
-import React, { FunctionComponent, InputHTMLAttributes, useEffect, useState } from "react";
+import React, { Fragment, FunctionComponent, InputHTMLAttributes, useEffect, useState } from "react";
 
 import EnumEditor, { ValueWithLabelOrPrimitive } from "../enum-editor/enum-editor";
 
@@ -6,12 +6,13 @@ import EnumEditor, { ValueWithLabelOrPrimitive } from "../enum-editor/enum-edito
 
 type RangeProps = {
   value: number;
+  unit?: string;
   onChange(value: object | number): void;
   steps?: ValueWithLabelOrPrimitive[];
 }
 
 const RangeEditor: FunctionComponent<RangeProps & Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'>> = (props) => {
-  const { onChange, value, min, max, steps, ...rest } = props;
+  const { onChange, value, min, max, unit, steps, ...rest } = props;
   const [currentValue, setCurrentValue] = useState<number>(value)
 
   useEffect(() => {
@@ -29,14 +30,18 @@ const RangeEditor: FunctionComponent<RangeProps & Omit<InputHTMLAttributes<HTMLI
       onMouseUp={(() => onChange(currentValue))}
       {...rest}
     /> :
-      <input
-        type="number"
-        className="form-control"
-        value={currentValue}
-        onChange={e => setCurrentValue(e.target.valueAsNumber)}
-        onBlur={() => onChange(currentValue)}
-        {...rest}
-      />
+      <Fragment>
+        <input
+          type="number"
+          className="form-control"
+          value={currentValue}
+          onChange={e => setCurrentValue(e.target.valueAsNumber)}
+          onBlur={() => onChange(currentValue)}
+          {...rest}
+        />
+        {unit ? <span className="input-group-text">{unit}</span> : null}
+      </Fragment>
+
     }
   </div>
 }
