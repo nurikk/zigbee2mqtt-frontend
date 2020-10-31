@@ -6,4 +6,5 @@ export interface BaseFeatureProps<T> {
   deviceState: DeviceState;
   device: Device;
   onChange(endpoint: Endpoint, value: object): void;
+  onRead(endpoint: Endpoint, value: object): void;
 }

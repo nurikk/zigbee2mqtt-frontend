@@ -16,7 +16,7 @@ interface ExposesProps {
 
 class Exposes extends Component<ExposesProps & PropsFromStore & StateApi, {}> {
     render() {
-        const { device, deviceStates, setDeviceState } = this.props;
+        const { device, deviceStates, setDeviceState, getDeviceState } = this.props;
         const deviceState = deviceStates.get(device.friendly_name) ?? {} as DeviceState;
         if (device.definition?.exposes) {
             return <div className="card">
@@ -25,6 +25,10 @@ class Exposes extends Component<ExposesProps & PropsFromStore & StateApi, {}> {
                         onChange={(endpoint, value) => {
                             setDeviceState(`${device.friendly_name}${endpoint ? `/${endpoint}` : ''}`, value)
                         }}
+                        onRead={(endpoint, value) => {
+                            getDeviceState(`${device.friendly_name}${endpoint ? `/${endpoint}` : ''}`, value)
+                        }}
+
                     />
                 </div>
             </div>

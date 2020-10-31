@@ -6,8 +6,6 @@ import Composite from "../composite/composite";
 type FanProps = BaseFeatureProps<FanFeature>
 export default class Fan extends Component<FanProps> {
   render() {
-    const { deviceState, device, feature, onChange } = this.props;
-
-    return <Composite type="fan" feature={feature} device={device} deviceState={deviceState} onChange={onChange} />
+    return <Composite type="fan" {...this.props} />
   }
 }

@@ -34,8 +34,8 @@ export interface DeviceApi {
 
 export interface StateApi {
     setStateValue(dev: string, name: string, value: unknown): Promise<void>;
-    getStateValue(dev: string, name: string | string[]): Promise<void>;
     setDeviceState(dev: string, value: object): Promise<void>;
+    getDeviceState(dev: string, value: object): Promise<void>;
 }
 
 export interface GroupsApi {
@@ -103,20 +103,10 @@ const actions = (store: Store<GlobalState>): object => ({
         api.send(`${dev}/set`, value);
         return Promise.resolve();
     },
-
-    getStateValue(state, dev: string, name: string | string[]): Promise<void> {
-        const payload = {};
-        if (typeof name === "string") {
-            payload[name] = "";
-        } else if (Array.isArray(name)) {
-            name.forEach((n) => {
-                payload[n] = "";
-            });
-        }
-        api.send(`${dev}/get`, payload);
+    getDeviceState(state, dev: string, value: object) {
+        api.send(`${dev}/get`, value);
         return Promise.resolve();
     },
-
     setPermitJoin(state, permit = true, device: Device): Promise<void> {
         api.send("bridge/request/permit_join", { value: permit, device: device?.friendly_name });
         return Promise.resolve();

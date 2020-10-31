@@ -7,7 +7,6 @@ type LightProps = BaseFeatureProps<LightFeature>
 
 export default class Light extends Component<LightProps, {}> {
   render() {
-    const { deviceState, device, feature, onChange } = this.props;
-    return <Composite type="light" feature={feature} device={device} deviceState={deviceState} onChange={onChange} />
+    return <Composite type="light" {...this.props} />
   }
 }

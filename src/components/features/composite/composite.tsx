@@ -1,5 +1,5 @@
 import React, { Component, FunctionComponent, PropsWithChildren } from "react";
-import { CompositeFeature, GenericExposedFeature } from "../../../types";
+import { CompositeFeature, Endpoint, GenericExposedFeature } from "../../../types";
 import { scale } from "../../../utils";
 import { isBinaryFeature, isColorFeature, isCoverFeature, isEnumFeature, isLightFeature, isLockFeature, isNumericFeature, isSwitchFeature, isTextualFeature } from "../../device-page/type-guards";
 
@@ -15,6 +15,7 @@ import Cover from "../cover/cover";
 import Lock from "../lock/lock";
 import Color from "../composite/color/color";
 import Textual from "../textual/textual";
+import Button from "../../button";
 
 
 type CompositeType = "composite" | "light" | "switch" | "cover" | "lock" | "fan";
@@ -34,22 +35,32 @@ const stepsConfiguration = {
     tilt: [0, 25, 50, 75, 100].map<ValueWithLabelOrPrimitive>(item => ({ value: item, title: item + '' }))
   }
 };
-
-const FeatureWrapper: FunctionComponent<PropsWithChildren<{ feature: CompositeFeature | GenericExposedFeature }>> = (props) => {
-  const { children, feature } = props;
+type FetatureWrapperProps = {
+  feature: CompositeFeature | GenericExposedFeature;
+  onRead(endpoint: Endpoint, value: object): void;
+};
+const FeatureWrapper: FunctionComponent<PropsWithChildren<FetatureWrapperProps>> = (props) => {
+  const { children, feature, onRead } = props;
   return <div className="row mb-3">
-    <label className="col-3 col-form-label"><strong title={JSON.stringify(feature)}>{feature.name}{feature.endpoint ? `_${feature.endpoint}` : null}</strong></label>
-    <div className="col-9 d-flex align-items-center">
+    <label className="col-3 col-form-label">
+      <strong title={JSON.stringify(feature)}>{feature.name}{feature.endpoint ? `_${feature.endpoint}` : null}</strong>
+    </label>
+    <div className="col-8 d-flex align-items-center">
       {children}
+    </div>
+    <div className="col-1">
+      <Button<CompositeFeature | GenericExposedFeature> item={feature} onClick={(item) => {
+        onRead(feature.endpoint, { [item.property]: "" })
+      }} className="btn btn-primaty"><i className="fa fa-sync"></i></Button>
     </div>
   </div>
 }
 
 export default class Composite extends Component<CompositeProps, {}> {
   renderFeature = (feature: CompositeFeature | GenericExposedFeature) => {
-    const { type, deviceState, device, onChange } = this.props;
-    const genericParams = { key: JSON.stringify(feature), device, deviceState, onChange };
-    const wrapperParams = { key: JSON.stringify(feature), feature };
+    const { type, deviceState, device, onChange, onRead } = this.props;
+    const genericParams = { key: JSON.stringify(feature), device, deviceState, onChange, onRead };
+    const wrapperParams = { key: JSON.stringify(feature), feature, onRead };
 
     if (isBinaryFeature(feature)) {
       return <FeatureWrapper {...wrapperParams}>
@@ -60,7 +71,7 @@ export default class Composite extends Component<CompositeProps, {}> {
         <Numeric feature={feature} {...genericParams}
           steps={stepsConfiguration[type]?.[feature.name]} />
       </FeatureWrapper>
-     } else if (isTextualFeature(feature)) {
+    } else if (isTextualFeature(feature)) {
       return <FeatureWrapper {...wrapperParams}>
         <Textual feature={feature} {...genericParams} />
       </FeatureWrapper>
