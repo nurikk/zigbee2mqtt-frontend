@@ -1,3 +1,20 @@
+## [0.2.68](https://github.com/nurikk/z2m-frontend/compare/0.2.67...0.2.68) (2020-10-31)
+
+
+### Bug Fixes
+
+* **range-editor:** send values onBlur ([7f243b7](https://github.com/nurikk/z2m-frontend/commit/7f243b7c719add5e3523f62985976f32c803852d))
+
+
+### Features
+
+* **editors:** add numeric input for range elements ([5239400](https://github.com/nurikk/z2m-frontend/commit/5239400f53d46afcfb70f0d72b2623b144f7a8e8))
+* **exposes:** show units in range editor ([d367cc1](https://github.com/nurikk/z2m-frontend/commit/d367cc1e9485ea73c85a1e4cc1a28ca9a06343ea))
+* **range-editor:** send value on mouseup ([f7bc512](https://github.com/nurikk/z2m-frontend/commit/f7bc512cee1d8ef54589c8d9518c685ed4af5225))
+* **toggle:** show unknown value state ([2d114ce](https://github.com/nurikk/z2m-frontend/commit/2d114cec67ca7bbf20433b89051607b4e385e445))
+
+
+
 ## [0.2.67](https://github.com/nurikk/z2m-frontend/compare/0.2.66...0.2.67) (2020-10-31)
 
 
