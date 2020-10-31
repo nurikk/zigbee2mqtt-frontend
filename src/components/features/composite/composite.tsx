@@ -1,7 +1,7 @@
 import React, { Component, FunctionComponent, PropsWithChildren } from "react";
 import { CompositeFeature, GenericExposedFeature } from "../../../types";
 import { scale } from "../../../utils";
-import { isBinaryFeature, isColorFeature, isCoverFeature, isEnumFeature, isLightFeature, isLockFeature, isNumericFeature, isSwitchFeature } from "../../device-page/type-guards";
+import { isBinaryFeature, isColorFeature, isCoverFeature, isEnumFeature, isLightFeature, isLockFeature, isNumericFeature, isSwitchFeature, isTextualFeature } from "../../device-page/type-guards";
 
 import Numeric from "../numeric/numeric";
 
@@ -14,6 +14,7 @@ import Switch from "../switch/switch";
 import Cover from "../cover/cover";
 import Lock from "../lock/lock";
 import Color from "../composite/color/color";
+import Textual from "../textual/textual";
 
 
 type CompositeType = "composite" | "light" | "switch" | "cover" | "lock" | "fan";
@@ -59,6 +60,10 @@ export default class Composite extends Component<CompositeProps, {}> {
         <Numeric feature={feature} {...genericParams}
           steps={stepsConfiguration[type]?.[feature.name]} />
       </FeatureWrapper>
+     } else if (isTextualFeature(feature)) {
+      return <FeatureWrapper {...wrapperParams}>
+        <Textual feature={feature} {...genericParams} />
+      </FeatureWrapper>
     } else if (isEnumFeature(feature)) {
       return <FeatureWrapper {...wrapperParams}>
         <Enum feature={feature} {...genericParams} />
@@ -77,7 +82,7 @@ export default class Composite extends Component<CompositeProps, {}> {
       </FeatureWrapper>
     }
     return (<FeatureWrapper {...wrapperParams}>
-      <label className="col-3 col-form-label">Unknown feature {feature.type}(<strong>{feature.name}</strong>)</label>
+      <label className="col-3 col-form-label">Unknown feature (<strong>{feature.type}</strong>)</label>
       <div className="col-9">{JSON.stringify(feature)}{JSON.stringify(deviceState)}</div>
     </FeatureWrapper>);
   }

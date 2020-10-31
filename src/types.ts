@@ -88,7 +88,7 @@ export interface BridgeInfo {
 
 export type PowerSource = "Battery" | "Mains (single phase)" | "DC Source";
 
-export type GenericFeatureType = "numeric" | "binary" | "enum";
+export type GenericFeatureType = "numeric" | "binary" | "enum" | "text";
 export type ComposeiteFeatureType = "fan" | "light" | "switch" | "cover" | "lock" | "composite";
 export type AllPossibleFeatures = GenericFeatureType & ComposeiteFeatureType;
 export type FeatureAccessMode = "r" | "w" | "rw";
@@ -119,6 +119,10 @@ export interface NumericFeature extends GenericExposedFeature {
     unit?: "string";
     value_min?: number;
     value_max?: number;
+}
+
+export interface TextualFeature extends GenericExposedFeature {
+    type: "text";
 }
 
 export interface EnumFeature extends GenericExposedFeature {
