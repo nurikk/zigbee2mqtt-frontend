@@ -50,7 +50,7 @@ const FeatureWrapper: FunctionComponent<PropsWithChildren<FetatureWrapperProps>>
     </div>
     <div className="col-1">
       <Button<CompositeFeature | GenericExposedFeature> item={feature} onClick={(item) => {
-        onRead(feature.endpoint, { [item.property]: "" })
+        onRead(feature.endpoint, { [item.name]: "" })
       }} className="btn btn-primaty"><i className="fa fa-sync"></i></Button>
     </div>
   </div>
