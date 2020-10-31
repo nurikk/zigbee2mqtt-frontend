@@ -1,3 +1,17 @@
+## [0.2.67](https://github.com/nurikk/z2m-frontend/compare/0.2.66...0.2.67) (2020-10-31)
+
+
+### Bug Fixes
+
+* **exposes:** fix read property name ([3776276](https://github.com/nurikk/z2m-frontend/commit/3776276d2ab4d0657a6e33c3fc002b860be647bd))
+
+
+### Features
+
+* **exposes:** check read prop ([0b50e8b](https://github.com/nurikk/z2m-frontend/commit/0b50e8bad3b1e3b2380012d8252302b597ed9b1e))
+
+
+
 ## [0.2.66](https://github.com/nurikk/z2m-frontend/compare/0.2.65...0.2.66) (2020-10-31)
 
 
