@@ -1,7 +1,7 @@
 import React, { Component, FunctionComponent, PropsWithChildren } from "react";
-import { ColorFeature, CompositeFeature, EnumFeature, GenericExposedFeature } from "../../../types";
+import { CompositeFeature, GenericExposedFeature } from "../../../types";
 import { scale } from "../../../utils";
-import { isBinaryFeature, isColorFeature, isCompositeFeature, isCoverFeature, isEnumFeature, isLightFeature, isLockFeature, isNumericFeature, isSwitchFeature } from "../../device-page/type-guards";
+import { isBinaryFeature, isColorFeature, isCoverFeature, isEnumFeature, isLightFeature, isLockFeature, isNumericFeature, isSwitchFeature } from "../../device-page/type-guards";
 
 import Numeric from "../numeric/numeric";
 
@@ -16,7 +16,7 @@ import Lock from "../lock/lock";
 import Color from "../composite/color/color";
 
 
-type CompositeType = "composite" | "light" | "switch" | "cover" | "lock";
+type CompositeType = "composite" | "light" | "switch" | "cover" | "lock" | "fan";
 
 interface CompositeProps extends BaseFeatureProps<CompositeFeature> {
   type: CompositeType;
