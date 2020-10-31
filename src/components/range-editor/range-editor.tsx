@@ -1,5 +1,6 @@
 import React, { Fragment, FunctionComponent, InputHTMLAttributes, useEffect, useState } from "react";
-
+import { randomString } from "../../utils";
+import cx from "classnames";
 import EnumEditor, { ValueWithLabelOrPrimitive } from "../enum-editor/enum-editor";
 
 
@@ -13,14 +14,18 @@ type RangeProps = {
 
 const RangeEditor: FunctionComponent<RangeProps & Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'>> = (props) => {
   const { onChange, value, min, max, unit, steps, ...rest } = props;
+  const [id, setId] = useState<string>(randomString(5));
   const [currentValue, setCurrentValue] = useState<number>(value)
 
   useEffect(() => {
     setCurrentValue(value)
   }, [value]);
+
+  const showRange = min !== undefined && max !== undefined;
   return <div className="input-group">
     {steps ? <EnumEditor values={steps} onChange={onChange} /> : null}
-    {min !== undefined && max !== undefined ? <input
+    {showRange ? <input
+      id={id}
       min={min}
       max={max}
       type="range"
@@ -29,21 +34,17 @@ const RangeEditor: FunctionComponent<RangeProps & Omit<InputHTMLAttributes<HTMLI
       onChange={e => setCurrentValue(e.target.valueAsNumber)}
       onMouseUp={(() => onChange(currentValue))}
       {...rest}
-    /> :
-      <Fragment>
-        <input
-          type="number"
-          className="form-control"
-          value={currentValue}
-          onChange={e => setCurrentValue(e.target.valueAsNumber)}
-          onBlur={() => onChange(currentValue)}
-          onMouseUp={() => onChange(currentValue)}
-          {...rest}
-        />
-        {unit ? <span className="input-group-text">{unit}</span> : null}
-      </Fragment>
-
-    }
+    /> : null}
+    <input
+      type="number"
+      className={cx("form-control", {'ml-1': showRange})}
+      value={currentValue}
+      onChange={e => setCurrentValue(e.target.valueAsNumber)}
+      onBlur={() => onChange(currentValue)}
+      {...rest}
+      style={showRange ? { 'maxWidth': '100px' } : null}
+    />
+    {unit ? <span className="input-group-text" style={{ 'minWidth': '66px' }}>{unit}</span> : null}
   </div>
 }
 

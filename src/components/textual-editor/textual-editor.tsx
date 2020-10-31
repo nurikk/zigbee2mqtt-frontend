@@ -23,7 +23,7 @@ const TextualEditor: FunctionComponent<TextualProps & Omit<InputHTMLAttributes<H
       onBlur={() => onChange(currentValue)}
       {...rest}
     />
-    {unit ? <span className="input-group-text">{unit}</span> : null}
+    {unit ? <span className="input-group-text" style={{'minWidth': '66px'}}>{unit}</span> : null}
   </Fragment>
 }
 

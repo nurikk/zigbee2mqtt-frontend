@@ -30,11 +30,11 @@ type FetatureWrapperProps = {
 const FeatureWrapper: FunctionComponent<PropsWithChildren<FetatureWrapperProps>> = (props) => {
   const { children, feature, onRead } = props;
   const isReadable = ["r", "rw"].includes(feature.access);
-  return <div className="row mb-3">
+  return <div className="row pb-2">
     <label className="col-3 col-form-label">
       <strong title={JSON.stringify(feature)}>{feature.name}{feature.endpoint ? `_${feature.endpoint}` : null}</strong>
     </label>
-    <div className="col-8 d-flex align-items-center">
+    <div className="col-6 col-sm-8 d-flex align-items-center">
       {children}
     </div>
     <div className="col-1">
