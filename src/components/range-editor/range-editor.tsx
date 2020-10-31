@@ -34,6 +34,7 @@ const RangeEditor: FunctionComponent<RangeProps & Omit<InputHTMLAttributes<HTMLI
         className="form-control"
         value={currentValue}
         onChange={e => setCurrentValue(e.target.valueAsNumber)}
+        onBlur={() => onChange(currentValue)}
         {...rest}
       />
     }
