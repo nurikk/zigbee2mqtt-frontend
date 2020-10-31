@@ -28,7 +28,6 @@ class Exposes extends Component<ExposesProps & PropsFromStore & StateApi, {}> {
                         onRead={(endpoint, value) => {
                             getDeviceState(`${device.friendly_name}${endpoint ? `/${endpoint}` : ''}`, value)
                         }}
-
                     />
                 </div>
             </div>
