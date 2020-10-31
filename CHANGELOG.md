@@ -1,3 +1,12 @@
+## [0.2.66](https://github.com/nurikk/z2m-frontend/compare/0.2.65...0.2.66) (2020-10-31)
+
+
+### Features
+
+* **exposes:** add read converters call ([2490f3b](https://github.com/nurikk/z2m-frontend/commit/2490f3b03088960970a56019c9b0a69fb3138be6))
+
+
+
 ## [0.2.65](https://github.com/nurikk/z2m-frontend/compare/0.2.64...0.2.65) (2020-10-31)
 
 
