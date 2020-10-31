@@ -1,3 +1,4 @@
+
 import React, { Component } from "react";
 
 import { EnumFeature } from "../../../types";
@@ -10,14 +11,16 @@ export default class Enum extends Component<EnumProps> {
 
   renderView() {
     const { feature: { property }, deviceState } = this.props;
-    return <strong>{deviceState[property] ?? "N/A"}</strong>
+    const value = deviceState[property] ?? "N/A";
+    return value === '' ? '<empty string>' : <strong>{value}</strong>
   }
   renderEditor() {
-    const { onChange, feature: { name, values, endpoint } } = this.props;
+    const { onChange, feature: { name, values, endpoint, property }, deviceState } = this.props;
     return (
       <EnumEditor
         onChange={(value) => onChange(endpoint, { [name]: value })}
         values={values as unknown as ValueWithLabelOrPrimitive[]}
+        value={deviceState[property] as ValueWithLabelOrPrimitive}
       />
     )
   }

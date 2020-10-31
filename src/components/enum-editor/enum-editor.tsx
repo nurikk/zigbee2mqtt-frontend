@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react";
 import Button from "../button";
-
+import cx from "classnames";
 type Primitive = number | string;
 
 export type ValueWithLabelOrPrimitive = {
@@ -9,6 +9,7 @@ export type ValueWithLabelOrPrimitive = {
 } | Primitive;
 
 type EnumProps = {
+  value?: ValueWithLabelOrPrimitive;
   onChange(value: unknown): void;
   values: ValueWithLabelOrPrimitive[];
 }
@@ -19,11 +20,11 @@ function isPrimitive(step: ValueWithLabelOrPrimitive): step is Primitive {
 }
 
 const EnumEditor: FunctionComponent<EnumProps> = (props) => {
-  const { onChange, values } = props;
+  const { onChange, values, value } = props;
   return <div className="btn-group mr-2">
     {
       values.map(v => <Button<ValueWithLabelOrPrimitive>
-        className="btn btn-outline-secondary"
+        className={cx("btn btn-outline-secondary", { active: isPrimitive(v) ? v === value : v.value == (isPrimitive(value) ? value : value?.value) })}
         onClick={item => onChange(item)}
         key={isPrimitive(v) ? v : v.title}
         item={isPrimitive(v) ? v : v.value}
