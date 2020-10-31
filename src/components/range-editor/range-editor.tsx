@@ -37,6 +37,7 @@ const RangeEditor: FunctionComponent<RangeProps & Omit<InputHTMLAttributes<HTMLI
           value={currentValue}
           onChange={e => setCurrentValue(e.target.valueAsNumber)}
           onBlur={() => onChange(currentValue)}
+          onMouseUp={() => onChange(currentValue)}
           {...rest}
         />
         {unit ? <span className="input-group-text">{unit}</span> : null}
