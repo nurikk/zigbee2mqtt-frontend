@@ -166,42 +166,51 @@ export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
         </div>);
     }
 
-
-    renderDevicesTable() {
+    renderDevicesTableHeader() {
         const { bridgeInfo } = this.props;
-        const { sortColumn, sortDirection, sortedTableData } = this.state;
+        const { sortColumn, sortDirection } = this.state;
         const { onSortChange } = this;
         const lastSeenIsAvaliable = bridgeInfo?.config?.advanced?.elapsed || bridgeInfo?.config?.advanced?.last_seen != "disable";
         return (
+            <thead>
+                <tr className="text-nowrap">
+                    <th>#</th>
+                    <th>Pic</th>
+                    <ActionTH<SortColumn> className={style["action-column"]} column="device.friendly_name"
+                        currentDirection={sortDirection} current={sortColumn}
+                        onClick={onSortChange}>Friendly name</ActionTH>
+                    <ActionTH<SortColumn> className={cx(style["action-column"])} column="device.ieee_address"
+                        currentDirection={sortDirection} current={sortColumn}
+                        onClick={onSortChange}>IEEE address</ActionTH>
+                    <ActionTH<SortColumn> className={cx(style["action-column"])} column="device.definition.vendor"
+                        currentDirection={sortDirection} current={sortColumn}
+                        onClick={onSortChange} title="definition.vendor">Manufacturer</ActionTH>
+                    <ActionTH<SortColumn> className={style["action-column"]} column="device.definition.model"
+                        currentDirection={sortDirection} current={sortColumn}
+                        onClick={onSortChange}>Model</ActionTH>
+                    <ActionTH<SortColumn> className={style["action-column"]} column="state.linkquality"
+                        currentDirection={sortDirection} current={sortColumn}
+                        onClick={onSortChange}>LQI</ActionTH>
+                    <ActionTH<SortColumn> className={cx(style["action-column"], { 'd-none': !lastSeenIsAvaliable })} column={["state.last_seen", "state.elapsed"]}
+                        currentDirection={sortDirection} current={sortColumn}
+                        onClick={onSortChange}>Last seen</ActionTH>
+                    <ActionTH<SortColumn> className={style["action-column"]} column="state.battery"
+                        currentDirection={sortDirection} current={sortColumn}
+                        onClick={onSortChange}>Power</ActionTH>
+                    <th>&nbsp;</th>
+                </tr>
+            </thead>
+        )
+    }
+
+
+    renderDevicesTable() {
+        const { bridgeInfo } = this.props;
+        const { sortedTableData } = this.state;
+        const lastSeenIsAvaliable = bridgeInfo?.config?.advanced?.elapsed || bridgeInfo?.config?.advanced?.last_seen != "disable";
+        return (
             <table className={cx("table align-middle", style.adaptive)}>
-                <thead>
-                    <tr className="text-nowrap">
-                        <th>#</th>
-                        <th>Pic</th>
-                        <ActionTH<SortColumn> className={style["action-column"]} column="device.friendly_name"
-                            currentDirection={sortDirection} current={sortColumn}
-                            onClick={onSortChange}>Friendly name</ActionTH>
-                        <ActionTH<SortColumn> className={cx(style["action-column"])} column="device.ieee_address"
-                            currentDirection={sortDirection} current={sortColumn}
-                            onClick={onSortChange}>IEEE address</ActionTH>
-                        <ActionTH<SortColumn> className={cx(style["action-column"])} column="device.definition.vendor"
-                            currentDirection={sortDirection} current={sortColumn}
-                            onClick={onSortChange} title="definition.vendor">Manufacturer</ActionTH>
-                        <ActionTH<SortColumn> className={style["action-column"]} column="device.definition.model"
-                            currentDirection={sortDirection} current={sortColumn}
-                            onClick={onSortChange}>Model</ActionTH>
-                        <ActionTH<SortColumn> className={style["action-column"]} column="state.linkquality"
-                            currentDirection={sortDirection} current={sortColumn}
-                            onClick={onSortChange}>LQI</ActionTH>
-                        <ActionTH<SortColumn> className={cx(style["action-column"], { 'd-none': !lastSeenIsAvaliable })} column={["state.last_seen", "state.elapsed"]}
-                            currentDirection={sortDirection} current={sortColumn}
-                            onClick={onSortChange}>Last seen</ActionTH>
-                        <ActionTH<SortColumn> className={style["action-column"]} column="state.battery"
-                            currentDirection={sortDirection} current={sortColumn}
-                            onClick={onSortChange}>Power</ActionTH>
-                        <th>&nbsp;</th>
-                    </tr>
-                </thead>
+                {this.renderDevicesTableHeader()}
                 <tbody>
                     {sortedTableData.map(({ device, state }, id) =>
                         <tr key={device.friendly_name} title={state?.update?.state == "available" ? 'Avaliable OTA update' : device.definition?.description}>
@@ -224,7 +233,6 @@ export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
                                 <DeviceControlGroup device={device} state={state} />
                             </td>
                         </tr>)}
-
                 </tbody>
             </table>
         );
