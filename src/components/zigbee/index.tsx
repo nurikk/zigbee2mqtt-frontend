@@ -165,12 +165,14 @@ export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
             </div>
         </div>);
     }
+    lastSeenIsAvaliable(): boolean {
+        const { bridgeInfo } = this.props;
+        return bridgeInfo?.config?.advanced?.elapsed || bridgeInfo?.config?.advanced?.last_seen != "disable";
+    }
 
     renderDevicesTableHeader() {
-        const { bridgeInfo } = this.props;
         const { sortColumn, sortDirection } = this.state;
         const { onSortChange } = this;
-        const lastSeenIsAvaliable = bridgeInfo?.config?.advanced?.elapsed || bridgeInfo?.config?.advanced?.last_seen != "disable";
         return (
             <thead>
                 <tr className="text-nowrap">
@@ -191,7 +193,7 @@ export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
                     <ActionTH<SortColumn> className={style["action-column"]} column="state.linkquality"
                         currentDirection={sortDirection} current={sortColumn}
                         onClick={onSortChange}>LQI</ActionTH>
-                    <ActionTH<SortColumn> className={cx(style["action-column"], { 'd-none': !lastSeenIsAvaliable })} column={["state.last_seen", "state.elapsed"]}
+                    <ActionTH<SortColumn> className={cx(style["action-column"], { 'd-none': !this.lastSeenIsAvaliable() })} column={["state.last_seen", "state.elapsed"]}
                         currentDirection={sortDirection} current={sortColumn}
                         onClick={onSortChange}>Last seen</ActionTH>
                     <ActionTH<SortColumn> className={style["action-column"]} column="state.battery"
@@ -205,9 +207,7 @@ export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
 
 
     renderDevicesTable() {
-        const { bridgeInfo } = this.props;
         const { sortedTableData } = this.state;
-        const lastSeenIsAvaliable = bridgeInfo?.config?.advanced?.elapsed || bridgeInfo?.config?.advanced?.last_seen != "disable";
         return (
             <table className={cx("table align-middle", style.adaptive)}>
                 {this.renderDevicesTableHeader()}
@@ -225,7 +225,7 @@ export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
                             <td className={cx("text-truncate", "text-nowrap", "position-relative")}>{device.definition?.vendor ?? 'Unsupported'}</td>
                             <td title={device?.definition?.description}>{device.definition?.model ?? 'Unsupported'}</td>
                             <td>{state?.linkquality ?? "N/A"}</td>
-                            <td className={cx({ 'd-none': !lastSeenIsAvaliable })}>{lastSeen(state?.last_seen, state?.elapsed)}</td>
+                            <td className={cx({ 'd-none': !this.lastSeenIsAvaliable() })}>{lastSeen(state?.last_seen, state?.elapsed)}</td>
                             <td className="text-left">
                                 <PowerSource source={device.power_source} battery={state?.battery} />
                             </td>
