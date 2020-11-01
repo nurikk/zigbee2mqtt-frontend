@@ -63,7 +63,15 @@ const computeLink = (d: LinkI, transform: ZoomTransform, radius: number, width: 
 type SelNode = Selection<SVGElement, NodeI, HTMLElement, unknown>;
 type SelLink = Selection<SVGElement, LinkI, HTMLElement, unknown>;
 
-const ticked = (transform: ZoomTransform, node: SelNode, link: SelLink, linkLabel: SelLink, width: number, height: number): void => {
+type TickedParams = {
+    transform: ZoomTransform;
+    node: SelNode;
+    link: SelLink;
+    linkLabel: SelLink;
+    width: number;
+    height: number;
+}
+const ticked = ({ transform, node, link, linkLabel, width, height }: TickedParams): void => {
     const radius = 40;
     link.attr("d", (d) => computeLink(d, transform, radius, width, height));
 
@@ -81,8 +89,15 @@ const ticked = (transform: ZoomTransform, node: SelNode, link: SelLink, linkLabe
     }
     node.attr("transform", computeTransform);
 };
-
-const processHighlights = (networkGraph: GraphI, links: LinkI[], selectedNode: NodeI, node: SelNode, link: SelLink, linkLabel: SelLink,) => {
+type ProcessHighlightsParams = {
+    networkGraph: GraphI;
+    links: LinkI[];
+    selectedNode: NodeI;
+    node: SelNode;
+    link: SelLink;
+    linkLabel: SelLink;
+}
+const processHighlights = ({ networkGraph, links, selectedNode, node, link, linkLabel }: ProcessHighlightsParams) => {
     const linkedByIndex = new Set<string>();
     networkGraph.nodes.forEach(n => linkedByIndex.add(n.ieeeAddr + "," + n.ieeeAddr));
     links.forEach((l) => linkedByIndex.add(l.sourceIeeeAddr + "," + l.targetIeeeAddr));
@@ -123,7 +138,7 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
         const links = networkGraph.links.filter(l => visibleLinks.includes(l.relationship));
         this.simulation.nodes(networkGraph.nodes);
         this.simulation.force<ForceLink<NodeI, LinkI>>("link").links(links);
-        this.simulation.on("tick", () => ticked(this.transform, node, link, linkLabel, width, height));
+        this.simulation.on("tick", () => ticked({ transform: this.transform, node, link, linkLabel, width, height }));
         this.simulation.restart();
 
 
@@ -132,11 +147,11 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
         const zoomHandler = zoom().on("zoom", ({ transform }) => {
             everything.attr("transform", transform);
             this.transform = transform;
-            ticked(transform, node, link, linkLabel, width, height);
+            ticked({ transform, node, link, linkLabel, width, height });
         });
         zoomHandler(select(this.svgRef.current));
 
-        processHighlights(networkGraph, links, selectedNode, node, link, linkLabel);
+        processHighlights({ networkGraph, links, selectedNode, node, link, linkLabel });
         node.on("click", (event, d: NodeI) => {
             const { selectedNode } = this.state;
             this.setState({ selectedNode: selectedNode ? null : d });
