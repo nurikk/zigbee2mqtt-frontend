@@ -6,7 +6,7 @@ import cx from "classnames";
 import { Device, SortDirection, DeviceState } from "../../types";
 import { genDeviceDetailsLink, lastSeen, toHex } from "../../utils";
 import { Notyf } from "notyf";
-import PowerSource from "../power-source";
+import PowerSource from "../power-source/power-source";
 import { connect } from "unistore/react";
 import { GlobalState } from "../../store";
 import actions from "../../actions";
@@ -16,7 +16,6 @@ import TableContainer from "@material-ui/core/TableContainer";
 import { TableHead, TableRow, TableCell, Table, TableBody, TableSortLabel, Box, CircularProgress, createStyles } from "@material-ui/core";
 import isEqual from "lodash/isEqual";
 import Alert from '@material-ui/lab/Alert';
-
 
 
 const styles = createStyles({

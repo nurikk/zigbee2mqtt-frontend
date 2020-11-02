@@ -1,7 +1,6 @@
-.plug {
-    margin-left: 4px;
+.danger {
+    color: red;
 }
-
 .blinking {
     animation: blinker 1s linear infinite;
 }

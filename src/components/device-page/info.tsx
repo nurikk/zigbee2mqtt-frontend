@@ -7,9 +7,10 @@ import cx from "classnames";
 import style from "./style.css";
 import { connect } from "unistore/react";
 import { GlobalState } from "../../store";
-import PowerSourceComp from "../power-source";
+
 import get from 'lodash/get';
 import DeviceImage from "../device-image";
+import PowerSource from "../power-source/power-source";
 
 
 type DeviceInfoProps = {
@@ -67,7 +68,7 @@ const displayProps = [
 
     {
         label: 'Power source',
-        render: (device: Device) => <dd className="col-7"><PowerSourceComp source={device.power_source} /></dd>
+        render: (device: Device) => <dd className="col-7"><PowerSource source={device.power_source} /></dd>
     },
     {
         label: 'Interview completed',

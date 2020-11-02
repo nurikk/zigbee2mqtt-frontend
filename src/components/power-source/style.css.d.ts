@@ -2,7 +2,7 @@ declare namespace StyleCssNamespace {
     export interface IStyleCss {
         blinker: string;
         blinking: string;
-        plug: string;
+        danger: string;
     }
 }
 
