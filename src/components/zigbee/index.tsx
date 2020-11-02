@@ -5,17 +5,25 @@ import DeviceControlGroup from "../device-control";
 import cx from "classnames";
 import { Device, SortDirection, DeviceState } from "../../types";
 import { genDeviceDetailsLink, lastSeen, toHex } from "../../utils";
-
 import { Notyf } from "notyf";
 import PowerSource from "../power-source";
 import { connect } from "unistore/react";
 import { GlobalState } from "../../store";
 import actions from "../../actions";
-import ActionTH from "./ActionTH";
-import isEqual from "lodash/isEqual";
 import { Link } from "react-router-dom";
 import DeviceImage from "../device-image";
+import TableContainer from "@material-ui/core/TableContainer";
+import { TableHead, TableRow, TableCell, Table, TableBody, TableSortLabel, Box, CircularProgress, createStyles } from "@material-ui/core";
+import isEqual from "lodash/isEqual";
+import Alert from '@material-ui/lab/Alert';
 
+
+
+const styles = createStyles({
+    visuallyHidden: {
+        display: 'none'
+    },
+});
 
 type SortColumn =
     | "device.network_address"
@@ -43,10 +51,15 @@ interface ZigbeeTableData {
     state: DeviceState;
 }
 
-
-
 const storeKey = "ZigbeeTableState";
 const longLoadingTimeout = 15 * 1000;
+interface HeadCell {
+    id?: SortColumn;
+    label: string;
+    numeric: boolean;
+    hidden?: boolean;
+}
+
 
 export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
     constructor(props) {
@@ -140,13 +153,14 @@ export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
 
     renderError() {
         const { error } = this.state;
-        return (<div className="h-100 d-flex justify-content-center align-items-center">
-            <div className="d-flex align-items-center">
-                {error}
-            </div>
-        </div>);
+        return (
+            <Box display="flex" justifyContent="center" alignItems="ceter" height="100%">
+                <Box display="flex" alignItems="center">
+                    <Alert severity="error">{error}</Alert>
+                </Box>
+            </Box>
+        );
     }
-
     render() {
         const { error } = this.state;
         const { devices } = this.props;
@@ -156,14 +170,13 @@ export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
         if (error) {
             return this.renderError();
         }
-        return (<div className="h-100 d-flex justify-content-center align-items-center">
-            <div className="d-flex align-items-center">
-                <strong>Loading, please wait.</strong>
-                <div className="spinner-border ml-2" role="status">
-                    <span className="sr-only">Loading...</span>
-                </div>
-            </div>
-        </div>);
+        return (
+            <Box display="flex" justifyContent="center" alignItems="ceter" height="100%">
+                <Box display="flex" alignItems="center">
+                    <CircularProgress />
+                </Box>
+            </Box>
+        );
     }
     lastSeenIsAvaliable(): boolean {
         const { bridgeInfo } = this.props;
@@ -173,68 +186,76 @@ export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
     renderDevicesTableHeader() {
         const { sortColumn, sortDirection } = this.state;
         const { onSortChange } = this;
+        const createSortHandler = (property: SortColumn) => (event: React.MouseEvent<unknown>) => {
+            onSortChange(property);
+        };
+        const headCells: HeadCell[] = [
+            { numeric: false, label: '#' },
+            { numeric: false, label: 'Pic' },
+            { id: 'device.friendly_name', numeric: false, label: 'Friendly name' },
+            { id: 'device.ieee_address', numeric: false, label: 'IEEE address' },
+            { id: 'device.definition.vendor', numeric: false, label: 'Manufacturer' },
+            { id: 'device.definition.model', numeric: false, label: 'Model' },
+            { id: 'state.linkquality', numeric: true, label: 'LQI' },
+            { id: 'state.last_seen', numeric: false, label: 'Last seen', hidden: !this.lastSeenIsAvaliable() },
+            { id: 'state.battery', numeric: false, label: 'Power' },
+            { numeric: false, label: ' ' },
+        ];
         return (
-            <thead>
-                <tr className="text-nowrap">
-                    <th>#</th>
-                    <th>Pic</th>
-                    <ActionTH<SortColumn> className={style["action-column"]} column="device.friendly_name"
-                        currentDirection={sortDirection} current={sortColumn}
-                        onClick={onSortChange}>Friendly name</ActionTH>
-                    <ActionTH<SortColumn> className={cx(style["action-column"])} column="device.ieee_address"
-                        currentDirection={sortDirection} current={sortColumn}
-                        onClick={onSortChange}>IEEE address</ActionTH>
-                    <ActionTH<SortColumn> className={cx(style["action-column"])} column="device.definition.vendor"
-                        currentDirection={sortDirection} current={sortColumn}
-                        onClick={onSortChange} title="definition.vendor">Manufacturer</ActionTH>
-                    <ActionTH<SortColumn> className={style["action-column"]} column="device.definition.model"
-                        currentDirection={sortDirection} current={sortColumn}
-                        onClick={onSortChange}>Model</ActionTH>
-                    <ActionTH<SortColumn> className={style["action-column"]} column="state.linkquality"
-                        currentDirection={sortDirection} current={sortColumn}
-                        onClick={onSortChange}>LQI</ActionTH>
-                    <ActionTH<SortColumn> className={cx(style["action-column"], { 'd-none': !this.lastSeenIsAvaliable() })} column={["state.last_seen", "state.elapsed"]}
-                        currentDirection={sortDirection} current={sortColumn}
-                        onClick={onSortChange}>Last seen</ActionTH>
-                    <ActionTH<SortColumn> className={style["action-column"]} column="state.battery"
-                        currentDirection={sortDirection} current={sortColumn}
-                        onClick={onSortChange}>Power</ActionTH>
-                    <th>&nbsp;</th>
-                </tr>
-            </thead>
+            <TableHead>
+                <TableRow>
+                    {
+                        headCells.map(headCell => <TableCell
+                            key={headCell.label}
+                            align={headCell.numeric ? 'right' : 'left'}
+                            sortDirection={sortColumn === headCell.id ? sortDirection : false}
+                        >
+                            {headCell.id ? <TableSortLabel
+                                active={sortColumn === headCell.id}
+                                direction={sortColumn === headCell.id ? sortDirection : 'asc'}
+                                onClick={createSortHandler(headCell.id)}
+                            >
+                                {headCell.label}
+                            </TableSortLabel> : headCell.label}
+                        </TableCell>)
+                    }
+                </TableRow>
+            </TableHead>
         )
     }
 
-
     renderDevicesTable() {
         const { sortedTableData } = this.state;
+        console.log(styles.visuallyHidden);
         return (
-            <table className={cx("table align-middle", style.adaptive)}>
-                {this.renderDevicesTableHeader()}
-                <tbody>
-                    {sortedTableData.map(({ device, state }, id) =>
-                        <tr key={device.friendly_name} title={state?.update?.state == "available" ? 'Avaliable OTA update' : device.definition?.description}>
-                            <td className="font-weight-bold">{id + 1}</td>
-                            <td className={style["device-pic"]}>
-                                <DeviceImage className={cx(style["device-image"])} device={device} deviceStatus={state} />
-                            </td>
-                            <td>
-                                <Link to={genDeviceDetailsLink(device.ieee_address)}>{device.friendly_name}</Link>
-                            </td>
-                            <td title={toHex(device.network_address)}>{device.ieee_address}</td>
-                            <td className={cx("text-truncate", "text-nowrap", "position-relative")}>{device.definition?.vendor ?? 'Unsupported'}</td>
-                            <td title={device?.definition?.description}>{device.definition?.model ?? 'Unsupported'}</td>
-                            <td>{state?.linkquality ?? "N/A"}</td>
-                            <td className={cx({ 'd-none': !this.lastSeenIsAvaliable() })}>{lastSeen(state?.last_seen, state?.elapsed)}</td>
-                            <td className="text-left">
-                                <PowerSource source={device.power_source} battery={state?.battery} />
-                            </td>
-                            <td>
-                                <DeviceControlGroup device={device} state={state} />
-                            </td>
-                        </tr>)}
-                </tbody>
-            </table>
+            <TableContainer>
+                <Table size="small" className={style.adaptive}>
+                    {this.renderDevicesTableHeader()}
+                    <TableBody>
+                        {sortedTableData.map(({ device, state }, id) =>
+                            <TableRow key={device.friendly_name} title={state?.update?.state == "available" ? 'Avaliable OTA update' : device.definition?.description}>
+                                <TableCell scope="row">{id + 1}</TableCell>
+                                <TableCell className={style["device-pic"]}>
+                                    <DeviceImage className={style["device-image"]} device={device} deviceStatus={state} />
+                                </TableCell>
+                                <TableCell>
+                                    <Link to={genDeviceDetailsLink(device.ieee_address)}>{device.friendly_name}</Link>
+                                </TableCell>
+                                <TableCell title={toHex(device.network_address)}>{device.ieee_address}</TableCell>
+                                <TableCell>{device.definition?.vendor ?? 'Unsupported'}</TableCell>
+                                <TableCell title={device?.definition?.description}>{device.definition?.model ?? 'Unsupported'}</TableCell>
+                                <TableCell align="right">{state?.linkquality ?? "N/A"}</TableCell>
+                                <TableCell className={cx({ 'd-none': !this.lastSeenIsAvaliable })}>{lastSeen(state?.last_seen, state?.elapsed)}</TableCell>
+                                <TableCell>
+                                    <PowerSource source={device.power_source} battery={state?.battery} />
+                                </TableCell>
+                                <TableCell>
+                                    <DeviceControlGroup device={device} state={state} />
+                                </TableCell>
+                            </TableRow>)}
+                    </TableBody>
+                </Table>
+            </TableContainer>
         );
     }
 }

@@ -104,6 +104,9 @@
     .adaptive td:nth-of-type(7):before {
         content: "LQI";
     }
+    .adaptive td:nth-of-type(7) {
+        text-align: left;
+    }
 
     .adaptive td:nth-of-type(8):before {
         content: "LastSeen";
