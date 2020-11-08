@@ -1,7 +1,7 @@
 
 import React, { Component } from "react";
 
-import { EnumFeature } from "../../../types";
+import { EnumFeature, FeatureAccessMode } from "../../../types";
 import EnumEditor, { ValueWithLabelOrPrimitive } from "../../enum-editor/enum-editor";
 
 import { BaseFeatureProps } from "../base";
@@ -27,11 +27,12 @@ export default class Enum extends Component<EnumProps> {
 
   render() {
     const { feature: { access } } = this.props;
-    switch (access) {
-      case "r":
-        return this.renderView();
-      default:
-        return this.renderEditor();
+    if (access & FeatureAccessMode.ACCESS_WRITE) {
+      return this.renderEditor();
+    } else if (access & FeatureAccessMode.ACCESS_STATE) {
+      return this.renderView();
+    } else {
+      return null;
     }
   }
 }
