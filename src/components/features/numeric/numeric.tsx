@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import { NumericFeature } from "../../../types";
+import { FeatureAccessMode, NumericFeature } from "../../../types";
 import { ValueWithLabelOrPrimitive } from "../../enum-editor/enum-editor";
 import RangeEditor from "../../range-editor/range-editor";
 import { BaseFeatureProps } from "../base";
@@ -26,11 +26,12 @@ export default class Numeric extends Component<NumericProps> {
   }
   render() {
     const { feature: { access } } = this.props;
-    switch (access) {
-      case "r":
-        return this.renderView();
-      default:
-        return this.renderEditor();
+    if (access & FeatureAccessMode.ACCESS_WRITE) {
+      return this.renderEditor();
+    } else if (access & FeatureAccessMode.ACCESS_STATE) {
+      return this.renderView();
+    } else {
+      return null;
     }
   }
 }

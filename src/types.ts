@@ -91,7 +91,14 @@ export type PowerSource = "Battery" | "Mains (single phase)" | "DC Source";
 export type GenericFeatureType = "numeric" | "binary" | "enum" | "text";
 export type ComposeiteFeatureType = "fan" | "light" | "switch" | "cover" | "lock" | "composite";
 export type AllPossibleFeatures = GenericFeatureType & ComposeiteFeatureType;
-export type FeatureAccessMode = "r" | "w" | "rw";
+
+
+export enum FeatureAccessMode {
+    NONE,
+    ACCESS_STATE = 0b001,
+    ACCESS_WRITE = 0b010,
+    ACCESS_READ = 0b100,
+}
 export interface GenericExposedFeature {
     type: GenericFeatureType;
     name: string;

@@ -1,5 +1,5 @@
 import React, { Component, FunctionComponent, PropsWithChildren } from "react";
-import { CompositeFeature, Endpoint, GenericExposedFeature } from "../../../types";
+import { CompositeFeature, Endpoint, FeatureAccessMode, GenericExposedFeature } from "../../../types";
 import { isBinaryFeature, isColorFeature, isCoverFeature, isEnumFeature, isLightFeature, isLockFeature, isNumericFeature, isSwitchFeature, isTextualFeature } from "../../device-page/type-guards";
 
 import Numeric from "../numeric/numeric";
@@ -29,7 +29,6 @@ type FetatureWrapperProps = {
 };
 const FeatureWrapper: FunctionComponent<PropsWithChildren<FetatureWrapperProps>> = (props) => {
   const { children, feature, onRead } = props;
-  const isReadable = ["r", "rw"].includes(feature.access);
   return <div className="row pb-2">
     <label className="col-3 col-form-label">
       <strong title={JSON.stringify(feature)}>{feature.name}{feature.endpoint ? `_${feature.endpoint}` : null}</strong>
@@ -38,7 +37,7 @@ const FeatureWrapper: FunctionComponent<PropsWithChildren<FetatureWrapperProps>>
       {children}
     </div>
     <div className="col-1">
-      {isReadable ? (
+      {feature.access & FeatureAccessMode.ACCESS_READ ? (
         <Button<CompositeFeature | GenericExposedFeature> item={feature} onClick={(item) => {
           onRead(feature.endpoint, { [item.name]: "" })
         }} className="btn btn-primaty"><i className="fa fa-sync"></i></Button>

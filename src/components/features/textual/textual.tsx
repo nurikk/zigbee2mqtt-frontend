@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import { TextualFeature } from "../../../types";
+import { FeatureAccessMode, TextualFeature } from "../../../types";
 import TextualEditor from "../../textual-editor/textual-editor";
 
 import { BaseFeatureProps } from "../base";
@@ -20,11 +20,12 @@ export default class Textual extends Component<TextualProps> {
   }
   render() {
     const { feature: { access } } = this.props;
-    switch (access) {
-      case "r":
-        return this.renderView();
-      default:
-        return this.renderEditor();
+    if (access & FeatureAccessMode.ACCESS_WRITE) {
+      return this.renderEditor();
+    } else if (access & FeatureAccessMode.ACCESS_STATE) {
+      return this.renderView();
+    } else {
+      return null;
     }
   }
 }
