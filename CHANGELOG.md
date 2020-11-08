@@ -1,3 +1,12 @@
+## [0.2.69](https://github.com/nurikk/z2m-frontend/compare/0.2.68...0.2.69) (2020-11-08)
+
+
+### Features
+
+* **exposes:** adopt new access mode format ([b4da1ac](https://github.com/nurikk/z2m-frontend/commit/b4da1ac3c75cef2ccd0237d6dd1322dd932638d0))
+
+
+
 ## [0.2.68](https://github.com/nurikk/z2m-frontend/compare/0.2.67...0.2.68) (2020-10-31)
 
 
