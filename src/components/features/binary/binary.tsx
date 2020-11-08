@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { BinaryFeature } from "../../../types";
+import { BinaryFeature, FeatureAccessMode } from "../../../types";
 import Toggle from "../../toggle";
 
 import { BaseFeatureProps } from "../base";
@@ -23,11 +23,12 @@ export default class Binary extends Component<BinaryProps> {
   }
   render() {
     const { feature: { access } } = this.props;
-    switch (access) {
-      case "r":
-        return this.renderView();
-      default:
-        return this.renderEditor();
+    if (access & FeatureAccessMode.ACCESS_WRITE) {
+      return this.renderEditor();
+    } else if (access & FeatureAccessMode.ACCESS_STATE) {
+      return this.renderView();
+    } else {
+      return null;
     }
   }
 }
