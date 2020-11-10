@@ -1,3 +1,17 @@
+# [1.0.0](https://github.com/nurikk/z2m-frontend/compare/0.2.68...1.0.0) (2020-11-10)
+
+
+### Features
+
+* **device-page:** migrate to material ([de423e7](https://github.com/nurikk/z2m-frontend/commit/de423e7d4e807005d53e5fcd0056509469fbafd8))
+* **exposes:** adopt new access mode format ([877eb39](https://github.com/nurikk/z2m-frontend/commit/877eb3916716fd49e7c650f5a0eda62db9006a27))
+* **exposes:** partially migrate to material ([445de96](https://github.com/nurikk/z2m-frontend/commit/445de96f3b6818d6d8228d6db9690eeafd5f0d2c))
+* **power-source:** migrate to material-ui ([5838619](https://github.com/nurikk/z2m-frontend/commit/583861955bec935cfdea55891d8952594deed6a9))
+* **ui:** migrate device control to material-ui ([acdbcbf](https://github.com/nurikk/z2m-frontend/commit/acdbcbf824ce8936f17f12a54d07a28eaba5adbd))
+* **zigbee:** refactor to material ui ([5e26476](https://github.com/nurikk/z2m-frontend/commit/5e264767ecba3a49a57fa7fd6bedbca349b0e5f1))
+
+
+
 ## [0.2.69](https://github.com/nurikk/z2m-frontend/compare/0.2.68...0.2.69) (2020-11-08)
 
 
