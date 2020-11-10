@@ -16,6 +16,7 @@ import TableContainer from "@material-ui/core/TableContainer";
 import { TableHead, TableRow, TableCell, Table, TableBody, TableSortLabel, Box, CircularProgress, createStyles } from "@material-ui/core";
 import isEqual from "lodash/isEqual";
 import Alert from '@material-ui/lab/Alert';
+import { Center } from "../center/center";
 
 
 const styles = createStyles({
@@ -152,13 +153,7 @@ export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
 
     renderError() {
         const { error } = this.state;
-        return (
-            <Box display="flex" justifyContent="center" alignItems="ceter" height="100%">
-                <Box display="flex" alignItems="center">
-                    <Alert severity="error">{error}</Alert>
-                </Box>
-            </Box>
-        );
+        return <Center><Alert severity="error">{error}</Alert></Center>;
     }
     render() {
         const { error } = this.state;
@@ -170,11 +165,9 @@ export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
             return this.renderError();
         }
         return (
-            <Box display="flex" justifyContent="center" alignItems="ceter" height="100%">
-                <Box display="flex" alignItems="center">
-                    <CircularProgress />
-                </Box>
-            </Box>
+            <Center>
+                <CircularProgress />
+            </Center>
         );
     }
     lastSeenIsAvaliable(): boolean {

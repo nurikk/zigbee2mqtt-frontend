@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { NavLink, Redirect, RouteComponentProps, withRouter } from "react-router-dom";
+import React, { Component, Fragment } from "react";
+import { RouteComponentProps, withRouter } from "react-router-dom";
 import { connect } from "unistore/react";
 import actions from "../../actions";
 import { GlobalState } from "../../store";
@@ -9,74 +9,103 @@ import States from "./states";
 import ConnectedDeviceExposes from "./exposes";
 import Clusters from "./clusters";
 
+import {  Tabs, Tab, Box, Paper } from "@material-ui/core";
+import Alert from "@material-ui/lab/Alert";
+import { Center } from "../center/center";
+
+
 type UrlParams = {
     dev: string;
     tab?: TabName;
 };
 type DevicePageProps = RouteComponentProps<UrlParams>;
 
+function a11yProps(index: unknown) {
+    return {
+        id: `simple-tab-${index}`,
+        'aria-controls': `simple-tabpanel-${index}`,
+    };
+}
+
+
+interface TabPanelProps {
+    children?: React.ReactNode;
+    index: number;
+    value: unknown;
+}
+
+function TabPanel(props: TabPanelProps) {
+    const { children, value, index, ...other } = props;
+
+    return (
+        <div
+            role="tabpanel"
+            hidden={value !== index}
+            id={`simple-tabpanel-${index}`}
+            aria-labelledby={`simple-tab-${index}`}
+            {...other}
+        >
+            {value === index && (
+                <Box p={3}>
+                    {children}
+                </Box>
+            )}
+        </div>
+    );
+}
 
 type TabName = "info" | "bind" | "state" | "exposes" | "clusters";
-// eslint-disable-next-line react/prefer-stateless-function
-export class DevicePage extends Component<DevicePageProps & GlobalState, {}> {
-    renderContent() {
-        const { match, devices } = this.props;
-        const { tab, dev } = match.params;
-        const device = devices.get(dev);
+type DevicePageState = {
+    activeTab: number;
+}
+export class DevicePage extends Component<DevicePageProps & GlobalState, DevicePageState> {
+    state: DevicePageState = {
+        activeTab: 0
+    }
 
-        switch (tab) {
-            case "info":
-                return <DeviceInfo device={device} />;
-            case "bind":
-                return <Bind device={device} />;
-            case "state":
-                return <States device={device} />;
-            case "exposes":
-                return <ConnectedDeviceExposes device={device} />;
-            case "clusters":
-                return <Clusters device={device} />
-            default:
-                return <Redirect to={`/device/${dev}/info`} />;
-        }
-
+    setActiveTab = (event, activeTab: number): void => {
+        this.setState({ activeTab });
     }
     render() {
-
+        const { activeTab } = this.state;
         const { devices, match } = this.props;
         const { dev } = match.params;
         const device = devices.get(dev);
         if (!device) {
-            return <div className="h-100 d-flex justify-content-center align-items-center">Unknown device</div>
+            return <Center><Alert severity="error">Unknown device</Alert></Center>
         }
 
-        return (<div className="card h-100">
-            <div className="card-header">
-                <ul className="nav nav-tabs card-header-tabs">
-                    <li className="nav-item">
-                        <NavLink activeClassName="active" className="nav-link" to={`/device/${dev}/info`}>About</NavLink>
-                    </li>
-                    <li className="nav-item">
-                        <NavLink activeClassName="active" className="nav-link" to={`/device/${dev}/bind`}>Bind</NavLink>
-
-                    </li>
-                    <li className="nav-item">
-                        <NavLink activeClassName="active" className="nav-link" to={`/device/${dev}/state`}>State</NavLink>
-                    </li>
-                    <li className="nav-item">
-                        <NavLink activeClassName="active" className="nav-link" to={`/device/${dev}/exposes`}>Exposes</NavLink>
-                    </li>
-                    <li className="nav-item">
-                        <NavLink activeClassName="active" className="nav-link" to={`/device/${dev}/clusters`}>Clusters</NavLink>
-                    </li>
-                </ul>
-            </div>
-
-            <div className="card-body">
-                <h5 className="card-title">{device.friendly_name}</h5>
-                {this.renderContent()}
-            </div>
-        </div>);
-
+        return (<Fragment>
+            <Paper square>
+                <Tabs value={activeTab}
+                    onChange={this.setActiveTab}
+                    variant="fullWidth"
+                    indicatorColor="primary"
+                    textColor="primary">
+                    <Tab label="Info" {...a11yProps(0)} />
+                    <Tab label="Bind" {...a11yProps(1)} />
+                    <Tab label="State" {...a11yProps(2)} />
+                    <Tab label="Exposes" {...a11yProps(4)} />
+                    <Tab label="Clusters" {...a11yProps(5)} />
+                </Tabs>
+            </Paper>
+            <TabPanel value={activeTab} index={0}>
+                <DeviceInfo device={device} />
+            </TabPanel>
+            <TabPanel value={activeTab} index={1}>
+                <Bind device={device} />
+            </TabPanel>
+            <TabPanel value={activeTab} index={2}>
+                <States device={device} />
+            </TabPanel>
+            <TabPanel value={activeTab} index={3}>
+                <ConnectedDeviceExposes device={device} />
+            </TabPanel>
+            <TabPanel value={activeTab} index={4}>
+                <Clusters device={device} />
+            </TabPanel>
+        </Fragment>
+        )
     }
 }
 const devicePageWithRouter = withRouter(DevicePage);
