@@ -60,7 +60,7 @@ type DevicePageState = {
 }
 export class DevicePage extends Component<DevicePageProps & GlobalState, DevicePageState> {
     state: DevicePageState = {
-        activeTab: 0
+        activeTab: 3
     }
 
     setActiveTab = (event, activeTab: number): void => {

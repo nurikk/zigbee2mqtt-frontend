@@ -1,11 +1,16 @@
 import React, { FunctionComponent } from "react";
-import Button from "../button";
+
 import cx from "classnames";
+
+import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
+import ToggleButton from '@material-ui/lab/ToggleButton';
+
+
 type Primitive = number | string;
 
 export type ValueWithLabelOrPrimitive = {
   value: number;
-  title: string;
+  label: string;
 } | Primitive;
 
 type EnumProps = {
@@ -16,20 +21,19 @@ type EnumProps = {
 
 
 function isPrimitive(step: ValueWithLabelOrPrimitive): step is Primitive {
-  return ["number", "string"].includes(typeof step);
+  return ["number", "string", "undefined"].includes(typeof step);
 }
 
 const EnumEditor: FunctionComponent<EnumProps> = (props) => {
   const { onChange, values, value } = props;
-  return <div className="btn-group mr-2">
+  return <ToggleButtonGroup exclusive value={isPrimitive(value) ? value : value.value} color="primary" onChange={(e, val) => onChange(val)}>
     {
-      values.map(v => <Button<ValueWithLabelOrPrimitive>
-        className={cx("btn btn-outline-secondary", { active: isPrimitive(v) ? v === value : v.value == (isPrimitive(value) ? value : value?.value) })}
-        onClick={item => onChange(item)}
-        key={isPrimitive(v) ? v : v.title}
-        item={isPrimitive(v) ? v : v.value}
-      >{isPrimitive(v) ? v : v.title}</Button>)
+      values.map(v => <ToggleButton
+        value={isPrimitive(v) ? v : v.value}
+        key={isPrimitive(v) ? v : v.label}
+        className={cx({ active: isPrimitive(v) ? v === value : v.value == (isPrimitive(value) ? value : value?.value) })}
+      >{isPrimitive(v) ? v : v.label}</ToggleButton>)
     }
-  </div>;
+  </ToggleButtonGroup>;
 }
 export default EnumEditor;

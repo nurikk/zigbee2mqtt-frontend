@@ -1,7 +1,7 @@
 import React, { Component, FunctionComponent, PropsWithChildren } from "react";
 import { CompositeFeature, Endpoint, FeatureAccessMode, GenericExposedFeature } from "../../../types";
 import { isBinaryFeature, isColorFeature, isCoverFeature, isEnumFeature, isLightFeature, isLockFeature, isNumericFeature, isSwitchFeature, isTextualFeature } from "../../device-page/type-guards";
-
+import RefreshIcon from '@material-ui/icons/Refresh';
 import Numeric from "../numeric/numeric";
 
 import { BaseFeatureProps } from "../base";
@@ -13,7 +13,7 @@ import Cover from "../cover/cover";
 import Lock from "../lock/lock";
 import Color from "../composite/color/color";
 import Textual from "../textual/textual";
-import Button from "../../button";
+import { Grid, IconButton, Typography } from "@material-ui/core";
 
 
 type CompositeType = "composite" | "light" | "switch" | "cover" | "lock" | "fan";
@@ -29,21 +29,24 @@ type FetatureWrapperProps = {
 };
 const FeatureWrapper: FunctionComponent<PropsWithChildren<FetatureWrapperProps>> = (props) => {
   const { children, feature, onRead } = props;
-  return <div className="row pb-2">
-    <label className="col-3 col-form-label">
-      <strong title={JSON.stringify(feature)}>{feature.name}{feature.endpoint ? `_${feature.endpoint}` : null}</strong>
-    </label>
-    <div className="col-6 col-sm-8 d-flex align-items-center">
+  return <Grid container spacing={2}>
+    <Grid item xs={3}>
+      <Typography title={JSON.stringify(feature)}>{feature.name}{feature.endpoint ? `_${feature.endpoint}` : null}</Typography>
+    </Grid>
+    <Grid item xs={6} sm={8}>
       {children}
-    </div>
-    <div className="col-1">
+    </Grid>
+
+    <Grid item xs={1}>
       {feature.access & FeatureAccessMode.ACCESS_READ ? (
-        <Button<CompositeFeature | GenericExposedFeature> item={feature} onClick={(item) => {
-          onRead(feature.endpoint, { [item.name]: "" })
-        }} className="btn btn-primaty"><i className="fa fa-sync"></i></Button>
+        <IconButton aria-label="refresh" color="primary" onClick={() => {
+          onRead(feature.endpoint, { [feature.name]: "" })
+        }}>
+          <RefreshIcon />
+        </IconButton>
       ) : null}
-    </div>
-  </div>
+    </Grid>
+  </Grid>
 }
 
 export default class Composite extends Component<CompositeProps, {}> {

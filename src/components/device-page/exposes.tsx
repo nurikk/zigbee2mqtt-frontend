@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { CompositeFeature, Device, DeviceState } from "../../types";
 import actions, { StateApi } from "../../actions";
-
+import Alert from "@material-ui/lab/Alert";
 import { connect } from "unistore/react";
 import { GlobalState } from "../../store";
 
 import Composite from "../features/composite/composite";
+import { Center } from "../center/center";
 
 interface PropsFromStore {
     deviceStates: Map<string, DeviceState>;
@@ -19,20 +20,16 @@ class Exposes extends Component<ExposesProps & PropsFromStore & StateApi, {}> {
         const { device, deviceStates, setDeviceState, getDeviceState } = this.props;
         const deviceState = deviceStates.get(device.friendly_name) ?? {} as DeviceState;
         if (device.definition?.exposes) {
-            return <div className="card">
-                <div className="card-body">
-                    <Composite feature={{ features: device.definition.exposes } as CompositeFeature} type="composite" device={device} deviceState={deviceState}
-                        onChange={(endpoint, value) => {
-                            setDeviceState(`${device.friendly_name}${endpoint ? `/${endpoint}` : ''}`, value)
-                        }}
-                        onRead={(endpoint, value) => {
-                            getDeviceState(`${device.friendly_name}${endpoint ? `/${endpoint}` : ''}`, value)
-                        }}
-                    />
-                </div>
-            </div>
+            return <Composite feature={{ features: device.definition.exposes } as CompositeFeature} type="composite" device={device} deviceState={deviceState}
+                onChange={(endpoint, value) => {
+                    setDeviceState(`${device.friendly_name}${endpoint ? `/${endpoint}` : ''}`, value)
+                }}
+                onRead={(endpoint, value) => {
+                    getDeviceState(`${device.friendly_name}${endpoint ? `/${endpoint}` : ''}`, value)
+                }}
+            />
         } else {
-            return "Device doesn't expose anything"
+            return <Center><Alert severity="info">Device doesn&apos;t expose anything</Alert></Center>
         }
     }
 }
