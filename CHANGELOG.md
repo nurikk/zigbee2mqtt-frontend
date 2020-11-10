@@ -1,3 +1,12 @@
+## [1.0.1](https://github.com/nurikk/z2m-frontend/compare/1.0.0...1.0.1) (2020-11-10)
+
+
+### Reverts
+
+* Revert "chore(release): 2.0.0 :tada:" ([492b2f1](https://github.com/nurikk/z2m-frontend/commit/492b2f1e308ecdbdc36a520b5e334ca620c11870))
+
+
+
 # [1.0.0](https://github.com/nurikk/z2m-frontend/compare/0.2.68...1.0.0) (2020-11-10)
 
 
