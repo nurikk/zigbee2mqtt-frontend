@@ -1,3 +1,17 @@
+## [0.2.74](https://github.com/nurikk/z2m-frontend/compare/0.2.73...0.2.74) (2020-11-11)
+
+
+### Bug Fixes
+
+* **map:** fix rendering issues ([c5ea0ae](https://github.com/nurikk/z2m-frontend/commit/c5ea0ae84bfbfea18e40db9f881e527035e44fb5))
+
+
+### Features
+
+* **setings:** add versions page to settings ([9a5f24b](https://github.com/nurikk/z2m-frontend/commit/9a5f24b773705e615bd603f03198e9bf64ab34ca))
+
+
+
 ## [0.2.73](https://github.com/nurikk/z2m-frontend/compare/0.2.72...0.2.73) (2020-11-11)
 
 
