@@ -10,6 +10,7 @@ import { GlobalState } from "../../store";
 import PowerSourceComp from "../power-source";
 import get from 'lodash/get';
 import DeviceImage from "../device-image";
+import { ModelLink, VendorLink } from "../vendor-links/verndor-links";
 
 
 type DeviceInfoProps = {
@@ -57,12 +58,14 @@ const displayProps = [
     {
         key: 'definition.vendor',
         label: 'Vendor',
-        if: 'supported'
+        if: 'supported',
+        render: (device: Device) => <dd className="col-7"><VendorLink device={device} /></dd>
     },
     {
         key: 'definition.model',
         label: 'Model',
-        if: 'supported'
+        if: 'supported',
+        render: (device: Device) => <dd className="col-7"><ModelLink device={device} /></dd>
     },
 
     {

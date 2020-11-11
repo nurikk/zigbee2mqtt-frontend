@@ -15,6 +15,7 @@ import ActionTH from "./ActionTH";
 import isEqual from "lodash/isEqual";
 import { Link } from "react-router-dom";
 import DeviceImage from "../device-image";
+import { ModelLink, VendorLink } from "../vendor-links/verndor-links";
 
 
 type SortColumn =
@@ -222,8 +223,8 @@ export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
                                 <Link to={genDeviceDetailsLink(device.ieee_address)}>{device.friendly_name}</Link>
                             </td>
                             <td title={toHex(device.network_address)}>{device.ieee_address}</td>
-                            <td className={cx("text-truncate", "text-nowrap", "position-relative")}>{device.definition?.vendor ?? 'Unsupported'}</td>
-                            <td title={device?.definition?.description}>{device.definition?.model ?? 'Unsupported'}</td>
+                            <td className={cx("text-truncate", "text-nowrap", "position-relative")}><VendorLink device={device} /></td>
+                            <td title={device?.definition?.description}><ModelLink device={device} /></td>
                             <td>{state?.linkquality ?? "N/A"}</td>
                             <td className={cx({ 'd-none': !this.lastSeenIsAvaliable() })}>{lastSeen(state?.last_seen, state?.elapsed)}</td>
                             <td className="text-left">
