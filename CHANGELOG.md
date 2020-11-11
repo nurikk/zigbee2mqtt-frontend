@@ -1,3 +1,13 @@
+## [0.2.72](https://github.com/nurikk/z2m-frontend/compare/0.2.71...0.2.72) (2020-11-11)
+
+
+### Features
+
+* **debug:** add api calls debug output ([f4e1c64](https://github.com/nurikk/z2m-frontend/commit/f4e1c6428241a8f74dd16b48eb7744298db03344))
+* **expose:** use property for get requests ([001fed8](https://github.com/nurikk/z2m-frontend/commit/001fed8aad4e116f5efa29f7b4dae4c7836f6a9a))
+
+
+
 ## [0.2.71](https://github.com/nurikk/z2m-frontend/compare/0.2.70...0.2.71) (2020-11-11)
 
 
