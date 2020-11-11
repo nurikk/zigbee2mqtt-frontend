@@ -7,7 +7,6 @@ import UniversalEditor from "../universal-editor";
 import isEmpty from "lodash/isEmpty";
 import { NavLink, Redirect, RouteComponentProps, withRouter } from "react-router-dom";
 import Button from "../button";
-import { download } from "../../utils";
 
 
 const settings = [
