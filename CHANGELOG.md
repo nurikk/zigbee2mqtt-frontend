@@ -1,3 +1,12 @@
+## [0.2.73](https://github.com/nurikk/z2m-frontend/compare/0.2.72...0.2.73) (2020-11-11)
+
+
+### Features
+
+* **exposes:** group features by endpoint ([8900433](https://github.com/nurikk/z2m-frontend/commit/890043301d6f96a6431b79e3809b466db1827de9))
+
+
+
 ## [0.2.72](https://github.com/nurikk/z2m-frontend/compare/0.2.71...0.2.72) (2020-11-11)
 
 
