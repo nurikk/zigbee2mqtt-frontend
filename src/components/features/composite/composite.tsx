@@ -14,6 +14,7 @@ import Lock from "../lock/lock";
 import Color from "../composite/color/color";
 import Textual from "../textual/textual";
 import Button from "../../button";
+import groupBy from "lodash/groupBy";
 
 
 type CompositeType = "composite" | "light" | "switch" | "cover" | "lock" | "fan";
@@ -31,7 +32,7 @@ const FeatureWrapper: FunctionComponent<PropsWithChildren<FetatureWrapperProps>>
   const { children, feature, onRead } = props;
   return <div className="row pb-2">
     <label className="col-3 col-form-label">
-      <strong title={JSON.stringify(feature)}>{feature.name}{feature.endpoint ? `_${feature.endpoint}` : null}</strong>
+      <strong title={JSON.stringify(feature)}>{feature.name}</strong>
     </label>
     <div className="col-6 col-sm-8 d-flex align-items-center">
       {children}
@@ -89,9 +90,19 @@ export default class Composite extends Component<CompositeProps, {}> {
     </FeatureWrapper>);
   }
   render() {
+    const MAGIC_NO_ENDPOINT = 'MAGIC_NO_ENDPOINT';
     const { feature: { features } } = this.props;
-
-    return features?.map(this.renderFeature);
+    const groupedFeatures = groupBy(features, f => f.endpoint ?? MAGIC_NO_ENDPOINT);
+    const result = [];
+    if (groupedFeatures[MAGIC_NO_ENDPOINT]) {
+      result.push(...groupedFeatures[MAGIC_NO_ENDPOINT].map(this.renderFeature));
+      delete groupedFeatures[MAGIC_NO_ENDPOINT];
+    }
+    for (const epName in groupedFeatures) {
+      const featuresGroup = groupedFeatures[epName];
+      result.push(<div key={epName}>Endpoint: {epName}<div className="pl-2">{...featuresGroup.map(this.renderFeature)}</div></div>);
+    }
+    return result;
 
   }
 }
