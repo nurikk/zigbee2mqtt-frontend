@@ -76,6 +76,7 @@ class Api {
         this.url = url;
     }
     send = (topic: string, payload: unknown): void => {
+        console.debug("Calling API", { topic, payload });
         this.socket.send(JSON.stringify({ topic, payload }));
     }
 
