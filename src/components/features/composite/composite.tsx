@@ -39,7 +39,7 @@ const FeatureWrapper: FunctionComponent<PropsWithChildren<FetatureWrapperProps>>
     <div className="col-1">
       {feature.access & FeatureAccessMode.ACCESS_READ ? (
         <Button<CompositeFeature | GenericExposedFeature> item={feature} onClick={(item) => {
-          onRead(feature.endpoint, { [item.name]: "" })
+          onRead(feature.endpoint, { [item.property]: "" })
         }} className="btn btn-primaty"><i className="fa fa-sync"></i></Button>
       ) : null}
     </div>
