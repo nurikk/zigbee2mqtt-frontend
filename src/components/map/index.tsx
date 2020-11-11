@@ -139,7 +139,6 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
         this.simulation.nodes(networkGraph.nodes);
         this.simulation.force<ForceLink<NodeI, LinkI>>("link").links(links);
         this.simulation.on("tick", () => ticked({ transform: this.transform, node, link, linkLabel, width, height }));
-        this.simulation.restart();
 
 
         //add zoom capabilities
@@ -156,6 +155,7 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
             const { selectedNode } = this.state;
             this.setState({ selectedNode: selectedNode ? null : d });
         });
+        this.simulation.alphaTarget(0.3).restart()
     }
 
 
