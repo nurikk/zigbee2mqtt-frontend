@@ -37,13 +37,14 @@ const settings = [
         description: 'Home Assistant integration (MQTT discovery)'
     }
 ]
-type SettingsTab = "settings" | "bridge"
+type SettingsTab = "settings" | "bridge" | "about";
 
 type UrlParams = {
     tab?: SettingsTab;
 };
 type SettingsPageProps = RouteComponentProps<UrlParams>;
 
+declare const FRONTEND_VERSION: string; //injected by webpack.DefinePlugin
 
 export class SettingsPage extends Component<SettingsPageProps & BridgeApi & GlobalState & LegacyApi & UtilsApi, {}> {
     updateConfig = (name: string, value: unknown): void => {
@@ -61,6 +62,9 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
                         </li>
                         <li className="nav-item">
                             <NavLink className="nav-link" activeClassName="active" to={`/settings/bridge`}>Raw</NavLink>
+                        </li>
+                        <li className="nav-item">
+                            <NavLink className="nav-link" activeClassName="active" to={`/settings/about`}>About</NavLink>
                         </li>
                     </ul>
 
@@ -80,11 +84,36 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
                 return this.renderSettings();
             case "bridge":
                 return this.renderBridgeInfo();
+            case "about":
+                return this.renderAbout();
             default:
                 return <Redirect to={`/settings/settings`} />;
         }
     }
+    renderAbout() {
+        const { bridgeInfo } = this.props;
+        const v = FRONTEND_VERSION;
+        return <div className="container">
+            <dl className="row">
+                <dt className="col-sm-3">zigbee2mqtt version</dt>
+                <dd className="col-sm-9">{bridgeInfo.version} {bridgeInfo.commit ? `commit: ${bridgeInfo.commit}` : null}</dd>
+            </dl>
 
+            <dl className="row">
+                <dt className="col-sm-3">coordinator type</dt>
+                <dd className="col-sm-9">{bridgeInfo.coordinator?.type ?? 'Unknown'}</dd>
+            </dl>
+            <dl className="row">
+                <dt className="col-sm-3">coordinator revision</dt>
+                <dd className="col-sm-9">{bridgeInfo.coordinator?.meta?.revision ?? 'Unknown'}</dd>
+            </dl>
+
+            <dl className="row">
+                <dt className="col-sm-3">frontend version</dt>
+                <dd className="col-sm-9">{v}</dd>
+            </dl>
+        </div>
+    }
     renderBridgeInfo() {
         const { bridgeInfo } = this.props;
         return <pre>{JSON.stringify(bridgeInfo, null, 4)}</pre>

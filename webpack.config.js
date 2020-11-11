@@ -4,12 +4,13 @@ const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
     .BundleAnalyzerPlugin;
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyPlugin = require('copy-webpack-plugin');
+const webpack = require("webpack");
 
 const path = require("path");
 const glob = require("glob");
-const proxyTo = process.env.Z2M_API_URI
-    ? process.env.Z2M_API_URI
-    : "ws://localhost:8579";
+const proxyTo = process.env.Z2M_API_URI ?
+    process.env.Z2M_API_URI :
+    "ws://localhost:8579";
 module.exports = (env, args) => {
     let production = false;
 
@@ -21,15 +22,18 @@ module.exports = (env, args) => {
     }
 
     const plugins = [
+        new webpack.DefinePlugin({
+            FRONTEND_VERSION: JSON.stringify(process.env.npm_package_version)
+        }),
         new MiniCssExtractPlugin({
             filename: "[name].[contenthash].css",
             chunkFilename: "[id].[contenthash].css",
         }),
         new CopyPlugin({
-            patterns: [
-              { from: 'src/images/favicon.ico' },
-            ],
-          }),
+            patterns: [{
+                from: 'src/images/favicon.ico'
+            }, ],
+        }),
     ];
     const basePath = "src/templates";
     glob.sync(`${basePath}/**/*.html`).forEach((item) => {
@@ -78,26 +82,21 @@ module.exports = (env, args) => {
             extensions: [".ts", ".tsx", ".js", ".html", ".txt"],
         },
         module: {
-            rules: [
-                {
+            rules: [{
                     test: /\.txt$/i,
                     use: 'raw-loader',
                 },
                 {
                     test: /\.(png|jpe?g|gif)$/i,
-                    use: [
-                        {
-                            loader: "file-loader",
-                        },
-                    ],
+                    use: [{
+                        loader: "file-loader",
+                    }, ],
                 },
                 {
                     test: /\.tsx?$/,
-                    use: [
-                        {
-                            loader: "ts-loader",
-                        },
-                    ],
+                    use: [{
+                        loader: "ts-loader",
+                    }, ],
                 },
                 {
                     test: /\.css$/i,

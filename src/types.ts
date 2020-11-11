@@ -84,6 +84,14 @@ export interface BridgeConfig {
 export interface BridgeInfo {
     config: Z2MConfig;
     permit_join: boolean;
+    commit?: string;
+    version?: string;
+    coordinator?: {
+        meta?: {
+            revision?: string;
+        };
+        type?: string;
+    };
 }
 
 export type PowerSource = "Battery" | "Mains (single phase)" | "DC Source";
