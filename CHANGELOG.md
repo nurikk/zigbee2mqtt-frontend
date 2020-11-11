@@ -1,3 +1,14 @@
+## [0.2.70](https://github.com/nurikk/z2m-frontend/compare/0.2.68...0.2.70) (2020-11-11)
+
+
+### Features
+
+* **device-info:** add z2m documentation links ([cbd34e0](https://github.com/nurikk/z2m-frontend/commit/cbd34e07aac0fcb0fb19f574098b20040e24d338))
+* **exposes:** adopt new access mode format ([6833db0](https://github.com/nurikk/z2m-frontend/commit/6833db00ca20f18b6e4b4b0e330c8e7d25f4345e))
+* **state:** remove editor from state page ([d843554](https://github.com/nurikk/z2m-frontend/commit/d8435547c0c47e4da70eca5b1211575545b73272))
+
+
+
 ## [0.2.69](https://github.com/nurikk/z2m-frontend/compare/0.2.68...0.2.69) (2020-11-08)
 
 
