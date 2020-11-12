@@ -30,6 +30,8 @@ type FetatureWrapperProps = {
 };
 const FeatureWrapper: FunctionComponent<PropsWithChildren<FetatureWrapperProps>> = (props) => {
   const { children, feature, onRead } = props;
+  const isColor = feature.name === "color_xy"; //hardcode for color
+  const isReadable = (feature.access & FeatureAccessMode.ACCESS_READ) || isColor;
   return <div className="row pb-2">
     <label className="col-3 col-form-label">
       <strong title={JSON.stringify(feature)}>{feature.name}</strong>
@@ -38,7 +40,7 @@ const FeatureWrapper: FunctionComponent<PropsWithChildren<FetatureWrapperProps>>
       {children}
     </div>
     <div className="col-1">
-      {feature.access & FeatureAccessMode.ACCESS_READ ? (
+      {isReadable ? (
         <Button<CompositeFeature | GenericExposedFeature> item={feature} onClick={(item) => {
           onRead(feature.endpoint, { [item.property]: "" })
         }} className="btn btn-primaty"><i className="fa fa-sync"></i></Button>
