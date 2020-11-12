@@ -30,7 +30,7 @@ type FetatureWrapperProps = {
 };
 const FeatureWrapper: FunctionComponent<PropsWithChildren<FetatureWrapperProps>> = (props) => {
   const { children, feature, onRead } = props;
-  const isColor = feature.name === "color_xy"; //hardcode for color
+  const isColor = feature.name.startsWith("color_"); //hardcode for color
   const isReadable = (feature.access & FeatureAccessMode.ACCESS_READ) || isColor;
   return <div className="row pb-2">
     <label className="col-3 col-form-label">
