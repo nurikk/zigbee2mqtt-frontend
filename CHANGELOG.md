@@ -1,3 +1,12 @@
+## [0.2.76](https://github.com/nurikk/z2m-frontend/compare/0.2.75...0.2.76) (2020-11-12)
+
+
+### Features
+
+* **exposes:** hardcode all access for color feature ([bf12a5a](https://github.com/nurikk/z2m-frontend/commit/bf12a5a5878ad3d30b3c6b9aac8e592075662ee2))
+
+
+
 ## [0.2.75](https://github.com/nurikk/z2m-frontend/compare/0.2.74...0.2.75) (2020-11-12)
 
 
