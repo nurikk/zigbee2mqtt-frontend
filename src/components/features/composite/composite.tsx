@@ -1,6 +1,6 @@
 import React, { Component, FunctionComponent, PropsWithChildren } from "react";
 import { CompositeFeature, Endpoint, FeatureAccessMode, GenericExposedFeature } from "../../../types";
-import { isBinaryFeature, isColorFeature, isCoverFeature, isEnumFeature, isLightFeature, isLockFeature, isNumericFeature, isSwitchFeature, isTextualFeature } from "../../device-page/type-guards";
+import { isBinaryFeature, isClimateFeature, isColorFeature, isCoverFeature, isEnumFeature, isLightFeature, isLockFeature, isNumericFeature, isSwitchFeature, isTextualFeature } from "../../device-page/type-guards";
 
 import Numeric from "../numeric/numeric";
 
@@ -15,9 +15,10 @@ import Color from "../composite/color/color";
 import Textual from "../textual/textual";
 import Button from "../../button";
 import groupBy from "lodash/groupBy";
+import Climate from "../climate/climate";
 
 
-type CompositeType = "composite" | "light" | "switch" | "cover" | "lock" | "fan";
+type CompositeType = "composite" | "light" | "switch" | "cover" | "lock" | "fan" | "climate";
 
 interface CompositeProps extends BaseFeatureProps<CompositeFeature> {
   type: CompositeType;
@@ -30,7 +31,7 @@ type FetatureWrapperProps = {
 };
 const FeatureWrapper: FunctionComponent<PropsWithChildren<FetatureWrapperProps>> = (props) => {
   const { children, feature, onRead } = props;
-  const isColor = feature.name.startsWith("color_"); //hardcode for color
+  const isColor = feature.name?.startsWith("color_"); //hardcode for color
   const isReadable = (feature.access & FeatureAccessMode.ACCESS_READ) || isColor;
   return <div className="row pb-2">
     <label className="col-3 col-form-label">
@@ -85,10 +86,12 @@ export default class Composite extends Component<CompositeProps, {}> {
       return <FeatureWrapper {...wrapperParams}>
         <Color feature={feature} {...genericParams} />
       </FeatureWrapper>
+    } else if (isClimateFeature(feature)) {
+      return <Climate feature={feature} {...genericParams} />
     }
     return (<FeatureWrapper {...wrapperParams}>
-      <label className="col-3 col-form-label">Unknown feature (<strong>{feature.type}</strong>)</label>
-      <div className="col-9">{JSON.stringify(feature)}{JSON.stringify(deviceState)}</div>
+      {/* <label className="col-3 col-form-label">Unknown feature (<strong>{feature.type}</strong>)</label> */}
+      <pre>{JSON.stringify(feature, null, 4)}{JSON.stringify(deviceState, null, 4)}</pre>
     </FeatureWrapper>);
   }
   render() {

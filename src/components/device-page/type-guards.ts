@@ -1,5 +1,5 @@
 
-import { GenericExposedFeature, BinaryFeature, NumericFeature, EnumFeature, LightFeature, CompositeFeature, SwitchFeature, CoverFeature, LockFeature, ColorFeature, TextualFeature } from "../../types";
+import { GenericExposedFeature, BinaryFeature, NumericFeature, EnumFeature, LightFeature, CompositeFeature, SwitchFeature, CoverFeature, LockFeature, ColorFeature, TextualFeature, ClimateFeature } from "../../types";
 
 export function isBinaryFeature(feature: GenericExposedFeature | CompositeFeature): feature is BinaryFeature {
   return feature.type === "binary";
@@ -37,4 +37,8 @@ export function isCompositeFeature(feature: GenericExposedFeature | CompositeFea
 
 export function isColorFeature(feature: GenericExposedFeature | CompositeFeature): feature is ColorFeature {
   return isCompositeFeature(feature) && (feature.name == "color_xy" || feature.name == "color_hs");
+}
+
+export function isClimateFeature(feature: GenericExposedFeature | CompositeFeature): feature is ClimateFeature {
+  return feature.type === "climate";
 }
