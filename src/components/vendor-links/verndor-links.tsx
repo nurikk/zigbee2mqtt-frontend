@@ -1,16 +1,20 @@
 import React, { Fragment } from "react";
 import { Device } from "../../types";
-import { sanitizeZ2MDeviceName } from "../../utils";
+
 type VendorProps = {
   device: Device;
 }
-
+const normalizeModel = (model: string): string => {
+  const find = '[/| |:]';
+  const re = new RegExp(find, 'g');
+  return model.replace(re, '_');
+};
 
 export const VendorLink: React.FunctionComponent<VendorProps> = (props: VendorProps) => {
   const { device } = props;
   if (device.supported) {
-    const url = `https://www.zigbee2mqtt.io/information/supported_devices.html#${encodeURIComponent(sanitizeZ2MDeviceName(device.definition?.vendor?.toLowerCase()))}`;
-    return <a target="_blank" rel="noopener noreferrer" href={url}>{sanitizeZ2MDeviceName(device.definition?.vendor)}</a>
+    const url = `https://www.zigbee2mqtt.io/information/supported_devices.html#${encodeURIComponent(normalizeModel(device.definition?.vendor?.toLowerCase()))}`;
+    return <a target="_blank" rel="noopener noreferrer" href={url}>{device.definition?.vendor}</a>
   }
   return <Fragment>Unsupported</Fragment>;
 }
@@ -25,7 +29,7 @@ export const ModelLink: React.FunctionComponent<VendorProps> = (props: VendorPro
       encodeURIComponent(device.definition?.vendor?.toLowerCase()),
       encodeURIComponent(device.definition?.model?.toLowerCase()),
     ].join('-');
-    url = `https://www.zigbee2mqtt.io/devices/${encodeURIComponent(device.definition?.model)}.html#${acnchor}`;
+    url = `https://www.zigbee2mqtt.io/devices/${encodeURIComponent(normalizeModel(device.definition?.model))}.html#${encodeURIComponent(normalizeModel(acnchor))}`;
     title = device.definition?.model;
   }
   return <a target="_blank" rel="noopener noreferrer" href={url}>{title}</a>
