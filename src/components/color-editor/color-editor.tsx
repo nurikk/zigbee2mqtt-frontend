@@ -14,7 +14,7 @@ type ColorProps = {
   onChange(value: object): void;
 }
 
-const toRGB = (source: AnyColor, sourceFormat: ColorFormat): string => {
+export const toRGB = (source: AnyColor, sourceFormat: ColorFormat): string => {
   switch (sourceFormat) {
     case "color_xy":
       {
