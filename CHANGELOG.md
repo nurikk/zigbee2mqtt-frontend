@@ -1,3 +1,12 @@
+## [0.2.79](https://github.com/nurikk/z2m-frontend/compare/0.2.78...0.2.79) (2020-11-12)
+
+
+### Features
+
+* **exposes:** implemented climate feature ([d7bebb3](https://github.com/nurikk/z2m-frontend/commit/d7bebb386574f130a2d99835019b5958b294d29c))
+
+
+
 ## [0.2.78](https://github.com/nurikk/z2m-frontend/compare/0.2.77...0.2.78) (2020-11-12)
 
 
