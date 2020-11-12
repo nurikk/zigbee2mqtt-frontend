@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import { Device } from "../../types";
+import { sanitizeZ2MDeviceName } from "../../utils";
 type VendorProps = {
   device: Device;
 }
@@ -8,8 +9,8 @@ type VendorProps = {
 export const VendorLink: React.FunctionComponent<VendorProps> = (props: VendorProps) => {
   const { device } = props;
   if (device.supported) {
-    const url = `https://www.zigbee2mqtt.io/information/supported_devices.html#${encodeURIComponent(device.definition?.vendor?.toLowerCase())}`;
-    return <a target="_blank" rel="noopener noreferrer" href={url}>{device.definition?.vendor}</a>
+    const url = `https://www.zigbee2mqtt.io/information/supported_devices.html#${encodeURIComponent(sanitizeZ2MDeviceName(device.definition?.vendor?.toLowerCase()))}`;
+    return <a target="_blank" rel="noopener noreferrer" href={url}>{sanitizeZ2MDeviceName(device.definition?.vendor)}</a>
   }
   return <Fragment>Unsupported</Fragment>;
 }

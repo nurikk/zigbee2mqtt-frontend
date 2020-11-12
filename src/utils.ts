@@ -130,3 +130,5 @@ export const download = (data: object, filename: string): void => {
     }, 1);
 
 }
+
+export const sanitizeZ2MDeviceName = (deviceName: string): string => deviceName?.replace(/:|\s|\//g, "-");

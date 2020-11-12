@@ -2,6 +2,7 @@ import React, { FunctionComponent, ImgHTMLAttributes, useState } from "react";
 import genericDevice from "../../images/generic-zigbee-device.png";
 import { Device, DeviceState } from "../../types";
 import cx from "classnames";
+import { sanitizeZ2MDeviceName } from "../../utils";
 type DeviceImageProps = {
     device: Device;
     deviceStatus?: DeviceState;
@@ -9,7 +10,7 @@ type DeviceImageProps = {
 }
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const genericDeiviceImageFallback = (device: Device): string => genericDevice;
-const genSlsDeviceImageUrlZ2M = (device: Device): string => `https://www.zigbee2mqtt.io/images/devices/${device?.definition?.model?.replace(/:|\s|\//g, "-")}.jpg`;
+const genSlsDeviceImageUrlZ2M = (device: Device): string => `https://www.zigbee2mqtt.io/images/devices/${sanitizeZ2MDeviceName(device?.definition?.model)}.jpg`;
 const genSlsDeviceImageUrlSLS = (device: Device): string => `https://slsys.github.io/Gateway/devices/png/${device?.definition?.model?.replace("/", "_")}.png`;
 
 const AVALIABLE_GENERATORS = [
