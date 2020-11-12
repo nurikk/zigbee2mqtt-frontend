@@ -1,3 +1,12 @@
+## [0.2.75](https://github.com/nurikk/z2m-frontend/compare/0.2.74...0.2.75) (2020-11-12)
+
+
+### Features
+
+* **exposes:** implement color according to access spec ([498d35e](https://github.com/nurikk/z2m-frontend/commit/498d35ece792eb58858f0028f460494f9d4fc9c2))
+
+
+
 ## [0.2.74](https://github.com/nurikk/z2m-frontend/compare/0.2.73...0.2.74) (2020-11-11)
 
 
