@@ -5,7 +5,6 @@ import { Store } from "unistore";
 
 import { Cluster, Device, TouchLinkDevice } from "./types";
 import api from "./api";
-import { endDevice2Router } from "./components/map/map.module.css";
 import { download } from "./utils";
 
 export interface UtilsApi {
