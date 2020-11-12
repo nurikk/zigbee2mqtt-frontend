@@ -16,6 +16,7 @@ import isEqual from "lodash/isEqual";
 import { Link } from "react-router-dom";
 import DeviceImage from "../device-image";
 import { ModelLink, VendorLink } from "../vendor-links/verndor-links";
+import Spinner from "../spinner";
 
 
 type SortColumn =
@@ -158,12 +159,7 @@ export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
             return this.renderError();
         }
         return (<div className="h-100 d-flex justify-content-center align-items-center">
-            <div className="d-flex align-items-center">
-                <strong>Loading, please wait.</strong>
-                <div className="spinner-border ml-2" role="status">
-                    <span className="sr-only">Loading...</span>
-                </div>
-            </div>
+            <Spinner />
         </div>);
     }
     lastSeenIsAvaliable(): boolean {

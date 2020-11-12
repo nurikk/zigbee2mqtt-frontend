@@ -13,6 +13,7 @@ import { select, selectAll, Selection } from "d3-selection";
 import { forceManyBodyReuse } from "d3-force-reuse"
 import { zoom, zoomIdentity, ZoomTransform } from "d3-zoom";
 import { linkTypes } from "./consts";
+import Spinner from "../spinner";
 
 export interface MouseEventsResponderNode {
     onMouseOver?: (arg0: NodeI, el: SVGPolygonElement | SVGCircleElement | SVGImageElement) => void;
@@ -231,12 +232,7 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
                 {
                     networkGraphIsLoading ? (
                         <div>
-                            <div className="d-flex align-items-center">
-                                <strong>Loading, please wait.</strong>
-                                <div className="spinner-border ml-2" role="status">
-                                    <span className="sr-only">Loading...</span>
-                                </div>
-                            </div>
+                            <Spinner />
                             <div>Depending on the size of your network this can take somewhere between 10 seconds and 2 minutes.</div>
                         </div>
 
