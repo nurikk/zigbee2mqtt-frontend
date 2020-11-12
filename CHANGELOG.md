@@ -1,3 +1,12 @@
+## [0.2.78](https://github.com/nurikk/z2m-frontend/compare/0.2.77...0.2.78) (2020-11-12)
+
+
+### Bug Fixes
+
+* **vendor-link:** use z2m normalizeModel ([e2476cd](https://github.com/nurikk/z2m-frontend/commit/e2476cdbae378aeab9e3d8d23ab16e7ec300574f))
+
+
+
 ## [0.2.77](https://github.com/nurikk/z2m-frontend/compare/0.2.76...0.2.77) (2020-11-12)
 
 
