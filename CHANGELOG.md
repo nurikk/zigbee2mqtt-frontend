@@ -1,3 +1,13 @@
+## [0.2.77](https://github.com/nurikk/z2m-frontend/compare/0.2.76...0.2.77) (2020-11-12)
+
+
+### Bug Fixes
+
+* **color:** improove hardcoded color check ([dddeca5](https://github.com/nurikk/z2m-frontend/commit/dddeca592083c1629564dd44a08fe08853bbaf19))
+* **vendor-links:** z2m style sanitisation ([17bece6](https://github.com/nurikk/z2m-frontend/commit/17bece63423d027deb58a756ca9ae0822c8b8687))
+
+
+
 ## [0.2.76](https://github.com/nurikk/z2m-frontend/compare/0.2.75...0.2.76) (2020-11-12)
 
 
