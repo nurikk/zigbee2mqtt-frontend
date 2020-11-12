@@ -1,34 +1,25 @@
-import React, { Component } from "react";
+import React, { FunctionComponent } from "react";
 
 import { BinaryFeature, FeatureAccessMode } from "../../../types";
 import Toggle from "../../toggle";
 
-import { BaseFeatureProps } from "../base";
+import { BaseFeatureProps, BaseViewer, NoAccessError } from "../base";
 
-type BinaryProps = BaseFeatureProps<BinaryFeature>
-export default class Binary extends Component<BinaryProps> {
+type BinaryProps = BaseFeatureProps<BinaryFeature>;
 
-  renderEditor() {
-    const { feature: { endpoint, name, property, value_off: valueOff, value_on: valueOn }, deviceState, onChange } = this.props;
+const Binary: FunctionComponent<BinaryProps> = (props) => {
+  const { feature: { access, endpoint, name, property, value_off: valueOff, value_on: valueOn }, deviceState, onChange } = props;
+  if (access & FeatureAccessMode.ACCESS_WRITE) {
     return <Toggle
       onChange={(value) => onChange(endpoint, { [name]: value })}
       value={deviceState[property]}
       valueOn={valueOn}
       valueOff={valueOff}
     />
-  }
-  renderView() {
-    const { feature: { property }, deviceState } = this.props;
-    return <strong>{deviceState[property] ? 'TRUE' : 'FALSE'}</strong>
-  }
-  render() {
-    const { feature: { access } } = this.props;
-    if (access & FeatureAccessMode.ACCESS_WRITE) {
-      return this.renderEditor();
-    } else if (access & FeatureAccessMode.ACCESS_STATE) {
-      return this.renderView();
-    } else {
-      return null;
-    }
+  } else if (access & FeatureAccessMode.ACCESS_STATE) {
+    return <BaseViewer {...props} />
+  } else {
+    return <NoAccessError {...props} />
   }
 }
+export default Binary;

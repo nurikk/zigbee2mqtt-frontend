@@ -1,9 +1,6 @@
-import React, { Component } from "react";
-
+import React, { FunctionComponent } from "react";
 import { CoverFeature } from "../../../types";
 import { ValueWithLabelOrPrimitive } from "../../enum-editor/enum-editor";
-
-
 import { BaseFeatureProps } from "../base";
 import Composite from "../composite/composite";
 
@@ -13,8 +10,9 @@ const stepsConfiguration = {
 };
 
 type CoverProps = BaseFeatureProps<CoverFeature>
-export default class Cover extends Component<CoverProps, {}> {
-  render() {
-    return <Composite type="cover" {...this.props} stepsConfiguration={stepsConfiguration} />
-  }
-}
+
+const Cover: FunctionComponent<CoverProps> = (props) => <Composite type="cover" {...props} stepsConfiguration={stepsConfiguration} />;
+
+export default Cover;
+
+

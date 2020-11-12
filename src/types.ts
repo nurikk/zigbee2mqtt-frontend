@@ -110,6 +110,7 @@ export enum FeatureAccessMode {
 export interface GenericExposedFeature {
     type: GenericFeatureType;
     name: string;
+    unit?: "string";
     access?: FeatureAccessMode;
     endpoint?: Endpoint;
     property: string;
@@ -131,7 +132,6 @@ export type GenericOrCompositeFeature = GenericExposedFeature | CompositeFeature
 
 export interface NumericFeature extends GenericExposedFeature {
     type: "numeric";
-    unit?: "string";
     value_min?: number;
     value_max?: number;
 }
