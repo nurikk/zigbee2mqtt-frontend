@@ -45,6 +45,14 @@ const getDistance = (d: LinkI): number => {
     return 50 * depth + distance;
 };
 
+const parentOrChild = [ZigbeeRelationship.NeigbhorIsAChild, ZigbeeRelationship.NeigbhorIsParent];
+const linkStrregth = (d: LinkI) => {
+    if (parentOrChild.includes(d.relationship)) {
+        return 0.2;
+    }
+    return 0;
+}
+
 const computeLink = (d: LinkI, transform: ZoomTransform, radius: number, width: number, height: number): string => {
     const src = d.source;
     const dst = d.target;
@@ -124,7 +132,7 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
         selectedNode: null,
         width: 0,
         height: 0,
-        visibleLinks: [ZigbeeRelationship.NeigbhorIsAChild]
+        visibleLinks: parentOrChild
     };
     transform: ZoomTransform = zoomIdentity;
 
@@ -161,10 +169,6 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
 
 
     updateForces(width: number, height: number): void {
-        const linkForce = forceLink<NodeI, LinkI>()
-            .id(d => d.ieeeAddr)
-            .distance(getDistance)
-            .strength(0.2);
 
         const chargeForce = forceManyBodyReuse()
             .distanceMin(200)
@@ -176,17 +180,12 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
             .distanceMax(50)
             .distanceMin(20);
 
-        const collisionForce = forceCollide(40)
-            .strength(1);
-
-        const centerForce = forceCenter(width / 2, height / 2);
-
         this.simulation = forceSimulation<NodeI, LinkI>()
-            .force("link", linkForce)
+            .force("link", forceLink<NodeI, LinkI>().id(d => d.ieeeAddr).distance(getDistance).strength(linkStrregth))
             .force("charge", chargeForce)
-            .force("collisionForce", collisionForce)
+            .force("collisionForce", forceCollide(40).strength(1))
             .force("repelForce", repelForce)
-            .force("center", centerForce)
+            .force("center", forceCenter(width / 2, height / 2))
             .force("x", forceX())
             .force("y", forceY())
     }
