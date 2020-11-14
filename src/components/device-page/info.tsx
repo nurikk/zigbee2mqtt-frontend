@@ -94,7 +94,7 @@ export class DeviceInfo extends Component<DeviceInfoProps & PropsFromStore, {}> 
 
                     <dl className="row">
                         {
-                            displayProps.filter(prop => get(device, prop.if, false)).map(prop => (
+                            displayProps.filter(prop => prop.if === undefined || get(device, prop.if, false)).map(prop => (
                                 <Fragment key={prop.label}>
                                     <dt className="col-5">{prop.label}</dt>
                                     {prop.render ?
