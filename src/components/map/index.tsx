@@ -31,19 +31,7 @@ const angle = (s: Source, t: Target) => Math.atan2(t.y - s.y, t.x - s.x);
 const xpos = (offset: number, s: Source, t: Target) => offset * Math.cos(angle(s, t)) + s.x;
 const ypos = (offset: number, s: Source, t: Target) => offset * Math.sin(angle(s, t)) + s.y;
 
-const distancesMap = {
-    BrokenLink: 450,
-    Router2Router: 300,
-    Coordinator2Router: 400,
-    Coordinator2EndDevice: 100,
-    EndDevice2Router: 100
-};
 
-const getDistance = (d: LinkI): number => {
-    const distance = distancesMap[d.linkType] ?? 200;
-    const depth = ~~(Math.min(4, d.depth));
-    return 50 * depth + distance;
-};
 
 const parentOrChild = [ZigbeeRelationship.NeigbhorIsAChild, ZigbeeRelationship.NeigbhorIsParent];
 const linkStrregth = (d: LinkI) => {
@@ -53,17 +41,17 @@ const linkStrregth = (d: LinkI) => {
     return 0;
 }
 
-const computeLink = (d: LinkI, transform: ZoomTransform, radius: number, width: number, height: number): string => {
+const computeLink = (d: LinkI, transform: ZoomTransform): string => {
     const src = d.source;
     const dst = d.target;
-    const x1 = transform.applyX(Math.max(radius, Math.min(width - radius, src.x)));
-    const y1 = transform.applyY(Math.max(radius, Math.min(height - radius, src.y)));
-    const x2 = transform.applyX(Math.max(radius, Math.min(width - radius, dst.x)));
-    const y2 = transform.applyY(Math.max(radius, Math.min(height - radius, dst.y)));
+    const x1 = transform.applyX(src.x);
+    const y1 = transform.applyY(src.y);
+    const x2 = transform.applyX(dst.x);
+    const y2 = transform.applyY(dst.y);
 
     const dx = x2 - x1, dy = y2 - y1;
-    const dr = Math.sqrt(dx * dx + dy * dy);
     if (d.repeated) {
+        const dr = Math.sqrt(dx * dx + dy * dy);
         return `M${x1},${y1} A${dr},${dr} 0 0, 1${x2},${y2}`;
     }
     return `M ${x1} ${y1} L ${x2} ${y2}`;
@@ -77,13 +65,9 @@ type TickedParams = {
     node: SelNode;
     link: SelLink;
     linkLabel: SelLink;
-    width: number;
-    height: number;
 }
-const ticked = ({ transform, node, link, linkLabel, width, height }: TickedParams): void => {
-    const radius = 40;
-    link.attr("d", (d) => computeLink(d, transform, radius, width, height));
-
+const ticked = ({ transform, node, link, linkLabel }: TickedParams): void => {
+    link.attr("d", (d) => computeLink(d, transform));
     linkLabel
         .attr('text-anchor', (d) => d.repeated ? 'start' : 'end')
         .attr('x', (d) => transform.applyX(xpos(d.repeated ? 30 : 60, d.source, d.target)))
@@ -92,8 +76,8 @@ const ticked = ({ transform, node, link, linkLabel, width, height }: TickedParam
     const imgXShift = 32 / 2;
     const imgYShift = 32 / 2;
     const computeTransform = (d: NodeI) => {
-        const nodeX = Math.max(radius, Math.min(width - radius, transform.applyX(d.x))) - imgXShift;
-        const nodeY = Math.max(radius, Math.min(height - radius, transform.applyY(d.y))) - imgYShift;
+        const nodeX = transform.applyX(d.x) - imgXShift;
+        const nodeY = transform.applyY(d.y) - imgYShift;
         return `translate(${nodeX}, ${nodeY})`;
     }
     node.attr("transform", computeTransform);
@@ -138,6 +122,9 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
 
     updateNodes = (): void => {
         const { networkGraph } = this.props;
+        if (!networkGraph.nodes.length) {
+            return;
+        }
         const { visibleLinks, selectedNode, width, height } = this.state;
 
         const node = selectAll<SVGElement, NodeI>(`.${style.node}`);
@@ -147,16 +134,17 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
         const links = networkGraph.links.filter(l => visibleLinks.includes(l.relationship));
         this.simulation.nodes(networkGraph.nodes);
         this.simulation.force<ForceLink<NodeI, LinkI>>("link").links(links);
-        this.simulation.on("tick", () => ticked({ transform: this.transform, node, link, linkLabel, width, height }));
+        this.simulation.on("tick", () => ticked({ transform: this.transform, node, link, linkLabel }));
 
 
         //add zoom capabilities
         const everything = select<SVGGeometryElement, NodeI>('.everything');
-        const zoomHandler = zoom().on("zoom", ({ transform }) => {
-            everything.attr("transform", transform);
-            this.transform = transform;
-            ticked({ transform, node, link, linkLabel, width, height });
-        });
+        const zoomHandler = zoom()
+            .extent([[0, 0], [width, height]])
+            .scaleExtent([1 / 10, 8])
+            .on("zoom", ({ transform }) => {
+                everything.attr("transform", transform);
+            });
         zoomHandler(select(this.svgRef.current));
 
         processHighlights({ networkGraph, links, selectedNode, node, link, linkLabel });
@@ -164,30 +152,18 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
             const { selectedNode } = this.state;
             this.setState({ selectedNode: selectedNode ? null : d });
         });
-        this.simulation.alphaTarget(0.3).restart()
+        this.simulation.restart();
     }
 
 
     updateForces(width: number, height: number): void {
-
-        const chargeForce = forceManyBodyReuse()
-            .distanceMin(200)
-            .distanceMax(1000)
-            .strength(-200);
-
-        const repelForce = forceManyBodyReuse()
-            .strength(-140)
-            .distanceMax(50)
-            .distanceMin(20);
-
         this.simulation = forceSimulation<NodeI, LinkI>()
-            .force("link", forceLink<NodeI, LinkI>().id(d => d.ieeeAddr).distance(getDistance).strength(linkStrregth))
-            .force("charge", chargeForce)
+            .force("link", forceLink<NodeI, LinkI>().id(d => d.ieeeAddr).distance(200).strength(linkStrregth))
+            .force("charge", forceManyBodyReuse().strength(-700))
             .force("collisionForce", forceCollide(40).strength(1))
-            .force("repelForce", repelForce)
             .force("center", forceCenter(width / 2, height / 2))
-            .force("x", forceX())
-            .force("y", forceY())
+            .force("x", forceX().strength(0.09))
+            .force("y", forceY().strength(0.2))
     }
 
     initPage(): void {
@@ -206,6 +182,7 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
 
     renderMap() {
         const { width, height, visibleLinks } = this.state;
+
         const { networkGraph } = this.props;
         const links = networkGraph.links.filter(l => visibleLinks.includes(l.relationship));
         return (
