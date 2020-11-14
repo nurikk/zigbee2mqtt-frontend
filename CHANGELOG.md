@@ -1,3 +1,12 @@
+## [0.2.80](https://github.com/nurikk/z2m-frontend/compare/0.2.79...0.2.80) (2020-11-14)
+
+
+### Features
+
+* **map:** fix various issues ([38fde05](https://github.com/nurikk/z2m-frontend/commit/38fde051ed0a9de5832222d9129ff66370ee4fec))
+
+
+
 ## [0.2.79](https://github.com/nurikk/z2m-frontend/compare/0.2.78...0.2.79) (2020-11-12)
 
 
