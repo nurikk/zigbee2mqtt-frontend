@@ -1,3 +1,12 @@
+## [0.2.82](https://github.com/nurikk/z2m-frontend/compare/0.2.81...0.2.82) (2020-11-15)
+
+
+### Bug Fixes
+
+* **map:** optimize forses ([cac1156](https://github.com/nurikk/z2m-frontend/commit/cac1156b9f1a90423b3e71c72fb802e46ff8e2c7))
+
+
+
 ## [0.2.81](https://github.com/nurikk/z2m-frontend/compare/0.2.80...0.2.81) (2020-11-15)
 
 
