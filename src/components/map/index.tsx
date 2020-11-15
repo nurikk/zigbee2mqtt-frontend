@@ -36,18 +36,32 @@ const ypos = (offset: number, s: Source, t: Target) => offset * Math.sin(angle(s
 const parentOrChild = [ZigbeeRelationship.NeigbhorIsAChild, ZigbeeRelationship.NeigbhorIsParent];
 const linkStrregth = (d: LinkI) => {
     if (parentOrChild.includes(d.relationship)) {
-        return 0.2;
+        return 1;
     }
     return 0;
 }
 
+const distancesMap = {
+    BrokenLink: 450,
+    Router2Router: 300,
+    Coordinator2Router: 400,
+    Coordinator2EndDevice: 100,
+    EndDevice2Router: 100
+};
+
+
+const getDistance = (d: LinkI): number => {
+    const distance = distancesMap[d.linkType] ?? 200;
+    const depth = ~~(Math.min(4, d.depth));
+    return 50 * depth + distance;
+};
+
 const computeLink = (d: LinkI, transform: ZoomTransform): string => {
     const src = d.source;
     const dst = d.target;
-    const x1 = transform.applyX(src.x);
-    const y1 = transform.applyY(src.y);
-    const x2 = transform.applyX(dst.x);
-    const y2 = transform.applyY(dst.y);
+    const [x1, y1] = transform.apply([src.x, src.y]);
+    const [x2, y2] = transform.apply([dst.x, dst.y]);
+
 
     const dx = x2 - x1, dy = y2 - y1;
     if (d.repeated) {
@@ -65,8 +79,17 @@ type TickedParams = {
     node: SelNode;
     link: SelLink;
     linkLabel: SelLink;
+    links: LinkI[];
 }
-const ticked = ({ transform, node, link, linkLabel }: TickedParams): void => {
+const ticked = ({ transform, node, link, linkLabel, links }: TickedParams): void => {
+    links.forEach(function (d) {
+        const [x1, y1] = transform.apply([d.source.x, d.source.y]),
+            [x2, y2] = transform.apply([d.target.x, d.target.y]),
+            slope = (y2 - y1) / (x2 - x1);
+
+        (d as unknown as NodeI).x = (x2 + x1) / 2;
+        (d as unknown as NodeI).y = (x2 - x1) * slope / 2 + y1;
+    });
     link.attr("d", (d) => computeLink(d, transform));
     linkLabel
         .attr('text-anchor', (d) => d.repeated ? 'start' : 'end')
@@ -76,9 +99,8 @@ const ticked = ({ transform, node, link, linkLabel }: TickedParams): void => {
     const imgXShift = 32 / 2;
     const imgYShift = 32 / 2;
     const computeTransform = (d: NodeI) => {
-        const nodeX = transform.applyX(d.x) - imgXShift;
-        const nodeY = transform.applyY(d.y) - imgYShift;
-        return `translate(${nodeX}, ${nodeY})`;
+        const [X, Y] = transform.apply([d.x, d.y]);
+        return `translate(${X - imgXShift}, ${Y - imgYShift})`;
     }
     node.attr("transform", computeTransform);
 };
@@ -132,9 +154,9 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
         const linkLabel = selectAll<SVGElement, LinkI>(`.${style.linkLabel}`);
 
         const links = networkGraph.links.filter(l => visibleLinks.includes(l.relationship));
-        this.simulation.nodes(networkGraph.nodes);
+        this.simulation.nodes(networkGraph.nodes.concat(links as unknown as NodeI[]));
         this.simulation.force<ForceLink<NodeI, LinkI>>("link").links(links);
-        this.simulation.on("tick", () => ticked({ transform: this.transform, node, link, linkLabel }));
+        this.simulation.on("tick", () => ticked({ transform: this.transform, node, link, linkLabel, links }));
 
 
         //add zoom capabilities
@@ -152,18 +174,23 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
             const { selectedNode } = this.state;
             this.setState({ selectedNode: selectedNode ? null : d });
         });
-        this.simulation.restart();
+        this.simulation.alphaTarget(0.03).restart();
+        setTimeout(() => {
+            this.simulation.alphaTarget(0)
+        }, 5000);
+
+
     }
 
 
     updateForces(width: number, height: number): void {
-        this.simulation = forceSimulation<NodeI, LinkI>()
-            .force("link", forceLink<NodeI, LinkI>().id(d => d.ieeeAddr).distance(200).strength(linkStrregth))
+        this.simulation = this.simulation
+            .force("link", forceLink<NodeI, LinkI>().id(d => d.ieeeAddr).strength(linkStrregth))
             .force("charge", forceManyBodyReuse().strength(-700))
-            .force("collisionForce", forceCollide(40).strength(1))
+            .force("collisionForce", forceCollide())
             .force("center", forceCenter(width / 2, height / 2))
-            .force("x", forceX().strength(0.09))
-            .force("y", forceY().strength(0.2))
+            .force("x", forceX(width / 2))
+            .force("y", forceY(height / 2))
     }
 
     initPage(): void {
