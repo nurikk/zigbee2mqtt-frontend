@@ -70,7 +70,7 @@ const displayProps = [
 
     {
         label: 'Power source',
-        render: (device: Device) => <dd className="col-7"><PowerSourceComp source={device.power_source} /></dd>
+        render: (device: Device, deviceStatus: DeviceState) => <dd className="col-7"><PowerSourceComp source={device.power_source} battery={deviceStatus.battery} /></dd>
     },
     {
         label: 'Interview completed',
@@ -81,7 +81,7 @@ const displayProps = [
 export class DeviceInfo extends Component<DeviceInfoProps & PropsFromStore, {}> {
     render() {
         const { device, deviceStates } = this.props;
-        const deviceStatus: DeviceState = deviceStates.get(device.friendly_name);
+        const deviceStatus: DeviceState = deviceStates.get(device.friendly_name) ?? {} as DeviceState;
 
         return (
             <div className="card">
@@ -98,7 +98,7 @@ export class DeviceInfo extends Component<DeviceInfoProps & PropsFromStore, {}> 
                                 <Fragment key={prop.label}>
                                     <dt className="col-5">{prop.label}</dt>
                                     {prop.render ?
-                                        prop.render(device) : <dd className="col-7">{get(device, prop.key)}</dd>}
+                                        prop.render(device, deviceStatus) : <dd className="col-7">{get(device, prop.key)}</dd>}
 
                                 </Fragment>
                             ))
