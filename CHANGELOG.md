@@ -1,3 +1,18 @@
+## [0.2.81](https://github.com/nurikk/z2m-frontend/compare/0.2.80...0.2.81) (2020-11-15)
+
+
+### Bug Fixes
+
+* **info:** fix property rendering ([10ead30](https://github.com/nurikk/z2m-frontend/commit/10ead30fc2e7e18b9096dd11c7c0465f5f3ef3bc))
+
+
+### Features
+
+* **devices-list:** add nwk address ([d16f380](https://github.com/nurikk/z2m-frontend/commit/d16f3807b69f43a86bf4b76d8cf0061ca9379381))
+* **map:** add link avoidance ([85ace87](https://github.com/nurikk/z2m-frontend/commit/85ace87f2517119a56450727be47f7bae902dd1c))
+
+
+
 ## [0.2.80](https://github.com/nurikk/z2m-frontend/compare/0.2.79...0.2.80) (2020-11-14)
 
 
