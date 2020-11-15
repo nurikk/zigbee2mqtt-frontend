@@ -35,25 +35,29 @@ const ypos = (offset: number, s: Source, t: Target) => offset * Math.sin(angle(s
 
 const parentOrChild = [ZigbeeRelationship.NeigbhorIsAChild, ZigbeeRelationship.NeigbhorIsParent];
 const linkStrregth = (d: LinkI) => {
-    if (parentOrChild.includes(d.relationship)) {
+    if (d.linkType === "Router2Router") {
         return 1;
     }
+    if (parentOrChild.includes(d.relationship)) {
+        return 0.5;
+    }
+
     return 0;
 }
 
 const distancesMap = {
     BrokenLink: 450,
-    Router2Router: 300,
-    Coordinator2Router: 400,
-    Coordinator2EndDevice: 100,
-    EndDevice2Router: 100
+    Router2Router: 200,
+    Coordinator2Router: 200,
+    Coordinator2EndDevice: 50,
+    EndDevice2Router: 50
 };
 
 
 const getDistance = (d: LinkI): number => {
-    const distance = distancesMap[d.linkType] ?? 200;
-    const depth = ~~(Math.min(4, d.depth));
-    return 50 * depth + distance;
+    return distancesMap[d.linkType] ?? 200;
+    // const depth = ~~(Math.min(4, d.depth));
+    // return 50 * depth + distance;
 };
 
 const computeLink = (d: LinkI, transform: ZoomTransform): string => {
@@ -175,22 +179,17 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
             this.setState({ selectedNode: selectedNode ? null : d });
         });
         this.simulation.alphaTarget(0.03).restart();
-        setTimeout(() => {
-            this.simulation.alphaTarget(0)
-        }, 5000);
-
-
     }
 
 
     updateForces(width: number, height: number): void {
         this.simulation = this.simulation
-            .force("link", forceLink<NodeI, LinkI>().id(d => d.ieeeAddr).strength(linkStrregth))
+            .force("link", forceLink<NodeI, LinkI>().id(d => d.ieeeAddr).distance(getDistance).strength(linkStrregth))
             .force("charge", forceManyBodyReuse().strength(-700))
             .force("collisionForce", forceCollide())
             .force("center", forceCenter(width / 2, height / 2))
-            .force("x", forceX(width / 2))
-            .force("y", forceY(height / 2))
+            .force("x", forceX().strength(0.1))
+            .force("y", forceY().strength(0.2))
     }
 
     initPage(): void {
