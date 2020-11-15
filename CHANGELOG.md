@@ -1,3 +1,13 @@
+## [0.2.83](https://github.com/nurikk/z2m-frontend/compare/0.2.81...0.2.83) (2020-11-15)
+
+
+### Bug Fixes
+
+* **device-info:** fix power source ([11b3cbc](https://github.com/nurikk/z2m-frontend/commit/11b3cbc4e1a2ef48aca17557bfc6eba296528963))
+* **map:** optimize forses ([383ecca](https://github.com/nurikk/z2m-frontend/commit/383eccae7bb90315aabb03c9ae5ce4a5467e62b5))
+
+
+
 ## [0.2.82](https://github.com/nurikk/z2m-frontend/compare/0.2.81...0.2.82) (2020-11-15)
 
 
