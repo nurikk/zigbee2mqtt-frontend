@@ -107,7 +107,7 @@ export class DeviceControlGroup extends Component<DeviceControlGroupProps & Devi
                             <label htmlFor={`fn${device.ieee_address}`} className="form-label">Friendly name</label>
                             <input id={`fn${device.ieee_address}`} onChange={this.onFriendlyNameChange} type="text" className="form-control" value={renameParams.friendlyName} />
                         </div>
-                        {bridgeInfo.config.homeassistant ? (
+                        {bridgeInfo?.config?.homeassistant ? (
                             <div className="form-check form-switch">
                                 <input className="form-check-input" checked={renameParams.isHassRename} type="checkbox" id={`hass${device.ieee_address}`} onChange={this.onHassEntityIdChange} />
                                 <label className="form-check-label" htmlFor={`hass${device.ieee_address}`}>Update Home Assistant entity ID</label>
