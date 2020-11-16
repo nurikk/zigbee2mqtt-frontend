@@ -1,3 +1,17 @@
+## [0.2.84](https://github.com/nurikk/z2m-frontend/compare/0.2.83...0.2.84) (2020-11-16)
+
+
+### Bug Fixes
+
+* **bridge-info:** fix empty bridge config ([aca4950](https://github.com/nurikk/z2m-frontend/commit/aca495085ff7f7fba2cdc0d4be559fc7dc1d0f66))
+
+
+### Features
+
+* **exposes:** add feature description ([b95ccdf](https://github.com/nurikk/z2m-frontend/commit/b95ccdfb49d655a60bfb9cf3a64148a7bbdd18e6))
+
+
+
 ## [0.2.83](https://github.com/nurikk/z2m-frontend/compare/0.2.81...0.2.83) (2020-11-15)
 
 
