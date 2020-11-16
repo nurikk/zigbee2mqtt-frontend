@@ -98,9 +98,6 @@ export class DeviceControlGroup extends Component<DeviceControlGroupProps & Devi
                 <Modal isOpen={isRenameModalOpened}>
                     <ModalHeader>
                         <h3>Rename device</h3>
-                        <button type="button" className="close" aria-label="Close" onClick={this.toggleRenameModal}>
-                            <span aria-hidden="true">&times;</span>
-                        </button>
                     </ModalHeader>
                     <ModalBody>
                         <div className="mb-3">
@@ -128,7 +125,6 @@ export class DeviceControlGroup extends Component<DeviceControlGroupProps & Devi
             <><Modal isOpen={isDeviceRemovalModalOpened}>
                 <ModalHeader>
                     <h3>Remove device</h3>
-                    <button type="button" className="close" aria-label="Close" onClick={this.toggleDeviceRemovalModal}><span aria-hidden="true">&times;</span></button>
                 </ModalHeader>
                 <ModalBody>
                     <div className="form-check form-switch">
