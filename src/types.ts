@@ -114,6 +114,7 @@ export interface GenericExposedFeature {
     access?: FeatureAccessMode;
     endpoint?: Endpoint;
     property: string;
+    description?: string;
 }
 
 export interface BinaryFeature extends GenericExposedFeature {

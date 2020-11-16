@@ -36,6 +36,7 @@ const FeatureWrapper: FunctionComponent<PropsWithChildren<FetatureWrapperProps>>
   return <div className="row pb-2">
     <label className="col-3 col-form-label">
       <strong title={JSON.stringify(feature)}>{feature.name}</strong>
+      {feature.description ? <small className="d-block text-muted">{feature.description}</small>: null}
     </label>
     <div className="col-6 col-sm-8 d-flex align-items-center">
       {children}
