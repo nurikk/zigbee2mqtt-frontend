@@ -38,7 +38,7 @@ export interface StateApi {
 }
 
 export interface GroupsApi {
-    createGroup(name: string): Promise<void>;
+    createGroup(name: string, id?: number): Promise<void>;
     removeGroup(name: string): Promise<void>;
     addDeviceToGroup(device: string, group: string): Promise<void>;
     removeDeviceFromGroup(device: string, group: string): Promise<void>;
@@ -144,8 +144,14 @@ const actions = (store: Store<GlobalState>): object => ({
         api.send("bridge/request/networkmap", { type: "raw", routes: false });
         return Promise.resolve();
     },
-    createGroup: (state, group: string): Promise<void> => {
-        api.send("bridge/request/group/add", group);
+    createGroup: (state, group: string, id: number): Promise<void> => {
+        const payload = {
+            'friendly_name': group
+        };
+        if (id) {
+            payload['id'] = id;
+        }
+        api.send("bridge/request/group/add", payload);
         return Promise.resolve();
     },
 
