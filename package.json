@@ -8,7 +8,7 @@
     ],
     "name": "zigbee2mqtt-frontend",
     "version": "0.2.84",
-    "license": "MIT",
+    "license": "GPL-3.0",
     "scripts": {
         "build": "npm run clean && webpack --config ./webpack.config.js --mode production",
         "start": "concurrently 'npm run start:ws' 'npm run start:dev'",
