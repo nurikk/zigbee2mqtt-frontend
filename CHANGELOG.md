@@ -1,3 +1,12 @@
+## [0.2.85](https://github.com/nurikk/z2m-frontend/compare/0.2.84...0.2.85) (2020-11-17)
+
+
+### Features
+
+* **groups:** allow users to enter group id during creation ([77d037a](https://github.com/nurikk/z2m-frontend/commit/77d037ad70321e7030ceb24f70922a8c2fabbef9))
+
+
+
 ## [0.2.84](https://github.com/nurikk/z2m-frontend/compare/0.2.83...0.2.84) (2020-11-16)
 
 
