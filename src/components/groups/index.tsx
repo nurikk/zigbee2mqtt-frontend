@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { ChangeEvent, Component } from "react";
 import { connect } from "unistore/react";
 import actions, { GroupsApi } from "../../actions";
 import { GlobalState, Group, GroupAddress } from "../../store";
@@ -16,6 +16,7 @@ import DeviceImage from "../device-image";
 
 interface GroupsPageState {
     newGroupName: string;
+    newGroupId?: number;
 }
 
 
@@ -139,34 +140,35 @@ class AddDeviceToGroup extends Component<AddDeviceToGroupProps, AddDeviceToGroup
 }
 
 export class GroupsPage extends Component<GroupsApi & GlobalState, GroupsPageState> {
-    state = {
-        newGroupName: ''
+    state: GroupsPageState = {
+        newGroupName: '',
+        newGroupId: undefined
     }
 
 
-
-    changeHandler = (event): void => {
-        const name: string = event.target.name;
-        const value: string = event.target.value;
-        this.setState({ [name]: value } as Pick<GroupsPageState, "newGroupName">);
+    changeHandler = (event: ChangeEvent<HTMLInputElement>): void => {
+        const { name, value } = event.target;
+        this.setState({ [name]: value } as unknown as GroupsPageState);
     }
 
     onGroupCreateSubmit = (): void => {
-        const { newGroupName } = this.state;
+        const { newGroupName, newGroupId } = this.state;
         const { createGroup } = this.props;
-        createGroup(newGroupName);
+        createGroup(newGroupName, newGroupId);
     }
 
     renderGroupCreationForm() {
-        const { newGroupName } = this.state;
+        const { newGroupName, newGroupId } = this.state;
         return (
             <form className="row mt-2">
-                <div className="col">
+                <div className="input-group  mb-2">
                     <label htmlFor="newGroupName" className="sr-only">Group name</label>
-                    <input onChange={this.changeHandler} value={newGroupName} required type="text" name="newGroupName" className="form-control" id="newGroupName" placeholder="bedroom_lamps" />
-                </div>
-                <div className="col">
-                    <Button<void> onClick={this.onGroupCreateSubmit} className="btn btn-primary mb-2">Create group</Button>
+                    <input onChange={this.changeHandler} value={newGroupName} required type="text" name="newGroupName" className="form-control" id="newGroupName" placeholder="new group name" />
+
+                    <label htmlFor="newGroupName" className="sr-only">Group id</label>
+                    <input onChange={this.changeHandler} value={newGroupId === undefined ? '' : newGroupId} type="number" name="newGroupId" className="form-control" id="newGroupId" placeholder="enter group id if necessary" />
+
+                    <Button<void> onClick={this.onGroupCreateSubmit} className="btn btn-primary form-control">Create group</Button>
                 </div>
 
             </form>
