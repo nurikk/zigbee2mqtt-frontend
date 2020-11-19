@@ -7,10 +7,10 @@ import cx from "classnames";
 import style from "./style.css";
 import { connect } from "unistore/react";
 import { GlobalState } from "../../store";
-import PowerSourceComp from "../power-source";
 import get from 'lodash/get';
 import DeviceImage from "../device-image";
 import { ModelLink, VendorLink } from "../vendor-links/verndor-links";
+import PowerSource from "../power-source";
 
 
 type DeviceInfoProps = {
@@ -70,7 +70,7 @@ const displayProps = [
 
     {
         label: 'Power source',
-        render: (device: Device, deviceStatus: DeviceState) => <dd className="col-7"><PowerSourceComp source={device.power_source} battery={deviceStatus.battery} /></dd>
+        render: (device: Device, deviceStatus: DeviceState) => <dd className="col-7"><PowerSource showLevel={true} source={device.power_source} battery={deviceStatus.battery} batteryLow={deviceStatus.battery_low} /></dd>
     },
     {
         label: 'Interview completed',
