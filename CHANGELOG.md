@@ -1,3 +1,14 @@
+## [0.2.85](https://github.com/nurikk/z2m-frontend/compare/0.2.84...0.2.85) (2020-11-19)
+
+
+### Features
+
+* **battery:** add support for battery_low state ([d4bbd8f](https://github.com/nurikk/z2m-frontend/commit/d4bbd8f3502b1c4c122b878b534a38d3170b92fe))
+* **groups:** allow users to enter group id during creation ([1ea9757](https://github.com/nurikk/z2m-frontend/commit/1ea9757f37cba80f9b118a371d384add72ddcb75))
+* **html:** make favicon relative ([#145](https://github.com/nurikk/z2m-frontend/issues/145)) ([ee16331](https://github.com/nurikk/z2m-frontend/commit/ee16331d1adba4f845e0895ebc369c310f962bf4))
+
+
+
 ## [0.2.85](https://github.com/nurikk/z2m-frontend/compare/0.2.84...0.2.85) (2020-11-17)
 
 
