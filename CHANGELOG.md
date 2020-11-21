@@ -1,3 +1,7 @@
+## [0.2.92](https://github.com/nurikk/z2m-frontend/compare/0.2.91...0.2.92) (2020-11-21)
+
+
+
 ## [0.2.91](https://github.com/nurikk/z2m-frontend/compare/0.2.89...0.2.91) (2020-11-21)
 
 
