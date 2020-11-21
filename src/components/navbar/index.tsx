@@ -43,12 +43,13 @@ type StartStopJoinButtonProps = {
 const StartStopJoinButton: FunctionComponent<StartStopJoinButtonProps & Pick<BridgeApi, 'setPermitJoin'> & Pick<GlobalState, 'bridgeInfo'>> = ({ devices, setPermitJoin, bridgeInfo }) => {
     const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(false);
     const [selectedRouter, setSelectedRouter] = useState<Device>(null);
-    // return<Button<boolean> className="btn btn-primary" item={!bridgeInfo.permit_join} onClick={setPermitJoin}>{bridgeInfo.permit_join ? "Disable join" : "Permit join"}</Button>
     const routers = [];
     const selectAndHide = (device: Device) => { setSelectedRouter(device); setIsComponentVisible(false) }
     devices.forEach((device) => {
         if (device.type == "Router") {
-            routers.push(<li key={device.friendly_name}><a onClick={() => selectAndHide(device)} className="dropdown-item" href="#">{device.friendly_name}</a></li>)
+            routers.push(<li key={device.friendly_name}>
+                <Button<Device> item={device} className="dropdown-item" onClick={selectAndHide}>{device.friendly_name}</Button>
+            </li>)
         }
     });
     const onBtnClick = () => {
@@ -60,10 +61,12 @@ const StartStopJoinButton: FunctionComponent<StartStopJoinButtonProps & Pick<Bri
                 <span className="visually-hidden">Toggle Dropdown</span>
             </Button>
                 <ul ref={ref} className={cx('dropdown-menu', style['scrollable-menu'], { show: isComponentVisible })}>
-                    <li key='all'><a className="dropdown-item" onClick={() => selectAndHide(null)} href="#">All</a></li>
+                    <li key='all'>
+                        <Button<Device> item={null} className="dropdown-item" onClick={selectAndHide}>All</Button>
+                    </li>
                     {routers}
                 </ul></>) : null}
-                <button onClick={onBtnClick} type="button" className="btn btn-outline-secondary">{bridgeInfo.permit_join ? "Disable join" : "Permit join"} ({selectedRouter?.friendly_name ?? "All"})</button>
+            <button onClick={onBtnClick} type="button" className="btn btn-outline-secondary">{bridgeInfo.permit_join ? "Disable join" : "Permit join"} ({selectedRouter?.friendly_name ?? "All"})</button>
 
         </div>
     );
