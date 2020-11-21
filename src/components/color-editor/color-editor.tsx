@@ -63,7 +63,7 @@ const ColorEditor: FunctionComponent<ColorProps & Omit<InputHTMLAttributes<HTMLI
     setCurrentColor(toRGB(value, format))
   }, [value, format]);
 
-  return <div className="input-group">
+  return <>
     <div className="btn-group mr-2">
       {
         steps.map(step => <Button<string>
@@ -77,14 +77,14 @@ const ColorEditor: FunctionComponent<ColorProps & Omit<InputHTMLAttributes<HTMLI
     </div>
     <input
       type="color"
-      className="form-control form-control-color border-0 p-0"
+      className="form-control form-control-color"
       value={currentColor}
       onChange={e => {
         onChange(rgbToTargetFormat(e.target.value, format))
       }}
       {...rest}
     />
-  </div>
+  </>
 
 }
 
