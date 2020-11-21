@@ -20,7 +20,11 @@ const AVALIABLE_GENERATORS = [
 const DeviceImage: FunctionComponent<DeviceImageProps & ImgHTMLAttributes<HTMLDivElement | SVGImageElement>> = (props) => {
     const [imageGenerators, setimageGenerators] = useState(AVALIABLE_GENERATORS);
     const { device, deviceStatus, type = "img", className, ...rest } = props;
-    const src = imageGenerators.length ? imageGenerators[0](device) : false;
+    let src = genericDeiviceImageFallback(device);
+    if (device?.definition?.model && imageGenerators.length) {
+        src = imageGenerators[0](device);
+    }
+
     const onImageError = () => {
         const newGenerators = [...imageGenerators];
         newGenerators.shift();
@@ -35,7 +39,7 @@ const DeviceImage: FunctionComponent<DeviceImageProps & ImgHTMLAttributes<HTMLDi
         case "img":
         default:
             return src ? <div className={cx(className, "position-relative")} {...rest}>
-                <img  onError={onImageError} src={src} className={"position-relative"} />
+                <img onError={onImageError} src={src} className={"position-relative"} />
                 {interviewSpinner}
                 {otaSpinner}
                 {unseccessfullInterview}
