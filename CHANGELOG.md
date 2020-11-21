@@ -1,3 +1,15 @@
+## [0.2.91](https://github.com/nurikk/z2m-frontend/compare/0.2.89...0.2.91) (2020-11-21)
+
+
+### Bug Fixes
+
+* **color-picker:** fix paddings ([f1a6c87](https://github.com/nurikk/z2m-frontend/commit/f1a6c87fa5973e8f4b25d13df2aedf5218bd7c28))
+* **device-image:** immidiatly fallback on empty model ([b801a99](https://github.com/nurikk/z2m-frontend/commit/b801a992601e09a20a119cd2d726be4245c0699d))
+* **join-button:** fix routing on click ([886eb7d](https://github.com/nurikk/z2m-frontend/commit/886eb7de241ca2cc3e7f558934826136d06b39c2))
+* **range-editor:** fix horizontal allignment ([ab69bb9](https://github.com/nurikk/z2m-frontend/commit/ab69bb948cd9059b74a476686050b43d49bc0d62))
+
+
+
 ## [0.2.90](https://github.com/nurikk/z2m-frontend/compare/0.2.89...0.2.90) (2020-11-21)
 
 
