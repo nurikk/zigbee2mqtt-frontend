@@ -24,7 +24,7 @@ export type AnyColor = RGBColor | XYColor | HueSaturationColor;
 export interface DeviceState {
     battery?: number;
     battery_low?: boolean;
-    last_seen?: string;
+    last_seen?: string | number;
     elapsed?: number;
     linkquality: number;
     update?: OTAState;

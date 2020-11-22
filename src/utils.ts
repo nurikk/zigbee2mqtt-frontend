@@ -1,7 +1,7 @@
 
 import { Device, Endpoint } from "./types";
 import { GraphI, NodeI } from "./components/map/types";
-import { format } from 'timeago.js';
+import { format, TDate } from 'timeago.js';
 
 export const genDeviceDetailsLink = (deviceIdentifier: string | number): string => (`/device/${deviceIdentifier}`);
 
@@ -27,11 +27,20 @@ export interface ApiResponse<T> {
     result: T;
 }
 
-export const lastSeen = (lastSeen: string, elapsed: number): string => {
+export const lastSeen = (lastSeen: string | number, elapsed: number): string => {
     if (!lastSeen && !elapsed) {
         return "N/A";
     }
-    const diff = elapsed ? Date.now() - elapsed : Date.parse(lastSeen);
+    let diff: TDate;
+    if (elapsed !== undefined) {
+        diff = Date.now() - elapsed;
+    } else {
+        if (typeof lastSeen === "string") {
+            diff = Date.parse(lastSeen);
+        } else {
+            diff = new Date(lastSeen);
+        }
+    }
     return format(diff);
 };
 
