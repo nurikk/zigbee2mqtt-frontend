@@ -1,3 +1,12 @@
+## [0.2.93](https://github.com/nurikk/z2m-frontend/compare/0.2.92...0.2.93) (2020-11-22)
+
+
+### Bug Fixes
+
+* **last-seen:** fix epoch last seen ([d89eb69](https://github.com/nurikk/z2m-frontend/commit/d89eb69b7ffce4c84dc719e95d61937c199fee3c))
+
+
+
 ## [0.2.92](https://github.com/nurikk/z2m-frontend/compare/0.2.91...0.2.92) (2020-11-21)
 
 
