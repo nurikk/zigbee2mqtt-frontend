@@ -9,6 +9,9 @@ import orderBy from "lodash/orderBy";
 
 
 const MAX_LOGS_RECORDS_IN_BUFFER = 100;
+const TOKEN_LOCAL_STORAGE_ITEM_NAME = "z2m-token";
+const AUTH_FLAG_LOCAL_STORAGE_ITEM_NAME = "z2m-auth";
+const UNAUTHORIZED_ERROR_CODE = 4401;
 
 const notyf = new Notyf();
 
@@ -80,10 +83,24 @@ class Api {
         this.socket.send(JSON.stringify({ topic, payload }));
     }
 
-    connect(): void {
-        this.socket = new ReconnectingWebSocket(this.url);
+    urlProvider = async () => {
+        const url = new URL(this.url)
+        let token = localStorage.getItem(TOKEN_LOCAL_STORAGE_ITEM_NAME);
+        const authRequired = !!localStorage.getItem(AUTH_FLAG_LOCAL_STORAGE_ITEM_NAME);
+        if (authRequired) {
+            if (!token) {
+                token = prompt("enter your z2m admin token");
+                localStorage.setItem(TOKEN_LOCAL_STORAGE_ITEM_NAME, token);
+            }
+            url.searchParams.append("token", token);
+        }
+        return url.toString();
+    }
 
+    connect(): void {
+        this.socket = new ReconnectingWebSocket(this.urlProvider);
         this.socket.addEventListener("message", this.onMessage);
+        this.socket.addEventListener("close", this.onClose);
     }
     private procsessBridgeMessage = (data: Message): void => {
         switch (data.topic) {
@@ -139,7 +156,7 @@ class Api {
                 {
                     const response = data.payload as ResponseWithStatus;
                     if (response.status == "ok") {
-                        const { value } = response.data as {value: unknown};
+                        const { value } = response.data as { value: unknown };
                         store.setState({
                             networkGraphIsLoading: false,
                             networkGraph: sanitizeGraph(value as GraphI)
@@ -178,6 +195,17 @@ class Api {
         }
     }
 
+    private onClose = (e: CloseEvent): void => {
+        if (e.code === UNAUTHORIZED_ERROR_CODE) {
+            localStorage.setItem(AUTH_FLAG_LOCAL_STORAGE_ITEM_NAME, "true");
+            localStorage.removeItem(TOKEN_LOCAL_STORAGE_ITEM_NAME);
+            notyf.error("Unauthorized");
+            setTimeout(() => {
+                window.location.reload();
+            }, 1000);
+        }
+    }
+
     private onMessage = (event: MessageEvent): void => {
         let data = {} as Message;
         try {
@@ -189,7 +217,7 @@ class Api {
 
         if (data.topic.startsWith("bridge/")) {
             this.procsessBridgeMessage(data);
-        }  else {
+        } else {
             const { deviceStates } = store.getState();
             const newDeviceStates = new Map(deviceStates);
             newDeviceStates.set(data.topic, { ...newDeviceStates.get(data.topic), ...(data.payload as DeviceState) });
