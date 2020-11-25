@@ -1,3 +1,12 @@
+## [0.2.94](https://github.com/nurikk/z2m-frontend/compare/0.2.93...0.2.94) (2020-11-25)
+
+
+### Features
+
+* **auth:** add z2m authentification support ([ac4362b](https://github.com/nurikk/z2m-frontend/commit/ac4362bb4dfa3898c5be269989c92de51818d9d0))
+
+
+
 ## [0.2.93](https://github.com/nurikk/z2m-frontend/compare/0.2.92...0.2.93) (2020-11-22)
 
 
