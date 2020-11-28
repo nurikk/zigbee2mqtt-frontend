@@ -1,3 +1,13 @@
+## [0.2.95](https://github.com/nurikk/z2m-frontend/compare/0.2.93...0.2.95) (2020-11-28)
+
+
+### Features
+
+* **auth:** add z2m authentification support ([c6aba31](https://github.com/nurikk/z2m-frontend/commit/c6aba31d4eca226e64b1d580db3226c334a0b41e))
+* **device-control:** add device FN dialog info ([4b23e1e](https://github.com/nurikk/z2m-frontend/commit/4b23e1e313d7a36397f5e384fbae6fbcf6aa8c13))
+
+
+
 ## [0.2.94](https://github.com/nurikk/z2m-frontend/compare/0.2.93...0.2.94) (2020-11-25)
 
 
