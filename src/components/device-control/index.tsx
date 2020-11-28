@@ -98,6 +98,7 @@ export class DeviceControlGroup extends Component<DeviceControlGroupProps & Devi
                 <Modal isOpen={isRenameModalOpened}>
                     <ModalHeader>
                         <h3>Rename device</h3>
+                        <small>{device.friendly_name}</small>
                     </ModalHeader>
                     <ModalBody>
                         <div className="mb-3">
@@ -125,6 +126,7 @@ export class DeviceControlGroup extends Component<DeviceControlGroupProps & Devi
             <><Modal isOpen={isDeviceRemovalModalOpened}>
                 <ModalHeader>
                     <h3>Remove device</h3>
+                    <small>{device.friendly_name}</small>
                 </ModalHeader>
                 <ModalBody>
                     <div className="form-check form-switch">
