@@ -1,3 +1,12 @@
+## [0.2.97](https://github.com/nurikk/z2m-frontend/compare/0.2.96...0.2.97) (2020-11-29)
+
+
+### Features
+
+* **mobile:** info page responsive ([25747e3](https://github.com/nurikk/z2m-frontend/commit/25747e357e163764ac8c46c66a873ad663b2fd65))
+
+
+
 ## [0.2.96](https://github.com/nurikk/z2m-frontend/compare/0.2.95...0.2.96) (2020-11-29)
 
 
