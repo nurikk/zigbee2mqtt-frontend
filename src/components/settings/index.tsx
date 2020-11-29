@@ -54,26 +54,26 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
 
     render() {
         return (
-            <div className="card">
-                <div className="card-header">
-                    <ul className="nav nav-tabs card-header-tabs">
-                        <li className="nav-item">
-                            <NavLink className="nav-link" activeClassName="active" to={`/settings/settings`}>Settings</NavLink>
-                        </li>
-                        <li className="nav-item">
-                            <NavLink className="nav-link" activeClassName="active" to={`/settings/bridge`}>Raw</NavLink>
-                        </li>
-                        <li className="nav-item">
-                            <NavLink className="nav-link" activeClassName="active" to={`/settings/about`}>About</NavLink>
-                        </li>
-                    </ul>
-
+            <>
+                <ul className="nav nav-tabs">
+                    <li className="nav-item">
+                        <NavLink className="nav-link" activeClassName="active" to={`/settings/settings`}>Settings</NavLink>
+                    </li>
+                    <li className="nav-item">
+                        <NavLink className="nav-link" activeClassName="active" to={`/settings/bridge`}>Raw</NavLink>
+                    </li>
+                    <li className="nav-item">
+                        <NavLink className="nav-link" activeClassName="active" to={`/settings/about`}>About</NavLink>
+                    </li>
+                </ul>
+                <div className="tab-content">
+                    <div className="tab-pane fade show active">
+                        <div className="container">
+                            {this.renderSwitcher()}
+                        </div>
+                    </div>
                 </div>
-
-                <div className="card-body">
-                    {this.renderSwitcher()}
-                </div>
-            </div>
+            </>
         )
     }
     renderSwitcher() {
@@ -93,7 +93,7 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
     renderAbout() {
         const { bridgeInfo } = this.props;
         const v = FRONTEND_VERSION;
-        return <div className="container">
+        return <>
             <dl className="row">
                 <dt className="col-sm-3">zigbee2mqtt version</dt>
                 <dd className="col-sm-9">{bridgeInfo.version} {bridgeInfo.commit ? `commit: ${bridgeInfo.commit}` : null}</dd>
@@ -112,7 +112,7 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
                 <dt className="col-sm-3">frontend version</dt>
                 <dd className="col-sm-9">{v}</dd>
             </dl>
-        </div>
+        </>
     }
     renderBridgeInfo() {
         const { bridgeInfo } = this.props;
@@ -130,30 +130,30 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
     }
     renderSettings() {
         const { bridgeInfo, exportState } = this.props;
-        return <div className="container">
-            <div className="mt-2">
-                {
-                    !isEmpty(bridgeInfo) && settings.map(setting => (
-                        <div key={setting.key} className="row">
-                            <div className="col">
-                                <label htmlFor={setting.key}>{setting.title}</label>
-                                <UniversalEditor
-                                    disabled={get(bridgeInfo, setting.path) === undefined}
-                                    value={get(bridgeInfo, setting.path) as string | ReadonlyArray<string> | number}
-                                    values={setting.values}
-                                    onChange={(value) => this.updateConfig(setting.key, value)}
-                                />
-                                <div className="form-text">{setting.description}</div>
-                            </div>
+        return <><div className="mt-2">
+            {
+                !isEmpty(bridgeInfo) && settings.map(setting => (
+                    <div key={setting.key} className="row">
+                        <div className="col">
+                            <label htmlFor={setting.key}>{setting.title}</label>
+                            <UniversalEditor
+                                disabled={get(bridgeInfo, setting.path) === undefined}
+                                value={get(bridgeInfo, setting.path) as string | ReadonlyArray<string> | number}
+                                values={setting.values}
+                                onChange={(value) => this.updateConfig(setting.key, value)}
+                            />
+                            <div className="form-text">{setting.description}</div>
                         </div>
-                    ))
-                }
-                {
-                    bridgeInfo.config?.advanced.legacy_api !== false ? this.renderLegacyApiSettings() : null
-                }
-            </div>
-            <Button<void> className="mt-2 btn btn-primary" onClick={exportState}>Download state</Button>
+                    </div>
+                ))
+            }
+            {
+                bridgeInfo.config?.advanced.legacy_api !== false ? this.renderLegacyApiSettings() : null
+            }
         </div>
+            <Button<void> className="mt-2 btn btn-primary" onClick={exportState}>Download state</Button>
+        </>
+
 
     }
 }

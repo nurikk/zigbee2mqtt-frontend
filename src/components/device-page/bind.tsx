@@ -73,7 +73,7 @@ export class Bind extends Component<BindProps & PropsFromStore & BindApi, BindSt
         const endpoints = getEndpoints(device);
         const bidingRules = convertBidningsIntoNiceStructure(device);
 
-        bidingRules.push({ isNew: Date.now(), target: {}, source: {'ieee_address': device.ieee_address, endpoint: endpoints[0]}, clusters: [] } as NiceBindingRule);
+        bidingRules.push({ isNew: Date.now(), target: {}, source: { 'ieee_address': device.ieee_address, endpoint: endpoints[0] }, clusters: [] } as NiceBindingRule);
         return {
             bidingRules
         };
@@ -82,7 +82,7 @@ export class Bind extends Component<BindProps & PropsFromStore & BindApi, BindSt
         const { device, devices, groups } = this.props;
         const { bidingRules } = this.state;
         return (
-            <div className="card table-responsive">
+            <div className="table-responsive">
                 <table className="table">
                     <thead>
                         <tr>

@@ -84,46 +84,46 @@ export class DeviceInfo extends Component<DeviceInfoProps & PropsFromStore, {}> 
         const deviceStatus: DeviceState = deviceStates.get(device.friendly_name) ?? {} as DeviceState;
 
         return (
-            <div className="card">
+            <Fragment>
                 <div className="d-flex justify-content-center">
                     <DeviceImage className={`card-img-top w-auto ${style["device-pic"]}`} device={device} deviceStatus={deviceStatus} />
                 </div>
 
-                <div className="card-body">
-                    <h5 className="card-title">{device.type}</h5>
 
-                    <dl className="row">
-                        {
-                            displayProps.filter(prop => prop.if === undefined || get(device, prop.if, false)).map(prop => (
-                                <Fragment key={prop.label}>
-                                    <dt className="col-5">{prop.label}</dt>
-                                    {prop.render ?
-                                        prop.render(device, deviceStatus) : <dd className="col-7">{get(device, prop.key)}</dd>}
+                <h5 className="card-title">{device.type}</h5>
 
-                                </Fragment>
-                            ))
-                        }
-                        {
-                            deviceStatus?.update?.state === "updating" ? (
-                                <Fragment>
-                                    <dt className="col-5">Updating firmware</dt>
-                                    <dd className="col-7">
-                                        <div className="progress">
-                                            <div className="progress-bar progress-bar-striped progress-bar-animated" style={{ width: `${deviceStatus.update.progress}%` }}>
-                                                {deviceStatus.update.progress}%
+                <dl className="row">
+                    {
+                        displayProps.filter(prop => prop.if === undefined || get(device, prop.if, false)).map(prop => (
+                            <Fragment key={prop.label}>
+                                <dt className="col-5">{prop.label}</dt>
+                                {prop.render ?
+                                    prop.render(device, deviceStatus) : <dd className="col-7">{get(device, prop.key)}</dd>}
+
+                            </Fragment>
+                        ))
+                    }
+                    {
+                        deviceStatus?.update?.state === "updating" ? (
+                            <Fragment>
+                                <dt className="col-5">Updating firmware</dt>
+                                <dd className="col-7">
+                                    <div className="progress">
+                                        <div className="progress-bar progress-bar-striped progress-bar-animated" style={{ width: `${deviceStatus.update.progress}%` }}>
+                                            {deviceStatus.update.progress}%
                                         </div>
-                                        </div>
-                                        <div>Remaining time {toHHMMSS(deviceStatus.update.remaining)}</div>
-                                    </dd>
-                                </Fragment>
-                            ) : null
-                        }
-                    </dl>
-                </div>
-                <div className="card-footer">
-                    <DeviceControlGroup device={device} state={deviceStatus} />
-                </div>
-            </div>
+                                    </div>
+                                    <div>Remaining time {toHHMMSS(deviceStatus.update.remaining)}</div>
+                                </dd>
+                            </Fragment>
+                        ) : null
+                    }
+                </dl>
+
+
+                <DeviceControlGroup device={device} state={deviceStatus} />
+
+            </Fragment>
         );
     }
 }

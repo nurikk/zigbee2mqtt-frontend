@@ -33,21 +33,27 @@ const FeatureWrapper: FunctionComponent<PropsWithChildren<FetatureWrapperProps>>
   const { children, feature, onRead } = props;
   const isColor = feature.name?.startsWith("color_"); //hardcode for color
   const isReadable = (feature.access & FeatureAccessMode.ACCESS_READ) || isColor;
-  return <div className="row pb-2">
-    <label className="col-3 col-form-label">
-      <strong title={JSON.stringify(feature)}>{feature.name}</strong>
-      {feature.description ? <small className="d-block text-muted">{feature.description}</small>: null}
-    </label>
-    <div className="col-6 col-sm-8 d-flex align-items-center">
+  return <div className="row">
+    <div className="col-12 col-md-3">
+      <label className="col-form-label">
+        <div>
+          <strong title={JSON.stringify(feature)}>{feature.name}</strong>
+          {isReadable ? (
+            <Button<CompositeFeature | GenericExposedFeature> item={feature} onClick={(item) => {
+              onRead(feature.endpoint, { [item.property]: "" })
+            }} className="btn btn-primaty"><i className="fa fa-sync"></i></Button>
+          ) : null}
+        </div>
+        {feature.description ? <small className="d-block text-muted">{feature.description}</small> : null}
+      </label>
+
+    </div>
+
+
+    <div className="col-12 col-md-9 d-flex align-items-center">
       {children}
     </div>
-    <div className="col-1">
-      {isReadable ? (
-        <Button<CompositeFeature | GenericExposedFeature> item={feature} onClick={(item) => {
-          onRead(feature.endpoint, { [item.property]: "" })
-        }} className="btn btn-primaty"><i className="fa fa-sync"></i></Button>
-      ) : null}
-    </div>
+
   </div>
 }
 

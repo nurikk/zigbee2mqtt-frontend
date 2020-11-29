@@ -22,7 +22,7 @@ class States extends Component<StatesProps & PropsFromStore & StateApi, {}> {
         const { device, deviceStates } = this.props;
         const deviceState = deviceStates.get(device.friendly_name) ?? {};
         return (
-            <div className="card">
+            <div>
                 <pre>{JSON.stringify(deviceState, null, 4)}</pre>
             </div>
         );

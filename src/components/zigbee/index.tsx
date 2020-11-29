@@ -206,32 +206,34 @@ export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
     renderDevicesTable() {
         const { sortedTableData } = this.state;
         return (
-            <table className={cx("table align-middle", style.adaptive)}>
-                {this.renderDevicesTableHeader()}
-                <tbody>
-                    {sortedTableData.map(({ device, state }, id) =>
-                        <tr key={device.friendly_name} title={state?.update?.state == "available" ? 'Avaliable OTA update' : device.definition?.description}>
-                            <td className="font-weight-bold">{id + 1}</td>
-                            <td className={style["device-pic"]}>
-                                <DeviceImage className={cx(style["device-image"])} device={device} deviceStatus={state} />
-                            </td>
-                            <td>
-                                <Link to={genDeviceDetailsLink(device.ieee_address)}>{device.friendly_name}</Link>
-                            </td>
-                            <td title={toHex(device.network_address)}>{device.ieee_address} ({toHex(device.network_address, 4)})</td>
-                            <td className={cx("text-truncate", "text-nowrap", "position-relative")}><VendorLink device={device} /></td>
-                            <td title={device?.definition?.description}><ModelLink device={device} /></td>
-                            <td>{state?.linkquality ?? "N/A"}</td>
-                            <td className={cx({ 'd-none': !this.lastSeenIsAvaliable() })}>{lastSeen(state?.last_seen, state?.elapsed)}</td>
-                            <td className="text-left">
-                                <PowerSource source={device.power_source} battery={state?.battery} batteryLow={state?.battery_low} />
-                            </td>
-                            <td>
-                                <DeviceControlGroup device={device} state={state} />
-                            </td>
-                        </tr>)}
-                </tbody>
-            </table>
+            <div className="row no-gutters">
+                <table className={cx("table align-middle col-12", style.adaptive)}>
+                    {this.renderDevicesTableHeader()}
+                    <tbody>
+                        {sortedTableData.map(({ device, state }, id) =>
+                            <tr key={device.friendly_name} title={state?.update?.state == "available" ? 'Avaliable OTA update' : device.definition?.description}>
+                                <td className="font-weight-bold">{id + 1}</td>
+                                <td className={style["device-pic"]}>
+                                    <DeviceImage className={cx(style["device-image"])} device={device} deviceStatus={state} />
+                                </td>
+                                <td>
+                                    <Link to={genDeviceDetailsLink(device.ieee_address)}>{device.friendly_name}</Link>
+                                </td>
+                                <td title={toHex(device.network_address)}>{device.ieee_address} ({toHex(device.network_address, 4)})</td>
+                                <td className={cx("text-truncate", "text-nowrap", "position-relative")}><VendorLink device={device} /></td>
+                                <td title={device?.definition?.description}><ModelLink device={device} /></td>
+                                <td>{state?.linkquality ?? "N/A"}</td>
+                                <td className={cx({ 'd-none': !this.lastSeenIsAvaliable() })}>{lastSeen(state?.last_seen, state?.elapsed)}</td>
+                                <td className="text-left">
+                                    <PowerSource source={device.power_source} battery={state?.battery} batteryLow={state?.battery_low} />
+                                </td>
+                                <td>
+                                    <DeviceControlGroup device={device} state={state} />
+                                </td>
+                            </tr>)}
+                    </tbody>
+                </table>
+            </div>
         );
     }
 }
