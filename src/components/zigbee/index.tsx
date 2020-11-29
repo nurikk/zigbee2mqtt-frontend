@@ -2,7 +2,6 @@ import style from "./style.css";
 import React, { Component, Fragment } from "react";
 import orderBy from "lodash/orderBy";
 import DeviceControlGroup from "../device-control";
-import cx from "classnames";
 import { Device, SortDirection, DeviceState } from "../../types";
 import { genDeviceDetailsLink, lastSeen, toHex } from "../../utils";
 
@@ -178,10 +177,10 @@ export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
                     <ActionTH<SortColumn> className={style["action-column"]} column="device.friendly_name"
                         currentDirection={sortDirection} current={sortColumn}
                         onClick={onSortChange}>Friendly name</ActionTH>
-                    <ActionTH<SortColumn> className={cx(style["action-column"])} column="device.ieee_address"
+                    <ActionTH<SortColumn> className={style["action-column"]} column="device.ieee_address"
                         currentDirection={sortDirection} current={sortColumn}
                         onClick={onSortChange}>IEEE address</ActionTH>
-                    <ActionTH<SortColumn> className={cx(style["action-column"])} column="device.definition.vendor"
+                    <ActionTH<SortColumn> className={style["action-column"]} column="device.definition.vendor"
                         currentDirection={sortDirection} current={sortColumn}
                         onClick={onSortChange} title="definition.vendor">Manufacturer</ActionTH>
                     <ActionTH<SortColumn> className={style["action-column"]} column="device.definition.model"
@@ -190,9 +189,9 @@ export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
                     <ActionTH<SortColumn> className={style["action-column"]} column="state.linkquality"
                         currentDirection={sortDirection} current={sortColumn}
                         onClick={onSortChange}>LQI</ActionTH>
-                    <ActionTH<SortColumn> className={cx(style["action-column"], { 'd-none': !this.lastSeenIsAvaliable() })} column={["state.last_seen", "state.elapsed"]}
+                    {this.lastSeenIsAvaliable() && <ActionTH<SortColumn> className={style["action-column"]} column={["state.last_seen", "state.elapsed"]}
                         currentDirection={sortDirection} current={sortColumn}
-                        onClick={onSortChange}>Last seen</ActionTH>
+                        onClick={onSortChange}>Last seen</ActionTH>}
                     <ActionTH<SortColumn> className={style["action-column"]} column="state.battery"
                         currentDirection={sortDirection} current={sortColumn}
                         onClick={onSortChange}>Power</ActionTH>
@@ -202,28 +201,27 @@ export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
         )
     }
 
-
     renderDevicesTable() {
         const { sortedTableData } = this.state;
         return (
-            <div className="row no-gutters">
-                <table className={cx("table align-middle col-12", style.adaptive)}>
+            <div className="row no-gutters table-responsive">
+                <table className="table align-middle col-12">
                     {this.renderDevicesTableHeader()}
                     <tbody>
                         {sortedTableData.map(({ device, state }, id) =>
                             <tr key={device.friendly_name} title={state?.update?.state == "available" ? 'Avaliable OTA update' : device.definition?.description}>
                                 <td className="font-weight-bold">{id + 1}</td>
                                 <td className={style["device-pic"]}>
-                                    <DeviceImage className={cx(style["device-image"])} device={device} deviceStatus={state} />
+                                    <DeviceImage className={style["device-image"]} device={device} deviceStatus={state} />
                                 </td>
                                 <td>
                                     <Link to={genDeviceDetailsLink(device.ieee_address)}>{device.friendly_name}</Link>
                                 </td>
                                 <td title={toHex(device.network_address)}>{device.ieee_address} ({toHex(device.network_address, 4)})</td>
-                                <td className={cx("text-truncate", "text-nowrap", "position-relative")}><VendorLink device={device} /></td>
+                                <td className="text-truncate text-nowrap position-relative"><VendorLink device={device} /></td>
                                 <td title={device?.definition?.description}><ModelLink device={device} /></td>
                                 <td>{state?.linkquality ?? "N/A"}</td>
-                                <td className={cx({ 'd-none': !this.lastSeenIsAvaliable() })}>{lastSeen(state?.last_seen, state?.elapsed)}</td>
+                                {this.lastSeenIsAvaliable() && <td>{lastSeen(state?.last_seen, state?.elapsed)}</td>}
                                 <td className="text-left">
                                     <PowerSource source={device.power_source} battery={state?.battery} batteryLow={state?.battery_low} />
                                 </td>

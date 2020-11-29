@@ -1,7 +1,6 @@
 declare namespace StyleCssNamespace {
     export interface IStyleCss {
         'action-column': string;
-        adaptive: string;
         'device-image': string;
         'device-pic': string;
     }
