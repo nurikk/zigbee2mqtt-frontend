@@ -1,3 +1,12 @@
+## [0.2.96](https://github.com/nurikk/z2m-frontend/compare/0.2.95...0.2.96) (2020-11-29)
+
+
+### Features
+
+* **mobile:** improve mobile ux ([4894587](https://github.com/nurikk/z2m-frontend/commit/489458726868cac7c6f28016292c08dbf70c098d))
+
+
+
 ## [0.2.95](https://github.com/nurikk/z2m-frontend/compare/0.2.93...0.2.95) (2020-11-28)
 
 
