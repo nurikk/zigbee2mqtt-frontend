@@ -27,11 +27,11 @@ const displayProps = [
         if: 'supported'
     },
     {
-        render: (device: Device) => <dd className="col-7" ><p className={cx('mb-0', 'font-weight-bold', { 'text-danger': !device.supported, 'text-success': device.supported })}>{device.supported ? 'Supported' : 'Unsupported'}</p></dd>,
+        render: (device: Device) => <dd className="col-12 col-md-7" ><p className={cx('mb-0', 'font-weight-bold', { 'text-danger': !device.supported, 'text-success': device.supported })}>{device.supported ? 'Supported' : 'Unsupported'}</p></dd>,
         label: 'Support status'
     },
     {
-        render: (device: Device) => <dd className="col-7">{device.definition.supports}</dd>,
+        render: (device: Device) => <dd className="col-12 col-md-7">{device.definition.supports}</dd>,
         label: 'Supports',
         if: 'definition.supports'
     },
@@ -42,7 +42,7 @@ const displayProps = [
     {
         key: 'network_address',
         label: 'Network address',
-        render: (device: Device) => <dd className="col-7">{toHex(device.network_address)}</dd>,
+        render: (device: Device) => <dd className="col-12 col-md-7">{toHex(device.network_address)}</dd>,
     },
     {
         key: 'date_code',
@@ -59,22 +59,22 @@ const displayProps = [
         key: 'definition.vendor',
         label: 'Vendor',
         if: 'supported',
-        render: (device: Device) => <dd className="col-7"><VendorLink device={device} /></dd>
+        render: (device: Device) => <dd className="col-12 col-md-7"><VendorLink device={device} /></dd>
     },
     {
         key: 'definition.model',
         label: 'Model',
         if: 'supported',
-        render: (device: Device) => <dd className="col-7"><ModelLink device={device} /></dd>
+        render: (device: Device) => <dd className="col-12 col-md-7"><ModelLink device={device} /></dd>
     },
 
     {
         label: 'Power source',
-        render: (device: Device, deviceStatus: DeviceState) => <dd className="col-7"><PowerSource showLevel={true} source={device.power_source} battery={deviceStatus.battery} batteryLow={deviceStatus.battery_low} /></dd>
+        render: (device: Device, deviceStatus: DeviceState) => <dd className="col-12 col-md-7"><PowerSource showLevel={true} source={device.power_source} battery={deviceStatus.battery} batteryLow={deviceStatus.battery_low} /></dd>
     },
     {
         label: 'Interview completed',
-        render: (device: Device) => <dd className="col-7">{device.interview_completed ? 'Yes' : 'No'}</dd>
+        render: (device: Device) => <dd className="col-12 col-md-7">{device.interview_completed ? 'Yes' : 'No'}</dd>
     }
 ];
 // eslint-disable-next-line react/prefer-stateless-function
@@ -96,9 +96,9 @@ export class DeviceInfo extends Component<DeviceInfoProps & PropsFromStore, {}> 
                     {
                         displayProps.filter(prop => prop.if === undefined || get(device, prop.if, false)).map(prop => (
                             <Fragment key={prop.label}>
-                                <dt className="col-5">{prop.label}</dt>
+                                <dt className="col-12 col-md-5">{prop.label}</dt>
                                 {prop.render ?
-                                    prop.render(device, deviceStatus) : <dd className="col-7">{get(device, prop.key)}</dd>}
+                                    prop.render(device, deviceStatus) : <dd className="col-12 col-md-7">{get(device, prop.key)}</dd>}
 
                             </Fragment>
                         ))
@@ -106,8 +106,8 @@ export class DeviceInfo extends Component<DeviceInfoProps & PropsFromStore, {}> 
                     {
                         deviceStatus?.update?.state === "updating" ? (
                             <Fragment>
-                                <dt className="col-5">Updating firmware</dt>
-                                <dd className="col-7">
+                                <dt className="col-12 col-md-5">Updating firmware</dt>
+                                <dd className="col-12 col-md-7">
                                     <div className="progress">
                                         <div className="progress-bar progress-bar-striped progress-bar-animated" style={{ width: `${deviceStatus.update.progress}%` }}>
                                             {deviceStatus.update.progress}%
