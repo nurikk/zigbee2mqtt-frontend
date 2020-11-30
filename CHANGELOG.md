@@ -1,3 +1,13 @@
+## [0.2.98](https://github.com/nurikk/z2m-frontend/compare/0.2.97...0.2.98) (2020-11-30)
+
+
+### Bug Fixes
+
+* **join-button:** align button left ([adc760f](https://github.com/nurikk/z2m-frontend/commit/adc760f6e7f1c30a0a352257c219cda8ddfb63cf))
+* **navbar:** close on click ([8007a94](https://github.com/nurikk/z2m-frontend/commit/8007a946b53f55e1ea90560741d69f385c4e354e))
+
+
+
 ## [0.2.97](https://github.com/nurikk/z2m-frontend/compare/0.2.96...0.2.97) (2020-11-29)
 
 
