@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent, useRef, useState } from 'react';
 
 import { GlobalState } from '../../store';
 import actions, { BridgeApi } from '../../actions';
@@ -9,6 +9,7 @@ import { Link, NavLink } from 'react-router-dom';
 import useComponentVisible from '../../hooks/useComponentVisible';
 import { Device } from '../../types';
 import style from "./style.css";
+import { useOnClickOutside } from '../../hooks/useOnClickOutside';
 
 const urls = [
     {
@@ -77,19 +78,23 @@ type PropsFromStore = {
     bridgeInfo: object;
 }
 const NavBar: FunctionComponent<PropsFromStore & BridgeApi & Pick<GlobalState, 'bridgeInfo'>> = ({ devices, setPermitJoin, bridgeInfo }) => {
-    const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(false);
+    const ref = useRef<HTMLDivElement>();
+    const [navbarIsVisible, setnavbarIsVisible] = useState<boolean>(false);
+    useOnClickOutside(ref, () => {
+        setnavbarIsVisible(false);
+    });
     return (<nav className="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-        <div className="container-fluid">
-            <Link className="navbar-brand" to="/">Zigbee2MQTT</Link>
-            <Button<boolean> onClick={setIsComponentVisible} item={!isComponentVisible} className={cx("navbar-toggler")} type="button">
+        <div ref={ref}  className="container-fluid">
+            <Link onClick={() => setnavbarIsVisible(false)} className="navbar-brand" to="/">Zigbee2MQTT</Link>
+            <button  onClick={() => { console.log('click'); setnavbarIsVisible(!navbarIsVisible) }} className="navbar-toggler" type="button">
                 <span className="navbar-toggler-icon" />
-            </Button>
-            <div ref={ref} className={cx("navbar-collapse collapse", { show: isComponentVisible })}>
+            </button>
+            <div className={cx("navbar-collapse collapse", { show: navbarIsVisible })}>
                 <ul className="navbar-nav mr-auto mb-2 mb-md-0">
                     {
                         urls.map(url =>
                             <li key={url.href} className="nav-item">
-                                <NavLink exact={url.exact} className="nav-link" to={url.href} activeClassName="active">
+                                <NavLink onClick={() => setnavbarIsVisible(false)} exact={url.exact} className="nav-link" to={url.href} activeClassName="active">
                                     {url.title}
                                 </NavLink>
                             </li>)
