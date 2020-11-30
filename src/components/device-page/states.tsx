@@ -21,11 +21,7 @@ class States extends Component<StatesProps & PropsFromStore & StateApi, {}> {
     render() {
         const { device, deviceStates } = this.props;
         const deviceState = deviceStates.get(device.friendly_name) ?? {};
-        return (
-            <div>
-                <pre>{JSON.stringify(deviceState, null, 4)}</pre>
-            </div>
-        );
+        return <pre>{JSON.stringify(deviceState, null, 4)}</pre>;
     }
 }
 

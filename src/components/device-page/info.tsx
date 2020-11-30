@@ -22,6 +22,14 @@ interface PropsFromStore {
 
 const displayProps = [
     {
+        label: 'Friendly name',
+        render: (device: Device) => <dd className="col-12 col-md-7"><strong>{device.friendly_name}</strong></dd>,
+    },
+    {
+        key: 'type',
+        label: 'Device type'
+    },
+    {
         key: 'definition.description',
         label: 'Description',
         if: 'supported'
@@ -90,7 +98,8 @@ export class DeviceInfo extends Component<DeviceInfoProps & PropsFromStore, {}> 
                 </div>
 
 
-                <h5 className="card-title">{device.type}</h5>
+                {/* <h2 className="card-title">{device.friendly_name} {device.type}</h2> */}
+
 
                 <dl className="row">
                     {

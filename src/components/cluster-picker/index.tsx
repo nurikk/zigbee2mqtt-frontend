@@ -5,11 +5,22 @@ import { randomString } from "../../utils";
 
 
 const clusterDescriptions = {
+    genPowerCfg: "PowerCfg",
     genScenes: "Scenes",
     genOnOff: "OnOff",
     genLevelCtrl: "LevelCtrl",
     lightingColorCtrl: "LColorCtrl",
     closuresWindowCovering: "Closures",
+    genMultistateInput: "MultistateInput",
+    genGroups: "Groups",
+    genOta: "Ota",
+    touchlink: "Touchlink",
+    genIdentify: "Identify",
+    msTemperatureMeasurement: "Temperature",
+    msIlluminanceMeasurement: "Illuminance",
+    msRelativeHumidity: "Humidity",
+    msPressureMeasurement: "Pressure",
+    msSoilMoisture: "Soil Moisture",
 }
 interface ClusterPickerProps {
     value: Cluster[];

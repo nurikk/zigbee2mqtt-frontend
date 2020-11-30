@@ -217,7 +217,7 @@ export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
                                 <td>
                                     <Link to={genDeviceDetailsLink(device.ieee_address)}>{device.friendly_name}</Link>
                                 </td>
-                                <td title={toHex(device.network_address)}>{device.ieee_address} ({toHex(device.network_address, 4)})</td>
+                                <td>{device.ieee_address} ({toHex(device.network_address, 4)})</td>
                                 <td className="text-truncate text-nowrap position-relative"><VendorLink device={device} /></td>
                                 <td title={device?.definition?.description}><ModelLink device={device} /></td>
                                 <td>{state?.linkquality ?? "N/A"}</td>

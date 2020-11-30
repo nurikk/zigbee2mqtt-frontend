@@ -74,7 +74,7 @@ export class DevicePage extends Component<DevicePageProps & GlobalState, {}> {
 
 
             <div className="tab-content">
-                <div className="tab-pane fade show active">
+                <div className="tab-pane fade show active container">
                     {this.renderContent()}
                 </div>
 
