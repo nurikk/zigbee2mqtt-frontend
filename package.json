@@ -37,7 +37,7 @@
         "@types/lodash": "^4.14.165",
         "@types/notyf": "^3.0.0",
         "@types/react": "^17.0.0",
-        "@types/react-dom": "^16.9.9",
+        "@types/react-dom": "^17.0.0",
         "@types/react-router-dom": "^5.1.6",
         "@types/reconnectingwebsocket": "^1.0.5",
         "@types/webpack-env": "^1.16.0",
