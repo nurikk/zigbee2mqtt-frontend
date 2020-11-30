@@ -51,7 +51,7 @@ export class DevicePage extends Component<DevicePageProps & GlobalState, {}> {
         }
 
         return (<div className="">
-
+            <h3>{device.friendly_name}</h3>
             <ul className="nav nav-tabs">
                 <li className="nav-item">
                     <NavLink activeClassName="active" className={`nav-link ${styles['small-nav']}`} to={`/device/${dev}/info`}>About</NavLink>
@@ -70,7 +70,7 @@ export class DevicePage extends Component<DevicePageProps & GlobalState, {}> {
                     <NavLink activeClassName="active" className={`nav-link ${styles['small-nav']}`} to={`/device/${dev}/clusters`}>Clusters</NavLink>
                 </li>
             </ul>
-            {/* <span className="card-title">{device.friendly_name}</span> */}
+
 
 
             <div className="tab-content">
