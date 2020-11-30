@@ -58,6 +58,7 @@ const StartStopJoinButton: FunctionComponent<StartStopJoinButtonProps & Pick<Bri
     }
     return (
         <div className="input-group w-auto">
+            <button onClick={onBtnClick} type="button" className="btn btn-outline-secondary">{bridgeInfo.permit_join ? "Disable join" : "Permit join"} ({selectedRouter?.friendly_name ?? "All"})</button>
             {routers.length ? (<><Button<boolean> type="button" onClick={setIsComponentVisible} item={!isComponentVisible} className="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-expanded="false">
                 <span className="visually-hidden">Toggle Dropdown</span>
             </Button>
@@ -67,7 +68,6 @@ const StartStopJoinButton: FunctionComponent<StartStopJoinButtonProps & Pick<Bri
                     </li>
                     {routers}
                 </ul></>) : null}
-            <button onClick={onBtnClick} type="button" className="btn btn-outline-secondary">{bridgeInfo.permit_join ? "Disable join" : "Permit join"} ({selectedRouter?.friendly_name ?? "All"})</button>
 
         </div>
     );
@@ -84,13 +84,13 @@ const NavBar: FunctionComponent<PropsFromStore & BridgeApi & Pick<GlobalState, '
         setnavbarIsVisible(false);
     });
     return (<nav className="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-        <div ref={ref}  className="container-fluid">
+        <div ref={ref} className="container-fluid">
             <Link onClick={() => setnavbarIsVisible(false)} className="navbar-brand" to="/">Zigbee2MQTT</Link>
-            <button  onClick={() => { console.log('click'); setnavbarIsVisible(!navbarIsVisible) }} className="navbar-toggler" type="button">
+            <button onClick={() => { console.log('click'); setnavbarIsVisible(!navbarIsVisible) }} className="navbar-toggler" type="button">
                 <span className="navbar-toggler-icon" />
             </button>
             <div className={cx("navbar-collapse collapse", { show: navbarIsVisible })}>
-                <ul className="navbar-nav mr-auto mb-2 mb-md-0">
+                <ul className="navbar-nav mb-2 mb-md-0">
                     {
                         urls.map(url =>
                             <li key={url.href} className="nav-item">
