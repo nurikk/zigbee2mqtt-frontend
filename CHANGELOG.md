@@ -1,3 +1,12 @@
+## [0.2.100](https://github.com/nurikk/z2m-frontend/compare/0.2.98...0.2.100) (2020-11-30)
+
+
+### Features
+
+* **device-page:** add FN to page header ([f68ddda](https://github.com/nurikk/z2m-frontend/commit/f68ddda3b5879b6ad497fce5f433669ccd3fec0f))
+
+
+
 ## [0.2.99](https://github.com/nurikk/z2m-frontend/compare/0.2.98...0.2.99) (2020-11-30)
 
 
