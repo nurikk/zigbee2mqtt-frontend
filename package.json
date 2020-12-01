@@ -29,7 +29,7 @@
         "@fortawesome/fontawesome-free": "^5.15.1",
         "@teamsupercell/typings-for-css-modules-loader": "^2.4.0",
         "@types/classnames": "^2.2.10",
-        "@types/color-convert": "^1.9.0",
+        "@types/color-convert": "^2.0.0",
         "@types/d3-drag": "^2.0.0",
         "@types/d3-force": "^2.1.0",
         "@types/d3-selection": "^2.0.0",
