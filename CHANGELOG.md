@@ -1,3 +1,12 @@
+## [0.2.105](https://github.com/nurikk/z2m-frontend/compare/0.2.104...0.2.105) (2020-12-09)
+
+
+### Bug Fixes
+
+* **settings:** fix z2m repo link ([51f125a](https://github.com/nurikk/z2m-frontend/commit/51f125a6b5a0f756f077803f842ddefd052f0f7d))
+
+
+
 ## [0.2.104](https://github.com/nurikk/z2m-frontend/compare/0.2.103...0.2.104) (2020-12-09)
 
 
