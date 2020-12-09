@@ -96,7 +96,7 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
         const zigbee2mqttVersion = isZigbee2mqttDevVersion ?
             bridgeInfo.version :
             <a target="_blank" rel="noopener noreferrer" href={`https://github.com/Koenkk/zigbee2mqtt/releases/tag/${bridgeInfo.version}`}>{bridgeInfo.version}</a>;
-        const zigbee2mqttCommit = !bridgeInfo.commit ?
+        const zigbee2mqttCommit = bridgeInfo.commit ?
             <>commit: <a target="_blank" rel="noopener noreferrer" href={`https://github.com/Koenkk/zigbee2mqtt/commit/${bridgeInfo.commit}`}>{bridgeInfo.commit}</a></> :
             null;
         const v = FRONTEND_VERSION;
