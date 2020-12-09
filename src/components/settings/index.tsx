@@ -92,11 +92,18 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
     }
     renderAbout() {
         const { bridgeInfo } = this.props;
+        const isZigbee2mqttDevVersion = bridgeInfo.version?.match(/^\d+\.\d+\.\d+$/) === null;
+        const zigbee2mqttVersion = isZigbee2mqttDevVersion ?
+            bridgeInfo.version :
+            <a target="_blank" rel="noopener noreferrer" href={`https://github.com/Koenkk/zigbee2mqtt/releases/tag/${bridgeInfo.version}`}>{bridgeInfo.version}</a>;
+        const zigbee2mqttCommit = !bridgeInfo.commit ?
+            <>commit: <a target="_blank" rel="noopener noreferrer" href={`https://github.com/Koenkk/zigbee2mqtt/commit/${bridgeInfo.commit}`}>{bridgeInfo.commit}</a></> :
+            null;
         const v = FRONTEND_VERSION;
         return <>
             <dl className="row">
                 <dt className="col-sm-3">zigbee2mqtt version</dt>
-                <dd className="col-sm-9">{bridgeInfo.version} {bridgeInfo.commit ? `commit: ${bridgeInfo.commit}` : null}</dd>
+                <dd className="col-sm-9">{zigbee2mqttVersion} {zigbee2mqttCommit}</dd>
             </dl>
 
             <dl className="row">
