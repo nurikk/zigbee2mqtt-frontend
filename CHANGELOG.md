@@ -1,3 +1,12 @@
+## [0.2.101](https://github.com/nurikk/z2m-frontend/compare/0.2.100...0.2.101) (2020-12-09)
+
+
+### Features
+
+* **group:** add support for group renaming ([45a837b](https://github.com/nurikk/z2m-frontend/commit/45a837bd859edb1f51c776cbdc7be68d20b4c284))
+
+
+
 ## [0.2.100](https://github.com/nurikk/z2m-frontend/compare/0.2.98...0.2.100) (2020-11-30)
 
 
