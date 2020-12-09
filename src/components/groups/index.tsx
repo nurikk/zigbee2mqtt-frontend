@@ -12,6 +12,7 @@ import DevicePicker from "../device-picker";
 import { Link } from "react-router-dom";
 import { getEndpoints } from "../device-page/bind-row";
 import DeviceImage from "../device-image";
+import { RenameGroupForm } from "./RenameForm";
 
 
 interface GroupsPageState {
@@ -182,6 +183,10 @@ export class GroupsPage extends Component<GroupsApi & GlobalState, GroupsPageSta
         const { removeDeviceFromGroup } = this.props;
         removeDeviceFromGroup(deviceFriendlyName, groupFriendlyName);
     }
+    renameGroup = (oldName: string, newName: string) => {
+        const { renameGroup } = this.props;
+        renameGroup(oldName, newName);
+    }
     renderGroups() {
         const { groups, devices, addDeviceToGroup } = this.props;
         return (
@@ -194,7 +199,11 @@ export class GroupsPage extends Component<GroupsApi & GlobalState, GroupsPageSta
                                     <button className="btn btn-link btn-sm">
                                         {group.friendly_name} (#{group.id})
                                     </button>
-                                    <Button<string> promt title="Remove group" item={group.friendly_name} onClick={this.removeGroup} className="btn btn-danger btn-sm float-right"><i className="fa fa-trash" /></Button>
+                                    <div className="btn-group float-right btn-group-sm" role="group" aria-label="Basic example">
+
+                                        <Button<string> promt title="Remove group" item={group.friendly_name} onClick={this.removeGroup} className="btn btn-danger"><i className="fa fa-trash" /></Button>
+                                        <RenameGroupForm name={group.friendly_name} onRename={this.renameGroup} />
+                                    </div>
                                 </h5>
                             </div>
 

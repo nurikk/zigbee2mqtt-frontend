@@ -42,6 +42,7 @@ export interface GroupsApi {
     removeGroup(name: string): Promise<void>;
     addDeviceToGroup(device: string, group: string): Promise<void>;
     removeDeviceFromGroup(device: string, group: string): Promise<void>;
+    renameGroup(oldName: string, newName: string): Promise<void>;
 }
 export interface BindApi {
     addBind(from: string, to: string, clusters: Cluster[]): Promise<void>;
@@ -171,6 +172,10 @@ const actions = (store: Store<GlobalState>): object => ({
         group: string
     ): Promise<void> => {
         api.send("bridge/request/group/members/remove", { device, group });
+        return Promise.resolve();
+    },
+    renameGroup: (state, oldName: string, newName: string): Promise<void> => {
+        api.send("bridge/request/group/rename", { from: oldName, to: newName });
         return Promise.resolve();
     },
 
