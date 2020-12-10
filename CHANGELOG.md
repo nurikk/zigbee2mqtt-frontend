@@ -1,3 +1,17 @@
+## [0.2.106](https://github.com/nurikk/z2m-frontend/compare/0.2.105...0.2.106) (2020-12-10)
+
+
+### Bug Fixes
+
+* **exposes:** fix true/false value rendering ([15a9390](https://github.com/nurikk/z2m-frontend/commit/15a9390d4ae59fa1559ba47417dd2901a2d7cac1))
+
+
+### Features
+
+* **exposes:** implement composite feature ([948b791](https://github.com/nurikk/z2m-frontend/commit/948b7911563148466946a18d7f1ae97d8921c427))
+
+
+
 ## [0.2.105](https://github.com/nurikk/z2m-frontend/compare/0.2.104...0.2.105) (2020-12-09)
 
 
