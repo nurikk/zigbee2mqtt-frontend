@@ -37,7 +37,7 @@ const RangeEditor: FunctionComponent<RangeProps & Omit<InputHTMLAttributes<HTMLI
     /> : null}
     <input
       type="number"
-      className={cx("form-control", {'ml-1': showRange})}
+      className={cx("form-control", {'ms-1': showRange})}
       value={currentValue}
       onChange={e => setCurrentValue(e.target.valueAsNumber)}
       onBlur={() => onChange(currentValue)}

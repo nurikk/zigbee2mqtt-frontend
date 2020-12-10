@@ -41,7 +41,7 @@ const PowerSource: FunctionComponent<PowerSourceProps> = ({ source, battery, bat
             if (!batteryClass) {
                 batteryClass = "fa-question";
             }
-            return <Fragment>{showLevel ? <span className="pr-2">Battery {battery !== undefined ? `${battery}%` : null}</span> : null}<i className={`fa ${batteryClass}`} title={title} {...rest} /></Fragment>;
+            return <Fragment>{showLevel ? <span className="pe-2">Battery {battery !== undefined ? `${battery}%` : null}</span> : null}<i className={`fa ${batteryClass}`} title={title} {...rest} /></Fragment>;
 
         case "Mains (single phase)":
         case "DC Source":
