@@ -1,6 +1,6 @@
 import React, { Component, FunctionComponent, PropsWithChildren } from "react";
 import { CompositeFeature, Endpoint, FeatureAccessMode, GenericExposedFeature } from "../../../types";
-import { isBinaryFeature, isClimateFeature, isColorFeature, isCoverFeature, isEnumFeature, isLightFeature, isLockFeature, isNumericFeature, isSwitchFeature, isTextualFeature } from "../../device-page/type-guards";
+import { isBinaryFeature, isClimateFeature, isColorFeature, isCompositeFeature, isCoverFeature, isEnumFeature, isLightFeature, isLockFeature, isNumericFeature, isSwitchFeature, isTextualFeature } from "../../device-page/type-guards";
 
 import Numeric from "../numeric/numeric";
 
@@ -25,9 +25,13 @@ interface CompositeProps extends BaseFeatureProps<CompositeFeature> {
   stepsConfiguration?: object;
 }
 
+interface CompositeState {
+  [key: string]: unknown;
+}
+
 type FetatureWrapperProps = {
   feature: CompositeFeature | GenericExposedFeature;
-  onRead(endpoint: Endpoint, value: object): void;
+  onRead(endpoint: Endpoint, property: object): void;
 };
 const FeatureWrapper: FunctionComponent<PropsWithChildren<FetatureWrapperProps>> = (props) => {
   const { children, feature, onRead } = props;
@@ -57,12 +61,36 @@ const FeatureWrapper: FunctionComponent<PropsWithChildren<FetatureWrapperProps>>
   </div>
 }
 
-export default class Composite extends Component<CompositeProps, {}> {
-  renderFeature = (feature: CompositeFeature | GenericExposedFeature) => {
-    const { deviceState, device, onChange, onRead, stepsConfiguration } = this.props;
+export default class Composite extends Component<CompositeProps, CompositeState> {
+  state: Readonly<CompositeState> = {}
+  onChange = (endpoint: Endpoint, value: object) => {
+    const { onChange, feature } = this.props;
+    if (isCompositeFeature(feature)) {
+      this.setState(value)
+    } else {
+      onChange(endpoint, value);
+    }
+  }
+  onApplyClick = () => {
+    const { onChange, feature: { endpoint, property } } = this.props;
+    onChange(endpoint, property ? { [property]: this.state } : this.state);
+  }
 
-    const genericParams = { key: JSON.stringify(feature), device, deviceState, onChange, onRead };
-    const wrapperParams = { key: JSON.stringify(feature), feature, onRead };
+  onRead = (endpoint: Endpoint, property: object) => {
+    const { onRead, feature } = this.props;
+    if (isCompositeFeature(feature)) {
+      onRead(endpoint, {[feature.property]: property})
+    } else {
+      onRead(endpoint, property);
+    }
+
+  }
+  renderFeature = (feature: CompositeFeature | GenericExposedFeature) => {
+    const { deviceState, device, stepsConfiguration } = this.props;
+
+
+    const genericParams = { key: JSON.stringify(feature), device, deviceState, onChange: this.onChange, onRead: this.onRead };
+    const wrapperParams = { key: JSON.stringify(feature), feature, onRead: this.onRead };
 
     if (isBinaryFeature(feature)) {
       return <FeatureWrapper {...wrapperParams}>
@@ -95,15 +123,21 @@ export default class Composite extends Component<CompositeProps, {}> {
       </FeatureWrapper>
     } else if (isClimateFeature(feature)) {
       return <Climate feature={feature} {...genericParams} />
+    } else if (isCompositeFeature(feature)) {
+      return <FeatureWrapper {...wrapperParams}>
+        <div className="row">
+          <Composite type="composite" feature={feature} {...genericParams} />
+        </div>
+      </FeatureWrapper>
     }
     return (<FeatureWrapper {...wrapperParams}>
-      {/* <label className="col-3 col-form-label">Unknown feature (<strong>{feature.type}</strong>)</label> */}
-      <pre>{JSON.stringify(feature, null, 4)}{JSON.stringify(deviceState, null, 4)}</pre>
+      <pre>{JSON.stringify(feature, null, 4)}</pre>
     </FeatureWrapper>);
   }
   render() {
     const MAGIC_NO_ENDPOINT = 'MAGIC_NO_ENDPOINT';
-    const { feature: { features } } = this.props;
+    const { feature } = this.props;
+    const { features } = feature;
     const groupedFeatures = groupBy(features, f => f.endpoint ?? MAGIC_NO_ENDPOINT);
     const result = [];
     if (groupedFeatures[MAGIC_NO_ENDPOINT]) {
@@ -113,6 +147,9 @@ export default class Composite extends Component<CompositeProps, {}> {
     for (const epName in groupedFeatures) {
       const featuresGroup = groupedFeatures[epName];
       result.push(<div key={epName}>Endpoint: {epName}<div className="pl-2">{...featuresGroup.map(this.renderFeature)}</div></div>);
+    }
+    if (isCompositeFeature(feature)) {
+      result.push(<div key={feature.name}><Button className="btn btn-primary float-right" onClick={this.onApplyClick}>Apply</Button></div>)
     }
     return result;
 

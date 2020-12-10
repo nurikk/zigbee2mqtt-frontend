@@ -32,11 +32,11 @@ export function isLockFeature(feature: GenericExposedFeature | CompositeFeature)
 }
 
 export function isCompositeFeature(feature: GenericExposedFeature | CompositeFeature): feature is CompositeFeature {
-  return feature.type === "composite";
+  return feature.type === "composite" && (feature.name !== "color_xy" && feature.name !== "color_hs");
 }
 
 export function isColorFeature(feature: GenericExposedFeature | CompositeFeature): feature is ColorFeature {
-  return isCompositeFeature(feature) && (feature.name == "color_xy" || feature.name == "color_hs");
+  return feature.type === "composite" && (feature.name == "color_xy" || feature.name == "color_hs");
 }
 
 export function isClimateFeature(feature: GenericExposedFeature | CompositeFeature): feature is ClimateFeature {
