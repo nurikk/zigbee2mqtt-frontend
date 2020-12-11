@@ -1,3 +1,13 @@
+## [0.2.107](https://github.com/nurikk/z2m-frontend/compare/0.2.106...0.2.107) (2020-12-11)
+
+
+### Bug Fixes
+
+* **exposes:** small padding fixes ([b5be25e](https://github.com/nurikk/z2m-frontend/commit/b5be25ef0e780d9208dece8859ffd6acff8aea4e))
+* **toggle:** fix on label ([567d503](https://github.com/nurikk/z2m-frontend/commit/567d5035d01a9962bebf909e02f2cb1ba1f46d78))
+
+
+
 ## [0.2.106](https://github.com/nurikk/z2m-frontend/compare/0.2.105...0.2.106) (2020-12-10)
 
 
