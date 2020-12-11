@@ -146,7 +146,7 @@ export default class Composite extends Component<CompositeProps, CompositeState>
     }
     for (const epName in groupedFeatures) {
       const featuresGroup = groupedFeatures[epName];
-      result.push(<div key={epName}>Endpoint: {epName}<div className="pl-2">{...featuresGroup.map(this.renderFeature)}</div></div>);
+      result.push(<div key={epName}>Endpoint: {epName}<div className="ps-4">{...featuresGroup.map(this.renderFeature)}</div></div>);
     }
     if (isCompositeFeature(feature)) {
       result.push(<div key={feature.name}><Button className="btn btn-primary float-right" onClick={this.onApplyClick}>Apply</Button></div>)

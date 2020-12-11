@@ -20,7 +20,7 @@ const Toggle: FunctionComponent<ToggleProps> = (props) => {
   const valueExists = value !== undefined && value !== null;
   return (
     <Fragment>
-      <Button<unknown> className="btn btn-link pl-0" item={valueOff} onClick={(item) => onChange(item)}><DisplayValue value={valueOff}/></Button>
+      <Button<unknown> className="btn btn-link ps-0" item={valueOff} onClick={(item) => onChange(item)}><DisplayValue value={valueOff}/></Button>
       {valueExists ? (
         <div className="form-check form-switch d-inline-block">
         <input className="form-check-input" type="checkbox" id={id} checked={value === valueOn} onChange={onCheckboxChange} />
