@@ -27,7 +27,7 @@ const Toggle: FunctionComponent<ToggleProps> = (props) => {
         {label ? <label className="form-check-label" htmlFor={id}>{label}</label> : null}
       </div>
       ): <i className="fa fa-question" title="Current value unknown"></i> }
-      <Button<unknown> className="btn btn-link" item={valueOn} onClick={(item) => onChange(item)}><DisplayValue value={valueOff}/></Button>
+      <Button<unknown> className="btn btn-link" item={valueOn} onClick={(item) => onChange(item)}><DisplayValue value={valueOn}/></Button>
     </Fragment>
   )
 }
