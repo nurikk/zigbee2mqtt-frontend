@@ -11,6 +11,9 @@ export const toHex = (input: number, padding = 4): string => {
 
 
 export const toHHMMSS = (secs: number): string => {
+    if (!secs) {
+        return 'N/A';
+    }
     const hours = Math.floor(secs / 3600);
     const minutes = Math.floor(secs / 60) % 60;
     const seconds = Math.floor(secs % 60);
