@@ -1,3 +1,12 @@
+## [0.2.108](https://github.com/nurikk/z2m-frontend/compare/0.2.107...0.2.108) (2020-12-18)
+
+
+### Bug Fixes
+
+* **time:** fix toHHMMSS default format ([8eb968d](https://github.com/nurikk/z2m-frontend/commit/8eb968d3a6c78b25a4b9ee5c58615c027658bb25))
+
+
+
 ## [0.2.107](https://github.com/nurikk/z2m-frontend/compare/0.2.106...0.2.107) (2020-12-11)
 
 
