@@ -26,7 +26,7 @@ interface LinkLabelProps extends LinkProps {
 
 const LinkLabel: FunctionComponent<LinkLabelProps> = props => {
     const { link } = props;
-    return <text className={style.linkLabel}>{link.linkquality}</text>;
+    return <text className={style.linkLabel}>{link.linkqualities.join('/')}</text>;
 };
 
 interface LinksPros {

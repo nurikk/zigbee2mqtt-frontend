@@ -1,6 +1,6 @@
 
 import { Device, Endpoint } from "./types";
-import { GraphI, NodeI } from "./components/map/types";
+import { GraphI, LinkI, NodeI } from "./components/map/types";
 import { format, TDate } from 'timeago.js';
 
 export const genDeviceDetailsLink = (deviceIdentifier: string | number): string => (`/device/${deviceIdentifier}`);
@@ -50,7 +50,7 @@ export const lastSeen = (lastSeen: string | number, elapsed: number): string => 
 
 export const sanitizeGraph = (inGraph: GraphI): GraphI => {
     const nodes = {};
-    const links = [];
+    const links = new Map<string, any>();
     const createdLinks = new Set<string>();
 
     inGraph.nodes.forEach(node => {
@@ -65,13 +65,19 @@ export const sanitizeGraph = (inGraph: GraphI): GraphI => {
             const repeatedLink = createdLinks.has(linkId);
             createdLinks.add(linkId);
             const linkType = [src.type, dst.type].join('2');
-            links.push({ ...link, ...{ source: link.source.ieeeAddr, target: link.target.ieeeAddr, linkType, repeated: repeatedLink } });
+
+            if (repeatedLink) {
+                links.get(linkId).linkqualities.push(link.linkquality);
+                links.get(linkId).relationships.push(link.relationship);
+            } else {
+                links.set(linkId, { ...link, ...{ source: link.source.ieeeAddr, linkType, target: link.target.ieeeAddr, linkqualities: [link.linkquality], relationships: [link.relationship]} });
+            }
         } else {
             console.warn("Broken link", link);
         }
     });
 
-    inGraph.links = links;
+    inGraph.links = Array.from(links.values());
     return inGraph;
 };
 

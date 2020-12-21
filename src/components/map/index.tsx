@@ -14,7 +14,7 @@ import { forceManyBodyReuse } from "d3-force-reuse"
 import { zoom, zoomIdentity, ZoomTransform } from "d3-zoom";
 import { linkTypes } from "./consts";
 import Spinner from "../spinner";
-
+import intersection from "lodash/intersection";
 export interface MouseEventsResponderNode {
     onMouseOver?: (arg0: NodeI, el: SVGPolygonElement | SVGCircleElement | SVGImageElement) => void;
     onMouseOut?: (arg0: NodeI, el: SVGPolygonElement | SVGCircleElement | SVGImageElement) => void;
@@ -65,13 +65,6 @@ const computeLink = (d: LinkI, transform: ZoomTransform): string => {
     const dst = d.target;
     const [x1, y1] = transform.apply([src.x, src.y]);
     const [x2, y2] = transform.apply([dst.x, dst.y]);
-
-
-    const dx = x2 - x1, dy = y2 - y1;
-    if (d.repeated) {
-        const dr = Math.sqrt(dx * dx + dy * dy);
-        return `M${x1},${y1} A${dr},${dr} 0 0, 1${x2},${y2}`;
-    }
     return `M ${x1} ${y1} L ${x2} ${y2}`;
 }
 
@@ -96,9 +89,9 @@ const ticked = ({ transform, node, link, linkLabel, links }: TickedParams): void
     });
     link.attr("d", (d) => computeLink(d, transform));
     linkLabel
-        .attr('text-anchor', (d) => d.repeated ? 'start' : 'end')
-        .attr('x', (d) => transform.applyX(xpos(d.repeated ? 30 : 60, d.source, d.target)))
-        .attr('y', (d) => transform.applyY(ypos(d.repeated ? 30 : 60, d.source, d.target)))
+        .attr('text-anchor', 'middle')
+        .attr('x', (d) => transform.applyX(xpos(60, d.source, d.target)))
+        .attr('y', (d) => transform.applyY(ypos(60, d.source, d.target)))
 
     const imgXShift = 32 / 2;
     const imgYShift = 32 / 2;
@@ -157,7 +150,7 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
         const link = selectAll<SVGElement, LinkI>(`.${style.link}`);
         const linkLabel = selectAll<SVGElement, LinkI>(`.${style.linkLabel}`);
 
-        const links = networkGraph.links.filter(l => visibleLinks.includes(l.relationship));
+        const links = networkGraph.links.filter(l => intersection(visibleLinks, l.relationships).length);
         this.simulation.nodes(networkGraph.nodes.concat(links as unknown as NodeI[]));
         this.simulation.force<ForceLink<NodeI, LinkI>>("link").links(links);
         this.simulation.on("tick", () => ticked({ transform: this.transform, node, link, linkLabel, links }));
@@ -210,7 +203,7 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
         const { width, height, visibleLinks } = this.state;
 
         const { networkGraph } = this.props;
-        const links = networkGraph.links.filter(l => visibleLinks.includes(l.relationship));
+        const links = networkGraph.links.filter(l => intersection(visibleLinks, l.relationships).length > 0);
         return (
             <svg ref={this.svgRef} viewBox={`0 0 ${width} ${height}`}>
                 <g className="everything">

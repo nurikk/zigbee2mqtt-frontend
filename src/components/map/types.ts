@@ -43,6 +43,7 @@ export interface LinkI extends SimulationLinkDatum<NodeI> {
     source: Source;
     target: Target;
     linkquality: number;
+    linkqualities: number[];
     depth: number;
     routes: unknown[];
     sourceIeeeAddr: string;
@@ -50,8 +51,8 @@ export interface LinkI extends SimulationLinkDatum<NodeI> {
     sourceNwkAddr: number;
     lqi: number;
     relationship: ZigbeeRelationship;
+    relationships: ZigbeeRelationship[];
     linkType: LinkType;
-    repeated?: boolean;
 }
 
 export interface GraphI {
