@@ -41,11 +41,12 @@ const getTarget = (rule: NiceBindingRule, devices: Map<string, Device>, groups: 
     }
     return devices.get(rule.target.ieee_address);
 }
-
+type Action = "Bind" | "Unbind";
 export default class BindRow extends Component<BindRowProps, BindRowState> {
     state: Readonly<BindRowState> = {
         stateRule: null
     }
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     static getDerivedStateFromProps(props: Readonly<BindRowProps>, state: BindRowState): Partial<BindRowState> {
         const { rule } = props;
         return {
@@ -110,17 +111,14 @@ export default class BindRow extends Component<BindRowProps, BindRowState> {
         return { from, to, clusters: stateRule.clusters };
     }
 
-    onBindClick = (): void => {
-        const { onBind } = this.props;
+    onBindOrUnBindClick = (action: Action): void => {
+        const { onUnBind, onBind } = this.props;
         const { from, to, clusters } = this.getBidningParams();
-        onBind(from, to, clusters);
-    }
-
-    onUnBindClick = (): void => {
-        const { onUnBind } = this.props;
-        const { from, to, clusters } = this.getBidningParams();
-        onUnBind(from, to, clusters);
-
+        if (action == "Bind") {
+            onBind(from, to, clusters);
+        } else {
+            onUnBind(from, to, clusters);
+        }
     }
 
     isValidRule(): boolean {
@@ -162,9 +160,9 @@ export default class BindRow extends Component<BindRowProps, BindRowState> {
                 <td><ClusterPicker clusters={Array.from(possibleClusters)} value={stateRule.clusters} onChange={this.setClusters} /></td>
                 <td>
                     <div className="btn-group btn-group-sm">
-                        <Button<void> disabled={!this.isValidRule()} title="Bind" className="btn btn-primary" onClick={this.onBindClick}><i
+                        <Button<Action> item={"Bind"} disabled={!this.isValidRule()} title="Bind" className="btn btn-primary" onClick={this.onBindOrUnBindClick}><i
                             className="fa fa-heart" /></Button>
-                        <Button<void> disabled={!stateRule.isNew && !this.isValidRule()} title="Unbind" className="btn btn-secondary" onClick={this.onUnBindClick}><i
+                        <Button<Action> item={"Unbind"} disabled={!stateRule.isNew && !this.isValidRule()} title="Unbind" className="btn btn-secondary" onClick={this.onBindOrUnBindClick}><i
                             className="fa fa-heart-broken" /></Button>
                     </div>
                 </td>
