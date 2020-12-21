@@ -1,3 +1,12 @@
+## [0.2.110](https://github.com/nurikk/z2m-frontend/compare/0.2.109...0.2.110) (2020-12-21)
+
+
+### Bug Fixes
+
+* **map:** show link labels on middle ([d6b1711](https://github.com/nurikk/z2m-frontend/commit/d6b17111928f217a88b0f3be712a48c642317b10))
+
+
+
 ## [0.2.109](https://github.com/nurikk/z2m-frontend/compare/0.2.108...0.2.109) (2020-12-21)
 
 
