@@ -1,3 +1,13 @@
+## [0.2.109](https://github.com/nurikk/z2m-frontend/compare/0.2.108...0.2.109) (2020-12-21)
+
+
+### Features
+
+* **logs:** add logs filtering functional ([8ac4c44](https://github.com/nurikk/z2m-frontend/commit/8ac4c44339b8adb8ccc5c4ea50cf6d6e8dbf9a27))
+* **map:** reduce repeated links ([4bb0d27](https://github.com/nurikk/z2m-frontend/commit/4bb0d27039bc0854692fad24d7f6a6f63e6f436b))
+
+
+
 ## [0.2.108](https://github.com/nurikk/z2m-frontend/compare/0.2.107...0.2.108) (2020-12-18)
 
 
