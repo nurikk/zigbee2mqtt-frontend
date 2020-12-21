@@ -19,6 +19,7 @@ deploy:
     token: $GITHUB_TOKEN
     edge: true # opt in to dpl v2
     local_dir: dist
+    strategy: git
     on:
       tags: false
 after_deploy:
