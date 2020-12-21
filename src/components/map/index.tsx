@@ -89,9 +89,8 @@ const ticked = ({ transform, node, link, linkLabel, links }: TickedParams): void
     });
     link.attr("d", (d) => computeLink(d, transform));
     linkLabel
-        .attr('text-anchor', 'middle')
-        .attr('x', (d) => transform.applyX(xpos(60, d.source, d.target)))
-        .attr('y', (d) => transform.applyY(ypos(60, d.source, d.target)))
+        .attr('x', (d) => transform.applyX(xpos(100, d.source, d.target)))
+        .attr('y', (d) => transform.applyY(ypos(100, d.source, d.target)))
 
     const imgXShift = 32 / 2;
     const imgYShift = 32 / 2;

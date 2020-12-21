@@ -51,7 +51,6 @@ export const lastSeen = (lastSeen: string | number, elapsed: number): string => 
 export const sanitizeGraph = (inGraph: GraphI): GraphI => {
     const nodes = {};
     const links = new Map<string, any>();
-    const createdLinks = new Set<string>();
 
     inGraph.nodes.forEach(node => {
         nodes[node.ieeeAddr] = node;
@@ -62,13 +61,11 @@ export const sanitizeGraph = (inGraph: GraphI): GraphI => {
         const dst: NodeI = nodes[link.target.ieeeAddr];
         if (src && dst) {
             const linkId = [link.source.ieeeAddr, link.target.ieeeAddr].sort().join('');
-            const repeatedLink = createdLinks.has(linkId);
-            createdLinks.add(linkId);
+            const repeatedLink = links.get(linkId);
             const linkType = [src.type, dst.type].join('2');
-
             if (repeatedLink) {
-                links.get(linkId).linkqualities.push(link.linkquality);
-                links.get(linkId).relationships.push(link.relationship);
+                repeatedLink.linkqualities.push(link.linkquality);
+                repeatedLink.relationships.push(link.relationship);
             } else {
                 links.set(linkId, { ...link, ...{ source: link.source.ieeeAddr, linkType, target: link.target.ieeeAddr, linkqualities: [link.linkquality], relationships: [link.relationship]} });
             }
