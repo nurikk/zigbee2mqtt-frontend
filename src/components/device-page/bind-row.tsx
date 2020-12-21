@@ -74,12 +74,10 @@ export default class BindRow extends Component<BindRowProps, BindRowState> {
             delete stateRule.target.ieee_address;
         }
         stateRule.clusters = [];
-
         this.setState({ stateRule });
     }
 
     setDestinationEp = (destinationEp: Endpoint): void => {
-
         const { stateRule } = this.state;
         stateRule.target.endpoint = destinationEp;
         stateRule.clusters = [];
@@ -148,25 +146,22 @@ export default class BindRow extends Component<BindRowProps, BindRowState> {
         const destinationEndpoints = getEndpoints(target);
 
         const possibleClusters: Set<Cluster> = new Set(stateRule.clusters);
-        if (device.endpoints.has(stateRule.source.endpoint)) {
-            device.endpoints.get(stateRule.source.endpoint).clusters.output.forEach(cluster => possibleClusters.add(cluster));
+        const destEndpoint = device.endpoints.get(stateRule.source.endpoint);
+        if (destEndpoint) {
+            destEndpoint.clusters.output.forEach(cluster => possibleClusters.add(cluster));
         }
-        return (
-            <tr>
-                <th scope="row">{idx + 1}</th>
-                <td><EndpointPicker disabled={!stateRule.isNew} values={sourceEndpoints} value={stateRule.source.endpoint} onChange={this.setSourceEp} /></td>
-                <td><DevicePicker disabled={!stateRule.isNew} type={targetType} value={stateRule.target.ieee_address || stateRule.target.id} devices={devices} groups={groups} onChange={this.setDestination} /></td>
-                <td>{stateRule.target.type === "endpoint" ? <EndpointPicker disabled={!stateRule.isNew} values={destinationEndpoints} value={stateRule.target.endpoint} onChange={this.setDestinationEp} /> : null}</td>
-                <td><ClusterPicker clusters={Array.from(possibleClusters)} value={stateRule.clusters} onChange={this.setClusters} /></td>
-                <td>
-                    <div className="btn-group btn-group-sm">
-                        <Button<Action> item={"Bind"} disabled={!this.isValidRule()} title="Bind" className="btn btn-primary" onClick={this.onBindOrUnBindClick}><i
-                            className="fa fa-heart" /></Button>
-                        <Button<Action> item={"Unbind"} disabled={!stateRule.isNew && !this.isValidRule()} title="Unbind" className="btn btn-secondary" onClick={this.onBindOrUnBindClick}><i
-                            className="fa fa-heart-broken" /></Button>
-                    </div>
-                </td>
-            </tr>
-        );
+        return (<tr>
+            <th scope="row">{idx + 1}</th>
+            <td><EndpointPicker disabled={!stateRule.isNew} values={sourceEndpoints} value={stateRule.source.endpoint} onChange={this.setSourceEp} /></td>
+            <td><DevicePicker disabled={!stateRule.isNew} type={targetType} value={stateRule.target.ieee_address || stateRule.target.id} devices={devices} groups={groups} onChange={this.setDestination} /></td>
+            <td>{stateRule.target.type === "endpoint" ? <EndpointPicker disabled={!stateRule.isNew} values={destinationEndpoints} value={stateRule.target.endpoint} onChange={this.setDestinationEp} /> : null}</td>
+            <td><ClusterPicker clusters={Array.from(possibleClusters)} value={stateRule.clusters} onChange={this.setClusters} /></td>
+            <td><div className="btn-group btn-group-sm">
+                <Button<Action> item={"Bind"} disabled={!this.isValidRule()} title="Bind" className="btn btn-primary" onClick={this.onBindOrUnBindClick}><i
+                    className="fa fa-heart" /></Button>
+                <Button<Action> item={"Unbind"} disabled={!stateRule.isNew && !this.isValidRule()} title="Unbind" className="btn btn-secondary" onClick={this.onBindOrUnBindClick}><i
+                    className="fa fa-heart-broken" /></Button>
+            </div></td>
+        </tr>);
     }
 }
