@@ -14,7 +14,7 @@ import { useOnClickOutside } from '../../hooks/useOnClickOutside';
 const urls = [
     {
         href: '/',
-        title: 'Home',
+        title: 'Devices',
         exact: true
     },
     {
