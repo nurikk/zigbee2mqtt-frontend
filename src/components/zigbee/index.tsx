@@ -221,7 +221,7 @@ export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
                                 <td>{device.ieee_address} ({toHex(device.network_address, 4)})</td>
                                 <td className="text-truncate text-nowrap position-relative"><VendorLink device={device} /></td>
                                 <td title={device?.definition?.description}><ModelLink device={device} /></td>
-                                <td><DisplayValue value={state?.linkquality}/></td>
+                                <td className="text-right"><DisplayValue value={state?.linkquality}/></td>
                                 {this.lastSeenIsAvaliable() && <td>{lastSeen(state?.last_seen, state?.elapsed)}</td>}
                                 <td className="text-left">
                                     <PowerSource source={device.power_source} battery={state?.battery} batteryLow={state?.battery_low} />
