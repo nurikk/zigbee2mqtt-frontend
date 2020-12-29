@@ -1,3 +1,12 @@
+## [0.2.124](https://github.com/nurikk/z2m-frontend/compare/0.2.123...0.2.124) (2020-12-29)
+
+
+### Features
+
+* **device:** add model_id support ([caa5913](https://github.com/nurikk/z2m-frontend/commit/caa5913231577d10484b5c1d8ef3339c02052bb6))
+
+
+
 ## [0.2.123](https://github.com/nurikk/z2m-frontend/compare/0.2.122...0.2.123) (2020-12-29)
 
 
