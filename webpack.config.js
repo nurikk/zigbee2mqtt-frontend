@@ -138,5 +138,11 @@ module.exports = (env, args) => {
         plugins,
         stats: "errors-only",
         externals: {},
+        node: {
+            fs: 'empty',
+            net: 'empty',
+            // eslint-disable-next-line @typescript-eslint/camelcase
+            child_process: 'empty'
+        }
     };
 };

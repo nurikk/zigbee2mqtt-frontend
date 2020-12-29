@@ -7,7 +7,7 @@ import ClusterPicker, { ClusterGroup, PickerType } from "../cluster-picker";
 import { NiceReportingingRule } from "./reporting";
 import { getEndpoints } from "../../utils";
 import AttributePicker from "../attribute-picker";
-import clusters from "zigbee-herdsman/dist/zcl/definition/cluster";
+import { Zcl } from "zigbee-herdsman";
 import Button from "../button";
 
 
@@ -22,7 +22,7 @@ interface ReportingRowState {
 }
 
 const getClusters = (device: Device, endpoint: Endpoint): ClusterGroup[] => {
-  let possibleClusters = Object.keys(clusters);
+  let possibleClusters = Object.keys(Zcl.Cluster);
   let availableClusters = [];
   const ep = device.endpoints.get(endpoint);
   if (ep) {
