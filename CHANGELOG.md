@@ -1,3 +1,12 @@
+## [0.2.123](https://github.com/nurikk/z2m-frontend/compare/0.2.122...0.2.123) (2020-12-29)
+
+
+### Features
+
+* **device-info:** parse mardown link in description ([9b8a5aa](https://github.com/nurikk/z2m-frontend/commit/9b8a5aafe4ec347d22d6528294c24c5c0bb92de3))
+
+
+
 ## [0.2.122](https://github.com/nurikk/z2m-frontend/compare/0.2.121...0.2.122) (2020-12-29)
 
 
