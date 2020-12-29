@@ -18,7 +18,7 @@ type UrlParams = {
 type DevicePageProps = RouteComponentProps<UrlParams>;
 
 
-type TabName = "info" | "bind" | "state" | "exposes" | "clusters" | "reporting";
+type TabName = "exposes" | "reporting" | "bind" | "info" | "state" | "clusters" ;
 // eslint-disable-next-line react/prefer-stateless-function
 export class DevicePage extends Component<DevicePageProps & GlobalState, {}> {
     renderContent() {
@@ -27,18 +27,18 @@ export class DevicePage extends Component<DevicePageProps & GlobalState, {}> {
         const device = devices.get(dev);
 
         switch (tab) {
-            case "info":
-                return <DeviceInfo device={device} />;
+            case "exposes":
+                return <ConnectedDeviceExposes device={device} />;  
             case "bind":
                 return <Bind device={device} />;
+            case "reporting":
+                return <Reporting device={device} />;
+            case "info":
+                return <DeviceInfo device={device} />;
             case "state":
                 return <States device={device} />;
-            case "exposes":
-                return <ConnectedDeviceExposes device={device} />;
             case "clusters":
-                return <Clusters device={device} />
-            case "reporting":
-                return <Reporting device={device} />
+                return <Clusters device={device} />;
             default:
                 return <Redirect to={`/device/${dev}/info`} />;
         }
@@ -57,7 +57,7 @@ export class DevicePage extends Component<DevicePageProps & GlobalState, {}> {
             <h3>{device.friendly_name}</h3>
             <ul className="nav nav-tabs">
                 <li className="nav-item">
-                    <NavLink activeClassName="active" className={`nav-link ${styles['small-nav']}`} to={`/device/${dev}/info`}>About</NavLink>
+                    <NavLink activeClassName="active" className={`nav-link ${styles['small-nav']}`} to={`/device/${dev}/exposes`}>Exposes</NavLink>
                 </li>
                 <li className="nav-item">
                     <NavLink activeClassName="active" className={`nav-link ${styles['small-nav']}`} to={`/device/${dev}/bind`}>Bind</NavLink>
@@ -66,10 +66,10 @@ export class DevicePage extends Component<DevicePageProps & GlobalState, {}> {
                     <NavLink activeClassName="active" className={`nav-link ${styles['small-nav']}`} to={`/device/${dev}/reporting`}>Reporting</NavLink>
                 </li>
                 <li className="nav-item">
-                    <NavLink activeClassName="active" className={`nav-link ${styles['small-nav']}`} to={`/device/${dev}/state`}>State</NavLink>
+                    <NavLink activeClassName="active" className={`nav-link ${styles['small-nav']}`} to={`/device/${dev}/info`}>About</NavLink>
                 </li>
                 <li className="nav-item">
-                    <NavLink activeClassName="active" className={`nav-link ${styles['small-nav']}`} to={`/device/${dev}/exposes`}>Exposes</NavLink>
+                    <NavLink activeClassName="active" className={`nav-link ${styles['small-nav']}`} to={`/device/${dev}/state`}>State</NavLink>
                 </li>
                 <li className="nav-item">
                     <NavLink activeClassName="active" className={`nav-link ${styles['small-nav']}`} to={`/device/${dev}/clusters`}>Clusters</NavLink>
