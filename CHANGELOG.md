@@ -1,3 +1,12 @@
+## [0.2.111](https://github.com/nurikk/z2m-frontend/compare/0.2.110...0.2.111) (2020-12-29)
+
+
+### Features
+
+* **reporting:** add reporting configuration interface ([126675d](https://github.com/nurikk/z2m-frontend/commit/126675d72b30f3c1d79c77b35c153f4d0d9eab60))
+
+
+
 ## [0.2.110](https://github.com/nurikk/z2m-frontend/compare/0.2.109...0.2.110) (2020-12-21)
 
 
