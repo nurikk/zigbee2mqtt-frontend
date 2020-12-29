@@ -23,7 +23,7 @@ export const VendorLink: React.FunctionComponent<VendorProps> = (props: VendorPr
 export const ModelLink: React.FunctionComponent<VendorProps> = (props: VendorProps) => {
   const { device } = props;
   let url = 'https://www.zigbee2mqtt.io/how_tos/how_to_support_new_devices.html#how-to-support-new-devices';
-  let title = 'Unsupported';
+  let title = device.model_id;
   if (device.supported) {
     const acnchor = [
       encodeURIComponent(device.definition?.vendor?.toLowerCase()),

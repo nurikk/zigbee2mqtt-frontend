@@ -207,6 +207,7 @@ export interface Device {
     model: string;
     friendly_name: string;
     power_source: PowerSource;
+    model_id: string;
     interviewing: boolean;
     interview_completed: boolean;
     software_build_id: number;

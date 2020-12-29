@@ -11,7 +11,11 @@ type DeviceImageProps = {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const genericDeiviceImageFallback = (device: Device): string => genericDevice;
 const genSlsDeviceImageUrlZ2M = (device: Device): string => `https://www.zigbee2mqtt.io/images/devices/${sanitizeZ2MDeviceName(device?.definition?.model)}.jpg`;
-const genSlsDeviceImageUrlSLS = (device: Device): string => `https://slsys.github.io/Gateway/devices/png/${device?.definition?.model?.replace("/", "_")}.png`;
+
+const sanitizeModelIDForImageUrl = (modelName: string): string => modelName?.replace("/", "_");
+
+export const genSlsDeviceImageUrlSLS = (device: Device): string => (`https://slsys.github.io/Gateway/devices/png/${sanitizeModelIDForImageUrl(device.model_id)}.png`);
+
 
 const AVALIABLE_GENERATORS = [
     genSlsDeviceImageUrlZ2M, genSlsDeviceImageUrlSLS, genericDeiviceImageFallback
