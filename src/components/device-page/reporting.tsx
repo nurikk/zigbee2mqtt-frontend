@@ -40,32 +40,24 @@ const convertBidningsIntoNiceStructure = (device: Device): NiceReportingingRule[
     return reportings;
 }
 type ReportingState = {
-    bidingRules: NiceReportingingRule[];
+    reportingRules: NiceReportingingRule[];
 }
 
 const rule2key = (rule: NiceReportingingRule): string => `${rule.isNew}${rule.cluster}-${rule.attribute}`;
 
 export class Reporting extends Component<ReportingProps & PropsFromStore & ReportingApi, ReportingState> {
     state: ReportingState = {
-        bidingRules: []
+        reportingRules: []
     }
-    onReportingClick = (from: string, to: string, clusters: Cluster[]): void => {
-        // const { addReporting } = this.props;
-        // addReporting(from, to, clusters);
-    };
-    onUnReportingClick = (from: string, to: string, clusters: Cluster[]): void => {
-        // const { removeReporting } = this.props;
-        // removeReporting(from, to, clusters);
-    };
-    static getDerivedStateFromProps(props: Readonly<ReportingProps & PropsFromStore>, state: ReportingState): Partial<ReportingState> {
+    static getDerivedStateFromProps(props: Readonly<ReportingProps & PropsFromStore>): Partial<ReportingState> {
         const { device } = props;
         // const endpoints = getEndpoints(device);
-        const bidingRules = convertBidningsIntoNiceStructure(device);
+        const reportingRules = convertBidningsIntoNiceStructure(device);
 
         // eslint-disable-next-line @typescript-eslint/camelcase
-        bidingRules.push({ isNew: Date.now(), reportable_change: 0, minimum_report_interval: 60, maximum_report_interval: 3600 } as NiceReportingingRule);
+        reportingRules.push({ isNew: Date.now(), reportable_change: 0, minimum_report_interval: 60, maximum_report_interval: 3600 } as NiceReportingingRule);
         return {
-            bidingRules
+            reportingRules
         };
     }
 
@@ -80,7 +72,7 @@ export class Reporting extends Component<ReportingProps & PropsFromStore & Repor
     }
     render() {
         const { device } = this.props;
-        const { bidingRules } = this.state;
+        const { reportingRules } = this.state;
 
         return (
             <div className="table-responsive">
@@ -99,10 +91,10 @@ export class Reporting extends Component<ReportingProps & PropsFromStore & Repor
                     </thead>
                     <tbody>
                         {
-                            bidingRules.map((rule, idx) =>
+                            reportingRules.map((rule, idx) =>
                                 <ReportingRow
-                                    idx={idx}
                                     key={rule2key(rule)}
+                                    idx={idx}
                                     rule={rule}
                                     device={device}
                                     onApply={this.onApply}
