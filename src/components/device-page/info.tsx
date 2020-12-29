@@ -90,7 +90,6 @@ export class DeviceInfo extends Component<DeviceInfoProps & PropsFromStore, {}> 
     render() {
         const { device, deviceStates } = this.props;
         const deviceStatus: DeviceState = deviceStates.get(device.friendly_name) ?? {} as DeviceState;
-
         return (
             <Fragment>
                 <div className="d-flex justify-content-center">

@@ -2,6 +2,7 @@
 import { Device, Endpoint } from "./types";
 import { GraphI, LinkI, NodeI } from "./components/map/types";
 import { format, TDate } from 'timeago.js';
+import { Group } from "./store";
 
 export const genDeviceDetailsLink = (deviceIdentifier: string | number): string => (`/device/${deviceIdentifier}`);
 
@@ -147,3 +148,15 @@ export const download = (data: object, filename: string): void => {
 }
 
 export const sanitizeZ2MDeviceName = (deviceName: string): string => deviceName?.replace(/:|\s|\//g, "-");
+
+
+export const getEndpoints = (obj: Device | Group): Endpoint[] => {
+    if (!obj) {
+        return []
+    } else if ((obj as Device).endpoints) {
+        return Array.from((obj as Device).endpoints.keys());
+    } else if ((obj as Group).members) {
+        return (obj as Group).members.map(g => g.endpoint);
+    }
+    return [];
+}

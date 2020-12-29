@@ -3,7 +3,7 @@
 import { GlobalState } from "./store";
 import { Store } from "unistore";
 
-import { Cluster, Device, TouchLinkDevice } from "./types";
+import { Cluster, Device, ReportingConfig, TouchLinkDevice } from "./types";
 import api from "./api";
 import { download } from "./utils";
 
@@ -58,6 +58,10 @@ export interface MapApi {
 
 export interface LegacyApi {
     resetZnp(): Promise<void>;
+}
+
+export interface ReportingApi {
+    configureReport(device: string, config: ReportingConfig): Promise<void>;
 }
 
 const actions = (store: Store<GlobalState>): object => ({
@@ -214,6 +218,13 @@ const actions = (store: Store<GlobalState>): object => ({
     },
     exportState(state): Promise<void> {
         download(state, 'state.json');
+        return Promise.resolve();
+    },
+    configureReport(state, device: string, config: ReportingConfig): Promise<void> {
+        api.send('bridge/request/device/configure_reporting', {
+            id: device,
+            ...config
+        });
         return Promise.resolve();
     }
 });

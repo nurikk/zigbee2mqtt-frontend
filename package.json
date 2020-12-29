@@ -22,7 +22,6 @@
     "eslintIgnore": [
         "dist/*"
     ],
-    "dependencies": {},
     "devDependencies": {
         "@commitlint/cli": "^11.0.0",
         "@commitlint/config-conventional": "^11.0.0",
@@ -85,6 +84,7 @@
         "webpack-cli": "4.2.0",
         "webpack-dev-server": "3.11.0",
         "ws": "^7.4.1",
+        "zigbee-herdsman": "^0.13.44",
         "zip-webpack-plugin": "^3.0.0"
     },
     "main": "index.js",

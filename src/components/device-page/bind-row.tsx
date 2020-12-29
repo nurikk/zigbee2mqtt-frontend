@@ -2,10 +2,11 @@ import React, { Component } from "react";
 import { Device, Endpoint, Cluster, ObjectType } from "../../types";
 import DevicePicker from "../device-picker";
 import EndpointPicker from "../endpoint-picker";
-import ClusterPicker from "../cluster-picker";
+import ClusterPicker, { PickerType } from "../cluster-picker";
 import Button from "../button";
 import { Group } from "../../store";
 import { NiceBindingRule } from "./bind";
+import { getEndpoints } from "../../utils";
 
 
 
@@ -23,17 +24,6 @@ interface BindRowProps {
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface BindRowState {
     stateRule: NiceBindingRule;
-}
-
-export const getEndpoints = (obj: Device | Group): Endpoint[] => {
-    if (!obj) {
-        return []
-    } else if ((obj as Device).endpoints) {
-        return Array.from((obj as Device).endpoints.keys());
-    } else if ((obj as Group).members) {
-        return (obj as Group).members.map(g => g.endpoint);
-    }
-    return [];
 }
 const getTarget = (rule: NiceBindingRule, devices: Map<string, Device>, groups: Group[]) => {
     if (rule.target.type === "group") {
@@ -155,7 +145,7 @@ export default class BindRow extends Component<BindRowProps, BindRowState> {
             <td><EndpointPicker disabled={!stateRule.isNew} values={sourceEndpoints} value={stateRule.source.endpoint} onChange={this.setSourceEp} /></td>
             <td><DevicePicker disabled={!stateRule.isNew} type={targetType} value={stateRule.target.ieee_address || stateRule.target.id} devices={devices} groups={groups} onChange={this.setDestination} /></td>
             <td>{stateRule.target.type === "endpoint" ? <EndpointPicker disabled={!stateRule.isNew} values={destinationEndpoints} value={stateRule.target.endpoint} onChange={this.setDestinationEp} /> : null}</td>
-            <td><ClusterPicker clusters={Array.from(possibleClusters)} value={stateRule.clusters} onChange={this.setClusters} /></td>
+            <td><ClusterPicker pickerType={PickerType.MULTIPLE} clusters={Array.from(possibleClusters)} value={stateRule.clusters} onChange={this.setClusters} /></td>
             <td><div className="btn-group btn-group-sm">
                 <Button<Action> item={"Bind"} disabled={!this.isValidRule()} title="Bind" className="btn btn-primary" onClick={this.onBindOrUnBindClick}><i
                     className="fa fa-heart" /></Button>

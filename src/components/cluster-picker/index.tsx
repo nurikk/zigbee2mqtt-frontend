@@ -22,18 +22,34 @@ const clusterDescriptions = {
     msPressureMeasurement: "Pressure",
     msSoilMoisture: "Soil Moisture",
 }
-interface ClusterPickerProps {
-    value: Cluster[];
-    onChange(arg1: Cluster[] | undefined): void;
-    clusters: Cluster[];
 
+export enum PickerType {
+    MULTIPLE,
+    SINGLE
+}
+export interface ClusterGroup {
+    name: string;
+    clusters: Cluster[];
+}
+interface ClusterPickerProps {
+    value: Cluster[] | Cluster;
+    onChange(arg1: Cluster[] | Cluster | undefined): void;
+    clusters: Cluster[] | ClusterGroup[];
+    pickerType: PickerType;
 }
 interface ClusterPickerState {
     pickerId: string;
 }
 
+
+
+function isClusterGroup(clusters: Cluster[] | ClusterGroup[]): clusters is ClusterGroup[] {
+
+    return typeof clusters[0] !== 'string';
+}
+
 // eslint-disable-next-line react/prefer-stateless-function
-export default class ClusterPicker extends Component<ClusterPickerProps & Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'>, ClusterPickerState> {
+export default class ClusterPicker extends Component<ClusterPickerProps & Omit<InputHTMLAttributes<HTMLInputElement | HTMLSelectElement>, 'onChange'>, ClusterPickerState> {
     public static defaultProps = {
         clusters: []
     };
@@ -41,37 +57,80 @@ export default class ClusterPicker extends Component<ClusterPickerProps & Omit<I
         pickerId: randomString(5)
     }
 
-    onChange = (e: ChangeEvent<HTMLInputElement>): void => {
-        const { onChange } = this.props;
+    onChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>): void => {
+        const { onChange, pickerType } = this.props;
         let { value } = this.props;
-        const { checked: isChecked, name } = e.target;
-        if (isChecked) {
-            value.push(name);
+        const { name } = e.target;
+        if (pickerType === PickerType.MULTIPLE) {
+            const { checked: isChecked } = e.target as HTMLInputElement;
+            if (isChecked) {
+                (value as Cluster[]).push(name);
+            } else {
+                value = (value as Cluster[]).filter(v => v !== name);
+            }
         } else {
-            value = value.filter(v => v !== name);
+            const { value: selectedValue } = e.target as HTMLInputElement;
+            value = selectedValue;
         }
-
         onChange(value);
     }
     render() {
+        const { pickerType } = this.props;
+        if (pickerType === PickerType.MULTIPLE) {
+            return this.renderMultiPicker();
+        } else {
+            return this.renderSinglePicker();
+        }
+    }
+    renderMultiPicker() {
         const { pickerId } = this.state;
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const { clusters, value, onChange, ...rest } = this.props;
+        const { clusters, value, pickerType, onChange, ...rest } = this.props;
+        let options = [];
+        if (isClusterGroup(clusters)) {
+            //TODO: implement if necessary
+            console.warn("Not implemented");
+        } else {
+            options = clusters.map(cluster => (
+                <div key={cluster} className="form-check form-check-inline">
+                    <input className="form-check-input"
+                        type="checkbox"
+                        checked={value.includes(cluster)}
+                        name={cluster}
+                        id={`${pickerId}_${cluster}`}
+                        value={cluster}
+                        onChange={this.onChange}
+                        {...rest}
+                    />
+                    <label className="form-check-label" htmlFor={`${pickerId}_${cluster}`} title={cluster}>{clusterDescriptions[cluster] ?? cluster}</label>
+                </div>
+            ));
+        }
 
-        const options = clusters.map(cluster => (
-            <div key={cluster} className="form-check form-check-inline">
-                <input className="form-check-input"
-                    type="checkbox"
-                    checked={value.includes(cluster)}
-                    name={cluster}
-                    id={`${pickerId}_${cluster}`}
-                    value={cluster}
-                    onChange={this.onChange}
-                    {...rest}
-                />
-                <label className="form-check-label" htmlFor={`${pickerId}_${cluster}`} title={cluster}>{clusterDescriptions[cluster] ?? cluster}</label>
-            </div>
-        ));
         return options;
+    }
+
+    renderSinglePicker() {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const { clusters, onChange, pickerType, ...rest } = this.props;
+        const options = [<option key="hidden" hidden>Select cluster</option>];
+        if (isClusterGroup(clusters)) {
+            clusters.forEach(group => {
+                const groupOptions = group.clusters.map(cluster => <option key={cluster} value={cluster}>{clusterDescriptions[cluster] ?? cluster}</option>)
+                if (groupOptions.length === 0) {
+                    groupOptions.push(<option key="none" disabled>None</option>)
+                }
+                options.push(<optgroup key={group.name} label={group.name}>{groupOptions}</optgroup>);
+            });
+
+
+        } else {
+            clusters.forEach(cluster => {
+                options.push(<option key={cluster} value={cluster}>{clusterDescriptions[cluster] ?? cluster}</option>);
+            })
+        }
+        return (<select className="form-select" onChange={this.onChange} {...rest}>
+            {options}
+        </select>)
     }
 }

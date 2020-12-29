@@ -38,6 +38,7 @@ export interface DeviceState {
 }
 
 export type Cluster = string;
+export type Attribute = string;
 
 export type Endpoint = string | number;
 
@@ -183,9 +184,16 @@ export interface DeviceDefinition {
     vendor: string;
     exposes: GenericExposedFeature[] | CompositeFeature[];
 }
-
+export interface ReportingConfig {
+    cluster: Cluster;
+    attribute: Attribute;
+    maximum_report_interval: number;
+    minimum_report_interval: number;
+    reportable_change: number;
+}
 export interface EndpointDescription {
     bindings: BindRule[];
+    configured_reportings: ReportingConfig[];
     clusters: {
         input: Cluster[];
         output: Cluster[];

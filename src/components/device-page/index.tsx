@@ -5,6 +5,7 @@ import actions from "../../actions";
 import { GlobalState } from "../../store";
 import DeviceInfo from "./info";
 import Bind from "./bind";
+import Reporting from "./reporting";
 import States from "./states";
 import ConnectedDeviceExposes from "./exposes";
 import Clusters from "./clusters";
@@ -17,7 +18,7 @@ type UrlParams = {
 type DevicePageProps = RouteComponentProps<UrlParams>;
 
 
-type TabName = "info" | "bind" | "state" | "exposes" | "clusters";
+type TabName = "info" | "bind" | "state" | "exposes" | "clusters" | "reporting";
 // eslint-disable-next-line react/prefer-stateless-function
 export class DevicePage extends Component<DevicePageProps & GlobalState, {}> {
     renderContent() {
@@ -36,6 +37,8 @@ export class DevicePage extends Component<DevicePageProps & GlobalState, {}> {
                 return <ConnectedDeviceExposes device={device} />;
             case "clusters":
                 return <Clusters device={device} />
+            case "reporting":
+                return <Reporting device={device} />
             default:
                 return <Redirect to={`/device/${dev}/info`} />;
         }
@@ -58,7 +61,9 @@ export class DevicePage extends Component<DevicePageProps & GlobalState, {}> {
                 </li>
                 <li className="nav-item">
                     <NavLink activeClassName="active" className={`nav-link ${styles['small-nav']}`} to={`/device/${dev}/bind`}>Bind</NavLink>
-
+                </li>
+                <li className="nav-item">
+                    <NavLink activeClassName="active" className={`nav-link ${styles['small-nav']}`} to={`/device/${dev}/reporting`}>Reporting</NavLink>
                 </li>
                 <li className="nav-item">
                     <NavLink activeClassName="active" className={`nav-link ${styles['small-nav']}`} to={`/device/${dev}/state`}>State</NavLink>

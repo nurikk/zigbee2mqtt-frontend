@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { Device, Cluster, Endpoint } from "../../types";
-import BindRow, { getEndpoints } from "./bind-row";
+import BindRow from "./bind-row";
 import actions, { BindApi } from "../../actions";
 import { connect } from "unistore/react";
 import { GlobalState, Group } from "../../store";
+import { getEndpoints } from "../../utils";
 
 
 interface PropsFromStore {

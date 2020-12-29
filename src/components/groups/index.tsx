@@ -4,13 +4,12 @@ import actions, { GroupsApi } from "../../actions";
 import { GlobalState, Group, GroupAddress } from "../../store";
 import Button from "../button";
 import { Device, Endpoint } from "../../types";
-import { genDeviceDetailsLink } from "../../utils";
+import { genDeviceDetailsLink, getEndpoints } from "../../utils";
 import style from './style.css';
 import cx from 'classnames';
 import EndpointPicker from "../endpoint-picker";
 import DevicePicker from "../device-picker";
 import { Link } from "react-router-dom";
-import { getEndpoints } from "../device-page/bind-row";
 import DeviceImage from "../device-image";
 import { RenameGroupForm } from "./RenameForm";
 
