@@ -19,6 +19,8 @@ type DeviceInfoProps = {
 interface PropsFromStore {
     deviceStates: Map<string, DeviceState>;
 }
+// [Flower sensor](http://modkam.ru/?p=1700)
+const markdownLinkRegex = /\[(.*?)\]\((.*?)\)/;
 
 const displayProps = [
     {
@@ -32,7 +34,17 @@ const displayProps = [
     {
         key: 'definition.description',
         label: 'Description',
-        if: 'supported'
+        if: 'supported',
+        render: (device: Device) => {
+            const result = markdownLinkRegex.exec(device.definition.description);
+            let content = <span>{device.definition.description}</span>;
+            if (result) {
+                // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                const [all, title, link] = result;
+                content = <a target="_blank" rel="noopener noreferrer"href={link}>{title}</a>
+            }
+            return <dd className="col-12 col-md-7">{content}</dd>
+        },
     },
     {
         render: (device: Device) => <dd className="col-12 col-md-7" ><p className={cx('mb-0', 'font-weight-bold', { 'text-danger': !device.supported, 'text-success': device.supported })}>{device.supported ? 'Supported' : 'Unsupported'}</p></dd>,
