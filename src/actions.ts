@@ -55,11 +55,6 @@ export interface BridgeApi {
 export interface MapApi {
     networkMapRequest(): Promise<void>;
 }
-
-export interface LegacyApi {
-    resetZnp(): Promise<void>;
-}
-
 export interface ReportingApi {
     configureReport(device: string, config: ReportingConfig): Promise<void>;
 }
@@ -190,10 +185,6 @@ const actions = (store: Store<GlobalState>): object => ({
     },
     updateConfigValue(state, name: string, value: unknown): Promise<void> {
         return api.send(`bridge/request/config/${name}`, {value});
-    },
-
-    resetZnp(state): Promise<void> {
-        return api.send(`bridge/config/reset`, {value: true});
     },
     exportState(state): Promise<void> {
         download(state, 'state.json');

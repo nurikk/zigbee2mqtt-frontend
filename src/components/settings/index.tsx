@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "unistore/react";
-import actions, { BridgeApi, LegacyApi, UtilsApi } from "../../actions";
+import actions, { BridgeApi, UtilsApi } from "../../actions";
 import { GlobalState } from "../../store";
 import get from "lodash/get";
 import UniversalEditor from "../universal-editor";
@@ -46,7 +46,7 @@ type SettingsPageProps = RouteComponentProps<UrlParams>;
 
 declare const FRONTEND_VERSION: string; //injected by webpack.DefinePlugin
 
-export class SettingsPage extends Component<SettingsPageProps & BridgeApi & GlobalState & LegacyApi & UtilsApi, {}> {
+export class SettingsPage extends Component<SettingsPageProps & BridgeApi & GlobalState & UtilsApi, {}> {
     updateConfig = (name: string, value: unknown): void => {
         const { updateConfigValue } = this.props;
         updateConfigValue(name, value);
@@ -125,16 +125,7 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
         const { bridgeInfo } = this.props;
         return <pre>{JSON.stringify(bridgeInfo, null, 4)}</pre>
     }
-    renderLegacyApiSettings() {
-        const { resetZnp } = this.props;
-        return [
-            <div key={"znp-rest"} className="row">
-                <div className="col">
-                    <Button<void> className="btn btn-danger" promt onClick={() => resetZnp()}>Reset coordinator</Button>
-                </div>
-            </div>
-        ];
-    }
+
     renderSettings() {
         const { bridgeInfo, exportState } = this.props;
         return <><div className="mt-2">
@@ -154,14 +145,9 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
                     </div>
                 ))
             }
-            {
-                bridgeInfo.config?.advanced.legacy_api !== false ? this.renderLegacyApiSettings() : null
-            }
         </div>
             <Button<void> className="mt-2 btn btn-primary" onClick={exportState}>Download state</Button>
         </>
-
-
     }
 }
 const SettingsPageWithRouter = withRouter(SettingsPage);
