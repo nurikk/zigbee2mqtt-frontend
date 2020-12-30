@@ -1,3 +1,12 @@
+## [0.2.125](https://github.com/nurikk/z2m-frontend/compare/0.2.124...0.2.125) (2020-12-30)
+
+
+### Features
+
+* **reporting:** add more intuitive disable rule ([263af29](https://github.com/nurikk/z2m-frontend/commit/263af29198bd820c3ed6c4807b8d0b66cb290161))
+
+
+
 ## [0.2.124](https://github.com/nurikk/z2m-frontend/compare/0.2.123...0.2.124) (2020-12-29)
 
 
