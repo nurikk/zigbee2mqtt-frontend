@@ -66,21 +66,33 @@ interface ResponseWithStatus {
     status: "ok" | "error";
     data: unknown;
     error?: string;
+    transaction?: number;
 }
 interface TouchllinkScanResponse extends ResponseWithStatus {
     data: {
         found: TouchLinkDevice[];
     };
 }
+interface Callable {
+    (): void;
+}
 class Api {
     url: string;
     socket: ReconnectingWebSocket;
+    requests: Map<number, [Callable, Callable]> = new Map<number, [Callable, Callable]>();
+    transactionNumber = 1;
     constructor(url: string) {
         this.url = url;
     }
-    send = (topic: string, payload: unknown): void => {
+    send = (topic: string, payload: object): Promise<void> => {
         console.debug("Calling API", { topic, payload });
-        this.socket.send(JSON.stringify({ topic, payload }));
+        const transaction = this.transactionNumber++;
+
+        const promise = new Promise<void>((resolve, reject) => {
+            this.requests.set(transaction, [resolve, reject]);
+        });
+        this.socket.send(JSON.stringify({ topic, payload: { ...payload, transaction } }));
+        return promise;
     }
 
     urlProvider = async () => {
@@ -192,6 +204,21 @@ class Api {
         }
         if (data.topic.startsWith("bridge/response/")) {
             showNotity(data.payload as ResponseWithStatus);
+            this.resolvePromises(data.payload as ResponseWithStatus);
+        }
+    }
+
+    private resolvePromises(message: ResponseWithStatus): void {
+        const { transaction, status } = message;
+        if (transaction !== undefined) {
+            const [resolve, reject] = this.requests.get(transaction);
+            if (resolve || resolve) {
+                if (status == "ok" || status == undefined) {
+                    resolve();
+                } else {
+                    reject();
+                }
+           }
         }
     }
 

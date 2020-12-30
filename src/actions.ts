@@ -76,8 +76,7 @@ const actions = (store: Store<GlobalState>): object => ({
             to,
             clusters,
         };
-        api.send("bridge/request/device/bind", bindParams);
-        return Promise.resolve();
+        return api.send("bridge/request/device/bind", bindParams);
     },
     removeBind: (
         state,
@@ -90,8 +89,7 @@ const actions = (store: Store<GlobalState>): object => ({
             to,
             clusters,
         };
-        api.send("bridge/request/device/unbind", bindParams);
-        return Promise.resolve();
+        return api.send("bridge/request/device/unbind", bindParams);
     },
 
     setStateValue(
@@ -100,20 +98,16 @@ const actions = (store: Store<GlobalState>): object => ({
         name: string,
         value: string | number | boolean
     ): Promise<void> {
-        api.send(`${dev}/set`, { [name]: value });
-        return Promise.resolve();
+        return api.send(`${dev}/set`, { [name]: value });
     },
     setDeviceState(state, dev: string, value: object) {
-        api.send(`${dev}/set`, value);
-        return Promise.resolve();
+        return api.send(`${dev}/set`, value);
     },
     getDeviceState(state, dev: string, value: object) {
-        api.send(`${dev}/get`, value);
-        return Promise.resolve();
+        return api.send(`${dev}/get`, value);
     },
     setPermitJoin(state, permit = true, device: Device): Promise<void> {
-        api.send("bridge/request/permit_join", { value: permit, device: device?.friendly_name });
-        return Promise.resolve();
+        return api.send("bridge/request/permit_join", { value: permit, device: device?.friendly_name });
     },
 
     renameDevice: (
@@ -122,12 +116,11 @@ const actions = (store: Store<GlobalState>): object => ({
         to: string,
         homeassistantRename: boolean
     ): Promise<void> => {
-        api.send("bridge/request/device/rename", {
+        return api.send("bridge/request/device/rename", {
             from,
             to,
             'homeassistant_rename': homeassistantRename,
         });
-        return Promise.resolve();
     },
     removeDevice: (
         state,
@@ -135,19 +128,16 @@ const actions = (store: Store<GlobalState>): object => ({
         force: boolean,
         block: boolean
     ): Promise<void> => {
-        api.send("bridge/request/device/remove", { id: dev, force, block });
-        return Promise.resolve();
+        return api.send("bridge/request/device/remove", { id: dev, force, block });
     },
 
     configureDevice: (state, name: string): Promise<void> => {
-        api.send("bridge/request/device/configure", { id: name });
-        return Promise.resolve();
+        return api.send("bridge/request/device/configure", { id: name });
     },
 
     networkMapRequest: (state): Promise<void> => {
         store.setState({ networkGraphIsLoading: true, networkGraph: { nodes: [], links: [] } });
-        api.send("bridge/request/networkmap", { type: "raw", routes: false });
-        return Promise.resolve();
+        return api.send("bridge/request/networkmap", { type: "raw", routes: false });
     },
     createGroup: (state, group: string, id: number): Promise<void> => {
         const payload = {
@@ -156,18 +146,15 @@ const actions = (store: Store<GlobalState>): object => ({
         if (id) {
             payload['id'] = id;
         }
-        api.send("bridge/request/group/add", payload);
-        return Promise.resolve();
+        return api.send("bridge/request/group/add", payload);
     },
 
     removeGroup: (state, group: string): Promise<void> => {
-        api.send("bridge/request/group/remove", group);
-        return Promise.resolve();
+        return api.send("bridge/request/group/remove", {id: group});
     },
 
     addDeviceToGroup: (state, device: string, group: string): Promise<void> => {
-        api.send("bridge/request/group/members/add", { group, device });
-        return Promise.resolve();
+        return api.send("bridge/request/group/members/add", { group, device });
     },
 
     removeDeviceFromGroup: (
@@ -175,57 +162,48 @@ const actions = (store: Store<GlobalState>): object => ({
         device: string,
         group: string
     ): Promise<void> => {
-        api.send("bridge/request/group/members/remove", { device, group });
-        return Promise.resolve();
+        return api.send("bridge/request/group/members/remove", { device, group });
     },
     renameGroup: (state, oldName: string, newName: string): Promise<void> => {
-        api.send("bridge/request/group/rename", { from: oldName, to: newName });
-        return Promise.resolve();
+        return api.send("bridge/request/group/rename", { from: oldName, to: newName });
     },
 
     touchlinkScan(): Promise<void> {
         store.setState({ touchlinkScanInProgress: true, touchlinkDevices: [] });
-        api.send("bridge/request/touchlink/scan", "");
-        return Promise.resolve();
+        return api.send("bridge/request/touchlink/scan", {value: true});
     },
     touchlinkIdentify(state, device: TouchLinkDevice): Promise<void> {
         store.setState({ touchlinkIdentifyInProgress: true });
-        api.send("bridge/request/touchlink/identify", device);
-        return Promise.resolve();
+        return api.send("bridge/request/touchlink/identify", device);
+
     },
     touchlinkReset(state, device: TouchLinkDevice): Promise<void> {
         store.setState({ touchlinkResetInProgress: true });
-        api.send("bridge/request/touchlink/factory_reset", device);
-        return Promise.resolve();
+        return api.send("bridge/request/touchlink/factory_reset", device);
     },
 
     checkOTA: (state, deviceName: string): Promise<void> => {
-        api.send("bridge/request/device/ota_update/check", { id: deviceName });
-        return Promise.resolve();
+        return api.send("bridge/request/device/ota_update/check", { id: deviceName });
     },
     updateOTA: (state, deviceName: string): Promise<void> => {
-        api.send("bridge/request/device/ota_update/update", { id: deviceName });
-        return Promise.resolve();
+        return api.send("bridge/request/device/ota_update/update", { id: deviceName });
     },
     updateConfigValue(state, name: string, value: unknown): Promise<void> {
-        api.send(`bridge/request/config/${name}`, value);
-        return Promise.resolve();
+        return api.send(`bridge/request/config/${name}`, {value});
     },
 
     resetZnp(state): Promise<void> {
-        api.send(`bridge/config/reset`, "");
-        return Promise.resolve();
+        return api.send(`bridge/config/reset`, {value: true});
     },
     exportState(state): Promise<void> {
         download(state, 'state.json');
         return Promise.resolve();
     },
     configureReport(state, device: string, config: ReportingConfig): Promise<void> {
-        api.send('bridge/request/device/configure_reporting', {
+        return api.send('bridge/request/device/configure_reporting', {
             id: device,
             ...config
         });
-        return Promise.resolve();
     }
 });
 export default actions;
