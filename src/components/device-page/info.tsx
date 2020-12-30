@@ -105,7 +105,6 @@ const displayProps = [
 export class DeviceInfo extends Component<DeviceInfoProps & PropsFromStore, {}> {
     render() {
         const { device, deviceStates } = this.props;
-        console.log(device);
         const deviceStatus: DeviceState = deviceStates.get(device.friendly_name) ?? {} as DeviceState;
         return (
             <Fragment>

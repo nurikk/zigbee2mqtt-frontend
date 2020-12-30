@@ -88,6 +88,13 @@ export default class ReportingRow extends Component<ReportingRowProps, Reporting
     onApply(stateRule);
   }
 
+  disableRule = (): void => {
+    const { onApply } = this.props;
+    const { stateRule } = this.state;
+    // eslint-disable-next-line @typescript-eslint/camelcase
+    onApply({ ...stateRule, maximum_report_interval: 0xFFFF });
+  }
+
 
   render() {
     const { rule, idx, device } = this.props;
@@ -102,7 +109,12 @@ export default class ReportingRow extends Component<ReportingRowProps, Reporting
       <td><input onChange={this.changeHandler} value={stateRule.minimum_report_interval} required type="number" name="minimum_report_interval" className="form-control" /></td>
       <td><input onChange={this.changeHandler} value={stateRule.maximum_report_interval} required type="number" name="maximum_report_interval" className="form-control" /></td>
       <td><input placeholder="Enter 65535 to disable reporting" onChange={this.changeHandler} value={stateRule.reportable_change} required type="number" name="reportable_change" className="form-control" /></td>
-      <td><Button<void> disabled={!isValidRule(stateRule)} className="btn btn-primary" onClick={this.applyRule}>Apply</Button></td>
+      <td>
+        <div className="btn-group" role="group" aria-label="Basic example">
+          <Button<void> disabled={!isValidRule(stateRule)} className="btn btn-primary" onClick={this.applyRule}>Apply</Button>
+          {!stateRule.isNew ? <Button<void> promt className="btn btn-danger" onClick={this.disableRule}>Disable</Button> : null}
+        </div>
+      </td>
     </tr>);
   }
 }
