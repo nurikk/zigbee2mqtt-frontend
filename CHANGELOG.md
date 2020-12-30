@@ -1,3 +1,13 @@
+## [0.2.126](https://github.com/nurikk/z2m-frontend/compare/0.2.125...0.2.126) (2020-12-30)
+
+
+### Features
+
+* **legacy:** deprecate legacy api calls ([7fcf67c](https://github.com/nurikk/z2m-frontend/commit/7fcf67c4b58397f37f378ce01c1ece2de362689f))
+* **transaction:** initial request/response implemtentation ([cc0369e](https://github.com/nurikk/z2m-frontend/commit/cc0369ed11bce529417a7c71f3994622da23baa9))
+
+
+
 ## [0.2.125](https://github.com/nurikk/z2m-frontend/compare/0.2.124...0.2.125) (2020-12-30)
 
 
