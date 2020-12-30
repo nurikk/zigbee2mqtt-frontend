@@ -45,7 +45,7 @@ const FeatureWrapper: FunctionComponent<PropsWithChildren<FetatureWrapperProps>>
           {isReadable ? (
             <Button<CompositeFeature | GenericExposedFeature> item={feature} onClick={(item) => {
               onRead(feature.endpoint, { [item.property]: "" })
-            }} className="btn btn-primaty"><i className="fa fa-sync"></i></Button>
+            }} className="btn btn-primary"><i className="fa fa-sync"></i></Button>
           ) : null}
         </div>
         {feature.description ? <small className="d-block text-muted">{feature.description}</small> : null}
