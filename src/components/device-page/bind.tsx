@@ -30,13 +30,16 @@ export interface NiceBindingRule {
     };
     clusters: Cluster[];
 }
-const rule2key = (rule: NiceBindingRule): string => `${rule.isNew}${rule.source.ieee_address}-${rule.target.id}-${rule.target.ieee_address}-${rule.clusters.join('-')}`;
+const rule2key = (rule: NiceBindingRule): string => `${rule.source.endpoint}-${rule.isNew}${rule.source.ieee_address}-${rule.target.id}-${rule.target.ieee_address}-${rule.clusters.join('-')}`;
 const convertBidningsIntoNiceStructure = (device: Device): NiceBindingRule[] => {
     const bindings = {};
     device.endpoints.forEach((description, endpoint) => {
         description.bindings
             .forEach(b => {
-                const targetId = b.target.id ?? b.target.ieee_address;
+                let targetId = b.target.id ?? `${b.target.ieee_address}-${b.target.endpoint}`;
+
+                targetId = `${targetId}-${endpoint}`;
+
                 if (bindings[targetId]) {
                     bindings[targetId].clusters.push(b.cluster);
                 } else {
@@ -73,7 +76,7 @@ export class Bind extends Component<BindProps & PropsFromStore & BindApi, BindSt
         const { device } = props;
         const endpoints = getEndpoints(device);
         const bidingRules = convertBidningsIntoNiceStructure(device);
-
+        console.log(bidingRules, device)
         bidingRules.push({ isNew: Date.now(), target: {}, source: { 'ieee_address': device.ieee_address, endpoint: endpoints[0] }, clusters: [] } as NiceBindingRule);
         return {
             bidingRules
