@@ -1,3 +1,12 @@
+## [0.2.129](https://github.com/nurikk/z2m-frontend/compare/0.2.127...0.2.129) (2020-12-31)
+
+
+### Bug Fixes
+
+* **binding:** fix multiple bindings to same device ([fdcd9a7](https://github.com/nurikk/z2m-frontend/commit/fdcd9a73f17014dc1064f131e188b10aacf63330))
+
+
+
 ## [0.2.128](https://github.com/nurikk/z2m-frontend/compare/0.2.127...0.2.128) (2020-12-31)
 
 
