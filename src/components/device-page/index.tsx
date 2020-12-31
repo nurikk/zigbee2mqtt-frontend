@@ -54,37 +54,39 @@ export class DevicePage extends Component<DevicePageProps & GlobalState, {}> {
         }
 
         return (<div className="">
-            <h3>{device.friendly_name}</h3>
-            <ul className="nav nav-tabs">
-                <li className="nav-item">
-                    <NavLink activeClassName="active" className={`nav-link ${styles['small-nav']}`} to={`/device/${dev}/info`}>About</NavLink>
-                </li>
-                <li className="nav-item">
-                    <NavLink activeClassName="active" className={`nav-link ${styles['small-nav']}`} to={`/device/${dev}/exposes`}>Exposes</NavLink>
-                </li>
-                <li className="nav-item">
-                    <NavLink activeClassName="active" className={`nav-link ${styles['small-nav']}`} to={`/device/${dev}/bind`}>Bind</NavLink>
-                </li>
-                <li className="nav-item">
-                    <NavLink activeClassName="active" className={`nav-link ${styles['small-nav']}`} to={`/device/${dev}/reporting`}>Reporting</NavLink>
-                </li>
-                <li className="nav-item">
-                    <NavLink activeClassName="active" className={`nav-link ${styles['small-nav']}`} to={`/device/${dev}/state`}>State</NavLink>
-                </li>
-                <li className="nav-item">
-                    <NavLink activeClassName="active" className={`nav-link ${styles['small-nav']}`} to={`/device/${dev}/clusters`}>Clusters</NavLink>
-                </li>
-            </ul>
+			<div className="row">
+				<div className="bg-light text-dark"><h3>{device.friendly_name}</h3></div>
+			</div>
+			<div className="row">
+				<ul className="nav nav-tabs">
+					<li className="nav-item">
+						<NavLink activeClassName="active" className={`nav-link ${styles['small-nav']}`} to={`/device/${dev}/info`}>About</NavLink>
+					</li>
+					<li className="nav-item">
+						<NavLink activeClassName="active" className={`nav-link ${styles['small-nav']}`} to={`/device/${dev}/exposes`}>Exposes</NavLink>
+					</li>
+					<li className="nav-item">
+						<NavLink activeClassName="active" className={`nav-link ${styles['small-nav']}`} to={`/device/${dev}/bind`}>Bind</NavLink>
+					</li>
+					<li className="nav-item">
+						<NavLink activeClassName="active" className={`nav-link ${styles['small-nav']}`} to={`/device/${dev}/reporting`}>Reporting</NavLink>
+					</li>
+					<li className="nav-item">
+						<NavLink activeClassName="active" className={`nav-link ${styles['small-nav']}`} to={`/device/${dev}/state`}>State</NavLink>
+					</li>
+					<li className="nav-item">
+						<NavLink activeClassName="active" className={`nav-link ${styles['small-nav']}`} to={`/device/${dev}/clusters`}>Clusters</NavLink>
+					</li>
+				</ul>
+			</div>
 
-
-
-            <div className="tab-content">
-                <div className="tab-pane fade show active container">
-                    {this.renderContent()}
-                </div>
-
-            </div>
-
+			<div className="row">
+				<div className="tab-content">
+					<div className="tab-pane fade show active container">
+						{this.renderContent()}
+					</div>
+				</div>
+			</div>
 
 
         </div>);
