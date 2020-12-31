@@ -1,3 +1,12 @@
+## [0.2.127](https://github.com/nurikk/z2m-frontend/compare/0.2.126...0.2.127) (2020-12-31)
+
+
+### Bug Fixes
+
+* **api:** fix request/response transaction issue ([ccaa416](https://github.com/nurikk/z2m-frontend/commit/ccaa4165b31ce1ea083eec989afcb10f75f92dad))
+
+
+
 ## [0.2.126](https://github.com/nurikk/z2m-frontend/compare/0.2.125...0.2.126) (2020-12-30)
 
 
