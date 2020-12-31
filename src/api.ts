@@ -1,7 +1,7 @@
 import ReconnectingWebSocket from "reconnecting-websocket";
 import store, { Group, LogMessage } from "./store";
 import { BridgeConfig, BridgeInfo, TouchLinkDevice, Device, DeviceState } from './types';
-import { sanitizeGraph, isSecurePage } from "./utils";
+import { sanitizeGraph, isSecurePage, randomString } from "./utils";
 import { Notyf } from "notyf";
 import { GraphI } from "./components/map/types";
 
@@ -66,7 +66,7 @@ interface ResponseWithStatus {
     status: "ok" | "error";
     data: unknown;
     error?: string;
-    transaction?: number;
+    transaction?: string;
 }
 interface TouchllinkScanResponse extends ResponseWithStatus {
     data: {
@@ -79,20 +79,27 @@ interface Callable {
 class Api {
     url: string;
     socket: ReconnectingWebSocket;
-    requests: Map<number, [Callable, Callable]> = new Map<number, [Callable, Callable]>();
+    requests: Map<string, [Callable, Callable]> = new Map<string, [Callable, Callable]>();
     transactionNumber = 1;
+    transactionRndPreffix: string;
     constructor(url: string) {
         this.url = url;
+        this.transactionRndPreffix = randomString(5);
     }
     send = (topic: string, payload: object): Promise<void> => {
         console.debug("Calling API", { topic, payload });
-        const transaction = this.transactionNumber++;
 
-        const promise = new Promise<void>((resolve, reject) => {
-            this.requests.set(transaction, [resolve, reject]);
-        });
-        this.socket.send(JSON.stringify({ topic, payload: { ...payload, transaction } }));
-        return promise;
+        if (topic.startsWith('bridge/request/')) {
+            const transaction = `${this.transactionRndPreffix}-${this.transactionNumber++}`;
+            const promise = new Promise<void>((resolve, reject) => {
+                this.requests.set(transaction, [resolve, reject]);
+            });
+            this.socket.send(JSON.stringify({ topic, payload: { ...payload, transaction } }));
+            return promise;
+        } else {
+            this.socket.send(JSON.stringify({ topic, payload }));
+            return Promise.resolve();
+        }
     }
 
     urlProvider = async () => {
@@ -218,6 +225,8 @@ class Api {
                 } else {
                     reject();
                 }
+
+                this.requests.delete(transaction);
            }
         }
     }
