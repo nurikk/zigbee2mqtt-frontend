@@ -52,41 +52,47 @@ export class DevicePage extends Component<DevicePageProps & GlobalState, {}> {
         if (!device) {
             return <div className="h-100 d-flex justify-content-center align-items-center">Unknown device</div>
         }
+        const links = [
+            {
+                title: 'About',
+                url: `/device/${dev}/info`
+            },
+            {
+                title: 'Exposes',
+                url: `/device/${dev}/exposes`
+            },
+            {
+                title: 'Bind',
+                url: `/device/${dev}/bind`
+            },
+            {
+                title: 'Reporting',
+                url: `/device/${dev}/reporting`
+            },
+            {
+                title: 'State',
+                url: `/device/${dev}/state`
+            },
+            {
+                title: 'Clusters',
+                url: `/device/${dev}/clusters`
+            }
+        ];
 
         return (<div className="">
             <h3>{device.friendly_name}</h3>
             <ul className="nav nav-tabs">
-                <li className="nav-item">
-                    <NavLink activeClassName="active" className={`nav-link ${styles['small-nav']}`} to={`/device/${dev}/info`}>About</NavLink>
-                </li>
-                <li className="nav-item">
-                    <NavLink activeClassName="active" className={`nav-link ${styles['small-nav']}`} to={`/device/${dev}/exposes`}>Exposes</NavLink>
-                </li>
-                <li className="nav-item">
-                    <NavLink activeClassName="active" className={`nav-link ${styles['small-nav']}`} to={`/device/${dev}/bind`}>Bind</NavLink>
-                </li>
-                <li className="nav-item">
-                    <NavLink activeClassName="active" className={`nav-link ${styles['small-nav']}`} to={`/device/${dev}/reporting`}>Reporting</NavLink>
-                </li>
-                <li className="nav-item">
-                    <NavLink activeClassName="active" className={`nav-link ${styles['small-nav']}`} to={`/device/${dev}/state`}>State</NavLink>
-                </li>
-                <li className="nav-item">
-                    <NavLink activeClassName="active" className={`nav-link ${styles['small-nav']}`} to={`/device/${dev}/clusters`}>Clusters</NavLink>
-                </li>
+                {
+                    links.map(link => <li key={link.title} className="nav-item">
+                        <NavLink activeClassName="active" className={`nav-link ${styles['small-nav']}`} to={link.url}>{link.title}</NavLink>
+                    </li>)
+                }
             </ul>
-
-
-
             <div className="tab-content">
                 <div className="tab-pane fade show active container">
                     {this.renderContent()}
                 </div>
-
             </div>
-
-
-
         </div>);
 
     }
