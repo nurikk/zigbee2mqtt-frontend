@@ -1,3 +1,7 @@
+## [0.2.131](https://github.com/nurikk/z2m-frontend/compare/0.2.130...0.2.131) (2021-01-01)
+
+
+
 ## [0.2.130](https://github.com/nurikk/z2m-frontend/compare/0.2.129...0.2.130) (2021-01-01)
 
 
