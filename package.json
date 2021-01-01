@@ -81,7 +81,7 @@
         "unistore": "^3.5.2",
         "webpack": "^4.44.2",
         "webpack-bundle-analyzer": "^4.3.0",
-        "webpack-cli": "4.3.0",
+        "webpack-cli": "4.3.1",
         "webpack-dev-server": "3.11.1",
         "ws": "^7.4.2",
         "zigbee-herdsman": "^0.13.46",
