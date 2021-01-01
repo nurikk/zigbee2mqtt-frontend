@@ -64,11 +64,10 @@ module.exports = (env, args) => {
         devtool: "source-map",
         optimization: {
             usedExports: true,
-            moduleIds: "hashed",
             runtimeChunk: "single",
             splitChunks: {
                 cacheGroups: {
-                    vendor: {
+                    defaultVendors: {
                         test: /node_modules/,
                         name: "scripts/vendor",
                         chunks: "all",
@@ -79,18 +78,16 @@ module.exports = (env, args) => {
         },
         resolve: {
             mainFields: ["module", "main"],
-            extensions: [".ts", ".tsx", ".js", ".html", ".txt"],
+            extensions: [".ts", ".tsx", ".js", ".html", ".txt"]
         },
         module: {
             rules: [{
                     test: /\.txt$/i,
-                    use: 'raw-loader',
+                    type: 'asset/source'
                 },
                 {
                     test: /\.(png|jpe?g|gif)$/i,
-                    use: [{
-                        loader: "file-loader",
-                    }, ],
+                    type: 'asset/resource',
                 },
                 {
                     test: /\.tsx?$/,
@@ -137,12 +134,6 @@ module.exports = (env, args) => {
         },
         plugins,
         stats: "errors-only",
-        externals: {},
-        node: {
-            fs: 'empty',
-            net: 'empty',
-            // eslint-disable-next-line @typescript-eslint/camelcase
-            child_process: 'empty'
-        }
+        externals: {}
     };
 };

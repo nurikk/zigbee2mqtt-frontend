@@ -1,6 +1,7 @@
 import React, { ChangeEvent, Component, InputHTMLAttributes } from "react";
 import { Attribute, Cluster } from "../../types";
-import { Zcl } from "zigbee-herdsman";
+
+import Clusters from "zigbee-herdsman/dist/zcl/definition/cluster"
 
 interface AttributePickerProps {
     cluster: Cluster;
@@ -19,7 +20,7 @@ export default class AttributePicker extends Component<AttributePickerProps & Om
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { cluster, onChange, ...rest } = this.props;
         let attrs = [];
-        const clusterDefinition = Zcl.Cluster[cluster];
+        const clusterDefinition = Clusters[cluster];
         if (clusterDefinition) {
             attrs = Object.keys(clusterDefinition.attributes);
         }
