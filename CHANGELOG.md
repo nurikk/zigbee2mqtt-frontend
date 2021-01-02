@@ -1,3 +1,12 @@
+## [0.2.132](https://github.com/nurikk/z2m-frontend/compare/0.2.131...0.2.132) (2021-01-02)
+
+
+### Bug Fixes
+
+* **styles:** fix stylings ([8c7b65b](https://github.com/nurikk/z2m-frontend/commit/8c7b65b0ddd4b36a6b5d34f21ecb45f0fffcbc72))
+
+
+
 ## [0.2.131](https://github.com/nurikk/z2m-frontend/compare/0.2.130...0.2.131) (2021-01-01)
 
 
