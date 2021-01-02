@@ -1,5 +1,6 @@
 {
   "git": {
     "commitMessage": "chore(deploy): release v${version}"
-  }
+  },
+  "npm": false
 }
