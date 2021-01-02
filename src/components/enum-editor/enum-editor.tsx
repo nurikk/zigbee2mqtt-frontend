@@ -21,7 +21,7 @@ function isPrimitive(step: ValueWithLabelOrPrimitive): step is Primitive {
 
 const EnumEditor: FunctionComponent<EnumProps> = (props) => {
   const { onChange, values, value } = props;
-  return <div className="btn-group mr-2">
+  return <div className="btn-group me-2">
     {
       values.map(v => <Button<ValueWithLabelOrPrimitive>
         className={cx("btn btn-outline-secondary", { active: isPrimitive(v) ? v === value : v.value == (isPrimitive(value) ? value : value?.value) })}

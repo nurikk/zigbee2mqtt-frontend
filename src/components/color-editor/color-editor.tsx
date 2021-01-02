@@ -64,7 +64,7 @@ const ColorEditor: FunctionComponent<ColorProps & Omit<InputHTMLAttributes<HTMLI
   }, [value, format]);
 
   return <>
-    <div className="btn-group mr-2">
+    <div className="btn-group me-2">
       {
         steps.map(step => <Button<string>
           className="btn"
