@@ -86,7 +86,7 @@ const NavBar: FunctionComponent<PropsFromStore & BridgeApi & Pick<GlobalState, '
     return (<nav className="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
         <div ref={ref} className="container-fluid">
             <Link onClick={() => setnavbarIsVisible(false)} className="navbar-brand" to="/">Zigbee2MQTT</Link>
-            <button onClick={() => { console.log('click'); setnavbarIsVisible(!navbarIsVisible) }} className="navbar-toggler" type="button">
+            <button onClick={() => { setnavbarIsVisible(!navbarIsVisible) }} className="navbar-toggler" type="button">
                 <span className="navbar-toggler-icon" />
             </button>
             <div className={cx("navbar-collapse collapse", { show: navbarIsVisible })}>
