@@ -5,8 +5,8 @@ import { BaseFeatureProps } from "../base";
 import Composite from "../composite/composite";
 
 const stepsConfiguration = {
-  position: [0, 25, 50, 75, 100].map<ValueWithLabelOrPrimitive>(item => ({ value: item, title: item + '' })),
-  tilt: [0, 25, 50, 75, 100].map<ValueWithLabelOrPrimitive>(item => ({ value: item, title: item + '' }))
+  position: [0, 25, 50, 75, 100].map<ValueWithLabelOrPrimitive>(item => ({ value: item, name: item + '' })),
+  tilt: [0, 25, 50, 75, 100].map<ValueWithLabelOrPrimitive>(item => ({ value: item, name: item + '' }))
 };
 
 type CoverProps = BaseFeatureProps<CoverFeature>

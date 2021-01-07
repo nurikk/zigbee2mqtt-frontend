@@ -133,10 +133,16 @@ export interface CompositeFeature extends Omit<GenericExposedFeature, "type"> {
 
 export type GenericOrCompositeFeature = GenericExposedFeature | CompositeFeature;
 
+export interface NumericFeaturePreset {
+    name: string;
+    value: number;
+    description?: string;
+}
 export interface NumericFeature extends GenericExposedFeature {
     type: "numeric";
     value_min?: number;
     value_max?: number;
+    presets?: NumericFeaturePreset[];
 }
 
 export interface TextualFeature extends GenericExposedFeature {

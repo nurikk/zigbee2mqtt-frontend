@@ -5,7 +5,8 @@ type Primitive = number | string;
 
 export type ValueWithLabelOrPrimitive = {
   value: number;
-  title: string;
+  name: string;
+  description?: string;
 } | Primitive;
 
 type EnumProps = {
@@ -26,9 +27,10 @@ const EnumEditor: FunctionComponent<EnumProps> = (props) => {
       values.map(v => <Button<ValueWithLabelOrPrimitive>
         className={cx("btn btn-outline-secondary", { active: isPrimitive(v) ? v === value : v.value == (isPrimitive(value) ? value : value?.value) })}
         onClick={item => onChange(item)}
-        key={isPrimitive(v) ? v : v.title}
+        key={isPrimitive(v) ? v : v.name}
         item={isPrimitive(v) ? v : v.value}
-      >{isPrimitive(v) ? v : v.title}</Button>)
+        title={isPrimitive(v) ? v as string : v.description}
+      >{isPrimitive(v) ? v : v.name}</Button>)
     }
   </div>;
 }
