@@ -1,3 +1,12 @@
+## [0.3.2](https://github.com/nurikk/z2m-frontend/compare/0.3.1...0.3.2) (2021-01-07)
+
+
+### Features
+
+* **exposes:** add support for numeric.presets ([ceea38a](https://github.com/nurikk/z2m-frontend/commit/ceea38a7711828c88b192843003a815b7462c24f))
+
+
+
 ## [0.3.1](https://github.com/nurikk/z2m-frontend/compare/0.3.0...0.3.1) (2021-01-02)
 
 
