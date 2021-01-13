@@ -131,9 +131,9 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
         return <><div className="mt-2">
             {
                 !isEmpty(bridgeInfo) && settings.map(setting => (
-                    <div key={setting.key} className="row">
-                        <div className="col">
-                            <label htmlFor={setting.key}>{setting.title}</label>
+                    <div key={setting.key} className="row border-bottom pt-1">
+                        <div className="col mb-3">
+                            <label htmlFor={setting.key} className="form-label">{setting.title}</label>
                             <UniversalEditor
                                 disabled={get(bridgeInfo, setting.path) === undefined}
                                 value={get(bridgeInfo, setting.path) as string | ReadonlyArray<string> | number}

@@ -64,3 +64,7 @@
 {"payload":{"battery":100,"contact":false,"last_seen":"2021-01-08T06:12:46+08:00","voltage":3015},"topic":"Bedroom room ac power"}
 {"payload":{"battery":34,"last_seen":"2021-01-07T20:19:35+08:00","update":{"state":"idle"},"update_available":false},"topic":"0xbc33acfffe17628b"}
 {"payload":{"co2":403,"humidity":59.34,"last_seen":"2021-01-08T07:02:07+08:00","linkquality":115,"pressure":1005,"temperature":31.77},"topic":"Airsense/FD11"}
+{"payload":{"level":"info","message":"MQTT publish: topic 'zigbee2mqtt/Master Bedroom Dimmer', payload '{\"brightness\":254,\"current\":0.18,\"energy\":48.82,\"linkquality\":48,\"power\":25.5,\"state\":\"OFF\",\"voltage\":171.9}'"},"topic":"bridge/logging"}
+{"payload":{"level":"warning","message":"MQTT publish: topic 'zigbee2mqtt/Master Bedroom Dimmer', payload '{\"brightness\":254,\"current\":0.18,\"energy\":48.82,\"linkquality\":48,\"power\":25.5,\"state\":\"OFF\",\"voltage\":171.9}'"},"topic":"bridge/logging"}
+{"payload":{"level":"error","message":"MQTT publish: topic 'zigbee2mqtt/Master Bedroom Dimmer', payload '{\"brightness\":254,\"current\":0.18,\"energy\":48.82,\"linkquality\":48,\"power\":25.5,\"state\":\"OFF\",\"voltage\":171.9}'"},"topic":"bridge/logging"}
+{"payload":{"level":"something","message":"some message"},"topic":"bridge/logging"}
