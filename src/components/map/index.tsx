@@ -97,8 +97,10 @@ const ticked = ({ transform, node, link, linkLabel, links }: TickedParams): void
     const imgXShift = 32 / 2;
     const imgYShift = 32 / 2;
     const computeTransform = (d: NodeI) => {
-        const [X, Y] = transform.apply([d.x, d.y]);
-        return `translate(${X - imgXShift}, ${Y - imgYShift})`;
+        if (d) {
+            const [X, Y] = transform.apply([d.x, d.y]);
+            return `translate(${X - imgXShift}, ${Y - imgYShift})`;
+        }
     }
     node.attr("transform", computeTransform);
 };
