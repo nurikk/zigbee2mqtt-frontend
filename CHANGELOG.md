@@ -1,3 +1,12 @@
+## [0.3.4](https://github.com/nurikk/z2m-frontend/compare/0.3.3...0.3.4) (2021-01-13)
+
+
+### Bug Fixes
+
+* **map:** fix detached node attributes calculation ([8975ddc](https://github.com/nurikk/z2m-frontend/commit/8975ddc8c31e76a8a77ac656bd64e5b1fd20cab3))
+
+
+
 ## [0.3.3](https://github.com/nurikk/z2m-frontend/compare/0.3.2...0.3.3) (2021-01-13)
 
 
