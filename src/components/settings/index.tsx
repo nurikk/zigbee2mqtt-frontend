@@ -132,7 +132,7 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
             {
                 !isEmpty(bridgeInfo) && settings.map(setting => (
                     <div key={setting.key} className="row">
-                        <div className="col">
+                        <div className="col mb-3">
                             <label htmlFor={setting.key}>{setting.title}</label>
                             <UniversalEditor
                                 disabled={get(bridgeInfo, setting.path) === undefined}

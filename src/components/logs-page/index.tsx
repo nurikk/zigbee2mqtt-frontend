@@ -59,12 +59,12 @@ export class LogsPage extends Component<GlobalState, LogsPageState> {
             {this.renderSearch()}
             {
                 logs.map((l, idx) => <div key={idx}>
-                    <span className={cx({
-                        'text-danger': l.level === 'error',
-                        'text-warning': l.level === 'warning',
-                        'text-info': l.level === 'info',
-                        'd-none': logLevel !== ALL
-                    })}>{l.level.toUpperCase()}:&nbsp;</span><code>
+                    {logLevel === ALL && <><span className={cx("badge", {
+                        'bg-danger': l.level === 'error',
+                        'bg-warning': l.level === 'warning',
+                        'bg-info': l.level === 'info',
+                        'bg-secondary': ['error', 'warning', 'info'].includes(l.level) === false,
+                    }, "text-capitalize")}>{l.level}</span>&nbsp;</>}<code>
                         <Highlighted text={l.message} highlight={search}></Highlighted>
                     </code></div>)
             }</div>
