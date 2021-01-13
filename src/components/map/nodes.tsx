@@ -1,5 +1,5 @@
 import React, { Component, createRef, RefObject } from "react";
-import { LinkI, NodeI, Source, Target } from "./types";
+import { LinkI, NodeI } from "./types";
 import cx from "classnames";
 import style from "./map.css";
 import { MouseEventsResponderNode } from ".";
@@ -32,7 +32,7 @@ const calcStarPoints = (
 };
 
 
-const getStarShape = (innerCircleArms: number, styleStarWidth: number, innerOuterRadiusRatio: number): string => {
+export const getStarShape = (innerCircleArms: number, styleStarWidth: number, innerOuterRadiusRatio: number): string => {
     return calcStarPoints(
         15,
         15,

@@ -1,7 +1,6 @@
 import React, { ChangeEvent, Component, createRef, Fragment } from "react";
 import Links from "./links";
-import Nodes from "./nodes";
-import style from "./map.css";
+import Nodes, { getStarShape } from "./nodes";
 import { GraphI, LinkI, NodeI, Source, Target, ZigbeeRelationship } from "./types";
 import { connect } from "unistore/react";
 import { GlobalState } from "../../store";
@@ -15,6 +14,8 @@ import { zoom, zoomIdentity, ZoomTransform } from "d3-zoom";
 import { linkTypes } from "./consts";
 import Spinner from "../spinner";
 import intersection from "lodash/intersection";
+import style from "./map.css";
+import cx from "classnames";
 export interface MouseEventsResponderNode {
     onMouseOver?: (arg0: NodeI, el: SVGPolygonElement | SVGCircleElement | SVGImageElement) => void;
     onMouseOut?: (arg0: NodeI, el: SVGPolygonElement | SVGCircleElement | SVGImageElement) => void;
@@ -26,6 +27,7 @@ interface MapState {
     width: number;
     height: number;
     visibleLinks: ZigbeeRelationship[];
+    legendIsVisible: boolean;
 }
 const angle = (s: Source, t: Target) => Math.atan2(t.y - s.y, t.x - s.x);
 const xpos = (offset: number, s: Source, t: Target) => offset * Math.cos(angle(s, t)) + s.x;
@@ -134,7 +136,8 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
         selectedNode: null,
         width: 0,
         height: 0,
-        visibleLinks: parentOrChild
+        visibleLinks: parentOrChild,
+        legendIsVisible: true,
     };
     transform: ZoomTransform = zoomIdentity;
 
@@ -268,9 +271,23 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
     }
     render() {
         const { networkGraph } = this.props;
+        const { legendIsVisible } = this.state;
         return (
             <div className={style.container} ref={this.ref}>
                 {networkGraph.nodes.length ? <Fragment>{this.renderMapControls()} {this.renderMap()}</Fragment> : this.renderMessage()}
+                <div className={cx("fixed-bottom", { "d-none": !legendIsVisible })} onClick={() => this.setState({ legendIsVisible: false })}>
+                    <div className={cx(style.node, style.Coordinator)}>
+                        <svg width="28" height="28" viewBox="0 0 28 28">
+                            <polygon points={getStarShape(5, 5, 14) as string} />
+                        </svg> is Coordinator</div>
+                    <div className={cx(style.node, style.EndDevice)}>Green means End Device</div>
+                    <div className={cx(style.node, style.Router)}>Blue means Router</div>
+
+                    <div>Solid lines are the link to the <span className={cx(style.node, style.Coordinator)}>Coordinator</span></div>
+                    <div>Dashed lines are the link with <span className={cx(style.node, style.Coordinator)}>Router</span></div>
+                    <div>Link quality is between 0 - 255, values with / represents multiple types of links</div>
+                    <div>Click on me to hide</div>
+                </div>
             </div>
         );
     }

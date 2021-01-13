@@ -38,6 +38,7 @@
 
 .EndDevice {
     fill: green;
+    color: green;
 }
 .Coordinator {
     stroke: #fff;
@@ -50,6 +51,7 @@
 .Router,
 .Coordinator {
     fill: blue;
+    color: blue;
 }
 
 .BrokenLink {
