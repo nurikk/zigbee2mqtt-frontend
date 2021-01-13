@@ -1,3 +1,13 @@
+## [0.3.3](https://github.com/nurikk/z2m-frontend/compare/0.3.2...0.3.3) (2021-01-13)
+
+
+### Features
+
+* **logs-page:** add log level config switch ([0a6bf21](https://github.com/nurikk/z2m-frontend/commit/0a6bf21c0c8de124e9dd5ad6a5fb881b50419ce3))
+* **map:** add map legend ([f8341bc](https://github.com/nurikk/z2m-frontend/commit/f8341bca373c68bb325fa32d77f6566bc4ec5a29))
+
+
+
 ## [0.3.2](https://github.com/nurikk/z2m-frontend/compare/0.3.1...0.3.2) (2021-01-07)
 
 
