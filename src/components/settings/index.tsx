@@ -8,7 +8,13 @@ import isEmpty from "lodash/isEmpty";
 import { NavLink, Redirect, RouteComponentProps, withRouter } from "react-router-dom";
 import Button from "../button";
 
-
+export const logLevelSetting = {
+    key: 'log_level',
+    path: 'log_level',
+    title: 'Log level',
+    description: 'Logging level',
+    values: ['debug', 'info', 'warn', 'error']
+};
 const settings = [
     {
         key: 'last_seen',
@@ -23,13 +29,7 @@ const settings = [
         title: 'Elapsed',
         description: 'Add an elapsed attribute to MQTT messages, contains milliseconds since the previous msg'
     },
-    {
-        key: 'log_level',
-        path: 'log_level',
-        title: 'Log level',
-        description: 'Logging level',
-        values: ['debug', 'info', 'warn', 'error']
-    },
+    {...logLevelSetting},
     {
         key: 'homeassistant',
         path: 'config.homeassistant',
