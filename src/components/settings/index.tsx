@@ -100,7 +100,7 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
             <>commit: <a target="_blank" rel="noopener noreferrer" href={`https://github.com/Koenkk/zigbee2mqtt/commit/${bridgeInfo.commit}`}>{bridgeInfo.commit}</a></> :
             null;
         const v = FRONTEND_VERSION;
-        return <>
+        return <div className="mt-2">
             <dl className="row">
                 <dt className="col-sm-3">zigbee2mqtt version</dt>
                 <dd className="col-sm-9">{zigbee2mqttVersion} {zigbee2mqttCommit}</dd>
@@ -119,7 +119,7 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
                 <dt className="col-sm-3">frontend version</dt>
                 <dd className="col-sm-9">{v}</dd>
             </dl>
-        </>
+        </div>
     }
     renderBridgeInfo() {
         const { bridgeInfo } = this.props;
