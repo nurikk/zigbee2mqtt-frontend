@@ -1,3 +1,12 @@
+## [0.3.9](https://github.com/nurikk/z2m-frontend/compare/0.3.8...0.3.9) (2021-01-15)
+
+
+### Bug Fixes
+
+* **settings:** fix initial state ([2f92a31](https://github.com/nurikk/z2m-frontend/commit/2f92a31848449ad2de2ca9f61f65d346067e94c4))
+
+
+
 ## [0.3.8](https://github.com/nurikk/z2m-frontend/compare/0.3.7...0.3.8) (2021-01-15)
 
 
