@@ -7,6 +7,7 @@ import UniversalEditor from "../universal-editor";
 import isEmpty from "lodash/isEmpty";
 import { NavLink, Redirect, RouteComponentProps, withRouter } from "react-router-dom";
 import Button from "../button";
+import Form from '@rjsf/bootstrap-4';
 
 export const logLevelSetting = {
     key: 'log_level',
@@ -37,7 +38,7 @@ const settings = [
         description: 'Home Assistant integration (MQTT discovery)'
     }
 ]
-type SettingsTab = "settings" | "bridge" | "about";
+type SettingsTab = "settings" | "bridge" | "about" | "experimental-settings";
 
 type UrlParams = {
     tab?: SettingsTab;
@@ -46,6 +47,7 @@ type SettingsPageProps = RouteComponentProps<UrlParams>;
 
 declare const FRONTEND_VERSION: string; //injected by webpack.DefinePlugin
 
+const log = (type) => console.log.bind(console, type);
 export class SettingsPage extends Component<SettingsPageProps & BridgeApi & GlobalState & UtilsApi, {}> {
     updateConfig = (name: string, value: unknown): void => {
         const { updateConfigValue } = this.props;
@@ -64,6 +66,9 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
                     </li>
                     <li className="nav-item">
                         <NavLink className="nav-link" activeClassName="active" to={`/settings/about`}>About</NavLink>
+                    </li>
+                    <li className="nav-item">
+                        <NavLink className="nav-link" activeClassName="active" to={`/settings/experimental-settings`}>Experimental Settings</NavLink>
                     </li>
                 </ul>
                 <div className="tab-content">
@@ -86,6 +91,8 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
                 return this.renderBridgeInfo();
             case "about":
                 return this.renderAbout();
+            case "experimental-settings":
+                return this.renderExperimentalSettings();
             default:
                 return <Redirect to={`/settings/settings`} />;
         }
@@ -148,6 +155,15 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
         </div>
             <Button<void> className="mt-2 btn btn-primary" onClick={exportState}>Download state</Button>
         </>
+    }
+
+    renderExperimentalSettings() {
+        const { bridgeInfo: { configSchema, config } } = this.props;
+        return <Form schema={configSchema}
+        formData={config}
+        onChange={log("changed")}
+        onSubmit={log("submitted")}
+        onError={log("errors")} />;
     }
 }
 const SettingsPageWithRouter = withRouter(SettingsPage);

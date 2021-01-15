@@ -1,3 +1,5 @@
+import { JSONSchema7 } from "json-schema";
+
 export type DeviceType = "EndDevice" | "Router" | "Coordinator";
 
 
@@ -64,12 +66,19 @@ export interface Network {
     pan_id: number;
     extended_pan_id: number[];
 }
+
+export interface DeviceConfig {
+
+}
 export interface Z2MConfig {
     homeassistant: boolean;
     advanced: {
         elapsed: boolean;
         last_seen: 'disable' | 'ISO_8601' | 'ISO_8601_local' | 'epoch';
         legacy_api: boolean;
+    };
+    devices: {
+        [key: string]: DeviceConfig;
     };
     [k: string]: unknown;
 }
@@ -85,6 +94,7 @@ export interface BridgeConfig {
 
 export interface BridgeInfo {
     config?: Z2MConfig;
+    configSchema: JSONSchema7;
     permit_join: boolean;
     commit?: string;
     version?: string;

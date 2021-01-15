@@ -29,6 +29,8 @@ export interface DeviceApi {
     ): Promise<void>;
     removeDevice(dev: string, force: boolean, block: boolean): Promise<void>;
     configureDevice(name: string): Promise<void>;
+
+    setDeviceOption(dev: string, name: string, value: unknown): Promise<void>;
 }
 
 export interface StateApi {
@@ -145,7 +147,7 @@ const actions = (store: Store<GlobalState>): object => ({
     },
 
     removeGroup: (state, group: string): Promise<void> => {
-        return api.send("bridge/request/group/remove", {id: group});
+        return api.send("bridge/request/group/remove", { id: group });
     },
 
     addDeviceToGroup: (state, device: string, group: string): Promise<void> => {
@@ -165,7 +167,7 @@ const actions = (store: Store<GlobalState>): object => ({
 
     touchlinkScan(): Promise<void> {
         store.setState({ touchlinkScanInProgress: true, touchlinkDevices: [] });
-        return api.send("bridge/request/touchlink/scan", {value: true});
+        return api.send("bridge/request/touchlink/scan", { value: true });
     },
     touchlinkIdentify(state, device: TouchLinkDevice): Promise<void> {
         store.setState({ touchlinkIdentifyInProgress: true });
@@ -184,7 +186,7 @@ const actions = (store: Store<GlobalState>): object => ({
         return api.send("bridge/request/device/ota_update/update", { id: deviceName });
     },
     updateConfigValue(state, name: string, value: unknown): Promise<void> {
-        return api.send(`bridge/request/config/${name}`, {value});
+        return api.send(`bridge/request/config/${name}`, { value });
     },
     exportState(state): Promise<void> {
         download(state, 'state.json');
@@ -194,6 +196,14 @@ const actions = (store: Store<GlobalState>): object => ({
         return api.send('bridge/request/device/configure_reporting', {
             id: device,
             ...config
+        });
+    },
+    setDeviceOption(state, id: string, name: string, value: unknown): Promise<void> {
+        return api.send('bridge/request/device/options', {
+            id,
+            options: {
+                [name]: value
+            }
         });
     }
 });
