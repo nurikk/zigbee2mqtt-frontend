@@ -11,7 +11,11 @@
   },
   "networkGraphIsLoading": false,
   "groups": [],
-  "bridgeConfig": {},
-  "bridgeInfo": {},
+  "bridgeConfig": {
+  },
+  "bridgeInfo": {
+    "configSchema": {},
+    "config": {}
+  },
   "logs": []
 }
