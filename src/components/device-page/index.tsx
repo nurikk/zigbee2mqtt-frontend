@@ -9,6 +9,7 @@ import Reporting from "./reporting";
 import States from "./states";
 import ConnectedDeviceExposes from "./exposes";
 import Clusters from "./clusters";
+import DeviceSettings from "./settings";
 import styles from "./style.css";
 
 type UrlParams = {
@@ -18,7 +19,7 @@ type UrlParams = {
 type DevicePageProps = RouteComponentProps<UrlParams>;
 
 
-type TabName = "info" | "bind" | "state" | "exposes" | "clusters" | "reporting";
+type TabName = "info" | "bind" | "state" | "exposes" | "clusters" | "reporting" | "settings";
 // eslint-disable-next-line react/prefer-stateless-function
 export class DevicePage extends Component<DevicePageProps & GlobalState, {}> {
     renderContent() {
@@ -39,6 +40,8 @@ export class DevicePage extends Component<DevicePageProps & GlobalState, {}> {
                 return <Clusters device={device} />
             case "reporting":
                 return <Reporting device={device} />
+            case "settings":
+                return <DeviceSettings device={device} />
             default:
                 return <Redirect to={`/device/${dev}/info`} />;
         }
@@ -72,6 +75,10 @@ export class DevicePage extends Component<DevicePageProps & GlobalState, {}> {
             {
                 title: 'State',
                 url: `/device/${dev}/state`
+            },
+            {
+                title: 'Settings',
+                url: `/device/${dev}/settings`
             },
             {
                 title: 'Clusters',
