@@ -1,3 +1,12 @@
+## [0.3.8](https://github.com/nurikk/z2m-frontend/compare/0.3.7...0.3.8) (2021-01-15)
+
+
+### Bug Fixes
+
+* **settings:** fix initial schema ([cb32358](https://github.com/nurikk/z2m-frontend/commit/cb32358705eaf48fef2cfa224f8d5c876ead7999))
+
+
+
 ## [0.3.7](https://github.com/nurikk/z2m-frontend/compare/0.3.6...0.3.7) (2021-01-15)
 
 
