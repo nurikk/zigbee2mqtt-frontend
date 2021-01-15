@@ -159,6 +159,12 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
 
     renderExperimentalSettings() {
         const { bridgeInfo: { configSchema, config } } = this.props;
+        const schema = { ...configSchema };
+        const ingoredFields = ['groups', 'devices'];
+        ingoredFields.forEach(field => {
+            schema.required = schema.required.filter(item => item !== field);
+            delete schema.properties[field];
+        });
         return <Form schema={configSchema}
         formData={config}
         onChange={log("changed")}

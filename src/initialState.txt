@@ -14,7 +14,10 @@
   "bridgeConfig": {
   },
   "bridgeInfo": {
-    "configSchema": {},
+    "configSchema": {
+      "properties": {},
+      "required": []
+    },
     "config": {}
   },
   "logs": []
