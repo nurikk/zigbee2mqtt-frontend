@@ -1,3 +1,12 @@
+## [0.3.5](https://github.com/nurikk/z2m-frontend/compare/0.3.4...0.3.5) (2021-01-15)
+
+
+### Features
+
+* **settings:** json schema based settings editor PoC ([06114e0](https://github.com/nurikk/z2m-frontend/commit/06114e074591153c1c76b494a429d4a17132c832))
+
+
+
 ## [0.3.4](https://github.com/nurikk/z2m-frontend/compare/0.3.3...0.3.4) (2021-01-13)
 
 
