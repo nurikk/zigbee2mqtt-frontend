@@ -183,10 +183,10 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
         const { bridgeInfo: { config_schema: configSchema, config } } = this.props;
         const copyConfig = cloneDeep(config);
         const schema = cloneDeep(configSchema);
-        if (!schema || !schema.required || schema.required.length === 0) {
+        if (!schema || !schema.properties || Object.keys(schema.properties).length === 0) {
             return <div>loading...</div>;
         }
-        
+
         ingoredFields.forEach(field => {
             schema.required = schema.required.filter(item => item !== field);
             delete schema.properties[field];
