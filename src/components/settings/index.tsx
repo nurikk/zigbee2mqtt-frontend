@@ -8,7 +8,9 @@ import isEmpty from "lodash/isEmpty";
 import { NavLink, Redirect, RouteComponentProps, withRouter } from "react-router-dom";
 import Button from "../button";
 import Form from '@rjsf/bootstrap-4';
-
+import cx from "classnames";
+import { JSONSchema7 } from "json-schema";
+import cloneDeep from "lodash/cloneDeep";
 export const logLevelSetting = {
     key: 'log_level',
     path: 'log_level',
@@ -30,7 +32,7 @@ const settings = [
         title: 'Elapsed',
         description: 'Add an elapsed attribute to MQTT messages, contains milliseconds since the previous msg'
     },
-    {...logLevelSetting},
+    { ...logLevelSetting },
     {
         key: 'homeassistant',
         path: 'config.homeassistant',
@@ -40,6 +42,7 @@ const settings = [
 ]
 type SettingsTab = "settings" | "bridge" | "about" | "experimental-settings";
 
+type SettigsKeys = string;
 type UrlParams = {
     tab?: SettingsTab;
 };
@@ -47,8 +50,18 @@ type SettingsPageProps = RouteComponentProps<UrlParams>;
 
 declare const FRONTEND_VERSION: string; //injected by webpack.DefinePlugin
 
-const log = (type) => console.log.bind(console, type);
-export class SettingsPage extends Component<SettingsPageProps & BridgeApi & GlobalState & UtilsApi, {}> {
+type SettingsPageState = {
+    keyName: SettigsKeys;
+}
+
+const ROOT_KEY_NAME = 'main';
+
+
+const ingoredFields = ['groups', 'devices', 'device_options'];
+export class SettingsPage extends Component<SettingsPageProps & BridgeApi & GlobalState & UtilsApi, SettingsPageState> {
+    state = {
+        keyName: 'mqtt'
+    }
     updateConfig = (name: string, value: unknown): void => {
         const { updateConfigValue } = this.props;
         updateConfigValue(name, value);
@@ -156,20 +169,68 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
             <Button<void> className="mt-2 btn btn-primary" onClick={exportState}>Download state</Button>
         </>
     }
-
+    onSettingsSave = ({ formData }) => {
+        const { updateBridgeConfig } = this.props;
+        const { keyName } = this.state;
+        if (keyName === ROOT_KEY_NAME) {
+            updateBridgeConfig(formData);
+        } else {
+            updateBridgeConfig({ [keyName]: formData });
+        }
+    }
     renderExperimentalSettings() {
-        const { bridgeInfo: { configSchema, config } } = this.props;
-        const schema = { ...configSchema };
-        const ingoredFields = ['groups', 'devices'];
+        const { keyName } = this.state;
+        const { bridgeInfo: { config_schema: configSchema, config } } = this.props;
+        const copyConfig = cloneDeep(config);
+        const schema = cloneDeep(configSchema);
+        if (!schema || !schema.required || schema.required.length === 0) {
+            return <div>loading...</div>;
+        }
+        
         ingoredFields.forEach(field => {
             schema.required = schema.required.filter(item => item !== field);
             delete schema.properties[field];
+            delete copyConfig[field];
         });
-        return <Form schema={configSchema}
-        formData={config}
-        onChange={log("changed")}
-        onSubmit={log("submitted")}
-        onError={log("errors")} />;
+
+        let currentSchema;
+        let currentConfig = copyConfig[keyName] as object;
+        const tabs = [];
+        const validJsonSchemasAsTabs = ['object', 'array']
+        Object.entries(configSchema.properties).forEach(([key, value]) => {
+            const typedValue = value as { type: string; title?: string };
+            if (validJsonSchemasAsTabs.includes(typedValue.type) && !ingoredFields.includes(key)) {
+                tabs.push({
+                    name: key,
+                    title: typedValue.title ?? key
+                })
+            }
+        })
+
+        if (keyName === ROOT_KEY_NAME) {
+            tabs.forEach(tab => {
+                schema.required = schema.required.filter(item => item !== tab.name);
+                delete schema.properties[tab.name];
+                delete copyConfig[tab.name];
+            });
+            currentSchema = schema;
+            currentConfig = copyConfig;
+        } else {
+            currentConfig = copyConfig[keyName] as object;
+            currentSchema = schema.properties[keyName] as JSONSchema7;
+        }
+    
+        return <>
+            <ul className="nav nav-pills nav-fill">
+                {tabs.map(tab => <li key={tab.name} className="nav-item">
+                    <a className={cx("nav-link", { active: keyName === tab.name })} aria-current="page" href="#" onClick={(e) => { this.setState({ keyName: tab.name }); e.preventDefault() }}>{tab.title}</a>
+                </li>)}
+            </ul>
+            <Form schema={currentSchema}
+                formData={currentConfig}
+                onSubmit={this.onSettingsSave}
+            />
+        </>
     }
 }
 const SettingsPageWithRouter = withRouter(SettingsPage);
