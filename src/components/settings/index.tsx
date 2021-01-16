@@ -57,7 +57,7 @@ type SettingsPageState = {
 const ROOT_KEY_NAME = 'main';
 
 
-const ingoredFields = ['groups', 'devices', 'device_options'];
+const ingoredFields = ['groups', 'devices', 'device_options', 'ban', 'whitelist'];
 export class SettingsPage extends Component<SettingsPageProps & BridgeApi & GlobalState & UtilsApi, SettingsPageState> {
     state = {
         keyName: 'mqtt'
@@ -198,8 +198,8 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
         const tabs = [];
         const validJsonSchemasAsTabs = ['object', 'array']
         Object.entries(configSchema.properties).forEach(([key, value]) => {
-            const typedValue = value as { type: string; title?: string };
-            if (validJsonSchemasAsTabs.includes(typedValue.type) && !ingoredFields.includes(key)) {
+            const typedValue = value as { type: string; title?: string; oneOf?: unknown[] };
+            if ((validJsonSchemasAsTabs.includes(typedValue.type) && !ingoredFields.includes(key)) || typedValue?.oneOf?.length > 0) {
                 tabs.push({
                     name: key,
                     title: typedValue.title ?? key
@@ -226,7 +226,7 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
                     <a className={cx("nav-link", { active: keyName === tab.name })} aria-current="page" href="#" onClick={(e) => { this.setState({ keyName: tab.name }); e.preventDefault() }}>{tab.title}</a>
                 </li>)}
             </ul>
-            <Form schema={currentSchema}
+            <Form key={keyName} schema={currentSchema}
                 formData={currentConfig}
                 onSubmit={this.onSettingsSave}
             />
