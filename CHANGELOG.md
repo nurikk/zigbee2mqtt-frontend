@@ -1,3 +1,12 @@
+## [0.3.12](https://github.com/nurikk/z2m-frontend/compare/0.3.11...0.3.12) (2021-01-16)
+
+
+### Features
+
+* **settings:** add oneOf support ([6bffa56](https://github.com/nurikk/z2m-frontend/commit/6bffa5637e65494cd83bdd47196657c739510d2b))
+
+
+
 ## [0.3.11](https://github.com/nurikk/z2m-frontend/compare/0.3.10...0.3.11) (2021-01-16)
 
 
