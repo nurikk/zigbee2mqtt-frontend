@@ -1,3 +1,12 @@
+## [0.3.10](https://github.com/nurikk/z2m-frontend/compare/0.3.9...0.3.10) (2021-01-16)
+
+
+### Features
+
+* **settings:** split settings to tabs ([863e762](https://github.com/nurikk/z2m-frontend/commit/863e762aec031ce6ce0f4d98af2b4e3f4ac5ce76))
+
+
+
 ## [0.3.9](https://github.com/nurikk/z2m-frontend/compare/0.3.8...0.3.9) (2021-01-15)
 
 
