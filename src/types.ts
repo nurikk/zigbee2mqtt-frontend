@@ -68,7 +68,7 @@ export interface Network {
 }
 
 export interface DeviceConfig {
-
+    [k: string]: object | string | number | boolean;
 }
 export interface Z2MConfig {
     homeassistant: boolean;
@@ -80,7 +80,7 @@ export interface Z2MConfig {
     devices: {
         [key: string]: DeviceConfig;
     };
-    [k: string]: unknown;
+    [k: string]: object | string | number | boolean;
 }
 export interface BridgeConfig {
     version: string;
@@ -94,7 +94,7 @@ export interface BridgeConfig {
 
 export interface BridgeInfo {
     config?: Z2MConfig;
-    configSchema: JSONSchema7;
+    config_schema: JSONSchema7;
     permit_join: boolean;
     commit?: string;
     version?: string;

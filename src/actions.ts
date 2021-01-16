@@ -53,6 +53,7 @@ export interface BindApi {
 export interface BridgeApi {
     setPermitJoin(permit: boolean, device: Device): Promise<void>;
     updateConfigValue(name: string, value: unknown): Promise<void>;
+    updateBridgeConfig(config: object): Promise<void>;
 }
 export interface MapApi {
     networkMapRequest(): Promise<void>;
@@ -188,6 +189,10 @@ const actions = (store: Store<GlobalState>): object => ({
     updateConfigValue(state, name: string, value: unknown): Promise<void> {
         return api.send(`bridge/request/config/${name}`, { value });
     },
+    updateBridgeConfig(state, config: object): Promise<void> {
+        return api.send('bridge/request/options', config);
+    },
+    
     exportState(state): Promise<void> {
         download(state, 'state.json');
         return Promise.resolve();
