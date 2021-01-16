@@ -1,3 +1,12 @@
+## [0.3.11](https://github.com/nurikk/z2m-frontend/compare/0.3.10...0.3.11) (2021-01-16)
+
+
+### Bug Fixes
+
+* **settings:** fix schema loading check ([af594a8](https://github.com/nurikk/z2m-frontend/commit/af594a866daec830408bb0a782883fee5f2b30d2))
+
+
+
 ## [0.3.10](https://github.com/nurikk/z2m-frontend/compare/0.3.9...0.3.10) (2021-01-16)
 
 
