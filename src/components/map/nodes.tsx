@@ -112,6 +112,7 @@ class Node extends Component<NodeProps, {}> {
 }
 
 interface NodesProps extends MouseEventsResponderNode {
+    root: SVGSVGElement;
     nodes: NodeI[];
     simulation: Simulation<NodeI, LinkI>;
 }
@@ -125,18 +126,19 @@ export default class Nodes extends Component<NodesProps, NodesState> {
         toggle: false
     }
     updateDrag(): void {
-        const { simulation } = this.props;
+        const { simulation, root } = this.props;
         const dragForce = drag<SVGCircleElement, NodeI>()
             .on("start", (event, d) => {
                 if (!event.active) {
                     simulation.alphaTarget(0.3).restart();
                 }
+
                 d.fx = d.x;
                 d.fy = d.y;
             })
-            .on("drag", (event, d) => {
-                d.fx = event.x;
-                d.fy = event.y;
+            .on("drag", ({ x, y }, d) => {
+                d.fx = x;
+                d.fy = y;
             })
             .on("end", (event, d) => {
                 if (!event.active) {
@@ -145,9 +147,7 @@ export default class Nodes extends Component<NodesProps, NodesState> {
                 d.fx = undefined;
                 d.fy = undefined;
             });
-
-
-        selectAll<SVGCircleElement, NodeI>(`.${style.node}`)
+        select(root).selectAll<SVGCircleElement, NodeI>(`.${style.node}`)
             .call(dragForce);
     }
 
@@ -159,7 +159,7 @@ export default class Nodes extends Component<NodesProps, NodesState> {
         this.updateDrag();
     }
 
-   
+
 
     render() {
         const { nodes, onMouseOut, onMouseOver } = this.props;

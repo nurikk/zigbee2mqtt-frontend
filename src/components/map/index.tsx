@@ -70,8 +70,8 @@ const computeLink = (d: LinkI, transform: ZoomTransform): string => {
     return `M ${x1} ${y1} L ${x2} ${y2}`;
 }
 
-type SelNode = Selection<SVGElement, NodeI, HTMLElement, unknown>;
-type SelLink = Selection<SVGElement, LinkI, HTMLElement, unknown>;
+type SelNode = Selection<SVGElement, NodeI, SVGElement, {}>;
+type SelLink = Selection<SVGElement, LinkI, SVGElement, {}>;
 
 type TickedParams = {
     transform: ZoomTransform;
@@ -149,10 +149,10 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
             return;
         }
         const { visibleLinks, selectedNode, width, height } = this.state;
-
-        const node = selectAll<SVGElement, NodeI>(`.${style.node}`);
-        const link = selectAll<SVGElement, LinkI>(`.${style.link}`);
-        const linkLabel = selectAll<SVGElement, LinkI>(`.${style.linkLabel}`);
+        const container = select<SVGElement, {}>(this.svgRef.current);
+        const node = container.selectAll<SVGElement, NodeI>(`.${style.node}`);
+        const link = container.selectAll<SVGElement, LinkI>(`.${style.link}`);
+        const linkLabel = container.selectAll<SVGElement, LinkI>(`.${style.linkLabel}`);
 
         const links = networkGraph.links.filter(l => intersection(visibleLinks, l.relationships).length);
         this.simulation.nodes(networkGraph.nodes.concat(links as unknown as NodeI[]));
@@ -161,14 +161,14 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
 
 
         //add zoom capabilities
-        const everything = select<SVGGeometryElement, NodeI>('.everything');
+        const everything = container.selectAll<SVGGeometryElement, NodeI>('.everything');
         const zoomHandler = zoom()
             .extent([[0, 0], [width, height]])
             .scaleExtent([1 / 10, 8])
             .on("zoom", ({ transform }) => {
                 everything.attr("transform", transform);
             });
-        zoomHandler(select(this.svgRef.current));
+        zoomHandler(container);
 
         processHighlights({ networkGraph, links, selectedNode, node, link, linkLabel });
         node.on("click", (event, d: NodeI) => {
@@ -213,6 +213,7 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
                 <g className="everything">
                     <Links links={links} />
                     <Nodes
+                        root={this.svgRef.current}
                         nodes={networkGraph.nodes}
                         simulation={this.simulation}
                     />
