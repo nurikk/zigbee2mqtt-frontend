@@ -12,6 +12,9 @@ type DeviceSettingsProps = {
 interface PropsFromStore {
     deviceStates: Map<string, DeviceState>;
 }
+const uiSchema = {
+    "ui:order": ["friendly_name", "retain", "retention", "qos", "filtered_attributes", "*"]
+};
 export class DeviceSettings extends Component<DeviceSettingsProps & GlobalState & PropsFromStore & DeviceApi, {}> {
     updateConfig = ({ formData }): void => {
         const { setDeviceOptions, device } = this.props;
@@ -29,6 +32,7 @@ export class DeviceSettings extends Component<DeviceSettingsProps & GlobalState 
         return <Form schema={configSchema.definitions.device as JSONSchema7}
             formData={deviceConfig}
             onSubmit={this.updateConfig}
+            uiSchema={uiSchema}
         />;
 
     }
