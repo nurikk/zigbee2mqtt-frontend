@@ -1,3 +1,26 @@
+## [0.3.14](https://github.com/nurikk/z2m-frontend/compare/0.3.4...0.3.14) (2021-01-17)
+
+
+### Bug Fixes
+
+* **reporting:** fix reporting rules key calculation ([f14617a](https://github.com/nurikk/z2m-frontend/commit/f14617a97a77d777d54a78de95edcc49c13f7947))
+* **settings:** fix initial schema ([f42a458](https://github.com/nurikk/z2m-frontend/commit/f42a458e26036786229302d14b9f755edba1b7f6))
+* **settings:** fix initial state ([1bc4aa7](https://github.com/nurikk/z2m-frontend/commit/1bc4aa79749f55e8470694d0a4ee093dacba37a9))
+* **settings:** fix schema loading check ([54ca693](https://github.com/nurikk/z2m-frontend/commit/54ca6939009cc3b9c7efd3661c5d9729a3c1b164))
+
+
+### Features
+
+* **device-page:** define fields order ([f29bb6b](https://github.com/nurikk/z2m-frontend/commit/f29bb6b3241e8ef490d32aad64af452dda3de373))
+* **device-page:** implement device configuration ([ba99df5](https://github.com/nurikk/z2m-frontend/commit/ba99df5b6478009a0e285856349c0f8f992adb35))
+* **settings:** add oneOf support ([b7383fd](https://github.com/nurikk/z2m-frontend/commit/b7383fd9c5d2f99ee35795adb73d4953e5e3cb45))
+* **settings:** change display order ([7dd8843](https://github.com/nurikk/z2m-frontend/commit/7dd8843e814d1c8e1c291ee61a07a14c8a7a8b5f))
+* **settings:** fix main settings tab ([f7dea60](https://github.com/nurikk/z2m-frontend/commit/f7dea60c57055793a7648af3bdd0550b3655a685))
+* **settings:** json schema based settings editor PoC ([1a80d41](https://github.com/nurikk/z2m-frontend/commit/1a80d41202126813e76f6a0d7e24418ed63028c1))
+* **settings:** split settings to tabs ([b4774dd](https://github.com/nurikk/z2m-frontend/commit/b4774ddf8dc26c5df644da0ce63487262932f4c8))
+
+
+
 ## [0.3.13](https://github.com/nurikk/z2m-frontend/compare/0.3.12...0.3.13) (2021-01-17)
 
 
