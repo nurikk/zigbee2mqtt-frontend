@@ -1,3 +1,13 @@
+## [0.3.15](https://github.com/nurikk/z2m-frontend/compare/0.3.14...0.3.15) (2021-01-17)
+
+
+### Bug Fixes
+
+* **api:** fix handling transactions from another instance ([bfd466f](https://github.com/nurikk/z2m-frontend/commit/bfd466f87e6335ce23ba6cf31a731fea16613a65))
+* **map:** fix node click events ([87ebc57](https://github.com/nurikk/z2m-frontend/commit/87ebc5732a60992d6a0cdb8e35d72e8e6575e940))
+
+
+
 ## [0.3.14](https://github.com/nurikk/z2m-frontend/compare/0.3.4...0.3.14) (2021-01-17)
 
 
