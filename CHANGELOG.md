@@ -1,3 +1,20 @@
+## [0.3.13](https://github.com/nurikk/z2m-frontend/compare/0.3.12...0.3.13) (2021-01-17)
+
+
+### Bug Fixes
+
+* **reporting:** fix reporting rules key calculation ([0fcae05](https://github.com/nurikk/z2m-frontend/commit/0fcae0507e099474971abbfd1790b2011222933f))
+
+
+### Features
+
+* **device-page:** define fields order ([7f7ae5c](https://github.com/nurikk/z2m-frontend/commit/7f7ae5c4b883d2a2029b448e0d6b590e43977bf4))
+* **device-page:** implement device configuration ([9690bc4](https://github.com/nurikk/z2m-frontend/commit/9690bc4b75fd783dca95a55c4d67fd9ca800077b))
+* **settings:** change display order ([d1ae9b4](https://github.com/nurikk/z2m-frontend/commit/d1ae9b44ed2373879ad75583cfa611bff6e66173))
+* **settings:** fix main settings tab ([0134903](https://github.com/nurikk/z2m-frontend/commit/01349032bb3a1ab12acfa6066d4963fde13c9fd7))
+
+
+
 ## [0.3.12](https://github.com/nurikk/z2m-frontend/compare/0.3.11...0.3.12) (2021-01-16)
 
 
