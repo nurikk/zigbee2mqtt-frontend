@@ -68,6 +68,8 @@ const uiSchemas = {
         "ui:order": ["port", "adapter", "disable_led", "*"]
     }
 };
+
+const validJsonSchemasAsTabs = ['object', 'array'];
 export class SettingsPage extends Component<SettingsPageProps & BridgeApi & GlobalState & UtilsApi, SettingsPageState> {
     state = {
         keyName: ROOT_KEY_NAME
@@ -188,25 +190,10 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
             updateBridgeConfig({ [keyName]: formData });
         }
     }
-    renderExperimentalSettings() {
-        const { keyName } = this.state;
-        const { bridgeInfo: { config_schema: configSchema, config } } = this.props;
-        const copyConfig = cloneDeep(config);
-        const schema = cloneDeep(configSchema);
-        if (!schema || !schema.properties || Object.keys(schema.properties).length === 0) {
-            return <div>loading...</div>;
-        }
 
-        ingoredFields.forEach(field => {
-            schema.required = schema.required.filter(item => item !== field);
-            delete schema.properties[field];
-            delete copyConfig[field];
-        });
-
-        let currentSchema;
-        let currentConfig = copyConfig[keyName] as object;
+    getSettingsTabs() {
+        const { bridgeInfo: { config_schema: configSchema } } = this.props;
         const tabs = [];
-        const validJsonSchemasAsTabs = ['object', 'array']
         Object.entries(configSchema.properties).forEach(([key, value]) => {
             const typedValue = value as { type: string; title?: string; oneOf?: unknown[] };
             if ((validJsonSchemasAsTabs.includes(typedValue.type) && !ingoredFields.includes(key)) || typedValue?.oneOf?.length > 0) {
@@ -220,9 +207,26 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
             name: ROOT_KEY_NAME,
             title: 'Main'
         });
+        return tabs;
+    }
+    getSettingsInfo() {
+        const { keyName } = this.state;
+        const { bridgeInfo: { config_schema: configSchema, config } } = this.props;
+        const copyConfig = cloneDeep(config);
+        const schema = cloneDeep(configSchema);
+
+        ingoredFields.forEach(field => {
+            schema.required = schema.required.filter(item => item !== field);
+            delete schema.properties[field];
+            delete copyConfig[field];
+        });
+
+        let currentSchema: JSONSchema7;
+        let currentConfig = copyConfig[keyName] as object;
+
 
         if (keyName === ROOT_KEY_NAME) {
-            tabs.forEach(tab => {
+            this.getSettingsTabs().forEach(tab => {
                 schema.required = schema.required.filter(item => item !== tab.name);
                 delete schema.properties[tab.name];
                 delete copyConfig[tab.name];
@@ -233,6 +237,18 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
             currentConfig = copyConfig[keyName] as object;
             currentSchema = schema.properties[keyName] as JSONSchema7;
         }
+        return { currentSchema, currentConfig };
+    }
+    renderExperimentalSettings() {
+        const { keyName } = this.state;
+        const { bridgeInfo: { config_schema: configSchema } } = this.props;
+
+        const schema = cloneDeep(configSchema);
+        if (!schema || !schema.properties || Object.keys(schema.properties).length === 0) {
+            return <div>loading...</div>;
+        }
+        const tabs = this.getSettingsTabs();
+        const { currentSchema, currentConfig } = this.getSettingsInfo();
 
         return <>
             <ul className="nav nav-pills nav-fill">
