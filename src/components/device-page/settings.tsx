@@ -5,30 +5,31 @@ import { connect } from "unistore/react";
 import { GlobalState } from "../../store";
 import actions, { DeviceApi } from "../../actions";
 import Form from '@rjsf/bootstrap-4';
-
+import { JSONSchema7 } from "json-schema"
 type DeviceSettingsProps = {
     device: Device;
 }
 interface PropsFromStore {
     deviceStates: Map<string, DeviceState>;
 }
-
-const log = (type) => console.log.bind(console, type);
-
-// eslint-disable-next-line react/prefer-stateless-function
 export class DeviceSettings extends Component<DeviceSettingsProps & GlobalState & PropsFromStore & DeviceApi, {}> {
-    updateConfig = (name: string, value: unknown): void => {
-
+    updateConfig = ({ formData }): void => {
+        const { setDeviceOptions, device } = this.props;
+        setDeviceOptions(device.ieee_address, formData);
     }
     render() {
-        return <div>Under construction</div>;
-        // const { bridgeInfo: { configSchema, config } } = this.props;
-        // console.log(configSchema);
-        // return <Form schema={configSchema}
-        //     formData={config}
-        //     onChange={log("changed")}
-        //     onSubmit={log("submitted")}
-        //     onError={log("errors")} />;
+        const { bridgeInfo: { config_schema: configSchema, config }, device } = this.props;
+        const deviceConfig = config.devices[device.ieee_address];
+
+
+        if (!configSchema || !configSchema.properties || Object.keys(configSchema.properties).length === 0) {
+            return <div>loading...</div>;
+        }
+
+        return <Form schema={configSchema.definitions.device as JSONSchema7}
+            formData={deviceConfig}
+            onSubmit={this.updateConfig}
+        />;
 
     }
 }
