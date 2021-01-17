@@ -9,8 +9,9 @@ import { NavLink, Redirect, RouteComponentProps, withRouter } from "react-router
 import Button from "../button";
 import Form from '@rjsf/bootstrap-4';
 import cx from "classnames";
-import { JSONSchema7 } from "json-schema";
+import { JSONSchema7, JSONSchema7Definition } from "json-schema";
 import cloneDeep from "lodash/cloneDeep";
+import value from "*.txt";
 export const logLevelSetting = {
     key: 'log_level',
     path: 'log_level',
@@ -70,6 +71,8 @@ const uiSchemas = {
 };
 
 const validJsonSchemasAsTabs = ['object', 'array'];
+
+const isValidKeyToRenderAsTab = (key: string, value: JSONSchema7): boolean => (validJsonSchemasAsTabs.includes(value.type as string) && !ingoredFields.includes(key)) || value?.oneOf?.length > 0
 export class SettingsPage extends Component<SettingsPageProps & BridgeApi & GlobalState & UtilsApi, SettingsPageState> {
     state = {
         keyName: ROOT_KEY_NAME
@@ -193,16 +196,12 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
 
     getSettingsTabs() {
         const { bridgeInfo: { config_schema: configSchema } } = this.props;
-        const tabs = [];
-        Object.entries(configSchema.properties).forEach(([key, value]) => {
-            const typedValue = value as { type: string; title?: string; oneOf?: unknown[] };
-            if ((validJsonSchemasAsTabs.includes(typedValue.type) && !ingoredFields.includes(key)) || typedValue?.oneOf?.length > 0) {
-                tabs.push({
-                    name: key,
-                    title: typedValue.title ?? key
-                })
-            }
-        });
+        const tabs = Object.entries<JSONSchema7>(configSchema.properties as unknown as ArrayLike<JSONSchema7>)
+            .filter(([key, value]) => isValidKeyToRenderAsTab(key, value))
+            .map(([key, value]) => ({
+                name: key,
+                title: value.title ?? key
+            }));
         tabs.unshift({
             name: ROOT_KEY_NAME,
             title: 'Main'
@@ -239,29 +238,29 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
         }
         return { currentSchema, currentConfig };
     }
+    renderSettingsTabs() {
+        const tabs = this.getSettingsTabs();
+        const { keyName } = this.state;
+        return <ul className="nav nav-pills nav-fill">
+            {tabs.map(tab => <li key={tab.name} className="nav-item">
+                <a className={cx("nav-link", { active: keyName === tab.name })} aria-current="page" href="#" onClick={(e) => { this.setState({ keyName: tab.name }); e.preventDefault() }}>{tab.title}</a>
+            </li>)}
+        </ul>;
+    }
     renderExperimentalSettings() {
         const { keyName } = this.state;
         const { bridgeInfo: { config_schema: configSchema } } = this.props;
-
-        const schema = cloneDeep(configSchema);
-        if (!schema || !schema.properties || Object.keys(schema.properties).length === 0) {
+        if (!configSchema || !configSchema.properties || Object.keys(configSchema.properties).length === 0) {
             return <div>loading...</div>;
         }
-        const tabs = this.getSettingsTabs();
         const { currentSchema, currentConfig } = this.getSettingsInfo();
 
-        return <>
-            <ul className="nav nav-pills nav-fill">
-                {tabs.map(tab => <li key={tab.name} className="nav-item">
-                    <a className={cx("nav-link", { active: keyName === tab.name })} aria-current="page" href="#" onClick={(e) => { this.setState({ keyName: tab.name }); e.preventDefault() }}>{tab.title}</a>
-                </li>)}
-            </ul>
+        return <>{this.renderSettingsTabs()}
             <Form key={keyName} schema={currentSchema}
                 formData={currentConfig}
                 onSubmit={this.onSettingsSave}
                 uiSchema={uiSchemas[keyName]}
-            />
-        </>
+            /></>
     }
 }
 const SettingsPageWithRouter = withRouter(SettingsPage);
