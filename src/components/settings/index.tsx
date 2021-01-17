@@ -58,6 +58,16 @@ const ROOT_KEY_NAME = 'main';
 
 
 const ingoredFields = ['groups', 'devices', 'device_options', 'ban', 'whitelist'];
+
+const uiSchemas = {
+    mqtt: {
+        "ui:order": ["base_topic", "server", "user", "password", "client_id", "version",
+            "ca", "key", "cert", "reject_unauthorized", "*"]
+    },
+    serial: {
+        "ui:order": ["port", "adapter", "disable_led", "*"]
+    }
+};
 export class SettingsPage extends Component<SettingsPageProps & BridgeApi & GlobalState & UtilsApi, SettingsPageState> {
     state = {
         keyName: 'mqtt'
@@ -219,7 +229,7 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
             currentConfig = copyConfig[keyName] as object;
             currentSchema = schema.properties[keyName] as JSONSchema7;
         }
-    
+
         return <>
             <ul className="nav nav-pills nav-fill">
                 {tabs.map(tab => <li key={tab.name} className="nav-item">
@@ -229,6 +239,7 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
             <Form key={keyName} schema={currentSchema}
                 formData={currentConfig}
                 onSubmit={this.onSettingsSave}
+                uiSchema={uiSchemas[keyName]}
             />
         </>
     }
