@@ -70,7 +70,7 @@ const uiSchemas = {
 };
 export class SettingsPage extends Component<SettingsPageProps & BridgeApi & GlobalState & UtilsApi, SettingsPageState> {
     state = {
-        keyName: 'mqtt'
+        keyName: ROOT_KEY_NAME
     }
     updateConfig = (name: string, value: unknown): void => {
         const { updateConfigValue } = this.props;
@@ -215,7 +215,11 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
                     title: typedValue.title ?? key
                 })
             }
-        })
+        });
+        tabs.unshift({
+            name: ROOT_KEY_NAME,
+            title: 'Main'
+        });
 
         if (keyName === ROOT_KEY_NAME) {
             tabs.forEach(tab => {
