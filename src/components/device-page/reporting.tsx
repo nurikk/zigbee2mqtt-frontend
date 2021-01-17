@@ -43,7 +43,7 @@ type ReportingState = {
     reportingRules: NiceReportingingRule[];
 }
 
-const rule2key = (rule: NiceReportingingRule): string => `${rule.isNew}${rule.cluster}-${rule.attribute}`;
+const rule2key = (rule: NiceReportingingRule): string => `${rule.isNew}${rule.endpoint}${rule.cluster}-${rule.attribute}`;
 
 export class Reporting extends Component<ReportingProps & PropsFromStore & ReportingApi, ReportingState> {
     state: ReportingState = {
