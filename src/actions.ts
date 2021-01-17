@@ -30,7 +30,7 @@ export interface DeviceApi {
     removeDevice(dev: string, force: boolean, block: boolean): Promise<void>;
     configureDevice(name: string): Promise<void>;
 
-    setDeviceOption(dev: string, name: string, value: unknown): Promise<void>;
+    setDeviceOptions(id: string, options: object): Promise<void>;
 }
 
 export interface StateApi {
@@ -133,6 +133,9 @@ const actions = (store: Store<GlobalState>): object => ({
         return api.send("bridge/request/device/configure", { id: name });
     },
 
+    setDeviceOptions: (state, id: string, options: object): Promise<void> => {
+        return api.send("bridge/request/device/options", { id, options });
+    },
     networkMapRequest: (state): Promise<void> => {
         store.setState({ networkGraphIsLoading: true, networkGraph: { nodes: [], links: [] } });
         return api.send("bridge/request/networkmap", { type: "raw", routes: false });
