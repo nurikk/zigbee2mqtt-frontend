@@ -217,17 +217,14 @@ class Api {
 
     private resolvePromises(message: ResponseWithStatus): void {
         const { transaction, status } = message;
-        if (transaction !== undefined) {
+        if (transaction !== undefined && this.requests.has(transaction)) {
             const [resolve, reject] = this.requests.get(transaction);
-            if (resolve || resolve) {
-                if (status == "ok" || status == undefined) {
-                    resolve();
-                } else {
-                    reject();
-                }
-
-                this.requests.delete(transaction);
-           }
+            if (status == "ok" || status == undefined) {
+                resolve();
+            } else {
+                reject();
+            }
+            this.requests.delete(transaction);
         }
     }
 
