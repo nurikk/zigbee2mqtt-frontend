@@ -69,7 +69,7 @@ export class LogsPage extends Component<GlobalState & BridgeApi, LogsPageState> 
         let { logs } = this.props;
         const { search, logLevel } = this.state;
 
-        const _search = new RegExp(search, 'gi');
+        const _search = new RegExp(escapeRegExp(search), 'gi');
 
         logs = logs
             .filter(l => (logLevel === ALL || l.level === logLevel) && (!search || _search.test(l.message)))
