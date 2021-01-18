@@ -1,3 +1,12 @@
+## [0.3.16](https://github.com/nurikk/z2m-frontend/compare/0.3.15...0.3.16) (2021-01-18)
+
+
+### Bug Fixes
+
+* **logs:** escape search query ([5fdcf44](https://github.com/nurikk/z2m-frontend/commit/5fdcf448f87c3c6f076444aa0fc8288521a11a04))
+
+
+
 ## [0.3.15](https://github.com/nurikk/z2m-frontend/compare/0.3.14...0.3.15) (2021-01-17)
 
 
