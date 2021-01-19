@@ -75,9 +75,10 @@ export class LogsPage extends Component<GlobalState & BridgeApi, LogsPageState> 
             .filter(l => (logLevel === ALL || l.level === logLevel) && (!search || _search.test(l.message)))
             .sort();
 
-        return <div className="container-fluid h-100 overflow-auto pt-2">
+        return <div className="container-fluid d-lg-flex flex-column h-100 pt-2">
             {this.renderSearch()}
             {logs.length == 0 ? <h1>You don&apos;t have {logLevel === ALL ? 'any' : logLevel} logs</h1> : null}
+            <div className="overflow-auto">
             {
                 logs.map((l, idx) => <div key={idx}>
                     {logLevel === ALL && <><span className={cx("badge", {
@@ -88,7 +89,9 @@ export class LogsPage extends Component<GlobalState & BridgeApi, LogsPageState> 
                     }, "text-capitalize")}>{l.level}</span>&nbsp;</>}<code>
                         <Highlighted text={l.message} highlight={search}></Highlighted>
                     </code></div>)
-            }</div>
+            }
+            </div>
+        </div>
     }
 }
 
