@@ -36,7 +36,6 @@
         "@types/d3-selection": "^2.0.0",
         "@types/d3-zoom": "^2.0.0",
         "@types/lodash": "^4.14.167",
-        "@types/notyf": "^3.0.0",
         "@types/react": "^17.0.0",
         "@types/react-dom": "^17.0.0",
         "@types/react-router-dom": "^5.1.7",
