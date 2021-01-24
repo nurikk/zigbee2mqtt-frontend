@@ -1,0 +1,30 @@
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+// custom variables that can be found in @boostrap/scss/variables.scss
+
+$spacer: 0.75rem;
+$grid-gutter-width: 1rem;
+
+// Cards
+$card-spacer-y:                     .25rem;
+$card-spacer-x:                     0.5rem;
+$card-title-spacer-y:               $spacer / 2 !default;
+$card-border-width:                 $border-width !default;
+$card-border-radius:                $border-radius !default;
+$card-border-color:                 rgba($black, .125) !default;
+$card-inner-border-radius:          subtract($card-border-radius, $card-border-width) !default;
+$card-cap-padding-y:                $card-spacer-y / 2;
+$card-cap-padding-x:                $card-spacer-x;
+//$card-color:                        $white;
+//$card-bg:                           $dark;
+
+
+
+$card-img-overlay-padding:          1.25rem !default;
+
+$card-group-margin:                 $grid-gutter-width / 2 !default;
+$card-deck-margin:                  $card-group-margin !default;
+
+$card-columns-count:                3 !default;
+$card-columns-gap:                  1.25rem !default;
+$card-columns-margin:               $card-spacer-y !default;

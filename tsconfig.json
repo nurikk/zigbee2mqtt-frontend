@@ -9,10 +9,10 @@
         "sourceMap": true,
         "jsx": "react",
         "experimentalDecorators": true,
-        "allowSyntheticDefaultImports": true
+        "allowSyntheticDefaultImports": true,
+        "baseUrl": "src"
     },
     "suppressImplicitAnyIndexErrors": true,
     "lib": ["es2015", "dom", "dom.iterable"],
-    "baseUrl": ".",
     "exclude": ["dist"]
 }
