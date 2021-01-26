@@ -19,7 +19,7 @@ type EnumProps = {
 
 
 function isPrimitive(step: ValueWithLabelOrPrimitive): step is Primitive {
-  return ["number", "string"].includes(typeof step);
+  return step === null || ["number", "string", "undefined"].includes(typeof step);
 }
 
 const EnumEditor: FunctionComponent<EnumProps> = (props) => {
