@@ -1,3 +1,12 @@
+## [0.3.19](https://github.com/nurikk/z2m-frontend/compare/0.3.18...0.3.19) (2021-01-26)
+
+
+### Bug Fixes
+
+* **enum-editor:** better primitive type detection ([0ff0dc4](https://github.com/nurikk/z2m-frontend/commit/0ff0dc4906874297ba1c51585853dd8241d74eb1))
+
+
+
 ## [0.3.18](https://github.com/nurikk/z2m-frontend/compare/0.3.16...0.3.18) (2021-01-26)
 
 
