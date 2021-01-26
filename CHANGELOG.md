@@ -1,3 +1,17 @@
+## [0.3.18](https://github.com/nurikk/z2m-frontend/compare/0.3.16...0.3.18) (2021-01-26)
+
+
+### Bug Fixes
+
+* **range-editor:** fix value param ([eaa9d82](https://github.com/nurikk/z2m-frontend/commit/eaa9d8256efe3087621613c25004af3218075333))
+
+
+### Features
+
+* **error-boundry:** better error boundry ([3fa8318](https://github.com/nurikk/z2m-frontend/commit/3fa831838d6b87492012b3376457d822a6a9358b))
+
+
+
 ## [0.3.17](https://github.com/nurikk/z2m-frontend/compare/0.3.16...0.3.17) (2021-01-26)
 
 
