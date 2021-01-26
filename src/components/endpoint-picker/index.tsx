@@ -25,7 +25,7 @@ export default class EndpointPicker extends Component<EndpointPickerProps & Omit
         return <select disabled={value && hasOnlyOneEP || disabled}
             value={value}
             className="form-control"
-            title={hasOnlyOneEP ? 'The only endpoint' : null}
+            title={hasOnlyOneEP ? 'The only endpoint' : ""}
             onChange={this.onSelect}
             {...rest}>
             {options}

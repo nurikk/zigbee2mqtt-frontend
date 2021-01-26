@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useRef, useState } from 'react';
+import React, { FunctionComponent, RefObject, useRef, useState } from 'react';
 
 import { GlobalState } from '../../store';
 import actions, { BridgeApi } from '../../actions';
@@ -43,8 +43,8 @@ type StartStopJoinButtonProps = {
 }
 const StartStopJoinButton: FunctionComponent<StartStopJoinButtonProps & Pick<BridgeApi, 'setPermitJoin'> & Pick<GlobalState, 'bridgeInfo'>> = ({ devices, setPermitJoin, bridgeInfo }) => {
     const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(false);
-    const [selectedRouter, setSelectedRouter] = useState<Device>(null);
-    const routers = [];
+    const [selectedRouter, setSelectedRouter] = useState<Device>({} as Device);
+    const routers: JSX.Element[] = [];
     const selectAndHide = (device: Device) => { setSelectedRouter(device); setIsComponentVisible(false) }
     devices.forEach((device) => {
         if (device.type == "Router") {
@@ -62,9 +62,9 @@ const StartStopJoinButton: FunctionComponent<StartStopJoinButtonProps & Pick<Bri
             {routers.length ? (<><Button<boolean> type="button" onClick={setIsComponentVisible} item={!isComponentVisible} className="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-expanded="false">
                 <span className="visually-hidden">Toggle Dropdown</span>
             </Button>
-                <ul ref={ref} className={cx('dropdown-menu', style['scrollable-menu'], { show: isComponentVisible })}>
+                <ul ref={ref as RefObject<HTMLUListElement>} className={cx('dropdown-menu', style['scrollable-menu'], { show: isComponentVisible })}>
                     <li key='all'>
-                        <Button<Device> item={null} className="dropdown-item" onClick={selectAndHide}>All</Button>
+                        <Button className="dropdown-item" onClick={selectAndHide}>All</Button>
                     </li>
                     {routers}
                 </ul></>) : null}
@@ -84,7 +84,7 @@ const NavBar: FunctionComponent<PropsFromStore & BridgeApi & Pick<GlobalState, '
         setnavbarIsVisible(false);
     });
     return (<nav className="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-        <div ref={ref} className="container-fluid">
+        <div ref={ref as React.MutableRefObject<HTMLDivElement>} className="container-fluid">
             <Link onClick={() => setnavbarIsVisible(false)} className="navbar-brand" to="/">Zigbee2MQTT</Link>
             <button onClick={() => { setnavbarIsVisible(!navbarIsVisible) }} className="navbar-toggler" type="button">
                 <span className="navbar-toggler-icon" />

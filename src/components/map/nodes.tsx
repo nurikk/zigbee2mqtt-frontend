@@ -54,7 +54,7 @@ export const isOnline = (device: Device): boolean => {
 };
 
 class Node extends Component<NodeProps, {}> {
-    ref = createRef<SVGPolygonElement | SVGCircleElement | SVGImageElement>();
+    ref = createRef<SVGElement>();
 
     componentDidMount(): void {
         const { current } = this.ref;
@@ -64,17 +64,17 @@ class Node extends Component<NodeProps, {}> {
 
     onMouseOut = (): void => {
         const { node, onMouseOut } = this.props;
-        onMouseOut && onMouseOut(node, this.ref.current);
+        this.ref && this.ref.current && onMouseOut && onMouseOut(node, this.ref.current);
     };
 
     onMouseOver = (): void => {
         const { node, onMouseOver } = this.props;
-        onMouseOver && onMouseOver(node, this.ref.current);
+        this.ref && this.ref.current && onMouseOver && onMouseOver(node, this.ref.current);
     };
 
     onDblClick = (): void => {
         const { node, onDblClick } = this.props;
-        onDblClick && onDblClick(node, this.ref.current);
+        this.ref && this.ref.current && onDblClick && onDblClick(node, this.ref.current);
     };
 
     render() {
@@ -112,7 +112,7 @@ class Node extends Component<NodeProps, {}> {
 }
 
 interface NodesProps extends MouseEventsResponderNode {
-    root: SVGSVGElement;
+    root: SVGElement;
     nodes: NodeI[];
     simulation: Simulation<NodeI, LinkI>;
 }

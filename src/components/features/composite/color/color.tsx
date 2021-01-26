@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react";
-import { AnyColor, ColorFeature } from "../../../../types";
+import { AnyColor, ColorFeature, Endpoint } from "../../../../types";
 import ColorEditor from "../../../color-editor/color-editor";
 
 import { BaseFeatureProps } from "../../base";
@@ -16,7 +16,7 @@ const Light: FunctionComponent<ColorProps> = (props) => {
       value[innerFeature.name] = deviceState[feature.property]?.[innerFeature.property] ?? 0;
     }
     return <ColorEditor
-      onChange={(color) => onChange(feature.endpoint, { color })}
+      onChange={(color) => onChange(feature.endpoint as Endpoint, { color })}
       value={value as AnyColor}
       format={feature.name} />
 }

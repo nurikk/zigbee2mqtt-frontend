@@ -19,7 +19,7 @@ export default class AttributePicker extends Component<AttributePickerProps & Om
     render() {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { cluster, onChange, ...rest } = this.props;
-        let attrs = [];
+        let attrs = [] as string[];
         const clusterDefinition = Clusters[cluster];
         if (clusterDefinition) {
             attrs = Object.keys(clusterDefinition.attributes);

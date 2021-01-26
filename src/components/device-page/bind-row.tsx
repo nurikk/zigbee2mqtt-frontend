@@ -25,16 +25,16 @@ interface BindRowProps {
 interface BindRowState {
     stateRule: NiceBindingRule;
 }
-const getTarget = (rule: NiceBindingRule, devices: Map<string, Device>, groups: Group[]) => {
+const getTarget = (rule: NiceBindingRule, devices: Map<string, Device>, groups: Group[]): Device | Group => {
     if (rule.target.type === "group") {
-        return groups.find(g => g.id === rule.target.id);
+        return groups.find(g => g.id === rule.target.id) as Group;
     }
-    return devices.get(rule.target.ieee_address);
+    return devices.get(rule.target?.ieee_address as string) as Device;
 }
 type Action = "Bind" | "Unbind";
 export default class BindRow extends Component<BindRowProps, BindRowState> {
     state: Readonly<BindRowState> = {
-        stateRule: null
+        stateRule: {} as NiceBindingRule
     }
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     static getDerivedStateFromProps(props: Readonly<BindRowProps>, state: BindRowState): Partial<BindRowState> {
@@ -83,12 +83,12 @@ export default class BindRow extends Component<BindRowProps, BindRowState> {
         const { device, groups, devices } = this.props;
         const { stateRule } = this.state;
         const from = `${device.friendly_name}/${stateRule.source.endpoint}`;
-        let to: string;
+        let to = "";
         if (stateRule.target.type === "group") {
-            const targetGroup = groups.find(group => group.id === stateRule.target.id);
+            const targetGroup = groups.find(group => group.id === stateRule.target.id) as Group;
             to = `${targetGroup.friendly_name}`;
         } else if (stateRule.target.type === "endpoint") {
-            const targeDevice = devices.get(stateRule.target.ieee_address);
+            const targeDevice = devices.get(stateRule.target?.ieee_address as string) as Device;
             if (targeDevice.type === "Coordinator") {
                 to = `${targeDevice.friendly_name}`;
             } else {
@@ -110,7 +110,7 @@ export default class BindRow extends Component<BindRowProps, BindRowState> {
 
     isValidRule(): boolean {
         const { stateRule } = this.state;
-        let valid = false;
+        let valid;
         if (stateRule.target.type == "endpoint") {
             valid = stateRule.source.endpoint
                 && stateRule.target.ieee_address
@@ -121,7 +121,7 @@ export default class BindRow extends Component<BindRowProps, BindRowState> {
                 && stateRule.target.id
                 && stateRule.clusters.length > 0;
         }
-        return valid;
+        return !!valid;
     }
 
     render() {
@@ -142,8 +142,8 @@ export default class BindRow extends Component<BindRowProps, BindRowState> {
         return (<tr>
             <th scope="row">{idx + 1}</th>
             <td><EndpointPicker disabled={!stateRule.isNew} values={sourceEndpoints} value={stateRule.source.endpoint} onChange={this.setSourceEp} /></td>
-            <td><DevicePicker disabled={!stateRule.isNew} type={targetType} value={stateRule.target.ieee_address || stateRule.target.id} devices={devices} groups={groups} onChange={this.setDestination} /></td>
-            <td>{stateRule.target.type === "endpoint" ? <EndpointPicker disabled={!stateRule.isNew} values={destinationEndpoints} value={stateRule.target.endpoint} onChange={this.setDestinationEp} /> : null}</td>
+            <td><DevicePicker disabled={!stateRule.isNew} type={targetType} value={(stateRule.target.ieee_address || stateRule.target.id) as string} devices={devices} groups={groups} onChange={this.setDestination} /></td>
+            <td>{stateRule.target.type === "endpoint" ? <EndpointPicker disabled={!stateRule.isNew} values={destinationEndpoints} value={stateRule.target.endpoint as Endpoint} onChange={this.setDestinationEp} /> : null}</td>
             <td><ClusterPicker pickerType={PickerType.MULTIPLE} clusters={Array.from(possibleClusters)} value={stateRule.clusters} onChange={this.setClusters} /></td>
             <td><div className="btn-group btn-group-sm">
                 <Button<Action> item={"Bind"} disabled={!this.isValidRule()} title="Bind" className="btn btn-primary" onClick={this.onBindOrUnBindClick}><i

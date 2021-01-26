@@ -42,7 +42,7 @@ const RangeEditor: FunctionComponent<RangeProps & Omit<InputHTMLAttributes<HTMLI
       onChange={e => setCurrentValue(e.target.valueAsNumber)}
       onBlur={() => onChange(currentValue)}
       {...rest}
-      style={showRange ? { 'maxWidth': '100px' } : null}
+      style={showRange ? { 'maxWidth': '100px' } : {}}
     />
     {unit ? <span className="input-group-text" style={{ 'minWidth': '66px' }}>{unit}</span> : null}
   </div>

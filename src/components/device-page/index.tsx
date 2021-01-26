@@ -11,6 +11,8 @@ import ConnectedDeviceExposes from "./exposes";
 import Clusters from "./clusters";
 import DeviceSettings from "./settings";
 import styles from "./style.css";
+import { Device } from "../../types";
+
 
 type UrlParams = {
     dev: string;
@@ -25,7 +27,7 @@ export class DevicePage extends Component<DevicePageProps & GlobalState, {}> {
     renderContent() {
         const { match, devices } = this.props;
         const { tab, dev } = match.params;
-        const device = devices.get(dev);
+        const device = devices.get(dev) as Device;
 
         switch (tab) {
             case "info":

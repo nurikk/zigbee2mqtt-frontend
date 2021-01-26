@@ -40,8 +40,8 @@ const displayProps = [
         label: 'Description',
         if: 'supported',
         render: (device: Device) => {
-            const result = markdownLinkRegex.exec(device.definition.description);
-            let content = <span>{device.definition.description}</span>;
+            const result = markdownLinkRegex.exec(device.definition?.description as string);
+            let content = <span>{device.definition?.description}</span>;
             if (result) {
                 // eslint-disable-next-line @typescript-eslint/no-unused-vars
                 const [all, title, link] = result;
@@ -55,7 +55,7 @@ const displayProps = [
         label: 'Support status'
     },
     {
-        render: (device: Device) => <dd className="col-12 col-md-7">{device.definition.supports}</dd>,
+        render: (device: Device) => <dd className="col-12 col-md-7">{device.definition?.supports}</dd>,
         label: 'Supports',
         if: 'definition.supports'
     },

@@ -86,7 +86,7 @@ export default class ClusterPicker extends Component<ClusterPickerProps & Omit<I
         const { pickerId } = this.state;
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { clusters, value, pickerType, onChange, ...rest } = this.props;
-        let options = [];
+        let options = [] as JSX.Element[];
         if (isClusterGroup(clusters)) {
             //TODO: implement if necessary
             console.warn("Not implemented");
