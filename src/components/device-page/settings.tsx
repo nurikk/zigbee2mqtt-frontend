@@ -22,14 +22,14 @@ export class DeviceSettings extends Component<DeviceSettingsProps & GlobalState 
     }
     render() {
         const { bridgeInfo: { config_schema: configSchema, config }, device } = this.props;
-        const deviceConfig = config.devices[device.ieee_address];
+        const deviceConfig = config?.devices[device.ieee_address];
 
 
         if (!configSchema || !configSchema.properties || Object.keys(configSchema.properties).length === 0) {
             return <div>loading...</div>;
         }
 
-        return <Form schema={configSchema.definitions.device as JSONSchema7}
+        return <Form schema={configSchema.definitions?.device as JSONSchema7}
             formData={deviceConfig}
             onSubmit={this.updateConfig}
             uiSchema={uiSchema}

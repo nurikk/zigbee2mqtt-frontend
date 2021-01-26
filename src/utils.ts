@@ -31,7 +31,7 @@ export interface ApiResponse<T> {
     result: T;
 }
 
-export const lastSeen = (lastSeen: string | number, elapsed: number): string => {
+export const lastSeen = (lastSeen?: string | number, elapsed?: number): string => {
     if (!lastSeen && !elapsed) {
         return "N/A";
     }
@@ -42,7 +42,7 @@ export const lastSeen = (lastSeen: string | number, elapsed: number): string => 
         if (typeof lastSeen === "string") {
             diff = Date.parse(lastSeen);
         } else {
-            diff = new Date(lastSeen);
+            diff = new Date(lastSeen as number);
         }
     }
     return format(diff);
@@ -147,12 +147,12 @@ export const download = (data: object, filename: string): void => {
 
 }
 
-export const sanitizeZ2MDeviceName = (deviceName: string): string => deviceName?.replace(/:|\s|\//g, "-");
+export const sanitizeZ2MDeviceName = (deviceName?: string): string => deviceName ? deviceName.replace(/:|\s|\//g, "-") : "NA";
 
 
 export const getEndpoints = (obj: Device | Group): Endpoint[] => {
     if (!obj) {
-        return []
+        return [];
     } else if ((obj as Device).endpoints) {
         return Array.from((obj as Device).endpoints.keys());
     } else if ((obj as Group).members) {

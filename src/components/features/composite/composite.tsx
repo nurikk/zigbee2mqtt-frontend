@@ -44,7 +44,7 @@ const FeatureWrapper: FunctionComponent<PropsWithChildren<FetatureWrapperProps>>
           <strong title={JSON.stringify(feature)}>{feature.name}</strong>
           {isReadable ? (
             <Button<CompositeFeature | GenericExposedFeature> item={feature} onClick={(item) => {
-              onRead(feature.endpoint, { [item.property]: "" })
+              onRead(feature.endpoint as Endpoint, { [item.property]: "" })
             }} className="btn btn-primary btn-sm"><i className="fa fa-sync"></i></Button>
           ) : null}
         </div>
@@ -73,7 +73,7 @@ export default class Composite extends Component<CompositeProps, CompositeState>
   }
   onApplyClick = () => {
     const { onChange, feature: { endpoint, property } } = this.props;
-    onChange(endpoint, property ? { [property]: this.state } : this.state);
+    onChange(endpoint as Endpoint, property ? { [property]: this.state } : this.state);
   }
 
   onRead = (endpoint: Endpoint, property: object) => {
@@ -139,7 +139,7 @@ export default class Composite extends Component<CompositeProps, CompositeState>
     const { feature } = this.props;
     const { features } = feature;
     const groupedFeatures = groupBy(features, f => f.endpoint ?? MAGIC_NO_ENDPOINT);
-    const result = [];
+    const result = [] as JSX.Element[];
     if (groupedFeatures[MAGIC_NO_ENDPOINT]) {
       result.push(...groupedFeatures[MAGIC_NO_ENDPOINT].map(this.renderFeature));
       delete groupedFeatures[MAGIC_NO_ENDPOINT];

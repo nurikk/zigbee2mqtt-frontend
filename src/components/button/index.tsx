@@ -13,7 +13,7 @@ export default class Button<T> extends Component<ButtonProps<T> & Omit<ButtonHTM
         if (promt) {
             confirmed = confirm(typeof promt === "string" ? promt : "Are you sure?");
         }
-        confirmed && onClick && onClick(item);
+        confirmed && onClick && onClick(item as T);
     };
 
     render() {

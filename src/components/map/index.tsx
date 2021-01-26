@@ -8,7 +8,7 @@ import actions, { MapApi } from "../../actions";
 
 import Button from "../button";
 import { ForceLink, forceLink, forceCollide, forceCenter, forceSimulation, forceX, forceY } from "d3-force";
-import { select, selectAll, Selection } from "d3-selection";
+import { select, selectAll, Selection, ValueFn } from "d3-selection";
 import { forceManyBodyReuse } from "d3-force-reuse"
 import { zoom, zoomIdentity, ZoomTransform } from "d3-zoom";
 import { linkTypes } from "./consts";
@@ -17,21 +17,21 @@ import intersection from "lodash/intersection";
 import style from "./map.css";
 import cx from "classnames";
 export interface MouseEventsResponderNode {
-    onMouseOver?: (arg0: NodeI, el: SVGPolygonElement | SVGCircleElement | SVGImageElement) => void;
-    onMouseOut?: (arg0: NodeI, el: SVGPolygonElement | SVGCircleElement | SVGImageElement) => void;
-    onDblClick?: (arg0: NodeI, el: SVGPolygonElement | SVGCircleElement | SVGImageElement) => void;
+    onMouseOver?: (arg0: NodeI, el: SVGElement) => void;
+    onMouseOut?: (arg0: NodeI, el: SVGElement) => void;
+    onDblClick?: (arg0: NodeI, el: SVGElement) => void;
 }
 
 interface MapState {
-    selectedNode: NodeI;
+    selectedNode?: NodeI;
     width: number;
     height: number;
     visibleLinks: ZigbeeRelationship[];
     legendIsVisible: boolean;
 }
-const angle = (s: Source, t: Target) => Math.atan2(t.y - s.y, t.x - s.x);
-const xpos = (offset: number, s: Source, t: Target) => offset * Math.cos(angle(s, t)) + s.x;
-const ypos = (offset: number, s: Source, t: Target) => offset * Math.sin(angle(s, t)) + s.y;
+const angle = (s: Source, t: Target) => Math.atan2(((t.y as number) - (s.y as number)), (t.x as number)- (s.x as number));
+const xpos = (offset: number, s: Source, t: Target) => offset * Math.cos(angle(s, t)) + (s.x as number);
+const ypos = (offset: number, s: Source, t: Target) => offset * Math.sin(angle(s, t)) + (s.y as number);
 
 
 
@@ -65,8 +65,8 @@ const getDistance = (d: LinkI): number => {
 const computeLink = (d: LinkI, transform: ZoomTransform): string => {
     const src = d.source;
     const dst = d.target;
-    const [x1, y1] = transform.apply([src.x, src.y]);
-    const [x2, y2] = transform.apply([dst.x, dst.y]);
+    const [x1, y1] = transform.apply([src.x as number, src.y as number]);
+    const [x2, y2] = transform.apply([dst.x as number, dst.y as number]);
     return `M ${x1} ${y1} L ${x2} ${y2}`;
 }
 
@@ -82,8 +82,8 @@ type TickedParams = {
 }
 const ticked = ({ transform, node, link, linkLabel, links }: TickedParams): void => {
     links.forEach(function (d) {
-        const [x1, y1] = transform.apply([d.source.x, d.source.y]),
-            [x2, y2] = transform.apply([d.target.x, d.target.y]),
+        const [x1, y1] = transform.apply([d.source.x as number, d.source.y as number]),
+            [x2, y2] = transform.apply([d.target.x as number, d.target.y as number]),
             slope = (y2 - y1) / (x2 - x1);
 
         (d as unknown as NodeI).x = (x2 + x1) / 2;
@@ -97,17 +97,15 @@ const ticked = ({ transform, node, link, linkLabel, links }: TickedParams): void
     const imgXShift = 32 / 2;
     const imgYShift = 32 / 2;
     const computeTransform = (d: NodeI) => {
-        if (d) {
-            const [X, Y] = transform.apply([d.x, d.y]);
-            return `translate(${X - imgXShift}, ${Y - imgYShift})`;
-        }
+        const [X, Y] = transform.apply([d.x as number, d.y as number]);
+        return `translate(${X - imgXShift}, ${Y - imgYShift})`;
     }
-    node.attr("transform", computeTransform);
+    node.attr("transform", computeTransform as ValueFn<SVGElement, NodeI, string | number | boolean | null>);
 };
 type ProcessHighlightsParams = {
     networkGraph: GraphI;
     links: LinkI[];
-    selectedNode: NodeI;
+    selectedNode?: NodeI;
     node: SelNode;
     link: SelLink;
     linkLabel: SelLink;
@@ -135,7 +133,6 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
     svgRef = createRef<SVGSVGElement>();
     simulation = forceSimulation<NodeI, LinkI>();
     state: Readonly<MapState> = {
-        selectedNode: null,
         width: 0,
         height: 0,
         visibleLinks: parentOrChild,
@@ -149,14 +146,14 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
             return;
         }
         const { visibleLinks, selectedNode, width, height } = this.state;
-        const container = select<SVGElement, {}>(this.svgRef.current);
+        const container = select<SVGElement, {}>(this.svgRef.current as SVGElement);
         const node = container.selectAll<SVGElement, NodeI>(`.${style.node}`);
         const link = container.selectAll<SVGElement, LinkI>(`.${style.link}`);
         const linkLabel = container.selectAll<SVGElement, LinkI>(`.${style.linkLabel}`);
 
         const links = networkGraph.links.filter(l => intersection(visibleLinks, l.relationships).length);
         this.simulation.nodes(networkGraph.nodes.concat(links as unknown as NodeI[]));
-        this.simulation.force<ForceLink<NodeI, LinkI>>("link").links(links);
+        this.simulation.force<ForceLink<NodeI, LinkI>>("link")?.links(links);
         this.simulation.on("tick", () => ticked({ transform: this.transform, node, link, linkLabel, links }));
 
 
@@ -173,7 +170,7 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
         processHighlights({ networkGraph, links, selectedNode, node, link, linkLabel });
         node.on("click", (event, d: NodeI) => {
             const { selectedNode } = this.state;
-            this.setState({ selectedNode: selectedNode ? null : d });
+            this.setState({ selectedNode: selectedNode ? null as unknown as NodeI : d });
         });
         this.simulation.alphaTarget(0.03).restart();
     }
@@ -213,7 +210,7 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
                 <g className="everything">
                     <Links links={links} />
                     <Nodes
-                        root={this.svgRef.current}
+                        root={this.svgRef.current as SVGElement}
                         nodes={networkGraph.nodes}
                         simulation={this.simulation}
                     />

@@ -38,7 +38,7 @@ export default class ErrorBoundary extends React.Component<ErrorBoundaryProps, E
         const { location: { pathname } } = this.props;
         const { location: { pathname: prevPathname } } = prevProps;
         if (prevPathname !== pathname) {
-            this.setState({ error: null });
+            this.setState({ error: undefined });
         }
     }
 }

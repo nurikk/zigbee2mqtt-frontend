@@ -41,7 +41,7 @@ const showNotity = (data: LogMessage | ResponseWithStatus): void => {
         switch (data.status) {
             case "error":
                 level = "error";
-                message = data.error;
+                message = data.error as string;
                 break;
             default:
                 break;
@@ -109,9 +109,9 @@ class Api {
         if (authRequired) {
             if (!token) {
                 token = prompt("enter your z2m admin token");
-                localStorage.setItem(TOKEN_LOCAL_STORAGE_ITEM_NAME, token);
+                localStorage.setItem(TOKEN_LOCAL_STORAGE_ITEM_NAME, token as string);
             }
-            url.searchParams.append("token", token);
+            url.searchParams.append("token", token as string);
         }
         return url.toString();
     }
@@ -218,7 +218,7 @@ class Api {
     private resolvePromises(message: ResponseWithStatus): void {
         const { transaction, status } = message;
         if (transaction !== undefined && this.requests.has(transaction)) {
-            const [resolve, reject] = this.requests.get(transaction);
+            const [resolve, reject] = this.requests.get(transaction) as [Callable, Callable];
             if (status == "ok" || status == undefined) {
                 resolve();
             } else {

@@ -29,7 +29,7 @@ const BluringInput: React.FunctionComponent<React.DetailedHTMLProps<React.InputH
 
     return <input
         value={internalValue}
-        onBlur={() => onChange({ target: { value: internalValue } } as ChangeEvent<HTMLInputElement>)}
+        onBlur={() => onChange && onChange({ target: { value: internalValue } } as ChangeEvent<HTMLInputElement>)}
         onChange={e => setInternalValue(e.target.value)}
         {...rest} />
 }

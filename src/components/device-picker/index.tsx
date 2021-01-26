@@ -16,10 +16,10 @@ export default class DevicePicker extends Component<DevicePickerProps & Omit<Sel
         const { value } = e.target as HTMLSelectElement;
 
         if (devices.has(value)) {
-            onChange(devices.get(value), "device");
+            onChange(devices.get(value) as Device, "device");
         } else {
             const group = groups.find(g => parseInt(value, 10) === g.id);
-            onChange(group, "group");
+            onChange(group as Group, "group");
         }
     }
     render() {
@@ -27,7 +27,7 @@ export default class DevicePicker extends Component<DevicePickerProps & Omit<Sel
         const { devices, groups, value, type, onChange, ...rest } = this.props;
         let options = [<option key="hidden" hidden>Select device</option>];
 
-        const devicesOptions = [];
+        const devicesOptions = [] as JSX.Element[];
         devices.forEach((device) => {
             devicesOptions.push(<option
                 title={device.definition?.description}

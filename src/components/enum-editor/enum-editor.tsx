@@ -3,11 +3,13 @@ import Button from "../button";
 import cx from "classnames";
 type Primitive = number | string;
 
-export type ValueWithLabelOrPrimitive = {
+export type ValueWithLabel = {
   value: number;
   name: string;
   description?: string;
-} | Primitive;
+};
+
+export type ValueWithLabelOrPrimitive = ValueWithLabel | Primitive;
 
 type EnumProps = {
   value?: ValueWithLabelOrPrimitive;
@@ -25,7 +27,7 @@ const EnumEditor: FunctionComponent<EnumProps> = (props) => {
   return <div className="btn-group me-2">
     {
       values.map(v => <Button<ValueWithLabelOrPrimitive>
-        className={cx("btn btn-outline-secondary", { active: isPrimitive(v) ? v === value : v.value == (isPrimitive(value) ? value : value?.value) })}
+        className={cx("btn btn-outline-secondary", { active: isPrimitive(v) ? v === value : v.value == (isPrimitive(value as ValueWithLabelOrPrimitive) ? value : (value as ValueWithLabel).value) })}
         onClick={item => onChange(item)}
         key={isPrimitive(v) ? v : v.name}
         item={isPrimitive(v) ? v : v.value}
