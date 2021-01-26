@@ -23,7 +23,7 @@ const RangeEditor: FunctionComponent<RangeProps & Omit<InputHTMLAttributes<HTMLI
 
   const showRange = min !== undefined && max !== undefined;
   return <div className="input-group align-items-center">
-    {steps ? <EnumEditor values={steps} onChange={onChange} /> : null}
+    {steps ? <EnumEditor values={steps} onChange={onChange} value={currentValue} /> : null}
     {showRange ? <input
       id={id}
       min={min}
