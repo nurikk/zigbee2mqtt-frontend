@@ -127,21 +127,6 @@ export class DeviceInfo extends Component<DeviceInfoProps & PropsFromStore, {}> 
                             </Fragment>
                         ))
                     }
-                    {
-                        deviceStatus?.update?.state === "updating" ? (
-                            <Fragment>
-                                <dt className="col-12 col-md-5">Updating firmware</dt>
-                                <dd className="col-12 col-md-7">
-                                    <div className="progress">
-                                        <div className="progress-bar progress-bar-striped progress-bar-animated" style={{ width: `${deviceStatus.update.progress}%` }}>
-                                            {deviceStatus.update.progress}%
-                                        </div>
-                                    </div>
-                                    <div>Remaining time {toHHMMSS(deviceStatus.update.remaining)}</div>
-                                </dd>
-                            </Fragment>
-                        ) : null
-                    }
                 </dl>
 
 

@@ -28,7 +28,7 @@ interface DeviceControlGroupState {
 
 }
 
-export class DeviceControlGroup extends Component<DeviceControlGroupProps & DeviceApi & OtaApi & GlobalState, DeviceControlGroupState> {
+export class DeviceControlGroup extends Component<DeviceControlGroupProps & DeviceApi & GlobalState, DeviceControlGroupState> {
     state = {
         isRenameModalOpened: false,
         isDeviceRemovalModalOpened: false,
@@ -146,26 +146,20 @@ export class DeviceControlGroup extends Component<DeviceControlGroupProps & Devi
                 <button onClick={this.toggleDeviceRemovalModal} className="btn btn-danger" title="Remove device"><i className={cx("fa", "fa-trash")} /></button></>
         )
     }
+
     render() {
-        const { device, configureDevice, checkOTA, updateOTA, state } = this.props;
+        const { device, configureDevice } = this.props;
         return (
             <div className="btn-group btn-group-sm" role="group">
                 {this.renderRenameButton()}
                 <Button<string> className="btn btn-secondary" onClick={configureDevice} item={device.friendly_name} title="Reconfigure" promt><i className={cx("fa", "fa-cogs")} /></Button>
-                {
-                    state?.update?.state === "available" ?
-                        <Button<string> className="btn btn-secondary" onClick={updateOTA} item={device.friendly_name} title="Update OTA" promt><i className={cx("fa", "fa-cloud-download-alt")} /></Button>
-                        : <Button<string> className="btn btn-secondary" onClick={checkOTA} item={device.friendly_name} title="Check OTA"><i className={cx("fa", "fa-cloud")} /></Button>
-                }
                 {this.renderDeviceRemovalButton()}
-
-
             </div>
         );
     }
 }
 
 const mappedProps = ["bridgeInfo"];
-const ConnectedDeviceControlGroup = connect<DeviceControlGroupProps, {}, GlobalState, DeviceApi & OtaApi>(mappedProps, actions)(DeviceControlGroup);
+const ConnectedDeviceControlGroup = connect<DeviceControlGroupProps, {}, GlobalState, DeviceApi>(mappedProps, actions)(DeviceControlGroup);
 export default ConnectedDeviceControlGroup;
 

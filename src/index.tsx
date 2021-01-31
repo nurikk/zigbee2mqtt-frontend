@@ -27,6 +27,7 @@ import NavBar from "./components/navbar";
 import ConnectedGroupsPage from "./components/groups";
 import ConnectedZigbeePage from "./components/zigbee";
 import LogsPage from "./components/logs-page";
+import OtaPage from "./components/ota-page";
 import ReactDOM from "react-dom";
 import ErrorBoundary from "./components/ErrorBoundary";
 
@@ -46,6 +47,7 @@ class Main extends Component {
                 <HashRouter>
                     <NavBar />
                     <Switch>
+                        <Route path="/ota" render={(props) => <ErrorBoundary {...props}><OtaPage /></ErrorBoundary>} />
                         <Route path="/map" render={(props) => <ErrorBoundary {...props}><ConnectedMap /></ErrorBoundary>} />
                         <Route path="/device/:dev/:tab?" render={(props) => <ErrorBoundary {...props}><ConnectedDevicePage /></ErrorBoundary>} />
                         <Route path="/settings/:tab?" render={(props) => <ErrorBoundary {...props}><ConnectedSettingsPage /></ErrorBoundary>} />

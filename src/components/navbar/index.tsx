@@ -30,6 +30,10 @@ const urls = [
         title: 'Groups'
     },
     {
+        href: '/ota',
+        title: 'OTA'
+    },
+    {
         href: '/touchlink',
         title: 'Touchlink'
     },
