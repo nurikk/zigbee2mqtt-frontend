@@ -1,13 +1,15 @@
 
 import React, { Component, FunctionComponent } from "react";
-import { Device, DeviceState } from "types";
+
 import { connect } from "unistore/react";
 import actions, { OtaApi } from "../../actions";
 import { GlobalState } from "../../store";
 import Button from "../button";
 import { genDeviceDetailsLink, toHHMMSS } from "../../utils";
 import { Link } from "react-router-dom";
+import { Device, DeviceState } from "../../types";
 import { VendorLink, ModelLink } from "../vendor-links/verndor-links";
+
 
 type OtaRowProps = {
     device: Device;

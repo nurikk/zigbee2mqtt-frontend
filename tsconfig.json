@@ -10,8 +10,7 @@
         "jsx": "react",
         "experimentalDecorators": true,
         "allowSyntheticDefaultImports": true,
-        "strictNullChecks": true,
-        "baseUrl": "src"
+        "strictNullChecks": true
     },
     "suppressImplicitAnyIndexErrors": true,
     "lib": ["es2015", "dom", "dom.iterable"],
