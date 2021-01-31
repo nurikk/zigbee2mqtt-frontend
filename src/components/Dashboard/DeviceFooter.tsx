@@ -10,21 +10,18 @@ type Props = {
     linkquality?: number;
     battery?: number;
     voltage?: number;
-    source?: PowerSourceType;
+    source: PowerSourceType;
     batteryLow?: boolean;
     consumption?: number;
     temperature?: number;
-    lastUpdate: number | string;
+    lastUpdate?: number | string;
 };
 
 const DeviceFooter: React.FC<Props> = ({ linkquality, battery, source, consumption, temperature, lastUpdate }) => {
-    // TODO:
-    const outdated = false; // (Date.now() - lastUpdate) / 1000 >= 3600;
-
     return (
         <footer className={`card-footer ${styles.footer}`}>
             <Row className="justify-content-between flex-nowrap">
-                <Col title="last update" className={`text-truncate ${outdated ? 'text-warning' : ''}`}>
+                <Col title="last update" className={`text-truncate`}>
                     {lastSeen(lastUpdate)}
                 </Col>
                 <Col className="col-auto text-truncate">

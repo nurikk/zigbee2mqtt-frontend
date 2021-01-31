@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/camelcase */
 import React, { useMemo } from 'react';
 import { CompositeFeature } from 'types';
 import { BaseFeatureProps } from 'components/features/base';
@@ -227,11 +228,11 @@ const DashboardDevice: React.FC<Props> = (props) => {
                 <DeviceFooter
                     lastUpdate={props.deviceState.last_seen}
                     battery={props.deviceState.battery}
-                    voltage={props.deviceState.voltage as number}
+                    voltage={props.deviceState.voltage}
                     source={props.device.power_source}
-                    consumption={props.deviceState.consumption as number}
+                    consumption={props.deviceState.consumption}
                     linkquality={props.deviceState.linkquality}
-                    temperature={state.isSocket ? (props.deviceState.temperature as number) : undefined}
+                    temperature={state.isSocket ? (props.deviceState.temperature) : undefined}
                 />
             </div>
         </div>

@@ -36,6 +36,22 @@ export interface DeviceState {
     color?: AnyColor;
     tilt?: number;
     position?: number;
+    lastUpdate: number;
+    click?: 'single' | 'double' | 'triple' | 'quadruple' | 'long' | 'long_release' | 'many';
+    consumption?: number;
+    power?: number;
+    temperature?: number;
+    away_mode?: 'ON' | 'OFF';
+    humidity?: number;
+    voltage?: number;
+    contact?: boolean;
+    occupancy?: boolean;
+    water_leak?: boolean;
+    local_temperature?: number;
+    current_heating_setpoint?: number;
+    // thermostat
+    system_mode?: 'off' | 'heat' | 'auto';
+    running_state?: 'idle' | 'heat';
     // [k: string]: string | number | boolean | OTAState | AnyColor | undefined;
 }
 
