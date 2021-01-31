@@ -12,7 +12,7 @@ import cx from "classnames";
 import { JSONSchema7 } from "json-schema";
 import cloneDeep from "lodash/cloneDeep";
 
-import "./style.scss";
+import "./style.global.scss";
 
 export const logLevelSetting = {
     key: 'log_level',

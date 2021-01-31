@@ -119,7 +119,7 @@ module.exports = (env, args) => {
                 {
                     test: /\.scss$/,
                     include: [/\.global\./, /node_modules/],
-                    use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+                    use: ['css-loader', 'sass-loader'],
                     sideEffects: true,
                 },
                 {
