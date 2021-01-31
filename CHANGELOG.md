@@ -1,3 +1,12 @@
+## [0.3.22](https://github.com/nurikk/z2m-frontend/compare/0.3.21...0.3.22) (2021-01-31)
+
+
+### Features
+
+* **ota-page:** add model/manufacturer cols ([9ae9eee](https://github.com/nurikk/z2m-frontend/commit/9ae9eeecf12abd19f5bf373e3c04f15e0396a862))
+
+
+
 ## [0.3.21](https://github.com/nurikk/z2m-frontend/compare/0.3.20...0.3.21) (2021-01-31)
 
 
