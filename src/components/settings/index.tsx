@@ -9,9 +9,11 @@ import { NavLink, Redirect, RouteComponentProps, withRouter } from "react-router
 import Button from "../button";
 import Form from '@rjsf/bootstrap-4';
 import cx from "classnames";
-import { JSONSchema7, JSONSchema7Definition } from "json-schema";
+import { JSONSchema7 } from "json-schema";
 import cloneDeep from "lodash/cloneDeep";
-import value from "*.txt";
+
+import "./style.scss";
+
 export const logLevelSetting = {
     key: 'log_level',
     path: 'log_level',
@@ -72,7 +74,7 @@ const uiSchemas = {
 
 const validJsonSchemasAsTabs = ['object', 'array'];
 
-const isValidKeyToRenderAsTab = (key: string, value: JSONSchema7): boolean => (validJsonSchemasAsTabs.includes(value.type as string) && !ingoredFields.includes(key)) || value?.oneOf?.length > 0
+const isValidKeyToRenderAsTab = (key: string, value: JSONSchema7): boolean => (validJsonSchemasAsTabs.includes(value.type as string) && !ingoredFields.includes(key)) || (value && value.oneOf ? value.oneOf.length > 0 : false);
 export class SettingsPage extends Component<SettingsPageProps & BridgeApi & GlobalState & UtilsApi, SettingsPageState> {
     state = {
         keyName: ROOT_KEY_NAME
@@ -211,30 +213,43 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
     getSettingsInfo() {
         const { keyName } = this.state;
         const { bridgeInfo: { config_schema: configSchema, config } } = this.props;
-        const copyConfig = cloneDeep(config);
+        const copyConfig = cloneDeep(config) as object;
         const schema = cloneDeep(configSchema);
 
         ingoredFields.forEach(field => {
-            schema.required = schema.required.filter(item => item !== field);
-            delete schema.properties[field];
+            if (schema.required) {
+                schema.required = schema.required.filter(item => item !== field);
+            }
+
+            if (schema.properties) {
+                delete schema.properties[field];
+            }
             delete copyConfig[field];
         });
 
-        let currentSchema: JSONSchema7;
+        let currentSchema: JSONSchema7 = schema;
         let currentConfig = copyConfig[keyName] as object;
 
 
         if (keyName === ROOT_KEY_NAME) {
             this.getSettingsTabs().forEach(tab => {
-                schema.required = schema.required.filter(item => item !== tab.name);
-                delete schema.properties[tab.name];
+                if (schema.required) {
+                    schema.required = schema.required.filter(item => item !== tab.name);
+                }
+                if (schema.properties) {
+                    delete schema.properties[tab.name];
+                }
+
                 delete copyConfig[tab.name];
             });
             currentSchema = schema;
             currentConfig = copyConfig;
         } else {
             currentConfig = copyConfig[keyName] as object;
-            currentSchema = schema.properties[keyName] as JSONSchema7;
+            if (schema.properties) {
+                currentSchema = schema.properties[keyName] as JSONSchema7;
+            }
+
         }
         return { currentSchema, currentConfig };
     }

@@ -1,7 +1,7 @@
-import './main.css';
+import "./main.css";
 
-import 'notyf/notyf.min.css';
-import 'styles/styles.global.scss';
+import "notyf/notyf.min.css";
+import './styles/styles.global.scss';
 
 import React from 'react';
 
@@ -21,6 +21,7 @@ import NavBar from './components/navbar';
 import ConnectedGroupsPage from './components/groups';
 import ConnectedZigbeePage from './components/zigbee';
 import LogsPage from './components/logs-page';
+import OtaPage from "./components/ota-page";
 import ReactDOM from 'react-dom';
 import ErrorBoundary from './components/ErrorBoundary';
 import Dashboard from './components/Dashboard/Dashboard';
@@ -35,6 +36,7 @@ const Main: React.FC = () => {
             <HashRouter>
                 <NavBar />
                 <Switch>
+                    <Route path="/ota" render={(props) => <ErrorBoundary {...props}><OtaPage /></ErrorBoundary>} />
                     <Route path="/map" render={(props) => <ErrorBoundary {...props}><ConnectedMap /></ErrorBoundary>} />
                     <Route path="/dashboard" render={(props) => <Dashboard {...props} />} />
                     <Route path="/device/:dev/:tab?" render={(props) => <ErrorBoundary {...props}><ConnectedDevicePage /></ErrorBoundary>} />

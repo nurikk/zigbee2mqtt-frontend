@@ -1,0 +1,5 @@
+@import "bootstrap";
+
+:global(.custom-select) {
+    @extend .form-select;
+}

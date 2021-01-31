@@ -114,7 +114,7 @@ export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
             if (device.type !== "Coordinator") {
                 tableData.push({
                     device,
-                    state: deviceStates.get(device.friendly_name)
+                    state: deviceStates.get(device.friendly_name) ?? {} as DeviceState
 
                 });
             }
@@ -123,7 +123,7 @@ export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
     }
 
 
-    onSortChange = (column: SortColumn | SortColumn[], sortDir: SortDirection = undefined): void => {
+    onSortChange = (column: SortColumn | SortColumn[], sortDir?: SortDirection): void => {
         const { sortColumn } = this.state;
         let { sortDirection } = this.state;
 
@@ -222,7 +222,7 @@ export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
                                 <td className="text-truncate text-nowrap position-relative"><VendorLink device={device} /></td>
                                 <td title={device?.definition?.description}><ModelLink device={device} /></td>
                                 <td><DisplayValue value={state?.linkquality}/></td>
-                                {this.lastSeenIsAvaliable() && <td>{lastSeen(state?.last_seen, state?.elapsed)}</td>}
+                                {this.lastSeenIsAvaliable() && <td>{lastSeen(state.last_seen, state.elapsed)}</td>}
                                 <td className="text-left">
                                     <PowerSource source={device.power_source} battery={state?.battery} batteryLow={state?.battery_low} />
                                 </td>

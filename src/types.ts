@@ -36,7 +36,7 @@ export interface DeviceState {
     color?: AnyColor;
     tilt?: number;
     position?: number;
-    [k: string]: string | number | boolean | OTAState | AnyColor;
+    // [k: string]: string | number | boolean | OTAState | AnyColor | undefined;
 }
 
 export type Cluster = string;
@@ -121,9 +121,9 @@ export enum FeatureAccessMode {
 }
 export interface GenericExposedFeature {
     type: GenericFeatureType;
-    name?: string;
+    name: string;
     unit?: "string";
-    access?: FeatureAccessMode;
+    access: FeatureAccessMode;
     endpoint?: Endpoint;
     property: string;
     description?: string;
@@ -199,6 +199,7 @@ export interface DeviceDefinition {
     supports: string;
     vendor: string;
     exposes: GenericExposedFeature[] | CompositeFeature[];
+    supports_ota?: boolean;
 }
 export interface ReportingConfig {
     cluster: Cluster;

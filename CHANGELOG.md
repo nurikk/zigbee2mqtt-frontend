@@ -1,3 +1,57 @@
+## [0.3.22](https://github.com/nurikk/z2m-frontend/compare/0.3.21...0.3.22) (2021-01-31)
+
+
+### Features
+
+* **ota-page:** add model/manufacturer cols ([9ae9eee](https://github.com/nurikk/z2m-frontend/commit/9ae9eeecf12abd19f5bf373e3c04f15e0396a862))
+
+
+
+## [0.3.21](https://github.com/nurikk/z2m-frontend/compare/0.3.20...0.3.21) (2021-01-31)
+
+
+### Features
+
+* **ota:** add OTA page ([a1f0111](https://github.com/nurikk/z2m-frontend/commit/a1f0111929dcba4426d52c1df3e2bff75e4af84d))
+
+
+
+## [0.3.20](https://github.com/nurikk/z2m-frontend/compare/0.3.19...0.3.20) (2021-01-31)
+
+
+### Bug Fixes
+
+* **experimental-settings:** fix custom-select styling ([00d5771](https://github.com/nurikk/z2m-frontend/commit/00d577159a3dc16ffe1218ae86f353ddd6ba18da))
+
+
+
+## [0.3.19](https://github.com/nurikk/z2m-frontend/compare/0.3.18...0.3.19) (2021-01-26)
+
+
+### Bug Fixes
+
+* **enum-editor:** better primitive type detection ([0ff0dc4](https://github.com/nurikk/z2m-frontend/commit/0ff0dc4906874297ba1c51585853dd8241d74eb1))
+
+
+
+## [0.3.18](https://github.com/nurikk/z2m-frontend/compare/0.3.16...0.3.18) (2021-01-26)
+
+
+### Bug Fixes
+
+* **range-editor:** fix value param ([eaa9d82](https://github.com/nurikk/z2m-frontend/commit/eaa9d8256efe3087621613c25004af3218075333))
+
+
+### Features
+
+* **error-boundry:** better error boundry ([3fa8318](https://github.com/nurikk/z2m-frontend/commit/3fa831838d6b87492012b3376457d822a6a9358b))
+
+
+
+## [0.3.17](https://github.com/nurikk/z2m-frontend/compare/0.3.16...0.3.17) (2021-01-26)
+
+
+
 ## [0.3.16](https://github.com/nurikk/z2m-frontend/compare/0.3.15...0.3.16) (2021-01-18)
 
 

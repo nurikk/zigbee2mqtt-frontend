@@ -23,7 +23,7 @@ interface ReportingRowState {
 
 const getClusters = (device: Device, endpoint: Endpoint): ClusterGroup[] => {
   let possibleClusters = Object.keys(Clusters);
-  let availableClusters = [];
+  let availableClusters = [] as Cluster[];
   const ep = device.endpoints.get(endpoint);
   if (ep) {
     availableClusters = availableClusters.concat(ep.clusters.output);

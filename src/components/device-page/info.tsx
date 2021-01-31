@@ -40,8 +40,8 @@ const displayProps = [
         label: 'Description',
         if: 'supported',
         render: (device: Device) => {
-            const result = markdownLinkRegex.exec(device.definition.description);
-            let content = <span>{device.definition.description}</span>;
+            const result = markdownLinkRegex.exec(device.definition?.description as string);
+            let content = <span>{device.definition?.description}</span>;
             if (result) {
                 // eslint-disable-next-line @typescript-eslint/no-unused-vars
                 const [all, title, link] = result;
@@ -55,7 +55,7 @@ const displayProps = [
         label: 'Support status'
     },
     {
-        render: (device: Device) => <dd className="col-12 col-md-7">{device.definition.supports}</dd>,
+        render: (device: Device) => <dd className="col-12 col-md-7">{device.definition?.supports}</dd>,
         label: 'Supports',
         if: 'definition.supports'
     },
@@ -126,21 +126,6 @@ export class DeviceInfo extends Component<DeviceInfoProps & PropsFromStore, {}> 
 
                             </Fragment>
                         ))
-                    }
-                    {
-                        deviceStatus?.update?.state === "updating" ? (
-                            <Fragment>
-                                <dt className="col-12 col-md-5">Updating firmware</dt>
-                                <dd className="col-12 col-md-7">
-                                    <div className="progress">
-                                        <div className="progress-bar progress-bar-striped progress-bar-animated" style={{ width: `${deviceStatus.update.progress}%` }}>
-                                            {deviceStatus.update.progress}%
-                                        </div>
-                                    </div>
-                                    <div>Remaining time {toHHMMSS(deviceStatus.update.remaining)}</div>
-                                </dd>
-                            </Fragment>
-                        ) : null
                     }
                 </dl>
 

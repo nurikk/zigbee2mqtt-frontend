@@ -10,6 +10,7 @@
         "jsx": "react",
         "experimentalDecorators": true,
         "allowSyntheticDefaultImports": true,
+        "strictNullChecks": true,
         "baseUrl": "src"
     },
     "suppressImplicitAnyIndexErrors": true,

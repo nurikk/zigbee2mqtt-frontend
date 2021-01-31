@@ -27,8 +27,8 @@ interface AddDeviceToGroupProps {
 }
 
 interface AddDeviceToGroupState {
-    device: string;
-    endpoint: Endpoint;
+    device?: string;
+    endpoint?: Endpoint;
 }
 
 interface DeviceGroupRowProps {
@@ -40,9 +40,9 @@ interface DeviceGroupRowProps {
 
 // eslint-disable-next-line react/prefer-stateless-function
 class DeviceGroupRow extends Component<DeviceGroupRowProps, {}> {
-    getDeviceObj(): Device | undefined {
+    getDeviceObj(): Device {
         const { groupAddress, devices } = this.props;
-        return devices.get(groupAddress.ieee_address);
+        return devices.get(groupAddress.ieee_address) as Device;
     }
     render() {
         const { rowNumber, groupAddress, removeDeviceFromGroup } = this.props;
@@ -93,16 +93,14 @@ class DeviceGroup extends Component<DeviceGroupPropts, {}> {
 }
 
 class AddDeviceToGroup extends Component<AddDeviceToGroupProps, AddDeviceToGroupState> {
-    state = {
-        device: undefined,
-        endpoint: undefined
-    };
+    state: Readonly<AddDeviceToGroupState> = {};
 
 
     onSubmit = (): void => {
         const { addDeviceToGroup, group } = this.props;
         const { device, endpoint } = this.state;
-        addDeviceToGroup(endpoint ? `${device}/${endpoint}` : device, group.friendly_name);
+
+        addDeviceToGroup(endpoint ? `${device}/${endpoint}` : device as string, group.friendly_name);
 
     }
     onDeviceSelect = (device: Device): void => {
@@ -116,7 +114,7 @@ class AddDeviceToGroup extends Component<AddDeviceToGroupProps, AddDeviceToGroup
     render() {
         const { device, endpoint } = this.state;
         const { devices } = this.props;
-        const deviceObj = devices.get(device);
+        const deviceObj = devices.get(device as string) as Device;
 
         const endpoints = getEndpoints(deviceObj);
 
@@ -124,8 +122,8 @@ class AddDeviceToGroup extends Component<AddDeviceToGroupProps, AddDeviceToGroup
 
             <div className="col">
                 <div className="input-group mb-3">
-                    <DevicePicker type="device" value={device} devices={devices} onChange={this.onDeviceSelect} />
-                    <EndpointPicker values={endpoints} value={endpoint} onChange={this.onEpChange} />
+                    <DevicePicker type="device" value={device as string} devices={devices} onChange={this.onDeviceSelect} />
+                    <EndpointPicker values={endpoints} value={endpoint as Endpoint} onChange={this.onEpChange} />
                 </div>
 
             </div>

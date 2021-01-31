@@ -22,12 +22,40 @@ export default class ErrorBoundary extends React.Component<ErrorBoundaryProps, E
 
     render() {
         const { error } = this.state;
+
         if (error) {
+            const githubUrlParams = {
+                title: `Got error: ${error.message}`,
+                body: [
+                    `DESCRIBE HERE WHAT HAPPENED AND WHAT YOU EXPECTED TO HAPPEN`,
+                    "\n\n\n\n\n",
+
+                    `**Current url**: ${window.location.toString()}`,
+                    `**Previous url**: ${document.referrer}`,
+                    "\n",
+                    `**Error type**: ${error?.name}`,
+                    `**Error message**: ${error?.message}`,
+                    "\n\n",
+                    error?.stack
+                ].join("\n")
+            } as Record<string, string>;
+
+
+            const githubUrl = `https://github.com/nurikk/z2m-frontend/issues/new?${new URLSearchParams(githubUrlParams).toString()}`
             return <div className="container">
-                <h1 className="text-danger">Take screenshot of this page and attach it to github issue, additionally <Button<void> className="mt-2 btn btn-link" onClick={() => this.donwloadState()}>download state</Button> and attach to the issue</h1>
-                <h2>{error.name}</h2>
-                <h3>{error.message}</h3>
-                <pre>{error.stack}</pre>
+
+                <h1 className="text-danger">Hello, you&apos;ve found a bug. Congratulations!</h1>
+                <ol>
+                    <li><strong>Calm down</strong></li>
+                    <li><strong>Raise a github issue <a target="_blank" rel="noopener noreferrer" href={githubUrl}>here</a></strong></li>
+                    <li><strong><span className="btn btn-link p-0" onClick={this.donwloadState}>Download this file</span> and attach to the issue</strong></li>
+                    <li><strong>Take a screenshot of this page and attach to the issue</strong></li>
+                </ol>
+                <div>
+                    <div>{error.name}</div>
+                    <div>{error.message}</div>
+                    <pre>{error.stack}</pre>
+                </div>
             </div>
 
         }
@@ -38,7 +66,7 @@ export default class ErrorBoundary extends React.Component<ErrorBoundaryProps, E
         const { location: { pathname } } = this.props;
         const { location: { pathname: prevPathname } } = prevProps;
         if (prevPathname !== pathname) {
-            this.setState({ error: null });
+            this.setState({ error: undefined });
         }
     }
 }

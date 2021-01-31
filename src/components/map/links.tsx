@@ -1,5 +1,5 @@
 import { LinkI } from "./types";
-import React, { FunctionComponent, useLayoutEffect, useRef } from "react";
+import React, { FunctionComponent, RefObject, useLayoutEffect, useRef } from "react";
 import style from "./map.css";
 import cx from "classnames";
 import { select } from "d3-selection";
@@ -37,12 +37,12 @@ const Links: FunctionComponent<LinksPros> = props => {
     const { links } = props;
     const ref = useRef<SVGGElement>();
     useLayoutEffect(() => {
-        select(ref.current).selectAll(`.${style.link}`).data(links);
-        select(ref.current).selectAll(`.${style.linkLabel}`).data(links);
+        select(ref.current as SVGGElement).selectAll(`.${style.link}`).data(links);
+        select(ref.current as SVGGElement).selectAll(`.${style.linkLabel}`).data(links);
     }, [links.length]);
 
     return (
-        <g ref={ref} className={style.links}>
+        <g ref={ref as RefObject<SVGGElement>} className={style.links}>
             {links.map((link: LinkI) => <Link
                 id={`edgepath${link.sourceIeeeAddr}-${link.targetIeeeAddr}-${link.linkType}`}
                 key={`link${link.sourceIeeeAddr}-${link.targetIeeeAddr}-${link.linkType}`}

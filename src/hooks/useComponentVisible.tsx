@@ -4,7 +4,7 @@ export default function useComponentVisible(initialIsVisible: boolean) {
     const [isComponentVisible, setIsComponentVisible] = useState(
         initialIsVisible
     );
-    const ref = useRef(null);
+    const ref = useRef<HTMLElement>(null);
 
     const handleHideDropdown = (event: KeyboardEvent) => {
         if (event.key === "Escape") {
@@ -13,7 +13,7 @@ export default function useComponentVisible(initialIsVisible: boolean) {
     };
 
     const handleClickOutside = (event: MouseEvent) => {
-        if (ref.current && !ref.current.contains(event.target)) {
+        if (ref.current && !ref.current.contains(event.target as Node)) {
             setIsComponentVisible(false);
         }
     };
