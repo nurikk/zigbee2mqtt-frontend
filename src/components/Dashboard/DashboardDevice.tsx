@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/camelcase */
 import React, { useMemo } from 'react';
 import { CompositeFeature } from 'types';
 import { BaseFeatureProps } from 'components/features/base';
@@ -102,17 +101,18 @@ const DashboardDevice: React.FC<Props> = (props) => {
     };
 
     const renderWaterLeak = () => {
-        const { water_leak } = props.deviceState;
+        // eslint-disable-next-line @typescript-eslint/camelcase
+        const { water_leak: waterLeak } = props.deviceState;
         return (
             <div className={styles.entity}>
                 <div className={styles.icon}>
-                    <i className={`fa fa-fw fa-water ${water_leak ? 'text-primary' : ''}`} />
+                    <i className={`fa fa-fw fa-water ${waterLeak ? 'text-primary' : ''}`} />
                 </div>
                 <div className={styles.title}>
                     Water Leak
-                    {water_leak ? <i className="fa fa-fw fa-exclamation-triangle text-danger" /> : null}
+                    {waterLeak ? <i className="fa fa-fw fa-exclamation-triangle text-danger" /> : null}
                 </div>
-                <div className={styles.value}>{water_leak ? 'Detected' : 'Clear'}</div>
+                <div className={styles.value}>{waterLeak ? 'Detected' : 'Clear'}</div>
             </div>
         );
     };
@@ -185,7 +185,12 @@ const DashboardDevice: React.FC<Props> = (props) => {
     };
 
     const renderThermostat = () => {
-        const { local_temperature = 0, current_heating_setpoint = 0, running_state, system_mode } = props.deviceState;
+        const {
+            local_temperature: localTemp = 0,
+            current_heating_setpoint: currentHeatingSetPoint = 0,
+            running_state: runningstate,
+            system_mode: systemMode,
+        } = props.deviceState;
         return (
             <>
                 <div className={styles.entity}>
@@ -193,16 +198,16 @@ const DashboardDevice: React.FC<Props> = (props) => {
                         <i className="fa fa-fw fa-fire-alt text-warning" />
                     </div>
                     <div className={styles.title}>
-                        Set ({system_mode}/{running_state})
+                        Set ({systemMode}/{runningstate})
                     </div>
-                    <div className={styles.value}>{current_heating_setpoint} °C</div>
+                    <div className={styles.value}>{currentHeatingSetPoint} °C</div>
                 </div>
                 <div className={styles.entity}>
                     <div className={styles.icon}>
-                        <i className={`fa fa-fw ${getTemperatureIcon(local_temperature as number)} text-danger`} />
+                        <i className={`fa fa-fw ${getTemperatureIcon(localTemp)} text-danger`} />
                     </div>
                     <div className={styles.title}>Room</div>
-                    <div className={styles.value}>{local_temperature} °C</div>
+                    <div className={styles.value}>{localTemp} °C</div>
                 </div>
             </>
         );
@@ -232,7 +237,7 @@ const DashboardDevice: React.FC<Props> = (props) => {
                     source={props.device.power_source}
                     consumption={props.deviceState.consumption}
                     linkquality={props.deviceState.linkquality}
-                    temperature={state.isSocket ? (props.deviceState.temperature) : undefined}
+                    temperature={state.isSocket ? props.deviceState.temperature : undefined}
                 />
             </div>
         </div>
