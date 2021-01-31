@@ -1,3 +1,12 @@
+## [0.3.20](https://github.com/nurikk/z2m-frontend/compare/0.3.19...0.3.20) (2021-01-31)
+
+
+### Bug Fixes
+
+* **experimental-settings:** fix custom-select styling ([00d5771](https://github.com/nurikk/z2m-frontend/commit/00d577159a3dc16ffe1218ae86f353ddd6ba18da))
+
+
+
 ## [0.3.19](https://github.com/nurikk/z2m-frontend/compare/0.3.18...0.3.19) (2021-01-26)
 
 
