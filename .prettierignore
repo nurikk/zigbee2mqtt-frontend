@@ -3,3 +3,4 @@ ws-messages/
 package-lock.json
 package.json
 .vscode/
+src/index.tsx

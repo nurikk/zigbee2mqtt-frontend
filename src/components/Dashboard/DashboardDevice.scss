@@ -3,10 +3,32 @@
     height: 100%;
 }
 
+.cardBody {
+    display: flex;
+    align-items: center;
+}
+
+.deviceImage {
+    flex-shrink: 0;
+    margin-right: 5px;
+    i {
+        right: 0px;
+    }
+
+    img {
+        max-height: 2em;
+    }
+}
+
+.exposes {
+    flex-grow: 1;
+}
+
 .entity {
     display: flex;
     align-items: center;
 }
+
 
 .icon {
     width: 25px;

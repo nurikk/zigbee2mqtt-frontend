@@ -12,6 +12,7 @@ type OwnProps = RouteComponentProps;
 type Props = Pick<GlobalState, 'devices' | 'deviceStates'> & OwnProps & StateApi;
 
 const Dashboard: React.FC<Props> = (props) => {
+    const { setDeviceState, getDeviceState } = props;
     return (
         <ErrorBoundary {...props}>
             <div className="container-fluid">
@@ -25,18 +26,12 @@ const Dashboard: React.FC<Props> = (props) => {
                                 feature={{ features: device.definition?.exposes } as CompositeFeature}
                                 device={device}
                                 deviceState={deviceState}
-                                onChange={(endpoint, value) => {
-                                    props.setDeviceState(
-                                        `${device.friendly_name}${endpoint ? `/${endpoint}` : ''}`,
-                                        value,
-                                    );
-                                }}
-                                onRead={(endpoint, value) => {
-                                    props.getDeviceState(
-                                        `${device.friendly_name}${endpoint ? `/${endpoint}` : ''}`,
-                                        value,
-                                    );
-                                }}
+                                onChange={(endpoint, value) =>
+                                    setDeviceState(`${device.friendly_name}${endpoint ? `/${endpoint}` : ''}`, value)
+                                }
+                                onRead={(endpoint, value) =>
+                                    getDeviceState(`${device.friendly_name}${endpoint ? `/${endpoint}` : ''}`, value)
+                                }
                             />
                         );
                     })}

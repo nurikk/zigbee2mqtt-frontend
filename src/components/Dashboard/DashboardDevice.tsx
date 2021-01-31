@@ -1,11 +1,10 @@
-/* eslint-disable @typescript-eslint/camelcase */
 import React, { useMemo } from 'react';
 import { CompositeFeature } from 'types';
 import { BaseFeatureProps } from 'components/features/base';
 import DeviceFooter from 'components/Dashboard/DeviceFooter';
 
 import styles from 'components/Dashboard/DashboardDevice.scss';
-import ReactSwitch from 'react-switch';
+import DeviceImage from 'components/device-image';
 
 type Props = BaseFeatureProps<CompositeFeature>;
 
@@ -158,8 +157,8 @@ const DashboardDevice: React.FC<Props> = (props) => {
         );
     };
 
-    const handleSwitchChange = (value: boolean) => {
-        props.onChange('', { state: value ? 'ON' : 'OFF' });
+    const handleSwitchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        props.onChange('', { state: event.target.checked ? 'ON' : 'OFF' });
     };
 
     const renderSwitch = () => {
@@ -171,7 +170,14 @@ const DashboardDevice: React.FC<Props> = (props) => {
                 </div>
                 <div className={styles.title}>{state === 'ON' ? <>{power} W</> : <>Off</>}</div>
                 <div className={styles.value}>
-                    <ReactSwitch onChange={handleSwitchChange} checked={state === 'ON'} width={40} height={20} />
+                    <div className="form-check form-switch">
+                        <input
+                            className="form-check-input"
+                            type="checkbox"
+                            onChange={handleSwitchChange}
+                            checked={state === 'ON'}
+                        />
+                    </div>
                 </div>
             </div>
         );
@@ -203,22 +209,26 @@ const DashboardDevice: React.FC<Props> = (props) => {
 
     return (
         <div className="col-xl-3 col-lg-4 col-sm-6 col-12 mb-3">
-            <div className={`${styles.card} card bg-light`}>
+            <div className={`${styles.card} card`}>
                 <div className="card-header text-truncate">{props.device.friendly_name}</div>
-                <div className="card-body">
-                    {state.isThermostat ? renderThermostat() : null}
-                    {!state.isSocket && state.hasTemperature ? renderTemperature() : null}
-                    {state.hasHumidity ? renderHumidity() : null}
-                    {state.hasContact ? renderContact() : null}
-                    {state.isSocket ? renderSwitch() : null}
-                    {state.hasOccupancy ? renderOccupancy() : null}
-                    {state.hasClick ? renderClick() : null}
-                    {state.hasWaterLeak ? renderWaterLeak() : null}
+                <div className={`${styles.cardBody} card-body`}>
+                    <DeviceImage device={props.device} className={styles.deviceImage} />
+                    <div className={styles.exposes}>
+                        {state.isThermostat ? renderThermostat() : null}
+                        {!state.isSocket && state.hasTemperature ? renderTemperature() : null}
+                        {state.hasHumidity ? renderHumidity() : null}
+                        {state.hasContact ? renderContact() : null}
+                        {state.isSocket ? renderSwitch() : null}
+                        {state.hasOccupancy ? renderOccupancy() : null}
+                        {state.hasClick ? renderClick() : null}
+                        {state.hasWaterLeak ? renderWaterLeak() : null}
+                    </div>
                 </div>
                 <DeviceFooter
-                    lastUpdate={props.deviceState.last_seen as number}
+                    lastUpdate={props.deviceState.last_seen}
                     battery={props.deviceState.battery}
                     voltage={props.deviceState.voltage as number}
+                    source={props.device.power_source}
                     consumption={props.deviceState.consumption as number}
                     linkquality={props.deviceState.linkquality}
                     temperature={state.isSocket ? (props.deviceState.temperature as number) : undefined}

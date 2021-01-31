@@ -35,63 +35,14 @@ const Main: React.FC = () => {
             <HashRouter>
                 <NavBar />
                 <Switch>
-                    <Route
-                        path="/map"
-                        render={(props) => (
-                            <ErrorBoundary {...props}>
-                                <ConnectedMap />
-                            </ErrorBoundary>
-                        )}
-                    />
+                    <Route path="/map" render={(props) => <ErrorBoundary {...props}><ConnectedMap /></ErrorBoundary>} />
                     <Route path="/dashboard" render={(props) => <Dashboard {...props} />} />
-                    <Route
-                        path="/device/:dev/:tab?"
-                        render={(props) => (
-                            <ErrorBoundary {...props}>
-                                <ConnectedDevicePage />
-                            </ErrorBoundary>
-                        )}
-                    />
-                    <Route
-                        path="/settings/:tab?"
-                        render={(props) => (
-                            <ErrorBoundary {...props}>
-                                <ConnectedSettingsPage />
-                            </ErrorBoundary>
-                        )}
-                    />
-                    <Route
-                        path="/groups"
-                        render={(props) => (
-                            <ErrorBoundary {...props}>
-                                <ConnectedGroupsPage />
-                            </ErrorBoundary>
-                        )}
-                    />
-                    <Route
-                        path="/logs"
-                        render={(props) => (
-                            <ErrorBoundary {...props}>
-                                <LogsPage />
-                            </ErrorBoundary>
-                        )}
-                    />
-                    <Route
-                        path="/touchlink"
-                        render={(props) => (
-                            <ErrorBoundary {...props}>
-                                <TouchlinkPage />
-                            </ErrorBoundary>
-                        )}
-                    />
-                    <Route
-                        path="/"
-                        render={(props) => (
-                            <ErrorBoundary {...props}>
-                                <ConnectedZigbeePage />
-                            </ErrorBoundary>
-                        )}
-                    />
+                    <Route path="/device/:dev/:tab?" render={(props) => <ErrorBoundary {...props}><ConnectedDevicePage /></ErrorBoundary>} />
+                    <Route path="/settings/:tab?" render={(props) => <ErrorBoundary {...props}><ConnectedSettingsPage /></ErrorBoundary>} />
+                    <Route path="/groups" render={(props) => <ErrorBoundary {...props}><ConnectedGroupsPage /></ErrorBoundary>} />
+                    <Route path="/logs" render={(props) => <ErrorBoundary {...props}><LogsPage /></ErrorBoundary>} />
+                    <Route path="/touchlink" render={(props) => <ErrorBoundary {...props}><TouchlinkPage /></ErrorBoundary>} />
+                    <Route path="/" render={(props) => <ErrorBoundary {...props}><ConnectedZigbeePage /></ErrorBoundary>} />
                 </Switch>
             </HashRouter>
         </Provider>

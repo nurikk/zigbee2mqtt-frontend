@@ -1,7 +1,6 @@
-import React, { Fragment, FunctionComponent } from "react";
-import { PowerSource as PowerSourceType } from "../../types";
-import style from "./style.css";
-
+import React, { Fragment, FunctionComponent } from 'react';
+import { PowerSource as PowerSourceType } from '../../types';
+import style from './style.css';
 
 interface PowerSourceProps {
     source: PowerSourceType;
@@ -10,44 +9,56 @@ interface PowerSourceProps {
     showLevel?: boolean;
 }
 
-
 const PowerSource: FunctionComponent<PowerSourceProps> = ({ source, battery, batteryLow, showLevel, ...rest }) => {
-    let batteryClass = "";
-    let title = "";
+    let batteryClass = '';
+    let title = '';
 
     switch (source) {
-        case "Battery":
+        case 'Battery':
             title = 'Battery';
             if (batteryLow !== undefined) {
-                batteryClass = batteryLow ? `fa-battery-empty ${style.blinking} text-danger` : 'fa-battery-full text-success';
+                batteryClass = batteryLow
+                    ? `fa-battery-empty ${style.blinking} text-danger`
+                    : 'fa-battery-full text-success';
                 title += batteryLow ? ' LOW' : ' OK';
             }
             if (battery !== undefined) {
                 if (battery >= 85) {
-                    batteryClass += " fa-battery-full";
+                    batteryClass += ' fa-battery-full';
                 } else if (battery >= 75) {
-                    batteryClass += " fa-battery-three-quarters";
+                    batteryClass += ' fa-battery-three-quarters';
                 } else if (battery >= 50) {
-                    batteryClass += " fa-battery-half";
+                    batteryClass += ' fa-battery-half';
                 } else if (battery >= 25) {
-                    batteryClass += " fa-battery-quarter";
+                    batteryClass += ' fa-battery-quarter';
                 } else if (battery >= 10) {
-                    batteryClass += ` fa-battery-empty ${style.blinking}`
+                    batteryClass += ` fa-battery-empty ${style.blinking}`;
                 } else {
-                    return <span className={`${style.blinking} text-danger`} role="alert">{battery}%</span>
+                    return (
+                        <span className={`${style.blinking} text-danger`} role="alert">
+                            {battery}%
+                        </span>
+                    );
                 }
             }
-            title += `${battery ? `, power level ${battery}%` : ""}`;
+            title += `${battery ? `, power level ${battery}%` : ''}`;
             if (!batteryClass) {
-                batteryClass = "fa-question";
+                batteryClass = 'fa-question';
             }
-            return <Fragment>{showLevel ? <span className="pe-2">Battery {battery !== undefined ? `${battery}%` : null}</span> : null}<i className={`fa ${batteryClass}`} title={title} {...rest} /></Fragment>;
+            return (
+                <>
+                    {showLevel ? (
+                        <span className="pe-2">Battery {battery !== undefined ? `${battery}%` : null}</span>
+                    ) : null}
+                    <i className={`fa fa-fw ${batteryClass}`} title={title} {...rest} />
+                </>
+            );
 
-        case "Mains (single phase)":
-        case "DC Source":
-            return <i className={`fa fa-plug ${style.plug}`} title={source} {...rest} />;
+        case 'Mains (single phase)':
+        case 'DC Source':
+            return <i className={`fa fa-fw fa-plug ${style.plug}`} title={source} {...rest} />;
         default:
-            return <i className={`fa fa-question`} title={source} {...rest} />;
+            return <i className={`fa fa-fw fa-question`} title={source} {...rest} />;
     }
 };
 
