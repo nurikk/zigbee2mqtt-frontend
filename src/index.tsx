@@ -1,8 +1,7 @@
 import "./main.css";
 
 import "notyf/notyf.min.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-
+import './styles/styles.global.scss';
 
 
 import React, { Component, FunctionComponent } from 'react';

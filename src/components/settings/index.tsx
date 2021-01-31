@@ -9,9 +9,11 @@ import { NavLink, Redirect, RouteComponentProps, withRouter } from "react-router
 import Button from "../button";
 import Form from '@rjsf/bootstrap-4';
 import cx from "classnames";
-import { JSONSchema7, JSONSchema7Definition } from "json-schema";
+import { JSONSchema7 } from "json-schema";
 import cloneDeep from "lodash/cloneDeep";
-import value from "*.txt";
+
+import "./style.scss";
+
 export const logLevelSetting = {
     key: 'log_level',
     path: 'log_level',

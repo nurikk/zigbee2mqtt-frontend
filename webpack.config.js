@@ -115,6 +115,36 @@ module.exports = (env, args) => {
                     include: /node_modules/,
                     use: [MiniCssExtractPlugin.loader, "css-loader"],
                 },
+
+                {
+                    test: /\.scss$/,
+                    include: [/\.global\./, /node_modules/],
+                    use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+                    sideEffects: true,
+                },
+                {
+                    // Preprocess our own .css files
+                    // This is the place to add your own loaders (e.g. sass/less etc.)
+                    // for a list of loaders, see https://webpack.js.org/loaders/#styling
+                    test: /\.scss$/,
+                    exclude: [/\.global\./, /node_modules/],
+                    use: [
+                        MiniCssExtractPlugin.loader,
+                        '@teamsupercell/typings-for-css-modules-loader',
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                sourceMap: true,
+                                modules: {
+                                    localIdentName: '[local]___[hash:base64:5]',
+                                },
+                                importLoaders: 1,
+                            },
+                        },
+                        'sass-loader',
+                    ],
+                    sideEffects: true,
+                },
             ],
         },
         devServer: {
