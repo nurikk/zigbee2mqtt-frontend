@@ -100,34 +100,6 @@ module.exports = (env, args) => {
                     ],
                 },
                 {
-                    test: /\.scss$/,
-                    include: [/\.global\./, /node_modules/],
-                    use: ['style-loader', 'css-loader', 'sass-loader'],
-                    sideEffects: true,
-                },
-                {
-                    // Preprocess our own .css files
-                    // This is the place to add your own loaders (e.g. sass/less etc.)
-                    // for a list of loaders, see https://webpack.js.org/loaders/#styling
-                    test: /\.scss$/,
-                    exclude: [/\.global\./, /node_modules/],
-                    use: [
-                        'style-loader',
-                        {
-                            loader: 'css-loader',
-                            options: {
-                                sourceMap: true,
-                                modules: {
-                                    localIdentName: '[local]___[hash:base64:5]',
-                                },
-                                importLoaders: 1,
-                            },
-                        },
-                        'sass-loader',
-                    ],
-                    sideEffects: true,
-                },
-                {
                     test: /\.css$/i,
                     use: [
                         MiniCssExtractPlugin.loader,
