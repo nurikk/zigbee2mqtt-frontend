@@ -24,19 +24,11 @@ export type XYColor = {
 }
 export type AnyColor = RGBColor | XYColor | HueSaturationColor;
 export interface DeviceState {
-    battery?: number;
-    battery_low?: boolean;
     last_seen?: string | number;
     elapsed?: number;
     linkquality: number;
     update?: OTAState;
-    state?: string;
-    brightness?: number;
-    color_temp?: number;
-    color?: AnyColor;
-    tilt?: number;
-    position?: number;
-    // [k: string]: string | number | boolean | OTAState | AnyColor | undefined;
+    [k: string]: string | number | boolean | OTAState | AnyColor | undefined;
 }
 
 export type Cluster = string;

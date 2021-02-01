@@ -224,7 +224,7 @@ export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
                                 <td><DisplayValue value={state?.linkquality}/></td>
                                 {this.lastSeenIsAvaliable() && <td>{lastSeen(state.last_seen, state.elapsed)}</td>}
                                 <td className="text-left">
-                                    <PowerSource source={device.power_source} battery={state?.battery} batteryLow={state?.battery_low} />
+                                    <PowerSource source={device.power_source} battery={state?.battery as number} batteryLow={state?.battery_low as boolean} />
                                 </td>
                                 <td>
                                     <DeviceControlGroup device={device} state={state} />
