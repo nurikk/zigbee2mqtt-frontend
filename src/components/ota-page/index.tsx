@@ -23,7 +23,7 @@ const StateCell: FunctionComponent<OtaRowProps & OtaApi> = (props) => {
             return (<><div className="progress">
                 <div className="progress-bar progress-bar-striped progress-bar-animated" style={{ width: `${state.update.progress}%` }}>
                     {state.update.progress}%</div>
-                </div>
+            </div>
                 <div>Remaining time {toHHMMSS(state.update.remaining)}</div>
             </>
             );
@@ -41,7 +41,7 @@ const OtaRow: FunctionComponent<OtaRowProps & OtaApi> = (props) => {
         <td><Link to={genDeviceDetailsLink(device.ieee_address)}>{device.friendly_name}</Link></td>
 
         <td className="text-truncate text-nowrap position-relative"><VendorLink device={device} /></td>
-                                <td title={device?.definition?.description}><ModelLink device={device} /></td>
+        <td title={device?.definition?.description}><ModelLink device={device} /></td>
         <td>
             <StateCell device={device} state={state} {...rest} />
         </td>
@@ -50,11 +50,19 @@ const OtaRow: FunctionComponent<OtaRowProps & OtaApi> = (props) => {
 
 
 class OtaPage extends Component<GlobalState & OtaApi, {}> {
-
+    getAllOtaDevices() {
+        const { devices } = this.props;
+        return Array.from(devices).filter(([, device]) => device?.definition?.supports_ota)
+    }
+    checkAllOTA = () => {
+        const { checkOTA } = this.props;
+        const otaDevices = this.getAllOtaDevices();
+        otaDevices.forEach(([, d]) => checkOTA(d.friendly_name));
+    }
     render() {
-        const { devices, deviceStates, checkOTA, updateOTA } = this.props;
+        const { deviceStates, checkOTA, updateOTA } = this.props;
         const otaApi = { checkOTA, updateOTA };
-        const otaDevices = Array.from(devices).filter(([ieeeAddr, device]) => device?.definition?.supports_ota)
+        const otaDevices = this.getAllOtaDevices();
 
         return <table className="table">
             <thead>
@@ -62,7 +70,7 @@ class OtaPage extends Component<GlobalState & OtaApi, {}> {
                     <th scope="col">Friendly name</th>
                     <th>Manufacturer</th>
                     <th>Model</th>
-                    <th>&nbsp;</th>
+                    <th><Button className="btn btn-danger btn-sm" onClick={this.checkAllOTA} promt>Check all OTA</Button></th>
                 </tr>
             </thead>
             <tbody>
