@@ -1,3 +1,19 @@
+## [0.3.23](https://github.com/nurikk/z2m-frontend/compare/0.3.22...0.3.23) (2021-02-01)
+
+
+### Bug Fixes
+
+* **styles:** fix global styles definition generation ([892d481](https://github.com/nurikk/z2m-frontend/commit/892d48104b961986447bb2fc9d585a7cbf3ce7ec))
+* **tsconfig:** fix module resolution ([3b2cbf5](https://github.com/nurikk/z2m-frontend/commit/3b2cbf5c9d78eff8c7e7f838ac54346cfeac1fa7))
+* **webpack:** fix styles loader ([ca76db8](https://github.com/nurikk/z2m-frontend/commit/ca76db82089cacbbd1a23116d7376901caa1e00e))
+
+
+### Features
+
+* **ota:** add check all button ([1663adb](https://github.com/nurikk/z2m-frontend/commit/1663adb751e8a74d26326e72710dc75ed17d511d))
+
+
+
 ## [0.3.22](https://github.com/nurikk/z2m-frontend/compare/0.3.21...0.3.22) (2021-01-31)
 
 
