@@ -72,6 +72,7 @@ export interface Z2MConfig {
     devices: {
         [key: string]: DeviceConfig;
     };
+    device_options: DeviceConfig;
     [k: string]: object | string | number | boolean;
 }
 export interface BridgeConfig {
@@ -96,6 +97,7 @@ export interface BridgeInfo {
         };
         type?: string;
     };
+    device_options: object;
 }
 
 export type PowerSource = "Battery" | "Mains (single phase)" | "DC Source";
