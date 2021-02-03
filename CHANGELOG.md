@@ -1,3 +1,12 @@
+## [0.3.24](https://github.com/nurikk/z2m-frontend/compare/0.3.23...0.3.24) (2021-02-03)
+
+
+### Features
+
+* **device-settings:** merge device settings with global values ([0332251](https://github.com/nurikk/z2m-frontend/commit/0332251665f8a3e70c060bfae5b56f8b7f6a6c03))
+
+
+
 ## [0.3.23](https://github.com/nurikk/z2m-frontend/compare/0.3.22...0.3.23) (2021-02-01)
 
 
