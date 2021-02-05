@@ -1,5 +1,5 @@
 import React from 'react';
-import { CompositeFeature, GenericExposedFeature } from '../../types';
+import { CompositeFeature, FeatureAccessMode, GenericExposedFeature } from '../../types';
 import DeviceImage from '../device-image';
 import { BaseFeatureProps } from '../features/base';
 import DeviceFooter from './DeviceFooter';
@@ -50,6 +50,7 @@ const DashboardDevice: React.FC<Props> = ({ onChange, device, deviceState, featu
               .filter(feature => !isCompositeFeature(feature))
               .filter(({ name }) => !genericRendererIgnoredNames.includes(name))
               .filter(({ property }) => deviceState[property] !== undefined)
+              .filter(({access}) => !(access & FeatureAccessMode.ACCESS_WRITE))
               .map((feature) =>
                 <GenericDashboardFeatureRenderer
                   key={`${feature.property}-${feature.name}`}
