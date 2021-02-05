@@ -1,10 +1,11 @@
 import React from 'react';
-import { GenericExposedFeature } from '../../types';
+import { BinaryFeature, GenericExposedFeature } from '../../types';
 import startCase from 'lodash/startCase';
 import camelCase from 'lodash/camelCase';
 import { BaseFeatureProps, BaseViewer } from '../features/base';
 
 import styles from './DashboardDevice.scss';
+import Binary from '../features/binary/binary';
 
 export const WaterLeak = ({ deviceState }) => {
   const { water_leak: waterLeak } = deviceState;
@@ -95,21 +96,21 @@ export const GenericDashboardFeatureRenderer: React.FC<BaseFeatureProps<GenericE
 
 
 
-// export const Switch: React.FC<BaseFeatureProps<BinaryFeature>> = (props) => {
-//   const { deviceState, onChange, feature } = props;
-//   const { state, power } = deviceState;
-//   return (
-//     <div className={styles.entity}>
-//       <div className={styles.icon}>
-//         <i className={`fa fa-fw fa-bolt ${state === 'ON' ? 'text-warning' : 'text-muted'}`} />
-//       </div>
-//       <div className={styles.title}>{state === 'ON' ? <>{power} W</> : <>Off</>}</div>
-//       <div className={styles.value}>
-//         <Binary {...props} />
-//       </div>
-//     </div>
-//   );
-// };
+export const Switch: React.FC<BaseFeatureProps<BinaryFeature>> = (props) => {
+  const { deviceState, onChange, feature } = props;
+  const { state, power } = deviceState;
+  return (
+    <div className={styles.entity}>
+      <div className={styles.icon}>
+        <i className={`fa fa-fw fa-bolt ${state === 'ON' ? 'text-warning' : 'text-muted'}`} />
+      </div>
+      <div className={styles.title}>{feature.name}</div>
+      <div className={styles.value}>
+        <Binary {...props} />
+      </div>
+    </div>
+  );
+};
 
 // export const Thermostat = ({ deviceState }) => {
 //   const {

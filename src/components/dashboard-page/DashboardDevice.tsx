@@ -1,14 +1,15 @@
 import React from 'react';
-import { CompositeFeature, FeatureAccessMode, GenericExposedFeature } from '../../types';
+import { BinaryFeature, CompositeFeature, FeatureAccessMode, GenericExposedFeature } from '../../types';
 import DeviceImage from '../device-image';
 import { BaseFeatureProps } from '../features/base';
 import DeviceFooter from './DeviceFooter';
 
 import styles from './DashboardDevice.scss';
-import { GenericDashboardFeatureRenderer } from './ComponentRenderers';
+import { GenericDashboardFeatureRenderer, Switch } from './ComponentRenderers';
 import { Link } from 'react-router-dom';
 import { genDeviceDetailsLink } from '../../utils';
-import { isCompositeFeature } from '../device-page/type-guards';
+import { isBinaryFeature, isCompositeFeature } from '../device-page/type-guards';
+
 
 
 type Props = BaseFeatureProps<CompositeFeature>;
@@ -23,7 +24,7 @@ const DashboardDevice: React.FC<Props> = ({ onChange, device, deviceState, featu
   };
   const handleChange = () => { };
   const handleRead = () => { };
-
+  if (device.friendly_name === 'work_lamp') {}
   return (
     <div className="col-xl-3 col-lg-4 col-sm-6 col-12 mb-3">
       <div className={`${styles.card} card`}>
@@ -32,19 +33,20 @@ const DashboardDevice: React.FC<Props> = ({ onChange, device, deviceState, featu
           <DeviceImage device={device} className={styles.deviceImage} />
           <div className={styles.exposes}>
             {/* {state.isThermostat ? <Thermostat deviceState={deviceState} /> : null} */}
-            {/*
-            {(features as CompositeFeature[])
-              .filter(isSwitchFeature)
+
+            {features
+              .filter(({access}) => access & FeatureAccessMode.ACCESS_WRITE)
+              .filter(isBinaryFeature)
               .map((feature) =>
                 <Switch
                   key={`${feature.property}-${feature.name}`}
                   device={device}
                   deviceState={deviceState}
-                  feature={feature.features[0] as BinaryFeature}
+                  feature={feature as unknown as BinaryFeature}
                   onChange={handleChange}
                   onRead={handleRead}
                 />
-            )} */}
+            )}
 
             {features
               .filter(feature => !isCompositeFeature(feature))
