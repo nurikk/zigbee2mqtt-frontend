@@ -10,12 +10,13 @@ import { BaseFeatureProps, BaseViewer, NoAccessError } from "../base";
 type EnumProps = BaseFeatureProps<EnumFeature>
 
 const Enum: FunctionComponent<EnumProps> = (props) => {
-  const { onChange, feature: { access, name, values, endpoint, property }, deviceState } = props;
+  const { onChange, feature: { access, name, values, endpoint, property }, deviceState, minimal } = props;
   if (access & FeatureAccessMode.ACCESS_WRITE) {
     return <EnumEditor
       onChange={(value) => onChange(endpoint as Endpoint, { [name]: value })}
       values={values as unknown as ValueWithLabelOrPrimitive[]}
-      value={deviceState[property] as ValueWithLabelOrPrimitive}
+        value={deviceState[property] as ValueWithLabelOrPrimitive}
+        minimal={minimal}
     />
   } else if (access & FeatureAccessMode.ACCESS_STATE) {
     return <BaseViewer {...props} />

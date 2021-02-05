@@ -3,11 +3,7 @@ declare namespace DashboardDeviceScssNamespace {
         card: string;
         cardBody: string;
         deviceImage: string;
-        entity: string;
         exposes: string;
-        icon: string;
-        title: string;
-        value: string;
     }
 }
 

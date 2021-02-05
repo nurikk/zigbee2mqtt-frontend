@@ -1,77 +1,51 @@
 import React from 'react';
-import { BinaryFeature, CompositeFeature, FeatureAccessMode, GenericExposedFeature } from '../../types';
-import DeviceImage from '../device-image';
+import { CompositeFeature } from '../../types';
+import cx from "classnames";
 import { BaseFeatureProps } from '../features/base';
 import DeviceFooter from './DeviceFooter';
 
 import styles from './DashboardDevice.scss';
-import { GenericDashboardFeatureRenderer, Switch } from './ComponentRenderers';
+
 import { Link } from 'react-router-dom';
 import { genDeviceDetailsLink } from '../../utils';
-import { isBinaryFeature, isCompositeFeature } from '../device-page/type-guards';
 
-
+import Composite from '../features/composite/composite';
+import DeviceImage from '../device-image';
 
 type Props = BaseFeatureProps<CompositeFeature>;
 
+const genericRendererIgnoredNames = ['linkquality', 'battery'];
 
-const genericRendererIgnoredNames = ["battery", "linkquality", "action"];
+const DashboardDevice: React.FC<Props> = ({ onChange, onRead, device, deviceState, feature: { features }, featureWrapperClass }) => {
 
-const DashboardDevice: React.FC<Props> = ({ onChange, device, deviceState, feature: { features } }) => {
+    const filteredFeatures = features
+        // .filter(({ property, access }) => deviceState[property] !== undefined || (access & FeatureAccessMode.ACCESS_WRITE))
+        .filter(({ name }) => !genericRendererIgnoredNames.includes(name))
 
-  const handleSwitchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    onChange('', { state: event.target.checked ? 'ON' : 'OFF' });
-  };
-  const handleChange = () => { };
-  const handleRead = () => { };
-  if (device.friendly_name === 'work_lamp') {}
-  return (
-    <div className="col-xl-3 col-lg-4 col-sm-6 col-12 mb-3">
-      <div className={`${styles.card} card`}>
-        <div className="card-header text-truncate"><Link to={genDeviceDetailsLink(device.ieee_address)}>{device.friendly_name}</Link></div>
-        <div className={`${styles.cardBody} card-body`}>
-          <DeviceImage device={device} className={styles.deviceImage} />
-          <div className={styles.exposes}>
-            {/* {state.isThermostat ? <Thermostat deviceState={deviceState} /> : null} */}
-
-            {features
-              .filter(({access}) => access & FeatureAccessMode.ACCESS_WRITE)
-              .filter(isBinaryFeature)
-              .map((feature) =>
-                <Switch
-                  key={`${feature.property}-${feature.name}`}
-                  device={device}
-                  deviceState={deviceState}
-                  feature={feature as unknown as BinaryFeature}
-                  onChange={handleChange}
-                  onRead={handleRead}
+    return (
+        <div className="col-xl-3 col-lg-4 col-sm-6 col-12 mb-3">
+            <div className={`${styles.card} card`}>
+                <div className="card-header text-truncate">
+                    <Link to={genDeviceDetailsLink(device.ieee_address)}>{device.friendly_name}</Link>
+                </div>
+                <div className={`${styles.cardBody} card-body row`}>
+                    <DeviceImage device={device} className={cx(styles.deviceImage, 'col col-1')} />
+                    <div className="col col-11">
+                    <Composite feature={{ features: filteredFeatures } as CompositeFeature} type="composite" device={device} deviceState={deviceState}
+                        onChange={onChange}
+                        onRead={onRead}
+                        featureWrapperClass={featureWrapperClass}
+                        minimal={true}
+                    />
+                    </div>
+                </div>
+                <DeviceFooter
+                    device={device}
+                    deviceState={deviceState}
                 />
-            )}
-
-            {features
-              .filter(feature => !isCompositeFeature(feature))
-              .filter(({ name }) => !genericRendererIgnoredNames.includes(name))
-              .filter(({ property }) => deviceState[property] !== undefined)
-              .filter(({access}) => !(access & FeatureAccessMode.ACCESS_WRITE))
-              .map((feature) =>
-                <GenericDashboardFeatureRenderer
-                  key={`${feature.property}-${feature.name}`}
-                  device={device}
-                  deviceState={deviceState}
-                  feature={feature as GenericExposedFeature}
-                  onChange={handleChange}
-                  onRead={handleRead}
-                />
-              )}
-          </div>
+            </div>
         </div>
-        <DeviceFooter
-          device={device}
-          deviceState={deviceState}
-        />
-      </div>
-    </div>
-  );
+    );
 };
 
 export default DashboardDevice;

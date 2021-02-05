@@ -4,13 +4,13 @@
 }
 
 .cardBody {
-    display: flex;
+    // display: flex;
     align-items: center;
 }
 
 .deviceImage {
-    flex-shrink: 0;
-    margin-right: 5px;
+    // flex-shrink: 0;
+    // margin-right: 5px;
     i {
         right: 0;
     }
@@ -24,23 +24,5 @@
     flex-grow: 1;
 }
 
-.entity {
-    display: flex;
-    align-items: center;
-}
 
 
-.icon {
-    width: 25px;
-    flex-shrink: 0;
-}
-
-.title {
-    flex-shrink: 1;
-    flex-grow: 1;
-}
-
-.value {
-    flex-shrink: 0;
-    line-height: 100%;
-}

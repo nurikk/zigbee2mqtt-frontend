@@ -5,6 +5,7 @@ import { connect } from "unistore/react";
 import { GlobalState } from "../../store";
 
 import Composite from "../features/composite/composite";
+import { FeatureWrapper } from "../features/composite/FeatureWrapper";
 interface PropsFromStore {
     deviceStates: Map<string, DeviceState>;
 }
@@ -23,6 +24,7 @@ class Exposes extends Component<ExposesProps & PropsFromStore & StateApi, {}> {
                 onRead={(endpoint, value) => {
                     getDeviceState(`${device.friendly_name}${endpoint ? `/${endpoint}` : ''}`, value)
                 }}
+                featureWrapperClass={FeatureWrapper}
             />
         } else {
             return "Device doesn't expose anything"

@@ -6,46 +6,47 @@ import EnumEditor, { ValueWithLabelOrPrimitive } from "../enum-editor/enum-edito
 
 
 type RangeProps = {
-  value: number;
-  unit?: string;
-  onChange(value: object | number): void;
-  steps?: ValueWithLabelOrPrimitive[];
+    value: number;
+    unit?: string;
+    onChange(value: object | number): void;
+    steps?: ValueWithLabelOrPrimitive[];
+    minimal?: boolean;
 }
 
 const RangeEditor: FunctionComponent<RangeProps & Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'>> = (props) => {
-  const { onChange, value, min, max, unit, steps, ...rest } = props;
-  const [id, setId] = useState<string>(randomString(5));
-  const [currentValue, setCurrentValue] = useState<number>(value)
+    const { onChange, value, min, max, unit, steps, minimal, ...rest } = props;
+    const [id, setId] = useState<string>(randomString(5));
+    const [currentValue, setCurrentValue] = useState<number>(value)
 
-  useEffect(() => {
-    setCurrentValue(value)
-  }, [value]);
+    useEffect(() => {
+        setCurrentValue(value)
+    }, [value]);
 
-  const showRange = min !== undefined && max !== undefined;
-  return <div className="input-group align-items-center">
-    {steps ? <EnumEditor values={steps} onChange={onChange} value={currentValue} /> : null}
-    {showRange ? <input
-      id={id}
-      min={min}
-      max={max}
-      type="range"
-      className="form-range form-control border-0"
-      value={currentValue}
-      onChange={e => setCurrentValue(e.target.valueAsNumber)}
-      onMouseUp={(() => onChange(currentValue))}
-      {...rest}
-    /> : null}
-    <input
-      type="number"
-      className={cx("form-control", {'ms-1': showRange})}
-      value={currentValue}
-      onChange={e => setCurrentValue(e.target.valueAsNumber)}
-      onBlur={() => onChange(currentValue)}
-      {...rest}
-      style={showRange ? { 'maxWidth': '100px' } : {}}
-    />
-    {unit ? <span className="input-group-text" style={{ 'minWidth': '66px' }}>{unit}</span> : null}
-  </div>
+    const showRange = min !== undefined && max !== undefined;
+    return <div className="input-group align-items-center">
+        {!minimal && steps ? <EnumEditor values={steps} onChange={onChange} value={currentValue} /> : null}
+        {showRange ? <input
+            id={id}
+            min={min}
+            max={max}
+            type="range"
+            className="form-range form-control border-0"
+            value={currentValue}
+            onChange={e => setCurrentValue(e.target.valueAsNumber)}
+            onMouseUp={(() => onChange(currentValue))}
+            {...rest}
+        /> : null}
+        {(!minimal || !showRange) && <input
+            type="number"
+            className={cx("form-control", { 'ms-1': showRange })}
+            value={currentValue}
+            onChange={e => setCurrentValue(e.target.valueAsNumber)}
+            onBlur={() => onChange(currentValue)}
+            {...rest}
+            style={showRange ? { 'maxWidth': '100px' } : {}}
+        />}
+        {(!minimal && unit) ? <span className="input-group-text" style={{ 'minWidth': '66px' }}>{unit}</span> : null}
+    </div>
 }
 
 export default RangeEditor;

@@ -8,14 +8,15 @@ type ColorProps = BaseFeatureProps<ColorFeature>;
 
 const Light: FunctionComponent<ColorProps> = (props) => {
 
-    const { deviceState, feature, onChange } = props;
+    const { deviceState, feature, onChange, minimal } = props;
     const value = {};
     for (const innerFeature of feature.features) {
-      value[innerFeature.name] = deviceState[feature.property]?.[innerFeature.property] ?? 0;
+        value[innerFeature.name] = deviceState[feature.property]?.[innerFeature.property] ?? 0;
     }
     return <ColorEditor
-      onChange={(color) => onChange(feature.endpoint as Endpoint, { color })}
-      value={value as AnyColor}
-      format={feature.name} />
+        onChange={(color) => onChange(feature.endpoint as Endpoint, { color })}
+        value={value as AnyColor}
+        format={feature.name}
+        minimal={minimal} />
 }
 export default Light;
