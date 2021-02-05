@@ -1,7 +1,5 @@
 import PowerSource from '../../components/power-source';
 import React from 'react';
-import { Col, Row } from 'react-bootstrap';
-
 import styles from './DeviceFooter.scss';
 import { Device, DeviceDefinition, DeviceState, GenericExposedFeature } from '../../types';
 import { lastSeen } from '../../utils';
@@ -38,14 +36,14 @@ const DeviceFooter: React.FC<Props> = ({ device, deviceState }) => {
     rederedFeatures.push(<PowerSource key={"power"} source={device.power_source} battery={deviceState.battery as number} />);
     return (
         <footer className={`card-footer ${styles.footer}`}>
-            <Row className="justify-content-between flex-nowrap">
-                <Col title="last update" className={`text-truncate`}>
+            <div className="row justify-content-between flex-nowrap">
+                <div title="last update" className={`col text-truncate`}>
                     {lastSeen(lastSeenTime)}
-                </Col>
-                <Col className="col-auto text-truncate">
+                </div>
+                <div className="col col-auto text-truncate">
                     {rederedFeatures}
-                </Col>
-            </Row>
+                </div>
+            </div>
         </footer>
     );
 };

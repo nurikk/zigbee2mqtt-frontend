@@ -6,11 +6,6 @@ import { BaseFeatureProps, BaseViewer } from '../features/base';
 
 import styles from './DashboardDevice.scss';
 
-
-
-
-
-
 export const WaterLeak = ({ deviceState }) => {
   const { water_leak: waterLeak } = deviceState;
   return (
