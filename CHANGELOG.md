@@ -1,3 +1,12 @@
+## [0.3.27](https://github.com/nurikk/z2m-frontend/compare/0.3.26...0.3.27) (2021-02-05)
+
+
+### Features
+
+* **dashboard:** implement controls ([f6718e6](https://github.com/nurikk/z2m-frontend/commit/f6718e6645cee961aefa355d4a5f2306604a1dd1))
+
+
+
 ## [0.3.26](https://github.com/nurikk/z2m-frontend/compare/0.3.25...0.3.26) (2021-02-05)
 
 
