@@ -68,7 +68,7 @@ export const sanitizeGraph = (inGraph: GraphI): GraphI => {
                 repeatedLink.linkqualities.push(link.linkquality);
                 repeatedLink.relationships.push(link.relationship);
             } else {
-                links.set(linkId, { ...link, ...{ source: link.source.ieeeAddr, linkType, target: link.target.ieeeAddr, linkqualities: [link.linkquality], relationships: [link.relationship]} });
+                links.set(linkId, { ...link, ...{ source: link.source.ieeeAddr, linkType, target: link.target.ieeeAddr, linkqualities: [link.linkquality], relationships: [link.relationship] } });
             }
         } else {
             console.warn("Broken link", link);

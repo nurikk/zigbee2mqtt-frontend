@@ -19,7 +19,7 @@ const urls = [
     },
     {
         href: '/dashboard',
-        title: 'Dashboard'
+        title: 'Dashboard (experimental)'
     },
     {
         href: '/map',
