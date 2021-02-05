@@ -1,0 +1,46 @@
+.card {
+    min-height: 100px;
+    height: 100%;
+}
+
+.cardBody {
+    display: flex;
+    align-items: center;
+}
+
+.deviceImage {
+    flex-shrink: 0;
+    margin-right: 5px;
+    i {
+        right: 0;
+    }
+
+    img {
+        max-height: 2em;
+    }
+}
+
+.exposes {
+    flex-grow: 1;
+}
+
+.entity {
+    display: flex;
+    align-items: center;
+}
+
+
+.icon {
+    width: 25px;
+    flex-shrink: 0;
+}
+
+.title {
+    flex-shrink: 1;
+    flex-grow: 1;
+}
+
+.value {
+    flex-shrink: 0;
+    line-height: 100%;
+}

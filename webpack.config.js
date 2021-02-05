@@ -135,9 +135,7 @@ module.exports = (env, args) => {
                             loader: 'css-loader',
                             options: {
                                 sourceMap: true,
-                                modules: {
-                                    localIdentName: '[local]___[hash:base64:5]',
-                                },
+                                modules: true,
                                 importLoaders: 1,
                             },
                         },

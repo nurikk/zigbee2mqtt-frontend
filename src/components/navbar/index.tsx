@@ -18,6 +18,10 @@ const urls = [
         exact: true
     },
     {
+        href: '/dashboard',
+        title: 'Dashboard'
+    },
+    {
         href: '/map',
         title: 'Map'
     },
