@@ -1,3 +1,13 @@
+## [0.3.26](https://github.com/nurikk/z2m-frontend/compare/0.3.25...0.3.26) (2021-02-05)
+
+
+### Bug Fixes
+
+* **dasboard:** show only readonly states ([d4b47ec](https://github.com/nurikk/z2m-frontend/commit/d4b47ecc8105024326445990e94e42e256962f40))
+* **dashboar:** use vanilla bootsrap ([1970e15](https://github.com/nurikk/z2m-frontend/commit/1970e156b4e307e8fe93f09126cc774070bac7cf))
+
+
+
 ## [0.3.25](https://github.com/nurikk/z2m-frontend/compare/0.3.24...0.3.25) (2021-02-05)
 
 
