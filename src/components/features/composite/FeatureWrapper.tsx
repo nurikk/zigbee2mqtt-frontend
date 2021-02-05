@@ -24,10 +24,7 @@ export const FeatureWrapper: FunctionComponent<PropsWithChildren<FetatureWrapper
         </div>
         {feature.description ? <small className="d-block text-muted">{feature.description}</small> : null}
       </label>
-
     </div>
-
-
     <div className="col-12 col-md-9 d-flex align-items-center">
       {children}
     </div>

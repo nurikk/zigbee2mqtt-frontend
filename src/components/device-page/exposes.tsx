@@ -1,19 +1,16 @@
 import React, { Component } from "react";
 import { CompositeFeature, Device, DeviceState } from "../../types";
 import actions, { StateApi } from "../../actions";
-
 import { connect } from "unistore/react";
 import { GlobalState } from "../../store";
 
 import Composite from "../features/composite/composite";
-
 interface PropsFromStore {
     deviceStates: Map<string, DeviceState>;
 }
 interface ExposesProps {
     device: Device;
 }
-
 class Exposes extends Component<ExposesProps & PropsFromStore & StateApi, {}> {
     render() {
         const { device, deviceStates, setDeviceState, getDeviceState } = this.props;

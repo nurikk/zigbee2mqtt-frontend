@@ -1,16 +1,10 @@
-import React, { Component, FunctionComponent, PropsWithChildren } from "react";
-import { CompositeFeature, Endpoint, FeatureAccessMode, GenericExposedFeature } from "../../../types";
-import { isBinaryFeature, isClimateFeature, isColorFeature, isCompositeFeature, isCoverFeature, isEnumFeature, isLightFeature, isLockFeature, isNumericFeature, isSwitchFeature, isTextualFeature } from "../../device-page/type-guards";
-
-
-
+import React, { Component } from "react";
+import { CompositeFeature, Endpoint } from "../../../types";
+import { isCompositeFeature } from "../../device-page/type-guards";
 import { BaseFeatureProps } from "../base";
-
 import Button from "../../button";
 import groupBy from "lodash/groupBy";
 import { Feature } from "./Feature";
-
-
 
 type CompositeType = "composite" | "light" | "switch" | "cover" | "lock" | "fan" | "climate";
 

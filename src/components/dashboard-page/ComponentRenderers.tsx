@@ -23,8 +23,6 @@ export const WaterLeak = ({ deviceState }) => {
   );
 };
 
-
-
 const getTemperatureIcon = (temperature: number) => {
   let icon = 'fa-thermometer-empty';
   if (temperature >= 30) {

@@ -1,4 +1,4 @@
-import React, { Component, FunctionComponent, PropsWithChildren } from "react";
+import React from "react";
 
 import { CompositeFeature, Device, DeviceState, Endpoint, GenericExposedFeature } from "../../../types";
 import { isBinaryFeature, isNumericFeature, isTextualFeature, isEnumFeature, isLightFeature, isSwitchFeature, isCoverFeature, isLockFeature, isColorFeature, isClimateFeature, isCompositeFeature } from "../../device-page/type-guards";

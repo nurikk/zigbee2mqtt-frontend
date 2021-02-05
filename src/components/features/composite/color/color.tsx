@@ -4,9 +4,7 @@ import ColorEditor from "../../../color-editor/color-editor";
 
 import { BaseFeatureProps } from "../../base";
 
-
 type ColorProps = BaseFeatureProps<ColorFeature>;
-
 
 const Light: FunctionComponent<ColorProps> = (props) => {
 
