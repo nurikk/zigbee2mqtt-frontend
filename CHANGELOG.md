@@ -1,3 +1,13 @@
+## [0.3.25](https://github.com/nurikk/z2m-frontend/compare/0.3.24...0.3.25) (2021-02-05)
+
+
+### Features
+
+* **dashboard:** dashboard inititial ([9fb8258](https://github.com/nurikk/z2m-frontend/commit/9fb82584bb01138720425f386f35aa997930a788))
+* **dashboard:** implement generic viewer ([5d418a6](https://github.com/nurikk/z2m-frontend/commit/5d418a6c8f09c602b00b6bffed333e275c37e3f1))
+
+
+
 ## [0.3.24](https://github.com/nurikk/z2m-frontend/compare/0.3.23...0.3.24) (2021-02-03)
 
 
