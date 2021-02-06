@@ -9,6 +9,17 @@ body {
     height: 100%;
 }
 
+
+
+.animation-blinking {
+    animation: _3RZptfeEHx5kKt07Bzj4tW 1s linear infinite;
+}
+@keyframes _3RZptfeEHx5kKt07Bzj4tW {
+    50% {
+        opacity: 0;
+    }
+}
+
 /*!
  * Bootstrap v5.0.0-beta1 (https://getbootstrap.com/)
  * Copyright 2011-2020 The Bootstrap Authors
@@ -128,16 +139,6 @@ body {
     margin-left: 4px;
 }
 
-.t22iUK3r3w1jlcSwxWXN9 {
-    animation: _3SpBv5_CMt6ERjs-mp41bf 1s linear infinite;
-}
-
-@keyframes _3SpBv5_CMt6ERjs-mp41bf {
-    50% {
-        opacity: 0;
-    }
-}
-
 ._1A0umx4fPj4iWC5K7RUnD- li {
     margin: 0;
 
@@ -255,4 +256,4 @@ body {
 }
 
 
-/*# sourceMappingURL=main.db6abffde06bbee68e2f.css.map*/
+/*# sourceMappingURL=main.cc0a8f039de19a8e56d1.css.map*/
