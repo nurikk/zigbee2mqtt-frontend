@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Device, DeviceState } from "../../types";
-import actions, { StateApi } from "../../actions";
+import actions from "../../actions/actions";
+import { StateApi } from "../../actions/StateApi";
 import { connect } from "unistore/react";
 import { GlobalState } from "../../store";
 

@@ -3,7 +3,8 @@ import React, { Component } from "react";
 import { Device, DeviceState } from "../../types";
 import { connect } from "unistore/react";
 import { GlobalState } from "../../store";
-import actions, { DeviceApi } from "../../actions";
+import actions from "../../actions/actions";
+import { DeviceApi } from "../../actions/DeviceApi";
 import Form from '@rjsf/bootstrap-4';
 import { JSONSchema7 } from "json-schema"
 type DeviceSettingsProps = {

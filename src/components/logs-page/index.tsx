@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "unistore/react";
-import actions, { BridgeApi } from "../../actions";
+import actions from "../../actions/actions";
 import { GlobalState } from "../../store";
 import cx from "classnames";
 import escapeRegExp from "lodash/escapeRegExp";
 import UniversalEditor from "../universal-editor";
 import { logLevelSetting } from "../settings";
 import get from "lodash/get";
+import { BridgeApi } from "../../actions/BridgeApi";
 
 
 

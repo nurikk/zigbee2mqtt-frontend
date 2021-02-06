@@ -6,7 +6,8 @@ import { connect } from 'unistore/react';
 
 import DashboardDevice from './DashboardDevice';
 import { DeviceState, CompositeFeature } from '../../types';
-import actions, { StateApi } from '../../actions';
+import actions from '../../actions/actions';
+import { StateApi } from "../../actions/StateApi";
 import { GlobalState } from '../../store';
 import { DashboardFeatureWrapper } from './DashboardFeatureWrapper';
 

@@ -1,12 +1,14 @@
 import React, { Component} from "react";
 import { connect } from "unistore/react";
-import actions, { TouchlinkApi } from "../../actions";
+import actions from "../../actions/actions";
+
 import { GlobalState } from "../../store";
 import Button from "../button";
 import { TouchLinkDevice } from "../../types";
 import { genDeviceDetailsLink } from "../../utils";
 import cx from "classnames";
 import { Link } from "react-router-dom";
+import { TouchlinkApi } from "../../actions/TouchlinkApi";
 
 
 

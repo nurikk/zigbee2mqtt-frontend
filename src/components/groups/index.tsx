@@ -1,6 +1,7 @@
 import React, { ChangeEvent, Component } from "react";
 import { connect } from "unistore/react";
-import actions, { GroupsApi } from "../../actions";
+import actions from "../../actions/actions";
+
 import { GlobalState, Group, GroupAddress } from "../../store";
 import Button from "../button";
 import { Device, Endpoint } from "../../types";
@@ -12,6 +13,7 @@ import DevicePicker from "../device-picker";
 import { Link } from "react-router-dom";
 import DeviceImage from "../device-image";
 import { RenameGroupForm } from "./RenameForm";
+import { GroupsApi } from "../../actions/GroupsApi";
 
 
 interface GroupsPageState {

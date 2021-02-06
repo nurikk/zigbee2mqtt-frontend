@@ -2,7 +2,8 @@
 import React, { Component, FunctionComponent } from "react";
 
 import { connect } from "unistore/react";
-import actions, { OtaApi } from "../../actions";
+import actions from "../../actions/actions";
+import { OtaApi } from "../../actions/OtaApi";
 import { GlobalState } from "../../store";
 import Button from "../button";
 import { genDeviceDetailsLink, toHHMMSS } from "../../utils";

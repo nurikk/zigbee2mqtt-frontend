@@ -1,7 +1,7 @@
 import React, { FunctionComponent, RefObject, useRef, useState } from 'react';
 
 import { GlobalState } from '../../store';
-import actions, { BridgeApi } from '../../actions';
+import actions from '../../actions/actions';
 import { connect } from 'unistore/react';
 import Button from '../button';
 import cx from "classnames";
@@ -10,6 +10,7 @@ import useComponentVisible from '../../hooks/useComponentVisible';
 import { Device } from '../../types';
 import style from "./style.css";
 import { useOnClickOutside } from '../../hooks/useOnClickOutside';
+import { BridgeApi } from '../../actions/BridgeApi';
 
 const urls = [
     {

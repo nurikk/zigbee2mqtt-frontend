@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "unistore/react";
-import actions, { BridgeApi, UtilsApi } from "../../actions";
+import actions, { UtilsApi } from "../../actions/actions";
 import { GlobalState } from "../../store";
 import get from "lodash/get";
 import UniversalEditor from "../universal-editor";
@@ -13,6 +13,9 @@ import { JSONSchema7 } from "json-schema";
 import cloneDeep from "lodash/cloneDeep";
 import uiSchemas from "./uiSchema.json";
 import "./style.global.scss";
+import { BridgeApi } from "../../actions/BridgeApi";
+
+
 
 export const logLevelSetting = {
     key: 'log_level',

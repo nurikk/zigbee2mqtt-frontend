@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { Device, Cluster, Endpoint } from "../../types";
 import BindRow from "./bind-row";
-import actions, { BindApi } from "../../actions";
+import actions from "../../actions/actions";
+import { BindApi } from "../../actions/BindApi";
 import { connect } from "unistore/react";
 import { GlobalState, Group } from "../../store";
 import { getEndpoints } from "../../utils";

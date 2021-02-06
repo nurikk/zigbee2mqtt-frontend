@@ -4,7 +4,7 @@ import Nodes, { getStarShape } from "./nodes";
 import { GraphI, LinkI, NodeI, Source, Target, ZigbeeRelationship } from "./types";
 import { connect } from "unistore/react";
 import { GlobalState } from "../../store";
-import actions, { MapApi } from "../../actions";
+import actions, { MapApi } from "../../actions/actions";
 
 import Button from "../button";
 import { ForceLink, forceLink, forceCollide, forceCenter, forceSimulation, forceX, forceY } from "d3-force";

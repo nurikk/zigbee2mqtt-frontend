@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { NavLink, Redirect, RouteComponentProps, withRouter } from "react-router-dom";
 import { connect } from "unistore/react";
-import actions from "../../actions";
+import actions from "../../actions/actions";
 import { GlobalState } from "../../store";
 import DeviceInfo from "./info";
 import Bind from "./bind";

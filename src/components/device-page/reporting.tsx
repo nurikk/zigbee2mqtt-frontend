@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Device, Cluster, Endpoint, Attribute } from "../../types";
 
-import actions, { ReportingApi } from "../../actions";
+import actions, { ReportingApi } from "../../actions/actions";
 import { connect } from "unistore/react";
 import { GlobalState, Group } from "../../store";
 import ReportingRow from "./reporting-row";

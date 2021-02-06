@@ -9,7 +9,7 @@ import { Notyf } from "notyf";
 import PowerSource from "../power-source";
 import { connect } from "unistore/react";
 import { GlobalState } from "../../store";
-import actions from "../../actions";
+import actions from "../../actions/actions";
 import ActionTH from "./ActionTH";
 import isEqual from "lodash/isEqual";
 import { Link } from "react-router-dom";
