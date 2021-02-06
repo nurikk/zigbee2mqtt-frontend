@@ -1,5 +1,3 @@
-import "./main.css";
-
 import "notyf/notyf.min.css";
 import './styles/styles.global.scss';
 

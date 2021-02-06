@@ -1,1 +1,24 @@
-@import "bootstrap";
+@import 'bootstrap';
+
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css');
+
+html,
+body {
+    height: 100%;
+}
+body {
+    padding-top: 3.5rem;
+}
+#root {
+    height: 100%;
+}
+
+@keyframes blinker {
+    50% {
+        opacity: 0;
+    }
+}
+
+.animation-blinking {
+    animation: blinker 1s linear infinite;
+}
