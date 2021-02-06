@@ -94,5 +94,12 @@
         "hooks": {
             "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
         }
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/nurikk/z2m-frontend.git"
+    },
+    "bugs": {
+        "url": "https://github.com/nurikk/z2m-frontend/issues"
     }
 }
