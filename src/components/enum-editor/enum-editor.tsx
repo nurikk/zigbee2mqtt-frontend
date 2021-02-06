@@ -33,6 +33,7 @@ const EnumEditor: FunctionComponent<EnumProps> = (props) => {
         }
         return <select className="form-control" onChange={onSelectChange}
             value={isPrimitive(value as ValueWithLabelOrPrimitive) ? value as string : (value as ValueWithLabel).value}>
+            <option key="hidded" hidden>----</option>
             {values.map(v => <option
                 key={isPrimitive(v) ? v : v.name}
                 value={isPrimitive(v) ? v : v.value}>{isPrimitive(v) ? v : v.name}

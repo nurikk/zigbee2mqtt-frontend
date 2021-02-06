@@ -22,6 +22,12 @@ const booleansMap = {
         [true, <span className={cx("text-danger", "animation-blinking")} key="Leaking">Leaking</span>],
         [false, 'Clear']
     ]),
+
+    tamper: new Map<boolean, string | JSX.Element>([
+        [true, <span className={cx("text-danger", "animation-blinking")} key="tampered">Tampered</span>],
+        [false, 'Clear']
+    ]),
+
     _default: new Map([
         [true, 'true'],
         [false, 'false']

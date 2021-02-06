@@ -14,7 +14,7 @@ import DeviceImage from '../device-image';
 
 type Props = BaseFeatureProps<CompositeFeature>;
 
-const genericRendererIgnoredNames = ['linkquality', 'battery'];
+const genericRendererIgnoredNames = ['linkquality', 'battery', 'battery_low'];
 
 const DashboardDevice: React.FC<Props> = ({ onChange, onRead, device, deviceState, feature: { features }, featureWrapperClass }) => {
 

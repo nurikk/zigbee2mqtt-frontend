@@ -23,7 +23,12 @@ const getTemperatureIcon = (temperature: number) => {
 
 
 const typeToClassMap = {
-    humidity: ['text-info', 'fa-tint']
+    humidity: ['text-info', 'fa-tint'],
+    illuminance: ['fa-sun'],
+    // eslint-disable-next-line @typescript-eslint/camelcase
+    illuminance_lux: ['fa-sun'],
+    // eslint-disable-next-line @typescript-eslint/camelcase
+    soil_moisture: ['fa-fill-drip']
 };
 const getGenericFeatureIcon = (name: string, value: unknown): string => {
     let classes = [] as string[];
