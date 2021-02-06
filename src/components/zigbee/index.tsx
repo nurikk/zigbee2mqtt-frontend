@@ -16,7 +16,8 @@ import { Link } from "react-router-dom";
 import DeviceImage from "../device-image";
 import { ModelLink, VendorLink } from "../vendor-links/verndor-links";
 import Spinner from "../spinner";
-import { DisplayValue } from "../DisplayValue";
+import { DisplayValue } from "../display-value/DisplayValue";
+
 
 
 type SortColumn =
@@ -221,7 +222,7 @@ export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
                                 <td>{device.ieee_address} ({toHex(device.network_address, 4)})</td>
                                 <td className="text-truncate text-nowrap position-relative"><VendorLink device={device} /></td>
                                 <td title={device?.definition?.description}><ModelLink device={device} /></td>
-                                <td><DisplayValue value={state?.linkquality}/></td>
+                                <td><DisplayValue value={state?.linkquality} name="linkquality"/></td>
                                 {this.lastSeenIsAvaliable() && <td>{lastSeen(state.last_seen, state.elapsed)}</td>}
                                 <td className="text-left">
                                     <PowerSource source={device.power_source} battery={state?.battery as number} batteryLow={state?.battery_low as boolean} />

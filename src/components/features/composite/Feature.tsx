@@ -32,17 +32,16 @@ export const Feature = (props: FeatureProps) => {
     const { feature, device, deviceState, stepsConfiguration, onRead, onChange, featureWrapperClass: FeatureWrapper, minimal } = props;
 
     const genericParams = { key: JSON.stringify(feature), device, deviceState, onChange, onRead, featureWrapperClass: FeatureWrapper, minimal };
-    const wrapperParams = { key: JSON.stringify(feature), feature, onRead };
+    const wrapperParams = { key: JSON.stringify(feature), feature, onRead, deviceState };
 
     if (isBinaryFeature(feature)) {
         return <FeatureWrapper {...wrapperParams} >
-            <Binary feature={feature} {...genericParams} featureWrapperClass={FeatureWrapper} />
+            <Binary feature={feature} {...genericParams} />
         </FeatureWrapper>
     } else if (isNumericFeature(feature)) {
         return <FeatureWrapper {...wrapperParams}>
             <Numeric feature={feature} {...genericParams}
                 steps={stepsConfiguration?.[feature.name]}
-                featureWrapperClass={FeatureWrapper}
             />
         </FeatureWrapper>
     } else if (isTextualFeature(feature)) {
@@ -69,9 +68,9 @@ export const Feature = (props: FeatureProps) => {
         return <Climate feature={feature} {...genericParams} />
     } else if (isCompositeFeature(feature)) {
         return <FeatureWrapper {...wrapperParams}>
-            {/* <div className="row" > */}
-            <Composite className="row" type="composite" feature={feature} {...genericParams} />
-            {/* </div> */}
+            <div className="row" >
+                <Composite className="row" type="composite" feature={feature} {...genericParams} />
+            </div>
         </FeatureWrapper>
     }
     return (<FeatureWrapper {...wrapperParams}>

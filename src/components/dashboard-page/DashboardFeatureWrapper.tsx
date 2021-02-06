@@ -9,61 +9,61 @@ import styles from "./DashboardFeatureWrapper.scss";
 const getTemperatureIcon = (temperature: number) => {
     let icon = 'fa-thermometer-empty';
     if (temperature >= 30) {
-      icon = 'fa-thermometer-full';
+        icon = 'fa-thermometer-full';
     } else if (temperature >= 25) {
-      icon = 'fa-thermometer-three-quarters';
+        icon = 'fa-thermometer-three-quarters';
     } else if (temperature >= 20) {
-      icon = 'fa-thermometer-half';
+        icon = 'fa-thermometer-half';
     } else if (temperature >= 15) {
-      icon = 'fa-thermometer-quarter';
+        icon = 'fa-thermometer-quarter';
     }
     return icon;
-  };
+};
 
 
 
-  const typeToClassMap = {
+const typeToClassMap = {
     humidity: ['text-info', 'fa-tint']
-  };
-  const getGenericFeatureIcon = (name: string, value: unknown): string => {
+};
+const getGenericFeatureIcon = (name: string, value: unknown): string => {
     let classes = [] as string[];
     switch (name) {
-      case 'temperature':
-        classes.push(getTemperatureIcon(value as number));
-        classes.push('text-danger');
-        break;
-      case 'contact':
-        if (value) {
-          classes.push('fa-door-closed text-muted')
-        } else {
-          classes.push('fa-door-open text-primary');
-        }
-        break;
-      case 'occupancy':
-        classes.push('fa-walking');
-        if (value) {
-          classes.push('text-warning');
-        }
-        break;
+        case 'temperature':
+            classes.push(getTemperatureIcon(value as number));
+            classes.push('text-danger');
+            break;
+        case 'contact':
+            if (value) {
+                classes.push('fa-door-closed text-muted')
+            } else {
+                classes.push('fa-door-open text-primary');
+            }
+            break;
+        case 'occupancy':
+            classes.push('fa-walking');
+            if (value) {
+                classes.push('text-warning');
+            }
+            break;
 
-      case 'water_leak':
-        classes.push('fa-water');
-        if (value) {
-          classes.push('text-primary');
-        }
-        break;
-      default:
-        classes = [...classes, ...(typeToClassMap[name] ?? [])];
-        break;
+        case 'water_leak':
+            classes.push('fa-water');
+            if (value) {
+                classes.push('text-primary');
+            }
+            break;
+        default:
+            classes = [...classes, ...(typeToClassMap[name] ?? [])];
+            break;
     }
     if (!classes.length) {
-      classes.push('invisible');
+        classes.push('invisible');
     }
     return classes.join(' ');
-  }
+}
 
 export const DashboardFeatureWrapper: FunctionComponent<PropsWithChildren<FetatureWrapperProps>> = (props) => {
-    const { children, feature, onRead, deviceState={} } = props;
+    const { children, feature, onRead, deviceState = {} } = props;
     const isColor = feature.name?.startsWith("color_"); //hardcode for color
     const isReadable = (feature.access & FeatureAccessMode.ACCESS_READ) || isColor;
     // const { feature, deviceState } = props;

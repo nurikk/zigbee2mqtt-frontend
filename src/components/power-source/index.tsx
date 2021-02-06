@@ -19,7 +19,7 @@ const PowerSource: FunctionComponent<PowerSourceProps> = ({ source, battery, bat
         case "Battery":
             title = 'Battery';
             if (batteryLow !== undefined) {
-                batteryClass = batteryLow ? `fa-battery-empty ${style.blinking} text-danger` : 'fa-battery-full text-success';
+                batteryClass = batteryLow ? `fa-battery-empty animation-blinking text-danger` : 'fa-battery-full text-success';
                 title += batteryLow ? ' LOW' : ' OK';
             }
             if (battery !== undefined) {
@@ -32,9 +32,9 @@ const PowerSource: FunctionComponent<PowerSourceProps> = ({ source, battery, bat
                 } else if (battery >= 25) {
                     batteryClass += " fa-battery-quarter";
                 } else if (battery >= 10) {
-                    batteryClass += ` fa-battery-empty ${style.blinking}`
+                    batteryClass += ` fa-battery-empty animation-blinking`
                 } else {
-                    return <span className={`${style.blinking} text-danger`} role="alert">{battery}%</span>
+                    return <span className={`animation-blinking text-danger`} role="alert">{battery}%</span>
                 }
             }
             title += `${battery ? `, power level ${battery}%` : ""}`;

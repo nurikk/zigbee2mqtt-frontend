@@ -31,12 +31,15 @@ const DashboardDevice: React.FC<Props> = ({ onChange, onRead, device, deviceStat
                 <div className={`${styles.cardBody} card-body row`}>
                     <DeviceImage device={device} className={cx(styles.deviceImage, 'col col-1')} />
                     <div className="col col-11">
-                    <Composite feature={{ features: filteredFeatures } as CompositeFeature} type="composite" device={device} deviceState={deviceState}
-                        onChange={onChange}
-                        onRead={onRead}
-                        featureWrapperClass={featureWrapperClass}
-                        minimal={true}
-                    />
+                        <Composite feature={{ features: filteredFeatures } as CompositeFeature}
+                            type="composite"
+                            device={device}
+                            deviceState={deviceState}
+                            onChange={onChange}
+                            onRead={onRead}
+                            featureWrapperClass={featureWrapperClass}
+                            minimal={true}
+                        />
                     </div>
                 </div>
                 <DeviceFooter

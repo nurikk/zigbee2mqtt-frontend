@@ -9,3 +9,14 @@ body {
 :global(#root) {
     height: 100%;
 }
+
+
+
+:global(.animation-blinking) {
+    animation: blinker 1s linear infinite;
+}
+@keyframes blinker {
+    50% {
+        opacity: 0;
+    }
+}

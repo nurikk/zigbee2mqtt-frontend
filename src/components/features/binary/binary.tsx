@@ -16,6 +16,7 @@ const Binary: FunctionComponent<BinaryProps> = (props) => {
             valueOn={valueOn}
             valueOff={valueOff}
             minimal={minimal}
+            name={name}
         />
     } else if (access & FeatureAccessMode.ACCESS_STATE) {
         return <BaseViewer {...props} />
