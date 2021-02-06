@@ -122,6 +122,10 @@ export class DeviceControlGroup extends Component<DeviceControlGroupProps & Devi
     renderDeviceRemovalButton() {
         const { device } = this.props;
         const { isDeviceRemovalModalOpened, removeParams } = this.state;
+        const checks = [
+            { label: 'Force remove', name: 'force', value: removeParams.force },
+            { label: 'Block from joining again', name: 'block', value: removeParams.block },
+        ];
         return (
             <><Modal isOpen={isDeviceRemovalModalOpened}>
                 <ModalHeader>
@@ -129,14 +133,15 @@ export class DeviceControlGroup extends Component<DeviceControlGroupProps & Devi
                     <small>{device.friendly_name}</small>
                 </ModalHeader>
                 <ModalBody>
-                    <div className="form-check form-switch">
-                        <input className="form-check-input" name="force" checked={removeParams.force} type="checkbox" id={`force${device.ieee_address}`} onChange={this.onDeviceRemovalParamChange} />
-                        <label className="form-check-label" htmlFor={`force${device.ieee_address}`}>Force remove</label>
-                    </div>
-                    <div className="form-check form-switch">
-                        <input className="form-check-input" name="block" checked={removeParams.block} type="checkbox" id={`block${device.ieee_address}`} onChange={this.onDeviceRemovalParamChange} />
-                        <label className="form-check-label" htmlFor={`block${device.ieee_address}`}>Block from joining again</label>
-                    </div>
+                    {
+                        checks.map(check => {
+                            const id = `${check.name}${device.ieee_address}`;
+                            return <div key={check.name} className="form-check form-switch">
+                                <input className="form-check-input" name={check.name} checked={check.value} type="checkbox" id={id} onChange={this.onDeviceRemovalParamChange} />
+                                <label className="form-check-label" htmlFor={id}>{check.label}</label>
+                            </div>
+                        })
+                    }
                 </ModalBody>
                 <ModalFooter>
                     <button type="button" className="btn btn-secondary" onClick={this.toggleDeviceRemovalModal}>Close</button>
