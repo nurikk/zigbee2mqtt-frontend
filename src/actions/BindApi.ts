@@ -1,7 +1,7 @@
 import api from "../api";
 import { Cluster } from "../types";
 
-type BindParams = {
+export type BindParams = {
     from: string;
     to: string;
     clusters: Cluster[];

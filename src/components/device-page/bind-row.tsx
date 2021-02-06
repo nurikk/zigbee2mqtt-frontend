@@ -7,6 +7,7 @@ import Button from "../button";
 import { Group } from "../../store";
 import { NiceBindingRule } from "./bind";
 import { getEndpoints } from "../../utils";
+import { BindParams } from "../../actions/BindApi";
 
 
 
@@ -17,8 +18,8 @@ interface BindRowProps {
     devices: Map<string, Device>;
     groups: Group[];
     device: Device;
-    onBind(from: string, to: string, clusters: Cluster[]): void;
-    onUnBind(from: string, to: string, clusters: Cluster[]): void;
+    onBind(params: BindParams): void;
+    onUnBind(params: BindParams): void;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -102,9 +103,9 @@ export default class BindRow extends Component<BindRowProps, BindRowState> {
         const { onUnBind, onBind } = this.props;
         const { from, to, clusters } = this.getBidningParams();
         if (action == "Bind") {
-            onBind(from, to, clusters);
+            onBind({ from, to, clusters });
         } else {
-            onUnBind(from, to, clusters);
+            onUnBind({ from, to, clusters });
         }
     }
 

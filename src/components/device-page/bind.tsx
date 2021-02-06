@@ -65,56 +65,39 @@ export class Bind extends Component<BindProps & PropsFromStore & BindApi, BindSt
     state: BindState = {
         bidingRules: []
     }
-    onBindClick = (from: string, to: string, clusters: Cluster[]): void => {
-        const { addBind } = this.props;
-        addBind({ from, to, clusters });
-    };
-    onUnBindClick = (from: string, to: string, clusters: Cluster[]): void => {
-        const { removeBind } = this.props;
-        removeBind({ from, to, clusters });
-    };
-    static getDerivedStateFromProps(props: Readonly<BindProps & PropsFromStore>, state: BindState): Partial<BindState> {
+    static getDerivedStateFromProps(props: Readonly<BindProps & PropsFromStore>): Partial<BindState> {
         const { device } = props;
         const endpoints = getEndpoints(device);
         const bidingRules = convertBidningsIntoNiceStructure(device);
         bidingRules.push({ isNew: Date.now(), target: {}, source: { 'ieee_address': device.ieee_address, endpoint: endpoints[0] }, clusters: [] } as unknown as NiceBindingRule);
-        return {
-            bidingRules
-        };
+        return { bidingRules };
+    }
+    renderHeader() {
+        const columns = ['#', 'Source EP', 'Destination', 'Destination EP', 'Clusters', 'Actions'];
+        return <thead><tr>{columns.map(column => <th key={column} scope="col">{column}</th>)}</tr></thead>
+    }
+    renderBody() {
+        const { device, devices, groups, removeBind, addBind } = this.props;
+        const { bidingRules } = this.state;
+        return <tbody>{bidingRules
+            .map((rule, idx) => <BindRow
+                key={rule2key(rule)}
+                rule={rule}
+                groups={groups}
+                onUnBind={removeBind}
+                onBind={addBind}
+                device={device}
+                idx={idx}
+                devices={devices} />)
+        }</tbody>
     }
     render() {
-        const { device, devices, groups } = this.props;
-        const { bidingRules } = this.state;
-        return (
-            <div className="table-responsive">
-                <table className="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Source EP</th>
-                            <th scope="col">Destination</th>
-                            <th scope="col">Destination EP</th>
-                            <th scope="col">Clusters</th>
-                            <th scope="col">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            bidingRules.map((rule, idx) => <BindRow
-                                key={rule2key(rule)}
-                                rule={rule}
-                                groups={groups}
-                                onUnBind={this.onUnBindClick}
-                                onBind={this.onBindClick}
-                                device={device}
-                                idx={idx}
-                                devices={devices} />)
-                        }
-                    </tbody>
-
-                </table>
-            </div>
-        );
+        return <div className="table-responsive">
+            <table className="table">
+                {this.renderHeader()}
+                {this.renderBody()}
+            </table>
+        </div>;
     }
 }
 
