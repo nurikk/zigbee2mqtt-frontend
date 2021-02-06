@@ -1,3 +1,13 @@
+## [0.3.30](https://github.com/nurikk/z2m-frontend/compare/0.3.29...0.3.30) (2021-02-06)
+
+
+### Features
+
+* **dasboard:** better display-value ([fc98450](https://github.com/nurikk/z2m-frontend/commit/fc984503feaed61cdbc6e4cd9d2652556fc09a14))
+* **dashboard:** small fixes ([478b3d7](https://github.com/nurikk/z2m-frontend/commit/478b3d7f1fa5c3627c4b39e3b151d8e2668cc6b5))
+
+
+
 ## [0.3.29](https://github.com/nurikk/z2m-frontend/compare/0.3.28...0.3.29) (2021-02-05)
 
 
