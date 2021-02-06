@@ -1,3 +1,12 @@
+## [0.3.36](https://github.com/nurikk/z2m-frontend/compare/0.3.35...0.3.36) (2021-02-06)
+
+
+### Bug Fixes
+
+* **settings:** fix cusom-select styles ([e023634](https://github.com/nurikk/z2m-frontend/commit/e023634d1aad5c4d359edf8fb6e32c614d65b996))
+
+
+
 ## [0.3.35](https://github.com/nurikk/z2m-frontend/compare/0.3.34...0.3.35) (2021-02-06)
 
 
