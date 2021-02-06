@@ -1,3 +1,13 @@
+## [0.3.38](https://github.com/nurikk/z2m-frontend/compare/0.3.37...0.3.38) (2021-02-06)
+
+
+### Features
+
+* **settings:** rename expremental/deprecated ([293f56d](https://github.com/nurikk/z2m-frontend/commit/293f56d72ac45acc7f6ba3b68c10454ed2b7d112))
+* **state-notifier:** use state notifier ([d98c199](https://github.com/nurikk/z2m-frontend/commit/d98c1998634a57a68e71095644eaef920bf18831))
+
+
+
 ## [0.3.37](https://github.com/nurikk/z2m-frontend/compare/0.3.36...0.3.37) (2021-02-06)
 
 
