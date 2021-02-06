@@ -67,11 +67,11 @@ export class Bind extends Component<BindProps & PropsFromStore & BindApi, BindSt
     }
     onBindClick = (from: string, to: string, clusters: Cluster[]): void => {
         const { addBind } = this.props;
-        addBind(from, to, clusters);
+        addBind({ from, to, clusters });
     };
     onUnBindClick = (from: string, to: string, clusters: Cluster[]): void => {
         const { removeBind } = this.props;
-        removeBind(from, to, clusters);
+        removeBind({ from, to, clusters });
     };
     static getDerivedStateFromProps(props: Readonly<BindProps & PropsFromStore>, state: BindState): Partial<BindState> {
         const { device } = props;
