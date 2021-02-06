@@ -85,7 +85,8 @@ type PropsFromStore = {
     devices: Map<string, Device>;
     bridgeInfo: object;
 }
-const NavBar: FunctionComponent<PropsFromStore & BridgeApi & Pick<GlobalState, 'bridgeInfo'>> = ({ devices, setPermitJoin, bridgeInfo }) => {
+const NavBar: FunctionComponent<PropsFromStore & BridgeApi & Pick<GlobalState, 'bridgeInfo'>> = (props) => {
+    const { devices, setPermitJoin, bridgeInfo, restartBridge } = props;
     const ref = useRef<HTMLDivElement>();
     const [navbarIsVisible, setnavbarIsVisible] = useState<boolean>(false);
     useOnClickOutside(ref, () => {
@@ -114,6 +115,7 @@ const NavBar: FunctionComponent<PropsFromStore & BridgeApi & Pick<GlobalState, '
                     bridgeInfo={bridgeInfo}
                 />
             </div>
+            {bridgeInfo.restart_required ? <Button onClick={restartBridge} promt className="btn btn-danger">Restart</Button>: null}
         </div>
     </nav>)
 }

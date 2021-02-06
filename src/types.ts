@@ -98,6 +98,7 @@ export interface BridgeInfo {
         type?: string;
     };
     device_options: object;
+    restart_required: boolean;
 }
 
 export type PowerSource = "Battery" | "Mains (single phase)" | "DC Source";

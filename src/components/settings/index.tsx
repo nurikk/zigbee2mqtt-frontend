@@ -164,7 +164,7 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
     }
 
     renderSettings() {
-        const { bridgeInfo, exportState } = this.props;
+        const { bridgeInfo, exportState, restartBridge } = this.props;
         return <><div className="mt-2">
             {
                 !isEmpty(bridgeInfo) && settings.map(setting => (
@@ -183,7 +183,8 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
                 ))
             }
         </div>
-            <Button<void> className="mt-2 btn btn-primary" onClick={exportState}>Download state</Button>
+            <Button className="btn btn-primary d-block mt-2" onClick={exportState}>Download state</Button>
+            <Button className="btn btn-danger d-block mt-2" onClick={restartBridge} promt>Restart</Button>
         </>
     }
     onSettingsSave = ({ formData }) => {
