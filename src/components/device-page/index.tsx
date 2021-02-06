@@ -22,7 +22,36 @@ type DevicePageProps = RouteComponentProps<UrlParams>;
 
 
 type TabName = "info" | "bind" | "state" | "exposes" | "clusters" | "reporting" | "settings";
-// eslint-disable-next-line react/prefer-stateless-function
+const getDeviceLinks = (dev: string) => ([
+    {
+        title: 'About',
+        url: `/device/${dev}/info`
+    },
+    {
+        title: 'Exposes',
+        url: `/device/${dev}/exposes`
+    },
+    {
+        title: 'Bind',
+        url: `/device/${dev}/bind`
+    },
+    {
+        title: 'Reporting',
+        url: `/device/${dev}/reporting`
+    },
+    {
+        title: 'State',
+        url: `/device/${dev}/state`
+    },
+    {
+        title: 'Settings',
+        url: `/device/${dev}/settings`
+    },
+    {
+        title: 'Clusters',
+        url: `/device/${dev}/clusters`
+    }
+]);
 export class DevicePage extends Component<DevicePageProps & GlobalState, {}> {
     renderContent() {
         const { match, devices } = this.props;
@@ -50,52 +79,20 @@ export class DevicePage extends Component<DevicePageProps & GlobalState, {}> {
 
     }
     render() {
-
         const { devices, match } = this.props;
         const { dev } = match.params;
         const device = devices.get(dev);
         if (!device) {
             return <div className="h-100 d-flex justify-content-center align-items-center">Unknown device</div>
         }
-        const links = [
-            {
-                title: 'About',
-                url: `/device/${dev}/info`
-            },
-            {
-                title: 'Exposes',
-                url: `/device/${dev}/exposes`
-            },
-            {
-                title: 'Bind',
-                url: `/device/${dev}/bind`
-            },
-            {
-                title: 'Reporting',
-                url: `/device/${dev}/reporting`
-            },
-            {
-                title: 'State',
-                url: `/device/${dev}/state`
-            },
-            {
-                title: 'Settings',
-                url: `/device/${dev}/settings`
-            },
-            {
-                title: 'Clusters',
-                url: `/device/${dev}/clusters`
-            }
-        ];
+        const links = getDeviceLinks(dev);
 
         return (<div className="">
             <h3>{device.friendly_name}</h3>
             <ul className="nav nav-tabs">
-                {
-                    links.map(link => <li key={link.title} className="nav-item">
-                        <NavLink activeClassName="active" className={`nav-link ${styles['small-nav']}`} to={link.url}>{link.title}</NavLink>
-                    </li>)
-                }
+                {links.map(link => <li key={link.title} className="nav-item">
+                    <NavLink activeClassName="active" className={`nav-link ${styles['small-nav']}`} to={link.url}>{link.title}</NavLink>
+                </li>)}
             </ul>
             <div className="tab-content">
                 <div className="tab-pane fade show active container">
