@@ -1,26 +1,20 @@
-import style from "./style.css";
 import React, { Component, Fragment } from "react";
-import orderBy from "lodash/orderBy";
-import DeviceControlGroup from "../device-control";
-import { Device, SortDirection, DeviceState } from "../../types";
-import { genDeviceDetailsLink, lastSeen, toHex } from "../../utils";
 
+import { Device, SortDirection, DeviceState } from "../../types";
 import { Notyf } from "notyf";
-import PowerSource from "../power-source";
 import { connect } from "unistore/react";
 import { GlobalState } from "../../store";
 import actions from "../../actions/actions";
-import ActionTH from "./ActionTH";
+
 import isEqual from "lodash/isEqual";
-import { Link } from "react-router-dom";
-import DeviceImage from "../device-image";
-import { ModelLink, VendorLink } from "../vendor-links/verndor-links";
+import orderBy from "lodash/orderBy";
 import Spinner from "../spinner";
-import { DisplayValue } from "../display-value/DisplayValue";
+import { TableHeader } from "./TableHeader";
+import { TableRow } from "./TableRow";
 
 
 
-type SortColumn =
+export type SortColumn =
     | "device.network_address"
     | "device.friendly_name"
     | "device.ieee_address"
@@ -40,13 +34,10 @@ interface ZigbeeTableState {
     error?: object;
 }
 
-
 interface ZigbeeTableData {
     device: Device;
     state: DeviceState;
 }
-
-
 
 const storeKey = "ZigbeeTableState";
 const longLoadingTimeout = 15 * 1000;
@@ -168,69 +159,27 @@ export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
         return bridgeInfo?.config?.advanced?.elapsed || bridgeInfo?.config?.advanced?.last_seen != "disable";
     }
 
-    renderDevicesTableHeader() {
-        const { sortColumn, sortDirection } = this.state;
-        const { onSortChange } = this;
-        return (
-            <thead>
-                <tr className="text-nowrap">
-                    <th>#</th>
-                    <th>Pic</th>
-                    <ActionTH<SortColumn> className={style["action-column"]} column="device.friendly_name"
-                        currentDirection={sortDirection} current={sortColumn}
-                        onClick={onSortChange}>Friendly name</ActionTH>
-                    <ActionTH<SortColumn> className={style["action-column"]} column="device.ieee_address"
-                        currentDirection={sortDirection} current={sortColumn}
-                        onClick={onSortChange}>IEEE address</ActionTH>
-                    <ActionTH<SortColumn> className={style["action-column"]} column="device.definition.vendor"
-                        currentDirection={sortDirection} current={sortColumn}
-                        onClick={onSortChange} title="definition.vendor">Manufacturer</ActionTH>
-                    <ActionTH<SortColumn> className={style["action-column"]} column="device.definition.model"
-                        currentDirection={sortDirection} current={sortColumn}
-                        onClick={onSortChange}>Model</ActionTH>
-                    <ActionTH<SortColumn> className={style["action-column"]} column="state.linkquality"
-                        currentDirection={sortDirection} current={sortColumn}
-                        onClick={onSortChange}>LQI</ActionTH>
-                    {this.lastSeenIsAvaliable() && <ActionTH<SortColumn> className={style["action-column"]} column={["state.last_seen", "state.elapsed"]}
-                        currentDirection={sortDirection} current={sortColumn}
-                        onClick={onSortChange}>Last seen</ActionTH>}
-                    <ActionTH<SortColumn> className={style["action-column"]} column="state.battery"
-                        currentDirection={sortDirection} current={sortColumn}
-                        onClick={onSortChange}>Power</ActionTH>
-                    <th>&nbsp;</th>
-                </tr>
-            </thead>
-        )
-    }
+
 
     renderDevicesTable() {
-        const { sortedTableData } = this.state;
+        const { sortedTableData, sortColumn, sortDirection } = this.state;
         return (
             <div className="row no-gutters table-responsive">
                 <table className="table align-middle col-12">
-                    {this.renderDevicesTableHeader()}
+                    <TableHeader
+                        lastSeenIsAvaliable={this.lastSeenIsAvaliable()}
+                        sortColumn={sortColumn}
+                        sortDirection={sortDirection}
+                        onSortChange={this.onSortChange}
+                    />
                     <tbody>
-                        {sortedTableData.map(({ device, state }, id) =>
-                            <tr key={device.friendly_name} title={state?.update?.state == "available" ? 'Avaliable OTA update' : device.definition?.description}>
-                                <td className="font-weight-bold">{id + 1}</td>
-                                <td className={style["device-pic"]}>
-                                    <DeviceImage className={style["device-image"]} device={device} deviceStatus={state} />
-                                </td>
-                                <td>
-                                    <Link to={genDeviceDetailsLink(device.ieee_address)}>{device.friendly_name}</Link>
-                                </td>
-                                <td>{device.ieee_address} ({toHex(device.network_address, 4)})</td>
-                                <td className="text-truncate text-nowrap position-relative"><VendorLink device={device} /></td>
-                                <td title={device?.definition?.description}><ModelLink device={device} /></td>
-                                <td><DisplayValue value={state?.linkquality} name="linkquality"/></td>
-                                {this.lastSeenIsAvaliable() && <td>{lastSeen(state.last_seen, state.elapsed)}</td>}
-                                <td className="text-left">
-                                    <PowerSource source={device.power_source} battery={state?.battery as number} batteryLow={state?.battery_low as boolean} />
-                                </td>
-                                <td>
-                                    <DeviceControlGroup device={device} state={state} />
-                                </td>
-                            </tr>)}
+                        {sortedTableData.map(({ device, state }, id) => <TableRow
+                            key={device.friendly_name}
+                            device={device}
+                            deviceState={state}
+                            id={id}
+                            lastSeenIsAvaliable={this.lastSeenIsAvaliable()}
+                        />)}
                     </tbody>
                 </table>
             </div>
