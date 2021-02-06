@@ -1,3 +1,12 @@
+## [0.3.31](https://github.com/nurikk/z2m-frontend/compare/0.3.30...0.3.31) (2021-02-06)
+
+
+### Features
+
+* **bridge:** add restart bridge api ([77e5ad3](https://github.com/nurikk/z2m-frontend/commit/77e5ad3821392da8580b9ad294ccf7ae92a1aafc))
+
+
+
 ## [0.3.30](https://github.com/nurikk/z2m-frontend/compare/0.3.29...0.3.30) (2021-02-06)
 
 
