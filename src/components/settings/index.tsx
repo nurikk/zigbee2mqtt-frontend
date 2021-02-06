@@ -69,7 +69,7 @@ const ingoredFields = ['groups', 'devices', 'device_options', 'ban', 'whitelist'
 
 const validJsonSchemasAsTabs = ['object', 'array'];
 
-const removePropertiesFromSchema = (names: string[], schema: JSONSchema7, config: object) => {
+const removePropertiesFromSchema = (names: string[], schema: JSONSchema7 = {}, config: object = {}) => {
 
     if (schema.required) {
         schema.required = schema.required.filter(item => names.includes(item));
@@ -219,7 +219,7 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
     }
 
     getSettingsTabs() {
-        const { bridgeInfo: { config_schema: configSchema } } = this.props;
+        const { bridgeInfo: { config_schema: configSchema = {properties: {}} } } = this.props;
         const tabs = Object.entries<JSONSchema7>(configSchema.properties as unknown as ArrayLike<JSONSchema7>)
             .filter(([key, value]) => isValidKeyToRenderAsTab(key, value))
             .map(([key, value]) => ({
@@ -265,10 +265,6 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
     }
     renderExperimentalSettings() {
         const { keyName } = this.state;
-        const { bridgeInfo: { config_schema: configSchema } } = this.props;
-        if (!configSchema || !configSchema.properties || Object.keys(configSchema.properties).length === 0) {
-            return <div>loading...</div>;
-        }
         const { currentSchema, currentConfig } = this.getSettingsInfo();
 
         return <>{this.renderSettingsTabs()}
