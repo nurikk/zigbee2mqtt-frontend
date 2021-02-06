@@ -1,0 +1,9 @@
+{
+    "mqtt": {
+        "ui:order": ["base_topic", "server", "user", "password", "client_id", "version",
+            "ca", "key", "cert", "reject_unauthorized", "*"]
+    },
+    "serial": {
+        "ui:order": ["port", "adapter", "disable_led", "*"]
+    }
+}

@@ -11,7 +11,7 @@ import Form from '@rjsf/bootstrap-4';
 import cx from "classnames";
 import { JSONSchema7 } from "json-schema";
 import cloneDeep from "lodash/cloneDeep";
-
+import uiSchemas from "./uiSchema.json";
 import "./style.global.scss";
 
 export const logLevelSetting = {
@@ -62,17 +62,45 @@ const ROOT_KEY_NAME = 'main';
 
 const ingoredFields = ['groups', 'devices', 'device_options', 'ban', 'whitelist'];
 
-const uiSchemas = {
-    mqtt: {
-        "ui:order": ["base_topic", "server", "user", "password", "client_id", "version",
-            "ca", "key", "cert", "reject_unauthorized", "*"]
-    },
-    serial: {
-        "ui:order": ["port", "adapter", "disable_led", "*"]
-    }
-};
+
 
 const validJsonSchemasAsTabs = ['object', 'array'];
+
+const removePropertiesFromSchema = (names: string[], schema: JSONSchema7, config: object) => {
+
+    names.forEach(name => {
+        if (schema.required) {
+            schema.required = schema.required.filter(item => item !== name);
+        }
+
+        if (schema.properties) {
+            delete schema.properties[name];
+        }
+        delete config[name];
+    });
+
+    return { schema, config };
+}
+
+const tabs = [
+    {
+        title: 'Settings',
+        url: `/settings/settings`
+    },
+    {
+        title: 'Raw',
+        url: `/settings/bridge`
+    },
+    {
+        title: 'About',
+        url: `/settings/about`
+    },
+    {
+        title: 'Experimental Settings',
+        url: `/settings/experimental-settings`
+    },
+];
+
 
 const isValidKeyToRenderAsTab = (key: string, value: JSONSchema7): boolean => (validJsonSchemasAsTabs.includes(value.type as string) && !ingoredFields.includes(key)) || (value && value.oneOf ? value.oneOf.length > 0 : false);
 export class SettingsPage extends Component<SettingsPageProps & BridgeApi & GlobalState & UtilsApi, SettingsPageState> {
@@ -83,24 +111,19 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
         const { updateConfigValue } = this.props;
         updateConfigValue(name, value);
     }
-
+    renderCategoriesTabs() {
+        return (
+            <ul className="nav nav-tabs">
+                {tabs.map(tab => <li key={tab.url} className="nav-item">
+                    <NavLink className="nav-link" activeClassName="active" to={tab.url}>{tab.title}</NavLink>
+                </li>)}
+            </ul>
+        )
+    }
     render() {
         return (
             <>
-                <ul className="nav nav-tabs">
-                    <li className="nav-item">
-                        <NavLink className="nav-link" activeClassName="active" to={`/settings/settings`}>Settings</NavLink>
-                    </li>
-                    <li className="nav-item">
-                        <NavLink className="nav-link" activeClassName="active" to={`/settings/bridge`}>Raw</NavLink>
-                    </li>
-                    <li className="nav-item">
-                        <NavLink className="nav-link" activeClassName="active" to={`/settings/about`}>About</NavLink>
-                    </li>
-                    <li className="nav-item">
-                        <NavLink className="nav-link" activeClassName="active" to={`/settings/experimental-settings`}>Experimental Settings</NavLink>
-                    </li>
-                </ul>
+                {this.renderCategoriesTabs()}
                 <div className="tab-content">
                     <div className="tab-pane fade show active">
                         <div className="container">
@@ -136,26 +159,21 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
         const zigbee2mqttCommit = bridgeInfo.commit ?
             <>commit: <a target="_blank" rel="noopener noreferrer" href={`https://github.com/Koenkk/zigbee2mqtt/commit/${bridgeInfo.commit}`}>{bridgeInfo.commit}</a></> :
             null;
-        const v = FRONTEND_VERSION;
+
+        const rows = [
+            { title: 'Zigbee2MQTT version', content: <>{zigbee2mqttVersion} {zigbee2mqttCommit}</> },
+            { title: 'Coordinator type', content: <>{bridgeInfo.coordinator?.type ?? 'Unknown'}</> },
+            { title: 'Coordinator revision', content: <>{bridgeInfo.coordinator?.meta?.revision ?? 'Unknown'}</> },
+            { title: 'Frontend version', content: FRONTEND_VERSION },
+        ];
+
         return <div className="mt-2">
-            <dl className="row">
-                <dt className="col-sm-3">zigbee2mqtt version</dt>
-                <dd className="col-sm-9">{zigbee2mqttVersion} {zigbee2mqttCommit}</dd>
-            </dl>
-
-            <dl className="row">
-                <dt className="col-sm-3">coordinator type</dt>
-                <dd className="col-sm-9">{bridgeInfo.coordinator?.type ?? 'Unknown'}</dd>
-            </dl>
-            <dl className="row">
-                <dt className="col-sm-3">coordinator revision</dt>
-                <dd className="col-sm-9">{bridgeInfo.coordinator?.meta?.revision ?? 'Unknown'}</dd>
-            </dl>
-
-            <dl className="row">
-                <dt className="col-sm-3">frontend version</dt>
-                <dd className="col-sm-9">{v}</dd>
-            </dl>
+            {
+                rows.map(row => <dl key={row.title} className="row">
+                    <dt className="col-sm-3">{row.title}</dt>
+                    <dd className="col-sm-9">{row.content}</dd>
+                </dl>)
+            }
         </div>
     }
     renderBridgeInfo() {
@@ -213,44 +231,23 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
     }
     getSettingsInfo() {
         const { keyName } = this.state;
-        const { bridgeInfo: { config_schema: configSchema, config } } = this.props;
-        const copyConfig = cloneDeep(config) as object;
-        const schema = cloneDeep(configSchema);
+        const { bridgeInfo: { config_schema: configSchema, config: originalConfig } } = this.props;
 
-        ingoredFields.forEach(field => {
-            if (schema.required) {
-                schema.required = schema.required.filter(item => item !== field);
-            }
+        let configAndSchema = removePropertiesFromSchema(ingoredFields, cloneDeep(configSchema), cloneDeep(originalConfig) as object);
 
-            if (schema.properties) {
-                delete schema.properties[field];
-            }
-            delete copyConfig[field];
-        });
-
-        let currentSchema: JSONSchema7 = schema;
-        let currentConfig = copyConfig[keyName] as object;
-
+        let currentSchema: JSONSchema7 = configAndSchema.schema;
+        let currentConfig = configAndSchema.config[keyName] as object;
 
         if (keyName === ROOT_KEY_NAME) {
-            this.getSettingsTabs().forEach(tab => {
-                if (schema.required) {
-                    schema.required = schema.required.filter(item => item !== tab.name);
-                }
-                if (schema.properties) {
-                    delete schema.properties[tab.name];
-                }
-
-                delete copyConfig[tab.name];
-            });
-            currentSchema = schema;
-            currentConfig = copyConfig;
+            const ignoreTabNames = this.getSettingsTabs().map(tab => tab.name);
+            configAndSchema = removePropertiesFromSchema(ignoreTabNames, configAndSchema.schema, configAndSchema.config)
+            currentSchema = configAndSchema.schema;
+            currentConfig = configAndSchema.config;
         } else {
-            currentConfig = copyConfig[keyName] as object;
-            if (schema.properties) {
-                currentSchema = schema.properties[keyName] as JSONSchema7;
+            currentConfig = configAndSchema.config[keyName] as object;
+            if (configAndSchema.schema.properties) {
+                currentSchema = configAndSchema.schema.properties[keyName] as JSONSchema7;
             }
-
         }
         return { currentSchema, currentConfig };
     }
