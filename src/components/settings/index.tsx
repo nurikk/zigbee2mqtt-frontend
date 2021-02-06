@@ -46,7 +46,7 @@ const settings = [
         description: 'Home Assistant integration (MQTT discovery)'
     }
 ]
-type SettingsTab = "settings" | "bridge" | "about" | "experimental-settings";
+type SettingsTab = "settings" | "bridge" | "about" | "deprecated-settings";
 
 type SettigsKeys = string;
 type UrlParams = {
@@ -91,16 +91,16 @@ const tabs = [
         url: `/settings/settings`
     },
     {
+        title: 'Settings (deprecated)',
+        url: `/settings/deprecated-settings`
+    },
+    {
         title: 'Raw',
         url: `/settings/bridge`
     },
     {
         title: 'About',
         url: `/settings/about`
-    },
-    {
-        title: 'Experimental Settings',
-        url: `/settings/experimental-settings`
     },
 ];
 
@@ -141,14 +141,14 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
         const { match } = this.props;
         const { tab } = match.params;
         switch (tab) {
-            case "settings":
-                return this.renderSettings();
+            case "deprecated-settings":
+                return this.renderDeprecatedSettings();
             case "bridge":
                 return this.renderBridgeInfo();
             case "about":
                 return this.renderAbout();
-            case "experimental-settings":
-                return this.renderExperimentalSettings();
+            case "settings":
+                return this.renderSettings();
             default:
                 return <Redirect to={`/settings/settings`} />;
         }
@@ -184,7 +184,7 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
         return <pre>{JSON.stringify(bridgeInfo, null, 4)}</pre>
     }
 
-    renderSettings() {
+    renderDeprecatedSettings() {
         const { bridgeInfo, exportState, restartBridge } = this.props;
         return <><div className="mt-2">
             {
@@ -263,7 +263,7 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
             </li>)}
         </ul>;
     }
-    renderExperimentalSettings() {
+    renderSettings() {
         const { keyName } = this.state;
         const { currentSchema, currentConfig } = this.getSettingsInfo();
 
