@@ -68,16 +68,16 @@ const validJsonSchemasAsTabs = ['object', 'array'];
 
 const removePropertiesFromSchema = (names: string[], schema: JSONSchema7, config: object) => {
 
-    names.forEach(name => {
-        if (schema.required) {
-            schema.required = schema.required.filter(item => item !== name);
-        }
+    if (schema.required) {
+        schema.required = schema.required.filter(item => names.includes(item));
+    }
 
+    for (const name of names) {
         if (schema.properties) {
             delete schema.properties[name];
         }
         delete config[name];
-    });
+    }
 
     return { schema, config };
 }
