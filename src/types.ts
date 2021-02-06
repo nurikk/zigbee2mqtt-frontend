@@ -84,7 +84,7 @@ export interface BridgeConfig {
     permit_join: boolean;
 
 }
-
+export type BridgeState = "online" | "offline";
 export interface BridgeInfo {
     config?: Z2MConfig;
     config_schema: JSONSchema7;

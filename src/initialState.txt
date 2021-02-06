@@ -11,6 +11,7 @@
   },
   "networkGraphIsLoading": false,
   "groups": [],
+  "bridgeState": "online",
   "bridgeConfig": {
   },
   "bridgeInfo": {

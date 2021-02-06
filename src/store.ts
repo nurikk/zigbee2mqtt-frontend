@@ -3,7 +3,7 @@ import devtools from "unistore/devtools";
 import initialState from './initialState.txt';
 
 
-import { Device, DeviceState, BridgeConfig, BridgeInfo, TouchLinkDevice } from "./types";
+import { Device, DeviceState, BridgeConfig, BridgeInfo, TouchLinkDevice, BridgeState } from "./types";
 import { GraphI } from "./components/map/types";
 import { deSerialize } from "./utils";
 
@@ -35,6 +35,7 @@ export interface GlobalState {
     groups: Group[];
     bridgeConfig: BridgeConfig;
     bridgeInfo: BridgeInfo;
+    bridgeState: BridgeState;
     logs: LogMessage[];
 };
 const _store = createStore(deSerialize(initialState) as GlobalState);

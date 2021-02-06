@@ -29,6 +29,7 @@ import OtaPage from "./components/ota-page";
 import ReactDOM from "react-dom";
 import ErrorBoundary from "./components/ErrorBoundary";
 import DashboardPage from "./components/dashboard-page";
+import StateNotifier from "./components/state-notifier/StateNotifier";
 
 const ConnectedDevicePageWrap: FunctionComponent<{ dev: string }> = ({ dev }) => (
     <ConnectedDevicePageWrap dev={dev} />
@@ -43,6 +44,7 @@ class Main extends Component {
         return (
             <Provider store={store}>
                 <HashRouter>
+                    <StateNotifier />
                     <NavBar />
                     <Switch>
                         <Route path="/ota" render={(props) => <ErrorBoundary {...props}><OtaPage /></ErrorBoundary>} />

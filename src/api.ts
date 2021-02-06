@@ -1,6 +1,6 @@
 import ReconnectingWebSocket from "reconnecting-websocket";
 import store, { Group, LogMessage } from "./store";
-import { BridgeConfig, BridgeInfo, TouchLinkDevice, Device, DeviceState } from './types';
+import { BridgeConfig, BridgeInfo, TouchLinkDevice, Device, DeviceState, BridgeState } from './types';
 import { sanitizeGraph, isSecurePage, randomString } from "./utils";
 import { Notyf } from "notyf";
 import { GraphI } from "./components/map/types";
@@ -132,6 +132,12 @@ class Api {
             case "bridge/info":
                 store.setState({
                     bridgeInfo: data.payload as BridgeInfo
+                });
+                break;
+
+            case "bridge/state":
+                store.setState({
+                    bridgeState: data.payload as BridgeState
                 });
                 break;
 
