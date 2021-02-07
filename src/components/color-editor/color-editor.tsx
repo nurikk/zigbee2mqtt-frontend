@@ -65,7 +65,7 @@ const ColorEditor: FunctionComponent<ColorProps & Omit<InputHTMLAttributes<HTMLI
     }, [value, format]);
 
     return <>
-        {!minimal && <div className="btn-group me-2">
+        {!minimal && <div className="btn-group me-2 float-start">
             {
                 steps.map(step => <Button<string>
                     className="btn"

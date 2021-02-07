@@ -68,9 +68,7 @@ export const Feature = (props: FeatureProps) => {
         return <Climate feature={feature} {...genericParams} />
     } else if (isCompositeFeature(feature)) {
         return <FeatureWrapper {...wrapperParams}>
-            <div className="row" >
-                <Composite className="row" type="composite" feature={feature} {...genericParams} />
-            </div>
+            <Composite type="composite" feature={feature} {...genericParams} />
         </FeatureWrapper>
     }
     return (<FeatureWrapper {...wrapperParams}>

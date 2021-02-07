@@ -1,5 +1,5 @@
-import React, { ChangeEvent, Fragment, FunctionComponent, useState } from "react";
-import { randomString } from "../../utils";
+import React, { ChangeEvent, FunctionComponent } from "react";
+
 import Button from "../button";
 import { DisplayValue } from "../display-value/DisplayValue";
 
@@ -10,7 +10,6 @@ type ToggleProps = {
     name: string;
     valueOn: unknown;
     valueOff: unknown;
-    label?: string;
     minimal?: boolean;
 }
 type ControlButtonProps = {
@@ -20,30 +19,28 @@ type ControlButtonProps = {
 }
 const ControlButton: FunctionComponent<ControlButtonProps> = (props) => {
     const { value, onClick, name } = props;
-    return <Button<unknown> className="btn btn-link ps-0" item={value} onClick={onClick}>
+    return <Button<unknown> className="btn btn-link" item={value} onClick={onClick}>
         <DisplayValue value={value} name={name} />
     </Button>
 }
 
 const Toggle: FunctionComponent<ToggleProps> = (props) => {
-    const { onChange, value, label, valueOn, valueOff, minimal, name } = props;
-    const [id, setId] = useState<string>(randomString(5));
+    const { onChange, value, valueOn, valueOff, minimal, name } = props;
+
     const onCheckboxChange = (e: ChangeEvent<HTMLInputElement>) => onChange(e.target.checked ? valueOn : valueOff);
     const valueExists = value !== undefined && value !== null;
     const showOnOffButtons = !minimal || (minimal && !valueExists);
     return (
-        <Fragment>
-
+        <div>
             {showOnOffButtons && <ControlButton value={valueOff} name={name} onClick={onChange} />}
             {valueExists ? (
-                <div className="form-check form-switch d-inline-block">
-                    <input className="form-check-input" type="checkbox" id={id} checked={value === valueOn} onChange={onCheckboxChange} />
-                    {label ? <label className="form-check-label" htmlFor={id}>{label}</label> : null}
+                <div className="form-check form-switch form-check-inline align-middle me-0">
+                    <input className="form-check-input" type="checkbox" checked={value === valueOn} onChange={onCheckboxChange} />
                 </div>
             ) : <i className="fa fa-question" title="Current value unknown"></i>}
             {showOnOffButtons && <ControlButton value={valueOn} name={name} onClick={onChange} />}
 
-        </Fragment>
+        </div>
     )
 }
 
