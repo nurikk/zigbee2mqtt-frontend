@@ -5,7 +5,7 @@ import { BaseFeatureProps } from "../base";
 import Button from "../../button";
 import groupBy from "lodash/groupBy";
 import { Feature } from "./Feature";
-
+import cx from "classnames";
 
 type CompositeType = "composite" | "light" | "switch" | "cover" | "lock" | "fan" | "climate";
 
@@ -78,7 +78,7 @@ export default class Composite extends Component<CompositeProps, CompositeState>
             />)}</div></div>);
         }
         if (isCompositeFeature(feature)) {
-            result.push(<div key={feature.name}><Button className="btn btn-primary float-right" onClick={this.onApplyClick}>Apply</Button></div>)
+            result.push(<div key={feature.name}><Button className={cx('btn btn-primary float-end', {'btn-sm': minimal})} onClick={this.onApplyClick}>Apply</Button></div>)
         }
         return result;
 
