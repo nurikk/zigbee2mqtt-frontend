@@ -29,9 +29,15 @@ interface MapState {
     visibleLinks: ZigbeeRelationship[];
     legendIsVisible: boolean;
 }
-const angle = (s: Source, t: Target) => Math.atan2(((t.y as number) - (s.y as number)), (t.x as number)- (s.x as number));
-const xpos = (offset: number, s: Source, t: Target) => offset * Math.cos(angle(s, t)) + (s.x as number);
-const ypos = (offset: number, s: Source, t: Target) => offset * Math.sin(angle(s, t)) + (s.y as number);
+const angle = (s: Source, t: Target) => Math.atan2(((t.y as number) - (s.y as number)), (t.x as number) - (s.x as number));
+
+
+const _calc = (params: { offset: number; s: Source; t: Target; accessor: string }, fn: (n: number) => number): number => {
+    const { offset, s, t, accessor } = params;
+    return offset * fn(angle(s, t)) + (s[accessor] as number);
+}
+const xpos = (offset: number, s: Source, t: Target) => _calc({ offset, s, t, accessor: 'x' }, Math.cos);
+const ypos = (offset: number, s: Source, t: Target) => _calc({ offset, s, t, accessor: 'y' }, Math.sin);
 
 
 
