@@ -1,3 +1,13 @@
+## [0.3.42](https://github.com/nurikk/z2m-frontend/compare/0.3.41...0.3.42) (2021-02-07)
+
+
+### Bug Fixes
+
+* **composite:** fix styling ([5affb0f](https://github.com/nurikk/z2m-frontend/commit/5affb0f16f0ff8fc78d25bba01b29e54e3f6293a))
+* **composite:** small fixes ([400e5c4](https://github.com/nurikk/z2m-frontend/commit/400e5c4e68332bcdb1183d4d9f394e10879145c6))
+
+
+
 ## [0.3.41](https://github.com/nurikk/z2m-frontend/compare/0.3.40...0.3.41) (2021-02-07)
 
 
