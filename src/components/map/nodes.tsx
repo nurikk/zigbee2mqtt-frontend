@@ -6,17 +6,14 @@ import { MouseEventsResponderNode } from ".";
 import { Device } from "../../types";
 import DeviceImage from "../device-image";
 import { Simulation } from "d3-force";
-import { select, selectAll } from "d3-selection";
+import { select } from "d3-selection";
 import { drag } from "d3-drag";
 
 
-const calcStarPoints = (
-    centerX: number,
-    centerY: number,
-    innerCircleArms: number,
-    innerRadius: number,
-    outerRadius: number
-): string => {
+export const getStarShape = (innerCircleArms: number, innerRadius: number, outerRadius: number): string => {
+    const centerX = 15;
+    const centerY = 15;
+
     const angle = Math.PI / innerCircleArms;
     const angleOffsetToCenterStar = 60;
     const totalArms = innerCircleArms * 2;
@@ -29,17 +26,6 @@ const calcStarPoints = (
         points += `${currX}, ${currY} `;
     }
     return points;
-};
-
-
-export const getStarShape = (innerCircleArms: number, styleStarWidth: number, innerOuterRadiusRatio: number): string => {
-    return calcStarPoints(
-        15,
-        15,
-        innerCircleArms,
-        styleStarWidth,
-        innerOuterRadiusRatio
-    );
 };
 
 interface NodeProps extends MouseEventsResponderNode {
