@@ -1,3 +1,12 @@
+## [0.3.41](https://github.com/nurikk/z2m-frontend/compare/0.3.40...0.3.41) (2021-02-07)
+
+
+### Bug Fixes
+
+* **settings:** add order for frontend ([85fa69c](https://github.com/nurikk/z2m-frontend/commit/85fa69c298031d0329fa935133153a3c631a577c))
+
+
+
 ## [0.3.40](https://github.com/nurikk/z2m-frontend/compare/0.3.39...0.3.40) (2021-02-07)
 
 
