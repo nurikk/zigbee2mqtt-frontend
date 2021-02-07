@@ -1,3 +1,12 @@
+## [0.3.40](https://github.com/nurikk/z2m-frontend/compare/0.3.39...0.3.40) (2021-02-07)
+
+
+### Bug Fixes
+
+* **settings:** preserve null values ([6386c41](https://github.com/nurikk/z2m-frontend/commit/6386c41a796c39a1eb22d902b794f58dfc4849a7))
+
+
+
 ## [0.3.39](https://github.com/nurikk/z2m-frontend/compare/0.3.38...0.3.39) (2021-02-07)
 
 
