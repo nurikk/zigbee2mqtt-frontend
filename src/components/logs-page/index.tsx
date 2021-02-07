@@ -4,12 +4,7 @@ import actions from "../../actions/actions";
 import { GlobalState } from "../../store";
 import cx from "classnames";
 import escapeRegExp from "lodash/escapeRegExp";
-import UniversalEditor from "../universal-editor";
-import { logLevelSetting } from "../settings";
-import get from "lodash/get";
 import { BridgeApi } from "../../actions/BridgeApi";
-
-
 
 type LogsPageState = {
     search: string;
@@ -32,18 +27,11 @@ const Highlighted = ({ text = '', highlight = '' }) => {
     )
 }
 
+const logLevels = [ALL, 'debug', 'info', 'warn', 'error'];
 export class LogsPage extends Component<GlobalState & BridgeApi, LogsPageState> {
     state = { search: '', logLevel: ALL }
-    updateConfig = (name: string, value: unknown): void => {
-        const { updateConfigValue } = this.props;
-        updateConfigValue(name, value);
-    }
     renderSearch() {
         const { search } = this.state;
-        const { bridgeInfo } = this.props;
-        const logLevels = [...logLevelSetting.values];
-        logLevels.unshift(ALL);
-
         return <form className="row row-cols-lg-auto g-3 align-items-center">
             <div className="col-12">
                 <label htmlFor="log-level" className="form-label">Show only</label>
@@ -54,15 +42,6 @@ export class LogsPage extends Component<GlobalState & BridgeApi, LogsPageState> 
             <div className="col-12">
                 <label htmlFor="search-filter" className="form-label">Filter by text</label>
                 <input id="search-filter" className="form-control col-10" placeholder="Enter search criteria" value={search} onChange={(e) => this.setState({ search: e.target.value })} type="text"></input>
-            </div>
-            <div className="col-12">
-                <label htmlFor={logLevelSetting.key} className="form-label">Configuration log level</label>
-                <UniversalEditor
-                    disabled={get(bridgeInfo, logLevelSetting.path) === undefined}
-                    value={get(bridgeInfo, logLevelSetting.path) as string | ReadonlyArray<string> | number}
-                    values={logLevelSetting.values}
-                    onChange={(value) => this.updateConfig(logLevelSetting.key, value)}
-                />
             </div>
         </form>;
     }

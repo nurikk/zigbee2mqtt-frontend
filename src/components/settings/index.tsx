@@ -2,9 +2,6 @@ import React, { Component } from "react";
 import { connect } from "unistore/react";
 import actions, { UtilsApi } from "../../actions/actions";
 import { GlobalState } from "../../store";
-import get from "lodash/get";
-import UniversalEditor from "../universal-editor";
-import isEmpty from "lodash/isEmpty";
 import { NavLink, Redirect, RouteComponentProps, withRouter } from "react-router-dom";
 import Button from "../button";
 import Form from '@rjsf/bootstrap-4';
@@ -15,38 +12,7 @@ import uiSchemas from "./uiSchema.json";
 import "./style.global.scss";
 import { BridgeApi } from "../../actions/BridgeApi";
 
-
-
-export const logLevelSetting = {
-    key: 'log_level',
-    path: 'log_level',
-    title: 'Log level',
-    description: 'Logging level',
-    values: ['debug', 'info', 'warn', 'error']
-};
-const settings = [
-    {
-        key: 'last_seen',
-        path: 'config.advanced.last_seen',
-        title: 'Last seen',
-        description: 'Add a last_seen attribute to MQTT messages, contains date/time of last Zigbee message',
-        values: ['disable', 'ISO_8601', 'ISO_8601_local', 'epoch']
-    },
-    {
-        key: 'elapsed',
-        path: 'config.advanced.elapsed',
-        title: 'Elapsed',
-        description: 'Add an elapsed attribute to MQTT messages, contains milliseconds since the previous msg'
-    },
-    { ...logLevelSetting },
-    {
-        key: 'homeassistant',
-        path: 'config.homeassistant',
-        title: 'Homeassistant support',
-        description: 'Home Assistant integration (MQTT discovery)'
-    }
-]
-type SettingsTab = "settings" | "bridge" | "about" | "deprecated-settings";
+type SettingsTab = "settings" | "bridge" | "about" | "tools";
 
 type SettigsKeys = string;
 type UrlParams = {
@@ -62,11 +28,7 @@ type SettingsPageState = {
 
 const ROOT_KEY_NAME = 'main';
 
-
 const ingoredFields = ['groups', 'devices', 'device_options', 'ban', 'whitelist'];
-
-
-
 const validJsonSchemasAsTabs = ['object', 'array'];
 
 const removePropertiesFromSchema = (names: string[], schema: JSONSchema7 = {}, config: object = {}) => {
@@ -91,16 +53,16 @@ const tabs = [
         url: `/settings/settings`
     },
     {
-        title: 'Settings (deprecated)',
-        url: `/settings/deprecated-settings`
-    },
-    {
-        title: 'Raw',
-        url: `/settings/bridge`
+        title: 'Tools',
+        url: `/settings/tools`
     },
     {
         title: 'About',
         url: `/settings/about`
+    },
+    {
+        title: 'Raw',
+        url: `/settings/bridge`
     },
 ];
 
@@ -109,10 +71,6 @@ const isValidKeyToRenderAsTab = (key: string, value: JSONSchema7): boolean => (v
 export class SettingsPage extends Component<SettingsPageProps & BridgeApi & GlobalState & UtilsApi, SettingsPageState> {
     state = {
         keyName: ROOT_KEY_NAME
-    }
-    updateConfig = (name: string, value: unknown): void => {
-        const { updateConfigValue } = this.props;
-        updateConfigValue(name, value);
     }
     renderCategoriesTabs() {
         return (
@@ -141,8 +99,8 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
         const { match } = this.props;
         const { tab } = match.params;
         switch (tab) {
-            case "deprecated-settings":
-                return this.renderDeprecatedSettings();
+            case "tools":
+                return this.renderTools();
             case "bridge":
                 return this.renderBridgeInfo();
             case "about":
@@ -184,29 +142,12 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
         return <pre>{JSON.stringify(bridgeInfo, null, 4)}</pre>
     }
 
-    renderDeprecatedSettings() {
-        const { bridgeInfo, exportState, restartBridge } = this.props;
-        return <><div className="mt-2">
-            {
-                !isEmpty(bridgeInfo) && settings.map(setting => (
-                    <div key={setting.key} className="row border-bottom pt-1">
-                        <div className="col mb-3">
-                            <label htmlFor={setting.key} className="form-label">{setting.title}</label>
-                            <UniversalEditor
-                                disabled={get(bridgeInfo, setting.path) === undefined}
-                                value={get(bridgeInfo, setting.path) as string | ReadonlyArray<string> | number}
-                                values={setting.values}
-                                onChange={(value) => this.updateConfig(setting.key, value)}
-                            />
-                            <div className="form-text">{setting.description}</div>
-                        </div>
-                    </div>
-                ))
-            }
-        </div>
+    renderTools() {
+        const { exportState, restartBridge } = this.props;
+        return <div className="mt-2">
             <Button className="btn btn-primary d-block mt-2" onClick={exportState}>Download state</Button>
-            <Button className="btn btn-danger d-block mt-2" onClick={restartBridge} promt>Restart</Button>
-        </>
+            <Button className="btn btn-danger d-block mt-2" onClick={restartBridge} promt>Restart Zigbee2MQTT</Button>
+        </div>
     }
     onSettingsSave = ({ formData }) => {
         const { updateBridgeConfig } = this.props;
