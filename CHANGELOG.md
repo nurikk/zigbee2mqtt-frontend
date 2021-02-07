@@ -1,3 +1,19 @@
+## [0.3.39](https://github.com/nurikk/z2m-frontend/compare/0.3.38...0.3.39) (2021-02-07)
+
+
+### Bug Fixes
+
+* **raw:** add mt-2 ([554b54c](https://github.com/nurikk/z2m-frontend/commit/554b54c2a730557570482cf697963ddea18a6226))
+
+
+### Features
+
+* **dashboard:** remove experimental title ([0ac1226](https://github.com/nurikk/z2m-frontend/commit/0ac1226a64ed13755d016352c7c24c79f0057b3d))
+* **settings:** deprecate bridge/request/config/* ([6ef03a3](https://github.com/nurikk/z2m-frontend/commit/6ef03a378e761d34cc9d9559ef97b301d5bb8e79))
+* **settings:** restyle settings tabs ([6233bd4](https://github.com/nurikk/z2m-frontend/commit/6233bd4330d63cb0ba2cc3dc06bb686e115c1463))
+
+
+
 ## [0.3.38](https://github.com/nurikk/z2m-frontend/compare/0.3.37...0.3.38) (2021-02-06)
 
 
