@@ -13,7 +13,7 @@ export default {
         return api.send("bridge/request/permit_join", { value: permit, device: device?.friendly_name });
     },
     updateBridgeConfig(state, options: object): Promise<void> {
-        return api.send('bridge/request/options', {options});
+        return api.send('bridge/request/options', { options });
     },
     restartBridge(state): Promise<void> {
         return api.send('bridge/request/restart', {});

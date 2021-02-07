@@ -1,7 +1,7 @@
 import ReconnectingWebSocket from "reconnecting-websocket";
 import store, { Group, LogMessage } from "./store";
 import { BridgeConfig, BridgeInfo, TouchLinkDevice, Device, DeviceState, BridgeState } from './types';
-import { sanitizeGraph, isSecurePage, randomString } from "./utils";
+import { sanitizeGraph, isSecurePage, randomString, stringifyWithPreservingUndefinedAsNull } from "./utils";
 import { Notyf } from "notyf";
 import { GraphI } from "./components/map/types";
 
@@ -76,6 +76,7 @@ interface TouchllinkScanResponse extends ResponseWithStatus {
 interface Callable {
     (): void;
 }
+
 class Api {
     url: string;
     socket: ReconnectingWebSocket;
@@ -94,10 +95,10 @@ class Api {
             const promise = new Promise<void>((resolve, reject) => {
                 this.requests.set(transaction, [resolve, reject]);
             });
-            this.socket.send(JSON.stringify({ topic, payload: { ...payload, transaction } }));
+            this.socket.send(stringifyWithPreservingUndefinedAsNull({ topic, payload: { ...payload, transaction } }));
             return promise;
         } else {
-            this.socket.send(JSON.stringify({ topic, payload }));
+            this.socket.send(stringifyWithPreservingUndefinedAsNull({ topic, payload }));
             return Promise.resolve();
         }
     }

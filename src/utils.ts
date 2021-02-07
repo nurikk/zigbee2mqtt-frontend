@@ -160,3 +160,6 @@ export const getEndpoints = (obj: Device | Group): Endpoint[] => {
     }
     return [];
 }
+
+
+export const stringifyWithPreservingUndefinedAsNull = (data: object): string => JSON.stringify(data, (k, v) => v === undefined ? null : v)
