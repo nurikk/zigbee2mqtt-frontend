@@ -139,7 +139,7 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
     }
     renderBridgeInfo() {
         const { bridgeInfo } = this.props;
-        return <pre>{JSON.stringify(bridgeInfo, null, 4)}</pre>
+        return <pre className="mt-2">{JSON.stringify(bridgeInfo, null, 4)}</pre>
     }
 
     renderTools() {
