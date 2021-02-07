@@ -5,5 +5,8 @@
     },
     "serial": {
         "ui:order": ["port", "adapter", "disable_led", "*"]
+    },
+    "frontend": {
+        "ui:order": ["port", "host", "*"]
     }
 }
