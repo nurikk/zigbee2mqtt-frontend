@@ -219,7 +219,7 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
     }
 
     getSettingsTabs() {
-        const { bridgeInfo: { config_schema: configSchema = {properties: {}} } } = this.props;
+        const { bridgeInfo: { config_schema: configSchema = { properties: {} } } } = this.props;
         const tabs = Object.entries<JSONSchema7>(configSchema.properties as unknown as ArrayLike<JSONSchema7>)
             .filter(([key, value]) => isValidKeyToRenderAsTab(key, value))
             .map(([key, value]) => ({
@@ -257,22 +257,28 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
     renderSettingsTabs() {
         const tabs = this.getSettingsTabs();
         const { keyName } = this.state;
-        return <ul className="nav nav-pills nav-fill">
-            {tabs.map(tab => <li key={tab.name} className="nav-item">
-                <a className={cx("nav-link", { active: keyName === tab.name })} aria-current="page" href="#" onClick={(e) => { this.setState({ keyName: tab.name }); e.preventDefault() }}>{tab.title}</a>
-            </li>)}
-        </ul>;
+        return <div className="nav flex-column nav-pills me-3">
+            {tabs.map(tab =>
+                <a key={tab.name} className={cx("nav-link", { active: keyName === tab.name })} aria-current="page" href="#" onClick={(e) => { this.setState({ keyName: tab.name }); e.preventDefault() }}>{tab.title}</a>
+            )}
+        </div>
+            ;
     }
     renderSettings() {
         const { keyName } = this.state;
         const { currentSchema, currentConfig } = this.getSettingsInfo();
 
-        return <>{this.renderSettingsTabs()}
-            <Form key={keyName} schema={currentSchema}
-                formData={currentConfig}
-                onSubmit={this.onSettingsSave}
-                uiSchema={uiSchemas[keyName]}
-            /></>
+        return <div className="d-flex align-items-start mt-2">
+            {this.renderSettingsTabs()}
+            <div className="tab-content w-100">
+                <Form key={keyName} schema={currentSchema}
+                    formData={currentConfig}
+                    onSubmit={this.onSettingsSave}
+                    uiSchema={uiSchemas[keyName]}
+                />
+            </div>
+
+        </div>
     }
 }
 const SettingsPageWithRouter = withRouter(SettingsPage);
