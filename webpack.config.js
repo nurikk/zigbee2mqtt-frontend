@@ -1,26 +1,16 @@
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
-    .BundleAnalyzerPlugin;
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyPlugin = require('copy-webpack-plugin');
 const webpack = require("webpack");
 
 const path = require("path");
 const glob = require("glob");
-const proxyTo = process.env.Z2M_API_URI ?
-    process.env.Z2M_API_URI :
-    "ws://localhost:8579";
-module.exports = (env, args) => {
-    let production = false;
+const proxyTo = process.env.Z2M_API_URI ? process.env.Z2M_API_URI : "ws://localhost:8579";
 
-    if (args && args.mode === "production") {
-        production = true;
-        // console.log('== Production mode');
-    } else {
-        console.log("== Development mode");
-    }
 
+const getPlugins = (production) => {
     const plugins = [
         new webpack.DefinePlugin({
             FRONTEND_VERSION: JSON.stringify(process.env.npm_package_version)
@@ -35,6 +25,7 @@ module.exports = (env, args) => {
             }, ],
         }),
     ];
+
     const basePath = "src/templates";
     glob.sync(`${basePath}/**/*.html`).forEach((item) => {
         plugins.push(
@@ -53,6 +44,19 @@ module.exports = (env, args) => {
     } else {
         plugins.push(new ForkTsCheckerWebpackPlugin());
     }
+    return plugins;
+};
+
+
+module.exports = (env, args) => {
+    let production = false;
+
+    if (args && args.mode === "production") {
+        production = true;
+    } else {
+        console.log("== Development mode");
+    }
+    const plugins = getPlugins(production);
 
     return {
         entry: "./src/index.tsx",
