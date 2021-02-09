@@ -1,3 +1,12 @@
+## [0.3.43](https://github.com/nurikk/z2m-frontend/compare/0.3.42...0.3.43) (2021-02-09)
+
+
+### Bug Fixes
+
+* **settings:** ignore map_options field ([ef064d3](https://github.com/nurikk/z2m-frontend/commit/ef064d3105554fd1f2de5665123e4847db1d5733))
+
+
+
 ## [0.3.42](https://github.com/nurikk/z2m-frontend/compare/0.3.41...0.3.42) (2021-02-07)
 
 
