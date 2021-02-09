@@ -28,7 +28,9 @@ const typeToClassMap = {
     // eslint-disable-next-line @typescript-eslint/camelcase
     illuminance_lux: ['fa-sun'],
     // eslint-disable-next-line @typescript-eslint/camelcase
-    soil_moisture: ['fa-fill-drip']
+    soil_moisture: ['fa-fill-drip'],
+    pressure: ['fa-cloud-download-alt'],
+    co2: ['fa-atom']
 };
 const getGenericFeatureIcon = (name: string, value: unknown): string => {
     let classes = [] as string[];
