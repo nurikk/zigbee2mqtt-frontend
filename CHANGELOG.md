@@ -1,3 +1,13 @@
+## [0.3.44](https://github.com/nurikk/z2m-frontend/compare/0.3.43...0.3.44) (2021-02-09)
+
+
+### Features
+
+* **dashboard:** add few icons ([1fdc876](https://github.com/nurikk/z2m-frontend/commit/1fdc8766e3b1efaf4b410d9fc5c5eadfa478dbe8))
+* **dashboard:** implement feature filtration ([fee5dc9](https://github.com/nurikk/z2m-frontend/commit/fee5dc9b0272cc79e917beddb9f4d2856c916e63))
+
+
+
 ## [0.3.43](https://github.com/nurikk/z2m-frontend/compare/0.3.42...0.3.43) (2021-02-09)
 
 
