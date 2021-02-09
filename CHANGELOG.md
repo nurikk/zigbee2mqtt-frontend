@@ -1,3 +1,12 @@
+## [0.3.45](https://github.com/nurikk/z2m-frontend/compare/0.3.44...0.3.45) (2021-02-09)
+
+
+### Features
+
+* **dashboard:** simplify grouping by endpoints ([b7f4d3a](https://github.com/nurikk/z2m-frontend/commit/b7f4d3a4cdf21f8c63b16f1a3bd6198b28a11d8c))
+
+
+
 ## [0.3.44](https://github.com/nurikk/z2m-frontend/compare/0.3.43...0.3.44) (2021-02-09)
 
 
