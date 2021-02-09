@@ -28,7 +28,7 @@ type SettingsPageState = {
 
 const ROOT_KEY_NAME = 'main';
 
-const ingoredFields = ['groups', 'devices', 'device_options', 'ban', 'whitelist'];
+const ingoredFields = ['groups', 'devices', 'device_options', 'ban', 'whitelist', 'map_options'];
 const validJsonSchemasAsTabs = ['object', 'array'];
 
 const removePropertiesFromSchema = (names: string[], schema: JSONSchema7 = {}, config: object = {}) => {
