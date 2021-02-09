@@ -1,5 +1,5 @@
 import React from 'react';
-import { CompositeFeature } from '../../types';
+import { CompositeFeature, DeviceState, FeatureAccessMode, GenericExposedFeature } from '../../types';
 import cx from "classnames";
 import { BaseFeatureProps } from '../features/base';
 import DeviceFooter from './DeviceFooter';
@@ -7,7 +7,7 @@ import DeviceFooter from './DeviceFooter';
 import styles from './DashboardDevice.scss';
 
 import { Link } from 'react-router-dom';
-import { genDeviceDetailsLink } from '../../utils';
+import { genDeviceDetailsLink, isOnlyOneBitIsSet } from '../../utils';
 
 import Composite from '../features/composite/composite';
 import DeviceImage from '../device-image';
@@ -15,12 +15,34 @@ import DeviceImage from '../device-image';
 type Props = BaseFeatureProps<CompositeFeature>;
 
 const genericRendererIgnoredNames = ['linkquality', 'battery', 'battery_low'];
+const whitelistFeatureNames = ['state', 'brightness', 'color_temp'];
+const whitelistFeatureTypes = ['light'];
+const nullish = ['', null, undefined];
+export const onlyValidFeaturesForDashboard = (feature: GenericExposedFeature | CompositeFeature, deviceState: DeviceState): boolean => {
+    const { access, property, name, type } = feature;
+    if (whitelistFeatureNames.includes(name)) {
+        return true;
+    }
+    if (whitelistFeatureTypes.includes(type)) {
+        return true;
+    }
+    if (!(access & FeatureAccessMode.ACCESS_STATE && !nullish.includes(deviceState[property] as string | null | undefined))) {
+        return false;
+    }
+    if (genericRendererIgnoredNames.includes(name)) {
+        return false;
+    }
+
+    if (access & FeatureAccessMode.ACCESS_STATE && isOnlyOneBitIsSet(access)) {
+        return true;
+    }
+    return false;
+}
 
 const DashboardDevice: React.FC<Props> = ({ onChange, onRead, device, deviceState, feature: { features }, featureWrapperClass }) => {
 
-    const filteredFeatures = features
-        // .filter(({ property, access }) => deviceState[property] !== undefined || (access & FeatureAccessMode.ACCESS_WRITE))
-        .filter(({ name }) => !genericRendererIgnoredNames.includes(name))
+    const filteredFeatures = features.filter((feature) => onlyValidFeaturesForDashboard(feature, deviceState));
+
 
     return (
         <div className="col-xl-3 col-lg-4 col-sm-6 col-12 mb-3">

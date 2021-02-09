@@ -163,3 +163,9 @@ export const getEndpoints = (obj: Device | Group): Endpoint[] => {
 
 
 export const stringifyWithPreservingUndefinedAsNull = (data: object): string => JSON.stringify(data, (k, v) => v === undefined ? null : v)
+
+
+
+export const isOnlyOneBitIsSet = (b: number): number | boolean => {
+    return b && !(b & (b - 1));
+}

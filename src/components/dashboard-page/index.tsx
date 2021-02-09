@@ -4,8 +4,8 @@ import React, { FunctionComponent, PropsWithChildren } from 'react';
 import { connect } from 'unistore/react';
 
 
-import DashboardDevice from './DashboardDevice';
-import { DeviceState, CompositeFeature } from '../../types';
+import DashboardDevice, { onlyValidFeaturesForDashboard } from './DashboardDevice';
+import { DeviceState, CompositeFeature, GenericExposedFeature } from '../../types';
 import actions from '../../actions/actions';
 import { StateApi } from "../../actions/StateApi";
 import { GlobalState } from '../../store';
@@ -20,16 +20,23 @@ type Props = Pick<GlobalState, 'devices' | 'deviceStates'> & StateApi;
 
 
 const Dashboard: React.FC<Props> = (props) => {
-    const { setDeviceState, getDeviceState } = props;
+    const { setDeviceState, getDeviceState, deviceStates } = props;
     return (
 
         <div className="container-fluid">
             <div className="row my-4 align-items-stretch">
-                {Array.from(props.devices).filter(([, device]) => device.supported).map(([key, device]) => {
-                    const deviceState = props.deviceStates.get(device.friendly_name) ?? ({} as DeviceState);
+                {Array.from(props.devices)
+                    .filter(([, device]) => device.supported)
+                    .map(([, device]) => ({ device, deviceState: deviceStates.get(device.friendly_name) ?? ({} as DeviceState)}))
+                    .filter(({ device, deviceState }) => {
+                        const _features = ((device.definition?.exposes ?? []) as (GenericExposedFeature | CompositeFeature)[]);
+                        return _features.filter((e: GenericExposedFeature | CompositeFeature) => onlyValidFeaturesForDashboard(e, deviceState)).length > 0
+                    })
+                    .map(( { device, deviceState }) => {
+
                     return (
                         <DashboardDevice
-                            key={key}
+                            key={device.ieee_address}
                             feature={{ features: device.definition?.exposes } as CompositeFeature}
                             device={device}
                             deviceState={deviceState}
