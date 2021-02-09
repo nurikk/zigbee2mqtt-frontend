@@ -70,17 +70,14 @@ const getGenericFeatureIcon = (name: string, value: unknown): string => {
 }
 
 export const DashboardFeatureWrapper: FunctionComponent<PropsWithChildren<FetatureWrapperProps>> = (props) => {
-    const { children, feature, onRead, deviceState = {} } = props;
-    const isColor = feature.name?.startsWith("color_"); //hardcode for color
-    const isReadable = (feature.access & FeatureAccessMode.ACCESS_READ) || isColor;
-    // const { feature, deviceState } = props;
+    const { children, feature, deviceState = {} } = props;
     const icon = getGenericFeatureIcon(feature.name, deviceState[feature.property]);
 
     return <div className={styles.entity}>
         {icon && <div className={styles.icon}>
             <i className={`fa fa-fw ${icon}`} />
         </div>}
-        <div className={styles.title}>{startCase(camelCase(feature.name))}</div>
+        <div className={styles.title}>{startCase(camelCase(feature.name))}{ feature.endpoint ? ` (${feature.endpoint})` : null}</div>
         <div className={styles.value}>{children}</div>
     </div>
 }

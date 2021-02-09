@@ -49,10 +49,40 @@ export default class Composite extends Component<CompositeProps, CompositeState>
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { feature, device, deviceState, onRead: _onRead, onChange: _onChange, featureWrapperClass, minimal } = this.props;
         const { features } = feature;
-        const groupedFeatures = groupBy(features, f => f.endpoint ?? MAGIC_NO_ENDPOINT);
-        const result = [] as JSX.Element[];
-        if (groupedFeatures[MAGIC_NO_ENDPOINT]) {
-            result.push(...groupedFeatures[MAGIC_NO_ENDPOINT].map(f => <Feature
+
+        const doGroupingByEndpoint = !minimal;
+        let result = [] as JSX.Element[];
+        if (doGroupingByEndpoint) {
+            const groupedFeatures = groupBy(features, f => f.endpoint ?? MAGIC_NO_ENDPOINT);
+
+            if (groupedFeatures[MAGIC_NO_ENDPOINT]) {
+                result.push(...groupedFeatures[MAGIC_NO_ENDPOINT].map(f => <Feature
+                    key={f.name + f.endpoint}
+                    feature={f}
+                    device={device}
+                    deviceState={deviceState}
+                    onChange={this.onChange}
+                    onRead={this.onRead}
+                    featureWrapperClass={featureWrapperClass}
+                    minimal={minimal}
+                />));
+                delete groupedFeatures[MAGIC_NO_ENDPOINT];
+            }
+            for (const epName in groupedFeatures) {
+                const featuresGroup = groupedFeatures[epName];
+                result.push(<div key={epName}>Endpoint: {epName}<div className="ps-4">{...featuresGroup.map(f => <Feature
+                    key={f.name + f.endpoint}
+                    feature={f}
+                    device={device}
+                    deviceState={deviceState}
+                    onChange={this.onChange}
+                    onRead={this.onRead}
+                    featureWrapperClass={featureWrapperClass}
+                    minimal={minimal}
+                />)}</div></div>);
+            }
+        } else {
+            result = result.concat(features.map(f => <Feature
                 key={f.name + f.endpoint}
                 feature={f}
                 device={device}
@@ -62,21 +92,9 @@ export default class Composite extends Component<CompositeProps, CompositeState>
                 featureWrapperClass={featureWrapperClass}
                 minimal={minimal}
             />));
-            delete groupedFeatures[MAGIC_NO_ENDPOINT];
         }
-        for (const epName in groupedFeatures) {
-            const featuresGroup = groupedFeatures[epName];
-            result.push(<div key={epName}>Endpoint: {epName}<div className="ps-4">{...featuresGroup.map(f => <Feature
-                key={f.name + f.endpoint}
-                feature={f}
-                device={device}
-                deviceState={deviceState}
-                onChange={this.onChange}
-                onRead={this.onRead}
-                featureWrapperClass={featureWrapperClass}
-                minimal={minimal}
-            />)}</div></div>);
-        }
+
+
         if (isCompositeFeature(feature)) {
             result.push(<div key={feature.name}><Button className={cx('btn btn-primary float-end', {'btn-sm': minimal})} onClick={this.onApplyClick}>Apply</Button></div>)
         }
