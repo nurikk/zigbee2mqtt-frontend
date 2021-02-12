@@ -1,3 +1,12 @@
+## [0.3.47](https://github.com/nurikk/z2m-frontend/compare/0.3.46...0.3.47) (2021-02-12)
+
+
+### Features
+
+* **app-stack:** rebuild the theme ([5c1de18](https://github.com/nurikk/z2m-frontend/commit/5c1de1875a5b9838cbc8fb11343848f1dabcbe45))
+
+
+
 ## [0.3.46](https://github.com/nurikk/z2m-frontend/compare/0.3.45...0.3.46) (2021-02-12)
 
 
