@@ -45,7 +45,7 @@ interface ClusterPickerState {
 
 function isClusterGroup(clusters: Cluster[] | ClusterGroup[]): clusters is ClusterGroup[] {
 
-    return typeof clusters[0] !== 'string';
+    return clusters.length > 0 && typeof clusters[0] !== 'string';
 }
 
 // eslint-disable-next-line react/prefer-stateless-function
