@@ -3,7 +3,7 @@ import startCase from "lodash/startCase";
 import React, { FunctionComponent, PropsWithChildren } from "react";
 import { FetatureWrapperProps } from "../features/composite/FeatureWrapper";
 import styles from "./DashboardFeatureWrapper.scss";
-
+import cx from "classnames";
 
 const getTemperatureIcon = (temperature: number) => {
     let icon = 'fa-thermometer-empty';
@@ -29,49 +29,39 @@ const typeToClassMap = {
     voltage: ['fa-bolt', 'text-success'],
     state: ['fa-star-half-alt'],
     brightness: ['fa-sun'],
+    occupancy: ['fa-walking'],
     /* eslint-disable @typescript-eslint/camelcase */
     color_xy: ['fa-palette'],
     color_hs: ['fa-palette'],
     color_temp: ['fa-sliders-h'],
     illuminance_lux: ['fa-sun'],
     soil_moisture: ['fa-fill-drip'],
+    water_leak: ['fa-water'],
     /* eslint-enable @typescript-eslint/camelcase */
 };
 const getGenericFeatureIcon = (name: string, value: unknown): string => {
     let classes = [] as string[];
     switch (name) {
         case 'temperature':
-            classes.push(getTemperatureIcon(value as number));
-            classes.push('text-danger');
+            classes.push(cx('text-danger', getTemperatureIcon(value as number)))
             break;
         case 'contact':
-            if (value) {
-                classes.push('fa-door-closed text-muted')
-            } else {
-                classes.push('fa-door-open text-primary');
-            }
+            classes.push(cx({ 'fa-door-closed text-muted': value, 'fa-door-open text-primary': !value }))
             break;
         case 'occupancy':
-            classes.push('fa-walking');
-            if (value) {
-                classes.push('text-warning');
-            }
+            classes.push(cx({ 'text-warning': value }))
             break;
-
         case 'water_leak':
-            classes.push('fa-water');
-            if (value) {
-                classes.push('text-primary');
-            }
+            classes.push(cx({ 'text-primary': value }));
             break;
         default:
-            classes = [...classes, ...(typeToClassMap[name] ?? [])];
             break;
     }
+    classes = [...classes, ...(typeToClassMap[name] ?? [])];
     if (!classes.length) {
         classes.push('invisible');
     }
-    return classes.join(' ');
+    return cx(classes);
 }
 
 export const DashboardFeatureWrapper: FunctionComponent<PropsWithChildren<FetatureWrapperProps>> = (props) => {
@@ -82,7 +72,7 @@ export const DashboardFeatureWrapper: FunctionComponent<PropsWithChildren<Fetatu
         {icon && <div className={styles.icon}>
             <i className={`fa fa-fw ${icon}`} />
         </div>}
-        <div className={styles.title}>{startCase(camelCase(feature.name))}{ feature.endpoint ? ` (${feature.endpoint})` : null}</div>
+        <div className={styles.title}>{startCase(camelCase(feature.name))}{feature.endpoint ? ` (${feature.endpoint})` : null}</div>
         <div className={styles.value}>{children}</div>
     </div>
 }
