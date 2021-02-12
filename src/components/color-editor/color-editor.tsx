@@ -19,7 +19,7 @@ export const toRGB = (source: AnyColor, sourceFormat: ColorFormat): string => {
     switch (sourceFormat) {
         case "color_xy":
             {
-                const { x, y } = source as XYColor;
+                const { x = 0, y = 0 } = source as XYColor;
                 const z = 1.0 - x - y;
                 const Y = 1;
                 const X = (Y / y) * x;
@@ -29,7 +29,7 @@ export const toRGB = (source: AnyColor, sourceFormat: ColorFormat): string => {
 
         case "color_hs":
             {
-                const { hue, saturation } = source as HueSaturationColor;
+                const { hue = 0, saturation = 0 } = source as HueSaturationColor;
                 return '#' + convertColors.hsv.hex([hue, saturation, 100]);
             }
         default:
@@ -80,7 +80,7 @@ const ColorEditor: FunctionComponent<ColorProps & Omit<InputHTMLAttributes<HTMLI
             type="color"
             className="form-control form-control-color"
             value={currentColor}
-            style={{minWidth: 40}}
+            style={{ minWidth: 40 }}
             onChange={e => {
                 onChange(rgbToTargetFormat(e.target.value, format))
             }}
