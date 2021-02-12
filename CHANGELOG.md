@@ -1,3 +1,12 @@
+## [0.3.48](https://github.com/nurikk/z2m-frontend/compare/0.3.47...0.3.48) (2021-02-12)
+
+
+### Bug Fixes
+
+* **styles:** include FA style link ([4e590aa](https://github.com/nurikk/z2m-frontend/commit/4e590aaa9430b4ff3098134a40fd79cf24f97ef5))
+
+
+
 ## [0.3.47](https://github.com/nurikk/z2m-frontend/compare/0.3.46...0.3.47) (2021-02-12)
 
 
