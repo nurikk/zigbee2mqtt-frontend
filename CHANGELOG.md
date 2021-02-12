@@ -1,3 +1,23 @@
+## [0.3.50](https://github.com/nurikk/z2m-frontend/compare/0.3.49...0.3.50) (2021-02-12)
+
+
+### Bug Fixes
+
+* **bindings:** add title to buttons ([5a70667](https://github.com/nurikk/z2m-frontend/commit/5a70667f181e2076e822967edc39f9d968e760a0))
+* **cluster-picker:** fix group detection ([29c3d3c](https://github.com/nurikk/z2m-frontend/commit/29c3d3c37ab8d5024ee8d73b1f69812a0472c05f))
+* **color-editor:** fix npe ([29e5b86](https://github.com/nurikk/z2m-frontend/commit/29e5b861e8f6f80163bcf57afa7ed6e81fc6282b))
+* **dashboard:** condense dashboard tiles ([8917e2e](https://github.com/nurikk/z2m-frontend/commit/8917e2e98f012f7fa188e0b9b91caf3c406b50ce))
+* **dashboard:** hide LQI feature for falsysh values ([608b15b](https://github.com/nurikk/z2m-frontend/commit/608b15bf9487ad858462d25b12cfd572ceba29c5))
+* **device-control:** change reconfigure icon ([af4f34e](https://github.com/nurikk/z2m-frontend/commit/af4f34e0d8c5edf3d00ea4376ebcb444ab7d3695))
+
+
+### Features
+
+* **dashboard:** add more icons ([420af3c](https://github.com/nurikk/z2m-frontend/commit/420af3c61af94ed9ef6e2ff289f74055ed69c363))
+* **dashboard:** improve dashboard features filtration algorithm ([d352444](https://github.com/nurikk/z2m-frontend/commit/d352444bf7e0c76010b79c9ee0c66dd2250b2fec))
+
+
+
 ## [0.3.49](https://github.com/nurikk/z2m-frontend/compare/0.3.48...0.3.49) (2021-02-12)
 
 
