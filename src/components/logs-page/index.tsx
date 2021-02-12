@@ -11,19 +11,19 @@ type LogsPageState = {
     logLevel: string;
 }
 const ALL = 'all';
-
+const TextWrapper = ({text}) => <>{text}</>;
 const Highlighted = ({ text = '', highlight = '' }) => {
     if (!highlight.trim()) {
-        return <span>{text}</span>
+        return <TextWrapper text={text} />
     }
     const regex = new RegExp(`(${escapeRegExp(highlight)})`, 'gi')
     const parts = text.split(regex)
     return (
-        <span>
+        <>
             {parts.filter(part => part).map((part, i) => (
-                regex.test(part) ? <mark key={i}>{part}</mark> : <span key={i}>{part}</span>
+                regex.test(part) ? <mark key={i}>{part}</mark> : <TextWrapper key={i} text={part}></TextWrapper>
             ))}
-        </span>
+        </>
     )
 }
 
