@@ -35,7 +35,7 @@ const DeviceFooter: React.FC<Props> = ({ device, deviceState }) => {
 
     rederedFeatures.push(<PowerSource key={"power"} source={device.power_source} battery={deviceState.battery as number} />);
     return (
-        <footer className={`card-footer ${styles.footer}`}>
+        <footer className={`card-footer pt-0 ${styles.footer}`}>
             <div className="row justify-content-between flex-nowrap">
                 <div title="last update" className={`col text-truncate`}>
                     {lastSeen(lastSeenTime)}

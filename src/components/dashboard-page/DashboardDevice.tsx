@@ -19,10 +19,10 @@ const DashboardDevice: React.FC<Props> = ({ onChange, onRead, device, deviceStat
     return (
         <div className="col-xl-3 col-lg-4 col-sm-6 col-12 mb-3">
             <div className={`${styles.card} card`}>
-                <div className="card-header text-truncate">
+                <div className="card-header text-truncate pb-0">
                     <Link to={genDeviceDetailsLink(device.ieee_address)}>{device.friendly_name}</Link>
                 </div>
-                <div className={`${styles.cardBody} card-body row`}>
+                <div className={`${styles.cardBody} card-body row py-0`}>
                     <DeviceImage device={device} className={cx(styles.deviceImage, 'col col-1')} />
                     <div className="col col-11">
                         <Composite feature={{ features } as CompositeFeature}
