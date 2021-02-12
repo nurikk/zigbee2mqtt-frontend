@@ -200,9 +200,8 @@ export class GroupsPage extends Component<GroupsApi & GlobalState, GroupsPageSta
                             {group.friendly_name} (#{group.id})
                                     </button>
                         <div className="btn-group float-right btn-group-sm" role="group" aria-label="Basic example">
-
-                            <Button<string> promt title="Remove group" item={group.friendly_name} onClick={this.removeGroup} className="btn btn-danger"><i className="fa fa-trash" /></Button>
                             <RenameGroupForm name={group.friendly_name} onRename={this.renameGroup} />
+                            <Button<string> promt title="Remove group" item={group.friendly_name} onClick={this.removeGroup} className="btn btn-danger"><i className="fa fa-trash" /></Button>
                         </div>
                     </h5>
                 </div>

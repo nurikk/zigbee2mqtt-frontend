@@ -32,7 +32,7 @@ export function RenameGroupForm(props: RenameGroupFormProps) {
           <button type="button" className="btn btn-primary" onClick={() => { onRename(name, renameGroupForm['friendlyName']); setModalIsOpened(false) }}>Save changes</button>
         </ModalFooter>
       </Modal>
-      <Button<void> className="btn btn-secondary" onClick={() => setModalIsOpened(true)} title="Rename group"><i className="fa fa-edit" /></Button>
+      <Button<void> className="btn btn-primary" onClick={() => setModalIsOpened(true)} title="Rename group"><i className="fa fa-edit" /></Button>
     </>
   )
 }
