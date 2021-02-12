@@ -13,12 +13,12 @@ import { DashboardFeatureWrapper } from './DashboardFeatureWrapper';
 import { isOnlyOneBitIsSet } from '../../utils';
 
 import { isLightFeature } from '../device-page/type-guards';
-import { groupBy } from 'lodash';
+import groupBy from "lodash/groupBy";
 
 
 type Props = Pick<GlobalState, 'devices' | 'deviceStates'> & StateApi;
 
-const genericRendererIgnoredNames = ['linkquality', 'battery', 'battery_low', 'illuminance_lux', 'color_temp_startup'];
+const genericRendererIgnoredNames = ['linkquality', 'battery', 'battery_low', 'illuminance_lux', 'color_temp_startup', 'voltage', 'strength'];
 const whitelistFeatureNames = ['state', 'brightness', 'color_temp'];
 const whitelistFeatureTypes = ['light'];
 const nullish = ['', null, undefined];
