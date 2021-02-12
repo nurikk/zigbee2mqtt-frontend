@@ -1,3 +1,15 @@
+## [0.3.49](https://github.com/nurikk/z2m-frontend/compare/0.3.48...0.3.49) (2021-02-12)
+
+
+### Bug Fixes
+
+* **device-controls:** change button styles ([31d8695](https://github.com/nurikk/z2m-frontend/commit/31d8695580b1cdefac004e080c1f3f363008a6dd))
+* **groups:** change order and classes ([14d7ce5](https://github.com/nurikk/z2m-frontend/commit/14d7ce503220f23f99add62b24c8961294239ac3))
+* **icons:** fix fas url ([9677203](https://github.com/nurikk/z2m-frontend/commit/9677203909b2507a8a2c9068f76abaad1862d71f))
+* **styles:** fix missing class ([4ed39f6](https://github.com/nurikk/z2m-frontend/commit/4ed39f667c34e23a2a9bb4d7647bfcb49491ca5b))
+
+
+
 ## [0.3.48](https://github.com/nurikk/z2m-frontend/compare/0.3.47...0.3.48) (2021-02-12)
 
 
