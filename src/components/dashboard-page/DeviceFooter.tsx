@@ -26,7 +26,7 @@ const DeviceFooter: React.FC<Props> = ({ device, deviceState }) => {
         .forEach(e => {
             switch (e.name) {
                 case "linkquality":
-                    rederedFeatures.push(<span key="linkquality" className="me-1"><i className="fa fa-signal fa-fw" /> {linkquality} LQI</span>);
+                    linkquality && rederedFeatures.push(<span key="linkquality" className="me-1"><i className="fa fa-signal fa-fw" /> {linkquality} LQI</span>);
                     break;
                 default:
                     break;
