@@ -3,12 +3,10 @@ import Button from "../button";
 import { Device, DeviceState } from "../../types";
 import { connect } from "unistore/react";
 import actions from "../../actions/actions";
-import { OtaApi } from "../../actions/OtaApi";
 import { DeviceApi } from "../../actions/DeviceApi";
 import cx from "classnames";
 import Modal, { ModalHeader, ModalBody, ModalFooter } from "../modal";
 import { GlobalState } from "../../store";
-import { BodyClass } from "../../hooks/bodyClass";
 interface DeviceControlGroupProps {
     device: Device;
     state?: DeviceState;
@@ -97,7 +95,7 @@ export class DeviceControlGroup extends Component<DeviceControlGroupProps & Devi
         const { bridgeInfo, device } = this.props;
         const { isRenameModalOpened, renameParams } = this.state;
         return (<>
-            <Button<void> className="btn btn-secondary" onClick={this.toggleRenameModal} title="Rename device"><i className="fa fa-edit" /></Button>
+            <Button<void> className="btn btn-primary" onClick={this.toggleRenameModal} title="Rename device"><i className="fa fa-edit" /></Button>
             <Modal isOpen={isRenameModalOpened}>
                 <ModalHeader>
                     <h3>Rename device</h3>
@@ -161,7 +159,7 @@ export class DeviceControlGroup extends Component<DeviceControlGroupProps & Devi
         return (
             <div className="btn-group btn-group-sm" role="group">
                 {this.renderRenameButton()}
-                <Button<string> className="btn btn-secondary" onClick={configureDevice} item={device.friendly_name} title="Reconfigure" promt><i className={cx("fa", "fa-cogs")} /></Button>
+                <Button<string> className="btn btn-warning" onClick={configureDevice} item={device.friendly_name} title="Reconfigure" promt><i className={cx("fa", "fa-cogs")} /></Button>
                 {this.renderDeviceRemovalButton()}
             </div>
         );
