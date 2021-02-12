@@ -1,3 +1,12 @@
+## [0.3.46](https://github.com/nurikk/z2m-frontend/compare/0.3.45...0.3.46) (2021-02-12)
+
+
+### Features
+
+* **theme:** introduce AppStack theme ([480b339](https://github.com/nurikk/z2m-frontend/commit/480b339050eef542ef5a914e68ba0d106696e7a2))
+
+
+
 ## [0.3.45](https://github.com/nurikk/z2m-frontend/compare/0.3.44...0.3.45) (2021-02-09)
 
 
