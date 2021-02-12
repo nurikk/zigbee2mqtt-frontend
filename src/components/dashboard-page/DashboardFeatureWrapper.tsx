@@ -1,7 +1,6 @@
 import camelCase from "lodash/camelCase";
 import startCase from "lodash/startCase";
 import React, { FunctionComponent, PropsWithChildren } from "react";
-import { FeatureAccessMode } from "../../types";
 import { FetatureWrapperProps } from "../features/composite/FeatureWrapper";
 import styles from "./DashboardFeatureWrapper.scss";
 
@@ -25,12 +24,18 @@ const getTemperatureIcon = (temperature: number) => {
 const typeToClassMap = {
     humidity: ['text-info', 'fa-tint'],
     illuminance: ['fa-sun'],
-    // eslint-disable-next-line @typescript-eslint/camelcase
-    illuminance_lux: ['fa-sun'],
-    // eslint-disable-next-line @typescript-eslint/camelcase
-    soil_moisture: ['fa-fill-drip'],
     pressure: ['fa-cloud-download-alt'],
-    co2: ['fa-atom']
+    co2: ['fa-atom', 'text-warning'],
+    voltage: ['fa-bolt', 'text-success'],
+    state: ['fa-star-half-alt'],
+    brightness: ['fa-sun'],
+    /* eslint-disable @typescript-eslint/camelcase */
+    color_xy: ['fa-palette'],
+    color_hs: ['fa-palette'],
+    color_temp: ['fa-sliders-h'],
+    illuminance_lux: ['fa-sun'],
+    soil_moisture: ['fa-fill-drip'],
+    /* eslint-enable @typescript-eslint/camelcase */
 };
 const getGenericFeatureIcon = (name: string, value: unknown): string => {
     let classes = [] as string[];
