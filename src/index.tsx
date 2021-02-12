@@ -1,5 +1,5 @@
 import "notyf/notyf.min.css";
-
+import "./styles/styles.global.scss";
 
 import React, { Component, FunctionComponent } from 'react';
 
