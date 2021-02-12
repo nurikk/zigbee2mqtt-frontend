@@ -12,27 +12,33 @@ import { GlobalState } from '../../store';
 import { DashboardFeatureWrapper } from './DashboardFeatureWrapper';
 import { isOnlyOneBitIsSet } from '../../utils';
 
-
+import { isLightFeature } from '../device-page/type-guards';
+import { groupBy } from 'lodash';
 
 
 type Props = Pick<GlobalState, 'devices' | 'deviceStates'> & StateApi;
 
-
-
-const genericRendererIgnoredNames = ['linkquality', 'battery', 'battery_low'];
+const genericRendererIgnoredNames = ['linkquality', 'battery', 'battery_low', 'illuminance_lux', 'color_temp_startup'];
 const whitelistFeatureNames = ['state', 'brightness', 'color_temp'];
 const whitelistFeatureTypes = ['light'];
 const nullish = ['', null, undefined];
 
-export const onlyValidFeaturesForDashboard = (feature: GenericExposedFeature | CompositeFeature, deviceState: DeviceState): boolean => {
+export const onlyValidFeaturesForDashboard = (feature: GenericExposedFeature | CompositeFeature, deviceState: DeviceState = {} as DeviceState): GenericExposedFeature | CompositeFeature | false => {
     const { access, property, name, type } = feature;
+    let { features } = feature as CompositeFeature;
+    if (isLightFeature(feature)) {
+        features = features.map(f => onlyValidFeaturesForDashboard(f, (property ? deviceState[property] : deviceState) as DeviceState)).filter(f => f) as (GenericExposedFeature | CompositeFeature)[];
+        const groupedFeatures = groupBy(features, 'property');
+        features = Object.values(groupedFeatures).map(f => f[0]);
+    }
+    const filteredOutFeature = {...feature, features} as GenericExposedFeature | CompositeFeature;
     if (whitelistFeatureNames.includes(name)) {
-        return true;
+        return filteredOutFeature;
     }
     if (whitelistFeatureTypes.includes(type)) {
-        return true;
+        return filteredOutFeature;
     }
-    if (!(access & FeatureAccessMode.ACCESS_STATE && !nullish.includes(deviceState[property] as string | null | undefined))) {
+    if (access && !(access & FeatureAccessMode.ACCESS_STATE && !nullish.includes(deviceState[property] as string | null | undefined))) {
         return false;
     }
     if (genericRendererIgnoredNames.includes(name)) {
@@ -40,7 +46,10 @@ export const onlyValidFeaturesForDashboard = (feature: GenericExposedFeature | C
     }
 
     if (access & FeatureAccessMode.ACCESS_STATE && isOnlyOneBitIsSet(access)) {
-        return true;
+        return filteredOutFeature;
+    }
+    if (Array.isArray(features) && features.length > 0) {
+        return filteredOutFeature;
     }
     return false;
 }
@@ -54,7 +63,9 @@ const Dashboard: React.FC<Props> = (props) => {
                 .map(([, device]) => ({ device, deviceState: deviceStates.get(device.friendly_name) ?? ({} as DeviceState) }))
                 .map(({ device, deviceState }) => {
                     const _features = ((device.definition?.exposes ?? []) as (GenericExposedFeature | CompositeFeature)[]);
-                    const filteredFeatures = _features.filter((e: GenericExposedFeature | CompositeFeature) => onlyValidFeaturesForDashboard(e, deviceState));
+                    const filteredFeatures = _features
+                        .map((e: GenericExposedFeature | CompositeFeature) => onlyValidFeaturesForDashboard(e, deviceState))
+                        .filter(f => f);
                     return { device, deviceState, filteredFeatures };
                 })
                 .filter(({ filteredFeatures }) => filteredFeatures.length > 0)
