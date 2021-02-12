@@ -159,7 +159,7 @@ export class DeviceControlGroup extends Component<DeviceControlGroupProps & Devi
         return (
             <div className="btn-group btn-group-sm" role="group">
                 {this.renderRenameButton()}
-                <Button<string> className="btn btn-warning" onClick={configureDevice} item={device.friendly_name} title="Reconfigure" promt><i className={cx("fa", "fa-cogs")} /></Button>
+                <Button<string> className="btn btn-warning" onClick={configureDevice} item={device.friendly_name} title="Reconfigure" promt><i className={cx("fa", "fa-retweet")} /></Button>
                 {this.renderDeviceRemovalButton()}
             </div>
         );
