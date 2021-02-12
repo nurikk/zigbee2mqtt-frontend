@@ -163,9 +163,9 @@ export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
 
     renderDevicesTable() {
         const { sortedTableData, sortColumn, sortDirection } = this.state;
-        return (
-            <div className="row no-gutters table-responsive">
-                <table className="table align-middle col-12">
+        return (<div className="card">
+            <div className="table-responsive">
+                <table className="table align-middle">
                     <TableHeader
                         lastSeenIsAvaliable={this.lastSeenIsAvaliable()}
                         sortColumn={sortColumn}
@@ -183,7 +183,7 @@ export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
                     </tbody>
                 </table>
             </div>
-        );
+        </div>);
     }
 }
 

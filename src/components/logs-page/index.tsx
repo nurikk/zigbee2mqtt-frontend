@@ -32,18 +32,22 @@ export class LogsPage extends Component<GlobalState & BridgeApi, LogsPageState> 
     state = { search: '', logLevel: ALL }
     renderSearch() {
         const { search } = this.state;
-        return <form className="row row-cols-lg-auto g-3 align-items-center">
-            <div className="col-12">
-                <label htmlFor="log-level" className="form-label">Show only</label>
-                <select id="log-level" className="form-select" onChange={e => this.setState({ logLevel: e.target.value })}>
-                    {logLevels.map(level => <option key={level} value={level}>{level}</option>)}
-                </select>
+        return <div className="card">
+            <div className="card-body">
+                <form className="row row-cols-lg-auto g-3 align-items-center">
+                    <div className="col-12">
+                        <label htmlFor="log-level" className="form-label">Show only</label>
+                        <select id="log-level" className="form-select" onChange={e => this.setState({ logLevel: e.target.value })}>
+                            {logLevels.map(level => <option key={level} value={level}>{level}</option>)}
+                        </select>
+                    </div>
+                    <div className="col-12">
+                        <label htmlFor="search-filter" className="form-label">Filter by text</label>
+                        <input id="search-filter" className="form-control col-10" placeholder="Enter search criteria" value={search} onChange={(e) => this.setState({ search: e.target.value })} type="text"></input>
+                    </div>
+                </form>
             </div>
-            <div className="col-12">
-                <label htmlFor="search-filter" className="form-label">Filter by text</label>
-                <input id="search-filter" className="form-control col-10" placeholder="Enter search criteria" value={search} onChange={(e) => this.setState({ search: e.target.value })} type="text"></input>
-            </div>
-        </form>;
+        </div>;
     }
     render() {
         let { logs } = this.props;
@@ -55,23 +59,27 @@ export class LogsPage extends Component<GlobalState & BridgeApi, LogsPageState> 
             .filter(l => (logLevel === ALL || l.level === logLevel) && (!search || _search.test(l.message)))
             .sort();
 
-        return <div className="container-fluid d-lg-flex flex-column h-100 pt-2">
+        return <>
             {this.renderSearch()}
-            {logs.length == 0 ? <h1>You don&apos;t have {logLevel === ALL ? 'any' : logLevel} logs</h1> : null}
-            <div className="overflow-auto">
-            {
-                logs.map((l, idx) => <div key={idx}>
-                    {logLevel === ALL && <><span className={cx("badge", {
-                        'bg-danger': l.level === 'error',
-                        'bg-warning': l.level === 'warning',
-                        'bg-info': l.level === 'info',
-                        'bg-secondary': ['error', 'warning', 'info'].includes(l.level) === false,
-                    }, "text-capitalize")}>{l.level}</span>&nbsp;</>}<code>
-                        <Highlighted text={l.message} highlight={search}></Highlighted>
-                    </code></div>)
-            }
+            <div className="card">
+                <div className="card-body">
+                    {logs.length == 0 ? <h1>You don&apos;t have {logLevel === ALL ? 'any' : logLevel} logs</h1> : null}
+                    <div className="overflow-auto">
+                        {
+                            logs.map((l, idx) => <div key={idx}>
+                                {logLevel === ALL && <><span className={cx("badge", {
+                                    'bg-danger': l.level === 'error',
+                                    'bg-warning': l.level === 'warning',
+                                    'bg-info': l.level === 'info',
+                                    'bg-secondary': ['error', 'warning', 'info'].includes(l.level) === false,
+                                }, "text-capitalize")}>{l.level}</span>&nbsp;</>}<code>
+                                    <Highlighted text={l.message} highlight={search}></Highlighted>
+                                </code></div>)
+                        }
+                    </div>
+                </div>
             </div>
-        </div>
+        </>
     }
 }
 

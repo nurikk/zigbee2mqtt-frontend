@@ -65,22 +65,26 @@ class OtaPage extends Component<GlobalState & OtaApi, {}> {
         const otaApi = { checkOTA, updateOTA };
         const otaDevices = this.getAllOtaDevices();
 
-        return <table className="table">
-            <thead>
-                <tr>
-                    <th scope="col">Friendly name</th>
-                    <th>Manufacturer</th>
-                    <th>Model</th>
-                    <th><Button className="btn btn-danger btn-sm" onClick={this.checkAllOTA} promt>Check all OTA</Button></th>
-                </tr>
-            </thead>
-            <tbody>
-                {otaDevices.length === 0 ? <tr><td colSpan={4}>You don&apos;t have any devices that support OTA</td></tr> : null}
-                {otaDevices.map(([ieeeAddr, device]) => (
-                    <OtaRow key={ieeeAddr} device={device} state={deviceStates.get(device.friendly_name) as DeviceState} {...otaApi} />
-                ))}
-            </tbody>
-        </table>
+        return <div className="card">
+            <div className="card-body">
+                <table className="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Friendly name</th>
+                            <th>Manufacturer</th>
+                            <th>Model</th>
+                            <th><Button className="btn btn-danger btn-sm" onClick={this.checkAllOTA} promt>Check all OTA</Button></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {otaDevices.length === 0 ? <tr><td colSpan={4}>You don&apos;t have any devices that support OTA</td></tr> : null}
+                        {otaDevices.map(([ieeeAddr, device]) => (
+                            <OtaRow key={ieeeAddr} device={device} state={deviceStates.get(device.friendly_name) as DeviceState} {...otaApi} />
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     }
 }
 

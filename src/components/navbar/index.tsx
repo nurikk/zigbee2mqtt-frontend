@@ -93,9 +93,9 @@ const NavBar: FunctionComponent<PropsFromStore & BridgeApi & Pick<GlobalState, '
     useOnClickOutside(ref, () => {
         setnavbarIsVisible(false);
     });
-    return (<nav className="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+    return (<nav className="navbar navbar-expand navbar-light navbar-bg">
         <div ref={ref as React.MutableRefObject<HTMLDivElement>} className="container-fluid">
-            <Link onClick={() => setnavbarIsVisible(false)} className="navbar-brand" to="/">Zigbee2MQTT</Link>
+            <Link onClick={() => setnavbarIsVisible(false)} to="/">Zigbee2MQTT</Link>
             <button onClick={() => { setnavbarIsVisible(!navbarIsVisible) }} className="navbar-toggler" type="button">
                 <span className="navbar-toggler-icon" />
             </button>

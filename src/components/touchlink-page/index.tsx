@@ -1,4 +1,4 @@
-import React, { Component} from "react";
+import React, { Component } from "react";
 import { connect } from "unistore/react";
 import actions from "../../actions/actions";
 
@@ -72,25 +72,20 @@ export class TouchlinkPage extends Component<TouchlinkApi & GlobalState, {}> {
     render() {
         const { touchlinkDevices, touchlinkScanInProgress, touchlinkScan } = this.props;
         return (
-            <div className="container">
-                <div className="card mt-2">
-                    <div className="card-header allign-middle">
-                        Detected {touchlinkDevices.length} touchlink devices.
+            <div className="card">
+                <div className="card-header allign-middle">
+                    Detected {touchlinkDevices.length} touchlink devices.
                         <Button title="Rescan" className="btn btn-primary btn-sm float-right" onClick={touchlinkScan}><i className="fa fa-sync" /></Button>
-                    </div>
-
-                    <div>
-                        <div className="card-body">
-                            {touchlinkScanInProgress ? (
-                                <div className="d-flex justify-content-center">
-                                    <div className="spinner-border" role="status">
-                                        <span className="sr-only">Loading...</span>
-                                    </div>
-                                </div>
-                            ) : touchlinkDevices.length === 0 ? this.renderNoDevices() : this.renderTouchlinkDevices()}
-
+                </div>
+                <div className="card-body">
+                    {touchlinkScanInProgress ? (
+                        <div className="d-flex justify-content-center">
+                            <div className="spinner-border" role="status">
+                                <span className="sr-only">Loading...</span>
+                            </div>
                         </div>
-                    </div>
+                    ) : touchlinkDevices.length === 0 ? this.renderNoDevices() : this.renderTouchlinkDevices()}
+
                 </div>
             </div>
         );

@@ -21,8 +21,10 @@ const getPlugins = (production) => {
         }),
         new CopyPlugin({
             patterns: [{
-                from: 'src/images/favicon.ico'
-            }, ],
+                from: 'src/images/favicon.ico',
+            }, {
+                from: 'src/bootstrap-theme'
+            }],
         }),
     ];
 

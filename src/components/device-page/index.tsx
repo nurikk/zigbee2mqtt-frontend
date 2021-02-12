@@ -87,19 +87,23 @@ export class DevicePage extends Component<DevicePageProps & GlobalState, {}> {
         }
         const links = getDeviceLinks(dev);
 
-        return (<div className="">
-            <h3>{device.friendly_name}</h3>
-            <ul className="nav nav-tabs">
-                {links.map(link => <li key={link.title} className="nav-item">
-                    <NavLink activeClassName="active" className={`nav-link ${styles['small-nav']}`} to={link.url}>{link.title}</NavLink>
-                </li>)}
-            </ul>
-            <div className="tab-content">
-                <div className="tab-pane fade show active container">
-                    {this.renderContent()}
+        return (<>
+            <h1 className="h3 mb-3">{device.friendly_name}</h1>
+
+            <div className="tab">
+                <ul className="nav nav-tabs">
+                    {links.map(link => <li key={link.title} className="nav-item">
+                        <NavLink activeClassName="active" className={`nav-link ${styles['small-nav']}`} to={link.url}>{link.title}</NavLink>
+                    </li>)}
+                </ul>
+                <div className="tab-content">
+                    <div className="tab-pane fade show active">
+                        {this.renderContent()}
+                    </div>
                 </div>
             </div>
-        </div>);
+
+        </>);
 
     }
 }

@@ -8,6 +8,7 @@ import { DeviceApi } from "../../actions/DeviceApi";
 import cx from "classnames";
 import Modal, { ModalHeader, ModalBody, ModalFooter } from "../modal";
 import { GlobalState } from "../../store";
+import { BodyClass } from "../../hooks/bodyClass";
 interface DeviceControlGroupProps {
     device: Device;
     state?: DeviceState;
@@ -95,30 +96,31 @@ export class DeviceControlGroup extends Component<DeviceControlGroupProps & Devi
     renderRenameButton() {
         const { bridgeInfo, device } = this.props;
         const { isRenameModalOpened, renameParams } = this.state;
-        return (
-            <><Button<void> className="btn btn-secondary" onClick={this.toggleRenameModal} title="Rename device"><i className="fa fa-edit" /></Button>
-                <Modal isOpen={isRenameModalOpened}>
-                    <ModalHeader>
-                        <h3>Rename device</h3>
-                        <small>{device.friendly_name}</small>
-                    </ModalHeader>
-                    <ModalBody>
-                        <div className="mb-3">
-                            <label htmlFor={`fn${device.ieee_address}`} className="form-label">Friendly name</label>
-                            <input id={`fn${device.ieee_address}`} onChange={this.onFriendlyNameChange} type="text" className="form-control" value={renameParams.friendlyName} />
+        return (<>
+            <Button<void> className="btn btn-secondary" onClick={this.toggleRenameModal} title="Rename device"><i className="fa fa-edit" /></Button>
+            <Modal isOpen={isRenameModalOpened}>
+                <ModalHeader>
+                    <h3>Rename device</h3>
+                    <small>{device.friendly_name}</small>
+                </ModalHeader>
+                <ModalBody>
+                    <div className="mb-3">
+                        <label htmlFor={`fn${device.ieee_address}`} className="form-label">Friendly name</label>
+                        <input id={`fn${device.ieee_address}`} onChange={this.onFriendlyNameChange} type="text" className="form-control" value={renameParams.friendlyName} />
+                    </div>
+                    {bridgeInfo?.config?.homeassistant ? (
+                        <div className="form-check form-switch">
+                            <input className="form-check-input" checked={renameParams.isHassRename} type="checkbox" id={`hass${device.ieee_address}`} onChange={this.onHassEntityIdChange} />
+                            <label className="form-check-label" htmlFor={`hass${device.ieee_address}`}>Update Home Assistant entity ID</label>
                         </div>
-                        {bridgeInfo?.config?.homeassistant ? (
-                            <div className="form-check form-switch">
-                                <input className="form-check-input" checked={renameParams.isHassRename} type="checkbox" id={`hass${device.ieee_address}`} onChange={this.onHassEntityIdChange} />
-                                <label className="form-check-label" htmlFor={`hass${device.ieee_address}`}>Update Home Assistant entity ID</label>
-                            </div>
-                        ) : null}
-                    </ModalBody>
-                    <ModalFooter>
-                        <button type="button" className="btn btn-secondary" onClick={this.toggleRenameModal}>Close</button>
-                        <button type="button" className="btn btn-primary" onClick={this.onRenameClick}>Save changes</button>
-                    </ModalFooter>
-                </Modal></>
+                    ) : null}
+                </ModalBody>
+                <ModalFooter>
+                    <button type="button" className="btn btn-secondary" onClick={this.toggleRenameModal}>Close</button>
+                    <button type="button" className="btn btn-primary" onClick={this.onRenameClick}>Save changes</button>
+                </ModalFooter>
+            </Modal>
+        </>
         )
     }
     renderDeviceRemovalButton() {

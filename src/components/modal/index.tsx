@@ -1,5 +1,6 @@
-import React, { Component, FunctionComponent,  Fragment } from "react";
+import React, { Component, FunctionComponent, Fragment } from "react";
 import cx from "classnames";
+import ReactDOM from "react-dom";
 // import * as style from "./style.css";
 
 
@@ -22,29 +23,41 @@ interface ModalState {
     display: string;
 }
 
-class Modal extends Component<ModalProps, ModalState> {
-    constructor(props: ModalProps) {
+
+class BodyEnd extends React.Component {
+    el: HTMLDivElement;
+    constructor(props) {
         super(props);
-        this.state = {
-            modalShow: '',
-            display: 'none'
-        };
-        this.openModal = this.openModal.bind(this);
-        this.closeModal = this.closeModal.bind(this);
+        this.el = document.createElement('div');
+
+        'modal-backdrop fade show'.split(' ').map(className => this.el.classList.add(className));
     }
 
-    openModal() {
-        this.setState({
-            modalShow: 'show',
-            display: 'block'
-        });
+    componentDidMount() {
+        document.body.appendChild(this.el);
     }
 
-    closeModal() {
-        this.setState({
-            modalShow: '',
-            display: 'none'
-        });
+    componentWillUnmount() {
+        document.body.removeChild(this.el);
+    }
+
+    render() {
+        return ReactDOM.createPortal(
+            this.props.children,
+            this.el,
+        );
+    }
+}
+class Modal extends Component<ModalProps, {}> {
+
+
+
+    openModal = () => {
+        document.body.classList.add("modal-open");
+    }
+
+    closeModal = () => {
+        document.body.classList.remove("modal-open");
     }
 
     componentDidMount() {
@@ -58,18 +71,17 @@ class Modal extends Component<ModalProps, ModalState> {
     }
 
     render() {
+        const { isOpen } = this.props;
         return (
-            <div
-                className={`modal fade ${ this.state.modalShow}`}
-
-                role="dialog"
-                aria-hidden="true"
-                style={{ display: this.state.display }}
+            isOpen && <div
+                className={`modal fade show`}
+                style={{ display: 'block' }}
             >
-                <div className="modal-dialog" role="document">
+                <div className="modal-dialog">
                     <div className="modal-content">{this.props.children}</div>
                 </div>
-            </div>
+                <BodyEnd />
+            </div >
         );
     }
 }

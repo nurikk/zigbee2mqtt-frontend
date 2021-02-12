@@ -48,40 +48,35 @@ export const onlyValidFeaturesForDashboard = (feature: GenericExposedFeature | C
 const Dashboard: React.FC<Props> = (props) => {
     const { setDeviceState, getDeviceState, deviceStates } = props;
     return (
+        <div className="row">
+            {Array.from(props.devices)
+                .filter(([, device]) => device.supported)
+                .map(([, device]) => ({ device, deviceState: deviceStates.get(device.friendly_name) ?? ({} as DeviceState) }))
+                .map(({ device, deviceState }) => {
+                    const _features = ((device.definition?.exposes ?? []) as (GenericExposedFeature | CompositeFeature)[]);
+                    const filteredFeatures = _features.filter((e: GenericExposedFeature | CompositeFeature) => onlyValidFeaturesForDashboard(e, deviceState));
+                    return { device, deviceState, filteredFeatures };
+                })
+                .filter(({ filteredFeatures }) => filteredFeatures.length > 0)
+                .map(({ device, deviceState, filteredFeatures }) => {
 
-        <div className="container-fluid">
-            <div className="row my-4 align-items-stretch">
-                {Array.from(props.devices)
-                    .filter(([, device]) => device.supported)
-                    .map(([, device]) => ({ device, deviceState: deviceStates.get(device.friendly_name) ?? ({} as DeviceState) }))
-                    .map(({ device, deviceState }) => {
-                        const _features = ((device.definition?.exposes ?? []) as (GenericExposedFeature | CompositeFeature)[]);
-                        const filteredFeatures = _features.filter((e: GenericExposedFeature | CompositeFeature) => onlyValidFeaturesForDashboard(e, deviceState));
-                        return { device, deviceState, filteredFeatures };
-                    })
-                    .filter(({ filteredFeatures }) => filteredFeatures.length > 0)
-                    .map(({ device, deviceState, filteredFeatures }) => {
-
-                        return (
-                            <DashboardDevice
-                                key={device.ieee_address}
-                                feature={{ features: filteredFeatures } as CompositeFeature}
-                                device={device}
-                                deviceState={deviceState}
-                                onChange={(endpoint, value) =>
-                                    setDeviceState(`${device.friendly_name}${endpoint ? `/${endpoint}` : ''}`, value)
-                                }
-                                onRead={(endpoint, value) =>
-                                    getDeviceState(`${device.friendly_name}${endpoint ? `/${endpoint}` : ''}`, value)
-                                }
-                                featureWrapperClass={DashboardFeatureWrapper}
-                            />
-                        );
-                    })}
-            </div>
-        </div>
-
-    );
+                    return (
+                        <DashboardDevice
+                            key={device.ieee_address}
+                            feature={{ features: filteredFeatures } as CompositeFeature}
+                            device={device}
+                            deviceState={deviceState}
+                            onChange={(endpoint, value) =>
+                                setDeviceState(`${device.friendly_name}${endpoint ? `/${endpoint}` : ''}`, value)
+                            }
+                            onRead={(endpoint, value) =>
+                                getDeviceState(`${device.friendly_name}${endpoint ? `/${endpoint}` : ''}`, value)
+                            }
+                            featureWrapperClass={DashboardFeatureWrapper}
+                        />
+                    );
+                })}
+        </div>);
 };
 
 const mappedProps = ['devices', 'deviceStates'];

@@ -160,18 +160,22 @@ export class GroupsPage extends Component<GroupsApi & GlobalState, GroupsPageSta
     renderGroupCreationForm() {
         const { newGroupName, newGroupId } = this.state;
         return (
-            <form className="row mt-2">
-                <div className="input-group  mb-2">
-                    <label htmlFor="newGroupName" className="sr-only">Group name</label>
-                    <input onChange={this.changeHandler} value={newGroupName} required type="text" name="newGroupName" className="form-control" id="newGroupName" placeholder="new group name" />
+            <div className="card">
+                <div className="card-body">
+                    <form>
+                        <div className="input-group mb-2">
+                            <label htmlFor="newGroupName" className="sr-only">Group name</label>
+                            <input onChange={this.changeHandler} value={newGroupName} required type="text" name="newGroupName" className="form-control" id="newGroupName" placeholder="new group name" />
 
-                    <label htmlFor="newGroupName" className="sr-only">Group id</label>
-                    <input onChange={this.changeHandler} value={newGroupId === undefined ? '' : newGroupId} type="number" name="newGroupId" className="form-control" id="newGroupId" placeholder="enter group id if necessary" />
+                            <label htmlFor="newGroupName" className="sr-only">Group id</label>
+                            <input onChange={this.changeHandler} value={newGroupId === undefined ? '' : newGroupId} type="number" name="newGroupId" className="form-control" id="newGroupId" placeholder="enter group id if necessary" />
 
-                    <Button<void> onClick={this.onGroupCreateSubmit} className="btn btn-primary form-control">Create group</Button>
+                            <Button<void> onClick={this.onGroupCreateSubmit} className="btn btn-primary form-control">Create group</Button>
+                        </div>
+
+                    </form>
                 </div>
-
-            </form>
+            </div>
         )
     }
     removeGroup = (friendlyName: string): void => {
@@ -188,46 +192,46 @@ export class GroupsPage extends Component<GroupsApi & GlobalState, GroupsPageSta
     }
     renderGroups() {
         const { groups, devices, addDeviceToGroup } = this.props;
-        return (
-            <div id="accordion">
-                {
-                    groups.map(group => (
-                        <div key={group.id} className="card mb-1">
-                            <div className="card-header" id={`heading${group.id}`}>
-                                <h5 className="mb-0">
-                                    <button className="btn btn-link btn-sm">
-                                        {group.friendly_name} (#{group.id})
+        return groups.map(group => (
+            <div key={group.id} className="card">
+                <div className="card-header" id={`heading${group.id}`}>
+                    <h5 className="mb-0">
+                        <button className="btn btn-link btn-sm">
+                            {group.friendly_name} (#{group.id})
                                     </button>
-                                    <div className="btn-group float-right btn-group-sm" role="group" aria-label="Basic example">
+                        <div className="btn-group float-right btn-group-sm" role="group" aria-label="Basic example">
 
-                                        <Button<string> promt title="Remove group" item={group.friendly_name} onClick={this.removeGroup} className="btn btn-danger"><i className="fa fa-trash" /></Button>
-                                        <RenameGroupForm name={group.friendly_name} onRename={this.renameGroup} />
-                                    </div>
-                                </h5>
-                            </div>
-
-                            <div>
-                                <div className="card-body">
-                                    <div className="table-responsive">
-                                        <DeviceGroup group={group} devices={devices} removeDeviceFromGroup={this.removeDeviceFromGroup} />
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="card-footer">
-                                <AddDeviceToGroup addDeviceToGroup={addDeviceToGroup} devices={devices} group={group} />
-                            </div>
+                            <Button<string> promt title="Remove group" item={group.friendly_name} onClick={this.removeGroup} className="btn btn-danger"><i className="fa fa-trash" /></Button>
+                            <RenameGroupForm name={group.friendly_name} onRename={this.renameGroup} />
                         </div>
-                    )).reverse()
-                }
+                    </h5>
+                </div>
 
+                <div>
+                    <div className="card-body">
+                        <div className="table-responsive">
+                            <DeviceGroup group={group} devices={devices} removeDeviceFromGroup={this.removeDeviceFromGroup} />
+                        </div>
+                    </div>
+                </div>
+                <div className="card-footer">
+                    <AddDeviceToGroup addDeviceToGroup={addDeviceToGroup} devices={devices} group={group} />
+                </div>
             </div>
-        )
+        )).reverse()
+
     }
 
     render() {
-        return <div className="container">
-            {this.renderGroupCreationForm()}
-            {this.renderGroups()}
+        return <div className="container-fluid p-0">
+            <div className="row">
+                <div className="col-12">
+
+                    {this.renderGroupCreationForm()}
+                    {this.renderGroups()}
+
+                </div>
+            </div>
         </div>
 
     }

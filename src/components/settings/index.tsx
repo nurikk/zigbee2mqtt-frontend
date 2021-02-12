@@ -11,6 +11,8 @@ import cloneDeep from "lodash/cloneDeep";
 import uiSchemas from "./uiSchema.json";
 import "./style.global.scss";
 import { BridgeApi } from "../../actions/BridgeApi";
+import Card from 'react-bootstrap/Card';
+
 
 type SettingsTab = "settings" | "bridge" | "about" | "tools";
 
@@ -83,16 +85,23 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
     }
     render() {
         return (
-            <>
-                {this.renderCategoriesTabs()}
-                <div className="tab-content">
-                    <div className="tab-pane fade show active">
-                        <div className="container">
-                            {this.renderSwitcher()}
+            <div className="container-fluid p-0">
+                <div className="row">
+                    <div className="col-12">
+                        <div className="tab h-100">
+                            {this.renderCategoriesTabs()}
+                            <div className="tab-content h-100">
+                                <div className="tab-pane fade show active h-100">
+                                    {this.renderSwitcher()}
+                                </div>
+                            </div>
+
                         </div>
                     </div>
+
                 </div>
-            </>
+            </div>
+
         )
     }
     renderSwitcher() {
@@ -128,25 +137,35 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
             { title: 'Frontend version', content: FRONTEND_VERSION },
         ];
 
-        return <div className="mt-2">
-            {
-                rows.map(row => <dl key={row.title} className="row">
-                    <dt className="col-sm-3">{row.title}</dt>
-                    <dd className="col-sm-9">{row.content}</dd>
-                </dl>)
-            }
+        return <div className="card">
+            <div className="card-body">
+                {
+                    rows.map(row => <dl key={row.title} className="row">
+                        <dt className="col-sm-3">{row.title}</dt>
+                        <dd className="col-sm-9">{row.content}</dd>
+                    </dl>)
+                }
+            </div>
         </div>
     }
     renderBridgeInfo() {
         const { bridgeInfo } = this.props;
-        return <pre className="mt-2">{JSON.stringify(bridgeInfo, null, 4)}</pre>
+        return <div className="card">
+            <div className="card-body">
+                <pre>{JSON.stringify(bridgeInfo, null, 4)}</pre>
+            </div>
+        </div>
     }
 
     renderTools() {
         const { exportState, restartBridge } = this.props;
-        return <div className="mt-2">
-            <Button className="btn btn-primary d-block mt-2" onClick={exportState}>Download state</Button>
-            <Button className="btn btn-danger d-block mt-2" onClick={restartBridge} promt>Restart Zigbee2MQTT</Button>
+        return <div className="card">
+            <div className="card-body">
+
+                <Button className="btn btn-primary d-block mt-2" onClick={exportState}>Download state</Button>
+                <Button className="btn btn-danger d-block mt-2" onClick={restartBridge} promt>Restart Zigbee2MQTT</Button>
+
+            </div>
         </div>
     }
     onSettingsSave = ({ formData }) => {
@@ -198,27 +217,34 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
     renderSettingsTabs() {
         const tabs = this.getSettingsTabs();
         const { keyName } = this.state;
-        return <div className="nav flex-column nav-pills me-3">
-            {tabs.map(tab =>
-                <a key={tab.name} className={cx("nav-link", { active: keyName === tab.name })} aria-current="page" href="#" onClick={(e) => { this.setState({ keyName: tab.name }); e.preventDefault() }}>{tab.title}</a>
-            )}
-        </div>
-            ;
+        return <div className="nav nav-tabs">
+            {
+                tabs.map(tab =>
+                    <li key={tab.name} className="nav-item">
+                        <a className={cx("nav-link", { 'bg-primary active': keyName === tab.name })} aria-current="page" href="#" onClick={(e) => { this.setState({ keyName: tab.name }); e.preventDefault() }}>{tab.title}</a>
+                    </li>
+                )
+            }
+        </div>;
     }
     renderSettings() {
         const { keyName } = this.state;
         const { currentSchema, currentConfig } = this.getSettingsInfo();
-
-        return <div className="d-flex align-items-start mt-2">
-            {this.renderSettingsTabs()}
-            <div className="tab-content w-100">
-                <Form key={keyName} schema={currentSchema}
-                    formData={currentConfig}
-                    onSubmit={this.onSettingsSave}
-                    uiSchema={uiSchemas[keyName]}
-                />
+        return <div className="card h-100">
+            <div className="card-body h-100">
+                <div className="tab tab-vertical h-100">
+                    {this.renderSettingsTabs()}
+                    <div className="tab-content h-100">
+                        <div className="tab-pane h-100 active">
+                            <Form key={keyName} schema={currentSchema}
+                                formData={currentConfig}
+                                onSubmit={this.onSettingsSave}
+                                uiSchema={uiSchemas[keyName]}
+                            />
+                        </div>
+                    </div>
+                </div>
             </div>
-
         </div>
     }
 }
