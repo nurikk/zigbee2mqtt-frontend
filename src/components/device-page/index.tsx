@@ -88,7 +88,7 @@ export class DevicePage extends Component<DevicePageProps & GlobalState, {}> {
         const links = getDeviceLinks(dev);
 
         return (<>
-            <h1 className="h3 mb-3">{device.friendly_name}</h1>
+            <h1 className="h3">{device.friendly_name}</h1>
 
             <div className="tab">
                 <ul className="nav nav-tabs">

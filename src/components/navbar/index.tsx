@@ -100,7 +100,7 @@ const NavBar: FunctionComponent<PropsFromStore & BridgeApi & Pick<GlobalState, '
                 <span className="navbar-toggler-icon" />
             </button>
             <div className={cx("navbar-collapse collapse", { show: navbarIsVisible })}>
-                <ul className="navbar-nav mb-2 mb-md-0">
+                <ul className="navbar-nav">
                     {
                         urls.map(url =>
                             <li key={url.href} className="nav-item">

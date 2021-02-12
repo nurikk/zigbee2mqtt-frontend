@@ -123,7 +123,7 @@ class AddDeviceToGroup extends Component<AddDeviceToGroupProps, AddDeviceToGroup
         return <form className="row">
 
             <div className="col">
-                <div className="input-group mb-3">
+                <div className="input-group">
                     <DevicePicker type="device" value={device as string} devices={devices} onChange={this.onDeviceSelect} />
                     <EndpointPicker values={endpoints} value={endpoint as Endpoint} onChange={this.onEpChange} />
                 </div>
@@ -163,7 +163,7 @@ export class GroupsPage extends Component<GroupsApi & GlobalState, GroupsPageSta
             <div className="card">
                 <div className="card-body">
                     <form>
-                        <div className="input-group mb-2">
+                        <div className="input-group">
                             <label htmlFor="newGroupName" className="sr-only">Group name</label>
                             <input onChange={this.changeHandler} value={newGroupName} required type="text" name="newGroupName" className="form-control" id="newGroupName" placeholder="new group name" />
 
