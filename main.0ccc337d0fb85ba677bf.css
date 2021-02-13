@@ -1,4 +1,4 @@
-@keyframes blinker{50%{opacity:0}}.animation-blinking{animation:blinker 1s linear infinite}
+@keyframes blinker{50%{opacity:0}}.animation-blinking{animation:blinker 1s linear infinite}.content{overflow-y:scroll}
 ._36Sntvyj-B3gg7Xj6xLUaY {
     max-height: 500px;
     overflow-x: auto;
@@ -224,4 +224,4 @@
 }
 
 
-/*# sourceMappingURL=main.d64edab8e060ae7796ee.css.map*/
+/*# sourceMappingURL=main.0ccc337d0fb85ba677bf.css.map*/
