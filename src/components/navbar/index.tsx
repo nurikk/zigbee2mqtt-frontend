@@ -66,7 +66,7 @@ const StartStopJoinButton: FunctionComponent<StartStopJoinButtonProps & Pick<Bri
         setPermitJoin(!bridgeInfo.permit_join, selectedRouter);
     }
     return (
-        <div className="input-group w-auto">
+        <div className="btn-group text-nowrap">
             <button onClick={onBtnClick} type="button" className="btn btn-outline-secondary">{bridgeInfo.permit_join ? "Disable join" : "Permit join"} ({selectedRouter?.friendly_name ?? "All"})</button>
             {routers.length ? (<><Button<boolean> type="button" onClick={setIsComponentVisible} item={!isComponentVisible} className="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-expanded="false">
                 <span className="visually-hidden">Toggle Dropdown</span>

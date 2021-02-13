@@ -47,7 +47,7 @@ class Main extends Component {
 
                     <div className="main">
                         <NavBar />
-                        <main className="content">
+                        <main className="content p-0 p-sm-3">
                             <div className="container-fluid p-0 h-100">
                                 <Switch>
                                     <Route path="/ota" render={(props) => <ErrorBoundary {...props}><OtaPage /></ErrorBoundary>} />

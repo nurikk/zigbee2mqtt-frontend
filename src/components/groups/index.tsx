@@ -222,16 +222,10 @@ export class GroupsPage extends Component<GroupsApi & GlobalState, GroupsPageSta
     }
 
     render() {
-        return <div className="container-fluid p-0">
-            <div className="row">
-                <div className="col-12">
-
-                    {this.renderGroupCreationForm()}
-                    {this.renderGroups()}
-
-                </div>
-            </div>
-        </div>
+        return <>
+            {this.renderGroupCreationForm()}
+            {this.renderGroups()}
+        </>
 
     }
 }

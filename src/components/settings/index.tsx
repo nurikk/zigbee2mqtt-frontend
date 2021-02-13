@@ -85,23 +85,14 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
     }
     render() {
         return (
-            <div className="container-fluid p-0">
-                <div className="row">
-                    <div className="col-12">
-                        <div className="tab h-100">
-                            {this.renderCategoriesTabs()}
-                            <div className="tab-content h-100">
-                                <div className="tab-pane fade show active h-100">
-                                    {this.renderSwitcher()}
-                                </div>
-                            </div>
-
-                        </div>
+            <div className="tab h-100">
+                {this.renderCategoriesTabs()}
+                <div className="tab-content h-100">
+                    <div className="tab-pane fade show active h-100">
+                        {this.renderSwitcher()}
                     </div>
-
                 </div>
             </div>
-
         )
     }
     renderSwitcher() {
