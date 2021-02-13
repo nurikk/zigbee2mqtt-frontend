@@ -1,3 +1,14 @@
+## [0.3.52](https://github.com/nurikk/z2m-frontend/compare/0.3.51...0.3.52) (2021-02-13)
+
+
+### Bug Fixes
+
+* **mobile:** some responsive styling fixes ([d616a3c](https://github.com/nurikk/z2m-frontend/commit/d616a3c2731a1ec865eea0d67d9b4a71828e411f))
+* **setings:** responsive settings ([c32b58d](https://github.com/nurikk/z2m-frontend/commit/c32b58d778277b0ce8109d0827b3bbe53c22277f))
+* **settings:** remove cards from inner tabls ([af36f64](https://github.com/nurikk/z2m-frontend/commit/af36f64329849fda5e16ca13ffdf8da23f0f0df4))
+
+
+
 ## [0.3.51](https://github.com/nurikk/z2m-frontend/compare/0.3.50...0.3.51) (2021-02-13)
 
 
