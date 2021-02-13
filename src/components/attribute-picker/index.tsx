@@ -6,6 +6,7 @@ import Clusters from "zigbee-herdsman/dist/zcl/definition/cluster"
 interface AttributePickerProps {
     cluster: Cluster;
     value: Attribute;
+    label?: string;
     onChange: (attr: Attribute) => void;
 }
 // eslint-disable-next-line react/prefer-stateless-function
@@ -18,7 +19,7 @@ export default class AttributePicker extends Component<AttributePickerProps & Om
     }
     render() {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const { cluster, onChange, ...rest } = this.props;
+        const { cluster, onChange, label, ...rest } = this.props;
         let attrs = [] as string[];
         const clusterDefinition = Clusters[cluster];
         if (clusterDefinition) {
@@ -26,8 +27,11 @@ export default class AttributePicker extends Component<AttributePickerProps & Om
         }
         const options = attrs.map(attr => <option key={attr} value={attr}>{attr}</option>);
         options.unshift(<option key="none" hidden>Select attribute</option>)
-        return (<select disabled={attrs.length === 0} className="form-select" onChange={this.onChange} {...rest}>
-            {options}
-        </select>)
+        return (<div className="form-group">
+            {label && <label className="form-label">{label}</label>}
+            <select disabled={attrs.length === 0} className="form-control" onChange={this.onChange} {...rest}>
+                {options}
+            </select>
+        </div>)
     }
 }

@@ -75,34 +75,17 @@ export class Reporting extends Component<ReportingProps & PropsFromStore & Repor
         const { reportingRules } = this.state;
 
         return (
-            <div className="table-responsive">
-                <table className="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Endpoint</th>
-                            <th scope="col">Cluster</th>
-                            <th scope="col">Attribute</th>
-                            <th scope="col">Min rep interval</th>
-                            <th scope="col">Max rep interval</th>
-                            <th scope="col">Min rep change</th>
-                            <th scope="col">&nbsp;</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            reportingRules.map((rule, idx) =>
-                                <ReportingRow
-                                    key={rule2key(rule)}
-                                    idx={idx}
-                                    rule={rule}
-                                    device={device}
-                                    onApply={this.onApply}
-                                />)
-                        }
-                    </tbody>
+            <div className="container-fluid">
+                {
+                    reportingRules.map((rule) =>
+                        <ReportingRow
+                            key={rule2key(rule)}
+                            rule={rule}
+                            device={device}
+                            onApply={this.onApply}
+                        />)
+                }
 
-                </table>
             </div>
         );
     }
