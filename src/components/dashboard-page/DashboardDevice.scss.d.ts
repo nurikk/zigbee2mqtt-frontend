@@ -1,9 +1,6 @@
 declare namespace DashboardDeviceScssNamespace {
     export interface IDashboardDeviceScss {
-        card: string;
-        cardBody: string;
         deviceImage: string;
-        exposes: string;
     }
 }
 

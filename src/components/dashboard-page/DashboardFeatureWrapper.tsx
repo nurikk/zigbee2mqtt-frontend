@@ -2,7 +2,6 @@ import camelCase from "lodash/camelCase";
 import startCase from "lodash/startCase";
 import React, { FunctionComponent, PropsWithChildren } from "react";
 import { FetatureWrapperProps } from "../features/composite/FeatureWrapper";
-import styles from "./DashboardFeatureWrapper.scss";
 import cx from "classnames";
 
 const getTemperatureIcon = (temperature: number) => {
@@ -68,12 +67,12 @@ export const DashboardFeatureWrapper: FunctionComponent<PropsWithChildren<Fetatu
     const { children, feature, deviceState = {} } = props;
     const icon = getGenericFeatureIcon(feature.name, deviceState[feature.property]);
 
-    return <div className={styles.entity}>
-        {icon && <div className={styles.icon}>
+    return <div className="d-flex align-items-center">
+        {icon && <div className="me-1">
             <i className={`fa fa-fw ${icon}`} />
         </div>}
-        <div className={styles.title}>{startCase(camelCase(feature.name))}{feature.endpoint ? ` (${feature.endpoint})` : null}</div>
-        <div className={styles.value}>{children}</div>
+        <div className="flex-shrink-1 flex-grow-1">{startCase(camelCase(feature.name))}{feature.endpoint ? ` (${feature.endpoint})` : null}</div>
+        <div className="flex-shrink-0">{children}</div>
     </div>
 }
 

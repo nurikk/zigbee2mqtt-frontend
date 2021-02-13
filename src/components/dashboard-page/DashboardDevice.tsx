@@ -17,12 +17,12 @@ type Props = BaseFeatureProps<CompositeFeature>;
 
 const DashboardDevice: React.FC<Props> = ({ onChange, onRead, device, deviceState, feature: { features }, featureWrapperClass }) => {
     return (
-        <div className="col-xl-3 col-lg-4 col-sm-6 col-12 mb-3">
-            <div className={`${styles.card} card`}>
+        <div className="col-xl-3 col-lg-4 col-sm-6 col-12 d-flex">
+            <div className={`flex-fill card flex-shrink-1`}>
                 <div className="card-header text-truncate pb-0">
                     <Link to={genDeviceDetailsLink(device.ieee_address)}>{device.friendly_name}</Link>
                 </div>
-                <div className={`${styles.cardBody} card-body row py-0`}>
+                <div className={`align-items-center card-body row`}>
                     <DeviceImage device={device} className={cx(styles.deviceImage, 'col col-1')} />
                     <div className="col col-11">
                         <Composite feature={{ features } as CompositeFeature}

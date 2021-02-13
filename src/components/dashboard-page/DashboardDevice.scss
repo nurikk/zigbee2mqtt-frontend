@@ -1,16 +1,5 @@
-.card {
-    min-height: 100px;
-    height: 100%;
-}
-
-.cardBody {
-    // display: flex;
-    align-items: center;
-}
 
 .deviceImage {
-    // flex-shrink: 0;
-    // margin-right: 5px;
     i {
         right: 0;
     }
@@ -19,10 +8,5 @@
         max-height: 2em;
     }
 }
-
-.exposes {
-    flex-grow: 1;
-}
-
 
 
