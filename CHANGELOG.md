@@ -1,3 +1,13 @@
+## [0.3.51](https://github.com/nurikk/z2m-frontend/compare/0.3.50...0.3.51) (2021-02-13)
+
+
+### Bug Fixes
+
+* **dashboard:** add ignore rules ([d4d1e17](https://github.com/nurikk/z2m-frontend/commit/d4d1e17baf6e36028fe0747f5d62a4d1ab5dba7d))
+* **styles:** fix navbar and mobile scroll ([47924d1](https://github.com/nurikk/z2m-frontend/commit/47924d1e595f70450e6b758df1739a3f835e3a3a))
+
+
+
 ## [0.3.50](https://github.com/nurikk/z2m-frontend/compare/0.3.49...0.3.50) (2021-02-12)
 
 
