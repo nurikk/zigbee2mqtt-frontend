@@ -85,10 +85,10 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
     }
     render() {
         return (
-            <div className="tab h-100">
+            <div className="tab">
                 {this.renderCategoriesTabs()}
-                <div className="tab-content h-100">
-                    <div className="tab-pane fade show active h-100">
+                <div className="tab-content h-100 p-0 p-sm-3">
+                    <div className="tab-pane fade show active">
                         {this.renderSwitcher()}
                     </div>
                 </div>
@@ -128,24 +128,24 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
             { title: 'Frontend version', content: FRONTEND_VERSION },
         ];
 
-        return rows.map(row => <dl key={row.title} className="row">
+        return <div className="p-3">{rows.map(row => <dl key={row.title} className="row">
             <dt className="col-sm-3">{row.title}</dt>
             <dd className="col-sm-9">{row.content}</dd>
-        </dl>);
+        </dl>)}</div>;
 
     }
     renderBridgeInfo() {
         const { bridgeInfo } = this.props;
-        return <pre>{JSON.stringify(bridgeInfo, null, 4)}</pre>
+        return <div className="p-3"><pre>{JSON.stringify(bridgeInfo, null, 4)}</pre></div>
 
     }
 
     renderTools() {
         const { exportState, restartBridge } = this.props;
-        return <>
+        return <div className="p-3">
             <Button className="btn btn-primary d-block mt-2" onClick={exportState}>Download state</Button>
             <Button className="btn btn-danger d-block mt-2" onClick={restartBridge} promt>Restart Zigbee2MQTT</Button>
-        </>
+        </div>
     }
     onSettingsSave = ({ formData }) => {
         const { updateBridgeConfig } = this.props;
@@ -196,7 +196,7 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
     renderSettingsTabs() {
         const tabs = this.getSettingsTabs();
         const { keyName } = this.state;
-        return <div className="nav nav-tabs">
+        return <div className="nav nav-pills">
             {
                 tabs.map(tab =>
                     <li key={tab.name} className="nav-item">
@@ -209,10 +209,10 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
     renderSettings() {
         const { keyName } = this.state;
         const { currentSchema, currentConfig } = this.getSettingsInfo();
-        return <div className="tab tab-vertical h-100">
+        return <div className="tab">
             {this.renderSettingsTabs()}
-            <div className="tab-content h-100">
-                <div className="tab-pane h-100 active">
+            <div className="tab-content">
+                <div className="tab-pane active">
                     <Form key={keyName} schema={currentSchema}
                         formData={currentConfig}
                         onSubmit={this.onSettingsSave}
