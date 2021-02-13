@@ -29,6 +29,10 @@ const typeToClassMap = {
     state: ['fa-star-half-alt'],
     brightness: ['fa-sun'],
     occupancy: ['fa-walking'],
+    current: ['fa-copyright', 'text-warning'],
+    power: ['fa-product-hunt', 'text-success'],
+    energy: ['fa-plug', 'text-info'],
+    frequency: ['fa-wave-square'],
     /* eslint-disable @typescript-eslint/camelcase */
     color_xy: ['fa-palette'],
     color_hs: ['fa-palette'],
