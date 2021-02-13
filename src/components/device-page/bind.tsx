@@ -72,14 +72,10 @@ export class Bind extends Component<BindProps & PropsFromStore & BindApi, BindSt
         bidingRules.push({ isNew: Date.now(), target: {}, source: { 'ieee_address': device.ieee_address, endpoint: endpoints[0] }, clusters: [] } as unknown as NiceBindingRule);
         return { bidingRules };
     }
-    renderHeader() {
-        const columns = ['#', 'Source EP', 'Destination', 'Destination EP', 'Clusters', 'Actions'];
-        return <thead><tr>{columns.map(column => <th key={column} scope="col">{column}</th>)}</tr></thead>
-    }
     renderBody() {
         const { device, devices, groups, removeBind, addBind } = this.props;
         const { bidingRules } = this.state;
-        return <tbody>{bidingRules
+        return bidingRules
             .map((rule, idx) => <BindRow
                 key={rule2key(rule)}
                 rule={rule}
@@ -89,14 +85,10 @@ export class Bind extends Component<BindProps & PropsFromStore & BindApi, BindSt
                 device={device}
                 idx={idx}
                 devices={devices} />)
-        }</tbody>
     }
     render() {
-        return <div className="table-responsive">
-            <table className="table">
-                {this.renderHeader()}
-                {this.renderBody()}
-            </table>
+        return <div className="container-fluid">
+            {this.renderBody()}
         </div>;
     }
 }

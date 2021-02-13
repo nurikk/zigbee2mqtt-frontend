@@ -6,6 +6,7 @@ import { Endpoint } from "../../types";
 interface EndpointPickerProps {
     onChange(endpoint: Endpoint): void;
     value: Endpoint;
+    label?: string;
     values: Endpoint[];
 }
 
@@ -17,19 +18,22 @@ export default class EndpointPicker extends Component<EndpointPickerProps & Omit
     }
     render() {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const { onSelect, value, values, disabled, onChange, ...rest } = this.props;
+        const { onSelect, value, values, disabled, onChange, label, ...rest } = this.props;
         const hasOnlyOneEP = values.length == 1;
 
         const options = values.map(ep => <option key={ep} value={ep}>{ep}</option>)
         options.unshift(<option key="hidded" hidden>Select endpoint</option>);
-        return <select disabled={value && hasOnlyOneEP || disabled}
-            value={value}
-            className="form-control"
-            title={hasOnlyOneEP ? 'The only endpoint' : ""}
-            onChange={this.onSelect}
-            {...rest}>
-            {options}
-        </select>;
+        return <div className="form-group">
+            {label && <label className="form-label">{label}</label>}
+            <select disabled={value && hasOnlyOneEP || disabled}
+                value={value}
+                className="form-control"
+                title={hasOnlyOneEP ? 'The only endpoint' : ""}
+                onChange={this.onSelect}
+                {...rest}>
+                {options}
+            </select>
+        </div>
 
     }
 }

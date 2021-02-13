@@ -1,6 +1,7 @@
 import React, { ChangeEvent, Component, InputHTMLAttributes } from "react";
 import { Cluster } from "../../types";
 import { randomString } from "../../utils";
+import { label } from "../map/map.module.css";
 
 
 
@@ -33,6 +34,7 @@ export interface ClusterGroup {
 }
 interface ClusterPickerProps {
     value: Cluster[] | Cluster;
+    label?: string;
     onChange(arg1: Cluster[] | Cluster | undefined): void;
     clusters: Cluster[] | ClusterGroup[];
     pickerType: PickerType;
@@ -50,9 +52,6 @@ function isClusterGroup(clusters: Cluster[] | ClusterGroup[]): clusters is Clust
 
 // eslint-disable-next-line react/prefer-stateless-function
 export default class ClusterPicker extends Component<ClusterPickerProps & Omit<InputHTMLAttributes<HTMLInputElement | HTMLSelectElement>, 'onChange'>, ClusterPickerState> {
-    public static defaultProps = {
-        clusters: []
-    };
     state: Readonly<ClusterPickerState> = {
         pickerId: randomString(5)
     }
@@ -85,7 +84,7 @@ export default class ClusterPicker extends Component<ClusterPickerProps & Omit<I
     renderMultiPicker() {
         const { pickerId } = this.state;
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const { clusters, value, pickerType, onChange, ...rest } = this.props;
+        const { clusters = [], value, pickerType, onChange, label, ...rest } = this.props;
         let options = [] as JSX.Element[];
         if (isClusterGroup(clusters)) {
             //TODO: implement if necessary
@@ -107,12 +106,18 @@ export default class ClusterPicker extends Component<ClusterPickerProps & Omit<I
             ));
         }
 
-        return options;
+        return <div className="form-group">
+            {label && <label className="form-label">{label}</label>}
+            <div className="form-control border-0">
+                {options}
+            </div>
+
+        </div>;
     }
 
     renderSinglePicker() {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const { clusters, onChange, pickerType, ...rest } = this.props;
+        const { clusters = [], onChange, pickerType, label, ...rest } = this.props;
         const options = [<option key="hidden" hidden>Select cluster</option>];
         if (isClusterGroup(clusters)) {
             clusters.forEach(group => {
@@ -129,8 +134,11 @@ export default class ClusterPicker extends Component<ClusterPickerProps & Omit<I
                 options.push(<option key={cluster} value={cluster}>{clusterDescriptions[cluster] ?? cluster}</option>);
             })
         }
-        return (<select className="form-select" onChange={this.onChange} {...rest}>
-            {options}
-        </select>)
+        return (<div className="form-group">
+            {label && <label className="form-label">{label}</label>}
+            <select className="form-select" onChange={this.onChange} {...rest}>
+                {options}
+            </select>
+        </div>)
     }
 }

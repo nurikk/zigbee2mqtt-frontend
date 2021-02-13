@@ -2,10 +2,11 @@ import React, { ChangeEvent, Component, SelectHTMLAttributes } from "react";
 import { Device, ObjectType } from "../../types";
 import { getDeviceDisplayName } from "../../utils";
 import { Group } from "../../store";
-const DELIMITER = '|';
+
 interface DevicePickerProps {
     type: ObjectType;
     value: string | number;
+    label?: string;
     devices: Map<string, Device>;
     groups?: Group[];
     onChange(device: Device | Group, type: ObjectType): void;
@@ -24,7 +25,7 @@ export default class DevicePicker extends Component<DevicePickerProps & Omit<Sel
     }
     render() {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const { devices, groups, value, type, onChange, ...rest } = this.props;
+        const { devices, groups, value, type, label, onChange, ...rest } = this.props;
         let options = [<option key="hidden" hidden>Select device</option>];
 
         const devicesOptions = [] as JSX.Element[];
@@ -45,14 +46,17 @@ export default class DevicePicker extends Component<DevicePickerProps & Omit<Sel
         } else {
             options = options.concat(devicesOptions);
         }
-        return <select
-            value={value}
-            onChange={this.onSelect}
-            className="form-control"
-            {...rest}
-        >{options}
+        return <div className="form-group">
+            <label className="form-label">{label}</label>
+            <select
+                value={value}
+                onChange={this.onSelect}
+                className="form-control"
+                {...rest}
+            >{options}
 
-        </select>;
+            </select>
+        </div>;
 
     }
 }
