@@ -1,3 +1,17 @@
+## [0.3.53](https://github.com/nurikk/z2m-frontend/compare/0.3.52...0.3.53) (2021-02-13)
+
+
+### Bug Fixes
+
+* **css:** reduce css usage ([f5cbc92](https://github.com/nurikk/z2m-frontend/commit/f5cbc928f75876a24535e17b5c41595bc141d488))
+
+
+### Features
+
+* **bind:** make mobile friendly ([0b16749](https://github.com/nurikk/z2m-frontend/commit/0b1674930fea9ef46437e99e4291f4da10d49902))
+
+
+
 ## [0.3.52](https://github.com/nurikk/z2m-frontend/compare/0.3.51...0.3.52) (2021-02-13)
 
 
