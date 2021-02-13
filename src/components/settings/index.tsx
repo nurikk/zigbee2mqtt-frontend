@@ -128,36 +128,24 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
             { title: 'Frontend version', content: FRONTEND_VERSION },
         ];
 
-        return <div className="card">
-            <div className="card-body">
-                {
-                    rows.map(row => <dl key={row.title} className="row">
-                        <dt className="col-sm-3">{row.title}</dt>
-                        <dd className="col-sm-9">{row.content}</dd>
-                    </dl>)
-                }
-            </div>
-        </div>
+        return rows.map(row => <dl key={row.title} className="row">
+            <dt className="col-sm-3">{row.title}</dt>
+            <dd className="col-sm-9">{row.content}</dd>
+        </dl>);
+
     }
     renderBridgeInfo() {
         const { bridgeInfo } = this.props;
-        return <div className="card">
-            <div className="card-body">
-                <pre>{JSON.stringify(bridgeInfo, null, 4)}</pre>
-            </div>
-        </div>
+        return <pre>{JSON.stringify(bridgeInfo, null, 4)}</pre>
+
     }
 
     renderTools() {
         const { exportState, restartBridge } = this.props;
-        return <div className="card">
-            <div className="card-body">
-
-                <Button className="btn btn-primary d-block mt-2" onClick={exportState}>Download state</Button>
-                <Button className="btn btn-danger d-block mt-2" onClick={restartBridge} promt>Restart Zigbee2MQTT</Button>
-
-            </div>
-        </div>
+        return <>
+            <Button className="btn btn-primary d-block mt-2" onClick={exportState}>Download state</Button>
+            <Button className="btn btn-danger d-block mt-2" onClick={restartBridge} promt>Restart Zigbee2MQTT</Button>
+        </>
     }
     onSettingsSave = ({ formData }) => {
         const { updateBridgeConfig } = this.props;
@@ -221,22 +209,19 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
     renderSettings() {
         const { keyName } = this.state;
         const { currentSchema, currentConfig } = this.getSettingsInfo();
-        return <div className="card h-100">
-            <div className="card-body h-100">
-                <div className="tab tab-vertical h-100">
-                    {this.renderSettingsTabs()}
-                    <div className="tab-content h-100">
-                        <div className="tab-pane h-100 active">
-                            <Form key={keyName} schema={currentSchema}
-                                formData={currentConfig}
-                                onSubmit={this.onSettingsSave}
-                                uiSchema={uiSchemas[keyName]}
-                            />
-                        </div>
-                    </div>
+        return <div className="tab tab-vertical h-100">
+            {this.renderSettingsTabs()}
+            <div className="tab-content h-100">
+                <div className="tab-pane h-100 active">
+                    <Form key={keyName} schema={currentSchema}
+                        formData={currentConfig}
+                        onSubmit={this.onSettingsSave}
+                        uiSchema={uiSchemas[keyName]}
+                    />
                 </div>
             </div>
         </div>
+
     }
 }
 const SettingsPageWithRouter = withRouter(SettingsPage);
