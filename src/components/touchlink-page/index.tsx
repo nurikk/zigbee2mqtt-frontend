@@ -75,7 +75,6 @@ export class TouchlinkPage extends Component<TouchlinkApi & GlobalState, {}> {
             <div className="card">
                 <div className="card-header allign-middle">
                     Detected {touchlinkDevices.length} touchlink devices.
-                        <Button title="Rescan" className="btn btn-primary btn-sm float-right" onClick={touchlinkScan}><i className="fa fa-sync" /></Button>
                 </div>
                 <div className="card-body">
                     {touchlinkScanInProgress ? (
