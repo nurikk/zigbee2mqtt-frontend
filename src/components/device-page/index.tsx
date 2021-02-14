@@ -40,12 +40,12 @@ const getDeviceLinks = (dev: string) => ([
         url: `/device/${dev}/reporting`
     },
     {
-        title: 'State',
-        url: `/device/${dev}/state`
-    },
-    {
         title: 'Settings',
         url: `/device/${dev}/settings`
+    },
+    {
+        title: 'State',
+        url: `/device/${dev}/state`
     },
     {
         title: 'Clusters',
