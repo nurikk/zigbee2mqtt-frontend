@@ -33,6 +33,7 @@ const typeToClassMap = {
     power: ['fa-product-hunt', 'text-success'],
     energy: ['fa-plug', 'text-info'],
     frequency: ['fa-wave-square'],
+    tamper: ['fa-bell-on'],
     /* eslint-disable @typescript-eslint/camelcase */
     color_xy: ['fa-palette'],
     color_hs: ['fa-palette'],
