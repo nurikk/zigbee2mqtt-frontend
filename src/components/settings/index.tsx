@@ -9,9 +9,8 @@ import cx from "classnames";
 import { JSONSchema7 } from "json-schema";
 import cloneDeep from "lodash/cloneDeep";
 import uiSchemas from "./uiSchema.json";
-import "./style.global.scss";
 import { BridgeApi } from "../../actions/BridgeApi";
-import Card from 'react-bootstrap/Card';
+
 
 
 type SettingsTab = "settings" | "bridge" | "about" | "tools";
