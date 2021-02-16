@@ -1,3 +1,12 @@
+## [0.3.55](https://github.com/nurikk/z2m-frontend/compare/0.3.54...0.3.55) (2021-02-16)
+
+
+### Bug Fixes
+
+* **select:** rebuild theme ([9673f65](https://github.com/nurikk/z2m-frontend/commit/9673f655a82f12c4841a21a0ad41a1d63f96642c))
+
+
+
 ## [0.3.54](https://github.com/nurikk/z2m-frontend/compare/0.3.53...0.3.54) (2021-02-14)
 
 
