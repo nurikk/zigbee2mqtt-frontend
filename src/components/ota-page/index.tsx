@@ -43,6 +43,8 @@ const OtaRow: FunctionComponent<OtaRowProps & OtaApi> = (props) => {
 
         <td className="text-truncate text-nowrap position-relative"><VendorLink device={device} /></td>
         <td title={device?.definition?.description}><ModelLink device={device} /></td>
+        <td>{device.date_code}</td>
+        <td>{device.software_build_id}</td>
         <td>
             <StateCell device={device} state={state} {...rest} />
         </td>
@@ -73,11 +75,13 @@ class OtaPage extends Component<GlobalState & OtaApi, {}> {
                             <th scope="col">Friendly name</th>
                             <th>Manufacturer</th>
                             <th>Model</th>
+                            <th>Firmware build date</th>
+                            <th>Firwmare version</th>
                             <th><Button className="btn btn-danger btn-sm" onClick={this.checkAllOTA} promt>Check all OTA</Button></th>
                         </tr>
                     </thead>
                     <tbody>
-                        {otaDevices.length === 0 ? <tr><td colSpan={4}>You don&apos;t have any devices that support OTA</td></tr> : null}
+                        {otaDevices.length === 0 ? <tr><td colSpan={6}>You don&apos;t have any devices that support OTA</td></tr> : null}
                         {otaDevices.map(([ieeeAddr, device]) => (
                             <OtaRow key={ieeeAddr} device={device} state={deviceStates.get(device.friendly_name) as DeviceState} {...otaApi} />
                         ))}
