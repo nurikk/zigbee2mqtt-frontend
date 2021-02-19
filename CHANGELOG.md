@@ -1,3 +1,12 @@
+## [0.3.59](https://github.com/nurikk/z2m-frontend/compare/0.3.58...0.3.59) (2021-02-19)
+
+
+### Bug Fixes
+
+* **groups:** fix add device to group form ([3eea39c](https://github.com/nurikk/z2m-frontend/commit/3eea39cc7c4b11f2e3112694de58582ea1a239bb))
+
+
+
 ## [0.3.58](https://github.com/nurikk/z2m-frontend/compare/0.3.57...0.3.58) (2021-02-19)
 
 
