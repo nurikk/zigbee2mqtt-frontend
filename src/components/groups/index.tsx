@@ -120,22 +120,14 @@ class AddDeviceToGroup extends Component<AddDeviceToGroupProps, AddDeviceToGroup
 
         const endpoints = getEndpoints(deviceObj);
 
-        return <form className="row">
+        return <div className="row row-cols-lg-auto align-items-center">
 
-            <div className="col">
-                <div className="input-group">
-                    <DevicePicker type="device" value={device as string} devices={devices} onChange={this.onDeviceSelect} />
-                    <EndpointPicker values={endpoints} value={endpoint as Endpoint} onChange={this.onEpChange} />
-                </div>
+            <DevicePicker type="device" value={device as string} devices={devices} onChange={this.onDeviceSelect} />
+            <EndpointPicker values={endpoints} value={endpoint as Endpoint} onChange={this.onEpChange} />
 
-            </div>
+            <Button<void> type="button" onClick={this.onSubmit} className="btn btn-primary">Add to group</Button>
+        </div>
 
-            <div className="col">
-                <Button<void> type="button" onClick={this.onSubmit} className="btn btn-primary">Add to group</Button>
-            </div>
-
-
-        </form>
     }
 }
 
@@ -162,18 +154,15 @@ export class GroupsPage extends Component<GroupsApi & GlobalState, GroupsPageSta
         return (
             <div className="card">
                 <div className="card-body">
-                    <form>
-                        <div className="input-group">
-                            <label htmlFor="newGroupName" className="sr-only">Group name</label>
-                            <input onChange={this.changeHandler} value={newGroupName} required type="text" name="newGroupName" className="form-control" id="newGroupName" placeholder="new group name" />
+                    <div className="input-group">
+                        <label htmlFor="newGroupName" className="sr-only">Group name</label>
+                        <input onChange={this.changeHandler} value={newGroupName} required type="text" name="newGroupName" className="form-control" id="newGroupName" placeholder="new group name" />
 
-                            <label htmlFor="newGroupName" className="sr-only">Group id</label>
-                            <input onChange={this.changeHandler} value={newGroupId === undefined ? '' : newGroupId} type="number" name="newGroupId" className="form-control" id="newGroupId" placeholder="enter group id if necessary" />
+                        <label htmlFor="newGroupName" className="sr-only">Group id</label>
+                        <input onChange={this.changeHandler} value={newGroupId === undefined ? '' : newGroupId} type="number" name="newGroupId" className="form-control" id="newGroupId" placeholder="enter group id if necessary" />
 
-                            <Button<void> onClick={this.onGroupCreateSubmit} className="btn btn-primary form-control">Create group</Button>
-                        </div>
-
-                    </form>
+                        <Button<void> onClick={this.onGroupCreateSubmit} className="btn btn-primary form-control">Create group</Button>
+                    </div>
                 </div>
             </div>
         )
@@ -206,13 +195,13 @@ export class GroupsPage extends Component<GroupsApi & GlobalState, GroupsPageSta
                     </h5>
                 </div>
 
-                <div>
-                    <div className="card-body">
-                        <div className="table-responsive">
-                            <DeviceGroup group={group} devices={devices} removeDeviceFromGroup={this.removeDeviceFromGroup} />
-                        </div>
+
+                <div className="card-body">
+                    <div className="table-responsive">
+                        <DeviceGroup group={group} devices={devices} removeDeviceFromGroup={this.removeDeviceFromGroup} />
                     </div>
                 </div>
+
                 <div className="card-footer">
                     <AddDeviceToGroup addDeviceToGroup={addDeviceToGroup} devices={devices} group={group} />
                 </div>

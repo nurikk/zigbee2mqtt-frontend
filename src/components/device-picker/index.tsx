@@ -47,7 +47,7 @@ export default class DevicePicker extends Component<DevicePickerProps & Omit<Sel
             options = options.concat(devicesOptions);
         }
         return <div className="form-group">
-            <label className="form-label">{label}</label>
+            {label && <label className="form-label">{label}</label>}
             <select
                 value={value}
                 onChange={this.onSelect}
