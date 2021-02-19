@@ -1,3 +1,12 @@
+## [0.3.58](https://github.com/nurikk/z2m-frontend/compare/0.3.57...0.3.58) (2021-02-19)
+
+
+### Bug Fixes
+
+* **exposes:** make nicier paddings ([0ecfd31](https://github.com/nurikk/z2m-frontend/commit/0ecfd31f78676fdf00c1be11a3ecb4c9f73a24f8))
+
+
+
 ## [0.3.57](https://github.com/nurikk/z2m-frontend/compare/0.3.56...0.3.57) (2021-02-18)
 
 
