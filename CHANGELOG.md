@@ -1,3 +1,12 @@
+## [0.3.62](https://github.com/nurikk/z2m-frontend/compare/0.3.61...0.3.62) (2021-02-22)
+
+
+### Features
+
+* **extension:** generate uniq class name ([1abea4d](https://github.com/nurikk/z2m-frontend/commit/1abea4d9b4af2e1296c6cac2d750ccbe72d765d7))
+
+
+
 ## [0.3.61](https://github.com/nurikk/z2m-frontend/compare/0.3.59...0.3.61) (2021-02-22)
 
 
