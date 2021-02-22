@@ -20,9 +20,11 @@ export class ExtensionsEditorPage extends Component<GlobalState & ExtensionApi, 
         const { readExtension, updateExtensionCode } = this.props;
 
         if (value === NEW_CONST) {
-            const newName = prompt("Enter new extension name", `user-extension${Date.now()}.js`);
+            const ts = Date.now() + '';
+            const newName = prompt("Enter new extension name", `user-extension${ts}.js`);
+            const templatedCode = exampleExtensionCode.replace(/%TS%/g, ts);
             if (newName !== null) {
-                updateExtensionCode(newName as Extension, exampleExtensionCode);
+                updateExtensionCode(newName as Extension, templatedCode);
                 this.setState({ currentExtension: newName as Extension });
             }
         } else {
