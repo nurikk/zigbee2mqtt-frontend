@@ -10,6 +10,12 @@ declare module "*.txt" {
 
 
 declare module "*.json" {
-    const value: any;
+    const value: string;
+    export default value;
+}
+
+
+declare module "*.js?raw" {
+    const value: string;
     export default value;
 }

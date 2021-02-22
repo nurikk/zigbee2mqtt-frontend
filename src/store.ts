@@ -23,6 +23,7 @@ export interface LogMessage {
     message: string;
 }
 
+export type Extension = "string";
 export interface GlobalState {
     devices: Map<string, Device>;
     deviceStates: Map<string, DeviceState>;
@@ -37,6 +38,7 @@ export interface GlobalState {
     bridgeInfo: BridgeInfo;
     bridgeState: BridgeState;
     logs: LogMessage[];
+    extensionCode: { [key: string]: string };
 };
 const _store = createStore(deSerialize(initialState) as GlobalState);
 const store = process.env.NODE_ENV === 'production' ?  _store : devtools(_store);

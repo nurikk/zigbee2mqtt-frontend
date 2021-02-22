@@ -1,0 +1,8 @@
+class MyExampleExtension {
+    constructor(zigbee, mqtt, state, publishEntityState, eventBus, settings, logger) {
+        logger.info('Loaded  MyExampleExtension');
+        mqtt.publish('example/extension', 'hello from MyExampleExtension')
+    }
+}
+
+module.exports = MyExampleExtension;

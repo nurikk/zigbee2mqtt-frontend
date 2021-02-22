@@ -45,6 +45,10 @@ const urls = [
     {
         href: '/logs',
         title: 'Logs'
+    },
+    {
+        href: '/extensions',
+        title: 'Extensions (experimental)'
     }
 ];
 type StartStopJoinButtonProps = {
