@@ -1,5 +1,5 @@
 import ReconnectingWebSocket from "reconnecting-websocket";
-import store, { Group, LogMessage } from "./store";
+import store, { Extension, Group, LogMessage } from "./store";
 import { BridgeConfig, BridgeInfo, TouchLinkDevice, Device, DeviceState, BridgeState } from './types';
 import { sanitizeGraph, isSecurePage, randomString, stringifyWithPreservingUndefinedAsNull } from "./utils";
 import { Notyf } from "notyf";
@@ -71,6 +71,12 @@ interface ResponseWithStatus {
 interface TouchllinkScanResponse extends ResponseWithStatus {
     data: {
         found: TouchLinkDevice[];
+    };
+}
+interface ExtensionReadResponse extends ResponseWithStatus {
+    data: {
+        name: string;
+        content: string;
     };
 }
 interface Callable {
@@ -165,6 +171,20 @@ class Api {
             case "bridge/event":
                 break;
 
+            case "bridge/extensions":
+                {
+                    const { extensionCode } = store.getState();
+                    const copyExtensionCode = { ...extensionCode };
+                    const names = data.payload as string[];
+                    names.forEach(name => {
+                        if (!copyExtensionCode[name]) {
+                            copyExtensionCode[name] = "";
+                        }
+                    });
+                    store.setState({ extensionCode: copyExtensionCode });
+                }
+                break;
+
             case "bridge/logging":
                 {
                     const { logs } = store.getState();
@@ -211,6 +231,15 @@ class Api {
 
             case "bridge/response/touchlink/factory_reset":
                 store.setState({ touchlinkResetInProgress: false });
+                break;
+
+
+            case "bridge/extension/response/read":
+                console.log(data.payload)
+                const { extensionCode } = store.getState();
+                const { data: { name, content } } = data.payload as ExtensionReadResponse;
+
+                store.setState({ extensionCode: { ...extensionCode, ...{ [name]: content } } });
                 break;
 
             default:

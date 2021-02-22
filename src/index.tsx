@@ -28,6 +28,7 @@ import OtaPage from "./components/ota-page";
 import ReactDOM from "react-dom";
 import ErrorBoundary from "./components/ErrorBoundary";
 import DashboardPage from "./components/dashboard-page";
+import ExtensionsEditorPage from "./components/extensions-editor";
 import StateNotifier from "./components/state-notifier/StateNotifier";
 
 const ConnectedDevicePageWrap: FunctionComponent<{ dev: string }> = ({ dev }) => (
@@ -58,6 +59,7 @@ class Main extends Component {
                                     <Route path="/logs" render={(props) => <ErrorBoundary {...props}><LogsPage /></ErrorBoundary>} />
                                     <Route path="/touchlink" render={(props) => <ErrorBoundary {...props}><TouchlinkPage /></ErrorBoundary>} />
                                     <Route path="/dashboard" render={(props) => <ErrorBoundary {...props}><DashboardPage /></ErrorBoundary>} />
+                                    <Route path="/extensions" render={(props) => <ErrorBoundary {...props}><ExtensionsEditorPage /></ErrorBoundary>} />
                                     <Route path="/" render={(props) => <ErrorBoundary {...props}><ConnectedZigbeePage /></ErrorBoundary>} />
                                 </Switch>
                             </div>

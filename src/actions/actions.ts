@@ -13,6 +13,7 @@ import stateActions from "./StateApi";
 import otaActions from "./OtaApi";
 import bindActions from "./BindApi";
 import touchlinkActions from "./TouchlinkApi";
+import extensionActions from "./ExtensionApi";
 
 export interface UtilsApi {
     exportState(): Promise<void>;
@@ -33,6 +34,7 @@ const actions = (store: Store<GlobalState>): object => ({
     ...otaActions,
     ...bindActions,
     ...touchlinkActions,
+    ...extensionActions,
 
     networkMapRequest: (state): Promise<void> => {
         store.setState({ networkGraphIsLoading: true, networkGraph: { nodes: [], links: [] } });
