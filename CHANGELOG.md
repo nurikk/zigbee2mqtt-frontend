@@ -1,3 +1,12 @@
+## [0.3.61](https://github.com/nurikk/z2m-frontend/compare/0.3.59...0.3.61) (2021-02-22)
+
+
+### Features
+
+* **extension-editor:** first implementation ([c2b1733](https://github.com/nurikk/z2m-frontend/commit/c2b17332e1e288025c37c28ce89a1673ff0d1316))
+
+
+
 ## [0.3.60](https://github.com/nurikk/z2m-frontend/compare/0.3.59...0.3.60) (2021-02-22)
 
 
