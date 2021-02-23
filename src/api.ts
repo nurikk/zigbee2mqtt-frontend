@@ -173,15 +173,8 @@ class Api {
 
             case "bridge/extensions":
                 {
-                    const { extensionCode } = store.getState();
-                    const copyExtensionCode = { ...extensionCode };
-                    const names = data.payload as string[];
-                    names.forEach(name => {
-                        if (!copyExtensionCode[name]) {
-                            copyExtensionCode[name] = "";
-                        }
-                    });
-                    store.setState({ extensionCode: copyExtensionCode });
+                    const extensions = data.payload as Extension[];
+                    store.setState({ extensions });
                 }
                 break;
 
@@ -233,14 +226,6 @@ class Api {
                 store.setState({ touchlinkResetInProgress: false });
                 break;
 
-
-            case "bridge/extension/response/read":
-                console.log(data.payload)
-                const { extensionCode } = store.getState();
-                const { data: { name, content } } = data.payload as ExtensionReadResponse;
-
-                store.setState({ extensionCode: { ...extensionCode, ...{ [name]: content } } });
-                break;
 
             default:
                 break;

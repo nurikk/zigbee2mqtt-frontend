@@ -22,5 +22,5 @@
     "config": {}
   },
   "logs": [],
-  "extensionCode": {}
+  "extensions": []
 }
