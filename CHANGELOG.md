@@ -1,3 +1,12 @@
+## [0.3.64](https://github.com/nurikk/z2m-frontend/compare/0.3.62...0.3.64) (2021-02-23)
+
+
+### Features
+
+* **extensions:** adapt new structure ([2525426](https://github.com/nurikk/z2m-frontend/commit/25254265a11a46fcb325c5072089fde8922744b3))
+
+
+
 ## [0.3.63](https://github.com/nurikk/z2m-frontend/compare/0.3.62...0.3.63) (2021-02-23)
 
 
