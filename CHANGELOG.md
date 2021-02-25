@@ -1,3 +1,12 @@
+## [0.3.65](https://github.com/nurikk/z2m-frontend/compare/0.3.64...0.3.65) (2021-02-25)
+
+
+### Bug Fixes
+
+* **map:** add circle around device images ([685dd95](https://github.com/nurikk/z2m-frontend/commit/685dd95e7b42353e5bb0a1e7c9c495ac1281e23d))
+
+
+
 ## [0.3.64](https://github.com/nurikk/z2m-frontend/compare/0.3.62...0.3.64) (2021-02-23)
 
 
