@@ -46,6 +46,9 @@
     fill: green;
     color: green;
 }
+.JhUbmgThutQMk8laPcsxg > circle {
+    stroke: green;
+}
 ._3F14ZWmKtSPPHai2y_MRRj {
     stroke: #fff;
     stroke-width: 2px;
@@ -58,6 +61,11 @@
 ._3F14ZWmKtSPPHai2y_MRRj {
     fill: blue;
     color: blue;
+}
+
+._1I1ZcuMgRbn_B5HXF9Z2mw > circle,
+._3F14ZWmKtSPPHai2y_MRRj > circle {
+    stroke: blue;
 }
 
 ._3FeEi6FG3R9pYpboNF-OBu {
@@ -100,6 +108,7 @@
     position: absolute;
     right: 0;
 }
+
 ._2UWt6cv5iKbBWQ1njU-Knh img {
     width: 150px;
 }
@@ -221,4 +230,4 @@
 }
 
 
-/*# sourceMappingURL=main.abdb20794acb672eeb75.css.map*/
+/*# sourceMappingURL=main.8348271462f3bfa04742.css.map*/
