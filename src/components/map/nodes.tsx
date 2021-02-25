@@ -75,9 +75,12 @@ class Node extends Component<NodeProps, {}> {
             onMouseOut={onMouseOut}
             onDoubleClick={onDblClick}
         >
+            <circle cx={16} cy={17} r={24} fill={"#fff"} stroke={"blue"} strokeWidth={2} />
             {
                 node.type === "Coordinator" ? (
                     <polygon
+                        stroke="blue"
+                        strokeWidth={1}
                         points={getStarShape(5, 5, 14) as string}
                     />
                 ) : (
@@ -90,8 +93,7 @@ class Node extends Component<NodeProps, {}> {
                         />
                     )
             }
-            <text>{node.friendlyName}</text>
-
+            <text x={45} y={25}>{node.friendlyName}</text>
         </g>);
 
     }

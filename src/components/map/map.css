@@ -40,6 +40,9 @@
     fill: green;
     color: green;
 }
+.EndDevice > circle {
+    stroke: green;
+}
 .Coordinator {
     stroke: #fff;
     stroke-width: 2px;
@@ -52,6 +55,11 @@
 .Coordinator {
     fill: blue;
     color: blue;
+}
+
+.Router > circle,
+.Coordinator > circle {
+    stroke: blue;
 }
 
 .BrokenLink {
