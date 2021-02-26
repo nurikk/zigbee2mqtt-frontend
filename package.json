@@ -54,7 +54,7 @@
         "concurrently": "^6.0.0",
         "conventional-changelog-cli": "^2.1.1",
         "copy-webpack-plugin": "^7.0.0",
-        "css-loader": "^5.0.2",
+        "css-loader": "^5.1.0",
         "d3-drag": "^2.0.0",
         "d3-force": "^2.1.1",
         "d3-force-reuse": "^1.0.1",
