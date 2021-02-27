@@ -65,7 +65,7 @@ export class ExtensionsEditorPage extends Component<GlobalState & ExtensionApi, 
                         <Button disabled={!currentExtension} onClick={this.onSaveClick} className="btn btn-primary">Save</Button>
                     </div>
                 </div>
-                <textarea spellCheck={false} onChange={this.onExtensionCodeChange} className="form-control h-100" value={code} />
+                <textarea style={{height: '80%'}} spellCheck={false} onChange={this.onExtensionCodeChange} className="form-control" value={code} />
             </div>
         </div>
 
