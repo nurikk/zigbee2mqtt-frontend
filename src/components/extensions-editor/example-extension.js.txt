@@ -8,21 +8,20 @@ class MyExampleExtension_TS_ {
     }
 
     async onStateChange(data) {
-        const { ID, from, to } = data;
+        const { ID, from, to, reason } = data;
 
-        const myRemoteIeeeAddre= '0x00124b00219fb9ee'; // change this
-        const myLampIeeAddr = '0x0017880104292f0a'; // change this
-
+        const myRemoteIeeeAddre= '0x00158d000224154d'; // change this
+        const myLampIeeAddr = '0x00124b001e73227f'; // change this
         //example how to toggle state
-        if (ID === myRemoteIeeeAddre) { // state changed for myRemote (clicked a button)
-            if (to.contact_l1) { // new state
+        if (ID === myRemoteIeeeAddre) { //state changed for myRemote (clicked a button)
+            if (from.action !== to.action && to.action === 'single') {
                 this.mqtt.publish(`${myLampIeeAddr}/set`, JSON.stringify({state: 'toggle'}), undefined, undefined, undefined, false);
             }
         }
     }
-    // async onMQTTMessage(topic, message) {
-    //     console.log({topic, message});
-    // }
+   // async onMQTTMessage(topic, message) {
+   //     console.log({topic, message});
+   // }
 }
 
 module.exports = MyExampleExtension_TS_;
