@@ -1,3 +1,12 @@
+## [0.3.68](https://github.com/nurikk/z2m-frontend/compare/0.3.67...0.3.68) (2021-02-27)
+
+
+### Features
+
+* **extensions:** add Ace editor ([17e1e1b](https://github.com/nurikk/z2m-frontend/commit/17e1e1ba69fa9e03ddc368e033f0a5b10139a8c9))
+
+
+
 ## [0.3.67](https://github.com/nurikk/z2m-frontend/compare/0.3.66...0.3.67) (2021-02-27)
 
 
