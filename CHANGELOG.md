@@ -1,3 +1,12 @@
+## [0.3.69](https://github.com/nurikk/z2m-frontend/compare/0.3.68...0.3.69) (2021-02-27)
+
+
+### Bug Fixes
+
+* **extensions:** update example code ([bd9ab79](https://github.com/nurikk/z2m-frontend/commit/bd9ab797b608cf62c80d283c47870b0d19a6faff))
+
+
+
 ## [0.3.68](https://github.com/nurikk/z2m-frontend/compare/0.3.67...0.3.68) (2021-02-27)
 
 
