@@ -4,7 +4,7 @@ class MyExampleExtension_TS_ {
         mqtt.publish('example/extension', 'hello from MyExampleExtension_TS_');
         this.eventBus = eventBus;
         this.mqtt = mqtt;
-        this.eventBus.on('stateChange', this.onStateChange.bind(this));
+        this.eventBus.on('stateChange', this.onStateChange.bind(this), this.constructor.name);
     }
 
     async onStateChange(data) {
