@@ -19,6 +19,9 @@ class MyExampleExtension_TS_ {
             }
         }
     }
+    async stop() {
+        this.eventBus.removeListenersExtension(this.constructor.name);
+    }
    // async onMQTTMessage(topic, message) {
    //     console.log({topic, message});
    // }
