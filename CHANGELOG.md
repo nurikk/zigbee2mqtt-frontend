@@ -1,3 +1,12 @@
+## [0.3.72](https://github.com/nurikk/z2m-frontend/compare/0.3.71...0.3.72) (2021-02-27)
+
+
+### Bug Fixes
+
+* **extension:** fix subcription ([13424de](https://github.com/nurikk/z2m-frontend/commit/13424de37dcf027d180ac484011ccdf29494ba99))
+
+
+
 ## [0.3.71](https://github.com/nurikk/z2m-frontend/compare/0.3.70...0.3.71) (2021-02-27)
 
 
