@@ -18,6 +18,6 @@ export default {
     },
 
     saveExtensionCode: (state, extension: Extension): Promise<void> => {
-        return api.send(`bridge/extension/request/save`, extension);
+        return api.send(`bridge/request/extension/save`, extension);
     }
 }

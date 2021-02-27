@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "unistore/react";
 import actions from "../../actions/actions";
-import { Extension, GlobalState } from "../../store";
+import { GlobalState } from "../../store";
 
 import exampleExtensionCode from './example-extension.js.txt';
 
@@ -40,7 +40,7 @@ export class ExtensionsEditorPage extends Component<GlobalState & ExtensionApi, 
         const { updateExtensionCode } = this.props;
         const ts = Date.now() + '';
         const newName = prompt("Enter new extension name", `user-extension${ts}.js`);
-        const templatedCode = exampleExtensionCode.replace(/%TS%/g, ts);
+        const templatedCode = exampleExtensionCode.replace(/_TS_/g, ts);
         if (newName !== null) {
             updateExtensionCode({ name: newName, code: templatedCode });
             this.setState({ currentExtension: newName });
@@ -49,10 +49,10 @@ export class ExtensionsEditorPage extends Component<GlobalState & ExtensionApi, 
     render() {
         const { currentExtension } = this.state;
         const { extensions } = this.props;
-        const code = extensions.find(e => e.name === currentExtension)?.code;
+        const code = extensions.find(e => e.name === currentExtension)?.code ?? "";
 
-        return <div className="card">
-            <div className="card-body">
+        return <div className="card h-100">
+            <div className="card-body h-100">
                 <div className="row mb-2">
                     <div className="col-6">
                         <select value={currentExtension} className="form-control" onChange={this.loadExtension}>
@@ -61,11 +61,11 @@ export class ExtensionsEditorPage extends Component<GlobalState & ExtensionApi, 
                         </select>
                     </div>
                     <div className="col-6">
-                        <Button onClick={this.addNewExtension} className="btn btn-success"><i className="fa fa-plus"></i></Button>
+                        <Button onClick={this.addNewExtension} className="btn btn-success me-2"><i className="fa fa-plus"></i></Button>
+                        <Button disabled={!currentExtension} onClick={this.onSaveClick} className="btn btn-primary">Save</Button>
                     </div>
                 </div>
-                <textarea onChange={this.onExtensionCodeChange} className="form-control mb-2" rows={10} value={code}></textarea>
-                <Button disabled={!currentExtension} onClick={this.onSaveClick} className="btn btn-primary">Save</Button>
+                <textarea spellCheck={false} onChange={this.onExtensionCodeChange} className="form-control h-100" value={code} />
             </div>
         </div>
 

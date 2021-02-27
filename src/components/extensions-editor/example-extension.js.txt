@@ -1,8 +1,28 @@
-class MyExampleExtension%TS% {
+class MyExampleExtension_TS_ {
     constructor(zigbee, mqtt, state, publishEntityState, eventBus, settings, logger) {
-        logger.info('Loaded  MyExampleExtension%TS%');
-        mqtt.publish('example/extension', 'hello from MyExampleExtension%TS%')
+        logger.info('Loaded  MyExampleExtension_TS_');
+        mqtt.publish('example/extension', 'hello from MyExampleExtension_TS_');
+        this.eventBus = eventBus;
+        this.mqtt = mqtt;
+        this.eventBus.on('stateChange', this.onStateChange.bind(this));
     }
+
+    async onStateChange(data) {
+        const { ID, from, to } = data;
+
+        const myRemoteIeeeAddre= '0x00124b00219fb9ee'; // change this
+        const myLampIeeAddr = '0x0017880104292f0a'; // change this
+
+        //example how to toggle state
+        if (ID === myRemoteIeeeAddre) { // state changed for myRemote (clicked a button)
+            if (to.contact_l1) { // new state
+                this.mqtt.publish(`${myLampIeeAddr}/set`, JSON.stringify({state: 'toggle'}), undefined, undefined, undefined, false);
+            }
+        }
+    }
+    // async onMQTTMessage(topic, message) {
+    //     console.log({topic, message});
+    // }
 }
 
-module.exports = MyExampleExtension%TS%;
+module.exports = MyExampleExtension_TS_;
