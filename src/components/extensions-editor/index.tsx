@@ -7,6 +7,9 @@ import exampleExtensionCode from './example-extension.js.txt';
 
 import { ExtensionApi } from "../../actions/ExtensionApi";
 import Button from "../button";
+import AceEditor from "react-ace";
+
+import "ace-builds/src-noconflict/mode-javascript";
 
 type ExtensionsEditorPageState = {
     currentExtension?: string;
@@ -21,12 +24,11 @@ export class ExtensionsEditorPage extends Component<GlobalState & ExtensionApi, 
 
 
     }
-    onExtensionCodeChange = (e) => {
+    onExtensionCodeChange = (code: string) => {
         const { updateExtensionCode } = this.props;
         const { currentExtension } = this.state;
-        const { value } = e.target;
 
-        currentExtension && updateExtensionCode({ name: currentExtension, code: value });
+        currentExtension && updateExtensionCode({ name: currentExtension, code });
     }
     onSaveClick = () => {
         const { saveExtensionCode } = this.props;
@@ -65,7 +67,17 @@ export class ExtensionsEditorPage extends Component<GlobalState & ExtensionApi, 
                         <Button disabled={!currentExtension} onClick={this.onSaveClick} className="btn btn-primary">Save</Button>
                     </div>
                 </div>
-                <textarea style={{height: '80%'}} spellCheck={false} onChange={this.onExtensionCodeChange} className="form-control" value={code} />
+                <AceEditor
+                    mode="javascript"
+                    theme="github"
+                    onChange={this.onExtensionCodeChange}
+                    name="UNIQUE_ID_OF_DIV"
+                    editorProps={{ $blockScrolling: true }}
+                    value={code}
+                    width="100%"
+                    height="90%"
+                    showPrintMargin={false}
+                />
             </div>
         </div>
 
