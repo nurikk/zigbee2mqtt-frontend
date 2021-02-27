@@ -1,3 +1,14 @@
+## [0.3.66](https://github.com/nurikk/z2m-frontend/compare/0.3.65...0.3.66) (2021-02-27)
+
+
+### Bug Fixes
+
+* **dashboard:** blacklist color_options ([4373f40](https://github.com/nurikk/z2m-frontend/commit/4373f4070b0543cbd7a8068a3e9460f0032ea213))
+* **exposes:** fix feature width ([de190b1](https://github.com/nurikk/z2m-frontend/commit/de190b14d4c621eddce8fcf761a997021b217097))
+* **map:** link label position fix ([bd7c3b7](https://github.com/nurikk/z2m-frontend/commit/bd7c3b75df465d1e5831bfd1ff9e7ccddb97db59))
+
+
+
 ## [0.3.65](https://github.com/nurikk/z2m-frontend/compare/0.3.64...0.3.65) (2021-02-25)
 
 
