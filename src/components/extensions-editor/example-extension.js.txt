@@ -2,6 +2,7 @@ class MyExampleExtension_TS_ {
     constructor(zigbee, mqtt, state, publishEntityState, eventBus, settings, logger) {
         logger.info('Loaded  MyExampleExtension_TS_');
         mqtt.publish('example/extension', 'hello from MyExampleExtension_TS_');
+        this.mqttBaseTopic = settings.get().mqtt.base_topic;
         this.eventBus = eventBus;
         this.mqtt = mqtt;
         this.eventBus.on('stateChange', this.onStateChange.bind(this), this.constructor.name);
@@ -15,16 +16,18 @@ class MyExampleExtension_TS_ {
         //example how to toggle state
         if (ID === myRemoteIeeeAddre) { //state changed for myRemote (clicked a button)
             if (from.action !== to.action && to.action === 'single') {
-                this.mqtt.publish(`${myLampIeeAddr}/set`, JSON.stringify({state: 'toggle'}), undefined, undefined, undefined, false);
+                this.mqtt.onMessage(`${this.mqttBaseTopic}/${myLampIeeAddr}/set`, JSON.stringify({state: 'toggle'}));
             }
         }
     }
+
+    async onMQTTMessage(topic, message) {
+        // console.log({topic, message});
+    }
+
     async stop() {
         this.eventBus.removeListenersExtension(this.constructor.name);
     }
-   // async onMQTTMessage(topic, message) {
-   //     console.log({topic, message});
-   // }
 }
 
 module.exports = MyExampleExtension_TS_;
