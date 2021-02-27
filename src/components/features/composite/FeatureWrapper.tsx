@@ -12,7 +12,7 @@ export const FeatureWrapper: FunctionComponent<PropsWithChildren<FetatureWrapper
     const { children, feature, onRead } = props;
     const isColor = feature.name?.startsWith("color_"); //hardcode for color
     const isReadable = (feature.access & FeatureAccessMode.ACCESS_READ) || isColor;
-    return <div className="row border-bottom py-1" >
+    return <div className="row border-bottom py-1 w-100">
         <div className="col-12 col-md-3">
             <label className="col-form-label w-100">
                 <div className="d-flex justify-content-between">
