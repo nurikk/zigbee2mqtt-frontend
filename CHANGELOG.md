@@ -1,3 +1,12 @@
+## [0.3.71](https://github.com/nurikk/z2m-frontend/compare/0.3.70...0.3.71) (2021-02-27)
+
+
+### Bug Fixes
+
+* **extension:** add stop method ([c2b2249](https://github.com/nurikk/z2m-frontend/commit/c2b22493936084167dce445da4e12e2c23cc9e6e))
+
+
+
 ## [0.3.70](https://github.com/nurikk/z2m-frontend/compare/0.3.69...0.3.70) (2021-02-27)
 
 
