@@ -1,3 +1,13 @@
+## [0.3.67](https://github.com/nurikk/z2m-frontend/compare/0.3.66...0.3.67) (2021-02-27)
+
+
+### Bug Fixes
+
+* **extensions:** set textarea height ([6d8b221](https://github.com/nurikk/z2m-frontend/commit/6d8b2212902638b5c2e73bf528e7d69c5d80aff6))
+* **extensions:** update sample code ([402f177](https://github.com/nurikk/z2m-frontend/commit/402f177de7f911a9619ab0a4c3a4d0cf7467becd))
+
+
+
 ## [0.3.66](https://github.com/nurikk/z2m-frontend/compare/0.3.65...0.3.66) (2021-02-27)
 
 
