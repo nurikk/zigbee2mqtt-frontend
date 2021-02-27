@@ -1,5 +1,5 @@
 import { LinkI } from "./types";
-import React, { FunctionComponent, RefObject, useLayoutEffect, useRef } from "react";
+import React, { Fragment, FunctionComponent, RefObject, useLayoutEffect, useRef } from "react";
 import style from "./map.css";
 import cx from "classnames";
 import { select } from "d3-selection";
@@ -43,18 +43,18 @@ const Links: FunctionComponent<LinksPros> = props => {
 
     return (
         <g ref={ref as RefObject<SVGGElement>} className={style.links}>
-            {links.map((link: LinkI) => <Link
-                id={`edgepath${link.sourceIeeeAddr}-${link.targetIeeeAddr}-${link.linkType}`}
-                key={`link${link.sourceIeeeAddr}-${link.targetIeeeAddr}-${link.linkType}`}
-                link={link}
-            />)}
-            {links.map((link: LinkI) => (
-                <LinkLabel
-                    xlinkHref={`#edgepath${link.sourceIeeeAddr}-${link.targetIeeeAddr}-${link.linkType}`}
-                    key={`label${link.sourceIeeeAddr}-${link.targetIeeeAddr}-${link.linkType}`}
-                    link={link}
-                />
-            ))}
+            {links.map((link: LinkI) =>
+                <Fragment key={`fragment${link.sourceIeeeAddr}-${link.targetIeeeAddr}-${link.linkType}`}>
+                    <Link
+                        id={`edgepath${link.sourceIeeeAddr}-${link.targetIeeeAddr}-${link.linkType}`}
+                        link={link}
+                    />
+                    <LinkLabel
+                        xlinkHref={`#edgepath${link.sourceIeeeAddr}-${link.targetIeeeAddr}-${link.linkType}`}
+                        link={link}
+                    />
+                </Fragment>
+            )}
         </g>
     );
 };

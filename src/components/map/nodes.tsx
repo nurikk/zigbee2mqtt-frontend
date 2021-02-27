@@ -75,7 +75,7 @@ class Node extends Component<NodeProps, {}> {
             onMouseOut={onMouseOut}
             onDoubleClick={onDblClick}
         >
-            <circle cx={16} cy={17} r={24} fill={"#fff"} stroke={"blue"} strokeWidth={2} />
+            <circle cx={16} cy={17} r={24} fill={"#fff"} stroke={"blue"} strokeWidth={1} />
             {
                 node.type === "Coordinator" ? (
                     <polygon

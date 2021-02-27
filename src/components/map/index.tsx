@@ -29,17 +29,6 @@ interface MapState {
     visibleLinks: ZigbeeRelationship[];
     legendIsVisible: boolean;
 }
-const angle = (s: Source, t: Target) => Math.atan2(((t.y as number) - (s.y as number)), (t.x as number) - (s.x as number));
-
-
-const _calc = (params: { offset: number; s: Source; t: Target; accessor: string }, fn: (n: number) => number): number => {
-    const { offset, s, t, accessor } = params;
-    return offset * fn(angle(s, t)) + (s[accessor] as number);
-}
-const xpos = (offset: number, s: Source, t: Target) => _calc({ offset, s, t, accessor: 'x' }, Math.cos);
-const ypos = (offset: number, s: Source, t: Target) => _calc({ offset, s, t, accessor: 'y' }, Math.sin);
-
-
 
 const parentOrChild = [ZigbeeRelationship.NeigbhorIsAChild, ZigbeeRelationship.NeigbhorIsParent];
 const linkStrregth = (d: LinkI) => {
@@ -84,29 +73,22 @@ type TickedParams = {
     node: SelNode;
     link: SelLink;
     linkLabel: SelLink;
-    links: LinkI[];
 }
-const ticked = ({ transform, node, link, linkLabel, links }: TickedParams): void => {
-    links.forEach(function (d) {
-        const [x1, y1] = transform.apply([d.source.x as number, d.source.y as number]),
-            [x2, y2] = transform.apply([d.target.x as number, d.target.y as number]),
-            slope = (y2 - y1) / (x2 - x1);
 
-        (d as unknown as NodeI).x = (x2 + x1) / 2;
-        (d as unknown as NodeI).y = (x2 - x1) * slope / 2 + y1;
-    });
+
+
+const ticked = ({ transform, node, link, linkLabel }: TickedParams): void => {
     link.attr("d", (d) => computeLink(d, transform));
     linkLabel
-        .attr('x', (d) => transform.applyX(xpos(100, d.source, d.target)))
-        .attr('y', (d) => transform.applyY(ypos(100, d.source, d.target)))
+        .attr('x', ({ source, target }) => transform.applyX(((source.x as number) + (target.x as number)) / 2))
+        .attr('y', ({ source, target }) => transform.applyY(((source.y as number) + (target.y as number)) / 2));
 
-    const imgXShift = 32 / 2;
-    const imgYShift = 32 / 2;
-    const computeTransform = (d: NodeI) => {
+    node.attr("transform", (d: NodeI) => {
+        const imgXShift = 32 / 2;
+        const imgYShift = 32 / 2;
         const [X, Y] = transform.apply([d.x as number, d.y as number]);
         return `translate(${X - imgXShift}, ${Y - imgYShift})`;
-    }
-    node.attr("transform", computeTransform as ValueFn<SVGElement, NodeI, string | number | boolean | null>);
+    });
 };
 type ProcessHighlightsParams = {
     networkGraph: GraphI;
@@ -160,7 +142,7 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
         const links = networkGraph.links.filter(l => intersection(visibleLinks, l.relationships).length);
         this.simulation.nodes(networkGraph.nodes.concat(links as unknown as NodeI[]));
         this.simulation.force<ForceLink<NodeI, LinkI>>("link")?.links(links);
-        this.simulation.on("tick", () => ticked({ transform: this.transform, node, link, linkLabel, links }));
+        this.simulation.on("tick", () => ticked({ transform: this.transform, node, link, linkLabel }));
 
 
         //add zoom capabilities
