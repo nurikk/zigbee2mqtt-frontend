@@ -48,7 +48,7 @@ const urls = [
     },
     {
         href: '/extensions',
-        title: 'Extensions (experimental)'
+        title: 'Extensions'
     }
 ];
 type StartStopJoinButtonProps = {
