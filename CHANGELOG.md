@@ -1,3 +1,13 @@
+## [0.3.75](https://github.com/nurikk/z2m-frontend/compare/0.3.74...0.3.75) (2021-02-28)
+
+
+### Features
+
+* **extension:** remove experemental label ([370fe28](https://github.com/nurikk/z2m-frontend/commit/370fe282ac22c117538a252fd91ab3689f76eb57))
+* **extensions:** add remove extension button ([6f620b3](https://github.com/nurikk/z2m-frontend/commit/6f620b3b20df4d049590cf37cfd0fabba6059771))
+
+
+
 ## [0.3.74](https://github.com/nurikk/z2m-frontend/compare/0.3.73...0.3.74) (2021-02-28)
 
 
