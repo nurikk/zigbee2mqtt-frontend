@@ -43,18 +43,16 @@ const linkStrregth = (d: LinkI) => {
 }
 
 const distancesMap = {
-    BrokenLink: 450,
-    Router2Router: 200,
-    Coordinator2Router: 200,
-    Coordinator2EndDevice: 50,
-    EndDevice2Router: 50
+    BrokenLink: 500,
+    Router2Router: 250,
+    Coordinator2Router: 250,
+    Coordinator2EndDevice: 100,
+    EndDevice2Router: 100
 };
 
 
 const getDistance = (d: LinkI): number => {
-    return distancesMap[d.linkType] ?? 200;
-    // const depth = ~~(Math.min(4, d.depth));
-    // return 50 * depth + distance;
+    return distancesMap[d.linkType] ?? 250;
 };
 
 const computeLink = (d: LinkI, transform: ZoomTransform): string => {
@@ -168,7 +166,7 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
         this.simulation = this.simulation
             .force("link", forceLink<NodeI, LinkI>().id(d => d.ieeeAddr).distance(getDistance).strength(linkStrregth))
             .force("charge", forceManyBodyReuse().strength(-700))
-            .force("collisionForce", forceCollide())
+            .force("collisionForce", forceCollide().radius(50))
             .force("center", forceCenter(width / 2, height / 2))
             .force("x", forceX().strength(0.1))
             .force("y", forceY().strength(0.2))
