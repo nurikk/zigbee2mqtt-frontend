@@ -38,6 +38,15 @@ export class ExtensionsEditorPage extends Component<GlobalState & ExtensionApi, 
 
         extension && saveExtensionCode(extension);
     }
+    removeExtension = () => {
+        const { removeExtension } = this.props;
+        const { currentExtension } = this.state;
+        const { extensions } = this.props;
+        const extension = extensions.find(e => e.name === currentExtension);
+
+        extension && removeExtension(extension);
+    }
+
     addNewExtension = () => {
         const { updateExtensionCode } = this.props;
         const ts = Date.now() + '';
@@ -64,6 +73,7 @@ export class ExtensionsEditorPage extends Component<GlobalState & ExtensionApi, 
                     </div>
                     <div className="col-6">
                         <Button onClick={this.addNewExtension} className="btn btn-success me-2"><i className="fa fa-plus"></i></Button>
+                        <Button promt disabled={!currentExtension} onClick={this.removeExtension} className="btn btn-danger me-2"><i className="fa fa-trash"></i></Button>
                         <Button disabled={!currentExtension} onClick={this.onSaveClick} className="btn btn-primary">Save</Button>
                     </div>
                 </div>
