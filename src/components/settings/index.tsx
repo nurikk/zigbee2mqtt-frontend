@@ -13,7 +13,7 @@ import { BridgeApi } from "../../actions/BridgeApi";
 
 
 
-type SettingsTab = "settings" | "bridge" | "about" | "tools";
+type SettingsTab = "settings" | "bridge" | "about" | "tools" | "donate";
 
 type SettigsKeys = string;
 type UrlParams = {
@@ -65,6 +65,10 @@ const tabs = [
         title: 'Raw',
         url: `/settings/bridge`
     },
+    {
+        title: <i className="fa fa-donate" />,
+        url: '/settings/donate'
+    }
 ];
 
 
@@ -106,6 +110,8 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
                 return this.renderAbout();
             case "settings":
                 return this.renderSettings();
+            case "donate":
+                return this.renderDonate();
             default:
                 return <Redirect to={`/settings/settings`} />;
         }
@@ -221,6 +227,14 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
             </div>
         </div>
 
+    }
+
+    renderDonate() {
+        return <div>
+            <a href="https://www.buymeacoffee.com/nurikk">
+                <img src="https://img.buymeacoffee.com/button-api/?text=Buy me a beer&emoji=🍺&slug=nurikk&button_colour=FFDD00&font_colour=000000&font_family=Arial&outline_colour=000000&coffee_colour=ffffff" />
+            </a>
+        </div>;
     }
 }
 const SettingsPageWithRouter = withRouter(SettingsPage);
