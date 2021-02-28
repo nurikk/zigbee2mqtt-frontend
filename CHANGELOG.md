@@ -1,3 +1,12 @@
+## [0.3.76](https://github.com/nurikk/z2m-frontend/compare/0.3.75...0.3.76) (2021-02-28)
+
+
+### Bug Fixes
+
+* **map:** make map thinner ([03e4bcd](https://github.com/nurikk/z2m-frontend/commit/03e4bcde945b931ebfce82c3085ffa65aefdaefb))
+
+
+
 ## [0.3.75](https://github.com/nurikk/z2m-frontend/compare/0.3.74...0.3.75) (2021-02-28)
 
 
