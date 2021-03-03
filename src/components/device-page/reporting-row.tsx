@@ -113,19 +113,19 @@ export default class ReportingRow extends Component<ReportingRowProps, Reporting
             </div>
             <div className="col-md-2">
                 <div className="form-group">
-                    <label className="form-label">Min rep interval</label>
+                    <label className="form-label text-nowrap">Min rep interval</label>
                     <input onChange={this.changeHandler} value={stateRule.minimum_report_interval} required type="number" name="minimum_report_interval" className="form-control" />
                 </div>
             </div>
             <div className="col-md-1">
                 <div className="form-group">
-                    <label className="form-label">Max rep interval</label>
+                    <label className="form-label text-nowrap">Max rep interval</label>
                     <input onChange={this.changeHandler} value={stateRule.maximum_report_interval} required type="number" name="maximum_report_interval" className="form-control" />
                 </div>
             </div>
             <div className="col-md-1">
                 <div className="form-group">
-                    <label className="form-label">Min rep change</label>
+                    <label className="form-label text-nowrap">Min rep change</label>
                     <input placeholder="Enter 65535 to disable reporting" onChange={this.changeHandler} value={stateRule.reportable_change} required type="number" name="reportable_change" className="form-control" />
                 </div>
 
