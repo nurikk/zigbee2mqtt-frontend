@@ -41,13 +41,13 @@ const linkStrregth = (d: LinkI) => {
 
     return 0;
 }
-
+const baseDistance = 100;
 const distancesMap = {
-    BrokenLink: 500,
-    Router2Router: 250,
-    Coordinator2Router: 250,
-    Coordinator2EndDevice: 100,
-    EndDevice2Router: 100
+    BrokenLink: 5 * baseDistance,
+    Router2Router: 2.5 * baseDistance,
+    Coordinator2Router: 2.5 * baseDistance,
+    Coordinator2EndDevice: 1 * baseDistance,
+    EndDevice2Router: 1 * baseDistance
 };
 
 
@@ -71,11 +71,20 @@ type TickedParams = {
     node: SelNode;
     link: SelLink;
     linkLabel: SelLink;
+    links: LinkI[];
 }
 
 
 
-const ticked = ({ transform, node, link, linkLabel }: TickedParams): void => {
+const ticked = ({ transform, node, link, linkLabel, links }: TickedParams): void => {
+    links.forEach(function (d) {
+        const [x1, y1] = transform.apply([d.source.x as number, d.source.y as number]),
+            [x2, y2] = transform.apply([d.target.x as number, d.target.y as number]),
+            slope = (y2 - y1) / (x2 - x1);
+
+        (d as unknown as NodeI).x = (x2 + x1) / 2;
+        (d as unknown as NodeI).y = (x2 - x1) * slope / 2 + y1;
+    });
     link.attr("d", (d) => computeLink(d, transform));
     linkLabel
         .attr('x', ({ source, target }) => transform.applyX(((source.x as number) + (target.x as number)) / 2))
@@ -140,7 +149,7 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
         const links = networkGraph.links.filter(l => intersection(visibleLinks, l.relationships).length);
         this.simulation.nodes(networkGraph.nodes.concat(links as unknown as NodeI[]));
         this.simulation.force<ForceLink<NodeI, LinkI>>("link")?.links(links);
-        this.simulation.on("tick", () => ticked({ transform: this.transform, node, link, linkLabel }));
+        this.simulation.on("tick", () => ticked({ transform: this.transform, node, link, linkLabel, links }));
 
 
         //add zoom capabilities
@@ -166,7 +175,7 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
         this.simulation = this.simulation
             .force("link", forceLink<NodeI, LinkI>().id(d => d.ieeeAddr).distance(getDistance).strength(linkStrregth))
             .force("charge", forceManyBodyReuse().strength(-700))
-            .force("collisionForce", forceCollide().radius(50))
+            .force("collisionForce", forceCollide())
             .force("center", forceCenter(width / 2, height / 2))
             .force("x", forceX().strength(0.1))
             .force("y", forceY().strength(0.2))
