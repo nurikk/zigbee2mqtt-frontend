@@ -1,3 +1,16 @@
+## [0.3.77](https://github.com/nurikk/z2m-frontend/compare/0.3.75...0.3.77) (2021-03-03)
+
+
+### Bug Fixes
+
+* **dashboar:** fix image position ([f0f0935](https://github.com/nurikk/z2m-frontend/commit/f0f0935e568ca116dfba9bc0e4a758096817f637))
+* **fonts:** increase font size ([08bbbcf](https://github.com/nurikk/z2m-frontend/commit/08bbbcf4754e3f58c1b68545944335c0add87105))
+* **map:** fix map spacings ([8cab32f](https://github.com/nurikk/z2m-frontend/commit/8cab32f7aefc1080696238194deef80a12e7835e))
+* **map:** make map thinner ([390c078](https://github.com/nurikk/z2m-frontend/commit/390c07897da75faff17333a11ed005fd2ca8be4e))
+* **reporting:** fix label text wrapping ([7d064b9](https://github.com/nurikk/z2m-frontend/commit/7d064b9e04cd9ce601ee60f40995413569321dd0))
+
+
+
 ## [0.3.76](https://github.com/nurikk/z2m-frontend/compare/0.3.75...0.3.76) (2021-02-28)
 
 
