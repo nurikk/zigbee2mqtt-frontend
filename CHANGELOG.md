@@ -1,3 +1,12 @@
+## [0.3.78](https://github.com/nurikk/z2m-frontend/compare/0.3.77...0.3.78) (2021-03-03)
+
+
+### Bug Fixes
+
+* **styles:** fix font size ([0bb5323](https://github.com/nurikk/z2m-frontend/commit/0bb53236d894524bd01cfd19dc8fd12b7e1171e5))
+
+
+
 ## [0.3.77](https://github.com/nurikk/z2m-frontend/compare/0.3.75...0.3.77) (2021-03-03)
 
 
