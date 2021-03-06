@@ -3,6 +3,7 @@ import genericDevice from "../../images/generic-zigbee-device.png";
 import { Device, DeviceState } from "../../types";
 import cx from "classnames";
 import { sanitizeZ2MDeviceName } from "../../utils";
+import style from "./style.css";
 type DeviceImageProps = {
     device: Device;
     deviceStatus?: DeviceState;
@@ -43,7 +44,7 @@ const DeviceImage: FunctionComponent<DeviceImageProps & ImgHTMLAttributes<HTMLDi
         case "img":
         default:
             return src ? <div className={cx(className, "position-relative")} {...rest}>
-                <img onError={onImageError} src={src} className={"position-relative"} />
+                <img onError={onImageError} src={src} className={style.img} />
                 {interviewSpinner}
                 {otaSpinner}
                 {unseccessfullInterview}

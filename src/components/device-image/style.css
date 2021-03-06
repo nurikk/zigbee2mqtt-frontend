@@ -1,0 +1,11 @@
+.img {
+    border-radius: 50%;
+    position: relative;
+    transition: transform .5s ease;
+}
+
+.img:hover {
+    transform: scale(4) translate(5px, 0);
+    z-index: 10;
+    border-radius: 0;
+}

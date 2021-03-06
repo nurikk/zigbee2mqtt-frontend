@@ -22,5 +22,6 @@
     "config": {}
   },
   "logs": [],
-  "extensions": []
+  "extensions": [],
+  "theme": "light"
 }

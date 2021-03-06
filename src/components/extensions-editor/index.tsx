@@ -10,19 +10,18 @@ import Button from "../button";
 import AceEditor from "react-ace";
 
 import "ace-builds/src-noconflict/mode-javascript";
+import 'ace-builds/src-noconflict/theme-github';
+import 'ace-builds/src-noconflict/theme-dracula';
 
 type ExtensionsEditorPageState = {
     currentExtension?: string;
 }
 export class ExtensionsEditorPage extends Component<GlobalState & ExtensionApi, ExtensionsEditorPageState> {
-    state: Readonly<ExtensionsEditorPageState> = {}
+    state: Readonly<ExtensionsEditorPageState> = {};
     loadExtension = (e) => {
         const { value } = e.target;
 
         this.setState({ currentExtension: value });
-
-
-
     }
     onExtensionCodeChange = (code: string) => {
         const { updateExtensionCode } = this.props;
@@ -57,13 +56,13 @@ export class ExtensionsEditorPage extends Component<GlobalState & ExtensionApi, 
             this.setState({ currentExtension: newName });
         }
     }
-    render() {
+    renderEditor() {
         const { currentExtension } = this.state;
-        const { extensions } = this.props;
+        const { extensions, theme } = this.props;
         const code = extensions.find(e => e.name === currentExtension)?.code ?? "";
-
-        return <div className="card h-100">
-            <div className="card-body h-100">
+        const editorTheme = theme === "light" ? "github" : "dracula";
+        return (
+            <>
                 <div className="row mb-2">
                     <div className="col-6">
                         <select value={currentExtension} className="form-control" onChange={this.loadExtension}>
@@ -79,21 +78,29 @@ export class ExtensionsEditorPage extends Component<GlobalState & ExtensionApi, 
                 </div>
                 <AceEditor
                     mode="javascript"
-                    theme="github"
                     onChange={this.onExtensionCodeChange}
                     name="UNIQUE_ID_OF_DIV"
                     editorProps={{ $blockScrolling: true }}
                     value={code}
                     width="100%"
-                    height="90%"
+                    maxLines={Infinity}
+                    theme={editorTheme}
                     showPrintMargin={false}
                 />
+
+            </>
+        )
+    }
+
+    render() {
+        return <div className="card h-100">
+            <div className="card-body h-100">
+                {this.renderEditor()}
             </div>
         </div>
-
     }
 }
 
-const mappedProps = ["extensions"];
+const mappedProps = ["extensions", "theme"];
 
 export default connect<{}, {}, GlobalState, {}>(mappedProps, actions)(ExtensionsEditorPage);

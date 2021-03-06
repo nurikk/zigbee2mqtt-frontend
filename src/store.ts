@@ -5,7 +5,9 @@ import initialState from './initialState.txt';
 
 import { Device, DeviceState, BridgeConfig, BridgeInfo, TouchLinkDevice, BridgeState } from "./types";
 import { GraphI } from "./components/map/types";
-import { deSerialize } from "./utils";
+import { deSerialize, getCurrentTheme } from "./utils";
+import { Theme } from "./components/theme-switcher";
+
 
 export interface GroupAddress {
     endpoint: number;
@@ -42,8 +44,13 @@ export interface GlobalState {
     bridgeState: BridgeState;
     logs: LogMessage[];
     extensions: Extension[];
+    theme: Theme;
 };
-const _store = createStore(deSerialize(initialState) as GlobalState);
+const theme = getCurrentTheme();
+const _initState = deSerialize(initialState) as GlobalState;
+_initState.theme = theme;
+
+const _store = createStore(_initState);
 const store = process.env.NODE_ENV === 'production' ?  _store : devtools(_store);
 
 export default store;

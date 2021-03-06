@@ -3,6 +3,7 @@ import { Device, Endpoint } from "./types";
 import { GraphI, LinkI, NodeI } from "./components/map/types";
 import { format, TDate } from 'timeago.js';
 import { Group } from "./store";
+import { Theme } from "./components/theme-switcher";
 
 export const genDeviceDetailsLink = (deviceIdentifier: string | number): string => (`/device/${deviceIdentifier}`);
 
@@ -169,3 +170,6 @@ export const stringifyWithPreservingUndefinedAsNull = (data: object): string => 
 export const isOnlyOneBitIsSet = (b: number): number | boolean => {
     return b && !(b & (b - 1));
 }
+
+export const getCurrentTheme = (): Theme => localStorage.getItem('theme') as Theme ?? 'light';
+export const saveCurrentTheme = (theme: string) => localStorage.setItem('theme', theme);

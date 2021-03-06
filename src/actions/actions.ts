@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-import { GlobalState } from "../store";
+import store, { GlobalState } from "../store";
 import { Store } from "unistore";
 
 import { ReportingConfig } from "../types";
 import api from "../api";
-import { download } from "../utils";
+import { download, saveCurrentTheme } from "../utils";
 import bridgeActions from "./BridgeApi";
 import deviceActions from "./DeviceApi";
 import groupActions from "./GroupsApi";
@@ -14,6 +14,7 @@ import otaActions from "./OtaApi";
 import bindActions from "./BindApi";
 import touchlinkActions from "./TouchlinkApi";
 import extensionActions from "./ExtensionApi";
+import { Theme } from "../components/theme-switcher";
 
 export interface UtilsApi {
     exportState(): Promise<void>;
@@ -25,6 +26,10 @@ export interface MapApi {
 export interface ReportingApi {
     configureReport(device: string, config: ReportingConfig): Promise<void>;
 }
+export interface ThemeActions {
+    setTheme(theme: Theme): Promise<void>;
+}
+
 
 const actions = (store: Store<GlobalState>): object => ({
     ...bridgeActions,
@@ -50,6 +55,11 @@ const actions = (store: Store<GlobalState>): object => ({
             id: device,
             ...config
         });
+    },
+    setTheme(state, theme: Theme): Promise<void> {
+        saveCurrentTheme(theme);
+        store.setState({ theme });
+        return Promise.resolve();
     }
 });
 export default actions;

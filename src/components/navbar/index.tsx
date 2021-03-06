@@ -1,7 +1,7 @@
 import React, { FunctionComponent, RefObject, useRef, useState } from 'react';
 
 import { GlobalState } from '../../store';
-import actions from '../../actions/actions';
+import actions, { ThemeActions } from '../../actions/actions';
 import { connect } from 'unistore/react';
 import Button from '../button';
 import cx from "classnames";
@@ -11,6 +11,7 @@ import { Device } from '../../types';
 import style from "./style.css";
 import { useOnClickOutside } from '../../hooks/useOnClickOutside';
 import { BridgeApi } from '../../actions/BridgeApi';
+import {  ThemeSwitcher } from '../theme-switcher';
 
 const urls = [
     {
@@ -90,8 +91,9 @@ type PropsFromStore = {
     devices: Map<string, Device>;
     bridgeInfo: object;
 }
-const NavBar: FunctionComponent<PropsFromStore & BridgeApi & Pick<GlobalState, 'bridgeInfo'>> = (props) => {
-    const { devices, setPermitJoin, bridgeInfo, restartBridge } = props;
+
+const NavBar: FunctionComponent<PropsFromStore & BridgeApi & Pick<GlobalState, 'bridgeInfo'> & ThemeActions> = (props) => {
+    const { devices, setPermitJoin, bridgeInfo, restartBridge, setTheme } = props;
     const ref = useRef<HTMLDivElement>();
     const [navbarIsVisible, setnavbarIsVisible] = useState<boolean>(false);
     useOnClickOutside(ref, () => {
@@ -120,7 +122,10 @@ const NavBar: FunctionComponent<PropsFromStore & BridgeApi & Pick<GlobalState, '
                     bridgeInfo={bridgeInfo}
                 />
             </div>
-            {bridgeInfo.restart_required ? <Button onClick={restartBridge} promt className="btn btn-danger">Restart</Button>: null}
+            {bridgeInfo.restart_required ? <Button onClick={restartBridge} promt className="btn btn-danger me-1">Restart</Button> : null}
+
+                <ThemeSwitcher saveCurrentTheme={setTheme} />
+
         </div>
     </nav>)
 }

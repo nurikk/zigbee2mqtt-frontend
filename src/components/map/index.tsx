@@ -181,14 +181,14 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
             .force("y", forceY().strength(0.2))
     }
 
-    initPage(): void {
+    initPage = () => {
         const { width, height } = (this.ref.current as HTMLDivElement).getBoundingClientRect();
         this.setState({ width, height });
         this.updateForces(width, height);
     }
 
     componentDidMount(): void {
-        this.initPage()
+        setTimeout(this.initPage, 200);
     }
 
     componentDidUpdate(): void {
