@@ -2,3 +2,5 @@
 !index.js
 !dist/**/*
 dist/report.html
+*.map
+.DS_Store
