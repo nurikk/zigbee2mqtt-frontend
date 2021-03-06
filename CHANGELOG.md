@@ -1,3 +1,17 @@
+## [0.3.79](https://github.com/nurikk/z2m-frontend/compare/0.3.78...0.3.79) (2021-03-06)
+
+
+### Bug Fixes
+
+* **npm:** don't publush .map file anymore ([9f80aea](https://github.com/nurikk/z2m-frontend/commit/9f80aea02177aaf9feca42a6a173d87ffe2b4373))
+
+
+### Features
+
+* **theme:** introduce dark theme ([59d377a](https://github.com/nurikk/z2m-frontend/commit/59d377a503e6d87e0a7ab6ce3d66b418c32ed732))
+
+
+
 ## [0.3.78](https://github.com/nurikk/z2m-frontend/compare/0.3.77...0.3.78) (2021-03-03)
 
 
