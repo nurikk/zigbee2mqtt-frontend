@@ -8,7 +8,7 @@ import actions, { MapApi } from "../../actions/actions";
 
 import Button from "../button";
 import { ForceLink, forceLink, forceCollide, forceCenter, forceSimulation, forceX, forceY } from "d3-force";
-import { select, selectAll, Selection, ValueFn } from "d3-selection";
+import { select, Selection } from "d3-selection";
 import { forceManyBodyReuse } from "d3-force-reuse"
 import { zoom, zoomIdentity, ZoomTransform } from "d3-zoom";
 import { linkTypes } from "./consts";
@@ -226,7 +226,6 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
                             <Spinner />
                             <div>Depending on the size of your network this can take somewhere between 10 seconds and 2 minutes.</div>
                         </div>
-
                     ) : <Button onClick={this.onRequestClick} className="btn btn-primary d-block">Load map</Button>
                 }
             </div>
@@ -263,25 +262,29 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
             }
         </div>
     }
+    renderHelp() {
+        const { legendIsVisible } = this.state;
+        return (<div className={cx("fixed-bottom", { "d-none": !legendIsVisible })} onClick={() => this.setState({ legendIsVisible: false })}>
+            <div className={cx(style.node, style.Coordinator)}>
+                <svg width="28" height="28" viewBox="0 0 28 28">
+                    <polygon points={getStarShape(5, 5, 14) as string} />
+                </svg> is Coordinator</div>
+            <div className={cx(style.node, style.EndDevice)}>Green means End Device</div>
+            <div className={cx(style.node, style.Router)}>Blue means Router</div>
+
+            <div>Solid lines are the link to the <span className={cx(style.node, style.Coordinator)}>Coordinator</span></div>
+            <div>Dashed lines are the link with <span className={cx(style.node, style.Coordinator)}>Router</span></div>
+            <div>Link quality is between 0 - 255 (higher is better), values with / represents multiple types of links</div>
+            <div>Click on me to hide</div>
+        </div>)
+    }
     render() {
         const { networkGraph } = this.props;
-        const { legendIsVisible } = this.state;
+
         return (
             <div className={style.container} ref={this.ref}>
                 {networkGraph.nodes.length ? <Fragment>{this.renderMapControls()} {this.renderMap()}</Fragment> : this.renderMessage()}
-                <div className={cx("fixed-bottom", { "d-none": !legendIsVisible })} onClick={() => this.setState({ legendIsVisible: false })}>
-                    <div className={cx(style.node, style.Coordinator)}>
-                        <svg width="28" height="28" viewBox="0 0 28 28">
-                            <polygon points={getStarShape(5, 5, 14) as string} />
-                        </svg> is Coordinator</div>
-                    <div className={cx(style.node, style.EndDevice)}>Green means End Device</div>
-                    <div className={cx(style.node, style.Router)}>Blue means Router</div>
-
-                    <div>Solid lines are the link to the <span className={cx(style.node, style.Coordinator)}>Coordinator</span></div>
-                    <div>Dashed lines are the link with <span className={cx(style.node, style.Coordinator)}>Router</span></div>
-                    <div>Link quality is between 0 - 255 (higher is better), values with / represents multiple types of links</div>
-                    <div>Click on me to hide</div>
-                </div>
+                {this.renderHelp()}
             </div>
         );
     }
