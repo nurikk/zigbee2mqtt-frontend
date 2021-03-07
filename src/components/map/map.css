@@ -60,6 +60,12 @@
     color: blue;
 }
 
+[data-theme="dark"] .Router,
+[data-theme="dark"] .Coordinator {
+    color: #3f80ea;
+    fill: #3f80ea;
+}
+
 .Router > circle,
 .Coordinator > circle {
     stroke: blue;
