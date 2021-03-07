@@ -27,6 +27,9 @@
     flood-color: #FFFFFF;
     flood-opacity: 1;
 }
+[data-theme="dark"] .linkLabel {
+    fill: white;
+}
 
 .links {
     -custom-noop: noop;
