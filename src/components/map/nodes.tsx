@@ -75,22 +75,28 @@ class Node extends Component<NodeProps, {}> {
             onMouseOut={onMouseOut}
             onDoubleClick={onDblClick}
         >
-            <circle cx={16} cy={17} r={24} fill={"#fff"} stroke={"blue"} strokeWidth={1} />
+
             {
                 node.type === "Coordinator" ? (
-                    <polygon
-                        stroke="blue"
-                        strokeWidth={1}
-                        points={getStarShape(5, 5, 14) as string}
-                    />
-                ) : (
-                        <DeviceImage
-                            type="svg"
-                            width={32}
-                            height={32}
-                            device={node as unknown as Device}
-                            className={`${style.img}`}
+                    <>
+                        <circle cx={15} cy={16} r={24} fill={"#fff"} stroke={"blue"} strokeWidth={1} />
+                        <polygon
+                            stroke="blue"
+                            strokeWidth={1}
+                            points={getStarShape(5, 5, 14) as string}
                         />
+                    </>
+                ) : (
+                        <>
+                            <circle cx={16} cy={17} r={24} fill={"#fff"} stroke={"blue"} strokeWidth={1} />
+                            <DeviceImage
+                                type="svg"
+                                width={32}
+                                height={32}
+                                device={node as unknown as Device}
+                                className={`${style.img}`}
+                            />
+                        </>
                     )
             }
             <text x={45} y={25}>{node.friendlyName}</text>
