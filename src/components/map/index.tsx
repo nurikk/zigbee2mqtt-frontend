@@ -77,13 +77,12 @@ type TickedParams = {
 
 
 const ticked = ({ transform, node, link, linkLabel, links }: TickedParams): void => {
-    links.forEach(function (d) {
+    links.forEach((d) => {
         const [x1, y1] = transform.apply([d.source.x as number, d.source.y as number]),
-            [x2, y2] = transform.apply([d.target.x as number, d.target.y as number]),
-            slope = (y2 - y1) / (x2 - x1);
+            [x2, y2] = transform.apply([d.target.x as number, d.target.y as number]);
 
         (d as unknown as NodeI).x = (x2 + x1) / 2;
-        (d as unknown as NodeI).y = (x2 - x1) * slope / 2 + y1;
+        (d as unknown as NodeI).y = (y2 + y1) / 2;
     });
     link.attr("d", (d) => computeLink(d, transform));
     linkLabel
@@ -280,7 +279,7 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
 
                     <div>Solid lines are the link to the <span className={cx(style.node, style.Coordinator)}>Coordinator</span></div>
                     <div>Dashed lines are the link with <span className={cx(style.node, style.Coordinator)}>Router</span></div>
-                    <div>Link quality is between 0 - 255, values with / represents multiple types of links</div>
+                    <div>Link quality is between 0 - 255 (higher is better), values with / represents multiple types of links</div>
                     <div>Click on me to hide</div>
                 </div>
             </div>
