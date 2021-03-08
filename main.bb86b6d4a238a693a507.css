@@ -33,6 +33,9 @@
     flood-color: #FFFFFF;
     flood-opacity: 1;
 }
+[data-theme="dark"] .EFSV-Lj6sJyoW14QA3ig0 {
+    fill: white;
+}
 
 ._3m9RTJKJZqiJx1UmLLzi4 {
     -custom-noop: noop;
@@ -61,6 +64,12 @@
 ._3F14ZWmKtSPPHai2y_MRRj {
     fill: blue;
     color: blue;
+}
+
+[data-theme="dark"] ._1I1ZcuMgRbn_B5HXF9Z2mw,
+[data-theme="dark"] ._3F14ZWmKtSPPHai2y_MRRj {
+    color: #3f80ea;
+    fill: #3f80ea;
 }
 
 ._1I1ZcuMgRbn_B5HXF9Z2mw > circle,
@@ -238,4 +247,4 @@
 
 
 
-/*# sourceMappingURL=main.25242423cd4a40e935af.css.map*/
+/*# sourceMappingURL=main.bb86b6d4a238a693a507.css.map*/
