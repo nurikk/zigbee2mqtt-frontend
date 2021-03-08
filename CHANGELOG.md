@@ -1,3 +1,15 @@
+## [0.3.80](https://github.com/nurikk/z2m-frontend/compare/0.3.79...0.3.80) (2021-03-08)
+
+
+### Bug Fixes
+
+* **map:** fix coordinator icon position ([2e31625](https://github.com/nurikk/z2m-frontend/commit/2e31625a82b2094177f2c1e830b94731a8b80c82))
+* **map:** fix link labels on dark theme ([21197f4](https://github.com/nurikk/z2m-frontend/commit/21197f40d87a626a5d3d3d6d455f59b7a8800d1d))
+* **map:** fix links spacers ([9880b04](https://github.com/nurikk/z2m-frontend/commit/9880b04e560d382a915a6e9bc6b0c009a4f43eff))
+* **map:** fix router label colors on dark theme ([754a43f](https://github.com/nurikk/z2m-frontend/commit/754a43f3d1b967da94500c506e8e9c372e076c24))
+
+
+
 ## [0.3.79](https://github.com/nurikk/z2m-frontend/compare/0.3.78...0.3.79) (2021-03-06)
 
 
