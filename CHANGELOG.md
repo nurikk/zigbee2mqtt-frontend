@@ -1,3 +1,12 @@
+## [0.3.81](https://github.com/nurikk/z2m-frontend/compare/0.3.80...0.3.81) (2021-03-13)
+
+
+### Bug Fixes
+
+* **reporting:** fix custom clusters and attributes in picker ([e57e3b0](https://github.com/nurikk/z2m-frontend/commit/e57e3b06dc4bfdab02b8a90464abb2fca799ec0a))
+
+
+
 ## [0.3.80](https://github.com/nurikk/z2m-frontend/compare/0.3.79...0.3.80) (2021-03-08)
 
 
