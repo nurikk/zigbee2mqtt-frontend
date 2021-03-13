@@ -1,3 +1,12 @@
+## [0.3.82](https://github.com/nurikk/z2m-frontend/compare/0.3.81...0.3.82) (2021-03-13)
+
+
+### Bug Fixes
+
+* **ux:** a few responsive fixes ([deeaa21](https://github.com/nurikk/z2m-frontend/commit/deeaa211cd3ed60a4998fa00ffbd54b72261f46e))
+
+
+
 ## [0.3.81](https://github.com/nurikk/z2m-frontend/compare/0.3.80...0.3.81) (2021-03-13)
 
 
