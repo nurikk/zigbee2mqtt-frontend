@@ -35,7 +35,7 @@
         "@types/classnames": "^2.2.10",
         "@types/color-convert": "^2.0.0",
         "@types/d3-drag": "^2.0.0",
-        "@types/d3-force": "^2.1.0",
+        "@types/d3-force": "^2.1.1",
         "@types/d3-selection": "^2.0.0",
         "@types/d3-zoom": "^2.0.0",
         "@types/lodash": "^4.14.167",
