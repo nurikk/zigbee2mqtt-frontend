@@ -20,13 +20,16 @@ interface ReportingRowState {
     stateRule: NiceReportingingRule;
 }
 
-const getClusters = (device: Device, endpoint: Endpoint): ClusterGroup[] => {
+const getClusters = (device: Device, endpoint: Endpoint, currentCluster: Cluster): ClusterGroup[] => {
     let possibleClusters = Object.keys(Clusters);
     let availableClusters = [] as Cluster[];
     const ep = device.endpoints.get(endpoint);
     if (ep) {
         availableClusters = availableClusters.concat(ep.clusters.output);
         possibleClusters = possibleClusters.filter(cluster => !availableClusters.includes(cluster))
+    }
+    if (!availableClusters.includes(currentCluster)) {
+        availableClusters.push(currentCluster);
     }
     return [
         {
@@ -106,7 +109,7 @@ export default class ReportingRow extends Component<ReportingRowProps, Reporting
                 <EndpointPicker label="Endpoint" disabled={!rule.isNew} values={sourceEndpoints} value={stateRule.endpoint} onChange={this.setSourceEp} />
             </div>
             <div className="col-md-2">
-                <ClusterPicker label="Cluster" disabled={!stateRule.endpoint} pickerType={PickerType.SINGLE} clusters={getClusters(device, stateRule.endpoint)} value={stateRule.cluster} onChange={this.setCluster} />
+                <ClusterPicker label="Cluster" disabled={!stateRule.endpoint} pickerType={PickerType.SINGLE} clusters={getClusters(device, stateRule.endpoint, stateRule.cluster)} value={stateRule.cluster} onChange={this.setCluster} />
             </div>
             <div className="col-md-2">
                 <AttributePicker label="Attribute" value={stateRule.attribute} cluster={stateRule.cluster} onChange={this.setAttribute} />
