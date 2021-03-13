@@ -68,7 +68,7 @@ class OtaPage extends Component<GlobalState & OtaApi, {}> {
         const otaDevices = this.getAllOtaDevices();
 
         return <div className="card">
-            <div className="card-body">
+            <div className="card-body table-responsive">
                 <table className="table">
                     <thead>
                         <tr>

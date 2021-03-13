@@ -71,7 +71,7 @@ const StartStopJoinButton: FunctionComponent<StartStopJoinButtonProps & Pick<Bri
         setPermitJoin(!bridgeInfo.permit_join, selectedRouter);
     }
     return (
-        <div className="btn-group text-nowrap">
+        <div className="btn-group text-nowrap me-1">
             <button onClick={onBtnClick} type="button" className="btn btn-outline-secondary">{bridgeInfo.permit_join ? "Disable join" : "Permit join"} ({selectedRouter?.friendly_name ?? "All"})</button>
             {routers.length ? (<><Button<boolean> type="button" onClick={setIsComponentVisible} item={!isComponentVisible} className="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-expanded="false">
                 <span className="visually-hidden">Toggle Dropdown</span>
@@ -102,6 +102,7 @@ const NavBar: FunctionComponent<PropsFromStore & BridgeApi & Pick<GlobalState, '
     return (<nav className="navbar navbar-expand-md navbar-light">
         <div ref={ref as React.MutableRefObject<HTMLDivElement>} className="container-fluid">
             <Link onClick={() => setnavbarIsVisible(false)} to="/">Zigbee2MQTT</Link>
+
             <button onClick={() => { setnavbarIsVisible(!navbarIsVisible) }} className="navbar-toggler" type="button">
                 <span className="navbar-toggler-icon" />
             </button>
@@ -121,11 +122,9 @@ const NavBar: FunctionComponent<PropsFromStore & BridgeApi & Pick<GlobalState, '
                     setPermitJoin={setPermitJoin}
                     bridgeInfo={bridgeInfo}
                 />
+                <ThemeSwitcher saveCurrentTheme={setTheme} />
             </div>
             {bridgeInfo.restart_required ? <Button onClick={restartBridge} promt className="btn btn-danger me-1">Restart</Button> : null}
-
-                <ThemeSwitcher saveCurrentTheme={setTheme} />
-
         </div>
     </nav>)
 }
