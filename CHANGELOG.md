@@ -1,3 +1,12 @@
+## [0.3.85](https://github.com/nurikk/z2m-frontend/compare/0.3.84...0.3.85) (2021-03-14)
+
+
+### Features
+
+* **device settings:** add device specific settings page ([08189ce](https://github.com/nurikk/z2m-frontend/commit/08189ce12194669037a28e0f21103158e148337c))
+
+
+
 ## [0.3.84](https://github.com/nurikk/z2m-frontend/compare/0.3.82...0.3.84) (2021-03-13)
 
 
