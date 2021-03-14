@@ -21,7 +21,7 @@ type UrlParams = {
 type DevicePageProps = RouteComponentProps<UrlParams>;
 
 
-type TabName = "info" | "bind" | "state" | "exposes" | "clusters" | "reporting" | "settings";
+type TabName = "info" | "bind" | "state" | "exposes" | "clusters" | "reporting" | "settings" | "settings-specific";
 const getDeviceLinks = (dev: string) => ([
     {
         title: 'About',
@@ -42,6 +42,10 @@ const getDeviceLinks = (dev: string) => ([
     {
         title: 'Settings',
         url: `/device/${dev}/settings`
+    },
+    {
+        title: 'Settings(specific)',
+        url: `/device/${dev}/settings-specific`
     },
     {
         title: 'State',
@@ -72,7 +76,9 @@ export class DevicePage extends Component<DevicePageProps & GlobalState, {}> {
             case "reporting":
                 return <Reporting device={device} />
             case "settings":
-                return <DeviceSettings device={device} />
+                return <DeviceSettings device={device} type="generic" />
+            case "settings-specific":
+                return <DeviceSettings device={device} type="specific" />
             default:
                 return <Redirect to={`/device/${dev}/info`} />;
         }

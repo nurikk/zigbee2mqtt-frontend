@@ -246,3 +246,6 @@ export interface TouchLinkDevice {
     ieee_address: string;
     channel: number;
 }
+
+
+export type KVP = Record<string, unknown>

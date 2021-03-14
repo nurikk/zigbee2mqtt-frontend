@@ -1,0 +1,60 @@
+{
+    "type": "array",
+    "items": {
+        "type": "object",
+        "properties": {
+            "key": {
+                "type": "string",
+                "title": "Property name"
+            },
+            "valueType": {
+                "type": "string",
+                "enum": ["string", "number", "boolean"],
+                "title": "Type"
+            }
+        },
+        "dependencies": {
+            "valueType": {
+                "oneOf": [
+                    {
+                        "properties": {
+                            "valueType": {
+                                "enum": [
+                                    "string"
+                                ]
+                            },
+                            "value": {
+                                "type": "string"
+                            }
+                        }
+
+                    },
+                    {
+                        "properties": {
+                            "valueType": {
+                                "enum": [
+                                    "number"
+                                ]
+                            },
+                            "value": {
+                                "type": "number"
+                            }
+                        }
+                    },
+                    {
+                        "properties": {
+                            "valueType": {
+                                "enum": [
+                                    "boolean"
+                                ]
+                            },
+                            "value": {
+                                "type": "boolean"
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    }
+}

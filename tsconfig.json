@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
         "outDir": "./dist",
-        "target": "es5",
+        "target": "es2019",
         "moduleResolution": "node",
         "module": "esnext",
         "noImplicitAny": false,
@@ -13,6 +13,6 @@
         "strictNullChecks": true
     },
     "suppressImplicitAnyIndexErrors": true,
-    "lib": ["es2015", "dom", "dom.iterable"],
+    "lib": ["dom", "esnext"],
     "exclude": ["dist"]
 }

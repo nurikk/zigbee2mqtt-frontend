@@ -10,7 +10,7 @@ declare module "*.txt" {
 
 
 declare module "*.json" {
-    const value: string;
+    const value: object;
     export default value;
 }
 
