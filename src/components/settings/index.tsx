@@ -10,6 +10,7 @@ import { JSONSchema7 } from "json-schema";
 import cloneDeep from "lodash/cloneDeep";
 import uiSchemas from "./uiSchema.json";
 import { BridgeApi } from "../../actions/BridgeApi";
+import { ISubmitEvent } from "@rjsf/core";
 
 
 
@@ -32,7 +33,7 @@ const ROOT_KEY_NAME = 'main';
 const ingoredFields = ['groups', 'devices', 'device_options', 'ban', 'whitelist', 'map_options'];
 const validJsonSchemasAsTabs = ['object', 'array'];
 
-const removePropertiesFromSchema = (names: string[], schema: JSONSchema7 = {}, config: object = {}) => {
+const removePropertiesFromSchema = (names: string[], schema: JSONSchema7 = {}, config: Record<string, unknown> = {}) => {
 
     if (schema.required) {
         schema.required = schema.required.filter(item => names.includes(item));
@@ -70,14 +71,29 @@ const tabs = [
         url: '/settings/donate'
     }
 ];
-
+const rows = [
+    <div key="nurikk" className="row pb-2">
+        <div className="col">
+            <a href="https://www.buymeacoffee.com/nurikk">
+                <img src="https://img.buymeacoffee.com/button-api/?text=Thanks for frontend&emoji=🍺&slug=nurikk&button_colour=FFDD00&font_colour=000000&font_family=Arial&outline_colour=000000&coffee_colour=ffffff" />
+            </a>
+        </div>
+    </div>,
+    <div key={"koenkk"} className="row pb-2">
+        <div className="col">
+            <a href="https://www.buymeacoffee.com/koenkk">
+                <img src="https://img.buymeacoffee.com/button-api/?text=Thanks for zigbee2mqtt&emoji=☕&slug=koenkk&button_colour=FFDD00&font_colour=000000&font_family=Arial&outline_colour=000000&coffee_colour=ffffff" />
+            </a>
+        </div>
+    </div>
+].sort(() => Math.random() - 0.5);
 
 const isValidKeyToRenderAsTab = (key: string, value: JSONSchema7): boolean => (validJsonSchemasAsTabs.includes(value.type as string) && !ingoredFields.includes(key)) || (value && value.oneOf ? value.oneOf.length > 0 : false);
 export class SettingsPage extends Component<SettingsPageProps & BridgeApi & GlobalState & UtilsApi, SettingsPageState> {
     state = {
         keyName: ROOT_KEY_NAME
     }
-    renderCategoriesTabs() {
+    renderCategoriesTabs(): JSX.Element {
         return (
             <ul className="nav nav-tabs">
                 {tabs.map(tab => <li key={tab.url} className="nav-item">
@@ -86,7 +102,7 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
             </ul>
         )
     }
-    render() {
+    render(): JSX.Element {
         return (
             <div className="tab">
                 {this.renderCategoriesTabs()}
@@ -98,7 +114,7 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
             </div>
         )
     }
-    renderSwitcher() {
+    renderSwitcher(): JSX.Element {
         const { match } = this.props;
         const { tab } = match.params;
         switch (tab) {
@@ -116,7 +132,7 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
                 return <Redirect to={`/settings/settings`} />;
         }
     }
-    renderAbout() {
+    renderAbout(): JSX.Element {
         const { bridgeInfo } = this.props;
         const isZigbee2mqttDevVersion = bridgeInfo.version?.match(/^\d+\.\d+\.\d+$/) === null;
         const zigbee2mqttVersion = isZigbee2mqttDevVersion ?
@@ -139,20 +155,21 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
         </dl>)}</div>;
 
     }
-    renderBridgeInfo() {
+    renderBridgeInfo(): JSX.Element {
         const { bridgeInfo } = this.props;
         return <div className="p-3"><pre>{JSON.stringify(bridgeInfo, null, 4)}</pre></div>
 
     }
 
-    renderTools() {
+    renderTools(): JSX.Element {
         const { exportState, restartBridge } = this.props;
         return <div className="p-3">
             <Button className="btn btn-primary d-block mt-2" onClick={exportState}>Download state</Button>
             <Button className="btn btn-danger d-block mt-2" onClick={restartBridge} promt>Restart Zigbee2MQTT</Button>
         </div>
     }
-    onSettingsSave = ({ formData }) => {
+    onSettingsSave = (e: ISubmitEvent<Record<string, unknown>>): void => {
+        const { formData } = e;
         const { updateBridgeConfig } = this.props;
         const { keyName } = this.state;
         if (keyName === ROOT_KEY_NAME) {
@@ -162,7 +179,7 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
         }
     }
 
-    getSettingsTabs() {
+    getSettingsTabs(): { name: string, title: string }[] {
         const { bridgeInfo: { config_schema: configSchema = { properties: {} } } } = this.props;
         const tabs = Object.entries<JSONSchema7>(configSchema.properties as unknown as ArrayLike<JSONSchema7>)
             .filter(([key, value]) => isValidKeyToRenderAsTab(key, value))
@@ -176,14 +193,14 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
         });
         return tabs;
     }
-    getSettingsInfo() {
+    getSettingsInfo(): { currentSchema: JSONSchema7; currentConfig: Record<string, unknown> } {
         const { keyName } = this.state;
         const { bridgeInfo: { config_schema: configSchema, config: originalConfig } } = this.props;
 
-        let configAndSchema = removePropertiesFromSchema(ingoredFields, cloneDeep(configSchema), cloneDeep(originalConfig) as object);
+        let configAndSchema = removePropertiesFromSchema(ingoredFields, cloneDeep(configSchema), cloneDeep(originalConfig) as Record<string, unknown>);
 
         let currentSchema: JSONSchema7 = configAndSchema.schema;
-        let currentConfig = configAndSchema.config[keyName] as object;
+        let currentConfig = configAndSchema.config[keyName] as Record<string, unknown>;
 
         if (keyName === ROOT_KEY_NAME) {
             const ignoreTabNames = this.getSettingsTabs().map(tab => tab.name);
@@ -191,14 +208,14 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
             currentSchema = configAndSchema.schema;
             currentConfig = configAndSchema.config;
         } else {
-            currentConfig = configAndSchema.config[keyName] as object;
+            currentConfig = configAndSchema.config[keyName] as Record<string, unknown>;
             if (configAndSchema.schema.properties) {
                 currentSchema = configAndSchema.schema.properties[keyName] as JSONSchema7;
             }
         }
         return { currentSchema, currentConfig };
     }
-    renderSettingsTabs() {
+    renderSettingsTabs(): JSX.Element {
         const tabs = this.getSettingsTabs();
         const { keyName } = this.state;
         return <div className="nav nav-pills">
@@ -211,7 +228,7 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
             }
         </div>;
     }
-    renderSettings() {
+    renderSettings(): JSX.Element {
         const { keyName } = this.state;
         const { currentSchema, currentConfig } = this.getSettingsInfo();
         return <div className="tab">
@@ -229,15 +246,16 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
 
     }
 
-    renderDonate() {
-        return <div>
-            <a href="https://www.buymeacoffee.com/nurikk">
-                <img src="https://img.buymeacoffee.com/button-api/?text=Buy me a beer&emoji=🍺&slug=nurikk&button_colour=FFDD00&font_colour=000000&font_family=Arial&outline_colour=000000&coffee_colour=ffffff" />
-            </a>
+    renderDonate(): JSX.Element {
+
+        return <div className="container-fluid">
+            <p>Hello, <mark>%username%</mark>, here you can thank us for hardworking</p>
+            <p>Don&apos;t hesitate to say something nice as well ;) </p>
+            {rows}
         </div>;
     }
 }
 const SettingsPageWithRouter = withRouter(SettingsPage);
 const mappedProps = ["bridgeInfo"];
-const ConnectedSettingsPage = connect<{}, {}, GlobalState, BridgeApi>(mappedProps, actions)(SettingsPageWithRouter);
+const ConnectedSettingsPage = connect<Record<string, unknown>, Record<string, unknown>, GlobalState, BridgeApi>(mappedProps, actions)(SettingsPageWithRouter);
 export default ConnectedSettingsPage;
