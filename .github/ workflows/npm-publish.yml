@@ -2,7 +2,7 @@ name: Node.js Package
 on:
   push:
     tags:
-      - '*'
+      - '**'
 jobs:
   build:
     runs-on: ubuntu-latest
