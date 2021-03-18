@@ -13,13 +13,6 @@ deploy:
     api_token: $NPM_TOKEN
     on:
       tags: true
-  - provider: pages
-    token: $GITHUB_TOKEN
-    edge: true # opt in to dpl v2
-    local_dir: dist
-    strategy: git
-    on:
-      tags: false
 after_deploy:
   - VERSION=$(node -p "require('./package.json').version")
   - '[ "${TRAVIS_TAG}" != "" ] && curl -XPOST -H "Authorization: token $GITHUB_TOKEN" -H "Accept: application/vnd.github.everest-preview+json" -H "Content-Type: application/json" https://api.github.com/repos/koenkk/zigbee2mqtt/dispatches --data "{\"event_type\": \"update_frontend\", \"client_payload\": { \"version\": \"$VERSION\"}}"'
