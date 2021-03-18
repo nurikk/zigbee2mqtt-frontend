@@ -1,3 +1,12 @@
+## [0.3.92](https://github.com/nurikk/z2m-frontend/compare/0.3.91...0.3.92) (2021-03-18)
+
+
+### Bug Fixes
+
+* **build:** fix travis detection codition ([efcb881](https://github.com/nurikk/z2m-frontend/commit/efcb88119aeca2abb310bb7efcc177d22dc247cd))
+
+
+
 ## [0.3.91](https://github.com/nurikk/z2m-frontend/compare/0.3.89...0.3.91) (2021-03-18)
 
 
