@@ -37,7 +37,7 @@ const getPlugins = (production) => {
             })
         );
     });
-    if (production) {
+    if (production && production.env['CI'] !== 'true') {
         plugins.push(
             new BundleAnalyzerPlugin({
                 analyzerMode: "static",
