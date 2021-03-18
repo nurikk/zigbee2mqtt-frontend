@@ -1,3 +1,18 @@
+## [0.3.91](https://github.com/nurikk/z2m-frontend/compare/0.3.89...0.3.91) (2021-03-18)
+
+
+### Bug Fixes
+
+* **build:** don't publish to gh pages ([4cb3895](https://github.com/nurikk/z2m-frontend/commit/4cb38958b5a8294b64c84dd0f6dcc57e3dfeeb65))
+* **build:** don't run build analyzer on CI ([99aec71](https://github.com/nurikk/z2m-frontend/commit/99aec716af939c0b2902c6307fcad316eb9335b6))
+
+
+### Reverts
+
+* Revert "chore(release): 0.3.90 :tada: [skip travis]" ([dc69576](https://github.com/nurikk/z2m-frontend/commit/dc695760d160402a6734be07fb02ec882663dfe6))
+
+
+
 ## [0.3.89](https://github.com/nurikk/z2m-frontend/compare/0.3.88...0.3.89) (2021-03-18)
 
 
