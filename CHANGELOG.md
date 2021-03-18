@@ -1,3 +1,12 @@
+## [0.3.106](https://github.com/nurikk/z2m-frontend/compare/0.3.105...0.3.106) (2021-03-18)
+
+
+### Bug Fixes
+
+* **build:** add cache property ([9e3624e](https://github.com/nurikk/z2m-frontend/commit/9e3624e6cff1c7fd3287a2ac87cd67fb5348a274))
+
+
+
 ## [0.3.105](https://github.com/nurikk/z2m-frontend/compare/0.3.104...0.3.105) (2021-03-18)
 
 
