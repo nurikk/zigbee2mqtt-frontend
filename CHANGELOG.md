@@ -1,3 +1,12 @@
+## [0.3.101](https://github.com/nurikk/z2m-frontend/compare/0.3.100...0.3.101) (2021-03-18)
+
+
+### Bug Fixes
+
+* **buil:** again ([98ee6ec](https://github.com/nurikk/z2m-frontend/commit/98ee6ecd64d4cb79cd835ede6b4f3cc40e872df2))
+
+
+
 ## [0.3.100](https://github.com/nurikk/z2m-frontend/compare/0.3.99...0.3.100) (2021-03-18)
 
 
