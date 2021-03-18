@@ -1,3 +1,12 @@
+## [0.3.86](https://github.com/nurikk/z2m-frontend/compare/0.3.85...0.3.86) (2021-03-18)
+
+
+### Features
+
+* **donate:** update donate page ([fbbd34c](https://github.com/nurikk/z2m-frontend/commit/fbbd34cbc6aad7959a31e8613f25a8bbee7ce0d4))
+
+
+
 ## [0.3.85](https://github.com/nurikk/z2m-frontend/compare/0.3.84...0.3.85) (2021-03-14)
 
 
