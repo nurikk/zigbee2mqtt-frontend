@@ -1,3 +1,12 @@
+## [0.3.95](https://github.com/nurikk/z2m-frontend/compare/0.3.94...0.3.95) (2021-03-18)
+
+
+### Bug Fixes
+
+* **build:** fix travis ([bf757c5](https://github.com/nurikk/z2m-frontend/commit/bf757c5e110f2162d9dea59c703942df2f6b7df0))
+
+
+
 ## [0.3.94](https://github.com/nurikk/z2m-frontend/compare/0.3.93...0.3.94) (2021-03-18)
 
 
