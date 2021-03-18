@@ -1,3 +1,12 @@
+## [0.3.107](https://github.com/nurikk/z2m-frontend/compare/0.3.106...0.3.107) (2021-03-18)
+
+
+### Bug Fixes
+
+* **build:** remove github build ([4855aa1](https://github.com/nurikk/z2m-frontend/commit/4855aa181d27f90d23eed4ba880efdc677f4115e))
+
+
+
 ## [0.3.106](https://github.com/nurikk/z2m-frontend/compare/0.3.105...0.3.106) (2021-03-18)
 
 
