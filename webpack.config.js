@@ -37,12 +37,14 @@ const getPlugins = (production) => {
             })
         );
     });
-    if (production && production.env['CI'] !== 'true') {
-        plugins.push(
-            new BundleAnalyzerPlugin({
-                analyzerMode: "static",
-            })
-        );
+    if (production) {
+        if (production.env['CI'] !== 'true') {
+            plugins.push(
+                new BundleAnalyzerPlugin({
+                    analyzerMode: "static",
+                })
+            );
+        }
     } else {
         plugins.push(new ForkTsCheckerWebpackPlugin());
     }
