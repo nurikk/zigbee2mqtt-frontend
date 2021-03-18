@@ -38,7 +38,7 @@ const getPlugins = (production) => {
         );
     });
     if (production) {
-        if (production.env['CI'] !== 'true') {
+        if (process.env['CI'] !== 'true') {
             plugins.push(
                 new BundleAnalyzerPlugin({
                     analyzerMode: "static",
