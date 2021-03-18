@@ -1,3 +1,12 @@
+## [0.3.97](https://github.com/nurikk/z2m-frontend/compare/0.3.96...0.3.97) (2021-03-18)
+
+
+### Features
+
+* **deploy:** use github to build ([b013b51](https://github.com/nurikk/z2m-frontend/commit/b013b51e85b175c87bc3a190ad83123078b4e580))
+
+
+
 ## [0.3.96](https://github.com/nurikk/z2m-frontend/compare/0.3.95...0.3.96) (2021-03-18)
 
 
