@@ -1,3 +1,12 @@
+## [0.3.109](https://github.com/nurikk/z2m-frontend/compare/0.3.108...0.3.109) (2021-03-20)
+
+
+### Bug Fixes
+
+* **last-seen:** better value handling with elapsed ([22784a9](https://github.com/nurikk/z2m-frontend/commit/22784a9939ad82dd7462bf38a529b829c0c3af51))
+
+
+
 ## [0.3.108](https://github.com/nurikk/z2m-frontend/compare/0.3.107...0.3.108) (2021-03-20)
 
 
