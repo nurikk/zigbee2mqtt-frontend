@@ -1,8 +1,8 @@
 import PowerSource from '../../components/power-source';
 import React from 'react';
 import { Device, DeviceDefinition, DeviceState, GenericExposedFeature } from '../../types';
-import { lastSeen } from '../../utils';
 import { LastSeenType } from '../zigbee';
+import { LastSeen } from '../LastSeen';
 
 
 type Props = {
@@ -38,7 +38,7 @@ const DeviceFooter: React.FC<Props> = ({ device, deviceState, lastSeenType }) =>
         <footer className="card-footer pt-0">
             <div className="row justify-content-between flex-nowrap">
                 <div title="last update" className="col text-truncate">
-                    {lastSeen(deviceState, lastSeenType)}
+                    <LastSeen state={deviceState} lastSeenType={lastSeenType} />
                 </div>
                 <div className="col col-auto text-truncate">
                     {rederedFeatures}
