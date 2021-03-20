@@ -62,13 +62,15 @@ export interface Network {
 export interface DeviceConfig {
     [k: string]: object | string | number | boolean;
 }
+export interface AdvancedConfig {
+    elapsed: boolean;
+    last_seen: 'disable' | 'ISO_8601' | 'ISO_8601_local' | 'epoch';
+    legacy_api: boolean;
+
+}
 export interface Z2MConfig {
     homeassistant: boolean;
-    advanced: {
-        elapsed: boolean;
-        last_seen: 'disable' | 'ISO_8601' | 'ISO_8601_local' | 'epoch';
-        legacy_api: boolean;
-    };
+    advanced: AdvancedConfig;
     devices: {
         [key: string]: DeviceConfig;
     };
@@ -86,7 +88,7 @@ export interface BridgeConfig {
 }
 export type BridgeState = "online" | "offline";
 export interface BridgeInfo {
-    config?: Z2MConfig;
+    config: Z2MConfig;
     config_schema: JSONSchema7;
     permit_join: boolean;
     commit?: string;

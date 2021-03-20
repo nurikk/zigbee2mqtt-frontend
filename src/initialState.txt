@@ -19,7 +19,9 @@
       "properties": {},
       "required": []
     },
-    "config": {}
+    "config": {
+        "advanced": {}
+    }
   },
   "logs": [],
   "extensions": [],

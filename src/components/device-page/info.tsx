@@ -1,7 +1,7 @@
 /* eslint-disable react/display-name */
 import React, { Component, Fragment } from "react";
-import { Device, DeviceState } from "../../types";
-import { toHex, toHHMMSS } from "../../utils";
+import { BridgeInfo, Device, DeviceState } from "../../types";
+import { getLastSeenType, toHex } from "../../utils";
 import DeviceControlGroup from "../device-control";
 import cx from "classnames";
 import style from "./style.css";
@@ -11,6 +11,7 @@ import get from 'lodash/get';
 import DeviceImage from "../device-image";
 import { ModelLink, VendorLink } from "../vendor-links/verndor-links";
 import PowerSource from "../power-source";
+import { LastSeen } from "../LastSeen";
 
 
 type DeviceInfoProps = {
@@ -26,6 +27,10 @@ const displayProps = [
     {
         label: 'Friendly name',
         render: (device: Device) => <dd className="col-12 col-md-7"><strong>{device.friendly_name}</strong></dd>,
+    },
+    {
+        label: 'Last seen',
+        render: (device: Device, state: DeviceState, bridgeInfo: BridgeInfo) => <dd className="col-12 col-md-7"><LastSeen lastSeenType={getLastSeenType(bridgeInfo.config.advanced)} state={state}/></dd>,
     },
     {
         key: 'type',
@@ -102,14 +107,15 @@ const displayProps = [
     }
 ];
 // eslint-disable-next-line react/prefer-stateless-function
-export class DeviceInfo extends Component<DeviceInfoProps & PropsFromStore, {}> {
-    render() {
-        const { device, deviceStates } = this.props;
-        const deviceStatus: DeviceState = deviceStates.get(device.friendly_name) ?? {} as DeviceState;
+export class DeviceInfo extends Component<DeviceInfoProps & PropsFromStore & Pick<GlobalState, 'bridgeInfo'>, unknown> {
+    render(): JSX.Element{
+        const { device, deviceStates, bridgeInfo } = this.props;
+
+        const deviceState: DeviceState = deviceStates.get(device.friendly_name) ?? {} as DeviceState;
         return (
             <Fragment>
                 <div className="d-flex justify-content-center">
-                    <DeviceImage className={`card-img-top w-auto ${style["device-pic"]}`} device={device} deviceStatus={deviceStatus} />
+                    <DeviceImage className={`card-img-top w-auto ${style["device-pic"]}`} device={device} deviceStatus={deviceState} />
                 </div>
 
 
@@ -122,7 +128,7 @@ export class DeviceInfo extends Component<DeviceInfoProps & PropsFromStore, {}> 
                             <Fragment key={prop.label}>
                                 <dt className="col-12 col-md-5">{prop.label}</dt>
                                 {prop.render ?
-                                    prop.render(device, deviceStatus) : <dd className="col-12 col-md-7">{get(device, prop.key)}</dd>}
+                                    prop.render(device, deviceState, bridgeInfo) : <dd className="col-12 col-md-7">{get(device, prop.key)}</dd>}
 
                             </Fragment>
                         ))
@@ -130,14 +136,14 @@ export class DeviceInfo extends Component<DeviceInfoProps & PropsFromStore, {}> 
                 </dl>
 
 
-                <DeviceControlGroup device={device} state={deviceStatus} />
+                <DeviceControlGroup device={device} state={deviceState} />
 
             </Fragment>
         );
     }
 }
 
-const mappedProps = ["deviceStates"];
+const mappedProps = ["deviceStates", "bridgeInfo"];
 
-const ConnectedDeviceInfoPage = connect<DeviceInfoProps, {}, GlobalState, PropsFromStore>(mappedProps)(DeviceInfo);
+const ConnectedDeviceInfoPage = connect<DeviceInfoProps, unknown, GlobalState, PropsFromStore>(mappedProps)(DeviceInfo);
 export default ConnectedDeviceInfoPage;

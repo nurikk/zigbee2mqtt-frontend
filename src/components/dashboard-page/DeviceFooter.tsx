@@ -2,21 +2,22 @@ import PowerSource from '../../components/power-source';
 import React from 'react';
 import { Device, DeviceDefinition, DeviceState, GenericExposedFeature } from '../../types';
 import { lastSeen } from '../../utils';
+import { LastSeenType } from '../zigbee';
 
 
 type Props = {
     device: Device;
     deviceState: DeviceState;
+    lastSeenType: LastSeenType;
 };
 
 const footerFeatures = [
     "linkquality"
 ];
 
-const DeviceFooter: React.FC<Props> = ({ device, deviceState }) => {
+const DeviceFooter: React.FC<Props> = ({ device, deviceState, lastSeenType }) => {
     const {
-        last_seen: lastSeenTime,
-        linkquality,
+        linkquality
     } = deviceState;
     const { exposes } = device.definition as DeviceDefinition;
     const rederedFeatures = [] as JSX.Element[];
@@ -37,7 +38,7 @@ const DeviceFooter: React.FC<Props> = ({ device, deviceState }) => {
         <footer className="card-footer pt-0">
             <div className="row justify-content-between flex-nowrap">
                 <div title="last update" className="col text-truncate">
-                    {lastSeen(lastSeenTime)}
+                    {lastSeen(deviceState, lastSeenType)}
                 </div>
                 <div className="col col-auto text-truncate">
                     {rederedFeatures}

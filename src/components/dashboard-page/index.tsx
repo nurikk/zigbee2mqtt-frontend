@@ -10,13 +10,13 @@ import actions from '../../actions/actions';
 import { StateApi } from "../../actions/StateApi";
 import { GlobalState } from '../../store';
 import { DashboardFeatureWrapper } from './DashboardFeatureWrapper';
-import { isOnlyOneBitIsSet } from '../../utils';
+import { getLastSeenType, isOnlyOneBitIsSet } from '../../utils';
 
 import { isLightFeature } from '../device-page/type-guards';
 import groupBy from "lodash/groupBy";
 
 
-type Props = Pick<GlobalState, 'devices' | 'deviceStates'> & StateApi;
+type Props = Pick<GlobalState, 'devices' | 'deviceStates' | 'bridgeInfo'> & StateApi;
 
 const genericRendererIgnoredNames = ['linkquality', 'battery', 'battery_low', 'illuminance_lux', 'color_temp_startup', 'voltage', 'strength', 'color_options'];
 const whitelistFeatureNames = ['state', 'brightness', 'color_temp'];
@@ -55,7 +55,8 @@ export const onlyValidFeaturesForDashboard = (feature: GenericExposedFeature | C
 }
 
 const Dashboard: React.FC<Props> = (props) => {
-    const { setDeviceState, getDeviceState, deviceStates } = props;
+    const { setDeviceState, getDeviceState, deviceStates, bridgeInfo } = props;
+    const lastSeenType = getLastSeenType(bridgeInfo.config.advanced);
     return (
         <div className="row">
             {Array.from(props.devices)
@@ -84,11 +85,13 @@ const Dashboard: React.FC<Props> = (props) => {
                                 getDeviceState(`${device.friendly_name}${endpoint ? `/${endpoint}` : ''}`, value)
                             }
                             featureWrapperClass={DashboardFeatureWrapper}
+                            lastSeenType={lastSeenType}
                         />
                     );
                 })}
         </div>);
 };
 
-const mappedProps = ['devices', 'deviceStates'];
-export default connect<{}, {}, GlobalState, {}>(mappedProps, actions)(Dashboard);
+const mappedProps = ['devices', 'deviceStates', 'bridgeInfo'];
+export default connect<unknown, unknown, GlobalState, unknown>(mappedProps, actions)(Dashboard);
+

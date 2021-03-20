@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component, Fragment, ReactNode } from "react";
 
 import { Device, SortDirection, DeviceState } from "../../types";
 import { Notyf } from "notyf";
@@ -11,8 +11,7 @@ import orderBy from "lodash/orderBy";
 import Spinner from "../spinner";
 import { TableHeader } from "./TableHeader";
 import { TableRow } from "./TableRow";
-
-
+import { getLastSeenType, lastSeen } from "../../utils";
 
 export type SortColumn =
     | "device.network_address"
@@ -21,7 +20,7 @@ export type SortColumn =
     | "device.definition.vendor"
     | "device.definition.model"
     | "state.linkquality"
-    | "state.last_seen"
+    | "lastSeen"
     | "state.elapsed"
     | "state.battery";
 
@@ -31,19 +30,21 @@ interface ZigbeeTableState {
     sortColumn: SortColumn | SortColumn[];
     currentTime: number;
     sortedTableData: ZigbeeTableData[];
-    error?: object;
+    error?: ReactNode;
 }
 
 interface ZigbeeTableData {
     device: Device;
     state: DeviceState;
+    lastSeen?: Date;
 }
 
 const storeKey = "ZigbeeTableState";
 const longLoadingTimeout = 15 * 1000;
+export type LastSeenType = "elapsed" | "disable" | "ISO_8601" | "ISO_8601_local" | "epoch";
 
 export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
-    constructor(props) {
+    constructor(props: Readonly<GlobalState>) {
         super(props);
         this.state = {
             sortDirection: "desc",
@@ -82,9 +83,8 @@ export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
             new Notyf().error(e.toString());
         }
     };
-    handleLongLoading = () => {
+    handleLongLoading = (): void=> {
         const { devices } = this.props;
-
         if (devices.size == 0) {
             const error = <Fragment>
                 <strong>Loading devices takes too long time.</strong>
@@ -100,13 +100,20 @@ export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
 
     static getDerivedStateFromProps(props: Readonly<GlobalState>, state: ZigbeeTableState): Partial<ZigbeeTableState> {
         const { sortColumn, sortDirection } = state;
-        const { devices, deviceStates } = props;
+        const { devices, deviceStates, bridgeInfo } = props;
         const tableData: ZigbeeTableData[] = [];
+
+
+        const lastSeenType = getLastSeenType(bridgeInfo?.config.advanced);
+
+
         devices.forEach((device) => {
             if (device.type !== "Coordinator") {
+                const state = deviceStates.get(device.friendly_name) ?? {} as DeviceState;
                 tableData.push({
                     device,
-                    state: deviceStates.get(device.friendly_name) ?? {} as DeviceState
+                    state,
+                    lastSeen: lastSeen(state, lastSeenType)
 
                 });
             }
@@ -132,7 +139,7 @@ export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
         this.setState({ sortColumn: column, sortDirection }, this.saveState);
     };
 
-    renderError() {
+    renderError(): JSX.Element {
         const { error } = this.state;
         return (<div className="h-100 d-flex justify-content-center align-items-center">
             <div className="d-flex align-items-center">
@@ -141,7 +148,7 @@ export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
         </div>);
     }
 
-    render() {
+    render(): JSX.Element {
         const { error } = this.state;
         const { devices } = this.props;
         if (devices.size) {
@@ -154,20 +161,16 @@ export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
             <Spinner />
         </div>);
     }
-    lastSeenIsAvaliable(): boolean {
+
+    renderDevicesTable(): JSX.Element {
         const { bridgeInfo } = this.props;
-        return bridgeInfo?.config?.advanced?.elapsed || bridgeInfo?.config?.advanced?.last_seen != "disable";
-    }
-
-
-
-    renderDevicesTable() {
         const { sortedTableData, sortColumn, sortDirection } = this.state;
+        const lastSeenType = getLastSeenType(bridgeInfo.config.advanced);
         return (<div className="card">
             <div className="table-responsive">
                 <table className="table align-middle">
                     <TableHeader
-                        lastSeenIsAvaliable={this.lastSeenIsAvaliable()}
+                        lastSeenType={lastSeenType}
                         sortColumn={sortColumn}
                         sortDirection={sortDirection}
                         onSortChange={this.onSortChange}
@@ -178,7 +181,7 @@ export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
                             device={device}
                             deviceState={state}
                             id={id}
-                            lastSeenIsAvaliable={this.lastSeenIsAvaliable()}
+                            lastSeenType={lastSeenType}
                         />)}
                     </tbody>
                 </table>
@@ -188,5 +191,5 @@ export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
 }
 
 const mappedProps = ["devices", "deviceStates", "bridgeInfo"];
-const ConnectedZigbeePage = connect<{}, ZigbeeTableState, GlobalState, {}>(mappedProps, actions)(ZigbeeTable);
+const ConnectedZigbeePage = connect<unknown, ZigbeeTableState, GlobalState, unknown>(mappedProps, actions)(ZigbeeTable);
 export default ConnectedZigbeePage;

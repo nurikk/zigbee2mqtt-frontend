@@ -1,11 +1,11 @@
 
-import { Device, Endpoint } from "./types";
-import { GraphI, NodeI } from "./components/map/types";
-import { format, TDate } from 'timeago.js';
+import { AdvancedConfig, Device, DeviceState, Endpoint } from "./types";
+import { GraphI, LinkI, NodeI } from "./components/map/types";
 import { Group } from "./store";
 import { Theme } from "./components/theme-switcher";
 import JSZip from 'jszip';
 import FileSaver from 'file-saver';
+import { LastSeenType } from "./components/zigbee";
 
 export const genDeviceDetailsLink = (deviceIdentifier: string | number): string => (`/device/${deviceIdentifier}`);
 
@@ -34,27 +34,37 @@ export interface ApiResponse<T> {
     result: T;
 }
 
-export const lastSeen = (lastSeen?: string | number, elapsed?: number): string => {
-    if (!lastSeen && !elapsed) {
-        return "N/A";
+export const getLastSeenType = (config: AdvancedConfig): LastSeenType => {
+    if (config.last_seen !== "disable") {
+        return config.last_seen;
     }
-    let diff: TDate;
-    if (elapsed !== undefined) {
-        diff = Date.now() - elapsed;
-    } else {
-        if (typeof lastSeen === "string") {
-            diff = Date.parse(lastSeen);
-        } else {
-            diff = new Date(lastSeen as number);
-        }
+    if (config.elapsed) {
+        return "elapsed";
     }
-    return format(diff);
+    return "disable";
+};
+
+export const lastSeen = (state: DeviceState, lastSeenType: LastSeenType): Date | undefined => {
+    switch (lastSeenType) {
+        case "ISO_8601":
+        case "ISO_8601_local":
+            return new Date(Date.parse(state.last_seen as string));
+
+        case "epoch":
+            return new Date(state.last_seen as number);
+
+        case "elapsed":
+            return new Date(Date.now() - (state.elapsed as number));
+        default:
+            console.warn("Unknown last_seen type " + lastSeenType);
+            return undefined;
+    }
 };
 
 
 export const sanitizeGraph = (inGraph: GraphI): GraphI => {
     const nodes = {};
-    const links = new Map<string, any>();
+    const links = new Map<string, LinkI>();
 
     inGraph.nodes.forEach(node => {
         nodes[node.ieeeAddr] = node;
@@ -71,7 +81,7 @@ export const sanitizeGraph = (inGraph: GraphI): GraphI => {
                 repeatedLink.linkqualities.push(link.linkquality);
                 repeatedLink.relationships.push(link.relationship);
             } else {
-                links.set(linkId, { ...link, ...{ source: link.source.ieeeAddr, linkType, target: link.target.ieeeAddr, linkqualities: [link.linkquality], relationships: [link.relationship] } });
+                links.set(linkId, { ...link, ...{ source: link.source.ieeeAddr, linkType, target: link.target.ieeeAddr, linkqualities: [link.linkquality], relationships: [link.relationship] } } as unknown as LinkI);
             }
         } else {
             console.warn("Broken link", link);

@@ -1,6 +1,6 @@
 
 import React from "react";
-import { SortColumn } from ".";
+import { LastSeenType, SortColumn } from ".";
 import { SortDirection } from "../../types";
 import ActionTH from "./ActionTH";
 import style from "./style.css";
@@ -9,10 +9,10 @@ type TableHeaderProps = {
     sortColumn: SortColumn | SortColumn[];
     sortDirection: SortDirection;
     onSortChange(column: SortColumn | SortColumn[], sortDir?: SortDirection): void;
-    lastSeenIsAvaliable: boolean;
+    lastSeenType: LastSeenType;
 }
-export const TableHeader = (props: TableHeaderProps) => {
-    const { sortColumn, sortDirection, onSortChange, lastSeenIsAvaliable } = props;
+export const TableHeader = (props: TableHeaderProps): JSX.Element=> {
+    const { sortColumn, sortDirection, onSortChange, lastSeenType } = props;
 
     return (
         <thead>
@@ -34,7 +34,7 @@ export const TableHeader = (props: TableHeaderProps) => {
                 <ActionTH<SortColumn> className={style["action-column"]} column="state.linkquality"
                     currentDirection={sortDirection} current={sortColumn}
                     onClick={onSortChange}>LQI</ActionTH>
-                {lastSeenIsAvaliable && <ActionTH<SortColumn> className={style["action-column"]} column={["state.last_seen", "state.elapsed"]}
+                {lastSeenType !== "disable" && <ActionTH<SortColumn> className={style["action-column"]} column="lastSeen"
                     currentDirection={sortDirection} current={sortColumn}
                     onClick={onSortChange}>Last seen</ActionTH>}
                 <ActionTH<SortColumn> className={style["action-column"]} column="state.battery"

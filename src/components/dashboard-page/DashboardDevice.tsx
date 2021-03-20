@@ -11,11 +11,12 @@ import { genDeviceDetailsLink } from '../../utils';
 
 import Composite from '../features/composite/composite';
 import DeviceImage from '../device-image';
+import { LastSeenType } from '../zigbee';
 
-type Props = BaseFeatureProps<CompositeFeature>;
+type Props = BaseFeatureProps<CompositeFeature> & { lastSeenType: LastSeenType };
 
 
-const DashboardDevice: React.FC<Props> = ({ onChange, onRead, device, deviceState, feature: { features }, featureWrapperClass }) => {
+const DashboardDevice: React.FC<Props> = ({ onChange, onRead, device, deviceState, lastSeenType, feature: { features }, featureWrapperClass }) => {
     return (
         <div className="col-xl-3 col-lg-4 col-sm-6 col-12 d-flex">
             <div className={`flex-fill card flex-shrink-1`}>
@@ -39,6 +40,7 @@ const DashboardDevice: React.FC<Props> = ({ onChange, onRead, device, deviceStat
                 <DeviceFooter
                     device={device}
                     deviceState={deviceState}
+                    lastSeenType={lastSeenType}
                 />
             </div>
         </div>
