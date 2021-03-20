@@ -47,7 +47,7 @@ export interface GlobalState {
     theme: Theme;
 };
 const theme = getCurrentTheme();
-const _initState = deSerialize(initialState) as GlobalState;
+const _initState = deSerialize<GlobalState>(initialState);
 _initState.theme = theme;
 
 const _store = createStore(_initState);

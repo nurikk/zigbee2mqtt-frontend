@@ -1,9 +1,11 @@
 
 import { Device, Endpoint } from "./types";
-import { GraphI, LinkI, NodeI } from "./components/map/types";
+import { GraphI, NodeI } from "./components/map/types";
 import { format, TDate } from 'timeago.js';
 import { Group } from "./store";
 import { Theme } from "./components/theme-switcher";
+import JSZip from 'jszip';
+import FileSaver from 'file-saver';
 
 export const genDeviceDetailsLink = (deviceIdentifier: string | number): string => (`/device/${deviceIdentifier}`);
 
@@ -102,7 +104,7 @@ export const scale = (inputY: number, yRange: Array<number>, xRange: Array<numbe
 
 
 
-function replacer(key: string, value: object) {
+function replacer(key: string, value: unknown) {
     const originalObject = this[key];
     if (originalObject instanceof Map) {
         return {
@@ -123,28 +125,21 @@ function reviver(key: string, value: { dataType: string; value: Iterable<readonl
     return value;
 }
 
-export const serialize = (data: object) => {
+export const serialize = (data: unknown): string => {
     return JSON.stringify(data, replacer);
 }
 
-export const deSerialize = (str: string) => {
+export function deSerialize<T>(str: string): T {
     return JSON.parse(str, reviver);
 }
 
 
-export const download = (data: object, filename: string): void => {
-    const blob = new Blob([serialize(data)], { type: 'octet/stream' });
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    document.body.appendChild(a);
-    a.href = url;
-    a.download = filename;
-
-    setTimeout(() => {
-        a.click();
-        window.URL.revokeObjectURL(url);
-        document.body.removeChild(a);
-    }, 1);
+export const download = (data: Record<string, unknown>, filename: string): void => {
+    const zip = new JSZip();
+    zip.file(filename, serialize(data), { compression: 'DEFLATE' });
+    zip.generateAsync({ type: "blob" }).then((content) => {
+        FileSaver.saveAs(content, `${filename}.zip`);
+    });
 
 }
 
@@ -163,7 +158,7 @@ export const getEndpoints = (obj: Device | Group): Endpoint[] => {
 }
 
 
-export const stringifyWithPreservingUndefinedAsNull = (data: object): string => JSON.stringify(data, (k, v) => v === undefined ? null : v)
+export const stringifyWithPreservingUndefinedAsNull = (data: Record<string, unknown>): string => JSON.stringify(data, (k, v) => v === undefined ? null : v)
 
 
 
@@ -172,4 +167,4 @@ export const isOnlyOneBitIsSet = (b: number): number | boolean => {
 }
 
 export const getCurrentTheme = (): Theme => localStorage.getItem('theme') as Theme ?? 'light';
-export const saveCurrentTheme = (theme: string) => localStorage.setItem('theme', theme);
+export const saveCurrentTheme = (theme: string): void => localStorage.setItem('theme', theme);
