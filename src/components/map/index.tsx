@@ -41,6 +41,7 @@ const linkStrregth = (d: LinkI) => {
 
     return 0;
 }
+const defaultVisibleRelationshLinks = [...parentOrChild, ZigbeeRelationship.NeigbhorIsASibling];
 const baseDistance = 100;
 const distancesMap = {
     BrokenLink: 5 * baseDistance,
@@ -129,7 +130,7 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
     state: Readonly<MapState> = {
         width: 0,
         height: 0,
-        visibleLinks: parentOrChild,
+        visibleLinks: defaultVisibleRelationshLinks,
         legendIsVisible: true,
     };
     transform: ZoomTransform = zoomIdentity;
