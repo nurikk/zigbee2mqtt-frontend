@@ -82,8 +82,8 @@ export default class Composite extends Component<CompositeProps, CompositeState>
                 />)}</div></div>);
             }
         } else {
-            result = result.concat(features.map(f => <Feature
-                key={f.name + f.endpoint}
+            const renderedFeatures = features.map(f => <Feature
+                key={JSON.stringify(f)}
                 feature={f}
                 device={device}
                 deviceState={deviceState}
@@ -91,12 +91,13 @@ export default class Composite extends Component<CompositeProps, CompositeState>
                 onRead={this.onRead}
                 featureWrapperClass={featureWrapperClass}
                 minimal={minimal}
-            />));
+            />);
+            result = result.concat(renderedFeatures);
         }
 
 
         if (isCompositeFeature(feature)) {
-            result.push(<div key={feature.name}><Button className={cx('btn btn-primary float-end', {'btn-sm': minimal})} onClick={this.onApplyClick}>Apply</Button></div>)
+            result.push(<div key={feature.name + 'apply'}><Button className={cx('btn btn-primary float-end', {'btn-sm': minimal})} onClick={this.onApplyClick}>Apply</Button></div>)
         }
         return result;
 
