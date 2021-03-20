@@ -1,3 +1,12 @@
+## [0.3.108](https://github.com/nurikk/z2m-frontend/compare/0.3.107...0.3.108) (2021-03-20)
+
+
+### Features
+
+* **error-boundry:** rework instructions and state download ([73e21c4](https://github.com/nurikk/z2m-frontend/commit/73e21c43dc240c6a3aadd2ef06a6190e6f24ac9e))
+
+
+
 ## [0.3.107](https://github.com/nurikk/z2m-frontend/compare/0.3.106...0.3.107) (2021-03-18)
 
 
