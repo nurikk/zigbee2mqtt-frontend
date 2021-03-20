@@ -1,3 +1,14 @@
+## [0.3.110](https://github.com/nurikk/z2m-frontend/compare/0.3.109...0.3.110) (2021-03-20)
+
+
+### Bug Fixes
+
+* **dashboard:** fix feature uniq key generation ([809f17a](https://github.com/nurikk/z2m-frontend/commit/809f17a7ce50d8205c90b83e37c5d5c22be1cd18))
+* **dashboard:** fix last seen renderer ([521941f](https://github.com/nurikk/z2m-frontend/commit/521941f039d966795a42d77b9ba6d8da7df55815))
+* **map:** show sibling links by default ([38e35e4](https://github.com/nurikk/z2m-frontend/commit/38e35e471589aa1528b9a4d24100a15e458b7c77))
+
+
+
 ## [0.3.109](https://github.com/nurikk/z2m-frontend/compare/0.3.108...0.3.109) (2021-03-20)
 
 
