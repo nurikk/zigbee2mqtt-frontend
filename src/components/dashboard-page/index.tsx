@@ -41,6 +41,9 @@ export const onlyValidFeaturesForDashboard = (feature: GenericExposedFeature | C
     if (access && !(access & FeatureAccessMode.ACCESS_STATE && !nullish.includes(deviceState[property] as string | null | undefined))) {
         return false;
     }
+    if (name == 'voltage' && deviceState.battery == undefined) {
+      return filteredOutFeature;
+    }
     if (genericRendererIgnoredNames.includes(name)) {
         return false;
     }
