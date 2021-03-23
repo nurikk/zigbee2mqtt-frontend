@@ -45,6 +45,8 @@ const typeToClassMap = {
     illuminance_lux: ['fa-sun'],
     soil_moisture: ['fa-fill-drip'],
     water_leak: ['fa-water'],
+    mode: ['fa-user-cog', 'text-warning'],
+    sound: ['fa-volume-up', 'text-info'],
     /* eslint-enable @typescript-eslint/camelcase */
 };
 const getGenericFeatureIcon = (name: string, value: unknown): string => {
