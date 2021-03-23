@@ -197,7 +197,7 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
         const { keyName } = this.state;
         const { bridgeInfo: { config_schema: configSchema, config: originalConfig } } = this.props;
 
-        let configAndSchema = removePropertiesFromSchema(ingoredFields, cloneDeep(configSchema), cloneDeep(originalConfig) as Record<string, unknown>);
+        let configAndSchema = removePropertiesFromSchema(ingoredFields, cloneDeep(configSchema), cloneDeep<Record<string, unknown>>(originalConfig));
 
         let currentSchema: JSONSchema7 = configAndSchema.schema;
         let currentConfig = configAndSchema.config[keyName] as Record<string, unknown>;

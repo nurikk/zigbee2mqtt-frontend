@@ -59,9 +59,7 @@ export interface Network {
     extended_pan_id: number[];
 }
 
-export interface DeviceConfig {
-    [k: string]: object | string | number | boolean;
-}
+export type DeviceConfig = Record<string, unknown>;
 export interface AdvancedConfig {
     elapsed: boolean;
     last_seen: 'disable' | 'ISO_8601' | 'ISO_8601_local' | 'epoch';
@@ -75,7 +73,7 @@ export interface Z2MConfig {
         [key: string]: DeviceConfig;
     };
     device_options: DeviceConfig;
-    [k: string]: object | string | number | boolean;
+    [k: string]: unknown;
 }
 export interface BridgeConfig {
     version: string;
@@ -91,6 +89,7 @@ export interface BridgeInfo {
     config: Z2MConfig;
     config_schema: JSONSchema7;
     permit_join: boolean;
+    permit_join_timeout: number;
     commit?: string;
     version?: string;
     coordinator?: {
@@ -99,7 +98,7 @@ export interface BridgeInfo {
         };
         type?: string;
     };
-    device_options: object;
+    device_options: Record<string, unknown>;
     restart_required: boolean;
 }
 
