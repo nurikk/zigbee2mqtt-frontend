@@ -19,7 +19,7 @@ import groupBy from "lodash/groupBy";
 type Props = Pick<GlobalState, 'devices' | 'deviceStates' | 'bridgeInfo'> & StateApi;
 
 const genericRendererIgnoredNames = ['linkquality', 'battery', 'battery_low', 'illuminance_lux', 'color_temp_startup', 'voltage', 'strength', 'color_options'];
-const whitelistFeatureNames = ['state', 'brightness', 'color_temp'];
+const whitelistFeatureNames = ['state', 'brightness', 'color_temp', 'mode', 'sound'];
 const whitelistFeatureTypes = ['light'];
 const nullish = ['', null, undefined];
 
