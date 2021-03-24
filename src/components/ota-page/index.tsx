@@ -55,12 +55,12 @@ const OtaRow: FunctionComponent<OtaRowProps & OtaApi> = (props) => {
 class OtaPage extends Component<GlobalState & OtaApi, {}> {
     getAllOtaDevices() {
         const { devices } = this.props;
-        return Array.from(devices).filter(([, device]) => device?.definition?.supports_ota)
+        return Object.values(devices).filter(device => device?.definition?.supports_ota)
     }
     checkAllOTA = () => {
         const { checkOTA } = this.props;
         const otaDevices = this.getAllOtaDevices();
-        otaDevices.forEach(([, d]) => checkOTA(d.friendly_name));
+        otaDevices.forEach(device => checkOTA(device.friendly_name));
     }
     render() {
         const { deviceStates, checkOTA, updateOTA } = this.props;
@@ -82,8 +82,8 @@ class OtaPage extends Component<GlobalState & OtaApi, {}> {
                     </thead>
                     <tbody>
                         {otaDevices.length === 0 ? <tr><td colSpan={6}>You don&apos;t have any devices that support OTA</td></tr> : null}
-                        {otaDevices.map(([ieeeAddr, device]) => (
-                            <OtaRow key={ieeeAddr} device={device} state={deviceStates.get(device.friendly_name) as DeviceState} {...otaApi} />
+                        {otaDevices.map(device => (
+                            <OtaRow key={device.ieee_address} device={device} state={deviceStates[device.friendly_name]} {...otaApi} />
                         ))}
                     </tbody>
                 </table>

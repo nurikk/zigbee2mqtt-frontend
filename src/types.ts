@@ -227,7 +227,7 @@ export interface Device {
     supported: boolean;
     definition?: DeviceDefinition;
     date_code: string;
-    endpoints: Map<Endpoint, EndpointDescription>;
+    endpoints: Record<Endpoint, EndpointDescription>;
 }
 
 export type ObjectType = "device" | "group";

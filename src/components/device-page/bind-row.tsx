@@ -15,7 +15,7 @@ import { BindParams } from "../../actions/BindApi";
 interface BindRowProps {
     rule: NiceBindingRule;
     idx: number;
-    devices: Map<string, Device>;
+    devices: Record<string, Device>;
     groups: Group[];
     device: Device;
     onBind(params: BindParams): void;
@@ -26,11 +26,11 @@ interface BindRowProps {
 interface BindRowState {
     stateRule: NiceBindingRule;
 }
-const getTarget = (rule: NiceBindingRule, devices: Map<string, Device>, groups: Group[]): Device | Group => {
+const getTarget = (rule: NiceBindingRule, devices: Record<string, Device>, groups: Group[]): Device | Group => {
     if (rule.target.type === "group") {
         return groups.find(g => g.id === rule.target.id) as Group;
     }
-    return devices.get(rule.target?.ieee_address as string) as Device;
+    return devices[rule.target?.ieee_address as string];
 }
 type Action = "Bind" | "Unbind";
 export default class BindRow extends Component<BindRowProps, BindRowState> {
@@ -89,7 +89,7 @@ export default class BindRow extends Component<BindRowProps, BindRowState> {
             const targetGroup = groups.find(group => group.id === stateRule.target.id) as Group;
             to = `${targetGroup.friendly_name}`;
         } else if (stateRule.target.type === "endpoint") {
-            const targeDevice = devices.get(stateRule.target?.ieee_address as string) as Device;
+            const targeDevice = devices[stateRule.target?.ieee_address as string];
             if (targeDevice.type === "Coordinator") {
                 to = `${targeDevice.friendly_name}`;
             } else {
@@ -126,7 +126,7 @@ export default class BindRow extends Component<BindRowProps, BindRowState> {
     }
 
     render() {
-        const { devices, groups, idx, device } = this.props;
+        const { devices, groups, device } = this.props;
         const { stateRule } = this.state;
 
         const targetType: ObjectType = stateRule.target.type === "endpoint" ? "device" : "group";
@@ -136,7 +136,7 @@ export default class BindRow extends Component<BindRowProps, BindRowState> {
         const destinationEndpoints = getEndpoints(target);
 
         const possibleClusters: Set<Cluster> = new Set(stateRule.clusters);
-        const destEndpoint = device.endpoints.get(stateRule.source.endpoint);
+        const destEndpoint = device.endpoints[stateRule.source.endpoint];
         if (destEndpoint) {
             destEndpoint.clusters.output.forEach(cluster => possibleClusters.add(cluster));
         }

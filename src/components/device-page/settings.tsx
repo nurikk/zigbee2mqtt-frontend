@@ -16,9 +16,8 @@ type DeviceSettingsProps = {
     device: Device;
     type: SettingsType;
 }
-interface PropsFromStore {
-    deviceStates: Map<string, DeviceState>;
-}
+type PropsFromStore = Pick<GlobalState, 'deviceStates'>;
+
 const genericUiSchema: UiSchema = {
     "ui:order": ["friendly_name", "retain", "retention", "qos", "filtered_attributes", "*"]
 };

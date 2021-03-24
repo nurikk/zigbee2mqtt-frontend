@@ -8,7 +8,7 @@ import ReportingRow from "./reporting-row";
 
 
 interface PropsFromStore {
-    devices: Map<string, Device>;
+    devices: Record<string, Device>;
     groups: Group[];
 }
 interface ReportingProps {
@@ -28,7 +28,7 @@ export interface NiceReportingingRule {
 }
 const convertBidningsIntoNiceStructure = (device: Device): NiceReportingingRule[] => {
     const reportings: NiceReportingingRule[] = [];
-    device.endpoints.forEach((description, endpoint) => {
+    Object.entries(device.endpoints).forEach(([endpoint, description]) => {
         description.configured_reportings
             .forEach(reportingRule => {
                 reportings.push({
@@ -54,7 +54,7 @@ export class Reporting extends Component<ReportingProps & PropsFromStore & Repor
         // const endpoints = getEndpoints(device);
         const reportingRules = convertBidningsIntoNiceStructure(device);
 
-        // eslint-disable-next-line @typescript-eslint/camelcase
+
         reportingRules.push({ isNew: Date.now(), reportable_change: 0, minimum_report_interval: 60, maximum_report_interval: 3600 } as NiceReportingingRule);
         return {
             reportingRules
@@ -63,10 +63,10 @@ export class Reporting extends Component<ReportingProps & PropsFromStore & Repor
 
     onApply = (rule: NiceReportingingRule) => {
         const { configureReport, device } = this.props;
-        // eslint-disable-next-line @typescript-eslint/camelcase
+
         const { cluster, endpoint, attribute, minimum_report_interval, maximum_report_interval, reportable_change } = rule;
         configureReport(`${device.friendly_name}/${endpoint}`, {
-            // eslint-disable-next-line @typescript-eslint/camelcase
+
             cluster, attribute, minimum_report_interval, maximum_report_interval, reportable_change
         });
     }

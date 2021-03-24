@@ -17,9 +17,8 @@ import { LastSeen } from "../LastSeen";
 type DeviceInfoProps = {
     device: Device;
 }
-interface PropsFromStore {
-    deviceStates: Map<string, DeviceState>;
-}
+type PropsFromStore = Pick<GlobalState, 'deviceStates'>;
+
 // [Flower sensor](http://modkam.ru/?p=1700)
 const markdownLinkRegex = /\[(.*?)\]\((.*?)\)/;
 
@@ -111,7 +110,7 @@ export class DeviceInfo extends Component<DeviceInfoProps & PropsFromStore & Pic
     render(): JSX.Element{
         const { device, deviceStates, bridgeInfo } = this.props;
 
-        const deviceState: DeviceState = deviceStates.get(device.friendly_name) ?? {} as DeviceState;
+        const deviceState: DeviceState = deviceStates[device.friendly_name] ?? {} as DeviceState;
         return (
             <Fragment>
                 <div className="d-flex justify-content-center">

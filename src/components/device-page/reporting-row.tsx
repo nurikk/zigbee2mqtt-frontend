@@ -23,7 +23,7 @@ interface ReportingRowState {
 const getClusters = (device: Device, endpoint: Endpoint, currentCluster: Cluster): ClusterGroup[] => {
     let possibleClusters = Object.keys(Clusters);
     let availableClusters = [] as Cluster[];
-    const ep = device.endpoints.get(endpoint);
+    const ep = device.endpoints[endpoint];
     if (ep) {
         availableClusters = availableClusters.concat(ep.clusters.output);
         possibleClusters = possibleClusters.filter(cluster => !availableClusters.includes(cluster))
@@ -93,7 +93,7 @@ export default class ReportingRow extends Component<ReportingRowProps, Reporting
     disableRule = (): void => {
         const { onApply } = this.props;
         const { stateRule } = this.state;
-        // eslint-disable-next-line @typescript-eslint/camelcase
+
         onApply({ ...stateRule, maximum_report_interval: 0xFFFF });
     }
 

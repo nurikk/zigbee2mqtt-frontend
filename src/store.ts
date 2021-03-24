@@ -1,13 +1,13 @@
 import createStore from "unistore";
 import devtools from "unistore/devtools";
-import initialState from './initialState.txt';
-
 
 import { Device, DeviceState, BridgeConfig, BridgeInfo, TouchLinkDevice, BridgeState } from "./types";
+
 import { GraphI } from "./components/map/types";
-import { deSerialize, getCurrentTheme } from "./utils";
+import { getCurrentTheme } from "./utils";
 import { Theme } from "./components/theme-switcher";
 
+import initialState from './initialState.json';
 
 export interface GroupAddress {
     endpoint: number;
@@ -30,8 +30,8 @@ export type Extension = {
     code: string;
 };
 export interface GlobalState {
-    devices: Map<string, Device>;
-    deviceStates: Map<string, DeviceState>;
+    devices: Record<string, Device>;
+    deviceStates: Record<string, DeviceState>;
     touchlinkDevices: TouchLinkDevice[];
     touchlinkScanInProgress: boolean;
     touchlinkIdentifyInProgress: boolean;
@@ -45,12 +45,13 @@ export interface GlobalState {
     logs: LogMessage[];
     extensions: Extension[];
     theme: Theme;
-};
-const theme = getCurrentTheme();
-const _initState = deSerialize<GlobalState>(initialState);
-_initState.theme = theme;
+}
 
-const _store = createStore(_initState);
+const theme = getCurrentTheme();
+
+(initialState as GlobalState).theme = theme;
+
+const _store = createStore<GlobalState>(initialState as GlobalState);
 const store = process.env.NODE_ENV === 'production' ?  _store : devtools(_store);
 
 export default store;

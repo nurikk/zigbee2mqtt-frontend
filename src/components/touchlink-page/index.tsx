@@ -44,9 +44,9 @@ export class TouchlinkPage extends Component<TouchlinkApi & GlobalState, {}> {
                             <tr key={touchlinkDevice.ieee_address}>
                                 <td>{idx + 1}</td>
                                 <td>{
-                                    devices.has(touchlinkDevice.ieee_address) ?
+                                    devices[touchlinkDevice.ieee_address] ?
                                         (<Link to={genDeviceDetailsLink(touchlinkDevice.ieee_address)}>{touchlinkDevice.ieee_address}</Link>) : touchlinkDevice.ieee_address}</td>
-                                <td>{devices.get(touchlinkDevice.ieee_address)?.friendly_name}</td>
+                                <td>{devices[touchlinkDevice.ieee_address]?.friendly_name}</td>
                                 <td>{touchlinkDevice.channel}</td>
                                 <td>
                                     <div className="btn-group float-right" role="group" aria-label="Basic example">

@@ -1,6 +1,6 @@
 {
-  "devices": {"dataType":"Map","value":[]},
-  "deviceStates": {"dataType":"Map","value":[]},
+  "devices": {},
+  "deviceStates": {},
   "touchlinkDevices": [],
   "touchlinkScanInProgress": false,
   "touchlinkIdentifyInProgress": false,

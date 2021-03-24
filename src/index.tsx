@@ -32,8 +32,6 @@ import ExtensionsEditorPage from "./components/extensions-editor";
 import StateNotifier from "./components/state-notifier/StateNotifier";
 import { ThemeSwitcherProvider } from "react-css-theme-switcher";
 
-
-
 const ConnectedDevicePageWrap: FunctionComponent<{ dev: string }> = ({ dev }) => (
     <ConnectedDevicePageWrap dev={dev} />
 );

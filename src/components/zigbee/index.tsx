@@ -85,7 +85,7 @@ export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
     };
     handleLongLoading = (): void=> {
         const { devices } = this.props;
-        if (devices.size == 0) {
+        if (Object.keys(devices).length == 0) {
             const error = <Fragment>
                 <strong>Loading devices takes too long time.</strong>
                 <div>Consider reading <a href="https://www.zigbee2mqtt.io/information/frontend.html">documentation</a></div>
@@ -107,9 +107,9 @@ export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
         const lastSeenType = getLastSeenType(bridgeInfo?.config.advanced);
 
 
-        devices.forEach((device) => {
+        Object.values(devices).forEach((device) => {
             if (device.type !== "Coordinator") {
-                const state = deviceStates.get(device.friendly_name) ?? {} as DeviceState;
+                const state = deviceStates[device.friendly_name] ?? {} as DeviceState;
                 tableData.push({
                     device,
                     state,
@@ -151,7 +151,7 @@ export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
     render(): JSX.Element {
         const { error } = this.state;
         const { devices } = this.props;
-        if (devices.size) {
+        if (Object.keys(devices).length) {
             return this.renderDevicesTable();
         }
         if (error) {

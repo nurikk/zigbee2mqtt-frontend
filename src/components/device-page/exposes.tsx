@@ -7,16 +7,16 @@ import { GlobalState } from "../../store";
 
 import Composite from "../features/composite/composite";
 import { FeatureWrapper } from "../features/composite/FeatureWrapper";
-interface PropsFromStore {
-    deviceStates: Map<string, DeviceState>;
-}
+
 interface ExposesProps {
     device: Device;
 }
-class Exposes extends Component<ExposesProps & PropsFromStore & StateApi, {}> {
+type PropsFromStore = Pick<GlobalState, 'deviceStates'>;
+
+class Exposes extends Component<ExposesProps & PropsFromStore & StateApi, unknown> {
     render() {
         const { device, deviceStates, setDeviceState, getDeviceState } = this.props;
-        const deviceState = deviceStates.get(device.friendly_name) ?? {} as DeviceState;
+        const deviceState = deviceStates[device.friendly_name] ?? {} as DeviceState;
         if (device.definition?.exposes) {
             return <Composite feature={{ features: device.definition.exposes } as CompositeFeature} type="composite" device={device} deviceState={deviceState}
                 onChange={(endpoint, value) => {

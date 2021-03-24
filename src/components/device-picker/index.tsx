@@ -7,7 +7,7 @@ interface DevicePickerProps {
     type: ObjectType;
     value: string | number;
     label?: string;
-    devices: Map<string, Device>;
+    devices: Record<string, Device>;
     groups?: Group[];
     onChange(device: Device | Group, type: ObjectType): void;
 }
@@ -16,8 +16,8 @@ export default class DevicePicker extends Component<DevicePickerProps & Omit<Sel
         const { onChange, devices, groups = [] } = this.props;
         const { value } = e.target as HTMLSelectElement;
 
-        if (devices.has(value)) {
-            onChange(devices.get(value) as Device, "device");
+        if (devices[value]) {
+            onChange(devices[value] as Device, "device");
         } else {
             const group = groups.find(g => parseInt(value, 10) === g.id);
             onChange(group as Group, "group");
@@ -29,7 +29,7 @@ export default class DevicePicker extends Component<DevicePickerProps & Omit<Sel
         let options = [<option key="hidden" hidden>Select device</option>];
 
         const devicesOptions = [] as JSX.Element[];
-        devices.forEach((device) => {
+        Object.values(devices).forEach((device) => {
             devicesOptions.push(<option
                 title={device.definition?.description}
                 key={device.ieee_address}

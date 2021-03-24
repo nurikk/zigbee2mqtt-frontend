@@ -53,7 +53,7 @@ const urls = [
     }
 ];
 type StartStopJoinButtonProps = {
-    devices: Map<string, Device>;
+    devices: Record<string, Device>;
 }
 const StartStopJoinButton: FunctionComponent<StartStopJoinButtonProps & Pick<BridgeApi, 'setPermitJoin'> & Pick<GlobalState, 'bridgeInfo'>> = ({ devices, setPermitJoin, bridgeInfo }) => {
     const { permit_join: permitJoin, permit_join_timeout: permitJoinTimeout } = bridgeInfo;
@@ -62,7 +62,7 @@ const StartStopJoinButton: FunctionComponent<StartStopJoinButtonProps & Pick<Bri
     const [selectedRouter, setSelectedRouter] = useState<Device>({} as Device);
     const routers: JSX.Element[] = [];
     const selectAndHide = (device: Device) => { setSelectedRouter(device); setIsComponentVisible(false) }
-    devices.forEach((device) => {
+    Object.values(devices).forEach((device) => {
         if (device.type == "Router") {
             routers.push(<li key={device.friendly_name}>
                 <Button<Device> item={device} className="dropdown-item" onClick={selectAndHide}>{device.friendly_name}</Button>
@@ -97,7 +97,7 @@ const StartStopJoinButton: FunctionComponent<StartStopJoinButtonProps & Pick<Bri
 }
 
 type PropsFromStore = {
-    devices: Map<string, Device>;
+    devices: Record<string, Device>;
     bridgeInfo: Record<string, unknown>;
 }
 

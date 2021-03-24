@@ -150,15 +150,13 @@ class Api {
 
             case "bridge/devices":
                 {
-                    const devicesMap = new Map();
-                    orderBy((data.payload as Device[]), "friendly_name").forEach((device) => {
-                        const dev = { ...device };
-                        dev.endpoints = new Map(Object.entries(device.endpoints));
-                        devicesMap.set(device.ieee_address, dev);
+                    const devicesMap = {};
+                    (data.payload as Device[]).forEach((device) => {
+                        devicesMap[device.ieee_address] = device;
                     });
                     store.setState({
                         devices: devicesMap
-                    })
+                    });
                 }
                 break;
 
@@ -268,14 +266,14 @@ class Api {
             notyf.error(e.message);
             notyf.error(event.data);
         }
+        console.log(data.topic);
 
         if (data.topic.startsWith("bridge/")) {
             this.procsessBridgeMessage(data);
         } else {
-            const { deviceStates } = store.getState();
-            const newDeviceStates = new Map(deviceStates);
-            newDeviceStates.set(data.topic, { ...newDeviceStates.get(data.topic), ...(data.payload as DeviceState) });
-            store.setState({ deviceStates: newDeviceStates });
+            let { deviceStates } = store.getState();
+            deviceStates = { ...deviceStates, ...{ [data.topic]: { ...deviceStates[data.topic], ...(data.payload as DeviceState) } } };
+            store.setState({ deviceStates });
         }
     }
 }

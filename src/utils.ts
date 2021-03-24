@@ -126,27 +126,9 @@ function replacer(key: string, value: unknown) {
     }
 }
 
-function reviver(key: string, value: { dataType: string; value: Iterable<readonly [unknown, unknown]>; }) {
-    if (typeof value === 'object' && value !== null) {
-        if (value.dataType === 'Map') {
-            return new Map(value.value);
-        }
-    }
-    return value;
-}
-
-export const serialize = (data: unknown): string => {
-    return JSON.stringify(data, replacer);
-}
-
-export function deSerialize<T>(str: string): T {
-    return JSON.parse(str, reviver);
-}
-
-
 export const download = (data: Record<string, unknown>, filename: string): void => {
     const zip = new JSZip();
-    zip.file(filename, serialize(data), { compression: 'DEFLATE' });
+    zip.file(filename, JSON.stringify(data, null, 4), { compression: 'DEFLATE' });
     zip.generateAsync({ type: "blob" }).then((content) => {
         FileSaver.saveAs(content, `${filename}.zip`);
     });
@@ -160,7 +142,7 @@ export const getEndpoints = (obj: Device | Group): Endpoint[] => {
     if (!obj) {
         return [];
     } else if ((obj as Device).endpoints) {
-        return Array.from((obj as Device).endpoints.keys());
+        return Object.keys((obj as Device).endpoints);
     } else if ((obj as Group).members) {
         return (obj as Group).members.map(g => g.endpoint);
     }

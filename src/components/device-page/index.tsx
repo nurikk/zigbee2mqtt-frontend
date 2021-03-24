@@ -60,7 +60,7 @@ export class DevicePage extends Component<DevicePageProps & GlobalState, {}> {
     renderContent() {
         const { match, devices } = this.props;
         const { tab, dev } = match.params;
-        const device = devices.get(dev) as Device;
+        const device = devices[dev];
 
         switch (tab) {
             case "info":
@@ -87,7 +87,7 @@ export class DevicePage extends Component<DevicePageProps & GlobalState, {}> {
     render() {
         const { devices, match } = this.props;
         const { dev } = match.params;
-        const device = devices.get(dev);
+        const device = devices[dev];
         if (!device) {
             return <div className="h-100 d-flex justify-content-center align-items-center">Unknown device</div>
         }

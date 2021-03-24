@@ -29,7 +29,7 @@ export default class Clusters extends Component<ClustersProps, {}> {
                 <li>
                     <span>{device.ieee_address}</span>
                     <ul>
-                        {Array.from(device.endpoints.entries()).map(([epName, epData]) => {
+                        {Object.entries(device.endpoints).map(([epName, epData]) => {
                             return (
                                 <li key={epName}>
                                     <span>Endpoint <strong>{epName}</strong></span>

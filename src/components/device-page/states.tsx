@@ -1,14 +1,11 @@
 import React, { Component } from "react";
-import { Device, DeviceState } from "../../types";
+import { Device } from "../../types";
 import actions from "../../actions/actions";
 import { StateApi } from "../../actions/StateApi";
 import { connect } from "unistore/react";
 import { GlobalState } from "../../store";
 
-interface PropsFromStore {
-    deviceStates: Map<string, DeviceState>;
-
-}
+type PropsFromStore = Pick<GlobalState, 'deviceStates'>;
 interface StatesProps {
     device: Device;
 }
@@ -21,11 +18,11 @@ class States extends Component<StatesProps & PropsFromStore & StateApi, {}> {
 
     render() {
         const { device, deviceStates } = this.props;
-        const deviceState = deviceStates.get(device.friendly_name) ?? {};
+        const deviceState = deviceStates[device.friendly_name] ?? {};
         return <pre>{JSON.stringify(deviceState, null, 4)}</pre>;
     }
 }
 
 const mappedProps = ["deviceStates"];
-const ConnectedDeviceStates = connect<StatesProps, {}, GlobalState, StateApi>(mappedProps, actions)(States);
+const ConnectedDeviceStates = connect<StatesProps, unknown, GlobalState, StateApi>(mappedProps, actions)(States);
 export default ConnectedDeviceStates;

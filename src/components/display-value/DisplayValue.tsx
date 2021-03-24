@@ -16,8 +16,6 @@ const booleansMap = {
         [true, 'Occupied'],
         [false, 'Clear']
     ]),
-
-    // eslint-disable-next-line @typescript-eslint/camelcase
     water_leak: new Map<boolean, string | JSX.Element>([
         [true, <span className={cx("text-danger", "animation-blinking")} key="Leaking">Leaking</span>],
         [false, 'Clear']

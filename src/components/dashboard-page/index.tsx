@@ -62,9 +62,9 @@ const Dashboard: React.FC<Props> = (props) => {
     const lastSeenType = getLastSeenType(bridgeInfo.config.advanced);
     return (
         <div className="row">
-            {Array.from(props.devices)
-                .filter(([, device]) => device.supported)
-                .map(([, device]) => ({ device, deviceState: deviceStates.get(device.friendly_name) ?? ({} as DeviceState) }))
+            {Object.values(props.devices)
+                .filter(device => device.supported)
+                .map(device => ({ device, deviceState: deviceStates[device.friendly_name] ?? ({} as DeviceState) }))
                 .map(({ device, deviceState }) => {
                     const _features = ((device.definition?.exposes ?? []) as (GenericExposedFeature | CompositeFeature)[]);
                     const filteredFeatures = _features

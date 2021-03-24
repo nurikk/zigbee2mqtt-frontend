@@ -9,7 +9,7 @@ import { getEndpoints } from "../../utils";
 
 
 interface PropsFromStore {
-    devices: Map<string, Device>;
+    devices: Record<string, Device>;
     groups: Group[];
 }
 interface BindProps {
@@ -34,7 +34,7 @@ export interface NiceBindingRule {
 const rule2key = (rule: NiceBindingRule): string => `${rule.source.endpoint}-${rule.isNew}${rule.source.ieee_address}-${rule.target.id}-${rule.target.ieee_address}-${rule.clusters.join('-')}`;
 const convertBidningsIntoNiceStructure = (device: Device): NiceBindingRule[] => {
     const bindings = {};
-    device.endpoints.forEach((description, endpoint) => {
+    Object.entries(device.endpoints).forEach(([endpoint, description]) => {
         description.bindings
             .forEach(b => {
                 let targetId = b.target.id ?? `${b.target.ieee_address}-${b.target.endpoint}`;
@@ -46,7 +46,6 @@ const convertBidningsIntoNiceStructure = (device: Device): NiceBindingRule[] => 
                 } else {
                     bindings[targetId] = {
                         source: {
-                            // eslint-disable-next-line @typescript-eslint/camelcase
                             ieee_address: device.ieee_address,
                             endpoint
                         },
