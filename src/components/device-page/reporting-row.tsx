@@ -28,7 +28,8 @@ const getClusters = (device: Device, endpoint: Endpoint, currentCluster: Cluster
         availableClusters = availableClusters.concat(ep.clusters.output);
         possibleClusters = possibleClusters.filter(cluster => !availableClusters.includes(cluster))
     }
-    if (!availableClusters.includes(currentCluster)) {
+
+    if (currentCluster && !availableClusters.includes(currentCluster)) {
         availableClusters.push(currentCluster);
     }
     return [

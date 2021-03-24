@@ -1,7 +1,6 @@
 import React, { ChangeEvent, Component, InputHTMLAttributes } from "react";
 import { Cluster } from "../../types";
 import { randomString } from "../../utils";
-import { label } from "../map/map.module.css";
 
 
 
