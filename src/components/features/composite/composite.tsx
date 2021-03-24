@@ -11,7 +11,7 @@ type CompositeType = "composite" | "light" | "switch" | "cover" | "lock" | "fan"
 
 interface CompositeProps extends BaseFeatureProps<CompositeFeature> {
     type: CompositeType;
-    stepsConfiguration?: object;
+    stepsConfiguration?: Record<string, unknown>;
     minimal?: boolean;
 }
 
@@ -23,7 +23,7 @@ interface CompositeState {
 
 export default class Composite extends Component<CompositeProps, CompositeState> {
     state: Readonly<CompositeState> = {}
-    onChange = (endpoint: Endpoint, value: object) => {
+    onChange = (endpoint: Endpoint, value: Record<string, unknown>) => {
         const { onChange, feature } = this.props;
         if (isCompositeFeature(feature)) {
             this.setState(value)
@@ -36,7 +36,7 @@ export default class Composite extends Component<CompositeProps, CompositeState>
         onChange(endpoint as Endpoint, property ? { [property]: this.state } : this.state);
     }
 
-    onRead = (endpoint: Endpoint, property: object) => {
+    onRead = (endpoint: Endpoint, property: Record<string, unknown>) => {
         const { onRead, feature } = this.props;
         if (isCompositeFeature(feature)) {
             onRead(endpoint, { [feature.property]: property })

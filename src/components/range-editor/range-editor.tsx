@@ -8,7 +8,7 @@ import EnumEditor, { ValueWithLabelOrPrimitive } from "../enum-editor/enum-edito
 type RangeProps = {
     value: number;
     unit?: string;
-    onChange(value: object | number): void;
+    onChange(value: Record<string, unknown> | number): void;
     steps?: ValueWithLabelOrPrimitive[];
     minimal?: boolean;
 }

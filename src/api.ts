@@ -266,7 +266,6 @@ class Api {
             notyf.error(e.message);
             notyf.error(event.data);
         }
-        console.log(data.topic);
 
         if (data.topic.startsWith("bridge/")) {
             this.procsessBridgeMessage(data);

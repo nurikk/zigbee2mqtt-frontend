@@ -14,15 +14,16 @@ import Textual from "../textual/textual";
 import Composite from "./composite";
 import Switch from "../switch/switch";
 import { FetatureWrapperProps } from "./FeatureWrapper";
+import { ValueWithLabelOrPrimitive } from "../../enum-editor/enum-editor";
 
 
 interface FeatureProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange"> {
     feature: CompositeFeature | GenericExposedFeature;
     deviceState: DeviceState;
     device: Device;
-    stepsConfiguration?: object;
-    onChange(endpoint: Endpoint, value: object): void;
-    onRead(endpoint: Endpoint, value: object): void;
+    stepsConfiguration?: Record<string, unknown>;
+    onChange(endpoint: Endpoint, value: Record<string, unknown>): void;
+    onRead(endpoint: Endpoint, value: Record<string, unknown>): void;
     featureWrapperClass: FunctionComponent<PropsWithChildren<FetatureWrapperProps>>;
     minimal?: boolean;
 }
@@ -41,7 +42,7 @@ export const Feature = (props: FeatureProps) => {
     } else if (isNumericFeature(feature)) {
         return <FeatureWrapper {...wrapperParams}>
             <Numeric feature={feature} {...genericParams}
-                steps={stepsConfiguration?.[feature.name]}
+                steps={stepsConfiguration?.[feature.name] as ValueWithLabelOrPrimitive[]}
             />
         </FeatureWrapper>
     } else if (isTextualFeature(feature)) {

@@ -10,7 +10,7 @@ import { JSONSchema7 } from "json-schema";
 import cloneDeep from "lodash/cloneDeep";
 import uiSchemas from "./uiSchema.json";
 import { BridgeApi } from "../../actions/BridgeApi";
-import { ISubmitEvent } from "@rjsf/core";
+import { ISubmitEvent, UiSchema } from "@rjsf/core";
 
 
 
@@ -238,7 +238,7 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
                     <Form key={keyName} schema={currentSchema}
                         formData={currentConfig}
                         onSubmit={this.onSettingsSave}
-                        uiSchema={uiSchemas[keyName]}
+                        uiSchema={uiSchemas[keyName] as UiSchema}
                     />
                 </div>
             </div>

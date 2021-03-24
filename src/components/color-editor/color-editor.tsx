@@ -11,7 +11,7 @@ type ColorProps = {
     value: Payload;
     steps?: string[];
     format: ColorFormat;
-    onChange(value: object): void;
+    onChange(value: Record<string, unknown>): void;
     minimal?: boolean;
 }
 
@@ -37,7 +37,7 @@ export const toRGB = (source: AnyColor, sourceFormat: ColorFormat): string => {
     }
 }
 
-const rgbToTargetFormat = (source: string, targetFormat: ColorFormat): object => {
+const rgbToTargetFormat = (source: string, targetFormat: ColorFormat): Record<string, unknown> => {
     switch (targetFormat) {
         case "color_hs":
             const [hue, saturation, v] = convertColors.hex.hsv(source);

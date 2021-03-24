@@ -6,7 +6,7 @@ import Button from "../../button";
 export type FetatureWrapperProps = {
     feature: CompositeFeature | GenericExposedFeature;
     deviceState?: DeviceState;
-    onRead(endpoint: Endpoint, property: object): void;
+    onRead(endpoint: Endpoint, property: Record<string, unknown>): void;
 };
 export const FeatureWrapper: FunctionComponent<PropsWithChildren<FetatureWrapperProps>> = (props) => {
     const { children, feature, onRead } = props;

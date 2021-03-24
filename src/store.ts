@@ -49,9 +49,9 @@ export interface GlobalState {
 
 const theme = getCurrentTheme();
 
-(initialState as GlobalState).theme = theme;
+(initialState as unknown as GlobalState).theme = theme;
 
-const _store = createStore<GlobalState>(initialState as GlobalState);
+const _store = createStore<GlobalState>(initialState as unknown as GlobalState);
 const store = process.env.NODE_ENV === 'production' ?  _store : devtools(_store);
 
 export default store;

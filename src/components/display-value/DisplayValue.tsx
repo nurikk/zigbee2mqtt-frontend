@@ -32,7 +32,7 @@ const booleansMap = {
     ])
 };
 
-export function DisplayValue(props: DisplayValueProps) {
+export function DisplayValue(props: DisplayValueProps): JSX.Element {
     const { value, name } = props;
     switch (typeof value) {
         case 'boolean':
