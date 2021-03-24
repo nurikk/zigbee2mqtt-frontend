@@ -25,18 +25,25 @@ const genericUiSchema: UiSchema = {
 const toType = (obj: unknown): string => ({}).toString.call(obj).match(/\s([a-zA-Z]+)/)[1].toLowerCase()
 
 export class DeviceSettings extends Component<DeviceSettingsProps & GlobalState & DeviceApi> {
+    getGenericDeviceSettingsSchema(): JSONSchema7 {
+        const { bridgeInfo: { config_schema: configSchema } } = this.props;
+        return (configSchema.definitions?.device ?? { properties: {} }) as JSONSchema7;
+    }
+    getDeviceConfig(): Record<string, unknown> {
+        const { bridgeInfo: { config }, device } = this.props;
+        return { ...config?.device_options, ...config?.devices[device.ieee_address] };
+    }
     updateConfig = (params: ISubmitEvent<KVP | KVP[]>): void => {
         const { formData } = params;
-        const { setDeviceOptions, type, bridgeInfo: { config_schema: configSchema, config }, device } = this.props;
-        const genericDeviceSettingsSchema = (configSchema.definitions?.device ?? { properties: {} }) as JSONSchema7;
-        const genericPropNames = Object.keys(genericDeviceSettingsSchema.properties as KVP);
-        const deviceConfig = { ...config?.device_options, ...config?.devices[device.ieee_address] };
+        const { setDeviceOptions, type, device } = this.props;
+
+        const genericPropNames = Object.keys(this.getGenericDeviceSettingsSchema().properties as KVP);
 
         if (type === "generic") {
             setDeviceOptions(device.ieee_address, formData);
         } else {
             const params = {};
-            Object.entries(deviceConfig)
+            Object.entries(this.getDeviceConfig())
                 .filter(([key]) => !genericPropNames.includes(key))
                 .forEach(([key]) => {
                     const updatedProp = (formData as KVP[]).find(f => f.key === key) as KVP;
@@ -51,9 +58,9 @@ export class DeviceSettings extends Component<DeviceSettingsProps & GlobalState 
     }
 
     getSchemaAndConfig(): { schema: JSONSchema7, data: KVP | KVP[], uiSchema: UiSchema } {
-        const { type, bridgeInfo: { config_schema: configSchema, config }, device } = this.props;
-        const genericDeviceSettingsSchema = (configSchema.definitions?.device ?? { properties: {} }) as JSONSchema7;
-        const deviceConfig = { ...config?.device_options, ...config?.devices[device.ieee_address] };
+        const { type } = this.props;
+        const genericDeviceSettingsSchema = this.getGenericDeviceSettingsSchema();
+        const deviceConfig = this.getDeviceConfig();
         if (type === "generic") {
             return { schema: genericDeviceSettingsSchema, data: deviceConfig, uiSchema: genericUiSchema };
         } else {
@@ -90,5 +97,5 @@ export class DeviceSettings extends Component<DeviceSettingsProps & GlobalState 
 
 const mappedProps = ["bridgeInfo"];
 
-const ConnectedDeviceSettingsPage = connect<DeviceSettingsProps, unknown, GlobalState,  DeviceApi>(mappedProps, actions)(DeviceSettings);
+const ConnectedDeviceSettingsPage = connect<DeviceSettingsProps, unknown, GlobalState, DeviceApi>(mappedProps, actions)(DeviceSettings);
 export default ConnectedDeviceSettingsPage;
