@@ -1,3 +1,14 @@
+## [0.3.112](https://github.com/nurikk/z2m-frontend/compare/0.3.111...0.3.112) (2021-03-24)
+
+
+### Bug Fixes
+
+* **attribute-picker:** fix undefined values ([d421b19](https://github.com/nurikk/z2m-frontend/commit/d421b19ce0d8a8cff37f445a637e11cacd5dca0d))
+* **device-settings:** fix rerender on device state update ([02e57fa](https://github.com/nurikk/z2m-frontend/commit/02e57fac64d80df89c71f56a3cfeb28a66f18a85))
+* **reporting:** fix pushing undefined cluster ([53d162c](https://github.com/nurikk/z2m-frontend/commit/53d162c0caf9c57918b892b26ad7d945ebace8f6))
+
+
+
 ## [0.3.111](https://github.com/nurikk/z2m-frontend/compare/0.3.110...0.3.111) (2021-03-23)
 
 
