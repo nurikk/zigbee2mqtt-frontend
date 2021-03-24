@@ -1,6 +1,6 @@
 /* eslint-disable react/display-name */
 import React, { Component, ReactNode } from "react";
-import { Device, DeviceState, KVP } from "../../types";
+import { Device, KVP } from "../../types";
 import { connect } from "unistore/react";
 import { GlobalState } from "../../store";
 import actions from "../../actions/actions";
@@ -16,7 +16,7 @@ type DeviceSettingsProps = {
     device: Device;
     type: SettingsType;
 }
-type PropsFromStore = Pick<GlobalState, 'deviceStates'>;
+
 
 const genericUiSchema: UiSchema = {
     "ui:order": ["friendly_name", "retain", "retention", "qos", "filtered_attributes", "*"]
@@ -24,7 +24,7 @@ const genericUiSchema: UiSchema = {
 
 const toType = (obj: unknown): string => ({}).toString.call(obj).match(/\s([a-zA-Z]+)/)[1].toLowerCase()
 
-export class DeviceSettings extends Component<DeviceSettingsProps & GlobalState & PropsFromStore & DeviceApi> {
+export class DeviceSettings extends Component<DeviceSettingsProps & GlobalState & DeviceApi> {
     updateConfig = (params: ISubmitEvent<KVP | KVP[]>): void => {
         const { formData } = params;
         const { setDeviceOptions, type, bridgeInfo: { config_schema: configSchema, config }, device } = this.props;
@@ -83,14 +83,12 @@ export class DeviceSettings extends Component<DeviceSettingsProps & GlobalState 
                 formData={data}
                 onSubmit={this.updateConfig}
                 uiSchema={uiSchema}
-
             />
         </>;
-
     }
 }
 
-const mappedProps = ["deviceStates", "bridgeInfo"];
+const mappedProps = ["bridgeInfo"];
 
-const ConnectedDeviceSettingsPage = connect<DeviceSettingsProps, {}, GlobalState, PropsFromStore & DeviceApi>(mappedProps, actions)(DeviceSettings);
+const ConnectedDeviceSettingsPage = connect<DeviceSettingsProps, unknown, GlobalState,  DeviceApi>(mappedProps, actions)(DeviceSettings);
 export default ConnectedDeviceSettingsPage;
