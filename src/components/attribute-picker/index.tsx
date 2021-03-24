@@ -25,7 +25,7 @@ export default class AttributePicker extends Component<AttributePickerProps & Om
         if (clusterDefinition) {
             attrs = Object.keys(clusterDefinition.attributes);
         }
-        if (!attrs.includes(value)) {
+        if (value !== undefined && !attrs.includes(value)) {
             attrs.push(value);
         }
         const options = attrs.map(attr => <option key={attr} value={attr}>{attr}</option>);
