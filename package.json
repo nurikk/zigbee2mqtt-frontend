@@ -97,7 +97,7 @@
         "webpack-bundle-analyzer": "^4.3.0",
         "webpack-cli": "4.5.0",
         "webpack-dev-server": "3.11.2",
-        "zigbee-herdsman": "^0.13.78",
+        "zigbee-herdsman": "^0.13.84",
         "zip-webpack-plugin": "^4.0.1"
     },
     "main": "index.js",
