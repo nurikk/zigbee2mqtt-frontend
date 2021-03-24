@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React, { ChangeEvent, Component } from "react";
 import { connect } from "unistore/react";
 import actions from "../../actions/actions";
-import { GlobalState } from "../../store";
+import { Extension, GlobalState } from "../../store";
 
 import exampleExtensionCode from './example-extension.js.txt';
 
@@ -18,35 +18,32 @@ type ExtensionsEditorPageState = {
 }
 export class ExtensionsEditorPage extends Component<GlobalState & ExtensionApi, ExtensionsEditorPageState> {
     state: Readonly<ExtensionsEditorPageState> = {};
-    loadExtension = (e) => {
+    loadExtension = (e: ChangeEvent<HTMLSelectElement>): void => {
         const { value } = e.target;
 
         this.setState({ currentExtension: value });
     }
-    onExtensionCodeChange = (code: string) => {
+    onExtensionCodeChange = (code: string): void => {
         const { updateExtensionCode } = this.props;
         const { currentExtension } = this.state;
-
         currentExtension && updateExtensionCode({ name: currentExtension, code });
     }
-    onSaveClick = () => {
+
+    getCurrentExtension(): Extension | undefined {
+        const { currentExtension } = this.state;
+        const { extensions } = this.props;
+        return extensions.find(e => e.name === currentExtension);
+    }
+    onSaveClick = (): void => {
         const { saveExtensionCode } = this.props;
-        const { currentExtension } = this.state;
-        const { extensions } = this.props;
-        const extension = extensions.find(e => e.name === currentExtension);
-
-        extension && saveExtensionCode(extension);
+        saveExtensionCode(this.getCurrentExtension() as Extension);
     }
-    removeExtension = () => {
+    removeExtension = (): void => {
         const { removeExtension } = this.props;
-        const { currentExtension } = this.state;
-        const { extensions } = this.props;
-        const extension = extensions.find(e => e.name === currentExtension);
-
-        extension && removeExtension(extension);
+        removeExtension(this.getCurrentExtension() as Extension);
     }
 
-    addNewExtension = () => {
+    addNewExtension = (): void => {
         const { updateExtensionCode } = this.props;
         const ts = Date.now() + '';
         const newName = prompt("Enter new extension name", `user-extension${ts}.js`);
@@ -56,45 +53,45 @@ export class ExtensionsEditorPage extends Component<GlobalState & ExtensionApi, 
             this.setState({ currentExtension: newName });
         }
     }
-    renderEditor() {
+    renderControls(): JSX.Element {
+        const { currentExtension } = this.state;
+        const { extensions } = this.props;
+        return <div className="row mb-2">
+            <div className="col-6">
+                <select value={currentExtension} className="form-control" onChange={this.loadExtension}>
+                    <option key="hidden" hidden>Select extension to edit</option>
+                    {extensions.map(({ name }) => <option key={name} value={name}>{name}</option>)}
+                </select>
+            </div>
+            <div className="col-6">
+                <Button onClick={this.addNewExtension} className="btn btn-success me-2"><i className="fa fa-plus"></i></Button>
+                <Button promt disabled={!currentExtension} onClick={this.removeExtension} className="btn btn-danger me-2"><i className="fa fa-trash"></i></Button>
+                <Button disabled={!currentExtension} onClick={this.onSaveClick} className="btn btn-primary">Save</Button>
+            </div>
+        </div>
+    }
+    renderEditor(): JSX.Element {
         const { currentExtension } = this.state;
         const { extensions, theme } = this.props;
         const code = extensions.find(e => e.name === currentExtension)?.code ?? "";
         const editorTheme = theme === "light" ? "github" : "dracula";
-        return (
-            <>
-                <div className="row mb-2">
-                    <div className="col-6">
-                        <select value={currentExtension} className="form-control" onChange={this.loadExtension}>
-                            <option key="hidden" hidden>Select extension to edit</option>
-                            {extensions.map(({ name }) => <option key={name} value={name}>{name}</option>)}
-                        </select>
-                    </div>
-                    <div className="col-6">
-                        <Button onClick={this.addNewExtension} className="btn btn-success me-2"><i className="fa fa-plus"></i></Button>
-                        <Button promt disabled={!currentExtension} onClick={this.removeExtension} className="btn btn-danger me-2"><i className="fa fa-trash"></i></Button>
-                        <Button disabled={!currentExtension} onClick={this.onSaveClick} className="btn btn-primary">Save</Button>
-                    </div>
-                </div>
-                <AceEditor
-                    mode="javascript"
-                    onChange={this.onExtensionCodeChange}
-                    name="UNIQUE_ID_OF_DIV"
-                    editorProps={{ $blockScrolling: true }}
-                    value={code}
-                    width="100%"
-                    maxLines={Infinity}
-                    theme={editorTheme}
-                    showPrintMargin={false}
-                />
-
-            </>
-        )
+        return <AceEditor
+            mode="javascript"
+            onChange={this.onExtensionCodeChange}
+            name="UNIQUE_ID_OF_DIV"
+            editorProps={{ $blockScrolling: true }}
+            value={code}
+            width="100%"
+            maxLines={Infinity}
+            theme={editorTheme}
+            showPrintMargin={false}
+        />
     }
 
-    render() {
+    render(): JSX.Element {
         return <div className="card h-100">
             <div className="card-body h-100">
+                {this.renderControls()}
                 {this.renderEditor()}
             </div>
         </div>
@@ -103,4 +100,4 @@ export class ExtensionsEditorPage extends Component<GlobalState & ExtensionApi, 
 
 const mappedProps = ["extensions", "theme"];
 
-export default connect<{}, {}, GlobalState, {}>(mappedProps, actions)(ExtensionsEditorPage);
+export default connect<unknown, unknown, GlobalState, unknown>(mappedProps, actions)(ExtensionsEditorPage);
