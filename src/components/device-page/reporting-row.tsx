@@ -47,6 +47,20 @@ const requiredRuleFileds = ['maximum_report_interval', 'minimum_report_interval'
 const isValidRule = (rule: NiceReportingingRule): boolean => {
     return requiredRuleFileds.every(field => rule[field] !== undefined)
 }
+
+type FormGroupInputProps = {
+    onChange(event: ChangeEvent<HTMLInputElement>): void;
+    label: string;
+    value: number;
+    name: string;
+}
+const FormGroupInput = (props: FormGroupInputProps): JSX.Element => {
+    const { onChange, label, value, name } = props
+    return <div className="form-group">
+        <label className="form-label text-nowrap">{label}</label>
+        <input onChange={onChange} value={value} required type="number" name={name} className="form-control" />
+    </div>
+}
 export default class ReportingRow extends Component<ReportingRowProps, ReportingRowState> {
 
     state: Readonly<ReportingRowState> = {
@@ -99,7 +113,7 @@ export default class ReportingRow extends Component<ReportingRowProps, Reporting
     }
 
 
-    render() {
+    render(): JSX.Element{
         const { rule, device } = this.props;
         const { stateRule } = this.state;
         const sourceEndpoints = getEndpoints(device);
@@ -116,16 +130,20 @@ export default class ReportingRow extends Component<ReportingRowProps, Reporting
                 <AttributePicker label="Attribute" value={stateRule.attribute} cluster={stateRule.cluster} onChange={this.setAttribute} />
             </div>
             <div className="col-md-2">
-                <div className="form-group">
-                    <label className="form-label text-nowrap">Min rep interval</label>
-                    <input onChange={this.changeHandler} value={stateRule.minimum_report_interval} required type="number" name="minimum_report_interval" className="form-control" />
-                </div>
+                <FormGroupInput
+                    onChange={this.changeHandler}
+                    value={stateRule.minimum_report_interval}
+                    name="minimum_report_interval"
+                    label="Min rep interval"
+                />
             </div>
             <div className="col-md-1">
-                <div className="form-group">
-                    <label className="form-label text-nowrap">Max rep interval</label>
-                    <input onChange={this.changeHandler} value={stateRule.maximum_report_interval} required type="number" name="maximum_report_interval" className="form-control" />
-                </div>
+                <FormGroupInput
+                    onChange={this.changeHandler}
+                    value={stateRule.maximum_report_interval}
+                    name="maximum_report_interval"
+                    label="Max rep interval"
+                />
             </div>
             <div className="col-md-1">
                 <div className="form-group">
