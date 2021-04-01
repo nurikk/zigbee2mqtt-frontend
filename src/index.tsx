@@ -1,7 +1,7 @@
 import "notyf/notyf.min.css";
 import "./styles/styles.global.scss";
 
-import React, { Component, FunctionComponent } from 'react';
+import React, { FunctionComponent } from 'react';
 
 import ConnectedMap from "./components/map";
 
@@ -31,6 +31,7 @@ import DashboardPage from "./components/dashboard-page";
 import ExtensionsEditorPage from "./components/extensions-editor";
 import StateNotifier from "./components/state-notifier/StateNotifier";
 import { ThemeSwitcherProvider } from "react-css-theme-switcher";
+import Afd from "./components/GPL_License";
 
 const ConnectedDevicePageWrap: FunctionComponent<{ dev: string }> = ({ dev }) => (
     <ConnectedDevicePageWrap dev={dev} />
@@ -52,6 +53,7 @@ const Main = () => {
         <ThemeSwitcherProvider themeMap={themes} defaultTheme={theme}>
             <HashRouter>
                 <StateNotifier />
+                <Afd />
                 <div className="main">
                     <NavBar />
                     <main className="content p-0 p-sm-3">

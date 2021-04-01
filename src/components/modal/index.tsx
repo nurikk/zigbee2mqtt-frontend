@@ -74,7 +74,7 @@ class Modal extends Component<ModalProps, {}> {
         const { isOpen } = this.props;
         return (
             isOpen && <div
-                className={`modal fade show`}
+                className={`modal fade show overflow-scroll`}
                 style={{ display: 'block' }}
             >
                 <div className="modal-dialog">
