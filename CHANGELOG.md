@@ -1,3 +1,12 @@
+## [0.3.115](https://github.com/nurikk/z2m-frontend/compare/0.3.114...0.3.115) (2021-04-03)
+
+
+### Features
+
+* **dev-console:** add dev console ([a87e0cb](https://github.com/nurikk/z2m-frontend/commit/a87e0cbc0aefca3aee6d3bfe7237f3ac0f7d964f))
+
+
+
 ## [0.3.114](https://github.com/nurikk/z2m-frontend/compare/0.3.113...0.3.114) (2021-04-01)
 
 
