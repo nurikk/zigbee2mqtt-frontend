@@ -77,7 +77,7 @@ export class DeviceSettings extends Component<DeviceSettingsProps & GlobalState 
     renderHelp(): ReactNode {
         const { type, device } = this.props;
         if (type === "specific") {
-            return <h2>Get possible device specific praemeters on <ModelLink device={device} anchor="device-type-specific-configuration" /></h2>
+            return <h2>Get possible device specific parameters on <ModelLink device={device} anchor="device-type-specific-configuration" /></h2>
         }
     }
     render(): ReactNode {
