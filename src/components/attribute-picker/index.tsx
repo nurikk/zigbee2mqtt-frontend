@@ -2,20 +2,29 @@ import React, { ChangeEvent, Component, InputHTMLAttributes } from "react";
 import { Attribute, Cluster } from "../../types";
 
 import Clusters from "zigbee-herdsman/dist/zcl/definition/cluster"
+import DataType from "zigbee-herdsman/dist/zcl/definition/dataType";
+
+export interface AttributeDefinition {
+    ID: number;
+    type: DataType;
+    manufacturerCode?: number;
+}
 
 interface AttributePickerProps {
     cluster: Cluster;
     value: Attribute;
     label?: string;
-    onChange: (attr: Attribute) => void;
+    onChange: (attr: Attribute, definition: AttributeDefinition) => void;
 }
 // eslint-disable-next-line react/prefer-stateless-function
 export default class AttributePicker extends Component<AttributePickerProps & Omit<InputHTMLAttributes<HTMLSelectElement>, 'onChange'>, {}> {
 
     onChange = (e: ChangeEvent<HTMLSelectElement>): void => {
-        const { onChange } = this.props;
+        const { onChange, cluster } = this.props;
         const { value } = e.target;
-        onChange(value);
+        const currentCluster = Clusters[cluster];
+        const attributeInfo = currentCluster.attributes[value]
+        onChange(value, attributeInfo);
     }
     render() {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars

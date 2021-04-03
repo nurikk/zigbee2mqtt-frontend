@@ -40,7 +40,7 @@ export class DeviceSettings extends Component<DeviceSettingsProps & GlobalState 
         const genericPropNames = Object.keys(this.getGenericDeviceSettingsSchema().properties as KVP);
 
         if (type === "generic") {
-            setDeviceOptions(device.ieee_address, formData);
+            setDeviceOptions(device.ieee_address, formData as Record<string, unknown>);
         } else {
             const params = {};
             Object.entries(this.getDeviceConfig())

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "unistore/react";
 import actions from "../../actions/actions";
-import { GlobalState } from "../../store";
+import { GlobalState, LogMessage } from "../../store";
 import cx from "classnames";
 import escapeRegExp from "lodash/escapeRegExp";
 import { BridgeApi } from "../../actions/BridgeApi";
@@ -10,8 +10,8 @@ type LogsPageState = {
     search: string;
     logLevel: string;
 }
-const ALL = 'all';
-const TextWrapper = ({text}) => <>{text}</>;
+export const ALL = 'all';
+const TextWrapper = ({ text }) => <>{text}</>;
 const Highlighted = ({ text = '', highlight = '' }) => {
     if (!highlight.trim()) {
         return <TextWrapper text={text} />
@@ -27,10 +27,28 @@ const Highlighted = ({ text = '', highlight = '' }) => {
     )
 }
 
+type LogRowProps = {
+    logLevel: string;
+    log: LogMessage;
+    search: string;
+}
+export function LogRow(props: LogRowProps): JSX.Element {
+    const { logLevel, log, search } = props
+    return <div>
+        {logLevel === ALL && <><span className={cx("badge", {
+            'bg-danger': log.level === 'error',
+            'bg-warning': log.level === 'warning',
+            'bg-info': log.level === 'info',
+            'bg-secondary': ['error', 'warning', 'info'].includes(log.level) === false,
+        }, "text-capitalize")}>{log.level}</span>&nbsp;</>}<code>
+            <Highlighted text={log.message} highlight={search}></Highlighted>
+        </code></div>
+}
+
 const logLevels = [ALL, 'debug', 'info', 'warn', 'error'];
 export class LogsPage extends Component<GlobalState & BridgeApi, LogsPageState> {
     state = { search: '', logLevel: ALL }
-    renderSearch() {
+    renderSearch(): JSX.Element {
         const { search } = this.state;
         return <div className="card">
             <div className="card-body">
@@ -49,7 +67,7 @@ export class LogsPage extends Component<GlobalState & BridgeApi, LogsPageState> 
             </div>
         </div>;
     }
-    render() {
+    render(): JSX.Element {
         let { logs } = this.props;
         const { search, logLevel } = this.state;
 
@@ -66,15 +84,7 @@ export class LogsPage extends Component<GlobalState & BridgeApi, LogsPageState> 
                     {logs.length == 0 ? <h1>You don&apos;t have {logLevel === ALL ? 'any' : logLevel} logs</h1> : null}
                     <div className="overflow-auto">
                         {
-                            logs.map((l, idx) => <div key={idx}>
-                                {logLevel === ALL && <><span className={cx("badge", {
-                                    'bg-danger': l.level === 'error',
-                                    'bg-warning': l.level === 'warning',
-                                    'bg-info': l.level === 'info',
-                                    'bg-secondary': ['error', 'warning', 'info'].includes(l.level) === false,
-                                }, "text-capitalize")}>{l.level}</span>&nbsp;</>}<code>
-                                    <Highlighted text={l.message} highlight={search}></Highlighted>
-                                </code></div>)
+                            logs.map((log, idx) => <LogRow key={idx} log={log} search={search} logLevel={logLevel} />)
                         }
                     </div>
                 </div>

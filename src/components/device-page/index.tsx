@@ -11,7 +11,9 @@ import ConnectedDeviceExposes from "./exposes";
 import Clusters from "./clusters";
 import DeviceSettings from "./settings";
 import styles from "./style.css";
-import { Device } from "../../types";
+
+import DevConsole from "./dev-console";
+import { DeviceApi } from "../../actions/DeviceApi";
 
 
 type UrlParams = {
@@ -21,7 +23,7 @@ type UrlParams = {
 type DevicePageProps = RouteComponentProps<UrlParams>;
 
 
-type TabName = "info" | "bind" | "state" | "exposes" | "clusters" | "reporting" | "settings" | "settings-specific";
+type TabName = "info" | "bind" | "state" | "exposes" | "clusters" | "reporting" | "settings" | "settings-specific" | "dev-console";
 const getDeviceLinks = (dev: string) => ([
     {
         title: 'About',
@@ -54,13 +56,21 @@ const getDeviceLinks = (dev: string) => ([
     {
         title: 'Clusters',
         url: `/device/${dev}/clusters`
-    }
+    },
+    {
+        title: 'Dev console',
+        url: `/device/${dev}/dev-console`
+    },
+
 ]);
-export class DevicePage extends Component<DevicePageProps & GlobalState, {}> {
-    renderContent() {
-        const { match, devices } = this.props;
+export class DevicePage extends Component<DevicePageProps & GlobalState & DeviceApi, {}> {
+    renderContent(): JSX.Element {
+        const { match, devices, deviceStates, logs } = this.props;
+        const { readDeviceAttributes, writeDeviceAttributes } = this.props;
         const { tab, dev } = match.params;
         const device = devices[dev];
+        const deviceState = deviceStates[device.friendly_name];
+
 
         switch (tab) {
             case "info":
@@ -79,12 +89,21 @@ export class DevicePage extends Component<DevicePageProps & GlobalState, {}> {
                 return <DeviceSettings device={device} type="generic" />
             case "settings-specific":
                 return <DeviceSettings device={device} type="specific" />
+
+            case "dev-console":
+                return <DevConsole
+                    device={device}
+                    deviceState={deviceState}
+                    logs={logs}
+                    readDeviceAttributes={readDeviceAttributes}
+                    writeDeviceAttributes={writeDeviceAttributes}
+                />
             default:
                 return <Redirect to={`/device/${dev}/info`} />;
         }
 
     }
-    render() {
+    render(): JSX.Element {
         const { devices, match } = this.props;
         const { dev } = match.params;
         const device = devices[dev];
@@ -114,6 +133,6 @@ export class DevicePage extends Component<DevicePageProps & GlobalState, {}> {
     }
 }
 const devicePageWithRouter = withRouter(DevicePage);
-const mappedProps = ["devices"];
+const mappedProps = ["devices", "deviceStates", "logs"];
 const ConnectedDevicePage = connect<{}, {}, GlobalState, {}>(mappedProps, actions)(devicePageWithRouter);
 export default ConnectedDevicePage;
