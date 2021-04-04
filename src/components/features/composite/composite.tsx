@@ -23,7 +23,7 @@ interface CompositeState {
 
 export default class Composite extends Component<CompositeProps, CompositeState> {
     state: Readonly<CompositeState> = {}
-    onChange = (endpoint: Endpoint, value: Record<string, unknown>) => {
+    onChange = (endpoint: Endpoint, value: Record<string, unknown>): void=> {
         const { onChange, feature } = this.props;
         if (isCompositeFeature(feature)) {
             this.setState(value)
@@ -31,12 +31,12 @@ export default class Composite extends Component<CompositeProps, CompositeState>
             onChange(endpoint, value);
         }
     }
-    onApplyClick = () => {
+    onApplyClick = (): void=> {
         const { onChange, feature: { endpoint, property } } = this.props;
         onChange(endpoint as Endpoint, property ? { [property]: this.state } : this.state);
     }
 
-    onRead = (endpoint: Endpoint, property: Record<string, unknown>) => {
+    onRead = (endpoint: Endpoint, property: Record<string, unknown>): void=> {
         const { onRead, feature } = this.props;
         if (isCompositeFeature(feature)) {
             onRead(endpoint, { [feature.property]: property })
@@ -44,7 +44,7 @@ export default class Composite extends Component<CompositeProps, CompositeState>
             onRead(endpoint, property);
         }
     }
-    render() {
+    render(): JSX.Element[] {
         const MAGIC_NO_ENDPOINT = 'MAGIC_NO_ENDPOINT';
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { feature, device, deviceState, onRead: _onRead, onChange: _onChange, featureWrapperClass, minimal } = this.props;

@@ -1,7 +1,7 @@
 import React, { FunctionComponent, PropsWithChildren } from "react";
 
 import { CompositeFeature, Device, DeviceState, Endpoint, GenericExposedFeature } from "../../../types";
-import { isBinaryFeature, isNumericFeature, isTextualFeature, isEnumFeature, isLightFeature, isSwitchFeature, isCoverFeature, isLockFeature, isColorFeature, isClimateFeature, isCompositeFeature } from "../../device-page/type-guards";
+import { isBinaryFeature, isNumericFeature, isTextualFeature, isEnumFeature, isLightFeature, isSwitchFeature, isCoverFeature, isLockFeature, isColorFeature, isClimateFeature, isCompositeFeature, isFanFeature } from "../../device-page/type-guards";
 import Binary from "../binary/binary";
 import Climate from "../climate/climate";
 import Cover from "../cover/cover";
@@ -15,6 +15,7 @@ import Composite from "./composite";
 import Switch from "../switch/switch";
 import { FetatureWrapperProps } from "./FeatureWrapper";
 import { ValueWithLabelOrPrimitive } from "../../enum-editor/enum-editor";
+import Fan from "../fan/fan";
 
 
 interface FeatureProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange"> {
@@ -28,7 +29,7 @@ interface FeatureProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onCha
     minimal?: boolean;
 }
 
-export const Feature = (props: FeatureProps) => {
+export const Feature = (props: FeatureProps): JSX.Element => {
 
     const { feature, device, deviceState, stepsConfiguration, onRead, onChange, featureWrapperClass: FeatureWrapper, minimal } = props;
 
@@ -67,6 +68,8 @@ export const Feature = (props: FeatureProps) => {
         </FeatureWrapper>
     } else if (isClimateFeature(feature)) {
         return <Climate feature={feature} {...genericParams} />
+    } else if (isFanFeature(feature)) {
+        return <Fan feature={feature} {...genericParams} />
     } else if (isCompositeFeature(feature)) {
         return <FeatureWrapper {...wrapperParams}>
             <Composite type="composite" feature={feature} {...genericParams} />
