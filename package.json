@@ -71,7 +71,7 @@
         "file-saver": "^2.0.5",
         "fork-ts-checker-webpack-plugin": "^6.1.0",
         "html-webpack-plugin": "^5.2.0",
-        "husky": "^5.1.1",
+        "husky": "^6.0.0",
         "jszip": "^3.6.0",
         "line-reader": "^0.4.0",
         "lodash": "^4.17.21",
