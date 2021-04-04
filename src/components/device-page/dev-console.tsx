@@ -1,17 +1,17 @@
 import React, { ChangeEvent, Component } from "react";
 import { Attribute, Cluster, Device, DeviceState } from "../../types";
 import ClusterPicker, { PickerType } from "../cluster-picker";
-import Clusters from "zigbee-herdsman/dist/zcl/definition/cluster"
+
+import DataType from "zigbee-herdsman/dist/zcl/definition/dataType";
+import ZclCluster from "zigbee-herdsman/dist/zcl/definition/cluster";
 import AttributePicker, { AttributeDefinition } from "../attribute-picker";
 import Button from "../button";
-import { DeviceApi, lastAttributeReadResultKey } from "../../actions/DeviceApi";
+import { DeviceApi } from "../../actions/DeviceApi";
 import { LogMessage } from "../../store";
 import { ALL, LogRow } from "../logs-page";
-import cx from "classnames";
 
 interface DevConsoleProps {
     device: Device;
-    deviceState: DeviceState;
     logs: LogMessage[];
 }
 export type AttributeInfo = {
@@ -34,13 +34,27 @@ type AttributeValueEditorProps = {
     value?: unknown;
 }
 function AttributeValueEditor(props: AttributeValueEditorProps): JSX.Element {
-    const { value, onChange, attribute } = props;
-    const onValueChanged = (e: ChangeEvent<HTMLInputElement>): void => {
-        onChange(attribute, e.target.value);
+    const { value, onChange, attribute, definition } = props;
+    const typesMap = {
+        [DataType.charStr]: 'string',
+        [DataType.longCharStr]: 'string',
     }
-    return <input className="form-control" type="text" value={value as string | number} onChange={onValueChanged}></input>
-}
+    const type = typesMap[definition.type] ?? 'number';
 
+    const onValueChanged = (e: ChangeEvent<HTMLInputElement>): void => {
+        const val = type === 'number' ? e.target.valueAsNumber : e.target.value;
+        onChange(attribute, val);
+    }
+
+
+    return <input className="form-control" type={type} value={value as string | number} onChange={onValueChanged}></input>
+}
+const logStartingStrings = [
+    'Read result of',
+    "Publish 'set' 'read' to",
+    "Publish 'set' 'write' to",
+    "Wrote "
+]
 export default class DevConsole extends Component<DevConsoleProps & Pick<DeviceApi, "readDeviceAttributes" | "writeDeviceAttributes">, DevConsoleState> {
     state: Readonly<DevConsoleState> = {
         cluster: "",
@@ -82,20 +96,12 @@ export default class DevConsole extends Component<DevConsoleProps & Pick<DeviceA
     }
 
     renderLastResult(): JSX.Element[] {
-        const { deviceState, logs } = this.props;
-        const lastAttributeReadResult = deviceState[lastAttributeReadResultKey];
-        const filtered = logs.filter(l =>
-            l.message.startsWith('Read result of') ||
-            l.message.startsWith("Publish 'set' 'read' to") ||
-            l.message.startsWith("Publish 'set' 'write' to")
-        );
+        const { logs } = this.props;
+        const filtered = logs.filter(l => logStartingStrings.some(startString => l.message.startsWith(startString)));
         const lastLogMessage = filtered.length > 0 ? filtered[filtered.length - 1] : null;
         const res: JSX.Element[] = [];
         if (lastLogMessage) {
             res.push(<LogRow key="log" log={lastLogMessage} search={""} logLevel={ALL} />)
-        }
-        if (lastAttributeReadResult) {
-            res.push(<pre key="data">{JSON.stringify(deviceState[lastAttributeReadResultKey], undefined, 4)}</pre>);
         }
         return res;
     }
@@ -146,7 +152,7 @@ export default class DevConsole extends Component<DevConsoleProps & Pick<DeviceA
             <div className="mb-3 row">
                 <div className="col-6 col-sm-3">
                     <ClusterPicker label="Cluster" pickerType={PickerType.SINGLE}
-                        clusters={Object.keys(Clusters)}
+                        clusters={Object.keys(ZclCluster)}
                         value={cluster}
                         onChange={this.onClusterChange} />
                 </div>
@@ -165,27 +171,11 @@ export default class DevConsole extends Component<DevConsoleProps & Pick<DeviceA
             </div>
         </>
     }
-    renderWrite(): JSX.Element {
-        return <div>renderWrite</div>
-    }
-    renderModes(): JSX.Element {
-        // const {mode} = this.state;
-        // switch (mode) {
-        //     case "read":
-        //         return this.renderRead();
-        //     case "write":
-        //         return this.renderWrite();
-        //     default:
-        //         return <div>unknown mode {mode}</div>
-
-        // }
-        return this.renderRead();
-    }
     render(): JSX.Element {
 
         return <div>
 
-            {this.renderModes()}
+            {this.renderRead()}
             {this.renderLastResult()}
         </div>
     }

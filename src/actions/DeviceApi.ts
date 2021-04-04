@@ -2,7 +2,6 @@ import api from "../api";
 import { AttributeInfo } from "../components/device-page/dev-console";
 import { Attribute, Cluster } from "../types";
 
-export const lastAttributeReadResultKey = "lastAttributeReadResult";
 export interface DeviceApi {
     renameDevice(
         old: string,
@@ -51,7 +50,7 @@ export default {
 
 
     readDeviceAttributes(state, id: string, cluster: Cluster, attributes: Attribute[], options: Record<string, unknown>): Promise<void> {
-        return api.send(`${id}/set`, { read: { cluster, attributes, options, state_property: lastAttributeReadResultKey } });
+        return api.send(`${id}/set`, { read: { cluster, attributes, options } });
     },
 
     writeDeviceAttributes(state, id: string, cluster: Cluster, attributes: AttributeInfo[], options: Record<string, unknown>): Promise<void> {

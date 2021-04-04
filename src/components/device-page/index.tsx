@@ -65,12 +65,10 @@ const getDeviceLinks = (dev: string) => ([
 ]);
 export class DevicePage extends Component<DevicePageProps & GlobalState & DeviceApi, {}> {
     renderContent(): JSX.Element {
-        const { match, devices, deviceStates, logs } = this.props;
+        const { match, devices, logs } = this.props;
         const { readDeviceAttributes, writeDeviceAttributes } = this.props;
         const { tab, dev } = match.params;
         const device = devices[dev];
-        const deviceState = deviceStates[device.friendly_name];
-
 
         switch (tab) {
             case "info":
@@ -89,11 +87,9 @@ export class DevicePage extends Component<DevicePageProps & GlobalState & Device
                 return <DeviceSettings device={device} type="generic" />
             case "settings-specific":
                 return <DeviceSettings device={device} type="specific" />
-
             case "dev-console":
                 return <DevConsole
                     device={device}
-                    deviceState={deviceState}
                     logs={logs}
                     readDeviceAttributes={readDeviceAttributes}
                     writeDeviceAttributes={writeDeviceAttributes}
