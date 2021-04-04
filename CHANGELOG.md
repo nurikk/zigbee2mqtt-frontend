@@ -1,3 +1,12 @@
+## [0.3.116](https://github.com/nurikk/z2m-frontend/compare/0.3.115...0.3.116) (2021-04-04)
+
+
+### Features
+
+* **dev-console:** fix input type for not string values ([a17d6ff](https://github.com/nurikk/z2m-frontend/commit/a17d6ff5ec94fe6b780d75407d122d3f8d81ec42))
+
+
+
 ## [0.3.115](https://github.com/nurikk/z2m-frontend/compare/0.3.114...0.3.115) (2021-04-03)
 
 
