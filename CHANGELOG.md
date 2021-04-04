@@ -1,3 +1,12 @@
+## [0.3.118](https://github.com/nurikk/z2m-frontend/compare/0.3.117...0.3.118) (2021-04-04)
+
+
+### Bug Fixes
+
+* **exposes:** implement Fan rendering ([fa982f8](https://github.com/nurikk/z2m-frontend/commit/fa982f87e066dd8da54059465c134462c841ca84))
+
+
+
 ## [0.3.117](https://github.com/nurikk/z2m-frontend/compare/0.3.115...0.3.117) (2021-04-04)
 
 
