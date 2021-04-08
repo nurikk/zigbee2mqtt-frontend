@@ -1,3 +1,12 @@
+## [0.3.119](https://github.com/nurikk/z2m-frontend/compare/0.3.118...0.3.119) (2021-04-08)
+
+
+### Features
+
+* **device-image:** add support for definition.icon ([e303f4f](https://github.com/nurikk/z2m-frontend/commit/e303f4fb4c1fbcbfe0e8221983aca88c8864927f))
+
+
+
 ## [0.3.118](https://github.com/nurikk/z2m-frontend/compare/0.3.117...0.3.118) (2021-04-04)
 
 
