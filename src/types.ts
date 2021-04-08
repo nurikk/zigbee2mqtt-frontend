@@ -197,6 +197,7 @@ export interface DeviceDefinition {
     vendor: string;
     exposes: GenericExposedFeature[] | CompositeFeature[];
     supports_ota: boolean;
+    icon?: string;
 }
 export interface ReportingConfig {
     cluster: Cluster;
