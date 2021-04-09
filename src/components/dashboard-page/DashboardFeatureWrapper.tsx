@@ -33,7 +33,7 @@ const typeToClassMap = {
     power: ['fa-power-off', 'text-success'],
     energy: ['fa-plug', 'text-info'],
     frequency: ['fa-wave-square'],
-    tamper: ['fa-exclamation-circle'],
+    tamper: ['fa-exclamation-circle', 'text-danger'],
     smoke: ['fa-smoking', 'text-danger'],
     radiation_dose_per_hour: ['fa-radiation', 'text-danger'],
     radioactive_events_per_minute: ['fa-radiation-alt', 'text-warning'],
