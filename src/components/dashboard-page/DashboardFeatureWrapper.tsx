@@ -48,6 +48,7 @@ const typeToClassMap = {
     mode: ['fa-user-cog', 'text-warning'],
     sound: ['fa-volume-up', 'text-info'],
     position: ['fa-percent', 'text-info'],
+    alarm: ['fa-exclamation-triangle', 'text-danger'],
     /* eslint-enable @typescript-eslint/camelcase */
 };
 const getGenericFeatureIcon = (name: string, value: unknown): string => {
