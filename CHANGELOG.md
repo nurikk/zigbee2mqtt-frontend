@@ -1,3 +1,12 @@
+## [0.3.120](https://github.com/nurikk/z2m-frontend/compare/0.3.119...0.3.120) (2021-04-24)
+
+
+### Features
+
+* **logs-page:** add clear screen and log level change ([7a77c86](https://github.com/nurikk/z2m-frontend/commit/7a77c86213e1d4aeafe15ae9cf0a757b18b66152))
+
+
+
 ## [0.3.119](https://github.com/nurikk/z2m-frontend/compare/0.3.118...0.3.119) (2021-04-08)
 
 
