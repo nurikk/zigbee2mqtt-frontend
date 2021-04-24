@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "unistore/react";
-import actions from "../../actions/actions";
+import actions, { UtilsApi } from "../../actions/actions";
 import { GlobalState, LogMessage } from "../../store";
 import cx from "classnames";
 import escapeRegExp from "lodash/escapeRegExp";
 import { BridgeApi } from "../../actions/BridgeApi";
+import ConfigureLogs from "./log-level-config";
+
 
 type LogsPageState = {
     search: string;
@@ -46,9 +48,12 @@ export function LogRow(props: LogRowProps): JSX.Element {
 }
 
 const logLevels = [ALL, 'debug', 'info', 'warn', 'error'];
-export class LogsPage extends Component<GlobalState & BridgeApi, LogsPageState> {
+
+
+export class LogsPage extends Component<GlobalState & BridgeApi & UtilsApi, LogsPageState> {
     state = { search: '', logLevel: ALL }
     renderSearch(): JSX.Element {
+        const { clearLogs, bridgeInfo: { config_schema, config }, updateBridgeConfig } = this.props;
         const { search } = this.state;
         return <div className="card">
             <div className="card-body">
@@ -62,6 +67,19 @@ export class LogsPage extends Component<GlobalState & BridgeApi, LogsPageState> 
                     <div className="col-12">
                         <label htmlFor="search-filter" className="form-label">Filter by text</label>
                         <input id="search-filter" className="form-control col-10" placeholder="Enter search criteria" value={search} onChange={(e) => this.setState({ search: e.target.value })} type="text"></input>
+                    </div>
+                    <div className="col-12">
+                        <ConfigureLogs
+                            schema={config_schema}
+                            schemaKey='properties.advanced.properties.log_level'
+                            config={config}
+                            configKey='advanced.log_level'
+                            onChange={updateBridgeConfig}
+                        />
+                    </div>
+                    <div className="col-12">
+                        <label htmlFor="reset">&nbsp;</label>
+                        <input id="reset" type="button" onClick={clearLogs} className="btn btn-primary form-control" value="Clear screen" />
                     </div>
                 </form>
             </div>

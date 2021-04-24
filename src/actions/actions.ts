@@ -18,6 +18,7 @@ import { Theme } from "../components/theme-switcher";
 
 export interface UtilsApi {
     exportState(): Promise<void>;
+    clearLogs(): Promise<void>;
 }
 
 export interface MapApi {
@@ -31,7 +32,7 @@ export interface ThemeActions {
 }
 
 
-const actions = (store: Store<GlobalState>): object => ({
+const actions = (store: Store<GlobalState>): Record<string, (state: GlobalState, ...rest: unknown[]) => Promise<void>> => ({
     ...bridgeActions,
     ...deviceActions,
     ...groupActions,
@@ -47,7 +48,7 @@ const actions = (store: Store<GlobalState>): object => ({
     },
 
     exportState(state): Promise<void> {
-        download(state, 'state.json');
+        download(state as unknown as Record<string, unknown>, 'state.json');
         return Promise.resolve();
     },
     configureReport(state, device: string, config: ReportingConfig): Promise<void> {
@@ -59,6 +60,11 @@ const actions = (store: Store<GlobalState>): object => ({
     setTheme(state, theme: Theme): Promise<void> {
         saveCurrentTheme(theme);
         store.setState({ theme });
+        return Promise.resolve();
+    },
+
+    clearLogs(state): Promise<void> {
+        store.setState({ logs: [] });
         return Promise.resolve();
     }
 });
