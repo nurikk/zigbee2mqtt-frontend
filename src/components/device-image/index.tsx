@@ -49,7 +49,7 @@ const DeviceImage: FunctionComponent<DeviceImageProps & ImgHTMLAttributes<HTMLDi
             case "img":
             default:
                 return <div className={cx(className, "position-relative")} {...rest}>
-                    <img onError={onImageError} src={src} className={style.img} />
+                    <img crossOrigin={"anonymous"} onError={onImageError} src={src} className={style.img} />
                     {interviewSpinner}
                     {otaSpinner}
                     {unseccessfullInterview}
