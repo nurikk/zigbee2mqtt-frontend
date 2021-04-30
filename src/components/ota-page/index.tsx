@@ -76,7 +76,7 @@ class OtaPage extends Component<GlobalState & OtaApi, {}> {
                             <th>Manufacturer</th>
                             <th>Model</th>
                             <th>Firmware build date</th>
-                            <th>Firwmare version</th>
+                            <th>Firmware version</th>
                             <th><Button className="btn btn-danger btn-sm" onClick={this.checkAllOTA} promt>Check all OTA</Button></th>
                         </tr>
                     </thead>
