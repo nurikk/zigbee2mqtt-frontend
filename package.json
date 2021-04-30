@@ -54,7 +54,7 @@
         "bootstrap": "^5.0.0-alpha3",
         "classnames": "^2.2.6",
         "color-convert": "^2.0.1",
-        "concurrently": "^6.0.0",
+        "concurrently": "^6.0.2",
         "conventional-changelog-cli": "^2.1.1",
         "copy-webpack-plugin": "^8.0.0",
         "css-loader": "^5.2.4",
