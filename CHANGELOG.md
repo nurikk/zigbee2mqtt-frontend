@@ -1,3 +1,12 @@
+# [0.4.0](https://github.com/nurikk/z2m-frontend/compare/0.3.121...0.4.0) (2021-05-01)
+
+
+### Bug Fixes
+
+* **ota:** typo in table header ([#458](https://github.com/nurikk/z2m-frontend/issues/458)) ([ab47191](https://github.com/nurikk/z2m-frontend/commit/ab4719184619441d049358adb01a181a6ba6ee3f))
+
+
+
 ## [0.3.121](https://github.com/nurikk/z2m-frontend/compare/0.3.120...0.3.121) (2021-04-29)
 
 
