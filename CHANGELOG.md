@@ -1,3 +1,17 @@
+## [0.4.1](https://github.com/nurikk/z2m-frontend/compare/0.4.0...0.4.1) (2021-05-02)
+
+
+### Bug Fixes
+
+* **style:** double scrollbars due to bootstrap ([#485](https://github.com/nurikk/z2m-frontend/issues/485)) ([2b9344e](https://github.com/nurikk/z2m-frontend/commit/2b9344e2600ed6d79d6e4696eb1964316235c996))
+
+
+### Features
+
+* **device-list:** add a search field to filter the list of devices ([#484](https://github.com/nurikk/z2m-frontend/issues/484)) ([19aaf35](https://github.com/nurikk/z2m-frontend/commit/19aaf35a5cd274a8ab2e80c63d76779d78aff70a))
+
+
+
 # [0.4.0](https://github.com/nurikk/z2m-frontend/compare/0.3.121...0.4.0) (2021-05-01)
 
 
