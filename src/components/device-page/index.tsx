@@ -14,6 +14,7 @@ import styles from "./style.css";
 
 import DevConsole from "./dev-console";
 import { DeviceApi } from "../../actions/DeviceApi";
+import { WithTranslation, withTranslation } from "react-i18next";
 
 
 type UrlParams = {
@@ -26,44 +27,44 @@ type DevicePageProps = RouteComponentProps<UrlParams>;
 type TabName = "info" | "bind" | "state" | "exposes" | "clusters" | "reporting" | "settings" | "settings-specific" | "dev-console";
 const getDeviceLinks = (dev: string) => ([
     {
-        title: 'About',
+        key: 'about',
         url: `/device/${dev}/info`
     },
     {
-        title: 'Exposes',
+        key: 'exposes',
         url: `/device/${dev}/exposes`
     },
     {
-        title: 'Bind',
+        key: 'bind',
         url: `/device/${dev}/bind`
     },
     {
-        title: 'Reporting',
+        key: 'reporting',
         url: `/device/${dev}/reporting`
     },
     {
-        title: 'Settings',
+        key: 'settings',
         url: `/device/${dev}/settings`
     },
     {
-        title: 'Settings(specific)',
+        key: 'settings_specific',
         url: `/device/${dev}/settings-specific`
     },
     {
-        title: 'State',
+        key: 'state',
         url: `/device/${dev}/state`
     },
     {
-        title: 'Clusters',
+        key: 'clusters',
         url: `/device/${dev}/clusters`
     },
     {
-        title: 'Dev console',
+        key: 'dev_console',
         url: `/device/${dev}/dev-console`
     },
 
 ]);
-export class DevicePage extends Component<DevicePageProps & GlobalState & DeviceApi, {}> {
+export class DevicePage extends Component<DevicePageProps & GlobalState & DeviceApi & WithTranslation<"devicePage">, {}> {
     renderContent(): JSX.Element {
         const { match, devices, logs } = this.props;
         const { readDeviceAttributes, writeDeviceAttributes } = this.props;
@@ -100,11 +101,11 @@ export class DevicePage extends Component<DevicePageProps & GlobalState & Device
 
     }
     render(): JSX.Element {
-        const { devices, match } = this.props;
+        const { devices, match, t } = this.props;
         const { dev } = match.params;
         const device = devices[dev];
         if (!device) {
-            return <div className="h-100 d-flex justify-content-center align-items-center">Unknown device</div>
+            return <div className="h-100 d-flex justify-content-center align-items-center">{t('unknown_device')}</div>
         }
         const links = getDeviceLinks(dev);
 
@@ -113,8 +114,8 @@ export class DevicePage extends Component<DevicePageProps & GlobalState & Device
 
             <div className="tab">
                 <ul className="nav nav-tabs">
-                    {links.map(link => <li key={link.title} className="nav-item">
-                        <NavLink activeClassName="active" className={`nav-link ${styles['small-nav']}`} to={link.url}>{link.title}</NavLink>
+                    {links.map(link => <li key={link.key} className="nav-item">
+                        <NavLink activeClassName="active" className={`nav-link ${styles['small-nav']}`} to={link.url}>{t(link.key)}</NavLink>
                     </li>)}
                 </ul>
                 <div className="tab-content">
@@ -130,5 +131,5 @@ export class DevicePage extends Component<DevicePageProps & GlobalState & Device
 }
 const devicePageWithRouter = withRouter(DevicePage);
 const mappedProps = ["devices", "deviceStates", "logs"];
-const ConnectedDevicePage = connect<{}, {}, GlobalState, {}>(mappedProps, actions)(devicePageWithRouter);
+const ConnectedDevicePage = withTranslation("devicePage")(connect<{}, {}, GlobalState, {}>(mappedProps, actions)(devicePageWithRouter));
 export default ConnectedDevicePage;

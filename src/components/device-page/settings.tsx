@@ -71,7 +71,7 @@ export class DeviceSettings extends Component<DeviceSettingsProps & GlobalState 
                     const valueType = toType(value);
                     return { value, valueType, key };
                 })
-            return { schema: deviceSpecificSchema, data: filteredDeviceConfig, uiSchema: {} }
+            return { schema: deviceSpecificSchema as JSONSchema7, data: filteredDeviceConfig, uiSchema: {} }
         }
     }
     renderHelp(): ReactNode {

@@ -1,6 +1,7 @@
 import React from "react";
 
 import cx from "classnames";
+import { useTranslation } from "react-i18next";
 type DisplayValueProps = {
     name: string;
     value: unknown;
@@ -25,6 +26,10 @@ const booleansMap = {
         [true, <span className={cx("text-danger", "animation-blinking")} key="tampered">Tampered</span>],
         [false, 'Clear']
     ]),
+    supported: new Map([
+        [true, 'Supported'],
+        [false, 'Not supported']
+    ]),
 
     _default: new Map([
         [true, 'true'],
@@ -33,17 +38,18 @@ const booleansMap = {
 };
 
 export function DisplayValue(props: DisplayValueProps): JSX.Element {
+    const { t } = useTranslation("values");
     const { value, name } = props;
     switch (typeof value) {
         case 'boolean':
             const mapValue = booleansMap[name] || booleansMap._default;
-            return <>{mapValue.get(value)}</>;
+            return <>{t(mapValue.get(value))}</>;
         case "undefined":
             return <>N/A</>;
         case "object":
             return <>{value === null ? 'null' : JSON.stringify(value)}</>;
         case "string":
-            return <>{value === "" ? <small className="text-muted">empty string</small> : value}</>;
+            return <>{value === "" ? <small className="text-muted">{t('empty_string')}</small> : value}</>;
         default:
             return <>{JSON.stringify(value)}</>;
     }

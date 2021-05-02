@@ -12,6 +12,7 @@ import Spinner from "../spinner";
 import { TableHeader } from "./TableHeader";
 import { TableRow } from "./TableRow";
 import { getLastSeenType, lastSeen } from "../../utils";
+import { withTranslation } from "react-i18next";
 
 export type SortColumn =
     | "device.network_address"
@@ -191,5 +192,5 @@ export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
 }
 
 const mappedProps = ["devices", "deviceStates", "bridgeInfo"];
-const ConnectedZigbeePage = connect<unknown, ZigbeeTableState, GlobalState, unknown>(mappedProps, actions)(ZigbeeTable);
+const ConnectedZigbeePage = withTranslation("zigbee")(connect<unknown, ZigbeeTableState, GlobalState, unknown>(mappedProps, actions)(ZigbeeTable));
 export default ConnectedZigbeePage;

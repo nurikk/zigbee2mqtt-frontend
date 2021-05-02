@@ -1,0 +1,22 @@
+import i18n, { ResourceLanguage } from 'i18next';
+import { initReactI18next } from 'react-i18next';
+import enTranslations from './locales/en.json';
+import ruTranslations from './locales/ru.json';
+import LanguageDetector from 'i18next-browser-languagedetector';
+
+export const resources = {
+    en: enTranslations as ResourceLanguage,
+    ru: ruTranslations as ResourceLanguage
+} as const;
+
+i18n
+    .use(LanguageDetector)
+    .use(initReactI18next)
+    .init({
+        fallbackLng: 'en',
+        debug: true,
+        resources,
+        ns: Object.keys(enTranslations)
+    });
+// i18n.changeLanguage('ru');
+export default i18n;

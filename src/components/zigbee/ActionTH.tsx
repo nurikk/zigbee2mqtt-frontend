@@ -4,6 +4,7 @@ import React, { MouseEvent, ThHTMLAttributes} from "react";
 
 import { SortDirection } from "../../types";
 import isEqual from "lodash/isEqual";
+import { withTranslation } from "react-i18next";
 
 
 interface ActionTHProps<T> {
@@ -21,7 +22,7 @@ export default class ActionTH<T> extends React.Component<ActionTHProps<T> & Omit
         onClick && onClick(column);
     };
 
-    renderArrow () {
+    renderArrow (): JSX.Element{
         const { currentDirection, current, column } = this.props;
         if (isEqual(current, column)) {
             if (currentDirection == "asc") {
@@ -32,7 +33,7 @@ export default class ActionTH<T> extends React.Component<ActionTHProps<T> & Omit
         return <i className={`fa fa-sort-amount-down invisible`} />;
     }
 
-    render () {
+    render (): JSX.Element{
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { children, onClick, current, column, currentDirection, ...rest } = this.props;
         return (<th {...rest}>
@@ -41,3 +42,5 @@ export default class ActionTH<T> extends React.Component<ActionTHProps<T> & Omit
         </th>);
     }
 }
+
+

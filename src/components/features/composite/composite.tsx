@@ -6,6 +6,7 @@ import Button from "../../button";
 import groupBy from "lodash/groupBy";
 import { Feature } from "./Feature";
 import cx from "classnames";
+import { WithTranslation, withTranslation } from "react-i18next";
 
 type CompositeType = "composite" | "light" | "switch" | "cover" | "lock" | "fan" | "climate";
 
@@ -21,7 +22,7 @@ interface CompositeState {
 
 
 
-export default class Composite extends Component<CompositeProps, CompositeState> {
+export class Composite extends Component<CompositeProps & WithTranslation<"composite">, CompositeState> {
     state: Readonly<CompositeState> = {}
     onChange = (endpoint: Endpoint, value: Record<string, unknown>): void=> {
         const { onChange, feature } = this.props;
@@ -45,9 +46,10 @@ export default class Composite extends Component<CompositeProps, CompositeState>
         }
     }
     render(): JSX.Element[] {
+
         const MAGIC_NO_ENDPOINT = 'MAGIC_NO_ENDPOINT';
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const { feature, device, deviceState, onRead: _onRead, onChange: _onChange, featureWrapperClass, minimal } = this.props;
+        const { t, feature, device, deviceState, onRead: _onRead, onChange: _onChange, featureWrapperClass, minimal } = this.props;
         const { features } = feature;
 
         const doGroupingByEndpoint = !minimal;
@@ -97,9 +99,11 @@ export default class Composite extends Component<CompositeProps, CompositeState>
 
 
         if (isCompositeFeature(feature)) {
-            result.push(<div key={feature.name + 'apply'}><Button className={cx('btn btn-primary float-end', {'btn-sm': minimal})} onClick={this.onApplyClick}>Apply</Button></div>)
+            result.push(<div key={feature.name + 'apply'}><Button className={cx('btn btn-primary float-end', {'btn-sm': minimal})} onClick={this.onApplyClick}>{t('apply')}</Button></div>)
         }
         return result;
 
     }
 }
+
+export default withTranslation("composite")(Composite);
