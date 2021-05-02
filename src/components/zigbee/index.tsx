@@ -31,6 +31,7 @@ interface ZigbeeTableState {
     currentTime: number;
     sortedTableData: ZigbeeTableData[];
     error?: ReactNode;
+    search: string;
 }
 
 interface ZigbeeTableData {
@@ -50,7 +51,8 @@ export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
             sortDirection: "desc",
             sortColumn: "device.network_address",
             currentTime: Date.now(),
-            sortedTableData: []
+            sortedTableData: [],
+            search: ""
         };
     }
 
@@ -99,15 +101,19 @@ export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
     }
 
     static getDerivedStateFromProps(props: Readonly<GlobalState>, state: ZigbeeTableState): Partial<ZigbeeTableState> {
-        const { sortColumn, sortDirection } = state;
+        const { sortColumn, sortDirection, search } = state;
         const { devices, deviceStates, bridgeInfo } = props;
         const tableData: ZigbeeTableData[] = [];
 
-
         const lastSeenType = getLastSeenType(bridgeInfo?.config.advanced);
-
-
-        Object.values(devices).forEach((device) => {
+        const searchQuery = search.toLowerCase();
+    
+        Object.values(devices).filter((device) =>
+            device.friendly_name?.toLowerCase().includes(searchQuery)
+            || device.ieee_address.toLowerCase().includes(searchQuery)
+            || device.definition?.model.toLowerCase().includes(searchQuery)
+            || device.definition?.vendor.toLowerCase().includes(searchQuery)
+        ).forEach((device) => {
             if (device.type !== "Coordinator") {
                 const state = deviceStates[device.friendly_name] ?? {} as DeviceState;
                 tableData.push({
@@ -164,9 +170,13 @@ export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
 
     renderDevicesTable(): JSX.Element {
         const { bridgeInfo } = this.props;
-        const { sortedTableData, sortColumn, sortDirection } = this.state;
+        const { sortedTableData, sortColumn, sortDirection, search } = this.state;
         const lastSeenType = getLastSeenType(bridgeInfo.config.advanced);
         return (<div className="card">
+            
+            <div className="col-12">
+                <input id="search-filter" className="form-control col-10" placeholder="Enter search criteria" value={search} onChange={(e) => this.setState({ search: e.target.value })} type="text"></input>
+            </div>
             <div className="table-responsive">
                 <table className="table align-middle">
                     <TableHeader
