@@ -3,6 +3,7 @@ import startCase from "lodash/startCase";
 import React, { FunctionComponent, PropsWithChildren } from "react";
 import { FetatureWrapperProps } from "../features/composite/FeatureWrapper";
 import cx from "classnames";
+import { useTranslation } from "react-i18next";
 
 const getTemperatureIcon = (temperature: number) => {
     let icon = 'fa-thermometer-empty';
@@ -38,18 +39,16 @@ const typeToClassMap = {
     radiation_dose_per_hour: ['fa-radiation', 'text-danger'],
     radioactive_events_per_minute: ['fa-radiation-alt', 'text-warning'],
     power_factor: ['fa-industry', 'text-danger'],
-    /* eslint-disable @typescript-eslint/camelcase */
+    mode: ['fa-user-cog', 'text-warning'],
+    sound: ['fa-volume-up', 'text-info'],
+    position: ['fa-percent', 'text-info'],
+    alarm: ['fa-exclamation-triangle', 'text-danger'],
     color_xy: ['fa-palette'],
     color_hs: ['fa-palette'],
     color_temp: ['fa-sliders-h'],
     illuminance_lux: ['fa-sun'],
     soil_moisture: ['fa-fill-drip'],
     water_leak: ['fa-water'],
-    mode: ['fa-user-cog', 'text-warning'],
-    sound: ['fa-volume-up', 'text-info'],
-    position: ['fa-percent', 'text-info'],
-    alarm: ['fa-exclamation-triangle', 'text-danger'],
-    /* eslint-enable @typescript-eslint/camelcase */
 };
 const getGenericFeatureIcon = (name: string, value: unknown): string => {
     let classes = [] as string[];
@@ -79,12 +78,13 @@ const getGenericFeatureIcon = (name: string, value: unknown): string => {
 export const DashboardFeatureWrapper: FunctionComponent<PropsWithChildren<FetatureWrapperProps>> = (props) => {
     const { children, feature, deviceState = {} } = props;
     const icon = getGenericFeatureIcon(feature.name, deviceState[feature.property]);
+    const { t } = useTranslation(['featureNames']);
 
     return <div className="d-flex align-items-center">
         {icon && <div className="me-1">
             <i className={`fa fa-fw ${icon}`} />
         </div>}
-        <div className="flex-shrink-1 flex-grow-1">{startCase(camelCase(feature.name))}{feature.endpoint ? ` (${feature.endpoint})` : null}</div>
+        <div className="flex-shrink-1 flex-grow-1">{t(feature.name, {defaultValue: startCase(camelCase(feature.name))})}{feature.endpoint ? ` (${feature.endpoint})` : null}</div>
         <div className="flex-shrink-0">{children}</div>
     </div>
 }

@@ -1,0 +1,51 @@
+{
+    "navbar": {
+        "restart": "Restart",
+        "devices": "Devices",
+        "dashboard": "Dashboard",
+        "map": "Map",
+        "settings": "Settings",
+        "groups": "Groups",
+
+        "touchlink": "Touchlink",
+
+        "logs": "Logs",
+        "ota": "OTA",
+
+        "extensions": "Extensions",
+        "permit_join": "Permit join",
+        "all": "All",
+        "toggle_dropdown": "Toggle dropdown"
+    },
+    "zigbee": {
+        "power": "Power",
+        "lqi": "LQI",
+        "friendly_name": "Friendly name",
+        "pic": "Pic",
+        "model": "Model",
+        "zigbee_model": "Zigbee Model",
+        "manufacturer": "Manufacturer",
+        "last_seen": "Last seen",
+        "ieee_address": "IEEE Address",
+        "device_type": "Device type",
+        "support_status": "Support status",
+        "network_address": "Network address",
+        "firmware_build_date": "Firmware build date",
+        "firmware_version": "Firmware version",
+        "interview_completed": "Interview completed"
+    },
+    "values": {
+        "true": "True"
+    },
+    "devicePage": {
+        "about": "About",
+        "exposes": "Exposes",
+        "bind": "Bind",
+        "reporting": "Reporting",
+        "settings": "Settings",
+        "settings_specific": "Settings (specific)",
+        "state": "State",
+        "clusters": "Clusters",
+        "dev_console": "Dev console"
+    }
+}

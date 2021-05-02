@@ -1,4 +1,5 @@
 import React, { FunctionComponent, PropsWithChildren } from "react";
+import { useTranslation } from "react-i18next";
 import { CompositeFeature, GenericExposedFeature, Endpoint, FeatureAccessMode, DeviceState } from "../../../types";
 import Button from "../../button";
 
@@ -9,6 +10,7 @@ export type FetatureWrapperProps = {
     onRead(endpoint: Endpoint, property: Record<string, unknown>): void;
 };
 export const FeatureWrapper: FunctionComponent<PropsWithChildren<FetatureWrapperProps>> = (props) => {
+    const { t } = useTranslation(['featureDescriptions']);
     const { children, feature, onRead } = props;
     const isColor = feature.name?.startsWith("color_"); //hardcode for color
     const isReadable = (feature.access & FeatureAccessMode.ACCESS_READ) || isColor;
@@ -23,7 +25,7 @@ export const FeatureWrapper: FunctionComponent<PropsWithChildren<FetatureWrapper
                         }} className="btn btn-primary btn-sm"><i className="fa fa-sync"></i></Button>
                     ) : null}
                 </div>
-                {feature.description ? <small className="d-block text-muted">{feature.description}</small> : null}
+                {feature.description ? <small className="d-block text-muted">{t(feature.description)}</small> : null}
             </label>
         </div>
         <div className="col-12 col-md-9 d-flex align-items-center">

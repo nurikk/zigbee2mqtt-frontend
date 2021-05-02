@@ -112,31 +112,15 @@ export const scale = (inputY: number, yRange: Array<number>, xRange: Array<numbe
 };
 
 
-
-
-function replacer(key: string, value: unknown) {
-    const originalObject = this[key];
-    if (originalObject instanceof Map) {
-        return {
-            dataType: 'Map',
-            value: Array.from(originalObject.entries()),
-        };
-    } else {
-        return value;
-    }
-}
-
 export const download = (data: Record<string, unknown>, filename: string): void => {
     const zip = new JSZip();
     zip.file(filename, JSON.stringify(data, null, 4), { compression: 'DEFLATE' });
     zip.generateAsync({ type: "blob" }).then((content) => {
         FileSaver.saveAs(content, `${filename}.zip`);
     });
-
 }
 
 export const sanitizeZ2MDeviceName = (deviceName?: string): string => deviceName ? deviceName.replace(/:|\s|\//g, "-") : "NA";
-
 
 export const getEndpoints = (obj: Device | Group): Endpoint[] => {
     if (!obj) {

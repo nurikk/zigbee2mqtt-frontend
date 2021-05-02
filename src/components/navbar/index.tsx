@@ -11,55 +11,59 @@ import { Device } from '../../types';
 import style from "./style.css";
 import { useOnClickOutside } from '../../hooks/useOnClickOutside';
 import { BridgeApi } from '../../actions/BridgeApi';
-import {  ThemeSwitcher } from '../theme-switcher';
+import { ThemeSwitcher } from '../theme-switcher';
+import { WithTranslation, withTranslation, useTranslation } from 'react-i18next';
+
+
 
 const urls = [
     {
         href: '/',
-        title: 'Devices',
+        key: 'devices',
         exact: true
     },
     {
         href: '/dashboard',
-        title: 'Dashboard'
+        key: 'dashboard'
     },
     {
         href: '/map',
-        title: 'Map'
+        key: 'map'
     },
     {
         href: '/settings',
-        title: 'Settings'
+        key: 'settings'
     },
     {
         href: '/groups',
-        title: 'Groups'
+        key: 'groups'
     },
     {
         href: '/ota',
-        title: 'OTA'
+        key: 'ota'
     },
     {
         href: '/touchlink',
-        title: 'Touchlink'
+        key: 'touchlink'
     },
     {
         href: '/logs',
-        title: 'Logs'
+        key: 'logs'
     },
     {
         href: '/extensions',
-        title: 'Extensions'
+        key: 'extensions'
     }
 ];
 type StartStopJoinButtonProps = {
     devices: Record<string, Device>;
 }
 const StartStopJoinButton: FunctionComponent<StartStopJoinButtonProps & Pick<BridgeApi, 'setPermitJoin'> & Pick<GlobalState, 'bridgeInfo'>> = ({ devices, setPermitJoin, bridgeInfo }) => {
-    const { permit_join: permitJoin, permit_join_timeout: permitJoinTimeout } = bridgeInfo;
 
+    const { t } = useTranslation(['navbar']);
     const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(false);
     const [selectedRouter, setSelectedRouter] = useState<Device>({} as Device);
+    const { permit_join: permitJoin, permit_join_timeout: permitJoinTimeout } = bridgeInfo;
     const routers: JSX.Element[] = [];
     const selectAndHide = (device: Device) => { setSelectedRouter(device); setIsComponentVisible(false) }
     Object.values(devices).forEach((device) => {
@@ -73,7 +77,7 @@ const StartStopJoinButton: FunctionComponent<StartStopJoinButtonProps & Pick<Bri
         setPermitJoin(!permitJoin, selectedRouter);
     }
     const permitJoinTimer = <>{permitJoinTimeout ? <div className="d-inline-block ms-1" style={{width: '30px', maxWidth: '30px'}}> {permitJoinTimeout}</div> : null}</>;
-    const buttonLabel = <>{permitJoin ? "Disable join" : "Permit join"} ({selectedRouter?.friendly_name ?? "All"}){permitJoinTimer}</>;
+    const buttonLabel = <>{permitJoin ? t("disable_join") : t("permit_join")} ({selectedRouter?.friendly_name ?? t("all")}){permitJoinTimer}</>;
     return (
         <div className="btn-group text-nowrap me-1">
 
@@ -83,11 +87,11 @@ const StartStopJoinButton: FunctionComponent<StartStopJoinButtonProps & Pick<Bri
 
 
             {routers.length ? (<><Button<boolean> type="button" onClick={setIsComponentVisible} item={!isComponentVisible} className="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-expanded="false">
-                <span className="visually-hidden">Toggle Dropdown</span>
+                <span className="visually-hidden">{t('toggle_dropdown')}</span>
             </Button>
                 <ul ref={ref as RefObject<HTMLUListElement>} className={cx('dropdown-menu', style['scrollable-menu'], { show: isComponentVisible })}>
                     <li key='all'>
-                        <Button className="dropdown-item" onClick={selectAndHide}>All</Button>
+                        <Button className="dropdown-item" onClick={selectAndHide}>{t('all')}</Button>
                     </li>
                     {routers}
                 </ul></>) : null}
@@ -101,8 +105,11 @@ type PropsFromStore = {
     bridgeInfo: Record<string, unknown>;
 }
 
-const NavBar: FunctionComponent<PropsFromStore & BridgeApi & Pick<GlobalState, 'bridgeInfo'> & ThemeActions> = (props) => {
-    const { devices, setPermitJoin, bridgeInfo, restartBridge, setTheme } = props;
+
+type NavBarProps = PropsFromStore & BridgeApi & Pick<GlobalState, 'bridgeInfo'> & ThemeActions & WithTranslation<'navbar'>;
+
+const NavBar: FunctionComponent<NavBarProps & PropsFromStore & BridgeApi & Pick<GlobalState, 'bridgeInfo'> & ThemeActions> = (props) => {
+    const { devices, setPermitJoin, bridgeInfo, restartBridge, setTheme, t, i18n } = props;
     const ref = useRef<HTMLDivElement>();
     const [navbarIsVisible, setnavbarIsVisible] = useState<boolean>(false);
     useOnClickOutside(ref, () => {
@@ -121,7 +128,7 @@ const NavBar: FunctionComponent<PropsFromStore & BridgeApi & Pick<GlobalState, '
                         urls.map(url =>
                             <li key={url.href} className="nav-item">
                                 <NavLink onClick={() => setnavbarIsVisible(false)} exact={url.exact} className="nav-link" to={url.href} activeClassName="active">
-                                    {url.title}
+                                    {t(url.key)}
                                 </NavLink>
                             </li>)
                     }
@@ -133,11 +140,11 @@ const NavBar: FunctionComponent<PropsFromStore & BridgeApi & Pick<GlobalState, '
                 />
                 <ThemeSwitcher saveCurrentTheme={setTheme} />
             </div>
-            {bridgeInfo.restart_required ? <Button onClick={restartBridge} promt className="btn btn-danger me-1">Restart</Button> : null}
+            {bridgeInfo.restart_required ? <Button onClick={restartBridge} promt className="btn btn-danger me-1">{t('restart')}</Button> : null}
         </div>
     </nav>)
 }
 const mappedProps = ["bridgeInfo", "devices"];
-const ConnectedNavBar = connect<unknown, unknown, PropsFromStore, BridgeApi>(mappedProps, actions)(NavBar);
+const ConnectedNavBar = withTranslation("navbar")(connect<unknown, unknown, PropsFromStore, BridgeApi>(mappedProps, actions)(NavBar));
 export default ConnectedNavBar;
 

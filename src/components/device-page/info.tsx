@@ -12,6 +12,8 @@ import DeviceImage from "../device-image";
 import { ModelLink, VendorLink } from "../vendor-links/verndor-links";
 import PowerSource from "../power-source";
 import { LastSeen } from "../LastSeen";
+import { WithTranslation, withTranslation } from "react-i18next";
+import { DisplayValue } from "../display-value/DisplayValue";
 
 
 type DeviceInfoProps = {
@@ -24,24 +26,24 @@ const markdownLinkRegex = /\[(.*?)\]\((.*?)\)/;
 
 const displayProps = [
     {
-        label: 'Friendly name',
+        translationKey: 'friendly_name',
         render: (device: Device) => <dd className="col-12 col-md-7"><strong>{device.friendly_name}</strong></dd>,
     },
     {
-        label: 'Last seen',
+        translationKey: 'last_seen',
         render: (device: Device, state: DeviceState, bridgeInfo: BridgeInfo) => <dd className="col-12 col-md-7"><LastSeen lastSeenType={getLastSeenType(bridgeInfo.config.advanced)} state={state}/></dd>,
     },
     {
         key: 'type',
-        label: 'Device type'
+        translationKey: 'device_type'
     },
     {
         key: 'model_id',
-        label: 'Zigbee model'
+        translationKey: 'zigbee_model'
     },
     {
         key: 'definition.description',
-        label: 'Description',
+        translationKey: 'description',
         if: 'supported',
         render: (device: Device) => {
             const result = markdownLinkRegex.exec(device.definition?.description as string);
@@ -55,60 +57,55 @@ const displayProps = [
         },
     },
     {
-        render: (device: Device) => <dd className="col-12 col-md-7" ><p className={cx('mb-0', 'font-weight-bold', { 'text-danger': !device.supported, 'text-success': device.supported })}>{device.supported ? 'Supported' : 'Unsupported'}</p></dd>,
-        label: 'Support status'
-    },
-    {
-        render: (device: Device) => <dd className="col-12 col-md-7">{device.definition?.supports}</dd>,
-        label: 'Supports',
-        if: 'definition.supports'
+        render: (device: Device) => <dd className="col-12 col-md-7" ><p className={cx('mb-0', 'font-weight-bold', { 'text-danger': !device.supported, 'text-success': device.supported })}><DisplayValue name="supported" value={device.supported}/></p></dd>,
+        translationKey: 'support_status'
     },
     {
         key: 'ieee_address',
-        label: 'IEEE address'
+        translationKey: 'ieee_address'
     },
     {
         key: 'network_address',
-        label: 'Network address',
+        translationKey: 'network_address',
         render: (device: Device) => <dd className="col-12 col-md-7">{toHex(device.network_address)}</dd>,
     },
     {
         key: 'date_code',
-        label: 'Firmware build date',
+        translationKey: 'firmware_build_date',
         if: 'date_code'
     },
     {
         key: 'software_build_id',
-        label: 'Firmware version',
+        translationKey: 'firmware_version',
         if: 'software_build_id'
     },
 
     {
         key: 'definition.vendor',
-        label: 'Vendor',
+        translationKey: 'manufacturer',
         if: 'supported',
         render: (device: Device) => <dd className="col-12 col-md-7"><VendorLink device={device} /></dd>
     },
     {
         key: 'definition.model',
-        label: 'Model',
+        translationKey: 'model',
         if: 'supported',
         render: (device: Device) => <dd className="col-12 col-md-7"><ModelLink device={device} /></dd>
     },
 
     {
-        label: 'Power source',
+        translationKey: 'power',
         render: (device: Device, deviceStatus: DeviceState) => <dd className="col-12 col-md-7"><PowerSource showLevel={true} source={device.power_source} battery={deviceStatus.battery as number} batteryLow={deviceStatus.battery_low as boolean} /></dd>
     },
     {
-        label: 'Interview completed',
-        render: (device: Device) => <dd className="col-12 col-md-7">{device.interview_completed ? 'Yes' : 'No'}</dd>
+        translationKey: 'Interview completed',
+        render: (device: Device) => <dd className="col-12 col-md-7"><DisplayValue name="interview_completed" value={device.interview_completed} /></dd>
     }
 ];
 // eslint-disable-next-line react/prefer-stateless-function
-export class DeviceInfo extends Component<DeviceInfoProps & PropsFromStore & Pick<GlobalState, 'bridgeInfo'>, unknown> {
+export class DeviceInfo extends Component<DeviceInfoProps & PropsFromStore & Pick<GlobalState, 'bridgeInfo'> & WithTranslation<"zigbee">, unknown> {
     render(): JSX.Element{
-        const { device, deviceStates, bridgeInfo } = this.props;
+        const { device, deviceStates, bridgeInfo, t } = this.props;
 
         const deviceState: DeviceState = deviceStates[device.friendly_name] ?? {} as DeviceState;
         return (
@@ -116,16 +113,11 @@ export class DeviceInfo extends Component<DeviceInfoProps & PropsFromStore & Pic
                 <div className="d-flex justify-content-center">
                     <DeviceImage className={`card-img-top w-auto ${style["device-pic"]}`} device={device} deviceStatus={deviceState} />
                 </div>
-
-
-                {/* <h2 className="card-title">{device.friendly_name} {device.type}</h2> */}
-
-
                 <dl className="row">
                     {
                         displayProps.filter(prop => prop.if === undefined || get(device, prop.if, false)).map(prop => (
-                            <Fragment key={prop.label}>
-                                <dt className="col-12 col-md-5">{prop.label}</dt>
+                            <Fragment key={prop.translationKey}>
+                                <dt className="col-12 col-md-5">{t(prop.translationKey)}</dt>
                                 {prop.render ?
                                     prop.render(device, deviceState, bridgeInfo) : <dd className="col-12 col-md-7">{get(device, prop.key)}</dd>}
 
@@ -144,5 +136,5 @@ export class DeviceInfo extends Component<DeviceInfoProps & PropsFromStore & Pic
 
 const mappedProps = ["deviceStates", "bridgeInfo"];
 
-const ConnectedDeviceInfoPage = connect<DeviceInfoProps, unknown, GlobalState, PropsFromStore>(mappedProps)(DeviceInfo);
+const ConnectedDeviceInfoPage = withTranslation("zigbee")(connect<DeviceInfoProps, unknown, GlobalState, PropsFromStore>(mappedProps)(DeviceInfo));
 export default ConnectedDeviceInfoPage;
