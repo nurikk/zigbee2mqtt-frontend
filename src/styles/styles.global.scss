@@ -4,10 +4,14 @@
     }
 }
 
+body {
+    overflow-y: auto !important;
+}
+
 .animation-blinking {
     animation: blinker 1s linear infinite;
 }
 
 .content {
-    overflow-y: scroll;
+    overflow-y: auto;
 }
