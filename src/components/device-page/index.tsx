@@ -27,39 +27,39 @@ type DevicePageProps = RouteComponentProps<UrlParams>;
 type TabName = "info" | "bind" | "state" | "exposes" | "clusters" | "reporting" | "settings" | "settings-specific" | "dev-console";
 const getDeviceLinks = (dev: string) => ([
     {
-        key: 'about',
+        translationKey: 'about',
         url: `/device/${dev}/info`
     },
     {
-        key: 'exposes',
+        translationKey: 'exposes',
         url: `/device/${dev}/exposes`
     },
     {
-        key: 'bind',
+        translationKey: 'bind',
         url: `/device/${dev}/bind`
     },
     {
-        key: 'reporting',
+        translationKey: 'reporting',
         url: `/device/${dev}/reporting`
     },
     {
-        key: 'settings',
+        translationKey: 'settings',
         url: `/device/${dev}/settings`
     },
     {
-        key: 'settings_specific',
+        translationKey: 'settings_specific',
         url: `/device/${dev}/settings-specific`
     },
     {
-        key: 'state',
+        translationKey: 'state',
         url: `/device/${dev}/state`
     },
     {
-        key: 'clusters',
+        translationKey: 'clusters',
         url: `/device/${dev}/clusters`
     },
     {
-        key: 'dev_console',
+        translationKey: 'dev_console',
         url: `/device/${dev}/dev-console`
     },
 
@@ -114,8 +114,8 @@ export class DevicePage extends Component<DevicePageProps & GlobalState & Device
 
             <div className="tab">
                 <ul className="nav nav-tabs">
-                    {links.map(link => <li key={link.key} className="nav-item">
-                        <NavLink activeClassName="active" className={`nav-link ${styles['small-nav']}`} to={link.url}>{t(link.key)}</NavLink>
+                    {links.map(link => <li key={link.translationKey} className="nav-item">
+                        <NavLink activeClassName="active" className={`nav-link ${styles['small-nav']}`} to={link.url}>{t(link.translationKey)}</NavLink>
                     </li>)}
                 </ul>
                 <div className="tab-content">
@@ -131,5 +131,5 @@ export class DevicePage extends Component<DevicePageProps & GlobalState & Device
 }
 const devicePageWithRouter = withRouter(DevicePage);
 const mappedProps = ["devices", "deviceStates", "logs"];
-const ConnectedDevicePage = withTranslation("devicePage")(connect<{}, {}, GlobalState, {}>(mappedProps, actions)(devicePageWithRouter));
+const ConnectedDevicePage = withTranslation("devicePage")(connect<unknown, unknown, GlobalState, unknown>(mappedProps, actions)(devicePageWithRouter));
 export default ConnectedDevicePage;
