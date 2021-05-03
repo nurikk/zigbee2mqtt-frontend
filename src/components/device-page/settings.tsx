@@ -10,6 +10,7 @@ import { JSONSchema7 } from "json-schema"
 import { ISubmitEvent, UiSchema } from "@rjsf/core";
 import deviceSpecificSchema from "./deviceSpecificSchema.json";
 import { ModelLink } from "../vendor-links/verndor-links";
+import customFields from "./../../i18n/rjsf-translation-fields";
 type SettingsType = "generic" | "specific";
 
 type DeviceSettingsProps = {
@@ -90,6 +91,7 @@ export class DeviceSettings extends Component<DeviceSettingsProps & GlobalState 
                 formData={data}
                 onSubmit={this.updateConfig}
                 uiSchema={uiSchema}
+                fields={customFields}
             />
         </>;
     }

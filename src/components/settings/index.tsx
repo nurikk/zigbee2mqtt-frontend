@@ -12,7 +12,7 @@ import uiSchemas from "./uiSchema.json";
 import { BridgeApi } from "../../actions/BridgeApi";
 import { ISubmitEvent, UiSchema } from "@rjsf/core";
 import { WithTranslation, withTranslation } from "react-i18next";
-
+import customFields from "./../../i18n/rjsf-translation-fields";
 
 
 type SettingsTab = "settings" | "bridge" | "about" | "tools" | "donate";
@@ -242,6 +242,7 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
                         formData={currentConfig}
                         onSubmit={this.onSettingsSave}
                         uiSchema={uiSchemas[keyName] as UiSchema}
+                        fields={customFields}
                     />
                 </div>
             </div>
