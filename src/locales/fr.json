@@ -37,6 +37,9 @@
     "values": {
         "true": "Vrai"
     },
+    "featureNames": {
+        "color_temp": "Température couleur"
+    },
     "devicePage": {
         "about": "A propos",
         "exposes": "Expose",
