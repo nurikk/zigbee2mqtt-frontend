@@ -23,6 +23,6 @@ export const ThemeSwitcher = (props: ThemeSwitcherProps) => {
         switcher({ theme });
     };
     return (
-        <Button<boolean> item={isDarkMode} className="btn btn-info" onClick={toggleDarkMode}>{isDarkMode ? '🌑' : `🌞`}</Button>
+        <Button<boolean> item={isDarkMode} className="btn btn-info" onClick={toggleDarkMode}>{isDarkMode ? '🌙' : `☀️`}</Button>
     );
 };
