@@ -1,0 +1,54 @@
+{
+    "navbar": {
+        "restart": "Redémarrer",
+        "devices": "Périphériques",
+        "dashboard": "Dashboard",
+        "map": "Schéma",
+        "settings": "Paramètres",
+        "groups": "Groupes",
+
+        "touchlink": "Touchlink",
+
+        "logs": "Logs",
+        "ota": "OTA",
+
+        "extensions": "Extensions",
+        "permit_join": "Appairage",
+        "all": "Tout",
+        "toggle_dropdown": "Bascule menu"
+    },
+    "zigbee": {
+        "power": "Alim",
+        "lqi": "LQI",
+        "friendly_name": "Nom Simplifié",
+        "pic": "Img",
+        "model": "Modèle",
+        "zigbee_model": "Modèle Zigbee",
+        "manufacturer": "Constructeur",
+        "last_seen": "Vu il y a",
+        "ieee_address": "Addresse IEEE",
+        "device_type": "Type de Périph",
+        "support_status": "Supporté",
+        "network_address": "Adresse réseau",
+        "firmware_build_date": "Date Firmware",
+        "firmware_version": "Version Firmware",
+        "interview_completed": "Interview completé"
+    },
+    "values": {
+        "true": "Vrai"
+    },
+    "featureNames": {
+        "color_temp": "Température couleur"
+    },
+    "devicePage": {
+        "about": "A propos",
+        "exposes": "Expose",
+        "bind": "Liens",
+        "reporting": "Rapports",
+        "settings": "Paramètres",
+        "settings_specific": "Paramètres (spécifiques)",
+        "state": "Etat",
+        "clusters": "Clusters",
+        "dev_console": "Console dev"
+    }
+}
