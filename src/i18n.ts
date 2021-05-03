@@ -20,5 +20,5 @@ i18n
         resources,
         ns: Object.keys(enTranslations)
     });
-// i18n.changeLanguage('ru');
+i18n.changeLanguage('en');
 export default i18n;

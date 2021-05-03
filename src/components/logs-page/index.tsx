@@ -6,6 +6,7 @@ import cx from "classnames";
 import escapeRegExp from "lodash/escapeRegExp";
 import { BridgeApi } from "../../actions/BridgeApi";
 import ConfigureLogs from "./log-level-config";
+import { WithTranslation, withTranslation } from "react-i18next";
 
 
 type LogsPageState = {
@@ -50,23 +51,24 @@ export function LogRow(props: LogRowProps): JSX.Element {
 const logLevels = [ALL, 'debug', 'info', 'warn', 'error'];
 
 
-export class LogsPage extends Component<GlobalState & BridgeApi & UtilsApi, LogsPageState> {
+export class LogsPage extends Component<GlobalState & BridgeApi & UtilsApi & WithTranslation<"logs">, LogsPageState> {
     state = { search: '', logLevel: ALL }
     renderSearch(): JSX.Element {
-        const { clearLogs, bridgeInfo: { config_schema, config }, updateBridgeConfig } = this.props;
+
+        const { clearLogs, bridgeInfo: { config_schema, config }, updateBridgeConfig, t } = this.props;
         const { search } = this.state;
         return <div className="card">
             <div className="card-body">
                 <form className="row row-cols-lg-auto g-3 align-items-center">
                     <div className="col-12">
-                        <label htmlFor="log-level" className="form-label">Show only</label>
+                        <label htmlFor="log-level" className="form-label">{t('show_only')}</label>
                         <select id="log-level" className="form-select" onChange={e => this.setState({ logLevel: e.target.value })}>
                             {logLevels.map(level => <option key={level} value={level}>{level}</option>)}
                         </select>
                     </div>
                     <div className="col-12">
-                        <label htmlFor="search-filter" className="form-label">Filter by text</label>
-                        <input id="search-filter" className="form-control col-10" placeholder="Enter search criteria" value={search} onChange={(e) => this.setState({ search: e.target.value })} type="text"></input>
+                        <label htmlFor="search-filter" className="form-label">{t('filter_by_text')}</label>
+                        <input id="search-filter" className="form-control col-10" placeholder={t('common:enter_search_criteria')} value={search} onChange={(e) => this.setState({ search: e.target.value })} type="text"></input>
                     </div>
                     <div className="col-12">
                         <ConfigureLogs
@@ -79,7 +81,7 @@ export class LogsPage extends Component<GlobalState & BridgeApi & UtilsApi, Logs
                     </div>
                     <div className="col-12">
                         <label htmlFor="reset">&nbsp;</label>
-                        <input id="reset" type="button" onClick={clearLogs} className="btn btn-primary form-control" value="Clear screen" />
+                        <input id="reset" type="button" onClick={clearLogs} className="btn btn-primary form-control" value={t('common:clear') as string} />
                     </div>
                 </form>
             </div>
@@ -87,6 +89,7 @@ export class LogsPage extends Component<GlobalState & BridgeApi & UtilsApi, Logs
     }
     render(): JSX.Element {
         let { logs } = this.props;
+        const { t } = this.props;
         const { search, logLevel } = this.state;
 
         const _search = new RegExp(escapeRegExp(search), 'gi');
@@ -99,7 +102,7 @@ export class LogsPage extends Component<GlobalState & BridgeApi & UtilsApi, Logs
             {this.renderSearch()}
             <div className="card">
                 <div className="card-body">
-                    {logs.length == 0 ? <h1>You don&apos;t have {logLevel === ALL ? 'any' : logLevel} logs</h1> : null}
+                    {logs.length == 0 ? <h1>{t('empty_logs_message')}</h1> : null}
                     <div className="overflow-auto">
                         {
                             logs.map((log, idx) => <LogRow key={idx} log={log} search={search} logLevel={logLevel} />)
@@ -113,4 +116,4 @@ export class LogsPage extends Component<GlobalState & BridgeApi & UtilsApi, Logs
 
 const mappedProps = ["logs", "bridgeInfo"];
 
-export default connect<{}, {}, GlobalState, {}>(mappedProps, actions)(LogsPage);
+export default withTranslation(["logs", "common"])(connect<unknown, unknown, GlobalState, unknown>(mappedProps, actions)(LogsPage));

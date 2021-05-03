@@ -9,11 +9,12 @@ import { genDeviceDetailsLink } from "../../utils";
 import cx from "classnames";
 import { Link } from "react-router-dom";
 import { TouchlinkApi } from "../../actions/TouchlinkApi";
+import { WithTranslation, withTranslation } from "react-i18next";
 
 
 
 // eslint-disable-next-line react/prefer-stateless-function
-export class TouchlinkPage extends Component<TouchlinkApi & GlobalState, {}> {
+export class TouchlinkPage extends Component<TouchlinkApi & GlobalState & WithTranslation<"touchlink">, unknown> {
     onIdentifyClick = (device: TouchLinkDevice): void => {
         const { touchlinkIdentify } = this.props;
         touchlinkIdentify(device);
@@ -24,8 +25,8 @@ export class TouchlinkPage extends Component<TouchlinkApi & GlobalState, {}> {
         touchlinkReset(device);
     }
 
-    renderTouchlinkDevices() {
-        const { touchlinkDevices, devices, touchlinkIdentifyInProgress, touchlinkResetInProgress } = this.props;
+    renderTouchlinkDevices(): JSX.Element {
+        const { touchlinkDevices, devices, touchlinkIdentifyInProgress, touchlinkResetInProgress, t } = this.props;
         const touchlinkInProgress = touchlinkIdentifyInProgress || touchlinkResetInProgress;
         return (
             <div className="table-responsive">
@@ -33,9 +34,9 @@ export class TouchlinkPage extends Component<TouchlinkApi & GlobalState, {}> {
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">ieee_address</th>
-                            <th scope="col">friendly_name</th>
-                            <th scope="col">channel</th>
+                            <th scope="col">{t('zigbee:ieee_address')}</th>
+                            <th scope="col">{t('zigbee:friendly_name')}</th>
+                            <th scope="col">{t('zigbee:channel')}</th>
                             <th scope="col">&nbsp;</th>
                         </tr>
                     </thead>
@@ -50,9 +51,9 @@ export class TouchlinkPage extends Component<TouchlinkApi & GlobalState, {}> {
                                 <td>{touchlinkDevice.channel}</td>
                                 <td>
                                     <div className="btn-group float-right" role="group" aria-label="Basic example">
-                                        <Button<TouchLinkDevice> disabled={touchlinkInProgress} item={touchlinkDevice} title="Identify" className="btn btn-primary" onClick={this.onIdentifyClick}><i
+                                        <Button<TouchLinkDevice> disabled={touchlinkInProgress} item={touchlinkDevice} title={t('identify')} className="btn btn-primary" onClick={this.onIdentifyClick}><i
                                             className={cx("fa", { "fa-exclamation-triangle": !touchlinkIdentifyInProgress, "fas fa-circle-notch fa-spin": touchlinkIdentifyInProgress })} /></Button>
-                                        <Button<TouchLinkDevice> disabled={touchlinkInProgress} item={touchlinkDevice} title="Factory reset" className="btn btn-danger" onClick={this.onResetClick}><i
+                                        <Button<TouchLinkDevice> disabled={touchlinkInProgress} item={touchlinkDevice} title={t('factory_reset')} className="btn btn-danger" onClick={this.onResetClick}><i
                                             className={cx("fa", { "fa-broom": !touchlinkResetInProgress, "fas fa-circle-notch fa-spin": touchlinkResetInProgress })} /></Button>
                                     </div>
                                 </td>
@@ -63,25 +64,25 @@ export class TouchlinkPage extends Component<TouchlinkApi & GlobalState, {}> {
             </div>
         );
     }
-    renderNoDevices() {
-        const { touchlinkScan } = this.props;
+    renderNoDevices(): JSX.Element {
+        const { touchlinkScan, t } = this.props;
         return (
-            <Button className="btn btn-primary mx-auto d-block" onClick={touchlinkScan}>Scan</Button>
+            <Button className="btn btn-primary mx-auto d-block" onClick={touchlinkScan}>{t('scan')}</Button>
         );
     }
-    render() {
-        const { touchlinkDevices, touchlinkScanInProgress, touchlinkScan } = this.props;
+    render(): JSX.Element {
+        const { touchlinkDevices, touchlinkScanInProgress, touchlinkScan, t } = this.props;
         return (
             <div className="card">
                 <div className="card-header allign-middle">
-                    Detected {touchlinkDevices.length} touchlink devices.
-                        <Button title="Rescan" className="btn btn-primary btn-sm float-right" onClick={touchlinkScan}><i className="fa fa-sync" /></Button>
+                    {t('detected_devices_message', { count: touchlinkDevices.length })}
+                    <Button title={t('rescan')} className="btn btn-primary btn-sm float-right" onClick={touchlinkScan}><i className="fa fa-sync" /></Button>
                 </div>
                 <div className="card-body">
                     {touchlinkScanInProgress ? (
                         <div className="d-flex justify-content-center">
                             <div className="spinner-border" role="status">
-                                <span className="sr-only">Loading...</span>
+                                <span className="sr-only">{t('common:loading')}</span>
                             </div>
                         </div>
                     ) : touchlinkDevices.length === 0 ? this.renderNoDevices() : this.renderTouchlinkDevices()}
@@ -93,4 +94,4 @@ export class TouchlinkPage extends Component<TouchlinkApi & GlobalState, {}> {
 }
 const mappedProps = ["touchlinkDevices", "devices", "touchlinkScanInProgress", "touchlinkIdentifyInProgress", "touchlinkResetInProgress"];
 
-export default connect<{}, {}, GlobalState, TouchlinkApi>(mappedProps, actions)(TouchlinkPage);
+export default withTranslation(["touchlink", "zigbee", "common"])(connect<unknown, unknown, GlobalState, TouchlinkApi>(mappedProps, actions)(TouchlinkPage));

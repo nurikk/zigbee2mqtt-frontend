@@ -11,6 +11,7 @@ import cloneDeep from "lodash/cloneDeep";
 import uiSchemas from "./uiSchema.json";
 import { BridgeApi } from "../../actions/BridgeApi";
 import { ISubmitEvent, UiSchema } from "@rjsf/core";
+import { WithTranslation, withTranslation } from "react-i18next";
 
 
 
@@ -51,23 +52,23 @@ const removePropertiesFromSchema = (names: string[], schema: JSONSchema7 = {}, c
 
 const tabs = [
     {
-        title: 'Settings',
+        translationKey: 'settings',
         url: `/settings/settings`
     },
     {
-        title: 'Tools',
+        translationKey: 'tools',
         url: `/settings/tools`
     },
     {
-        title: 'About',
+        translationKey: 'about',
         url: `/settings/about`
     },
     {
-        title: 'Raw',
+        translationKey: 'raw',
         url: `/settings/bridge`
     },
     {
-        title: <i className="fa fa-donate" />,
+        translationKey: 'donate',
         url: '/settings/donate'
     }
 ];
@@ -89,15 +90,16 @@ const rows = [
 ].sort(() => Math.random() - 0.5);
 
 const isValidKeyToRenderAsTab = (key: string, value: JSONSchema7): boolean => (validJsonSchemasAsTabs.includes(value.type as string) && !ingoredFields.includes(key)) || (value && value.oneOf ? value.oneOf.length > 0 : false);
-export class SettingsPage extends Component<SettingsPageProps & BridgeApi & GlobalState & UtilsApi, SettingsPageState> {
+export class SettingsPage extends Component<SettingsPageProps & BridgeApi & GlobalState & UtilsApi & WithTranslation<"setting">, SettingsPageState> {
     state = {
         keyName: ROOT_KEY_NAME
     }
     renderCategoriesTabs(): JSX.Element {
+        const { t } = this.props;
         return (
             <ul className="nav nav-tabs">
                 {tabs.map(tab => <li key={tab.url} className="nav-item">
-                    <NavLink className="nav-link" activeClassName="active" to={tab.url}>{tab.title}</NavLink>
+                    <NavLink className="nav-link" activeClassName="active" to={tab.url}>{t(tab.translationKey)}</NavLink>
                 </li>)}
             </ul>
         )
@@ -143,14 +145,14 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
             null;
 
         const rows = [
-            { title: 'Zigbee2MQTT version', content: <>{zigbee2mqttVersion} {zigbee2mqttCommit}</> },
-            { title: 'Coordinator type', content: <>{bridgeInfo.coordinator?.type ?? 'Unknown'}</> },
-            { title: 'Coordinator revision', content: <>{bridgeInfo.coordinator?.meta?.revision ?? 'Unknown'}</> },
-            { title: 'Frontend version', content: FRONTEND_VERSION },
+            { translationKey: 'Zigbee2MQTT version', content: <>{zigbee2mqttVersion} {zigbee2mqttCommit}</> },
+            { translationKey: 'Coordinator type', content: <>{bridgeInfo.coordinator?.type ?? 'Unknown'}</> },
+            { translationKey: 'Coordinator revision', content: <>{bridgeInfo.coordinator?.meta?.revision ?? 'Unknown'}</> },
+            { translationKey: 'Frontend version', content: FRONTEND_VERSION },
         ];
 
-        return <div className="p-3">{rows.map(row => <dl key={row.title} className="row">
-            <dt className="col-sm-3">{row.title}</dt>
+        return <div className="p-3">{rows.map(row => <dl key={row.translationKey} className="row">
+            <dt className="col-sm-3">{row.translationKey}</dt>
             <dd className="col-sm-9">{row.content}</dd>
         </dl>)}</div>;
 
@@ -216,13 +218,14 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
         return { currentSchema, currentConfig };
     }
     renderSettingsTabs(): JSX.Element {
+        const { t } = this.props;
         const tabs = this.getSettingsTabs();
         const { keyName } = this.state;
         return <div className="nav nav-pills">
             {
                 tabs.map(tab =>
                     <li key={tab.name} className="nav-item">
-                        <a className={cx("nav-link", { 'bg-primary active': keyName === tab.name })} aria-current="page" href="#" onClick={(e) => { this.setState({ keyName: tab.name }); e.preventDefault() }}>{tab.title}</a>
+                        <a className={cx("nav-link", { 'bg-primary active': keyName === tab.name })} aria-current="page" href="#" onClick={(e) => { this.setState({ keyName: tab.name }); e.preventDefault() }}>{t(tab.name, {defaultValue: tab.title})}</a>
                     </li>
                 )
             }
@@ -257,5 +260,5 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
 }
 const SettingsPageWithRouter = withRouter(SettingsPage);
 const mappedProps = ["bridgeInfo"];
-const ConnectedSettingsPage = connect<Record<string, unknown>, Record<string, unknown>, GlobalState, BridgeApi>(mappedProps, actions)(SettingsPageWithRouter);
+const ConnectedSettingsPage = withTranslation("settings")(connect<Record<string, unknown>, Record<string, unknown>, GlobalState, BridgeApi>(mappedProps, actions)(SettingsPageWithRouter));
 export default ConnectedSettingsPage;

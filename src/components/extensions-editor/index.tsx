@@ -12,11 +12,12 @@ import AceEditor from "react-ace";
 import "ace-builds/src-noconflict/mode-javascript";
 import 'ace-builds/src-noconflict/theme-github';
 import 'ace-builds/src-noconflict/theme-dracula';
+import { WithTranslation, withTranslation } from "react-i18next";
 
 type ExtensionsEditorPageState = {
     currentExtension?: string;
 }
-export class ExtensionsEditorPage extends Component<GlobalState & ExtensionApi, ExtensionsEditorPageState> {
+export class ExtensionsEditorPage extends Component<GlobalState & ExtensionApi & WithTranslation<"extensions">, ExtensionsEditorPageState> {
     state: Readonly<ExtensionsEditorPageState> = {};
     loadExtension = (e: ChangeEvent<HTMLSelectElement>): void => {
         const { value } = e.target;
@@ -44,9 +45,9 @@ export class ExtensionsEditorPage extends Component<GlobalState & ExtensionApi, 
     }
 
     addNewExtension = (): void => {
-        const { updateExtensionCode } = this.props;
+        const { updateExtensionCode, t } = this.props;
         const ts = Date.now() + '';
-        const newName = prompt("Enter new extension name", `user-extension${ts}.js`);
+        const newName = prompt(t('extension_name_propmt'), `user-extension${ts}.js`);
         const templatedCode = exampleExtensionCode.replace(/_TS_/g, ts);
         if (newName !== null) {
             updateExtensionCode({ name: newName, code: templatedCode });
@@ -55,18 +56,18 @@ export class ExtensionsEditorPage extends Component<GlobalState & ExtensionApi, 
     }
     renderControls(): JSX.Element {
         const { currentExtension } = this.state;
-        const { extensions } = this.props;
+        const { extensions, t } = this.props;
         return <div className="row mb-2">
             <div className="col-6">
                 <select value={currentExtension} className="form-control" onChange={this.loadExtension}>
-                    <option key="hidden" hidden>Select extension to edit</option>
+                    <option key="hidden" hidden>{t('select_extension_to_edit')}</option>
                     {extensions.map(({ name }) => <option key={name} value={name}>{name}</option>)}
                 </select>
             </div>
             <div className="col-6">
                 <Button onClick={this.addNewExtension} className="btn btn-success me-2"><i className="fa fa-plus"></i></Button>
                 <Button promt disabled={!currentExtension} onClick={this.removeExtension} className="btn btn-danger me-2"><i className="fa fa-trash"></i></Button>
-                <Button disabled={!currentExtension} onClick={this.onSaveClick} className="btn btn-primary">Save</Button>
+                <Button disabled={!currentExtension} onClick={this.onSaveClick} className="btn btn-primary">{t('common:save')}</Button>
             </div>
         </div>
     }
@@ -100,4 +101,4 @@ export class ExtensionsEditorPage extends Component<GlobalState & ExtensionApi, 
 
 const mappedProps = ["extensions", "theme"];
 
-export default connect<unknown, unknown, GlobalState, unknown>(mappedProps, actions)(ExtensionsEditorPage);
+export default withTranslation("extensions")(connect<unknown, unknown, GlobalState, unknown>(mappedProps, actions)(ExtensionsEditorPage));

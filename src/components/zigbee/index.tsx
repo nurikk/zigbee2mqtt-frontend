@@ -12,7 +12,7 @@ import Spinner from "../spinner";
 import { TableHeader } from "./TableHeader";
 import { TableRow } from "./TableRow";
 import { getLastSeenType, lastSeen } from "../../utils";
-import { withTranslation } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 
 export type SortColumn =
     | "device.network_address"
@@ -44,9 +44,9 @@ interface ZigbeeTableData {
 const storeKey = "ZigbeeTableState";
 const longLoadingTimeout = 15 * 1000;
 export type LastSeenType = "elapsed" | "disable" | "ISO_8601" | "ISO_8601_local" | "epoch";
-
-export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
-    constructor(props: Readonly<GlobalState>) {
+type ZigbeeTableProps = GlobalState & WithTranslation<"zigbee">
+export class ZigbeeTable extends Component<ZigbeeTableProps, ZigbeeTableState> {
+    constructor(props: Readonly<ZigbeeTableProps>) {
         super(props);
         this.state = {
             sortDirection: "desc",
@@ -86,7 +86,7 @@ export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
             new Notyf().error(e.toString());
         }
     };
-    handleLongLoading = (): void=> {
+    handleLongLoading = (): void => {
         const { devices } = this.props;
         if (Object.keys(devices).length == 0) {
             const error = <Fragment>
@@ -108,7 +108,7 @@ export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
 
         const lastSeenType = getLastSeenType(bridgeInfo?.config.advanced);
         const searchQuery = search.toLowerCase();
-    
+
         Object.values(devices).filter((device) =>
             device.friendly_name?.toLowerCase().includes(searchQuery)
             || device.ieee_address.toLowerCase().includes(searchQuery)
@@ -170,37 +170,39 @@ export class ZigbeeTable extends Component<GlobalState, ZigbeeTableState> {
     }
 
     renderDevicesTable(): JSX.Element {
-        const { bridgeInfo } = this.props;
+        const { bridgeInfo, t } = this.props;
         const { sortedTableData, sortColumn, sortDirection, search } = this.state;
         const lastSeenType = getLastSeenType(bridgeInfo.config.advanced);
-        return (<div className="card">
-            
+        return (<><div className="card">
+
             <div className="col-12">
-                <input id="search-filter" className="form-control col-10" placeholder="Enter search criteria" value={search} onChange={(e) => this.setState({ search: e.target.value })} type="text"></input>
+                <input id="search-filter" className="form-control col-10" placeholder={t('common:enter_search_criteria')} value={search} onChange={(e) => this.setState({ search: e.target.value })} type="text"></input>
             </div>
-            <div className="table-responsive">
-                <table className="table align-middle">
-                    <TableHeader
-                        lastSeenType={lastSeenType}
-                        sortColumn={sortColumn}
-                        sortDirection={sortDirection}
-                        onSortChange={this.onSortChange}
-                    />
-                    <tbody>
-                        {sortedTableData.map(({ device, state }, id) => <TableRow
-                            key={device.friendly_name}
-                            device={device}
-                            deviceState={state}
-                            id={id}
+        </div>
+            <div className="card">
+                <div className="table-responsive mt-1">
+                    <table className="table align-middle">
+                        <TableHeader
                             lastSeenType={lastSeenType}
-                        />)}
-                    </tbody>
-                </table>
-            </div>
-        </div>);
+                            sortColumn={sortColumn}
+                            sortDirection={sortDirection}
+                            onSortChange={this.onSortChange}
+                        />
+                        <tbody>
+                            {sortedTableData.map(({ device, state }, id) => <TableRow
+                                key={device.friendly_name}
+                                device={device}
+                                deviceState={state}
+                                id={id}
+                                lastSeenType={lastSeenType}
+                            />)}
+                        </tbody>
+                    </table>
+                </div>
+            </div></>);
     }
 }
 
 const mappedProps = ["devices", "deviceStates", "bridgeInfo"];
-const ConnectedZigbeePage = withTranslation("zigbee")(connect<unknown, ZigbeeTableState, GlobalState, unknown>(mappedProps, actions)(ZigbeeTable));
+const ConnectedZigbeePage = withTranslation(["zigbee", "common"])(connect<unknown, ZigbeeTableState, GlobalState, unknown>(mappedProps, actions)(ZigbeeTable));
 export default ConnectedZigbeePage;

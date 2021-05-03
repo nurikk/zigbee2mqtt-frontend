@@ -10,6 +10,7 @@ import { genDeviceDetailsLink, toHHMMSS } from "../../utils";
 import { Link } from "react-router-dom";
 import { Device, DeviceState } from "../../types";
 import { VendorLink, ModelLink } from "../vendor-links/verndor-links";
+import { useTranslation, WithTranslation, withTranslation } from "react-i18next";
 
 
 type OtaRowProps = {
@@ -18,6 +19,7 @@ type OtaRowProps = {
 }
 
 const StateCell: FunctionComponent<OtaRowProps & OtaApi> = (props) => {
+    const { t } = useTranslation("ota");
     const { device, state, checkOTA, updateOTA } = props;
     switch (state?.update?.state) {
         case "updating":
@@ -25,13 +27,13 @@ const StateCell: FunctionComponent<OtaRowProps & OtaApi> = (props) => {
                 <div className="progress-bar progress-bar-striped progress-bar-animated" style={{ width: `${state.update.progress}%` }}>
                     {state.update.progress}%</div>
             </div>
-                <div>Remaining time {toHHMMSS(state.update.remaining)}</div>
+                <div>{t('remaining_time', { remaining: toHHMMSS(state.update.remaining) })}</div>
             </>
             );
         case "available":
-            return <Button<string> className="btn btn-danger btn-sm" onClick={updateOTA} item={device.friendly_name} title="Update OTA" promt>Update OTA</Button>
+            return <Button<string> className="btn btn-danger btn-sm" onClick={updateOTA} item={device.friendly_name} promt>{t("update")}</Button>
         default:
-            return <Button<string> className="btn btn-primary btn-sm" onClick={checkOTA} item={device.friendly_name} title="Check OTA">Check OTA</Button>
+            return <Button<string> className="btn btn-primary btn-sm" onClick={checkOTA} item={device.friendly_name} >{t('check')}</Button>
 
 
     }
@@ -52,7 +54,7 @@ const OtaRow: FunctionComponent<OtaRowProps & OtaApi> = (props) => {
 }
 
 
-class OtaPage extends Component<GlobalState & OtaApi, {}> {
+class OtaPage extends Component<GlobalState & OtaApi & WithTranslation<"ota">, unknown> {
     getAllOtaDevices() {
         const { devices } = this.props;
         return Object.values(devices).filter(device => device?.definition?.supports_ota)
@@ -63,7 +65,7 @@ class OtaPage extends Component<GlobalState & OtaApi, {}> {
         otaDevices.forEach(device => checkOTA(device.friendly_name));
     }
     render() {
-        const { deviceStates, checkOTA, updateOTA } = this.props;
+        const { deviceStates, checkOTA, updateOTA, t } = this.props;
         const otaApi = { checkOTA, updateOTA };
         const otaDevices = this.getAllOtaDevices();
 
@@ -72,16 +74,16 @@ class OtaPage extends Component<GlobalState & OtaApi, {}> {
                 <table className="table">
                     <thead>
                         <tr>
-                            <th scope="col">Friendly name</th>
-                            <th>Manufacturer</th>
-                            <th>Model</th>
-                            <th>Firmware build date</th>
-                            <th>Firmware version</th>
-                            <th><Button className="btn btn-danger btn-sm" onClick={this.checkAllOTA} promt>Check all OTA</Button></th>
+                            <th scope="col">{t("zigbee:friendly_name")}</th>
+                            <th>{t("zigbee:manufacturer")}</th>
+                            <th>{t("zigbee:model")}</th>
+                            <th>{t("zigbee:firmware_build_date")}</th>
+                            <th>{t("zigbee:firmware_version")}</th>
+                            <th><Button className="btn btn-danger btn-sm" onClick={this.checkAllOTA} promt>{t('check_all')}</Button></th>
                         </tr>
                     </thead>
                     <tbody>
-                        {otaDevices.length === 0 ? <tr><td colSpan={6}>You don&apos;t have any devices that support OTA</td></tr> : null}
+                        {otaDevices.length === 0 ? <tr><td colSpan={6}>{t('empty_ota_message')}</td></tr> : null}
                         {otaDevices.map(device => (
                             <OtaRow key={device.ieee_address} device={device} state={deviceStates[device.friendly_name]} {...otaApi} />
                         ))}
@@ -94,4 +96,4 @@ class OtaPage extends Component<GlobalState & OtaApi, {}> {
 
 const mappedProps = ["devices", "deviceStates"];
 
-export default connect<{}, {}, GlobalState, {}>(mappedProps, actions)(OtaPage);
+export default withTranslation(["ota", "zigbee", "common"])(connect<unknown, unknown, GlobalState, unknown>(mappedProps, actions)(OtaPage));

@@ -15,7 +15,8 @@
         "extensions": "Extensions",
         "permit_join": "Permit join",
         "all": "All",
-        "toggle_dropdown": "Toggle dropdown"
+        "toggle_dropdown": "Toggle dropdown",
+        "disable_join": "Disable join"
     },
     "zigbee": {
         "power": "Power",
@@ -32,7 +33,17 @@
         "network_address": "Network address",
         "firmware_build_date": "Firmware build date",
         "firmware_version": "Firmware version",
-        "interview_completed": "Interview completed"
+        "interview_completed": "Interview completed",
+        "unsupported": "Unsupported",
+        "rename_device": "Rename device",
+        "remove_device": "Remove device",
+        "update_Home_assistant_entity_id": "Update Home Assistant entity ID",
+
+        "force_remove": "Force remove",
+        "block_join": "Block from joining again",
+
+        "reconfigure": "Reconfigure",
+        "endpoint": "Endpoint"
     },
     "values": {
         "true": "True"
@@ -47,5 +58,68 @@
         "state": "State",
         "clusters": "Clusters",
         "dev_console": "Dev console"
+    },
+    "common": {
+        "dialog_configramtion_prompt": "Are you sure?",
+        "enter_search_criteria": "Enter search criteria",
+        "clear": "Clear",
+        "close": "Close",
+        "save": "Save",
+        "loading": "Loading...",
+        "check_all": "Check all",
+        "remaining_time": "Remaining time {{remaining}}",
+        "action": "Action",
+        "delete": "Delete"
+    },
+    "settings": {
+        "settings": "Settings",
+        "tools": "Tools",
+        "about": "About",
+        "raw": "Raw",
+        "donate": "Donate",
+
+        "experimental": "Experimental",
+        "blocklist": "Blocklist"
+
+    },
+    "logs": {
+        "show_only": "Show only",
+        "filter_by_text": "Filter by text",
+        "empty_logs_message": "Nothing to display"
+    },
+    "extensions": {
+        "extension_name_propmt": "Enter new extension name",
+        "select_extension_to_edit": "Select extension to edit"
+    },
+    "touchlink": {
+        "detected_devices_message": "Detected {{count}} touchlink devices.",
+        "rescan": "Scan again",
+        "scan": "Scan"
+    },
+    "ota": {
+        "empty_ota_message": "You don&apos;t have any devices that support OTA",
+        "update": "Update device firmware",
+        "check": "Check for new updates",
+        "check_all": "Check all"
+    },
+    "groups": {
+        "new_group_name": "New group name",
+        "new_group_name_placeholder": "example: my_bedroom_lights",
+        "new_group_id": "New group id",
+        "new_group_id_placeholder": "Specify group id if necessary",
+        "remove_group": "Remove group",
+        "create_group": "Create group",
+        "add_to_group": "Add to group"
+    },
+    "map": {
+        "loading": "Depending on the size of your network this can take somewhere between 10 seconds and 2 minutes.",
+        "load": "Load map",
+        "help_is_coordinator": "is Coordinator",
+        "help_end_device_description": "Green means End Device",
+        "help_router_description": "Blue means Router",
+        "help_coordinator_link_description": "Solid lines are the link to the Coordinator",
+        "help_router_links_description": "Dashed lines are the link with Routes",
+        "help_lqi_description": "Link quality is between 0 - 255 (higher is better), values with / represents multiple types of links",
+        "hide": "Click on me to hide"
     }
 }

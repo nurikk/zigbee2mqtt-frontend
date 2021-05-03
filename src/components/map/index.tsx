@@ -16,6 +16,7 @@ import Spinner from "../spinner";
 import intersection from "lodash/intersection";
 import style from "./map.css";
 import cx from "classnames";
+import { WithTranslation, withTranslation } from "react-i18next";
 export interface MouseEventsResponderNode {
     onMouseOver?: (arg0: NodeI, el: SVGElement) => void;
     onMouseOut?: (arg0: NodeI, el: SVGElement) => void;
@@ -123,7 +124,7 @@ const processHighlights = ({ networkGraph, links, selectedNode, node, link, link
     }
 }
 
-export class MapComponent extends Component<GlobalState & MapApi, MapState> {
+export class MapComponent extends Component<GlobalState & MapApi & WithTranslation<"map">, MapState> {
     ref = createRef<HTMLDivElement>();
     svgRef = createRef<SVGSVGElement>();
     simulation = forceSimulation<NodeI, LinkI>();
@@ -181,7 +182,7 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
             .force("y", forceY().strength(0.2))
     }
 
-    initPage = () => {
+    initPage = (): void => {
         const { width, height } = (this.ref.current as HTMLDivElement).getBoundingClientRect();
         this.setState({ width, height });
         this.updateForces(width, height);
@@ -195,7 +196,7 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
         this.updateNodes();
     }
 
-    renderMap() {
+    renderMap(): JSX.Element {
         const { width, height, visibleLinks } = this.state;
 
         const { networkGraph } = this.props;
@@ -217,17 +218,17 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
         const { networkMapRequest } = this.props;
         networkMapRequest();
     }
-    renderMessage() {
-        const { networkGraphIsLoading } = this.props;
+    renderMessage(): JSX.Element {
+        const { networkGraphIsLoading, t } = this.props;
         return (
             <div className="h-100 d-flex justify-content-center align-items-center">
                 {
                     networkGraphIsLoading ? (
                         <div>
                             <Spinner />
-                            <div>Depending on the size of your network this can take somewhere between 10 seconds and 2 minutes.</div>
+                            <div>{t('loading')}</div>
                         </div>
-                    ) : <Button onClick={this.onRequestClick} className="btn btn-primary d-block">Load map</Button>
+                    ) : <Button onClick={this.onRequestClick} className="btn btn-primary d-block">{t('load')}</Button>
                 }
             </div>
         );
@@ -244,7 +245,7 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
         }
         this.setState({ visibleLinks });
     }
-    renderMapControls() {
+    renderMapControls(): JSX.Element {
         const { visibleLinks } = this.state;
         return <div className={style.controls}>
             {
@@ -263,23 +264,24 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
             }
         </div>
     }
-    renderHelp() {
+    renderHelp(): JSX.Element {
+        const { t } = this.props;
         const { legendIsVisible } = this.state;
         return (<div className={cx("fixed-bottom", { "d-none": !legendIsVisible })} onClick={() => this.setState({ legendIsVisible: false })}>
             <div className={cx(style.node, style.Coordinator)}>
                 <svg width="28" height="28" viewBox="0 0 28 28">
                     <polygon points={getStarShape(5, 5, 14) as string} />
-                </svg> is Coordinator</div>
-            <div className={cx(style.node, style.EndDevice)}>Green means End Device</div>
-            <div className={cx(style.node, style.Router)}>Blue means Router</div>
+                </svg> {t('help_is_coordinator')}</div>
+            <div className={cx(style.node, style.EndDevice)}>{t("help_end_device_description")}</div>
+            <div className={cx(style.node, style.Router)}>{t('help_router_description')}</div>
 
-            <div>Solid lines are the link to the <span className={cx(style.node, style.Coordinator)}>Coordinator</span></div>
-            <div>Dashed lines are the link with <span className={cx(style.node, style.Coordinator)}>Router</span></div>
-            <div>Link quality is between 0 - 255 (higher is better), values with / represents multiple types of links</div>
-            <div>Click on me to hide</div>
+            <div>{t('help_coordinator_link_description')}</div>
+            <div>{t('help_router_links_description')}</div>
+            <div>{t("help_lqi_description")}</div>
+            <div>{t("hide")}</div>
         </div>)
     }
-    render() {
+    render(): JSX.Element {
         const { networkGraph } = this.props;
 
         return (
@@ -293,5 +295,5 @@ export class MapComponent extends Component<GlobalState & MapApi, MapState> {
 
 
 const mappedProps = ["networkGraph", "networkGraphIsLoading"];
-const ConnectedMap = connect<{}, MapState, GlobalState, {}>(mappedProps, actions)(MapComponent);
+const ConnectedMap = withTranslation("map")(connect<unknown, MapState, GlobalState, unknown>(mappedProps, actions)(MapComponent));
 export default ConnectedMap;
