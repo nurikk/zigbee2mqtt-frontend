@@ -135,7 +135,7 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
         }
     }
     renderAbout(): JSX.Element {
-        const { bridgeInfo } = this.props;
+        const { bridgeInfo, t } = this.props;
         const isZigbee2mqttDevVersion = bridgeInfo.version?.match(/^\d+\.\d+\.\d+$/) === null;
         const zigbee2mqttVersion = isZigbee2mqttDevVersion ?
             bridgeInfo.version :
@@ -145,14 +145,14 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
             null;
 
         const rows = [
-            { translationKey: 'Zigbee2MQTT version', content: <>{zigbee2mqttVersion} {zigbee2mqttCommit}</> },
-            { translationKey: 'Coordinator type', content: <>{bridgeInfo.coordinator?.type ?? 'Unknown'}</> },
-            { translationKey: 'Coordinator revision', content: <>{bridgeInfo.coordinator?.meta?.revision ?? 'Unknown'}</> },
-            { translationKey: 'Frontend version', content: FRONTEND_VERSION },
+            { translationKey: 'zigbee2mqtt_version', content: <>{zigbee2mqttVersion} {zigbee2mqttCommit}</> },
+            { translationKey: 'coordinator_type', content: <>{bridgeInfo.coordinator?.type ?? t('common:unknown')}</> },
+            { translationKey: 'coordinator_revision', content: <>{bridgeInfo.coordinator?.meta?.revision ?? t('common:unknown')}</> },
+            { translationKey: 'frontend_version', content: FRONTEND_VERSION },
         ];
 
         return <div className="p-3">{rows.map(row => <dl key={row.translationKey} className="row">
-            <dt className="col-sm-3">{row.translationKey}</dt>
+            <dt className="col-sm-3">{t(row.translationKey)}</dt>
             <dd className="col-sm-9">{row.content}</dd>
         </dl>)}</div>;
 
@@ -164,10 +164,10 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
     }
 
     renderTools(): JSX.Element {
-        const { exportState, restartBridge } = this.props;
+        const { exportState, restartBridge, t } = this.props;
         return <div className="p-3">
-            <Button className="btn btn-primary d-block mt-2" onClick={exportState}>Download state</Button>
-            <Button className="btn btn-danger d-block mt-2" onClick={restartBridge} promt>Restart Zigbee2MQTT</Button>
+            <Button className="btn btn-primary d-block mt-2" onClick={exportState}>{t('download_state')}</Button>
+            <Button className="btn btn-danger d-block mt-2" onClick={restartBridge} promt>{t('restart_zigbee2mqtt')}</Button>
         </div>
     }
     onSettingsSave = (e: ISubmitEvent<Record<string, unknown>>): void => {
@@ -182,16 +182,16 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
     }
 
     getSettingsTabs(): { name: string, title: string }[] {
-        const { bridgeInfo: { config_schema: configSchema = { properties: {} } } } = this.props;
+        const { bridgeInfo: { config_schema: configSchema = { properties: {} } }, t } = this.props;
         const tabs = Object.entries<JSONSchema7>(configSchema.properties as unknown as ArrayLike<JSONSchema7>)
             .filter(([key, value]) => isValidKeyToRenderAsTab(key, value))
             .map(([key, value]) => ({
                 name: key,
-                title: value.title ?? key
+                title: t(key, { defaultValue: value.title })
             }));
         tabs.unshift({
             name: ROOT_KEY_NAME,
-            title: 'Main'
+            title: t('main', {defaultValue: "Main"})
         });
         return tabs;
     }
@@ -225,7 +225,7 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
             {
                 tabs.map(tab =>
                     <li key={tab.name} className="nav-item">
-                        <a className={cx("nav-link", { 'bg-primary active': keyName === tab.name })} aria-current="page" href="#" onClick={(e) => { this.setState({ keyName: tab.name }); e.preventDefault() }}>{t(tab.name, {defaultValue: tab.title})}</a>
+                        <a className={cx("nav-link", { 'bg-primary active': keyName === tab.name })} aria-current="page" href="#" onClick={(e) => { this.setState({ keyName: tab.name }); e.preventDefault() }}>{t(tab.name, { defaultValue: tab.title })}</a>
                     </li>
                 )
             }
@@ -251,15 +251,15 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
     }
 
     renderDonate(): JSX.Element {
-
+        const { t } = this.props;
+        const donateText = t("donation_text", { returnObjects: true }) as string[];
         return <div className="container-fluid">
-            <p>Hello, <mark>%username%</mark>, here you can thank us for hardworking</p>
-            <p>Don&apos;t hesitate to say something nice as well ;) </p>
+            {donateText.map(row => <p key={row }>{row }</p>)}
             {rows}
         </div>;
     }
 }
 const SettingsPageWithRouter = withRouter(SettingsPage);
 const mappedProps = ["bridgeInfo"];
-const ConnectedSettingsPage = withTranslation("settings")(connect<Record<string, unknown>, Record<string, unknown>, GlobalState, BridgeApi>(mappedProps, actions)(SettingsPageWithRouter));
+const ConnectedSettingsPage = withTranslation(["settings", "common"])(connect<Record<string, unknown>, Record<string, unknown>, GlobalState, BridgeApi>(mappedProps, actions)(SettingsPageWithRouter));
 export default ConnectedSettingsPage;
