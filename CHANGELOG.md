@@ -1,3 +1,19 @@
+## [0.4.2](https://github.com/nurikk/z2m-frontend/compare/0.4.1...0.4.2) (2021-05-04)
+
+
+### Features
+
+* **i18n:** add locale picker ([009f6c1](https://github.com/nurikk/z2m-frontend/commit/009f6c16bd63761770f0ef4b78bfca8575d7d25d))
+* **i18n:** add support for json-schema translations ([4951167](https://github.com/nurikk/z2m-frontend/commit/49511677b87f048ef7f88574cfdb504d7035ed20))
+* **i18n:** conditional debug ([64bf613](https://github.com/nurikk/z2m-frontend/commit/64bf6133dc7a974b18f02f3f925a3374b6c03427))
+* **i18n:** fix namings ([8eb04cc](https://github.com/nurikk/z2m-frontend/commit/8eb04ccca078d8ada37034953a859c3f481497ae))
+* **i18n:** initial implementation ([4df84cb](https://github.com/nurikk/z2m-frontend/commit/4df84cbd6c4e5be1a82e36bd1da8e995f27e7eb2))
+* **i18n:** initial implementation ([dd5bc22](https://github.com/nurikk/z2m-frontend/commit/dd5bc229a82f669a70fcf49250bd171686c893ba))
+* **i18n:** molo i18n strings ([bd8fd6d](https://github.com/nurikk/z2m-frontend/commit/bd8fd6d264da7e1d0839cb32268b7cac28ebb294))
+* **i18n:** more localized strings ([07f55de](https://github.com/nurikk/z2m-frontend/commit/07f55dee3840429fb1cc4ba52f09ac27c48b0c54))
+
+
+
 ## [0.4.1](https://github.com/nurikk/z2m-frontend/compare/0.4.0...0.4.1) (2021-05-02)
 
 
