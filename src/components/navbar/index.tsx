@@ -13,6 +13,7 @@ import { useOnClickOutside } from '../../hooks/useOnClickOutside';
 import { BridgeApi } from '../../actions/BridgeApi';
 import { ThemeSwitcher } from '../theme-switcher';
 import { WithTranslation, withTranslation, useTranslation } from 'react-i18next';
+import LocalePicker from '../../i18n/LocalePicker';
 
 
 
@@ -132,6 +133,7 @@ const NavBar: FunctionComponent<NavBarProps & PropsFromStore & BridgeApi & Pick<
                                 </NavLink>
                             </li>)
                     }
+                    <LocalePicker />
                 </ul>
                 <StartStopJoinButton
                     devices={devices}
@@ -139,6 +141,7 @@ const NavBar: FunctionComponent<NavBarProps & PropsFromStore & BridgeApi & Pick<
                     bridgeInfo={bridgeInfo}
                 />
                 <ThemeSwitcher saveCurrentTheme={setTheme} />
+
             </div>
             {bridgeInfo.restart_required ? <Button onClick={restartBridge} promt className="btn btn-danger me-1">{t('restart')}</Button> : null}
         </div>
