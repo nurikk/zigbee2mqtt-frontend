@@ -54,7 +54,7 @@
         "bind": "Lien",
         "reporting": "Rapports",
         "settings": "Paramètres",
-        "settings_specific": "Paramètres (spécifiques)",
+        "settings_specific": "Paramètres (Spécifiques)",
         "state": "Etat",
         "clusters": "Clusters",
         "dev_console": "Console dev"
@@ -84,7 +84,7 @@
             "Salut, %username%, vous pouvez ici nous remercier pour notre dur labeur",
             "N'hésitez pas à nous laisser un petit mot gentil ;)"
         ],
-        "zigbee2mqtt_version": "version Zigbee2MQTT",
+        "zigbee2mqtt_version": "Version Zigbee2MQTT",
         "coordinator_type": "Type de Coordinateur",
         "coordinator_revision": "Révision du Coordinateur",
         "frontend_version": "Version Interface",
@@ -124,7 +124,7 @@
         "loading": "En fonction de la taille de votre réseau, ceci peut prendre entre 10 secondes et 2 minutes.",
         "load": "Charger le schéma",
         "help_is_coordinator": "est le Coordinateur",
-        "help_end_device_description": "Les Périphérique terminaux sont en vert",
+        "help_end_device_description": "Les Périphérique Terminaux sont en vert",
         "help_router_description": "Les Routeurs sont en bleu",
         "help_coordinator_link_description": "Les lignes pleines sont les liens avec le Coordinateur",
         "help_router_links_description": "Les lignes en pointillés sont les liens avec les Routeurs",
