@@ -37,7 +37,7 @@
 		"unsupported": "Non Supporté",
         "rename_device": "Renommer le périph",
         "remove_device": "Supprimer le périph",
-        "update_Home_assistant_entity_id": "MàJ de l'ID d'entité Home Asssistant",
+        "update_Home_assistant_entity_id": "MàJ de l'ID d'entité Home Assistant",
 
         "force_remove": "Forcer la suppression",
         "block_join": "Bloquer tout nouvel appairage",
