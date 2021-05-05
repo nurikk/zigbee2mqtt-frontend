@@ -10,7 +10,7 @@
         "touchlink": "Touchlink",
 
         "logs": "Journaux",
-        "ota": "OTA",
+        "ota": "MàJ OTA",
 
         "extensions": "Extensions",
         "permit_join": "Activer Appairage",
@@ -106,7 +106,7 @@
         "scan": "Scanner"
     },
     "ota": {
-        "empty_ota_message": "Vous n&apos;avez aucun périphérique supportant OTA",
+        "empty_ota_message": "Vous n&apos;avez aucun périphérique supportant les MàJ OTA",
         "update": "MàJ firmware des périphériques",
         "check": "Vérifier nouvelles MàJ",
         "check_all": "Vérifier tout"
