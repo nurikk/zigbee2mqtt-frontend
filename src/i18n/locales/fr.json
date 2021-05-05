@@ -9,13 +9,14 @@
 
         "touchlink": "Touchlink",
 
-        "logs": "Logs",
-        "ota": "OTA",
+        "logs": "Journaux",
+        "ota": "MàJ OTA",
 
         "extensions": "Extensions",
-        "permit_join": "Appairage",
+        "permit_join": "Activer Appairage",
         "all": "Tout",
-        "toggle_dropdown": "Bascule menu"
+        "toggle_dropdown": "Bascule menu",
+		"disable_join": "Désactiver Appairage"
     },
     "zigbee": {
         "power": "Alim",
@@ -32,23 +33,102 @@
         "network_address": "Adresse réseau",
         "firmware_build_date": "Date Firmware",
         "firmware_version": "Version Firmware",
-        "interview_completed": "Interview completé"
+        "interview_completed": "Interview terminé",
+		"unsupported": "Non Supporté",
+        "rename_device": "Renommer le périph",
+        "remove_device": "Supprimer le périph",
+        "update_Home_assistant_entity_id": "MàJ de l'ID d'entité Home Assistant",
+
+        "force_remove": "Forcer la suppression",
+        "block_join": "Bloquer tout nouvel appairage",
+
+        "reconfigure": "Reconfigurer",
+        "endpoint": "Endpoint"
     },
     "values": {
         "true": "Vrai"
     },
-    "featureNames": {
-        "color_temp": "Température couleur"
-    },
     "devicePage": {
-        "about": "A propos",
+        "about": "À propos",
         "exposes": "Expose",
-        "bind": "Liens",
+        "bind": "Lien",
         "reporting": "Rapports",
         "settings": "Paramètres",
-        "settings_specific": "Paramètres (spécifiques)",
+        "settings_specific": "Paramètres (Spécifiques)",
         "state": "Etat",
         "clusters": "Clusters",
         "dev_console": "Console dev"
+    },
+    "common": {
+        "dialog_configramtion_prompt": "Êtes-vous sûr ?",
+        "enter_search_criteria": "Entrez le critère de recherche",
+        "clear": "Vider",
+        "close": "Fermer",
+        "save": "Sauver",
+        "loading": "Chargement...",
+        "check_all": "Cocher tout",
+        "remaining_time": "Temps restant {{remaining}}",
+        "action": "Action",
+        "delete": "Effacer"
+    },
+    "settings": {
+        "settings": "Paramètres",
+        "tools": "Outils",
+        "about": "À propos",
+        "raw": "Brut",
+        "donate": "Don",
+
+        "experimental": "Expérimental",
+        "blocklist": "Liste noire",
+        "donation_text": [
+            "Salut, %username%, vous pouvez ici nous remercier pour notre dur labeur",
+            "N'hésitez pas à nous laisser un petit mot gentil ;)"
+        ],
+        "zigbee2mqtt_version": "Version Zigbee2MQTT",
+        "coordinator_type": "Type de Coordinateur",
+        "coordinator_revision": "Révision du Coordinateur",
+        "frontend_version": "Version Interface",
+        "download_state": "État de téléchargement",
+        "restart_zigbee2mqtt": "Redémarrer Zigbee2MQTT"
+    },
+    "logs": {
+        "show_only": "Niveau",
+        "filter_by_text": "Filtrer sur le texte",
+        "empty_logs_message": "Rien à afficher"
+    },
+    "extensions": {
+        "extension_name_propmt": "Entrez le nom de l'extension",
+        "select_extension_to_edit": "Choisir l'extension à modifier"
+    },
+    "touchlink": {
+        "detected_devices_message": "{{count}} périphériques Touchlink détectés.",
+        "rescan": "Rescanner",
+        "scan": "Scanner"
+    },
+    "ota": {
+        "empty_ota_message": "Vous n&apos;avez aucun périphérique supportant les MàJ OTA",
+        "update": "MàJ firmware des périphériques",
+        "check": "Vérifier nouvelles MàJ",
+        "check_all": "Vérifier tout"
+    },
+    "groups": {
+        "new_group_name": "Nouveau nom de groupe",
+        "new_group_name_placeholder": "exemple: mes_lumières_chambre",
+        "new_group_id": "Nouvel ID groupe",
+        "new_group_id_placeholder": "Spécifiez l'ID groupe si nécessaire",
+        "remove_group": "Supprimer groupe",
+        "create_group": "Créer groupe",
+        "add_to_group": "Ajouter au groupe"
+    },
+    "map": {
+        "loading": "En fonction de la taille de votre réseau, ceci peut prendre entre 10 secondes et 2 minutes.",
+        "load": "Charger le schéma",
+        "help_is_coordinator": "est le Coordinateur",
+        "help_end_device_description": "Les Périphérique Terminaux sont en vert",
+        "help_router_description": "Les Routeurs sont en bleu",
+        "help_coordinator_link_description": "Les lignes pleines sont les liens avec le Coordinateur",
+        "help_router_links_description": "Les lignes en pointillés sont les liens avec les Routeurs",
+        "help_lqi_description": "La qualité de lien est entre 0 - 255 (plus c'est haut mieux c'est), les valeurs avec un / representent plusieurs types de liens",
+        "hide": "Cliquez-moi pour me cacher"
     }
 }
