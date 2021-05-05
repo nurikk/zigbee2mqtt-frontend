@@ -121,7 +121,7 @@
         "add_to_group": "Ajouter au groupe"
     },
     "map": {
-        "loading": "En fonction de la taille de votre réseau, ceci peut prendre entre 10 secondes et 2 minutesç.",
+        "loading": "En fonction de la taille de votre réseau, ceci peut prendre entre 10 secondes et 2 minutes.",
         "load": "Charger le schéma",
         "help_is_coordinator": "est le Coordinateur",
         "help_end_device_description": "Les Périphérique terminaux sont en vert",
