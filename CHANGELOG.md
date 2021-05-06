@@ -1,3 +1,17 @@
+## [0.4.3](https://github.com/nurikk/z2m-frontend/compare/0.4.2...0.4.3) (2021-05-06)
+
+
+### Bug Fixes
+
+* **i18n:** disable ru locale ([ed06104](https://github.com/nurikk/z2m-frontend/commit/ed06104965169d7460ec3b280939942ee4af55f6))
+
+
+### Features
+
+* **i18n:** add locale flags ([0aa6399](https://github.com/nurikk/z2m-frontend/commit/0aa639948d96dab3bd05570e36311f453fcab047))
+
+
+
 ## [0.4.2](https://github.com/nurikk/z2m-frontend/compare/0.4.1...0.4.2) (2021-05-04)
 
 
