@@ -69,7 +69,9 @@
         "check_all": "Check all",
         "remaining_time": "Remaining time {{remaining}}",
         "action": "Action",
-        "delete": "Delete"
+        "delete": "Delete",
+        "en": "English",
+        "fr": "French"
     },
     "settings": {
         "settings": "Settings",

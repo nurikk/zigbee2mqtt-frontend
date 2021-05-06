@@ -69,7 +69,9 @@
         "check_all": "Cocher tout",
         "remaining_time": "Temps restant {{remaining}}",
         "action": "Action",
-        "delete": "Effacer"
+        "delete": "Effacer",
+        "en": "English",
+        "fr": "French"
     },
     "settings": {
         "settings": "Paramètres",
