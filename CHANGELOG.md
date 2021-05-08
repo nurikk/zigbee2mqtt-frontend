@@ -1,3 +1,13 @@
+## [0.4.4](https://github.com/nurikk/z2m-frontend/compare/0.4.3...0.4.4) (2021-05-08)
+
+
+### Bug Fixes
+
+* **18n:** capitalaze polski ([65e5573](https://github.com/nurikk/z2m-frontend/commit/65e5573c2c430726d317b5b0f308fb0969bf0d6a))
+* **i18n:** fix default language ([8479512](https://github.com/nurikk/z2m-frontend/commit/847951231692acb9b4a6c57b71f081b416ffcf9e))
+
+
+
 ## [0.4.3](https://github.com/nurikk/z2m-frontend/compare/0.4.2...0.4.3) (2021-05-06)
 
 
