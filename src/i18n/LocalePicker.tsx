@@ -7,9 +7,10 @@ import cx from "classnames";
 import { Resource } from 'i18next';
 import en from "./flags/us.png";
 import fr from "./flags/fr.png";
+import pl from "./flags/pl.png";
 
 const localesMap = {
-    en, fr
+    en, fr, pl
 }
 
 

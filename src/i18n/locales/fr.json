@@ -71,7 +71,8 @@
         "action": "Action",
         "delete": "Effacer",
         "en": "English",
-        "fr": "French"
+        "fr": "Français",
+        "pl": "polski"
     },
     "settings": {
         "settings": "Paramètres",
