@@ -85,7 +85,7 @@ module.exports = (env, args) => {
             },
         },
         resolve: {
-            mainFields: ["module", "main"],
+            // mainFields: ["module", "main"],
             extensions: [".ts", ".tsx", ".js", ".html", ".txt"]
         },
         module: {
