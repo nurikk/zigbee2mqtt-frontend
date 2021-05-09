@@ -1,13 +1,20 @@
 
 import React, { RefObject } from 'react';
-
 import { useTranslation } from 'react-i18next';
+import { register } from "timeago.js"
 import useComponentVisible from '../hooks/useComponentVisible';
 import cx from "classnames";
 import { Resource } from 'i18next';
 import en from "./flags/us.png";
 import fr from "./flags/fr.png";
 import pl from "./flags/pl.png";
+
+import timePl from "timeago.js/lib/lang/pl";
+import timeFR from "timeago.js/lib/lang/fr";
+
+
+register("pl", timePl);
+register("fr", timeFR);
 
 const localesMap = {
     en, fr, pl
