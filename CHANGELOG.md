@@ -1,3 +1,12 @@
+## [0.4.5](https://github.com/nurikk/z2m-frontend/compare/0.4.4...0.4.5) (2021-05-09)
+
+
+### Features
+
+* **i18n:** translate lastSeen ([4ebc23f](https://github.com/nurikk/z2m-frontend/commit/4ebc23fcc3327dfc36a5c8d34d9ce53ba169830e))
+
+
+
 ## [0.4.4](https://github.com/nurikk/z2m-frontend/compare/0.4.3...0.4.4) (2021-05-08)
 
 
