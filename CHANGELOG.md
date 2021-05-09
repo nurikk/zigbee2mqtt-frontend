@@ -1,3 +1,14 @@
+## [0.4.6](https://github.com/nurikk/z2m-frontend/compare/0.4.5...0.4.6) (2021-05-09)
+
+
+### Bug Fixes
+
+* **error-boundry:** update steps ([3eeceaa](https://github.com/nurikk/z2m-frontend/commit/3eeceaa8fa0156b502e5382e2b027ea234191076))
+* **external-extensions:** fix example extension ([8dbeff2](https://github.com/nurikk/z2m-frontend/commit/8dbeff25d627ee57a38b5667674c27396ca18145))
+* **webpack:** fix resolve ([92ed7b0](https://github.com/nurikk/z2m-frontend/commit/92ed7b056195819a3982b30c026cdbeb92d2d2f6))
+
+
+
 ## [0.4.5](https://github.com/nurikk/z2m-frontend/compare/0.4.4...0.4.5) (2021-05-09)
 
 
