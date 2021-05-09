@@ -18,7 +18,7 @@ type TableRowProps = {
     lastSeenType: LastSeenType;
 }
 export const TableRow = (props: TableRowProps): JSX.Element => {
-    const { device, deviceState, id, lastSeenType } = props;
+    const { device, deviceState = {} as DeviceState, id, lastSeenType } = props;
     return <tr key={device.friendly_name} title={deviceState.update?.state == "available" ? 'Avaliable OTA update' : device.definition?.description}>
     <td className="font-weight-bold">{id + 1}</td>
     <td className={style["device-pic"]}>

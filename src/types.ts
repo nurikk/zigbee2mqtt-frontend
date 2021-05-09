@@ -1,7 +1,8 @@
 import { JSONSchema7 } from "json-schema";
 
 export type DeviceType = "EndDevice" | "Router" | "Coordinator";
-
+export type FriendlyName = string;
+export type IEEEEAddress = string;
 
 interface OTAState {
     state: "available" | "updating";
@@ -99,7 +100,7 @@ export interface BridgeInfo {
         };
         type?: string;
     };
-    device_options: Record<string, unknown>;
+    device_options: Record<IEEEEAddress, unknown>;
     restart_required: boolean;
 }
 
@@ -216,11 +217,11 @@ export interface EndpointDescription {
 }
 
 export interface Device {
-    ieee_address: string;
+    ieee_address: IEEEEAddress;
     type: DeviceType;
     network_address: number;
     model: string;
-    friendly_name: string;
+    friendly_name: FriendlyName;
     power_source: PowerSource;
     model_id: string;
     interviewing: boolean;
@@ -238,7 +239,7 @@ export interface BindRule {
     target: {
         id?: number;
         endpoint?: Endpoint;
-        ieee_address?: string;
+        ieee_address?: IEEEEAddress;
         type: "endpoint" | "group";
     };
 
@@ -246,7 +247,7 @@ export interface BindRule {
 export type SortDirection = "asc" | "desc";
 
 export interface TouchLinkDevice {
-    ieee_address: string;
+    ieee_address: IEEEEAddress;
     channel: number;
 }
 

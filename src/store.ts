@@ -1,7 +1,7 @@
 import createStore from "unistore";
 import devtools from "unistore/devtools";
 
-import { Device, DeviceState, BridgeConfig, BridgeInfo, TouchLinkDevice, BridgeState } from "./types";
+import { Device, DeviceState, BridgeConfig, BridgeInfo, TouchLinkDevice, BridgeState, FriendlyName, IEEEEAddress } from "./types";
 
 import { GraphI } from "./components/map/types";
 import { getCurrentTheme } from "./utils";
@@ -9,14 +9,15 @@ import { Theme } from "./components/theme-switcher";
 
 import initialState from './initialState.json';
 
+
 export interface GroupAddress {
     endpoint: number;
-    ieee_address: string;
+    ieee_address: IEEEEAddress;
 }
 
 export interface Group {
     id: number;
-    friendly_name: string;
+    friendly_name: FriendlyName;
     members: GroupAddress[];
 }
 
@@ -29,9 +30,10 @@ export type Extension = {
     name: string;
     code: string;
 };
+
 export interface GlobalState {
-    devices: Record<string, Device>;
-    deviceStates: Record<string, DeviceState>;
+    devices: Record<IEEEEAddress, Device>;
+    deviceStates: Record<FriendlyName, DeviceState>;
     touchlinkDevices: TouchLinkDevice[];
     touchlinkScanInProgress: boolean;
     touchlinkIdentifyInProgress: boolean;

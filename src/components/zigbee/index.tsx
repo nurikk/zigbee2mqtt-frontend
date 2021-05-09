@@ -30,7 +30,6 @@ interface ZigbeeTableState {
     sortDirection: SortDirection;
     sortColumn: SortColumn | SortColumn[];
     currentTime: number;
-    sortedTableData: ZigbeeTableData[];
     error?: ReactNode;
     search: string;
 }
@@ -52,7 +51,6 @@ export class ZigbeeTable extends Component<ZigbeeTableProps, ZigbeeTableState> {
             sortDirection: "desc",
             sortColumn: "device.network_address",
             currentTime: Date.now(),
-            sortedTableData: [],
             search: ""
         };
     }
@@ -101,34 +99,6 @@ export class ZigbeeTable extends Component<ZigbeeTableProps, ZigbeeTableState> {
         this.restoreState();
     }
 
-    static getDerivedStateFromProps(props: Readonly<GlobalState>, state: ZigbeeTableState): Partial<ZigbeeTableState> {
-        const { sortColumn, sortDirection, search } = state;
-        const { devices, deviceStates, bridgeInfo } = props;
-        const tableData: ZigbeeTableData[] = [];
-
-        const lastSeenType = getLastSeenType(bridgeInfo?.config.advanced);
-        const searchQuery = search.toLowerCase();
-
-        Object.values(devices).filter((device) =>
-            device.friendly_name?.toLowerCase().includes(searchQuery)
-            || device.ieee_address.toLowerCase().includes(searchQuery)
-            || device.definition?.model.toLowerCase().includes(searchQuery)
-            || device.definition?.vendor.toLowerCase().includes(searchQuery)
-        ).forEach((device) => {
-            if (device.type !== "Coordinator") {
-                const state = deviceStates[device.friendly_name] ?? {} as DeviceState;
-                tableData.push({
-                    device,
-                    state,
-                    lastSeen: lastSeen(state, lastSeenType)
-
-                });
-            }
-        });
-        return { sortedTableData: orderBy<ZigbeeTableData>(tableData, sortColumn, [sortDirection]) };
-    }
-
-
     onSortChange = (column: SortColumn | SortColumn[], sortDir?: SortDirection): void => {
         const { sortColumn } = this.state;
         let { sortDirection } = this.state;
@@ -168,10 +138,39 @@ export class ZigbeeTable extends Component<ZigbeeTableProps, ZigbeeTableState> {
             <Spinner />
         </div>);
     }
+    getDevicesToRender(): ZigbeeTableData[] {
+
+        const { sortColumn, sortDirection, search } = this.state;
+        const { devices, deviceStates, bridgeInfo } = this.props;
+        const tableData: ZigbeeTableData[] = [];
+
+        const lastSeenType = getLastSeenType(bridgeInfo?.config.advanced);
+        const searchQuery = search.toLowerCase();
+
+        Object.values(devices).filter((device) =>
+            device.friendly_name?.toLowerCase().includes(searchQuery)
+            || device.ieee_address.toLowerCase().includes(searchQuery)
+            || device.definition?.model.toLowerCase().includes(searchQuery)
+            || device.definition?.vendor.toLowerCase().includes(searchQuery)
+        ).forEach((device) => {
+            if (device.type !== "Coordinator") {
+                const state = deviceStates[device.friendly_name] ?? {} as DeviceState;
+                tableData.push({
+                    device,
+                    state,
+                    lastSeen: lastSeen(state, lastSeenType)
+
+                });
+            }
+        });
+        return orderBy<ZigbeeTableData>(tableData, sortColumn, [sortDirection]);
+
+    }
 
     renderDevicesTable(): JSX.Element {
         const { bridgeInfo, t } = this.props;
-        const { sortedTableData, sortColumn, sortDirection, search } = this.state;
+        const devices = this.getDevicesToRender();
+        const { sortColumn, sortDirection, search } = this.state;
         const lastSeenType = getLastSeenType(bridgeInfo.config.advanced);
         return (<><div className="card">
 
@@ -189,13 +188,18 @@ export class ZigbeeTable extends Component<ZigbeeTableProps, ZigbeeTableState> {
                             onSortChange={this.onSortChange}
                         />
                         <tbody>
-                            {sortedTableData.map(({ device, state }, id) => <TableRow
-                                key={device.friendly_name}
-                                device={device}
-                                deviceState={state}
-                                id={id}
-                                lastSeenType={lastSeenType}
-                            />)}
+                            {
+                                // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                                devices.map(({ device, state }, index) =>
+                                    <TableRow
+                                        key={device.friendly_name}
+                                        device={device}
+                                        deviceState={state}
+                                        id={index}
+                                        lastSeenType={lastSeenType}
+                                    />
+                                )
+                            }
                         </tbody>
                     </table>
                 </div>
