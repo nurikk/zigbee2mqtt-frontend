@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Device, Cluster, Endpoint } from "../../types";
 import BindRow from "./bind-row";
 import actions from "../../actions/actions";
@@ -57,24 +57,13 @@ const convertBidningsIntoNiceStructure = (device: Device): NiceBindingRule[] => 
     });
     return Object.values(bindings);
 }
-type BindState = {
-    bidingRules: NiceBindingRule[];
-}
-export class Bind extends Component<BindProps & PropsFromStore & BindApi, BindState> {
-    state: BindState = {
-        bidingRules: []
-    }
-    static getDerivedStateFromProps(props: Readonly<BindProps & PropsFromStore>): Partial<BindState> {
-        const { device } = props;
-        const endpoints = getEndpoints(device);
-        const bidingRules = convertBidningsIntoNiceStructure(device);
-        bidingRules.push({ isNew: Date.now(), target: {}, source: { 'ieee_address': device.ieee_address, endpoint: endpoints[0] }, clusters: [] } as unknown as NiceBindingRule);
-        return { bidingRules };
-    }
-    renderBody() {
-        const { device, devices, groups, removeBind, addBind } = this.props;
-        const { bidingRules } = this.state;
-        return bidingRules
+export function Bind(props: BindProps & PropsFromStore & BindApi): JSX.Element {
+    const { device, devices, groups, removeBind, addBind } = props;
+    const endpoints = getEndpoints(device);
+    const bidingRules = convertBidningsIntoNiceStructure(device);
+    bidingRules.push({ isNew: Date.now(), target: {}, source: { 'ieee_address': device.ieee_address, endpoint: endpoints[0] }, clusters: [] } as unknown as NiceBindingRule);
+    return <div className="container-fluid">
+        {bidingRules
             .map((rule, idx) => <BindRow
                 key={rule2key(rule)}
                 rule={rule}
@@ -83,15 +72,11 @@ export class Bind extends Component<BindProps & PropsFromStore & BindApi, BindSt
                 onBind={addBind}
                 device={device}
                 idx={idx}
-                devices={devices} />)
-    }
-    render() {
-        return <div className="container-fluid">
-            {this.renderBody()}
-        </div>;
-    }
+                devices={devices} />)}
+    </div>;
+
 }
 
 const mappedProps = ["devices", "groups"];
-const ConnectedBindPage = connect<BindProps, {}, GlobalState, PropsFromStore & BindApi>(mappedProps, actions)(Bind);
+const ConnectedBindPage = connect<BindProps, unknown, GlobalState, PropsFromStore & BindApi>(mappedProps, actions)(Bind);
 export default ConnectedBindPage
