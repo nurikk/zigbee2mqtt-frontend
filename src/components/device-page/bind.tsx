@@ -1,11 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Device, Cluster, Endpoint } from "../../types";
 import BindRow from "./bind-row";
 import actions from "../../actions/actions";
 import { BindApi } from "../../actions/BindApi";
 import { connect } from "unistore/react";
 import { GlobalState, Group } from "../../store";
-import { getEndpoints } from "../../utils";
 
 
 interface PropsFromStore {
@@ -15,20 +14,21 @@ interface PropsFromStore {
 interface BindProps {
     device: Device;
 }
-
+type BindTarget = {
+    id?: number;
+    endpoint?: Endpoint;
+    ieee_address?: string;
+    type: "endpoint" | "group";
+};
+type BindSource = {
+    ieee_address: string;
+    endpoint: Endpoint;
+};
 export interface NiceBindingRule {
     id?: number;
     isNew?: number;
-    source: {
-        ieee_address: string;
-        endpoint: Endpoint;
-    };
-    target: {
-        id?: number;
-        endpoint?: Endpoint;
-        ieee_address?: string;
-        type: "endpoint" | "group";
-    };
+    source: BindSource;
+    target: BindTarget;
     clusters: Cluster[];
 }
 const rule2key = (rule: NiceBindingRule): string => `${rule.source.endpoint}-${rule.isNew}${rule.source.ieee_address}-${rule.target.id}-${rule.target.ieee_address}-${rule.clusters.join('-')}`;
@@ -59,20 +59,22 @@ const convertBidningsIntoNiceStructure = (device: Device): NiceBindingRule[] => 
 }
 export function Bind(props: BindProps & PropsFromStore & BindApi): JSX.Element {
     const { device, devices, groups, removeBind, addBind } = props;
-    const endpoints = getEndpoints(device);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const [newBindingRule, setnewBindingRule] = useState<NiceBindingRule>({ isNew: Date.now(), target: {} as BindTarget, source: { 'ieee_address': device.ieee_address, endpoint: "" }, clusters: [] })
+
     const bidingRules = convertBidningsIntoNiceStructure(device);
-    bidingRules.push({ isNew: Date.now(), target: {}, source: { 'ieee_address': device.ieee_address, endpoint: endpoints[0] }, clusters: [] } as unknown as NiceBindingRule);
     return <div className="container-fluid">
-        {bidingRules
-            .map((rule, idx) => <BindRow
-                key={rule2key(rule)}
-                rule={rule}
-                groups={groups}
-                onUnBind={removeBind}
-                onBind={addBind}
-                device={device}
-                idx={idx}
-                devices={devices} />)}
+        {
+            [...bidingRules, newBindingRule]
+                .map((rule, idx) => <BindRow
+                    key={rule2key(rule)}
+                    rule={rule}
+                    groups={groups}
+                    onUnBind={removeBind}
+                    onBind={addBind}
+                    device={device}
+                    idx={idx}
+                    devices={devices} />)}
     </div>;
 
 }

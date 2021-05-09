@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { Device, Cluster, Endpoint, Attribute } from "../../types";
 
 import actions, { ReportingApi } from "../../actions/actions";
@@ -39,57 +39,38 @@ const convertBidningsIntoNiceStructure = (device: Device): NiceReportingingRule[
     });
     return reportings;
 }
-type ReportingState = {
-    reportingRules: NiceReportingingRule[];
-}
+
 
 const rule2key = (rule: NiceReportingingRule): string => `${rule.isNew}${rule.endpoint}${rule.cluster}-${rule.attribute}`;
 
-export class Reporting extends Component<ReportingProps & PropsFromStore & ReportingApi, ReportingState> {
-    state: ReportingState = {
-        reportingRules: []
-    }
-    static getDerivedStateFromProps(props: Readonly<ReportingProps & PropsFromStore>): Partial<ReportingState> {
-        const { device } = props;
-        // const endpoints = getEndpoints(device);
-        const reportingRules = convertBidningsIntoNiceStructure(device);
+function Reporting(props: ReportingProps & PropsFromStore & ReportingApi): JSX.Element {
+    const { configureReport, device } = props;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const [newReportingRule, setnewReportingRule] = useState<NiceReportingingRule>({ isNew: Date.now(), reportable_change: 0, minimum_report_interval: 60, maximum_report_interval: 3600, endpoint: "", cluster: "", attribute: "" })
 
-
-        reportingRules.push({ isNew: Date.now(), reportable_change: 0, minimum_report_interval: 60, maximum_report_interval: 3600 } as NiceReportingingRule);
-        return {
-            reportingRules
-        };
-    }
-
-    onApply = (rule: NiceReportingingRule) => {
-        const { configureReport, device } = this.props;
-
+    const onApply = (rule: NiceReportingingRule): void => {
         const { cluster, endpoint, attribute, minimum_report_interval, maximum_report_interval, reportable_change } = rule;
         configureReport(`${device.friendly_name}/${endpoint}`, {
-
             cluster, attribute, minimum_report_interval, maximum_report_interval, reportable_change
         });
     }
-    render() {
-        const { device } = this.props;
-        const { reportingRules } = this.state;
+    const reportingRules = convertBidningsIntoNiceStructure(device);
+    return (
+        <div className="container-fluid">
+            {
+                [...reportingRules, newReportingRule].map((rule) =>
+                    <ReportingRow
+                        key={rule2key(rule)}
+                        rule={rule}
+                        device={device}
+                        onApply={onApply}
+                    />)
+            }
 
-        return (
-            <div className="container-fluid">
-                {
-                    reportingRules.map((rule) =>
-                        <ReportingRow
-                            key={rule2key(rule)}
-                            rule={rule}
-                            device={device}
-                            onApply={this.onApply}
-                        />)
-                }
-
-            </div>
-        );
-    }
+        </div>
+    );
 }
+
 
 const mappedProps = ["devices", "groups"];
 const ConnectedReportingPage = connect<ReportingProps, {}, GlobalState, PropsFromStore & ReportingApi>(mappedProps, actions)(Reporting);
