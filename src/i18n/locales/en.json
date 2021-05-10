@@ -69,10 +69,7 @@
         "check_all": "Check all",
         "remaining_time": "Remaining time {{remaining}}",
         "action": "Action",
-        "delete": "Delete",
-        "en": "English",
-        "fr": "Français",
-        "pl": "Polski"
+        "delete": "Delete"
     },
     "settings": {
         "settings": "Settings",
@@ -133,5 +130,11 @@
         "help_router_links_description": "Dashed lines are the link with Routes",
         "help_lqi_description": "Link quality is between 0 - 255 (higher is better), values with / represents multiple types of links",
         "hide": "Click on me to hide"
+    },
+    "localeNames": {
+        "en": "English",
+        "fr": "Français",
+        "pl": "Polski",
+        "de": "Deutsche Sprache"
     }
 }

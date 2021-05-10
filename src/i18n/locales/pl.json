@@ -69,10 +69,7 @@
         "check_all": "Sprawdź wszystkie",
         "remaining_time": "Czas pozostały {{remaining}}",
         "action": "Akcja",
-        "delete": "Usuń",
-        "en": "English",
-        "fr": "Français",
-        "pl": "Polski"
+        "delete": "Usuń"
     },
     "settings": {
         "settings": "Ustawienia",
