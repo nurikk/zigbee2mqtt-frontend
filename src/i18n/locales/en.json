@@ -46,7 +46,11 @@
         "endpoint": "Endpoint"
     },
     "values": {
-        "true": "True"
+        "true": "True",
+        "Open": "Open",
+        "Closed": "Closed",
+        "Clear": "Clear",
+        "Occupied": "Occupied"
     },
     "devicePage": {
         "about": "About",
@@ -77,6 +81,14 @@
         "about": "About",
         "raw": "Raw",
         "donate": "Donate",
+        "main": "Main",
+        "advanced": "Advanced",
+        "external_converters": "External converters",
+        "frontend": "Frontend",
+        "mqtt": "MQTT",
+        "ota": "OTA updates",
+        "passlist": "Passlist",
+        "serial": "Serial",
 
         "experimental": "Experimental",
         "blocklist": "Blocklist",
@@ -136,5 +148,34 @@
         "fr": "Français",
         "pl": "Polski",
         "de": "Deutsche Sprache"
+    },
+    "featureNames": {
+        "contact": "Contact",
+        "occupancy": "Occupancy",
+        "temperature": "Temperature",
+        "illuminance": "Illuminance",
+        "humidity": "Humidity",
+        "state": "State",
+        "brightness": "Brightness",
+        "color_temp": "Color Temp",
+        "color_xy": "Color Xy",
+        "pressure": "Pressure",
+        "soil_moisture": "Soil Moisture"
+    },
+    "settingsSchemaTranslations": {
+        "root-title": "Serial",
+        "root_availability_blacklist__title": "Availability blacklist (deprecated, use availability_blocklist)",
+        "root_availability_blocklist__title": "Availability Blocklist",
+        "root_availability_blocklist__description": "Prevent devices from being checked for availability",
+        "root_availability_passlist__title": "Availability passlist",
+        "root_availability_passlist__description": "Only enable availability check for certain devices",
+        "root_availability_whitelist__title": "Availability whitelist (deprecated, use passlist)",
+        "root_ext_pan_id__title": "Ext Pan ID",
+        "root_ext_pan_id__description": "Zigbee extended pan ID, changing requires repairing all devices!",
+        "root_log_output__title": "Log output",
+        "root_log_output__description": "Output location of the log, leave empty to supress logging",
+        "root_log_syslog-title": "syslog",
+        "root__title": "Passlist",
+        "root__description": "Allow only certain devices to join the network (by ieeeAddr). Note that all devices not on the passlist will be removed from the network!"
     }
 }
