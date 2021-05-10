@@ -1,0 +1,138 @@
+{
+    "navbar": {
+        "restart": "Neustart",
+        "devices": "Geräte",
+        "dashboard": "Dashboard",
+        "map": "Karte",
+        "settings": "Einstellungen",
+        "groups": "Gruppen",
+
+        "touchlink": "Touchlink",
+
+        "logs": "Logs",
+        "ota": "OTA",
+
+        "extensions": "Erweiterungen",
+        "permit_join": "Anlernen aktiv",
+        "all": "Alle",
+        "toggle_dropdown": "Dropdown Auswahl",
+        "disable_join": "Anlernen inaktiv"
+    },
+    "zigbee": {
+        "power": "Power",
+        "lqi": "LQI",
+        "friendly_name": "Friendly name",
+        "pic": "Bild",
+        "model": "Modell",
+        "zigbee_model": "Zigbee Modell",
+        "manufacturer": "Hersteller",
+        "last_seen": "Zuletzt gesehen",
+        "ieee_address": "IEEE Addresse",
+        "device_type": "Geräte Typ",
+        "support_status": "Unterstützungsstatus",
+        "network_address": "Netzwerk Adresse",
+        "firmware_build_date": "Firmware Entwicklungsdatum",
+        "firmware_version": "Firmware Version",
+        "interview_completed": "Interview komplett",
+        "unsupported": "Nicht unterstützt",
+        "rename_device": "Gerät umbenennen",
+        "remove_device": "Gerät entfernen",
+        "update_Home_assistant_entity_id": "Update Home Assistant System ID",
+
+        "force_remove": "Erzwinge Entfernen",
+        "block_join": "Blockieren vom Anlernen",
+
+        "reconfigure": "Neu konfigurieren",
+        "endpoint": "Endpunkt"
+    },
+    "values": {
+        "true": "Wahr"
+    },
+    "devicePage": {
+        "about": "Über",
+        "exposes": "Details",
+        "bind": "Bindungen",
+        "reporting": "Reporting",
+        "settings": "Einstellungen",
+        "settings_specific": "Einstellungen (spezifisch)",
+        "state": "Status",
+        "clusters": "Clusters",
+        "dev_console": "Dev Konsole"
+    },
+    "common": {
+        "dialog_configramtion_prompt": "Bist Du sicher?",
+        "enter_search_criteria": "Suchwort",
+        "clear": "Löschen",
+        "close": "Schliessen",
+        "save": "Speichern",
+        "loading": "Laden...",
+        "check_all": "Alle prüfen",
+        "remaining_time": "verbleibende Zeit {{remaining}}",
+        "action": "Aktion",
+        "delete": "Löschen",
+        "en": "English",
+        "fr": "Français",
+        "pl": "Polski",
+        "de": "German"
+    },
+    "settings": {
+        "settings": "Einstellungen",
+        "tools": "Tools",
+        "about": "Über",
+        "raw": "Raw",
+        "donate": "Spende",
+
+        "experimental": "Experimentell",
+        "blocklist": "Geblockte Geräte",
+        "donation_text": [
+            "Hallo, %username%, hier kannst Du unsere harte Arbeit unterstützen.",
+            "Ein netter, begleitender Kommentar würde uns ebenso freuen. ;)"
+        ],
+        "zigbee2mqtt_version": "Zigbee2MQTT Version",
+        "coordinator_type": "Coordinator Typ",
+        "coordinator_revision": "Coordinator Version",
+        "frontend_version": "Frontend Version",
+        "download_state": "Download Status",
+        "restart_zigbee2mqtt": "Zigbee2MQTT neu starten"
+    },
+    "logs": {
+        "show_only": "Log-Typ",
+        "filter_by_text": "Filtere nach:",
+        "empty_logs_message": "Nichts anzuzeigen"
+    },
+    "extensions": {
+        "extension_name_propmt": "Name der neuen Erweiterung",
+        "select_extension_to_edit": "Wähle Erweiterung zum bearbeiten"
+    },
+    "touchlink": {
+        "detected_devices_message": " {{count}} touchlink Geräte entdeckt.",
+        "rescan": "scan wiederholen",
+        "scan": "Scannen"
+    },
+    "ota": {
+        "empty_ota_message": "Keine OTA-fähigen Geräte vorhanden",
+        "update": "Update Geräte Firmware",
+        "check": "Prüfe auf neue Updates",
+        "check_all": "Alle überprüfen"
+    },
+    "groups": {
+        "new_group_name": "Neuer Gruppenname",
+        "new_group_name_placeholder": "Beispiel: my_bedroom_lights",
+        "new_group_id": "Neue Gruppen-ID",
+        "new_group_id_placeholder": "Wenn benötigt, Gruppen-ID festlegen.",
+        "remove_group": "Gruppe entfernen",
+        "create_group": "gruppe erstellen",
+        "add_to_group": "Zur Gruppe hinzufügen"
+    },
+    "map": {
+        "loading": "Abhängig von der Größe des NEtzwerks kann es zwischen 10 Sekunden und 2 Minuten dauern.",
+        "load": "Karte Laden",
+        "help_is_coordinator": "Koordinator",
+        "help_end_device_description": "Grün bedeutet: End-Gerät",
+        "help_router_description": "Blau bedeutet: Router",
+        "help_coordinator_link_description": "Durchgehende Linien führen zum Coordinator",
+        "help_router_links_description": "Gestrichelte Linien führen zu Routern",
+        "help_lqi_description": "Link Qualität zwischen 0 - 255 (höher ist besser), Angaben mit / bedeuten verschiedene Link-Typen.",
+        "hide": "Zum Verbergen klicken"
+    }
+}
