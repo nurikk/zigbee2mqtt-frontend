@@ -1,3 +1,7 @@
+## [0.4.8](https://github.com/nurikk/z2m-frontend/compare/0.4.7...0.4.8) (2021-05-10)
+
+
+
 ## [0.4.7](https://github.com/nurikk/z2m-frontend/compare/0.4.6...0.4.7) (2021-05-10)
 
 
