@@ -46,7 +46,11 @@
         "endpoint": "Punkt końcowy"
     },
     "values": {
-        "true": "Prawda"
+        "true": "Prawda",
+        "Open": "Otwarte",
+        "Closed": "Zamknięte",
+        "Clear": "Brak",
+        "Occupied": "Wykryto Obecność"
     },
     "devicePage": {
         "about": "O urządzeniu",
@@ -61,13 +65,13 @@
     },
     "common": {
         "dialog_configramtion_prompt": "Czy jesteś pewien?",
-        "enter_search_criteria": "Wprowadz kryteria wyszukiwania",
+        "enter_search_criteria": "Wprowadź kryteria wyszukiwania",
         "clear": "Wyczyść",
         "close": "Zamknij",
         "save": "Zapisz",
         "loading": "Ładowanie...",
         "check_all": "Sprawdź wszystkie",
-        "remaining_time": "Czas pozostały {{remaining}}",
+        "remaining_time": "Pozostały czas: {{remaining}}",
         "action": "Akcja",
         "delete": "Usuń"
     },
@@ -75,8 +79,16 @@
         "settings": "Ustawienia",
         "tools": "Narzędzia",
         "about": "O programie",
-        "raw": "Raw",
+        "raw": "Wygenerowana konfiguracja",
         "donate": "Wsparcie",
+        "main": "Główne",
+        "advanced": "Zaawansowane",
+        "external_converters": "Konwertery zewnętrzne",
+        "frontend": "Aplikacja interfejsu użytkownika",
+        "mqtt": "MQTT",
+        "ota": "Aktualizacje OTA",
+        "passlist": "Lista dopuszczonych",
+        "serial": "Port szeregowy",
 
         "experimental": "Eksperymentalne",
         "blocklist": "Lista zablokowanych",
@@ -87,7 +99,7 @@
         "zigbee2mqtt_version": "Wersja Zigbee2MQTT",
         "coordinator_type": "Typ koordynatora",
         "coordinator_revision": "Wersja oprogramowania koordynatora",
-        "frontend_version": "Wersja aplikacji front end",
+        "frontend_version": "Wersja aplikacji interfejsu użytkownika",
         "download_state": "Pobierz stan",
         "restart_zigbee2mqtt": "Zrestartuj Zigbee2MQTT"
     },
@@ -130,5 +142,40 @@
         "help_router_links_description": "Linie przerywane to połączenia z ruterami",
         "help_lqi_description": "Jakość połączenia to wartość 0 - 255 (im wyższa tym lepiej), wartości oddzielone / odnoszą się do różnych typów połączeń.",
         "hide": "Kliknij tutaj by ukryć"
+    },
+    "localeNames": {
+        "en": "English",
+        "fr": "Français",
+        "pl": "Polski",
+        "de": "Deutsche Sprache"
+    },
+    "featureNames": {
+        "contact": "Kontakt",
+        "occupancy": "Obecność",
+        "temperature": "Temperatura",
+        "illuminance": "Natężenie światła",
+        "humidity": "Wilgotność",
+        "state": "Stan",
+        "brightness": "Poziom Jasności",
+        "color_temp": "Temperatura Barwowa",
+        "color_xy": "Kolor Xy",
+        "pressure": "Ciśnienie",
+        "soil_moisture": "Wilgotność Gleby"
+    },
+    "settingsSchemaTranslations": {
+        "root-title": "Port szeregowy",
+        "root_availability_blacklist__title": "Czarna lista sprawdzania dostępności (ustawienie wycofywane, użyj listy blokad sprawdzania dostępności)",
+        "root_availability_blocklist__title": "Lista blokad sprawdzania dostępności",
+        "root_availability_blocklist__description": "Zablokuj sprawdzanie dostępności urządzeń z tej listy",
+        "root_availability_passlist__title": "Lista sprawdzania dostępności",
+        "root_availability_passlist__description": "Włącz sprawdzanie obecności tylko dla urządzeń z tej listy",
+        "root_availability_whitelist__title": "Bilała lista sprawdzania dostępności (ustawienie wycofywane, użyj listy sprawdzania obecności)",
+        "root_ext_pan_id__title": "Ext Pan ID",
+        "root_ext_pan_id__description": "Parametr Zigbee rozszerzonego identyfikatora sieci, zmiana wymaga ponownego sparowania wszystkich urządzeń!",
+        "root_log_output__title": "Wyjście logowania",
+        "root_log_output__description": "Położenie wyjściowego pliku logu, pozostaw puste by wyłączyć rejestrowanie logu zdarzeń",
+        "root_log_syslog-title": "Log systemowy",
+        "root__title": "Lista dopuszczonych",
+        "root__description": "Pozwól tylko wybranym urządzeniom (identyfikowanym przez adres ieeeAddr) do sieci. Zwróc uwagę na fakt, że wszystkie urządzenia spoza tej listy zostaną usunięte z obecnej sieci!"
     }
 }
