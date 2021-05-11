@@ -13,8 +13,6 @@ declare module "*.json" {
     const value: Record<string, unknown>;
     export default value;
 }
-
-
 declare module "*.js?raw" {
     const value: string;
     export default value;

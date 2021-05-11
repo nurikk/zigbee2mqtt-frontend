@@ -1,3 +1,21 @@
+## [0.4.8](https://github.com/nurikk/z2m-frontend/compare/0.4.7...0.4.8) (2021-05-10)
+
+
+
+## [0.4.7](https://github.com/nurikk/z2m-frontend/compare/0.4.6...0.4.7) (2021-05-10)
+
+
+### Bug Fixes
+
+* **i18:** add DE locale, small refactoring ([66bb1db](https://github.com/nurikk/z2m-frontend/commit/66bb1db057b2761015020f5eb867b6a90287dd2b))
+
+
+### Features
+
+* **i18n:** add more en translation keys ([bbb4320](https://github.com/nurikk/z2m-frontend/commit/bbb43207b0ed053161a8b07f188b74a808b014ea))
+
+
+
 ## [0.4.6](https://github.com/nurikk/z2m-frontend/compare/0.4.5...0.4.6) (2021-05-09)
 
 
