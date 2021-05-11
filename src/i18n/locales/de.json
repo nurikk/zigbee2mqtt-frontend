@@ -21,7 +21,7 @@
     "zigbee": {
         "power": "Power",
         "lqi": "LQI",
-        "friendly_name": "Friendly name",
+        "friendly_name": "Gerätename",
         "pic": "Bild",
         "model": "Modell",
         "zigbee_model": "Zigbee Modell",
@@ -31,7 +31,7 @@
         "device_type": "Geräte Typ",
         "support_status": "Unterstützungsstatus",
         "network_address": "Netzwerk Adresse",
-        "firmware_build_date": "Firmware Entwicklungsdatum",
+        "firmware_build_date": "Firmware Datum",
         "firmware_version": "Firmware Version",
         "interview_completed": "Interview komplett",
         "unsupported": "Nicht unterstützt",
@@ -46,7 +46,11 @@
         "endpoint": "Endpunkt"
     },
     "values": {
-        "true": "Wahr"
+        "true": "Wahr",
+        "Open": "Öffnen",
+        "Closed": "Geschlossen",
+        "Clear": "frei",
+        "Occupied": "beschäftigt"
     },
     "devicePage": {
         "about": "Über",
@@ -69,11 +73,7 @@
         "check_all": "Alle prüfen",
         "remaining_time": "verbleibende Zeit {{remaining}}",
         "action": "Aktion",
-        "delete": "Löschen",
-        "en": "English",
-        "fr": "Français",
-        "pl": "Polski",
-        "de": "German"
+        "delete": "Löschen"
     },
     "settings": {
         "settings": "Einstellungen",
@@ -81,7 +81,14 @@
         "about": "Über",
         "raw": "Raw",
         "donate": "Spende",
-
+        "main": "Main",
+        "advanced": "Erweitert",
+        "external_converters": "Zusätzliche Konverter",
+        "frontend": "Frontend",
+        "mqtt": "MQTT",
+        "ota": "OTA updates",
+        "passlist": "Passlist",
+        "serial": "Serial",
         "experimental": "Experimentell",
         "blocklist": "Geblockte Geräte",
         "donation_text": [
@@ -125,7 +132,7 @@
         "add_to_group": "Zur Gruppe hinzufügen"
     },
     "map": {
-        "loading": "Abhängig von der Größe des NEtzwerks kann es zwischen 10 Sekunden und 2 Minuten dauern.",
+        "loading": "Abhängig von der Größe des Netzwerks kann es zwischen 10 Sekunden und 2 Minuten dauern.",
         "load": "Karte Laden",
         "help_is_coordinator": "Koordinator",
         "help_end_device_description": "Grün bedeutet: End-Gerät",
@@ -134,5 +141,40 @@
         "help_router_links_description": "Gestrichelte Linien führen zu Routern",
         "help_lqi_description": "Link Qualität zwischen 0 - 255 (höher ist besser), Angaben mit / bedeuten verschiedene Link-Typen.",
         "hide": "Zum Verbergen klicken"
+    },
+    "localeNames": {
+        "en": "English",
+        "fr": "Français",
+        "pl": "Polski",
+        "de": "Deutsch"
+    },
+    "featureNames": {
+        "contact": "Kontakt",
+        "occupancy": "Besetzt",
+        "temperature": "Temperatur",
+        "illuminance": "Beleuchtungsstärke",
+        "humidity": "Feuchtigkeit",
+        "state": "Status",
+        "brightness": "Helligkeit",
+        "color_temp": "Farbtemperatur",
+        "color_xy": "Farbe Xy",
+        "pressure": "Druck",
+        "soil_moisture": "Bodenfeuchtigkeit"
+    },
+    "settingsSchemaTranslations": {
+        "root-title": "Serial",
+        "root_availability_blacklist__title": "Aktuelle Blacklist (veraltet, nutze availability_blocklist)",
+        "root_availability_blocklist__title": "Aktuelle Blockliste",
+        "root_availability_blocklist__description": "Klammert Geräte bei dem Verfügbarkeits-Check aus.",
+        "root_availability_passlist__title": "Aktuelle passlist",
+        "root_availability_passlist__description": "Ermögliche Anwesenheits-Check nur für gelistete Geräte",
+        "root_availability_whitelist__title": "Aktuelle whitelist (veraltet, nutze passlist)",
+        "root_ext_pan_id__title": "Ext Pan ID",
+        "root_ext_pan_id__description": "Zigbee erweiterte pan ID, Änderung benötigt neues Anlernen aller Geräte!",
+        "root_log_output__title": "Log Ausgabe",
+        "root_log_output__description": "Ablageort für das Log, leer lassen um das Logging zu unterbinden",
+        "root_log_syslog-title": "System-Log",
+        "root__title": "Passlist",
+        "root__description": "Erlaubt nur bestimmten Geräten, dem Netzwerk beizutreten (anhand der ieeeAddr). Beachte: Alle Geräte, die nicht in dar passlist sind, werden vom Netzwerk entfernt!"
     }
 }
