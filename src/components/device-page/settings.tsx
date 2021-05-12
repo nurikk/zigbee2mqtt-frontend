@@ -18,14 +18,28 @@ type DeviceSettingsProps = {
     type: SettingsType;
 }
 
+type ParamValue = {
+    key: string;
+    value: unknown;
+    type: unknown;
+}
 
 const genericUiSchema: UiSchema = {
     "ui:order": ["friendly_name", "retain", "retention", "qos", "filtered_attributes", "*"]
 };
 
 const toType = (obj: unknown): string => ({}).toString.call(obj).match(/\s([a-zA-Z]+)/)[1].toLowerCase()
-
-export class DeviceSettings extends Component<DeviceSettingsProps & GlobalState & DeviceApi> {
+type DeviceSettingsState = {
+    newSetting: ParamValue;
+}
+export class DeviceSettings extends Component<DeviceSettingsProps & GlobalState & DeviceApi, DeviceSettingsState> {
+    state = {
+        newSetting: {
+            key: "",
+            value: "",
+            type: ""
+        } as ParamValue
+    }
     getGenericDeviceSettingsSchema(): JSONSchema7 {
         const { bridgeInfo: { config_schema: configSchema } } = this.props;
         return (configSchema.definitions?.device ?? { properties: {} }) as JSONSchema7;
@@ -37,13 +51,17 @@ export class DeviceSettings extends Component<DeviceSettingsProps & GlobalState 
     updateConfig = (params: ISubmitEvent<KVP | KVP[]>): void => {
         const { formData } = params;
         const { setDeviceOptions, type, device } = this.props;
-
         const genericPropNames = Object.keys(this.getGenericDeviceSettingsSchema().properties as KVP);
-
         if (type === "generic") {
             setDeviceOptions(device.ieee_address, formData as Record<string, unknown>);
         } else {
-            const params = {};
+
+            const params = (formData as ParamValue[]).reduce((result, curr) => {
+                if (curr.key) {
+                    result[curr.key] = curr.value;
+                }
+                return result;
+            }, {});
             Object.entries(this.getDeviceConfig())
                 .filter(([key]) => !genericPropNames.includes(key))
                 .forEach(([key]) => {
@@ -59,6 +77,7 @@ export class DeviceSettings extends Component<DeviceSettingsProps & GlobalState 
     }
 
     getSchemaAndConfig(): { schema: JSONSchema7, data: KVP | KVP[], uiSchema: UiSchema } {
+        const { newSetting } = this.state;
         const { type } = this.props;
         const genericDeviceSettingsSchema = this.getGenericDeviceSettingsSchema();
         const deviceConfig = this.getDeviceConfig();
@@ -70,9 +89,9 @@ export class DeviceSettings extends Component<DeviceSettingsProps & GlobalState 
                 .filter(([key]) => !genericPropNames.includes(key))
                 .map(([key, value]) => {
                     const valueType = toType(value);
-                    return { value, valueType, key };
+                    return { value, valueType, key } as unknown as ParamValue;
                 })
-            return { schema: deviceSpecificSchema as JSONSchema7, data: [{}].concat(filteredDeviceConfig), uiSchema: {} }
+            return { schema: deviceSpecificSchema as JSONSchema7, data: [newSetting, ...filteredDeviceConfig], uiSchema: {} }
         }
     }
     renderHelp(): ReactNode {
@@ -82,9 +101,7 @@ export class DeviceSettings extends Component<DeviceSettingsProps & GlobalState 
         }
     }
     render(): ReactNode {
-
         const { schema, data, uiSchema } = this.getSchemaAndConfig();
-
         return <>
             {this.renderHelp()}
             <Form schema={schema as JSONSchema7}
