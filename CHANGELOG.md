@@ -1,3 +1,12 @@
+## [0.4.10](https://github.com/nurikk/z2m-frontend/compare/0.4.9...0.4.10) (2021-05-12)
+
+
+### Bug Fixes
+
+* **settings:** fix adding new values ([0c41754](https://github.com/nurikk/z2m-frontend/commit/0c41754df4aea2890d8369fba41ce21403f00074))
+
+
+
 ## [0.4.9](https://github.com/nurikk/z2m-frontend/compare/0.4.8...0.4.9) (2021-05-11)
 
 
