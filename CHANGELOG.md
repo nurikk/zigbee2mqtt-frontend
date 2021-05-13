@@ -1,3 +1,21 @@
+## [0.4.10](https://github.com/nurikk/z2m-frontend/compare/0.4.9...0.4.10) (2021-05-12)
+
+
+### Bug Fixes
+
+* **settings:** fix adding new values ([0c41754](https://github.com/nurikk/z2m-frontend/commit/0c41754df4aea2890d8369fba41ce21403f00074))
+
+
+
+## [0.4.9](https://github.com/nurikk/z2m-frontend/compare/0.4.8...0.4.9) (2021-05-11)
+
+
+### Bug Fixes
+
+* **device-settings:** add default property ([0f96e39](https://github.com/nurikk/z2m-frontend/commit/0f96e39d48741b03d243ce8c963134a218ef7c9d))
+
+
+
 ## [0.4.8](https://github.com/nurikk/z2m-frontend/compare/0.4.7...0.4.8) (2021-05-10)
 
 

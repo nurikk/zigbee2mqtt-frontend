@@ -46,7 +46,11 @@
         "endpoint": "Endpoint"
     },
     "values": {
-        "true": "Vrai"
+        "true": "Vrai",
+        "Open": "Ouvert",
+        "Closed": "Fermé",
+        "Clear": "RàS",
+        "Occupied": "Occupé"
     },
     "devicePage": {
         "about": "À propos",
@@ -77,9 +81,17 @@
         "about": "À propos",
         "raw": "Brut",
         "donate": "Don",
+        "main": "Principal",
+        "advanced": "Avancé",
+        "external_converters": "Convertisseurs Externes",
+        "frontend": "Interface",
+        "mqtt": "MQTT",
+        "ota": "MàJ OTA",
+        "passlist": "Ignorés",
+        "serial": "Port Série",
 
         "experimental": "Expérimental",
-        "blocklist": "Liste noire",
+        "blocklist": "Liste de blocage",
         "donation_text": [
             "Salut, %username%, vous pouvez ici nous remercier pour notre dur labeur",
             "N'hésitez pas à nous laisser un petit mot gentil ;)"
@@ -130,5 +142,40 @@
         "help_router_links_description": "Les lignes en pointillés sont les liens avec les Routeurs",
         "help_lqi_description": "La qualité de lien est entre 0 - 255 (plus c'est haut mieux c'est), les valeurs avec un / representent plusieurs types de liens",
         "hide": "Cliquez-moi pour me cacher"
+    },
+    "localeNames": {
+        "en": "Anglais",
+        "fr": "Français",
+        "pl": "Polonais",
+        "de": "Allemand"
+    },
+    "featureNames": {
+        "contact": "Contact",
+        "occupancy": "Occupation",
+        "temperature": "Température",
+        "illuminance": "Éclairement",
+        "humidity": "Humidité",
+        "state": "État",
+        "brightness": "Luminosité",
+        "color_temp": "Temp Couleur",
+        "color_xy": "Couleur Xy",
+        "pressure": "Pression",
+        "soil_moisture": "Humidité Sol"
+    },
+    "settingsSchemaTranslations": {
+        "root-title": "Port Série",
+        "root_availability_blacklist__title": "Liste noire disponibilité (déprécié, utilisez Liste blocage disponibilité)",
+        "root_availability_blocklist__title": "Liste blocage disponibilité",
+        "root_availability_blocklist__description": "Empèche que certains périphériques soient vérifiés pour la disponibilité",
+        "root_availability_passlist__title": "Liste activation disponibilité",
+        "root_availability_passlist__description": "Activer la disponibilité seulement sur certains périphériques",
+        "root_availability_whitelist__title": "Liste blanche disponibilité (déprécié, utilisez Liste activation disponibilité)",
+        "root_ext_pan_id__title": "ID Pan étendu",
+        "root_ext_pan_id__description": "ID pan étendu zigbee, tout changement imposera un ré-appairage de tous les périphériques!",
+        "root_log_output__title": "Sortie Log",
+        "root_log_output__description": "Localisation des sorties Log, laissez vide pour supprimer le logging",
+        "root_log_syslog-title": "syslog",
+        "root__title": "Liste Activation",
+        "root__description": "Autoriser seulement certains périphériques à joindre le réseau (par adresse IEEE). Notez que tous les périphériques absents de la liste seront retirés du réseau!"
     }
 }
