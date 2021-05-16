@@ -163,7 +163,7 @@
         "pressure": "Pressure",
         "soil_moisture": "Soil Moisture"
     },
-    "exposes":{
+    "exposes": {
         "battery": "Battery",
         "occupancy": "Occupancy",
         "temperature": "Temperature",
@@ -171,14 +171,14 @@
         "illuminance_lux": "Illuminance",
         "illuminance": "Illuminance",
         "linkquality": "Linkquality",
-        "state":"State",
-        "brightness":"Brightness",
-        "color_temp":"Color temperature",
+        "state": "State",
+        "brightness": "Brightness",
+        "color_temp": "Color temperature",
         "color_temp_startup": "Startup color temp",
-        "color_xy":"Color (XY)",
+        "color_xy": "Color (XY)",
         "color_hs": "Color (HS)",
         "effect": "Effect",
-        "action":"Action",
+        "action": "Action",
         "strength": "Strength",
         "sensivity": "Sensivity",
         "carbon_monoxide": "Carbon monoxide",
@@ -194,7 +194,7 @@
         "current": "Current",
         "energy": "Energy",
         "power_outage_memory": "Power outage memory",
-        "humidity":"Humidity",
+        "humidity": "Humidity",
         "water_leak": "Water leak",
         "options": "Options",
         "current_heating_setpoint": "Current heating setpoint",
@@ -220,8 +220,6 @@
         "consumer_overload": "Consumer overload",
         "led_disabled_night": "Led disabled night",
         "auto_off": "Auto off"
-        },
-        
     },
     "settingsSchemaTranslations": {
         "root-title": "Serial",
