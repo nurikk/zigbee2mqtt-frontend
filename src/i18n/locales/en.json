@@ -169,7 +169,7 @@
         "temperature": "Temperature",
         "voltage": "Voltage",
         "illuminance_lux": "Illuminance",
-        "illuminance": "Llluminance",
+        "illuminance": "Illuminance",
         "linkquality": "Linkquality",
         "state":"State",
         "brightness":"Brightness",
