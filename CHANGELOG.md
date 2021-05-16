@@ -1,3 +1,12 @@
+## [0.4.11](https://github.com/nurikk/z2m-frontend/compare/0.4.10...0.4.11) (2021-05-16)
+
+
+### Bug Fixes
+
+* **device-settings:** fix value ovvirides, deprecate device-specific settings ([c50bb8c](https://github.com/nurikk/z2m-frontend/commit/c50bb8c2acd13318611005a07f4e6e39b710de90))
+
+
+
 ## [0.4.10](https://github.com/nurikk/z2m-frontend/compare/0.4.9...0.4.10) (2021-05-12)
 
 
