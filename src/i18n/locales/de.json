@@ -160,7 +160,7 @@
         "color_temp": "Farbtemperatur",
         "color_xy": "Farbe Xy",
         "pressure": "Luftdruck",
-        "soil_moisture": "Bodenfeuchtigkeit",
+        "soil_moisture": "Bodenfeuchtigkeit"
     },
     "exposes": {
         "battery": "Batterie",
