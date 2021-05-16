@@ -1,3 +1,12 @@
+## [0.4.13](https://github.com/nurikk/z2m-frontend/compare/0.4.12...0.4.13) (2021-05-16)
+
+
+### Bug Fixes
+
+* **i19n:** fix locales file ([644c36e](https://github.com/nurikk/z2m-frontend/commit/644c36e6350e5a13299673f923c633102c7422da))
+
+
+
 ## [0.4.12](https://github.com/nurikk/z2m-frontend/compare/0.4.11...0.4.12) (2021-05-16)
 
 
