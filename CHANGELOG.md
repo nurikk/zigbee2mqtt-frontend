@@ -1,3 +1,12 @@
+## [0.4.14](https://github.com/nurikk/z2m-frontend/compare/0.4.13...0.4.14) (2021-05-18)
+
+
+### Features
+
+* **i18n:** more localized strings ([31b39cf](https://github.com/nurikk/z2m-frontend/commit/31b39cf869e21f24b82a50eb666adfa5fb5e8491))
+
+
+
 ## [0.4.13](https://github.com/nurikk/z2m-frontend/compare/0.4.12...0.4.13) (2021-05-16)
 
 
