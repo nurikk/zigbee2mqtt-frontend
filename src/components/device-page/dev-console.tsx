@@ -9,6 +9,7 @@ import Button from "../button";
 import { DeviceApi } from "../../actions/DeviceApi";
 import { LogMessage } from "../../store";
 import { ALL, LogRow } from "../logs-page";
+import { WithTranslation, withTranslation } from "react-i18next";
 
 interface DevConsoleProps {
     device: Device;
@@ -55,7 +56,7 @@ const logStartingStrings = [
     "Publish 'set' 'write' to",
     "Wrote "
 ]
-export default class DevConsole extends Component<DevConsoleProps & Pick<DeviceApi, "readDeviceAttributes" | "writeDeviceAttributes">, DevConsoleState> {
+export class DevConsole extends Component<DevConsoleProps & WithTranslation & Pick<DeviceApi, "readDeviceAttributes" | "writeDeviceAttributes">, DevConsoleState> {
     state: Readonly<DevConsoleState> = {
         cluster: "",
         attributes: [],
@@ -148,16 +149,17 @@ export default class DevConsole extends Component<DevConsoleProps & Pick<DeviceA
     }
     renderRead(): JSX.Element {
         const { cluster } = this.state;
+        const { t } = this.props;
         return <>
             <div className="mb-3 row">
                 <div className="col-6 col-sm-3">
-                    <ClusterPicker label="Cluster" pickerType={PickerType.SINGLE}
+                    <ClusterPicker label={t('cluster')} pickerType={PickerType.SINGLE}
                         clusters={Object.keys(ZclCluster)}
                         value={cluster}
                         onChange={this.onClusterChange} />
                 </div>
                 <div className="col-6 col-sm-3">
-                    <AttributePicker label="Attribute" value={""} cluster={cluster} onChange={this.onAttributeSelect} />
+                    <AttributePicker label={t('attribute')} value={""} cluster={cluster} onChange={this.onAttributeSelect} />
                 </div>
             </div>
             <div className="mb-3 row">
@@ -165,8 +167,8 @@ export default class DevConsole extends Component<DevConsoleProps & Pick<DeviceA
             </div>
             <div className="mb-3 row">
                 <div className="btn-group col col-3" role="group">
-                    <Button<void> className="btn btn-success me-2" onClick={this.onReadClick}>Read</Button>
-                    <Button<void> className="btn btn-danger" onClick={this.onWriteClick}>Write</Button>
+                    <Button<void> className="btn btn-success me-2" onClick={this.onReadClick}>{t('read')}</Button>
+                    <Button<void> className="btn btn-danger" onClick={this.onWriteClick}>{t('write')}</Button>
                 </div>
             </div>
         </>
@@ -181,3 +183,4 @@ export default class DevConsole extends Component<DevConsoleProps & Pick<DeviceA
     }
 }
 
+export default withTranslation("common")(DevConsole);

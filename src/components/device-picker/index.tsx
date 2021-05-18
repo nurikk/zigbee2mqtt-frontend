@@ -1,19 +1,22 @@
-import React, { ChangeEvent, Component, SelectHTMLAttributes } from "react";
+import React, { ChangeEvent, SelectHTMLAttributes } from "react";
 import { Device, ObjectType } from "../../types";
 import { getDeviceDisplayName } from "../../utils";
 import { Group } from "../../store";
+import { useTranslation } from "react-i18next";
 
-interface DevicePickerProps {
-    type: ObjectType;
+interface DevicePickerProps extends Omit<SelectHTMLAttributes<HTMLSelectElement>, 'onChange'> {
     value: string | number;
     label?: string;
     devices: Record<string, Device>;
     groups?: Group[];
     onChange(device: Device | Group, type: ObjectType): void;
 }
-export default class DevicePicker extends Component<DevicePickerProps & Omit<SelectHTMLAttributes<HTMLSelectElement>, 'onChange'>, {}> {
-    onSelect = (e: ChangeEvent<HTMLSelectElement>): void => {
-        const { onChange, devices, groups = [] } = this.props;
+export default function DevicePicker(props: DevicePickerProps): JSX.Element {
+    const { t } = useTranslation("common");
+    const { devices, value, label, onChange, groups = [], ...rest } = props;
+
+    const onSelectHandler = (e: ChangeEvent<HTMLSelectElement>): void => {
+        const { } = this.props;
         const { value } = e.target as HTMLSelectElement;
 
         if (devices[value]) {
@@ -23,40 +26,35 @@ export default class DevicePicker extends Component<DevicePickerProps & Omit<Sel
             onChange(group as Group, "group");
         }
     }
-    render() {
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const { devices, groups, value, type, label, onChange, ...rest } = this.props;
-        let options = [<option key="hidden" hidden>Select device</option>];
-
-        const devicesOptions = [] as JSX.Element[];
-        Object.values(devices).forEach((device) => {
-            devicesOptions.push(<option
-                title={device.definition?.description}
-                key={device.ieee_address}
-                value={device.ieee_address}
-            >{getDeviceDisplayName(device)}</option>);
-        });
-        if (groups && groups.length) {
-            const groupOptions = groups.map(group => <option
-                key={group.friendly_name}
-                value={group.id}>{group.friendly_name}
-            </option>);
-            options.push(<optgroup key="Groups" label="Groups">{groupOptions}</optgroup>);
-            options.push(<optgroup key="Devices" label="Devices">{devicesOptions}</optgroup>);
-        } else {
-            options = options.concat(devicesOptions);
-        }
-        return <div className="form-group">
-            {label && <label className="form-label">{label}</label>}
-            <select
-                value={value}
-                onChange={this.onSelect}
-                className="form-control"
-                {...rest}
-            >{options}
-
-            </select>
-        </div>;
-
+    let options = [<option key="hidden" hidden>{t('select_device') }</option>];
+    const devicesOptions = [] as JSX.Element[];
+    Object.values(devices).forEach((device) => {
+        devicesOptions.push(<option
+            title={device.definition?.description}
+            key={device.ieee_address}
+            value={device.ieee_address}
+        >{getDeviceDisplayName(device)}</option>);
+    });
+    if (groups && groups.length) {
+        const groupOptions = groups.map(group => <option
+            key={group.friendly_name}
+            value={group.id}>{group.friendly_name}
+        </option>);
+        options.push(<optgroup key="Groups" label={t('groups')}>{groupOptions}</optgroup>);
+        options.push(<optgroup key="Devices" label={t('devices')}>{devicesOptions}</optgroup>);
+    } else {
+        options = options.concat(devicesOptions);
     }
+    return <div className="form-group">
+        {label && <label className="form-label">{label}</label>}
+        <select
+            value={value}
+            onChange={onSelectHandler}
+            className="form-control"
+            {...rest}
+        >{options}
+        </select>
+    </div>;
+
+
 }

@@ -98,7 +98,7 @@ const displayProps = [
         render: (device: Device, deviceStatus: DeviceState) => <dd className="col-12 col-md-7"><PowerSource showLevel={true} source={device.power_source} battery={deviceStatus.battery as number} batteryLow={deviceStatus.battery_low as boolean} /></dd>
     },
     {
-        translationKey: 'Interview completed',
+        translationKey: 'interview_completed',
         render: (device: Device) => <dd className="col-12 col-md-7"><DisplayValue name="interview_completed" value={device.interview_completed} /></dd>
     }
 ];

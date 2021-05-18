@@ -9,26 +9,26 @@ type DisplayValueProps = {
 
 const booleansMap = {
     contact: new Map<boolean, string | JSX.Element>([
-        [true, 'Closed'],
-        [false, 'Open'],
+        [true, 'closed'],
+        [false, 'open'],
     ]),
 
     occupancy: new Map([
-        [true, 'Occupied'],
-        [false, 'Clear']
+        [true, 'occupied'],
+        [false, 'clear']
     ]),
     water_leak: new Map<boolean, string | JSX.Element>([
         [true, <span className={cx("text-danger", "animation-blinking")} key="Leaking">Leaking</span>],
-        [false, 'Clear']
+        [false, 'clear']
     ]),
 
     tamper: new Map<boolean, string | JSX.Element>([
         [true, <span className={cx("text-danger", "animation-blinking")} key="tampered">Tampered</span>],
-        [false, 'Clear']
+        [false, 'clear']
     ]),
     supported: new Map([
-        [true, 'Supported'],
-        [false, 'Not supported']
+        [true, 'supported'],
+        [false, 'not_supported']
     ]),
 
     _default: new Map([

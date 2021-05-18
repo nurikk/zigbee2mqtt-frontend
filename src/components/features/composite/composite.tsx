@@ -99,11 +99,11 @@ export class Composite extends Component<CompositeProps & WithTranslation<"compo
 
 
         if (isCompositeFeature(feature)) {
-            result.push(<div key={feature.name + 'apply'}><Button className={cx('btn btn-primary float-end', {'btn-sm': minimal})} onClick={this.onApplyClick}>{t('apply')}</Button></div>)
+            result.push(<div key={feature.name + 'apply'}><Button className={cx('btn btn-primary float-end', {'btn-sm': minimal})} onClick={this.onApplyClick}>{t('common:apply')}</Button></div>)
         }
         return result;
 
     }
 }
 
-export default withTranslation("composite")(Composite);
+export default withTranslation(["composite", "common"])(Composite);

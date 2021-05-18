@@ -44,7 +44,16 @@
         "block_join": "Block from joining again",
 
         "reconfigure": "Reconfigure",
-        "endpoint": "Endpoint"
+        "endpoint": "Endpoint",
+        "select_cluster": "Select cluster",
+        "select_attribute": "Select attribute",
+        "output_clusters": "Output clusters",
+        "input_clusters": "Input_clusters",
+        "cluster": "Cluster",
+        "attribute": "Attribute",
+        "min_rep_interval": "Min rep interval",
+        "max_rep_interval": "max rep interval",
+        "min_rep_change": "Min rep change"
     },
     "values": {
         "true": "True",
@@ -62,7 +71,8 @@
         "settings_specific": "Settings (specific)",
         "state": "State",
         "clusters": "Clusters",
-        "dev_console": "Dev console"
+        "dev_console": "Dev console",
+        "unknown_device": "Unknown device"
     },
     "common": {
         "dialog_configramtion_prompt": "Are you sure?",
@@ -74,7 +84,24 @@
         "check_all": "Check all",
         "remaining_time": "Remaining time {{remaining}}",
         "action": "Action",
-        "delete": "Delete"
+        "delete": "Delete",
+        "cluster": "Cluster",
+        "attribute": "Attribute",
+        "read": "Read",
+        "write": "Write",
+        "apply": "Apply",
+        "disable": "Disable",
+        "select_endpoint": "Select endpoint",
+        "source_endpoint": "Source endpoint",
+        "destination": "Destination",
+        "clusters": "Clusters",
+        "bind": "Bind",
+        "unbind": "Unbind",
+        "select_device": "Select device",
+        "groups": "Groups",
+        "devices": "Devices",
+        "actions": "Actions",
+        "none": "None"
     },
     "settings": {
         "settings": "Settings",
@@ -235,6 +262,10 @@
         "root_log_output__description": "Output location of the log, leave empty to supress logging",
         "root_log_syslog-title": "syslog",
         "root__title": "Passlist",
-        "root__description": "Allow only certain devices to join the network (by ieeeAddr). Note that all devices not on the passlist will be removed from the network!"
+        "root__description": "Allow only certain devices to join the network (by ieeeAddr). Note that all devices not on the passlist will be removed from the network!",
+        "root_filtered_attributes__title": "Filtered attributes",
+        "root_filtered_attributes__description": "Allows to prevent certain attributes from being published",
+        "root_debounce_ignore__title": "Ignore debounce",
+        "root_debounce_ignore__description": "Protects unique payload values of specified payload properties from overriding within debounce time"
     }
 }

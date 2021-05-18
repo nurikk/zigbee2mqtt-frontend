@@ -7,33 +7,34 @@ import { GlobalState } from "../../store";
 
 import Composite from "../features/composite/composite";
 import { FeatureWrapper } from "../features/composite/FeatureWrapper";
+import { useTranslation } from "react-i18next";
 
-interface ExposesProps {
+type ExposesProps = {
     device: Device;
 }
-type PropsFromStore = Pick<GlobalState, 'deviceStates'>;
 
-class Exposes extends Component<ExposesProps & PropsFromStore & StateApi, unknown> {
-    render() {
-        const { device, deviceStates, setDeviceState, getDeviceState } = this.props;
-        const deviceState = deviceStates[device.friendly_name] ?? {} as DeviceState;
-        if (device.definition?.exposes) {
-            return <Composite feature={{ features: device.definition.exposes } as CompositeFeature} type="composite" device={device} deviceState={deviceState}
-                onChange={(endpoint, value) => {
-                    setDeviceState(`${device.friendly_name}${endpoint ? `/${endpoint}` : ''}`, value)
-                }}
-                onRead={(endpoint, value) => {
-                    getDeviceState(`${device.friendly_name}${endpoint ? `/${endpoint}` : ''}`, value)
-                }}
-                featureWrapperClass={FeatureWrapper}
-            />
-        } else {
-            return "Device doesn't expose anything"
-        }
+
+function Exposes(props: ExposesProps & Pick<GlobalState, 'deviceStates'> & StateApi) {
+    const { device, deviceStates, setDeviceState, getDeviceState } = props;
+    const { t } = useTranslation();
+    const deviceState = deviceStates[device.friendly_name] ?? {} as DeviceState;
+    if (device.definition?.exposes) {
+        return <Composite feature={{ features: device.definition.exposes } as CompositeFeature} type="composite" device={device} deviceState={deviceState}
+            onChange={(endpoint, value) => {
+                setDeviceState(`${device.friendly_name}${endpoint ? `/${endpoint}` : ''}`, value)
+            }}
+            onRead={(endpoint, value) => {
+                getDeviceState(`${device.friendly_name}${endpoint ? `/${endpoint}` : ''}`, value)
+            }}
+            featureWrapperClass={FeatureWrapper}
+        />
+    } else {
+        return t('empty_exposes_definition');
     }
+
 }
 
 const mappedProps = ["deviceStates"];
 
-const ConnectedDeviceExposes = connect<ExposesProps, {}, GlobalState, StateApi>(mappedProps, actions)(Exposes);
+const ConnectedDeviceExposes = connect<ExposesProps, unknown, GlobalState, StateApi>(mappedProps, actions)(Exposes);
 export default ConnectedDeviceExposes;

@@ -43,7 +43,7 @@ export function AddDeviceToGroup(props: AddDeviceToGroupProps): JSX.Element {
 
     return <div className="row row-cols-lg-auto align-items-center">
 
-        <DevicePicker type="device" value={device as string} devices={devices} onChange={onDeviceSelect} />
+        <DevicePicker value={device as string} devices={devices} onChange={onDeviceSelect} />
         <EndpointPicker values={endpoints} value={endpoint as Endpoint} onChange={onEpChange} />
 
         <Button<void> type="button" onClick={onSubmit} className="btn btn-primary">{t('add_to_group')}</Button>

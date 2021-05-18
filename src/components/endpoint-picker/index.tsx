@@ -1,39 +1,38 @@
-import React, { ChangeEvent, Component, SelectHTMLAttributes } from "react";
+import React, { ChangeEvent, SelectHTMLAttributes } from "react";
+import { useTranslation } from "react-i18next";
 import { Endpoint } from "../../types";
 
 
 
-interface EndpointPickerProps {
+interface EndpointPickerProps extends Omit<SelectHTMLAttributes<HTMLSelectElement>, 'onChange'> {
     onChange(endpoint: Endpoint): void;
     value: Endpoint;
     label?: string;
     values: Endpoint[];
 }
 
-export default class EndpointPicker extends Component<EndpointPickerProps & Omit<SelectHTMLAttributes<HTMLSelectElement>, 'onChange'>, {}> {
-    onSelect = (e: ChangeEvent<HTMLSelectElement>): void => {
-        const { onChange } = this.props;
+export default function EndpointPicker(props: EndpointPickerProps): JSX.Element {
+    const { value, values, disabled, onChange, label, ...rest } = props;
+    const { t } = useTranslation("common");
+    const onSelectHandler = (e: ChangeEvent<HTMLSelectElement>): void => {
         const { value } = e.target as HTMLSelectElement;
         onChange(value);
     }
-    render() {
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const { onSelect, value, values, disabled, onChange, label, ...rest } = this.props;
-        const hasOnlyOneEP = values.length == 1;
+    const hasOnlyOneEP = values.length == 1;
 
-        const options = values.map(ep => <option key={ep} value={ep}>{ep}</option>)
-        options.unshift(<option key="hidded" hidden>Select endpoint</option>);
-        return <div className="form-group">
-            {label && <label className="form-label">{label}</label>}
-            <select disabled={value && hasOnlyOneEP || disabled}
-                value={value}
-                className="form-control"
-                title={hasOnlyOneEP ? 'The only endpoint' : ""}
-                onChange={this.onSelect}
-                {...rest}>
-                {options}
-            </select>
-        </div>
+    const options = values.map(ep => <option key={ep} value={ep}>{ep}</option>)
+    options.unshift(<option key="hidded" hidden>{t('select_endpoint')}</option>);
+    return <div className="form-group">
+        {label && <label className="form-label">{label}</label>}
+        <select disabled={value && hasOnlyOneEP || disabled}
+            value={value}
+            className="form-control"
+            title={hasOnlyOneEP ? t('the_only_endpoint') : ""}
+            onChange={onSelectHandler}
+            {...rest}>
+            {options}
+        </select>
+    </div>
 
-    }
+
 }

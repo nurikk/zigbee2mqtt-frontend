@@ -1,4 +1,5 @@
 import React, { ChangeEvent, Component, InputHTMLAttributes } from "react";
+import { WithTranslation, withTranslation } from "react-i18next";
 import { Cluster } from "../../types";
 import { randomString } from "../../utils";
 
@@ -50,7 +51,7 @@ function isClusterGroup(clusters: Cluster[] | ClusterGroup[]): clusters is Clust
 }
 
 // eslint-disable-next-line react/prefer-stateless-function
-export default class ClusterPicker extends Component<ClusterPickerProps & Omit<InputHTMLAttributes<HTMLInputElement | HTMLSelectElement>, 'onChange'>, ClusterPickerState> {
+export class ClusterPicker extends Component<WithTranslation & ClusterPickerProps & Omit<InputHTMLAttributes<HTMLInputElement | HTMLSelectElement>, 'onChange'>, ClusterPickerState> {
     state: Readonly<ClusterPickerState> = {
         pickerId: randomString(5)
     }
@@ -80,7 +81,7 @@ export default class ClusterPicker extends Component<ClusterPickerProps & Omit<I
             return this.renderSinglePicker();
         }
     }
-    renderMultiPicker() {
+    renderMultiPicker(): JSX.Element {
         const { pickerId } = this.state;
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { clusters = [], value, pickerType, onChange, label, ...rest } = this.props;
@@ -114,15 +115,15 @@ export default class ClusterPicker extends Component<ClusterPickerProps & Omit<I
         </div>;
     }
 
-    renderSinglePicker() {
+    renderSinglePicker(): JSX.Element {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const { clusters = [], onChange, pickerType, label, ...rest } = this.props;
-        const options = [<option key="hidden" hidden>Select cluster</option>];
+        const { clusters = [], onChange, pickerType, label, t, ...rest } = this.props;
+        const options = [<option key="hidden" hidden>{t('select_cluster')}</option>];
         if (isClusterGroup(clusters)) {
             clusters.forEach(group => {
                 const groupOptions = group.clusters.map(cluster => <option key={cluster} value={cluster}>{clusterDescriptions[cluster] ?? cluster}</option>)
                 if (groupOptions.length === 0) {
-                    groupOptions.push(<option key="none" disabled>None</option>)
+                    groupOptions.push(<option key="none" disabled>{t('none')}</option>)
                 }
                 options.push(<optgroup key={group.name} label={group.name}>{groupOptions}</optgroup>);
             });
@@ -141,3 +142,5 @@ export default class ClusterPicker extends Component<ClusterPickerProps & Omit<I
         </div>)
     }
 }
+
+export default withTranslation(["zigbee", "common"])(ClusterPicker);

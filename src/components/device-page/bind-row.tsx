@@ -8,11 +8,12 @@ import { Group } from "../../store";
 import { NiceBindingRule } from "./bind";
 import { getEndpoints } from "../../utils";
 import { BindParams } from "../../actions/BindApi";
+import { WithTranslation, withTranslation } from "react-i18next";
 
 
 
 
-interface BindRowProps {
+interface BindRowProps extends WithTranslation {
     rule: NiceBindingRule;
     idx: number;
     devices: Record<string, Device>;
@@ -33,7 +34,7 @@ const getTarget = (rule: NiceBindingRule, devices: Record<string, Device>, group
     return devices[rule.target?.ieee_address as string];
 }
 type Action = "Bind" | "Unbind";
-export default class BindRow extends Component<BindRowProps, BindRowState> {
+export class BindRow extends Component<BindRowProps, BindRowState> {
     state: Readonly<BindRowState> = {
         stateRule: {} as NiceBindingRule
     }
@@ -125,12 +126,9 @@ export default class BindRow extends Component<BindRowProps, BindRowState> {
         return !!valid;
     }
 
-    render() {
-        const { devices, groups, device } = this.props;
+    render(): JSX.Element {
+        const { devices, groups, device, t } = this.props;
         const { stateRule } = this.state;
-
-        const targetType: ObjectType = stateRule.target.type === "endpoint" ? "device" : "group";
-
         const sourceEndpoints = getEndpoints(device);
         const target = getTarget(stateRule, devices, groups);
         const destinationEndpoints = getEndpoints(target);
@@ -143,27 +141,27 @@ export default class BindRow extends Component<BindRowProps, BindRowState> {
         return (
             <div className="row pb-2 border-bottom">
                 <div className="col-md-2">
-                    <EndpointPicker label="Source EP" disabled={!stateRule.isNew} values={sourceEndpoints} value={stateRule.source.endpoint} onChange={this.setSourceEp} />
+                    <EndpointPicker label={t('source_endpoint')} disabled={!stateRule.isNew} values={sourceEndpoints} value={stateRule.source.endpoint} onChange={this.setSourceEp} />
                 </div>
                 <div className="col-md-2">
-                    <DevicePicker label="Destination" disabled={!stateRule.isNew} type={targetType} value={(stateRule.target.ieee_address || stateRule.target.id) as string} devices={devices} groups={groups} onChange={this.setDestination} />
+                    <DevicePicker label={t('destination')} disabled={!stateRule.isNew} value={(stateRule.target.ieee_address || stateRule.target.id) as string} devices={devices} groups={groups} onChange={this.setDestination} />
                 </div>
                 <div className="col-md-2">
-                    {stateRule.target.type === "endpoint" ? <EndpointPicker label="Destination EP" disabled={!stateRule.isNew} values={destinationEndpoints} value={stateRule.target.endpoint as Endpoint} onChange={this.setDestinationEp} /> : null}
+                    {stateRule.target.type === "endpoint" ? <EndpointPicker label={'destination_endpoint'} disabled={!stateRule.isNew} values={destinationEndpoints} value={stateRule.target.endpoint as Endpoint} onChange={this.setDestinationEp} /> : null}
                 </div>
                 <div className="col-md-4">
-                    <ClusterPicker label="Clusters" pickerType={PickerType.MULTIPLE} clusters={Array.from(possibleClusters)} value={stateRule.clusters} onChange={this.setClusters} />
+                    <ClusterPicker label={t('clusters')} pickerType={PickerType.MULTIPLE} clusters={Array.from(possibleClusters)} value={stateRule.clusters} onChange={this.setClusters} />
                 </div>
                 <div className="col-md-2">
                     <div className="form-group">
                         <label className="form-label">Actions</label>
                         <div className="form-control border-0">
                             <div className="btn-group btn-group-sm">
-                                <Button<Action> item={"Bind"} disabled={!this.isValidRule()} title="Bind" className="btn btn-primary" onClick={this.onBindOrUnBindClick}>
-                                    Bind&nbsp;<i
+                                <Button<Action> item={"Bind"} disabled={!this.isValidRule()} title={t('bind')} className="btn btn-primary" onClick={this.onBindOrUnBindClick}>
+                                    {t('bind')}&nbsp;<i
                                         className="fa fa-heart" /></Button>
-                                <Button<Action> item={"Unbind"} disabled={!stateRule.isNew && !this.isValidRule()} title="Unbind" className="btn btn-danger" onClick={this.onBindOrUnBindClick}><i
-                                    className="fa fa-heart-broken" />&nbsp;Unbind</Button>
+                                <Button<Action> item={"Unbind"} disabled={!stateRule.isNew && !this.isValidRule()} title={t('unbind')} className="btn btn-danger" onClick={this.onBindOrUnBindClick}><i
+                                    className="fa fa-heart-broken" />&nbsp;{t('unbind')}</Button>
                             </div>
                         </div>
                     </div>
@@ -172,3 +170,5 @@ export default class BindRow extends Component<BindRowProps, BindRowState> {
         );
     }
 }
+
+export default withTranslation(["common", "zigbee"])(BindRow);

@@ -9,6 +9,7 @@ import { getEndpoints } from "../../utils";
 import AttributePicker from "../attribute-picker";
 import Clusters from "zigbee-herdsman/dist/zcl/definition/cluster"
 import Button from "../button";
+import { useTranslation, WithTranslation, withTranslation } from "react-i18next";
 
 
 interface ReportingRowProps {
@@ -61,7 +62,7 @@ const FormGroupInput = (props: FormGroupInputProps): JSX.Element => {
         <input onChange={onChange} value={value} required type="number" name={name} className="form-control" />
     </div>
 }
-export default class ReportingRow extends Component<ReportingRowProps, ReportingRowState> {
+export class ReportingRow extends Component<ReportingRowProps & WithTranslation, ReportingRowState> {
 
     state: Readonly<ReportingRowState> = {
         stateRule: {} as NiceReportingingRule
@@ -114,27 +115,27 @@ export default class ReportingRow extends Component<ReportingRowProps, Reporting
 
 
     render(): JSX.Element{
-        const { rule, device } = this.props;
+        const { rule, device, t } = this.props;
         const { stateRule } = this.state;
         const sourceEndpoints = getEndpoints(device);
 
         return (<div className="row pb-2 border-bottom">
 
             <div className="col-md-2">
-                <EndpointPicker label="Endpoint" disabled={!rule.isNew} values={sourceEndpoints} value={stateRule.endpoint} onChange={this.setSourceEp} />
+                <EndpointPicker label={t('endpoint')} disabled={!rule.isNew} values={sourceEndpoints} value={stateRule.endpoint} onChange={this.setSourceEp} />
             </div>
             <div className="col-md-2">
-                <ClusterPicker label="Cluster" disabled={!stateRule.endpoint} pickerType={PickerType.SINGLE} clusters={getClusters(device, stateRule.endpoint, stateRule.cluster)} value={stateRule.cluster} onChange={this.setCluster} />
+                <ClusterPicker label={t('cluster')} disabled={!stateRule.endpoint} pickerType={PickerType.SINGLE} clusters={getClusters(device, stateRule.endpoint, stateRule.cluster)} value={stateRule.cluster} onChange={this.setCluster} />
             </div>
             <div className="col-md-2">
-                <AttributePicker label="Attribute" value={stateRule.attribute} cluster={stateRule.cluster} onChange={this.setAttribute} />
+                <AttributePicker label={t('attribute')} value={stateRule.attribute} cluster={stateRule.cluster} onChange={this.setAttribute} />
             </div>
             <div className="col-md-2">
                 <FormGroupInput
                     onChange={this.changeHandler}
                     value={stateRule.minimum_report_interval}
                     name="minimum_report_interval"
-                    label="Min rep interval"
+                    label={t('min_rep_interval')}
                 />
             </div>
             <div className="col-md-1">
@@ -142,23 +143,23 @@ export default class ReportingRow extends Component<ReportingRowProps, Reporting
                     onChange={this.changeHandler}
                     value={stateRule.maximum_report_interval}
                     name="maximum_report_interval"
-                    label="Max rep interval"
+                    label={t('max_rep_interval')}
                 />
             </div>
             <div className="col-md-1">
                 <div className="form-group">
-                    <label className="form-label text-nowrap">Min rep change</label>
-                    <input placeholder="Enter 65535 to disable reporting" onChange={this.changeHandler} value={stateRule.reportable_change} required type="number" name="reportable_change" className="form-control" />
+                    <label className="form-label text-nowrap">{t('min_rep_change') }</label>
+                    <input onChange={this.changeHandler} value={stateRule.reportable_change} required type="number" name="reportable_change" className="form-control" />
                 </div>
 
             </div>
             <div className="col-md-2">
                 <div className="form-group">
-                    <label className="form-label">Actions</label>
+                    <label className="form-label">{ t('actions')}</label>
                     <div className="form-group">
                         <div className="btn-group" role="group" aria-label="Basic example">
-                            <Button<void> disabled={!isValidRule(stateRule)} className="btn btn-primary" onClick={this.applyRule}>Apply</Button>
-                            {!stateRule.isNew ? <Button<void> promt className="btn btn-danger" onClick={this.disableRule}>Disable</Button> : null}
+                            <Button<void> disabled={!isValidRule(stateRule)} className="btn btn-primary" onClick={this.applyRule}>{t('common:apply') }</Button>
+                            {!stateRule.isNew ? <Button<void> promt className="btn btn-danger" onClick={this.disableRule}>{t('common:disable') }</Button> : null}
                         </div>
                     </div>
                 </div>
@@ -166,3 +167,5 @@ export default class ReportingRow extends Component<ReportingRowProps, Reporting
         </div>);
     }
 }
+
+export default withTranslation(["zigbee", "common"])(ReportingRow);
