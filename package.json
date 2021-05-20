@@ -94,7 +94,7 @@
         "sass": "^1.32.12",
         "sass-loader": "^11.0.1",
         "timeago.js": "^4.0.2",
-        "ts-loader": "^9.1.1",
+        "ts-loader": "^9.2.1",
         "typescript": "^4.2.4",
         "unistore": "^3.5.2",
         "webpack": "^5.36.2",
