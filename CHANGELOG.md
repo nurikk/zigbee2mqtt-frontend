@@ -1,3 +1,12 @@
+## [0.4.15](https://github.com/nurikk/z2m-frontend/compare/0.4.14...0.4.15) (2021-05-21)
+
+
+### Bug Fixes
+
+* **device-picker:** fix select handler ([75b9b3b](https://github.com/nurikk/z2m-frontend/commit/75b9b3bd1b3e6b67547b8ee35639116034936f76))
+
+
+
 ## [0.4.14](https://github.com/nurikk/z2m-frontend/compare/0.4.13...0.4.14) (2021-05-18)
 
 
