@@ -16,7 +16,6 @@ export default function DevicePicker(props: DevicePickerProps): JSX.Element {
     const { devices, value, label, onChange, groups = [], ...rest } = props;
 
     const onSelectHandler = (e: ChangeEvent<HTMLSelectElement>): void => {
-        const { } = this.props;
         const { value } = e.target as HTMLSelectElement;
 
         if (devices[value]) {
