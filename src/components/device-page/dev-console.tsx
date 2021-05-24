@@ -153,10 +153,12 @@ export class DevConsole extends Component<DevConsoleProps & WithTranslation & Pi
         return <>
             <div className="mb-3 row">
                 <div className="col-6 col-sm-3">
-                    <ClusterPicker label={t('cluster')} pickerType={PickerType.SINGLE}
+                    <ClusterPicker
+                        label={t('cluster')} pickerType={PickerType.SINGLE}
                         clusters={Object.keys(ZclCluster)}
                         value={cluster}
-                        onChange={this.onClusterChange} />
+                        onChange={this.onClusterChange}
+                    />
                 </div>
                 <div className="col-6 col-sm-3">
                     <AttributePicker label={t('attribute')} value={""} cluster={cluster} onChange={this.onAttributeSelect} />

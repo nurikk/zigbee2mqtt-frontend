@@ -29,7 +29,6 @@ export interface DeviceState {
     elapsed?: number;
     linkquality: number;
     update?: OTAState;
-    lastAttributeReadResult?: Record<string, unknown>;
     [k: string]: string | number | boolean | OTAState | AnyColor | undefined | Record<string, unknown>;
 }
 
