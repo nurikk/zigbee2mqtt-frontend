@@ -57,10 +57,10 @@
     },
     "values": {
         "true": "True",
-        "Open": "Open",
-        "Closed": "Closed",
-        "Clear": "Clear",
-        "Occupied": "Occupied"
+        "open": "Open",
+        "closed": "Closed",
+        "clear": "Clear",
+        "occupied": "Occupied"
     },
     "devicePage": {
         "about": "About",
@@ -191,7 +191,11 @@
         "color_temp": "Color Temp",
         "color_xy": "Color Xy",
         "pressure": "Pressure",
-        "soil_moisture": "Soil Moisture"
+        "soil_moisture": "Soil Moisture",
+        "angle_x": "Angle X",
+        "angle_y": "Angle Y",
+        "angle_z": "Angle Z",
+        "action": "Action"
     },
     "exposes": {
         "battery": "Battery",
