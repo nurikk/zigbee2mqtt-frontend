@@ -1,3 +1,12 @@
+## [0.4.16](https://github.com/nurikk/z2m-frontend/compare/0.4.15...0.4.16) (2021-05-29)
+
+
+### Features
+
+* **i18n:** update translation keys ([350bc94](https://github.com/nurikk/z2m-frontend/commit/350bc9420e640a9b247e3a906a9527dae309801e))
+
+
+
 ## [0.4.15](https://github.com/nurikk/z2m-frontend/compare/0.4.14...0.4.15) (2021-05-21)
 
 
