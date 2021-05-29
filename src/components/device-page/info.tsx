@@ -2,7 +2,7 @@
 import React, { Component, Fragment } from "react";
 import { BridgeInfo, Device, DeviceState } from "../../types";
 import { getLastSeenType, toHex } from "../../utils";
-import DeviceControlGroup from "../device-control";
+import DeviceControlGroup from "../device-control/DeviceControlGroup";
 import cx from "classnames";
 import style from "./style.css";
 import { connect } from "unistore/react";

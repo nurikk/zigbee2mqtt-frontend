@@ -33,7 +33,6 @@ import DashboardPage from "./components/dashboard-page";
 import ExtensionsEditorPage from "./components/extensions-editor";
 import StateNotifier from "./components/state-notifier/StateNotifier";
 import { ThemeSwitcherProvider } from "react-css-theme-switcher";
-import Afd from "./components/GPL_License";
 import i18n from "./i18n";
 import { I18nextProvider } from 'react-i18next';
 
@@ -57,7 +56,6 @@ const Main = () => {
                 <ThemeSwitcherProvider themeMap={themes} defaultTheme={theme}>
                     <HashRouter>
                         <StateNotifier />
-                        <Afd />
                         <div className="main">
                             <NavBar />
                             <main className="content p-0 p-sm-3">

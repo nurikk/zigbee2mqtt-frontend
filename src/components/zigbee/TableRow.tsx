@@ -4,7 +4,7 @@ import style from "./style.css";
 import { Link } from "react-router-dom";
 import { Device, DeviceState } from "../../types";
 import { genDeviceDetailsLink, toHex } from "../../utils";
-import  DeviceControlGroup from "../device-control";
+import  DeviceControlGroup from "../device-control/DeviceControlGroup";
 import DeviceImage from "../device-image";
 import { DisplayValue } from "../display-value/DisplayValue";
 import PowerSource from "../power-source";
@@ -17,6 +17,7 @@ type TableRowProps = {
     id: number;
     lastSeenType: LastSeenType;
 }
+
 export const TableRow = (props: TableRowProps): JSX.Element => {
     const { device, deviceState = {} as DeviceState, id, lastSeenType } = props;
     return <tr key={device.friendly_name} title={deviceState.update?.state == "available" ? 'Avaliable OTA update' : device.definition?.description}>

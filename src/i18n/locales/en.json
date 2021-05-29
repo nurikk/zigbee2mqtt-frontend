@@ -75,6 +75,7 @@
         "unknown_device": "Unknown device"
     },
     "common": {
+        "confirmation": "Configramtion prompt",
         "dialog_configramtion_prompt": "Are you sure?",
         "enter_search_criteria": "Enter search criteria",
         "clear": "Clear",
@@ -101,7 +102,8 @@
         "groups": "Groups",
         "devices": "Devices",
         "actions": "Actions",
-        "none": "None"
+        "none": "None",
+        "ok": "Ok"
     },
     "settings": {
         "settings": "Settings",
@@ -137,6 +139,7 @@
         "empty_logs_message": "Nothing to display"
     },
     "extensions": {
+        "create_new_extension": "Create new extension",
         "extension_name_propmt": "Enter new extension name",
         "select_extension_to_edit": "Select extension to edit"
     },

@@ -1,29 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { connect } from "unistore/react";
 import actions from "../../actions/actions";
+import useModal from "../../hooks/useModal";
 import { GlobalState } from "../../store";
-import Modal, { ModalHeader, ModalBody, ModalFooter } from "../modal";
+import Modal, { ModalHeader, ModalBody, ModalFooter } from "../modal/Modal";
 
 const StateNotifier = (props: GlobalState) => {
     const { bridgeState } = props;
-    const [modalOpened, setModalOpened] = useState(bridgeState !== "online");
-    useEffect(() => {
-        if (bridgeState !== "online") {
-            setModalOpened(true);
-        } else {
-            setModalOpened(false);
-        }
-    }, [bridgeState])
+    const { isOpen, toggle } = useModal(bridgeState !== "online");
+
 
     return (
-        <Modal isOpen={modalOpened}>
+        <Modal isOpen={isOpen}>
             <ModalHeader>Zigbee2MQTT</ModalHeader>
             <ModalBody>
                 <div>Hello, Zigbee2MQTT in status <span className="text-danger">{bridgeState}</span>.</div>
                 <div>Please wait....</div>
             </ModalBody>
             <ModalFooter>
-                <button type="button" className="btn btn-secondary" onClick={() => setModalOpened(false)}>Close</button>
+                <button type="button" className="btn btn-secondary" onClick={toggle}>Close</button>
             </ModalFooter>
         </Modal>
     );
