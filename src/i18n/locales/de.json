@@ -13,10 +13,10 @@
         "ota": "OTA",
 
         "extensions": "Erweiterungen",
-        "permit_join": "Anlernen aktiv",
+        "permit_join": "Anlernen aktivieren",
         "all": "Alle",
         "toggle_dropdown": "Dropdown Auswahl",
-        "disable_join": "Anlernen inaktiv"
+        "disable_join": "Anlernen deaktivieren"
     },
     "zigbee": {
         "power": "Power",
