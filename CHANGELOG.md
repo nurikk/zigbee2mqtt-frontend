@@ -1,3 +1,12 @@
+## [0.4.18](https://github.com/nurikk/z2m-frontend/compare/0.4.17...0.4.18) (2021-06-03)
+
+
+### Bug Fixes
+
+* **i18n:** fix ota page translation ([ce0624b](https://github.com/nurikk/z2m-frontend/commit/ce0624b3fc88bab15bb57b9cbc7f8e6015084d32))
+
+
+
 ## [0.4.17](https://github.com/nurikk/z2m-frontend/compare/0.4.16...0.4.17) (2021-06-03)
 
 
