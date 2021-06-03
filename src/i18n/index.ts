@@ -9,16 +9,19 @@ import enTranslations from './locales/en.json';
 import frTranslations from './locales/fr.json';
 import plTranslations from './locales/pl.json';
 import deTranslations from './locales/de.json';
+import ruTranslations from './locales/ru.json';
 
 
 import timePl from "timeago.js/lib/lang/pl";
 import timeFR from "timeago.js/lib/lang/fr";
 import timeDe from "timeago.js/lib/lang/de";
+import timeRu from "timeago.js/lib/lang/ru";
 
 
 register("pl", timePl);
 register("fr", timeFR);
 register("de", timeDe);
+register("ru", timeRu);
 
 
 
@@ -26,7 +29,8 @@ export const resources = {
     en: enTranslations as ResourceLanguage,
     fr: frTranslations as ResourceLanguage,
     pl: plTranslations as ResourceLanguage,
-    de: deTranslations as ResourceLanguage
+    de: deTranslations as ResourceLanguage,
+    ru: ruTranslations as ResourceLanguage,
 } as const;
 
 declare let window:Record<string, unknown>;

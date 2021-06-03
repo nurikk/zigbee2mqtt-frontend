@@ -9,10 +9,11 @@ import en from "./flags/us.png";
 import fr from "./flags/fr.png";
 import pl from "./flags/pl.png";
 import de from "./flags/de.png";
+import ru from "./flags/ru.png";
 
 
 const localesMap = {
-    en, fr, pl, de
+    en, fr, pl, de, ru
 }
 
 
