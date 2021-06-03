@@ -10,6 +10,7 @@ import fr from "./flags/fr.png";
 import pl from "./flags/pl.png";
 import de from "./flags/de.png";
 import ru from "./flags/ru.png";
+import missing from "./flags/missing-locale.png"
 
 
 const localesMap = {
@@ -26,14 +27,14 @@ export default function LocalePicker(): JSX.Element {
     const selectAndHide = (lang: string) => { i18n.changeLanguage(lang); setIsComponentVisible(false) }
 
     const locales = Object.keys(i18n.options.resources as Resource).map((language) => (<a key={language} className="dropdown-item" href="#" onClick={selectAndHide.bind(null, language)}>
-        <img src={localesMap[language]} alt={t(language)} width="20" className="align-middle me-1" />
+        <img src={localesMap[language] ?? missing} alt={t(language)} width="20" className="align-middle me-1" />
         <span className="align-middle">{t(language)}</span>
     </a>));
     const currentLanguage = i18n.language.split('-')[0];
 
     return (<li className="nav-item dropdown">
         <a className={cx("nav-flag dropdown-toggle", { show: isComponentVisible })} href="#" onClick={() => setIsComponentVisible(!isComponentVisible)} >
-            <img src={localesMap[currentLanguage]} alt={t(currentLanguage)} />
+            <img src={localesMap[currentLanguage] ?? missing} alt={t(currentLanguage)} />
         </a>
         <div ref={ref as RefObject<HTMLDivElement>} className={cx("dropdown-menu dropdown-menu-end", { show: isComponentVisible })}>
             {locales}
