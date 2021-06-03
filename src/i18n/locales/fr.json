@@ -82,7 +82,6 @@
         "save": "Sauver",
         "loading": "Chargement...",
         "check_all": "Cocher tout",
-        "remaining_time": "Temps restant {{remaining}}",
         "action": "Action",
         "delete": "Effacer",
         "cluster": "Cluster",
@@ -151,7 +150,8 @@
         "empty_ota_message": "Vous n&apos;avez aucun périphérique supportant les MàJ OTA",
         "update": "MàJ firmware des périphériques",
         "check": "Vérifier nouvelles MàJ",
-        "check_all": "Vérifier tout"
+        "check_all": "Vérifier tout",
+        "remaining_time": "Temps restant {{remaining}}"
     },
     "groups": {
         "new_group_name": "Nouveau nom de groupe",

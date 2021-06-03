@@ -71,7 +71,6 @@
         "save": "Zapisz",
         "loading": "Ładowanie...",
         "check_all": "Sprawdź wszystkie",
-        "remaining_time": "Pozostały czas: {{remaining}}",
         "action": "Akcja",
         "delete": "Usuń"
     },
@@ -121,7 +120,8 @@
         "empty_ota_message": "Nie posiadasz urządzeń wspierających OTA",
         "update": "Zaktualizuj oprogramowanie układowe",
         "check": "Spradź dostępność aktualizacji",
-        "check_all": "Sprawdź wszystkie"
+        "check_all": "Sprawdź wszystkie",
+        "remaining_time": "Pozostały czas: {{remaining}}"
     },
     "groups": {
         "new_group_name": "Nazwa nowej grupy",

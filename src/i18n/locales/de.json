@@ -71,8 +71,7 @@
         "close": "Schliessen",
         "save": "Speichern",
         "loading": "Laden...",
-        "check_all": "Alle prüfen",
-        "remaining_time": "verbleibende Zeit {{remaining}}",
+        "check_all": "Alle prüfen",        
         "action": "Aktion",
         "delete": "Löschen"
     },
@@ -121,7 +120,8 @@
         "empty_ota_message": "Keine OTA-fähigen Geräte vorhanden",
         "update": "Update Geräte Firmware",
         "check": "Prüfe auf neue Updates",
-        "check_all": "Alle überprüfen"
+        "check_all": "Alle überprüfen",
+        "remaining_time": "verbleibende Zeit {{remaining}}"
     },
     "groups": {
         "new_group_name": "Neuer Gruppenname",
