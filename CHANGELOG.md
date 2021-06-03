@@ -1,3 +1,18 @@
+## [0.4.17](https://github.com/nurikk/z2m-frontend/compare/0.4.16...0.4.17) (2021-06-03)
+
+
+### Bug Fixes
+
+* **translation:** fix german translation for permit join button ([#563](https://github.com/nurikk/z2m-frontend/issues/563)) ([31c4010](https://github.com/nurikk/z2m-frontend/commit/31c4010a60debe4d447421f65fa3b063a06a44c2))
+
+
+### Features
+
+* **i18n:** add missing locale flag ([78979e5](https://github.com/nurikk/z2m-frontend/commit/78979e595549b0ca2155ddba583132efe3e6d89b))
+* **i18n:** add ru locale ([a81756d](https://github.com/nurikk/z2m-frontend/commit/a81756d5a847f851dde529422c2d228449ae5bd7))
+
+
+
 ## [0.4.16](https://github.com/nurikk/z2m-frontend/compare/0.4.15...0.4.16) (2021-05-29)
 
 
