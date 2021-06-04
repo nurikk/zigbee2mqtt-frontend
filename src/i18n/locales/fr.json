@@ -29,6 +29,7 @@
         "last_seen": "Vu il y a",
         "ieee_address": "Addresse IEEE",
         "device_type": "Type de Périph",
+        "description": "Description",
         "support_status": "Supporté",
         "network_address": "Adresse réseau",
         "firmware_build_date": "Date Firmware",
