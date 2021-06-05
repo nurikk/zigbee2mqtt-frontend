@@ -178,7 +178,8 @@
         "en": "English",
         "fr": "Français",
         "pl": "Polski",
-        "de": "Deutsche Sprache"
+        "de": "Deutsche Sprache",
+        "ptbr": "Brazilian Portuguese"
     },
     "featureNames": {
         "contact": "Contact",
