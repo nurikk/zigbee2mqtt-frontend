@@ -8,20 +8,24 @@ import EnumEditor, { ValueWithLabelOrPrimitive } from "../../enum-editor/enum-ed
 import { BaseFeatureProps, BaseViewer, NoAccessError } from "../base";
 
 type EnumProps = BaseFeatureProps<EnumFeature>
+const VERY_BIG_ENUM_SIZE = 4;
 
 const Enum: FunctionComponent<EnumProps> = (props) => {
-  const { onChange, feature: { access, name, values, endpoint, property }, deviceState, minimal } = props;
-  if (access & FeatureAccessMode.ACCESS_WRITE) {
-    return <EnumEditor
-      onChange={(value) => onChange(endpoint as Endpoint, { [name]: value })}
-      values={values as unknown as ValueWithLabelOrPrimitive[]}
-        value={deviceState[property] as ValueWithLabelOrPrimitive}
-        minimal={minimal}
-    />
-  } else if (access & FeatureAccessMode.ACCESS_STATE) {
-    return <BaseViewer {...props} />
-  } else {
-    return <NoAccessError {...props} />
-  }
+    const { onChange, feature: { access, name, values, endpoint, property }, deviceState, minimal } = props;
+
+    const thisIsVeryBigEnumeration = values.length > VERY_BIG_ENUM_SIZE;
+
+    if (access & FeatureAccessMode.ACCESS_WRITE) {
+        return <EnumEditor
+            onChange={(value) => onChange(endpoint as Endpoint, { [name]: value })}
+            values={values as unknown as ValueWithLabelOrPrimitive[]}
+            value={deviceState[property] as ValueWithLabelOrPrimitive}
+            minimal={minimal || thisIsVeryBigEnumeration}
+        />
+    } else if (access & FeatureAccessMode.ACCESS_STATE) {
+        return <BaseViewer {...props} />
+    } else {
+        return <NoAccessError {...props} />
+    }
 }
 export default Enum;
