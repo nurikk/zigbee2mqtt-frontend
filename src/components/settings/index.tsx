@@ -238,7 +238,7 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
             {this.renderSettingsTabs()}
             <div className="tab-content">
                 <div className="tab-pane active">
-                    <Form key={keyName} schema={currentSchema}
+                    <Form idPrefix={keyName} schema={currentSchema}
                         formData={currentConfig}
                         onSubmit={this.onSettingsSave}
                         uiSchema={uiSchemas[keyName] as UiSchema}
