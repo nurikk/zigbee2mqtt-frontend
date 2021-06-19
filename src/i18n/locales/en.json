@@ -82,7 +82,7 @@
         "close": "Close",
         "save": "Save",
         "loading": "Loading...",
-        "check_all": "Check all",        
+        "check_all": "Check all",
         "action": "Action",
         "delete": "Delete",
         "cluster": "Cluster",
@@ -179,7 +179,8 @@
         "fr": "Français",
         "pl": "Polski",
         "de": "Deutsche Sprache",
-        "ptbr": "Brazilian Portuguese"
+        "ptbr": "Brazilian Portuguese",
+        "ru": "Русский"
     },
     "featureNames": {
         "contact": "Contact",
