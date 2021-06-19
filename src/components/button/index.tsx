@@ -33,7 +33,7 @@ export default function Button<T>(props: ButtonProps<T>): JSX.Element {
                 <h3>{t('confirmation')}</h3>
             </ModalHeader>
             <ModalBody>
-                {t('dialog_configramtion_prompt')}
+                {t('dialog_confirmation_prompt')}
             </ModalBody>
             <ModalFooter>
                 <button type="button" className="btn btn-secondary" onClick={toggle}>{t('common:close')}</button>

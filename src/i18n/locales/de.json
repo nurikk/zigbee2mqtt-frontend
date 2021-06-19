@@ -65,13 +65,13 @@
         "dev_console": "Dev Konsole"
     },
     "common": {
-        "dialog_configramtion_prompt": "Bist Du sicher?",
+        "dialog_confirmation_prompt": "Bist Du sicher?",
         "enter_search_criteria": "Suchwort",
         "clear": "Löschen",
         "close": "Schliessen",
         "save": "Speichern",
         "loading": "Laden...",
-        "check_all": "Alle prüfen",        
+        "check_all": "Alle prüfen",
         "action": "Aktion",
         "delete": "Löschen"
     },

@@ -76,7 +76,7 @@
     },
     "common": {
         "confirmation": "Confirmation",
-        "dialog_configramtion_prompt": "Êtes-vous sûr ?",
+        "dialog_confirmation_prompt": "Êtes-vous sûr ?",
         "enter_search_criteria": "Entrez le critère de recherche",
         "clear": "Vider",
         "close": "Fermer",

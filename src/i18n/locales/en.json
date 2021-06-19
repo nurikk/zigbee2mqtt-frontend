@@ -75,8 +75,8 @@
         "unknown_device": "Unknown device"
     },
     "common": {
-        "confirmation": "Configramtion prompt",
-        "dialog_configramtion_prompt": "Are you sure?",
+        "confirmation": "Confirmation prompt",
+        "dialog_confirmation_prompt": "Are you sure?",
         "enter_search_criteria": "Enter search criteria",
         "clear": "Clear",
         "close": "Close",

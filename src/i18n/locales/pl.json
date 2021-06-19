@@ -64,7 +64,7 @@
         "dev_console": "Konsola"
     },
     "common": {
-        "dialog_configramtion_prompt": "Czy jesteś pewien?",
+        "dialog_confirmation_prompt": "Czy jesteś pewien?",
         "enter_search_criteria": "Wprowadź kryteria wyszukiwania",
         "clear": "Wyczyść",
         "close": "Zamknij",
