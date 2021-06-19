@@ -148,7 +148,9 @@ export class DevConsole extends Component<DevConsoleProps & WithTranslation & Pi
         this.setState({ mode });
     }
     renderRead(): JSX.Element {
-        const { cluster } = this.state;
+        const { cluster, attributes } = this.state;
+        const noAttributesSelected = attributes.length === 0;
+        const noSelectedCluster = cluster === "";
         const { t } = this.props;
         return <>
             <div className="mb-3 row">
@@ -169,8 +171,8 @@ export class DevConsole extends Component<DevConsoleProps & WithTranslation & Pi
             </div>
             <div className="mb-3 row">
                 <div className="btn-group col col-3" role="group">
-                    <Button<void> className="btn btn-success me-2" onClick={this.onReadClick}>{t('read')}</Button>
-                    <Button<void> className="btn btn-danger" onClick={this.onWriteClick}>{t('write')}</Button>
+                    <Button<void> disabled={noAttributesSelected || noSelectedCluster} className="btn btn-success me-2" onClick={this.onReadClick}>{t('read')}</Button>
+                    <Button<void> disabled={noAttributesSelected || noSelectedCluster} className="btn btn-danger" onClick={this.onWriteClick}>{t('write')}</Button>
                 </div>
             </div>
         </>
