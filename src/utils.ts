@@ -55,6 +55,10 @@ export const lastSeen = (state: DeviceState, lastSeenType: LastSeenType): Date |
 
         case "elapsed":
             return new Date(Date.now() - (state.elapsed as number));
+
+        case "disable":
+            return undefined;
+
         default:
             console.warn("Unknown last_seen type " + lastSeenType);
             return undefined;
