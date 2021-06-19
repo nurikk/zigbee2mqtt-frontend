@@ -14,7 +14,7 @@ export const FeatureWrapper: FunctionComponent<PropsWithChildren<FetatureWrapper
     const { children, feature, onRead } = props;
     const isColor = feature.name?.startsWith("color_"); //hardcode for color
     const isReadable = (feature.access & FeatureAccessMode.ACCESS_READ) || isColor;
-    return <div className="row border-bottom py-1 w-100">
+    return <div className="row border-bottom py-1 w-100 align-items-center">
         <div className="col-12 col-md-3">
             <label className="col-form-label w-100">
                 <div className="d-flex justify-content-between">
@@ -28,7 +28,7 @@ export const FeatureWrapper: FunctionComponent<PropsWithChildren<FetatureWrapper
                 {feature.description ? <small className="d-block text-muted">{t(feature.description)}</small> : null}
             </label>
         </div>
-        <div className="col-12 col-md-9 d-flex align-items-center">
+        <div className="col-12 col-md-9">
             {children}
         </div>
     </div>
