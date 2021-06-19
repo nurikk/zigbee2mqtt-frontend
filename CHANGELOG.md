@@ -1,3 +1,18 @@
+## [0.4.20](https://github.com/nurikk/z2m-frontend/compare/0.4.19...0.4.20) (2021-06-19)
+
+
+### Bug Fixes
+
+* **dev-console:** disable read/write buttons if nothing is selected ([5e6e91f](https://github.com/nurikk/z2m-frontend/commit/5e6e91f83f15796c73d3f194fd37aa7852391d97))
+* **enum:** render minial enum for many value cases ([da835c3](https://github.com/nurikk/z2m-frontend/commit/da835c3dd06438bb7e868a486152c384e1c3a0f8))
+* **feature-wrapper:** fix nested feature wrapping ([86e4a5c](https://github.com/nurikk/z2m-frontend/commit/86e4a5c16ab8aed366b5a956d8b4663c554729b6))
+* **i18n:** add ru locale label ([ff45a34](https://github.com/nurikk/z2m-frontend/commit/ff45a3417cde90b40c1f40e84e7dd153263a1d03))
+* **i18n:** fix configramtion misstype ([8c234c2](https://github.com/nurikk/z2m-frontend/commit/8c234c2277050ea046fdacf514b63a8189e33328))
+* **lastSeen:** fix disabled handling ([ff729dc](https://github.com/nurikk/z2m-frontend/commit/ff729dcff8e9b33c8ad2914e9e322a93e7c7c264))
+* **settings:** fix schema props updates ([6640547](https://github.com/nurikk/z2m-frontend/commit/6640547378f78d0c8ad66ad1cfe9c3f52187a518))
+
+
+
 ## [0.4.19](https://github.com/nurikk/z2m-frontend/compare/0.4.18...0.4.19) (2021-06-06)
 
 
