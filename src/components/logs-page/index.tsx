@@ -59,7 +59,7 @@ export class LogsPage extends Component<GlobalState & BridgeApi & UtilsApi & Wit
         const { search } = this.state;
         return <div className="card">
             <div className="card-body">
-                <form className="row row-cols-lg-auto g-3 align-items-center">
+                <div className="row row-cols-lg-auto g-3 align-items-center">
                     <div className="col-12">
                         <label htmlFor="log-level" className="form-label">{t('show_only')}</label>
                         <select id="log-level" className="form-select" onChange={e => this.setState({ logLevel: e.target.value })}>
@@ -83,7 +83,7 @@ export class LogsPage extends Component<GlobalState & BridgeApi & UtilsApi & Wit
                         <label htmlFor="reset">&nbsp;</label>
                         <input id="reset" type="button" onClick={clearLogs} className="btn btn-primary form-control" value={t('common:clear') as string} />
                     </div>
-                </form>
+                </div>
             </div>
         </div>;
     }
