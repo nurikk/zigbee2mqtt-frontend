@@ -4,8 +4,7 @@ import { DeviceType, DeviceDefinition } from "../../types";
 export interface NodeI extends SimulationNodeDatum {
     ieeeAddr: string;
     friendlyName?: string;
-    type?: DeviceType;
-    failed?: string[];
+    type: DeviceType;
     lastSeen?: number;
     definition?: DeviceDefinition;
 }
@@ -24,13 +23,9 @@ export type LinkType =
 
     "BrokenLink";
 
-export interface Source extends SimulationNodeDatum {
-    ieeeAddr: string;
-}
 
-export interface Target extends SimulationNodeDatum {
-    ieeeAddr: string;
-}
+
+
 export enum ZigbeeRelationship {
     NeigbhorIsParent,
     NeigbhorIsAChild,
@@ -40,15 +35,12 @@ export enum ZigbeeRelationship {
 }
 
 export interface LinkI extends SimulationLinkDatum<NodeI> {
-    source: Source;
-    target: Target;
+    source: NodeI;
+    target: NodeI;
     linkquality: number;
     linkqualities: number[];
     depth: number;
     routes: unknown[];
-    sourceIeeeAddr: string;
-    targetIeeeAddr: string;
-    sourceNwkAddr: number;
     lqi: number;
     relationship: ZigbeeRelationship;
     relationships: ZigbeeRelationship[];

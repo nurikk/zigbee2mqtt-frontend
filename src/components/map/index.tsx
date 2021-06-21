@@ -1,7 +1,7 @@
 import React, { ChangeEvent, Component, createRef, Fragment } from "react";
 import Links from "./links";
 import Nodes, { getStarShape } from "./nodes";
-import { GraphI, LinkI, NodeI, Source, Target, ZigbeeRelationship } from "./types";
+import { GraphI, LinkI, NodeI, ZigbeeRelationship } from "./types";
 import { connect } from "unistore/react";
 import { GlobalState } from "../../store";
 import actions, { MapApi } from "../../actions/actions";
@@ -109,9 +109,9 @@ type ProcessHighlightsParams = {
 const processHighlights = ({ networkGraph, links, selectedNode, node, link, linkLabel }: ProcessHighlightsParams) => {
     const linkedByIndex = new Set<string>();
     networkGraph.nodes.forEach(n => linkedByIndex.add(n.ieeeAddr + "," + n.ieeeAddr));
-    links.forEach((l) => linkedByIndex.add(l.sourceIeeeAddr + "," + l.targetIeeeAddr));
+    links.forEach((l) => linkedByIndex.add(l.source.ieeeAddr + "," + l.target.ieeeAddr));
 
-    const neighboring = (a: Source, b: Target): boolean => linkedByIndex.has(a.ieeeAddr + "," + b.ieeeAddr)
+    const neighboring = (a: NodeI, b: NodeI): boolean => linkedByIndex.has(a.ieeeAddr + "," + b.ieeeAddr)
     const computeOpacity = (l: LinkI) => (l.source === selectedNode || l.target === selectedNode ? 1 : 0.15);
     if (selectedNode) {
         node.style("opacity", (o: NodeI) => neighboring(selectedNode, o) || neighboring(o, selectedNode) ? 1 : 0.15);

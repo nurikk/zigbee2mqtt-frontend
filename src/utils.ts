@@ -1,6 +1,6 @@
 
 import { AdvancedConfig, Device, DeviceState, Endpoint } from "./types";
-import { GraphI, LinkI, NodeI } from "./components/map/types";
+import { GraphI, LinkI, LinkType, NodeI } from "./components/map/types";
 import { Group } from "./store";
 import { Theme } from "./components/theme-switcher";
 import JSZip from 'jszip';
@@ -75,17 +75,19 @@ export const sanitizeGraph = (inGraph: GraphI): GraphI => {
     });
 
     inGraph.links.sort((a, b) => a.relationship - b.relationship).forEach(link => {
+
         const src: NodeI = nodes[link.source.ieeeAddr];
         const dst: NodeI = nodes[link.target.ieeeAddr];
+
         if (src && dst) {
             const linkId = [link.source.ieeeAddr, link.target.ieeeAddr].sort().join('');
             const repeatedLink = links.get(linkId);
-            const linkType = [src.type, dst.type].join('2');
+            const linkType = [src.type, dst.type].join('2') as LinkType;
             if (repeatedLink) {
                 repeatedLink.linkqualities.push(link.linkquality);
                 repeatedLink.relationships.push(link.relationship);
             } else {
-                links.set(linkId, { ...link, ...{ source: link.source.ieeeAddr, linkType, target: link.target.ieeeAddr, linkqualities: [link.linkquality], relationships: [link.relationship] } } as unknown as LinkI);
+                links.set(linkId, { ...link, ...{ source: src, target: dst, linkType, linkqualities: [link.linkquality], relationships: [link.relationship] } });
             }
         } else {
             console.warn("Broken link", link);

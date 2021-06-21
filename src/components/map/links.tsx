@@ -43,18 +43,19 @@ const Links: FunctionComponent<LinksPros> = props => {
 
     return (
         <g ref={ref as RefObject<SVGGElement>} className={style.links}>
-            {links.map((link: LinkI) =>
-                <Fragment key={`fragment${link.sourceIeeeAddr}-${link.targetIeeeAddr}-${link.linkType}`}>
+            {links.map((link: LinkI) => {
+                const id = `${link.source.ieeeAddr}-${link.target.ieeeAddr}-${link.linkType}`;
+                return <Fragment key={`fragment${id}`}>
                     <Link
-                        id={`edgepath${link.sourceIeeeAddr}-${link.targetIeeeAddr}-${link.linkType}`}
+                        id={`edgepath${id}`}
                         link={link}
                     />
                     <LinkLabel
-                        xlinkHref={`#edgepath${link.sourceIeeeAddr}-${link.targetIeeeAddr}-${link.linkType}`}
+                        xlinkHref={`#edgepath${id}`}
                         link={link}
                     />
                 </Fragment>
-            )}
+            })}
         </g>
     );
 };
