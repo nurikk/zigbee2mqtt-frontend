@@ -73,6 +73,7 @@ const Dashboard: React.FC<Props> = (props) => {
                     return { device, deviceState, filteredFeatures };
                 })
                 .filter(({ filteredFeatures }) => filteredFeatures.length > 0)
+                .sort((a, b) => a.device.friendly_name.localeCompare(b.device.friendly_name))
                 .map(({ device, deviceState, filteredFeatures }) => {
 
                     return (
