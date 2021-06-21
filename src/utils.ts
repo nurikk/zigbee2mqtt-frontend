@@ -90,7 +90,7 @@ export const sanitizeGraph = (inGraph: GraphI): GraphI => {
                 links.set(linkId, { ...link, ...{ source: src, target: dst, linkType, linkqualities: [link.linkquality], relationships: [link.relationship] } });
             }
         } else {
-            console.warn("Broken link", link);
+            console.warn(`Broken link${src ? "": " ,source node is missing"}${dst ? "": " ,target node is missing"}`, link);
         }
     });
 
