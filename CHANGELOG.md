@@ -1,3 +1,21 @@
+## [0.4.22](https://github.com/nurikk/z2m-frontend/compare/0.4.21...0.4.22) (2021-06-21)
+
+
+### Bug Fixes
+
+* **cluster-picker:** clusters should't jump on selectiong ([b7f0a4e](https://github.com/nurikk/z2m-frontend/commit/b7f0a4ec3fc5f39454e22feebcb32b0d51a96b55))
+* **device-settings:** fix potential undefined reference ([bb95a3a](https://github.com/nurikk/z2m-frontend/commit/bb95a3ac32334a3c2b86f516d58b8418ef1b7dd4))
+* **logs:** fix form nesting ([4f3ee6a](https://github.com/nurikk/z2m-frontend/commit/4f3ee6a1fefdb984eddbdfec93f7354fa9f21d3a))
+
+
+### Features
+
+* **dashboard:** sort devices alphabetically ([5dfe8d0](https://github.com/nurikk/z2m-frontend/commit/5dfe8d0ca89a4926cf8da75319c69a2481741fee))
+* **device-picker:** sort devices in alphabetical order ([7700180](https://github.com/nurikk/z2m-frontend/commit/770018060ef72adc93a87619df4fa39ef13ff5f1))
+* **i18n:** add more keys ([04c3fd2](https://github.com/nurikk/z2m-frontend/commit/04c3fd2be7d77164b413a50fc20ce8d14b3efd0c))
+
+
+
 ## [0.4.21](https://github.com/nurikk/z2m-frontend/compare/0.4.20...0.4.21) (2021-06-19)
 
 
