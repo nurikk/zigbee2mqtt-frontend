@@ -38,7 +38,7 @@ export default class DeviceSettings extends Component<DeviceSettingsProps, Devic
         updatedDeviceConfig: {}
     }
     getGenericDeviceSettingsSchema(): JSONSchema7 {
-        const { bridgeInfo: { config_schema: configSchema } } = this.props;
+        const { bridgeInfo: { config_schema: configSchema = {} } } = this.props;
         return (configSchema.definitions?.device ?? { properties: {} }) as JSONSchema7;
     }
     getDeviceConfig(): KVP | KVP[] {
