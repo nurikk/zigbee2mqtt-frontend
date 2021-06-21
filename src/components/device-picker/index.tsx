@@ -27,7 +27,9 @@ export default function DevicePicker(props: DevicePickerProps): JSX.Element {
     }
     let options = [<option key="hidden" hidden>{t('select_device') }</option>];
     const devicesOptions = [] as JSX.Element[];
-    Object.values(devices).forEach((device) => {
+    Object.values(devices)
+        .sort((a, b) => a.friendly_name.localeCompare(b.friendly_name))
+        .forEach((device) => {
         devicesOptions.push(<option
             title={device.definition?.description}
             key={device.ieee_address}
