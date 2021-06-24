@@ -27,15 +27,20 @@ export class Composite extends Component<CompositeProps & WithTranslation<"compo
     onChange = (endpoint: Endpoint, value: Record<string, unknown>): void=> {
         const { onChange, feature } = this.props;
         const { features } = feature;
-        const isMoreThanOneFeature = features.length > 1;
+        const isOnlyOneFeature = features.length == 1;
 
-        if (isCompositeFeature(feature) && isMoreThanOneFeature) {
-            this.setState(value)
+        if (isCompositeFeature(feature)) {
+            this.setState(value, () => {
+                if (isOnlyOneFeature) {
+                    this.onCompositeFeatureApply();
+                }
+            })
+
         } else {
             onChange(endpoint, value);
         }
     }
-    onApplyClick = (): void=> {
+    onCompositeFeatureApply = (): void=> {
         const { onChange, feature: { endpoint, property } } = this.props;
         onChange(endpoint as Endpoint, property ? { [property]: this.state } : this.state);
     }
@@ -103,7 +108,7 @@ export class Composite extends Component<CompositeProps & WithTranslation<"compo
 
 
         if (isThisACompositeFeature && isMoreThanOneFeature) {
-            result.push(<div key={feature.name + 'apply'}><Button className={cx('btn btn-primary float-end', {'btn-sm': minimal})} onClick={this.onApplyClick}>{t('common:apply')}</Button></div>)
+            result.push(<div key={feature.name + 'apply'}><Button className={cx('btn btn-primary float-end', {'btn-sm': minimal})} onClick={this.onCompositeFeatureApply}>{t('common:apply')}</Button></div>)
         }
         return result;
 
