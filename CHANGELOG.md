@@ -1,3 +1,12 @@
+## [0.4.24](https://github.com/nurikk/z2m-frontend/compare/0.4.23...0.4.24) (2021-06-24)
+
+
+### Bug Fixes
+
+* **composite:** fix composite feature apply ([6c607d4](https://github.com/nurikk/z2m-frontend/commit/6c607d4e1aa016c1472cc30b9b1cdbc224017bf5))
+
+
+
 ## [0.4.23](https://github.com/nurikk/z2m-frontend/compare/0.4.22...0.4.23) (2021-06-24)
 
 
