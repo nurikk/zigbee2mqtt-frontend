@@ -1,3 +1,17 @@
+## [0.4.23](https://github.com/nurikk/z2m-frontend/compare/0.4.22...0.4.23) (2021-06-24)
+
+
+### Bug Fixes
+
+* **exposes:** fix double enpoint label ([8b5e349](https://github.com/nurikk/z2m-frontend/commit/8b5e3499f71e530deb29350b6983d56f436bfad6))
+
+
+### Features
+
+* **exposes:** immidiatly apply composes seature with single property ([ae54aae](https://github.com/nurikk/z2m-frontend/commit/ae54aae9fa0fedf78faaefa8b2b35684afa95972))
+
+
+
 ## [0.4.22](https://github.com/nurikk/z2m-frontend/compare/0.4.21...0.4.22) (2021-06-21)
 
 
