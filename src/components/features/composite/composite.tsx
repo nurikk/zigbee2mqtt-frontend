@@ -26,7 +26,10 @@ export class Composite extends Component<CompositeProps & WithTranslation<"compo
     state: Readonly<CompositeState> = {}
     onChange = (endpoint: Endpoint, value: Record<string, unknown>): void=> {
         const { onChange, feature } = this.props;
-        if (isCompositeFeature(feature)) {
+        const { features } = feature;
+        const isMoreThanOneFeature = features.length > 1;
+
+        if (isCompositeFeature(feature) && isMoreThanOneFeature) {
             this.setState(value)
         } else {
             onChange(endpoint, value);
@@ -51,7 +54,8 @@ export class Composite extends Component<CompositeProps & WithTranslation<"compo
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { t, feature, device, deviceState, onRead: _onRead, onChange: _onChange, featureWrapperClass, minimal } = this.props;
         const { features } = feature;
-
+        const isThisACompositeFeature = isCompositeFeature(feature)
+        const isMoreThanOneFeature = features.length > 1;
         const doGroupingByEndpoint = !minimal;
         let result = [] as JSX.Element[];
         if (doGroupingByEndpoint) {
@@ -98,7 +102,7 @@ export class Composite extends Component<CompositeProps & WithTranslation<"compo
         }
 
 
-        if (isCompositeFeature(feature)) {
+        if (isThisACompositeFeature && isMoreThanOneFeature) {
             result.push(<div key={feature.name + 'apply'}><Button className={cx('btn btn-primary float-end', {'btn-sm': minimal})} onClick={this.onApplyClick}>{t('common:apply')}</Button></div>)
         }
         return result;
