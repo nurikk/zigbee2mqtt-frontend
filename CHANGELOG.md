@@ -1,3 +1,12 @@
+## [0.4.27](https://github.com/nurikk/z2m-frontend/compare/0.4.26...0.4.27) (2021-06-25)
+
+
+### Bug Fixes
+
+* **exposes:** fix null features ([12b7186](https://github.com/nurikk/z2m-frontend/commit/12b7186ee7668b17a91f5c7c66965c3cc57a4fb6))
+
+
+
 ## [0.4.26](https://github.com/nurikk/z2m-frontend/compare/0.4.25...0.4.26) (2021-06-25)
 
 
