@@ -1,3 +1,12 @@
+## [0.4.28](https://github.com/nurikk/z2m-frontend/compare/0.4.27...0.4.28) (2021-06-25)
+
+
+### Bug Fixes
+
+* **error-boundry:** make instructions more visible ([6996b7c](https://github.com/nurikk/z2m-frontend/commit/6996b7c5f1af52846a032363733a782cbaa5563e))
+
+
+
 ## [0.4.27](https://github.com/nurikk/z2m-frontend/compare/0.4.26...0.4.27) (2021-06-25)
 
 
