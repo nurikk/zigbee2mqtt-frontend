@@ -1,3 +1,12 @@
+## [0.4.25](https://github.com/nurikk/z2m-frontend/compare/0.4.24...0.4.25) (2021-06-25)
+
+
+### Bug Fixes
+
+* **exposes:** fix ep group labesl ([9453735](https://github.com/nurikk/z2m-frontend/commit/9453735fefcb04f0c81baf0d4a21bcb3091c9b05))
+
+
+
 ## [0.4.24](https://github.com/nurikk/z2m-frontend/compare/0.4.23...0.4.24) (2021-06-24)
 
 
