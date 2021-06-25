@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { CompositeFeature, Device, DeviceState } from "../../types";
 import actions from "../../actions/actions";
 import { StateApi } from "../../actions/StateApi";
@@ -19,7 +19,7 @@ function Exposes(props: ExposesProps & Pick<GlobalState, 'deviceStates'> & State
     const { t } = useTranslation();
     const deviceState = deviceStates[device.friendly_name] ?? {} as DeviceState;
     if (device.definition?.exposes) {
-        return <Composite feature={{ features: device.definition.exposes } as CompositeFeature} type="composite" device={device} deviceState={deviceState}
+        return <Composite showEndpointLabels={true} feature={{ features: device.definition.exposes } as CompositeFeature} type="composite" device={device} deviceState={deviceState}
             onChange={(endpoint, value) => {
                 setDeviceState(`${device.friendly_name}${endpoint ? `/${endpoint}` : ''}`, value)
             }}

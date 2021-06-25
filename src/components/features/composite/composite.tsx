@@ -14,6 +14,7 @@ interface CompositeProps extends BaseFeatureProps<CompositeFeature> {
     type: CompositeType;
     stepsConfiguration?: Record<string, unknown>;
     minimal?: boolean;
+    showEndpointLabels?: boolean;
 }
 
 interface CompositeState {
@@ -57,7 +58,7 @@ export class Composite extends Component<CompositeProps & WithTranslation<"compo
 
         const MAGIC_NO_ENDPOINT = 'MAGIC_NO_ENDPOINT';
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const { t, feature, device, deviceState, onRead: _onRead, onChange: _onChange, featureWrapperClass, minimal } = this.props;
+        const { t, showEndpointLabels = false , feature, device, deviceState, onRead: _onRead, onChange: _onChange, featureWrapperClass, minimal } = this.props;
         const { features } = feature;
         const isThisACompositeFeature = isCompositeFeature(feature)
         const isMoreThanOneFeature = features.length > 1;
@@ -81,7 +82,7 @@ export class Composite extends Component<CompositeProps & WithTranslation<"compo
             }
             for (const epName in groupedFeatures) {
                 const featuresGroup = groupedFeatures[epName];
-                result.push(<div key={epName}>{isThisACompositeFeature ? null : `Endpoint: ${epName}`}<div className="ps-4">{...featuresGroup.map(f => <Feature
+                result.push(<div key={epName}>{showEndpointLabels ?  `Endpoint: ${epName}` : null}<div className="ps-4">{...featuresGroup.map(f => <Feature
                     key={f.name + f.endpoint}
                     feature={f}
                     device={device}
