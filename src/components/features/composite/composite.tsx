@@ -27,10 +27,10 @@ export class Composite extends Component<CompositeProps & WithTranslation<"compo
     state: Readonly<CompositeState> = {}
     onChange = (endpoint: Endpoint, value: Record<string, unknown>): void=> {
         const { onChange, feature } = this.props;
-        const { features } = feature;
-        const isOnlyOneFeature = features.length == 1;
 
         if (isCompositeFeature(feature)) {
+            const { features = [] } = feature;
+            const isOnlyOneFeature = features.length == 1;
             this.setState(value, () => {
                 if (isOnlyOneFeature) {
                     this.onCompositeFeatureApply();
@@ -59,7 +59,7 @@ export class Composite extends Component<CompositeProps & WithTranslation<"compo
         const MAGIC_NO_ENDPOINT = 'MAGIC_NO_ENDPOINT';
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { t, showEndpointLabels = false , feature, device, deviceState, onRead: _onRead, onChange: _onChange, featureWrapperClass, minimal } = this.props;
-        const { features } = feature;
+        const { features = [] } = feature;
         const isThisACompositeFeature = isCompositeFeature(feature)
         const isMoreThanOneFeature = features.length > 1;
         const doGroupingByEndpoint = !minimal;
