@@ -152,7 +152,7 @@
         "update": "Update device firmware",
         "check": "Check for new updates",
         "check_all": "Check all",
-        "remaining_time": "Remaining time {{remaining}}"
+        "remaining_time": "Remaining time {{- remaining}}"
     },
     "groups": {
         "new_group_name": "New group name",

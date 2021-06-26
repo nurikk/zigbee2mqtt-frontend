@@ -152,7 +152,7 @@
         "update": "MàJ firmware des périphériques",
         "check": "Vérifier nouvelles MàJ",
         "check_all": "Vérifier tout",
-        "remaining_time": "Temps restant {{remaining}}"
+        "remaining_time": "Temps restant {{- remaining}}"
     },
     "groups": {
         "new_group_name": "Nouveau nom de groupe",

@@ -153,7 +153,7 @@
         "update": "Обновить прошивку устройства",
         "check": "Проверить на наличие новых обновлений",
         "check_all": "Проверить все",
-        "remaining_time": "Оставшееся время {{remaining}}"
+        "remaining_time": "Оставшееся время {{- remaining}}"
     },
     "groups": {
         "new_group_name": "Имя новой группы",

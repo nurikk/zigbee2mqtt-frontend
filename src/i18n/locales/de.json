@@ -121,7 +121,7 @@
         "update": "Update Geräte Firmware",
         "check": "Prüfe auf neue Updates",
         "check_all": "Alle überprüfen",
-        "remaining_time": "verbleibende Zeit {{remaining}}"
+        "remaining_time": "verbleibende Zeit {{- remaining}}"
     },
     "groups": {
         "new_group_name": "Neuer Gruppenname",
