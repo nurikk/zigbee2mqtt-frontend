@@ -1,3 +1,13 @@
+## [0.4.29](https://github.com/nurikk/z2m-frontend/compare/0.4.28...0.4.29) (2021-06-26)
+
+
+### Bug Fixes
+
+* **extension:** fix ace worker loading issue ([c91c5e4](https://github.com/nurikk/z2m-frontend/commit/c91c5e43173bb62b895931b4536defb225010889))
+* **i18n:** fix renaming time N/A escaping ([dfd4339](https://github.com/nurikk/z2m-frontend/commit/dfd43396f38a0c19d00b27391977914ac99a3630))
+
+
+
 ## [0.4.28](https://github.com/nurikk/z2m-frontend/compare/0.4.27...0.4.28) (2021-06-25)
 
 
