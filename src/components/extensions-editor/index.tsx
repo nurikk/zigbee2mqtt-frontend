@@ -67,6 +67,7 @@ export class ExtensionsEditorPage extends Component<GlobalState & ExtensionApi &
         const code = extensions.find(e => e.name === currentExtension)?.code ?? "";
         const editorTheme = theme === "light" ? "github" : "dracula";
         return <AceEditor
+            setOptions={{useWorker: false}}
             mode="javascript"
             onChange={this.onExtensionCodeChange}
             name="UNIQUE_ID_OF_DIV"
