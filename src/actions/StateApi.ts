@@ -2,8 +2,8 @@ import api from "../api";
 
 export interface StateApi {
     setStateValue(dev: string, name: string, value: unknown): Promise<void>;
-    setDeviceState(dev: string, value: object): Promise<void>;
-    getDeviceState(dev: string, value: object): Promise<void>;
+    setDeviceState(dev: string, value: Record<string, unknown>): Promise<void>;
+    getDeviceState(dev: string, value: Record<string, unknown>): Promise<void>;
 }
 
 export default {
@@ -15,10 +15,10 @@ export default {
     ): Promise<void> {
         return api.send(`${dev}/set`, { [name]: value });
     },
-    setDeviceState(state, dev: string, value: object) {
+    setDeviceState(state, dev: string, value: Record<string, unknown>):Promise<void> {
         return api.send(`${dev}/set`, value);
     },
-    getDeviceState(state, dev: string, value: object) {
+    getDeviceState(state, dev: string, value: Record<string, unknown>):Promise<void> {
         return api.send(`${dev}/get`, value);
     },
 }

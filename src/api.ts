@@ -73,12 +73,6 @@ interface TouchllinkScanResponse extends ResponseWithStatus {
         found: TouchLinkDevice[];
     };
 }
-interface ExtensionReadResponse extends ResponseWithStatus {
-    data: {
-        name: string;
-        content: string;
-    };
-}
 interface Callable {
     (): void;
 }
@@ -93,7 +87,7 @@ class Api {
         this.url = url;
         this.transactionRndPreffix = randomString(5);
     }
-    send = (topic: string, payload: object): Promise<void> => {
+    send = (topic: string, payload: Record<string, unknown>): Promise<void> => {
         console.debug("Calling API", { topic, payload });
 
         if (topic.startsWith('bridge/request/')) {

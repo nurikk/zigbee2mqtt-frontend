@@ -14,12 +14,12 @@ export default {
         store.setState({ touchlinkScanInProgress: true, touchlinkDevices: [] });
         return api.send("bridge/request/touchlink/scan", { value: true });
     },
-    touchlinkIdentify(state, device: TouchLinkDevice): Promise<void> {
+    touchlinkIdentify(state, device: Record<string, unknown>): Promise<void> {
         store.setState({ touchlinkIdentifyInProgress: true });
         return api.send("bridge/request/touchlink/identify", device);
 
     },
-    touchlinkReset(state, device: TouchLinkDevice): Promise<void> {
+    touchlinkReset(state, device: Record<string, unknown>): Promise<void> {
         store.setState({ touchlinkResetInProgress: true });
         return api.send("bridge/request/touchlink/factory_reset", device);
     },

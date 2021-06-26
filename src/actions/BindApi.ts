@@ -12,7 +12,7 @@ export interface BindApi {
 }
 
 type BindOperation = "bind" | "unbind";
-const bindOp = (operation: BindOperation, params: object) => {
+const bindOp = (operation: BindOperation, params: Record<string, unknown>) => {
     return api.send(`bridge/request/device/${operation}`, params);
 }
 export default {
