@@ -9,13 +9,15 @@ class MyExampleExtension_TS_ {
     }
 
     async onStateChange(data) {
-        const { ID, from, to, reason, change } = data;
-        // console.log({ID, change});
-        const myRemoteIeeeAddre= '0x00158d000224154d'; // change this
-        const myLampIeeAddr = '0x00124b001e73227f'; // change this
+        console.log("State changed", data); // comment this out if clutters logs
+        
+        const { ID, update } = data;
+        
+        
         //example how to toggle state
-        if (ID === myRemoteIeeeAddre) { //state changed for myRemote (clicked a button)
-            if (change.action === 'single') {
+        if (ID === '0x00158d000224154d') { //state changed for some device (example: clicked a button)
+            if (update.action === 'single') {
+                const myLampIeeAddr = '0x00124b001e73227f'; // change this
                 this.mqtt.onMessage(`${this.mqttBaseTopic}/${myLampIeeAddr}/set`, JSON.stringify({state: 'toggle'}));
             }
         }
