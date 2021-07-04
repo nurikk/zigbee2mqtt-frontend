@@ -71,7 +71,7 @@
         "file-saver": "^2.0.5",
         "fork-ts-checker-webpack-plugin": "^6.2.12",
         "html-webpack-plugin": "^5.2.0",
-        "husky": "^6.0.0",
+        "husky": "^7.0.0",
         "i18next": "^20.3.2",
         "i18next-browser-languagedetector": "^6.1.2",
         "i18next-http-backend": "^1.2.6",
