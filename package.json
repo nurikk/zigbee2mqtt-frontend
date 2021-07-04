@@ -35,7 +35,7 @@
         "@teamsupercell/typings-for-css-modules-loader": "^2.4.0",
         "@types/classnames": "^2.3.1",
         "@types/color-convert": "^2.0.0",
-        "@types/d3-drag": "^2.0.0",
+        "@types/d3-drag": "^3.0.1",
         "@types/d3-force": "^3.0.1",
         "@types/d3-selection": "^2.0.0",
         "@types/d3-zoom": "^3.0.1",
