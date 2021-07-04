@@ -5,8 +5,7 @@ import { SinglePickerProps, isClusterGroup, clusterDescriptions } from "./index"
 
 export function SinglePicker(props: SinglePickerProps): JSX.Element{
     const [pickerId] = useState(randomString(5));
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { clusters = [], onChange, label, disabled } = props;
+    const { clusters = [], onChange, value, label, disabled } = props;
     const { t } = useTranslation(["zigbee", "common"]);
     const options = [<option key="hidden" hidden>{t('select_cluster')}</option>];
 
@@ -32,7 +31,7 @@ export function SinglePicker(props: SinglePickerProps): JSX.Element{
     }
     return (<div className="form-group">
         {label && <label htmlFor={pickerId} className="form-label">{label}</label>}
-        <select id={pickerId} className="form-select" onChange={onChangeHandler} disabled={disabled}>
+        <select id={pickerId} value={value} className="form-select" onChange={onChangeHandler} disabled={disabled}>
             {options}
         </select>
     </div>);
