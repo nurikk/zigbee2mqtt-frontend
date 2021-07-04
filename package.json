@@ -78,7 +78,7 @@
         "jszip": "^3.6.0",
         "line-reader": "^0.4.0",
         "lodash": "^4.17.21",
-        "mini-css-extract-plugin": "^1.5.1",
+        "mini-css-extract-plugin": "^2.0.0",
         "notyf": "^3.10.0",
         "pinst": "^2.1.6",
         "prettier": "^2.3.2",
