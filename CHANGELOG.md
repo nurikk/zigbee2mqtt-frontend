@@ -1,3 +1,12 @@
+## [0.4.31](https://github.com/nurikk/z2m-frontend/compare/0.4.30...0.4.31) (2021-07-04)
+
+
+### Bug Fixes
+
+* **cluster-picker:** fix SinglePicker value ([ef33eda](https://github.com/nurikk/z2m-frontend/commit/ef33eda4c356298df875db3a21dcac985323aa3e))
+
+
+
 ## [0.4.30](https://github.com/nurikk/z2m-frontend/compare/0.4.29...0.4.30) (2021-07-01)
 
 
