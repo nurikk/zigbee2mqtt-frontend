@@ -79,7 +79,7 @@
         "line-reader": "^0.4.0",
         "lodash": "^4.17.21",
         "mini-css-extract-plugin": "^1.5.1",
-        "notyf": "^3.9.0",
+        "notyf": "^3.10.0",
         "pinst": "^2.1.6",
         "prettier": "^2.3.2",
         "react": "^17.0.1",
