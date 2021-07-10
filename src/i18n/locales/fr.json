@@ -116,7 +116,7 @@
         "frontend": "Interface",
         "mqtt": "MQTT",
         "ota": "MàJ OTA",
-        "passlist": "Ignorés",
+        "passlist": "Autorisés",
         "serial": "Port Série",
 
         "experimental": "Expérimental",
