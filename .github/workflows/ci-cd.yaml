@@ -31,16 +31,12 @@ jobs:
 
     - name: Publish to npm
       if: startsWith(github.ref, 'refs/tags/') && github.event_name == 'push'
-      run: npm publish --verbose
       env:
         NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN }}
-    - name: Get frontend version
-      if: startsWith(github.ref, 'refs/tags/') && github.event_name == 'push'
-      id: frontend-version
       run: |
-        version=$(node -p "require('./package.json').version")
-        echo "::set-output name=version::$version"
-    - name: Trigger Zigbee2MQTT update
-      if: startsWith(github.ref, 'refs/tags/') && github.event_name == 'push'
-      run: |
-        curl -XPOST -H "Authorization: token ${{ secrets.TRIGGER_TOKEN }}" -H "Accept: application/vnd.github.everest-preview+json" -H "Content-Type: application/json" https://api.github.com/repos/koenkk/zigbee2mqtt/dispatches --data '{"event_type": "update_frontend", "client_payload": { "version": "${{ steps.frontend-version.outputs.version }}"}}'
+        npm publish --verbose
+        VERSION=$(node -p "require('./package.json').version")
+        curl -XPOST -H "Authorization: token ${{ secrets.TRIGGER_TOKEN }}" -H "Accept: application/vnd.github.everest-preview+json" -H "Content-Type: application/json" https://api.github.com/repos/koenkk/zigbee2mqtt/dispatches --data "{\"event_type\": \"update_frontend\", \"client_payload\": { \"version\": \"$VERSION\"}}'
+
+
+        
