@@ -1,3 +1,12 @@
+## [0.4.34](https://github.com/nurikk/z2m-frontend/compare/0.4.33...0.4.34) (2021-07-12)
+
+
+### Bug Fixes
+
+* **i18n:** add es locale default translation ([c344501](https://github.com/nurikk/z2m-frontend/commit/c3445016447c5ea24c8d57bbd901f64d2c911add))
+
+
+
 ## [0.4.33](https://github.com/nurikk/z2m-frontend/compare/0.4.32...0.4.33) (2021-07-04)
 
 
