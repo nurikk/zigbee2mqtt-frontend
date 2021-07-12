@@ -180,7 +180,8 @@
         "pl": "Polski",
         "de": "Deutsche Sprache",
         "ptbr": "Brazilian Portuguese",
-        "ru": "Русский"
+        "ru": "Русский",
+        "es": "Español"
     },
     "featureNames": {
         "contact": "Contact",
