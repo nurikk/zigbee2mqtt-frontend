@@ -1,0 +1,36 @@
+# This is a basic workflow that is manually triggered
+
+name: Bump version
+
+# Controls when the action will run. Workflow runs when manually triggered using the UI
+# or API.
+on: [workflow_dispatch]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "greet"
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v2
+      with:
+        node-version: 15
+        registry-url: https://registry.npmjs.org/
+    - name: Get NodeJS Version
+      id: nodeversion
+      run: |
+        echo "::set-output name=version::$(node --version)"
+    - name: Restore node_modules cache
+      id: cache-node-modules
+      uses: actions/cache@v2
+      with:
+        path: node_modules
+        key: ${{ runner.os }}-${{ steps.nodeversion.outputs.version }}-${{ hashFiles('package-lock.json') }}
+
+#     - name: Install dependencies
+#       if: steps.cache-node-modules.outputs.cache-hit != 'true'
+#       run: npm ci
+
+    - name: Bump version
+      run: npm version patch
