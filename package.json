@@ -45,7 +45,7 @@
         "@types/react-bootstrap": "^0.32.26",
         "@types/react-dom": "^17.0.9",
         "@types/react-router-dom": "^5.1.8",
-        "@types/reconnectingwebsocket": "^1.0.6",
+        "@types/reconnectingwebsocket": "^1.0.7",
         "@types/webpack-env": "^1.16.2",
         "@types/ws": "^7.4.6",
         "@typescript-eslint/eslint-plugin": "^4.28.2",
