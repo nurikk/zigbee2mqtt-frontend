@@ -1,3 +1,12 @@
+## [0.4.38](https://github.com/nurikk/z2m-frontend/compare/0.4.37...0.4.38) (2021-07-13)
+
+
+### Features
+
+* **device-info:** add zigbee_manufacturer ([badcdd5](https://github.com/nurikk/z2m-frontend/commit/badcdd56a8ce9d794aeb441e6670c6c2050fd110))
+
+
+
 ## [0.4.37](https://github.com/nurikk/z2m-frontend/compare/0.4.36...0.4.37) (2021-07-13)
 
 
