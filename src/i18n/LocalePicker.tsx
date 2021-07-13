@@ -12,11 +12,12 @@ import de from "./flags/de.png";
 import ru from "./flags/ru.png";
 import ptbr from "./flags/ptbr.png";
 import es from "./flags/es.png";
+import ua from "./flags/ua.png";
 import missing from "./flags/missing-locale.png"
 
 
 const localesMap = {
-    en, fr, pl, de, ru, ptbr, es
+    en, fr, pl, de, ru, ptbr, es, ua
 }
 
 
