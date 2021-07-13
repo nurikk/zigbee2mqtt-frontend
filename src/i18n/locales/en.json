@@ -181,7 +181,8 @@
         "de": "Deutsche Sprache",
         "ptbr": "Brazilian Portuguese",
         "ru": "Русский",
-        "es": "Español"
+        "es": "Español",
+        "ua": "Українська"
     },
     "featureNames": {
         "contact": "Contact",
