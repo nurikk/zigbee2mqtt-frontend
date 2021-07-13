@@ -25,6 +25,7 @@
         "pic": "Pic",
         "model": "Model",
         "zigbee_model": "Zigbee Model",
+        "zigbee_manufacturer": "Zigbee Manufacturer",
         "manufacturer": "Manufacturer",
         "last_seen": "Last seen",
         "ieee_address": "IEEE Address",

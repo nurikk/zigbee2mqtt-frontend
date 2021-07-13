@@ -42,6 +42,10 @@ const displayProps = [
         translationKey: 'zigbee_model'
     },
     {
+        key: 'manufacturer',
+        translationKey: 'zigbee_manufacturer'
+    },
+    {
         key: 'definition.description',
         translationKey: 'description',
         if: 'supported',
