@@ -21,7 +21,7 @@
   "zigbee": {
         "power": "Потужність",
         "lqi": "Якість сигналу",
-        "friendly_name": "Имя користувача",
+        "friendly_name": "І'мя користувача",
         "pic": "Мал.",
         "model": "Модель",
         "zigbee_model": "Модель Zigbee",
