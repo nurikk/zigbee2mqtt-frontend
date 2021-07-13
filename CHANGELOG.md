@@ -1,3 +1,12 @@
+## [0.4.37](https://github.com/nurikk/z2m-frontend/compare/0.4.36...0.4.37) (2021-07-13)
+
+
+### Features
+
+* **i18n:** Ukrainian locale ([9dbb59f](https://github.com/nurikk/z2m-frontend/commit/9dbb59f1794d23bd9906bd79ea495caaf5a5a6e6))
+
+
+
 ## 0.4.36 (2021-07-12)
 
 
