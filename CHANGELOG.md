@@ -1,3 +1,17 @@
+## [0.4.40](https://github.com/nurikk/z2m-frontend/compare/0.4.39...0.4.40) (2021-07-15)
+
+
+### Bug Fixes
+
+* **i18n:** update translations ([da62eeb](https://github.com/nurikk/z2m-frontend/commit/da62eeb981f4070d403f9b74e071c0e60ec59717))
+
+
+### Features
+
+* **i18n:** add translation helper page ([3e24d86](https://github.com/nurikk/z2m-frontend/commit/3e24d86775754b644fbe159a26f496f6a18c58b1))
+
+
+
 ## [0.4.39](https://github.com/nurikk/z2m-frontend/compare/0.4.38...0.4.39) (2021-07-14)
 
 
