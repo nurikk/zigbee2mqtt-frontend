@@ -1,181 +1,175 @@
 {
-    "navbar": {
-        "restart": "Restart",
-        "devices": "Urządzenia",
-        "dashboard": "Pulpit",
-        "map": "Mapa",
-        "settings": "Ustawienia",
-        "groups": "Grupy",
-
-        "touchlink": "Touchlink",
-
-        "logs": "Logi",
-        "ota": "OTA",
-
-        "extensions": "Rozszerzenia",
-        "permit_join": "Zezwól na dołączanie",
-        "all": "Wszystkie",
-        "toggle_dropdown": "Przełącz listę",
-        "disable_join": "Zabroń dołączania"
-    },
-    "zigbee": {
-        "power": "Zasilanie",
-        "lqi": "LQI",
-        "friendly_name": "Przyjazna nazwa",
-        "pic": "Foto",
-        "model": "Model",
-        "zigbee_model": "Model Zigbee",
-        "manufacturer": "Producent",
-        "last_seen": "Ostatnio widziane",
-        "ieee_address": "Adres IEEE",
-        "device_type": "Typ urządzenia",
-        "support_status": "Support status",
-        "network_address": "Adres sieciowy",
-        "firmware_build_date": "Data firmware",
-        "firmware_version": "Wersja firmware",
-        "interview_completed": "Interview completed",
-        "unsupported": "Niewspierane",
-        "rename_device": "Zmień nazwę urządzenia",
-        "remove_device": "Usuń urządzenie",
-        "update_Home_assistant_entity_id": "Zaktualizuj ID encji Home Assistanta",
-
-        "force_remove": "Wymuś usunięcie",
-        "block_join": "Zablokuj ponowne dołączanie",
-
-        "reconfigure": "Przekonfiguruj",
-        "endpoint": "Punkt końcowy"
-    },
-    "values": {
-        "true": "Prawda",
-        "Open": "Otwarte",
-        "Closed": "Zamknięte",
-        "Clear": "Brak",
-        "Occupied": "Wykryto Obecność"
+    "common": {
+        "action": "Akcja",
+        "check_all": "Sprawdź wszystkie",
+        "clear": "Wyczyść",
+        "close": "Zamknij",
+        "delete": "Usuń",
+        "dialog_confirmation_prompt": "Czy jesteś pewien?",
+        "enter_search_criteria": "Wprowadź kryteria wyszukiwania",
+        "loading": "Ładowanie...",
+        "save": "Zapisz"
     },
     "devicePage": {
         "about": "O urządzeniu",
-        "exposes": "Eksponowane",
         "bind": "Powiązania",
+        "clusters": "Klaster",
+        "dev_console": "Konsola",
+        "exposes": "Eksponowane",
         "reporting": "Raportowanie",
         "settings": "Ustawienia",
         "settings_specific": "Ustawienia (specyficzne)",
-        "state": "Stan",
-        "clusters": "Klaster",
-        "dev_console": "Konsola"
-    },
-    "common": {
-        "dialog_confirmation_prompt": "Czy jesteś pewien?",
-        "enter_search_criteria": "Wprowadź kryteria wyszukiwania",
-        "clear": "Wyczyść",
-        "close": "Zamknij",
-        "save": "Zapisz",
-        "loading": "Ładowanie...",
-        "check_all": "Sprawdź wszystkie",
-        "action": "Akcja",
-        "delete": "Usuń"
-    },
-    "settings": {
-        "settings": "Ustawienia",
-        "tools": "Narzędzia",
-        "about": "O programie",
-        "raw": "Wygenerowana konfiguracja",
-        "donate": "Wsparcie",
-        "main": "Główne",
-        "advanced": "Zaawansowane",
-        "external_converters": "Konwertery zewnętrzne",
-        "frontend": "Aplikacja interfejsu użytkownika",
-        "mqtt": "MQTT",
-        "ota": "Aktualizacje OTA",
-        "passlist": "Lista dopuszczonych",
-        "serial": "Port szeregowy",
-
-        "experimental": "Eksperymentalne",
-        "blocklist": "Lista zablokowanych",
-        "donation_text": [
-            "Cześć %username%, tutaj możesz podziękować nam za ciężką pracę.",
-            "Byłoby miło gdybyś zostawił też jakieś dobre słowo ;)"
-        ],
-        "zigbee2mqtt_version": "Wersja Zigbee2MQTT",
-        "coordinator_type": "Typ koordynatora",
-        "coordinator_revision": "Wersja oprogramowania koordynatora",
-        "frontend_version": "Wersja aplikacji interfejsu użytkownika",
-        "download_state": "Pobierz stan",
-        "restart_zigbee2mqtt": "Zrestartuj Zigbee2MQTT"
-    },
-    "logs": {
-        "show_only": "Pokaż tylko",
-        "filter_by_text": "Filtruj po tekście",
-        "empty_logs_message": "Brak logów do wyświetlenia"
+        "state": "Stan"
     },
     "extensions": {
         "extension_name_propmt": "Wprowadź nazwę nowego rozszerzenia",
         "select_extension_to_edit": "Wybierz rozszerzenie do edycji"
+    },
+    "featureNames": {
+        "brightness": "Poziom Jasności",
+        "color_temp": "Temperatura Barwowa",
+        "color_xy": "Kolor Xy",
+        "contact": "Kontakt",
+        "humidity": "Wilgotność",
+        "illuminance": "Natężenie światła",
+        "occupancy": "Obecność",
+        "pressure": "Ciśnienie",
+        "soil_moisture": "Wilgotność Gleby",
+        "state": "Stan",
+        "temperature": "Temperatura"
+    },
+    "groups": {
+        "add_to_group": "Dodaj do grupy",
+        "create_group": "Utwórz grupę",
+        "new_group_id": "ID nowej grupy",
+        "new_group_id_placeholder": "Podaj ID grupy jeśli potrzebujesz",
+        "new_group_name": "Nazwa nowej grupy",
+        "new_group_name_placeholder": "przykład: lampy_sypialnia",
+        "remove_group": "Usuń grupę"
+    },
+    "localeNames": {
+        "de": "Deutsche Sprache",
+        "en": "English",
+        "fr": "Français",
+        "pl": "Polski"
+    },
+    "logs": {
+        "empty_logs_message": "Brak logów do wyświetlenia",
+        "filter_by_text": "Filtruj po tekście",
+        "show_only": "Pokaż tylko"
+    },
+    "map": {
+        "help_coordinator_link_description": "Linie ciągłe to połączenia z koordynatorem",
+        "help_end_device_description": "zielony to urządzenia końcowe",
+        "help_is_coordinator": "to koordynator",
+        "help_lqi_description": "Jakość połączenia to wartość 0 - 255 (im wyższa tym lepiej), wartości oddzielone / odnoszą się do różnych typów połączeń.",
+        "help_router_description": "niebieski to rutery",
+        "help_router_links_description": "Linie przerywane to połączenia z ruterami",
+        "hide": "Kliknij tutaj by ukryć",
+        "load": "Załaduj mapę",
+        "loading": "Ładowanie mapy może zająć od 10 sekund do 2 minut, w zależności od rozmiaru Twojej sieci."
+    },
+    "navbar": {
+        "all": "Wszystkie",
+        "dashboard": "Pulpit",
+        "devices": "Urządzenia",
+        "disable_join": "Zabroń dołączania",
+        "extensions": "Rozszerzenia",
+        "groups": "Grupy",
+        "logs": "Logi",
+        "map": "Mapa",
+        "ota": "OTA",
+        "permit_join": "Zezwól na dołączanie",
+        "restart": "Restart",
+        "settings": "Ustawienia",
+        "toggle_dropdown": "Przełącz listę",
+        "touchlink": "Touchlink"
+    },
+    "ota": {
+        "check": "Spradź dostępność aktualizacji",
+        "check_all": "Sprawdź wszystkie",
+        "empty_ota_message": "Nie posiadasz urządzeń wspierających OTA",
+        "remaining_time": "Pozostały czas: {{- remaining}}",
+        "update": "Zaktualizuj oprogramowanie układowe"
+    },
+    "settings": {
+        "about": "O programie",
+        "advanced": "Zaawansowane",
+        "blocklist": "Lista zablokowanych",
+        "coordinator_revision": "Wersja oprogramowania koordynatora",
+        "coordinator_type": "Typ koordynatora",
+        "donate": "Wsparcie",
+        "donation_text": [
+            "Cześć %username%, tutaj możesz podziękować nam za ciężką pracę.",
+            "Byłoby miło gdybyś zostawił też jakieś dobre słowo ;)"
+        ],
+        "download_state": "Pobierz stan",
+        "experimental": "Eksperymentalne",
+        "external_converters": "Konwertery zewnętrzne",
+        "frontend": "Aplikacja interfejsu użytkownika",
+        "frontend_version": "Wersja aplikacji interfejsu użytkownika",
+        "main": "Główne",
+        "mqtt": "MQTT",
+        "ota": "Aktualizacje OTA",
+        "passlist": "Lista dopuszczonych",
+        "raw": "Wygenerowana konfiguracja",
+        "restart_zigbee2mqtt": "Zrestartuj Zigbee2MQTT",
+        "serial": "Port szeregowy",
+        "settings": "Ustawienia",
+        "tools": "Narzędzia",
+        "zigbee2mqtt_version": "Wersja Zigbee2MQTT"
+    },
+    "settingsSchemaTranslations": {
+        "root-title": "Port szeregowy",
+        "root__description": "Pozwól tylko wybranym urządzeniom (identyfikowanym przez adres ieeeAddr) do sieci. Zwróc uwagę na fakt, że wszystkie urządzenia spoza tej listy zostaną usunięte z obecnej sieci!",
+        "root__title": "Lista dopuszczonych",
+        "root_availability_blacklist__title": "Czarna lista sprawdzania dostępności (ustawienie wycofywane, użyj listy blokad sprawdzania dostępności)",
+        "root_availability_blocklist__description": "Zablokuj sprawdzanie dostępności urządzeń z tej listy",
+        "root_availability_blocklist__title": "Lista blokad sprawdzania dostępności",
+        "root_availability_passlist__description": "Włącz sprawdzanie obecności tylko dla urządzeń z tej listy",
+        "root_availability_passlist__title": "Lista sprawdzania dostępności",
+        "root_availability_whitelist__title": "Bilała lista sprawdzania dostępności (ustawienie wycofywane, użyj listy sprawdzania obecności)",
+        "root_ext_pan_id__description": "Parametr Zigbee rozszerzonego identyfikatora sieci, zmiana wymaga ponownego sparowania wszystkich urządzeń!",
+        "root_ext_pan_id__title": "Ext Pan ID",
+        "root_log_output__description": "Położenie wyjściowego pliku logu, pozostaw puste by wyłączyć rejestrowanie logu zdarzeń",
+        "root_log_output__title": "Wyjście logowania",
+        "root_log_syslog-title": "Log systemowy"
     },
     "touchlink": {
         "detected_devices_message": "Wykryte urządzenia touchlink: {{count}}. ",
         "rescan": "Skanuj ponownie",
         "scan": "Skanuj"
     },
-    "ota": {
-        "empty_ota_message": "Nie posiadasz urządzeń wspierających OTA",
-        "update": "Zaktualizuj oprogramowanie układowe",
-        "check": "Spradź dostępność aktualizacji",
-        "check_all": "Sprawdź wszystkie",
-        "remaining_time": "Pozostały czas: {{- remaining}}"
+    "values": {
+        "Clear": "Brak",
+        "Closed": "Zamknięte",
+        "Occupied": "Wykryto Obecność",
+        "Open": "Otwarte",
+        "true": "Prawda"
     },
-    "groups": {
-        "new_group_name": "Nazwa nowej grupy",
-        "new_group_name_placeholder": "przykład: lampy_sypialnia",
-        "new_group_id": "ID nowej grupy",
-        "new_group_id_placeholder": "Podaj ID grupy jeśli potrzebujesz",
-        "remove_group": "Usuń grupę",
-        "create_group": "Utwórz grupę",
-        "add_to_group": "Dodaj do grupy"
-    },
-    "map": {
-        "loading": "Ładowanie mapy może zająć od 10 sekund do 2 minut, w zależności od rozmiaru Twojej sieci.",
-        "load": "Załaduj mapę",
-        "help_is_coordinator": "to koordynator",
-        "help_end_device_description": "zielony to urządzenia końcowe",
-        "help_router_description": "niebieski to rutery",
-        "help_coordinator_link_description": "Linie ciągłe to połączenia z koordynatorem",
-        "help_router_links_description": "Linie przerywane to połączenia z ruterami",
-        "help_lqi_description": "Jakość połączenia to wartość 0 - 255 (im wyższa tym lepiej), wartości oddzielone / odnoszą się do różnych typów połączeń.",
-        "hide": "Kliknij tutaj by ukryć"
-    },
-    "localeNames": {
-        "en": "English",
-        "fr": "Français",
-        "pl": "Polski",
-        "de": "Deutsche Sprache"
-    },
-    "featureNames": {
-        "contact": "Kontakt",
-        "occupancy": "Obecność",
-        "temperature": "Temperatura",
-        "illuminance": "Natężenie światła",
-        "humidity": "Wilgotność",
-        "state": "Stan",
-        "brightness": "Poziom Jasności",
-        "color_temp": "Temperatura Barwowa",
-        "color_xy": "Kolor Xy",
-        "pressure": "Ciśnienie",
-        "soil_moisture": "Wilgotność Gleby"
-    },
-    "settingsSchemaTranslations": {
-        "root-title": "Port szeregowy",
-        "root_availability_blacklist__title": "Czarna lista sprawdzania dostępności (ustawienie wycofywane, użyj listy blokad sprawdzania dostępności)",
-        "root_availability_blocklist__title": "Lista blokad sprawdzania dostępności",
-        "root_availability_blocklist__description": "Zablokuj sprawdzanie dostępności urządzeń z tej listy",
-        "root_availability_passlist__title": "Lista sprawdzania dostępności",
-        "root_availability_passlist__description": "Włącz sprawdzanie obecności tylko dla urządzeń z tej listy",
-        "root_availability_whitelist__title": "Bilała lista sprawdzania dostępności (ustawienie wycofywane, użyj listy sprawdzania obecności)",
-        "root_ext_pan_id__title": "Ext Pan ID",
-        "root_ext_pan_id__description": "Parametr Zigbee rozszerzonego identyfikatora sieci, zmiana wymaga ponownego sparowania wszystkich urządzeń!",
-        "root_log_output__title": "Wyjście logowania",
-        "root_log_output__description": "Położenie wyjściowego pliku logu, pozostaw puste by wyłączyć rejestrowanie logu zdarzeń",
-        "root_log_syslog-title": "Log systemowy",
-        "root__title": "Lista dopuszczonych",
-        "root__description": "Pozwól tylko wybranym urządzeniom (identyfikowanym przez adres ieeeAddr) do sieci. Zwróc uwagę na fakt, że wszystkie urządzenia spoza tej listy zostaną usunięte z obecnej sieci!"
+    "zigbee": {
+        "block_join": "Zablokuj ponowne dołączanie",
+        "device_type": "Typ urządzenia",
+        "endpoint": "Punkt końcowy",
+        "firmware_build_date": "Data firmware",
+        "firmware_version": "Wersja firmware",
+        "force_remove": "Wymuś usunięcie",
+        "friendly_name": "Przyjazna nazwa",
+        "ieee_address": "Adres IEEE",
+        "interview_completed": "Interview completed",
+        "last_seen": "Ostatnio widziane",
+        "lqi": "LQI",
+        "manufacturer": "Producent",
+        "model": "Model",
+        "network_address": "Adres sieciowy",
+        "pic": "Foto",
+        "power": "Zasilanie",
+        "reconfigure": "Przekonfiguruj",
+        "remove_device": "Usuń urządzenie",
+        "rename_device": "Zmień nazwę urządzenia",
+        "support_status": "Support status",
+        "unsupported": "Niewspierane",
+        "update_Home_assistant_entity_id": "Zaktualizuj ID encji Home Assistanta",
+        "zigbee_model": "Model Zigbee"
     }
 }
