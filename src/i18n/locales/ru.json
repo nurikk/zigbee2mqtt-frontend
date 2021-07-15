@@ -130,13 +130,6 @@
         "new_group_name_placeholder": "Пример: my_bedroom_lights",
         "remove_group": "Удалить группу"
     },
-    "localeNames": {
-        "de": "Deutsche Sprache",
-        "en": "English",
-        "fr": "Français",
-        "pl": "Polski",
-        "ru": "Русский"
-    },
     "logs": {
         "empty_logs_message": "Нет информации для отображения",
         "filter_by_text": "Фильтровать по тексту",

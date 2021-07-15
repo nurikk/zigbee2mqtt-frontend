@@ -105,12 +105,6 @@
         "new_group_name_placeholder": "Beispiel: my_bedroom_lights",
         "remove_group": "Gruppe entfernen"
     },
-    "localeNames": {
-        "de": "Deutsch",
-        "en": "English",
-        "fr": "Français",
-        "pl": "Polski"
-    },
     "logs": {
         "empty_logs_message": "Nichts anzuzeigen",
         "filter_by_text": "Filtere nach:",

@@ -132,16 +132,6 @@
         "new_group_name_placeholder": "example: my_bedroom_lights",
         "remove_group": "Remove group"
     },
-    "localeNames": {
-        "de": "Deutsche Sprache",
-        "en": "English",
-        "es": "Español",
-        "fr": "Français",
-        "pl": "Polski",
-        "ptbr": "Brazilian Portuguese",
-        "ru": "Русский",
-        "ua": "Українська"
-    },
     "logs": {
         "empty_logs_message": "Nothing to display",
         "filter_by_text": "Filter by text",
@@ -206,7 +196,8 @@
         "serial": "Serial",
         "settings": "Settings",
         "tools": "Tools",
-        "zigbee2mqtt_version": "Zigbee2MQTT version"
+        "zigbee2mqtt_version": "Zigbee2MQTT version",
+        "translate": "Translate"
     },
     "settingsSchemaTranslations": {
         "advanced-title": "Advanced",
@@ -264,7 +255,8 @@
         "occupied": "Occupied",
         "open": "Open",
         "supported": "Supported",
-        "true": "True"
+        "true": "True",
+        "empty_string": "Empty string(\"\")"
     },
     "zigbee": {
         "actions": "Actions",

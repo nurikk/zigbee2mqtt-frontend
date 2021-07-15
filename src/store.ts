@@ -47,6 +47,7 @@ export interface GlobalState {
     logs: LogMessage[];
     extensions: Extension[];
     theme: Theme;
+    missingTranslations: Map<string, unknown>;
 }
 
 const theme = getCurrentTheme();

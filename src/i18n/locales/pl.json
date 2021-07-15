@@ -47,12 +47,6 @@
         "new_group_name_placeholder": "przykład: lampy_sypialnia",
         "remove_group": "Usuń grupę"
     },
-    "localeNames": {
-        "de": "Deutsche Sprache",
-        "en": "English",
-        "fr": "Français",
-        "pl": "Polski"
-    },
     "logs": {
         "empty_logs_message": "Brak logów do wyświetlenia",
         "filter_by_text": "Filtruj po tekście",

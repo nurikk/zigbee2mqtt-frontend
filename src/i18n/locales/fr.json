@@ -130,14 +130,6 @@
         "new_group_name_placeholder": "exemple: mes_lumières_chambre",
         "remove_group": "Supprimer groupe"
     },
-    "localeNames": {
-        "de": "Allemand",
-        "en": "Anglais",
-        "fr": "Français",
-        "pl": "Polonais",
-        "ptbr": "Portugais Brésilien",
-        "ru": "Russe"
-    },
     "logs": {
         "empty_logs_message": "Rien à afficher",
         "filter_by_text": "Filtrer sur le texte",

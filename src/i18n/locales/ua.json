@@ -130,14 +130,7 @@
         "new_group_name_placeholder": "Приклад: my_bedroom_lights",
         "remove_group": "Видалити групу"
     },
-    "localeNames": {
-        "de": "Deutsche Sprache",
-        "en": "English",
-        "fr": "Français",
-        "pl": "Polski",
-        "ru": "Русский",
-        "ua": "Українська"
-    },
+
     "logs": {
         "empty_logs_message": "Немає інформації для відображення",
         "filter_by_text": "Фільтрувати за текстом",

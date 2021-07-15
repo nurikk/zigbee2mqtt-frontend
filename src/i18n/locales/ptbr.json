@@ -130,13 +130,6 @@
         "new_group_name_placeholder": "exemplo: minhas_luzes_quarto",
         "remove_group": "Remover grupo"
     },
-    "localeNames": {
-        "de": "Deutsche Sprache",
-        "en": "English",
-        "fr": "Français",
-        "pl": "Polski",
-        "ptbr": "Português Brasileiro"
-    },
     "logs": {
         "empty_logs_message": "Não há logs para exibir",
         "filter_by_text": "Filtrar por texto",

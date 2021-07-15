@@ -130,15 +130,6 @@
         "new_group_name_placeholder": "ejemplo: luces_del_dormitorio",
         "remove_group": "Eliminar grupo"
     },
-    "localeNames": {
-        "de": "Deutsche Sprache",
-        "en": "English",
-        "es": "Español",
-        "fr": "Français",
-        "pl": "Polski",
-        "ptbr": "Brazilian Portuguese",
-        "ru": "Русский"
-    },
     "logs": {
         "empty_logs_message": "No hay nada que mostrar",
         "filter_by_text": "Filtrar por texto",
