@@ -1,3 +1,12 @@
+## [0.4.42](https://github.com/nurikk/z2m-frontend/compare/0.4.40...0.4.42) (2021-07-18)
+
+
+### Bug Fixes
+
+* **groups:** fix issue when removed device still in a group ([5db985c](https://github.com/nurikk/z2m-frontend/commit/5db985c1c0a35f780ee765e710c4cbd0f479c727))
+
+
+
 ## [0.4.41](https://github.com/nurikk/z2m-frontend/compare/0.4.40...0.4.41) (2021-07-18)
 
 
