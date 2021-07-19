@@ -5,7 +5,7 @@ on:
     tags: '*'
 
 jobs:
-  build:
+  publish-npm:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -14,23 +14,12 @@ jobs:
           node-version: 16
       - run: npm ci
       - run: npm run build
-
-  publish-npm:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-        with:
-          node-version: 14
-          registry-url: https://registry.npmjs.org/
-      - run: npm ci
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
   tagged-release:
     needs: publish-npm
-    name: "Tagged Release"
+    name: "Github Release"
     runs-on: "ubuntu-latest"
     steps:
       - uses: "marvinpinto/action-automatic-releases@latest"
@@ -40,7 +29,7 @@ jobs:
           
   z2m-pr:
       needs: publish-npm
-      name: "Raise Zigbee2MQTT pr"
+      name: "Zigbee2MQTT pull request"
       runs-on: "ubuntu-latest"
       steps:
         - name: Get frontend version
