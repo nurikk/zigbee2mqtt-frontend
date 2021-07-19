@@ -2,7 +2,7 @@ name: "Tagged release"
 
 on:
   push:
-    tags: '*"
+    tags: '*'
 
 jobs:
   tagged-release:
