@@ -5,7 +5,7 @@ on:
     tags: '*'
 
 jobs:
-  publish-npm:
+  release:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -18,27 +18,15 @@ jobs:
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
-  tagged-release:
-    needs: publish-npm
-    name: "Github Release"
-    runs-on: "ubuntu-latest"
-    steps:
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           prerelease: false
-          
-  z2m-pr:
-      needs: publish-npm
-      name: "Zigbee2MQTT pull request"
-      runs-on: "ubuntu-latest"
-      steps:
-        - name: Get frontend version
-          id: frontend-version
-          run: |
-            version=$(node -p "require('./package.json').version")
-            echo "::set-output name=version::$version"
-        - run: |
+      - id: frontend-version
+        run: |
+          version=$(node -p "require('./package.json').version")
+          echo "::set-output name=version::$version"
+      - run: |
             curl -XPOST -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github.everest-preview+json" -H "Content-Type: application/json" https://api.github.com/repos/koenkk/zigbee2mqtt/dispatches --data '{"event_type": "update_frontend", "client_payload": { "version": "${{ steps.frontend-version.outputs.version }}"}}'
 
 
