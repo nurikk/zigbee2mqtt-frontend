@@ -1,7 +1,8 @@
 name: "tagged-release"
 
 on:
-  push: [tags]
+  push:
+    tags: '*"
 
 jobs:
   tagged-release:
