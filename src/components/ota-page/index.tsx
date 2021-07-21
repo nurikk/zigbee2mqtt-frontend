@@ -52,9 +52,9 @@ const OtaRow: FunctionComponent<OtaRowProps & OtaApi> = (props) => {
         </td>
     </tr>
 }
+type PropsFromStore = Pick<GlobalState, 'devices' | 'deviceStates'>;
 
-
-class OtaPage extends Component<GlobalState & OtaApi & WithTranslation<"ota">, unknown> {
+class OtaPage extends Component<PropsFromStore & OtaApi & WithTranslation<"ota">, unknown> {
     getAllOtaDevices() {
         const { devices } = this.props;
         return Object.values(devices).filter(device => device?.definition?.supports_ota)
@@ -96,4 +96,4 @@ class OtaPage extends Component<GlobalState & OtaApi & WithTranslation<"ota">, u
 
 const mappedProps = ["devices", "deviceStates"];
 
-export default withTranslation(["ota", "zigbee", "common"])(connect<unknown, unknown, GlobalState, unknown>(mappedProps, actions)(OtaPage));
+export default withTranslation(["ota", "zigbee", "common"])(connect<unknown, unknown, PropsFromStore, unknown>(mappedProps, actions)(OtaPage));

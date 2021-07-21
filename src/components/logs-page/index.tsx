@@ -50,8 +50,8 @@ export function LogRow(props: LogRowProps): JSX.Element {
 
 const logLevels = [ALL, 'debug', 'info', 'warn', 'error'];
 
-
-export class LogsPage extends Component<GlobalState & BridgeApi & UtilsApi & WithTranslation<"logs">, LogsPageState> {
+type PropsFromStore = Pick<GlobalState, 'bridgeInfo' | 'logs'>;
+export class LogsPage extends Component<PropsFromStore & BridgeApi & UtilsApi & WithTranslation<"logs">, LogsPageState> {
     state = { search: '', logLevel: ALL }
     renderSearch(): JSX.Element {
 

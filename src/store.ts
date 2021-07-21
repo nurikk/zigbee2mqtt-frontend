@@ -31,8 +31,13 @@ export type Extension = {
     code: string;
 };
 
-export interface GlobalState {
-    devices: Record<IEEEEAddress, Device>;
+export type Devices = Record<IEEEEAddress, Device>;
+
+export type WithDevices = {
+    devices: Devices;
+}
+
+export interface GlobalState  extends WithDevices {    
     deviceStates: Record<FriendlyName, DeviceState>;
     touchlinkDevices: TouchLinkDevice[];
     touchlinkScanInProgress: boolean;

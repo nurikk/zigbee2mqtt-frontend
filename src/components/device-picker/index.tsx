@@ -1,13 +1,12 @@
 import React, { ChangeEvent, SelectHTMLAttributes } from "react";
 import { Device, ObjectType } from "../../types";
 import { getDeviceDisplayName } from "../../utils";
-import { Group } from "../../store";
+import { Group, WithDevices } from "../../store";
 import { useTranslation } from "react-i18next";
 
-interface DevicePickerProps extends Omit<SelectHTMLAttributes<HTMLSelectElement>, 'onChange'> {
+interface DevicePickerProps extends Omit<SelectHTMLAttributes<HTMLSelectElement>, 'onChange'>, WithDevices {
     value: string | number;
     label?: string;
-    devices: Record<string, Device>;
     groups?: Group[];
     onChange(device: Device | Group, type: ObjectType): void;
 }

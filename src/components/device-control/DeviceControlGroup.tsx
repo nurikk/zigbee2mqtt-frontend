@@ -15,7 +15,9 @@ interface DeviceControlGroupProps {
     device: Device;
     state?: DeviceState;
 }
-function DeviceControlGroup(props: DeviceControlGroupProps & DeviceApi & GlobalState) {
+type PropsFromStore = Pick<GlobalState, 'bridgeInfo'>;
+
+function DeviceControlGroup(props: DeviceControlGroupProps & DeviceApi & PropsFromStore) {
     const { device, bridgeInfo, configureDevice, renameDevice, removeDevice } = props;
     const { t } = useTranslation(["zigbee", "common"]);
     return (
@@ -37,6 +39,6 @@ function DeviceControlGroup(props: DeviceControlGroupProps & DeviceApi & GlobalS
 }
 
 const mappedProps = ["bridgeInfo"];
-const ConnectedDeviceControlGroup = connect<DeviceControlGroupProps, unknown, GlobalState, DeviceApi>(mappedProps, actions)(DeviceControlGroup);
+const ConnectedDeviceControlGroup = connect<DeviceControlGroupProps, unknown, PropsFromStore, DeviceApi>(mappedProps, actions)(DeviceControlGroup);
 export default ConnectedDeviceControlGroup;
 

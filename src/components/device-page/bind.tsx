@@ -7,10 +7,7 @@ import { connect } from "unistore/react";
 import { GlobalState, Group } from "../../store";
 
 
-interface PropsFromStore {
-    devices: Record<string, Device>;
-    groups: Group[];
-}
+type PropsFromStore = Pick<GlobalState, 'devices' | 'groups'>;
 interface BindProps {
     device: Device;
 }

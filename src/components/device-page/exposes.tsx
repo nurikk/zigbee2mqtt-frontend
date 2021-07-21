@@ -13,8 +13,9 @@ type ExposesProps = {
     device: Device;
 }
 
+type PropsFromStore = Pick<GlobalState, 'deviceStates'>;
 
-function Exposes(props: ExposesProps & Pick<GlobalState, 'deviceStates'> & StateApi) {
+function Exposes(props: ExposesProps & PropsFromStore & StateApi) {
     const { device, deviceStates, setDeviceState, getDeviceState } = props;
     const { t } = useTranslation();
     const deviceState = deviceStates[device.friendly_name] ?? {} as DeviceState;
