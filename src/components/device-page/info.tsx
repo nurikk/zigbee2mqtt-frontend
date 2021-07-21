@@ -19,7 +19,7 @@ import { DisplayValue } from "../display-value/DisplayValue";
 type DeviceInfoProps = {
     device: Device;
 }
-type PropsFromStore = Pick<GlobalState, 'deviceStates'>;
+type PropsFromStore = Pick<GlobalState, 'deviceStates' | 'bridgeInfo'>;
 
 // [Flower sensor](http://modkam.ru/?p=1700)
 const markdownLinkRegex = /\[(.*?)\]\((.*?)\)/;
@@ -107,7 +107,7 @@ const displayProps = [
     }
 ];
 // eslint-disable-next-line react/prefer-stateless-function
-export class DeviceInfo extends Component<DeviceInfoProps & PropsFromStore & Pick<GlobalState, 'bridgeInfo'> & WithTranslation<"zigbee">, unknown> {
+export class DeviceInfo extends Component<DeviceInfoProps & PropsFromStore & WithTranslation<"zigbee">, unknown> {
     render(): JSX.Element{
         const { device, deviceStates, bridgeInfo, t } = this.props;
 

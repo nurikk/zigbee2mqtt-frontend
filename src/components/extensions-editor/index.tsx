@@ -16,7 +16,8 @@ import CreateNewExtension from "./CreateNewExtension";
 type ExtensionsEditorPageState = {
     currentExtension?: string;
 }
-export class ExtensionsEditorPage extends Component<GlobalState & ExtensionApi & WithTranslation<"extensions">, ExtensionsEditorPageState> {
+type PropsFromStore = Pick<GlobalState, 'extensions' | 'theme'>;
+export class ExtensionsEditorPage extends Component<PropsFromStore & ExtensionApi & WithTranslation<"extensions">, ExtensionsEditorPageState> {
     state: Readonly<ExtensionsEditorPageState> = {};
     loadExtension = (e: ChangeEvent<HTMLSelectElement>): void => {
         const { value } = e.target;

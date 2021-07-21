@@ -7,10 +7,7 @@ import { GlobalState, Group } from "../../store";
 import ReportingRow from "./reporting-row";
 
 
-interface PropsFromStore {
-    devices: Record<string, Device>;
-    groups: Group[];
-}
+type PropsFromStore = Pick<GlobalState, 'groups' | 'devices'>;
 interface ReportingProps {
     device: Device;
 }

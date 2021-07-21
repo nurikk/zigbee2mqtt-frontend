@@ -123,8 +123,8 @@ const processHighlights = ({ networkGraph, links, selectedNode, node, link, link
         linkLabel.style("opacity", 1);
     }
 }
-
-export class MapComponent extends Component<GlobalState & MapApi & WithTranslation<"map">, MapState> {
+type PropsFromStore = Pick<GlobalState, 'networkGraph' | 'networkGraphIsLoading'>;
+export class MapComponent extends Component<PropsFromStore & MapApi & WithTranslation<"map">, MapState> {
     ref = createRef<HTMLDivElement>();
     svgRef = createRef<SVGSVGElement>();
     simulation = forceSimulation<NodeI, LinkI>();

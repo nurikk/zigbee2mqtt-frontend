@@ -4,7 +4,7 @@ import DevicePicker from "../device-picker";
 import EndpointPicker from "../endpoint-picker";
 import ClusterPicker, { PickerType } from "../cluster-picker";
 import Button from "../button";
-import { Group } from "../../store";
+import { Group, WithDevices, Devices } from "../../store";
 import { NiceBindingRule } from "./bind";
 import { getEndpoints } from "../../utils";
 import { BindParams } from "../../actions/BindApi";
@@ -13,10 +13,9 @@ import { WithTranslation, withTranslation } from "react-i18next";
 
 
 
-interface BindRowProps extends WithTranslation {
+interface BindRowProps extends WithTranslation, WithDevices {
     rule: NiceBindingRule;
     idx: number;
-    devices: Record<string, Device>;
     groups: Group[];
     device: Device;
     onBind(params: BindParams): void;
@@ -27,7 +26,7 @@ interface BindRowProps extends WithTranslation {
 interface BindRowState {
     stateRule: NiceBindingRule;
 }
-const getTarget = (rule: NiceBindingRule, devices: Record<string, Device>, groups: Group[]): Device | Group => {
+const getTarget = (rule: NiceBindingRule, devices: Devices, groups: Group[]): Device | Group => {
     if (rule.target.type === "group") {
         return groups.find(g => g.id === rule.target.id) as Group;
     }

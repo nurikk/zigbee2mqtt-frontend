@@ -14,7 +14,8 @@ interface GroupsPageState {
     newGroupName: string;
     newGroupId?: number;
 }
-export class GroupsPage extends Component<GroupsApi & GlobalState & WithTranslation<"groups">, GroupsPageState> {
+type PropsFromStore = Pick<GlobalState, 'groups' | 'devices'>;
+export class GroupsPage extends Component<PropsFromStore & GroupsApi & WithTranslation<"groups">, GroupsPageState> {
     state: GroupsPageState = {
         newGroupName: '',
         newGroupId: undefined
@@ -100,5 +101,5 @@ export class GroupsPage extends Component<GroupsApi & GlobalState & WithTranslat
 }
 
 const mappedProps = ["groups", "devices"];
-const ConnectedGroupsPage = withTranslation("groups")(connect<unknown, unknown, GlobalState, GroupsApi>(mappedProps, actions)(GroupsPage));
+const ConnectedGroupsPage = withTranslation("groups")(connect<unknown, unknown, PropsFromStore, GroupsApi>(mappedProps, actions)(GroupsPage));
 export default ConnectedGroupsPage;

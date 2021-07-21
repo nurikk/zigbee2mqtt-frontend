@@ -5,7 +5,8 @@ import useModal from "../../hooks/useModal";
 import { GlobalState } from "../../store";
 import Modal, { ModalHeader, ModalBody, ModalFooter } from "../modal/Modal";
 
-const StateNotifier = (props: GlobalState) => {
+type PropsFromStore = Pick<GlobalState, 'bridgeState'>;
+const StateNotifier = (props: PropsFromStore) => {
     const { bridgeState } = props;
     const { isOpen, toggle } = useModal(bridgeState !== "online");
 
@@ -24,6 +25,6 @@ const StateNotifier = (props: GlobalState) => {
     );
 }
 const mappedProps = ["bridgeState"];
-const ConnectedStateNotifier = connect<{}, {}, GlobalState, {}>(mappedProps, actions)(StateNotifier);
+const ConnectedStateNotifier = connect<{}, {}, PropsFromStore, {}>(mappedProps, actions)(StateNotifier);
 export default ConnectedStateNotifier;
 

@@ -60,7 +60,9 @@ type UrlParams = {
     dev: string;
     tab?: TabName;
 };
-type DevicePageProps = RouteComponentProps<UrlParams> & GlobalState & DeviceApi & WithTranslation<"devicePage">;
+type PropsFromStore = Pick<GlobalState, 'bridgeInfo' | 'devices' | 'logs'>;
+
+type DevicePageProps = RouteComponentProps<UrlParams> & PropsFromStore & DeviceApi & WithTranslation<"devicePage">;
 
 function ContentRenderer(props: DevicePageProps): JSX.Element {
     const { match, devices, logs } = props;

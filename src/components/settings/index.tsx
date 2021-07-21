@@ -94,7 +94,8 @@ const rows = [
 ].sort(() => Math.random() - 0.5);
 
 const isValidKeyToRenderAsTab = (key: string, value: JSONSchema7): boolean => (validJsonSchemasAsTabs.includes(value.type as string) && !ingoredFields.includes(key)) || (value && value.oneOf ? value.oneOf.length > 0 : false);
-export class SettingsPage extends Component<SettingsPageProps & BridgeApi & GlobalState & UtilsApi & WithTranslation<"setting">, SettingsPageState> {
+type PropsFromStore = Pick<GlobalState, 'bridgeInfo' | 'missingTranslations'>;
+export class SettingsPage extends Component<PropsFromStore & SettingsPageProps & BridgeApi & UtilsApi & WithTranslation<"setting">, SettingsPageState> {
     state = {
         keyName: ROOT_KEY_NAME
     }

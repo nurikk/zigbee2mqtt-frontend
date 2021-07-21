@@ -6,7 +6,7 @@ import EndpointPicker from "../endpoint-picker";
 import DevicePicker from "../device-picker";
 import { useTranslation } from "react-i18next";
 
-import { Group } from "../../store";
+import { Group, WithDevices } from "../../store";
 
 
 type AddDeviceToGroupState = {
@@ -15,10 +15,9 @@ type AddDeviceToGroupState = {
 }
 
 type AddDeviceToGroupProps = {
-    devices: Record<string, Device>;
     group: Group;
     addDeviceToGroup(deviceName: string, groupName: string): void;
-}
+} & WithDevices;
 
 export function AddDeviceToGroup(props: AddDeviceToGroupProps): JSX.Element {
     const [state, setState] = useState<AddDeviceToGroupState>({});
