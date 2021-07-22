@@ -223,6 +223,7 @@ export interface Device {
     friendly_name: FriendlyName;
     power_source: PowerSource;
     model_id: string;
+    manufacturer: string;
     interviewing: boolean;
     interview_completed: boolean;
     software_build_id: number;

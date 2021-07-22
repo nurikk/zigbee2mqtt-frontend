@@ -6,7 +6,11 @@ import cx from 'classnames';
 import { Link } from "react-router-dom";
 import DeviceImage from "../device-image";
 import { GroupAddress, WithDevices } from "../../store";
+<<<<<<< HEAD
 
+=======
+import { useTranslation } from "react-i18next";
+>>>>>>> origin/master
 
 
 type DeviceGroupRowProps = {
@@ -17,9 +21,9 @@ type DeviceGroupRowProps = {
 
 
 export function DeviceGroupRow(props: DeviceGroupRowProps): JSX.Element {
-
+    const { t } = useTranslation('devicePage');
     const { rowNumber, removeDeviceFromGroup, groupAddress, devices } = props;
-    const device = devices[groupAddress.ieee_address];
+    const device = devices[groupAddress.ieee_address] ?? { ieee_address: groupAddress.ieee_address, friendly_name: t('unknown_device') };
 
     return <tr>
         <th scope="row">{rowNumber + 1}</th>

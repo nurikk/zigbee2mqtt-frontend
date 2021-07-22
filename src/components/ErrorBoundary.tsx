@@ -49,7 +49,7 @@ export default class ErrorBoundary extends React.Component<ErrorBoundaryProps, E
                     <li className="fs-1 lh-lg">Calm down</li>
                     <li className="fs-1 lh-lg"><a className="link-primary animation-blinking" href="#" onClick={this.donwloadState}>Click here, and save this file</a></li>
 
-                    <li className="fs-1 lh-lg"><a target="_blank" rel="noopener noreferrer" href={githubUrl}>Raise a github issue</a>, attach <b>previously</b> donwloaded file</li>
+                    <li className="fs-1 lh-lg"><a target="_blank" rel="noopener noreferrer" href={githubUrl}>Raise a github issue</a>, attach <b>previously</b> downloaded file</li>
                     <li className="fs-1 lh-lg">Take a screenshot of this page and attach to the issue</li>
                     <li className="fs-1 lh-lg">In the github issue write detailed description for the issue, how this happened? Steps to reproduce</li>
                 </ol>
