@@ -145,7 +145,7 @@ export class SettingsPage extends Component<PropsFromStore & SettingsPageProps &
         const { missingTranslations, i18n } = this.props;
         const currentLanguage = i18n.language.split('-')[0];
 
-        const url = `https://github.com/nurikk/z2m-frontend/edit/master/src/i18n/locales/${currentLanguage}.json`;
+        const url = `https://github.com/nurikk/z2m-frontend/edit/dev/src/i18n/locales/${currentLanguage}.json`;
         return <div className="p-3">
             <p>This page contains missing translation keys.</p>
             <p>You can navigate to different pages to collect missing tranlations and come back here again (don't referesh browser page).</p>

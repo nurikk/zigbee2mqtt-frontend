@@ -6,11 +6,7 @@ import cx from 'classnames';
 import { Link } from "react-router-dom";
 import DeviceImage from "../device-image";
 import { GroupAddress, WithDevices } from "../../store";
-<<<<<<< HEAD
-
-=======
 import { useTranslation } from "react-i18next";
->>>>>>> origin/master
 
 
 type DeviceGroupRowProps = {
