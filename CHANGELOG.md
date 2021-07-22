@@ -1,3 +1,69 @@
+## [0.5.14](https://github.com/nurikk/z2m-frontend/compare/0.5.13...0.5.14) (2021-07-22)
+
+
+### Bug Fixes
+
+* **branching:** fix merge conflicts ([fe6223e](https://github.com/nurikk/z2m-frontend/commit/fe6223e65d2bb227c1701b23d13391610893b071))
+
+
+
+## [0.4.43](https://github.com/nurikk/z2m-frontend/compare/0.4.42...0.4.43) (2021-07-18)
+
+
+
+## [0.4.42](https://github.com/nurikk/z2m-frontend/compare/0.4.40...0.4.42) (2021-07-18)
+
+
+### Bug Fixes
+
+* **groups:** fix issue when removed device still in a group ([5db985c](https://github.com/nurikk/z2m-frontend/commit/5db985c1c0a35f780ee765e710c4cbd0f479c727))
+
+
+
+## [0.4.40](https://github.com/nurikk/z2m-frontend/compare/0.4.39...0.4.40) (2021-07-15)
+
+
+### Bug Fixes
+
+* **i18n:** update translations ([da62eeb](https://github.com/nurikk/z2m-frontend/commit/da62eeb981f4070d403f9b74e071c0e60ec59717))
+
+
+### Features
+
+* **i18n:** add translation helper page ([3e24d86](https://github.com/nurikk/z2m-frontend/commit/3e24d86775754b644fbe159a26f496f6a18c58b1))
+
+
+
+## [0.4.39](https://github.com/nurikk/z2m-frontend/compare/0.4.38...0.4.39) (2021-07-14)
+
+
+
+## [0.4.38](https://github.com/nurikk/z2m-frontend/compare/0.4.37...0.4.38) (2021-07-13)
+
+
+### Features
+
+* **device-info:** add zigbee_manufacturer ([badcdd5](https://github.com/nurikk/z2m-frontend/commit/badcdd56a8ce9d794aeb441e6670c6c2050fd110))
+
+
+
+## [0.4.37](https://github.com/nurikk/z2m-frontend/compare/0.4.36...0.4.37) (2021-07-13)
+
+
+### Features
+
+* **i18n:** Ukrainian locale ([9dbb59f](https://github.com/nurikk/z2m-frontend/commit/9dbb59f1794d23bd9906bd79ea495caaf5a5a6e6))
+
+
+
+## [0.4.36](https://github.com/nurikk/z2m-frontend/compare/0.4.35...0.4.36) (2021-07-12)
+
+
+
+## [0.4.35](https://github.com/nurikk/z2m-frontend/compare/0.4.34...0.4.35) (2021-07-12)
+
+
+
 ## [0.5.13](https://github.com/nurikk/z2m-frontend/compare/0.5.12...0.5.13) (2021-07-22)
 
 
