@@ -56,10 +56,9 @@ const urls = [
         key: 'extensions'
     }
 ];
-type StartStopJoinButtonProps = {
-    devices: Record<string, Device>;
-}
-const StartStopJoinButton: FunctionComponent<StartStopJoinButtonProps & Pick<BridgeApi, 'setPermitJoin'> & Pick<GlobalState, 'bridgeInfo'>> = ({ devices, setPermitJoin, bridgeInfo }) => {
+type StartStopJoinButtonProps = Pick<BridgeApi, 'setPermitJoin'> & Pick<GlobalState, 'bridgeInfo' | 'devices'>;
+
+const StartStopJoinButton: FunctionComponent<StartStopJoinButtonProps> = ({ devices, setPermitJoin, bridgeInfo }) => {
 
     const { t } = useTranslation(['navbar']);
     const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(false);
@@ -77,7 +76,7 @@ const StartStopJoinButton: FunctionComponent<StartStopJoinButtonProps & Pick<Bri
     const onBtnClick = () => {
         setPermitJoin(!permitJoin, selectedRouter);
     }
-    const permitJoinTimer = <>{permitJoinTimeout ? <div className="d-inline-block ms-1" style={{width: '30px', maxWidth: '30px'}}> {permitJoinTimeout}</div> : null}</>;
+    const permitJoinTimer = <>{permitJoinTimeout ? <div className="d-inline-block ms-1" style={{ width: '30px', maxWidth: '30px' }}> {permitJoinTimeout}</div> : null}</>;
     const buttonLabel = <>{permitJoin ? t("disable_join") : t("permit_join")} ({selectedRouter?.friendly_name ?? t("all")}){permitJoinTimer}</>;
     return (
         <div className="btn-group text-nowrap me-1">
@@ -101,15 +100,9 @@ const StartStopJoinButton: FunctionComponent<StartStopJoinButtonProps & Pick<Bri
     );
 }
 
-type PropsFromStore = {
-    devices: Record<string, Device>;
-    bridgeInfo: Record<string, unknown>;
-}
+type PropsFromStore = Pick<GlobalState, 'devices' | 'bridgeInfo'>;
 
-
-type NavBarProps = PropsFromStore & BridgeApi & Pick<GlobalState, 'bridgeInfo'> & ThemeActions & WithTranslation<'navbar'>;
-
-const NavBar: FunctionComponent<NavBarProps & PropsFromStore & BridgeApi & Pick<GlobalState, 'bridgeInfo'> & ThemeActions> = (props) => {
+const NavBar: FunctionComponent<PropsFromStore & ThemeActions & WithTranslation<'navbar'> & BridgeApi> = (props) => {
     const { devices, setPermitJoin, bridgeInfo, restartBridge, setTheme, t, i18n } = props;
     const ref = useRef<HTMLDivElement>();
     const [navbarIsVisible, setnavbarIsVisible] = useState<boolean>(false);

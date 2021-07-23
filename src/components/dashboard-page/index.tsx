@@ -16,7 +16,7 @@ import { isLightFeature } from '../device-page/type-guards';
 import groupBy from "lodash/groupBy";
 
 
-type Props = Pick<GlobalState, 'devices' | 'deviceStates' | 'bridgeInfo'> & StateApi;
+type PropsFromStore = Pick<GlobalState, 'devices' | 'deviceStates' | 'bridgeInfo'>;
 
 const genericRendererIgnoredNames = ['linkquality', 'battery', 'battery_low', 'illuminance_lux', 'color_temp_startup', 'voltage', 'strength', 'color_options'];
 const whitelistFeatureNames = ['state', 'brightness', 'color_temp', 'mode', 'sound', 'occupancy', 'tamper', 'alarm'];
@@ -57,7 +57,7 @@ export const onlyValidFeaturesForDashboard = (feature: GenericExposedFeature | C
     return false;
 }
 
-const Dashboard: React.FC<Props> = (props) => {
+const Dashboard: React.FC<PropsFromStore & StateApi> = (props) => {
     const { setDeviceState, getDeviceState, deviceStates, bridgeInfo } = props;
     const lastSeenType = getLastSeenType(bridgeInfo.config.advanced);
     return (

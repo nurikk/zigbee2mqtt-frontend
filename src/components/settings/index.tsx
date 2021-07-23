@@ -15,7 +15,7 @@ import { WithTranslation, withTranslation } from "react-i18next";
 import customFields from "./../../i18n/rjsf-translation-fields";
 
 
-type SettingsTab = "settings" | "bridge" | "about" | "tools" | "donate";
+type SettingsTab = "settings" | "bridge" | "about" | "tools" | "donate" | "translate";
 
 type SettigsKeys = string;
 type UrlParams = {
@@ -68,6 +68,10 @@ const tabs = [
         url: `/settings/bridge`
     },
     {
+        translationKey: 'translate',
+        url: '/settings/translate'
+    },
+    {
         translationKey: 'donate',
         url: '/settings/donate'
     }
@@ -90,7 +94,8 @@ const rows = [
 ].sort(() => Math.random() - 0.5);
 
 const isValidKeyToRenderAsTab = (key: string, value: JSONSchema7): boolean => (validJsonSchemasAsTabs.includes(value.type as string) && !ingoredFields.includes(key)) || (value && value.oneOf ? value.oneOf.length > 0 : false);
-export class SettingsPage extends Component<SettingsPageProps & BridgeApi & GlobalState & UtilsApi & WithTranslation<"setting">, SettingsPageState> {
+type PropsFromStore = Pick<GlobalState, 'bridgeInfo' | 'missingTranslations'>;
+export class SettingsPage extends Component<PropsFromStore & SettingsPageProps & BridgeApi & UtilsApi & WithTranslation<"setting">, SettingsPageState> {
     state = {
         keyName: ROOT_KEY_NAME
     }
@@ -130,9 +135,24 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
                 return this.renderSettings();
             case "donate":
                 return this.renderDonate();
+            case "translate":
+                return this.renderTranslate();
             default:
                 return <Redirect to={`/settings/settings`} />;
         }
+    }
+    renderTranslate(): JSX.Element {
+        const { missingTranslations, i18n } = this.props;
+        const currentLanguage = i18n.language.split('-')[0];
+
+        const url = `https://github.com/nurikk/z2m-frontend/edit/master/src/i18n/locales/${currentLanguage}.json`;
+        return <div className="p-3">
+            <p>This page contains missing translation keys.</p>
+            <p>You can navigate to different pages to collect missing tranlations and come back here again (don't referesh browser page).</p>
+            <p>Usually there is a lot of missing keys in settings and device pages</p>
+            <p>Then you can navigate to <a target="_blank" rel="noopener noreferrer" href={url}>Github</a> and raise a PR with translated missing keys</p>
+            <pre>{JSON.stringify(missingTranslations, null, 4)}</pre>
+        </div>
     }
     renderAbout(): JSX.Element {
         const { bridgeInfo, t } = this.props;
@@ -191,7 +211,7 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
             }));
         tabs.unshift({
             name: ROOT_KEY_NAME,
-            title: t('main', {defaultValue: "Main"})
+            title: t('main', { defaultValue: "Main" })
         });
         return tabs;
     }
@@ -254,12 +274,12 @@ export class SettingsPage extends Component<SettingsPageProps & BridgeApi & Glob
         const { t } = this.props;
         const donateText = t("donation_text", { returnObjects: true }) as string[];
         return <div className="container-fluid">
-            {donateText.map(row => <p key={row }>{row }</p>)}
+            {donateText.map(row => <p key={row}>{row}</p>)}
             {rows}
         </div>;
     }
 }
 const SettingsPageWithRouter = withRouter(SettingsPage);
-const mappedProps = ["bridgeInfo"];
+const mappedProps = ["bridgeInfo", "missingTranslations"];
 const ConnectedSettingsPage = withTranslation(["settings", "common"])(connect<Record<string, unknown>, Record<string, unknown>, GlobalState, BridgeApi>(mappedProps, actions)(SettingsPageWithRouter));
 export default ConnectedSettingsPage;

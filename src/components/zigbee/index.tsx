@@ -43,7 +43,8 @@ interface ZigbeeTableData {
 const storeKey = "ZigbeeTableState";
 const longLoadingTimeout = 15 * 1000;
 export type LastSeenType = "elapsed" | "disable" | "ISO_8601" | "ISO_8601_local" | "epoch";
-type ZigbeeTableProps = GlobalState & WithTranslation<"zigbee">
+type PropsFromStore = Pick<GlobalState, 'devices' | 'deviceStates' | 'bridgeInfo'>;
+type ZigbeeTableProps = PropsFromStore & WithTranslation<"zigbee">
 export class ZigbeeTable extends Component<ZigbeeTableProps, ZigbeeTableState> {
     constructor(props: Readonly<ZigbeeTableProps>) {
         super(props);
@@ -208,5 +209,5 @@ export class ZigbeeTable extends Component<ZigbeeTableProps, ZigbeeTableState> {
 }
 
 const mappedProps = ["devices", "deviceStates", "bridgeInfo"];
-const ConnectedZigbeePage = withTranslation(["zigbee", "common"])(connect<unknown, ZigbeeTableState, GlobalState, unknown>(mappedProps, actions)(ZigbeeTable));
+const ConnectedZigbeePage = withTranslation(["zigbee", "common"])(connect<unknown, ZigbeeTableState, PropsFromStore, unknown>(mappedProps, actions)(ZigbeeTable));
 export default ConnectedZigbeePage;

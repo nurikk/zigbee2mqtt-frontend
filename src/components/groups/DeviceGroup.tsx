@@ -1,16 +1,15 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Group } from "../../store";
+import { Group, WithDevices } from "../../store";
 import { Device } from "../../types";
 import { DeviceGroupRow } from "./DeviceGroupRow";
 
 
 
-export interface DeviceGroupProps {
+export interface DeviceGroupProps extends WithDevices {
     group: Group;
-    devices: Record<string, Device>;
     removeDeviceFromGroup(groupFriendlyName: string, deviceFriendlyName: string): void;
-}
+} 
 
 
 

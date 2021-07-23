@@ -25,5 +25,6 @@
   },
   "logs": [],
   "extensions": [],
-  "theme": "light"
+  "theme": "light",
+  "missingTranslations": {}
 }

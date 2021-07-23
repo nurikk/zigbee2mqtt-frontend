@@ -5,22 +5,21 @@ import style from './style.css';
 import cx from 'classnames';
 import { Link } from "react-router-dom";
 import DeviceImage from "../device-image";
-import { GroupAddress } from "../../store";
-import { Device } from "../../types";
+import { GroupAddress, WithDevices } from "../../store";
+import { useTranslation } from "react-i18next";
 
 
 type DeviceGroupRowProps = {
     rowNumber: number;
     groupAddress: GroupAddress;
-    devices: Record<string, Device>;
     removeDeviceFromGroup(deviceFriendlyName: string): void;
-}
+} & WithDevices;
 
 
 export function DeviceGroupRow(props: DeviceGroupRowProps): JSX.Element {
-
+    const { t } = useTranslation('devicePage');
     const { rowNumber, removeDeviceFromGroup, groupAddress, devices } = props;
-    const device = devices[groupAddress.ieee_address];
+    const device = devices[groupAddress.ieee_address] ?? { ieee_address: groupAddress.ieee_address, friendly_name: t('unknown_device') };
 
     return <tr>
         <th scope="row">{rowNumber + 1}</th>
