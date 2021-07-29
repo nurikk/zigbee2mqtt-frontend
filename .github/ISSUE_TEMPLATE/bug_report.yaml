@@ -31,6 +31,7 @@ body:
       label: Relevant stacktrace
       render: shell
   - type: dropdown
+    label: initialState.zip
     id: initial_state
     validations:
       required: true
