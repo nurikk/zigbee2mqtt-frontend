@@ -30,9 +30,12 @@ body:
     attributes:
       label: Relevant stacktrace
       render: shell
-  - type: checkboxes
-    id: cat-preferences
+  - type: dropdown
+    id: initial_state
+    validations:
+      required: true
     attributes:
+      multiple: false
       options:
-        - label: I remember about initialState.zip file
-          required: true
+        - I will attach initialState.zip
+        - I will not attach initialState.zip
