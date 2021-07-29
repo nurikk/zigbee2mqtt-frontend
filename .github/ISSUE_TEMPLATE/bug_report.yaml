@@ -27,8 +27,8 @@ body:
         - Chrome
         - Safari
         - Microsoft Edge
-     - type: textarea
-  - id: stacktracke
+  - type: textarea
+    id: stacktracke
     attributes:
       label: Relevant stacktrace
       render: shell
