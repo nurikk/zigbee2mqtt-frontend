@@ -27,3 +27,17 @@ body:
         - Chrome
         - Safari
         - Microsoft Edge
+     - type: textarea
+  - id: stacktracke
+    attributes:
+      label: Relevant stacktrace
+      render: shell
+  - type: checkboxes
+    id: cat-preferences
+    attributes:
+      label: I remember about `initialState.zip` file
+
+      options:
+        - label: Orange cat (required. Everyone likes orange cats.)
+          required: true
+        - label: **Black cat**
