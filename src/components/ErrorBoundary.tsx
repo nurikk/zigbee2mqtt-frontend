@@ -25,11 +25,8 @@ export default class ErrorBoundary extends React.Component<ErrorBoundaryProps, E
 
         if (error) {
             const githubUrlParams = {
-                title: `Got error: ${error.message}`,
-                body: [
-                    `DESCRIBE HERE WHAT HAPPENED AND WHAT YOU EXPECTED TO HAPPEN`,
-                    "\n\n\n\n\n",
-
+                template: 'bug_report.yaml',
+                stacktracke: [
                     `**Current url**: ${window.location.toString()}`,
                     `**Previous url**: ${document.referrer}`,
                     "\n",
