@@ -33,7 +33,6 @@ body:
   - type: checkboxes
     id: cat-preferences
     attributes:
-      label: I remember about `initialState.zip` file
       options:
-        - label: I remember about `initialState.zip` file
+        - label: I remember about initialState.zip file
           required: true
