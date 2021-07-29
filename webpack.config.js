@@ -60,6 +60,7 @@ const config = {
     target: "web",
     devtool: "source-map",
     optimization: {
+        minimize: false,
         usedExports: true,
         runtimeChunk: "single",
         splitChunks: {
@@ -90,7 +91,7 @@ const config = {
                 test: /\.tsx?$/,
                 use: [{
                     loader: "ts-loader",
-                }, ],
+                }],
             },
             {
                 test: /\.css$/i,
