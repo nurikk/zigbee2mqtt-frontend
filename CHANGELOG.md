@@ -1,3 +1,13 @@
+## [0.5.15](https://github.com/nurikk/z2m-frontend/compare/0.5.14...0.5.15) (2021-07-29)
+
+
+### Features
+
+* **debug:** disable minimisation for debugging ([2787323](https://github.com/nurikk/z2m-frontend/commit/2787323b21555de1bbfb63618201c023eef919e0))
+* **errors:** update issue creation link ([74dd2b3](https://github.com/nurikk/z2m-frontend/commit/74dd2b3ceed831c37fd561833a9a2b7c66a1db67))
+
+
+
 ## [0.5.14](https://github.com/nurikk/z2m-frontend/compare/0.5.13...0.5.14) (2021-07-22)
 
 
