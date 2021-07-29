@@ -155,12 +155,12 @@
         "groups": "Группы",
         "logs": "Логи",
         "map": "Карта",
-        "ota": "Обновление по воздуху (ОТА)",
+        "ota": "ОТА",
         "permit_join": "Разрешить подключения",
         "restart": "Перезапустить",
         "settings": "Настройки",
         "toggle_dropdown": "Toggle dropdown",
-        "touchlink": "Быстрое подключение (Touchlink)"
+        "touchlink": "Touchlink"
     },
     "ota": {
         "check": "Проверить на наличие новых обновлений",
