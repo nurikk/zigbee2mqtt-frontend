@@ -36,8 +36,6 @@ body:
     id: cat-preferences
     attributes:
       label: I remember about `initialState.zip` file
-
       options:
-        - label: Orange cat (required. Everyone likes orange cats.)
+        - label: I remember about `initialState.zip` file
           required: true
-        - label: **Black cat**
