@@ -121,7 +121,8 @@
         "pressure": "Pressure",
         "soil_moisture": "Soil Moisture",
         "state": "State",
-        "temperature": "Temperature"
+        "temperature": "Temperature",
+        "tamper": "Tamper"
     },
     "groups": {
         "add_to_group": "Add to group",
@@ -256,7 +257,9 @@
         "open": "Open",
         "supported": "Supported",
         "true": "True",
-        "empty_string": "Empty string(\"\")"
+        "empty_string": "Empty string(\"\")",
+        "leaking": "Leaking",
+        "tampered": "Tampered"
     },
     "zigbee": {
         "actions": "Actions",

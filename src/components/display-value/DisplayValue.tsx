@@ -6,48 +6,52 @@ type DisplayValueProps = {
     name: string;
     value: unknown;
 }
+function BooleanValueView(props: DisplayValueProps): JSX.Element {
+    const { value, name } = props;
+    const { t } = useTranslation("values");
+    const booleansMap = {
+        contact: new Map<boolean, string | JSX.Element>([
+            [true, t('closed')],
+            [false, t('open')],
+        ]),
 
-const booleansMap = {
-    contact: new Map<boolean, string | JSX.Element>([
-        [true, 'closed'],
-        [false, 'open'],
-    ]),
+        occupancy: new Map([
+            [true, t('occupied')],
+            [false, t('clear')]
+        ]),
+        water_leak: new Map<boolean, string | JSX.Element>([
+            [true, <span className={cx("text-danger", "animation-blinking")} key="Leaking">{t('leaking')}</span>],
+            [false, t('clear')]
+        ]),
 
-    occupancy: new Map([
-        [true, 'occupied'],
-        [false, 'clear']
-    ]),
-    water_leak: new Map<boolean, string | JSX.Element>([
-        [true, <span className={cx("text-danger", "animation-blinking")} key="Leaking">Leaking</span>],
-        [false, 'clear']
-    ]),
+        tamper: new Map<boolean, string | JSX.Element>([
+            [true, <span className={cx("text-danger", "animation-blinking")} key="tampered">{t('tampered')}</span>],
+            [false, 'clear']
+        ]),
+        supported: new Map([
+            [true, t('supported')],
+            [false, t('not_supported')]
+        ]),
 
-    tamper: new Map<boolean, string | JSX.Element>([
-        [true, <span className={cx("text-danger", "animation-blinking")} key="tampered">Tampered</span>],
-        [false, 'clear']
-    ]),
-    supported: new Map([
-        [true, 'supported'],
-        [false, 'not_supported']
-    ]),
-
-    _default: new Map([
-        [true, 'true'],
-        [false, 'false']
-    ])
-};
+        _default: new Map([
+            [true, t('true')],
+            [false, t('false')]
+        ])
+    };
+    const mapValue = booleansMap[name] || booleansMap._default;
+    return <>{mapValue.get(value)}</>;
+}
 
 export function DisplayValue(props: DisplayValueProps): JSX.Element {
     const { t } = useTranslation("values");
-    const { value, name } = props;
+    const { value } = props;
     switch (typeof value) {
         case 'boolean':
-            const mapValue = booleansMap[name] || booleansMap._default;
-            return <>{t(mapValue.get(value))}</>;
+            return <BooleanValueView {...props}/>
         case "undefined":
             return <>N/A</>;
         case "object":
-            return <>{value === null ? 'null' : JSON.stringify(value)}</>;
+            return <>{value === null ? t('null') : JSON.stringify(value)}</>;
         case "string":
             return <>{value === "" ? <small className="text-muted">{t('empty_string')}</small> : value}</>;
         default:
