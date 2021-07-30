@@ -1,3 +1,12 @@
+## [0.5.17](https://github.com/nurikk/z2m-frontend/compare/0.5.16...0.5.17) (2021-07-30)
+
+
+### Bug Fixes
+
+* **exposes:** fix boolean values translations ([7e21370](https://github.com/nurikk/z2m-frontend/commit/7e2137004a15edba5f683a5887f6f82f8635e8e7))
+
+
+
 ## [0.5.16](https://github.com/nurikk/z2m-frontend/compare/0.5.15...0.5.16) (2021-07-29)
 
 
