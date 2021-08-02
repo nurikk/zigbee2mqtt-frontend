@@ -26,6 +26,7 @@
         "select_device": "Виберіть пристрій",
         "select_endpoint": "Виберіть кінцеву точку",
         "source_endpoint": "Початкова кінечна точка",
+        "the_only_endpoint": "Єдина кінцева точка",
         "unbind": "Відв'язати",
         "write": "Записати"
     },
@@ -66,6 +67,7 @@
         "current_heating_setpoint": "Поточне задане значення опалення",
         "eco_temperature": "Економічна температура",
         "effect": "Ефект",
+        "empty_exposes_definition": "Викриває визначення",
         "energy": "Енергія",
         "force": "Примусово",
         "humidity": "Вологість",
@@ -119,7 +121,8 @@
         "pressure": "Тиск",
         "soil_moisture": "Вологість грунту",
         "state": "Стан",
-        "temperature": "Температура"
+        "temperature": "Температура",
+        "tamper": "Злам"
     },
     "groups": {
         "add_to_group": "Додати в групу",
@@ -130,7 +133,6 @@
         "new_group_name_placeholder": "Приклад: my_bedroom_lights",
         "remove_group": "Видалити групу"
     },
-
     "logs": {
         "empty_logs_message": "Немає інформації для відображення",
         "filter_by_text": "Фільтрувати за текстом",
@@ -195,12 +197,33 @@
         "serial": "Послідовний інтерфейс",
         "settings": "Налаштування",
         "tools": "Інструменти",
-        "zigbee2mqtt_version": "Версія Zigbee2MQTT"
+        "zigbee2mqtt_version": "Версія Zigbee2MQTT",
+        "translate": "Переклад"
     },
     "settingsSchemaTranslations": {
-        "root-title": "Serial",
+        "advanced-title": "Розширений",
+        "advanced_availability_blacklist__title": "Список заборон доступності (застаріло, використовуйте список доступних_блоків)",
+        "advanced_availability_blocklist__description": "Запобігання перевірки наявності пристроїв",
+        "advanced_availability_blocklist__title": "Доступність списку заборон",
+        "advanced_availability_passlist__description": "Увімкнути перевірку доступності лише для певних пристроїв",
+        "advanced_availability_passlist__title": "Доступність списку дозволів",
+        "advanced_availability_whitelist__title": "Білий список доступності (застаріло, використовуйте список доступу)",
+        "advanced_ext_pan_id__description": "Розширений ідентифікатор панорами Zigbee, зміна вимагає нового приєднання всіх пристроїв!",
+        "advanced_ext_pan_id__title": "Ext Pan ID",
+        "advanced_log_output__description": "Вихідне місце журналу, залиште порожнім, щоб вимкнути ведення журналу",
+        "advanced_log_output__title": "Виведення журналу",
+        "advanced_log_syslog-title": "Системний журнал",
+        "blocklist__description": "Блокування пристроїв із мережі (за допомогою ieeeAddr)",
+        "blocklist__title": "Список заборон",
+        "experimental-title": "Експериментальний",
+        "external_converters__description": "Ви можете визначити зовнішні перетворювачі, наприклад додайте підтримку пристрою DiY",
+        "external_converters__title": "Зовнішні перетворювачі",
+        "frontend-title": "Інтерфейс",
+        "mqtt-title": "MQTT",
+        "ota-title": "OTA оновлення",
+        "passlist__description": "Дозволити лише певним пристроям підключатися до мережі (за допомогою ieeeAddr). Зверніть увагу, що всі пристрої, які не є у списку доступу, будуть вилучені з мережі!",
+        "passlist__title": "Список дозволів",
         "root__description": "Позволяти під'єднуватись до мережі лише визначеним пристроям (перевірка по ieeeAddr). Зверніть увагу, що всі пристрої, не включені в список, будуть видалені з мережі!",
-        "root__title": "Список дозволів",
         "root_availability_blacklist__title": "Список заборон перевірки доступності (застаріло, використовуйте availability_blocklist)",
         "root_availability_blocklist__description": "Вилучити пристрій зі списку заборон перевірки на доступність",
         "root_availability_blocklist__title": "Список заборон перевірки доступності",
@@ -213,9 +236,12 @@
         "root_ext_pan_id__title": "Розш. ідентифікатор мережі (Ext Pan ID)",
         "root_filtered_attributes__description": "Дозволяє відключити публікацію вказаних атрибутів",
         "root_filtered_attributes__title": "Фільтр атрибутів",
+        "root_filtered_optimistic__description": "Фільтрувати атрибути з оптимістичного корисного навантаження для публікації під час виклику /встановлення. (Це не впливає, якщо для параметра optimistic встановлено значення false).",
+        "root_filtered_optimistic__title": "Відфільтровані оптимістичні атрибути",
         "root_log_output__description": "Папка, в якій будуть формуватися файли журналів. Залиште поле пустим для відключення файлів журналів.",
         "root_log_output__title": "Папка для журналів",
-        "root_log_syslog-title": "syslog"
+        "root_log_syslog-title": "Системний журнал",
+        "serial-title": "Serial"
     },
     "touchlink": {
         "detected_devices_message": "Знайдено пристрій, що підтримує швидке приє'днання (touchlink): {{count}}.",
@@ -226,11 +252,17 @@
         "clear": "Вільно",
         "closed": "Закрито",
         "false": "Вимк.",
+        "not_supported": "Не підтримується",
         "occupied": "Зайнято",
         "open": "Відкрито",
-        "true": "Увім"
+        "supported": "Підтримується",
+        "true": "Увім",
+        "empty_string": "Порожній рядок(\"\")",
+        "leaking": "Витік",
+        "tampered": "Зламано"
     },
     "zigbee": {
+        "actions": "Дії",
         "attribute": "Атрибут",
         "block_join": "Блокувати подальші спроби приєднання",
         "cluster": "Кластер",
@@ -252,6 +284,7 @@
         "min_rep_interval": "Мін. інтервал звітів",
         "model": "Модель",
         "network_address": "Мережева адреса",
+        "none": "Нічого",
         "output_clusters": "Кластери виводу",
         "pic": "Мал.",
         "power": "Живлення",
@@ -263,6 +296,7 @@
         "support_status": "Статус підтримки",
         "unsupported": "Не підтримується",
         "update_Home_assistant_entity_id": "Оновити ідентифікатор об'єкту Home Assistant",
+        "zigbee_manufacturer": "Виробник Zigbee",
         "zigbee_model": "Модель Zigbee"
     }
 }
