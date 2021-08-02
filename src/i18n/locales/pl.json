@@ -37,6 +37,10 @@
         "soil_moisture": "Wilgotność Gleby",
         "state": "Stan",
         "temperature": "Temperatura"
+        "power": "Moc",
+        "current": "Natężenie",
+        "voltage": "Napięcie",
+        "energy": "Energia"
     },
     "groups": {
         "add_to_group": "Dodaj do grupy",
