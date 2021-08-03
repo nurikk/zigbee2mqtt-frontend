@@ -1,3 +1,7 @@
+## [0.5.19](https://github.com/nurikk/z2m-frontend/compare/0.5.18...0.5.19) (2021-08-03)
+
+
+
 ## [0.5.18](https://github.com/nurikk/z2m-frontend/compare/0.5.17...0.5.18) (2021-07-30)
 
 
