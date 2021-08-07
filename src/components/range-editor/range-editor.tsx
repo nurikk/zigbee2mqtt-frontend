@@ -29,6 +29,7 @@ const RangeEditor: FunctionComponent<RangeProps & Omit<InputHTMLAttributes<HTMLI
             id={id}
             min={min}
             max={max}
+            step={1}
             type="range"
             className="form-range form-control border-0"
             value={currentValue}
@@ -42,6 +43,8 @@ const RangeEditor: FunctionComponent<RangeProps & Omit<InputHTMLAttributes<HTMLI
             value={currentValue}
             onChange={e => setCurrentValue(e.target.valueAsNumber)}
             onBlur={() => onChange(currentValue)}
+            min={min}
+            max={max}
             {...rest}
             style={showRange ? { 'maxWidth': '100px' } : {}}
         />}
