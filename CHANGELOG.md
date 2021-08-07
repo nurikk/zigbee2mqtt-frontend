@@ -1,3 +1,12 @@
+## [0.5.21](https://github.com/nurikk/z2m-frontend/compare/0.5.20...0.5.21) (2021-08-07)
+
+
+### Bug Fixes
+
+* **range-editor:** add min/max/step attributes ([6805230](https://github.com/nurikk/z2m-frontend/commit/680523043985d2de398cccf01bc273ae17d90528))
+
+
+
 ## [0.5.20](https://github.com/nurikk/z2m-frontend/compare/0.5.19...0.5.20) (2021-08-07)
 
 
