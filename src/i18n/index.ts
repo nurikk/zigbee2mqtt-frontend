@@ -57,9 +57,8 @@ const blacklistedNamespaces = ['localeNames'];
 const missingKeyHandler = (lngs: string[], ns: string, key: string, fallbackValue: string) => {
 
     if (!blacklistedNamespaces.includes(ns)) {
-
         // eslint-disable-next-line @typescript-eslint/ban-types
-        set(window.missing as object, [ns, key].join('.'), fallbackValue);
+        set(window.missing as object, [ns, key], fallbackValue);
         store.setState({ missingTranslations: window.missing as Map<string, unknown> });
         //then use `copy(window.missing)` in chrome dev tools console
     }

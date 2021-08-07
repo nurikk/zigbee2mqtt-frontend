@@ -272,7 +272,7 @@ export class SettingsPage extends Component<PropsFromStore & SettingsPageProps &
 
     renderDonate(): JSX.Element {
         const { t } = this.props;
-        const donateText = t("donation_text", { returnObjects: true }) as string[];
+        const donateText = t("donation_text", { returnObjects: true, defaultValue: [] }) as string[];
         return <div className="container-fluid">
             {donateText.map(row => <p key={row}>{row}</p>)}
             {rows}
