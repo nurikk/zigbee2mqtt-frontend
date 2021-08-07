@@ -1,3 +1,12 @@
+## [0.5.20](https://github.com/nurikk/z2m-frontend/compare/0.5.19...0.5.20) (2021-08-07)
+
+
+### Bug Fixes
+
+* **i18n:** fix crash on missing translation ([ec0fd3a](https://github.com/nurikk/z2m-frontend/commit/ec0fd3a8ef3a2f4cc9757bec6bd2feac51fe7731))
+
+
+
 ## [0.5.19](https://github.com/nurikk/z2m-frontend/compare/0.5.18...0.5.19) (2021-08-03)
 
 
