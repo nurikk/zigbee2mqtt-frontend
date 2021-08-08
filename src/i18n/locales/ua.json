@@ -122,7 +122,25 @@
         "soil_moisture": "Вологість грунту",
         "state": "Стан",
         "temperature": "Температура",
-        "tamper": "Втручання"
+        "tamper": "Втручання",
+        "action_angle": "Кут дії",
+        "action_from_side": "Дія зі сторони",
+        "action_side": "Сторона дії",
+        "action_to_side": "Дія на сторону"
+    },
+    "featureDescriptions": {
+        "Remaining battery in %": "Залишок батареї у %",
+        "Measured temperature value": "Виміряне значення температури",
+        "Measured relative humidity": "Виміряне значення вологості",
+        "The measured atmospheric pressure": "Виміряний атмосферний тиск",
+        "Voltage of the battery in millivolts": "Напруга батареї в мілівольтах",
+        "Link quality (signal strength)": "Якість зв'язку (сила сигналу)",
+        "Indicates if the contact is closed (= true) or open (= false)": "Показує, що контакт замкнутий (= true) або розімкнений (= false)",
+        "Indicates if the battery of this device is almost empty": "Показує, що батарея цього пристрою майже розряджена",
+        "Indicates whether the device is tampered": "Показує, чи пристрій взламано",
+        "Side of the cube": "Сторона куба",
+        "Indicates whether the device detected occupancy": "Показує, чи пристрій виявив присутність",
+        "Measured illuminance in lux": "Виміряна освітленість в люксах"
     },
     "groups": {
         "add_to_group": "Додати в групу",
