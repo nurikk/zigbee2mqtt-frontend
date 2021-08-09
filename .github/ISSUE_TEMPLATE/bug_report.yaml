@@ -40,5 +40,5 @@ body:
       label: initialState.zip
       multiple: false
       options:
-        - I will attach initialState.zip
-        - I will not attach initialState.zip
+        - I will attach state.json.zip
+        - I will not attach state.json.zip
