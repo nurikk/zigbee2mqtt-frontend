@@ -162,7 +162,7 @@
         "permit_join": "Aanmelden toestaan",
         "restart": "Herstart",
         "settings": "Instellingen",
-        "toggle_dropdown": "Schakel menu", // ??
+        "toggle_dropdown": "Schakel menu",
         "touchlink": "Touchlink"
     },
     "ota": {
