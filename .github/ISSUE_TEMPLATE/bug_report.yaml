@@ -37,7 +37,7 @@ body:
     validations:
       required: true
     attributes:
-      label: initialState.zip
+      label: Did you donwload state.json.zip?
       multiple: false
       options:
         - I will attach state.json.zip
