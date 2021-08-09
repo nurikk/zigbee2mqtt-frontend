@@ -1,3 +1,12 @@
+## [0.5.23](https://github.com/nurikk/z2m-frontend/compare/0.5.22...0.5.23) (2021-08-09)
+
+
+### Features
+
+* **i18n:** Dutch translation... 🇳🇱 ([2d58a24](https://github.com/nurikk/z2m-frontend/commit/2d58a2451a8aed25ae73329508c17262a04d2b56))
+
+
+
 ## [0.5.22](https://github.com/nurikk/z2m-frontend/compare/0.5.21...0.5.22) (2021-08-08)
 
 
