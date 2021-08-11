@@ -26,6 +26,7 @@
         "select_device": "Choix Périph",
         "select_endpoint": "Choix endpoint",
         "source_endpoint": "Endpoint Source",
+        "the_only_endpoint": "Le seul endpoint",
         "unbind": "Délier",
         "write": "Ecriture"
     },
@@ -66,6 +67,7 @@
         "current_heating_setpoint": "Consigne chauffage actuelle",
         "eco_temperature": "Température éco",
         "effect": "Effet",
+        "empty_exposes_definition": "Vider définition d'expositions",
         "energy": "Energie",
         "force": "Force",
         "humidity": "Humidité",
@@ -119,7 +121,17 @@
         "pressure": "Pression",
         "soil_moisture": "Humidité Sol",
         "state": "État",
-        "temperature": "Température"
+        "temperature": "Température",
+        "tamper": "Sabotage"
+    },
+    "featureDescriptions": {
+        "On/off state of this light": "Etat Allumé/Eteint de cette lumière",
+        "Brightness of this light": "Luminosité de cette lumière",
+        "Triggers an effect on the light (e.g. make light blink for a few seconds)": "Exécute un effet sur la lumière (ex : faire clignotter quelques secondes)",
+        "Controls the behavior when the device is powered on": "Contrôle le comportement lorsque le périphérique est allumé",
+        "Link quality (signal strength)": "Qualité du lien (force du signal)",
+        "Remaining battery in %": "Batterie restante en %",
+        "Triggered action (e.g. a button click)": "Executer une action (ex : un clic bouton)"
     },
     "groups": {
         "add_to_group": "Ajouter au groupe",
@@ -139,7 +151,7 @@
         "help_coordinator_link_description": "Les lignes pleines sont les liens avec le Coordinateur",
         "help_end_device_description": "Les Périphérique Terminaux sont en vert",
         "help_is_coordinator": "est le Coordinateur",
-        "help_lqi_description": "La qualité de lien est entre 0 - 255 (plus c'est haut mieux c'est), les valeurs avec un / representent plusieurs types de liens",
+        "help_lqi_description": "La qualité de lien est entre 0 - 255 (plus c'est haut mieux c'est), les valeurs avec un / représentent plusieurs types de liens",
         "help_router_description": "Les Routeurs sont en bleu",
         "help_router_links_description": "Les lignes en pointillés sont les liens avec les Routeurs",
         "hide": "Cliquez-moi pour me cacher",
@@ -194,7 +206,8 @@
         "serial": "Port Série",
         "settings": "Paramètres",
         "tools": "Outils",
-        "zigbee2mqtt_version": "Version Zigbee2MQTT"
+        "zigbee2mqtt_version": "Version Zigbee2MQTT",
+        "translate": "Traduire"
     },
     "settingsSchemaTranslations": {
         "advanced-title": "Avancé",
@@ -249,9 +262,16 @@
         "closed": "Fermé",
         "occupied": "Occupé",
         "open": "Ouvert",
-        "true": "Vrai"
+        "true": "Vrai",
+        "leaking": "Fuite",
+        "tampered": "Saboté",
+        "supported": "Supporté",
+        "not_supported": "Non supporté",
+        "false": "Faux",
+        "empty_string": "Chaîne vide (\"\")"
     },
     "zigbee": {
+        "actions": "Actions",
         "attribute": "Attribut",
         "block_join": "Bloquer tout nouvel appairage",
         "cluster": "Cluster",
@@ -273,6 +293,7 @@
         "min_rep_interval": "Interval min réponse",
         "model": "Modèle",
         "network_address": "Adresse réseau",
+        "none": "Aucun",
         "output_clusters": "Clusters Sortants",
         "pic": "Img",
         "power": "Alim",
@@ -284,6 +305,7 @@
         "support_status": "Supporté",
         "unsupported": "Non Supporté",
         "update_Home_assistant_entity_id": "MàJ de l'ID d'entité Home Assistant",
-        "zigbee_model": "Modèle Zigbee"
+        "zigbee_model": "Modèle Zigbee",
+        "zigbee_manufacturer": "Constructeur Zigbee"
     }
 }
