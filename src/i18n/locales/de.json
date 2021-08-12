@@ -9,6 +9,8 @@
         "enter_search_criteria": "Suchwort",
         "loading": "Laden...",
         "save": "Speichern"
+        "confirmation": "bestätigen",
+        "ok": "ok"
     },
     "devicePage": {
         "about": "Über",
@@ -170,6 +172,7 @@
         "settings": "Einstellungen",
         "tools": "Tools",
         "zigbee2mqtt_version": "Zigbee2MQTT Version"
+        "translate": "übersetzen"
     },
     "settingsSchemaTranslations": {
         "root-title": "Serial",
@@ -198,6 +201,16 @@
         "Occupied": "beschäftigt",
         "Open": "Offen",
         "true": "Ja"
+        "closed": "geschlossen",
+        "open": "offen",
+        "occupied": "beschäftigt",
+        "clear": "ruhig",
+        "leaking": "Feuchtigkeit entdeckt",
+        "tampered": "manipuliert",
+        "supported": "unterstützt",
+        "not_supported": "nicht unterstützt",
+        "false": "falsch"
+        
     },
     "zigbee": {
         "block_join": "Blockieren vom Anlernen",
@@ -224,5 +237,23 @@
         "unsupported": "Nicht unterstützt",
         "update_Home_assistant_entity_id": "Update Home Assistant System ID",
         "zigbee_model": "Zigbee Modell"
+        "zigbee_manufacturer": "zigbee Hersteller"
+        
+     "featureDescriptions": {
+        "Link quality (signal strength)": "Link Qualität (signal stärke)",
+        "On/off state of the switch": "On/off Status des Schalters",
+        "On/off state of this light": "On/off Status des Leuchtmittels",
+        "Brightness of this light": "Helligkeit des Leuchtmittels",
+        "Color temperature of this light": "Farbtemperatur des Leuchtmittels",
+        "Color temperature after cold power on of this light": "Farbtemperatur nach Trennung vom Stromnetz",
+        "Color of this light in the CIE 1931 color space (x/y)": "Farbe des Leuchtmittels im CIE 1931 Farbraum (x/y)",
+        "Color of this light expressed as hue/saturation": "Farbe des Leuchtmittels übersetzt in hue/saturation",
+        "Triggers an effect on the light (e.g. make light blink for a few seconds)": "Startet einen Effekt des Leuchtmittels (z.B. Blinken für ein paar Sekunden)",
+        "Remaining battery in %": "Aktueller Batteriestatus in %",
+        "Triggered action (e.g. a button click)": "Ausgelöstes Ereignis (z.B. ein Aktivieren eines Tasters)",
+        "Voltage of the battery in millivolts": "Ladung der Batterie in millivolt",
+        "Indicates whether the device detected occupancy": "Ermittelt, ob eine BEwegung erkannt wurde",
+        "Measured temperature value": "Gemessene Temperatur",
+        "Measured illuminance in lux": "Gemessene Helligkeit in Lux"
     }
 }
