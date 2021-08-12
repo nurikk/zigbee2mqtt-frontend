@@ -75,7 +75,7 @@
         "i18next": "^20.3.2",
         "i18next-browser-languagedetector": "^6.1.2",
         "i18next-http-backend": "^1.2.6",
-        "jszip": "^3.6.0",
+        "jszip": "^3.7.0",
         "line-reader": "^0.4.0",
         "lodash": "^4.17.21",
         "mini-css-extract-plugin": "^2.1.0",
