@@ -1,3 +1,12 @@
+## [0.5.24](https://github.com/nurikk/z2m-frontend/compare/0.5.23...0.5.24) (2021-08-12)
+
+
+### Bug Fixes
+
+* **18n:** fix it locale name ([928856f](https://github.com/nurikk/z2m-frontend/commit/928856f6bdf90b68aa96dd3526eea61e4ede0c32))
+
+
+
 ## [0.5.23](https://github.com/nurikk/z2m-frontend/compare/0.5.22...0.5.23) (2021-08-09)
 
 
