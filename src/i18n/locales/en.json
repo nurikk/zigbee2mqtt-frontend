@@ -168,7 +168,7 @@
     "ota": {
         "check": "Check for new updates",
         "check_all": "Check all",
-        "empty_ota_message": "You don&apos;t have any devices that support OTA",
+        "empty_ota_message": "You don't have any devices that support OTA",
         "remaining_time": "Remaining time {{- remaining}}",
         "update": "Update device firmware"
     },

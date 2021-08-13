@@ -189,7 +189,7 @@
     "ota": {
         "check": "Vérifier nouvelles MàJ",
         "check_all": "Vérifier tout",
-        "empty_ota_message": "Vous n&apos;avez aucun périphérique supportant les MàJ OTA",
+        "empty_ota_message": "Vous n'avez aucun périphérique supportant les MàJ OTA",
         "remaining_time": "Temps restant {{- remaining}}",
         "update": "MàJ firmware des périphériques"
     },
