@@ -138,9 +138,6 @@ export class MapComponent extends Component<PropsFromStore & MapApi & WithTransl
 
     updateNodes = (): void => {
         const { networkGraph } = this.props;
-        if (!networkGraph.nodes.length) {
-            return;
-        }
         const { visibleLinks, selectedNode, width, height } = this.state;
         const container = select<SVGElement, {}>(this.svgRef.current as SVGElement);
         const node = container.selectAll<SVGElement, NodeI>(`.${style.node}`);

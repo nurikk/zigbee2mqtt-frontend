@@ -1,3 +1,26 @@
+## [0.5.25](https://github.com/nurikk/z2m-frontend/compare/0.5.24...0.5.25) (2021-08-13)
+
+
+### Bug Fixes
+
+* **i18n:** fix &apos; ([726f5a4](https://github.com/nurikk/z2m-frontend/commit/726f5a4e42226244f4fb93467f52de4de39977aa))
+
+
+### Features
+
+* **i18n:** update de.json ([#742](https://github.com/nurikk/z2m-frontend/issues/742)) ([7dc11a9](https://github.com/nurikk/z2m-frontend/commit/7dc11a9563f005a3909d03169f7b4886644c4183))
+
+
+
+## [0.5.24](https://github.com/nurikk/z2m-frontend/compare/0.5.23...0.5.24) (2021-08-12)
+
+
+### Bug Fixes
+
+* **18n:** fix it locale name ([928856f](https://github.com/nurikk/z2m-frontend/commit/928856f6bdf90b68aa96dd3526eea61e4ede0c32))
+
+
+
 ## [0.5.23](https://github.com/nurikk/z2m-frontend/compare/0.5.22...0.5.23) (2021-08-09)
 
 
