@@ -233,7 +233,7 @@
           "root_debounce_ignore__title": "Ignoriere doppelte Meldungen",
           "root_debounce_ignore__description": "Schützt einzelne payload Werte von spezifizierten payload Eigenschaften vor Überschreibung während der Entprellzeit",
           "root_filtered_optimistic__title": "Filtered optimistic attributes",
-          "root_filtered_optimistic__description": "Filtern von Attributen bei ""optimistic publish payload"" bei abruf oder setzen. (Diese Funktion ist abgeschaltet, wenn ""optimistic"" deaktiviert ist.)."
+          "root_filtered_optimistic__description": "Filtern von Attributen bei \"optimistic publish payload\" bei abruf oder setzen. (Diese Funktion ist abgeschaltet, wenn \"optimistic\" deaktiviert ist.)."
     },
     "touchlink": {
         "detected_devices_message": " {{count}} touchlink Geräte entdeckt.",
