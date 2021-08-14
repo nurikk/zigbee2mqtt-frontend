@@ -168,7 +168,7 @@
         "The measured atmospheric pressure": "Виміряне значення атмосферного тиску",
         "Triggered action (e.g. a button click)": "Виклик дії (наприклад натискання кнопки)",
         "Voltage of the battery in millivolts": "Напруга батареї в мілівольтах",
-        "Week format user for schedule": "Тижневий формат користувач для планування",
+        "Week format user for schedule": "Тижневий формат користувач для планування"
     },
     "groups": {
         "add_to_group": "Додати в групу",
