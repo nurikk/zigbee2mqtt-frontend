@@ -15,3 +15,19 @@ body {
 .content {
     overflow-y: auto;
 }
+
+.stroke-blink-enter {
+    stroke-width: 1;
+}
+.stroke-blink-enter-active {
+    stroke-width: 5;
+
+    transition: stroke-width 200ms;
+}
+.stroke-blink-exit {
+    stroke-width: 5;
+}
+.stroke-blink-exit-active {
+    stroke-width: 1;
+    transition: stroke-width 200ms;
+}
