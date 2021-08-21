@@ -113,13 +113,21 @@
         "color_temp": "Temperatura de color",
         "color_xy": "Color Xy",
         "contact": "Contacto",
+        "current": "Corriente",
+        "energy": "Energía",
         "humidity": "Humedad",
         "illuminance": "Iluminación",
         "occupancy": "Ocupación",
+        "power": "Consumo",
         "pressure": "Presión",
+        "smoke": "Humo",
+        "smoke_density": "Densidad del humo",
         "soil_moisture": "Humedad del suelo",
         "state": "Estado",
-        "temperature": "Temperatura"
+        "tamper": "Manipulación",
+        "temperature": "Temperatura",
+        "voltage": "Voltaje",
+        "water_leak": "Fuga de agua"
     },
     "groups": {
         "add_to_group": "Añadir a un grupo",
@@ -194,6 +202,7 @@
         "serial": "Serie",
         "settings": "Ajustes",
         "tools": "Herramientas",
+        "translate": "Traducir",
         "zigbee2mqtt_version": "Versión de Zigbee2MQTT"
     },
     "settingsSchemaTranslations": {
@@ -245,10 +254,15 @@
         "scan": "Buscar"
     },
     "values": {
-        "clear": "Claro",
+        "clear": "Limpio",
         "closed": "Cerrado",
+        "false": "Falso",
+        "leaking": "Fuga",
+        "not_supported": "No soportado",
         "occupied": "Ocupado",
         "open": "Abierto",
+        "supported": "Soportado",
+        "tampered": "Manipulado",
         "true": "Verdadero"
     },
     "zigbee": {
@@ -263,7 +277,7 @@
         "force_remove": "Forzar la eliminación",
         "friendly_name": "Nombre amigable",
         "ieee_address": "Dirección IEEE",
-        "input_clusters": "Clusters_Entrada",
+        "input_clusters": "Clusters entrada",
         "interview_completed": "Entrevista completa",
         "last_seen": "Ultima vez visto",
         "lqi": "LQI",
