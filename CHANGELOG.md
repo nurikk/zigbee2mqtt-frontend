@@ -1,3 +1,17 @@
+## [0.5.26](https://github.com/nurikk/z2m-frontend/compare/0.5.25...0.5.26) (2021-08-21)
+
+
+### Bug Fixes
+
+* **i18n:** update de locale ([5c01f76](https://github.com/nurikk/z2m-frontend/commit/5c01f762ba418d6b43aef5bb0af5ccb6f155b485))
+
+
+### Features
+
+* **map:** indicate state change on map ([6224aa8](https://github.com/nurikk/z2m-frontend/commit/6224aa83e8273805b651dcec00eb97a0fb7b5b47))
+
+
+
 ## [0.5.25](https://github.com/nurikk/z2m-frontend/compare/0.5.24...0.5.25) (2021-08-13)
 
 
