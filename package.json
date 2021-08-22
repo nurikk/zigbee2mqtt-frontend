@@ -64,7 +64,7 @@
         "d3-force-reuse": "^1.0.1",
         "d3-selection": "^3.0.0",
         "d3-zoom": "^3.0.0",
-        "eslint": "^7.30.0",
+        "eslint": "^7.32.0",
         "eslint-config-prettier": "^8.3.0",
         "eslint-config-react": "^1.1.7",
         "eslint-plugin-prettier": "^3.4.0",
