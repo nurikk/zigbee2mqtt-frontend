@@ -1,3 +1,12 @@
+## [0.5.27](https://github.com/nurikk/z2m-frontend/compare/0.5.26...0.5.27) (2021-08-23)
+
+
+### Features
+
+* **apple-touch-icon:** introduce apple-touch-icon ([92b3d09](https://github.com/nurikk/z2m-frontend/commit/92b3d095e2804aa3ea28330202f82958db6f44ca))
+
+
+
 ## [0.5.26](https://github.com/nurikk/z2m-frontend/compare/0.5.25...0.5.26) (2021-08-21)
 
 
