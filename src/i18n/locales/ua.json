@@ -120,7 +120,9 @@
         "color_temp": "Колірна температура",
         "color_xy": "Колір XY",
         "contact": "Контакт",
+        "current": "Струм",
         "current_heating_setpoint": "Встановлена температура",
+        "energy": "Енергія,
         "humidity": "Вологість",
         "illuminance": "Освітленість",
         "local_temperature": "Фактична температура",
@@ -129,11 +131,16 @@
         "position": "Положення",
         "preset": "Пресет",
         "pressure": "Тиск",
+        "power": "Споживання енергії",
+        "smoke": "Дим",
+        "smoke_density": "Густина диму",
         "soil_moisture": "Вологість грунту",
         "state": "Стан",
         "system_mode": "Режим системи",
         "tamper": "Втручання",
-        "temperature": "Температура"
+        "temperature": "Температура",
+        "voltage": "Напруга",
+        "water_leak": "Витік води"
     },
     "featureDescriptions": {
         "Away mode": "Режим від'їзду",
