@@ -10,6 +10,7 @@
         "close": "Cerrar",
         "cluster": "Cluster",
         "clusters": "Clusters",
+        "the_only_endpoint": "El único endpoint",
         "confirmation": "Mensaje de confirmación",
         "delete": "Borrar",
         "destination": "Destino",
@@ -259,6 +260,7 @@
         "false": "Falso",
         "leaking": "Fuga",
         "not_supported": "No soportado",
+        "null": "Nulo",
         "occupied": "Ocupado",
         "open": "Abierto",
         "supported": "Soportado",
@@ -298,6 +300,7 @@
         "support_status": "Soportado",
         "unsupported": "No soportado",
         "update_Home_assistant_entity_id": "Actualizar el ID de entidad de Home Assistant",
+        "zigbee_manufacturer": "Fabricante Zigbee",
         "zigbee_model": "Modelo Zigbee "
     }
 }
