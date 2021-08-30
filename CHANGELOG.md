@@ -1,3 +1,12 @@
+# [0.6.0](https://github.com/nurikk/z2m-frontend/compare/0.5.27...0.6.0) (2021-08-30)
+
+
+### Features
+
+* **i18n:** update ua.json ([#775](https://github.com/nurikk/z2m-frontend/issues/775)) ([1fb8120](https://github.com/nurikk/z2m-frontend/commit/1fb8120925e9dff4772cec9bcba815ccdf8ffb38))
+
+
+
 ## [0.5.27](https://github.com/nurikk/z2m-frontend/compare/0.5.26...0.5.27) (2021-08-23)
 
 
