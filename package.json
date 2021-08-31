@@ -50,7 +50,7 @@
         "@types/webpack-env": "^1.16.2",
         "@types/ws": "^7.4.7",
         "@typescript-eslint/eslint-plugin": "^4.29.3",
-        "@typescript-eslint/parser": "^4.29.3",
+        "@typescript-eslint/parser": "^4.30.0",
         "ace-builds": "^1.4.12",
         "bootstrap": "^5.1.0",
         "classnames": "^2.2.6",
