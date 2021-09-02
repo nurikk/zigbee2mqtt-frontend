@@ -1,3 +1,35 @@
+# [0.6.0](https://github.com/nurikk/z2m-frontend/compare/0.5.27...0.6.0) (2021-08-30)
+
+
+### Features
+
+* **i18n:** update ua.json ([#775](https://github.com/nurikk/z2m-frontend/issues/775)) ([1fb8120](https://github.com/nurikk/z2m-frontend/commit/1fb8120925e9dff4772cec9bcba815ccdf8ffb38))
+
+
+
+## [0.5.27](https://github.com/nurikk/z2m-frontend/compare/0.5.26...0.5.27) (2021-08-23)
+
+
+### Features
+
+* **apple-touch-icon:** introduce apple-touch-icon ([92b3d09](https://github.com/nurikk/z2m-frontend/commit/92b3d095e2804aa3ea28330202f82958db6f44ca))
+
+
+
+## [0.5.26](https://github.com/nurikk/z2m-frontend/compare/0.5.25...0.5.26) (2021-08-21)
+
+
+### Bug Fixes
+
+* **i18n:** update de locale ([5c01f76](https://github.com/nurikk/z2m-frontend/commit/5c01f762ba418d6b43aef5bb0af5ccb6f155b485))
+
+
+### Features
+
+* **map:** indicate state change on map ([6224aa8](https://github.com/nurikk/z2m-frontend/commit/6224aa83e8273805b651dcec00eb97a0fb7b5b47))
+
+
+
 ## [0.5.25](https://github.com/nurikk/z2m-frontend/compare/0.5.24...0.5.25) (2021-08-13)
 
 

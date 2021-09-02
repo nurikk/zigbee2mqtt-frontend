@@ -24,6 +24,8 @@ const getPlugins = (production) => {
                 from: 'src/images/favicon.ico',
             }, {
                 from: 'src/bootstrap-theme'
+            }, {
+                from: 'src/images/apple-touch-icon.png'
             }],
         }),
     ];
@@ -80,67 +82,67 @@ const config = {
     },
     module: {
         rules: [{
-                test: /\.txt$/i,
-                type: 'asset/source'
-            },
-            {
-                test: /\.(png|jpe?g|gif)$/i,
-                type: 'asset/resource',
-            },
-            {
-                test: /\.tsx?$/,
-                use: [{
-                    loader: "ts-loader",
-                }],
-            },
-            {
-                test: /\.css$/i,
-                use: [
-                    MiniCssExtractPlugin.loader,
+            test: /\.txt$/i,
+            type: 'asset/source'
+        },
+        {
+            test: /\.(png|jpe?g|gif)$/i,
+            type: 'asset/resource',
+        },
+        {
+            test: /\.tsx?$/,
+            use: [{
+                loader: "ts-loader",
+            }],
+        },
+        {
+            test: /\.css$/i,
+            use: [
+                MiniCssExtractPlugin.loader,
 
-                    "@teamsupercell/typings-for-css-modules-loader",
-                    {
-                        loader: "css-loader",
-                        options: {
-                            modules: true,
-                        },
+                "@teamsupercell/typings-for-css-modules-loader",
+                {
+                    loader: "css-loader",
+                    options: {
+                        modules: true,
                     },
-                ],
-                exclude: /node_modules/,
-            },
-            {
-                test: /\.css$/i,
-                include: /node_modules/,
-                use: [MiniCssExtractPlugin.loader, "css-loader"],
-            },
+                },
+            ],
+            exclude: /node_modules/,
+        },
+        {
+            test: /\.css$/i,
+            include: /node_modules/,
+            use: [MiniCssExtractPlugin.loader, "css-loader"],
+        },
 
-            {
-                test: /\.scss$/,
-                include: [/\.global\./, /node_modules/],
-                use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
-                sideEffects: true,
-            },
-            {
-                // Preprocess our own .css files
-                // This is the place to add your own loaders (e.g. sass/less etc.)
-                // for a list of loaders, see https://webpack.js.org/loaders/#styling
-                test: /\.scss$/,
-                exclude: [/\.global\./, /node_modules/],
-                use: [
-                    MiniCssExtractPlugin.loader,
-                    '@teamsupercell/typings-for-css-modules-loader',
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            sourceMap: true,
-                            modules: true,
-                            importLoaders: 1,
-                        },
+        {
+            test: /\.scss$/,
+            include: [/\.global\./, /node_modules/],
+            use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+            sideEffects: true,
+        },
+        {
+            // Preprocess our own .css files
+            // This is the place to add your own loaders (e.g. sass/less etc.)
+            // for a list of loaders, see https://webpack.js.org/loaders/#styling
+            test: /\.scss$/,
+            exclude: [/\.global\./, /node_modules/],
+            use: [
+                MiniCssExtractPlugin.loader,
+                '@teamsupercell/typings-for-css-modules-loader',
+                {
+                    loader: 'css-loader',
+                    options: {
+                        sourceMap: true,
+                        modules: true,
+                        importLoaders: 1,
                     },
-                    'sass-loader',
-                ],
-                sideEffects: true,
-            },
+                },
+                'sass-loader',
+            ],
+            sideEffects: true,
+        },
         ],
     },
     devServer: {
@@ -171,5 +173,5 @@ module.exports = (env, args) => {
     }
     const plugins = getPlugins(production);
 
-    return {...config, plugins}
+    return { ...config, plugins }
 };

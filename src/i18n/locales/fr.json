@@ -204,7 +204,7 @@
             "Salut, %username%, vous pouvez ici nous remercier pour notre dur labeur",
             "N'hésitez pas à nous laisser un petit mot gentil ;)"
         ],
-        "download_state": "État de téléchargement",
+        "download_state": "Téléchargement de l'état",
         "experimental": "Expérimental",
         "external_converters": "Convertisseurs Externes",
         "frontend": "Interface",
@@ -231,8 +231,8 @@
         "advanced_availability_whitelist__title": "Liste blanche disponibilité (déprécié, utilisez Liste autorisation disponibilité)",
         "advanced_ext_pan_id__description": "ID pan étendu zigbee, tout changement imposera un ré-appairage de tous les périphériques!",
         "advanced_ext_pan_id__title": "ID Pan étendu",
-        "advanced_log_output__description": "Localisation des sorties Log, laissez vide pour supprimer le logging",
-        "advanced_log_output__title": "Sortie Log",
+        "advanced_log_output__description": "Localisation des journaux de sorties, laissez vide pour supprimer la journalisation",
+        "advanced_log_output__title": "Journaux de Sortie",
         "advanced_log_syslog-title": "syslog",
         "blocklist__description": "Bloquer les périphériques sur le réseau (par adresse IEEE)",
         "blocklist__title": "Liste blocage",
@@ -259,10 +259,12 @@
         "root_ext_pan_id__title": "ID Pan étendu",
         "root_filtered_attributes__description": "Permet d'empêcher la publication de certains attributs",
         "root_filtered_attributes__title": "Attributs filtrés",
-        "root_log_output__description": "Localisation des sorties Log, laissez vide pour supprimer le logging",
-        "root_log_output__title": "Sortie Log",
+        "root_log_output__description": "Localisation des journaux de sorties, laissez vide pour supprimer la journalisation",
+        "root_log_output__title": "Journaux de Sortie",
         "root_log_syslog-title": "syslog",
-        "serial-title": "Port Série"
+        "serial-title": "Port Série",
+        "root_filtered_optimistic__title": "Attibuts optimistes filtrés",
+        "root_filtered_optimistic__description": "Attributs filtrés de la publication optimiste lors de l'appel de /set. (Aucun effet si optimiste est à faux)."
     },
     "touchlink": {
         "detected_devices_message": "{{count}} périphériques Touchlink détectés.",

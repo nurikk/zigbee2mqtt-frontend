@@ -3,11 +3,14 @@ import { LinkI, NodeI } from "./types";
 import cx from "classnames";
 import style from "./map.css";
 import { MouseEventsResponderNode } from ".";
-import { Device } from "../../types";
+import { Device, DeviceState, FriendlyName } from "../../types";
 import DeviceImage from "../device-image";
 import { Simulation } from "d3-force";
 import { select } from "d3-selection";
 import { drag } from "d3-drag";
+import { CSSTransition } from 'react-transition-group'; // ES6
+import isEqual from "lodash/isEqual";
+
 
 
 export const getStarShape = (innerCircleArms: number, innerRadius: number, outerRadius: number): string => {
@@ -30,6 +33,7 @@ export const getStarShape = (innerCircleArms: number, innerRadius: number, outer
 
 interface NodeProps extends MouseEventsResponderNode {
     node: NodeI;
+    deviceState: DeviceState;
 }
 
 const offlineTimeout = 3600 * 2;
@@ -38,9 +42,30 @@ export const isOnline = (device: Device): boolean => {
 
     return true; //Date.now() - device.lastSeen < offlineTimeout;
 };
-
-class Node extends Component<NodeProps, {}> {
+type NodeState = {
+    hasBeenUpdated: boolean;
+}
+class Node extends Component<NodeProps, NodeState> {
+    state: Readonly<NodeState> = {
+        hasBeenUpdated: false
+    }
     ref = createRef<SVGElement>();
+
+
+    componentDidUpdate(prevProps: NodeProps) {
+        const { deviceState: prevDeviceState } = prevProps;
+        const { deviceState: currentDeviceState } = this.props;
+        const statesAreEqual = isEqual(prevDeviceState, currentDeviceState);
+        let { hasBeenUpdated } = this.state;
+
+        if (statesAreEqual) {
+            if (hasBeenUpdated) {
+                this.setState({ hasBeenUpdated: false });
+            }
+        } else {
+            this.setState({ hasBeenUpdated: true });
+        }
+    }
 
     componentDidMount(): void {
         const { current } = this.ref;
@@ -64,8 +89,8 @@ class Node extends Component<NodeProps, {}> {
     };
 
     render() {
-
-        const { node } = this.props;
+        const { hasBeenUpdated } = this.state;
+        const { node, deviceState } = this.props;
         const { onMouseOver, onMouseOut, onDblClick } = this;
         const deviceType = node.type as string;
         const cn = cx(style.node, style[deviceType]); //{ [style.offline]: !isOnline(node.device, time) }
@@ -87,17 +112,22 @@ class Node extends Component<NodeProps, {}> {
                         />
                     </>
                 ) : (
-                        <>
-                            <circle cx={16} cy={17} r={24} fill={"#fff"} stroke={"blue"} strokeWidth={1} />
-                            <DeviceImage
-                                type="svg"
-                                width={32}
-                                height={32}
-                                device={node as unknown as Device}
-                                className={`${style.img}`}
-                            />
-                        </>
-                    )
+                    <>
+                        <CSSTransition in={hasBeenUpdated} timeout={200} classNames="stroke-blink">
+                            <circle data-foo={deviceState?.last_seen} cx={16} cy={17} r={24} fill={"#fff"} stroke={"blue"} strokeWidth={1} />
+                        </CSSTransition>
+                        <DeviceImage
+                            type="svg"
+                            width={32}
+                            height={32}
+                            device={node as unknown as Device}
+                            className={`${style.img}`}
+
+                        />
+
+
+                    </>
+                )
             }
             <text x={45} y={25}>{node.friendlyName}</text>
         </g>);
@@ -108,6 +138,7 @@ class Node extends Component<NodeProps, {}> {
 interface NodesProps extends MouseEventsResponderNode {
     root: SVGElement;
     nodes: NodeI[];
+    deviceStates: Record<FriendlyName, DeviceState>;
     simulation: Simulation<NodeI, LinkI>;
 }
 
@@ -156,7 +187,7 @@ export default class Nodes extends Component<NodesProps, NodesState> {
 
 
     render() {
-        const { nodes, onMouseOut, onMouseOver } = this.props;
+        const { nodes, onMouseOut, onMouseOver, deviceStates } = this.props;
         return (
             <g className={style.nodes}>
                 {nodes.map((node: NodeI) => (
@@ -165,6 +196,7 @@ export default class Nodes extends Component<NodesProps, NodesState> {
                         onMouseOver={onMouseOver}
                         key={node.ieeeAddr}
                         node={node}
+                        deviceState={deviceStates[node.friendlyName as FriendlyName]}
                     />
                 ))}
             </g>
