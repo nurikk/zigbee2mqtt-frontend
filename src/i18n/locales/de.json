@@ -82,7 +82,7 @@
         "operation_mode": "Betriebsmodus",
         "options": "Optionen",
         "position": "Position",
-        "power": "Power",
+        "power": "Leistung",
         "power_on_behavior": "Zustand nach Stromausfall",
         "power_outage_memory": "Zustand nach Stromausfall",
         "preset": "Voreinstellung",
@@ -112,7 +112,14 @@
         "pressure": "Luftdruck",
         "soil_moisture": "Bodenfeuchtigkeit",
         "state": "Status",
-        "temperature": "Temperatur"
+        "temperature": "Temperatur",
+        "level_config": "Level Konfiguration",
+        "on_off_transition_time": "Ein Aus Übergangszeit",
+        "current_level_startup": "Aktuelles Startlevel",
+        "power": "Leistung",
+        "position": "Position",
+        "moving": "Bewegung",
+        "calibration_time": "Kalibrierungszeit"
     },
     "groups": {
         "add_to_group": "Zur Gruppe hinzufügen",
@@ -188,7 +195,7 @@
         "settings": "Einstellungen",
         "tools": "Tools",
         "zigbee2mqtt_version": "Zigbee2MQTT Version",
-        "translate": "übersetzen"
+        "translate": "Übersetzen"
     },
     "settingsSchemaTranslations": {
         "root-title": "Serial",
@@ -274,7 +281,7 @@
         "model": "Modell",
         "network_address": "Netzwerk Adresse",
         "pic": "Bild",
-        "power": "Power",
+        "power": "Leistung",
         "reconfigure": "Neu konfigurieren",
         "remove_device": "Gerät entfernen",
         "rename_device": "Gerät umbenennen",
@@ -307,8 +314,8 @@
         "Triggers an effect on the light (e.g. make light blink for a few seconds)": "Startet einen Effekt des Leuchtmittels (z.B. Blinken für ein paar Sekunden)",
         "Remaining battery in %": "Aktueller Batteriestatus in %",
         "Triggered action (e.g. a button click)": "Ausgelöstes Ereignis (z.B. ein Aktivieren eines Tasters)",
-        "Voltage of the battery in millivolts": "Ladung der Batterie in millivolt",
-        "Indicates whether the device detected occupancy": "Ermittelt, ob eine BEwegung erkannt wurde",
+        "Voltage of the battery in millivolts": "Ladung der Batterie in Millivolt",
+        "Indicates whether the device detected occupancy": "Ermittelt, ob eine Bewegung erkannt wurde",
         "Measured temperature value": "Gemessene Temperatur",
         "Measured illuminance in lux": "Gemessene Helligkeit in Lux",
         "Controls the behaviour when the device is powered on": "Überprüft das Verhalten beim Einschalten des Device.",
@@ -339,7 +346,7 @@
         "The measured atmospheric pressure": "Gemessner Luftdruck",
         "Indicates if CO (carbon monoxide) is detected": "Kohlenmonoxid entdeckt",
         "Indicates if the contact is closed (= true) or open (= false)": "Kontakt geschlossen (= true) oder offen (= false)",
-        "Instantaneous measured power": "Momentan gemessene Power",
+        "Instantaneous measured power": "Momentan gemessene Leistung",
         "Instantaneous measured electrical current": "Aktuell gemessener Ampere-Bedarf",
         "Measured electrical potential value": "Gemessene Stromstärke in Volt ankommend",
         "Sum of consumed energy": "Seit Anfang verbrauchter Strom in kW/h",
