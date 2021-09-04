@@ -1,3 +1,17 @@
+## [0.6.1](https://github.com/nurikk/z2m-frontend/compare/0.6.0...0.6.1) (2021-09-04)
+
+
+### Bug Fixes
+
+* **i18n:** fix traditional chinese locale ([bb1b3c5](https://github.com/nurikk/z2m-frontend/commit/bb1b3c5dd93c8e3a0e0477ff842bf8b632407f03))
+
+
+### Features
+
+* **i18n:** add Korean locale [#805](https://github.com/nurikk/z2m-frontend/issues/805) ([f1c3121](https://github.com/nurikk/z2m-frontend/commit/f1c312144c482ea3e955aaaa50dbf060d4ce1643))
+
+
+
 # [0.6.0](https://github.com/nurikk/z2m-frontend/compare/0.5.27...0.6.0) (2021-08-30)
 
 
