@@ -17,7 +17,7 @@
         "dialog_confirmation_prompt": "Sei sicuro?",
         "disable": "Disabilita",
         "enter_search_criteria": "Inserisci un criterio di ricerca",
-        "groups": "Grouppi",
+        "groups": "Gruppi",
         "loading": "Caricamento...",
         "none": "Nessuno",
         "ok": "Ok",
@@ -85,7 +85,7 @@
         "operation_mode": "Modalità operativa",
         "options": "Opzioni",
         "position": "Positione",
-        "power": "Potenza",
+        "power": "Alimentazione",
         "power_on_behavior": "Comportamento di accensione",
         "power_outage_memory": "Memoria per interruzione di corrente",
         "preset": "Preset",
@@ -122,7 +122,8 @@
         "soil_moisture": "Umidità del suolo",
         "state": "Stato",
         "temperature": "Temperatura",
-        "tamper": "Manomesso"
+        "tamper": "Manomesso",
+        "power_alarm_active": "Allarme potenza attivo"
     },
     "groups": {
         "add_to_group": "Aggiungi a gruppo",
@@ -141,13 +142,13 @@
     "map": {
         "help_coordinator_link_description": "Linee continue sono link verso il Coordinator",
         "help_end_device_description": "Verde identifica un End Device",
-        "help_is_coordinator": "è Coordinator",
-        "help_lqi_description": "La qualità di connessione è tra 0 - 255 (più alta è meglio), valori con / rappresentano tipi multipli di link",
+        "help_is_coordinator": "è il Coordinator",
+        "help_lqi_description": "La qualità di connessione è tra 0 - 255 (più alta è meglio), valori con / rappresentano tipi di link multipli",
         "help_router_description": "Blu identifica un Router",
         "help_router_links_description": "Linee tratteggiate sono link verso i Routers",
         "hide": "Clicca per nascondere",
         "load": "Carica mappa",
-        "loading": "I base alla dimensione della tua rete questa operazione può richiedere tra i 10 secondi e i 2 minuti."
+        "loading": "In base alla dimensione della tua rete questa operazione può richiedere tra i 10 secondi e i 2 minuti."
     },
     "navbar": {
         "all": "Tutto",
@@ -155,7 +156,7 @@
         "devices": "Dispositivi",
         "disable_join": "Disabilita join",
         "extensions": "Estensioni",
-        "groups": "Grouppi",
+        "groups": "Gruppi",
         "logs": "Log",
         "map": "Mappa",
         "ota": "OTA",
@@ -167,7 +168,7 @@
     },
     "ota": {
         "check": "Verifica nuovi aggiornamenti",
-        "check_all": "Verifica tutti",
+        "check_all": "Verifica tutti i dispositivi",
         "empty_ota_message": "Non hai dispositivi in grado di supportare aggiornamenti OTA",
         "remaining_time": "Tempo rimanente {{- remaining}}",
         "update": "Aggiorna firmware del device"
@@ -180,11 +181,11 @@
         "coordinator_type": "Tipo Coordinator",
         "donate": "Donazioni",
         "donation_text": [
-            "Ciao, %username%, qui puoi ringraziarci per il duro lavoro",
+            "Ciao, %username% , qui puoi ringraziarci per il duro lavoro",
             "Non esitare a dire anche qualcosa di carino ;)"
         ],
-        "download_state": "Avanzamento download",
-        "experimental": "Sperimentali",
+        "download_state": "Download backup",
+        "experimental": "Sperimentale",
         "external_converters": "Convertitori esterni",
         "frontend": "Frontend",
         "frontend_version": "Versione frontend",
