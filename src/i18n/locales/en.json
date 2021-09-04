@@ -40,6 +40,7 @@
         "settings": "Settings",
         "settings_specific": "Settings (specific)",
         "state": "State",
+        "scene": "Scene",
         "unknown_device": "Unknown device"
     },
     "exposes": {
@@ -298,5 +299,13 @@
         "update_Home_assistant_entity_id": "Update Home Assistant entity ID",
         "zigbee_manufacturer": "Zigbee Manufacturer",
         "zigbee_model": "Zigbee Model"
+    },
+    "scene": {
+        "scene_id": "Scene ID",
+        "recall": "Recall",
+        "store": "Store",
+        "remove": "Remove",
+        "remove_all": "Remove all",
+        "add": "Add"
     }
 }
