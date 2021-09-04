@@ -112,7 +112,7 @@
         "pressure": "Luftdruck",
         "soil_moisture": "Bodenfeuchtigkeit",
         "state": "Status",
-        "temperature": "Temperatur"
+        "temperature": "Temperatur",
         "level_config": "Level Konfiguration",
         "on_off_transition_time": "Ein Aus Übergangszeit",
         "current_level_startup": "Aktuelles Startlevel",
