@@ -18,6 +18,7 @@ import chsTranslations from './locales/chs.json';
 import nlTranslations from './locales/nl.json';
 import itTranslations from './locales/it.json';
 import chtTranslations from './locales/cht.json';
+import koTranslations from './locales/ko.json';
 
 
 import timePl from "timeago.js/lib/lang/pl";
@@ -31,6 +32,7 @@ import timeChs from "timeago.js/lib/lang/zh_CN";
 import timeNl from "timeago.js/lib/lang/nl";
 import timeIt from "timeago.js/lib/lang/it";
 import timeCht from "timeago.js/lib/lang/zh_TW";
+import timeKo from "timeago.js/lib/lang/ko";
 
 
 register("pl", timePl);
@@ -43,7 +45,9 @@ register("ua", timeUa);
 register("chs", timeChs);
 register("nl", timeNl);
 register("it", timeIt);
-register("cht", timeCht)
+register("ko", timeKo);
+
+
 
 
 
@@ -60,6 +64,7 @@ export const resources = {
     nl: nlTranslations as ResourceLanguage,
     it: itTranslations as ResourceLanguage,
     cht: chtTranslations as ResourceLanguage,
+    ko: koTranslations as ResourceLanguage,
 } as const;
 
 declare let window: Record<string, unknown>;
