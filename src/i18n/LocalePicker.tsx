@@ -16,7 +16,7 @@ import ua from "./flags/ua.png";
 import chs from "./flags/cn.png";
 import nl from "./flags/nl.png";
 import it from "./flags/it.png";
-import cht from "./flags/tw.png";
+import zh from "./flags/tw.png";
 import ko from "./flags/kr.png";
 import missing from "./flags/missing-locale.png";
 
@@ -24,7 +24,7 @@ import missing from "./flags/missing-locale.png";
 import localeNames from './locales/localeNames.json';
 
 const localesMap = {
-    en, fr, pl, de, ru, ptbr, es, ua, chs, nl, it, cht, ko
+    en, fr, pl, de, ru, ptbr, es, ua, chs, nl, it, zh, ko
 }
 
 
