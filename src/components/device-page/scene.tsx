@@ -57,13 +57,18 @@ function AddScene(props: SceneProps & Pick<SceneApi, 'sceneStore'> & Pick<StateA
     const [sceneId, setSceneId] = useState<SceneId>(0);
     const sceneExposes = ['light', 'state', 'color_temp', 'color', 'transition', 'brightness'];
 
-    const sceneFeatures = (device.definition?.exposes as GenericExposedFeature[]).filter(f => sceneExposes.includes(getFeatureName(f)));
+    const sceneFeatures = ((device.definition?.exposes ?? []) as GenericExposedFeature[]).filter(f => sceneExposes.includes(getFeatureName(f)));
 
 
     return <>
         <div className="mb-3">
             <label htmlFor="add-scene" className="form-label">{t('scene_id')}</label>
-            <input min={0} max={255} value={sceneId} type="number" className="form-control" id="add-scene"
+            <input id="add-scene"
+                className="form-control"
+                min={0}
+                max={255}
+                value={sceneId}
+                type="number"
                 onChange={(e) => setSceneId(e.target.valueAsNumber)}
             />
 
