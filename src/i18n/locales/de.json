@@ -38,7 +38,8 @@
         "settings": "Einstellungen",
         "settings_specific": "Einstellungen (spezifisch)",
         "state": "Status",
-        "scene": "Szene"
+        "scene": "Szene",
+        "unknown_device": "unbekanntes Device"
     },
     "scene": {
         "remove_all": "Alle entfernen",
@@ -107,7 +108,8 @@
     },
     "extensions": {
         "extension_name_propmt": "Name der neuen Erweiterung",
-        "select_extension_to_edit": "Wähle Erweiterung zum bearbeiten"
+        "select_extension_to_edit": "Wähle Erweiterung zum bearbeiten",
+        "create_new_extension": "Neue Erweiterung erstellen"
     },
     "featureNames": {
         "brightness": "Helligkeit",
