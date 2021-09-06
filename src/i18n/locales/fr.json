@@ -132,7 +132,7 @@
         "Controls the behaviour when the device is powered on": "Contrôle le comportement lorsque le périphérique est allumé",
         "Link quality (signal strength)": "Qualité du lien (force du signal)",
         "Remaining battery in %": "Batterie restante en %",
-        "Triggered action (e.g. a button click)": "Executer une action (ex : un clic bouton)",
+        "Triggered action (e.g. a button click)": "Action déclenchée (ex : un clic bouton)",
         "Measured temperature value": "Valeur de température mesurée",
         "Measured relative humidity": "Valeur d'humidité relative mesurée",
         "The measured atmospheric pressure": "Valeur de pression atmosphérique mesurée",
