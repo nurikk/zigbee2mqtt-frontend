@@ -37,7 +37,15 @@
         "reporting": "Reporting",
         "settings": "Einstellungen",
         "settings_specific": "Einstellungen (spezifisch)",
-        "state": "Status"
+        "state": "Status",
+        "scene": "Szene"
+    },
+    "scene": {
+        "remove_all": "Alle entfernen",
+        "scene_id": "Szenen ID",
+        "store": "Speichern",
+        "recall": "Abrufen",
+        "remove": "Entfernen"
     },
     "exposes": {
         "Pressure": "Luftdruck",
@@ -119,7 +127,9 @@
         "power": "Leistung",
         "position": "Position",
         "moving": "Bewegung",
-        "calibration_time": "Kalibrierungszeit"
+        "calibration_time": "Kalibrierungszeit",
+        "color_temp_startup": "Start Farbtemperatur",
+        "color_hs": "Farbe Hs"
     },
     "groups": {
         "add_to_group": "Zur Gruppe hinzufügen",
@@ -352,6 +362,9 @@
         "Sum of consumed energy": "Seit Anfang verbrauchter Strom in kW/h",
         "Recover state after power outage": "Eingestellter Zustand nach Stromabfall",
         "Raw measured illuminance": "Gemessener Helligkeits-Rohwert",
-        "Indicates whether the device detected smoke": "Raucherkennung"
+        "Indicates whether the device detected smoke": "Raucherkennung",
+        "Motor speed": "Motor Geschwindigkeit",
+        "Indicates whether the device detected a water leak": "Zeigt, ob ein Wasseraustritt erkannt wurde",
+        "Indicates whether the device is tampered": "Zeigt, ob das Gerät manipuliert wurde"
     }
 }
