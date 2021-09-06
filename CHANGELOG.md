@@ -1,3 +1,12 @@
+## [0.6.4](https://github.com/nurikk/z2m-frontend/compare/0.6.3...0.6.4) (2021-09-06)
+
+
+### Features
+
+* **scene:** combine remove all button ([0a41c17](https://github.com/nurikk/z2m-frontend/commit/0a41c174ed8bf5e77d660af04f8004a35aac1953))
+
+
+
 ## [0.6.3](https://github.com/nurikk/z2m-frontend/compare/0.6.2...0.6.3) (2021-09-06)
 
 
