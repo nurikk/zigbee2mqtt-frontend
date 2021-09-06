@@ -1,3 +1,18 @@
+## [0.6.3](https://github.com/nurikk/z2m-frontend/compare/0.6.2...0.6.3) (2021-09-06)
+
+
+### Bug Fixes
+
+* **scene:** fix reference error for empty exposes ([a3c8017](https://github.com/nurikk/z2m-frontend/commit/a3c8017e0fb0f904c37a897eb7d3505108c01db8))
+* **scenes:** better feature filtration ([9f9cadb](https://github.com/nurikk/z2m-frontend/commit/9f9cadb89ffe191c40d3c3dc20c2c37efef68bab))
+
+
+### Features
+
+* **scene:** implement scenes for zigbee groups ([ce2ccfc](https://github.com/nurikk/z2m-frontend/commit/ce2ccfcede2ef74b93c1e2b7b3e735b831faf024))
+
+
+
 ## [0.6.2](https://github.com/nurikk/z2m-frontend/compare/0.6.1...0.6.2) (2021-09-04)
 
 
