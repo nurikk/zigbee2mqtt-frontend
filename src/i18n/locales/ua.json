@@ -37,7 +37,7 @@
         "dev_console": "Консоль приладу",
         "exposes": "Викрито",
         "reporting": "Звіти",
-        "scene": "Сцена"
+        "scene": "Сцена",
         "settings": "Налаштування",
         "settings_specific": "Налаштування (для даного приладу)",
         "state": "Стан",
