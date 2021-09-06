@@ -20,8 +20,8 @@ interface RecallRemoveAndMayBeStoreSceneProps {
     showStoreButton: boolean;
 }
 
-export function RecallRemoveAndMayBeStoreScene(props: RecallRemoveAndMayBeStoreSceneProps & Pick<SceneApi, 'sceneRecall' | 'sceneRemove' | 'sceneStore'>) {
-    const { sceneRecall, sceneRemove, sceneStore, showStoreButton, target } = props;
+export function RecallRemoveAndMayBeStoreScene(props: RecallRemoveAndMayBeStoreSceneProps & Pick<SceneApi, 'sceneRecall' | 'sceneRemove' | 'sceneStore' | 'sceneRemoveAll'>) {
+    const { sceneRecall, sceneRemove, sceneStore, sceneRemoveAll, showStoreButton, target } = props;
     const { t } = useTranslation("scene");
     const [sceneId, setSceneId] = useState<SceneId>(0);
     return <>
@@ -32,11 +32,12 @@ export function RecallRemoveAndMayBeStoreScene(props: RecallRemoveAndMayBeStoreS
             />
         </div>
         <div className="d-flex">
-            <div className="btn-group ms-auto">
+            <div className="btn-group ms-auto pe-1">
                 {showStoreButton ? <button onClick={() => sceneStore(target.friendly_name, sceneId)} type="submit" className="btn btn-primary">{t('store')}</button> : null}
                 <button onClick={() => sceneRecall(target.friendly_name, sceneId)} type="submit" className="btn btn-success">{t('recall')}</button>
                 <Button promt onClick={() => sceneRemove(target.friendly_name, sceneId)} type="submit" className="btn btn-danger">{t('remove')}</Button>
             </div>
+            <Button promt onClick={() => sceneRemoveAll(target.friendly_name)} type="submit" className="btn btn-danger">{t('remove_all')}</Button>
         </div>
     </>
 }
@@ -115,13 +116,14 @@ function AddScene(props: AddSceneProps & Pick<SceneApi, 'sceneStore'> & Pick<Sta
     </>
 }
 
+
 type SceneProps = {
     device: Device;
     deviceState: DeviceState;
 }
 function Scene(props: SceneProps & SceneApi & StateApi) {
     const { sceneStore, sceneRecall, sceneRemove, sceneRemoveAll, setDeviceState, device, deviceState } = props;
-    const { t } = useTranslation("scene");
+
     return <div className="row">
         <div className="col-12 col-sm-6 col-xxl-4 d-flex">
             <div className="card flex-fill">
@@ -143,6 +145,7 @@ function Scene(props: SceneProps & SceneApi & StateApi) {
                         sceneStore={sceneStore}
                         sceneRecall={sceneRecall}
                         sceneRemove={sceneRemove}
+                        sceneRemoveAll={sceneRemoveAll}
                         showStoreButton={false}
                         target={device}
                         deviceState={deviceState}
@@ -150,16 +153,6 @@ function Scene(props: SceneProps & SceneApi & StateApi) {
                 </div>
             </div>
         </div>
-        <div className="col-12 col-sm-6 col-xxl-4 d-flex">
-            <div className="card flex-fill">
-                <div className="card-body d-flex py-4">
-                    <div className="align-self-center mx-auto">
-                        <Button promt onClick={() => sceneRemoveAll(device.friendly_name)} type="submit" className="btn btn-danger">{t('remove_all')}</Button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
     </div>
 }
 

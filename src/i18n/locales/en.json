@@ -306,7 +306,7 @@
         "recall": "Recall",
         "store": "Store",
         "remove": "Remove",
-        "remove_all": "Remove all",
+        "remove_all": "Remove all scenes",
         "add": "Add"
     }
 }

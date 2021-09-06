@@ -88,18 +88,19 @@ export class GroupsPage extends Component<PropsFromStore & SceneApi & GroupsApi 
 
                 <div className="card-footer">
                     <div className="row">
-                        <div className="col-12 col-sm-6 col-xxl-6 d-flex">
+                        <div className="col-12 col-sm-4 col-xxl-6 d-flex">
                             <div className="form-group w-100">
                                 <AddDeviceToGroup addDeviceToGroup={addDeviceToGroup} devices={devices} group={group} />
                             </div>
                         </div>
-                        <div className="col-12 col-sm-6 col-xxl-6 d-flex">
+                        <div className="col-12 col-sm-4 col-xxl-6 d-flex">
                             <div className="form-group w-100">
                                 <RecallRemoveAndMayBeStoreScene
                                     target={group}
                                     sceneStore={sceneStore}
                                     sceneRecall={sceneRecall}
                                     sceneRemove={sceneRemove}
+                                    sceneRemoveAll={sceneRemoveAll}
                                     showStoreButton={true}
                                     deviceState={{} as DeviceState}
                                 />
