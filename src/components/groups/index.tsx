@@ -10,12 +10,15 @@ import { GroupsApi } from "../../actions/GroupsApi";
 import { withTranslation, WithTranslation } from "react-i18next";
 import { AddDeviceToGroup } from "./AddDeviceToGroup";
 import { DeviceGroup } from "./DeviceGroup";
+import { RecallRemoveAndMayBeStoreScene } from "../device-page/scene";
+import { SceneApi } from "../../actions/SceneApi";
+import { DeviceState } from "../../types";
 interface GroupsPageState {
     newGroupName: string;
     newGroupId?: number;
 }
 type PropsFromStore = Pick<GlobalState, 'groups' | 'devices'>;
-export class GroupsPage extends Component<PropsFromStore & GroupsApi & WithTranslation<"groups">, GroupsPageState> {
+export class GroupsPage extends Component<PropsFromStore & SceneApi & GroupsApi & WithTranslation<"groups">, GroupsPageState> {
     state: GroupsPageState = {
         newGroupName: '',
         newGroupId: undefined
@@ -63,7 +66,7 @@ export class GroupsPage extends Component<PropsFromStore & GroupsApi & WithTrans
         renameGroup(oldName, newName);
     }
     renderGroups(): JSX.Element[] {
-        const { groups, devices, addDeviceToGroup, t } = this.props;
+        const { groups, devices, addDeviceToGroup, sceneStore, sceneRecall, sceneRemove, sceneRemoveAll, t } = this.props;
         return groups.map(group => (
             <div key={group.id} className="card">
                 <div className="card-header" id={`heading${group.id}`}>
@@ -84,7 +87,26 @@ export class GroupsPage extends Component<PropsFromStore & GroupsApi & WithTrans
                 </div>
 
                 <div className="card-footer">
-                    <AddDeviceToGroup addDeviceToGroup={addDeviceToGroup} devices={devices} group={group} />
+                    <div className="row">
+                        <div className="col-12 col-sm-6 col-xxl-6 d-flex">
+                            <div className="form-group w-100">
+                                <AddDeviceToGroup addDeviceToGroup={addDeviceToGroup} devices={devices} group={group} />
+                            </div>
+                        </div>
+                        <div className="col-12 col-sm-6 col-xxl-6 d-flex">
+                            <div className="form-group w-100">
+                                <RecallRemoveAndMayBeStoreScene
+                                    target={group}
+                                    sceneStore={sceneStore}
+                                    sceneRecall={sceneRecall}
+                                    sceneRemove={sceneRemove}
+                                    showStoreButton={true}
+                                    deviceState={{} as DeviceState}
+                                />
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         )).reverse()

@@ -1,6 +1,6 @@
 import ReconnectingWebSocket from "reconnecting-websocket";
-import store, { Extension, Group, LogMessage } from "./store";
-import { BridgeConfig, BridgeInfo, TouchLinkDevice, Device, DeviceState, BridgeState } from './types';
+import store, { Extension, LogMessage } from "./store";
+import { BridgeConfig, BridgeInfo, TouchLinkDevice, Device, DeviceState, BridgeState, Group } from './types';
 import { sanitizeGraph, isSecurePage, randomString, stringifyWithPreservingUndefinedAsNull } from "./utils";
 import { Notyf } from "notyf";
 import { GraphI } from "./components/map/types";

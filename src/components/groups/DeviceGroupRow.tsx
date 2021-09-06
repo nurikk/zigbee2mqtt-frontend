@@ -5,8 +5,9 @@ import style from './style.css';
 import cx from 'classnames';
 import { Link } from "react-router-dom";
 import DeviceImage from "../device-image";
-import { GroupAddress, WithDevices } from "../../store";
+import { WithDevices } from "../../store";
 import { useTranslation } from "react-i18next";
+import { GroupAddress } from "../../types";
 
 
 type DeviceGroupRowProps = {

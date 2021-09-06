@@ -214,13 +214,24 @@ export interface EndpointDescription {
         output: Cluster[];
     };
 }
+export interface WithFreiendlyName {
+    friendly_name: FriendlyName;
+}
+export interface GroupAddress {
+    endpoint: number;
+    ieee_address: IEEEEAddress;
+}
 
-export interface Device {
+export interface Group extends WithFreiendlyName { 
+    id: number;
+    members: GroupAddress[];
+}
+
+export interface Device extends WithFreiendlyName {
     ieee_address: IEEEEAddress;
     type: DeviceType;
     network_address: number;
     model: string;
-    friendly_name: FriendlyName;
     power_source: PowerSource;
     model_id: string;
     manufacturer: string;

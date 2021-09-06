@@ -132,7 +132,7 @@
         "new_group_id_placeholder": "Specify group id if necessary",
         "new_group_name": "New group name",
         "new_group_name_placeholder": "example: my_bedroom_lights",
-        "remove_group": "Remove group"
+        "remove_group": "Remove group"        
     },
     "logs": {
         "empty_logs_message": "Nothing to display",
@@ -298,7 +298,8 @@
         "unsupported": "Unsupported",
         "update_Home_assistant_entity_id": "Update Home Assistant entity ID",
         "zigbee_manufacturer": "Zigbee Manufacturer",
-        "zigbee_model": "Zigbee Model"
+        "zigbee_model": "Zigbee Model",
+        "device": "Device"
     },
     "scene": {
         "scene_id": "Scene ID",

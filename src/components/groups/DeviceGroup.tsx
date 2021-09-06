@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Group, WithDevices } from "../../store";
-import { Device } from "../../types";
+import { WithDevices } from "../../store";
+import { Group } from "../../types";
 import { DeviceGroupRow } from "./DeviceGroupRow";
 
 

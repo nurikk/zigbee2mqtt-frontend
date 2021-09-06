@@ -1,7 +1,6 @@
 
-import { AdvancedConfig, Device, DeviceState, Endpoint } from "./types";
+import { AdvancedConfig, Device, DeviceState, Endpoint, Group } from "./types";
 import { GraphI, LinkI, LinkType, NodeI } from "./components/map/types";
-import { Group } from "./store";
 import { Theme } from "./components/theme-switcher";
 import JSZip from 'jszip';
 import FileSaver from 'file-saver';

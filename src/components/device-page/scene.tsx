@@ -1,5 +1,5 @@
 import React, { Component, useState } from "react";
-import { CompositeFeature, Device, DeviceState, GenericExposedFeature, SwitchFeature } from "../../types";
+import { CompositeFeature, Device, DeviceState, GenericExposedFeature, SwitchFeature, WithFreiendlyName } from "../../types";
 import actions from "../../actions/actions";
 import { SceneApi, SceneId } from "../../actions/SceneApi";
 import { connect } from "unistore/react";
@@ -14,13 +14,14 @@ import groupBy from "lodash/groupBy";
 
 
 
-interface SceneProps {
-    device: Device;
+interface RecallRemoveAndMayBeStoreSceneProps {
+    target: WithFreiendlyName;
     deviceState: DeviceState;
+    showStoreButton: boolean;
 }
 
-function RecallRemoveScene(props: SceneProps & Pick<SceneApi, 'sceneRecall' | 'sceneRemove'>) {
-    const { sceneRecall, sceneRemove, device } = props;
+export function RecallRemoveAndMayBeStoreScene(props: RecallRemoveAndMayBeStoreSceneProps & Pick<SceneApi, 'sceneRecall' | 'sceneRemove' | 'sceneStore'>) {
+    const { sceneRecall, sceneRemove, sceneStore, showStoreButton, target } = props;
     const { t } = useTranslation("scene");
     const [sceneId, setSceneId] = useState<SceneId>(0);
     return <>
@@ -32,8 +33,9 @@ function RecallRemoveScene(props: SceneProps & Pick<SceneApi, 'sceneRecall' | 's
         </div>
         <div className="d-flex">
             <div className="btn-group ms-auto">
-                <button onClick={() => sceneRecall(device.friendly_name, sceneId)} type="submit" className="btn btn-success">{t('recall')}</button>
-                <Button promt onClick={() => sceneRemove(device.friendly_name, sceneId)} type="submit" className="btn btn-danger">{t('remove')}</Button>
+                {showStoreButton ? <button onClick={() => sceneStore(target.friendly_name, sceneId)} type="submit" className="btn btn-primary">{t('store')}</button> : null}
+                <button onClick={() => sceneRecall(target.friendly_name, sceneId)} type="submit" className="btn btn-success">{t('recall')}</button>
+                <Button promt onClick={() => sceneRemove(target.friendly_name, sceneId)} type="submit" className="btn btn-danger">{t('remove')}</Button>
             </div>
         </div>
     </>
@@ -65,12 +67,15 @@ export const onlyValidFeaturesForScenes = (feature: GenericExposedFeature | Comp
     return false;
 }
 
-function AddScene(props: SceneProps & Pick<SceneApi, 'sceneStore'> & Pick<StateApi, 'setDeviceState'>) {
+type AddSceneProps = {
+    device: Device;
+    deviceState: DeviceState;
+}
+function AddScene(props: AddSceneProps & Pick<SceneApi, 'sceneStore'> & Pick<StateApi, 'setDeviceState'>) {
     const { device, deviceState, sceneStore, setDeviceState } = props;
 
     const { t } = useTranslation("scene");
     const [sceneId, setSceneId] = useState<SceneId>(0);
-    const sceneExposes = ['light', 'state', 'color_temp', 'color', 'transition', 'brightness'];
 
     const filteredFeatures = ((device.definition?.exposes ?? []) as GenericExposedFeature[])
         .map((e: GenericExposedFeature | CompositeFeature) => onlyValidFeaturesForScenes(e, deviceState))
@@ -110,6 +115,10 @@ function AddScene(props: SceneProps & Pick<SceneApi, 'sceneStore'> & Pick<StateA
     </>
 }
 
+type SceneProps = {
+    device: Device;
+    deviceState: DeviceState;
+}
 function Scene(props: SceneProps & SceneApi & StateApi) {
     const { sceneStore, sceneRecall, sceneRemove, sceneRemoveAll, setDeviceState, device, deviceState } = props;
     const { t } = useTranslation("scene");
@@ -130,10 +139,12 @@ function Scene(props: SceneProps & SceneApi & StateApi) {
         <div className="col-12 col-sm-6 col-xxl-4 d-flex">
             <div className="card flex-fill">
                 <div className="card-body py-4">
-                    <RecallRemoveScene
+                    <RecallRemoveAndMayBeStoreScene
+                        sceneStore={sceneStore}
                         sceneRecall={sceneRecall}
                         sceneRemove={sceneRemove}
-                        device={device}
+                        showStoreButton={false}
+                        target={device}
                         deviceState={deviceState}
                     />
                 </div>

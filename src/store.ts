@@ -1,7 +1,7 @@
 import createStore from "unistore";
 import devtools from "unistore/devtools";
 
-import { Device, DeviceState, BridgeConfig, BridgeInfo, TouchLinkDevice, BridgeState, FriendlyName, IEEEEAddress } from "./types";
+import { Device, DeviceState, BridgeConfig, BridgeInfo, TouchLinkDevice, BridgeState, FriendlyName, IEEEEAddress, Group } from "./types";
 
 import { GraphI } from "./components/map/types";
 import { getCurrentTheme } from "./utils";
@@ -10,16 +10,7 @@ import { Theme } from "./components/theme-switcher";
 import initialState from './initialState.json';
 
 
-export interface GroupAddress {
-    endpoint: number;
-    ieee_address: IEEEEAddress;
-}
 
-export interface Group {
-    id: number;
-    friendly_name: FriendlyName;
-    members: GroupAddress[];
-}
 
 export interface LogMessage {
     level: "error" | "info" | "warning";
