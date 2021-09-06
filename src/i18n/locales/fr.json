@@ -40,6 +40,7 @@
         "settings": "Paramètres",
         "settings_specific": "Paramètres (Spécifiques)",
         "state": "Etat",
+        "scene": "Scène",
         "unknown_device": "Périphérique inconnu"
     },
     "exposes": {
@@ -321,5 +322,13 @@
         "update_Home_assistant_entity_id": "MàJ de l'ID d'entité Home Assistant",
         "zigbee_model": "Modèle Zigbee",
         "zigbee_manufacturer": "Constructeur Zigbee"
+    },
+    "scene": {
+        "scene_id": "ID Scène",
+        "recall": "Rappeler",
+        "store": "Stocker",
+        "remove": "Supprimer",
+        "remove_all": "Supprimer tout",
+        "add": "Ajouter"
     }
 }
