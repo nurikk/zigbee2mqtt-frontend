@@ -10,6 +10,7 @@ import Composite from "../features/composite/composite";
 import { DashboardFeatureWrapper } from "../dashboard-page/DashboardFeatureWrapper";
 import { isLightFeature, isSwitchFeature } from "./type-guards";
 import { StateApi } from "../../actions/StateApi";
+import groupBy from "lodash/groupBy";
 
 
 
@@ -38,16 +39,30 @@ function RecallRemoveScene(props: SceneProps & Pick<SceneApi, 'sceneRecall' | 's
     </>
 }
 
-function getFeatureName(feature: GenericExposedFeature): string {
-    if (feature.name) {
-        return feature.name;
-    } else if (isSwitchFeature(feature)) {
-        return (feature as SwitchFeature).features[0].name;
-    } else if (isLightFeature(feature)) {
-        return "light"
-    }
 
-    return "";
+const whitelistFeatureNames = ['state', 'color_temp', 'color', 'transition', 'brightness'];
+
+export const onlyValidFeaturesForScenes = (feature: GenericExposedFeature | CompositeFeature,
+    deviceState: DeviceState = {} as DeviceState): GenericExposedFeature | CompositeFeature | false => {
+
+    const { property, name } = feature;
+    let { features } = feature as CompositeFeature;
+    if (isLightFeature(feature)) {
+        features = features
+            .map(f => onlyValidFeaturesForScenes(f, (property ? deviceState[property] : deviceState) as DeviceState))
+            .filter(f => f) as (GenericExposedFeature | CompositeFeature)[];
+        const groupedFeatures = groupBy(features, 'property');
+        features = Object.values(groupedFeatures)
+            .map(f => f[0]);
+    }
+    const filteredOutFeature = { ...feature, features } as GenericExposedFeature | CompositeFeature;
+    if (whitelistFeatureNames.includes(name)) {
+        return filteredOutFeature;
+    }
+    if (Array.isArray(features) && features.length > 0) {
+        return filteredOutFeature;
+    }
+    return false;
 }
 
 function AddScene(props: SceneProps & Pick<SceneApi, 'sceneStore'> & Pick<StateApi, 'setDeviceState'>) {
@@ -57,7 +72,11 @@ function AddScene(props: SceneProps & Pick<SceneApi, 'sceneStore'> & Pick<StateA
     const [sceneId, setSceneId] = useState<SceneId>(0);
     const sceneExposes = ['light', 'state', 'color_temp', 'color', 'transition', 'brightness'];
 
-    const sceneFeatures = ((device.definition?.exposes ?? []) as GenericExposedFeature[]).filter(f => sceneExposes.includes(getFeatureName(f)));
+    const filteredFeatures = ((device.definition?.exposes ?? []) as GenericExposedFeature[])
+        .map((e: GenericExposedFeature | CompositeFeature) => onlyValidFeaturesForScenes(e, deviceState))
+        .filter(f => f);
+
+
 
 
     return <>
@@ -72,7 +91,7 @@ function AddScene(props: SceneProps & Pick<SceneApi, 'sceneStore'> & Pick<StateA
                 onChange={(e) => setSceneId(e.target.valueAsNumber)}
             />
 
-            <Composite feature={{ features: sceneFeatures } as CompositeFeature}
+            <Composite feature={{ features: filteredFeatures } as CompositeFeature}
                 className="row"
                 type="composite"
                 device={device}
