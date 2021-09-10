@@ -20,15 +20,15 @@
         "groups": "그룹",
         "loading": "Loading...",
         "none": "None",
-        "ok": "Ok",
-        "read": "Read",
-        "save": "Save",
-        "select_device": "Select device",
-        "select_endpoint": "Select endpoint",
+        "ok": "확인",
+        "read": "읽기",
+        "save": "저장",
+        "select_device": "장치 선택",
+        "select_endpoint": "endpoint 선택",
         "source_endpoint": "Source endpoint",
         "the_only_endpoint": "The only endpoint",
         "unbind": "Unbind",
-        "write": "Write"
+        "write": "쓰기"
     },
     "devicePage": {
         "about": "자세히",
@@ -36,7 +36,7 @@
         "clusters": "클러스터",
         "dev_console": "Dev console",
         "exposes": "Exposes",
-        "reporting": "Reporting",
+        "reporting": "보고",
         "settings": "설정",
         "settings_specific": "설정 (specific)",
         "state": "상태",
@@ -81,7 +81,7 @@
         "min_temperature": "최저 온도",
         "motor_reversal": "역방향 모터회전",
         "moving": "움직임",
-        "occupancy": "Occupancy",
+        "occupancy": "감지",
         "operation_mode": "동작 모드",
         "options": "옵션",
         "position": "위치",
@@ -99,7 +99,8 @@
         "temperature": "온도",
         "voltage": "전압",
         "water_leak": "누수",
-        "week": "주"
+        "week": "주",
+        "device_temperature": "장치 온도"
     },
     "extensions": {
         "create_new_extension": "새 익스텐션 만들기",
@@ -117,12 +118,16 @@
         "contact": "접촉",
         "humidity": "습도",
         "illuminance": "밝기",
-        "occupancy": "Occupancy",
+        "occupancy": "감지",
+        "options": "옵션",
+        "position": "위치",
         "pressure": "압력",
         "soil_moisture": "토양 습도",
+        "smoke": "연기",
         "state": "상태",
         "temperature": "온도",
-        "tamper": "분리 감지"
+        "tamper": "분리 감지",
+        "device_temperature": "장치 온도"
     },
     "groups": {
         "add_to_group": "그룹 추가",
@@ -139,15 +144,15 @@
         "show_only": "Show only"
     },
     "map": {
-        "help_coordinator_link_description": "Solid lines are the link to the Coordinator",
-        "help_end_device_description": "Green means End Device",
+        "help_coordinator_link_description": "실선 : Coordinator와 연결",
+        "help_end_device_description": "녹색 : End Device",
         "help_is_coordinator": "is Coordinator",
-        "help_lqi_description": "Link quality is between 0 - 255 (higher is better), values with / represents multiple types of links",
-        "help_router_description": "Blue means Router",
-        "help_router_links_description": "Dashed lines are the link with Routes",
-        "hide": "Click on me to hide",
-        "load": "Load map",
-        "loading": "Depending on the size of your network this can take somewhere between 10 seconds and 2 minutes."
+        "help_lqi_description": "Link quality 값은 0~255 (높을수록 좋음), 여러 유형의 링크를 나타냅니다.",
+        "help_router_description": "파랑 : Router",
+        "help_router_links_description": "점선 : Routes와 연결",
+        "hide": "숨기기",
+        "load": "맵 보기",
+        "loading": "네트워크 크기에 따라 다르며 10초~2분정도 소요됩니다."
     },
     "navbar": {
         "all": "전체",
@@ -183,22 +188,22 @@
             "Hello, %username%, here you can thank us for hardworking",
             "Don't hesitate to say something nice as well ;)"
         ],
-        "download_state": "Download state",
+        "download_state": "다운로드 상태",
         "experimental": "Experimental",
-        "external_converters": "External converters",
+        "external_converters": "외부 컨버터",
         "frontend": "Frontend",
-        "frontend_version": "Frontend version",
+        "frontend_version": "Frontend 버전",
         "main": "Main",
         "mqtt": "MQTT",
-        "ota": "OTA updates",
+        "ota": "OTA 업데이트",
         "passlist": "Passlist",
         "raw": "Raw",
-        "restart_zigbee2mqtt": "Restart Zigbee2MQTT",
+        "restart_zigbee2mqtt": "재시작 Zigbee2MQTT",
         "serial": "Serial",
         "settings": "설정",
-        "tools": "Tools",
-        "zigbee2mqtt_version": "Zigbee2MQTT version",
-        "translate": "Translate"
+        "tools": "도구",
+        "zigbee2mqtt_version": "Zigbee2MQTT 버전",
+        "translate": "번역"
     },
     "settingsSchemaTranslations": {
         "advanced-title": "Advanced",
@@ -245,8 +250,8 @@
     },
     "touchlink": {
         "detected_devices_message": "Detected {{count}} touchlink devices.",
-        "rescan": "Scan again",
-        "scan": "Scan"
+        "rescan": "재 탐색",
+        "scan": "탐색"
     },
     "values": {
         "clear": "정상",
@@ -269,12 +274,12 @@
         "description": "설명",
         "device_type": "장치 종류",
         "endpoint": "Endpoint",
-        "firmware_build_date": "Firmware build date",
-        "firmware_version": "Firmware version",
+        "firmware_build_date": "펌웨어 제작일",
+        "firmware_version": "펌웨어 버전",
         "force_remove": "강제 삭제",
         "friendly_name": "Friendly name",
         "ieee_address": "IEEE Address",
-        "input_clusters": "Input_clusters",
+        "input_clusters": "입력 클러스터",
         "interview_completed": "인터뷰 성공",
         "last_seen": "Last seen",
         "lqi": "LQI",
@@ -282,10 +287,10 @@
         "max_rep_interval": "최대 보고 주기",
         "min_rep_change": "최소 보고 변화값",
         "min_rep_interval": "최소 보고 주기",
-        "model": "Model",
+        "model": "모델명",
         "network_address": "네트워크 주소",
         "none": "None",
-        "output_clusters": "Output clusters",
+        "output_clusters": "출력 클러스터",
         "pic": "사진",
         "power": "파워",
         "reconfigure": "재설정",
@@ -297,6 +302,6 @@
         "unsupported": "지원하지 않음",
         "update_Home_assistant_entity_id": "Home Assistant entity ID 업데이트",
         "zigbee_manufacturer": "Zigbee 제조사",
-        "zigbee_model": "Zigbee 모델"
+        "zigbee_model": "Zigbee 모델명"
     }
 }
