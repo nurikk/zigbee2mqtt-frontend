@@ -206,23 +206,30 @@ export interface ReportingConfig {
     minimum_report_interval: number;
     reportable_change: number;
 }
-export interface EndpointDescription {
+export interface WithScenes {
+    scenes: Scene[];
+}
+export interface EndpointDescription{
     bindings: BindRule[];
     configured_reportings: ReportingConfig[];
     clusters: {
         input: Cluster[];
         output: Cluster[];
-    };
+    };    
 }
 export interface WithFreiendlyName {
     friendly_name: FriendlyName;
 }
 export interface GroupAddress {
-    endpoint: number;
+    endpoint: Endpoint;
     ieee_address: IEEEEAddress;
 }
 
-export interface Group extends WithFreiendlyName { 
+export type Scene = {
+    id: number;
+    endpoint?: Endpoint;
+}
+export interface Group extends WithFreiendlyName, WithScenes { 
     id: number;
     members: GroupAddress[];
 }

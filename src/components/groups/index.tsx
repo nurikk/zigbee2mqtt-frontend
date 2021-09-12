@@ -10,7 +10,7 @@ import { GroupsApi } from "../../actions/GroupsApi";
 import { withTranslation, WithTranslation } from "react-i18next";
 import { AddDeviceToGroup } from "./AddDeviceToGroup";
 import { DeviceGroup } from "./DeviceGroup";
-import { RecallRemoveAndMayBeStoreScene } from "../device-page/scene";
+import { AddScene, RecallRemove } from "../device-page/scene";
 import { SceneApi } from "../../actions/SceneApi";
 import { DeviceState } from "../../types";
 interface GroupsPageState {
@@ -88,22 +88,44 @@ export class GroupsPage extends Component<PropsFromStore & SceneApi & GroupsApi 
 
                 <div className="card-footer">
                     <div className="row">
-                        <div className="col-12 col-sm-4 col-xxl-6 d-flex">
-                            <div className="form-group w-100">
-                                <AddDeviceToGroup addDeviceToGroup={addDeviceToGroup} devices={devices} group={group} />
+
+                        <div className="col-12 col-sm-4 col-xxl-4 d-flex">
+                            <div className="card w-100" >
+                                <div className="card-body">
+                                    <div className="form-group">
+                                        <AddDeviceToGroup addDeviceToGroup={addDeviceToGroup} devices={devices} group={group} />
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div className="col-12 col-sm-4 col-xxl-6 d-flex">
-                            <div className="form-group w-100">
-                                <RecallRemoveAndMayBeStoreScene
-                                    target={group}
-                                    sceneStore={sceneStore}
-                                    sceneRecall={sceneRecall}
-                                    sceneRemove={sceneRemove}
-                                    sceneRemoveAll={sceneRemoveAll}
-                                    showStoreButton={true}
-                                    deviceState={{} as DeviceState}
-                                />
+                        <div className="col-12 col-sm-4 col-xxl-4 d-flex">
+                            <div className="card w-100">
+                                <div className="card-body">
+                                    <div className="form-group">
+                                        <RecallRemove
+                                            target={group}
+                                            sceneStore={sceneStore}
+                                            sceneRecall={sceneRecall}
+                                            sceneRemove={sceneRemove}
+                                            sceneRemoveAll={sceneRemoveAll}
+                                            deviceState={{} as DeviceState}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-12 col-sm-4 col-xxl-4 d-flex">
+                            <div className="card w-100">
+                                <div className="card-body">
+                                    <div className="form-group">
+                                        <AddScene
+                                            sceneStore={sceneStore}
+                                            target={group}
+                                            deviceState={{} as DeviceState}
+                                            setDeviceState={(dev: string, value: Record<string, unknown>) => { return Promise.resolve() }}
+                                        />
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -275,7 +275,7 @@
         "force_remove": "Force remove",
         "friendly_name": "Friendly name",
         "ieee_address": "IEEE Address",
-        "input_clusters": "Input_clusters",
+        "input_clusters": "Input clusters",
         "interview_completed": "Interview completed",
         "last_seen": "Last seen",
         "lqi": "LQI",
@@ -306,7 +306,8 @@
         "recall": "Recall",
         "store": "Store",
         "remove": "Remove",
-        "remove_all": "Remove all scenes",
-        "add": "Add"
+        "remove_all": "Remove all",
+        "add": "Add",
+        "select_scene": "Select Scene"
     }
 }
