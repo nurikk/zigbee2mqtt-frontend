@@ -1,3 +1,12 @@
+## [0.6.6](https://github.com/nurikk/z2m-frontend/compare/0.6.4...0.6.6) (2021-09-12)
+
+
+### Features
+
+* **scenes:** add support from scenes list ([eb37f63](https://github.com/nurikk/z2m-frontend/commit/eb37f6334b2a6f88f9b2e6a6030b6a1c88e69c10))
+
+
+
 ## [0.6.5](https://github.com/nurikk/z2m-frontend/compare/0.6.4...0.6.5) (2021-09-12)
 
 
