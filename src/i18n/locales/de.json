@@ -150,7 +150,8 @@
         "away_mode": "Abwesenheitsmodus",
         "preset": "Vorgabe",
         "water_leak": "Wasserleck",
-        "tamper": "Manipulation"
+        "tamper": "Manipulation",
+        "action": "Aktion"
     },
     "groups": {
         "add_to_group": "Zur Gruppe hinzufügen",
