@@ -46,7 +46,8 @@
         "scene_id": "Szenen ID",
         "store": "Speichern",
         "recall": "Abrufen",
-        "remove": "Entfernen"
+        "remove": "Entfernen",
+        "select_scene": "Szene auswählen"
     },
     "exposes": {
         "Pressure": "Luftdruck",
