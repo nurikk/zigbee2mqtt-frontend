@@ -38,6 +38,7 @@ body:
       required: true
     attributes:
       label: Did you donwload state.json.zip?
+      description: The file from error page or `Zigbee2MQTT frontend -> Settings -> Tools -> Download state`
       multiple: false
       options:
         - I will attach state.json.zip
