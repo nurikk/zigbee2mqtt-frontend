@@ -44,16 +44,17 @@ export default class DeviceSettings extends Component<DeviceSettingsProps, Devic
     getDeviceConfig(): KVP | KVP[] {
         const { bridgeInfo: { config }, device } = this.props;
         const { updatedDeviceConfig } = this.state;
-        return merge({}, updatedDeviceConfig, config?.device_options, config?.devices[device.ieee_address]);
+        return merge({}, config?.device_options, config?.devices[device.ieee_address], updatedDeviceConfig);
     }
     onFormChange = (params: ISubmitEvent<KVP | KVP[]>): void => {
         const { formData } = params;
         this.setState({ updatedDeviceConfig: formData });
     }
-    updateConfig = (params: ISubmitEvent<KVP | KVP[]>): void => {
+    updateConfig = async (params: ISubmitEvent<KVP | KVP[]>): Promise<void> => {
         const { formData } = params;
         const { setDeviceOptions, device } = this.props;
-        setDeviceOptions(device.ieee_address, formData as Record<string, unknown>);
+        await setDeviceOptions(device.ieee_address, formData as Record<string, unknown>);
+        this.setState({ updatedDeviceConfig: {} });
     }
 
     getSchemaAndConfig(): { schema: JSONSchema7, data: KVP | KVP[], uiSchema: UiSchema } {
