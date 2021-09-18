@@ -112,7 +112,7 @@ const processHighlights = ({ networkGraph, links, selectedNode, node, link, link
     links.forEach((l) => linkedByIndex.add(l.source.ieeeAddr + "," + l.target.ieeeAddr));
 
     const neighboring = (a: NodeI, b: NodeI): boolean => linkedByIndex.has(a.ieeeAddr + "," + b.ieeeAddr)
-    const computeOpacity = (l: LinkI) => (l.source === selectedNode || l.target === selectedNode ? 1 : 0.15);
+    const computeOpacity = (l: LinkI) => (l?.source === selectedNode || l?.target === selectedNode ? 1 : 0.15);
     if (selectedNode) {
         node.style("opacity", (o: NodeI) => neighboring(selectedNode, o) || neighboring(o, selectedNode) ? 1 : 0.15);
         link.style("stroke-opacity", computeOpacity);
