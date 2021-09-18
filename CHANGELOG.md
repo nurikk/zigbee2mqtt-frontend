@@ -1,3 +1,13 @@
+## [0.6.7](https://github.com/nurikk/z2m-frontend/compare/0.6.6...0.6.7) (2021-09-18)
+
+
+### Bug Fixes
+
+* **map:** fix netrowk crash ([7b2e116](https://github.com/nurikk/z2m-frontend/commit/7b2e116c282e1763a3c62ad322dc5ab9df908c06)), closes [#835](https://github.com/nurikk/z2m-frontend/issues/835)
+* **settings:** fix config update ([de5c6ac](https://github.com/nurikk/z2m-frontend/commit/de5c6ac3ef839d2939cebd38e453ae9d7da9ebba)), closes [#847](https://github.com/nurikk/z2m-frontend/issues/847) [#786](https://github.com/nurikk/z2m-frontend/issues/786)
+
+
+
 ## [0.6.6](https://github.com/nurikk/z2m-frontend/compare/0.6.4...0.6.6) (2021-09-12)
 
 
