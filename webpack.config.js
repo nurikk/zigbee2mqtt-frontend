@@ -149,7 +149,7 @@ const config = {
         headers: {
             "Access-Control-Allow-Origin": "*",
         },
-        contentBase: "./dist",
+        static: "./dist",
         compress: true,
         host: "0.0.0.0",
         port: 3030,
