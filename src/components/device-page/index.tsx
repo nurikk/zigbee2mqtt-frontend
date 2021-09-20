@@ -38,10 +38,10 @@ const getDeviceLinks = (dev: string) => ([
         translationKey: 'settings',
         url: `/device/${dev}/settings`
     },
-    {
-        translationKey: 'settings_specific',
-        url: `/device/${dev}/settings-specific`
-    },
+    // {
+    //     translationKey: 'settings_specific',
+    //     url: `/device/${dev}/settings-specific`
+    // },
     {
         translationKey: 'state',
         url: `/device/${dev}/state`
