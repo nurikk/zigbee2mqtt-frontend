@@ -1,3 +1,14 @@
+## [0.6.8](https://github.com/nurikk/z2m-frontend/compare/0.6.7...0.6.8) (2021-09-20)
+
+
+### Bug Fixes
+
+* **settings:** remove specific link ([e395267](https://github.com/nurikk/z2m-frontend/commit/e395267dbea9d33110e3985c0de736cf048d0cfb))
+* **styles:** upgrade theme to the latest version ([2ec6676](https://github.com/nurikk/z2m-frontend/commit/2ec66767a6e2fd74610c972a8b0c7edea44318b4))
+* **webpack:** fix legacy params ([b6ada6f](https://github.com/nurikk/z2m-frontend/commit/b6ada6fbba75de4848b3cb38c3ce786f8e01c492))
+
+
+
 ## [0.6.7](https://github.com/nurikk/z2m-frontend/compare/0.6.6...0.6.7) (2021-09-18)
 
 
