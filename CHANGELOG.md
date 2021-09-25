@@ -1,3 +1,12 @@
+## [0.6.9](https://github.com/nurikk/z2m-frontend/compare/0.6.8...0.6.9) (2021-09-25)
+
+
+### Bug Fixes
+
+* **settings:** update repo url ([320e953](https://github.com/nurikk/z2m-frontend/commit/320e9535eba84ab130c81430b7278fc7ce6857ac))
+
+
+
 ## [0.6.8](https://github.com/nurikk/z2m-frontend/compare/0.6.7...0.6.8) (2021-09-20)
 
 
