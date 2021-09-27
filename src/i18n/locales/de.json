@@ -13,7 +13,7 @@
         "ok": "ok",
         "source_endpoint": "Quellen Endpunkt",
         "destination": "Ziel",
-        "clusters": "Cluster",
+        "clusters": "Clusters",
         "bind": "verbinden",
         "unbind": "trennen",
         "select_endpoint": "Wähle Endpunkt",
@@ -26,7 +26,8 @@
         "read": "Lesen",
         "write": "Schreiben",
         "the_only_endpoint": "Der einzige Endpunkt",
-        "disable": "Abschalten"
+        "disable": "Abschalten",
+        "unknown": "Unbekannt"
     },
     "devicePage": {
         "about": "Über",
@@ -34,7 +35,7 @@
         "clusters": "Clusters",
         "dev_console": "Dev Konsole",
         "exposes": "Details",
-        "reporting": "Reporting",
+        "reporting": "Berichten",
         "settings": "Einstellungen",
         "settings_specific": "Einstellungen (spezifisch)",
         "state": "Status",
@@ -119,7 +120,7 @@
         "contact": "Kontakt",
         "humidity": "Feuchtigkeit",
         "illuminance": "Beleuchtungsstärke",
-        "occupancy": "Besetzt",
+        "occupancy": "Bewegung",
         "pressure": "Luftdruck",
         "soil_moisture": "Bodenfeuchtigkeit",
         "state": "Status",
@@ -281,20 +282,20 @@
         "scan": "Scannen"
     },
     "values": {
-        "Clear": "Ruhig",
+        "Clear": "Inaktiv",
         "Closed": "Geschlossen",
-        "Occupied": "beschäftigt",
+        "Occupied": "Aktiv",
         "Open": "Offen",
         "true": "Ja",
         "closed": "geschlossen",
         "open": "offen",
-        "occupied": "beschäftigt",
-        "clear": "ruhig",
+        "occupied": "Aktiv",
+        "clear": "Inaktiv",
         "leaking": "Feuchtigkeit entdeckt",
         "tampered": "manipuliert",
         "supported": "unterstützt",
         "not_supported": "nicht unterstützt",
-        "false": "falsch"
+        "false": "Nein"
         
     },
     "zigbee": {
