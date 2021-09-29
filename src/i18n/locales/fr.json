@@ -123,7 +123,14 @@
         "soil_moisture": "Humidité Sol",
         "state": "État",
         "temperature": "Température",
-        "tamper": "Sabotage"
+        "tamper": "Sabotage",
+        "current_heating_setpoint": "Consigne de chauffe actuelle",
+        "local_temperature": "Température Locale",
+        "system_mode": "Mode du Système",
+        "local_temperature_calibration": "Calibration Température Locale",
+        "away_mode": "Mode Absence",
+        "position": "Position",
+        "preset": "Préréglage"
     },
     "featureDescriptions": {
         "On/off state of this light": "Etat Allumé/Eteint de cette lumière",
@@ -152,7 +159,7 @@
         "Current temperature measured on the device": "Température Actuelle mesurée sur le périphérique",
         "Mode of this device": "Mode du périphérique",
         "Offset to be used in the local_temperature": "Décalage à appliquer sur la local_temperature",
-        "Away mode": "Mode absent",
+        "Away mode": "Mode absence",
         "Mode of this device (similar to system_mode)": "Mode du périphérique (similaire à system_mode)",
         "Enable/disable auto lock": "Active/Désactive auto-verrouillage",
         "Enable/disable away mode": "Active/Désactive mode absent",
@@ -164,7 +171,8 @@
         "Maximum temperature": "Température Max",
         "Minimum temperature": "Température Min",
         "Week format user for schedule": "Format semaine du calendrier",
-        "Away preset temperature": "Température Absent pré-définie"        
+        "Away preset temperature": "Température Absent pré-définie",
+        "On/off state of the switch": "Etat Allumé/Eteint de l'interrupteur"
     },
     "groups": {
         "add_to_group": "Ajouter au groupe",
