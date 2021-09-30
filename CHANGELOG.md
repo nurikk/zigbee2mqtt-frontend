@@ -1,3 +1,13 @@
+## [0.6.11](https://github.com/nurikk/z2m-frontend/compare/0.6.10...0.6.11) (2021-09-30)
+
+
+### Bug Fixes
+
+* **exposes:** fix translation for tamper close ([f42d296](https://github.com/nurikk/z2m-frontend/commit/f42d2965a1e9de14a094bf507862c661d972cea1))
+* **i18n:** fix language picker navigation clicks ([0d0efea](https://github.com/nurikk/z2m-frontend/commit/0d0efeaa463ea66b98e662e42d2beec30b97807a))
+
+
+
 ## [0.6.10](https://github.com/nurikk/z2m-frontend/compare/0.6.9...0.6.10) (2021-09-30)
 
 
