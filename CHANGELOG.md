@@ -1,3 +1,12 @@
+## [0.6.10](https://github.com/nurikk/z2m-frontend/compare/0.6.9...0.6.10) (2021-09-30)
+
+
+### Bug Fixes
+
+* **i18n:** update ru translation ([7b216ac](https://github.com/nurikk/z2m-frontend/commit/7b216ac3ef50a58fc7d0c4cb3c30205afa201877))
+
+
+
 ## [0.6.9](https://github.com/nurikk/z2m-frontend/compare/0.6.8...0.6.9) (2021-09-25)
 
 
