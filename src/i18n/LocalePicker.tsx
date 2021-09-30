@@ -36,14 +36,21 @@ export default function LocalePicker(): JSX.Element {
 
     const selectAndHide = (lang: string) => { i18n.changeLanguage(lang); setIsComponentVisible(false) }
 
-    const locales = Object.keys(i18n.options.resources as Resource).map((language) => (<a key={language} className="dropdown-item" href="#" onClick={selectAndHide.bind(null, language)}>
+    const locales = Object.keys(i18n.options.resources as Resource).map((language) => (<a key={language} className="dropdown-item" href="#"
+        onClick={(e) => {
+            selectAndHide(language);
+            e.preventDefault();
+        }}>
         <img src={localesMap[language] ?? missing} alt={localeNames[language]} width="20" className="align-middle me-1" />
         <span className="align-middle">{localeNames[language]}</span>
     </a>));
     const currentLanguage = i18n.language.split('-')[0];
 
     return (<li className="nav-item dropdown">
-        <a className={cx("nav-flag dropdown-toggle", { show: isComponentVisible })} href="#" onClick={() => setIsComponentVisible(!isComponentVisible)} >
+        <a className={cx("nav-flag dropdown-toggle", { show: isComponentVisible })} href="#" onClick={(e) => {
+            setIsComponentVisible(!isComponentVisible);
+            e.preventDefault();
+        }}>
             <img src={localesMap[currentLanguage] ?? missing} alt={localeNames[currentLanguage]} />
         </a>
         <div ref={ref as RefObject<HTMLDivElement>} className={cx("dropdown-menu dropdown-menu-end", { show: isComponentVisible })}>
