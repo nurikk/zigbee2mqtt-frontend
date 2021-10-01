@@ -1,3 +1,12 @@
+## [0.6.12](https://github.com/nurikk/z2m-frontend/compare/0.6.11...0.6.12) (2021-10-01)
+
+
+### Bug Fixes
+
+* **mobile:** range-editor not working on mobile ([#899](https://github.com/nurikk/z2m-frontend/issues/899)) ([a78aa85](https://github.com/nurikk/z2m-frontend/commit/a78aa8581127e58ee3b8ddbe71157b1b8ad48aac))
+
+
+
 ## [0.6.11](https://github.com/nurikk/z2m-frontend/compare/0.6.10...0.6.11) (2021-09-30)
 
 
