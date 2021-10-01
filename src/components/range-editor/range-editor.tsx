@@ -34,6 +34,7 @@ const RangeEditor: FunctionComponent<RangeProps & Omit<InputHTMLAttributes<HTMLI
             className="form-range form-control border-0"
             value={currentValue}
             onChange={e => setCurrentValue(e.target.valueAsNumber)}
+            onTouchEnd={(() => onChange(currentValue))}
             onMouseUp={(() => onChange(currentValue))}
             {...rest}
         /> : null}
