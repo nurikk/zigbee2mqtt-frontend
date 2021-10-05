@@ -22,6 +22,7 @@ const getTemperatureIcon = (temperature: number) => {
 
 
 const typeToClassMap = {
+    action: ['fa-uncharted'],
     humidity: ['text-info', 'fa-tint'],
     illuminance: ['fa-sun'],
     pressure: ['fa-cloud-download-alt'],
