@@ -40,7 +40,16 @@
         "settings": "Instellingen",
         "settings_specific": "Instellingen (specifiek)",
         "state": "Status",
-        "unknown_device": "Onbekend apparaat"
+        "unknown_device": "Onbekend apparaat",
+        "scene": "Scene"
+    },
+    "scene": {
+        "scene_id": "Scene-ID",
+        "store": "Winkel",
+        "recall": "Terugtrekken",
+        "remove": "Verwijder",
+        "remove_all": "Verwijder alle",
+        "select_scene": "Selecteer scene"
     },
     "exposes": {
         "action": "Actie",
@@ -298,5 +307,12 @@
         "update_Home_assistant_entity_id": "Home Assistant entiteit-ID bijwerken",
         "zigbee_manufacturer": "Zigbee Fabrikant",
         "zigbee_model": "Zigbee Model"
+    },
+    "featureDescriptions": {
+        "Indicates whether the device detected occupancy": "Geeft aan of het apparaat bezetting heeft gedetecteerd",
+        "Indicates if the battery of this device is almost empty": "Geeft aan of de batterij van dit apparaat bijna leeg is",
+        "Indicates whether the device is tampered": "Geeft aan of er met het apparaat is geknoeid",
+        "Remaining battery in %": "Resterende batterij in %",
+        "Link quality (signal strength)": "Kwaliteit van de verbinding (signaalsterkte)"
     }
 }
