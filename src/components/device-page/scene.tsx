@@ -1,5 +1,5 @@
 import React, { ChangeEvent, Component, useState } from "react";
-import { CompositeFeature, Device, DeviceState, Endpoint, GenericExposedFeature, Group, Scene, SwitchFeature, WithFreiendlyName, WithScenes } from "../../types";
+import { CompositeFeature, Device, DeviceState, Endpoint, EndpointDescription, GenericExposedFeature, Group, Scene, SwitchFeature, WithFreiendlyName, WithScenes } from "../../types";
 import actions from "../../actions/actions";
 import { SceneApi, SceneId } from "../../actions/SceneApi";
 import { connect } from "unistore/react";
@@ -12,13 +12,13 @@ import { isLightFeature, isSwitchFeature } from "./type-guards";
 import { StateApi } from "../../actions/StateApi";
 import groupBy from "lodash/groupBy";
 
-const isValidSceneId = (id: number): boolean => {
-    return id >= 0 && id <= 255;
+const isValidSceneId = (id: SceneId, existingScenes: Scene[] = []): boolean => {
+    return id >= 0 && id <= 255 && !existingScenes.find(s => s.id == id);
 }
 
 
 interface RecallRemoveAndMayBeStoreSceneProps {
-    target: WithFreiendlyName | WithScenes;
+    target: Device | Group;
     deviceState: DeviceState;
 }
 
@@ -37,9 +37,9 @@ function ScenePicker(props: ScenePickerProps) {
         onSceneSelected({ id: parseInt(id, 10), endpoint });
     }
     const selectPicker = <select onChange={onSelectHandler} id="rr-scene" className="form-select">
-        <option  key="hidden" hidden>{t('select_scene')}</option>
+        <option key="hidden" hidden>{t('select_scene')}</option>
         {
-            scenes.map(scene => <option key={`${scene.id}-${scene.endpoint}`} value={`${scene.id}-${scene.endpoint}`}>{scene.id} {scene.endpoint ? `(${scene.endpoint})` : ''}</option>)
+            scenes.map(scene => <option key={`${scene.id}-${scene.endpoint}`} value={`${scene.id}-${scene.endpoint}`}>{scene.name}</option>)
         }
     </select>;
 
@@ -54,12 +54,33 @@ function ScenePicker(props: ScenePickerProps) {
 
     </>
 }
+
+function getScenes(target: Group | Device): Scene[] {
+    if ((target as Device).endpoints) {
+        const scenes: Scene[] = [];
+        let endpoint: EndpointDescription;
+        Object.entries((target as Device).endpoints).forEach(
+            ([endpoint, value]) => {
+                for (let _scene of value.scenes) {
+                    scenes.push({
+                        ..._scene, ...{ endpoint }
+                    })
+                }
+            }
+        );
+        return scenes;
+    } else if ((target as WithScenes).scenes) {
+        return (target as WithScenes).scenes;
+    }
+    return []
+}
+
 export function RecallRemove(props: RecallRemoveAndMayBeStoreSceneProps & Pick<SceneApi, 'sceneRecall' | 'sceneRemove' | 'sceneStore' | 'sceneRemoveAll'>) {
     const { sceneRecall, sceneRemove, sceneStore, sceneRemoveAll, target } = props;
     const { t } = useTranslation("scene");
-    const [scene, setScene] = useState<Scene>({id: 0, endpoint: undefined} as Scene);
+    const [scene, setScene] = useState<Scene>({ id: 0, endpoint: undefined } as Scene);
     const sceneIsntSelected = scene.id === undefined;
-    const { scenes } = target as WithScenes;
+    const scenes = getScenes(target);
     const { friendly_name } = target as WithFreiendlyName;
     return <>
         <div className="mb-3">
@@ -108,12 +129,15 @@ export const onlyValidFeaturesForScenes = (feature: GenericExposedFeature | Comp
 type AddSceneProps = {
     target: Device | Group;
     deviceState: DeviceState;
+
 }
 export function AddScene(props: AddSceneProps & Pick<SceneApi, 'sceneStore'> & Pick<StateApi, 'setDeviceState'>) {
     const { target, deviceState, sceneStore, setDeviceState } = props;
-
+    const scenes = getScenes(target);
     const { t } = useTranslation("scene");
     const [sceneId, setSceneId] = useState<SceneId>(0);
+    const [sceneName, setSceneName] = useState<string>("");
+
     let filteredFeatures: (false | GenericExposedFeature | CompositeFeature)[] = [];
     if ((target as Device).definition) {
         filteredFeatures = (((target as Device).definition?.exposes ?? []) as GenericExposedFeature[])
@@ -132,6 +156,14 @@ export function AddScene(props: AddSceneProps & Pick<SceneApi, 'sceneStore'> & P
                 type="number"
                 onChange={(e) => setSceneId(e.target.valueAsNumber)}
             />
+            <label htmlFor="add-scene-name" className="form-label">{t('scene_name')}</label>
+            <input id="add-scene-name"
+                className="form-control"
+                value={sceneName}
+                type="string"
+                onChange={(e) => setSceneName(e.target.value)}
+                placeholder={ `Scene ${sceneId}`}
+            />
 
             <Composite feature={{ features: filteredFeatures } as CompositeFeature}
                 className="row"
@@ -147,7 +179,7 @@ export function AddScene(props: AddSceneProps & Pick<SceneApi, 'sceneStore'> & P
             />
         </div>
         <div className="d-flex">
-            <button disabled={!isValidSceneId(sceneId)} type="submit" onClick={() => sceneStore(target.friendly_name, sceneId)} className="btn btn-primary ms-auto">{t('store')}</button>
+            <button disabled={!isValidSceneId(sceneId, scenes)} type="submit" onClick={() => sceneStore(target.friendly_name, { id: sceneId, name: sceneName })} className="btn btn-primary ms-auto">{t('store')}</button>
         </div>
     </>
 }
@@ -157,9 +189,9 @@ type SceneProps = {
     device: Device;
     deviceState: DeviceState;
 }
+
 function ScenePage(props: SceneProps & SceneApi & StateApi) {
     const { sceneStore, sceneRecall, sceneRemove, sceneRemoveAll, setDeviceState, device, deviceState } = props;
-
     return <div className="row">
         <div className="col-12 col-sm-6 col-xxl-6 d-flex">
             <div className="card flex-fill">

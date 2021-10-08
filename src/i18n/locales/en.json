@@ -308,6 +308,7 @@
         "remove": "Remove",
         "remove_all": "Remove all",
         "add": "Add",
-        "select_scene": "Select Scene"
+        "select_scene": "Select Scene",
+        "scene_name": "Scene Name"
     }
 }

@@ -209,7 +209,7 @@ export interface ReportingConfig {
 export interface WithScenes {
     scenes: Scene[];
 }
-export interface EndpointDescription{
+export interface EndpointDescription extends WithScenes{
     bindings: BindRule[];
     configured_reportings: ReportingConfig[];
     clusters: {
@@ -227,6 +227,7 @@ export interface GroupAddress {
 
 export type Scene = {
     id: number;
+    name?: string;
     endpoint?: Endpoint;
 }
 export interface Group extends WithFreiendlyName, WithScenes { 
