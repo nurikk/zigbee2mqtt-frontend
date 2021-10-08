@@ -63,7 +63,7 @@ const ColorEditor: FunctionComponent<ColorProps & Omit<InputHTMLAttributes<HTMLI
     useEffect(() => {
         setCurrentColor(toRGB(value, format))
     }, [value, format]);
-
+    console.log(currentColor);
     return <>
         {!minimal && <div className="btn-group me-2 float-start">
             {
@@ -82,8 +82,11 @@ const ColorEditor: FunctionComponent<ColorProps & Omit<InputHTMLAttributes<HTMLI
             value={currentColor}
             style={{ minWidth: 40 }}
             onChange={e => {
-                onChange(rgbToTargetFormat(e.target.value, format))
+                if (e.target.value.toLowerCase() !== currentColor.toLowerCase()) {
+                    onChange(rgbToTargetFormat(e.target.value, format))
+                }
             }}
+
             {...rest}
         />
     </>
