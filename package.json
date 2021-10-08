@@ -52,7 +52,7 @@
         "@typescript-eslint/eslint-plugin": "^4.33.0",
         "@typescript-eslint/parser": "^4.33.0",
         "ace-builds": "^1.4.13",
-        "bootstrap": "^5.1.1",
+        "bootstrap": "^5.1.2",
         "classnames": "^2.2.6",
         "color-convert": "^2.0.1",
         "concurrently": "^6.3.0",
