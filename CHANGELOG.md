@@ -1,3 +1,18 @@
+## [0.6.13](https://github.com/nurikk/z2m-frontend/compare/0.6.12...0.6.13) (2021-10-08)
+
+
+### Bug Fixes
+
+* **color-picker:** fix second onChange event handling ([ff8b65e](https://github.com/nurikk/z2m-frontend/commit/ff8b65ec3dd449a523fe517a929dde5fd8355dc2))
+* **scenes:** small fixes ([2ea92b3](https://github.com/nurikk/z2m-frontend/commit/2ea92b31fb76ceafc41e7227e3294a58411a9bc7))
+
+
+### Features
+
+* **scenes:** add scene names ([f9d5492](https://github.com/nurikk/z2m-frontend/commit/f9d5492d476d9be3459c2d226a8bf262c41c3d17))
+
+
+
 ## [0.6.12](https://github.com/nurikk/z2m-frontend/compare/0.6.11...0.6.12) (2021-10-01)
 
 
