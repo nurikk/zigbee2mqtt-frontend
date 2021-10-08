@@ -1,3 +1,12 @@
+## [0.6.16](https://github.com/nurikk/z2m-frontend/compare/0.6.15...0.6.16) (2021-10-08)
+
+
+### Features
+
+* **map:** add custom device icon to the map ([4311030](https://github.com/nurikk/z2m-frontend/commit/4311030cdfa881b617428aedc35c88ff223c4046))
+
+
+
 ## [0.6.15](https://github.com/nurikk/z2m-frontend/compare/0.6.14...0.6.15) (2021-10-08)
 
 
