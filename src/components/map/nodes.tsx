@@ -3,7 +3,7 @@ import { LinkI, NodeI } from "./types";
 import cx from "classnames";
 import style from "./map.css";
 import { MouseEventsResponderNode } from ".";
-import { Device, DeviceState, FriendlyName } from "../../types";
+import { Device, DeviceState, FriendlyName, IEEEEAddress } from "../../types";
 import DeviceImage from "../device-image";
 import { Simulation } from "d3-force";
 import { select } from "d3-selection";
@@ -34,6 +34,7 @@ export const getStarShape = (innerCircleArms: number, innerRadius: number, outer
 interface NodeProps extends MouseEventsResponderNode {
     node: NodeI;
     deviceState: DeviceState;
+    device: Device;
 }
 
 const offlineTimeout = 3600 * 2;
@@ -90,7 +91,7 @@ class Node extends Component<NodeProps, NodeState> {
 
     render() {
         const { hasBeenUpdated } = this.state;
-        const { node, deviceState } = this.props;
+        const { node, deviceState, device } = this.props;
         const { onMouseOver, onMouseOut, onDblClick } = this;
         const deviceType = node.type as string;
         const cn = cx(style.node, style[deviceType]); //{ [style.offline]: !isOnline(node.device, time) }
@@ -120,12 +121,9 @@ class Node extends Component<NodeProps, NodeState> {
                             type="svg"
                             width={32}
                             height={32}
-                            device={node as unknown as Device}
+                            device={device}
                             className={`${style.img}`}
-
                         />
-
-
                     </>
                 )
             }
@@ -140,6 +138,7 @@ interface NodesProps extends MouseEventsResponderNode {
     nodes: NodeI[];
     deviceStates: Record<FriendlyName, DeviceState>;
     simulation: Simulation<NodeI, LinkI>;
+    devices: Record<IEEEEAddress, Device>;
 }
 
 type NodesState = {
@@ -187,7 +186,8 @@ export default class Nodes extends Component<NodesProps, NodesState> {
 
 
     render() {
-        const { nodes, onMouseOut, onMouseOver, deviceStates } = this.props;
+        const { nodes, onMouseOut, onMouseOver, deviceStates, devices } = this.props;
+        debugger
         return (
             <g className={style.nodes}>
                 {nodes.map((node: NodeI) => (
@@ -197,6 +197,7 @@ export default class Nodes extends Component<NodesProps, NodesState> {
                         key={node.ieeeAddr}
                         node={node}
                         deviceState={deviceStates[node.friendlyName as FriendlyName]}
+                        device={devices[node.ieeeAddr]}
                     />
                 ))}
             </g>
