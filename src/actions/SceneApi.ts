@@ -22,7 +22,7 @@ export interface SceneApi {
 
 export default {
     sceneStore(state, dev: string,  scene: Scene, endpoint?: Endpoint): Promise<void> {
-        return api.send(`${dev}/set`, { scene_store: {ID: scene.id, name: scene.name} });
+        return api.send(`${dev}/set`, { scene_store: {...{ID: scene.id}, ...(scene.name && {name: scene.name})} });
     },
     sceneRecall(state, dev: string,  sceneId: SceneId, endpoint?: Endpoint): Promise<void> {
         return api.send(`${dev}/set`, { scene_recall: sceneId });

@@ -36,19 +36,23 @@ function ScenePicker(props: ScenePickerProps) {
         const [id, endpoint] = value.split("-");
         onSceneSelected({ id: parseInt(id, 10), endpoint });
     }
-    const selectPicker = <select onChange={onSelectHandler} id="rr-scene" className="form-select">
-        <option key="hidden" hidden>{t('select_scene')}</option>
-        {
-            scenes.map(scene => <option key={`${scene.id}-${scene.endpoint}`} value={`${scene.id}-${scene.endpoint}`}>{scene.name}</option>)
-        }
-    </select>;
+    const selectPicker = <>
+        <label htmlFor="rr-scene" className="form-label">{t('scene_name')}</label>
+        <select onChange={onSelectHandler} id="rr-scene" className="form-select">
+            <option key="hidden" hidden>{t('select_scene')}</option>
+            {
+                scenes.map(scene => <option key={`${scene.id}-${scene.endpoint}`} value={`${scene.id}-${scene.endpoint}`}>{scene.name}</option>)
+            }
+        </select>
+    </>;
 
-    const textPicker = <input min={0} value={value.id} type="number" className="form-control" id="rr-scene"
-        onChange={(e) => onSceneSelected({ id: e.target.valueAsNumber, endpoint: undefined })} />;
+    const textPicker = <>
+        <label htmlFor="rr-scene" className="form-label">{t('scene_id')}</label>
+        <input min={0} value={value.id} type="number" className="form-control" id="rr-scene"
+            onChange={(e) => onSceneSelected({ id: e.target.valueAsNumber, endpoint: undefined })} />
+    </>
 
     return <>
-        <label htmlFor="rr-scene" className="form-label">{t('scene_id')}</label>
-
         {scenes.length > 0 ? selectPicker : textPicker}
 
 
@@ -138,6 +142,7 @@ export function AddScene(props: AddSceneProps & Pick<SceneApi, 'sceneStore'> & P
     const [sceneId, setSceneId] = useState<SceneId>(0);
     const [sceneName, setSceneName] = useState<string>("");
 
+    const defaultSceneName = `Scene ${sceneId}`;
     let filteredFeatures: (false | GenericExposedFeature | CompositeFeature)[] = [];
     if ((target as Device).definition) {
         filteredFeatures = (((target as Device).definition?.exposes ?? []) as GenericExposedFeature[])
@@ -162,7 +167,7 @@ export function AddScene(props: AddSceneProps & Pick<SceneApi, 'sceneStore'> & P
                 value={sceneName}
                 type="string"
                 onChange={(e) => setSceneName(e.target.value)}
-                placeholder={ `Scene ${sceneId}`}
+                placeholder={defaultSceneName}
             />
 
             <Composite feature={{ features: filteredFeatures } as CompositeFeature}
@@ -179,7 +184,7 @@ export function AddScene(props: AddSceneProps & Pick<SceneApi, 'sceneStore'> & P
             />
         </div>
         <div className="d-flex">
-            <button disabled={!isValidSceneId(sceneId, scenes)} type="submit" onClick={() => sceneStore(target.friendly_name, { id: sceneId, name: sceneName })} className="btn btn-primary ms-auto">{t('store')}</button>
+            <button disabled={!isValidSceneId(sceneId, scenes)} type="submit" onClick={() => sceneStore(target.friendly_name, { id: sceneId, name: sceneName || defaultSceneName })} className="btn btn-primary ms-auto">{t('store')}</button>
         </div>
     </>
 }
