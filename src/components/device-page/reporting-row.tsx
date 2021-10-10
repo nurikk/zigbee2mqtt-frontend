@@ -128,7 +128,7 @@ export class ReportingRow extends Component<ReportingRowProps & WithTranslation,
                 <ClusterPicker label={t('cluster')} disabled={!stateRule.endpoint} pickerType={PickerType.SINGLE} clusters={getClusters(device, stateRule.endpoint, stateRule.cluster)} value={stateRule.cluster} onChange={this.setCluster} />
             </div>
             <div className="col-md-2">
-                <AttributePicker label={t('attribute')} value={stateRule.attribute} cluster={stateRule.cluster} onChange={this.setAttribute} />
+                <AttributePicker label={t('attribute')} disabled={!stateRule.cluster} value={stateRule.attribute} cluster={stateRule.cluster} onChange={this.setAttribute} />
             </div>
             <div className="col-md-2">
                 <FormGroupInput
