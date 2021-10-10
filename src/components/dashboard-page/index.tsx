@@ -14,6 +14,7 @@ import { getLastSeenType, isOnlyOneBitIsSet } from '../../utils';
 
 import { isLightFeature } from '../device-page/type-guards';
 import groupBy from "lodash/groupBy";
+import { filterDeviceByFeatures } from '../groups/DeviceGroupRow';
 
 
 type PropsFromStore = Pick<GlobalState, 'devices' | 'deviceStates' | 'bridgeInfo'>;
@@ -31,7 +32,7 @@ export const onlyValidFeaturesForDashboard = (feature: GenericExposedFeature | C
         const groupedFeatures = groupBy(features, 'property');
         features = Object.values(groupedFeatures).map(f => f[0]);
     }
-    const filteredOutFeature = {...feature, features} as GenericExposedFeature | CompositeFeature;
+    const filteredOutFeature = { ...feature, features } as GenericExposedFeature | CompositeFeature;
     if (whitelistFeatureNames.includes(name)) {
         return filteredOutFeature;
     }
@@ -42,7 +43,7 @@ export const onlyValidFeaturesForDashboard = (feature: GenericExposedFeature | C
         return false;
     }
     if (name == 'voltage' && deviceState.battery == undefined) {
-      return filteredOutFeature;
+        return filteredOutFeature;
     }
     if (genericRendererIgnoredNames.includes(name)) {
         return false;
@@ -62,40 +63,29 @@ const Dashboard: React.FC<PropsFromStore & StateApi> = (props) => {
     const lastSeenType = getLastSeenType(bridgeInfo.config.advanced);
     return (
         <div className="row">
-            {Object.values(props.devices)
-                .filter(device => device.supported)
-                .map(device => ({ device, deviceState: deviceStates[device.friendly_name] ?? ({} as DeviceState) }))
-                .map(({ device, deviceState }) => {
-                    const _features = ((device.definition?.exposes ?? []) as (GenericExposedFeature | CompositeFeature)[]);
-                    const filteredFeatures = _features
-                        .map((e: GenericExposedFeature | CompositeFeature) => onlyValidFeaturesForDashboard(e, deviceState))
-                        .filter(f => f);
-                    return { device, deviceState, filteredFeatures };
-                })
-                .filter(({ filteredFeatures }) => filteredFeatures.length > 0)
-                .sort((a, b) => a.device.friendly_name.localeCompare(b.device.friendly_name))
-                .map(({ device, deviceState, filteredFeatures }) => {
+            {filterDeviceByFeatures(props.devices, deviceStates, onlyValidFeaturesForDashboard).map(({ device, deviceState, filteredFeatures }) => {
 
-                    return (
-                        <DashboardDevice
-                            key={device.ieee_address}
-                            feature={{ features: filteredFeatures } as CompositeFeature}
-                            device={device}
-                            deviceState={deviceState}
-                            onChange={(endpoint, value) =>
-                                setDeviceState(`${device.friendly_name}${endpoint ? `/${endpoint}` : ''}`, value)
-                            }
-                            onRead={(endpoint, value) =>
-                                getDeviceState(`${device.friendly_name}${endpoint ? `/${endpoint}` : ''}`, value)
-                            }
-                            featureWrapperClass={DashboardFeatureWrapper}
-                            lastSeenType={lastSeenType}
-                        />
-                    );
-                })}
+                return (
+                    <DashboardDevice
+                        key={device.ieee_address}
+                        feature={{ features: filteredFeatures } as CompositeFeature}
+                        device={device}
+                        deviceState={deviceState}
+                        onChange={(endpoint, value) =>
+                            setDeviceState(`${device.friendly_name}${endpoint ? `/${endpoint}` : ''}`, value)
+                        }
+                        onRead={(endpoint, value) =>
+                            getDeviceState(`${device.friendly_name}${endpoint ? `/${endpoint}` : ''}`, value)
+                        }
+                        featureWrapperClass={DashboardFeatureWrapper}
+                        lastSeenType={lastSeenType}
+                    />
+                );
+            })}
         </div>);
 };
 
 const mappedProps = ['devices', 'deviceStates', 'bridgeInfo'];
 export default connect<unknown, unknown, GlobalState, unknown>(mappedProps, actions)(Dashboard);
+
 

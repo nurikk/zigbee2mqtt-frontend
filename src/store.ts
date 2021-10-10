@@ -28,17 +28,25 @@ export type WithDevices = {
     devices: Devices;
 }
 
-export interface GlobalState  extends WithDevices {    
+export type WithDeviceStates = {
     deviceStates: Record<FriendlyName, DeviceState>;
+}
+export type WithGroups = {
+    groups: Group[];
+}
+export type WithBridgeInfo = {
+    bridgeInfo: BridgeInfo;
+}
+
+
+export interface GlobalState extends WithDevices, WithDeviceStates, WithGroups, WithBridgeInfo {
     touchlinkDevices: TouchLinkDevice[];
     touchlinkScanInProgress: boolean;
     touchlinkIdentifyInProgress: boolean;
     touchlinkResetInProgress: boolean;
     networkGraph: GraphI;
     networkGraphIsLoading: boolean;
-    groups: Group[];
     bridgeConfig: BridgeConfig;
-    bridgeInfo: BridgeInfo;
     bridgeState: BridgeState;
     logs: LogMessage[];
     extensions: Extension[];
@@ -51,6 +59,6 @@ const theme = getCurrentTheme();
 (initialState as unknown as GlobalState).theme = theme;
 
 const _store = createStore<GlobalState>(initialState as unknown as GlobalState);
-const store = process.env.NODE_ENV === 'production' ?  _store : devtools(_store);
+const store = process.env.NODE_ENV === 'production' ? _store : devtools(_store);
 
 export default store;
