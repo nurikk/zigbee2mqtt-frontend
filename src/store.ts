@@ -37,7 +37,7 @@ export type WithDevices = {
     devices: Devices;
 }
 
-export interface GlobalState  extends WithDevices {    
+export interface GlobalState  extends WithDevices {
     deviceStates: Record<FriendlyName, DeviceState>;
     touchlinkDevices: TouchLinkDevice[];
     touchlinkScanInProgress: boolean;

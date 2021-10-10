@@ -9,7 +9,7 @@ import { DeviceGroupRow } from "./DeviceGroupRow";
 export interface DeviceGroupProps extends WithDevices {
     group: Group;
     removeDeviceFromGroup(groupFriendlyName: string, deviceFriendlyName: string): void;
-} 
+}
 
 
 
