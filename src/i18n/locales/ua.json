@@ -270,12 +270,14 @@
         "remove": "Видалити",
         "remove_all": "Видалити все",
         "scene_id": "Ідентифікатор сцени",
+        "scene_name": "Назва сцени",
         "select_scene": "Вибір сцени",
         "store": "Зберегти"
     },
     "settings": {
         "about": "Про програму",
         "advanced": "Розширені",
+        "availability": "Наявність",
         "blocklist": "Список заборон",
         "coordinator_revision": "Версія координатора",
         "coordinator_type": "Тип координатора",
