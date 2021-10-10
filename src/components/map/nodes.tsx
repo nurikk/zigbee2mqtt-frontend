@@ -187,7 +187,6 @@ export default class Nodes extends Component<NodesProps, NodesState> {
 
     render() {
         const { nodes, onMouseOut, onMouseOver, deviceStates, devices } = this.props;
-        debugger
         return (
             <g className={style.nodes}>
                 {nodes.map((node: NodeI) => (
