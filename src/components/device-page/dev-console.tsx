@@ -1,5 +1,5 @@
 import React, { ChangeEvent, Component } from "react";
-import { Attribute, Cluster, Device, DeviceState } from "../../types";
+import { Attribute, Cluster, Device, DeviceState, Endpoint } from "../../types";
 import ClusterPicker, { PickerType } from "../cluster-picker";
 
 import DataType from "zigbee-herdsman/dist/zcl/definition/dataType";
@@ -10,6 +10,8 @@ import { DeviceApi } from "../../actions/DeviceApi";
 import { LogMessage } from "../../store";
 import { ALL, LogRow } from "../logs-page";
 import { WithTranslation, withTranslation } from "react-i18next";
+import EndpointPicker from "../endpoint-picker";
+import { getEndpoints } from "../../utils";
 
 interface DevConsoleProps {
     device: Device;
@@ -22,6 +24,7 @@ export type AttributeInfo = {
 }
 type DevConsoleState = {
     cluster: Cluster;
+    endpoint: Endpoint;
     attributes: AttributeInfo[];
     mode: Mode;
 }
@@ -57,14 +60,25 @@ const logStartingStrings = [
     "Wrote "
 ]
 export class DevConsole extends Component<DevConsoleProps & WithTranslation & Pick<DeviceApi, "readDeviceAttributes" | "writeDeviceAttributes">, DevConsoleState> {
-    state: Readonly<DevConsoleState> = {
-        cluster: "",
-        attributes: [],
-        mode: "read"
+
+
+    constructor(props) {
+        super(props);
+        const { device } = props;
+        const defaultEndpoint = Object.keys(device.endpoints)[0];
+        this.state = {
+            endpoint: defaultEndpoint,
+            cluster: "",
+            attributes: [],
+            mode: "read"
+        }
     }
     canRead = (): boolean => {
-        const { cluster, attributes } = this.state;
-        return attributes.length > 0 && cluster !== "";
+        const { cluster, attributes, endpoint } = this.state;
+        return !!endpoint && attributes.length > 0 && !!cluster;
+    }
+    onEndpointChange = (endpoint: Endpoint): void => {
+        this.setState({ attributes: [], cluster: "", endpoint });
     }
 
     onClusterChange = (cluster: Cluster): void => {
@@ -77,7 +91,6 @@ export class DevConsole extends Component<DevConsoleProps & WithTranslation & Pi
             this.setState({ attributes: newAttributes });
         }
     }
-
     onAttributeDelete = (attribute: Attribute): void => {
         const { attributes } = this.state;
         const newAttributes = attributes.filter(info => info.attribute !== attribute)
@@ -86,14 +99,14 @@ export class DevConsole extends Component<DevConsoleProps & WithTranslation & Pi
     }
     onReadClick = (): void => {
         const { readDeviceAttributes, device } = this.props;
-        const { cluster, attributes } = this.state;
-        readDeviceAttributes(device.ieee_address, cluster, attributes.map(info => info.attribute), {});
+        const { cluster, attributes, endpoint } = this.state;
+        readDeviceAttributes(device.friendly_name, "", cluster, attributes.map(info => info.attribute), {});
     }
 
     onWriteClick = (): void => {
         const { writeDeviceAttributes, device } = this.props;
-        const { cluster, attributes } = this.state;
-        writeDeviceAttributes(device.ieee_address, cluster, attributes, {});
+        const { cluster, attributes, endpoint } = this.state;
+        writeDeviceAttributes(device.friendly_name, "", cluster, attributes, {});
     }
 
     renderLastResult(): JSX.Element[] {
@@ -148,12 +161,16 @@ export class DevConsole extends Component<DevConsoleProps & WithTranslation & Pi
         this.setState({ mode });
     }
     renderRead(): JSX.Element {
-        const { cluster, attributes } = this.state;
+        const { cluster, attributes, endpoint } = this.state;
         const noAttributesSelected = attributes.length === 0;
         const noSelectedCluster = cluster === "";
-        const { t } = this.props;
+        const { t, device } = this.props;
+        const endpoints = getEndpoints(device);
         return <>
             <div className="mb-3 row">
+                <div className="col-6 col-sm-3">
+                    <EndpointPicker disabled label={t('zigbee:endpoint')} values={endpoints} value={endpoint as Endpoint} onChange={this.onEndpointChange} />
+                </div>
                 <div className="col-6 col-sm-3">
                     <ClusterPicker
                         label={t('cluster')} pickerType={PickerType.SINGLE}
@@ -162,6 +179,8 @@ export class DevConsole extends Component<DevConsoleProps & WithTranslation & Pi
                         onChange={this.onClusterChange}
                     />
                 </div>
+
+
                 <div className="col-6 col-sm-3">
                     <AttributePicker label={t('attribute')} value={""} cluster={cluster} onChange={this.onAttributeSelect} />
                 </div>

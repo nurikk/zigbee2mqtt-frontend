@@ -3,7 +3,7 @@
 import store, { GlobalState } from "../store";
 import { Store } from "unistore";
 
-import { ReportingConfig } from "../types";
+import { Endpoint, FriendlyName, IEEEEAddress, ReportingConfig } from "../types";
 import api from "../api";
 import { download, saveCurrentTheme } from "../utils";
 import bridgeActions from "./BridgeApi";
@@ -32,6 +32,14 @@ export interface ThemeActions {
     setTheme(theme: Theme): Promise<void>;
 }
 
+
+export const toDeviceId = (friendlyNameOrIEEEAddress: FriendlyName | IEEEEAddress, endpoint: Endpoint): string => {
+    if (endpoint) {
+        return `${friendlyNameOrIEEEAddress}/${endpoint}`;
+    } else {
+        return friendlyNameOrIEEEAddress;
+    }
+}
 
 const actions = (store: Store<GlobalState>): Record<string, (state: GlobalState, ...rest: unknown[]) => Promise<void>> => ({
     ...bridgeActions,
