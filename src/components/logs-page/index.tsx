@@ -38,7 +38,7 @@ type LogRowProps = {
 export function LogRow(props: LogRowProps): JSX.Element {
     const { logLevel, log, search } = props
     return <div>
-        {logLevel === ALL && <><span className={cx("badge", {
+        {logLevel === ALL && <><span style={{ width: '50px' }} className={cx("badge", {
             'bg-danger': log.level === 'error',
             'bg-warning': log.level === 'warning',
             'bg-info': log.level === 'info',
