@@ -26,6 +26,7 @@
         "select_device": "Seleccionar dispositivo",
         "select_endpoint": "Seleccionar endpoint",
         "source_endpoint": "Endpoint de origen",
+        "the_only_endpoint": "El único endpoint",
         "unbind": "Desenlazar",
         "write": "Escribir"
     },
@@ -55,7 +56,7 @@
         "calibration": "Calibración",
         "carbon_monoxide": "Monóxido de carbono",
         "color_hs": "Color (HS)",
-        "color_temp": "Temperatura de colore",
+        "color_temp": "Temperatura de color",
         "color_temp_startup": "Temperatura de color de inicio",
         "color_xy": "Color (XY)",
         "comfort_temperature": "Temperatura de Comfort",
@@ -66,6 +67,7 @@
         "current_heating_setpoint": "Punto de ajuste de calor",
         "eco_temperature": "Temperatura Eco",
         "effect": "Efecto",
+        "empty_exposes_definition": "Empty exposes definition",
         "energy": "Energía",
         "force": "Forzar",
         "humidity": "Humedad",
@@ -88,7 +90,7 @@
         "power_outage_memory": "Memoria de corte de energía",
         "preset": "Preestablecido",
         "pressure": "Presión",
-        "sensivity": "Sensivity",
+        "sensivity": "Sensibilidad",
         "smoke": "Humo",
         "state": "Estado",
         "strength": "Fuerza",
@@ -194,7 +196,8 @@
         "serial": "Serie",
         "settings": "Ajustes",
         "tools": "Herramientas",
-        "zigbee2mqtt_version": "Versión de Zigbee2MQTT"
+        "zigbee2mqtt_version": "Versión de Zigbee2MQTT",
+        "translate": "Traducir"
     },
     "settingsSchemaTranslations": {
         "advanced-title": "Avanzado",
@@ -234,6 +237,8 @@
         "root_ext_pan_id__title": "Ext Pan ID",
         "root_filtered_attributes__description": "Permite evitar la publicación de ciertos atributos",
         "root_filtered_attributes__title": "Atributos filtrados",
+        "root_filtered_optimistic__description": "Filter attributes from optimistic publish payload when calling /set. (This has no effect if optimistic is set to false).",
+        "root_filtered_optimistic__title": "Filtered optimistic attributes",
         "root_log_output__description": "Ubicación de salida del registros, dejalo vacío para eliminar el registro",
         "root_log_output__title": "Salida del registro",
         "root_log_syslog-title": "syslog",
@@ -247,11 +252,16 @@
     "values": {
         "clear": "Claro",
         "closed": "Cerrado",
+        "false": "Falso",
+        "not_supported": "No soportado",
         "occupied": "Ocupado",
         "open": "Abierto",
-        "true": "Verdadero"
+        "supported": "Soportado",
+        "true": "Verdadero",
+        "empty_string": "sString vacio(\"\")"
     },
     "zigbee": {
+        "actions": "Acciones",
         "attribute": "Atributo",
         "block_join": "Bloquear para no unirse de nuevo",
         "cluster": "Cluster",
@@ -273,6 +283,7 @@
         "min_rep_interval": "Intervalo Min de replicación",
         "model": "Modelo",
         "network_address": "Dirección de red",
+        "none": "Ninguno",
         "output_clusters": "Clusters de salida",
         "pic": "Foto",
         "power": "Potencia",
@@ -284,6 +295,7 @@
         "support_status": "Soportado",
         "unsupported": "No soportado",
         "update_Home_assistant_entity_id": "Actualizar el ID de entidad de Home Assistant",
-        "zigbee_model": "Modelo Zigbee "
+        "zigbee_manufacturer": "Fabricante Zigbee",
+        "zigbee_model": "Modelo Zigbee"
     }
 }
