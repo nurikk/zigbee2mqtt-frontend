@@ -1,3 +1,18 @@
+## [0.6.17](https://github.com/nurikk/z2m-frontend/compare/0.6.16...0.6.17) (2021-10-10)
+
+
+### Bug Fixes
+
+* **reporting:** disable attr picker befor cluster is selected ([0f74204](https://github.com/nurikk/z2m-frontend/commit/0f7420458294412a7b7f4a25b4467f7119630585))
+
+
+### Features
+
+* **dev-console:** add endpoint picker ([127d72f](https://github.com/nurikk/z2m-frontend/commit/127d72fdb649be3f924cfafe2a62be3a4113af2f))
+* **group:** rewamp groups page ([82ac7ab](https://github.com/nurikk/z2m-frontend/commit/82ac7abeb874e35d3d77be56cbacb9243011d9a3))
+
+
+
 ## [0.6.16](https://github.com/nurikk/z2m-frontend/compare/0.6.15...0.6.16) (2021-10-08)
 
 
