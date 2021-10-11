@@ -7,10 +7,10 @@ import { ISubmitEvent, UiSchema } from "@rjsf/core";
 
 import customFields from "./../../i18n/rjsf-translation-fields";
 import merge from "lodash/merge";
+import { WithBridgeInfo } from "../../store";
 
-interface DeviceSettingsProps extends Pick<DeviceApi, "setDeviceOptions"> {
+interface DeviceSettingsProps extends Pick<DeviceApi, "setDeviceOptions">, WithBridgeInfo {
     device: Device;
-    bridgeInfo: BridgeInfo;
 }
 
 type ParamValue = {

@@ -16,6 +16,7 @@ import styles from "./style.css";
 import DevConsole from "./dev-console";
 import { DeviceApi } from "../../actions/DeviceApi";
 import { WithTranslation, withTranslation } from "react-i18next";
+import DeviceSpecificSettings from "./DeviceSpecificSettings";
 
 const getDeviceLinks = (dev: string) => ([
     {
@@ -38,10 +39,10 @@ const getDeviceLinks = (dev: string) => ([
         translationKey: 'settings',
         url: `/device/${dev}/settings`
     },
-    // {
-    //     translationKey: 'settings_specific',
-    //     url: `/device/${dev}/settings-specific`
-    // },
+    {
+        translationKey: 'settings_specific',
+        url: `/device/${dev}/settings-specific`
+    },
     {
         translationKey: 'state',
         url: `/device/${dev}/state`
@@ -96,7 +97,11 @@ function ContentRenderer(props: DevicePageProps): JSX.Element {
                 bridgeInfo={bridgeInfo}
             />
         case "settings-specific":
-            return <div>Under construction</div>
+            return <DeviceSpecificSettings
+                device={device}
+                setDeviceOptions={setDeviceOptions}
+                bridgeInfo={bridgeInfo}
+            />
         case "dev-console":
             return <DevConsole
                 device={device}

@@ -196,6 +196,7 @@ export interface DeviceDefinition {
     supports: string;
     vendor: string;
     exposes: GenericExposedFeature[] | CompositeFeature[];
+    options: GenericExposedFeature[] | CompositeFeature[];
     supports_ota: boolean;
     icon?: string;
 }
