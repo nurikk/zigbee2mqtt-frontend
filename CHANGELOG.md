@@ -1,3 +1,15 @@
+## [0.6.18](https://github.com/nurikk/z2m-frontend/compare/0.6.17...0.6.18) (2021-10-11)
+
+
+### Bug Fixes
+
+* **i18n:** auto fallback to en for unknown language ([5e9fe33](https://github.com/nurikk/z2m-frontend/commit/5e9fe3335b3876724922aeb0e0d680ef66996a77))
+* **logs:** fix log badge width ([2556edf](https://github.com/nurikk/z2m-frontend/commit/2556edf1106d6cdd09cff3c037b28ae70f9a94cd))
+* **logs:** tune form breakpoints ([7c1e136](https://github.com/nurikk/z2m-frontend/commit/7c1e136d55e3bfbf32a21adef6de8a8b499e9bd8))
+* **map:** remove debugger ([8feb638](https://github.com/nurikk/z2m-frontend/commit/8feb638d5417158af29e59b036255a26b0a6ae23))
+
+
+
 ## [0.6.17](https://github.com/nurikk/z2m-frontend/compare/0.6.16...0.6.17) (2021-10-10)
 
 
