@@ -111,10 +111,11 @@
     },
     "featureNames": {
         "action": "Aktion",
-        "action_angle": "Кут дії",
+        "action_angle": "Bewegung Winkel",
         "action_from_side": "Bewegung von Seite",
         "action_side": "Aktive Seite",
-        "action_to_side": "BEwegung zur Seite",
+        "action_to_side": "Bewegung zur Seite",
+        "alarm": "Alarm",
         "angle_x": "Ausrichtung X",
         "angle_y": "Ausrichtung Y",
         "angle_z": "Ausrichtung Z",
@@ -159,6 +160,7 @@
         "water_leak": "Wasserleck"
     },
     "featureDescriptions": {
+        "Auto off after specific time.": "Automatische Abschaltung nach bestimmter Zeit.",
         "Away mode": "Abwesenheitsmodus",
         "Away preset days": "Abwesenheit in Tagen",
         "Away preset temperature": "Definierte Temperatur für den Abwesenheitsmodus",
