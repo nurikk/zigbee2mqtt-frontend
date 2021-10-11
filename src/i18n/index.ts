@@ -93,4 +93,9 @@ i18n
         saveMissing: true,
         missingKeyHandler
     });
+
+const currentLanguage = i18n.language.split('-')[0].toLocaleLowerCase();
+if (!resources[currentLanguage]) {
+    i18n.changeLanguage('en');
+}
 export default i18n;
