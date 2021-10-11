@@ -1,3 +1,12 @@
+## [0.6.19](https://github.com/nurikk/z2m-frontend/compare/0.6.18...0.6.19) (2021-10-11)
+
+
+### Features
+
+* **options:** introduce device specific options ([cd78061](https://github.com/nurikk/z2m-frontend/commit/cd780610bf712f4df1d3ff1e38e6161d9751bce7))
+
+
+
 ## [0.6.18](https://github.com/nurikk/z2m-frontend/compare/0.6.17...0.6.18) (2021-10-11)
 
 
