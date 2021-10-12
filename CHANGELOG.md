@@ -1,3 +1,17 @@
+## [0.6.20](https://github.com/nurikk/z2m-frontend/compare/0.6.19...0.6.20) (2021-10-12)
+
+
+### Bug Fixes
+
+* **i18n:** update DE translation ([#940](https://github.com/nurikk/z2m-frontend/issues/940)) ([3a218ab](https://github.com/nurikk/z2m-frontend/commit/3a218ab5f6fa487f29c2e161c40684ab2fc157d8))
+
+
+### Features
+
+* **dev-console:** enable endpoint picker ([22a243c](https://github.com/nurikk/z2m-frontend/commit/22a243c249330d26dcc89bbc8bdd8bd49d88d525))
+
+
+
 ## [0.6.19](https://github.com/nurikk/z2m-frontend/compare/0.6.18...0.6.19) (2021-10-11)
 
 
