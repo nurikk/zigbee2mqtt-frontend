@@ -100,13 +100,13 @@ export class DevConsole extends Component<DevConsoleProps & WithTranslation & Pi
     onReadClick = (): void => {
         const { readDeviceAttributes, device } = this.props;
         const { cluster, attributes, endpoint } = this.state;
-        readDeviceAttributes(device.friendly_name, "", cluster, attributes.map(info => info.attribute), {});
+        readDeviceAttributes(device.friendly_name, endpoint, cluster, attributes.map(info => info.attribute), {});
     }
 
     onWriteClick = (): void => {
         const { writeDeviceAttributes, device } = this.props;
         const { cluster, attributes, endpoint } = this.state;
-        writeDeviceAttributes(device.friendly_name, "", cluster, attributes, {});
+        writeDeviceAttributes(device.friendly_name, endpoint, cluster, attributes, {});
     }
 
     renderLastResult(): JSX.Element[] {
@@ -169,7 +169,7 @@ export class DevConsole extends Component<DevConsoleProps & WithTranslation & Pi
         return <>
             <div className="mb-3 row">
                 <div className="col-6 col-sm-3">
-                    <EndpointPicker disabled label={t('zigbee:endpoint')} values={endpoints} value={endpoint as Endpoint} onChange={this.onEndpointChange} />
+                    <EndpointPicker label={t('zigbee:endpoint')} values={endpoints} value={endpoint as Endpoint} onChange={this.onEndpointChange} />
                 </div>
                 <div className="col-6 col-sm-3">
                     <ClusterPicker
