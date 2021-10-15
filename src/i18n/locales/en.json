@@ -107,6 +107,12 @@
         "extension_name_propmt": "Enter new extension name",
         "select_extension_to_edit": "Select extension to edit"
     },
+    "featureDescriptions": {
+        "On/off state of this light": "On/off state of this light",
+        "Brightness of this light": "Brightness of this light",
+        "Triggers an effect on the light (e.g. make light blink for a few seconds)": "Triggers an effect on the light (e.g. make light blink for a few seconds)",
+        "Link quality (signal strength)": "Link quality (signal strength)"
+    },
     "featureNames": {
         "action": "Action",
         "angle_x": "Angle X",
