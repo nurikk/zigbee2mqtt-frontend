@@ -107,6 +107,13 @@
         "extension_name_propmt": "Enter new extension name",
         "select_extension_to_edit": "Select extension to edit"
     },
+    "featureDescriptions": {
+        "Remaining battery in %": "Remaining battery in %",
+        "Indicates if the contact is closed (= true) or open (= false)": "Indicates if the contact is closed (= true) or open (= false)",
+        "Measured temperature value": "Measured temperature value",
+        "Voltage of the battery in millivolts": "Voltage of the battery in millivolts",
+        "Link quality (signal strength)": "Link quality (signal strength)"
+    },
     "featureNames": {
         "action": "Action",
         "angle_x": "Angle X",
