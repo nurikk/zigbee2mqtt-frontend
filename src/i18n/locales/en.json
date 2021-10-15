@@ -107,6 +107,14 @@
         "extension_name_propmt": "Enter new extension name",
         "select_extension_to_edit": "Select extension to edit"
     },
+        "featureDescriptions": {
+        "Remaining battery in %": "Remaining battery in %",
+        "Measured temperature value": "Measured temperature value",
+        "Measured relative humidity": "Measured relative humidity",
+        "The measured atmospheric pressure": "The measured atmospheric pressure",
+        "Voltage of the battery in millivolts": "Voltage of the battery in millivolts",
+        "Link quality (signal strength)": "Link quality (signal strength)"
+    },
     "featureNames": {
         "action": "Action",
         "angle_x": "Angle X",
