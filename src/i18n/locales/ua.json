@@ -36,7 +36,7 @@
         "bind": "Зв'язок",
         "clusters": "Кластери",
         "dev_console": "Консоль розробника",
-        "exposes": "Виставлені",
+        "exposes": "Деталі",
         "reporting": "Звіти",
         "scene": "Сцени",
         "settings": "Налаштування",
@@ -120,6 +120,7 @@
         "action_from_side": "Дія зі сторони",
         "action_side": "Сторона дії",
         "action_to_side": "Дія на сторону",
+        "alarm": "Тривога",
         "angle_x": "Кут X",
         "angle_y": "Кут Y",
         "angle_z": "Кут Z",
@@ -164,6 +165,7 @@
         "water_leak": "Витік води"
     },
     "featureDescriptions": {
+        "Auto off after specific time.": "Автоматичне вимкнення протягом певного часу",
         "Away mode": "Режим від'їзду",
         "Away preset days": "Пресети днів",
         "Away preset temperature": "Пресети температур для режиму від'їзду",
@@ -367,7 +369,6 @@
         "clear": "не виявлено",
         "closed": "закрито",
         "empty_string": "порожній рядок",
-        "fall": "падіння",
         "false": "ні",
         "leaking": "витік",
         "not_supported": "не підтримується",
