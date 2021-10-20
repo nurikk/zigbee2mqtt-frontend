@@ -231,6 +231,10 @@
     "groups": {
         "add_to_group": "Додати в групу",
         "create_group": "Створити групу",
+        "group_id": "Ідентифікатор групи",
+        "group_name": "Назва групи",
+        "group_members": "Члени групи",
+        "group_scenes": "Групові сцени",
         "new_group_id": "Новий ідентифікатор групи",
         "new_group_id_placeholder": "Вкажіть ідентификатор групи, якщо необхідно",
         "new_group_name": "Назва нової групи",
