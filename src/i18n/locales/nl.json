@@ -260,12 +260,12 @@
     "values": {
         "clear": "Geen",
         "closed": "Gesloten",
-        "false": "Onjuist",
+        "false": "Onwaar",
         "not_supported": "Niet ondersteund",
         "occupied": "Beweging",
         "open": "Open",
         "supported": "Ondersteund",
-        "true": "Juist",
+        "true": "Waar",
         "empty_string": "Lege waarde(\"\")",
         "leaking": "Lekkage",
         "tampered": "Gesaboteerd"
