@@ -18,7 +18,7 @@ export const FeatureWrapper: FunctionComponent<PropsWithChildren<FetatureWrapper
         <div className="col-12 col-md-3">
             <label className="col-form-label w-100">
                 <div className="d-flex justify-content-between">
-                    <strong title={JSON.stringify(feature)}>{feature.name}</strong>
+                    <strong title={JSON.stringify(feature)}>{feature.name === 'state' ? feature.property : feature.name}</strong>
                     {isReadable ? (
                         <Button<CompositeFeature | GenericExposedFeature> item={feature} onClick={(item) => {
                             onRead(feature.endpoint as Endpoint, { [item.property]: "" })
