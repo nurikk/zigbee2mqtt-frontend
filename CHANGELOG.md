@@ -1,3 +1,12 @@
+## [0.6.22](https://github.com/nurikk/z2m-frontend/compare/0.6.21...0.6.22) (2021-10-23)
+
+
+### Bug Fixes
+
+* **exposes:** fix color feature detection ([87d9e02](https://github.com/nurikk/z2m-frontend/commit/87d9e0208eef543af8d59bff2e38b915494f04cf))
+
+
+
 ## [0.6.21](https://github.com/nurikk/z2m-frontend/compare/0.6.20...0.6.21) (2021-10-23)
 
 
