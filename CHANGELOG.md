@@ -1,3 +1,12 @@
+## [0.6.21](https://github.com/nurikk/z2m-frontend/compare/0.6.20...0.6.21) (2021-10-23)
+
+
+### Bug Fixes
+
+* **dashboard:** better feature filtration and feature labels ([6cee5af](https://github.com/nurikk/z2m-frontend/commit/6cee5afb90cc1690f107aa3d62711af93825d178))
+
+
+
 ## [0.6.20](https://github.com/nurikk/z2m-frontend/compare/0.6.19...0.6.20) (2021-10-12)
 
 
