@@ -307,6 +307,7 @@
     "settings": {
         "about": "О программе",
         "advanced": "Расширенные",
+        "availability": "Доступность",
         "blocklist": "Черный список",
         "coordinator_revision": "Версия координатора",
         "coordinator_type": "Тип координатора",
