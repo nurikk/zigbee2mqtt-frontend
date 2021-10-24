@@ -36,7 +36,7 @@
         "bind": "Зв'язок",
         "clusters": "Кластери",
         "dev_console": "Консоль розробника",
-        "exposes": "Деталі",
+        "exposes": "Експонує",
         "reporting": "Звіти",
         "scene": "Сцени",
         "settings": "Налаштування",
@@ -306,7 +306,7 @@
     "settings": {
         "about": "Про програму",
         "advanced": "Розширені",
-        "availability": "Наявність",
+        "availability": "Доступність",
         "blocklist": "Список заборон",
         "coordinator_revision": "Версія координатора",
         "coordinator_type": "Тип координатора",
