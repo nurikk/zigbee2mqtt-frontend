@@ -1,6 +1,7 @@
 import React, { Fragment, FunctionComponent } from "react";
 import { PowerSource as PowerSourceType } from "../../types";
 import style from "./style.css";
+import { useTranslation } from "react-i18next";
 
 
 interface PowerSourceProps {
@@ -12,12 +13,14 @@ interface PowerSourceProps {
 
 
 const PowerSource: FunctionComponent<PowerSourceProps> = ({ source, battery, batteryLow, showLevel, ...rest }) => {
+    const { t } = useTranslation("zigbee");
     let batteryClass = "";
     let title = "";
+    let translationKey = source.toLowerCase().replace(/\s/g, '_').replace(/[^a-z0-9_]/g, '');
 
     switch (source) {
         case "Battery":
-            title = 'Battery';
+            title = t(translationKey);
             if (batteryLow !== undefined) {
                 batteryClass = batteryLow ? `fa-battery-empty animation-blinking text-danger` : 'fa-battery-full text-success';
                 title += batteryLow ? ' LOW' : ' OK';
@@ -37,7 +40,7 @@ const PowerSource: FunctionComponent<PowerSourceProps> = ({ source, battery, bat
                     return <span className={`animation-blinking text-danger`} role="alert">{battery}%</span>
                 }
             }
-            title += `${battery ? `, power level ${battery}%` : ""}`;
+            title += `${battery ? (`, ` + t(`power_level`) + ` ${battery}%`) : ""}`;
             if (!batteryClass) {
                 batteryClass = "fa-question";
             }
@@ -45,7 +48,8 @@ const PowerSource: FunctionComponent<PowerSourceProps> = ({ source, battery, bat
 
         case "Mains (single phase)":
         case "DC Source":
-            return <i className={`fa fa-plug ${style.plug}`} title={source} {...rest} />;
+            title = t(translationKey);
+            return <i className={`fa fa-plug ${style.plug}`} title={title} {...rest} />;
         default:
             return <i className={`fa fa-question`} title={source} {...rest} />;
     }
