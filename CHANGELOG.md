@@ -1,4 +1,23 @@
+## [0.6.22](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.21...0.6.22) (2021-10-23)
+
+
+### Bug Fixes
+
+* **exposes:** fix color feature detection ([87d9e02](https://github.com/nurikk/zigbee2mqtt-frontend/commit/87d9e0208eef543af8d59bff2e38b915494f04cf))
+
+
+
+## [0.6.21](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.20...0.6.21) (2021-10-23)
+
+
+### Bug Fixes
+
+* **dashboard:** better feature filtration and feature labels ([6cee5af](https://github.com/nurikk/zigbee2mqtt-frontend/commit/6cee5afb90cc1690f107aa3d62711af93825d178))
+
+
+
 ## [0.6.20](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.19...0.6.20) (2021-10-12)
+
 
 
 ### Bug Fixes

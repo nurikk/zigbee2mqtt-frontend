@@ -320,6 +320,7 @@
         "cluster": "Cluster",
         "description": "Description",
         "device_type": "Type de Périph",
+        "device": "Périphérique",
         "endpoint": "Endpoint",
         "firmware_build_date": "Date Firmware",
         "firmware_version": "Version Firmware",
@@ -354,6 +355,7 @@
     "scene": {
         "scene_id": "ID Scène",
         "recall": "Rappeler",
+        "select_scene": "Choisir Scène",
         "store": "Stocker",
         "remove": "Supprimer",
         "remove_all": "Supprimer tout",

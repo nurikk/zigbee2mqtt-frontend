@@ -79,12 +79,12 @@ export const DashboardFeatureWrapper: FunctionComponent<PropsWithChildren<Fetatu
     const { children, feature, deviceState = {} } = props;
     const icon = getGenericFeatureIcon(feature.name, deviceState[feature.property]);
     const { t } = useTranslation(['featureNames']);
-
+    console.log(feature);
     return <div className="d-flex align-items-center">
         {icon && <div className="me-1">
             <i className={`fa fa-fw ${icon}`} />
         </div>}
-        <div className="flex-shrink-1 flex-grow-1">{t(feature.name, {defaultValue: startCase(camelCase(feature.name))})}{feature.endpoint ? ` (${feature.endpoint})` : null}</div>
+        <div className="flex-shrink-1 flex-grow-1">{t(feature.name === 'state' ? feature.property : feature.name, {defaultValue: startCase(camelCase(feature.name === 'state' ? feature.property : feature.name))})}{feature.endpoint ? ` (${feature.endpoint})` : null}</div>
         <div className="flex-shrink-0">{children}</div>
     </div>
 }
