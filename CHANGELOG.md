@@ -1,3 +1,18 @@
+## [0.6.23](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.22...0.6.23) (2021-10-25)
+
+
+### Bug Fixes
+
+* **url:** change z2m-frontend to zigbee2mqtt-frontend ([#939](https://github.com/nurikk/zigbee2mqtt-frontend/issues/939)) ([9379475](https://github.com/nurikk/zigbee2mqtt-frontend/commit/9379475f8524aaff4229687b9df66e5406e5769b))
+
+
+### Features
+
+* **translations:** add German to power-source translations ([5b60ca4](https://github.com/nurikk/zigbee2mqtt-frontend/commit/5b60ca42c77dce8a8cbc585111b3f5bed08a5d4a))
+* **translations:** add power-source to translatable content ([c6f47d1](https://github.com/nurikk/zigbee2mqtt-frontend/commit/c6f47d100378d016bd16e0053dc845d5ce6e48bd))
+
+
+
 ## [0.6.22](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.21...0.6.22) (2021-10-23)
 
 
