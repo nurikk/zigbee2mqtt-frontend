@@ -114,9 +114,9 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/nurikk/z2m-frontend.git"
+        "url": "git+https://github.com/nurikk/zigbee2mqtt-frontend.git"
     },
     "bugs": {
-        "url": "https://github.com/nurikk/z2m-frontend/issues"
+        "url": "https://github.com/nurikk/zigbee2mqtt-frontend/issues"
     }
 }

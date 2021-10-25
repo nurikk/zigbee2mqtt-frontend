@@ -38,7 +38,7 @@ export default class ErrorBoundary extends React.Component<ErrorBoundaryProps, E
             } as Record<string, string>;
 
 
-            const githubUrl = `https://github.com/nurikk/z2m-frontend/issues/new?${new URLSearchParams(githubUrlParams).toString()}`
+            const githubUrl = `https://github.com/nurikk/zigbee2mqtt-frontend/issues/new?${new URLSearchParams(githubUrlParams).toString()}`
             return <div className="container">
 
                 <h1 className="text-danger">Hello, you&apos;ve found a bug. Congratulations!</h1>
