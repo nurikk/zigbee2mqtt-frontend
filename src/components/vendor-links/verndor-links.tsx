@@ -16,7 +16,7 @@ export const VendorLink: React.FunctionComponent<VendorProps> = (props: VendorPr
     const { t } = useTranslation("zigbee");
     const { device } = props;
     if (device.supported && device.definition) {
-        const url = `https://www.zigbee2mqtt.io/information/supported_devices.html#${encodeURIComponent(normalizeModel(device.definition.vendor?.toLowerCase()))}`;
+        const url = `https://www.zigbee2mqtt.io/information/supported_devices.html#v=${encodeURIComponent(normalizeModel(device.definition.vendor?))}`;
         return <a target="_blank" rel="noopener noreferrer" href={url}>{device.definition.vendor}</a>
     }
     return <Fragment>{t('unsupported')}</Fragment>;
