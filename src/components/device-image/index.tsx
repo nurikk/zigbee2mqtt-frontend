@@ -47,7 +47,7 @@ const DeviceImage: FunctionComponent<DeviceImageProps & ImgHTMLAttributes<HTMLDi
         const unseccessfullInterview = !device.interviewing && !device.interview_completed ? <i title={t("interview_failed")} className="fa fa-exclamation-triangle position-absolute top-0 right-0 text-danger" /> : null;
         switch (type) {
             case "svg":
-                return <image {...rest} onError={onImageError} href={src} />;
+                return <image crossOrigin={"anonymous"} {...rest} onError={onImageError} href={src} />;
             case "img":
             default:
                 return <div className={cx(className, "position-relative")} {...rest}>
