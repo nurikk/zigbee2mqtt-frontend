@@ -12,7 +12,7 @@ interface PowerSourceProps {
 }
 
 
-const PowerSource: FunctionComponent<PowerSourceProps> = ({ source, battery, batteryLow, showLevel, ...rest }) => {
+const PowerSource: FunctionComponent<PowerSourceProps> = ({ source = "", battery, batteryLow, showLevel, ...rest }) => {
     const { t } = useTranslation("zigbee");
     let batteryClass = "";
     let title = "";
