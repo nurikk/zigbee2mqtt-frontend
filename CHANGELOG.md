@@ -1,3 +1,15 @@
+## [0.6.25](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.24...0.6.25) (2021-10-26)
+
+
+### Bug Fixes
+
+* **dashboard:** update feature filter rules ([bcf7025](https://github.com/nurikk/zigbee2mqtt-frontend/commit/bcf702508baebac2cfa8e38943c4cff023024a73))
+* **DeviceImage:** add crossOrigin for svg image ([20f5fbf](https://github.com/nurikk/zigbee2mqtt-frontend/commit/20f5fbf143591f13abb9ccaf924d50695414546c))
+* **DeviceImage:** fix undefined device case ([489cc97](https://github.com/nurikk/zigbee2mqtt-frontend/commit/489cc97e90ad8728f71370c45f78c6a9d39fe7f8))
+* **PowerSource:** fix null translation key ([54aba76](https://github.com/nurikk/zigbee2mqtt-frontend/commit/54aba76a4107ddbe3b80d23da224575ab9c7832a))
+
+
+
 ## [0.6.24](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.23...0.6.24) (2021-10-26)
 
 
