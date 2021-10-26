@@ -1,3 +1,13 @@
+## [0.6.24](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.23...0.6.24) (2021-10-26)
+
+
+### Features
+
+* **translations:** add battery translation to device info page ([#975](https://github.com/nurikk/zigbee2mqtt-frontend/issues/975)) ([d721d49](https://github.com/nurikk/zigbee2mqtt-frontend/commit/d721d49ac8df19f54fdee4aaf4f9f111285770fc))
+* **translations:** add device-image overlay titles to translatable content ([#976](https://github.com/nurikk/zigbee2mqtt-frontend/issues/976)) ([e0fdc4d](https://github.com/nurikk/zigbee2mqtt-frontend/commit/e0fdc4ddb4ae72b238a6fc3d81b973973030b0a4))
+
+
+
 ## [0.6.23](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.22...0.6.23) (2021-10-25)
 
 
