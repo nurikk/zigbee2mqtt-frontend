@@ -287,6 +287,8 @@
         "ieee_address": "IEEE adres",
         "input_clusters": "Invoercluster",
         "interview_completed": "Interview voltooid",
+        "interview_failed": "Interview mislukt",
+        "interviewing": "Interviewen",
         "last_seen": "Laatst gezien",
         "lqi": "LQI",
         "mains_single_phase": "Netstroom (1-fase)",
@@ -309,6 +311,7 @@
         "support_status": "Ondersteuningsstatus",
         "unsupported": "Niet ondersteund",
         "update_Home_assistant_entity_id": "Home Assistant entiteit-ID bijwerken",
+        "updating_firmware": "Firmware updaten",
         "zigbee_manufacturer": "Zigbee Fabrikant",
         "zigbee_model": "Zigbee Model"
     },

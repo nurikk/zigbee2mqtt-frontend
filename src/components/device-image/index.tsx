@@ -4,6 +4,7 @@ import { Device, DeviceState } from "../../types";
 import cx from "classnames";
 import { sanitizeZ2MDeviceName } from "../../utils";
 import style from "./style.css";
+import { useTranslation } from "react-i18next";
 type DeviceImageProps = {
     device: Device;
     deviceStatus?: DeviceState;
@@ -24,6 +25,7 @@ const AVALIABLE_GENERATORS = [
 ]
 
 const DeviceImage: FunctionComponent<DeviceImageProps & ImgHTMLAttributes<HTMLDivElement | SVGImageElement>> = (props) => {
+    const { t } = useTranslation("zigbee");
     const [imageGenerators, setimageGenerators] = useState(AVALIABLE_GENERATORS);
     const { device, deviceStatus, type = "img", className, ...rest } = props;
     let src: string | undefined = genericDeiviceImageFallback(device);
@@ -40,9 +42,9 @@ const DeviceImage: FunctionComponent<DeviceImageProps & ImgHTMLAttributes<HTMLDi
         }
     }
     if (src) {
-        const otaSpinner = deviceStatus?.update?.state === "updating" ? <i title="Updating firmware" className="fa fa-sync fa-spin position-absolute bottom-0 right-0" /> : null;
-        const interviewSpinner = device.interviewing ? <i title="Interviewing" className="fa fa-spinner fa-spin position-absolute bottom-0 right-0" /> : null;
-        const unseccessfullInterview = !device.interviewing && !device.interview_completed ? <i title="Interview failed" className="fa fa-exclamation-triangle position-absolute top-0 right-0 text-danger" /> : null;
+        const otaSpinner = deviceStatus?.update?.state === "updating" ? <i title={t("updating_firmware")} className="fa fa-sync fa-spin position-absolute bottom-0 right-0" /> : null;
+        const interviewSpinner = device.interviewing ? <i title={t("interviewing")} className="fa fa-spinner fa-spin position-absolute bottom-0 right-0" /> : null;
+        const unseccessfullInterview = !device.interviewing && !device.interview_completed ? <i title={t("interview_failed")} className="fa fa-exclamation-triangle position-absolute top-0 right-0 text-danger" /> : null;
         switch (type) {
             case "svg":
                 return <image {...rest} onError={onImageError} href={src} />;
