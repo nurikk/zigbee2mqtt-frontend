@@ -27,7 +27,7 @@ const AVALIABLE_GENERATORS = [
 const DeviceImage: FunctionComponent<DeviceImageProps & ImgHTMLAttributes<HTMLDivElement | SVGImageElement>> = (props) => {
     const { t } = useTranslation("zigbee");
     const [imageGenerators, setimageGenerators] = useState(AVALIABLE_GENERATORS);
-    const { device, deviceStatus, type = "img", className, ...rest } = props;
+    const { device = {} as Device, deviceStatus, type = "img", className, ...rest } = props;
     let src: string | undefined = genericDeiviceImageFallback(device);
     const onImageError = () => {
         const newGenerators = [...imageGenerators];
