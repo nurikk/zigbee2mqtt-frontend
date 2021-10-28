@@ -329,6 +329,8 @@
         "ieee_address": "Adresse IEEE",
         "input_clusters": "Clusters Entrants",
         "interview_completed": "Interview terminé",
+        "interview_failed": "Echec de l'Interview",
+        "interviewing": "Interview en cours",
         "last_seen": "Vu il y a",
         "lqi": "LQI",
         "manufacturer": "Constructeur",
@@ -348,6 +350,7 @@
         "select_cluster": "Choisir Cluster",
         "support_status": "Supporté",
         "unsupported": "Non Supporté",
+        "updating_firmware": "Firmware en cours de MàJ",
         "update_Home_assistant_entity_id": "MàJ de l'ID d'entité Home Assistant",
         "zigbee_model": "Modèle Zigbee",
         "zigbee_manufacturer": "Constructeur Zigbee"
