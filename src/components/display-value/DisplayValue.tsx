@@ -15,6 +15,12 @@ function BooleanValueView(props: DisplayValueProps): JSX.Element {
             [false, t('open')],
         ]),
 
+        action: new Map([
+            [drop, t('drop')],
+            [tilt, t('tilt')],
+            [vibration, t('vibration')]
+        ]),    
+            
         occupancy: new Map([
             [true, t('occupied')],
             [false, t('clear')]
