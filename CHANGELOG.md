@@ -1,3 +1,14 @@
+## [0.6.26](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.25...0.6.26) (2021-10-30)
+
+
+### Features
+
+* **dashboard:** add temperature icon to device_temperature class ([#992](https://github.com/nurikk/zigbee2mqtt-frontend/issues/992)) ([622c7ee](https://github.com/nurikk/zigbee2mqtt-frontend/commit/622c7eea0248ab48ebcb6b1ba92b65742c16081a))
+* **ota:** add link to ota changelog ([#991](https://github.com/nurikk/zigbee2mqtt-frontend/issues/991)) ([93f1a4e](https://github.com/nurikk/zigbee2mqtt-frontend/commit/93f1a4e685e790b883eb4b2ed9b7d09d1cd1136c))
+* **translations:** add miscellaneous translations ([#990](https://github.com/nurikk/zigbee2mqtt-frontend/issues/990)) ([969a023](https://github.com/nurikk/zigbee2mqtt-frontend/commit/969a0234d7f3c139516a26ee0a1275a71c99a27a))
+
+
+
 ## [0.6.25](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.24...0.6.25) (2021-10-26)
 
 
