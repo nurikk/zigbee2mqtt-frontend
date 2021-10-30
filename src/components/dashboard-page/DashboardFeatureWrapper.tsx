@@ -53,6 +53,7 @@ const typeToClassMap = {
 const getGenericFeatureIcon = (name: string, value: unknown): string => {
     let classes = [] as string[];
     switch (name) {
+        case 'device_temperature':
         case 'temperature':
             classes.push(cx('text-danger', getTemperatureIcon(value as number)))
             break;
