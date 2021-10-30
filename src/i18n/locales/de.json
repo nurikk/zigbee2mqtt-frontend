@@ -409,7 +409,7 @@
         "model": "Modell",
         "network_address": "Netzwerk Adresse",
         "pic": "Bild",
-        "power": "Leistung",
+        "power": "Spannungsversorgung",
         "power_level": "Leistungspegel",
         "reconfigure": "Neu konfigurieren",
         "remove_device": "Gerät entfernen",
