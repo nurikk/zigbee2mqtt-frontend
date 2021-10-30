@@ -37,3 +37,26 @@ export const ModelLink: React.FunctionComponent<VendorProps> = (props: VendorPro
     }
     return <a target="_blank" rel="noopener noreferrer" href={url}>{title}</a>
 }
+
+
+export const OTALink: React.FunctionComponent<VendorProps> = (props: VendorProps) => {
+    const { device, anchor } = props;
+    let url = '';
+    let title = device.software_build_id;
+
+    switch (device?.definition?.vendor) {
+        case "IKEA":
+            url = `https://ww8.ikea.com/ikeahomesmart/releasenotes/releasenotes.html`
+            break
+
+        case "Ubisys":
+            url = `https://www.ubisys.de/en/support/firmware/changelog-${device.definition?.model?.replace(/[-]/g, '').toLowerCase()}/`
+            break
+    }
+
+    if (url != '') {
+        return <a target="_blank" rel="noopener noreferrer" href={url}>{title}</a>
+    } else {
+        return <>{title}</>
+    }
+}
