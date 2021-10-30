@@ -9,7 +9,7 @@ import Button from "../button";
 import { genDeviceDetailsLink, toHHMMSS } from "../../utils";
 import { Link } from "react-router-dom";
 import { Device, DeviceState } from "../../types";
-import { VendorLink, ModelLink } from "../vendor-links/verndor-links";
+import { VendorLink, ModelLink, OTALink } from "../vendor-links/verndor-links";
 import { useTranslation, WithTranslation, withTranslation } from "react-i18next";
 
 
@@ -46,7 +46,7 @@ const OtaRow: FunctionComponent<OtaRowProps & OtaApi> = (props) => {
         <td className="text-truncate text-nowrap position-relative"><VendorLink device={device} /></td>
         <td title={device?.definition?.description}><ModelLink device={device} /></td>
         <td>{device.date_code}</td>
-        <td>{device.software_build_id}</td>
+        <td><OTALink device={device} /></td>
         <td>
             <StateCell device={device} state={state} {...rest} />
         </td>
