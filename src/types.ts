@@ -241,7 +241,7 @@ export interface Device extends WithFreiendlyName {
     type: DeviceType;
     network_address: number;
     model: string;
-    power_source: PowerSource;
+    power_source?: PowerSource;
     model_id: string;
     manufacturer: string;
     interviewing: boolean;
