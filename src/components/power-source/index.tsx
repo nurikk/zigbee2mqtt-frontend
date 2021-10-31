@@ -16,7 +16,7 @@ const PowerSource: FunctionComponent<PowerSourceProps> = ({ source = "", battery
     const { t } = useTranslation("zigbee");
     let batteryClass = "";
     let title = "";
-    let translationKey = source.toLowerCase().replace(/\s/g, '_').replace(/[^a-z0-9_]/g, '');
+    let translationKey = source?.toLowerCase().replace(/\s/g, '_').replace(/[^a-z0-9_]/g, '');
 
     switch (source) {
         case "Battery":
