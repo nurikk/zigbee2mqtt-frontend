@@ -1,3 +1,12 @@
+## [0.6.27](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.26...0.6.27) (2021-10-31)
+
+
+### Bug Fixes
+
+* **PowerSource:** fix undefined powersource ([eae750c](https://github.com/nurikk/zigbee2mqtt-frontend/commit/eae750cc91c367cd59db6a9c942085ad4a552313))
+
+
+
 ## [0.6.26](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.25...0.6.26) (2021-10-30)
 
 
