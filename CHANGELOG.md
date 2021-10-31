@@ -1,3 +1,12 @@
+## [0.6.28](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.27...0.6.28) (2021-10-31)
+
+
+### Bug Fixes
+
+* **PowerSource:** refactor translation key ([76ffdea](https://github.com/nurikk/zigbee2mqtt-frontend/commit/76ffdea02fff4c72404610c8cf3898ec79290aad))
+
+
+
 ## [0.6.27](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.26...0.6.27) (2021-10-31)
 
 
