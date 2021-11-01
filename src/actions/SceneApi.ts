@@ -18,7 +18,7 @@ export interface SceneApi {
     sceneRemove(dev: string,  sceneId: SceneId, endpoint?: Endpoint| undefined): Promise<void>;
     sceneRemoveAll(dev: string, endpoint?: Endpoint): Promise<void>;
 }
-// Document: https://www.zigbee2mqtt.io/information/scenes.html
+// Document: https://www.zigbee2mqtt.io/guide/usage/scenes.html
 
 export default {
     sceneStore(state, dev: string,  scene: Scene, endpoint?: Endpoint): Promise<void> {
