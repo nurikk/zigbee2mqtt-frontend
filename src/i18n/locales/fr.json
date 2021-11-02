@@ -369,6 +369,7 @@
     },
     "scene": {
         "scene_id": "ID Scène",
+        "scene_name": "Nom Scène",
         "recall": "Rappeler",
         "select_scene": "Choisir Scène",
         "store": "Stocker",
