@@ -166,8 +166,8 @@
         "The measured atmospheric pressure": "The measured atmospheric pressure",
         "Triggered action (e.g. a button click)": "Triggered action (e.g. a button click)",
         "Triggers an effect on the light (e.g. make light blink for a few seconds)": "Triggers an effect on the light (e.g. make light blink for a few seconds)",
-        "Voltage of the battery in millivolts": "Voltage of the battery in millivolts": "Voltage of the battery in millivolts": "Voltage of the battery in millivolts",
-        "Week format user for schedule": "Week format user for schedule": "Week format user for schedule": "Week format user for schedule"
+        "Voltage of the battery in millivolts": "Voltage of the battery in millivolts",
+        "Week format user for schedule": "Week format user for schedule"
     },
     "featureNames": {
         "action": "Action",
