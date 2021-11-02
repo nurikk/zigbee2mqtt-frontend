@@ -8,7 +8,7 @@
         "*.css"
     ],
     "name": "zigbee2mqtt-frontend",
-    "version": "0.6.20",
+    "version": "0.6.30",
     "license": "GPL-3.0",
     "scripts": {
         "build": "npm run clean && webpack --config ./webpack.config.js --mode production",
@@ -114,9 +114,9 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/nurikk/z2m-frontend.git"
+        "url": "git+https://github.com/nurikk/zigbee2mqtt-frontend.git"
     },
     "bugs": {
-        "url": "https://github.com/nurikk/z2m-frontend/issues"
+        "url": "https://github.com/nurikk/zigbee2mqtt-frontend/issues"
     }
 }
