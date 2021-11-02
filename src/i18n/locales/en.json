@@ -181,6 +181,7 @@
     "settings": {
         "about": "About",
         "advanced": "Advanced",
+        "availability": "Availability",
         "blocklist": "Blocklist",
         "coordinator_revision": "Coordinator revision",
         "coordinator_type": "Coordinator type",
