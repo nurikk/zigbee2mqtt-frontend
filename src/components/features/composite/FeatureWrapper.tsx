@@ -2,6 +2,7 @@ import React, { FunctionComponent, PropsWithChildren } from "react";
 import { useTranslation } from "react-i18next";
 import { CompositeFeature, GenericExposedFeature, Endpoint, FeatureAccessMode, DeviceState } from "../../../types";
 import Button from "../../button";
+import { isColorFeature } from "../../device-page/type-guards";
 
 
 export type FetatureWrapperProps = {
@@ -12,13 +13,13 @@ export type FetatureWrapperProps = {
 export const FeatureWrapper: FunctionComponent<PropsWithChildren<FetatureWrapperProps>> = (props) => {
     const { t } = useTranslation(['featureDescriptions']);
     const { children, feature, onRead } = props;
-    const isColor = feature.name?.startsWith("color_"); //hardcode for color
+    const isColor = isColorFeature(feature);
     const isReadable = (feature.access & FeatureAccessMode.ACCESS_READ) || isColor;
     return <div className="row border-bottom py-1 w-100 align-items-center">
         <div className="col-12 col-md-3">
             <label className="col-form-label w-100">
                 <div className="d-flex justify-content-between">
-                    <strong title={JSON.stringify(feature)}>{feature.name}</strong>
+                    <strong title={JSON.stringify(feature)}>{feature.name === 'state' ? feature.property : feature.name}</strong>
                     {isReadable ? (
                         <Button<CompositeFeature | GenericExposedFeature> item={feature} onClick={(item) => {
                             onRead(feature.endpoint as Endpoint, { [item.property]: "" })

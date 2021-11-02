@@ -107,7 +107,7 @@
         "extension_name_propmt": "Enter new extension name",
         "select_extension_to_edit": "Select extension to edit"
     },
-        "featureDescriptions": {
+    "featureDescriptions": {
         "Remaining battery in %": "Remaining battery in %",
         "Indicates if the contact is closed (= true) or open (= false)": "Indicates if the contact is closed (= true) or open (= false)",
         "Measured temperature value": "Measured temperature value",
@@ -122,6 +122,7 @@
         "angle_y": "Angle Y",
         "angle_z": "Angle Z",
         "brightness": "Brightness",
+        "co2": "CO2",
         "color_temp": "Color Temp",
         "color_xy": "Color Xy",
         "contact": "Contact",
@@ -189,6 +190,7 @@
     "settings": {
         "about": "About",
         "advanced": "Advanced",
+        "availability": "Availability",
         "blocklist": "Blocklist",
         "coordinator_revision": "Coordinator revision",
         "coordinator_type": "Coordinator type",
@@ -278,8 +280,10 @@
     "zigbee": {
         "actions": "Actions",
         "attribute": "Attribute",
+        "battery": "Battery",
         "block_join": "Block from joining again",
         "cluster": "Cluster",
+        "dc_source": "DC Source",
         "description": "Description",
         "device_type": "Device type",
         "endpoint": "Endpoint",
@@ -290,8 +294,11 @@
         "ieee_address": "IEEE Address",
         "input_clusters": "Input clusters",
         "interview_completed": "Interview completed",
+        "interview_failed": "Interview failed",
+        "interviewing": "Interviewing",
         "last_seen": "Last seen",
         "lqi": "LQI",
+        "mains_single_phase": "Mains (single phase)",
         "manufacturer": "Manufacturer",
         "max_rep_interval": "max rep interval",
         "min_rep_change": "Min rep change",
@@ -302,6 +309,7 @@
         "output_clusters": "Output clusters",
         "pic": "Pic",
         "power": "Power",
+        "power_level": "power level",
         "reconfigure": "Reconfigure",
         "remove_device": "Remove device",
         "rename_device": "Rename device",
@@ -309,6 +317,7 @@
         "select_cluster": "Select cluster",
         "support_status": "Support status",
         "unsupported": "Unsupported",
+        "updating_firmware": "Updating firmware",
         "update_Home_assistant_entity_id": "Update Home Assistant entity ID",
         "zigbee_manufacturer": "Zigbee Manufacturer",
         "zigbee_model": "Zigbee Model",

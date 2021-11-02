@@ -12,14 +12,16 @@ import { GlobalState } from '../../store';
 import { DashboardFeatureWrapper } from './DashboardFeatureWrapper';
 import { getLastSeenType, isOnlyOneBitIsSet } from '../../utils';
 
-import { isLightFeature } from '../device-page/type-guards';
+import { isClimateFeature, isLightFeature } from '../device-page/type-guards';
 import groupBy from "lodash/groupBy";
 import { filterDeviceByFeatures } from '../groups/DeviceGroupRow';
 
 
 type PropsFromStore = Pick<GlobalState, 'devices' | 'deviceStates' | 'bridgeInfo'>;
 
-const genericRendererIgnoredNames = ['linkquality', 'battery', 'battery_low', 'illuminance_lux', 'color_temp_startup', 'voltage', 'strength', 'color_options'];
+const genericRendererIgnoredNames = ['linkquality', 'battery', 'battery_low',
+    'illuminance_lux', 'color_temp_startup', 'voltage',
+    'strength', 'color_options', 'warning', 'position', 'operation_mode', 'operation_mode2'];
 const whitelistFeatureNames = ['state', 'brightness', 'color_temp', 'mode', 'sound', 'occupancy', 'tamper', 'alarm'];
 const whitelistFeatureTypes = ['light'];
 const nullish = ['', null, undefined];
@@ -27,7 +29,7 @@ const nullish = ['', null, undefined];
 export const onlyValidFeaturesForDashboard = (feature: GenericExposedFeature | CompositeFeature, deviceState: DeviceState = {} as DeviceState): GenericExposedFeature | CompositeFeature | false => {
     const { access, property, name, type } = feature;
     let { features } = feature as CompositeFeature;
-    if (isLightFeature(feature)) {
+    if (isLightFeature(feature) || isClimateFeature(feature)) {
         features = features.map(f => onlyValidFeaturesForDashboard(f, (property ? deviceState[property] : deviceState) as DeviceState)).filter(f => f) as (GenericExposedFeature | CompositeFeature)[];
         const groupedFeatures = groupBy(features, 'property');
         features = Object.values(groupedFeatures).map(f => f[0]);
