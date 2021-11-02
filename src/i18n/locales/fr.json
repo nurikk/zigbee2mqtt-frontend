@@ -130,7 +130,10 @@
         "local_temperature_calibration": "Calibration Température Locale",
         "away_mode": "Mode Absence",
         "position": "Position",
-        "preset": "Préréglage"
+        "preset": "Préréglage",
+        "state_l1": "Etat L 1",
+        "state_l2": "Etat L 2",
+        "state_l3": "Etat L 3"
     },
     "featureDescriptions": {
         "On/off state of this light": "Etat Allumé/Eteint de cette lumière",
@@ -181,7 +184,11 @@
         "new_group_id_placeholder": "Spécifiez l'ID groupe si nécessaire",
         "new_group_name": "Nouveau nom de groupe",
         "new_group_name_placeholder": "exemple: mes_lumières_chambre",
-        "remove_group": "Supprimer groupe"
+        "remove_group": "Supprimer groupe",
+        "group_id": "ID Groupe",
+        "group_name": "Nom Groupe",
+        "group_members": "Membres Groupe",
+        "group_scenes": "Scènes Groupe"
     },
     "logs": {
         "empty_logs_message": "Rien à afficher",
@@ -225,6 +232,7 @@
     "settings": {
         "about": "À propos",
         "advanced": "Avancé",
+        "availability": "Disponibilité",
         "blocklist": "Liste de blocage",
         "coordinator_revision": "Révision du Coordinateur",
         "coordinator_type": "Type de Coordinateur",
