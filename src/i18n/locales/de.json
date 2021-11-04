@@ -390,7 +390,12 @@
         "root_debounce_ignore__title": "Ignoriere doppelte Meldungen",
         "root_debounce_ignore__description": "Schützt einzelne payload Werte von spezifizierten payload Eigenschaften vor Überschreibung während der Entprellzeit",
         "root_filtered_optimistic__title": "Filtered optimistic attributes",
-        "root_filtered_optimistic__description": "Filtern von Attributen bei \"optimistic publish payload\" bei abruf oder setzen. (Diese Funktion ist abgeschaltet, wenn \"optimistic\" deaktiviert ist.)."
+        "root_filtered_optimistic__description": "Filtern von Attributen bei \"optimistic publish payload\" bei abruf oder setzen. (Diese Funktion ist abgeschaltet, wenn \"optimistic\" deaktiviert ist.).",
+        "availability-title": "Verfügbarkeit (erweitert)",
+        "availability_active-title": "Aktiv",
+        "availability_active-description": "Optionen für aktive Geräte (Router/mit Netzanschluss)",
+        "availability_passive-title": "Passiv",
+        "availability_passive-description": "Optionen für passive Geräte (Batteriebetrieben)"
     },
     "touchlink": {
         "detected_devices_message": " {{count}} Touchlink Geräte entdeckt.",
