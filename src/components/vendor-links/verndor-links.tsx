@@ -16,7 +16,7 @@ export const VendorLink: React.FunctionComponent<VendorProps> = (props: VendorPr
     const { t } = useTranslation("zigbee");
     const { device } = props;
     if (device.supported && device.definition) {
-        const url = `https://www.zigbee2mqtt.io/information/supported_devices.html#v=${encodeURIComponent(normalizeModel(device.definition.vendor))}`;
+        const url = `https://www.zigbee2mqtt.io/supported-devices/#v=${encodeURIComponent(normalizeModel(device.definition.vendor))}`;
         return <a target="_blank" rel="noopener noreferrer" href={url}>{device.definition.vendor}</a>
     }
     return <Fragment>{t('unsupported')}</Fragment>;
@@ -25,7 +25,7 @@ export const VendorLink: React.FunctionComponent<VendorProps> = (props: VendorPr
 
 export const ModelLink: React.FunctionComponent<VendorProps> = (props: VendorProps) => {
     const { device, anchor } = props;
-    let url = 'https://www.zigbee2mqtt.io/how_tos/how_to_support_new_devices.html#how-to-support-new-devices';
+    let url = 'https://www.zigbee2mqtt.io/advanced/support-new-devices/01_support_new_devices.html';
     let title = device.model_id;
     if (device.supported && device.definition) {
         const detailsAcnchor = [

@@ -90,7 +90,7 @@ export class ZigbeeTable extends Component<ZigbeeTableProps, ZigbeeTableState> {
         if (Object.keys(devices).length == 0) {
             const error = <Fragment>
                 <strong>Loading devices takes too long time.</strong>
-                <div>Consider reading <a href="https://www.zigbee2mqtt.io/information/frontend.html">documentation</a></div>
+                <div>Consider reading <a href="https://www.zigbee2mqtt.io/guide/configuration/webui.html#webui">documentation</a></div>
             </Fragment>;
             this.setState({ error });
         }
