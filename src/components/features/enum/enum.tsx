@@ -17,7 +17,7 @@ const Enum: FunctionComponent<EnumProps> = (props) => {
 
     if (access & FeatureAccessMode.ACCESS_WRITE) {
         return <EnumEditor
-            onChange={(value) => onChange(endpoint as Endpoint, { [name]: value })}
+            onChange={(value) => onChange(endpoint as Endpoint, { [property]: value })}
             values={values as unknown as ValueWithLabelOrPrimitive[]}
             value={deviceState[property] as ValueWithLabelOrPrimitive}
             minimal={minimal || thisIsVeryBigEnumeration}
