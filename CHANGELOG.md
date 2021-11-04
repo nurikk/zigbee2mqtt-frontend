@@ -1,3 +1,12 @@
+## [0.6.31](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.30...0.6.31) (2021-11-04)
+
+
+### Bug Fixes
+
+* **exposes:** fix property handling ([fff9f5d](https://github.com/nurikk/zigbee2mqtt-frontend/commit/fff9f5d70414b9f6ede5d4b16f82d8ea6c4a6aa3))
+
+
+
 ## [0.6.30](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.29...0.6.30) (2021-11-01)
 
 
