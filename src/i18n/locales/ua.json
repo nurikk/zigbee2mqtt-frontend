@@ -234,7 +234,7 @@
         "Measured temperature value": "Виміряне значення температури",
         "Minimum temperature": "Мінімальна температура",
         "Mode of this device": "Режим даного приладу",
-        "Mode of this device (similar to system_mode)": "Режим даного приладу (подібний до Системного режиму)",
+        "Mode of this device (similar to system_mode)": "Режим приладу (подібний до Системного режиму)",
         "Moving inside the range of the sensor": "Виявлення переміщення в межах діапазону датчика",
         "Motor speed": "Швидкість двигуна",
         "Number of digits after decimal point for humidity, takes into effect on next report of device.": "Кількість знаків після коми для вологості, вступає в силу при наступному звіті приладу.",
@@ -264,7 +264,7 @@
         "Triggered action (e.g. a button click)": "Виклик дії (наприклад натискання кнопки)",
         "Triggers an effect on the light (e.g. make light blink for a few seconds)": "Створює еффект на світло (наприклад, змушує світло блимати протягом децількох хвилин)",
         "Voltage of the battery in millivolts": "Напруга батареї в мілівольтах",
-        "Week format user for schedule": "Тижневий формат користувач для планування",
+        "Week format user for schedule": "Тижневий формат користувача для планування",
         "Window status closed or open ": "Стан вікна закрите або відкрити"
     },
     "groups": {
