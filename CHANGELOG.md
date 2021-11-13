@@ -1,3 +1,13 @@
+## [0.6.32](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.31...0.6.32) (2021-11-13)
+
+
+### Bug Fixes
+
+* **DeviceFooter:** fix rendering unsupported devices ([0ee2d47](https://github.com/nurikk/zigbee2mqtt-frontend/commit/0ee2d4746d9f6a15df434e1be15f32ff959d2a51))
+* **ReportingRow:** fix state value overrides ([ee947d2](https://github.com/nurikk/zigbee2mqtt-frontend/commit/ee947d2994c7ba6e9f5e2cd273dac0a793d4df1e))
+
+
+
 ## [0.6.31](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.30...0.6.31) (2021-11-04)
 
 
