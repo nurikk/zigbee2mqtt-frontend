@@ -92,10 +92,8 @@ export class LogsPage extends Component<PropsFromStore & BridgeApi & UtilsApi & 
         const { t } = this.props;
         const { search, logLevel } = this.state;
 
-        const _search = new RegExp(escapeRegExp(search), 'gi');
-
         logs = logs
-            .filter(l => (logLevel === ALL || l.level === logLevel) && (!search || _search.test(l.message)))
+            .filter(l => (logLevel === ALL || l.level === logLevel) && (!search || l.message.toLowerCase().includes(search.toLowerCase())))
             .sort();
 
         return <>
