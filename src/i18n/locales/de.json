@@ -13,6 +13,7 @@
         "confirmation": "Bestätigen",
         "delete": "Löschen",
         "destination": "Ziel",
+        "destination_endpoint": "Zielendpunkt",
         "devices": "Devices",
         "dialog_confirmation_prompt": "Bist Du sicher?",
         "disable": "Abschalten",
