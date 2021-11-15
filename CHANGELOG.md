@@ -1,3 +1,12 @@
+## [0.6.33](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.32...0.6.33) (2021-11-15)
+
+
+### Bug Fixes
+
+* **LogsPage:** fix message filtering ([5144a3f](https://github.com/nurikk/zigbee2mqtt-frontend/commit/5144a3f7f71958d779c579d8e0976ef970e60c3d))
+
+
+
 ## [0.6.32](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.31...0.6.32) (2021-11-13)
 
 
