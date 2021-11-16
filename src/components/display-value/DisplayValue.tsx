@@ -26,7 +26,7 @@ function BooleanValueView(props: DisplayValueProps): JSX.Element {
 
         tamper: new Map<boolean, string | JSX.Element>([
             [true, <span className={cx("text-danger", "animation-blinking")} key="tampered">{t('tampered')}</span>],
-            [false, 'clear']
+            [false, t('clear')]
         ]),
         supported: new Map([
             [true, t('supported')],

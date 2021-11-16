@@ -38,7 +38,7 @@ type LogRowProps = {
 export function LogRow(props: LogRowProps): JSX.Element {
     const { logLevel, log, search } = props
     return <div>
-        {logLevel === ALL && <><span className={cx("badge", {
+        {logLevel === ALL && <><span style={{ width: '50px' }} className={cx("badge", {
             'bg-danger': log.level === 'error',
             'bg-warning': log.level === 'warning',
             'bg-info': log.level === 'info',
@@ -60,17 +60,17 @@ export class LogsPage extends Component<PropsFromStore & BridgeApi & UtilsApi & 
         return <div className="card">
             <div className="card-body">
                 <div className="row row-cols-lg-auto g-3 align-items-center">
-                    <div className="col-12">
+                    <div className="col-12 col-sm-4 col-xxl-4">
                         <label htmlFor="log-level" className="form-label">{t('show_only')}</label>
                         <select id="log-level" className="form-select" onChange={e => this.setState({ logLevel: e.target.value })}>
                             {logLevels.map(level => <option key={level} value={level}>{level}</option>)}
                         </select>
                     </div>
-                    <div className="col-12">
+                    <div className="col-12 col-sm-4 col-xxl-4">
                         <label htmlFor="search-filter" className="form-label">{t('filter_by_text')}</label>
                         <input id="search-filter" className="form-control col-10" placeholder={t('common:enter_search_criteria')} value={search} onChange={(e) => this.setState({ search: e.target.value })} type="text"></input>
                     </div>
-                    <div className="col-12">
+                    <div className="col-12 col-sm-4 col-xxl-4">
                         <ConfigureLogs
                             schema={config_schema}
                             schemaKey='properties.advanced.properties.log_level'
@@ -92,10 +92,8 @@ export class LogsPage extends Component<PropsFromStore & BridgeApi & UtilsApi & 
         const { t } = this.props;
         const { search, logLevel } = this.state;
 
-        const _search = new RegExp(escapeRegExp(search), 'gi');
-
         logs = logs
-            .filter(l => (logLevel === ALL || l.level === logLevel) && (!search || _search.test(l.message)))
+            .filter(l => (logLevel === ALL || l.level === logLevel) && (!search || l.message.toLowerCase().includes(search.toLowerCase())))
             .sort();
 
         return <>

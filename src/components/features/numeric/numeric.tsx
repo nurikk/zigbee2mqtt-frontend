@@ -9,10 +9,10 @@ interface NumericProps extends BaseFeatureProps<NumericFeature> {
 }
 
 const Numeric: FunctionComponent<NumericProps> = (props) => {
-    const { feature: { presets, access, endpoint, name, property, unit, value_max: valueMax, value_min: valueMin }, deviceState, steps, onChange, minimal } = props;
+    const { feature: { presets, access = FeatureAccessMode.ACCESS_WRITE, endpoint, name, property, unit, value_max: valueMax, value_min: valueMin }, deviceState, steps, onChange, minimal } = props;
     if (access & FeatureAccessMode.ACCESS_WRITE) {
         return <RangeEditor
-            onChange={(value) => onChange(endpoint as Endpoint, { [name]: value })}
+            onChange={(value) => onChange(endpoint as Endpoint, { [property]: value })}
             value={deviceState[property] as number ?? 0}
             min={valueMin}
             max={valueMax}

@@ -3,7 +3,7 @@
 import store, { GlobalState } from "../store";
 import { Store } from "unistore";
 
-import { ReportingConfig } from "../types";
+import { Endpoint, FriendlyName, IEEEEAddress, ReportingConfig } from "../types";
 import api from "../api";
 import { download, saveCurrentTheme } from "../utils";
 import bridgeActions from "./BridgeApi";
@@ -14,6 +14,7 @@ import otaActions from "./OtaApi";
 import bindActions from "./BindApi";
 import touchlinkActions from "./TouchlinkApi";
 import extensionActions from "./ExtensionApi";
+import sceneActions from "./SceneApi";
 import { Theme } from "../components/theme-switcher";
 
 export interface UtilsApi {
@@ -32,6 +33,14 @@ export interface ThemeActions {
 }
 
 
+export const toDeviceId = (friendlyNameOrIEEEAddress: FriendlyName | IEEEEAddress, endpoint: Endpoint): string => {
+    if (endpoint) {
+        return `${friendlyNameOrIEEEAddress}/${endpoint}`;
+    } else {
+        return friendlyNameOrIEEEAddress;
+    }
+}
+
 const actions = (store: Store<GlobalState>): Record<string, (state: GlobalState, ...rest: unknown[]) => Promise<void>> => ({
     ...bridgeActions,
     ...deviceActions,
@@ -41,6 +50,7 @@ const actions = (store: Store<GlobalState>): Record<string, (state: GlobalState,
     ...bindActions,
     ...touchlinkActions,
     ...extensionActions,
+    ...sceneActions,
 
     networkMapRequest: (state): Promise<void> => {
         store.setState({ networkGraphIsLoading: true, networkGraph: { nodes: [], links: [] } });

@@ -1,5 +1,5 @@
 {
-    "de": "Deutsche Sprache",
+    "de": "Deutsch",
     "en": "English",
     "es": "Español",
     "fr": "Français",
@@ -9,5 +9,7 @@
     "ru": "Русский",
     "ua": "Українська",
     "chs": "简体中文",
-    "it": "Italiano"
+    "it": "Italiano",
+    "zh": "繁體中文",
+    "ko": "한국어"
 }

@@ -19,21 +19,8 @@ const DeviceFooter: React.FC<Props> = ({ device, deviceState, lastSeenType }) =>
     const {
         linkquality
     } = deviceState;
-    const { exposes } = device.definition as DeviceDefinition;
-    const rederedFeatures = [] as JSX.Element[];
-    (exposes as GenericExposedFeature[])
-        .filter(e => footerFeatures.includes(e.name))
-        .forEach(e => {
-            switch (e.name) {
-                case "linkquality":
-                    linkquality && rederedFeatures.push(<span key="linkquality" className="me-1"><i className="fa fa-signal fa-fw" /> {linkquality} LQI</span>);
-                    break;
-                default:
-                    break;
-            }
-        });
+    const { supported } = device;
 
-    rederedFeatures.push(<PowerSource key={"power"} source={device.power_source} battery={deviceState.battery as number} />);
     return (
         <footer className="card-footer pt-0">
             <div className="row justify-content-between flex-nowrap">
@@ -41,7 +28,8 @@ const DeviceFooter: React.FC<Props> = ({ device, deviceState, lastSeenType }) =>
                     <LastSeen state={deviceState} lastSeenType={lastSeenType} />
                 </div>
                 <div className="col col-auto text-truncate">
-                    {rederedFeatures}
+                    <span key="linkquality" className="me-1"><i className="fa fa-signal fa-fw" /> {linkquality} LQI</span>
+                    {supported && <PowerSource key={"power"} source={device.power_source} battery={deviceState.battery as number} />}
                 </div>
             </div>
         </footer>

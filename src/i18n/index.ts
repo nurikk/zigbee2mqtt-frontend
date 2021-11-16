@@ -17,6 +17,8 @@ import uaTranslations from './locales/ua.json';
 import chsTranslations from './locales/chs.json';
 import nlTranslations from './locales/nl.json';
 import itTranslations from './locales/it.json';
+import zhTranslations from './locales/zh.json';
+import koTranslations from './locales/ko.json';
 
 
 import timePl from "timeago.js/lib/lang/pl";
@@ -29,6 +31,8 @@ import timeUa from "timeago.js/lib/lang/uk";
 import timeChs from "timeago.js/lib/lang/zh_CN";
 import timeNl from "timeago.js/lib/lang/nl";
 import timeIt from "timeago.js/lib/lang/it";
+import timeZh from "timeago.js/lib/lang/zh_TW";
+import timeKo from "timeago.js/lib/lang/ko";
 
 
 register("pl", timePl);
@@ -41,6 +45,10 @@ register("ua", timeUa);
 register("chs", timeChs);
 register("nl", timeNl);
 register("it", timeIt);
+register("ko", timeKo);
+register("zh", timeZh);
+
+
 
 
 
@@ -56,6 +64,8 @@ export const resources = {
     chs: chsTranslations as ResourceLanguage,
     nl: nlTranslations as ResourceLanguage,
     it: itTranslations as ResourceLanguage,
+    zh: zhTranslations as ResourceLanguage,
+    ko: koTranslations as ResourceLanguage,
 } as const;
 
 declare let window: Record<string, unknown>;
@@ -83,4 +93,9 @@ i18n
         saveMissing: true,
         missingKeyHandler
     });
+
+const currentLanguage = i18n.language.split('-')[0].toLocaleLowerCase();
+if (!resources[currentLanguage]) {
+    i18n.changeLanguage('en');
+}
 export default i18n;

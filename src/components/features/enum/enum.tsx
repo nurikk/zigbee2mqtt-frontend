@@ -11,13 +11,13 @@ type EnumProps = BaseFeatureProps<EnumFeature>
 const VERY_BIG_ENUM_SIZE = 4;
 
 const Enum: FunctionComponent<EnumProps> = (props) => {
-    const { onChange, feature: { access, name, values, endpoint, property }, deviceState, minimal } = props;
+    const { onChange, feature: { access = FeatureAccessMode.ACCESS_WRITE, name, values, endpoint, property }, deviceState, minimal } = props;
 
     const thisIsVeryBigEnumeration = values.length > VERY_BIG_ENUM_SIZE;
 
     if (access & FeatureAccessMode.ACCESS_WRITE) {
         return <EnumEditor
-            onChange={(value) => onChange(endpoint as Endpoint, { [name]: value })}
+            onChange={(value) => onChange(endpoint as Endpoint, { [property]: value })}
             values={values as unknown as ValueWithLabelOrPrimitive[]}
             value={deviceState[property] as ValueWithLabelOrPrimitive}
             minimal={minimal || thisIsVeryBigEnumeration}

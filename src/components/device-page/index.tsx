@@ -10,11 +10,13 @@ import States from "./states";
 import ConnectedDeviceExposes from "./exposes";
 import Clusters from "./clusters";
 import DeviceSettings from "./settings";
+import Scene from "./scene";
 import styles from "./style.css";
 
 import DevConsole from "./dev-console";
 import { DeviceApi } from "../../actions/DeviceApi";
 import { WithTranslation, withTranslation } from "react-i18next";
+import DeviceSpecificSettings from "./DeviceSpecificSettings";
 
 const getDeviceLinks = (dev: string) => ([
     {
@@ -50,25 +52,30 @@ const getDeviceLinks = (dev: string) => ([
         url: `/device/${dev}/clusters`
     },
     {
+        translationKey: 'scene',
+        url: `/device/${dev}/scene`
+    },
+    {
         translationKey: 'dev_console',
         url: `/device/${dev}/dev-console`
     },
 
 ]);
-type TabName = "info" | "bind" | "state" | "exposes" | "clusters" | "reporting" | "settings" | "settings-specific" | "dev-console";
+type TabName = "info" | "bind" | "state" | "exposes" | "clusters" | "reporting" | "settings" | "settings-specific" | "dev-console" | "scene";
 type UrlParams = {
     dev: string;
     tab?: TabName;
 };
-type PropsFromStore = Pick<GlobalState, 'bridgeInfo' | 'devices' | 'logs'>;
+type PropsFromStore = Pick<GlobalState, 'bridgeInfo' | 'devices' | 'logs' | 'deviceStates'>;
 
 type DevicePageProps = RouteComponentProps<UrlParams> & PropsFromStore & DeviceApi & WithTranslation<"devicePage">;
 
 function ContentRenderer(props: DevicePageProps): JSX.Element {
     const { match, devices, logs } = props;
-    const { readDeviceAttributes, writeDeviceAttributes, setDeviceOptions, bridgeInfo } = props;
+    const { readDeviceAttributes, writeDeviceAttributes, setDeviceOptions, bridgeInfo, deviceStates } = props;
     const { tab, dev } = match.params;
     const device = devices[dev];
+    const deviceState = deviceStates[device.friendly_name] ?? {};
 
     switch (tab) {
         case "info":
@@ -90,7 +97,11 @@ function ContentRenderer(props: DevicePageProps): JSX.Element {
                 bridgeInfo={bridgeInfo}
             />
         case "settings-specific":
-            return <div>Under construction</div>
+            return <DeviceSpecificSettings
+                device={device}
+                setDeviceOptions={setDeviceOptions}
+                bridgeInfo={bridgeInfo}
+            />
         case "dev-console":
             return <DevConsole
                 device={device}
@@ -98,6 +109,8 @@ function ContentRenderer(props: DevicePageProps): JSX.Element {
                 readDeviceAttributes={readDeviceAttributes}
                 writeDeviceAttributes={writeDeviceAttributes}
             />
+        case "scene":
+            return <Scene device={device} deviceState={deviceState} />;
         default:
             return <Redirect to={`/device/${dev}/info`} />;
     }

@@ -1,6 +1,7 @@
 import api from "../api";
 import { AttributeInfo } from "../components/device-page/dev-console";
-import { Attribute, Cluster } from "../types";
+import { Attribute, Cluster, Endpoint, FriendlyName, IEEEEAddress } from "../types";
+import { toDeviceId } from "./actions";
 
 export interface DeviceApi {
     renameDevice(
@@ -13,8 +14,8 @@ export interface DeviceApi {
 
     setDeviceOptions(id: string, options: Record<string, unknown>): Promise<void>;
 
-    readDeviceAttributes(id: string, cluster: Cluster, attrbutes: Attribute[], options: Record<string, unknown>): Promise<void>;
-    writeDeviceAttributes(id: string, cluster: Cluster, attrbutes: AttributeInfo[], options: Record<string, unknown>): Promise<void>;
+    readDeviceAttributes(friendlyNameOrIEEEAddress: FriendlyName | IEEEEAddress, endpoint: Endpoint, cluster: Cluster, attrbutes: Attribute[], options: Record<string, unknown>): Promise<void>;
+    writeDeviceAttributes(friendlyNameOrIEEEAddress: FriendlyName | IEEEEAddress, endpoint: Endpoint, cluster: Cluster, attrbutes: AttributeInfo[], options: Record<string, unknown>): Promise<void>;
 }
 
 
@@ -48,16 +49,15 @@ export default {
         return api.send("bridge/request/device/options", { id, options });
     },
 
-
-    readDeviceAttributes(state, id: string, cluster: Cluster, attributes: Attribute[], options: Record<string, unknown>): Promise<void> {
-        return api.send(`${id}/set`, { read: { cluster, attributes, options } });
+    readDeviceAttributes(state, id: FriendlyName | IEEEEAddress, endpoint: Endpoint, cluster: Cluster, attributes: Attribute[], options: Record<string, unknown>): Promise<void> {
+        return api.send(`${toDeviceId(id, endpoint)}/set`, { read: { cluster, attributes, options } });
     },
 
-    writeDeviceAttributes(state, id: string, cluster: Cluster, attributes: AttributeInfo[], options: Record<string, unknown>): Promise<void> {
+    writeDeviceAttributes(state, id: FriendlyName | IEEEEAddress, endpoint: Endpoint, cluster: Cluster, attributes: AttributeInfo[], options: Record<string, unknown>): Promise<void> {
         const payload = {};
         attributes.forEach(info => {
             payload[info.attribute] = info.value;
         })
-        return api.send(`${id}/set`, { write: { cluster, payload, options } });
+        return api.send(`${toDeviceId(id, endpoint)}/set`, { write: { cluster, payload, options } });
     }
 }

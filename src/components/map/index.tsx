@@ -112,7 +112,7 @@ const processHighlights = ({ networkGraph, links, selectedNode, node, link, link
     links.forEach((l) => linkedByIndex.add(l.source.ieeeAddr + "," + l.target.ieeeAddr));
 
     const neighboring = (a: NodeI, b: NodeI): boolean => linkedByIndex.has(a.ieeeAddr + "," + b.ieeeAddr)
-    const computeOpacity = (l: LinkI) => (l.source === selectedNode || l.target === selectedNode ? 1 : 0.15);
+    const computeOpacity = (l: LinkI) => (l?.source === selectedNode || l?.target === selectedNode ? 1 : 0.15);
     if (selectedNode) {
         node.style("opacity", (o: NodeI) => neighboring(selectedNode, o) || neighboring(o, selectedNode) ? 1 : 0.15);
         link.style("stroke-opacity", computeOpacity);
@@ -123,7 +123,7 @@ const processHighlights = ({ networkGraph, links, selectedNode, node, link, link
         linkLabel.style("opacity", 1);
     }
 }
-type PropsFromStore = Pick<GlobalState, 'networkGraph' | 'networkGraphIsLoading' | 'deviceStates'>;
+type PropsFromStore = Pick<GlobalState, 'networkGraph' | 'networkGraphIsLoading' | 'deviceStates' | 'devices'>;
 export class MapComponent extends Component<PropsFromStore & MapApi & WithTranslation<"map">, MapState> {
     ref = createRef<HTMLDivElement>();
     svgRef = createRef<SVGSVGElement>();
@@ -196,7 +196,8 @@ export class MapComponent extends Component<PropsFromStore & MapApi & WithTransl
     renderMap(): JSX.Element {
         const { width, height, visibleLinks } = this.state;
 
-        const { networkGraph, deviceStates } = this.props;
+
+        const { networkGraph, deviceStates, devices } = this.props;
         const links = networkGraph.links.filter(l => intersection(visibleLinks, l.relationships).length > 0);
         return (
             <svg ref={this.svgRef} viewBox={`0 0 ${width} ${height}`}>
@@ -207,6 +208,7 @@ export class MapComponent extends Component<PropsFromStore & MapApi & WithTransl
                         nodes={networkGraph.nodes}
                         simulation={this.simulation}
                         deviceStates={deviceStates}
+                        devices={devices}
                     />
                 </g>
             </svg >
@@ -292,6 +294,6 @@ export class MapComponent extends Component<PropsFromStore & MapApi & WithTransl
 }
 
 
-const mappedProps = ["networkGraph", "networkGraphIsLoading", "deviceStates"];
+const mappedProps = ["networkGraph", "networkGraphIsLoading", "deviceStates", "devices"];
 const ConnectedMap = withTranslation("map")(connect<unknown, MapState, GlobalState, unknown>(mappedProps, actions)(MapComponent));
 export default ConnectedMap;

@@ -31,10 +31,12 @@ import ReactDOM from "react-dom";
 import ErrorBoundary from "./components/ErrorBoundary";
 import DashboardPage from "./components/dashboard-page";
 import ExtensionsEditorPage from "./components/extensions-editor";
+import GroupPage from "./components/groups/GroupPage";
 import StateNotifier from "./components/state-notifier/StateNotifier";
 import { ThemeSwitcherProvider } from "react-css-theme-switcher";
 import i18n from "./i18n";
 import { I18nextProvider } from 'react-i18next';
+
 
 
 const ConnectedDevicePageWrap: FunctionComponent<{ dev: string }> = ({ dev }) => (
@@ -66,6 +68,8 @@ const Main = () => {
                                         <Route path="/device/:dev/:tab?" render={(props) => <ErrorBoundary {...props}><ConnectedDevicePage /></ErrorBoundary>} />
                                         <Route path="/settings/:tab?" render={(props) => <ErrorBoundary {...props}><ConnectedSettingsPage /></ErrorBoundary>} />
                                         <Route path="/groups" render={(props) => <ErrorBoundary {...props}><ConnectedGroupsPage /></ErrorBoundary>} />
+                                        <Route path="/group/:groupId?" render={(props) => <ErrorBoundary {...props}><GroupPage /></ErrorBoundary>} />
+
                                         <Route path="/logs" render={(props) => <ErrorBoundary {...props}><LogsPage /></ErrorBoundary>} />
                                         <Route path="/touchlink" render={(props) => <ErrorBoundary {...props}><TouchlinkPage /></ErrorBoundary>} />
                                         <Route path="/dashboard" render={(props) => <ErrorBoundary {...props}><DashboardPage /></ErrorBoundary>} />

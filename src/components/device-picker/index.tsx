@@ -1,7 +1,7 @@
 import React, { ChangeEvent, SelectHTMLAttributes } from "react";
-import { Device, ObjectType } from "../../types";
+import { Device, Group, ObjectType } from "../../types";
 import { getDeviceDisplayName } from "../../utils";
-import { Group, WithDevices } from "../../store";
+import { WithDevices } from "../../store";
 import { useTranslation } from "react-i18next";
 
 interface DevicePickerProps extends Omit<SelectHTMLAttributes<HTMLSelectElement>, 'onChange'>, WithDevices {

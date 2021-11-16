@@ -1,23 +1,27 @@
 import React, { Fragment, FunctionComponent } from "react";
 import { PowerSource as PowerSourceType } from "../../types";
 import style from "./style.css";
+import { useTranslation } from "react-i18next";
 
 
 interface PowerSourceProps {
-    source: PowerSourceType;
+    source?: PowerSourceType;
     battery?: number;
     batteryLow?: boolean;
     showLevel?: boolean;
 }
 
+const powerSourceTypeToTranslationKey = (source: PowerSourceType): string => {
+    return source.toLowerCase().replace(/\s/g, '_').replace(/[^a-z0-9_]/g, '');
+}
 
 const PowerSource: FunctionComponent<PowerSourceProps> = ({ source, battery, batteryLow, showLevel, ...rest }) => {
+    const { t } = useTranslation("zigbee");
     let batteryClass = "";
-    let title = "";
 
     switch (source) {
         case "Battery":
-            title = 'Battery';
+            let title = t(powerSourceTypeToTranslationKey(source));
             if (batteryLow !== undefined) {
                 batteryClass = batteryLow ? `fa-battery-empty animation-blinking text-danger` : 'fa-battery-full text-success';
                 title += batteryLow ? ' LOW' : ' OK';
@@ -37,15 +41,15 @@ const PowerSource: FunctionComponent<PowerSourceProps> = ({ source, battery, bat
                     return <span className={`animation-blinking text-danger`} role="alert">{battery}%</span>
                 }
             }
-            title += `${battery ? `, power level ${battery}%` : ""}`;
+            title += `${battery ? (`, ` + t(`power_level`) + ` ${battery}%`) : ""}`;
             if (!batteryClass) {
                 batteryClass = "fa-question";
             }
-            return <Fragment>{showLevel ? <span className="pe-2">Battery {battery !== undefined ? `${battery}%` : null}</span> : null}<i className={`fa ${batteryClass}`} title={title} {...rest} /></Fragment>;
+            return <Fragment>{showLevel ? <span className="pe-2">{t('battery')} {battery !== undefined ? `${battery}%` : null}</span> : null}<i className={`fa ${batteryClass}`} title={title} {...rest} /></Fragment>;
 
         case "Mains (single phase)":
         case "DC Source":
-            return <i className={`fa fa-plug ${style.plug}`} title={source} {...rest} />;
+            return <i className={`fa fa-plug ${style.plug}`} title={t(powerSourceTypeToTranslationKey(source))} {...rest} />;
         default:
             return <i className={`fa fa-question`} title={source} {...rest} />;
     }

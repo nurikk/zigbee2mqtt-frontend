@@ -1,4 +1,5 @@
 import React, { ChangeEvent, Component } from "react";
+import merge from "lodash/merge";
 import { Device, Endpoint, Cluster, Attribute } from "../../types";
 
 import EndpointPicker from "../endpoint-picker";
@@ -71,8 +72,9 @@ export class ReportingRow extends Component<ReportingRowProps & WithTranslation,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     static getDerivedStateFromProps(props: Readonly<ReportingRowProps>, state: ReportingRowState): Partial<ReportingRowState> {
         const { rule } = props;
+        const { stateRule } = state;
         return {
-            stateRule: rule
+            stateRule: merge({}, rule, stateRule)
         };
     }
 
@@ -128,7 +130,7 @@ export class ReportingRow extends Component<ReportingRowProps & WithTranslation,
                 <ClusterPicker label={t('cluster')} disabled={!stateRule.endpoint} pickerType={PickerType.SINGLE} clusters={getClusters(device, stateRule.endpoint, stateRule.cluster)} value={stateRule.cluster} onChange={this.setCluster} />
             </div>
             <div className="col-md-2">
-                <AttributePicker label={t('attribute')} value={stateRule.attribute} cluster={stateRule.cluster} onChange={this.setAttribute} />
+                <AttributePicker label={t('attribute')} disabled={!stateRule.cluster} value={stateRule.attribute} cluster={stateRule.cluster} onChange={this.setAttribute} />
             </div>
             <div className="col-md-2">
                 <FormGroupInput

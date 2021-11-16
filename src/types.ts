@@ -196,6 +196,7 @@ export interface DeviceDefinition {
     supports: string;
     vendor: string;
     exposes: GenericExposedFeature[] | CompositeFeature[];
+    options: GenericExposedFeature[] | CompositeFeature[];
     supports_ota: boolean;
     icon?: string;
 }
@@ -206,22 +207,41 @@ export interface ReportingConfig {
     minimum_report_interval: number;
     reportable_change: number;
 }
-export interface EndpointDescription {
+export interface WithScenes {
+    scenes: Scene[];
+}
+export interface EndpointDescription extends WithScenes{
     bindings: BindRule[];
     configured_reportings: ReportingConfig[];
     clusters: {
         input: Cluster[];
         output: Cluster[];
-    };
+    };    
+}
+export interface WithFreiendlyName {
+    friendly_name: FriendlyName;
+}
+export interface GroupAddress {
+    endpoint: Endpoint;
+    ieee_address: IEEEEAddress;
 }
 
-export interface Device {
+export type Scene = {
+    id: number;
+    name?: string;
+    endpoint?: Endpoint;
+}
+export interface Group extends WithFreiendlyName, WithScenes { 
+    id: number;
+    members: GroupAddress[];
+}
+
+export interface Device extends WithFreiendlyName {
     ieee_address: IEEEEAddress;
     type: DeviceType;
     network_address: number;
     model: string;
-    friendly_name: FriendlyName;
-    power_source: PowerSource;
+    power_source?: PowerSource;
     model_id: string;
     manufacturer: string;
     interviewing: boolean;

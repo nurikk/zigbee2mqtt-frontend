@@ -4,7 +4,7 @@ import BindRow from "./bind-row";
 import actions from "../../actions/actions";
 import { BindApi } from "../../actions/BindApi";
 import { connect } from "unistore/react";
-import { GlobalState, Group } from "../../store";
+import { GlobalState } from "../../store";
 
 
 type PropsFromStore = Pick<GlobalState, 'devices' | 'groups'>;

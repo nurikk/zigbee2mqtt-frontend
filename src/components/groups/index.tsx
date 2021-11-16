@@ -2,20 +2,23 @@ import React, { ChangeEvent, Component } from "react";
 import { connect } from "unistore/react";
 import actions from "../../actions/actions";
 
-import { GlobalState } from "../../store";
+import { GlobalState, WithBridgeInfo, WithDevices, WithDeviceStates, WithGroups } from "../../store";
 import Button from "../button";
 
 import { RenameGroupForm } from "./RenameForm";
 import { GroupsApi } from "../../actions/GroupsApi";
 import { withTranslation, WithTranslation } from "react-i18next";
-import { AddDeviceToGroup } from "./AddDeviceToGroup";
-import { DeviceGroup } from "./DeviceGroup";
+import { SceneApi } from "../../actions/SceneApi";
+import { Group } from "../../types";
+import { StateApi } from "../../actions/StateApi";
+import { Link } from "react-router-dom";
 interface GroupsPageState {
     newGroupName: string;
     newGroupId?: number;
 }
-type PropsFromStore = Pick<GlobalState, 'groups' | 'devices'>;
-export class GroupsPage extends Component<PropsFromStore & GroupsApi & WithTranslation<"groups">, GroupsPageState> {
+type PropsFromStore = WithDevices & WithDeviceStates & WithGroups & WithBridgeInfo;
+
+export class GroupsPage extends Component<PropsFromStore & StateApi & SceneApi & GroupsApi & WithTranslation<"groups">, GroupsPageState> {
     state: GroupsPageState = {
         newGroupName: '',
         newGroupId: undefined
@@ -54,40 +57,49 @@ export class GroupsPage extends Component<PropsFromStore & GroupsApi & WithTrans
         const { removeGroup } = this.props;
         removeGroup(friendlyName);
     }
-    removeDeviceFromGroup = (groupFriendlyName: string, deviceFriendlyName: string): void => {
-        const { removeDeviceFromGroup } = this.props;
-        removeDeviceFromGroup(deviceFriendlyName, groupFriendlyName);
-    }
+
     renameGroup = (oldName: string, newName: string): void => {
         const { renameGroup } = this.props;
         renameGroup(oldName, newName);
     }
-    renderGroups(): JSX.Element[] {
-        const { groups, devices, addDeviceToGroup, t } = this.props;
-        return groups.map(group => (
-            <div key={group.id} className="card">
-                <div className="card-header" id={`heading${group.id}`}>
-                    <h5 className="mb-0">
-                        <button className="btn btn-link btn-sm">{group.friendly_name} (#{group.id})</button>
-                        <div className="btn-group float-right btn-group-sm" role="group">
-                            <RenameGroupForm name={group.friendly_name} onRename={this.renameGroup} />
-                            <Button<string> promt title={t('remove_group')} item={group.friendly_name} onClick={this.removeGroup} className="btn btn-danger"><i className="fa fa-trash" /></Button>
-                        </div>
-                    </h5>
-                </div>
+    renderGroups(): JSX.Element {
+        const { groups, t
+        } = this.props;
+        const { setStateValue, setDeviceState, getDeviceState } = this.props;
 
-
-                <div className="card-body">
-                    <div className="table-responsive">
-                        <DeviceGroup group={group} devices={devices} removeDeviceFromGroup={this.removeDeviceFromGroup} />
-                    </div>
-                </div>
-
-                <div className="card-footer">
-                    <AddDeviceToGroup addDeviceToGroup={addDeviceToGroup} devices={devices} group={group} />
-                </div>
+        return <div className="card">
+            <div className="card-body">
+                <table className="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">{t('group_id')}</th>
+                            <th scope="col">{t('group_name')}</th>
+                            <th scope="col">{t('group_members')}</th>
+                            <th scope="col">{t('group_scenes')}</th>
+                            <th scope="col">&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            groups.map(group => (
+                                <tr key={group.id}>
+                                    <td><Link to={`/group/${group.id}`}>{group.id}</Link></td>
+                                    <td><Link to={`/group/${group.id}`}>{group.friendly_name}</Link></td>
+                                    <td>{group.members.length}</td>
+                                    <td>{group.scenes.length}</td>
+                                    <td>
+                                        <div className="btn-group float-right btn-group-sm" role="group">
+                                            <RenameGroupForm name={group.friendly_name} onRename={this.renameGroup} />
+                                            <Button<string> promt title={t('remove_group')} item={group.friendly_name} onClick={this.removeGroup} className="btn btn-danger"><i className="fa fa-trash" /></Button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            )).reverse()
+                        }
+                    </tbody>
+                </table>
             </div>
-        )).reverse()
+        </div>
 
     }
 
@@ -100,6 +112,6 @@ export class GroupsPage extends Component<PropsFromStore & GroupsApi & WithTrans
     }
 }
 
-const mappedProps = ["groups", "devices"];
+const mappedProps = ["groups", "devices", "deviceStates", "bridgeInfo"];
 const ConnectedGroupsPage = withTranslation("groups")(connect<unknown, unknown, PropsFromStore, GroupsApi>(mappedProps, actions)(GroupsPage));
 export default ConnectedGroupsPage;
