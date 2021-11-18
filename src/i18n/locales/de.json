@@ -178,7 +178,7 @@
         "state_l2": "Status L 2",
         "state_l3": "Status L 3",
         "state_l4": "Status L 4",
-        "sunday_schedule": "Plan Sonntag"
+        "sunday_schedule": "Plan Sonntag",
         "system_mode": "System Mode",
         "tamper": "Manipulation",
         "temperature": "Temperatur",
