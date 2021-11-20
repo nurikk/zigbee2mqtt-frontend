@@ -1,3 +1,4 @@
+import 'react-app-polyfill/stable';
 import "notyf/notyf.min.css";
 import "./styles/styles.global.scss";
 

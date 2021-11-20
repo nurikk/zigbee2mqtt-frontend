@@ -1,10 +1,10 @@
 
-import { AdvancedConfig, Device, DeviceState, Endpoint, Group } from "./types";
+import { AdvancedConfig, Device, DeviceState, Endpoint, Group, LastSeenType } from "./types";
 import { GraphI, LinkI, LinkType, NodeI } from "./components/map/types";
 import { Theme } from "./components/theme-switcher";
 import JSZip from 'jszip';
 import FileSaver from 'file-saver';
-import { LastSeenType } from "./components/zigbee";
+
 
 export const genDeviceDetailsLink = (deviceIdentifier: string | number): string => (`/device/${deviceIdentifier}`);
 

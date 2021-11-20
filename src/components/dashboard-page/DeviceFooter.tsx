@@ -1,7 +1,7 @@
 import PowerSource from '../../components/power-source';
 import React from 'react';
-import { Device, DeviceDefinition, DeviceState, GenericExposedFeature } from '../../types';
-import { LastSeenType } from '../zigbee';
+import { Device, DeviceState, LastSeenType } from '../../types';
+
 import { LastSeen } from '../LastSeen';
 
 
@@ -11,9 +11,6 @@ type Props = {
     lastSeenType: LastSeenType;
 };
 
-const footerFeatures = [
-    "linkquality"
-];
 
 const DeviceFooter: React.FC<Props> = ({ device, deviceState, lastSeenType }) => {
     const {
