@@ -1,3 +1,19 @@
+## [0.6.34](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.33...0.6.34) (2021-11-20)
+
+
+### Bug Fixes
+
+* **DeviceSpecificSettings:** fix empty config ([4c72c0e](https://github.com/nurikk/zigbee2mqtt-frontend/commit/4c72c0ef19462cb2edbf98b21818b82d2398071c))
+* **style:** reformat ([079eba7](https://github.com/nurikk/zigbee2mqtt-frontend/commit/079eba724cd1d57f2b06a8a3582a6feebecac50f))
+
+
+### Features
+
+* **about:** add statistic information ([1219978](https://github.com/nurikk/zigbee2mqtt-frontend/commit/12199784871f504ac716f4fba7b6e8dbcbdb43fa))
+* **zigbee:** new table implementation ([0b5a968](https://github.com/nurikk/zigbee2mqtt-frontend/commit/0b5a9685df427b2757c2716c37af04ea23f73942))
+
+
+
 ## [0.6.33](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.32...0.6.33) (2021-11-15)
 
 
