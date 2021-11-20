@@ -1,12 +1,8 @@
-import React, { Component, Fragment, ReactNode } from "react";
-import { useTable, useSortBy, Row, HeaderGroup, CellProps, HeaderProps, Hooks, Column, IdType, FilterValue, FilterProps, UseSortByOptions, UsePaginationOptions, useAsyncDebounce, useGlobalFilter } from 'react-table'
+import React from "react";
+import { useTable, useSortBy, HeaderGroup, Column, UseSortByOptions, UsePaginationOptions, useAsyncDebounce, useGlobalFilter } from 'react-table'
 import { ZigbeeTableData as Data } from ".";
 import cx from "classnames";
 import { useTranslation } from "react-i18next";
-
-export interface TableOptions<D extends Record<string, unknown>>
-  extends UsePaginationOptions<D>,
-  UseSortByOptions<D> { }
 
 interface Props {
   columns: Array<Column<Data>>;
@@ -21,7 +17,7 @@ function GlobalFilter({
   const onChange = useAsyncDebounce(value => {
     setGlobalFilter(value || undefined)
   }, 200);
-  // 
+
   const { t } = useTranslation(['common'])
 
   return (

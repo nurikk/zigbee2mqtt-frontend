@@ -5,8 +5,6 @@ import { Notyf } from "notyf";
 import { connect } from "unistore/react";
 import { GlobalState } from "../../store";
 import actions from "../../actions/actions";
-
-import DataTable, { SortOrder, TableColumn } from 'react-data-table-component';
 import style from "./style.css";
 import Spinner from "../spinner";
 import { genDeviceDetailsLink, getLastSeenType, lastSeen, toHex } from "../../utils";
@@ -20,6 +18,9 @@ import PowerSource from "../power-source";
 import DeviceControlGroup from "../device-control/DeviceControlGroup";
 import { Table } from "./ReactTableCom";
 import { CellProps, Column } from "react-table";
+import { join } from "lodash";
+
+type SortOrder = "asc" | "desc";
 
 interface ZigbeeTableState {
     sortDirection: SortOrder;
@@ -50,7 +51,7 @@ const pesistToLocalStorage = (storeData) => {
     } catch (e) {
         new Notyf().error(e.toString());
     }
-}
+};
 export class ZigbeeTable extends Component<ZigbeeTableProps, ZigbeeTableState> {
     constructor(props: Readonly<ZigbeeTableProps>) {
         super(props);
@@ -82,12 +83,12 @@ export class ZigbeeTable extends Component<ZigbeeTableProps, ZigbeeTableState> {
         }
         pesistToLocalStorage(storeData);
     }
-    onSortChange = (selectedColumn: TableColumn<ZigbeeTableData>, sortDirection: SortOrder): void => {
-        this.setState({
-            sortDirection,
-            sortColumnId: selectedColumn.id as number
-        }, this.saveState);
-    }
+    // onSortChange = (selectedColumn: TableColumn<ZigbeeTableData>, sortDirection: SortOrder): void => {
+    //     this.setState({
+    //         sortDirection,
+    //         sortColumnId: selectedColumn.id as number
+    //     }, this.saveState);
+    // }
 
     handleLongLoading = (): void => {
         const { devices } = this.props;
@@ -168,19 +169,17 @@ export class ZigbeeTable extends Component<ZigbeeTableProps, ZigbeeTableState> {
             },
             {
                 Header: t('ieee_address') as string,
-                accessor: ({ device }) => device.ieee_address + ' ' + toHex(device.network_address, 4),
+                accessor: ({ device }) => [device.ieee_address, toHex(device.network_address, 4)].join(' '),
                 Cell: ({ row: { original: { device } } }) => <>{device.ieee_address} ({toHex(device.network_address, 4)})</>,
-
-
             },
             {
                 Header: t('manufacturer') as string,
-                accessor: ({ device }) => device.manufacturer,
+                accessor: ({ device }) => [device.manufacturer, device.definition?.vendor].join(' '),
                 Cell: ({ row: { original: { device } } }) => <VendorLink device={device} />
             },
             {
                 Header: t('model') as string,
-                accessor: ({ device }) => device.model_id,
+                accessor: ({ device }) => [device.model_id, device.definition?.model].join(' '),
                 Cell: ({ row: { original: { device } } }) => <ModelLink device={device} />
             },
             {
@@ -192,23 +191,20 @@ export class ZigbeeTable extends Component<ZigbeeTableProps, ZigbeeTableState> {
                 Header: t('last_seen') as string,
                 accessor: ({ state }) => lastSeen(state, lastSeenType)?.getTime(),
                 Cell: ({ row: { original: { state } } }) => <LastSeen state={state} lastSeenType={lastSeenType} />,
-
-                // omit: lastSeenType === "disable"
+                // isVisible: lastSeenType !== "disable"
 
             },
             {
                 Header: t('power') as string,
                 accessor: ({ device }) => device.power_source,
                 Cell: ({ row: { original: { state, device } } }) => <PowerSource source={device.power_source} battery={state.battery as number} batteryLow={state.battery_low as boolean} />,
-
-
             },
-             {
+            {
                 Header: '',
                 id: '-controls',
                 Cell: ({ row: { original: { state, device } } }) => <DeviceControlGroup device={device} state={state} />,
                 disableSortBy: true,
-             }
+            }
         ];
         return (<div className="card">
             <div className="table-responsive mt-1">
