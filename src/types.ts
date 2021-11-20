@@ -4,7 +4,7 @@ export type DeviceType = "EndDevice" | "Router" | "Coordinator";
 export type FriendlyName = string;
 export type IEEEEAddress = string;
 
-interface OTAState {
+export type OTAState = {
     state: "available" | "updating";
     progress: number;
     remaining: number;
@@ -24,14 +24,7 @@ export type XYColor = {
     y: number;
 }
 export type AnyColor = RGBColor | XYColor | HueSaturationColor;
-export interface DeviceState {
-    last_seen?: string | number;
-    elapsed?: number;
-    linkquality: number;
-    update?: OTAState;
-    [k: string]: string | number | boolean | OTAState | AnyColor | undefined | Record<string, unknown>;
-}
-
+export type DeviceState = Record<string, unknown>;
 export type Cluster = string;
 export type Attribute = string;
 
@@ -70,9 +63,7 @@ export interface AdvancedConfig {
 export interface Z2MConfig {
     homeassistant: boolean;
     advanced: AdvancedConfig;
-    devices: {
-        [key: string]: DeviceConfig;
-    };
+    devices: Record<string, DeviceConfig>;
     device_options: DeviceConfig;
     [k: string]: unknown;
 }

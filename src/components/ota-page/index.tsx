@@ -8,7 +8,7 @@ import { GlobalState } from "../../store";
 import Button from "../button";
 import { genDeviceDetailsLink, toHHMMSS } from "../../utils";
 import { Link } from "react-router-dom";
-import { Device, DeviceState } from "../../types";
+import { Device, DeviceState, OTAState } from "../../types";
 import { VendorLink, ModelLink, OTALink } from "../vendor-links/verndor-links";
 import { useTranslation, WithTranslation, withTranslation } from "react-i18next";
 
@@ -21,13 +21,14 @@ type OtaRowProps = {
 const StateCell: FunctionComponent<OtaRowProps & OtaApi> = (props) => {
     const { t } = useTranslation("ota");
     const { device, state, checkOTA, updateOTA } = props;
-    switch (state?.update?.state) {
+    const otaState = (state?.update ?? {}) as OTAState;
+    switch (otaState.state) {
         case "updating":
             return (<><div className="progress">
-                <div className="progress-bar progress-bar-striped progress-bar-animated" style={{ width: `${state.update.progress}%` }}>
-                    {state.update.progress}%</div>
+                <div className="progress-bar progress-bar-striped progress-bar-animated" style={{ width: `${otaState.progress}%` }}>
+                    {otaState.progress}%</div>
             </div>
-                <div>{t('remaining_time', { remaining: toHHMMSS(state.update.remaining) })}</div>
+                <div>{t('remaining_time', { remaining: toHHMMSS(otaState.remaining) })}</div>
             </>
             );
         case "available":

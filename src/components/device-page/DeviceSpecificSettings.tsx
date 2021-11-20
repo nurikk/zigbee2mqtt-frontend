@@ -17,7 +17,7 @@ type DeviceSpecificSettingsProps = {
 function DeviceSpecificSettings(props: DeviceSpecificSettingsProps & Pick<DeviceApi, "setDeviceOptions">) {
     const { device, bridgeInfo: { config }, setDeviceOptions } = props;
     const { t } = useTranslation(["exposes"]);
-    const deviceState = config.devices[device.ieee_address] as DeviceState;
+    const deviceState = (config.devices[device.ieee_address] ?? {});
     if (device.definition?.options?.length) {
         return <Composite showEndpointLabels={true}
             feature={{ features: device.definition.options } as CompositeFeature}
