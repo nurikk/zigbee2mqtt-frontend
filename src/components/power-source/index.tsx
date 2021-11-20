@@ -11,8 +11,8 @@ interface PowerSourceProps {
     showLevel?: boolean;
 }
 
-const powerSourceTypeToTranslationKey = (source: PowerSourceType): string => {
-    return source.toLowerCase().replace(/\s/g, '_').replace(/[^a-z0-9_]/g, '');
+export const powerSourceTypeToTranslationKey = (source: PowerSourceType | undefined): string => {
+    return (source + '').toLowerCase().replace(/\s/g, '_').replace(/[^a-z0-9_]/g, '');
 }
 
 const PowerSource: FunctionComponent<PowerSourceProps> = ({ source, battery, batteryLow, showLevel, ...rest }) => {
