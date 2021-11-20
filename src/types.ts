@@ -240,7 +240,6 @@ export interface Device extends WithFreiendlyName {
     ieee_address: IEEEEAddress;
     type: DeviceType;
     network_address: number;
-    model: string;
     power_source?: PowerSource;
     model_id: string;
     manufacturer: string;
@@ -264,12 +263,12 @@ export interface BindRule {
     };
 
 }
-export type SortDirection = "asc" | "desc";
 
 export interface TouchLinkDevice {
     ieee_address: IEEEEAddress;
     channel: number;
 }
 
+export type LastSeenType = "elapsed" | "disable" | "ISO_8601" | "ISO_8601_local" | "epoch";
 
 export type KVP = Record<string, unknown>

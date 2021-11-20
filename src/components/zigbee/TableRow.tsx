@@ -2,7 +2,7 @@
 import React from "react";
 import style from "./style.css";
 import { Link } from "react-router-dom";
-import { Device, DeviceState } from "../../types";
+import { Device, DeviceState, LastSeenType } from "../../types";
 import { genDeviceDetailsLink, toHex } from "../../utils";
 import  DeviceControlGroup from "../device-control/DeviceControlGroup";
 import DeviceImage from "../device-image";
@@ -10,7 +10,7 @@ import { DisplayValue } from "../display-value/DisplayValue";
 import PowerSource from "../power-source";
 import { VendorLink, ModelLink } from "../vendor-links/verndor-links";
 import { LastSeen } from "../LastSeen";
-import { LastSeenType } from ".";
+
 type TableRowProps = {
     device: Device;
     deviceState: DeviceState;
