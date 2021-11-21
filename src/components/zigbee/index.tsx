@@ -16,9 +16,9 @@ import { DisplayValue } from "../display-value/DisplayValue";
 import { LastSeen } from "../LastSeen";
 import PowerSource from "../power-source";
 import DeviceControlGroup from "../device-control/DeviceControlGroup";
-import { Table } from "./ReactTableCom";
+import { Table } from "../grid/ReactTableCom";
 import { CellProps, Column } from "react-table";
-import { join } from "lodash";
+
 
 type SortOrder = "asc" | "desc";
 
@@ -146,7 +146,7 @@ export class ZigbeeTable extends Component<ZigbeeTableProps, ZigbeeTableState> {
         const devices = this.getDevicesToRender();
         const { sortColumnId, sortDirection, search } = this.state;
         const lastSeenType = getLastSeenType(bridgeInfo.config.advanced);
-        const reactTableColumns: Column<ZigbeeTableData>[] = [
+        const columns: Column<ZigbeeTableData>[] = [
             {
                 Header: '#',
                 id: '-rownumber',
@@ -209,7 +209,7 @@ export class ZigbeeTable extends Component<ZigbeeTableProps, ZigbeeTableState> {
         return (<div className="card">
             <div className="table-responsive mt-1">
                 <Table
-                    columns={reactTableColumns}
+                    columns={columns}
                     data={devices}
                 />
             </div>

@@ -11,6 +11,8 @@ import { Link } from "react-router-dom";
 import { Device, DeviceState, OTAState } from "../../types";
 import { VendorLink, ModelLink, OTALink } from "../vendor-links/verndor-links";
 import { useTranslation, WithTranslation, withTranslation } from "react-i18next";
+import { Column } from "react-table";
+import { Table } from "../grid/ReactTableCom";
 
 
 type OtaRowProps = {
@@ -39,57 +41,70 @@ const StateCell: FunctionComponent<OtaRowProps & OtaApi> = (props) => {
 
     }
 }
-const OtaRow: FunctionComponent<OtaRowProps & OtaApi> = (props) => {
-    const { device, state, ...rest } = props;
-    return <tr>
-        <td><Link to={genDeviceDetailsLink(device.ieee_address)}>{device.friendly_name}</Link></td>
 
-        <td className="text-truncate text-nowrap position-relative"><VendorLink device={device} /></td>
-        <td title={device?.definition?.description}><ModelLink device={device} /></td>
-        <td>{device.date_code}</td>
-        <td><OTALink device={device} /></td>
-        <td>
-            <StateCell device={device} state={state} {...rest} />
-        </td>
-    </tr>
-}
 type PropsFromStore = Pick<GlobalState, 'devices' | 'deviceStates'>;
 
+type OtaGridData = {
+    id: string;
+    device: Device;
+    state: DeviceState;
+}
 class OtaPage extends Component<PropsFromStore & OtaApi & WithTranslation<"ota">, unknown> {
     getAllOtaDevices() {
-        const { devices } = this.props;
-        return Object.values(devices).filter(device => device?.definition?.supports_ota)
+        const { devices, deviceStates } = this.props;
+        return Object.values(devices)
+            .filter(device => device?.definition?.supports_ota)
+            .map((device) => {
+                const state = deviceStates[device.friendly_name] ?? {} as DeviceState;
+                return { id: device.friendly_name, device, state } as OtaGridData;
+            })
     }
     checkAllOTA = () => {
         const { checkOTA } = this.props;
         const otaDevices = this.getAllOtaDevices();
-        otaDevices.forEach(device => checkOTA(device.friendly_name));
+        otaDevices.forEach(({ device }) => checkOTA(device.friendly_name));
     }
     render() {
-        const { deviceStates, checkOTA, updateOTA, t } = this.props;
+        const { checkOTA, updateOTA, t } = this.props;
         const otaApi = { checkOTA, updateOTA };
         const otaDevices = this.getAllOtaDevices();
+        const columns: Column<OtaGridData>[] = [
+            {
+                Header: t('zigbee:friendly_name') as string,
+                accessor: ({ device }) => device.friendly_name,
+                Cell: ({ row: { original: { device } } }) => <Link to={genDeviceDetailsLink(device.ieee_address)}>{device.friendly_name}</Link>
+
+            },
+            {
+                Header: t('zigbee:manufacturer') as string,
+                accessor: ({ device }) => [device.manufacturer, device.definition?.vendor].join(' '),
+                Cell: ({ row: { original: { device } } }) => <VendorLink device={device} />
+            },
+            {
+                Header: t('zigbee:model') as string,
+                accessor: ({ device }) => [device.model_id, device.definition?.model].join(' '),
+                Cell: ({ row: { original: { device } } }) => <ModelLink device={device} />
+            },
+            {
+                Header: t('zigbee:firmware_build_date') as string,
+                accessor: ({ device }) => device.date_code
+
+            },
+            {
+                Header: t('zigbee:firmware_version') as string,
+                accessor: ({ device }) => [device.model_id, device.definition?.model].join(' '),
+                Cell: ({ row: { original: { device } } }) => <OTALink device={device} />
+            },
+            {
+                Header: () => <Button className="btn btn-danger btn-sm" onClick={this.checkAllOTA} promt>{t('check_all')}</Button>,
+                id: 'check_all',
+                Cell: ({ row: { original: { device, state } } }) => <StateCell device={device} state={state} {...otaApi} />
+            },
+        ]
 
         return <div className="card">
             <div className="card-body table-responsive">
-                <table className="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">{t("zigbee:friendly_name")}</th>
-                            <th>{t("zigbee:manufacturer")}</th>
-                            <th>{t("zigbee:model")}</th>
-                            <th>{t("zigbee:firmware_build_date")}</th>
-                            <th>{t("zigbee:firmware_version")}</th>
-                            <th><Button className="btn btn-danger btn-sm" onClick={this.checkAllOTA} promt>{t('check_all')}</Button></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {otaDevices.length === 0 ? <tr><td colSpan={6}>{t('empty_ota_message')}</td></tr> : null}
-                        {otaDevices.map(device => (
-                            <OtaRow key={device.ieee_address} device={device} state={deviceStates[device.friendly_name]} {...otaApi} />
-                        ))}
-                    </tbody>
-                </table>
+                <Table columns={columns} data={otaDevices} />
             </div>
         </div>
     }
