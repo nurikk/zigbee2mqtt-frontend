@@ -98,13 +98,14 @@ export class ZigbeeTable extends Component<ZigbeeTableProps> {
                 accessor: ({ state }) => state.linkquality,
                 Cell: ({ row: { original: { state } } }) => <DisplayValue value={state.linkquality} name="linkquality" />,
             },
-            {
+            ...(lastSeenType !== "disable" ? [{
                 Header: t('last_seen') as string,
                 accessor: ({ state }) => lastSeen(state, lastSeenType)?.getTime(),
                 Cell: ({ row: { original: { state } } }) => <LastSeen state={state} lastSeenType={lastSeenType} />,
-                // isVisible: lastSeenType !== "disable"
 
-            },
+            }] : []),
+
+
             {
                 Header: t('power') as string,
                 accessor: ({ device }) => device.power_source,
@@ -117,6 +118,7 @@ export class ZigbeeTable extends Component<ZigbeeTableProps> {
                 disableSortBy: true,
             }
         ];
+
         return (<div className="card">
             <div className="table-responsive mt-1">
                 <Table

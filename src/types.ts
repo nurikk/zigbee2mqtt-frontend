@@ -260,6 +260,6 @@ export interface TouchLinkDevice {
     channel: number;
 }
 
-export type LastSeenType = "elapsed" | "disable" | "ISO_8601" | "ISO_8601_local" | "epoch";
+export type LastSeenType = "disable" | "ISO_8601" | "ISO_8601_local" | "epoch";
 
 export type KVP = Record<string, unknown>

@@ -37,9 +37,6 @@ export const getLastSeenType = (config: AdvancedConfig): LastSeenType => {
     if (config.last_seen !== "disable") {
         return config.last_seen;
     }
-    if (config.elapsed) {
-        return "elapsed";
-    }
     return "disable";
 };
 
@@ -50,10 +47,7 @@ export const lastSeen = (state: DeviceState, lastSeenType: LastSeenType): Date |
             return new Date(Date.parse(state.last_seen as string));
 
         case "epoch":
-            return new Date(state.last_seen as number);
-
-        case "elapsed":
-            return new Date(Date.now() - (state.elapsed as number));
+            return new Date(state.last_seen as number);        
 
         case "disable":
             return undefined;
