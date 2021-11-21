@@ -1,3 +1,22 @@
+## [0.6.35](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.34...0.6.35) (2021-11-21)
+
+
+### Bug Fixes
+
+* **grid:** fix auto resetting ([511c7a2](https://github.com/nurikk/zigbee2mqtt-frontend/commit/511c7a250b3c11656934421f31beac0b7e7ddb06))
+* **zigbee:** cleanup code ([05824de](https://github.com/nurikk/zigbee2mqtt-frontend/commit/05824dee7087c30b4dc5fbc428fa537d99a6ca55))
+* **zigbee:** remove dead code ([ddb3ec1](https://github.com/nurikk/zigbee2mqtt-frontend/commit/ddb3ec1bbb1d533c7a8e4c24485626fff556c527))
+
+
+### Features
+
+* **grid:** persist state ([0f9dd51](https://github.com/nurikk/zigbee2mqtt-frontend/commit/0f9dd517efd2a8abe14846b159f615b804b5f054))
+* **ota:** refactor ota grid ([f826444](https://github.com/nurikk/zigbee2mqtt-frontend/commit/f82644483b146f48b2e88bc57ea08ba28df3d6ee))
+* **ota:** refactor table ([9a15fdb](https://github.com/nurikk/zigbee2mqtt-frontend/commit/9a15fdbb1003e9a805635fc3f3c793c566681092))
+* **touchlink:** refactor grid ([0e0e2cc](https://github.com/nurikk/zigbee2mqtt-frontend/commit/0e0e2cc4528d65e6fb636f473067a9f8c698e38a))
+
+
+
 ## [0.6.34](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.33...0.6.34) (2021-11-20)
 
 
