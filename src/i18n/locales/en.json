@@ -375,7 +375,8 @@
         "update_Home_assistant_entity_id": "Update Home Assistant entity ID",
         "zigbee_manufacturer": "Zigbee Manufacturer",
         "zigbee_model": "Zigbee Model",
-        "device": "Device"
+        "device": "Device",
+        "channel": "Channel"
     },
     "scene": {
         "scene_id": "Scene ID",

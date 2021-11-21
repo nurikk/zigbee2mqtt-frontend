@@ -10,6 +10,8 @@ import cx from "classnames";
 import { Link } from "react-router-dom";
 import { TouchlinkApi } from "../../actions/TouchlinkApi";
 import { WithTranslation, withTranslation } from "react-i18next";
+import { Column } from "react-table";
+import { Table } from "../grid/ReactTableCom";
 
 
 
@@ -28,39 +30,45 @@ export class TouchlinkPage extends Component<TouchlinkApi & GlobalState & WithTr
     renderTouchlinkDevices(): JSX.Element {
         const { touchlinkDevices, devices, touchlinkIdentifyInProgress, touchlinkResetInProgress, t } = this.props;
         const touchlinkInProgress = touchlinkIdentifyInProgress || touchlinkResetInProgress;
+        const columns: Column<TouchLinkDevice>[] = [
+            {
+                Header: t('zigbee:ieee_address') as string,
+                accessor: (touchlinkDevice) => touchlinkDevice.ieee_address,
+                Cell: ({ row: { original: touchlinkDevice } }) => devices[touchlinkDevice.ieee_address] ?
+                    (<Link to={genDeviceDetailsLink(touchlinkDevice.ieee_address)}>{touchlinkDevice.ieee_address}</Link>) : touchlinkDevice.ieee_address
+
+            },
+            {
+                Header: t('zigbee:friendly_name') as string,
+                accessor: (touchlinkDevice) => devices[touchlinkDevice.ieee_address]?.friendly_name,
+            },
+            {
+                id: 'channel',
+                Header: t('zigbee:channel') as string,
+                accessor: 'channel'
+
+            },
+
+            {
+                id: 'actions',
+                Header: '',
+                Cell: ({ row: { original: touchlinkDevice } }) => {
+                    return (
+                        <div className="btn-group float-right" role="group" aria-label="Basic example">
+                            <Button<TouchLinkDevice> disabled={touchlinkInProgress} item={touchlinkDevice} title={t('identify')} className="btn btn-primary" onClick={this.onIdentifyClick}><i
+                                className={cx("fa", { "fa-exclamation-triangle": !touchlinkIdentifyInProgress, "fas fa-circle-notch fa-spin": touchlinkIdentifyInProgress })} /></Button>
+                            <Button<TouchLinkDevice> disabled={touchlinkInProgress} item={touchlinkDevice} title={t('factory_reset')} className="btn btn-danger" onClick={this.onResetClick}><i
+                                className={cx("fa", { "fa-broom": !touchlinkResetInProgress, "fas fa-circle-notch fa-spin": touchlinkResetInProgress })} /></Button>
+                        </div>
+                    )
+                }
+            },
+
+
+        ];
         return (
             <div className="table-responsive">
-                <table className="table align-middle">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">{t('zigbee:ieee_address')}</th>
-                            <th scope="col">{t('zigbee:friendly_name')}</th>
-                            <th scope="col">{t('zigbee:channel')}</th>
-                            <th scope="col">&nbsp;</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {touchlinkDevices.map((touchlinkDevice, idx) => (
-                            <tr key={touchlinkDevice.ieee_address}>
-                                <td>{idx + 1}</td>
-                                <td>{
-                                    devices[touchlinkDevice.ieee_address] ?
-                                        (<Link to={genDeviceDetailsLink(touchlinkDevice.ieee_address)}>{touchlinkDevice.ieee_address}</Link>) : touchlinkDevice.ieee_address}</td>
-                                <td>{devices[touchlinkDevice.ieee_address]?.friendly_name}</td>
-                                <td>{touchlinkDevice.channel}</td>
-                                <td>
-                                    <div className="btn-group float-right" role="group" aria-label="Basic example">
-                                        <Button<TouchLinkDevice> disabled={touchlinkInProgress} item={touchlinkDevice} title={t('identify')} className="btn btn-primary" onClick={this.onIdentifyClick}><i
-                                            className={cx("fa", { "fa-exclamation-triangle": !touchlinkIdentifyInProgress, "fas fa-circle-notch fa-spin": touchlinkIdentifyInProgress })} /></Button>
-                                        <Button<TouchLinkDevice> disabled={touchlinkInProgress} item={touchlinkDevice} title={t('factory_reset')} className="btn btn-danger" onClick={this.onResetClick}><i
-                                            className={cx("fa", { "fa-broom": !touchlinkResetInProgress, "fas fa-circle-notch fa-spin": touchlinkResetInProgress })} /></Button>
-                                    </div>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+                <Table columns={columns} data={touchlinkDevices} />
             </div>
         );
     }

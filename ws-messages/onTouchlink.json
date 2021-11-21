@@ -1,0 +1,18 @@
+{
+    "payload": {
+        "status": "ok",
+        "data": {
+            "found": [
+                {
+                    "ieee_address": "xxxxx",
+                    "channel": 1
+                },
+                {
+                    "ieee_address": "0x00124b001e73227f",
+                    "channel": 10
+                }
+            ]
+        }
+    },
+    "topic": "bridge/response/touchlink/scan"
+}
