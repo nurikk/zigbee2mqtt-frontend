@@ -50,6 +50,8 @@ export const Table: React.FC<Props> = ({ columns, data }) => {
     {
       columns,
       data,
+      autoResetSortBy: false,
+      autoResetFilters: false,
     },
     useGlobalFilter,
     useSortBy
