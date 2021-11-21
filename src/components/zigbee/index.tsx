@@ -23,11 +23,7 @@ import { CellProps, Column } from "react-table";
 type SortOrder = "asc" | "desc";
 
 interface ZigbeeTableState {
-    sortDirection: SortOrder;
-    sortColumnId: number;
     error?: ReactNode;
-    search: string;
-    columnOrder: string[];
 }
 
 export interface ZigbeeTableData {
@@ -55,40 +51,8 @@ const pesistToLocalStorage = (storeData) => {
 export class ZigbeeTable extends Component<ZigbeeTableProps, ZigbeeTableState> {
     constructor(props: Readonly<ZigbeeTableProps>) {
         super(props);
-        this.state = {
-            sortDirection: "desc" as SortOrder,
-            sortColumnId: 1,
-            search: "",
-            columnOrder: []
-        };
+        this.state = {};
     }
-
-    restoreState(): void {
-        const storedState = localStorage.getItem(storeKey);
-        if (storedState) {
-            try {
-                const restored: Pick<ZigbeeTableState, "sortDirection" | "sortColumnId" | "columnOrder"> = JSON.parse(storedState);
-                this.setState(restored);
-            } catch (e) {
-                new Notyf().error(e.toString());
-            }
-        }
-    }
-    saveState(): void {
-        const { sortColumnId, sortDirection, columnOrder } = this.state;
-        const storeData = {
-            sortColumnId,
-            sortDirection,
-            columnOrder
-        }
-        pesistToLocalStorage(storeData);
-    }
-    // onSortChange = (selectedColumn: TableColumn<ZigbeeTableData>, sortDirection: SortOrder): void => {
-    //     this.setState({
-    //         sortDirection,
-    //         sortColumnId: selectedColumn.id as number
-    //     }, this.saveState);
-    // }
 
     handleLongLoading = (): void => {
         const { devices } = this.props;
@@ -102,7 +66,6 @@ export class ZigbeeTable extends Component<ZigbeeTableProps, ZigbeeTableState> {
     }
     componentDidMount(): void {
         setTimeout(this.handleLongLoading, longLoadingTimeout);
-        this.restoreState();
     }
 
     renderError(): JSX.Element {
@@ -144,7 +107,6 @@ export class ZigbeeTable extends Component<ZigbeeTableProps, ZigbeeTableState> {
     renderDevicesTable(): JSX.Element {
         const { bridgeInfo, t } = this.props;
         const devices = this.getDevicesToRender();
-        const { sortColumnId, sortDirection, search } = this.state;
         const lastSeenType = getLastSeenType(bridgeInfo.config.advanced);
         const columns: Column<ZigbeeTableData>[] = [
             {
