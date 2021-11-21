@@ -10,7 +10,7 @@ import actions from '../../actions/actions';
 import { StateApi } from "../../actions/StateApi";
 import { GlobalState } from '../../store';
 import { DashboardFeatureWrapper } from './DashboardFeatureWrapper';
-import { getLastSeenType, isOnlyOneBitIsSet } from '../../utils';
+import { isOnlyOneBitIsSet } from '../../utils';
 
 import { isClimateFeature, isLightFeature } from '../device-page/type-guards';
 import groupBy from "lodash/groupBy";
@@ -62,7 +62,7 @@ export const onlyValidFeaturesForDashboard = (feature: GenericExposedFeature | C
 
 const Dashboard: React.FC<PropsFromStore & StateApi> = (props) => {
     const { setDeviceState, getDeviceState, deviceStates, bridgeInfo } = props;
-    const lastSeenType = getLastSeenType(bridgeInfo.config.advanced);
+
     return (
         <div className="row">
             {filterDeviceByFeatures(props.devices, deviceStates, onlyValidFeaturesForDashboard).map(({ device, deviceState, filteredFeatures }) => {
@@ -80,7 +80,7 @@ const Dashboard: React.FC<PropsFromStore & StateApi> = (props) => {
                             getDeviceState(`${device.friendly_name}${endpoint ? `/${endpoint}` : ''}`, value)
                         }
                         featureWrapperClass={DashboardFeatureWrapper}
-                        lastSeenType={lastSeenType}
+                        lastSeenType={bridgeInfo.config.advanced.last_seen}
                     />
                 );
             })}

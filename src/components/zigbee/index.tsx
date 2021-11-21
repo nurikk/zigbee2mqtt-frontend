@@ -7,7 +7,7 @@ import { GlobalState } from "../../store";
 import actions from "../../actions/actions";
 import style from "./style.css";
 import Spinner from "../spinner";
-import { genDeviceDetailsLink, getLastSeenType, lastSeen, toHex } from "../../utils";
+import { genDeviceDetailsLink, lastSeen, toHex } from "../../utils";
 import { WithTranslation, withTranslation } from "react-i18next";
 import DeviceImage from "../device-image";
 import { ModelLink, VendorLink } from "../vendor-links/verndor-links";
@@ -55,7 +55,7 @@ export class ZigbeeTable extends Component<ZigbeeTableProps> {
     renderDevicesTable(): JSX.Element {
         const { bridgeInfo, t } = this.props;
         const devices = this.getDevicesToRender();
-        const lastSeenType = getLastSeenType(bridgeInfo.config.advanced);
+
         const columns: Column<ZigbeeTableData>[] = [
             {
                 Header: '#',
@@ -98,10 +98,10 @@ export class ZigbeeTable extends Component<ZigbeeTableProps> {
                 accessor: ({ state }) => state.linkquality,
                 Cell: ({ row: { original: { state } } }) => <DisplayValue value={state.linkquality} name="linkquality" />,
             },
-            ...(lastSeenType !== "disable" ? [{
+            ...(bridgeInfo.config.advanced.last_seen !== "disable" ? [{
                 Header: t('last_seen') as string,
-                accessor: ({ state }) => lastSeen(state, lastSeenType)?.getTime(),
-                Cell: ({ row: { original: { state } } }) => <LastSeen state={state} lastSeenType={lastSeenType} />,
+                accessor: ({ state }) => lastSeen(state, bridgeInfo.config.advanced.last_seen)?.getTime(),
+                Cell: ({ row: { original: { state } } }) => <LastSeen state={state} lastSeenType={bridgeInfo.config.advanced.last_seen} />,
 
             }] : []),
 

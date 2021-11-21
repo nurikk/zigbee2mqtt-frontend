@@ -33,12 +33,6 @@ export interface ApiResponse<T> {
     result: T;
 }
 
-export const getLastSeenType = (config: AdvancedConfig): LastSeenType => {
-    if (config.last_seen !== "disable") {
-        return config.last_seen;
-    }
-    return "disable";
-};
 
 export const lastSeen = (state: DeviceState, lastSeenType: LastSeenType): Date | undefined => {
     switch (lastSeenType) {
