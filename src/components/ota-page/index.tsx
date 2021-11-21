@@ -103,7 +103,7 @@ class OtaPage extends Component<PropsFromStore & OtaApi & WithTranslation<"ota">
 
         return <div className="card">
             <div className="card-body table-responsive">
-                <Table columns={columns} data={otaDevices} />
+                <Table id="otaDevices" columns={columns} data={otaDevices} />
             </div>
         </div>
     }

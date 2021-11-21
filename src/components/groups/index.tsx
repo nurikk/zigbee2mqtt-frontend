@@ -107,7 +107,7 @@ export class GroupsPage extends Component<PropsFromStore & StateApi & SceneApi &
         ]
         return <div className="card">
             <div className="card-body">
-                <Table columns={columns} data={groups} />
+                <Table id="groups" columns={columns} data={groups} />
             </div>
         </div>
 

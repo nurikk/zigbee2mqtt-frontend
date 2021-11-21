@@ -80,7 +80,6 @@ export const DashboardFeatureWrapper: FunctionComponent<PropsWithChildren<Fetatu
     const { children, feature, deviceState = {} } = props;
     const icon = getGenericFeatureIcon(feature.name, deviceState[feature.property]);
     const { t } = useTranslation(['featureNames']);
-    console.log(feature);
     return <div className="d-flex align-items-center">
         {icon && <div className="me-1">
             <i className={`fa fa-fw ${icon}`} />

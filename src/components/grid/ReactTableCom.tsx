@@ -1,10 +1,14 @@
 import React from "react";
-import { useTable, useSortBy, HeaderGroup, Column, useAsyncDebounce, useGlobalFilter } from 'react-table'
+import { useTable, useSortBy, HeaderGroup, Column, useAsyncDebounce, useGlobalFilter, ActionType, TableInstance, TableState } from 'react-table'
 
 import cx from "classnames";
 import { useTranslation } from "react-i18next";
 
+import { set, get } from "local-storage";
+import debounce from "lodash/debounce";
+
 interface Props {
+  id: string;
   columns: Array<Column<any>>;
   data: Array<any>;
 }
@@ -35,8 +39,22 @@ function GlobalFilter({
   )
 }
 
-export const Table: React.FC<Props> = ({ columns, data }) => {
+const persist = debounce((key: string, data: Record<string, unknown>): void => {
+  set(key, data);
+})
 
+
+const stateReducer = (newState: TableState<any>, action: ActionType, previousState: TableState<any>, instance?: TableInstance<any>): TableState<any> => {
+  if (instance) {
+    const { instanceId } = instance;
+    const { sortBy, globalFilter } = newState;
+    persist(instanceId, { sortBy, globalFilter })
+  }
+  return newState;
+};
+
+export const Table: React.FC<Props> = ({ columns, data, id }) => {
+  const initialState = get<Partial<TableState<any>>>(id) || {};
   const {
     getTableProps,
     getTableBodyProps,
@@ -48,10 +66,13 @@ export const Table: React.FC<Props> = ({ columns, data }) => {
     setGlobalFilter,
   } = useTable<any>(
     {
+      instanceId: id,
+      stateReducer,
       columns,
       data,
       autoResetSortBy: false,
       autoResetFilters: false,
+      initialState
     },
     useGlobalFilter,
     useSortBy

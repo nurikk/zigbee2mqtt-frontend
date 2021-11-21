@@ -124,6 +124,7 @@ export class ZigbeeTable extends Component<ZigbeeTableProps, ZigbeeTableState> {
 
             },
             {
+                id: 'friendly_name',
                 Header: t('friendly_name') as string,
                 accessor: ({ device }) => device.friendly_name,
                 Cell: ({ row: { original: { device } } }) => <Link to={genDeviceDetailsLink(device.ieee_address)}>{device.friendly_name}</Link>
@@ -171,6 +172,7 @@ export class ZigbeeTable extends Component<ZigbeeTableProps, ZigbeeTableState> {
         return (<div className="card">
             <div className="table-responsive mt-1">
                 <Table
+                    id="zigbee"
                     columns={columns}
                     data={devices}
                 />
