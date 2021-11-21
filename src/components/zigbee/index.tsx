@@ -18,73 +18,21 @@ import PowerSource from "../power-source";
 import DeviceControlGroup from "../device-control/DeviceControlGroup";
 import { Table } from "../grid/ReactTableCom";
 import { CellProps, Column } from "react-table";
-
-
-type SortOrder = "asc" | "desc";
-
-interface ZigbeeTableState {
-    error?: ReactNode;
-}
-
 export interface ZigbeeTableData {
     id: string;
     device: Device;
     state: DeviceState;
 }
 
-const storeKey = "ZigbeeTableState";
-const longLoadingTimeout = 15 * 1000;
 
 type PropsFromStore = Pick<GlobalState, 'devices' | 'deviceStates' | 'bridgeInfo'>;
 type ZigbeeTableProps = PropsFromStore & WithTranslation<"zigbee">;
 
-
-
-const pesistToLocalStorage = (storeData) => {
-    //in private mode localstorage access can throw exceptions
-    try {
-        localStorage.setItem(storeKey, JSON.stringify(storeData));
-    } catch (e) {
-        new Notyf().error(e.toString());
-    }
-};
-export class ZigbeeTable extends Component<ZigbeeTableProps, ZigbeeTableState> {
-    constructor(props: Readonly<ZigbeeTableProps>) {
-        super(props);
-        this.state = {};
-    }
-
-    handleLongLoading = (): void => {
-        const { devices } = this.props;
-        if (Object.keys(devices).length == 0) {
-            const error = <Fragment>
-                <strong>Loading devices takes too long time.</strong>
-                <div>Consider reading <a href="https://www.zigbee2mqtt.io/guide/configuration/webui.html#webui">documentation</a></div>
-            </Fragment>;
-            this.setState({ error });
-        }
-    }
-    componentDidMount(): void {
-        setTimeout(this.handleLongLoading, longLoadingTimeout);
-    }
-
-    renderError(): JSX.Element {
-        const { error } = this.state;
-        return (<div className="h-100 d-flex justify-content-center align-items-center">
-            <div className="d-flex align-items-center">
-                {error}
-            </div>
-        </div>);
-    }
-
+export class ZigbeeTable extends Component<ZigbeeTableProps> {
     render(): JSX.Element {
-        const { error } = this.state;
         const { devices } = this.props;
         if (Object.keys(devices).length) {
             return this.renderDevicesTable();
-        }
-        if (error) {
-            return this.renderError();
         }
         return (<div className="h-100 d-flex justify-content-center align-items-center">
             <Spinner />
@@ -182,5 +130,5 @@ export class ZigbeeTable extends Component<ZigbeeTableProps, ZigbeeTableState> {
 }
 
 const mappedProps = ["devices", "deviceStates", "bridgeInfo"];
-const ConnectedZigbeePage = withTranslation(["zigbee", "common"])(connect<unknown, ZigbeeTableState, PropsFromStore, unknown>(mappedProps, actions)(ZigbeeTable));
+const ConnectedZigbeePage = withTranslation(["zigbee", "common"])(connect<unknown, unknown, PropsFromStore, unknown>(mappedProps, actions)(ZigbeeTable));
 export default ConnectedZigbeePage;
