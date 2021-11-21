@@ -361,6 +361,7 @@
         "restart_zigbee2mqtt": "Перезавантажити Zigbee2MQTT",
         "serial": "Serial-порт",
         "settings": "Налаштування",
+        "stats": "Статистика",
         "tools": "Інструменти",
         "translate": "Переклад",
         "zigbee2mqtt_version": "Версія Zigbee2MQTT"
@@ -409,6 +410,14 @@
         "root-title": "Serial",
         "root__title": "Passlist",
         "serial-title": "Послідовний інтерфейс"
+    },
+    "stats": {
+        "byType": "За типом",
+        "byPowerSource": "За джерелом живлення",
+        "byVendor": "За виробниками",
+        "byModel": "За моделями",
+        "total": "Всього",
+        "EndDevice": "Кінцевий прилад"
     },
     "touchlink": {
         "detected_devices_message": "Знайдено прилад, що підтримує швидке приєднання (touchlink): {{count}}.",
