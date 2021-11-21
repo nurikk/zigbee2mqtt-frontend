@@ -1,3 +1,12 @@
+## [0.6.36](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.35...0.6.36) (2021-11-21)
+
+
+### Bug Fixes
+
+* **lastSeen:** don't rely on elapsed ([ef7a553](https://github.com/nurikk/zigbee2mqtt-frontend/commit/ef7a553ec6a42617f95971cb81b104d04cff69b0))
+
+
+
 ## [0.6.35](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.34...0.6.35) (2021-11-21)
 
 
