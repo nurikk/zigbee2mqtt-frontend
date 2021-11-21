@@ -73,7 +73,6 @@ class OtaPage extends Component<PropsFromStore & OtaApi & WithTranslation<"ota">
                 Header: t('zigbee:friendly_name') as string,
                 accessor: ({ device }) => device.friendly_name,
                 Cell: ({ row: { original: { device } } }) => <Link to={genDeviceDetailsLink(device.ieee_address)}>{device.friendly_name}</Link>
-
             },
             {
                 Header: t('zigbee:manufacturer') as string,
