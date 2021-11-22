@@ -1,8 +1,8 @@
 import React from "react";
-import { DeviceState } from "../types";
+import { DeviceState, LastSeenType } from "../types";
 import { format } from 'timeago.js';
 import { lastSeen } from "../utils";
-import { LastSeenType } from "./zigbee";
+
 import { useTranslation } from "react-i18next";
 
 type LastSeenProps = {

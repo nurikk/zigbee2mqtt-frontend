@@ -1,3 +1,56 @@
+## [0.6.37](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.36...0.6.37) (2021-11-22)
+
+
+### Bug Fixes
+
+* **modals:** introduce global modal dialogs ([31ff0e7](https://github.com/nurikk/zigbee2mqtt-frontend/commit/31ff0e7b270123920b7b9ac497adf97caa9b6f5e))
+
+
+
+## [0.6.36](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.35...0.6.36) (2021-11-21)
+
+
+### Bug Fixes
+
+* **lastSeen:** don't rely on elapsed ([ef7a553](https://github.com/nurikk/zigbee2mqtt-frontend/commit/ef7a553ec6a42617f95971cb81b104d04cff69b0))
+
+
+
+## [0.6.35](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.34...0.6.35) (2021-11-21)
+
+
+### Bug Fixes
+
+* **grid:** fix auto resetting ([511c7a2](https://github.com/nurikk/zigbee2mqtt-frontend/commit/511c7a250b3c11656934421f31beac0b7e7ddb06))
+* **zigbee:** cleanup code ([05824de](https://github.com/nurikk/zigbee2mqtt-frontend/commit/05824dee7087c30b4dc5fbc428fa537d99a6ca55))
+* **zigbee:** remove dead code ([ddb3ec1](https://github.com/nurikk/zigbee2mqtt-frontend/commit/ddb3ec1bbb1d533c7a8e4c24485626fff556c527))
+
+
+### Features
+
+* **grid:** persist state ([0f9dd51](https://github.com/nurikk/zigbee2mqtt-frontend/commit/0f9dd517efd2a8abe14846b159f615b804b5f054))
+* **ota:** refactor ota grid ([f826444](https://github.com/nurikk/zigbee2mqtt-frontend/commit/f82644483b146f48b2e88bc57ea08ba28df3d6ee))
+* **ota:** refactor table ([9a15fdb](https://github.com/nurikk/zigbee2mqtt-frontend/commit/9a15fdbb1003e9a805635fc3f3c793c566681092))
+* **touchlink:** refactor grid ([0e0e2cc](https://github.com/nurikk/zigbee2mqtt-frontend/commit/0e0e2cc4528d65e6fb636f473067a9f8c698e38a))
+
+
+
+## [0.6.34](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.33...0.6.34) (2021-11-20)
+
+
+### Bug Fixes
+
+* **DeviceSpecificSettings:** fix empty config ([4c72c0e](https://github.com/nurikk/zigbee2mqtt-frontend/commit/4c72c0ef19462cb2edbf98b21818b82d2398071c))
+* **style:** reformat ([079eba7](https://github.com/nurikk/zigbee2mqtt-frontend/commit/079eba724cd1d57f2b06a8a3582a6feebecac50f))
+
+
+### Features
+
+* **about:** add statistic information ([1219978](https://github.com/nurikk/zigbee2mqtt-frontend/commit/12199784871f504ac716f4fba7b6e8dbcbdb43fa))
+* **zigbee:** new table implementation ([0b5a968](https://github.com/nurikk/zigbee2mqtt-frontend/commit/0b5a9685df427b2757c2716c37af04ea23f73942))
+
+
+
 ## [0.6.33](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.32...0.6.33) (2021-11-15)
 
 

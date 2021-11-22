@@ -2,7 +2,7 @@ import React, { ChangeEvent, Component } from "react";
 import { connect } from "unistore/react";
 import actions from "../../actions/actions";
 
-import { GlobalState, WithBridgeInfo, WithDevices, WithDeviceStates, WithGroups } from "../../store";
+import { WithBridgeInfo, WithDevices, WithDeviceStates, WithGroups } from "../../store";
 import Button from "../button";
 
 import { RenameGroupForm } from "./RenameForm";
@@ -12,6 +12,8 @@ import { SceneApi } from "../../actions/SceneApi";
 import { Group } from "../../types";
 import { StateApi } from "../../actions/StateApi";
 import { Link } from "react-router-dom";
+import { Column } from "react-table";
+import { Table } from "../grid/ReactTableCom";
 interface GroupsPageState {
     newGroupName: string;
     newGroupId?: number;
@@ -63,41 +65,49 @@ export class GroupsPage extends Component<PropsFromStore & StateApi & SceneApi &
         renameGroup(oldName, newName);
     }
     renderGroups(): JSX.Element {
-        const { groups, t
-        } = this.props;
-        const { setStateValue, setDeviceState, getDeviceState } = this.props;
+        const { groups, t } = this.props;
+        const columns: Column<Group>[] = [
+            {
+                id: 'group_id',
+                Header: t('group_id') as string,
+                accessor: (group) => group.id,
+                Cell: ({ row: { original: group } }) => <Link to={`/group/${group.id}`}>{group.id}</Link>
 
+            },
+            {
+                id: 'friendly_name',
+                Header: t('group_name') as string,
+                accessor: (group) => group.friendly_name,
+                Cell: ({ row: { original: group } }) => <Link to={`/group/${group.id}`}>{group.friendly_name}</Link>
+
+            },
+
+            {
+                id: 'members',
+                Header: t('group_members') as string,
+                accessor: (group) => group.members.length ?? 0,
+            },
+            {
+                id: 'scenes',
+                Header: t('group_scenes') as string,
+                accessor: (group) => group.scenes?.length ?? 0,
+            },
+            {
+                Header: '',
+                id: 'actions',
+                Cell: ({ row: { original: group } }) => (
+                    <div className="btn-group float-right btn-group-sm" role="group">
+                        <RenameGroupForm name={group.friendly_name} onRename={this.renameGroup} />
+                        <Button<string> promt title={t('remove_group')} item={group.friendly_name} onClick={this.removeGroup} className="btn btn-danger"><i className="fa fa-trash" /></Button>
+                    </div>
+                )
+
+            },
+
+        ]
         return <div className="card">
             <div className="card-body">
-                <table className="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">{t('group_id')}</th>
-                            <th scope="col">{t('group_name')}</th>
-                            <th scope="col">{t('group_members')}</th>
-                            <th scope="col">{t('group_scenes')}</th>
-                            <th scope="col">&nbsp;</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            groups.map(group => (
-                                <tr key={group.id}>
-                                    <td><Link to={`/group/${group.id}`}>{group.id}</Link></td>
-                                    <td><Link to={`/group/${group.id}`}>{group.friendly_name}</Link></td>
-                                    <td>{group.members.length}</td>
-                                    <td>{group.scenes.length}</td>
-                                    <td>
-                                        <div className="btn-group float-right btn-group-sm" role="group">
-                                            <RenameGroupForm name={group.friendly_name} onRename={this.renameGroup} />
-                                            <Button<string> promt title={t('remove_group')} item={group.friendly_name} onClick={this.removeGroup} className="btn btn-danger"><i className="fa fa-trash" /></Button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            )).reverse()
-                        }
-                    </tbody>
-                </table>
+                <Table id="groups" columns={columns} data={groups} />
             </div>
         </div>
 

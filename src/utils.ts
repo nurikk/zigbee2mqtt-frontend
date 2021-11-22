@@ -1,10 +1,10 @@
 
-import { AdvancedConfig, Device, DeviceState, Endpoint, Group } from "./types";
+import { AdvancedConfig, Device, DeviceState, Endpoint, Group, LastSeenType } from "./types";
 import { GraphI, LinkI, LinkType, NodeI } from "./components/map/types";
 import { Theme } from "./components/theme-switcher";
 import JSZip from 'jszip';
 import FileSaver from 'file-saver';
-import { LastSeenType } from "./components/zigbee";
+
 
 export const genDeviceDetailsLink = (deviceIdentifier: string | number): string => (`/device/${deviceIdentifier}`);
 
@@ -33,15 +33,6 @@ export interface ApiResponse<T> {
     result: T;
 }
 
-export const getLastSeenType = (config: AdvancedConfig): LastSeenType => {
-    if (config.last_seen !== "disable") {
-        return config.last_seen;
-    }
-    if (config.elapsed) {
-        return "elapsed";
-    }
-    return "disable";
-};
 
 export const lastSeen = (state: DeviceState, lastSeenType: LastSeenType): Date | undefined => {
     switch (lastSeenType) {
@@ -50,10 +41,7 @@ export const lastSeen = (state: DeviceState, lastSeenType: LastSeenType): Date |
             return new Date(Date.parse(state.last_seen as string));
 
         case "epoch":
-            return new Date(state.last_seen as number);
-
-        case "elapsed":
-            return new Date(Date.now() - (state.elapsed as number));
+            return new Date(state.last_seen as number);        
 
         case "disable":
             return undefined;

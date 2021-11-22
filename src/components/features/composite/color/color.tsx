@@ -11,7 +11,7 @@ const Light: FunctionComponent<ColorProps> = (props) => {
     const { deviceState, feature, onChange, minimal } = props;
     const value = {};
     for (const innerFeature of feature.features) {
-        value[innerFeature.name] = deviceState[feature.property]?.[innerFeature.property] ?? 0;
+        value[innerFeature.name] = (deviceState[feature.property] as Record<string, Record<string, unknown>>)?.[innerFeature.property] ?? 0;
     }
     return <ColorEditor
         onChange={(color) => onChange(feature.endpoint as Endpoint, { color })}
