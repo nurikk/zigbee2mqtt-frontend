@@ -1,7 +1,7 @@
 /* eslint-disable react/display-name */
 import React, { Component, Fragment } from "react";
 import { BridgeInfo, Device, DeviceState } from "../../types";
-import { getLastSeenType, toHex } from "../../utils";
+import { toHex } from "../../utils";
 import DeviceControlGroup from "../device-control/DeviceControlGroup";
 import cx from "classnames";
 import style from "./style.css";
@@ -31,7 +31,7 @@ const displayProps = [
     },
     {
         translationKey: 'last_seen',
-        render: (device: Device, state: DeviceState, bridgeInfo: BridgeInfo) => <dd className="col-12 col-md-7"><LastSeen lastSeenType={getLastSeenType(bridgeInfo.config.advanced)} state={state}/></dd>,
+        render: (device: Device, state: DeviceState, bridgeInfo: BridgeInfo) => <dd className="col-12 col-md-7"><LastSeen lastSeenType={bridgeInfo.config.advanced.last_seen} state={state}/></dd>,
     },
     {
         key: 'type',

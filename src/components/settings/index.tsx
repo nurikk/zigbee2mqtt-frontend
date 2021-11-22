@@ -13,6 +13,7 @@ import { BridgeApi } from "../../actions/BridgeApi";
 import { ISubmitEvent, UiSchema } from "@rjsf/core";
 import { WithTranslation, withTranslation } from "react-i18next";
 import customFields from "./../../i18n/rjsf-translation-fields";
+import { Stats } from "./stats";
 
 
 type SettingsTab = "settings" | "bridge" | "about" | "tools" | "donate" | "translate";
@@ -94,7 +95,7 @@ const rows = [
 ].sort(() => Math.random() - 0.5);
 
 const isValidKeyToRenderAsTab = (key: string, value: JSONSchema7): boolean => (validJsonSchemasAsTabs.includes(value.type as string) && !ingoredFields.includes(key)) || (value && value.oneOf ? value.oneOf.length > 0 : false);
-type PropsFromStore = Pick<GlobalState, 'bridgeInfo' | 'missingTranslations'>;
+type PropsFromStore = Pick<GlobalState, 'bridgeInfo' | 'missingTranslations' | 'devices'>;
 export class SettingsPage extends Component<PropsFromStore & SettingsPageProps & BridgeApi & UtilsApi & WithTranslation<"setting">, SettingsPageState> {
     state = {
         keyName: ROOT_KEY_NAME
@@ -155,7 +156,7 @@ export class SettingsPage extends Component<PropsFromStore & SettingsPageProps &
         </div>
     }
     renderAbout(): JSX.Element {
-        const { bridgeInfo, t } = this.props;
+        const { bridgeInfo, devices, t } = this.props;
         const isZigbee2mqttDevVersion = bridgeInfo.version?.match(/^\d+\.\d+\.\d+$/) === null;
         const zigbee2mqttVersion = isZigbee2mqttDevVersion ?
             bridgeInfo.version :
@@ -169,6 +170,7 @@ export class SettingsPage extends Component<PropsFromStore & SettingsPageProps &
             { translationKey: 'coordinator_type', content: <>{bridgeInfo.coordinator?.type ?? t('common:unknown')}</> },
             { translationKey: 'coordinator_revision', content: <>{bridgeInfo.coordinator?.meta?.revision ?? t('common:unknown')}</> },
             { translationKey: 'frontend_version', content: FRONTEND_VERSION },
+            { translationKey: 'stats', content: <Stats devices={devices} /> },
         ];
 
         return <div className="p-3">{rows.map(row => <dl key={row.translationKey} className="row">
@@ -280,6 +282,6 @@ export class SettingsPage extends Component<PropsFromStore & SettingsPageProps &
     }
 }
 const SettingsPageWithRouter = withRouter(SettingsPage);
-const mappedProps = ["bridgeInfo", "missingTranslations"];
+const mappedProps = ["bridgeInfo", "missingTranslations", "devices"];
 const ConnectedSettingsPage = withTranslation(["settings", "common"])(connect<Record<string, unknown>, Record<string, unknown>, GlobalState, BridgeApi>(mappedProps, actions)(SettingsPageWithRouter));
 export default ConnectedSettingsPage;

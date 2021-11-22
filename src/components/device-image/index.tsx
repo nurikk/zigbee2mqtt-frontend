@@ -1,6 +1,6 @@
 import React, { FunctionComponent, ImgHTMLAttributes, useState } from "react";
 import genericDevice from "../../images/generic-zigbee-device.png";
-import { Device, DeviceState } from "../../types";
+import { Device, DeviceState, OTAState } from "../../types";
 import cx from "classnames";
 import { sanitizeZ2MDeviceName } from "../../utils";
 import style from "./style.css";
@@ -42,7 +42,8 @@ const DeviceImage: FunctionComponent<DeviceImageProps & ImgHTMLAttributes<HTMLDi
         }
     }
     if (src) {
-        const otaSpinner = deviceStatus?.update?.state === "updating" ? <i title={t("updating_firmware")} className="fa fa-sync fa-spin position-absolute bottom-0 right-0" /> : null;
+        const otaState = (deviceStatus?.update ?? {}) as OTAState;
+        const otaSpinner = otaState.state === "updating" ? <i title={t("updating_firmware")} className="fa fa-sync fa-spin position-absolute bottom-0 right-0" /> : null;
         const interviewSpinner = device.interviewing ? <i title={t("interviewing")} className="fa fa-spinner fa-spin position-absolute bottom-0 right-0" /> : null;
         const unseccessfullInterview = !device.interviewing && !device.interview_completed ? <i title={t("interview_failed")} className="fa fa-exclamation-triangle position-absolute top-0 right-0 text-danger" /> : null;
         switch (type) {

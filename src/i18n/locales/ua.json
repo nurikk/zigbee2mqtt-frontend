@@ -142,7 +142,7 @@
         "current_level_startup": "Встановлений рівень запуску",
         "device_temperature": "Температура приладу",
         "energy": "Енергія",
-        "holidays_schedule": "Розклад святкових днів",
+        "holidays_schedule": "Святкові",
         "humidity": "Вологість",
         "illuminance": "Освітленість",
         "level_config": "Конфігурація рівня",
@@ -160,7 +160,7 @@
         "power": "Споживання енергії",
         "presence": "Присутність",
         "preset": "Пресети",
-        "programming_mode": "Запрограмований режим",
+        "programming_mode": "Режим прог.",
         "program_weekday": "Програма буденних днів",
         "program_saturday": "Програма суботи",
         "program_sunday": "Програма неділі",
@@ -183,7 +183,7 @@
         "week": "Тиждень",
         "window_detection": "Виявлення вікна",
         "window": "Вікно",
-        "workdays_schedule": "Розклад робочих днів"
+        "workdays_schedule": "Робочі"
     },
     "featureDescriptions": {
         "Auto off after specific time.": "Автоматичне вимкнення протягом певного часу",
@@ -361,6 +361,7 @@
         "restart_zigbee2mqtt": "Перезавантажити Zigbee2MQTT",
         "serial": "Serial-порт",
         "settings": "Налаштування",
+        "stats": "Статистика",
         "tools": "Інструменти",
         "translate": "Переклад",
         "zigbee2mqtt_version": "Версія Zigbee2MQTT"
@@ -409,6 +410,14 @@
         "root-title": "Serial",
         "root__title": "Passlist",
         "serial-title": "Послідовний інтерфейс"
+    },
+    "stats": {
+        "byType": "За типом",
+        "byPowerSource": "За джерелом живлення",
+        "byVendor": "За виробниками",
+        "byModel": "За моделями",
+        "total": "Всього",
+        "EndDevice": "Кінцевий прилад"
     },
     "touchlink": {
         "detected_devices_message": "Знайдено прилад, що підтримує швидке приєднання (touchlink): {{count}}.",
