@@ -1,3 +1,12 @@
+## [0.6.39](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.38...0.6.39) (2021-11-22)
+
+
+### Bug Fixes
+
+* **table:** fix header margins ([4ec71de](https://github.com/nurikk/zigbee2mqtt-frontend/commit/4ec71de509627118a50b9dfe2caceb98c8acbcac))
+
+
+
 ## [0.6.38](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.37...0.6.38) (2021-11-22)
 
 
