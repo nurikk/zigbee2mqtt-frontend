@@ -1,6 +1,5 @@
 [![Node.js CI](https://github.com/nurikk/zigbee2mqtt-frontend/actions/workflows/node.js.yml/badge.svg)](https://github.com/nurikk/zigbee2mqtt-frontend/actions/workflows/node.js.yml)
-[![CodeFactor](https://www.codefactor.io/repository/github/nurikk/zigbee2mqtt-frontend/badge/master)](https://www.codefactor.io/repository/github/nurikk/zigbee2mqtt-frontend/overview/master)
-[![codebeat badge](https://codebeat.co/badges/f71685ee-16e0-4ac5-b016-23b6a9888aa6)](https://codebeat.co/projects/github-com-nurikk-z2m-frontend-master)
+[![codebeat badge](https://codebeat.co/badges/5ca1254f-569b-4ec0-99fa-fe6f0fa2896b)](https://codebeat.co/projects/github-com-nurikk-zigbee2mqtt-frontend-dev)
 
 # Screenshots
 
