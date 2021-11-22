@@ -31,7 +31,7 @@
         "write": "Zapsat"
     },
     "devicePage": {
-        "about": "O mě",
+        "about": "Informace",
         "bind": "Svázat",
         "clusters": "Clustery",
         "dev_console": "Vývojářská konzole",
@@ -167,7 +167,12 @@
         "Triggered action (e.g. a button click)": "Spuštěná akce (např. kliknutí na tlačítko)",
         "Triggers an effect on the light (e.g. make light blink for a few seconds)": "Spustí efekt na světlo (např. nechá světlo na několik sekund blikat)",
         "Voltage of the battery in millivolts": "Napětí baterie v milivoltech",
-        "Week format user for schedule": "Formát kalendářního týdne"
+        "Week format user for schedule": "Formát kalendářního týdne",
+        "Number of digits after decimal point for temperature, takes into effect on next report of device.": "Počet číslic za desetinnou čárkou pro teplotu, platí při dalším hlášení zařízení.",
+        "Calibrates the temperature value (absolute offset), takes into effect on next report of device.": "Kalibruje hodnotu teploty (absolutní odchylka), projeví se při dalším hlášení zařízení.",
+        "Number of digits after decimal point for humidity, takes into effect on next report of device.": "Počet číslic za desetinnou čárkou pro vlhkost, platí při dalším hlášení zařízení.",
+        "Calibrates the humidity value (absolute offset), takes into effect on next report of device.": "Kalibruje hodnotu vlhkosti (absolutní odchylka), projeví se při dalším hlášení zařízení.",
+        "Controls the transition time (in seconds) of on/off, brightness, color temperature (if applicable) and color (if applicable) changes. Defaults to `0` (no transition).": "Ovládá dobu přechodu (v sekundách) změn zapnutí/vypnutí, jasu, teploty barev (pokud je to možné) a barvy (pokud je to možné). Výchozí hodnota je „0“ (bez přechodu)."
     },
     "featureNames": {
         "action": "Akce",
@@ -186,7 +191,17 @@
         "soil_moisture": "Vlhkost půdy",
         "state": "Stav",
         "temperature": "Teplota",
-        "tamper": "Manipulovat"
+        "tamper": "Manipulovat",
+        "child_lock": "Dětský zámek",
+        "window_detection": "Detekce otevřeného okna",
+        "valve_detection": "Detekce hlavice",
+        "local_temperature": "Místní teplota",
+        "auto_lock": "Automatický zámek",
+        "away_mode": "Režim pryč",
+        "programming_mode": "Programovací režim",
+        "week": "Týden",
+        "workdays_schedule": "Týdenní kalendář",
+        "holidays_schedule": "Prázdninový kalendář"
     },
     "groups": {
         "add_to_group": "Přidat do skupiny",
@@ -204,15 +219,15 @@
     "logs": {
         "empty_logs_message": "Nic k zobrazení",
         "filter_by_text": "Filtrovat podle textu",
-        "show_only": "Pouze zobrazit"
+        "show_only": "Filtrovat podle typu"
     },
     "map": {
-        "help_coordinator_link_description": "Plné čáry jsou odkazem na koordinátora",
+        "help_coordinator_link_description": "Plné čáry jsou spojením s koordinátorem",
         "help_end_device_description": "Zelená znamená koncové zařízení",
         "help_is_coordinator": "je koordinátor",
         "help_lqi_description": "Kvalita spojení je mezi 0 - 255 (vyšší je lepší), hodnota s / představuje více typů spojení",
         "help_router_description": "Modrá znamená směrovač",
-        "help_router_links_description": "Přerušované čáry jsou spojením se směrovači",
+        "help_router_links_description": "Přerušované čáry jsou spojením se směrovačem",
         "hide": "Kliknutím na mě skryješ",
         "load": "Načíst mapu",
         "loading": "V závislosti na velikosti vaší sítě může načtení trvat 10 sekund až 2 minuty."
@@ -252,7 +267,7 @@
             "Dobrý den, %username%, zde nám můžete poděkovat za tvrdou práci",
             "Neváhej a řekni taky něco hezkého ;)"
         ],
-        "download_state": "Stav stahování",
+        "download_state": "Stáhnout konfiguraci",
         "experimental": "Experimentální",
         "external_converters": "Externí převodníky",
         "frontend": "Frontend",
@@ -262,12 +277,13 @@
         "ota": "Aktualizace OTA",
         "passlist": "Přístupová práva",
         "raw": "Raw",
-        "restart_zigbee2mqtt": "Restart Zigbee2MQTT",
+        "restart_zigbee2mqtt": "Restartovat Zigbee2MQTT",
         "serial": "Sériový",
         "settings": "Nastavení",
         "tools": "Nástroje",
         "zigbee2mqtt_version": "Verze Zigbee2MQTT",
-        "translate": "Přeložit"
+        "translate": "Přeložit",
+        "stats": "statistiky"
     },
     "settingsSchemaTranslations": {
         "advanced-title": "Advanced",
@@ -312,6 +328,15 @@
         "root_log_syslog-title": "syslog",
         "serial-title": "Sériový"
     },
+    "stats": {
+        "EndDevice": "Koncové zařízení",
+        "Router": "Router",
+        "byType": "dle typu",
+        "byPowerSource": "dle zdroje napájení",
+        "byVendor": "dle výrobce",
+        "byModel": "dle modelu",
+        "total": "celkové"
+    },
     "touchlink": {
         "detected_devices_message": "Zjištěno {{count}} zařízení touchlink.",
         "rescan": "Hledat znova",
@@ -320,12 +345,12 @@
     "values": {
         "clear": "Vymazat",
         "closed": "Zavřeno",
-        "false": "Nepravda",
+        "false": "Ne",
         "not_supported": "Není podporováno",
         "occupied": "Obsazený",
         "open": "Otevřeno",
         "supported": "Podporováno",
-        "true": "Pravda",
+        "true": "Ano",
         "empty_string": "Prázdný řetězec(\"\")",
         "leaking": "Netěsnost",
         "tampered": "Manipulováno"
