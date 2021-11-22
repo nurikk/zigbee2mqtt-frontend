@@ -106,7 +106,7 @@ function DevicesTable(props: DevicesTableProps) {
     ];
 
     return (<div className="card">
-        <div className="table-responsive mt-1">
+        <div className="table-responsive">
             <Table
                 id="zigbee"
                 columns={columns}
