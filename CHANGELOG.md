@@ -1,3 +1,13 @@
+## [0.6.38](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.37...0.6.38) (2021-11-22)
+
+
+### Bug Fixes
+
+* **grid:** fix headers ([0b09316](https://github.com/nurikk/zigbee2mqtt-frontend/commit/0b09316b5d08367a851c4731dcefc48c28e48571))
+* **grid:** fix html ([43232ad](https://github.com/nurikk/zigbee2mqtt-frontend/commit/43232adc8ecc099e020241a34d37a02378196f5a))
+
+
+
 ## [0.6.37](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.36...0.6.37) (2021-11-22)
 
 
