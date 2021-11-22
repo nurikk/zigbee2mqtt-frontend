@@ -1,6 +1,6 @@
 import React, { Component, Fragment, ReactNode } from "react";
 
-import { Device, DeviceState } from "../../types";
+import { Device, DeviceState, LastSeenType } from "../../types";
 import { Notyf } from "notyf";
 import { connect } from "unistore/react";
 import { GlobalState } from "../../store";
@@ -8,7 +8,7 @@ import actions from "../../actions/actions";
 import style from "./style.css";
 import Spinner from "../spinner";
 import { genDeviceDetailsLink, lastSeen, toHex } from "../../utils";
-import { WithTranslation, withTranslation } from "react-i18next";
+import { useTranslation, WithTranslation, withTranslation } from "react-i18next";
 import DeviceImage from "../device-image";
 import { ModelLink, VendorLink } from "../vendor-links/verndor-links";
 import { Link } from "react-router-dom";
@@ -28,18 +28,96 @@ export interface ZigbeeTableData {
 type PropsFromStore = Pick<GlobalState, 'devices' | 'deviceStates' | 'bridgeInfo'>;
 type ZigbeeTableProps = PropsFromStore & WithTranslation<"zigbee">;
 
-export class ZigbeeTable extends Component<ZigbeeTableProps> {
-    render(): JSX.Element {
-        const { devices } = this.props;
-        if (Object.keys(devices).length) {
-            return this.renderDevicesTable();
+type DevicesTableProps = {
+    data: ZigbeeTableData[];
+    lastSeenType: LastSeenType;
+}
+function DevicesTable(props: DevicesTableProps) {
+    const { data, lastSeenType } = props;
+    const { t } = useTranslation(["zigbee", "common"]);
+
+    const columns: Column<ZigbeeTableData>[] = [
+        {
+            id: 'rownumber',
+            Header: '#',
+            Cell: ({ row }: CellProps<ZigbeeTableData>) => <div className="font-weight-bold">{row.index + 1}</div>,
+            disableSortBy: true,
+
+        },
+        {
+            id: 'pic',
+            Header: t('pic') as string,
+            Cell: ({ row: { original: { device, state } } }) => <DeviceImage className={style["device-image"]} device={device} deviceStatus={state} />,
+            accessor: rowData => rowData,
+            disableSortBy: true,
+
+
+        },
+        {
+            id: 'friendly_name',
+            Header: t('friendly_name') as string,
+            accessor: ({ device }) => device.friendly_name,
+            Cell: ({ row: { original: { device } } }) => <Link to={genDeviceDetailsLink(device.ieee_address)}>{device.friendly_name}</Link>
+
+        },
+        {
+            id: 'ieee_address',
+            Header: t('ieee_address') as string,
+            accessor: ({ device }) => [device.ieee_address, toHex(device.network_address, 4)].join(' '),
+            Cell: ({ row: { original: { device } } }) => <>{device.ieee_address} ({toHex(device.network_address, 4)})</>,
+        },
+        {
+            id: 'manufacturer',
+            Header: t('manufacturer') as string,
+            accessor: ({ device }) => [device.manufacturer, device.definition?.vendor].join(' '),
+            Cell: ({ row: { original: { device } } }) => <VendorLink device={device} />
+        },
+        {
+            id: 'model',
+            Header: t('model') as string,
+            accessor: ({ device }) => [device.model_id, device.definition?.model].join(' '),
+            Cell: ({ row: { original: { device } } }) => <ModelLink device={device} />
+        },
+        {
+            id: 'lqi',
+            Header: t('lqi') as string,
+            accessor: ({ state }) => state.linkquality,
+            Cell: ({ row: { original: { state } } }) => <DisplayValue value={state.linkquality} name="linkquality" />,
+        },
+        ...(lastSeenType !== "disable" ? [{
+            id: 'last_seen',
+            Header: t('last_seen') as string,
+            accessor: ({ state }) => lastSeen(state, lastSeenType)?.getTime(),
+            Cell: ({ row: { original: { state } } }) => <LastSeen state={state} lastSeenType={lastSeenType} />,
+
+        }] : []),
+        {
+            id: 'power',
+            Header: t('power') as string,
+            accessor: ({ device }) => device.power_source,
+            Cell: ({ row: { original: { state, device } } }) => <PowerSource source={device.power_source} battery={state.battery as number} batteryLow={state.battery_low as boolean} />,
+        },
+        {
+            id: 'controls',
+            Header: '',
+            Cell: ({ row: { original: { device, state } } }) => <DeviceControlGroup device={device} state={state} />,
+            disableSortBy: true,
         }
-        return (<div className="h-100 d-flex justify-content-center align-items-center">
-            <Spinner />
-        </div>);
-    }
-    getDevicesToRender(): ZigbeeTableData[] {
-        const { devices, deviceStates } = this.props;
+    ];
+
+    return (<div className="card">
+        <div className="table-responsive mt-1">
+            <Table
+                id="zigbee"
+                columns={columns}
+                data={data}
+            />
+        </div>
+    </div>);
+}
+export function ZigbeeTable(props: ZigbeeTableProps) {
+    const { devices, deviceStates, bridgeInfo } = props;
+    const getDevicesToRender = (): ZigbeeTableData[] => {
         return Object.values(devices)
             .filter(device => device.type !== "Coordinator")
             .map((device) => {
@@ -51,82 +129,14 @@ export class ZigbeeTable extends Component<ZigbeeTableProps> {
                 } as ZigbeeTableData;
             });
     }
-
-    renderDevicesTable(): JSX.Element {
-        const { bridgeInfo, t } = this.props;
-        const devices = this.getDevicesToRender();
-
-        const columns: Column<ZigbeeTableData>[] = [
-            {
-                Header: '#',
-                id: '-rownumber',
-                Cell: ({ row }: CellProps<ZigbeeTableData>) => <div className="font-weight-bold">{row.index + 1}</div>,
-                disableSortBy: true,
-
-            },
-            {
-                Header: t('pic') as string,
-                Cell: ({ value: { device, state } }) => <DeviceImage className={style["device-image"]} device={device} deviceStatus={state} />,
-                accessor: rowData => rowData,
-                disableSortBy: true,
-
-            },
-            {
-                id: 'friendly_name',
-                Header: t('friendly_name') as string,
-                accessor: ({ device }) => device.friendly_name,
-                Cell: ({ row: { original: { device } } }) => <Link to={genDeviceDetailsLink(device.ieee_address)}>{device.friendly_name}</Link>
-
-            },
-            {
-                Header: t('ieee_address') as string,
-                accessor: ({ device }) => [device.ieee_address, toHex(device.network_address, 4)].join(' '),
-                Cell: ({ row: { original: { device } } }) => <>{device.ieee_address} ({toHex(device.network_address, 4)})</>,
-            },
-            {
-                Header: t('manufacturer') as string,
-                accessor: ({ device }) => [device.manufacturer, device.definition?.vendor].join(' '),
-                Cell: ({ row: { original: { device } } }) => <VendorLink device={device} />
-            },
-            {
-                Header: t('model') as string,
-                accessor: ({ device }) => [device.model_id, device.definition?.model].join(' '),
-                Cell: ({ row: { original: { device } } }) => <ModelLink device={device} />
-            },
-            {
-                Header: t('lqi') as string,
-                accessor: ({ state }) => state.linkquality,
-                Cell: ({ row: { original: { state } } }) => <DisplayValue value={state.linkquality} name="linkquality" />,
-            },
-            ...(bridgeInfo.config.advanced.last_seen !== "disable" ? [{
-                Header: t('last_seen') as string,
-                accessor: ({ state }) => lastSeen(state, bridgeInfo.config.advanced.last_seen)?.getTime(),
-                Cell: ({ row: { original: { state } } }) => <LastSeen state={state} lastSeenType={bridgeInfo.config.advanced.last_seen} />,
-
-            }] : []),
+    const data = React.useMemo(() => getDevicesToRender(), [devices, deviceStates]);
 
 
-            {
-                Header: t('power') as string,
-                accessor: ({ device }) => device.power_source,
-                Cell: ({ row: { original: { state, device } } }) => <PowerSource source={device.power_source} battery={state.battery as number} batteryLow={state.battery_low as boolean} />,
-            },
-            {
-                Header: '',
-                id: '-controls',
-                Cell: ({ row: { original: { state, device } } }) => <DeviceControlGroup device={device} state={state} />,
-                disableSortBy: true,
-            }
-        ];
-
-        return (<div className="card">
-            <div className="table-responsive mt-1">
-                <Table
-                    id="zigbee"
-                    columns={columns}
-                    data={devices}
-                />
-            </div>
+    if (Object.keys(data).length) {
+        return <DevicesTable data={data} lastSeenType={bridgeInfo.config.advanced.last_seen} />
+    } else {
+        return (<div className="h-100 d-flex justify-content-center align-items-center">
+            <Spinner />
         </div>);
     }
 }
