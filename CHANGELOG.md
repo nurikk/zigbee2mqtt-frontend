@@ -1,3 +1,12 @@
+## [0.6.37](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.36...0.6.37) (2021-11-22)
+
+
+### Bug Fixes
+
+* **modals:** introduce global modal dialogs ([31ff0e7](https://github.com/nurikk/zigbee2mqtt-frontend/commit/31ff0e7b270123920b7b9ac497adf97caa9b6f5e))
+
+
+
 ## [0.6.36](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.35...0.6.36) (2021-11-21)
 
 
