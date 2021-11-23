@@ -105,7 +105,7 @@
         "unistore": "^3.5.2",
         "webpack": "^5.64.2",
         "webpack-bundle-analyzer": "^4.5.0",
-        "webpack-cli": "4.9.0",
+        "webpack-cli": "4.9.1",
         "webpack-dev-server": "4.3.1",
         "zigbee-herdsman": "^0.13.172",
         "zip-webpack-plugin": "^4.0.1"
