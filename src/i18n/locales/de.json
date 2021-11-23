@@ -277,7 +277,8 @@
         "Triggers an effect on the light (e.g. make light blink for a few seconds)": "Startet einen Effekt des Leuchtmittels (z.B. Blinken für ein paar Sekunden)",
         "Voltage of the battery in millivolts": "Ladung der Batterie in Millivolt",
         "Week format user for schedule": "Aufteilung der Wochentage für Heizprogramme",
-        "Window status closed or open ": "Zustand des Fensters (geöffnet oder geschlossen)"
+        "Window status closed or open ": "Zustand des Fensters (geöffnet oder geschlossen)",
+        "This device does not support reporting electric measurements so it is polled instead. The default poll interval is 60 seconds.": "Dieses Gerät unterstützt keine Meldung von elektrischen Messungen, daher wird stattdessen abgefragt. Das Standardabfrageintervall beträgt 60 Sekunden."
     },
     "groups": {
         "add_to_group": "Zur Gruppe hinzufügen",
