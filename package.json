@@ -31,7 +31,7 @@
         "@commitlint/config-conventional": "^15.0.0",
         "@fortawesome/fontawesome-free": "^5.15.4",
         "@rjsf/bootstrap-4": "^3.2.1",
-        "@rjsf/core": "^3.1.0",
+        "@rjsf/core": "^3.2.1",
         "@teamsupercell/typings-for-css-modules-loader": "^2.4.0",
         "@types/classnames": "^2.3.1",
         "@types/color-convert": "^2.0.0",
