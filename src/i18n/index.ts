@@ -20,6 +20,7 @@ import itTranslations from './locales/it.json';
 import zhTranslations from './locales/zh.json';
 import koTranslations from './locales/ko.json';
 import csTranslations from './locales/cs.json';
+import fiTranslations from './locales/fi.json';
 
 
 import timePl from "timeago.js/lib/lang/pl";
@@ -35,6 +36,7 @@ import timeIt from "timeago.js/lib/lang/it";
 import timeZh from "timeago.js/lib/lang/zh_TW";
 import timeKo from "timeago.js/lib/lang/ko";
 import timeCs from "timeago.js/lib/lang/cs";
+import timeFi from "timeago.js/lib/lang/fi";
 import { useEffect } from 'react';
 
 
@@ -51,7 +53,7 @@ register("it", timeIt);
 register("ko", timeKo);
 register("zh", timeZh);
 register("cs", timeCs);
-
+register("fi", timeFi);
 
 
 
@@ -71,6 +73,7 @@ export const resources = {
     zh: zhTranslations as ResourceLanguage,
     ko: koTranslations as ResourceLanguage,
     cs: csTranslations as ResourceLanguage,
+    fi: fiTranslations as ResourceLanguage,
 } as const;
 
 declare let window: Record<string, unknown>;
