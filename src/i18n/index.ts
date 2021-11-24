@@ -35,6 +35,7 @@ import timeIt from "timeago.js/lib/lang/it";
 import timeZh from "timeago.js/lib/lang/zh_TW";
 import timeKo from "timeago.js/lib/lang/ko";
 import timeCs from "timeago.js/lib/lang/cs";
+import { useEffect } from 'react';
 
 
 register("pl", timePl);
@@ -86,6 +87,9 @@ const missingKeyHandler = (lngs: string[], ns: string, key: string, fallbackValu
     }
 }
 const debug = process.env.NODE_ENV !== 'production'
+i18n.on("languageChanged", (lng: string) => {
+    document.documentElement.lang = lng;
+})
 i18n
     .use(LanguageDetector)
     .use(initReactI18next)
@@ -96,7 +100,8 @@ i18n
         ns: Object.keys(enTranslations),
         saveMissing: true,
         missingKeyHandler
-    });
+    })
+
 
 const currentLanguage = i18n.language.split('-')[0].toLocaleLowerCase();
 if (!resources[currentLanguage]) {

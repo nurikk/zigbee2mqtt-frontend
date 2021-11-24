@@ -3,9 +3,9 @@ import { useTranslation } from "react-i18next";
 import { GlobalState } from "../../store";
 import orderBy from "lodash/orderBy";
 import { powerSourceTypeToTranslationKey } from "../power-source";
-type StatsProps = Pick<GlobalState, 'devices'> & {
 
-}
+type StatsProps = Pick<GlobalState, 'devices'>;
+
 export function Stats(props: StatsProps) {
     const { devices } = props;
     const { t } = useTranslation(["stats", "zigbee"]);
