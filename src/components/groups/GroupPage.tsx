@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { AddDeviceToGroup } from "./AddDeviceToGroup";
 import { DeviceGroup } from "./DeviceGroup";
 import { AddScene, RecallRemove } from "../device-page/scene";
-import { DeviceState, Group } from "../../types";
+import { DeviceState } from "../../types";
 
 import { connect } from "unistore/react";
 import actions from "../../actions/actions";

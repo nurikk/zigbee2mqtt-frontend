@@ -41,7 +41,7 @@ const offlineTimeout = 3600 * 2;
 
 export const isOnline = (device: Device): boolean => {
 
-    return true; //Date.now() - device.lastSeen < offlineTimeout;
+    return true; // TODO: implement avalilability feature
 };
 type NodeState = {
     hasBeenUpdated: boolean;
@@ -109,7 +109,7 @@ class Node extends Component<NodeProps, NodeState> {
                         <polygon
                             stroke="blue"
                             strokeWidth={1}
-                            points={getStarShape(5, 5, 14) as string}
+                            points={getStarShape(5, 5, 14)}
                         />
                     </>
                 ) : (

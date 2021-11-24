@@ -9,7 +9,7 @@ export interface BridgeApi {
 
 
 export default {
-    setPermitJoin(_state, permit = true, device: Device, time = 254): Promise<void> {
+    setPermitJoin(_state, permit = true, device?: Device, time = 254): Promise<void> {
         return api.send("bridge/request/permit_join", { value: permit, time, device: device?.friendly_name });
     },
     updateBridgeConfig(_state, options: unknown): Promise<void> {

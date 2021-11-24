@@ -19,10 +19,9 @@ export function MultiPicker(props: MultiPickerProps): JSX.Element {
         onChange(newVal);
     };
     if (isClusterGroup(clusters)) {
-        //TODO: implement if necessary
         console.warn("Not implemented");
     } else {
-        options = clusters.sort((a, b) => a.localeCompare(b)).map(cluster => (
+        options = [...clusters].sort((a, b) => a.localeCompare(b)).map(cluster => (
             <div key={cluster} className="form-check form-check-inline">
                 <input className="form-check-input"
                     type="checkbox"

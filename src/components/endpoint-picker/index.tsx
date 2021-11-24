@@ -15,8 +15,7 @@ export default function EndpointPicker(props: EndpointPickerProps): JSX.Element 
     const { value, values, disabled, onChange, label, ...rest } = props;
     const { t } = useTranslation("common");
     const onSelectHandler = (e: ChangeEvent<HTMLSelectElement>): void => {
-        const { value } = e.target as HTMLSelectElement;
-        onChange(value);
+        onChange(e.target.value);
     }
     const hasOnlyOneEP = values.length == 1;
 

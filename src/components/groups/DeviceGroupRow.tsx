@@ -1,7 +1,6 @@
 import React from "react";
 import Button from "../button";
-import { Devices } from "../../store";
-import { WithBridgeInfo, WithDevices, WithDeviceStates } from "../../store";
+import { WithBridgeInfo, WithDevices, WithDeviceStates, Devices } from "../../store";
 import { useTranslation } from "react-i18next";
 import { CompositeFeature, Device, DeviceState, FriendlyName, GenericExposedFeature, GroupAddress } from "../../types";
 import DashboardDevice from "../dashboard-page/DashboardDevice";
@@ -49,8 +48,8 @@ export function DeviceGroupRow(props: DeviceGroupRowProps): JSX.Element {
     const { setDeviceState, getDeviceState } = props;
 
     let filteredFeatures: (false | GenericExposedFeature | CompositeFeature)[] = [];
-    if ((device as Device).definition) {
-        filteredFeatures = (((device as Device).definition?.exposes ?? []) as GenericExposedFeature[])
+    if (device.definition) {
+        filteredFeatures = ((device.definition.exposes ?? []) as GenericExposedFeature[])
             .map((e: GenericExposedFeature | CompositeFeature) => onlyValidFeaturesForScenes(e, deviceState))
             .filter(f => f);
     }

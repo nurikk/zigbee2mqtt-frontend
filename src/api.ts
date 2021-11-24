@@ -5,9 +5,6 @@ import { sanitizeGraph, isSecurePage, randomString, stringifyWithPreservingUndef
 import { Notyf } from "notyf";
 import { GraphI } from "./components/map/types";
 
-import orderBy from "lodash/orderBy";
-
-
 const MAX_LOGS_RECORDS_IN_BUFFER = 100;
 const TOKEN_LOCAL_STORAGE_ITEM_NAME = "z2m-token";
 const AUTH_FLAG_LOCAL_STORAGE_ITEM_NAME = "z2m-auth";
@@ -38,13 +35,9 @@ const showNotity = (data: LogMessage | ResponseWithStatus): void => {
         message = data.message;
         level = data.level;
     } else if (isResponseWithStatus(data)) {
-        switch (data.status) {
-            case "error":
-                level = "error";
-                message = data.error as string;
-                break;
-            default:
-                break;
+        if (data.status === "error") {
+            level = "error";
+            message = data.error as string;
         }
     }
 

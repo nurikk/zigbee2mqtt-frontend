@@ -162,7 +162,6 @@ export class MapComponent extends Component<PropsFromStore & MapApi & WithTransl
 
         processHighlights({ networkGraph, links, selectedNode, node, link, linkLabel });
         node.on("click", (event, d: NodeI) => {
-            const { selectedNode } = this.state;
             this.setState({ selectedNode: selectedNode ? null as unknown as NodeI : d });
         });
         this.simulation.alphaTarget(0.03).restart();
@@ -270,7 +269,7 @@ export class MapComponent extends Component<PropsFromStore & MapApi & WithTransl
         return (<div className={cx("fixed-bottom", { "d-none": !legendIsVisible })} onClick={() => this.setState({ legendIsVisible: false })}>
             <div className={cx(style.node, style.Coordinator)}>
                 <svg width="28" height="28" viewBox="0 0 28 28">
-                    <polygon points={getStarShape(5, 5, 14) as string} />
+                    <polygon points={getStarShape(5, 5, 14)} />
                 </svg> {t('help_is_coordinator')}</div>
             <div className={cx(style.node, style.EndDevice)}>{t("help_end_device_description")}</div>
             <div className={cx(style.node, style.Router)}>{t('help_router_description')}</div>

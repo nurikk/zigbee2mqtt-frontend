@@ -24,20 +24,20 @@ export function AddDeviceToGroup(props: AddDeviceToGroupProps): JSX.Element {
     const { addDeviceToGroup, group, devices } = props;
     const { device, endpoint } = state;
 
-    const deviceObj = devices[device as string] as Device;
+    const deviceObj = devices[device as string];
     const endpoints = getEndpoints(deviceObj);
     const { t } = useTranslation(["groups", "zigbee"]);
 
     const onSubmit = (): void => {
         addDeviceToGroup(endpoint ? `${device}/${endpoint}` : device as string, group.friendly_name);
     };
-    const onDeviceSelect = (device: Device): void => {
-        const endpoints = getEndpoints(device);
-        setState({ device: device.ieee_address, endpoint: endpoints[0] });
+    const onDeviceSelect = (d: Device): void => {
+        const eps = getEndpoints(d);
+        setState({ device: d.ieee_address, endpoint: eps[0] });
     };
 
-    const onEpChange = (endpoint: Endpoint): void => {
-        setState({ endpoint });
+    const onEpChange = (ep: Endpoint): void => {
+        setState({ endpoint: ep });
     };
 
     return <>

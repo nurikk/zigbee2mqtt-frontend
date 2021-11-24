@@ -18,8 +18,8 @@ function GlobalFilter({
   setGlobalFilter,
 }) {
   const [value, setValue] = React.useState(globalFilter)
-  const onChange = useAsyncDebounce(value => {
-    setGlobalFilter(value || undefined)
+  const onChange = useAsyncDebounce(v => {
+    setGlobalFilter(v || undefined)
   }, 200);
 
   const { t } = useTranslation(['common'])

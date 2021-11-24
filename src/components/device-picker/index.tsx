@@ -15,12 +15,11 @@ export default function DevicePicker(props: DevicePickerProps): JSX.Element {
     const { devices, value, label, onChange, groups = [], ...rest } = props;
 
     const onSelectHandler = (e: ChangeEvent<HTMLSelectElement>): void => {
-        const { value } = e.target as HTMLSelectElement;
-
-        if (devices[value]) {
-            onChange(devices[value] as Device, "device");
+        const { value: selectedValue } = e.target as HTMLSelectElement;
+        if (devices[selectedValue]) {
+            onChange(devices[selectedValue], "device");
         } else {
-            const group = groups.find(g => parseInt(value, 10) === g.id);
+            const group = groups.find(g => parseInt(selectedValue, 10) === g.id);
             onChange(group as Group, "group");
         }
     }

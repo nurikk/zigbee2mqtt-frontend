@@ -11,7 +11,7 @@ type EnumProps = BaseFeatureProps<EnumFeature>
 const VERY_BIG_ENUM_SIZE = 4;
 
 const Enum: FunctionComponent<EnumProps> = (props) => {
-    const { onChange, feature: { access = FeatureAccessMode.ACCESS_WRITE, name, values, endpoint, property }, deviceState, minimal } = props;
+    const { onChange, feature: { access = FeatureAccessMode.ACCESS_WRITE, values, endpoint, property }, deviceState, minimal } = props;
 
     const thisIsVeryBigEnumeration = values.length > VERY_BIG_ENUM_SIZE;
 

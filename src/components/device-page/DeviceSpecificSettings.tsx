@@ -1,5 +1,5 @@
 import React from "react";
-import { CompositeFeature, Device, DeviceState } from "../../types";
+import { CompositeFeature, Device } from "../../types";
 import actions from "../../actions/actions";
 import { connect } from "unistore/react";
 import { GlobalState, WithBridgeInfo } from "../../store";
@@ -27,7 +27,9 @@ function DeviceSpecificSettings(props: DeviceSpecificSettingsProps & Pick<Device
             onChange={async (endpoint, value) => {
                 await setDeviceOptions(device.ieee_address, value as Record<string, unknown>);
             }}
-            onRead={(endpoint, value) => { }}
+            onRead={(endpoint, value) => {
+                //emtpy function to prevent read
+            }}
             featureWrapperClass={FeatureWrapper}
         />
     } else {

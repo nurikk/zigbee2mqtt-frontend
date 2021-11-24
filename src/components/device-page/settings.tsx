@@ -65,7 +65,7 @@ export default class DeviceSettings extends Component<DeviceSettingsProps, Devic
 
     render(): ReactNode {
         const { schema, data, uiSchema } = this.getSchemaAndConfig();
-        return <Form schema={schema as JSONSchema7}
+        return <Form schema={schema}
             formData={data}
             onSubmit={this.updateConfig}
             onChange={this.onFormChange}

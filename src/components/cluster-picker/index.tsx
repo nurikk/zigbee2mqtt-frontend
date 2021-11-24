@@ -66,7 +66,7 @@ export default function ClusterPicker(props: ClusterPickerProps): JSX.Element {
     if (pickerType === PickerType.MULTIPLE) {
         return <MultiPicker onChange={onChange} clusters={clusters as Cluster[]} value={value as Cluster[]} disabled={disabled} label={label} />
     } else {
-        return <SinglePicker onChange={onChange} clusters={clusters as Cluster[] | ClusterGroup[]} value={value as Cluster} disabled={disabled} label={label} />
+        return <SinglePicker onChange={onChange} clusters={clusters as Cluster[]} value={value as Cluster} disabled={disabled} label={label} />
     }
 }
 
