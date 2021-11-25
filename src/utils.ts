@@ -35,6 +35,9 @@ export interface ApiResponse<T> {
 
 
 export const lastSeen = (state: DeviceState, lastSeenType: LastSeenType): Date | undefined => {
+    if (!state.last_seen) {
+        return undefined;
+    }
     switch (lastSeenType) {
         case "ISO_8601":
         case "ISO_8601_local":
