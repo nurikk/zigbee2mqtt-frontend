@@ -5,14 +5,7 @@ import { getEndpoints } from "../../utils";
 import EndpointPicker from "../endpoint-picker";
 import DevicePicker from "../device-picker";
 import { useTranslation } from "react-i18next";
-
 import { WithDevices } from "../../store";
-
-
-type AddDeviceToGroupState = {
-    device?: string;
-    endpoint?: Endpoint;
-}
 
 type AddDeviceToGroupProps = {
     group: Group;
@@ -20,9 +13,10 @@ type AddDeviceToGroupProps = {
 } & WithDevices;
 
 export function AddDeviceToGroup(props: AddDeviceToGroupProps): JSX.Element {
-    const [state, setState] = useState<AddDeviceToGroupState>({});
+    const [endpoint, setEndpoint] = useState<Endpoint>("");
+    const [device, setDevice] = useState<string>("");
     const { addDeviceToGroup, group, devices } = props;
-    const { device, endpoint } = state;
+
 
     const deviceObj = devices[device as string];
     const endpoints = getEndpoints(deviceObj);
@@ -33,11 +27,12 @@ export function AddDeviceToGroup(props: AddDeviceToGroupProps): JSX.Element {
     };
     const onDeviceSelect = (d: Device): void => {
         const eps = getEndpoints(d);
-        setState({ device: d.ieee_address, endpoint: eps[0] });
+        setDevice(d.ieee_address)
+        setEndpoint(eps[0]);
     };
 
     const onEpChange = (ep: Endpoint): void => {
-        setState({ endpoint: ep });
+        setEndpoint(ep);
     };
 
     return <>
