@@ -98,11 +98,11 @@ export const Table: React.FC<Props> = ({ columns, data, id }) => {
               <th className="text-nowrap" {...column.getHeaderProps(column.getSortByToggleProps())}>
                 <span className={cx({ 'btn-link mr-1': column.canSort })}>{column.render('Header')}</span>
                 <span>
-                  {column.isSorted
-                    ? column.isSortedDesc
-                      ? <i className={`fa fa-sort-amount-down-alt`} />
-                      : <i className={`fa fa-sort-amount-down`} />
-                    : <i className={`fa fa-sort-amount-down invisible`} />}
+                <i className={cx('fa', {
+                  'fa-sort-amount-down invisible': !column.isSorted,
+                  'fa-sort-amount-down-alt': column.isSorted && !column.isSortedDesc,
+                  'fa-sort-amount-down': column.isSorted && column.isSortedDesc,
+                })} />
                 </span>
               </th>
             ))}

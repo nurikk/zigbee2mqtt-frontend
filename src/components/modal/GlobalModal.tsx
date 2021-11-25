@@ -16,44 +16,57 @@ const MODAL_COMPONENTS: any = {
 
 };
 
-type GlobalModalContext = {
+type Store = {
+    modalType: string;
+    modalProps: Record<string, any>;
+}
+
+type GlobalModalContextType = {
     showModal: (modalType: string, modalProps?: any) => void;
     hideModal: () => void;
-    store: any;
+    store: Store;
 };
 
-const initalState: GlobalModalContext = {
-    showModal: () => { },
-    hideModal: () => { },
-    store: {},
+
+const initalState: GlobalModalContextType = {
+    showModal: () => {
+        // empty function
+    },
+    hideModal: () => {
+        // empty function
+    },
+    store: {} as Store,
 };
 
 const GlobalModalContext = createContext(initalState);
 export const useGlobalModalContext = () => useContext(GlobalModalContext);
 
 export const GlobalModal: React.FC<{}> = ({ children }) => {
-    const [store, setStore] = useState<Record<string, unknown>>();
-    const { modalType, modalProps } = store || {};
+    const [store, setStore] = useState<Store>({} as Store);
+    const { modalType, modalProps } = store;
 
-    const showModal = (modalType: string, modalProps: any = {}) => {
+    const showModal = (t: string, p: any = {}) => {
         setStore({
             ...store,
-            modalType,
-            modalProps,
+            modalType: t,
+            modalProps: p,
         });
     };
 
     const hideModal = () => {
         setStore({
             ...store,
-            modalType: null,
+            modalType: "",
             modalProps: {},
         });
     };
 
     const renderComponent = () => {
-        const ModalComponent = MODAL_COMPONENTS[modalType as any];
-        if (!modalType || !ModalComponent) {
+        if (!modalType) {
+            return null;
+        }
+        const ModalComponent = MODAL_COMPONENTS[modalType];
+        if (!ModalComponent) {
             return null;
         }
         return <ModalComponent id="global-modal" {...modalProps} />;

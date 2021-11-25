@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useState } from "react";
-import { CompositeFeature, Device, DeviceState, EndpointDescription, GenericExposedFeature, Group, Scene, WithFreiendlyName, WithScenes } from "../../types";
+import { CompositeFeature, Device, DeviceState, GenericExposedFeature, Group, Scene, WithFreiendlyName, WithScenes } from "../../types";
 import actions from "../../actions/actions";
 import { SceneApi, SceneId } from "../../actions/SceneApi";
 import { connect } from "unistore/react";
