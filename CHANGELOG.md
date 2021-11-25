@@ -1,3 +1,16 @@
+## [0.6.40](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.39...0.6.40) (2021-11-25)
+
+
+### Bug Fixes
+
+* **AddDeviceToGroup:** fix selection of non default endpoint ([bb8a211](https://github.com/nurikk/zigbee2mqtt-frontend/commit/bb8a2117fb66ebea42a4977e569b14f125fdf860))
+* **build:** downgrade react-router-dom ([a9d8fc1](https://github.com/nurikk/zigbee2mqtt-frontend/commit/a9d8fc1d2b19317f97a31effc9aa62a8ad3aa386))
+* **lastSeen:** fix handling undefined last_seen value ([84ec31f](https://github.com/nurikk/zigbee2mqtt-frontend/commit/84ec31f328df6b6860c1f42bdc7c1cc29cf3a5cb))
+* **sonar:** fix sonar warnings ([3ce5d7b](https://github.com/nurikk/zigbee2mqtt-frontend/commit/3ce5d7b422e3036cf30cb115155d2279db4f9c2b))
+* **style:** fix sonar cube errors ([f885e18](https://github.com/nurikk/zigbee2mqtt-frontend/commit/f885e1800cf927d5abcf95733b05751351f34e1a))
+
+
+
 ## [0.6.39](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.38...0.6.39) (2021-11-22)
 
 
