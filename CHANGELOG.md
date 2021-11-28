@@ -1,3 +1,12 @@
+## [0.6.41](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.40...0.6.41) (2021-11-28)
+
+
+### Features
+
+* **availability:** implement availability feature ([3d21699](https://github.com/nurikk/zigbee2mqtt-frontend/commit/3d21699d41bfc2e0f615e75fc282fcf915239bb3))
+
+
+
 ## [0.6.40](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.39...0.6.40) (2021-11-25)
 
 
