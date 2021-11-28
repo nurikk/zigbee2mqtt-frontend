@@ -10,6 +10,7 @@ import { select } from "d3-selection";
 import { drag } from "d3-drag";
 import { CSSTransition } from 'react-transition-group'; // ES6
 import isEqual from "lodash/isEqual";
+import { OnlineOrOffline, WithAvaliability, WithDevices, WithDeviceStates } from "../../store";
 
 
 
@@ -35,14 +36,10 @@ interface NodeProps extends MouseEventsResponderNode {
     node: NodeI;
     deviceState: DeviceState;
     device: Device;
+    avalilability: OnlineOrOffline;
 }
 
-const offlineTimeout = 3600 * 2;
 
-export const isOnline = (device: Device): boolean => {
-
-    return true; // TODO: implement avalilability feature
-};
 type NodeState = {
     hasBeenUpdated: boolean;
 }
@@ -91,10 +88,10 @@ class Node extends Component<NodeProps, NodeState> {
 
     render() {
         const { hasBeenUpdated } = this.state;
-        const { node, deviceState, device } = this.props;
+        const { node, deviceState, device, avalilability } = this.props;
         const { onMouseOver, onMouseOut, onDblClick } = this;
         const deviceType = node.type as string;
-        const cn = cx(style.node, style[deviceType]); //{ [style.offline]: !isOnline(node.device, time) }
+        const cn = cx(style.node, style[deviceType], { [style.offline]: avalilability === "offline" })
         return (<g className={cn}
             ref={this.ref as RefObject<SVGImageElement>}
             onMouseOver={onMouseOver}
@@ -133,12 +130,10 @@ class Node extends Component<NodeProps, NodeState> {
     }
 }
 
-interface NodesProps extends MouseEventsResponderNode {
+interface NodesProps extends MouseEventsResponderNode, WithAvaliability, WithDevices, WithDeviceStates {
     root: SVGElement;
     nodes: NodeI[];
-    deviceStates: Record<FriendlyName, DeviceState>;
     simulation: Simulation<NodeI, LinkI>;
-    devices: Record<IEEEEAddress, Device>;
 }
 
 type NodesState = {
@@ -186,7 +181,7 @@ export default class Nodes extends Component<NodesProps, NodesState> {
 
 
     render() {
-        const { nodes, onMouseOut, onMouseOver, deviceStates, devices } = this.props;
+        const { nodes, onMouseOut, onMouseOver, deviceStates, devices, avalilability } = this.props;
         return (
             <g className={style.nodes}>
                 {nodes.map((node: NodeI) => (
@@ -197,6 +192,7 @@ export default class Nodes extends Component<NodesProps, NodesState> {
                         node={node}
                         deviceState={deviceStates[node.friendlyName as FriendlyName]}
                         device={devices[node.ieeeAddr]}
+                        avalilability={avalilability[node.friendlyName as FriendlyName]}
                     />
                 ))}
             </g>

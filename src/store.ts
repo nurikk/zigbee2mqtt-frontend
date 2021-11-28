@@ -38,8 +38,14 @@ export type WithBridgeInfo = {
     bridgeInfo: BridgeInfo;
 }
 
+export type OnlineOrOffline = 'online' | 'offline';
 
-export interface GlobalState extends WithDevices, WithDeviceStates, WithGroups, WithBridgeInfo {
+export type WithAvaliability = {
+    avalilability: Record<FriendlyName, OnlineOrOffline>;
+}
+
+
+export interface GlobalState extends WithDevices, WithDeviceStates, WithGroups, WithBridgeInfo, WithAvaliability {
     touchlinkDevices: TouchLinkDevice[];
     touchlinkScanInProgress: boolean;
     touchlinkIdentifyInProgress: boolean;
