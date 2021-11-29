@@ -35,13 +35,19 @@ const displayProps = [
         render: (device: Device, state: DeviceState, bridgeInfo: BridgeInfo) => <dd className="col-12 col-md-7"><LastSeen lastSeenType={bridgeInfo.config.advanced.last_seen} state={state} /></dd>,
     },
     {
-        translationKey: 'avaliability',
+        translationKey: 'avaliability.avaliability',
         render: (device: Device, state: DeviceState, bridgeInfo: BridgeInfo, availability: OnlineOrOffline) => {
-            const availabilityFeatureEnabled = !!bridgeInfo.config.availability;
+            const { config } = bridgeInfo;
+            const availabilityFeatureEnabled = !!config.availability;
+            const avalilabilityEnabledForDevice = config.devices[device.ieee_address]?.availability !== false;
+
+
             return <dd className="col-12 col-md-7">
                 <Avaliability
                     avaliability={availability}
-                    enabled={availabilityFeatureEnabled} />
+                    availabilityFeatureEnabled={availabilityFeatureEnabled}
+                    avalilabilityEnabledForDevice={avalilabilityEnabledForDevice}
+                     />
             </dd>
         },
     },

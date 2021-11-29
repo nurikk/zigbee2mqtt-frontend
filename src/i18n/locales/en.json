@@ -376,10 +376,7 @@
         "zigbee_manufacturer": "Zigbee Manufacturer",
         "zigbee_model": "Zigbee Model",
         "device": "Device",
-        "channel": "Channel",
-        "avaliability": "Avaliability",
-        "offline": "Offline",
-        "online": "Online"
+        "channel": "Channel"        
     },
     "scene": {
         "scene_id": "Scene ID",
@@ -397,5 +394,11 @@
         "byVendor": "By vendor",
         "byModel": "By model",
         "total": "Total"
+    },
+    "avaliability": {
+        "avaliability": "Avaliability",
+        "offline": "Offline",
+        "online": "Online",
+        "disabled": "Disabled"
     }
 }
