@@ -71,7 +71,7 @@
         "eslint-plugin-prettier": "^4.0.0",
         "eslint-plugin-react": "^7.26.1",
         "file-saver": "^2.0.5",
-        "fork-ts-checker-webpack-plugin": "^6.3.4",
+        "fork-ts-checker-webpack-plugin": "^6.4.2",
         "html-webpack-plugin": "^5.5.0",
         "husky": "^7.0.4",
         "i18next": "^21.5.3",
