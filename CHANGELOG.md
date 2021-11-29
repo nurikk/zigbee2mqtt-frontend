@@ -1,3 +1,12 @@
+## [0.6.42](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.41...0.6.42) (2021-11-29)
+
+
+### Features
+
+* **avaliability:** support for per device config ([68809e8](https://github.com/nurikk/zigbee2mqtt-frontend/commit/68809e8cba50afa31fd7776fd785c1114142bc95))
+
+
+
 ## [0.6.41](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.40...0.6.41) (2021-11-28)
 
 
