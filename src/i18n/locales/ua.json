@@ -451,6 +451,7 @@
     "zigbee": {
         "actions": "Дії",
         "attribute": "Атрибут",
+        "avaliability": "Доступність",
         "battery": "Батарея",
         "block_join": "Блокувати подальші спроби приєднання",
         "cluster": "Кластер",
