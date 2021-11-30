@@ -20,13 +20,14 @@ import zh from "./flags/tw.png";
 import ko from "./flags/kr.png";
 import cs from "./flags/cz.png";
 import fi from "./flags/fi.png";
+import sv from "./flags/sv.png";
 import missing from "./flags/missing-locale.png";
 
 
 import localeNames from './locales/localeNames.json';
 
 const localesMap = {
-    en, fr, pl, de, ru, ptbr, es, ua, chs, nl, it, zh, ko, cs, fi
+    en, fr, pl, de, ru, ptbr, es, ua, chs, nl, it, zh, ko, cs, fi, sv
 }
 
 
