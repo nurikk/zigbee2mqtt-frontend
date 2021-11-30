@@ -1,3 +1,12 @@
+## [0.6.43](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.42...0.6.43) (2021-11-30)
+
+
+### Features
+
+* **core:** refactor local storage component ([766b733](https://github.com/nurikk/zigbee2mqtt-frontend/commit/766b733a3f68fec758e7158c71382ff945483a7e))
+
+
+
 ## [0.6.42](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.41...0.6.42) (2021-11-29)
 
 
