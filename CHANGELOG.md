@@ -1,3 +1,12 @@
+## [0.6.44](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.43...0.6.44) (2021-11-30)
+
+
+### Bug Fixes
+
+* **storage:** fix storage keys ([b2e2ca8](https://github.com/nurikk/zigbee2mqtt-frontend/commit/b2e2ca8ebee615b3a66225c2cf8d16ea56ec514e))
+
+
+
 ## [0.6.43](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.42...0.6.43) (2021-11-30)
 
 
