@@ -1,4 +1,10 @@
 {
+    "avaliability": {
+        "avaliability": "Доступність",
+        "disabled": "Вимкнено",
+        "offline": "Офлайн",
+        "online": "Онлайн"
+    },
     "common": {
         "action": "Дія",
         "actions": "Дії",
@@ -452,8 +458,10 @@
         "actions": "Дії",
         "attribute": "Атрибут",
         "avaliability": "Доступність",
+        "avaliability.avaliability": "avaliability.avaliability",
         "battery": "Батарея",
         "block_join": "Блокувати подальші спроби приєднання",
+        "channel": "Канал",
         "cluster": "Кластер",
         "dc_source": "Джерело постійного струму",
         "description": "Опис",
