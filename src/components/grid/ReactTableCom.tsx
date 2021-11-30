@@ -4,8 +4,8 @@ import { useTable, useSortBy, HeaderGroup, Column, useAsyncDebounce, useGlobalFi
 import cx from "classnames";
 import { useTranslation } from "react-i18next";
 
-import { set, get } from "local-storage";
 import debounce from "lodash/debounce";
+import { local } from "@toolz/local-storage";
 
 interface Props {
   id: string;
@@ -40,7 +40,7 @@ function GlobalFilter({
 }
 
 const persist = debounce((key: string, data: Record<string, unknown>): void => {
-  set(key, data);
+  local.setItem(key, data);
 })
 
 
@@ -54,7 +54,7 @@ const stateReducer = (newState: TableState<any>, action: ActionType, previousSta
 };
 
 export const Table: React.FC<Props> = ({ columns, data, id }) => {
-  const initialState = get<Partial<TableState<any>>>(id) || {};
+  const initialState = local.getItem<Partial<TableState<any>>>(id) || {};
   const {
     getTableProps,
     getTableBodyProps,

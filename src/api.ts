@@ -4,6 +4,7 @@ import { BridgeConfig, BridgeInfo, TouchLinkDevice, Device, DeviceState, BridgeS
 import { sanitizeGraph, isSecurePage, randomString, stringifyWithPreservingUndefinedAsNull } from "./utils";
 import { Notyf } from "notyf";
 import { GraphI } from "./components/map/types";
+import { local } from "@toolz/local-storage";
 
 const MAX_LOGS_RECORDS_IN_BUFFER = 100;
 const TOKEN_LOCAL_STORAGE_ITEM_NAME = "z2m-token";
@@ -99,12 +100,14 @@ class Api {
 
     urlProvider = async () => {
         const url = new URL(this.url)
-        let token = localStorage.getItem(TOKEN_LOCAL_STORAGE_ITEM_NAME);
-        const authRequired = !!localStorage.getItem(AUTH_FLAG_LOCAL_STORAGE_ITEM_NAME);
+        let token = local.getItem<string>(TOKEN_LOCAL_STORAGE_ITEM_NAME);
+        const authRequired = !!local.getItem(AUTH_FLAG_LOCAL_STORAGE_ITEM_NAME);
         if (authRequired) {
             if (!token) {
-                token = prompt("enter your z2m admin token");
-                localStorage.setItem(TOKEN_LOCAL_STORAGE_ITEM_NAME, token as string);
+                token = prompt("Enter your z2m admin token") as string;
+                if (token) {
+                    local.setItem(TOKEN_LOCAL_STORAGE_ITEM_NAME, token as string);
+                }
             }
             url.searchParams.append("token", token as string);
         }
@@ -249,8 +252,8 @@ class Api {
 
     private onClose = (e: CloseEvent): void => {
         if (e.code === UNAUTHORIZED_ERROR_CODE) {
-            localStorage.setItem(AUTH_FLAG_LOCAL_STORAGE_ITEM_NAME, "true");
-            localStorage.removeItem(TOKEN_LOCAL_STORAGE_ITEM_NAME);
+            local.setItem(AUTH_FLAG_LOCAL_STORAGE_ITEM_NAME, true);
+            local.remove(TOKEN_LOCAL_STORAGE_ITEM_NAME);
             notyf.error("Unauthorized");
             setTimeout(() => {
                 window.location.reload();

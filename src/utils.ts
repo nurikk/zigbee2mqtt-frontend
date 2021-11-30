@@ -4,6 +4,7 @@ import { GraphI, LinkI, LinkType, NodeI } from "./components/map/types";
 import { Theme } from "./components/theme-switcher";
 import JSZip from 'jszip';
 import FileSaver from 'file-saver';
+import { local } from "@toolz/local-storage";
 
 
 export const genDeviceDetailsLink = (deviceIdentifier: string | number): string => (`/device/${deviceIdentifier}`);
@@ -138,5 +139,5 @@ export const isOnlyOneBitIsSet = (b: number): number | boolean => {
     return b && !(b & (b - 1));
 }
 
-export const getCurrentTheme = (): Theme => localStorage.getItem('theme') as Theme ?? 'light';
-export const saveCurrentTheme = (theme: string): void => localStorage.setItem('theme', theme);
+export const getCurrentTheme = (): Theme => local.getItem('theme') as Theme ?? 'light';
+export const saveCurrentTheme = (theme: string): void => local.setItem('theme', theme);
