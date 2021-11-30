@@ -86,7 +86,7 @@
         "pinst": "^2.1.6",
         "prettier": "^2.5.0",
         "react": "^17.0.1",
-        "react-ace": "^9.4.4",
+        "react-ace": "^9.5.0",
         "react-app-polyfill": "^2.0.0",
         "react-bootstrap": "^1.6.4",
         "react-css-theme-switcher": "^0.3.0",
