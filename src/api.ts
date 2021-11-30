@@ -7,8 +7,8 @@ import { GraphI } from "./components/map/types";
 import { local } from "@toolz/local-storage";
 
 const MAX_LOGS_RECORDS_IN_BUFFER = 100;
-const TOKEN_LOCAL_STORAGE_ITEM_NAME = "z2m-token";
-const AUTH_FLAG_LOCAL_STORAGE_ITEM_NAME = "z2m-auth";
+const TOKEN_LOCAL_STORAGE_ITEM_NAME = "z2m-token-v2";
+const AUTH_FLAG_LOCAL_STORAGE_ITEM_NAME = "z2m-auth-v2";
 const UNAUTHORIZED_ERROR_CODE = 4401;
 
 const AVALIABILITY_FEATURE_TOPIC_ENDING = "/availability";

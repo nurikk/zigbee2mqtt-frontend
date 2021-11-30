@@ -39,8 +39,11 @@ function GlobalFilter({
   )
 }
 
+const TABLE_STORAGE_PREFFIX = 'rc-table-';
+const getStorageKey = (id: string) => `${TABLE_STORAGE_PREFFIX}${id}`;
+
 const persist = debounce((key: string, data: Record<string, unknown>): void => {
-  local.setItem(key, data);
+  local.setItem(getStorageKey(key), data);
 })
 
 
@@ -53,8 +56,10 @@ const stateReducer = (newState: TableState<any>, action: ActionType, previousSta
   return newState;
 };
 
+
+
 export const Table: React.FC<Props> = ({ columns, data, id }) => {
-  const initialState = local.getItem<Partial<TableState<any>>>(id) || {};
+  const initialState = local.getItem<Partial<TableState<any>>>(getStorageKey(id)) || {};
   const {
     getTableProps,
     getTableBodyProps,
