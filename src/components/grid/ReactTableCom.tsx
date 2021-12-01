@@ -39,7 +39,7 @@ function GlobalFilter({
   )
 }
 
-const TABLE_STORAGE_PREFFIX = 'rc-table-';
+const TABLE_STORAGE_PREFFIX = 'z2m-';
 const getStorageKey = (id: string) => `${TABLE_STORAGE_PREFFIX}${id}`;
 
 const persist = debounce((key: string, data: Record<string, unknown>): void => {

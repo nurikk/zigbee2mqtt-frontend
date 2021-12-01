@@ -138,7 +138,7 @@ export const stringifyWithPreservingUndefinedAsNull = (data: Record<string, unkn
 export const isOnlyOneBitIsSet = (b: number): number | boolean => {
     return b && !(b & (b - 1));
 }
-const THEME_STORAGE_KEY = 'theme-v2';
+const THEME_STORAGE_KEY = 'z2m-theme';
 
 export const getCurrentTheme = (): Theme => local.getItem(THEME_STORAGE_KEY) as Theme ?? 'light';
 export const saveCurrentTheme = (theme: string): void => local.setItem(THEME_STORAGE_KEY, theme);
