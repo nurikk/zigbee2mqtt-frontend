@@ -1,3 +1,12 @@
+## [0.6.45](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.44...0.6.45) (2021-12-01)
+
+
+### Features
+
+* **build:** add gzipped files to bundle ([83cee23](https://github.com/nurikk/zigbee2mqtt-frontend/commit/83cee23a628f4c87b08323592251a521b1c9f422))
+
+
+
 ## [0.6.44](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.43...0.6.44) (2021-11-30)
 
 
