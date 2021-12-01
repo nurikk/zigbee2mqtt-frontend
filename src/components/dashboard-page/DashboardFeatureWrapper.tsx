@@ -48,6 +48,7 @@ const typeToClassMap = {
     color_temp: ['fa-sliders-h'],
     illuminance_lux: ['fa-sun'],
     soil_moisture: ['fa-fill-drip'],
+    week: ['fa-calendar'],
     water_leak: ['fa-water'],
 };
 const getGenericFeatureIcon = (name: string, value: unknown): string => {
