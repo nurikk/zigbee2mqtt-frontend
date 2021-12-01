@@ -231,7 +231,7 @@
         "restart": "Starta om",
         "settings": "Inställningar",
         "toggle_dropdown": "Växla rullgardinsmenyn",
-        "touchlink": "Touchlink"
+        "touchlink": "Peklänk"
     },
     "ota": {
         "check": "Sök efter nya uppdateringar",
@@ -242,7 +242,7 @@
     },
     "settings": {
         "about": "Om",
-        "advanced": "Avancerad",
+        "advanced": "Avancerat",
         "availability": "Tillgänglighet",
         "blocklist": "Blockeringslista",
         "coordinator_revision": "Koordinator revision",
@@ -257,11 +257,11 @@
         "external_converters": "Externa omvandlare",
         "frontend": "Frontend",
         "frontend_version": "Frontend version",
-        "main": "Huvudsaklig",
+        "main": "Huvudmeny",
         "mqtt": "MQTT",
         "ota": "OTA-uppdateringar",
         "passlist": "Passlista",
-        "raw": "Rå",
+        "raw": "Rådata",
         "restart_zigbee2mqtt": "Starta om Zigbee2MQTT",
         "serial": "Serienummer",
         "settings": "Inställningar",
