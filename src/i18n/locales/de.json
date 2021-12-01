@@ -260,7 +260,8 @@
         "Position of this cover": "Position des Vorhangs",
         "Position": "Position",
         "presets for sensivity for presence and movement": "Standardeinstellungen für die Sensibilität des Radar-Sensors (Bewegung und Anwesenheit).",
-        "PROGRAMMING MODE ⏱ - In this mode, the device executes a preset week programming temperature time and temperature. ": "PROGRAMMIERMODUS ⏱ - In diesem Modus verwendet das Ventil einen festgelegten Stunden- und Temperaturplan pro Woche.",
+        "PROGRAMMING MODE ⏱ - In this mode, the device executes a preset week programming temperature time and temperature. ": "PROGRAMMIERMODUS ⏱ - In diesem Modus verwendet das Gerät einen festgelegten Stunden- und Temperaturplan pro Woche.",
+        "Schedule MODE ⏱ - In this mode, the device executes a preset week programming temperature time and temperature.": "Geplanter Modus ⏱ - In diesem Modus verwendet das Gerät einen festgelegten Stunden- und Temperaturplan pro Woche.",
         "Raw measured illuminance": "Gemessener Helligkeits-Rohwert",
         "Recover state after power outage": "Eingestellter Zustand nach Stromausfall",
         "Remaining battery in %": "Aktueller Batteriestatus in %",
@@ -345,7 +346,7 @@
     "settings": {
         "about": "Über",
         "advanced": "Erweitert",
-        "availability": "Erreichbar",
+        "availability": "Verfügbarkeit",
         "blocklist": "Geblockte Geräte",
         "coordinator_revision": "Coordinator Version",
         "coordinator_type": "Coordinator Typ",
@@ -463,7 +464,7 @@
         "actions": "Aktionen",
         "attribute": "Attribute",
         "battery": "Batterie",
-        "block_join": "Blockieren vom Anlernen",
+        "block_join": "Anlernen blockieren",
         "cluster": "Cluster",
         "dc_source": "Gleichstromquelle",
         "description": "Beschreibung",
@@ -503,6 +504,11 @@
         "update_Home_assistant_entity_id": "Update Home Assistant System ID",
         "updating_firmware": "Firmware aktualisieren",
         "zigbee_manufacturer": "Zigbee Hersteller",
-        "zigbee_model": "Zigbee Modell"
+        "zigbee_model": "Zigbee Modell",
+        "avaliability.avaliability": "Verfügbarkeit"
+    },
+    "avaliability": {
+        "avaliability": "Verfügbarkeit",
+        "online": "online"
     }
 }
