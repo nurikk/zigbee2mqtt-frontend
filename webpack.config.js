@@ -1,9 +1,12 @@
+const webpack = require("webpack");
+
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyPlugin = require('copy-webpack-plugin');
-const webpack = require("webpack");
+const CompressionPlugin = require("compression-webpack-plugin");
+
 
 const path = require("path");
 const glob = require("glob");
@@ -28,6 +31,7 @@ const getPlugins = (production) => {
                 from: 'src/images/apple-touch-icon.png'
             }],
         }),
+        new CompressionPlugin()
     ];
 
     const basePath = "src/templates";
