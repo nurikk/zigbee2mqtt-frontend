@@ -1,5 +1,5 @@
 import React from 'react';
-import { CompositeFeature } from '../../types';
+import { CompositeFeature, LastSeenType } from '../../types';
 import cx from "classnames";
 import { BaseFeatureProps } from '../features/base';
 import DeviceFooter from './DeviceFooter';
@@ -11,7 +11,7 @@ import { genDeviceDetailsLink } from '../../utils';
 
 import Composite from '../features/composite/composite';
 import DeviceImage from '../device-image';
-import { LastSeenType } from '../zigbee';
+
 
 type Props = BaseFeatureProps<CompositeFeature> & { lastSeenType: LastSeenType, controls?: JSX.Element };
 

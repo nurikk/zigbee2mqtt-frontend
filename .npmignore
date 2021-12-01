@@ -3,4 +3,5 @@
 !dist/**/*
 dist/report.html
 *.map
+*.map.gz
 .DS_Store

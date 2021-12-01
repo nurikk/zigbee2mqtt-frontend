@@ -1,6 +1,6 @@
 const WebSocket = require("ws");
 const lineReader = require('line-reader');
-
+const fs = require("fs");
 const wss = new WebSocket.Server({
     port: 8579,
 });
@@ -15,9 +15,10 @@ wss.on("connection", (ws) => {
         const msg = JSON.parse(message.data);
         switch (msg.topic) {
             case "bridge/request/networkmap":
-                lineReader.eachLine('./ws-messages/networkMapRequest.json', (line, last) => {
-                    ws.send(line);
-                });
+                ws.send(fs.readFileSync('./ws-messages/networkMapRequest.json', 'utf8'));
+                break;
+            case "bridge/request/touchlink/scan":
+                ws.send(fs.readFileSync('./ws-messages/onTouchlink.json', 'utf8'));
                 break;
             default:
                 break;

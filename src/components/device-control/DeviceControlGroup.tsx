@@ -8,8 +8,7 @@ import cx from "classnames";
 
 import { GlobalState } from "../../store";
 import { useTranslation } from "react-i18next";
-import { RenameAction } from "./RenameAction";
-import RemoveAction from "./RemoveAction";
+import { MODAL_TYPES, useGlobalModalContext } from "../modal/GlobalModal";
 
 interface DeviceControlGroupProps {
     device: Device;
@@ -20,12 +19,10 @@ type PropsFromStore = Pick<GlobalState, 'bridgeInfo'>;
 function DeviceControlGroup(props: DeviceControlGroupProps & DeviceApi & PropsFromStore) {
     const { device, bridgeInfo, configureDevice, renameDevice, removeDevice } = props;
     const { t } = useTranslation(["zigbee", "common"]);
+    const { showModal } = useGlobalModalContext();
     return (
         <div className="btn-group btn-group-sm" role="group">
-            <RenameAction device={device}
-                bridgeInfo={bridgeInfo}
-                renameDevice={renameDevice}
-            />
+            <Button<void> className="btn btn-primary" onClick={() => showModal(MODAL_TYPES.RENAME_DEVICE, { device, renameDevice, bridgeInfo })} title={t('rename_device')}><i className="fa fa-edit" /></Button>
             <Button<string>
                 className="btn btn-warning"
                 onClick={configureDevice}
@@ -33,7 +30,7 @@ function DeviceControlGroup(props: DeviceControlGroupProps & DeviceApi & PropsFr
                 title={t('reconfigure')} promt>
                 <i className={cx("fa", "fa-retweet")} />
             </Button>
-            <RemoveAction device={device} removeDevice={removeDevice} />
+            <button onClick={() => showModal(MODAL_TYPES.REMOVE_DEVICE, { device, removeDevice })} className="btn btn-danger" title={t('remove_device')}><i className={cx("fa", "fa-trash")} /></button>
         </div>
     );
 }

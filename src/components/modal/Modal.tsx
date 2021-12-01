@@ -23,7 +23,7 @@ class BodyEnd extends React.Component {
         super(props);
         this.el = document.createElement('div');
 
-        'modal-backdrop fade show'.split(' ').map(className => this.el.classList.add(className));
+        'modal-backdrop fade show'.split(' ').forEach(className => this.el.classList.add(className));
     }
 
     componentDidMount() {

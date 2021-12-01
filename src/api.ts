@@ -1,18 +1,17 @@
 import ReconnectingWebSocket from "reconnecting-websocket";
-import store, { Extension, LogMessage } from "./store";
+import store, { Extension, LogMessage, OnlineOrOffline } from "./store";
 import { BridgeConfig, BridgeInfo, TouchLinkDevice, Device, DeviceState, BridgeState, Group } from './types';
 import { sanitizeGraph, isSecurePage, randomString, stringifyWithPreservingUndefinedAsNull } from "./utils";
 import { Notyf } from "notyf";
 import { GraphI } from "./components/map/types";
-
-import orderBy from "lodash/orderBy";
-
+import { local } from "@toolz/local-storage";
 
 const MAX_LOGS_RECORDS_IN_BUFFER = 100;
-const TOKEN_LOCAL_STORAGE_ITEM_NAME = "z2m-token";
-const AUTH_FLAG_LOCAL_STORAGE_ITEM_NAME = "z2m-auth";
+const TOKEN_LOCAL_STORAGE_ITEM_NAME = "z2m-token-v2";
+const AUTH_FLAG_LOCAL_STORAGE_ITEM_NAME = "z2m-auth-v2";
 const UNAUTHORIZED_ERROR_CODE = 4401;
 
+const AVALIABILITY_FEATURE_TOPIC_ENDING = "/availability";
 const notyf = new Notyf();
 
 interface Message {
@@ -38,13 +37,9 @@ const showNotity = (data: LogMessage | ResponseWithStatus): void => {
         message = data.message;
         level = data.level;
     } else if (isResponseWithStatus(data)) {
-        switch (data.status) {
-            case "error":
-                level = "error";
-                message = data.error as string;
-                break;
-            default:
-                break;
+        if (data.status === "error") {
+            level = "error";
+            message = data.error as string;
         }
     }
 
@@ -105,12 +100,14 @@ class Api {
 
     urlProvider = async () => {
         const url = new URL(this.url)
-        let token = localStorage.getItem(TOKEN_LOCAL_STORAGE_ITEM_NAME);
-        const authRequired = !!localStorage.getItem(AUTH_FLAG_LOCAL_STORAGE_ITEM_NAME);
+        let token = local.getItem<string>(TOKEN_LOCAL_STORAGE_ITEM_NAME);
+        const authRequired = !!local.getItem(AUTH_FLAG_LOCAL_STORAGE_ITEM_NAME);
         if (authRequired) {
             if (!token) {
-                token = prompt("enter your z2m admin token");
-                localStorage.setItem(TOKEN_LOCAL_STORAGE_ITEM_NAME, token as string);
+                token = prompt("Enter your z2m admin token") as string;
+                if (token) {
+                    local.setItem(TOKEN_LOCAL_STORAGE_ITEM_NAME, token as string);
+                }
             }
             url.searchParams.append("token", token as string);
         }
@@ -121,6 +118,11 @@ class Api {
         this.socket = new ReconnectingWebSocket(this.urlProvider);
         this.socket.addEventListener("message", this.onMessage);
         this.socket.addEventListener("close", this.onClose);
+    }
+    private processDeviceStateMessage = (data: Message): void => {
+        let { deviceStates } = store.getState();
+        deviceStates = { ...deviceStates, ...{ [data.topic]: { ...deviceStates[data.topic], ...(data.payload as DeviceState) } } };
+        store.setState({ deviceStates });
     }
     private procsessBridgeMessage = (data: Message): void => {
         switch (data.topic) {
@@ -228,6 +230,13 @@ class Api {
         }
     }
 
+    private processAvailabilityMessage = (data: Message): void => {
+        let { avalilability } = store.getState();
+        const friendlyName = data.topic.split(AVALIABILITY_FEATURE_TOPIC_ENDING, 1)[0];
+        avalilability = { ...avalilability, ...{ [friendlyName]: data.payload as OnlineOrOffline}};
+        store.setState({ avalilability });
+    }
+
     private resolvePromises(message: ResponseWithStatus): void {
         const { transaction, status } = message;
         if (transaction !== undefined && this.requests.has(transaction)) {
@@ -243,8 +252,8 @@ class Api {
 
     private onClose = (e: CloseEvent): void => {
         if (e.code === UNAUTHORIZED_ERROR_CODE) {
-            localStorage.setItem(AUTH_FLAG_LOCAL_STORAGE_ITEM_NAME, "true");
-            localStorage.removeItem(TOKEN_LOCAL_STORAGE_ITEM_NAME);
+            local.setItem(AUTH_FLAG_LOCAL_STORAGE_ITEM_NAME, true);
+            local.remove(TOKEN_LOCAL_STORAGE_ITEM_NAME);
             notyf.error("Unauthorized");
             setTimeout(() => {
                 window.location.reload();
@@ -260,13 +269,12 @@ class Api {
             notyf.error(e.message);
             notyf.error(event.data);
         }
-
-        if (data.topic.startsWith("bridge/")) {
+        if (data.topic.endsWith(AVALIABILITY_FEATURE_TOPIC_ENDING)) {
+            this.processAvailabilityMessage(data);
+        } else if (data.topic.startsWith("bridge/")) {
             this.procsessBridgeMessage(data);
         } else {
-            let { deviceStates } = store.getState();
-            deviceStates = { ...deviceStates, ...{ [data.topic]: { ...deviceStates[data.topic], ...(data.payload as DeviceState) } } };
-            store.setState({ deviceStates });
+            this.processDeviceStateMessage(data);
         }
     }
 }

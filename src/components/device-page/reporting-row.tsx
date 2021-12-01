@@ -10,7 +10,7 @@ import { getEndpoints } from "../../utils";
 import AttributePicker from "../attribute-picker";
 import Clusters from "zigbee-herdsman/dist/zcl/definition/cluster"
 import Button from "../button";
-import { useTranslation, WithTranslation, withTranslation } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 
 
 interface ReportingRowProps {

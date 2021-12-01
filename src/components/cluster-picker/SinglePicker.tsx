@@ -3,15 +3,14 @@ import { useTranslation } from "react-i18next";
 import { randomString } from "../../utils";
 import { SinglePickerProps, isClusterGroup, clusterDescriptions } from "./index";
 
-export function SinglePicker(props: SinglePickerProps): JSX.Element{
+export function SinglePicker(props: SinglePickerProps): JSX.Element {
     const [pickerId] = useState(randomString(5));
     const { clusters = [], onChange, value, label, disabled } = props;
     const { t } = useTranslation(["zigbee", "common"]);
     const options = [<option key="hidden" hidden>{t('select_cluster')}</option>];
 
     const onChangeHandler = (e: ChangeEvent<HTMLSelectElement>): void => {
-        const { value } = e.target;
-        onChange(value);
+        onChange(e.target.value);
     };
 
     if (isClusterGroup(clusters)) {

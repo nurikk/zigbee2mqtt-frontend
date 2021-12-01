@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-import store, { GlobalState } from "../store";
+import { GlobalState } from "../store";
 import { Store } from "unistore";
 
 import { Endpoint, FriendlyName, IEEEEAddress, ReportingConfig } from "../types";

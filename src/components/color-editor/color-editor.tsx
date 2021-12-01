@@ -40,7 +40,7 @@ export const toRGB = (source: AnyColor, sourceFormat: ColorFormat): string => {
 const rgbToTargetFormat = (source: string, targetFormat: ColorFormat): Record<string, unknown> => {
     switch (targetFormat) {
         case "color_hs":
-            const [hue, saturation, v] = convertColors.hex.hsv(source);
+            const [hue, saturation] = convertColors.hex.hsv(source);
             return { hue, saturation };
 
 

@@ -1,5 +1,5 @@
-import React, { ChangeEvent, Component, useState } from "react";
-import { CompositeFeature, Device, DeviceState, Endpoint, EndpointDescription, GenericExposedFeature, Group, Scene, SwitchFeature, WithFreiendlyName, WithScenes } from "../../types";
+import React, { ChangeEvent, useState } from "react";
+import { CompositeFeature, Device, DeviceState, GenericExposedFeature, Group, Scene, WithFreiendlyName, WithScenes } from "../../types";
 import actions from "../../actions/actions";
 import { SceneApi, SceneId } from "../../actions/SceneApi";
 import { connect } from "unistore/react";
@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
 import Button from "../button";
 import Composite from "../features/composite/composite";
 import { DashboardFeatureWrapper } from "../dashboard-page/DashboardFeatureWrapper";
-import { isLightFeature, isSwitchFeature } from "./type-guards";
+import { isLightFeature } from "./type-guards";
 import { StateApi } from "../../actions/StateApi";
 import groupBy from "lodash/groupBy";
 
@@ -32,8 +32,7 @@ function ScenePicker(props: ScenePickerProps) {
     const { t } = useTranslation("scene");
     const { onSceneSelected, scenes = [], value } = props;
     const onSelectHandler = (e: ChangeEvent<HTMLSelectElement>) => {
-        const { value } = e.target;
-        const [id, endpoint] = value.split("-");
+        const [id, endpoint] = e.target.value.split("-");
         onSceneSelected({ id: parseInt(id, 10), endpoint });
     }
     const selectPicker = <>
@@ -62,7 +61,6 @@ function ScenePicker(props: ScenePickerProps) {
 function getScenes(target: Group | Device): Scene[] {
     if ((target as Device).endpoints) {
         const scenes: Scene[] = [];
-        let endpoint: EndpointDescription;
         Object.entries((target as Device).endpoints).forEach(
             ([endpoint, value]) => {
                 for (let _scene of value.scenes) {
@@ -80,7 +78,7 @@ function getScenes(target: Group | Device): Scene[] {
 }
 
 export function RecallRemove(props: RecallRemoveAndMayBeStoreSceneProps & Pick<SceneApi, 'sceneRecall' | 'sceneRemove' | 'sceneStore' | 'sceneRemoveAll'>) {
-    const { sceneRecall, sceneRemove, sceneStore, sceneRemoveAll, target } = props;
+    const { sceneRecall, sceneRemove, sceneRemoveAll, target } = props;
     const { t } = useTranslation("scene");
     const [scene, setScene] = useState<Scene>({ id: 0, endpoint: undefined } as Scene);
     const sceneIsntSelected = scene.id === undefined;
@@ -178,7 +176,9 @@ export function AddScene(props: AddSceneProps & Pick<SceneApi, 'sceneStore'> & P
                 onChange={(endpoint, value) => {
                     setDeviceState(`${target.friendly_name}${endpoint ? `/${endpoint}` : ''}`, value)
                 }}
-                onRead={() => { }}
+                onRead={() => {
+                    // empty function
+                 }}
                 featureWrapperClass={DashboardFeatureWrapper}
                 minimal={true}
             />

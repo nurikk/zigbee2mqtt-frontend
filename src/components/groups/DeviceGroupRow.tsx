@@ -1,8 +1,6 @@
 import React from "react";
 import Button from "../button";
-import { getLastSeenType } from "../../utils";
-import { Devices } from "../../store";
-import { WithBridgeInfo, WithDevices, WithDeviceStates } from "../../store";
+import { WithBridgeInfo, WithDevices, WithDeviceStates, Devices } from "../../store";
 import { useTranslation } from "react-i18next";
 import { CompositeFeature, Device, DeviceState, FriendlyName, GenericExposedFeature, GroupAddress } from "../../types";
 import DashboardDevice from "../dashboard-page/DashboardDevice";
@@ -46,12 +44,12 @@ export function DeviceGroupRow(props: DeviceGroupRowProps): JSX.Element {
     const { removeDeviceFromGroup, groupAddress, devices, deviceStates, bridgeInfo } = props;
     const device = devices[groupAddress.ieee_address] ?? { ieee_address: groupAddress.ieee_address, friendly_name: t('unknown_device') };
     const deviceState = deviceStates[device.friendly_name] ?? {} as DeviceState;
-    const lastSeenType = getLastSeenType(bridgeInfo.config.advanced);
+
     const { setDeviceState, getDeviceState } = props;
 
     let filteredFeatures: (false | GenericExposedFeature | CompositeFeature)[] = [];
-    if ((device as Device).definition) {
-        filteredFeatures = (((device as Device).definition?.exposes ?? []) as GenericExposedFeature[])
+    if (device.definition) {
+        filteredFeatures = ((device.definition.exposes ?? []) as GenericExposedFeature[])
             .map((e: GenericExposedFeature | CompositeFeature) => onlyValidFeaturesForScenes(e, deviceState))
             .filter(f => f);
     }
@@ -68,7 +66,7 @@ export function DeviceGroupRow(props: DeviceGroupRowProps): JSX.Element {
             getDeviceState(`${device.friendly_name}${endpoint ? `/${endpoint}` : ''}`, value)
         }
         featureWrapperClass={DashboardFeatureWrapper}
-        lastSeenType={lastSeenType}
+        lastSeenType={bridgeInfo.config.advanced.last_seen}
         controls={<Button<string> promt item={device.friendly_name} onClick={removeDeviceFromGroup} className="btn btn-danger btn-sm float-right"><i className="fa fa-trash" /></Button>}
     />
 

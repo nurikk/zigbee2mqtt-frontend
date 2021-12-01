@@ -123,7 +123,7 @@ const processHighlights = ({ networkGraph, links, selectedNode, node, link, link
         linkLabel.style("opacity", 1);
     }
 }
-type PropsFromStore = Pick<GlobalState, 'networkGraph' | 'networkGraphIsLoading' | 'deviceStates' | 'devices'>;
+type PropsFromStore = Pick<GlobalState, 'networkGraph' | 'networkGraphIsLoading' | 'deviceStates' | 'devices' | 'avalilability'>;
 export class MapComponent extends Component<PropsFromStore & MapApi & WithTranslation<"map">, MapState> {
     ref = createRef<HTMLDivElement>();
     svgRef = createRef<SVGSVGElement>();
@@ -162,7 +162,6 @@ export class MapComponent extends Component<PropsFromStore & MapApi & WithTransl
 
         processHighlights({ networkGraph, links, selectedNode, node, link, linkLabel });
         node.on("click", (event, d: NodeI) => {
-            const { selectedNode } = this.state;
             this.setState({ selectedNode: selectedNode ? null as unknown as NodeI : d });
         });
         this.simulation.alphaTarget(0.03).restart();
@@ -197,7 +196,7 @@ export class MapComponent extends Component<PropsFromStore & MapApi & WithTransl
         const { width, height, visibleLinks } = this.state;
 
 
-        const { networkGraph, deviceStates, devices } = this.props;
+        const { networkGraph, deviceStates, devices, avalilability } = this.props;
         const links = networkGraph.links.filter(l => intersection(visibleLinks, l.relationships).length > 0);
         return (
             <svg ref={this.svgRef} viewBox={`0 0 ${width} ${height}`}>
@@ -209,6 +208,7 @@ export class MapComponent extends Component<PropsFromStore & MapApi & WithTransl
                         simulation={this.simulation}
                         deviceStates={deviceStates}
                         devices={devices}
+                        avalilability={avalilability}
                     />
                 </g>
             </svg >
@@ -270,7 +270,7 @@ export class MapComponent extends Component<PropsFromStore & MapApi & WithTransl
         return (<div className={cx("fixed-bottom", { "d-none": !legendIsVisible })} onClick={() => this.setState({ legendIsVisible: false })}>
             <div className={cx(style.node, style.Coordinator)}>
                 <svg width="28" height="28" viewBox="0 0 28 28">
-                    <polygon points={getStarShape(5, 5, 14) as string} />
+                    <polygon points={getStarShape(5, 5, 14)} />
                 </svg> {t('help_is_coordinator')}</div>
             <div className={cx(style.node, style.EndDevice)}>{t("help_end_device_description")}</div>
             <div className={cx(style.node, style.Router)}>{t('help_router_description')}</div>
@@ -294,6 +294,6 @@ export class MapComponent extends Component<PropsFromStore & MapApi & WithTransl
 }
 
 
-const mappedProps = ["networkGraph", "networkGraphIsLoading", "deviceStates", "devices"];
+const mappedProps = ["networkGraph", "networkGraphIsLoading", "deviceStates", "devices", "avalilability"];
 const ConnectedMap = withTranslation("map")(connect<unknown, MapState, GlobalState, unknown>(mappedProps, actions)(MapComponent));
 export default ConnectedMap;

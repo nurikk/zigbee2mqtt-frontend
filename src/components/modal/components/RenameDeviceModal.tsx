@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import Button from "../button";
-import Modal, { ModalHeader, ModalBody, ModalFooter } from "../modal/Modal";
 import { useTranslation } from "react-i18next";
-import { Device, BridgeInfo } from "../../types";
-import useModal from "../../hooks/useModal";
 
+import { BridgeInfo, Device } from "../../../types";
+
+import { useGlobalModalContext } from "../GlobalModal";
+import Modal, { ModalBody, ModalFooter, ModalHeader } from "../Modal";
 
 export type RenameActionProps = {
     device: Device;
@@ -13,21 +13,20 @@ export type RenameActionProps = {
     renameDevice(old: string, newName: string, homeassistantRename: boolean): Promise<void>;
 
 }
-
-export function RenameAction(props: RenameActionProps): JSX.Element {
-
+export const RenameDeviceModal = (props: RenameActionProps) => {
+    const { hideModal } = useGlobalModalContext();
     const { bridgeInfo, device, renameDevice } = props;
     const [isHassRename, setIsHassRename] = useState(false);
     const [friendlyName, setFriendlyName] = useState(device.friendly_name);
     const { t } = useTranslation(["zigbee", "common"]);
-    const { isOpen, toggle} = useModal(false);
+
     const onSaveClick = async (): Promise<void> => {
         await renameDevice(device.friendly_name, friendlyName, isHassRename);
-        toggle();
+        hideModal();
     };
-    return (<>
-        <Button<void> className="btn btn-primary" onClick={toggle} title={t('rename_device')}><i className="fa fa-edit" /></Button>
-        <Modal isOpen={isOpen}>
+
+    return (
+        <Modal isOpen={true}>
             <ModalHeader>
                 <h3>{t('rename_device')}</h3>
                 <small>{device.friendly_name}</small>
@@ -45,10 +44,9 @@ export function RenameAction(props: RenameActionProps): JSX.Element {
                 ) : null}
             </ModalBody>
             <ModalFooter>
-                <button type="button" className="btn btn-secondary" onClick={toggle}>{t('common:close')}</button>
+                <button type="button" className="btn btn-secondary" onClick={hideModal}>{t('common:close')}</button>
                 <button type="button" className="btn btn-primary" onClick={onSaveClick}>{t('common:save')}</button>
             </ModalFooter>
         </Modal>
-    </>
     );
-}
+};

@@ -1,10 +1,11 @@
 
-import { AdvancedConfig, Device, DeviceState, Endpoint, Group } from "./types";
+import { AdvancedConfig, Device, DeviceState, Endpoint, Group, LastSeenType } from "./types";
 import { GraphI, LinkI, LinkType, NodeI } from "./components/map/types";
 import { Theme } from "./components/theme-switcher";
 import JSZip from 'jszip';
 import FileSaver from 'file-saver';
-import { LastSeenType } from "./components/zigbee";
+import { local } from "@toolz/local-storage";
+
 
 export const genDeviceDetailsLink = (deviceIdentifier: string | number): string => (`/device/${deviceIdentifier}`);
 
@@ -33,27 +34,18 @@ export interface ApiResponse<T> {
     result: T;
 }
 
-export const getLastSeenType = (config: AdvancedConfig): LastSeenType => {
-    if (config.last_seen !== "disable") {
-        return config.last_seen;
-    }
-    if (config.elapsed) {
-        return "elapsed";
-    }
-    return "disable";
-};
 
 export const lastSeen = (state: DeviceState, lastSeenType: LastSeenType): Date | undefined => {
+    if (!state.last_seen) {
+        return undefined;
+    }
     switch (lastSeenType) {
         case "ISO_8601":
         case "ISO_8601_local":
             return new Date(Date.parse(state.last_seen as string));
 
         case "epoch":
-            return new Date(state.last_seen as number);
-
-        case "elapsed":
-            return new Date(Date.now() - (state.elapsed as number));
+            return new Date(state.last_seen as number);        
 
         case "disable":
             return undefined;
@@ -146,6 +138,7 @@ export const stringifyWithPreservingUndefinedAsNull = (data: Record<string, unkn
 export const isOnlyOneBitIsSet = (b: number): number | boolean => {
     return b && !(b & (b - 1));
 }
+const THEME_STORAGE_KEY = 'z2m-theme';
 
-export const getCurrentTheme = (): Theme => localStorage.getItem('theme') as Theme ?? 'light';
-export const saveCurrentTheme = (theme: string): void => localStorage.setItem('theme', theme);
+export const getCurrentTheme = (): Theme => local.getItem(THEME_STORAGE_KEY) as Theme ?? 'light';
+export const saveCurrentTheme = (theme: string): void => local.setItem(THEME_STORAGE_KEY, theme);

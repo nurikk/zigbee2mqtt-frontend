@@ -267,7 +267,8 @@
         "settings": "Settings",
         "tools": "Tools",
         "zigbee2mqtt_version": "Zigbee2MQTT version",
-        "translate": "Translate"
+        "translate": "Translate",
+        "stats": "Stats"
     },
     "settingsSchemaTranslations": {
         "advanced-title": "Advanced",
@@ -374,7 +375,8 @@
         "update_Home_assistant_entity_id": "Update Home Assistant entity ID",
         "zigbee_manufacturer": "Zigbee Manufacturer",
         "zigbee_model": "Zigbee Model",
-        "device": "Device"
+        "device": "Device",
+        "channel": "Channel"        
     },
     "scene": {
         "scene_id": "Scene ID",
@@ -385,5 +387,18 @@
         "add": "Add",
         "select_scene": "Select Scene",
         "scene_name": "Scene Name"
+    },
+    "stats": {
+        "byType": "By device type",
+        "byPowerSource": "By power source",
+        "byVendor": "By vendor",
+        "byModel": "By model",
+        "total": "Total"
+    },
+    "avaliability": {
+        "avaliability": "Avaliability",
+        "offline": "Offline",
+        "online": "Online",
+        "disabled": "Disabled"
     }
 }

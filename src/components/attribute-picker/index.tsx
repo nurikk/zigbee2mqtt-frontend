@@ -23,10 +23,10 @@ export default function AttributePicker(props: AttributePickerProps & Omit<Input
     const { t } = useTranslation("zigbee");
     const onChangeHandler = (e: ChangeEvent<HTMLSelectElement>): void => {
 
-        const { value } = e.target;
+        const { value: inputValue } = e.target;
         const currentCluster = Clusters[cluster];
-        const attributeInfo = currentCluster.attributes[value]
-        onChange(value, attributeInfo);
+        const attributeInfo = currentCluster.attributes[inputValue]
+        onChange(inputValue, attributeInfo);
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars

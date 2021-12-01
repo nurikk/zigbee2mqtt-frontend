@@ -1,5 +1,4 @@
 import React from "react";
-import { useTranslation } from "react-i18next";
 import { StateApi } from "../../actions/StateApi";
 import { WithBridgeInfo, WithDevices, WithDeviceStates } from "../../store";
 import { Group } from "../../types";

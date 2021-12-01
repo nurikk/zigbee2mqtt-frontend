@@ -1,5 +1,5 @@
 import React, { Component, ReactNode } from "react";
-import { BridgeInfo, Device, KVP } from "../../types";
+import { Device, KVP } from "../../types";
 import { DeviceApi } from "../../actions/DeviceApi";
 import Form from '@rjsf/bootstrap-4';
 import { JSONSchema7 } from "json-schema"
@@ -65,7 +65,7 @@ export default class DeviceSettings extends Component<DeviceSettingsProps, Devic
 
     render(): ReactNode {
         const { schema, data, uiSchema } = this.getSchemaAndConfig();
-        return <Form schema={schema as JSONSchema7}
+        return <Form schema={schema}
             formData={data}
             onSubmit={this.updateConfig}
             onChange={this.onFormChange}

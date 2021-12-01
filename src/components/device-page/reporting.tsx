@@ -43,7 +43,7 @@ const rule2key = (rule: NiceReportingingRule): string => `${rule.isNew}${rule.en
 function Reporting(props: ReportingProps & PropsFromStore & ReportingApi): JSX.Element {
     const { configureReport, device } = props;
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const [newReportingRule, setnewReportingRule] = useState<NiceReportingingRule>({ isNew: Date.now(), reportable_change: 0, minimum_report_interval: 60, maximum_report_interval: 3600, endpoint: "", cluster: "", attribute: "" })
+    const [newReportingRule] = useState<NiceReportingingRule>({ isNew: Date.now(), reportable_change: 0, minimum_report_interval: 60, maximum_report_interval: 3600, endpoint: "", cluster: "", attribute: "" })
 
     const onApply = (rule: NiceReportingingRule): void => {
         const { cluster, endpoint, attribute, minimum_report_interval, maximum_report_interval, reportable_change } = rule;

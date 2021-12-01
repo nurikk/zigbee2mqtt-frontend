@@ -19,6 +19,9 @@ import nlTranslations from './locales/nl.json';
 import itTranslations from './locales/it.json';
 import zhTranslations from './locales/zh.json';
 import koTranslations from './locales/ko.json';
+import csTranslations from './locales/cs.json';
+import fiTranslations from './locales/fi.json';
+import svTranslations from './locales/sv.json';
 
 
 import timePl from "timeago.js/lib/lang/pl";
@@ -33,6 +36,11 @@ import timeNl from "timeago.js/lib/lang/nl";
 import timeIt from "timeago.js/lib/lang/it";
 import timeZh from "timeago.js/lib/lang/zh_TW";
 import timeKo from "timeago.js/lib/lang/ko";
+import timeCs from "timeago.js/lib/lang/cs";
+import timeFi from "timeago.js/lib/lang/fi";
+import timeSv from "timeago.js/lib/lang/sv";
+
+import { useEffect } from 'react';
 
 
 register("pl", timePl);
@@ -47,7 +55,9 @@ register("nl", timeNl);
 register("it", timeIt);
 register("ko", timeKo);
 register("zh", timeZh);
-
+register("cs", timeCs);
+register("fi", timeFi);
+register("sv", timeSv);
 
 
 
@@ -66,6 +76,10 @@ export const resources = {
     it: itTranslations as ResourceLanguage,
     zh: zhTranslations as ResourceLanguage,
     ko: koTranslations as ResourceLanguage,
+    cs: csTranslations as ResourceLanguage,
+    fi: fiTranslations as ResourceLanguage,
+    sv: svTranslations as ResourceLanguage,
+
 } as const;
 
 declare let window: Record<string, unknown>;
@@ -82,6 +96,9 @@ const missingKeyHandler = (lngs: string[], ns: string, key: string, fallbackValu
     }
 }
 const debug = process.env.NODE_ENV !== 'production'
+i18n.on("languageChanged", (lng: string) => {
+    document.documentElement.lang = lng;
+})
 i18n
     .use(LanguageDetector)
     .use(initReactI18next)
@@ -92,7 +109,8 @@ i18n
         ns: Object.keys(enTranslations),
         saveMissing: true,
         missingKeyHandler
-    });
+    })
+
 
 const currentLanguage = i18n.language.split('-')[0].toLocaleLowerCase();
 if (!resources[currentLanguage]) {

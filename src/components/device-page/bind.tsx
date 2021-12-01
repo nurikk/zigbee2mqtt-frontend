@@ -57,7 +57,7 @@ const convertBidningsIntoNiceStructure = (device: Device): NiceBindingRule[] => 
 export function Bind(props: BindProps & PropsFromStore & BindApi): JSX.Element {
     const { device, devices, groups, removeBind, addBind } = props;
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const [newBindingRule, setnewBindingRule] = useState<NiceBindingRule>({ isNew: Date.now(), target: {} as BindTarget, source: { 'ieee_address': device.ieee_address, endpoint: "" }, clusters: [] })
+    const [newBindingRule] = useState<NiceBindingRule>({ isNew: Date.now(), target: {} as BindTarget, source: { 'ieee_address': device.ieee_address, endpoint: "" }, clusters: [] })
 
     const bidingRules = convertBidningsIntoNiceStructure(device);
     return <div className="container-fluid">

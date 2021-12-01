@@ -1,5 +1,5 @@
 import React, { ChangeEvent, Component } from "react";
-import { Attribute, Cluster, Device, DeviceState, Endpoint } from "../../types";
+import { Attribute, Cluster, Device, Endpoint } from "../../types";
 import ClusterPicker, { PickerType } from "../cluster-picker";
 
 import DataType from "zigbee-herdsman/dist/zcl/definition/dataType";
