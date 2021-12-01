@@ -105,7 +105,7 @@
     "extensions": {
         "create_new_extension": "Skapa nytt tillägg",
         "extension_name_propmt": "Ange nytt tilläggsnamn",
-        "select_extension_to_edit": "SVälj tillägg att redigera"
+        "select_extension_to_edit": "Välj tillägg att redigera"
     },
     "featureDescriptions": {
         "Auto off after specific time.": "Automatisk avstängning efter viss tid.",
@@ -208,11 +208,11 @@
     },
     "map": {
         "help_coordinator_link_description": "Heldragna linjer är länken till koordinatorn",
-        "help_end_device_description": "Grön betyder slutenhet",
+        "help_end_device_description": "Grön är slutenhet",
         "help_is_coordinator": "är Koordinator",
         "help_lqi_description": "Länkkvaliteten är mellan 0 - 255 (högre är bättre), värden med / representerar flera typer av länkar",
-        "help_router_description": "Blå betyder Router",
-        "help_router_links_description": "Streckade linjer är länken till rutter",
+        "help_router_description": "Blå är router",
+        "help_router_links_description": "Streckade linjer är länken till router",
         "hide": "Klicka på mig för att gömma mig",
         "load": "Ladda karta",
         "loading": "Beroende på storleken på ditt nätverk kan detta ta någonstans mellan 10 sekunder och 2 minuter."
@@ -362,11 +362,11 @@
         "none": "Ingen",
         "output_clusters": "Utgångskluster",
         "pic": "Bild",
-        "power": "Kraft",
-        "power_level": "kraftnivå",
+        "power": "Strömkälla",
+        "power_level": "Effektnivå",
         "reconfigure": "Konfigurera om",
-        "remove_device": "Ta bort enheten",
-        "rename_device": "Byt namn på enheten",
+        "remove_device": "Ta bort enhet",
+        "rename_device": "Byt namn på enhet",
         "select_attribute": "Välj attribut",
         "select_cluster": "Välj kluster",
         "support_status": "Supportstatus",
