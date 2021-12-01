@@ -505,10 +505,13 @@
         "updating_firmware": "Firmware aktualisieren",
         "zigbee_manufacturer": "Zigbee Hersteller",
         "zigbee_model": "Zigbee Modell",
+        "channel": "Kanal",
         "avaliability.avaliability": "Verfügbarkeit"
     },
     "avaliability": {
         "avaliability": "Verfügbarkeit",
-        "online": "online"
+        "offline": "Offline",
+        "online": "Online",
+        "disabled": "Deaktiviert"
     }
 }
