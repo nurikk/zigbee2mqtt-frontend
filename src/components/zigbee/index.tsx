@@ -169,18 +169,12 @@ export function ZigbeeTable(props: ZigbeeTableProps) {
     }
     const data = React.useMemo(() => getDevicesToRender(), [devices, deviceStates]);
 
+    return <DevicesTable
+        data={data}
+        lastSeenType={config.advanced.last_seen}
+        availabilityFeatureEnabled={availabilityFeatureEnabled}
+    />
 
-    if (Object.keys(data).length) {
-        return <DevicesTable
-            data={data}
-            lastSeenType={config.advanced.last_seen}
-            availabilityFeatureEnabled={availabilityFeatureEnabled}
-        />
-    } else {
-        return (<div className="h-100 d-flex justify-content-center align-items-center">
-            <Spinner />
-        </div>);
-    }
 }
 
 const mappedProps = ["devices", "deviceStates", "bridgeInfo", "avalilability"];
