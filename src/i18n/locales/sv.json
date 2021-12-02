@@ -167,7 +167,7 @@
         "Triggered action (e.g. a button click)": "Utlöst åtgärd (t.ex. ett knappklick)",
         "Triggers an effect on the light (e.g. make light blink for a few seconds)": "Utlöser en effekt på ljuset (t.ex. få ljuset att blinka i några sekunder)",
         "Voltage of the battery in millivolts": "Batteriets spänning i millivolt",
-        "Week format user for schedule": "Veckoformat användare för schema"
+        "Week format user for schedule": "Veckoformat användare för schema",
         "Controls the transition time (in seconds) of on/off, brightness, color temperature (if applicable) and color (if applicable) changes. Defaults to `0` (no transition).": "Kontrollerar övergångstiden (i sekunder) för på/av, ljusstyrka, färgtemperatur (om tillämpligt) och färg (om tillämpligt). Standardinställningen är `0` (ingen övergång).": "Kontrollerar övergångstiden (i sekunder). ) av på/av, ljusstyrka, färgtemperatur (om tillämpligt) och färg (om tillämpligt) ändras. Standardinställningen är `0` (ingen övergång).",
 		"When enabled colors will be synced, e.g. if the light supports both color x/y and color temperature a conversion from color x/y to color temperature will be done when setting the x/y color (default true).": "När aktiverade färger synkroniseras, t.ex. om ljuset stöder både färg x/y och färgtemperatur kommer en konvertering från färg x/y till färgtemperatur att göras när x/y-färgen ställs in (standard sant)."
         
