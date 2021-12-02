@@ -35,7 +35,7 @@ const displayProps = [
         render: (device: Device, state: DeviceState, bridgeInfo: BridgeInfo) => <dd className="col-12 col-md-7"><LastSeen lastSeenType={bridgeInfo.config.advanced.last_seen} state={state} /></dd>,
     },
     {
-        translationKey: 'avaliability.avaliability',
+        translationKey: 'avaliability:avaliability',
         render: (device: Device, state: DeviceState, bridgeInfo: BridgeInfo, availability: OnlineOrOffline) => {
             const { config } = bridgeInfo;
             const availabilityFeatureEnabled = !!config.availability;
