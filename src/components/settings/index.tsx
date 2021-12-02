@@ -4,7 +4,7 @@ import actions, { UtilsApi } from "../../actions/actions";
 import { GlobalState } from "../../store";
 import { NavLink, Redirect, RouteComponentProps, withRouter } from "react-router-dom";
 import Button from "../button";
-import Form from '@rjsf/bootstrap-4';
+import Form from "@rjsf/core";
 import cx from "classnames";
 import { JSONSchema7 } from "json-schema";
 import cloneDeep from "lodash/cloneDeep";

@@ -1,7 +1,7 @@
 import React, { Component, ReactNode } from "react";
 import { Device, KVP } from "../../types";
 import { DeviceApi } from "../../actions/DeviceApi";
-import Form from '@rjsf/bootstrap-4';
+import Form from "@rjsf/core";
 import { JSONSchema7 } from "json-schema"
 import { ISubmitEvent, UiSchema } from "@rjsf/core";
 

@@ -1,6 +1,6 @@
 import React from "react";
 
-import Form from "@rjsf/bootstrap-4";
+import Form from "@rjsf/core";
 import { JSONSchema7 } from "json-schema"
 import { KVP, Z2MConfig } from "../../types";
 import get from "lodash/get";
