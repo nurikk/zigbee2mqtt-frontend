@@ -1,3 +1,13 @@
+## [0.6.47](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.46...0.6.47) (2021-12-02)
+
+
+### Bug Fixes
+
+* **translations:** fix Availability type ([cf8cde9](https://github.com/nurikk/zigbee2mqtt-frontend/commit/cf8cde9f2b9945bde5e81be0c2fcf251d559b710))
+* **ZigbeeTable:** remove confusing spinner ([688a9be](https://github.com/nurikk/zigbee2mqtt-frontend/commit/688a9be9d0984bda93c23d2adeb974251def6370))
+
+
+
 ## [0.6.46](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.45...0.6.46) (2021-12-01)
 
 
