@@ -195,7 +195,7 @@
         "new_group_id_placeholder": "Specica id gruppo se necessario",
         "new_group_name": "Nuovo nome gruppo",
         "new_group_name_placeholder": "esempio:: luci_camera_da_letto",
-        "remove_group": "Rimuovi gruppo"
+        "remove_group": "Rimuovi gruppo",
         "group_id": "ID del gruppo",
         "group_name": "Nome del gruppo",
         "group_members": "Membri del gruppo",
@@ -374,8 +374,8 @@
         "updating_firmware": "Aggiornamento firmware",
         "update_Home_assistant_entity_id": "Aggiorna entity_id di Home Assistant",
         "zigbee_manufacturer": "Produttore Zigbee",
-        "zigbee_model": "Modello Zigbee"
-        "device": "Dispositivo"
+        "zigbee_model": "Modello Zigbee",
+        "device": "Dispositivo",
         "channel": "Canale"
     },
     "scene": {
