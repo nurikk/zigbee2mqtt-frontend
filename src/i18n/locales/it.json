@@ -267,7 +267,7 @@
         "settings": "Impostazioni",
         "tools": "Strumenti",
         "zigbee2mqtt_version": "Versione Zigbee2MQTT",
-        "translate": "Traduci"
+        "translate": "Traduci",
         "stats": "Stati"
     },
     "settingsSchemaTranslations": {
