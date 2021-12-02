@@ -135,7 +135,7 @@
         "Force the valve position": "Vynutit polohu ventilu",
         "Indicates if CO (carbon monoxide) is detected": "Ukazuje, zda je detekován CO (oxid uhelnatý)",
         "Indicates if the battery of this device is almost empty": "Ukazuje, zda je baterie tohoto zařízení téměř vybitá",
-        "Indicates if the contact is closed (= true) or open (= false)": "Ukazuje, zda je kontakt sepnutý (= true) nebo otevřený (= false)",
+        "Indicates if the contact is closed (= true) or open (= false)": "Ukazuje, zda je kontakt sepnutý (= Ano) nebo otevřený (= Ne)",
         "Indicates whether the device detected a water leak": "Ukazuje, zda zařízení detekovalo únik vody",
         "Indicates whether the device detected occupancy": "Ukazuje, zda zařízení detekovalo obsazenost",
         "Indicates whether the device detected smoke": "Ukazuje, zda zařízení detekovalo kouř",
@@ -172,7 +172,24 @@
         "Calibrates the temperature value (absolute offset), takes into effect on next report of device.": "Kalibruje hodnotu teploty (absolutní odchylka), projeví se při dalším hlášení zařízení.",
         "Number of digits after decimal point for humidity, takes into effect on next report of device.": "Počet číslic za desetinnou čárkou pro vlhkost, platí při dalším hlášení zařízení.",
         "Calibrates the humidity value (absolute offset), takes into effect on next report of device.": "Kalibruje hodnotu vlhkosti (absolutní odchylka), projeví se při dalším hlášení zařízení.",
-        "Controls the transition time (in seconds) of on/off, brightness, color temperature (if applicable) and color (if applicable) changes. Defaults to `0` (no transition).": "Ovládá dobu přechodu (v sekundách) změn zapnutí/vypnutí, jasu, teploty barev (pokud je to možné) a barvy (pokud je to možné). Výchozí hodnota je „0“ (bez přechodu)."
+        "Controls the transition time (in seconds) of on/off, brightness, color temperature (if applicable) and color (if applicable) changes. Defaults to `0` (no transition).": "Ovládá dobu přechodu (v sekundách) změn zapnutí/vypnutí, jasu, teploty barev (pokud je to možné) a barvy (pokud je to možné). Výchozí hodnota je „0“ (bez přechodu).",
+        "Schedule MODE ⏱ - In this mode, the device executes a preset week programming temperature time and temperature.": "Režim plánu ⏱ - V tomto režimu zařízení provádí přednastavené týdenní vytápění dle nastaveného času vytápění a teploty.",
+        "Set to false to disable the legacy integration (highly recommended), will change structure of the published payload (default true).": "Nastavením na hodnotu Ne zakážete starší integraci (důrazně doporučujeme), změní se struktura publikované užitečné zátěže (výchozí hodnota Ano).",
+        "Simulate a brightness value. If this device provides a brightness_move_up or brightness_move_down action it is possible to specify the update interval and delta.": "Simulovat hodnotu jasu. Pokud toto zařízení poskytuje akci bright_move_up nebo bright_move_down, je možné určit interval aktualizace a rozdíl.",
+        "Delta per interval, 20 by default": "Rozdíl v intervalu, ve výchozím nastavení 20",
+        "Interval duration": "Délka intervalu",
+        "Number of digits after decimal point for pressure, takes into effect on next report of device.": "Počet číslic za desetinnou čárkou pro tlak, platí při dalším hlášení zařízení.",
+        "Calibrates the pressure value (absolute offset), takes into effect on next report of device.": "Kalibruje hodnotu tlaku (absolutní offset), projeví se při dalším hlášení zařízení.",
+        "Alarm temperature max": "Max teplota pro alarm",
+        "Alarm temperature min": "Min teplota pro alarm",
+        "Alarm huminity max": "Max vlhkost pro alarm",
+        "Alarm huminity min": "Min vlhkost pro alarm",
+        "Alarm humidity status": "Stav vlhkosti pro alarm",
+        "Alarm temperature status": "Stav teploty pro alarm",
+        "Number of digits after decimal point for illuminance, takes into effect on next report of device.": "Počet číslic za desetinnou čárkou pro osvětlení, platí při dalším hlášení zařízení.",
+        "Calibrates the illuminance value (percentual offset), takes into effect on next report of device.": "Kalibruje hodnotu osvětlení (procentuální offset), projeví se při dalším hlášení zařízení.",
+        "Number of digits after decimal point for illuminance_lux, takes into effect on next report of device.": "Počet číslic za desetinnou čárkou pro illuminance_lux, platí při další zprávě zařízení.",
+        "Calibrates the illuminance_lux value (percentual offset), takes into effect on next report of device.": "Kalibruje hodnotu illuminance_lux (procentuální offset), projeví se při další zprávě zařízení."
     },
     "featureNames": {
         "action": "Akce",
@@ -201,7 +218,15 @@
         "programming_mode": "Programovací režim",
         "week": "Týden",
         "workdays_schedule": "Týdenní kalendář",
-        "holidays_schedule": "Prázdninový kalendář"
+        "holidays_schedule": "Prázdninový kalendář",
+        "current_heating_setpoint": "Aktuálně nastavená hodnota vytápění",
+        "system_mode": "Systémový režim",
+        "local_temperature_calibration": "Kalibrace místní teploty",
+        "preset": "Přednastavení",
+        "power": "Napájení",
+        "current": "Proud",
+        "voltage": "Napětí",
+        "energy": "Energie"
     },
     "groups": {
         "add_to_group": "Přidat do skupiny",
@@ -256,7 +281,7 @@
         "update": "Aktualizovat firmware zařízení"
     },
     "settings": {
-        "about": "O mě",
+        "about": "Informace",
         "advanced": "Pokročilé",
         "availability": "Dostupnost",
         "blocklist": "Seznam blokovaných",
@@ -321,7 +346,7 @@
         "root_ext_pan_id__title": "Ext Pan ID",
         "root_filtered_attributes__description": "Povolit zabránění zveřejnění určitých atributů ",
         "root_filtered_attributes__title": "Filtrované atributy",
-        "root_filtered_optimistic__description": "Filtrujte atributy z optimistického publikování dat při dotazu /set (Toto nemá žádný vliv, pokud je optimistické nastaveno na false).",
+        "root_filtered_optimistic__description": "Filtrujte atributy z optimistického publikování dat při dotazu /set (Toto nemá žádný vliv, pokud je optimistické nastaveno na Ne).",
         "root_filtered_optimistic__title": "Filtrované optimistické atributy",
         "root_log_output__description": "Výstupní umístění logu, ponechte prázdné pro potlačení logování",
         "root_log_output__title": "Výstup logu",
@@ -353,7 +378,8 @@
         "true": "Ano",
         "empty_string": "Prázdný řetězec(\"\")",
         "leaking": "Netěsnost",
-        "tampered": "Manipulováno"
+        "tampered": "Manipulováno",
+        "null": "Prázdné"
     },
     "zigbee": {
         "actions": "Akce",
@@ -399,7 +425,8 @@
         "update_Home_assistant_entity_id": "Aktualizovat ID entity v Home Assistant",
         "zigbee_manufacturer": "Výrobce Zigbee",
         "zigbee_model": "Model Zigbee",
-        "device": "Zařízení"
+        "device": "Zařízení",
+        "avaliability.avaliability": "Dostupnost"
     },
     "scene": {
         "scene_id": "ID scény",
@@ -410,5 +437,12 @@
         "add": "Přidat",
         "select_scene": "Vybrat scénu",
         "scene_name": "Název scény"
+    },
+    "avaliability": {
+        "avaliability": "Dostupnost",
+        "offline": "Offline",
+        "online": "Online",
+        "disabled": "Zakázáno",
+        "enabled": "Povoleno"
     }
 }
