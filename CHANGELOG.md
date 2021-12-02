@@ -1,3 +1,12 @@
+## [0.6.48](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.47...0.6.48) (2021-12-02)
+
+
+### Bug Fixes
+
+* **rjsf:** remove @rjsf/bootstrap-4 deps, fallback to bootsrap 3 styles ([1703e80](https://github.com/nurikk/zigbee2mqtt-frontend/commit/1703e80fd887d31c70c026e1e6ff59d5b771e93e))
+
+
+
 ## [0.6.47](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.46...0.6.47) (2021-12-02)
 
 
