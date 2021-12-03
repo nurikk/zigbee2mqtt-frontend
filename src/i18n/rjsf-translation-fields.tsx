@@ -11,7 +11,7 @@ const DescriptionField = (props: Partial<FieldProps>): JSX.Element => {
     const { description, id } = props;
     const { t } = useTranslation("settingsSchemaDescriptions");
     if (description) {
-        return <div><div className="mb-3">{t(id as string, { defaultValue: description })}</div></div>;
+        return <div><div className="mb-3">{t(description)}</div></div>;
     }
     return <></>;
 };
@@ -26,7 +26,7 @@ const TitleField = ({ title, id }: Partial<FieldProps>): JSX.Element => {
 
     return (
         <div className="my-1">
-            <h5>{t(id as string, { defaultValue: title })}</h5>
+            <h5>{t(title as string)}</h5>
             <hr className="border-0 bg-secondary" style={{ height: "1px" }} />
         </div>
     )
