@@ -1,3 +1,17 @@
+## [0.6.49](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.48...0.6.49) (2021-12-03)
+
+
+### Bug Fixes
+
+* **DevicesTable:** sort power column by state.battery ([a57a387](https://github.com/nurikk/zigbee2mqtt-frontend/commit/a57a38758f4b0aacb5eda4b567e59611adfa9324))
+
+
+### Features
+
+* **i18n:** add poeeditor message ([00c85ce](https://github.com/nurikk/zigbee2mqtt-frontend/commit/00c85ce19882a5a1dfd763bca2d66abbed8d7b67))
+
+
+
 ## [0.6.48](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.47...0.6.48) (2021-12-02)
 
 
