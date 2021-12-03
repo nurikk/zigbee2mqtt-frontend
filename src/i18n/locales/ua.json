@@ -477,7 +477,7 @@
         "root_log_output__title": "Папка для журналів",
         "root_log_syslog-title": "Системний журнал",
         "root_qos__description": "Рівень QoS для повідомлень MQTT даного приладу",
-        "root_retention__description": "Встановлює термін дії повідомлення MQTT у секундах, переконайтеся, що для mqtt.version встановлено значення 5",
+        "root_retention__description": "Sets the MQTT Message Expiry in seconds, Make sure to set mqtt.version to 5",
         "root-title": "Serial",
         "root__title": "Passlist",
         "serial__title": "Налаштування послідовного інтерфейсу",
