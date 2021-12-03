@@ -19,8 +19,6 @@ const getTemperatureIcon = (temperature: number) => {
     return icon;
 };
 
-
-
 const typeToClassMap = {
     humidity: ['text-info', 'fa-tint'],
     illuminance: ['fa-sun'],
@@ -48,9 +46,12 @@ const typeToClassMap = {
     color_temp: ['fa-sliders-h'],
     illuminance_lux: ['fa-sun'],
     soil_moisture: ['fa-fill-drip'],
-    week: ['fa-calendar-week'],
     water_leak: ['fa-water'],
+    week: ['fa-calendar-week'],
+    workdays_schedule: ['fa-calendar-day', 'text-info'],
+    holidays_schedule: ['fa-calendar-day', 'text-danger'],
 };
+
 const getGenericFeatureIcon = (name: string, value: unknown): string => {
     let classes = [] as string[];
     switch (name) {
