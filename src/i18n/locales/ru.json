@@ -28,7 +28,6 @@
         "source_endpoint": "Исходная конечная точка",
         "the_only_endpoint": "Единственная конечная точка",
         "unbind": "Отвязать",
-        "unknown": "Неизвестно",
         "write": "Записать"
     },
     "devicePage": {
