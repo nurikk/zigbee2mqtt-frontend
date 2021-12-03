@@ -427,7 +427,7 @@
         "availability-title": "Доступність (об'єкт)",
         "blocklist__description": "Блокування приладів із мережі (за допомогою ieeeAddr)",
         "blocklist__title": "Список заборон",
-        "experimental__title": "Експериментальні налаштування"
+        "experimental__title": "Експериментальні налаштування",
         "experimental-title": "Експериментальні налаштування",
         "experimental_output__description": "Приклади, коли 'стан' пристрою публікується json: тема: 'zigbee2mqtt/my_bulb' корисне навантаження '{\"state\": \"ON\"}' атрибут: тема 'zigbee2mqtt/my_bulb/state' корисне навантаження 'ON' attribute_and_json : і json, і атрибут (див. вище)",
         "experimental_transmit_power__description": "Потужність передачі адаптера, доступна лише для адаптерів Z-Stack (CC253*/CC2652/CC1352), CC2652 = 5 дБм, макс. CC1352 = 20 дБм (за замовчуванням 5 дБм)",
@@ -477,7 +477,7 @@
         "root_log_output__title": "Папка для журналів",
         "root_log_syslog-title": "Системний журнал",
         "root_qos__description": "Рівень QoS для повідомлень MQTT даного приладу",
-        "root_retention__description": "Sets the MQTT Message Expiry in seconds, Make sure to set mqtt.version to 5",
+        "root_retention__description": "Встановлює термін дії повідомлення MQTT в секундах. Обов'язково встановіть mqtt.version на 5",
         "root-title": "Serial",
         "root__title": "Passlist",
         "serial__title": "Налаштування послідовного інтерфейсу",
