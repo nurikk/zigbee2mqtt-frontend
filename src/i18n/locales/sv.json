@@ -393,7 +393,8 @@
         "byPowerSource": "Efter strömkälla",
         "byVendor": "Efter säljare",
         "byModel": "Efter modell",
-        "total": "Totalt"
+        "total": "Totalt",
+        "Router": "Router"
     },
     "avaliability": {
         "avaliability": "Tillgänglighet",
