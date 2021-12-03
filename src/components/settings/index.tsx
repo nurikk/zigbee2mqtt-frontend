@@ -148,6 +148,8 @@ export class SettingsPage extends Component<PropsFromStore & SettingsPageProps &
 
         const url = `https://github.com/nurikk/zigbee2mqtt-frontend/edit/dev/src/i18n/locales/${currentLanguage}.json`;
         return <div className="p-3">
+            <p>We're trying to migrate to <a target="_blank" rel="noopener noreferrer"href="https://poeditor.com/join/project?hash=Az88waAhPd">POEditor</a></p>
+            <p>We're going to deprecate github PR flow in favor to <a target="_blank" rel="noopener noreferrer"href="https://poeditor.com/join/project?hash=Az88waAhPd">POEditor</a>.</p>
             <p>This page contains missing translation keys.</p>
             <p>You can navigate to different pages to collect missing translations and come back here again (don't referesh browser page).</p>
             <p>Usually there is a lot of missing keys in settings and device pages</p>
