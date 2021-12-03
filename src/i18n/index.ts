@@ -82,19 +82,6 @@ export const resources = {
 
 } as const;
 
-declare let window: Record<string, unknown>;
-window.missing = {};
-
-const blacklistedNamespaces = ['localeNames'];
-const missingKeyHandler = (lngs: string[], ns: string, key: string, fallbackValue: string) => {
-
-    if (!blacklistedNamespaces.includes(ns)) {
-        // eslint-disable-next-line @typescript-eslint/ban-types
-        set(window.missing as object, [ns, key], fallbackValue);
-        store.setState({ missingTranslations: window.missing as Map<string, unknown> });
-        //then use `copy(window.missing)` in chrome dev tools console
-    }
-}
 const debug = process.env.NODE_ENV !== 'production'
 i18n.on("languageChanged", (lng: string) => {
     document.documentElement.lang = lng;
@@ -103,12 +90,10 @@ i18n
     .use(LanguageDetector)
     .use(initReactI18next)
     .init({
-        // fallbackLng: 'en',
+        fallbackLng: 'en',
         debug,
         resources,
         ns: Object.keys(enTranslations),
-        saveMissing: true,
-        missingKeyHandler
     })
 
 
