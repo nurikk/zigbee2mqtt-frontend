@@ -129,7 +129,7 @@ function DevicesTable(props: DevicesTableProps) {
         {
             id: 'power',
             Header: t('power') as string,
-            accessor: ({ device }) => device.power_source,
+            accessor: ({ state }) => state.battery,
             Cell: ({ row: { original: { state, device } } }) => <PowerSource source={device.power_source} battery={state.battery as number} batteryLow={state.battery_low as boolean} />,
         },
         {
