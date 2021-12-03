@@ -43,64 +43,7 @@
         "unknown_device": "알 수 없는 장치"
     },
     "exposes": {
-        "action": "액션",
-        "auto_off": "Auto off",
-        "away_mode": "외출 모드",
-        "away_preset_days": "Away preset days",
-        "away_preset_temperature": "Away preset temperature",
-        "backlight_mode": "Backlight mode",
-        "battery": "배터리",
-        "battery_low": "저전압 배터리",
-        "boost_time": "Boost time",
-        "brightness": "밝기",
-        "calibration": "캘리브레이션",
-        "carbon_monoxide": "일산화탄소",
-        "color_hs": "Color (HS)",
-        "color_temp": "색 온도",
-        "color_temp_startup": "Startup color temp",
-        "color_xy": "Color (XY)",
-        "comfort_temperature": "편안한 온도",
-        "consumer_connected": "Consumer connected",
-        "consumer_overload": "Consumer overload",
-        "contact": "접촉",
-        "current": "전류",
-        "current_heating_setpoint": "Current heating setpoint",
-        "eco_temperature": "Eco temperature",
-        "effect": "Effect",
-        "empty_exposes_definition": "Empty exposes definition",
-        "energy": "에너지",
-        "force": "Force",
-        "humidity": "습도",
-        "illuminance": "조도",
-        "illuminance_lux": "조도_lux",
-        "led_disabled_night": "Led disabled night",
-        "linkquality": "Linkquality",
-        "local_temperature": "Local 온도",
-        "local_temperature_calibration": "Local 온도 보정",
-        "max_temperature": "최대 온도",
-        "min_temperature": "최저 온도",
-        "motor_reversal": "역방향 모터회전",
-        "moving": "움직임",
-        "occupancy": "감지",
-        "operation_mode": "동작 모드",
-        "options": "옵션",
-        "position": "위치",
-        "power": "전원",
-        "power_on_behavior": "Power on behavior",
-        "power_outage_memory": "Power outage memory",
-        "preset": "프리셋",
-        "pressure": "압력",
-        "sensivity": "감도",
-        "smoke": "연기",
-        "state": "상태",
-        "strength": "강도",
-        "system_mode": "시스템 모드",
-        "tamper": "분리 감지",
-        "temperature": "온도",
-        "voltage": "전압",
-        "water_leak": "누수",
-        "week": "주",
-        "device_temperature": "장치 온도"
+        "empty_exposes_definition": "Empty exposes definition"        
     },
     "extensions": {
         "create_new_extension": "새 익스텐션 만들기",
@@ -127,7 +70,49 @@
         "state": "상태",
         "temperature": "온도",
         "tamper": "분리 감지",
-        "device_temperature": "장치 온도"
+        "device_temperature": "장치 온도",
+
+        "auto_off": "Auto off",
+        "away_mode": "외출 모드",
+      
+        "battery": "배터리",
+        "battery_low": "저전압 배터리",        
+        "calibration": "캘리브레이션",
+        "carbon_monoxide": "일산화탄소",
+
+
+
+        "comfort_temperature": "편안한 온도",
+
+        "current": "전류",
+
+        
+        "energy": "에너지",
+        "force": "Force",        
+        "illuminance_lux": "조도_lux",
+
+
+        "local_temperature": "Local 온도",
+        "local_temperature_calibration": "Local 온도 보정",
+        "max_temperature": "최대 온도",
+        "min_temperature": "최저 온도",
+        "motor_reversal": "역방향 모터회전",
+        "moving": "움직임",
+
+        "operation_mode": "동작 모드",
+        
+        "power": "전원",        
+        "preset": "프리셋",
+
+        "sensivity": "감도",
+        
+        "strength": "강도",
+        "system_mode": "시스템 모드",
+        
+        "voltage": "전압",
+        "water_leak": "누수",
+        "week": "주"
+
     },
     "groups": {
         "add_to_group": "그룹 추가",

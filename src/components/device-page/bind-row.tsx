@@ -146,7 +146,7 @@ export class BindRow extends Component<BindRowProps, BindRowState> {
                     <DevicePicker label={t('destination')} disabled={!stateRule.isNew} value={(stateRule.target.ieee_address || stateRule.target.id) as string} devices={devices} groups={groups} onChange={this.setDestination} />
                 </div>
                 <div className="col-md-2">
-                    {stateRule.target.type === "endpoint" ? <EndpointPicker label={'destination_endpoint'} disabled={!stateRule.isNew} values={destinationEndpoints} value={stateRule.target.endpoint as Endpoint} onChange={this.setDestinationEp} /> : null}
+                    {stateRule.target.type === "endpoint" ? <EndpointPicker label={t('destination_endpoint')} disabled={!stateRule.isNew} values={destinationEndpoints} value={stateRule.target.endpoint as Endpoint} onChange={this.setDestinationEp} /> : null}
                 </div>
                 <div className="col-md-4">
                     <ClusterPicker label={t('clusters')} pickerType={PickerType.MULTIPLE} clusters={Array.from(possibleClusters)} value={stateRule.clusters} onChange={this.setClusters} />

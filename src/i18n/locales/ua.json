@@ -52,69 +52,8 @@
         "unknown_device": "Невідомий прилад"
     },
     "exposes": {
-        "action": "Дія",
-        "auto_off": "Автовимкнення",
-        "away_mode": "Режим від'їзду",
-        "away_preset_days": "Пресети днів від'їзду",
-        "away_preset_temperature": "Пресети температури від'їзду",
-        "backlight_mode": "Режим підсвітки",
-        "battery": "Заряд батареї",
-        "battery_low": "Низький заряд батареї",
-        "boost_time": "Час прискорення",
-        "brightness": "Яскравість",
-        "calibration": "Калібрування",
-        "carbon_monoxide": "Чадний газ",
-        "co2": "Вуглекислий газ",
-        "color_hs": "Колір відтінок/насиченість",
-        "color_temp": "Кольорова температура",
-        "color_temp_startup": "Кольорова температура при старті",
-        "color_xy": "Колір (XY)",
-        "comfort_temperature": "Комфортна температура",
-        "consumer_connected": "Споживач підключений",
-        "consumer_overload": "Споживача перевантажений",
-        "contact": "Контакт",
-        "current": "Струм",
-        "current_heating_setpoint": "Встановлене значення опалення",
-        "device_temperature": "Температура приладу",
-        "eco_temperature": "Економічна температура",
-        "effect": "Ефект",
-        "empty_exposes_definition": "Немає виставленнь",
-        "energy": "Енергія",
-        "force": "Примусово",
-        "humidity": "Вологість",
-        "illuminance": "Освітленість",
-        "illuminance_lux": "Освітленість люкс",
-        "led_disabled_night": "Нічний режим індикатора",
-        "linkquality": "Якість звя'зку",
-        "local_temperature": "Місцева температура",
-        "local_temperature_calibration": "Калибрування місцевої температуры",
-        "max_temperature": "Макс. температура",
-        "min_temperature": "Мін. температура",
-        "motion": "Рух",
-        "motion_direction": "Напрямок руху",
-        "motion_speed": "Швидкість руху",
-        "motor_reversal": "Зворотній хід двигуна",
-        "moving": "Рух",
-        "occupancy": "Присутність",
-        "operation_mode": "Режим роботи",
-        "options": "Опції",
-        "position": "Позиція",
-        "power": "Живлення",
-        "power_on_behavior": "Поведінка при ввімкнені",
-        "power_outage_memory": "Пам'ять після вимкнення єнергії",
-        "preset": "Пресет",
-        "presence": "Присутність",
-        "pressure": "Тиск",
-        "sensivity": "Чутливість",
-        "smoke": "Дим",
-        "state": "Стан",
-        "strength": "Сила",
-        "system_mode": "Системний режим",
-        "tamper": "Втручання",
-        "temperature": "Температура",
-        "voltage": "Напруга",
-        "water_leak": "Протікання",
-        "week": "Тиждень"
+        "empty_exposes_definition": "Немає виставленнь"
+        
     },
     "extensions": {
         "create_new_extension": "Створити нове розширення",
@@ -197,7 +136,48 @@
         "week": "Тиждень",
         "window_detection": "Виявлення вікна",
         "window": "Вікно",
-        "workdays_schedule": "Робочі"
+        "workdays_schedule": "Робочі",
+
+        "auto_off": "Автовимкнення",
+
+        "away_preset_days": "Пресети днів від'їзду",
+        "away_preset_temperature": "Пресети температури від'їзду",
+        "backlight_mode": "Режим підсвітки",
+        "battery": "Заряд батареї",
+        "battery_low": "Низький заряд батареї",
+        "boost_time": "Час прискорення",
+
+        "calibration": "Калібрування",
+
+        
+        "comfort_temperature": "Комфортна температура",
+
+        "consumer_overload": "Споживача перевантажений",
+      
+        "eco_temperature": "Економічна температура",
+        "effect": "Ефект",
+        
+
+        "force": "Примусово",
+        
+        "illuminance_lux": "Освітленість люкс",
+        "led_disabled_night": "Нічний режим індикатора",
+        "linkquality": "Якість звя'зку",
+        
+        "max_temperature": "Макс. температура",
+        "min_temperature": "Мін. температура",
+        
+        "motor_reversal": "Зворотній хід двигуна",
+
+        "operation_mode": "Режим роботи",
+
+        "power_on_behavior": "Поведінка при ввімкнені",
+        "power_outage_memory": "Пам'ять після вимкнення єнергії",
+        
+        "sensivity": "Чутливість",
+        
+        "strength": "Сила"
+
     },
     "featureDescriptions": {
         "Auto off after specific time.": "Автоматичне вимкнення протягом певного часу",

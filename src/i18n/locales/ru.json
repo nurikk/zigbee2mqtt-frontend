@@ -45,69 +45,7 @@
         "unknown_device": "Неизвестное устройство"
     },
     "exposes": {
-        "action": "Действие",
-        "auto_off": "Автоотключение",
-        "away_mode": "Режим отсутствия",
-        "away_preset_days": "Предустановка дней отсутствия",
-        "away_preset_temperature": "Предустановка температуры отсутствия",
-        "backlight_mode": "Режим подсветки",
-        "battery": "Батарейка",
-        "battery_low": "Батарейка разряжена",
-        "boost_time": "Время усиленной работы",
-        "brightness": "Яркость",
-        "calibration": "Калибровка",
-        "carbon_monoxide": "Угарный газ",
-        "co2": "Углекислый газ",
-        "color_hs": "Цвет (HS)",
-        "color_temp": "Цветовая температура",
-        "color_temp_startup": "Цветовая температура при старте",
-        "color_xy": "Цвет (XY)",
-        "comfort_temperature": "Комфортная температура",
-        "consumer_connected": "Потребитель подключен",
-        "consumer_overload": "Перегрузка потребителя",
-        "contact": "Контакт",
-        "current": "Ток",
-        "current_heating_setpoint": "Текущая заданная точка нагрева",
-        "device_temperature": "Температура устройства",
-        "eco_temperature": "Экономная температура",
-        "effect": "Эффект",
-        "empty_exposes_definition": "Данные отсутствуют",
-        "energy": "Энергия",
-        "force": "Принудительно",
-        "humidity": "Влажность",
-        "illuminance": "Освещенность",
-        "illuminance_lux": "Освещенность",
-        "led_disabled_night": "Ночной режим индикатора",
-        "linkquality": "Качество связи",
-        "local_temperature": "Местная температура",
-        "local_temperature_calibration": "Калибровка местной температуры",
-        "max_temperature": "Макс. температура",
-        "min_temperature": "Мин. температура",
-        "motion": "Движение",
-        "motion_direction": "Направление движения",
-        "motion_speed": "Скорость движения",
-        "motor_reversal": "Обратный ход двигателя",
-        "moving": "Перемещение",
-        "occupancy": "Занятость",
-        "operation_mode": "Режим работы",
-        "options": "Опции",
-        "position": "Позиция",
-        "power": "Питание",
-        "power_on_behavior": "Мощность при поведении",
-        "power_outage_memory": "Память при отключении питания",
-        "preset": "Предустановка",
-        "presence": "Пресутствие",
-        "pressure": "Давление",
-        "sensivity": "Чувствительность",
-        "smoke": "Дым",
-        "state": "Состояние",
-        "strength": "Сила",
-        "system_mode": "Системный режим",
-        "tamper": "Вмешательство",
-        "temperature": "Температура",
-        "voltage": "Напряжение",
-        "water_leak": "Протечка",
-        "week": "Неделя"
+        "empty_exposes_definition": "Данные отсутствуют"        
     },
     "extensions": {
         "create_new_extension": "Создать новое расширение",
@@ -162,7 +100,53 @@
         "tamper": "Вмешательство",
         "temperature": "Температура",
         "voltage": "Напряжение",
-        "water_leak": "Утечка воды"
+        "water_leak": "Утечка воды",
+
+        "auto_off": "Автоотключение",
+
+        "away_preset_days": "Предустановка дней отсутствия",
+        "away_preset_temperature": "Предустановка температуры отсутствия",
+        "backlight_mode": "Режим подсветки",
+        "battery": "Батарейка",
+        "battery_low": "Батарейка разряжена",
+        "boost_time": "Время усиленной работы",
+
+        "calibration": "Калибровка",
+        
+        "comfort_temperature": "Комфортная температура",
+
+        "consumer_overload": "Перегрузка потребителя",
+        
+        "eco_temperature": "Экономная температура",
+        "effect": "Эффект",
+        
+
+        "force": "Принудительно",
+
+
+        "illuminance_lux": "Освещенность",
+        "led_disabled_night": "Ночной режим индикатора",
+        "linkquality": "Качество связи",
+        
+        "max_temperature": "Макс. температура",
+        "min_temperature": "Мин. температура",
+        "motion": "Движение",
+        "motion_direction": "Направление движения",
+        "motion_speed": "Скорость движения",
+        "motor_reversal": "Обратный ход двигателя",
+        
+        "operation_mode": "Режим работы",
+
+        "power_on_behavior": "Мощность при поведении",
+        "power_outage_memory": "Память при отключении питания",
+
+        "presence": "Пресутствие",
+
+        "sensivity": "Чувствительность",
+        
+        "strength": "Сила",
+
+        "week": "Неделя"
     },
     "featureDescriptions": {
         "Auto off after specific time.": "Автоматическое выключение через определенное время",

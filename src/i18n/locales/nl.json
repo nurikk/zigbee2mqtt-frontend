@@ -53,63 +53,7 @@
         "select_scene": "Selecteer scene"
     },
     "exposes": {
-        "action": "Actie",
-        "auto_off": "Automatisch uit",
-        "away_mode": "Afwezigheidsmodus",
-        "away_preset_days": "Vooraf ingestelde dagen afwezig",
-        "away_preset_temperature": "Vooraf ingestelde temperatuur",
-        "backlight_mode": "Achtergrondmodus",
-        "battery": "Batterij",
-        "battery_low": "Battery laag",
-        "boost_time": "Boost tijd",
-        "brightness": "Helderheid",
-        "calibration": "Kalibratie",
-        "carbon_monoxide": "Koolstofmonoxide",
-        "color_hs": "Kleur (HS)",
-        "color_temp": "Kleurtemperatuur",
-        "color_temp_startup": "Opstartkleur temperatuur",
-        "color_xy": "Kleur (XY)",
-        "comfort_temperature": "Comfort temperatuur",
-        "consumer_connected": "Client verbonden",
-        "consumer_overload": "Client overbelast",
-        "contact": "Contact",
-        "current": "Huidig",
-        "current_heating_setpoint": "Huidig verwarmingsinstelpunt",
-        "eco_temperature": "Eco temperatuur",
-        "effect": "Effect",
-        "empty_exposes_definition": "Empty exposes definition",
-        "energy": "Energie",
-        "force": "Forceer",
-        "humidity": "Luchtvochtigheid",
-        "illuminance": "Lichtsterkte",
-        "illuminance_lux": "Lichtsterkte",
-        "led_disabled_night": "Led 's nachts uitgeschakeld",
-        "linkquality": "Verbindingskwaliteit",
-        "local_temperature": "Lokale temperatuur",
-        "local_temperature_calibration": "Lokale temperatuurkalibratie",
-        "max_temperature": "Max temperatuur",
-        "min_temperature": "Min temperatuur",
-        "motor_reversal": "Motor omgekeerd",
-        "moving": "Verplaatsing",
-        "occupancy": "Detectie",
-        "operation_mode": "Werkingsmodus",
-        "options": "Opties",
-        "position": "Positie",
-        "power": "Stroom",
-        "power_on_behavior": "Opstartgedrag",
-        "power_outage_memory": "Geheugen stroomuitval",
-        "preset": "Vooraf ingesteld",
-        "pressure": "Druk",
-        "sensivity": "Gevoeligheid",
-        "smoke": "Rook",
-        "state": "Staat",
-        "strength": "Sterkte",
-        "system_mode": "Systeemmodus",
-        "tamper": "Sabotage",
-        "temperature": "Temperatuur",
-        "voltage": "Voltage",
-        "water_leak": "Waterlekkage",
-        "week": "Week"
+        "empty_exposes_definition": "Empty exposes definition"        
     },
     "extensions": {
         "create_new_extension": "Nieuwe extensie aanmaken",
@@ -141,7 +85,60 @@
         "state": "Status",
         "system_mode": "Systeemmodus",
         "temperature": "Temperatuur",
-        "tamper": "Sabotage"
+        "tamper": "Sabotage",
+
+        "auto_off": "Automatisch uit",
+        "away_mode": "Afwezigheidsmodus",
+        "away_preset_days": "Vooraf ingestelde dagen afwezig",
+        "away_preset_temperature": "Vooraf ingestelde temperatuur",
+        "backlight_mode": "Achtergrondmodus",
+        "battery": "Batterij",
+        "battery_low": "Battery laag",
+        "boost_time": "Boost tijd",
+
+        "calibration": "Kalibratie",
+        "carbon_monoxide": "Koolstofmonoxide",
+        "color_hs": "Kleur (HS)",
+
+        "color_temp_startup": "Opstartkleur temperatuur",
+
+        "comfort_temperature": "Comfort temperatuur",
+        "consumer_connected": "Client verbonden",
+        "consumer_overload": "Client overbelast",
+
+        "current": "Huidig",
+        "current_heating_setpoint": "Huidig verwarmingsinstelpunt",
+        "eco_temperature": "Eco temperatuur",
+        "effect": "Effect",
+        
+
+        "force": "Forceer",
+
+
+        "illuminance_lux": "Lichtsterkte",
+        "led_disabled_night": "Led 's nachts uitgeschakeld",
+        "linkquality": "Verbindingskwaliteit",
+        
+        "max_temperature": "Max temperatuur",
+        "min_temperature": "Min temperatuur",
+        "motor_reversal": "Motor omgekeerd",
+        "moving": "Verplaatsing",
+        
+        "options": "Opties",
+        "position": "Positie",
+
+        "power_on_behavior": "Opstartgedrag",
+        "power_outage_memory": "Geheugen stroomuitval",
+        "preset": "Vooraf ingesteld",
+
+        "sensivity": "Gevoeligheid",
+        "smoke": "Rook",
+
+        "strength": "Sterkte",
+        
+        "voltage": "Voltage",
+        "water_leak": "Waterlekkage",
+        "week": "Week"
     },
     "groups": {
         "add_to_group": "Toevoegen aan groep",
