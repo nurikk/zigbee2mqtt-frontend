@@ -9,7 +9,7 @@ export interface DescriptionFieldProps extends Partial<FieldProps> {
 
 const DescriptionField = (props: Partial<FieldProps>): JSX.Element => {
     const { description, id } = props;
-    const { t } = useTranslation("settingsSchemaTranslations");
+    const { t } = useTranslation("settingsSchemaDescriptions");
     if (description) {
         return <div><div className="mb-3">{t(id as string, { defaultValue: description })}</div></div>;
     }
@@ -22,7 +22,7 @@ export interface TitleFieldProps extends Partial<FieldProps> {
 }
 
 const TitleField = ({ title, id }: Partial<FieldProps>): JSX.Element => {
-    const { t } = useTranslation("settingsSchemaTranslations");
+    const { t } = useTranslation("settingsSchemaTitles");
 
     return (
         <div className="my-1">

@@ -316,26 +316,6 @@
         "translate": "Перевод",
         "zigbee2mqtt_version": "Версия Zigbee2MQTT"
     },
-    "settingsSchemaTranslations": {
-        "root-title": "Serial",
-        "root__description": "Позволить подключаться к сети только определенным устройствам (проверка по ieeeAddr). Обратите внимание, что все устройства, не включенные в список, будут удалены из сети!",
-        "root__title": "Белый список",
-        "root_availability_blacklist__title": "Черный список проверки доступности (устарело, используйте availability_blocklist)",
-        "root_availability_blocklist__description": "Исключить устройства из проверки на доступность",
-        "root_availability_blocklist__title": "Черный список проверки доступности",
-        "root_availability_passlist__description": "Включить проверку доступности только для определенных устройств",
-        "root_availability_passlist__title": "Белый список проверки доступности",
-        "root_availability_whitelist__title": "Белый список проверки доступности (устарело, используйте passlist)",
-        "root_debounce_ignore__description": "Позволяет публиковать указанные атрибуты без использования задержки фильтрации повторяющихся пакетов",
-        "root_debounce_ignore__title": "Игнорировать фильтр повторных пакетов",
-        "root_ext_pan_id__description": "Расширенный идентификатор сети Zigbee. Изменение потребует перепривязки всех устройств!",
-        "root_ext_pan_id__title": "Расш. идентификатор сети (Ext Pan ID)",
-        "root_filtered_attributes__description": "Позволяет отключить публикацию указанных атрибутов",
-        "root_filtered_attributes__title": "Фильтр атрибутов",
-        "root_log_output__description": "Папка, в которой будут формировать лог файлы. Оставьте поле пустым для отключения лог файлов.",
-        "root_log_output__title": "Папка для логов",
-        "root_log_syslog-title": "syslog"
-    },
     "touchlink": {
         "detected_devices_message": "Найдено устройств, поддерживающих быстрое подключение (touchlink): {{count}}.",
         "rescan": "Повторить поиск",

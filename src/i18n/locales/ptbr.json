@@ -196,26 +196,6 @@
         "tools": "Ferramentas",
         "zigbee2mqtt_version": "Versão Zigbee2MQTT"
     },
-    "settingsSchemaTranslations": {
-        "root-title": "Serial",
-        "root__description": "Permitir que apenas alguns dispositivos entrem na rede (pelo ieeeAddr). Fique atento, todos os dispositivos que não estão na lista de aprovação serão removidos da rede!",
-        "root__title": "Lista de aprovação",
-        "root_availability_blacklist__title": "Lista negra de disponibilidade (descontinuada, use Lista de bloqueio de disponibilidade)",
-        "root_availability_blocklist__description": "Impedir que a disponibilidade dos dispositivos seja verificada",
-        "root_availability_blocklist__title": "Lista de bloqueio de disponibilidade ",
-        "root_availability_passlist__description": "Ative a verificação de disponibilidade apenas para determinados dispositivos",
-        "root_availability_passlist__title": "Lista de aprovação de disponibilidade",
-        "root_availability_whitelist__title": "Lista branca de disponibilidade (descontinuada, use Lista de aprovação de disponibilidade)",
-        "root_debounce_ignore__description": "Previne que valores únicos de payload das propriedades do payload especificadas sejam sobrescritas dentro do tempo de debounce",
-        "root_debounce_ignore__title": "Ignorar debounce",
-        "root_ext_pan_id__description": "Pan ID Zigbee estendido, mudar requer reparear todos os dispositivos!",
-        "root_ext_pan_id__title": "Pan ID estendido",
-        "root_filtered_attributes__description": "Permite evitar que certos atributos sejam publicados",
-        "root_filtered_attributes__title": "Atributos filtrdos",
-        "root_log_output__description": "Local de saída de log, deixe em branco para desativar o log",
-        "root_log_output__title": "Saída de Log",
-        "root_log_syslog-title": "syslog"
-    },
     "touchlink": {
         "detected_devices_message": "Detectados {{count}} dispositivos touchlink.",
         "rescan": "Escanear novamente",
