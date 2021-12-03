@@ -1,3 +1,21 @@
+## [0.6.50](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.49...0.6.50) (2021-12-03)
+
+
+### Bug Fixes
+
+* **i18n:** fix expose and featureNames duplication ([c742759](https://github.com/nurikk/zigbee2mqtt-frontend/commit/c7427594d2e196f71c3487817ccd5e3cd6e85a0f))
+* **i18n:** fix rjsf translations ([fc23fa5](https://github.com/nurikk/zigbee2mqtt-frontend/commit/fc23fa5eea5da0a1fe6321700ebd12370cbc3e01))
+* **i18n:** remove junk ([1527682](https://github.com/nurikk/zigbee2mqtt-frontend/commit/15276821db62460e50fc6a6d290135896c45221f))
+* **i18n:** remove settingsSchemaTitles field ([81c3e5a](https://github.com/nurikk/zigbee2mqtt-frontend/commit/81c3e5a30cc1ab5a6c24c0330c3c2aa7c2104b65))
+
+
+### Features
+
+* **i18n:** add feature names exporter ([274b917](https://github.com/nurikk/zigbee2mqtt-frontend/commit/274b9171d3fe3068f25e34b96e323a0b6e085f64))
+* **i18n:** remove missingKeyHandler ([cbb62ff](https://github.com/nurikk/zigbee2mqtt-frontend/commit/cbb62ff14db5aacb38de940e8faa2b22099acf96))
+
+
+
 ## [0.6.49](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.48...0.6.49) (2021-12-03)
 
 
