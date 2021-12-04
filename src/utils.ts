@@ -5,6 +5,7 @@ import { Theme } from "./components/theme-switcher";
 import JSZip from 'jszip';
 import FileSaver from 'file-saver';
 import { local } from "@toolz/local-storage";
+import debounce from "lodash/debounce";
 
 
 export const genDeviceDetailsLink = (deviceIdentifier: string | number): string => (`/device/${deviceIdentifier}`);
@@ -45,7 +46,7 @@ export const lastSeen = (state: DeviceState, lastSeenType: LastSeenType): Date |
             return new Date(Date.parse(state.last_seen as string));
 
         case "epoch":
-            return new Date(state.last_seen as number);        
+            return new Date(state.last_seen as number);
 
         case "disable":
             return undefined;
@@ -81,7 +82,7 @@ export const sanitizeGraph = (inGraph: GraphI): GraphI => {
                 links.set(linkId, { ...link, ...{ source: src, target: dst, linkType, linkqualities: [link.linkquality], relationships: [link.relationship] } });
             }
         } else {
-            console.warn(`Broken link${src ? "": " ,source node is missing"}${dst ? "": " ,target node is missing"}`, link);
+            console.warn(`Broken link${src ? "" : " ,source node is missing"}${dst ? "" : " ,target node is missing"}`, link);
         }
     });
 
@@ -142,3 +143,16 @@ const THEME_STORAGE_KEY = 'z2m-theme';
 
 export const getCurrentTheme = (): Theme => local.getItem(THEME_STORAGE_KEY) as Theme ?? 'light';
 export const saveCurrentTheme = (theme: string): void => local.setItem(THEME_STORAGE_KEY, theme);
+
+
+export const debounceArgs = (fn, options) => {
+    var __dbArgs: any[] = []
+    var __dbFn = debounce(() => {
+        fn.call(undefined, __dbArgs);
+        __dbArgs = []
+    }, options);
+    return (...args) => {
+        __dbArgs.push([...args]);
+        __dbFn();
+    }
+};

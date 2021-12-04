@@ -1,7 +1,7 @@
 import ReconnectingWebSocket from "reconnecting-websocket";
 import store, { Extension, LogMessage, OnlineOrOffline } from "./store";
 import { BridgeConfig, BridgeInfo, TouchLinkDevice, Device, DeviceState, BridgeState, Group } from './types';
-import { sanitizeGraph, isSecurePage, randomString, stringifyWithPreservingUndefinedAsNull } from "./utils";
+import { sanitizeGraph, isSecurePage, randomString, stringifyWithPreservingUndefinedAsNull, debounceArgs } from "./utils";
 import { Notyf } from "notyf";
 import { GraphI } from "./components/map/types";
 import { local } from "@toolz/local-storage";
@@ -72,6 +72,8 @@ interface Callable {
     (): void;
 }
 
+const apiDebouceDelay = 250;
+
 class Api {
     url: string;
     socket: ReconnectingWebSocket;
@@ -119,11 +121,14 @@ class Api {
         this.socket.addEventListener("message", this.onMessage);
         this.socket.addEventListener("close", this.onClose);
     }
-    private processDeviceStateMessage = (data: Message): void => {
+    private processDeviceStateMessage = debounceArgs((messages: Message[]): void => {
         let { deviceStates } = store.getState();
-        deviceStates = { ...deviceStates, ...{ [data.topic]: { ...deviceStates[data.topic], ...(data.payload as DeviceState) } } };
+        messages.forEach(data => {
+            deviceStates = { ...deviceStates, ...{ [data.topic]: { ...deviceStates[data.topic], ...(data.payload as DeviceState) } } };
+        });
         store.setState({ deviceStates });
-    }
+    }, { trailing: true, maxWait: apiDebouceDelay }) as (data: Message) => void;
+
     private procsessBridgeMessage = (data: Message): void => {
         switch (data.topic) {
             case "bridge/config":
@@ -230,12 +235,14 @@ class Api {
         }
     }
 
-    private processAvailabilityMessage = (data: Message): void => {
+    private processAvailabilityMessage = debounceArgs((messages: Message[]): void => {
         let { avalilability } = store.getState();
-        const friendlyName = data.topic.split(AVALIABILITY_FEATURE_TOPIC_ENDING, 1)[0];
-        avalilability = { ...avalilability, ...{ [friendlyName]: data.payload as OnlineOrOffline}};
+        messages.forEach(data => {
+            const friendlyName = data.topic.split(AVALIABILITY_FEATURE_TOPIC_ENDING, 1)[0];
+            avalilability = { ...avalilability, ...{ [friendlyName]: data.payload as OnlineOrOffline } };
+        });
         store.setState({ avalilability });
-    }
+    }, { trailing: true, maxWait: apiDebouceDelay }) as (data: Message) => void;
 
     private resolvePromises(message: ResponseWithStatus): void {
         const { transaction, status } = message;
@@ -265,17 +272,18 @@ class Api {
         let data = {} as Message;
         try {
             data = JSON.parse(event.data) as Message;
+            if (data.topic.endsWith(AVALIABILITY_FEATURE_TOPIC_ENDING)) {
+                this.processAvailabilityMessage(data);
+            } else if (data.topic.startsWith("bridge/")) {
+                this.procsessBridgeMessage(data);
+            } else {
+                this.processDeviceStateMessage(data);
+            }
         } catch (e) {
             notyf.error(e.message);
-            notyf.error(event.data);
+            console.error(event.data);
         }
-        if (data.topic.endsWith(AVALIABILITY_FEATURE_TOPIC_ENDING)) {
-            this.processAvailabilityMessage(data);
-        } else if (data.topic.startsWith("bridge/")) {
-            this.procsessBridgeMessage(data);
-        } else {
-            this.processDeviceStateMessage(data);
-        }
+
     }
 }
 const apiUrl = `${window.location.host}${document.location.pathname}api`;
