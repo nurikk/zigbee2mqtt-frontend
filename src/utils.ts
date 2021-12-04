@@ -152,7 +152,7 @@ export const debounceArgs = (fn, options) => {
         __dbArgs = []
     }, options);
     return (...args) => {
-        __dbArgs.push([...args]);
+        __dbArgs.push(...args);
         __dbFn();
     }
 };
