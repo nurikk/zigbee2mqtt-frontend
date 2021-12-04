@@ -1,3 +1,12 @@
+## [0.6.52](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.51...0.6.52) (2021-12-04)
+
+
+### Bug Fixes
+
+* **loading:** fix long loading ([7e4130e](https://github.com/nurikk/zigbee2mqtt-frontend/commit/7e4130eae8ba447fdf8eb64bc434dc61a29378b1))
+
+
+
 ## [0.6.51](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.50...0.6.51) (2021-12-04)
 
 
