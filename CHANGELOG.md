@@ -1,3 +1,18 @@
+## [0.6.51](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.50...0.6.51) (2021-12-04)
+
+
+### Bug Fixes
+
+* **trim-locales:** remove dead code ([2ebfdd0](https://github.com/nurikk/zigbee2mqtt-frontend/commit/2ebfdd0a59d2ef064cbc3999838ad59810ad07e9))
+
+
+### Features
+
+* **i18n:** introduce locale trimmer ([be7b7b0](https://github.com/nurikk/zigbee2mqtt-frontend/commit/be7b7b078d05b02cc88dfcd4b0cb7e1861415a9e))
+* **i18n:** trim locales ([34bff60](https://github.com/nurikk/zigbee2mqtt-frontend/commit/34bff601e3dbc442313fbf2f7ec46fa8fad1dca2))
+
+
+
 ## [0.6.50](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.49...0.6.50) (2021-12-03)
 
 
