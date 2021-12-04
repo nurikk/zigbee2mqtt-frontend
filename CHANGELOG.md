@@ -1,3 +1,12 @@
+## [0.6.55](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.54...0.6.55) (2021-12-04)
+
+
+### Features
+
+* **build:** enable js minimisation ([33adcb0](https://github.com/nurikk/zigbee2mqtt-frontend/commit/33adcb076cbcf93a23ba7c26bd6572c5456b64da))
+
+
+
 ## [0.6.54](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.53...0.6.54) (2021-12-04)
 
 
