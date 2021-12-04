@@ -12,17 +12,11 @@ const files = [];
 const dir = fs.opendirSync(localesDir)
 let dirent
 while ((dirent = dir.readSync()) !== null) {
-    console.log(dirent.name)
     if (!ignoredFiles.includes(dirent.name)) {
         files.push(dirent.name)
     }
 }
 dir.closeSync()
-
-
-
-
-
 
 for (const file of files) {
     const localeFileName = `./src/i18n/locales/${file}`;
@@ -38,32 +32,6 @@ for (const file of files) {
         }
 
     })
+    console.log(`Trimmed ${localeFileName}`)
     fs.writeFileSync(localeFileName, JSON.stringify(newTranslation, null, 4));
 }
-// console.log(files)
-
-
-
-// const isObject = (value) => value !== null && typeof value === 'object'
-
-// const exportSettingsSchemaDescriptions = (obj) => {
-//     Object.entries(obj).forEach(([key, value]) => {
-
-//         if (isObject(value)) {
-//             exportSettingsSchemaDescriptions(value)
-//         } else if (key === 'description') {
-//             settingsSchemaDescriptions[value] = value;
-//         } else if (key === 'title') {
-//             settingsSchemaTitles[value] = value;
-//         }
-//     })
-// }
-
-// exportSettingsSchemaDescriptions(settingsSchema)
-
-
-// enTranslations.settingsSchemaDescriptions = settingsSchemaDescriptions;
-// enTranslations.settingsSchemaTitles = settingsSchemaTitles;
-
-
-// fs.writeFileSync(enTranslationFile, JSON.stringify(enTranslations, null, 4));
