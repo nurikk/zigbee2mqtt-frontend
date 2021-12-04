@@ -66,7 +66,7 @@ const config = {
     target: "web",
     devtool: "source-map",
     optimization: {
-        minimize: false,
+        minimize: true,
         usedExports: true,
         runtimeChunk: "single",
         splitChunks: {
