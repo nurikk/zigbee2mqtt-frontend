@@ -1,3 +1,12 @@
+## [0.6.53](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.52...0.6.53) (2021-12-04)
+
+
+### Bug Fixes
+
+* **utils:** fix debounceArgs ([1d7fd1c](https://github.com/nurikk/zigbee2mqtt-frontend/commit/1d7fd1c868065dea9f28dda167dd188ed097e039))
+
+
+
 ## [0.6.52](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.51...0.6.52) (2021-12-04)
 
 
