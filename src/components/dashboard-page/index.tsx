@@ -19,9 +19,13 @@ import { filterDeviceByFeatures } from '../groups/DeviceGroupRow';
 
 type PropsFromStore = Pick<GlobalState, 'devices' | 'deviceStates' | 'bridgeInfo'>;
 
-const genericRendererIgnoredNames = ['linkquality', 'battery', 'battery_low',
+const genericRendererIgnoredNames = [
+    'linkquality', 'battery', 'battery_low',
     'illuminance_lux', 'color_temp_startup', 'voltage',
-    'strength', 'color_options', 'warning', 'position', 'operation_mode', 'operation_mode2'];
+    'strength', 'color_options', 'warning', 'position', 
+    'operation_mode', 'operation_mode2', 'programming_mode', 
+    'options'];
+
 const whitelistFeatureNames = ['state', 'brightness', 'color_temp', 'mode', 'sound', 'occupancy', 'tamper', 'alarm'];
 const whitelistFeatureTypes = ['light'];
 const nullish = ['', null, undefined];
