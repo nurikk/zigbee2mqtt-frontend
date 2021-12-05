@@ -88,9 +88,7 @@ export const Table: React.FC<Props> = ({ columns, data, id }) => {
     <table {...getTableProps()} className="table responsive">
       <thead>
         <tr>
-          <th
-            colSpan={visibleColumns.length}
-          >
+          <th colSpan={visibleColumns.length}>
             <GlobalFilter
               globalFilter={state.globalFilter}
               setGlobalFilter={setGlobalFilter}
@@ -103,11 +101,11 @@ export const Table: React.FC<Props> = ({ columns, data, id }) => {
               <th className="text-nowrap" {...column.getHeaderProps(column.getSortByToggleProps())}>
                 <span className={cx({ 'btn-link mr-1': column.canSort })}>{column.render('Header')}</span>
                 <span>
-                <i className={cx('fa', {
-                  'fa-sort-amount-down invisible': !column.isSorted,
-                  'fa-sort-amount-down-alt': column.isSorted && !column.isSortedDesc,
-                  'fa-sort-amount-down': column.isSorted && column.isSortedDesc,
-                })} />
+                  <i className={cx('fa', {
+                    'fa-sort-amount-down invisible': !column.isSorted,
+                    'fa-sort-amount-down-alt': column.isSorted && !column.isSortedDesc,
+                    'fa-sort-amount-down': column.isSorted && column.isSortedDesc,
+                  })} />
                 </span>
               </th>
             ))}
@@ -128,6 +126,5 @@ export const Table: React.FC<Props> = ({ columns, data, id }) => {
         )}
       </tbody>
     </table>
-
   )
 }

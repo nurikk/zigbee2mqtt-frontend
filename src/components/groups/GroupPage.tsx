@@ -2,7 +2,6 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { AddDeviceToGroup } from "./AddDeviceToGroup";
 import { DeviceGroup } from "./DeviceGroup";
-import { AddScene, RecallRemove } from "../device-page/scene";
 import { DeviceState } from "../../types";
 
 import { connect } from "unistore/react";
@@ -12,6 +11,8 @@ import { WithBridgeInfo, WithDevices, WithDeviceStates, WithGroups } from "../..
 import { GroupsApi } from "../../actions/GroupsApi";
 import { StateApi } from "../../actions/StateApi";
 import { SceneApi } from "../../actions/SceneApi";
+import { AddScene } from "../device-page/AddScene";
+import { RecallRemove } from "../device-page/RecallRemove";
 
 
 type PropsFromStore = WithDevices & WithDeviceStates & WithGroups & WithBridgeInfo;

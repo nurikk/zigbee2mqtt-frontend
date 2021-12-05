@@ -56,7 +56,7 @@ type FormGroupInputProps = {
     value: number;
     name: string;
 }
-const FormGroupInput = (props: FormGroupInputProps): JSX.Element => {
+function FormGroupInput(props: FormGroupInputProps) {
     const { onChange, label, value, name } = props
     return <div className="form-group">
         <label className="form-label text-nowrap">{label}</label>

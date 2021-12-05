@@ -1,0 +1,111 @@
+import React from "react";
+import style from "./style.css";
+import { genDeviceDetailsLink, lastSeen, toHex } from "../../utils";
+import { useTranslation } from "react-i18next";
+import DeviceImage from "../device-image";
+import { ModelLink, VendorLink } from "../vendor-links/verndor-links";
+import { Link } from "react-router-dom";
+import { DisplayValue } from "../display-value/DisplayValue";
+import { LastSeen } from "../LastSeen";
+import PowerSource from "../power-source";
+import DeviceControlGroup from "../device-control/DeviceControlGroup";
+import { Table } from "../grid/ReactTableCom";
+import { CellProps, Column } from "react-table";
+import { DevicesPageData } from "./index";
+import { Avaliability } from "./Avaliability";
+import { LastSeenType } from "../../types";
+
+export type DevicesTableProps = {
+    data: DevicesPageData[];
+    lastSeenType: LastSeenType;
+    availabilityFeatureEnabled: boolean;
+}
+
+export function DevicesTable(props: DevicesTableProps) {
+    const { data, lastSeenType, availabilityFeatureEnabled } = props;
+    const { t } = useTranslation(["zigbee", "common", "avaliability"]);
+
+    const columns: Column<DevicesPageData>[] = [
+        {
+            id: 'rownumber',
+            Header: '#',
+            Cell: ({ row }: CellProps<DevicesPageData>) => <div className="font-weight-bold">{row.index + 1}</div>,
+            disableSortBy: true,
+        },
+        {
+            id: 'pic',
+            Header: t('pic') as string,
+            Cell: ({ row: { original: { device, state } } }) => <DeviceImage className={style["device-image"]} device={device} deviceStatus={state} />,
+            accessor: rowData => rowData,
+            disableSortBy: true,
+        },
+        {
+            id: 'friendly_name',
+            Header: t('friendly_name') as string,
+            accessor: ({ device }) => device.friendly_name,
+            Cell: ({ row: { original: { device } } }) => <Link to={genDeviceDetailsLink(device.ieee_address)}>{device.friendly_name}</Link>
+        },
+        {
+            id: 'ieee_address',
+            Header: t('ieee_address') as string,
+            accessor: ({ device }) => [device.ieee_address, toHex(device.network_address, 4)].join(' '),
+            Cell: ({ row: { original: { device } } }) => <>{device.ieee_address} ({toHex(device.network_address, 4)})</>,
+        },
+        {
+            id: 'manufacturer',
+            Header: t('manufacturer') as string,
+            accessor: ({ device }) => [device.manufacturer, device.definition?.vendor].join(' '),
+            Cell: ({ row: { original: { device } } }) => <VendorLink device={device} />
+        },
+        {
+            id: 'model',
+            Header: t('model') as string,
+            accessor: ({ device }) => [device.model_id, device.definition?.model].join(' '),
+            Cell: ({ row: { original: { device } } }) => <ModelLink device={device} />
+        },
+        {
+            id: 'lqi',
+            Header: t('lqi') as string,
+            accessor: ({ state }) => state.linkquality,
+            Cell: ({ row: { original: { state } } }) => <DisplayValue value={state.linkquality} name="linkquality" />,
+        },
+        ...(lastSeenType !== "disable" ? [{
+            id: 'last_seen',
+            Header: t('last_seen') as string,
+            accessor: ({ state }) => lastSeen(state, lastSeenType)?.getTime(),
+            Cell: ({ row: { original: { state } } }) => <LastSeen state={state} lastSeenType={lastSeenType} />,
+        }] : []),
+        ...(availabilityFeatureEnabled ? [{
+            id: 'avaliability',
+            Header: t('avaliability:avaliability') as string,
+            accessor: ({ avalilabilityState }) => avalilabilityState,
+            Cell: ({ row: { original: { avalilabilityState, avalilabilityEnabledForDevice } } }) => {
+                return <Avaliability
+                    avaliability={avalilabilityState}
+                    avalilabilityEnabledForDevice={avalilabilityEnabledForDevice} />;
+            },
+        }] : []),
+
+        {
+            id: 'power',
+            Header: t('power') as string,
+            accessor: ({ state }) => state.battery,
+            Cell: ({ row: { original: { state, device } } }) => <PowerSource source={device.power_source} battery={state.battery as number} batteryLow={state.battery_low as boolean} />,
+        },
+        {
+            id: 'controls',
+            Header: '',
+            Cell: ({ row: { original: { device, state } } }) => <DeviceControlGroup device={device} state={state} />,
+            disableSortBy: true,
+        }
+    ];
+
+    return (<div className="card">
+        <div className="table-responsive">
+            <Table
+                id="zigbee"
+                columns={columns}
+                data={data} />
+        </div>
+    </div>);
+}

@@ -14,7 +14,8 @@ import PowerSource from "../power-source";
 import { LastSeen } from "../LastSeen";
 import { WithTranslation, withTranslation } from "react-i18next";
 import { DisplayValue } from "../display-value/DisplayValue";
-import { Avaliability } from "../zigbee";
+import { Avaliability } from "../zigbee/Avaliability";
+
 
 
 type DeviceInfoProps = {
@@ -40,7 +41,6 @@ const displayProps = [
             const { config } = bridgeInfo;
             const availabilityFeatureEnabled = !!config.availability;
             const avalilabilityEnabledForDevice = config.devices[device.ieee_address]?.availability !== false;
-
 
             return <dd className="col-12 col-md-7">
                 <Avaliability
