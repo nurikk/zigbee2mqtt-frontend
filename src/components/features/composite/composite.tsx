@@ -67,9 +67,9 @@ export class Composite extends Component<CompositeProps & WithTranslation<"compo
         if (doGroupingByEndpoint) {
             const groupedFeatures = groupBy(features, f => f.endpoint ?? MAGIC_NO_ENDPOINT);
 
-            if (groupedFeatures[MAGIC_NO_ENDPOINT]) {
+            if (groupedFeatures[MAGIC_NO_ENDPOINT]) {                    
                 result.push(...groupedFeatures[MAGIC_NO_ENDPOINT].map(f => <Feature
-                    key={f.name + f.endpoint}
+                    key={JSON.stringify(f)}
                     feature={f}
                     device={device}
                     deviceState={deviceState}
