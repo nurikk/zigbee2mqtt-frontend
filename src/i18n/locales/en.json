@@ -229,7 +229,7 @@
         "Specifies the minimum light output after switching on": "Specifies the minimum light output after switching on",
         "The dimmer supports AC forward phase control.": "The dimmer supports AC forward phase control.",
         "The dimmer supports AC reverse phase control.": "The dimmer supports AC reverse phase control.",
-        "The dimmer is capable of measuring the reactanceto distinguish inductive and capacitive loads.": "The dimmer is capable of measuring the reactanceto distinguish inductive and capacitive loads.",
+        "The dimmer is capable of measuring the reactanceto distinguish inductive and capacitive loads.": "The dimmer is capable of measuring the reactance to distinguish inductive and capacitive loads.",
         "The dimmer is capable of replacing the built-in, default dimming curve.": "The dimmer is capable of replacing the built-in, default dimming curve.",
         "The dimmer is capable of detecting an output overload and shutting the output off.": "The dimmer is capable of detecting an output overload and shutting the output off.",
         "The dimmer is currently operating in AC forward phase control mode.": "The dimmer is currently operating in AC forward phase control mode.",
