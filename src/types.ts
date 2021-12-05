@@ -97,8 +97,7 @@ export interface BridgeInfo {
 export type PowerSource = "Battery" | "Mains (single phase)" | "DC Source";
 
 export type GenericFeatureType = "numeric" | "binary" | "enum" | "text";
-export type ComposeiteFeatureType = "fan" | "light" | "switch" | "cover" | "lock" | "composite" | "climate";
-export type AllPossibleFeatures = GenericFeatureType & ComposeiteFeatureType;
+export type CompositeFeatureType = "fan" | "light" | "switch" | "cover" | "lock" | "composite" | "climate";
 
 
 export enum FeatureAccessMode {
@@ -125,7 +124,7 @@ export interface BinaryFeature extends GenericExposedFeature {
 }
 
 export interface CompositeFeature extends Omit<GenericExposedFeature, "type"> {
-    type: ComposeiteFeatureType;
+    type: CompositeFeatureType;
     features: (GenericExposedFeature | CompositeFeature)[];
 }
 
@@ -207,9 +206,9 @@ export interface EndpointDescription extends WithScenes{
     clusters: {
         input: Cluster[];
         output: Cluster[];
-    };    
+    };
 }
-export interface WithFreiendlyName {
+export interface WithFriendlyName {
     friendly_name: FriendlyName;
 }
 export interface GroupAddress {
@@ -222,12 +221,12 @@ export type Scene = {
     name?: string;
     endpoint?: Endpoint;
 }
-export interface Group extends WithFreiendlyName, WithScenes { 
+export interface Group extends WithFriendlyName, WithScenes {
     id: number;
     members: GroupAddress[];
 }
 
-export interface Device extends WithFreiendlyName {
+export interface Device extends WithFriendlyName {
     ieee_address: IEEEEAddress;
     type: DeviceType;
     network_address: number;

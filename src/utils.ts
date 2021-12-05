@@ -1,5 +1,5 @@
 
-import { AdvancedConfig, Device, DeviceState, Endpoint, Group, LastSeenType } from "./types";
+import { Device, DeviceState, Endpoint, Group, LastSeenType } from "./types";
 import { GraphI, LinkI, LinkType, NodeI } from "./components/map/types";
 import { Theme } from "./components/theme-switcher";
 import JSZip from 'jszip';
@@ -104,9 +104,7 @@ export const scale = (inputY: number, yRange: Array<number>, xRange: Array<numbe
     const [yMin, yMax] = yRange;
 
     const percent = (inputY - yMin) / (yMax - yMin);
-    const outputX = percent * (xMax - xMin) + xMin;
-
-    return outputX;
+    return percent * (xMax - xMin) + xMin;
 };
 
 
@@ -145,12 +143,12 @@ export const getCurrentTheme = (): Theme => local.getItem(THEME_STORAGE_KEY) as 
 export const saveCurrentTheme = (theme: string): void => local.setItem(THEME_STORAGE_KEY, theme);
 
 
-export const debounceArgs = (fn, options) => {
-    var __dbArgs: any[] = []
-    var __dbFn = debounce(() => {
+export const debounceArgs = (fn: (...args: any) => any, options: Record<string, any>) => {
+    let __dbArgs: any[] = [];
+    const __dbFn = debounce(() => {
         fn.call(undefined, __dbArgs);
         __dbArgs = []
-    }, options);
+    }, undefined, options);
     return (...args) => {
         __dbArgs.push(...args);
         __dbFn();

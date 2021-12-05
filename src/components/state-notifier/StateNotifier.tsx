@@ -25,6 +25,6 @@ const StateNotifier = (props: PropsFromStore) => {
     );
 }
 const mappedProps = ["bridgeState"];
-const ConnectedStateNotifier = connect<{}, {}, PropsFromStore, {}>(mappedProps, actions)(StateNotifier);
+const ConnectedStateNotifier = connect<Record<string, unknown>, Record<string, unknown>, PropsFromStore, Record<string, unknown>>(mappedProps, actions)(StateNotifier);
 export default ConnectedStateNotifier;
 

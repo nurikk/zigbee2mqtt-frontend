@@ -13,15 +13,15 @@ export type RenameActionProps = {
     renameDevice(old: string, newName: string, homeassistantRename: boolean): Promise<void>;
 
 }
-export const RenameDeviceModal = (props: RenameActionProps) => {
+export const RenameDeviceModal = (props: RenameActionProps): JSX.Element => {
     const { hideModal } = useGlobalModalContext();
     const { bridgeInfo, device, renameDevice } = props;
-    const [isHassRename, setIsHassRename] = useState(false);
+    const [isHASSRename, setIsHASSRename] = useState(false);
     const [friendlyName, setFriendlyName] = useState(device.friendly_name);
     const { t } = useTranslation(["zigbee", "common"]);
 
     const onSaveClick = async (): Promise<void> => {
-        await renameDevice(device.friendly_name, friendlyName, isHassRename);
+        await renameDevice(device.friendly_name, friendlyName, isHASSRename);
         hideModal();
     };
 
@@ -38,7 +38,7 @@ export const RenameDeviceModal = (props: RenameActionProps) => {
                 </div>
                 {bridgeInfo?.config?.homeassistant ? (
                     <div className="form-check form-switch">
-                        <input className="form-check-input" checked={isHassRename} type="checkbox" id={`hass${device.ieee_address}`} onChange={(e) => setIsHassRename(e.target.checked)} />
+                        <input className="form-check-input" checked={isHASSRename} type="checkbox" id={`hass${device.ieee_address}`} onChange={(e) => setIsHASSRename(e.target.checked)} />
                         <label className="form-check-label" htmlFor={`hass${device.ieee_address}`}>{t('update_Home_assistant_entity_id')}</label>
                     </div>
                 ) : null}

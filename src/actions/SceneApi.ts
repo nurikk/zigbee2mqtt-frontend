@@ -1,16 +1,6 @@
 import api from "../api";
 import { Endpoint, Scene } from "../types";
 
-//tz.scene_store, tz.scene_recall, tz.scene_add, tz.scene_remove, tz.scene_remove_all
-
-type SceneAddParams = {
-    color_temp?: string;
-    color?: string;
-    transition?: number;
-    state?: string;
-    brightness?: number;
-
-}
 export type SceneId = number;
 export interface SceneApi {
     sceneStore(dev: string,  scene: Scene, endpoint?: Endpoint | undefined): Promise<void>;

@@ -1,4 +1,4 @@
-import React, { Fragment, FunctionComponent, InputHTMLAttributes, useEffect, useState } from "react";
+import React, { FunctionComponent, InputHTMLAttributes, useEffect, useState } from "react";
 import { randomString } from "../../utils";
 import cx from "classnames";
 import EnumEditor, { ValueWithLabelOrPrimitive } from "../enum-editor/enum-editor";

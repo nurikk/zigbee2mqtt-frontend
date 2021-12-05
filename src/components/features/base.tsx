@@ -3,7 +3,7 @@ import React, { FunctionComponent, PropsWithChildren } from "react";
 import { DeviceState, Device, Endpoint, GenericExposedFeature, CompositeFeature } from "../../types";
 import { DisplayValue } from "../display-value/DisplayValue";
 
-import { FetatureWrapperProps } from "./composite/FeatureWrapper";
+import { FeatureWrapperProps } from "./composite/FeatureWrapper";
 
 export interface BaseFeatureProps<T> extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange"> {
     feature: T;
@@ -11,8 +11,7 @@ export interface BaseFeatureProps<T> extends Omit<React.HTMLAttributes<HTMLDivEl
     device: Device;
     onChange(endpoint: Endpoint, value: Record<string, unknown>): void;
     onRead(endpoint: Endpoint, value: Record<string, unknown>): void;
-    // featureWrapperClass: React.ComponentType<FetatureWrapperProps>;
-    featureWrapperClass: FunctionComponent<PropsWithChildren<FetatureWrapperProps>>;
+    featureWrapperClass: FunctionComponent<PropsWithChildren<FeatureWrapperProps>>;
     minimal?: boolean;
 
 }
@@ -23,4 +22,4 @@ export const BaseViewer: FunctionComponent<BaseFeatureProps<GenericExposedFeatur
     return <div><strong><DisplayValue value={deviceState[property]} name={name} /></strong>{unit ? <small className="text-muted ms-1">{unit}</small> : null}</div>
 }
 
-export const NoAccessError: FunctionComponent<BaseFeatureProps<GenericExposedFeature | CompositeFeature>> = ({ feature: { access } }) => <div className="alert alert-warning p-0" role="alert">Unknown acces {JSON.stringify(access, null, 4)}</div>;
+export const NoAccessError: FunctionComponent<BaseFeatureProps<GenericExposedFeature | CompositeFeature>> = ({ feature: { access } }) => <div className="alert alert-warning p-0" role="alert">Unknown access {JSON.stringify(access, null, 4)}</div>;

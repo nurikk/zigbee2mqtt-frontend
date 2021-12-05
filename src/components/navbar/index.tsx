@@ -103,17 +103,17 @@ const StartStopJoinButton: FunctionComponent<StartStopJoinButtonProps> = ({ devi
 type PropsFromStore = Pick<GlobalState, 'devices' | 'bridgeInfo'>;
 
 const NavBar: FunctionComponent<PropsFromStore & ThemeActions & WithTranslation<'navbar'> & BridgeApi> = (props) => {
-    const { devices, setPermitJoin, bridgeInfo, restartBridge, setTheme, t, i18n } = props;
+    const { devices, setPermitJoin, bridgeInfo, restartBridge, setTheme, t } = props;
     const ref = useRef<HTMLDivElement>();
-    const [navbarIsVisible, setnavbarIsVisible] = useState<boolean>(false);
+    const [navbarIsVisible, setNavbarIsVisible] = useState<boolean>(false);
     useOnClickOutside(ref, () => {
-        setnavbarIsVisible(false);
+        setNavbarIsVisible(false);
     });
     return (<nav className="navbar navbar-expand-md navbar-light">
         <div ref={ref as React.MutableRefObject<HTMLDivElement>} className="container-fluid">
-            <Link onClick={() => setnavbarIsVisible(false)} to="/">Zigbee2MQTT</Link>
+            <Link onClick={() => setNavbarIsVisible(false)} to="/">Zigbee2MQTT</Link>
 
-            <button onClick={() => { setnavbarIsVisible(!navbarIsVisible) }} className="navbar-toggler" type="button">
+            <button onClick={() => { setNavbarIsVisible(!navbarIsVisible) }} className="navbar-toggler" type="button">
                 <span className="navbar-toggler-icon" />
             </button>
             <div className={cx("navbar-collapse collapse", { show: navbarIsVisible })}>
@@ -121,7 +121,7 @@ const NavBar: FunctionComponent<PropsFromStore & ThemeActions & WithTranslation<
                     {
                         urls.map(url =>
                             <li key={url.href} className="nav-item">
-                                <NavLink onClick={() => setnavbarIsVisible(false)} exact={url.exact} className="nav-link" to={url.href} activeClassName="active">
+                                <NavLink onClick={() => setNavbarIsVisible(false)} exact={url.exact} className="nav-link" to={url.href} activeClassName="active">
                                     {t(url.key)}
                                 </NavLink>
                             </li>)
@@ -136,7 +136,7 @@ const NavBar: FunctionComponent<PropsFromStore & ThemeActions & WithTranslation<
                 <ThemeSwitcher saveCurrentTheme={setTheme} />
 
             </div>
-            {bridgeInfo.restart_required ? <Button onClick={restartBridge} promt className="btn btn-danger me-1">{t('restart')}</Button> : null}
+            {bridgeInfo.restart_required ? <Button onClick={restartBridge} prompt className="btn btn-danger me-1">{t('restart')}</Button> : null}
         </div>
     </nav>)
 }

@@ -13,7 +13,7 @@ import Numeric from "../numeric/numeric";
 import Textual from "../textual/textual";
 import Composite from "./composite";
 import Switch from "../switch/switch";
-import { FetatureWrapperProps } from "./FeatureWrapper";
+import { FeatureWrapperProps } from "./FeatureWrapper";
 import { ValueWithLabelOrPrimitive } from "../../enum-editor/enum-editor";
 import Fan from "../fan/fan";
 
@@ -25,7 +25,7 @@ interface FeatureProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onCha
     stepsConfiguration?: Record<string, unknown>;
     onChange(endpoint: Endpoint, value: Record<string, unknown>): void;
     onRead(endpoint: Endpoint, value: Record<string, unknown>): void;
-    featureWrapperClass: FunctionComponent<PropsWithChildren<FetatureWrapperProps>>;
+    featureWrapperClass: FunctionComponent<PropsWithChildren<FeatureWrapperProps>>;
     minimal?: boolean;
 }
 

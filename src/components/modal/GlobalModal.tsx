@@ -9,7 +9,7 @@ export const MODAL_TYPES = {
     DIALOG_CONFIRMATION: "DIALOG_CONFIRMATION",
 };
 
-const MODAL_COMPONENTS: any = {
+const MODAL_COMPONENTS: Record<string, (props) => JSX.Element> = {
     [MODAL_TYPES.RENAME_DEVICE]: RenameDeviceModal,
     [MODAL_TYPES.REMOVE_DEVICE]: RemoveDeviceModal,
     [MODAL_TYPES.DIALOG_CONFIRMATION]: DialogConfirmationModal,
@@ -18,17 +18,17 @@ const MODAL_COMPONENTS: any = {
 
 type Store = {
     modalType: string;
-    modalProps: Record<string, any>;
+    modalProps: Record<string, unknown>;
 }
 
 type GlobalModalContextType = {
-    showModal: (modalType: string, modalProps?: any) => void;
+    showModal: (modalType: string, modalProps?: Record<string, unknown>) => void;
     hideModal: () => void;
     store: Store;
 };
 
 
-const initalState: GlobalModalContextType = {
+const initialState: GlobalModalContextType = {
     showModal: () => {
         // empty function
     },
@@ -38,14 +38,14 @@ const initalState: GlobalModalContextType = {
     store: {} as Store,
 };
 
-const GlobalModalContext = createContext(initalState);
+const GlobalModalContext = createContext(initialState);
 export const useGlobalModalContext = () => useContext(GlobalModalContext);
 
-export const GlobalModal: React.FC<{}> = ({ children }) => {
+export const GlobalModal: React.FC<Record<string, unknown>> = ({ children }) => {
     const [store, setStore] = useState<Store>({} as Store);
     const { modalType, modalProps } = store;
 
-    const showModal = (t: string, p: any = {}) => {
+    const showModal = (t: string, p: Record<string, unknown> = {}) => {
         setStore({
             ...store,
             modalType: t,

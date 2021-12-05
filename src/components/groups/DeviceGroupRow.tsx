@@ -67,7 +67,7 @@ export function DeviceGroupRow(props: DeviceGroupRowProps): JSX.Element {
         }
         featureWrapperClass={DashboardFeatureWrapper}
         lastSeenType={bridgeInfo.config.advanced.last_seen}
-        controls={<Button<string> promt item={device.friendly_name} onClick={removeDeviceFromGroup} className="btn btn-danger btn-sm float-right"><i className="fa fa-trash" /></Button>}
+        controls={<Button<string> prompt item={device.friendly_name} onClick={removeDeviceFromGroup} className="btn btn-danger btn-sm float-right"><i className="fa fa-trash" /></Button>}
     />
 
 }

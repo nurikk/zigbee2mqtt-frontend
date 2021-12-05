@@ -5,7 +5,7 @@ import { Device, Endpoint, Cluster, Attribute } from "../../types";
 import EndpointPicker from "../endpoint-picker";
 import ClusterPicker, { ClusterGroup, PickerType } from "../cluster-picker";
 
-import { NiceReportingingRule } from "./reporting";
+import { NiceRepointingRule } from "./reporting";
 import { getEndpoints } from "../../utils";
 import AttributePicker from "../attribute-picker";
 import Clusters from "zigbee-herdsman/dist/zcl/definition/cluster"
@@ -14,12 +14,12 @@ import { WithTranslation, withTranslation } from "react-i18next";
 
 
 interface ReportingRowProps {
-    rule: NiceReportingingRule;
+    rule: NiceRepointingRule;
     device: Device;
-    onApply(rule: NiceReportingingRule): void;
+    onApply(rule: NiceRepointingRule): void;
 }
 interface ReportingRowState {
-    stateRule: NiceReportingingRule;
+    stateRule: NiceRepointingRule;
 }
 
 const getClusters = (device: Device, endpoint: Endpoint, currentCluster: Cluster): ClusterGroup[] => {
@@ -36,18 +36,18 @@ const getClusters = (device: Device, endpoint: Endpoint, currentCluster: Cluster
     }
     return [
         {
-            name: 'Avaliable',
+            name: 'available',
             clusters: availableClusters
         },
         {
-            name: 'Possible',
+            name: 'possible',
             clusters: possibleClusters
         }
     ]
 }
-const requiredRuleFileds = ['maximum_report_interval', 'minimum_report_interval', 'reportable_change', 'endpoint', 'cluster', 'attribute'];
-const isValidRule = (rule: NiceReportingingRule): boolean => {
-    return requiredRuleFileds.every(field => rule[field] !== undefined)
+const requiredRuleFiled = ['maximum_report_interval', 'minimum_report_interval', 'reportable_change', 'endpoint', 'cluster', 'attribute'];
+const isValidRule = (rule: NiceRepointingRule): boolean => {
+    return requiredRuleFiled.every(field => rule[field] !== undefined)
 }
 
 type FormGroupInputProps = {
@@ -66,7 +66,7 @@ function FormGroupInput(props: FormGroupInputProps) {
 export class ReportingRow extends Component<ReportingRowProps & WithTranslation, ReportingRowState> {
 
     state: Readonly<ReportingRowState> = {
-        stateRule: {} as NiceReportingingRule
+        stateRule: {} as NiceRepointingRule
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -161,7 +161,7 @@ export class ReportingRow extends Component<ReportingRowProps & WithTranslation,
                     <div className="form-group">
                         <div className="btn-group" role="group" aria-label="Basic example">
                             <Button<void> disabled={!isValidRule(stateRule)} className="btn btn-primary" onClick={this.applyRule}>{t('common:apply') }</Button>
-                            {!stateRule.isNew ? <Button<void> promt className="btn btn-danger" onClick={this.disableRule}>{t('common:disable') }</Button> : null}
+                            {!stateRule.isNew ? <Button<void> prompt className="btn btn-danger" onClick={this.disableRule}>{t('common:disable') }</Button> : null}
                         </div>
                     </div>
                 </div>

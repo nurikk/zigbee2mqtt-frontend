@@ -9,7 +9,7 @@ export type Theme = "light" | "dark";
 type ThemeSwitcherProps = {
     saveCurrentTheme(theme: Theme): void;
 }
-export const ThemeSwitcher = (props: ThemeSwitcherProps) => {
+export const ThemeSwitcher = (props: ThemeSwitcherProps): JSX.Element => {
     const { saveCurrentTheme } = props;
     const { switcher, themes, status, currentTheme } = useThemeSwitcher();
     const isDarkMode = currentTheme === 'dark';

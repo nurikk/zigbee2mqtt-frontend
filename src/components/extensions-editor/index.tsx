@@ -57,7 +57,7 @@ export class ExtensionsEditorPage extends Component<PropsFromStore & ExtensionAp
             </div>
             <div className="col-6">
                 <CreateNewExtension updateExtensionCode={updateExtensionCode} onCreated={(extension: Extension) => this.setState({ currentExtension: extension.name })} />
-                <Button promt disabled={!currentExtension} onClick={this.removeExtension} className="btn btn-danger me-2"><i className="fa fa-trash"></i></Button>
+                <Button prompt disabled={!currentExtension} onClick={this.removeExtension} className="btn btn-danger me-2"><i className="fa fa-trash"></i></Button>
                 <Button disabled={!currentExtension} onClick={this.onSaveClick} className="btn btn-primary">{t('common:save')}</Button>
             </div>
         </div>

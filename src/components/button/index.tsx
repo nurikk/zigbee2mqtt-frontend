@@ -3,11 +3,11 @@ import { MODAL_TYPES, useGlobalModalContext } from "../modal/GlobalModal";
 interface ButtonProps<T> extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'onClick'> {
     item?: T;
     onClick?(arg1: T): void;
-    promt?: boolean | string;
+    prompt?: boolean | string;
 }
 
 export default function Button<T>(props: ButtonProps<T>): JSX.Element {
-    const { children, item, onClick, promt, ...rest } = props;
+    const { children, item, onClick, prompt, ...rest } = props;
 
     const { showModal, hideModal } = useGlobalModalContext();
     const onConfirmHandler = (): void => {
@@ -15,7 +15,7 @@ export default function Button<T>(props: ButtonProps<T>): JSX.Element {
         hideModal()
     }
     const onClickHandler = (): void => {
-        if (promt) {
+        if (prompt) {
             showModal(MODAL_TYPES.DIALOG_CONFIRMATION, { onConfirmHandler });
         } else {
             onClick && onClick(item as T);

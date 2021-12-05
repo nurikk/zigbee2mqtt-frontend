@@ -14,17 +14,17 @@ import PowerSource from "../power-source";
 import { LastSeen } from "../LastSeen";
 import { WithTranslation, withTranslation } from "react-i18next";
 import { DisplayValue } from "../display-value/DisplayValue";
-import { Avaliability } from "../zigbee/Avaliability";
+import { Availability } from "../zigbee/Availability";
 
 
 
 type DeviceInfoProps = {
     device: Device;
 }
-type PropsFromStore = Pick<GlobalState, 'deviceStates' | 'bridgeInfo' | 'avalilability'>;
+type PropsFromStore = Pick<GlobalState, 'deviceStates' | 'bridgeInfo' | 'availability'>;
 
 // [Flower sensor](http://modkam.ru/?p=1700)
-const markdownLinkRegex = /\[(.*?)\]\((.*?)\)/;
+const markdownLinkRegex = /\[(.*?)]\((.*?)\)/;
 
 const displayProps = [
     {
@@ -40,13 +40,13 @@ const displayProps = [
         render: (device: Device, state: DeviceState, bridgeInfo: BridgeInfo, availability: OnlineOrOffline) => {
             const { config } = bridgeInfo;
             const availabilityFeatureEnabled = !!config.availability;
-            const avalilabilityEnabledForDevice = config.devices[device.ieee_address]?.availability !== false;
+            const availabilityEnabledForDevice = config.devices[device.ieee_address]?.availability !== false;
 
             return <dd className="col-12 col-md-7">
-                <Avaliability
-                    avaliability={availability}
+                <Availability
+                    availability={availability}
                     availabilityFeatureEnabled={availabilityFeatureEnabled}
-                    avalilabilityEnabledForDevice={avalilabilityEnabledForDevice}
+                    availabilityEnabledForDevice={availabilityEnabledForDevice}
                      />
             </dd>
         },
@@ -127,7 +127,7 @@ const displayProps = [
 // eslint-disable-next-line react/prefer-stateless-function
 export class DeviceInfo extends Component<DeviceInfoProps & PropsFromStore & WithTranslation<"zigbee">, unknown> {
     render(): JSX.Element {
-        const { device, deviceStates, bridgeInfo, avalilability, t } = this.props;
+        const { device, deviceStates, bridgeInfo, availability, t } = this.props;
 
         const deviceState: DeviceState = deviceStates[device.friendly_name] ?? {} as DeviceState;
         return (
@@ -141,7 +141,7 @@ export class DeviceInfo extends Component<DeviceInfoProps & PropsFromStore & Wit
                             <Fragment key={prop.translationKey}>
                                 <dt className="col-12 col-md-5">{t(prop.translationKey)}</dt>
                                 {prop.render ?
-                                    prop.render(device, deviceState, bridgeInfo, avalilability[device.friendly_name] ?? 'offline') : <dd className="col-12 col-md-7">{get(device, prop.key)}</dd>}
+                                    prop.render(device, deviceState, bridgeInfo, availability[device.friendly_name] ?? 'offline') : <dd className="col-12 col-md-7">{get(device, prop.key)}</dd>}
 
                             </Fragment>
                         ))
@@ -156,7 +156,7 @@ export class DeviceInfo extends Component<DeviceInfoProps & PropsFromStore & Wit
     }
 }
 
-const mappedProps = ["deviceStates", "bridgeInfo", "avalilability"];
+const mappedProps = ["deviceStates", "bridgeInfo", "availability"];
 
 const ConnectedDeviceInfoPage = withTranslation("zigbee")(connect<DeviceInfoProps, unknown, GlobalState, PropsFromStore>(mappedProps)(DeviceInfo));
 export default ConnectedDeviceInfoPage;

@@ -5,12 +5,12 @@ import Button from "../../button";
 import { isColorFeature } from "../../device-page/type-guards";
 
 
-export type FetatureWrapperProps = {
+export type FeatureWrapperProps = {
     feature: CompositeFeature | GenericExposedFeature;
     deviceState?: DeviceState;
     onRead(endpoint: Endpoint, property: Record<string, unknown>): void;
 };
-export const FeatureWrapper: FunctionComponent<PropsWithChildren<FetatureWrapperProps>> = (props) => {
+export const FeatureWrapper: FunctionComponent<PropsWithChildren<FeatureWrapperProps>> = (props) => {
     const { t } = useTranslation(['featureDescriptions']);
     const { children, feature, onRead } = props;
     const isColor = isColorFeature(feature);

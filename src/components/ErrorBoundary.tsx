@@ -15,7 +15,7 @@ export default class ErrorBoundary extends React.Component<ErrorBoundaryProps, E
         return { error };
     }
 
-    donwloadState = (e: SyntheticEvent): void => {
+    downloadState = (e: SyntheticEvent): void => {
         download(store.getState() as unknown as Record<string, unknown>, 'initialState.json');
         e.preventDefault();
     }
@@ -44,7 +44,7 @@ export default class ErrorBoundary extends React.Component<ErrorBoundaryProps, E
                 <h1 className="text-danger">Hello, you&apos;ve found a bug. Congratulations!</h1>
                 <ol>
                     <li className="fs-1 lh-lg">Calm down</li>
-                    <li className="fs-1 lh-lg"><a className="link-primary animation-blinking" href="#" onClick={this.donwloadState}>Click here, and save this file</a></li>
+                    <li className="fs-1 lh-lg"><a className="link-primary animation-blinking" href="#" onClick={this.downloadState}>Click here, and save this file</a></li>
 
                     <li className="fs-1 lh-lg"><a target="_blank" rel="noopener noreferrer" href={githubUrl}>Raise a github issue</a>, attach <b>previously</b> downloaded file</li>
                     <li className="fs-1 lh-lg">Take a screenshot of this page and attach to the issue</li>

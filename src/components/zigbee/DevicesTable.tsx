@@ -12,7 +12,7 @@ import DeviceControlGroup from "../device-control/DeviceControlGroup";
 import { Table } from "../grid/ReactTableCom";
 import { CellProps, Column } from "react-table";
 import { DevicesPageData } from "./index";
-import { Avaliability } from "./Avaliability";
+import { Availability } from "./Availability";
 import { LastSeenType } from "../../types";
 
 export type DevicesTableProps = {
@@ -24,10 +24,25 @@ export type DevicesTableProps = {
 export function DevicesTable(props: DevicesTableProps) {
     const { data, lastSeenType, availabilityFeatureEnabled } = props;
     const { t } = useTranslation(["zigbee", "common", "avaliability"]);
-
-    const columns: Column<DevicesPageData>[] = [
+    const lastSeenCol = lastSeenType !== "disable" ? [{
+        id: 'last_seen',
+        Header: t('last_seen') as string,
+        accessor: ({ state }) => lastSeen(state, lastSeenType)?.getTime(),
+        Cell: ({ row: { original: { state } } }) => <LastSeen state={state} lastSeenType={lastSeenType} />,
+    }] : [];
+    const availabilityCol = availabilityFeatureEnabled ? [{
+        id: 'availability',
+        Header: t('avaliability:avaliability') as string,
+        accessor: ({ availabilityState }) => availabilityState,
+        Cell: ({ row: { original: { availabilityState, availabilityEnabledForDevice } } }) => {
+            return <Availability
+                availability={availabilityState}
+                availabilityEnabledForDevice={availabilityEnabledForDevice} />;
+        },
+    }] : [];
+    const columns = [
         {
-            id: 'rownumber',
+            id: 'number',
             Header: '#',
             Cell: ({ row }: CellProps<DevicesPageData>) => <div className="font-weight-bold">{row.index + 1}</div>,
             disableSortBy: true,
@@ -69,23 +84,8 @@ export function DevicesTable(props: DevicesTableProps) {
             accessor: ({ state }) => state.linkquality,
             Cell: ({ row: { original: { state } } }) => <DisplayValue value={state.linkquality} name="linkquality" />,
         },
-        ...(lastSeenType !== "disable" ? [{
-            id: 'last_seen',
-            Header: t('last_seen') as string,
-            accessor: ({ state }) => lastSeen(state, lastSeenType)?.getTime(),
-            Cell: ({ row: { original: { state } } }) => <LastSeen state={state} lastSeenType={lastSeenType} />,
-        }] : []),
-        ...(availabilityFeatureEnabled ? [{
-            id: 'avaliability',
-            Header: t('avaliability:avaliability') as string,
-            accessor: ({ avalilabilityState }) => avalilabilityState,
-            Cell: ({ row: { original: { avalilabilityState, avalilabilityEnabledForDevice } } }) => {
-                return <Avaliability
-                    avaliability={avalilabilityState}
-                    avalilabilityEnabledForDevice={avalilabilityEnabledForDevice} />;
-            },
-        }] : []),
-
+        ...lastSeenCol,
+        ...availabilityCol,
         {
             id: 'power',
             Header: t('power') as string,
@@ -104,8 +104,8 @@ export function DevicesTable(props: DevicesTableProps) {
         <div className="table-responsive">
             <Table
                 id="zigbee"
-                columns={columns}
-                data={data} />
+                columns={columns as unknown as Column<Record<string, unknown>>[]}
+                data={data as unknown as Record<string, unknown>[]} />
         </div>
     </div>);
 }

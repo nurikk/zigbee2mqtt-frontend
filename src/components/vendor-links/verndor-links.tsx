@@ -28,11 +28,11 @@ export const ModelLink: React.FunctionComponent<VendorProps> = (props: VendorPro
     let url = 'https://www.zigbee2mqtt.io/advanced/support-new-devices/01_support_new_devices.html';
     let title = device.model_id;
     if (device.supported && device.definition) {
-        const detailsAcnchor = [
+        const detailsAnchor = [
             encodeURIComponent(device.definition?.vendor?.toLowerCase()),
             encodeURIComponent(device.definition?.model?.toLowerCase()),
         ].join('-');
-        url = `https://www.zigbee2mqtt.io/devices/${encodeURIComponent(normalizeModel(device.definition?.model))}.html#${encodeURIComponent(normalizeModel(anchor || detailsAcnchor))}`;
+        url = `https://www.zigbee2mqtt.io/devices/${encodeURIComponent(normalizeModel(device.definition?.model))}.html#${encodeURIComponent(normalizeModel(anchor || detailsAnchor))}`;
         title = device.definition.model;
     }
     return <a target="_blank" rel="noopener noreferrer" href={url}>{title}</a>
@@ -40,9 +40,9 @@ export const ModelLink: React.FunctionComponent<VendorProps> = (props: VendorPro
 
 
 export const OTALink: React.FunctionComponent<VendorProps> = (props: VendorProps) => {
-    const { device, anchor } = props;
+    const { device } = props;
     let url = '';
-    let title = device.software_build_id;
+    const title = device.software_build_id;
 
     switch (device?.definition?.vendor) {
         case "IKEA":

@@ -2,10 +2,6 @@ import i18n, { ResourceLanguage } from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import { register } from "timeago.js"
 import LanguageDetector from 'i18next-browser-languagedetector';
-import set from "lodash/set";
-
-import store from "./../store";
-
 import enTranslations from './locales/en.json';
 import frTranslations from './locales/fr.json';
 import plTranslations from './locales/pl.json';
@@ -39,8 +35,6 @@ import timeKo from "timeago.js/lib/lang/ko";
 import timeCs from "timeago.js/lib/lang/cs";
 import timeFi from "timeago.js/lib/lang/fi";
 import timeSv from "timeago.js/lib/lang/sv";
-
-import { useEffect } from 'react';
 
 
 register("pl", timePl);

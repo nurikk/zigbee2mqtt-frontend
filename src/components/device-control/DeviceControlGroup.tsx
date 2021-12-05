@@ -27,7 +27,7 @@ function DeviceControlGroup(props: DeviceControlGroupProps & DeviceApi & PropsFr
                 className="btn btn-warning"
                 onClick={configureDevice}
                 item={device.friendly_name}
-                title={t('reconfigure')} promt>
+                title={t('reconfigure')} prompt>
                 <i className={cx("fa", "fa-retweet")} />
             </Button>
             <button onClick={() => showModal(MODAL_TYPES.REMOVE_DEVICE, { device, removeDevice })} className="btn btn-danger" title={t('remove_device')}><i className={cx("fa", "fa-trash")} /></button>

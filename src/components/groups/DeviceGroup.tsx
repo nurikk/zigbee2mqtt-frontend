@@ -20,11 +20,11 @@ export function DeviceGroup(props: DeviceGroupProps & StateApi): JSX.Element {
     };
 
     return <div className="row">{
-        group.members.map((groupMemebershipInfo, idx) => <DeviceGroupRow
-            key={groupMemebershipInfo.ieee_address}
+        group.members.map((groupMembershipInfo) => <DeviceGroupRow
+            key={groupMembershipInfo.ieee_address}
             removeDeviceFromGroup={onRemove}
             devices={devices}
-            groupAddress={groupMemebershipInfo}
+            groupAddress={groupMembershipInfo}
             deviceStates={deviceStates}
             bridgeInfo={bridgeInfo}
             {...{ setStateValue, setDeviceState, getDeviceState }}

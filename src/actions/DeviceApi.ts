@@ -14,8 +14,8 @@ export interface DeviceApi {
 
     setDeviceOptions(id: string, options: Record<string, unknown>): Promise<void>;
 
-    readDeviceAttributes(friendlyNameOrIEEEAddress: FriendlyName | IEEEEAddress, endpoint: Endpoint, cluster: Cluster, attrbutes: Attribute[], options: Record<string, unknown>): Promise<void>;
-    writeDeviceAttributes(friendlyNameOrIEEEAddress: FriendlyName | IEEEEAddress, endpoint: Endpoint, cluster: Cluster, attrbutes: AttributeInfo[], options: Record<string, unknown>): Promise<void>;
+    readDeviceAttributes(friendlyNameOrIEEEAddress: FriendlyName | IEEEEAddress, endpoint: Endpoint, cluster: Cluster, attributes: Attribute[], options: Record<string, unknown>): Promise<void>;
+    writeDeviceAttributes(friendlyNameOrIEEEAddress: FriendlyName | IEEEEAddress, endpoint: Endpoint, cluster: Cluster, attributes: AttributeInfo[], options: Record<string, unknown>): Promise<void>;
 }
 
 
@@ -45,7 +45,7 @@ export default {
         return api.send("bridge/request/device/configure", { id: name });
     },
 
-    setDeviceOptions: (state, id: string, options: object): Promise<void> => {
+    setDeviceOptions: (state, id: string, options: Record<string, unknown>): Promise<void> => {
         return api.send("bridge/request/device/options", { id, options });
     },
 

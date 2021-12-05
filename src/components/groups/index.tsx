@@ -98,7 +98,7 @@ export class GroupsPage extends Component<PropsFromStore & StateApi & SceneApi &
                 Cell: ({ row: { original: group } }) => (
                     <div className="btn-group float-right btn-group-sm" role="group">
                         <RenameGroupForm name={group.friendly_name} onRename={this.renameGroup} />
-                        <Button<string> promt title={t('remove_group')} item={group.friendly_name} onClick={this.removeGroup} className="btn btn-danger"><i className="fa fa-trash" /></Button>
+                        <Button<string> prompt title={t('remove_group')} item={group.friendly_name} onClick={this.removeGroup} className="btn btn-danger"><i className="fa fa-trash" /></Button>
                     </div>
                 )
 
@@ -106,7 +106,9 @@ export class GroupsPage extends Component<PropsFromStore & StateApi & SceneApi &
 
         ]
         return <div className="card">
-            <Table id="groups" columns={columns} data={groups} />
+            <Table id="groups" 
+            columns={columns} 
+            data={groups} />
         </div>
 
     }

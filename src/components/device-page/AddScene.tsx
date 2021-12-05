@@ -12,7 +12,7 @@ type AddSceneProps = {
     deviceState: DeviceState;
 
 };
-export function AddScene(props: AddSceneProps & Pick<SceneApi, 'sceneStore'> & Pick<StateApi, 'setDeviceState'>) {
+export function AddScene(props: AddSceneProps & Pick<SceneApi, 'sceneStore'> & Pick<StateApi, 'setDeviceState'>): JSX.Element {
     const { target, deviceState, sceneStore, setDeviceState } = props;
     const scenes = getScenes(target);
     const { t } = useTranslation("scene");
@@ -51,7 +51,7 @@ export function AddScene(props: AddSceneProps & Pick<SceneApi, 'sceneStore'> & P
                 device={target as Device}
                 deviceState={deviceState}
                 onChange={(endpoint, value) => {
-                    setDeviceState(`${target.friendly_name}${endpoint ? `/${endpoint}` : ''}`, value);
+                    setDeviceState(`${target.friendly_name}${endpoint ? `/${endpoint}` : ''}`, value)
                 }}
                 onRead={() => {
                     // empty function

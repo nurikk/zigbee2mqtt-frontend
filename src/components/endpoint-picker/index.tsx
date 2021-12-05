@@ -20,7 +20,7 @@ export default function EndpointPicker(props: EndpointPickerProps): JSX.Element 
     const hasOnlyOneEP = values.length == 1;
 
     const options = values.map(ep => <option key={ep} value={ep}>{ep}</option>)
-    options.unshift(<option key="hidded" hidden>{t('select_endpoint')}</option>);
+    options.unshift(<option key="hided" hidden>{t('select_endpoint')}</option>);
     return <div className="form-group">
         {label && <label className="form-label">{label}</label>}
         <select disabled={value && hasOnlyOneEP || disabled}

@@ -3,14 +3,14 @@ import { LinkI, NodeI } from "./types";
 import cx from "classnames";
 import style from "./map.css";
 import { MouseEventsResponderNode } from ".";
-import { Device, DeviceState, FriendlyName, IEEEEAddress } from "../../types";
+import { Device, DeviceState, FriendlyName } from "../../types";
 import DeviceImage from "../device-image";
 import { Simulation } from "d3-force";
 import { select } from "d3-selection";
 import { drag } from "d3-drag";
 import { CSSTransition } from 'react-transition-group'; // ES6
 import isEqual from "lodash/isEqual";
-import { OnlineOrOffline, WithAvaliability, WithDevices, WithDeviceStates } from "../../store";
+import { OnlineOrOffline, WithAvailability, WithDevices, WithDeviceStates } from "../../store";
 
 
 
@@ -36,7 +36,7 @@ interface NodeProps extends MouseEventsResponderNode {
     node: NodeI;
     deviceState: DeviceState;
     device: Device;
-    avalilability: OnlineOrOffline;
+    availability: OnlineOrOffline;
 }
 
 
@@ -54,7 +54,7 @@ class Node extends Component<NodeProps, NodeState> {
         const { deviceState: prevDeviceState } = prevProps;
         const { deviceState: currentDeviceState } = this.props;
         const statesAreEqual = isEqual(prevDeviceState, currentDeviceState);
-        let { hasBeenUpdated } = this.state;
+        const { hasBeenUpdated } = this.state;
 
         if (statesAreEqual) {
             if (hasBeenUpdated) {
@@ -88,10 +88,10 @@ class Node extends Component<NodeProps, NodeState> {
 
     render() {
         const { hasBeenUpdated } = this.state;
-        const { node, deviceState, device, avalilability } = this.props;
+        const { node, deviceState, device, availability } = this.props;
         const { onMouseOver, onMouseOut, onDblClick } = this;
         const deviceType = node.type as string;
-        const cn = cx(style.node, style[deviceType], { [style.offline]: avalilability === "offline" })
+        const cn = cx(style.node, style[deviceType], { [style.offline]: availability === "offline" })
         return (<g className={cn}
             ref={this.ref as RefObject<SVGImageElement>}
             onMouseOver={onMouseOver}
@@ -130,7 +130,7 @@ class Node extends Component<NodeProps, NodeState> {
     }
 }
 
-interface NodesProps extends MouseEventsResponderNode, WithAvaliability, WithDevices, WithDeviceStates {
+interface NodesProps extends MouseEventsResponderNode, WithAvailability, WithDevices, WithDeviceStates {
     root: SVGElement;
     nodes: NodeI[];
     simulation: Simulation<NodeI, LinkI>;
@@ -180,8 +180,8 @@ export default class Nodes extends Component<NodesProps, NodesState> {
 
 
 
-    render() {
-        const { nodes, onMouseOut, onMouseOver, deviceStates, devices, avalilability } = this.props;
+    render(): JSX.Element {
+        const { nodes, onMouseOut, onMouseOver, deviceStates, devices, availability } = this.props;
         return (
             <g className={style.nodes}>
                 {nodes.map((node: NodeI) => (
@@ -192,7 +192,7 @@ export default class Nodes extends Component<NodesProps, NodesState> {
                         node={node}
                         deviceState={deviceStates[node.friendlyName as FriendlyName]}
                         device={devices[node.ieeeAddr]}
-                        avalilability={avalilability[node.friendlyName as FriendlyName]}
+                        availability={availability[node.friendlyName as FriendlyName]}
                     />
                 ))}
             </g>

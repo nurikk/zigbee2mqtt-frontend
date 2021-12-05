@@ -33,12 +33,12 @@ export type WithBridgeInfo = {
 
 export type OnlineOrOffline = 'online' | 'offline';
 
-export type WithAvaliability = {
-    avalilability: Record<FriendlyName, OnlineOrOffline>;
+export type WithAvailability = {
+    availability: Record<FriendlyName, OnlineOrOffline>;
 }
 
 
-export interface GlobalState extends WithDevices, WithDeviceStates, WithGroups, WithBridgeInfo, WithAvaliability {
+export interface GlobalState extends WithDevices, WithDeviceStates, WithGroups, WithBridgeInfo, WithAvailability {
     touchlinkDevices: TouchLinkDevice[];
     touchlinkScanInProgress: boolean;
     touchlinkIdentifyInProgress: boolean;

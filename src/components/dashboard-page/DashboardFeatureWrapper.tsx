@@ -1,7 +1,7 @@
 import camelCase from "lodash/camelCase";
 import startCase from "lodash/startCase";
 import React, { FunctionComponent, PropsWithChildren } from "react";
-import { FetatureWrapperProps } from "../features/composite/FeatureWrapper";
+import { FeatureWrapperProps } from "../features/composite/FeatureWrapper";
 import cx from "classnames";
 import { useTranslation } from "react-i18next";
 
@@ -78,7 +78,7 @@ const getGenericFeatureIcon = (name: string, value: unknown): string => {
     return cx(classes);
 }
 
-export const DashboardFeatureWrapper: FunctionComponent<PropsWithChildren<FetatureWrapperProps>> = (props) => {
+export const DashboardFeatureWrapper: FunctionComponent<PropsWithChildren<FeatureWrapperProps>> = (props) => {
     const { children, feature, deviceState = {} } = props;
     const icon = getGenericFeatureIcon(feature.name, deviceState[feature.property]);
     const { t } = useTranslation(['featureNames']);

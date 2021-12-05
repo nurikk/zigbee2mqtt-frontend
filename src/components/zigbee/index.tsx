@@ -10,21 +10,21 @@ export interface DevicesPageData {
     id: string;
     device: Device;
     state: DeviceState;
-    avalilabilityState: OnlineOrOffline;
-    avalilabilityEnabledForDevice: boolean;
+    availabilityState: OnlineOrOffline;
+    availabilityEnabledForDevice: boolean;
 }
 
 
-type PropsFromStore = Pick<GlobalState, 'devices' | 'deviceStates' | 'bridgeInfo' | 'avalilability'>;
+type PropsFromStore = Pick<GlobalState, 'devices' | 'deviceStates' | 'bridgeInfo' | 'availability'>;
 type DevicesPageProps = PropsFromStore & WithTranslation<"zigbee">;
 
 
 
-export function DevicesPage(props: DevicesPageProps) {
-    const { devices, deviceStates, bridgeInfo: { config }, avalilability } = props;
+export function DevicesPage(props: DevicesPageProps): JSX.Element {
+    const { devices, deviceStates, bridgeInfo: { config }, availability } = props;
     const availabilityFeatureEnabled = !!config.availability;
     const getDevicesToRender = (): DevicesPageData[] => {
-        return Object.values(devices)
+        return Object.values<Device>(devices)
             .filter(device => device.type !== "Coordinator")
             .map((device) => {
                 const state = deviceStates[device.friendly_name] ?? {} as DeviceState;
@@ -32,8 +32,8 @@ export function DevicesPage(props: DevicesPageProps) {
                     id: device.friendly_name,
                     device,
                     state,
-                    avalilabilityState: avalilability[device.friendly_name] ?? "offline",
-                    avalilabilityEnabledForDevice: config.devices[device.ieee_address]?.availability !== false
+                    availabilityState: availability[device.friendly_name] ?? "offline",
+                    availabilityEnabledForDevice: config.devices[device.ieee_address]?.availability !== false
                 } as DevicesPageData;
             });
     }
@@ -47,6 +47,6 @@ export function DevicesPage(props: DevicesPageProps) {
 
 }
 
-const mappedProps = ["devices", "deviceStates", "bridgeInfo", "avalilability"];
+const mappedProps = ["devices", "deviceStates", "bridgeInfo", "availability"];
 const ConnectedZigbeePage = withTranslation(["zigbee", "common"])(connect<unknown, unknown, PropsFromStore, unknown>(mappedProps, actions)(DevicesPage));
 export default ConnectedZigbeePage;

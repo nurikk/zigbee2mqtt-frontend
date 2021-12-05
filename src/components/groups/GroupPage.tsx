@@ -31,7 +31,7 @@ function GroupPage(props: GroupPageProps) {
     const groupId = parseInt(match.params.groupId as string, 10);
     const group = groups.find(g => g.id === groupId) || {
         id: groupId,
-        friendly_name: "Unknow group",
+        friendly_name: "Unknown group",
         members: [],
         scenes: []
     };

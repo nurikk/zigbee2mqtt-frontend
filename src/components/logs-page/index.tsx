@@ -42,7 +42,7 @@ export function LogRow(props: LogRowProps): JSX.Element {
             'bg-danger': log.level === 'error',
             'bg-warning': log.level === 'warning',
             'bg-info': log.level === 'info',
-            'bg-secondary': ['error', 'warning', 'info'].includes(log.level) === false,
+            'bg-secondary': !['error', 'warning', 'info'].includes(log.level),
         }, "text-capitalize")}>{log.level}</span>&nbsp;</>}<code>
             <Highlighted text={log.message} highlight={search}></Highlighted>
         </code></div>

@@ -13,7 +13,7 @@ import { WithTranslation, withTranslation } from "react-i18next";
 import EndpointPicker from "../endpoint-picker";
 import { getEndpoints } from "../../utils";
 
-interface DevConsoleProps {
+interface DevConsoleProps extends WithTranslation, Pick<DeviceApi, "readDeviceAttributes" | "writeDeviceAttributes">{
     device: Device;
     logs: LogMessage[];
 }
@@ -59,10 +59,10 @@ const logStartingStrings = [
     "Publish 'set' 'write' to",
     "Wrote "
 ]
-export class DevConsole extends Component<DevConsoleProps & WithTranslation & Pick<DeviceApi, "readDeviceAttributes" | "writeDeviceAttributes">, DevConsoleState> {
+export class DevConsole extends Component<DevConsoleProps, DevConsoleState> {
 
 
-    constructor(props) {
+    constructor(props: DevConsoleProps) {
         super(props);
         const { device } = props;
         const defaultEndpoint = Object.keys(device.endpoints)[0];
@@ -129,7 +129,7 @@ export class DevConsole extends Component<DevConsoleProps & WithTranslation & Pi
         this.setState({ attributes: newAttributes });
     }
 
-    renderSelectedAtrribute(): JSX.Element[] {
+    renderSelectedAttribute(): JSX.Element[] {
         const { attributes } = this.state;
         return attributes.map(({ attribute, value = "", definition }) => <div key={attribute} className="row mb-1">
             <div className="col-3">
@@ -186,7 +186,7 @@ export class DevConsole extends Component<DevConsoleProps & WithTranslation & Pi
                 </div>
             </div>
             <div className="mb-3 row">
-                {this.renderSelectedAtrribute()}
+                {this.renderSelectedAttribute()}
             </div>
             <div className="mb-3 row">
                 <div className="btn-group col col-3" role="group">

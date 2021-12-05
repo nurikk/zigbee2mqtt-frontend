@@ -19,7 +19,7 @@ export function SinglePicker(props: SinglePickerProps): JSX.Element {
             if (groupOptions.length === 0) {
                 groupOptions.push(<option key="none" disabled>{t('none')}</option>);
             }
-            options.push(<optgroup key={group.name} label={group.name}>{groupOptions}</optgroup>);
+            options.push(<optgroup key={group.name} label={t(group.name)}>{groupOptions}</optgroup>);
         });
 
 

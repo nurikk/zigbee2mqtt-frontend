@@ -32,7 +32,7 @@ interface MapState {
 }
 
 const parentOrChild = [ZigbeeRelationship.NeigbhorIsAChild, ZigbeeRelationship.NeigbhorIsParent];
-const linkStrregth = (d: LinkI) => {
+const linkStrength = (d: LinkI) => {
     if (d.linkType === "Router2Router") {
         return 1;
     }
@@ -42,14 +42,14 @@ const linkStrregth = (d: LinkI) => {
 
     return 0;
 }
-const defaultVisibleRelationshLinks = [...parentOrChild, ZigbeeRelationship.NeigbhorIsASibling];
+const defaultVisibleRelationsLinks = [...parentOrChild, ZigbeeRelationship.NeigbhorIsASibling];
 const baseDistance = 100;
 const distancesMap = {
     BrokenLink: 5 * baseDistance,
     Router2Router: 2.5 * baseDistance,
     Coordinator2Router: 2.5 * baseDistance,
-    Coordinator2EndDevice: 1 * baseDistance,
-    EndDevice2Router: 1 * baseDistance
+    Coordinator2EndDevice: baseDistance,
+    EndDevice2Router: baseDistance
 };
 
 
@@ -65,8 +65,8 @@ const computeLink = (d: LinkI, transform: ZoomTransform): string => {
     return `M ${x1} ${y1} L ${x2} ${y2}`;
 }
 
-type SelNode = Selection<SVGElement, NodeI, SVGElement, {}>;
-type SelLink = Selection<SVGElement, LinkI, SVGElement, {}>;
+type SelNode = Selection<SVGElement, NodeI, SVGElement, Record<string, unknown>>;
+type SelLink = Selection<SVGElement, LinkI, SVGElement, Record<string, unknown>>;
 
 type TickedParams = {
     transform: ZoomTransform;
@@ -123,7 +123,7 @@ const processHighlights = ({ networkGraph, links, selectedNode, node, link, link
         linkLabel.style("opacity", 1);
     }
 }
-type PropsFromStore = Pick<GlobalState, 'networkGraph' | 'networkGraphIsLoading' | 'deviceStates' | 'devices' | 'avalilability'>;
+type PropsFromStore = Pick<GlobalState, 'networkGraph' | 'networkGraphIsLoading' | 'deviceStates' | 'devices' | 'availability'>;
 export class MapComponent extends Component<PropsFromStore & MapApi & WithTranslation<"map">, MapState> {
     ref = createRef<HTMLDivElement>();
     svgRef = createRef<SVGSVGElement>();
@@ -131,7 +131,7 @@ export class MapComponent extends Component<PropsFromStore & MapApi & WithTransl
     state: Readonly<MapState> = {
         width: 0,
         height: 0,
-        visibleLinks: defaultVisibleRelationshLinks,
+        visibleLinks: defaultVisibleRelationsLinks,
         legendIsVisible: true,
     };
     transform: ZoomTransform = zoomIdentity;
@@ -139,7 +139,7 @@ export class MapComponent extends Component<PropsFromStore & MapApi & WithTransl
     updateNodes = (): void => {
         const { networkGraph } = this.props;
         const { visibleLinks, selectedNode, width, height } = this.state;
-        const container = select<SVGElement, {}>(this.svgRef.current as SVGElement);
+        const container = select<SVGElement, Record<string, unknown>>(this.svgRef.current as SVGElement);
         const node = container.selectAll<SVGElement, NodeI>(`.${style.node}`);
         const link = container.selectAll<SVGElement, LinkI>(`.${style.link}`);
         const linkLabel = container.selectAll<SVGElement, LinkI>(`.${style.linkLabel}`);
@@ -170,7 +170,7 @@ export class MapComponent extends Component<PropsFromStore & MapApi & WithTransl
 
     updateForces(width: number, height: number): void {
         this.simulation = this.simulation
-            .force("link", forceLink<NodeI, LinkI>().id(d => d.ieeeAddr).distance(getDistance).strength(linkStrregth))
+            .force("link", forceLink<NodeI, LinkI>().id(d => d.ieeeAddr).distance(getDistance).strength(linkStrength))
             .force("charge", forceManyBodyReuse().strength(-700))
             .force("collisionForce", forceCollide())
             .force("center", forceCenter(width / 2, height / 2))
@@ -196,7 +196,7 @@ export class MapComponent extends Component<PropsFromStore & MapApi & WithTransl
         const { width, height, visibleLinks } = this.state;
 
 
-        const { networkGraph, deviceStates, devices, avalilability } = this.props;
+        const { networkGraph, deviceStates, devices, availability } = this.props;
         const links = networkGraph.links.filter(l => intersection(visibleLinks, l.relationships).length > 0);
         return (
             <svg ref={this.svgRef} viewBox={`0 0 ${width} ${height}`}>
@@ -208,7 +208,7 @@ export class MapComponent extends Component<PropsFromStore & MapApi & WithTransl
                         simulation={this.simulation}
                         deviceStates={deviceStates}
                         devices={devices}
-                        avalilability={avalilability}
+                        availability={availability}
                     />
                 </g>
             </svg >
@@ -294,6 +294,6 @@ export class MapComponent extends Component<PropsFromStore & MapApi & WithTransl
 }
 
 
-const mappedProps = ["networkGraph", "networkGraphIsLoading", "deviceStates", "devices", "avalilability"];
+const mappedProps = ["networkGraph", "networkGraphIsLoading", "deviceStates", "devices", "availability"];
 const ConnectedMap = withTranslation("map")(connect<unknown, MapState, GlobalState, unknown>(mappedProps, actions)(MapComponent));
 export default ConnectedMap;

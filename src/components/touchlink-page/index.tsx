@@ -68,7 +68,7 @@ export class TouchlinkPage extends Component<TouchlinkApi & GlobalState & WithTr
         ];
         return (
             <div className="table-responsive">
-                <Table id="touchlinkDevices" columns={columns} data={touchlinkDevices} />
+                <Table id="touchlinkDevices" columns={columns as unknown as Column<Record<string, unknown>>[]} data={touchlinkDevices as unknown as Record<string, unknown>[]} />
             </div>
         );
     }

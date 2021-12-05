@@ -11,7 +11,7 @@ type DeviceImageProps = {
     type?: "img" | "svg";
 }
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const genericDeiviceImageFallback = (device: Device): string => genericDevice;
+const genericDeviceImageFallback = (device: Device): string => genericDevice;
 const genSlsDeviceImageUrlZ2M = (device: Device): string => `https://www.zigbee2mqtt.io/images/devices/${sanitizeZ2MDeviceName(device?.definition?.model)}.jpg`;
 const converterDeviceImage = (device: Device): string | undefined => device.definition?.icon;
 
@@ -20,19 +20,19 @@ const sanitizeModelIDForImageUrl = (modelName: string): string => modelName?.rep
 export const genSlsDeviceImageUrlSLS = (device: Device): string => (`https://slsys.github.io/Gateway/devices/png/${sanitizeModelIDForImageUrl(device.model_id)}.png`);
 
 
-const AVALIABLE_GENERATORS = [
+const AVAILABLE_GENERATORS = [
     converterDeviceImage, genSlsDeviceImageUrlZ2M, genSlsDeviceImageUrlSLS
 ]
 
 const DeviceImage: FunctionComponent<DeviceImageProps & ImgHTMLAttributes<HTMLDivElement | SVGImageElement>> = (props) => {
     const { t } = useTranslation("zigbee");
-    const [imageGenerators, setimageGenerators] = useState(AVALIABLE_GENERATORS);
+    const [imageGenerators, setImageGenerators] = useState(AVAILABLE_GENERATORS);
     const { device = {} as Device, deviceStatus, type = "img", className, ...rest } = props;
-    let src: string | undefined = genericDeiviceImageFallback(device);
+    let src: string | undefined = genericDeviceImageFallback(device);
     const onImageError = () => {
         const newGenerators = [...imageGenerators];
         newGenerators.shift();
-        setimageGenerators(newGenerators);
+        setImageGenerators(newGenerators);
     };
 
     if (device?.definition?.model && imageGenerators.length) {
@@ -45,7 +45,7 @@ const DeviceImage: FunctionComponent<DeviceImageProps & ImgHTMLAttributes<HTMLDi
         const otaState = (deviceStatus?.update ?? {}) as OTAState;
         const otaSpinner = otaState.state === "updating" ? <i title={t("updating_firmware")} className="fa fa-sync fa-spin position-absolute bottom-0 right-0" /> : null;
         const interviewSpinner = device.interviewing ? <i title={t("interviewing")} className="fa fa-spinner fa-spin position-absolute bottom-0 right-0" /> : null;
-        const unseccessfullInterview = !device.interviewing && !device.interview_completed ? <i title={t("interview_failed")} className="fa fa-exclamation-triangle position-absolute top-0 right-0 text-danger" /> : null;
+        const unsuccessfulInterview = !device.interviewing && !device.interview_completed ? <i title={t("interview_failed")} className="fa fa-exclamation-triangle position-absolute top-0 right-0 text-danger" /> : null;
         switch (type) {
             case "svg":
                 return <image crossOrigin={"anonymous"} {...rest} onError={onImageError} href={src} />;
@@ -55,7 +55,7 @@ const DeviceImage: FunctionComponent<DeviceImageProps & ImgHTMLAttributes<HTMLDi
                     <img crossOrigin={"anonymous"} onError={onImageError} src={src} className={style.img} />
                     {interviewSpinner}
                     {otaSpinner}
-                    {unseccessfullInterview}
+                    {unsuccessfulInterview}
                 </div>;
         }
     } else {

@@ -1,26 +1,16 @@
-import React, { Component } from "react";
+import React  from "react";
 import { Device } from "../../types";
 import actions from "../../actions/actions";
 import { StateApi } from "../../actions/StateApi";
 import { connect } from "unistore/react";
 import { GlobalState } from "../../store";
+type PropsFromStore = Pick<GlobalState, 'deviceStates'> & StateApi
+type StatesProps = { device: Device };
 
-type PropsFromStore = Pick<GlobalState, 'deviceStates'>;
-interface StatesProps {
-    device: Device;
-}
-
-class States extends Component<StatesProps & PropsFromStore & StateApi, {}> {
-    setStateValue = (name: string, value: unknown): void => {
-        const { setStateValue, device } = this.props;
-        setStateValue(device.friendly_name, name, value);
-    };
-
-    render() {
-        const { device, deviceStates } = this.props;
-        const deviceState = deviceStates[device.friendly_name] ?? {};
-        return <pre>{JSON.stringify(deviceState, null, 4)}</pre>;
-    }
+function States(props: StatesProps & PropsFromStore) {
+    const { device, deviceStates } = props;
+    const deviceState = deviceStates[device.friendly_name] ?? {};
+    return <pre>{JSON.stringify(deviceState, null, 4)}</pre>;
 }
 
 const mappedProps = ["deviceStates"];

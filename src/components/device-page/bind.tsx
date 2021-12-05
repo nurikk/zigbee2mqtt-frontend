@@ -29,7 +29,7 @@ export interface NiceBindingRule {
     clusters: Cluster[];
 }
 const rule2key = (rule: NiceBindingRule): string => `${rule.source.endpoint}-${rule.isNew}${rule.source.ieee_address}-${rule.target.id}-${rule.target.ieee_address}-${rule.clusters.join('-')}`;
-const convertBidningsIntoNiceStructure = (device: Device): NiceBindingRule[] => {
+const convertBindingsIntoNiceStructure = (device: Device): NiceBindingRule[] => {
     const bindings = {};
     Object.entries(device.endpoints).forEach(([endpoint, description]) => {
         description.bindings
@@ -59,7 +59,7 @@ export function Bind(props: BindProps & PropsFromStore & BindApi): JSX.Element {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [newBindingRule] = useState<NiceBindingRule>({ isNew: Date.now(), target: {} as BindTarget, source: { 'ieee_address': device.ieee_address, endpoint: "" }, clusters: [] })
 
-    const bidingRules = convertBidningsIntoNiceStructure(device);
+    const bidingRules = convertBindingsIntoNiceStructure(device);
     return <div className="container-fluid">
         {
             [...bidingRules, newBindingRule]

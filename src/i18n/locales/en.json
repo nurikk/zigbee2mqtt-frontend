@@ -1240,7 +1240,9 @@
         "zigbee_manufacturer": "Zigbee Manufacturer",
         "zigbee_model": "Zigbee Model",
         "device": "Device",
-        "channel": "Channel"
+        "channel": "Channel",
+        "possible": "Possible",
+        "available": "Available"
     },
     "scene": {
         "scene_id": "Scene ID",

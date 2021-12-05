@@ -28,7 +28,7 @@ function DeviceSpecificSettings(props: DeviceSpecificSettingsProps & Pick<Device
                 await setDeviceOptions(device.ieee_address, value as Record<string, unknown>);
             }}
             onRead={(endpoint, value) => {
-                //emtpy function to prevent read
+                //empty function to prevent read
             }}
             featureWrapperClass={FeatureWrapper}
         />

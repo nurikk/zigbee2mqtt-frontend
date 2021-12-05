@@ -10,7 +10,7 @@ type DeviceRemovalButtonProps = {
     removeDevice(dev: string, force: boolean, block: boolean): Promise<void>;
 }
 
-export const RemoveDeviceModal = (props: DeviceRemovalButtonProps) => {
+export const RemoveDeviceModal = (props: DeviceRemovalButtonProps): JSX.Element => {
 
     const { t } = useTranslation(["zigbee", "common"]);
     const { device, removeDevice } = props;

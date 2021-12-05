@@ -18,7 +18,7 @@ import { Stats } from "./stats";
 
 type SettingsTab = "settings" | "bridge" | "about" | "tools" | "donate" | "translate";
 
-type SettigsKeys = string;
+type SettingsKeys = string;
 type UrlParams = {
     tab?: SettingsTab;
 };
@@ -27,12 +27,12 @@ type SettingsPageProps = RouteComponentProps<UrlParams>;
 declare const FRONTEND_VERSION: string; //injected by webpack.DefinePlugin
 
 type SettingsPageState = {
-    keyName: SettigsKeys;
+    keyName: SettingsKeys;
 }
 
 const ROOT_KEY_NAME = 'main';
 
-const ingoredFields = ['groups', 'devices', 'device_options', 'ban', 'whitelist', 'map_options'];
+const ignoredFields = ['groups', 'devices', 'device_options', 'ban', 'whitelist', 'map_options'];
 const validJsonSchemasAsTabs = ['object', 'array'];
 
 const removePropertiesFromSchema = (names: string[], schema: JSONSchema7 = {}, config: Record<string, unknown> = {}) => {
@@ -94,7 +94,7 @@ const rows = [
     </div>
 ].sort(() => Math.random() - 0.5);
 
-const isValidKeyToRenderAsTab = (key: string, value: JSONSchema7): boolean => (validJsonSchemasAsTabs.includes(value.type as string) && !ingoredFields.includes(key)) || (value && value.oneOf ? value.oneOf.length > 0 : false);
+const isValidKeyToRenderAsTab = (key: string, value: JSONSchema7): boolean => (validJsonSchemasAsTabs.includes(value.type as string) && !ignoredFields.includes(key)) || (value && value.oneOf ? value.oneOf.length > 0 : false);
 type PropsFromStore = Pick<GlobalState, 'bridgeInfo' | 'missingTranslations' | 'devices'>;
 export class SettingsPage extends Component<PropsFromStore & SettingsPageProps & BridgeApi & UtilsApi & WithTranslation<"setting">, SettingsPageState> {
     state = {
@@ -144,7 +144,7 @@ export class SettingsPage extends Component<PropsFromStore & SettingsPageProps &
     }
     renderTranslate(): JSX.Element {
         return <div className="p-3">
-            <p>Helo with translation, join us <a target="_blank" rel="noopener noreferrer" href="https://poeditor.com/join/project?hash=Az88waAhPd">POEditor</a></p>
+            <p>Hello with translation, join us <a target="_blank" rel="noopener noreferrer" href="https://poeditor.com/join/project?hash=Az88waAhPd">POEditor</a></p>
         </div>
     }
     renderAbout(): JSX.Element {
@@ -181,7 +181,7 @@ export class SettingsPage extends Component<PropsFromStore & SettingsPageProps &
         const { exportState, restartBridge, t } = this.props;
         return <div className="p-3">
             <Button className="btn btn-primary d-block mt-2" onClick={exportState}>{t('download_state')}</Button>
-            <Button className="btn btn-danger d-block mt-2" onClick={restartBridge} promt>{t('restart_zigbee2mqtt')}</Button>
+            <Button className="btn btn-danger d-block mt-2" onClick={restartBridge} prompt>{t('restart_zigbee2mqtt')}</Button>
         </div>
     }
     onSettingsSave = (e: ISubmitEvent<Record<string, unknown>>): void => {
@@ -213,10 +213,10 @@ export class SettingsPage extends Component<PropsFromStore & SettingsPageProps &
         const { keyName } = this.state;
         const { bridgeInfo: { config_schema: configSchema, config: originalConfig } } = this.props;
 
-        let configAndSchema = removePropertiesFromSchema(ingoredFields, cloneDeep(configSchema), cloneDeep<Record<string, unknown>>(originalConfig));
+        let configAndSchema = removePropertiesFromSchema(ignoredFields, cloneDeep(configSchema), cloneDeep<Record<string, unknown>>(originalConfig));
 
         let currentSchema: JSONSchema7 = configAndSchema.schema;
-        let currentConfig = configAndSchema.config[keyName] as Record<string, unknown>;
+        let currentConfig: Record<string, unknown>;
 
         if (keyName === ROOT_KEY_NAME) {
             const ignoreTabNames = this.getSettingsTabs().map(tab => tab.name);

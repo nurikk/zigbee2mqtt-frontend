@@ -7,7 +7,7 @@ type ScenePickerProps = {
     scenes: Scene[];
     onSceneSelected: (sceneId: Scene) => void;
 };
-export function ScenePicker(props: ScenePickerProps) {
+export function ScenePicker(props: ScenePickerProps): JSX.Element {
     const { t } = useTranslation("scene");
     const { onSceneSelected, scenes = [], value } = props;
     const onSelectHandler = (e: ChangeEvent<HTMLSelectElement>) => {

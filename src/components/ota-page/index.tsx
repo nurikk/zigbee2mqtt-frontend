@@ -34,7 +34,8 @@ const StateCell: FunctionComponent<OtaRowProps & OtaApi> = (props) => {
             </>
             );
         case "available":
-            return <Button<string> className="btn btn-danger btn-sm" onClick={updateOTA} item={device.friendly_name} promt>{t("update")}</Button>
+            return <Button<string> className="btn btn-danger btn-sm" onClick={updateOTA} item={device.friendly_name}
+                                   prompt>{t("update")}</Button>
         default:
             return <Button<string> className="btn btn-primary btn-sm" onClick={checkOTA} item={device.friendly_name} >{t('check')}</Button>
 
@@ -95,7 +96,7 @@ class OtaPage extends Component<PropsFromStore & OtaApi & WithTranslation<"ota">
                 Cell: ({ row: { original: { device } } }) => <OTALink device={device} />
             },
             {
-                Header: () => <Button className="btn btn-danger btn-sm" onClick={this.checkAllOTA} promt>{t('check_all')}</Button>,
+                Header: () => <Button className="btn btn-danger btn-sm" onClick={this.checkAllOTA} prompt>{t('check_all')}</Button>,
                 id: 'check_all',
                 Cell: ({ row: { original: { device, state } } }) => <StateCell device={device} state={state} {...otaApi} />
             },
@@ -103,7 +104,9 @@ class OtaPage extends Component<PropsFromStore & OtaApi & WithTranslation<"ota">
 
         return <div className="card">
             <div className="table-responsive">
-                <Table id="otaDevices" columns={columns} data={otaDevices} />
+                <Table id="otaDevices" 
+                columns={columns as unknown as Column<Record<string, unknown>>[]} 
+                data={otaDevices} />
             </div>
         </div>
     }

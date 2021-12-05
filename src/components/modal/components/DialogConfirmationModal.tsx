@@ -7,7 +7,7 @@ type DialogConfirmationModalProps = {
     onConfirmHandler(): void;
 }
 
-export const DialogConfirmationModal = (props: DialogConfirmationModalProps) => {
+export const DialogConfirmationModal = (props: DialogConfirmationModalProps): JSX.Element => {
     const { onConfirmHandler } = props;
     const { t } = useTranslation("common");
     const { hideModal } = useGlobalModalContext();

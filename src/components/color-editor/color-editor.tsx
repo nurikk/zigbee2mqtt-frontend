@@ -55,10 +55,10 @@ const rgbToTargetFormat = (source: string, targetFormat: ColorFormat): Record<st
     }
 
 }
-const pridePallete = ['#FF0018', '#FFA52C', '#FFFF41', '#008018', '#0000F9', '#86007D'];
+const pridePallet = ['#FF0018', '#FFA52C', '#FFFF41', '#008018', '#0000F9', '#86007D'];
 const ColorEditor: FunctionComponent<ColorProps & Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'value'>> = (props) => {
 
-    const { onChange, value = {} as AnyColor, format, steps = pridePallete, minimal, ...rest } = props;
+    const { onChange, value = {} as AnyColor, format, steps = pridePallet, minimal, ...rest } = props;
     const [currentColor, setCurrentColor] = useState<string>(toRGB(value, format));
     useEffect(() => {
         setCurrentColor(toRGB(value, format))
