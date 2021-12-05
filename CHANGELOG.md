@@ -1,3 +1,16 @@
+## [0.6.56](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.55...0.6.56) (2021-12-05)
+
+
+### Bug Fixes
+
+* **build:** disable minimisation on dev env ([086309d](https://github.com/nurikk/zigbee2mqtt-frontend/commit/086309df3fc852517af92ce1d331af1e3280dbce))
+* **composite:** fix key ([668a8a1](https://github.com/nurikk/zigbee2mqtt-frontend/commit/668a8a16cbfc2eee116ff976341147c68e2918de))
+* **dashboard:** blacklist programming_mode and options ([6e5f449](https://github.com/nurikk/zigbee2mqtt-frontend/commit/6e5f449f0101de38d3c5c19f579f3a204046e0a3))
+* **enum:** use display value comp ([a8dfa5d](https://github.com/nurikk/zigbee2mqtt-frontend/commit/a8dfa5d43ffbec517746ca3afc6b78d9a86c99b8))
+* **i18n:** trim locales ([e713512](https://github.com/nurikk/zigbee2mqtt-frontend/commit/e71351274016b466dccee499e379962ab31ec87a))
+
+
+
 ## [0.6.55](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.54...0.6.55) (2021-12-04)
 
 
