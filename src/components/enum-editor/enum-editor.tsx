@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from "react";
 import Button from "../button";
 import cx from "classnames";
+import { DisplayValue } from "../display-value/DisplayValue";
 type Primitive = number | string;
 
 export type ValueWithLabel = {
@@ -49,7 +50,7 @@ const EnumEditor: FunctionComponent<EnumProps> = (props) => {
                 key={isPrimitive(v) ? v : v.name}
                 item={isPrimitive(v) ? v : v.value}
                 title={isPrimitive(v) ? v as string : v.description}
-            >{isPrimitive(v) ? v : v.name}</Button>)
+            >{isPrimitive(v) ? <DisplayValue value={v} name=""/> : v.name}</Button>)
         }
     </div>;
 }
