@@ -143,12 +143,14 @@ export const getCurrentTheme = (): Theme => local.getItem(THEME_STORAGE_KEY) as 
 export const saveCurrentTheme = (theme: string): void => local.setItem(THEME_STORAGE_KEY, theme);
 
 
-export const debounceArgs = (fn: (...args: any) => any, options: Record<string, any>) => {
+export const debounceArgs = (fn: (...args: any) => any, options?: Record<string, any>) => {
     let __dbArgs: any[] = [];
+    
     const __dbFn = debounce(() => {
         fn.call(undefined, __dbArgs);
         __dbArgs = []
-    }, undefined, options);
+    // @ts-ignore
+    }, options);
     return (...args) => {
         __dbArgs.push(...args);
         __dbFn();
