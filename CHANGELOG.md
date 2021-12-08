@@ -1,3 +1,17 @@
+## [0.6.59](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.58...0.6.59) (2021-12-08)
+
+
+### Bug Fixes
+
+* **ConfigureLogs:** hide description ([f36bfed](https://github.com/nurikk/zigbee2mqtt-frontend/commit/f36bfed1fc836059f40b1a93efe7ae9a7da1ae34))
+
+
+### Features
+
+* **i18n:** trim locales ([be3b3fb](https://github.com/nurikk/zigbee2mqtt-frontend/commit/be3b3fb114740d0081562deb360e6d81f9480584))
+
+
+
 ## [0.6.58](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.57...0.6.58) (2021-12-06)
 
 
