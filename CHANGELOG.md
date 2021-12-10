@@ -1,3 +1,17 @@
+## [0.6.60](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.59...0.6.60) (2021-12-10)
+
+
+### Bug Fixes
+
+* **DevicesTable:** fix data accessors ([c449073](https://github.com/nurikk/zigbee2mqtt-frontend/commit/c449073fa30258930a8e838eeaa5ecb2fc3e6213))
+
+
+### Features
+
+* **i18n:** trim locales ([39f0625](https://github.com/nurikk/zigbee2mqtt-frontend/commit/39f0625e9f24c4c08a22a7fd2fb9c3374305c1c2))
+
+
+
 ## [0.6.59](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.58...0.6.59) (2021-12-08)
 
 
