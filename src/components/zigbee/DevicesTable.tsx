@@ -26,13 +26,13 @@ export function DevicesTable(props: DevicesTableProps) {
     const { t } = useTranslation(["zigbee", "common", "avaliability"]);
     const lastSeenCol = lastSeenType !== "disable" ? [{
         id: 'last_seen',
-        Header: t('last_seen') as string,
+        Header: t('last_seen'),
         accessor: ({ state }) => lastSeen(state, lastSeenType)?.getTime(),
         Cell: ({ row: { original: { state } } }) => <LastSeen state={state} lastSeenType={lastSeenType} />,
     }] : [];
     const availabilityCol = availabilityFeatureEnabled ? [{
         id: 'availability',
-        Header: t('avaliability:avaliability') as string,
+        Header: t('avaliability:avaliability'),
         accessor: ({ availabilityState }) => availabilityState,
         Cell: ({ row: { original: { availabilityState, availabilityEnabledForDevice } } }) => {
             return <Availability
@@ -49,38 +49,38 @@ export function DevicesTable(props: DevicesTableProps) {
         },
         {
             id: 'pic',
-            Header: t('pic') as string,
+            Header: t('pic'),
             Cell: ({ row: { original: { device, state } } }) => <DeviceImage className={style["device-image"]} device={device} deviceStatus={state} />,
             accessor: rowData => rowData,
             disableSortBy: true,
         },
         {
             id: 'friendly_name',
-            Header: t('friendly_name') as string,
+            Header: t('friendly_name'),
             accessor: ({ device }) => device.friendly_name,
             Cell: ({ row: { original: { device } } }) => <Link to={genDeviceDetailsLink(device.ieee_address)}>{device.friendly_name}</Link>
         },
         {
             id: 'ieee_address',
-            Header: t('ieee_address') as string,
+            Header: t('ieee_address'),
             accessor: ({ device }) => [device.ieee_address, toHex(device.network_address, 4)].join(' '),
             Cell: ({ row: { original: { device } } }) => <>{device.ieee_address} ({toHex(device.network_address, 4)})</>,
         },
         {
             id: 'manufacturer',
-            Header: t('manufacturer') as string,
+            Header: t('manufacturer'),
             accessor: ({ device }) => [device.manufacturer, device.definition?.vendor].join(' '),
             Cell: ({ row: { original: { device } } }) => <VendorLink device={device} />
         },
         {
             id: 'model',
-            Header: t('model') as string,
+            Header: t('model'),
             accessor: ({ device }) => [device.model_id, device.definition?.model].join(' '),
             Cell: ({ row: { original: { device } } }) => <ModelLink device={device} />
         },
         {
             id: 'lqi',
-            Header: t('lqi') as string,
+            Header: t('lqi'),
             accessor: ({ state }) => state.linkquality,
             Cell: ({ row: { original: { state } } }) => <DisplayValue value={state.linkquality} name="linkquality" />,
         },
@@ -88,7 +88,7 @@ export function DevicesTable(props: DevicesTableProps) {
         ...availabilityCol,
         {
             id: 'power',
-            Header: t('power') as string,
+            Header: t('power'),
             accessor: ({ state }) => state.battery,
             Cell: ({ row: { original: { state, device } } }) => <PowerSource source={device.power_source} battery={state.battery as number} batteryLow={state.battery_low as boolean} />,
         },
