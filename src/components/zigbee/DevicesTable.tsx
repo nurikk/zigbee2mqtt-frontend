@@ -69,13 +69,13 @@ export function DevicesTable(props: DevicesTableProps) {
         {
             id: 'manufacturer',
             Header: t('manufacturer'),
-            accessor: ({ device }) => [device.manufacturer, device.definition?.vendor].join(' '),
+            accessor: ({ device }) => [device.definition?.vendor, device.manufacturer].join(' '),
             Cell: ({ row: { original: { device } } }) => <VendorLink device={device} />
         },
         {
             id: 'model',
             Header: t('model'),
-            accessor: ({ device }) => [device.model_id, device.definition?.model].join(' '),
+            accessor: ({ device }) => [device.definition?.model, device.model_id].join(' '),
             Cell: ({ row: { original: { device } } }) => <ModelLink device={device} />
         },
         {
@@ -89,7 +89,7 @@ export function DevicesTable(props: DevicesTableProps) {
         {
             id: 'power',
             Header: t('power'),
-            accessor: ({ state }) => state.battery,
+            accessor: ({ state, device }) => [state.battery, device.definition?.power].join(' '),
             Cell: ({ row: { original: { state, device } } }) => <PowerSource source={device.power_source} battery={state.battery as number} batteryLow={state.battery_low as boolean} />,
         },
         {
