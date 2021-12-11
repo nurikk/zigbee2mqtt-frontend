@@ -55,3 +55,9 @@ body {
 .glyphicon-arrow-down::before {
     content: "\f063";
 }
+
+
+.dropdown-menu {
+    max-height: 280px;
+    overflow-y: auto;
+}

@@ -8,7 +8,6 @@ import cx from "classnames";
 import { Link, NavLink } from 'react-router-dom';
 import useComponentVisible from '../../hooks/useComponentVisible';
 import { Device } from '../../types';
-import style from "./style.css";
 import { useOnClickOutside } from '../../hooks/useOnClickOutside';
 import { BridgeApi } from '../../actions/BridgeApi';
 import { ThemeSwitcher } from '../theme-switcher';
@@ -89,7 +88,7 @@ const StartStopJoinButton: FunctionComponent<StartStopJoinButtonProps> = ({ devi
             {routers.length ? (<><Button<boolean> type="button" onClick={setIsComponentVisible} item={!isComponentVisible} className="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-expanded="false">
                 <span className="visually-hidden">{t('toggle_dropdown')}</span>
             </Button>
-                <ul ref={ref as RefObject<HTMLUListElement>} className={cx('dropdown-menu', style['scrollable-menu'], { show: isComponentVisible })}>
+                <ul ref={ref as RefObject<HTMLUListElement>} className={cx('dropdown-menu', { show: isComponentVisible })}>
                     <li key='all'>
                         <Button className="dropdown-item" onClick={selectAndHide}>{t('all')}</Button>
                     </li>
