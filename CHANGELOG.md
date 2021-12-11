@@ -1,3 +1,12 @@
+## [0.6.61](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.60...0.6.61) (2021-12-11)
+
+
+### Bug Fixes
+
+* **dropdowns:** make dropdowns scrollable ([a14c6e0](https://github.com/nurikk/zigbee2mqtt-frontend/commit/a14c6e03cc65d09ef311cb28e28babe2cfeb1bcb))
+
+
+
 ## [0.6.60](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.59...0.6.60) (2021-12-10)
 
 
