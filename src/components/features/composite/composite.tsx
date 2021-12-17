@@ -42,8 +42,13 @@ export class Composite extends Component<CompositeProps & WithTranslation<"compo
         }
     }
     onCompositeFeatureApply = (): void=> {
-        const { onChange, feature: { endpoint, property } } = this.props;
-        onChange(endpoint as Endpoint, property ? { [property]: this.state } : this.state);
+        const { onChange, deviceState, feature: { endpoint, property, features } } = this.props;
+
+        const properties = features.map(f => f.property);
+        const compositePropertiesState = properties.reduce((acc, p) => ({ ...acc, [p]: deviceState[p]}), {});
+        const compositeState = {...compositePropertiesState, ...this.state};
+
+        onChange(endpoint as Endpoint, property ? { [property]: compositeState } : compositeState);
     }
 
     onRead = (endpoint: Endpoint, property: Record<string, unknown>): void=> {
@@ -64,6 +69,9 @@ export class Composite extends Component<CompositeProps & WithTranslation<"compo
         const isMoreThanOneFeature = features.length > 1;
         const doGroupingByEndpoint = !minimal;
         let result = [] as JSX.Element[];
+
+        const compositeDeviceState = {...deviceState, ...this.state};
+
         if (doGroupingByEndpoint) {
             const groupedFeatures = groupBy(features, f => f.endpoint ?? MAGIC_NO_ENDPOINT);
 
@@ -72,7 +80,7 @@ export class Composite extends Component<CompositeProps & WithTranslation<"compo
                     key={JSON.stringify(f)}
                     feature={f}
                     device={device}
-                    deviceState={deviceState}
+                    deviceState={compositeDeviceState}
                     onChange={this.onChange}
                     onRead={this.onRead}
                     featureWrapperClass={featureWrapperClass}
@@ -86,7 +94,7 @@ export class Composite extends Component<CompositeProps & WithTranslation<"compo
                     key={f.name + f.endpoint}
                     feature={f}
                     device={device}
-                    deviceState={deviceState}
+                    deviceState={compositeDeviceState}
                     onChange={this.onChange}
                     onRead={this.onRead}
                     featureWrapperClass={featureWrapperClass}
@@ -98,7 +106,7 @@ export class Composite extends Component<CompositeProps & WithTranslation<"compo
                 key={JSON.stringify(f)}
                 feature={f}
                 device={device}
-                deviceState={deviceState}
+                deviceState={compositeDeviceState}
                 onChange={this.onChange}
                 onRead={this.onRead}
                 featureWrapperClass={featureWrapperClass}
