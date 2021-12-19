@@ -154,7 +154,7 @@ function getConfig(production) {
                 "Access-Control-Allow-Origin": "*",
             },
             static: "./dist",
-            compress: true,
+            compress: false,
             host: "0.0.0.0",
             port: 3030,
             proxy: {
