@@ -1,3 +1,18 @@
+## [0.6.62](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.61...0.6.62) (2021-12-19)
+
+
+### Bug Fixes
+
+* **DeviceImage:** fix fallback logic ([5dd7f7d](https://github.com/nurikk/zigbee2mqtt-frontend/commit/5dd7f7da272c30b6db26ece11eb2eb58e53d3e90))
+
+
+### Features
+
+* **i18n:** trim locales ([33f56e4](https://github.com/nurikk/zigbee2mqtt-frontend/commit/33f56e4c9f133e1205d36c1207b750a7afb6369a))
+* **webpack:** don't compress on debug ([855ed79](https://github.com/nurikk/zigbee2mqtt-frontend/commit/855ed797535deb15acc4d3dad9a5c4879fa4e6a0))
+
+
+
 ## [0.6.61](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.60...0.6.61) (2021-12-11)
 
 
