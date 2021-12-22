@@ -1,3 +1,19 @@
+## [0.6.63](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.62...0.6.63) (2021-12-22)
+
+
+### Bug Fixes
+
+* **DeviceImage:** fix device prop ([4401445](https://github.com/nurikk/zigbee2mqtt-frontend/commit/4401445ef11213b83fe048dedead5d7fd6ce277f))
+* **icons:** don't load icons from cnd ([5e85897](https://github.com/nurikk/zigbee2mqtt-frontend/commit/5e858975519afbc649dccebb2c59b599d57fc029))
+
+
+### Features
+
+* **i18n:** import keys ([de5491f](https://github.com/nurikk/zigbee2mqtt-frontend/commit/de5491f16835603d3c37e932c1c6e2267e9261d2))
+* **i18n:** trim locales ([a5b4b6a](https://github.com/nurikk/zigbee2mqtt-frontend/commit/a5b4b6a9a05c1699004b303b1e6fa3df71b85a76))
+
+
+
 ## [0.6.62](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.61...0.6.62) (2021-12-19)
 
 
