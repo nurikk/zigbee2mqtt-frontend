@@ -34,7 +34,7 @@ const DeviceImage: FunctionComponent<DeviceImageProps & ImgHTMLAttributes<HTMLDi
 
     const { device = {} as Device, deviceStatus, type = "img", className, ...rest } = props;
     const { src } = useImage({
-        srcList: AVAILABLE_GENERATORS.map(fn => fn(props.device)) as string[],
+        srcList: AVAILABLE_GENERATORS.map(fn => fn(device)) as string[],
     });
 
     const otaState = (deviceStatus?.update ?? {}) as OTAState;
