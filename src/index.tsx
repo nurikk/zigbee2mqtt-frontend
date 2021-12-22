@@ -1,5 +1,6 @@
 import 'react-app-polyfill/stable';
 import "notyf/notyf.min.css";
+import "@fortawesome/fontawesome-free/css/all.css";
 import "./styles/styles.global.scss";
 
 import React, { FunctionComponent, Suspense } from 'react';
