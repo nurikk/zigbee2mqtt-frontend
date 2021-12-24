@@ -1114,12 +1114,17 @@
         "download_state": "Download Status",
         "experimental": "Experimentell",
         "external_converters": "Externe Konverter",
+        "frontend": "Frontend",
         "frontend_version": "Frontend Version",
         "main": "Hauptseite",
+        "mqtt": "MQTT",
         "ota": "OTA Updates",
+        "passlist": "Zugangsliste",
+        "raw": "Roh",
         "restart_zigbee2mqtt": "Zigbee2MQTT neustarten",
         "serial": "Seriell",
         "settings": "Einstellungen",
+        "tools": "Werkzeuge",
         "zigbee2mqtt_version": "Zigbee2MQTT Version",
         "translate": "Übersetzen",
         "stats": "Statistiken"
@@ -1201,7 +1206,7 @@
         "remove_all": "Alle entfernen",
         "add": "Hinzufügen",
         "select_scene": "Szene auswählen",
-        "scene_name": "Szenen Name"
+        "scene_name": "Szenenname"
     },
     "stats": {
         "byType": "nach Typ",
@@ -1209,12 +1214,15 @@
         "byVendor": "nach Hersteller",
         "byModel": "nach Modell",
         "total": "Gesamt",
-        "EndDevice": "Endgerät"
+        "EndDevice": "Endgerät",
+        "Router": "Router"
     },
     "avaliability": {
         "avaliability": "Verfügbarkeit",
         "disabled": "Deaktiviert",
-        "enabled": "aktiviert"
+        "enabled": "Aktiviert",
+        "offline": "Offline",
+        "online": "Online"
     },
     "settingsSchemaDescriptions": {
         "Home Assistant integration (MQTT discovery)": "Integration von Home Assistant (MQTT-Erkennung)",
