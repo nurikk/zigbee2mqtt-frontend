@@ -1,3 +1,12 @@
+## [0.6.65](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.64...0.6.65) (2021-12-25)
+
+
+### Features
+
+* **SettingsPage:** add coordinator ieee address ([7aa40d5](https://github.com/nurikk/zigbee2mqtt-frontend/commit/7aa40d53466efabee08827717446354a13cf8fdd))
+
+
+
 ## [0.6.64](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.63...0.6.64) (2021-12-24)
 
 
