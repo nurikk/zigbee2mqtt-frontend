@@ -161,6 +161,7 @@ export class SettingsPage extends Component<PropsFromStore & SettingsPageProps &
             { translationKey: 'zigbee2mqtt_version', content: <>{zigbee2mqttVersion} {zigbee2mqttCommit}</> },
             { translationKey: 'coordinator_type', content: <>{bridgeInfo.coordinator?.type ?? t('common:unknown')}</> },
             { translationKey: 'coordinator_revision', content: <>{bridgeInfo.coordinator?.meta?.revision ?? t('common:unknown')}</> },
+            { translationKey: 'coordinator_ieee_address', content: <>{bridgeInfo.coordinator?.ieee_address ?? t('common:unknown')}</> },       
             { translationKey: 'frontend_version', content: FRONTEND_VERSION },
             { translationKey: 'stats', content: <Stats devices={devices} /> },
         ];

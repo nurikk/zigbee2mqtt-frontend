@@ -89,6 +89,7 @@ export interface BridgeInfo {
             revision?: string;
         };
         type?: string;
+        ieee_address: string;
     };
     device_options: Record<IEEEEAddress, unknown>;
     restart_required: boolean;

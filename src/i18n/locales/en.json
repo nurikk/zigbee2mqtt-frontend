@@ -1149,6 +1149,7 @@
         "blocklist": "Blocklist",
         "coordinator_revision": "Coordinator revision",
         "coordinator_type": "Coordinator type",
+        "coordinator_ieee_address": "Coordinator IEEE Address",
         "donate": "Donate",
         "donation_text": [
             "Hello, %username%, here you can thank us for hardworking",
