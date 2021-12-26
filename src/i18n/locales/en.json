@@ -474,7 +474,20 @@
         "Water Status of Regulator": "Water Status of Regulator",
         "Regulator role (Master vs Slave)": "Regulator role (Master vs Slave)",
         "State or sensor value": "State or sensor value",
-        "Manual start of siren": "Manual start of siren"
+        "Manual start of siren": "Manual start of siren",
+        "Number of digits after decimal point for temperature, takes into effect on next report of device.": "Number of digits after decimal point for temperature, takes into effect on next report of device.",
+        "Calibrates the temperature value (absolute offset), takes into effect on next report of device.": "Calibrates the temperature value (absolute offset), takes into effect on next report of device.",
+        "Number of digits after decimal point for humidity, takes into effect on next report of device.": "Number of digits after decimal point for humidity, takes into effect on next report of device.",
+        "Calibrates the humidity value (absolute offset), takes into effect on next report of device.": "Calibrates the humidity value (absolute offset), takes into effect on next report of device.",
+        "Number of digits after decimal point for pressure, takes into effect on next report of device.": "Number of digits after decimal point for pressure, takes into effect on next report of device.",
+        "Calibrates the pressure value (absolute offset), takes into effect on next report of device.": "Calibrates the pressure value (absolute offset), takes into effect on next report of device.",
+        "Time in seconds after which occupancy is cleared after detecting it (default 90 seconds).": "Time in seconds after which occupancy is cleared after detecting it (default 90 seconds).",
+        "Sends a message the last time occupancy was detected. When setting this for example to [10, 60] a `{\"no_occupancy_since\": 10}` will be send after 10 seconds and a `{\"no_occupancy_since\": 60}` after 60 seconds.": "Sends a message the last time occupancy was detected. When setting this for example to [10, 60] a `{\"no_occupancy_since\": 10}` will be send after 10 seconds and a `{\"no_occupancy_since\": 60}` after 60 seconds.",
+        "Number of digits after decimal point for illuminance, takes into effect on next report of device.": "Number of digits after decimal point for illuminance, takes into effect on next report of device.",
+        "Calibrates the illuminance value (percentual offset), takes into effect on next report of device.": "Calibrates the illuminance value (percentual offset), takes into effect on next report of device.",
+        "Number of digits after decimal point for illuminance_lux, takes into effect on next report of device.": "Number of digits after decimal point for illuminance_lux, takes into effect on next report of device.",
+        "Calibrates the illuminance_lux value (percentual offset), takes into effect on next report of device.": "Calibrates the illuminance_lux value (percentual offset), takes into effect on next report of device.",
+        "Controls the transition time (in seconds) of on/off, brightness, color temperature (if applicable) and color (if applicable) changes. Defaults to `0` (no transition).": "Controls the transition time (in seconds) of on/off, brightness, color temperature (if applicable) and color (if applicable) changes. Defaults to `0` (no transition)."
     },
     "featureNames": {
         "action": "Action",
@@ -1199,6 +1212,7 @@
     "zigbee": {
         "actions": "Actions",
         "attribute": "Attribute",
+        "avaliability.avaliability": "Availablity",
         "battery": "Battery",
         "block_join": "Block from joining again",
         "cluster": "Cluster",
