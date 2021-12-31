@@ -1,3 +1,12 @@
+## [0.6.67](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.66...0.6.67) (2021-12-31)
+
+
+### Bug Fixes
+
+* **exposes:** dont include endpoint into topic name ([2885ebc](https://github.com/nurikk/zigbee2mqtt-frontend/commit/2885ebc295ec5e4cff1fc3ab902460f46648ebfd))
+
+
+
 ## [0.6.66](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.65...0.6.66) (2021-12-31)
 
 
