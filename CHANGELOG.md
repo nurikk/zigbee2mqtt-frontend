@@ -1,3 +1,12 @@
+## [0.6.66](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.65...0.6.66) (2021-12-31)
+
+
+### Features
+
+* **i18n:** trim locales ([34f9c51](https://github.com/nurikk/zigbee2mqtt-frontend/commit/34f9c512469667c8e36f7e10420d4c3f997add7f))
+
+
+
 ## [0.6.65](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.64...0.6.65) (2021-12-25)
 
 
