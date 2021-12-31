@@ -8,7 +8,7 @@
         "*.css"
     ],
     "name": "zigbee2mqtt-frontend",
-    "version": "0.6.66",
+    "version": "0.6.67",
     "license": "GPL-3.0",
     "scripts": {
         "build": "npm run clean && webpack --config ./webpack.config.js --mode production",
@@ -108,7 +108,7 @@
         "webpack-cli": "4.9.1",
         "webpack-dev-server": "4.6.0",
         "zigbee-herdsman": "^0.13.175",
-        "zigbee-herdsman-converters": "^14.0.336",
+        "zigbee-herdsman-converters": "^14.0.365",
         "zip-webpack-plugin": "^4.0.1"
     },
     "main": "index.js",
