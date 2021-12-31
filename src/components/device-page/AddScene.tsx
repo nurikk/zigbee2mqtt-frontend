@@ -51,7 +51,7 @@ export function AddScene(props: AddSceneProps & Pick<SceneApi, 'sceneStore'> & P
                 device={target as Device}
                 deviceState={deviceState}
                 onChange={(endpoint, value) => {
-                    setDeviceState(`${target.friendly_name}${endpoint ? `/${endpoint}` : ''}`, value)
+                    setDeviceState(target.friendly_name, value)
                 }}
                 onRead={() => {
                     // empty function

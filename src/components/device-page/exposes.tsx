@@ -22,10 +22,10 @@ function Exposes(props: ExposesProps & PropsFromStore & StateApi) {
     if (device.definition?.exposes?.length) {
         return <Composite showEndpointLabels={true} feature={{ features: device.definition.exposes } as CompositeFeature} type="composite" device={device} deviceState={deviceState}
             onChange={(endpoint, value) => {
-                setDeviceState(`${device.friendly_name}${endpoint ? `/${endpoint}` : ''}`, value)
+                setDeviceState(device.friendly_name, value)
             }}
             onRead={(endpoint, value) => {
-                getDeviceState(`${device.friendly_name}${endpoint ? `/${endpoint}` : ''}`, value)
+                getDeviceState(device.friendly_name, value)
             }}
             featureWrapperClass={FeatureWrapper}
         />

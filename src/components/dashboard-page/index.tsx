@@ -78,10 +78,10 @@ const Dashboard: React.FC<PropsFromStore & StateApi> = (props) => {
                         device={device}
                         deviceState={deviceState}
                         onChange={(endpoint, value) =>
-                            setDeviceState(`${device.friendly_name}${endpoint ? `/${endpoint}` : ''}`, value)
+                            setDeviceState(device.friendly_name, value)
                         }
                         onRead={(endpoint, value) =>
-                            getDeviceState(`${device.friendly_name}${endpoint ? `/${endpoint}` : ''}`, value)
+                            getDeviceState(device.friendly_name, value)
                         }
                         featureWrapperClass={DashboardFeatureWrapper}
                         lastSeenType={bridgeInfo.config.advanced.last_seen}
