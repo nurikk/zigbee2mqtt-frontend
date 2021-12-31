@@ -38,6 +38,6 @@ npm run build //compiled files at ./dist
 
 # Sponsors
 
-[JetHome](http://jethome.ru/)
+[JetHome](https://jethome.ru/)
 
 
