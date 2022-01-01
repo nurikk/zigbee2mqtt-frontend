@@ -130,7 +130,7 @@
         "Number of digits after decimal point for illuminance_lux, takes into effect on next report of device.": "照度 (勒克斯) 小数点后的数字，在设备的下次报告中生效。",
         "Number of digits after decimal point for pressure, takes into effect on next report of device.": "气压的小数点后的数字，在设备的下一次报告中生效。",
         "Number of digits after decimal point for temperature, takes into effect on next report of device.": "温度的小数点后的数字，在设备的下一次报告中生效。",
-        "Presets for sensivity for presence and movement": "预设对存在和运动的敏感度",
+        "Presets for sensitivity for presence and movement": "预设对存在和运动的敏感度",
         "PROGRAMMING MODE ⏱ - In this mode, the device executes a preset week programming temperature time and temperature. ": "编程模式 ⏱ - 在这种模式下，设备执行预设的一周编程温度时间和温度。",
         "Sends a message the last time occupancy was detected. When setting this for example to [10, 60] a `{\"no_occupancy_since\": 10}` will be send after 10 seconds and a `{\"no_occupancy_since\": 60}` after 60 seconds.": "发出最后一次检测到占用情况的信息。例如，当设置为[10, 60]时，10秒后将发送`{\"no_occupancy_since\": 10}`将在10秒后发送，`{\"no_occupancy_since\": 60}`在60秒后发送。",
         "Sensitivity of the radar": "雷达敏感度",

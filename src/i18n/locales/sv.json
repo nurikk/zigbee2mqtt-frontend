@@ -128,7 +128,7 @@
         "Number of digits after decimal point for illuminance_lux, takes into effect on next report of device.": "Antal siffror efter decimalkomma för illuminance_lux, träder i kraft vid nästa rapport om enheten.",
         "Number of digits after decimal point for pressure, takes into effect on next report of device.": "Antal siffror efter decimalkomma för tryck, träder i kraft vid nästa rapport från enheten.",
         "Number of digits after decimal point for temperature, takes into effect on next report of device.": "Antal siffror efter decimalkomma för temperatur, träder i kraft vid nästa rapport från enheten.",
-        "Presets for sensivity for presence and movement": "Förinställningar för känslighet för närvaro och rörelse",
+        "Presets for sensitivity for presence and movement": "Förinställningar för känslighet för närvaro och rörelse",
         "PROGRAMMING MODE ⏱ - In this mode, the device executes a preset week programming temperature time and temperature. ": "PROGRAMMERINGSLÄGE ⏱ - I detta läge kör enheten en förinställd veckoprogrammering av temperaturtid och temperatur.",
         "Sends a message the last time occupancy was detected. When setting this for example to [10, 60] a `{\"no_occupancy_since\": 10}` will be send after 10 seconds and a `{\"no_occupancy_since\": 60}` after 60 seconds.": "Skickar ett meddelande senaste gången beläggning upptäcktes. När du till exempel ställer in detta till [10, 60] kommer ett `{\"no_occupancy_since\": 10}` att skickas efter 10 sekunder och ett `{\"no_occupancy_since\": 60}` efter 60 sekunder.",
         "Sensitivity of the radar": "Radarns känslighet",
@@ -238,7 +238,7 @@
         "moving inside the range of the sensor": "rör sig inom sensorns räckvidd",
         "direction of movement from the point of view of the radar": "rörelseriktning från radarns synvinkel",
         "sensitivity of the radar": "radarns känslighet",
-        "presets for sensivity for presence and movement": "förinställningar för känslighet av närvaro och rörelse",
+        "presets for sensitivity for presence and movement": "förinställningar för känslighet av närvaro och rörelse",
         "O-Sensitivity mode": "O-känslighetsläge",
         "V-Sensitivity mode": "V-känslighetsläge",
         "Led status switch": "LED-statusbrytare",
@@ -1068,7 +1068,7 @@
         "l14": "N 14",
         "l15": "N 15",
         "l16": "N 16",
-        "sensivity": "Känslighet",
+        "sensitivity": "Känslighet",
         "consumer_overload": "Konsumentöverbelastning"
     },
     "groups": {

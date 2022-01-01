@@ -124,7 +124,7 @@
         "Number of digits after decimal point for illuminance_lux, takes into effect on next report of device.": "Nombre de décimales pour l'éclairement (lux), pris en compte au prochain rapport du périph.",
         "Number of digits after decimal point for pressure, takes into effect on next report of device.": "Nombre de décimales pour la pression, pris en compte au prochain rapport du périph.",
         "Number of digits after decimal point for temperature, takes into effect on next report of device.": "Nombre de décimales pour la température, pris en compte au prochain rapport du périph.",
-        "Presets for sensivity for presence and movement": "Pré-configuration pour la sensibilité de présence et mouvement",
+        "Presets for sensitivity for presence and movement": "Pré-configuration pour la sensibilité de présence et mouvement",
         "PROGRAMMING MODE ⏱ - In this mode, the device executes a preset week programming temperature time and temperature. ": "MODE PROGRAMMING ⏱ - Dans ce mode, la vanne utilise un horaire prédéfini d'heures et de température pour la semaine. ",
         "Sends a message the last time occupancy was detected. When setting this for example to [10, 60] a `{\"no_occupancy_since\": 10}` will be send after 10 seconds and a `{\"no_occupancy_since\": 60}` after 60 seconds.": "Envoi un message la dernière fois qu'une occupation a été détectée. Si vous configurez par exemple [10, 60] , un `{\"no_occupancy_since\": 10}` sera envoyé après 10 secondes et un `{\"no_occupancy_since\": 60}` après 60 secondes.",
         "Sensitivity of the radar": "Sensibilité du radar",
@@ -234,7 +234,7 @@
         "moving inside the range of the sensor": "Indique si un mouvement a été détecté dans le rayon du radar.",
         "direction of movement from the point of view of the radar": "Direction du mouvement du point de vue du radar",
         "sensitivity of the radar": "sensibilité du radar",
-        "presets for sensivity for presence and movement": "préréglage de sensibilité pour la présence et le mouvement",
+        "presets for sensitivity for presence and movement": "préréglage de sensibilité pour la présence et le mouvement",
         "O-Sensitivity mode": "Mode Sensibilité-O",
         "V-Sensitivity mode": "Mode Sensibilité-V",
         "Led status switch": "Interrupteur de statut LED",
@@ -1055,7 +1055,7 @@
         "l14": "N 14",
         "l15": "N 15",
         "l16": "N 16",
-        "sensivity": "Sensibilité",
+        "sensitivity": "Sensibilité",
         "consumer_overload": "Surcharge Consommateur"
     },
     "groups": {

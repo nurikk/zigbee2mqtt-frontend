@@ -130,7 +130,7 @@
         "Number of digits after decimal point for illuminance_lux, takes into effect on next report of device.": "Кількість знаків після коми для освітленності в люксах, вступає в силу при наступному звіті приладу.",
         "Number of digits after decimal point for pressure, takes into effect on next report of device.": "Кількість знаків після коми для тиску, вступає в силу при наступному звіті приладу.",
         "Number of digits after decimal point for temperature, takes into effect on next report of device.": "Кількість знаків після коми для температури, вступає в силу при наступному звіті приладу.",
-        "Presets for sensivity for presence and movement": "Пресети для чутливості присутності та руху",
+        "Presets for sensitivity for presence and movement": "Пресети для чутливості присутності та руху",
         "PROGRAMMING MODE ⏱ - In this mode, the device executes a preset week programming temperature time and temperature. ": "РЕЖИМ ПРОГРАМУВАННЯ ⏱ - У цьому режимі клапан використовує заздалегідь визначений розклад годин і температури на тиждень.",
         "Sends a message the last time occupancy was detected. When setting this for example to [10, 60] a `{\"no_occupancy_since\": 10}` will be send after 10 seconds and a `{\"no_occupancy_since\": 60}` after 60 seconds.": "Надсилає повідомлення, коли востаннє було виявлено присутність. Якщо встановити, наприклад, значення [10, 60], `{\"no_occupancy_since\": 10}` буде надіслано через 10 секунд, а `{\"no_occupancy_since\": 60}` через 60 секунд.",
         "Sensitivity of the radar": "Чутливість радара",
@@ -241,7 +241,7 @@
         "moving inside the range of the sensor": "переміщення всередині діапазону дії датчика",
         "direction of movement from the point of view of the radar": "напрямок руху з точки зору радіолокатора",
         "sensitivity of the radar": "Чутливість радара",
-        "presets for sensivity for presence and movement": "Пресети для чутливості для присутності та руху",
+        "presets for sensitivity for presence and movement": "Пресети для чутливості для присутності та руху",
         "O-Sensitivity mode": "Режим О-чутливості",
         "V-Sensitivity mode": "Режим V-чутливості",
         "Led status switch": "Перемикач світлодіода статусу",
@@ -1084,7 +1084,7 @@
         "l15": "Л 15",
         "l16": "Л 16",
         "led": "СД",
-        "sensivity": "Чутливість",
+        "sensitivity": "Чутливість",
         "consumer_overload": "Перевантаження споживача"
     },
     "groups": {

@@ -131,7 +131,7 @@
         "Number of digits after decimal point for illuminance_lux, takes into effect on next report of device.": "Liczba miejsc po przecinku dla natężenia światła w lux, efektywne przy następnym raporcie z urządzenia.",
         "Number of digits after decimal point for pressure, takes into effect on next report of device.": "Liczba miejsc po przecinku dla ciśnienia, efektywne przy następnym raporcie z urządzenia.",
         "Number of digits after decimal point for temperature, takes into effect on next report of device.": "Liczba miejsc po przecinku dla temperatury, efektywne przy następnym raporcie z urządzenia.",
-        "Presets for sensivity for presence and movement": "Ustawienia czułości dla obecności i wykrywania ruchu",
+        "Presets for sensitivity for presence and movement": "Ustawienia czułości dla obecności i wykrywania ruchu",
         "PROGRAMMING MODE ⏱ - In this mode, the device executes a preset week programming temperature time and temperature. ": "TRYB PROGRAMOWANIA ⏱ - w tym trybie urządzenie wykonuje zaprogramowany tygodniowy harmonogram czasu i temperatury.",
         "Sends a message the last time occupancy was detected. When setting this for example to [10, 60] a `{\"no_occupancy_since\": 10}` will be send after 10 seconds and a `{\"no_occupancy_since\": 60}` after 60 seconds.": "Wysyła komunikat z ostatnim czasem wykrycia ruchu. Przykładowo, po ustawieniu wartości [10, 60] komunikat `{\"no_occupancy_since\": 10}` zostanie wysłany po 10 sekundach oraz komunikat `{\"no_occupancy_since\": 60}` po 60 sekundach.",
         "Sensitivity of the radar": "Czułość radaru",

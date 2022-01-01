@@ -131,7 +131,7 @@
         "Number of digits after decimal point for illuminance_lux, takes into effect on next report of device.": "Number of digits after decimal point for illuminance_lux, takes into effect on next report of device.",
         "Number of digits after decimal point for pressure, takes into effect on next report of device.": "Number of digits after decimal point for pressure, takes into effect on next report of device.\n",
         "Number of digits after decimal point for temperature, takes into effect on next report of device.": "Number of digits after decimal point for temperature, takes into effect on next report of device.",
-        "Presets for sensivity for presence and movement": "Presets for sensivity for presence and movement",
+        "Presets for sensitivity for presence and movement": "Presets for sensitivity for presence and movement",
         "PROGRAMMING MODE ⏱ - In this mode, the device executes a preset week programming temperature time and temperature. ": "PROGRAMMING MODE ⏱ - In this mode, the device executes a preset week programming temperature time and temperature.",
         "Sends a message the last time occupancy was detected. When setting this for example to [10, 60] a `{\"no_occupancy_since\": 10}` will be send after 10 seconds and a `{\"no_occupancy_since\": 60}` after 60 seconds.": "Sends a message the last time occupancy was detected. When setting this for example to [10, 60] a `{\"no_occupancy_since\": 10}` will be send after 10 seconds and a `{\"no_occupancy_since\": 60}` after 60 seconds.",
         "Sensitivity of the radar": "Radar sensitivity",
@@ -242,7 +242,7 @@
         "moving inside the range of the sensor": "moving inside the range of the sensor",
         "direction of movement from the point of view of the radar": "direction of movement from the point of view of the radar",
         "sensitivity of the radar": "sensitivity of the radar",
-        "presets for sensivity for presence and movement": "presets for sensivity for presence and movement",
+        "presets for sensitivity for presence and movement": "presets for sensitivity for presence and movement",
         "O-Sensitivity mode": "O-Sensitivity mode",
         "V-Sensitivity mode": "V-Sensitivity mode",
         "Led status switch": "LED status switch",
@@ -1087,7 +1087,7 @@
         "l15": "L 15",
         "l16": "L 16",
         "led": "LED",
-        "sensivity": "Sensivity",
+        "sensitivity": "sensitivity",
         "consumer_overload": "Consumer overload"
     },
     "groups": {

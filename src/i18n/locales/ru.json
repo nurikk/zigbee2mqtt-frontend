@@ -129,7 +129,7 @@
         "Number of digits after decimal point for illuminance_lux, takes into effect on next report of device.": "Количество знаков после запятой для освещенности в люксах, вступает в силу при следующем отчете устройства.",
         "Number of digits after decimal point for pressure, takes into effect on next report of device.": "Количество цифр после десятичной точки для давления, вступает в силу при следующем отчете устройства.",
         "Number of digits after decimal point for temperature, takes into effect on next report of device.": "Количество цифр после десятичной точки для температуры, вступает в силу при следующем отчете устройства.",
-        "Presets for sensivity for presence and movement": "Предустановки чувствительности к присутствию и движению",
+        "Presets for sensitivity for presence and movement": "Предустановки чувствительности к присутствию и движению",
         "PROGRAMMING MODE ⏱ - In this mode, the device executes a preset week programming temperature time and temperature. ": "РЕЖИМ ПРОГРАММИРОВАНИЯ ⏱ - В этом режиме клапан использует заранее определенное расписание часов и температуры в неделю.",
         "Sends a message the last time occupancy was detected. When setting this for example to [10, 60] a `{\"no_occupancy_since\": 10}` will be send after 10 seconds and a `{\"no_occupancy_since\": 60}` after 60 seconds.": "Отправляет сообщение о последнем обнаружении занятости. При установке, например, на [10, 60], `{\"no_occupancy_since\": 10}` будет отправлено через 10 секунд, а `{\"no_occupancy_since\": 60}` через 60 секунд.",
         "Sensitivity of the radar": "Чувствительность радара",
@@ -543,7 +543,7 @@
         "output_status": "Состояние выхода",
         "room_status_code": "Код состояния комнаты",
         "system_status_code": "Код состояния системы",
-        "sensivity": "Чувствительность"
+        "sensitivity": "Чувствительность"
     },
     "groups": {
         "add_to_group": "Добавить в группу",
