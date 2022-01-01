@@ -1272,7 +1272,7 @@
         "Adapter concurrency (e.g. 2 for CC2531 or 16 for CC26X2R1) (default: null, uses recommended value)": "Parallelität des Adapters (z. B. 2 für CC2531 oder 16 für CC26X2R1) (Standard: null, verwendet den empfohlenen Wert)",
         "Adapter delay": "Adapterverzögerung",
         "Use IKEA TRADFRI OTA test server, see OTA updates documentation": "Verwende den IKEA TRADFRI OTA-Testserver, siehe Dokumentation zu OTA-Updates",
-        "Home Assistant legacy triggers, when enabled Zigbee2mqt will send an empty 'action' or 'click' after one has been send. A 'sensor_action' and 'sensor_click' will be discoverd": "Home Assistant Legacy-Trigger, wenn aktiviert, sendet Zigbee2mqt eine leere 'Aktion' oder 'Klick', nachdem eine gesendet wurde. Eine 'sensor_action' und 'sensor_click' werden erkannt",
+        "Home Assistant legacy triggers, when enabled Zigbee2mqt will send an empty 'action' or 'click' after one has been send. A 'sensor_action' and 'sensor_click' will be discovered": "Home Assistant Legacy-Trigger, wenn aktiviert, sendet Zigbee2mqt eine leere 'Aktion' oder 'Klick', nachdem eine gesendet wurde. Eine 'sensor_action' und 'sensor_click' werden erkannt",
         "The host running syslogd, defaults to localhost.": "Der Host, auf dem syslogd ausgeführt wird, ist standardmäßig localhost.",
         "The port on the host that syslog is running on, defaults to syslogd's default port.": "Der Port auf dem Host, auf dem syslog ausgeführt wird, ist standardmäßig der Standardport von syslogd.",
         "The network protocol to log over (e.g. tcp4, udp4, tls4, unix, unix-connect, etc).": "Das Netzwerkprotokoll für die Anmeldung (z. B. tcp4, udp4, tls4, Unix, Unix-Connect usw.).",
