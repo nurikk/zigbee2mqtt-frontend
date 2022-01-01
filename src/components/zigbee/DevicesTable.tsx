@@ -23,7 +23,7 @@ export type DevicesTableProps = {
 
 export function DevicesTable(props: DevicesTableProps) {
     const { data, lastSeenType, availabilityFeatureEnabled } = props;
-    const { t } = useTranslation(["zigbee", "common", "avaliability"]);
+    const { t } = useTranslation(["zigbee", "common", "availability"]);
     const lastSeenCol = lastSeenType !== "disable" ? [{
         id: 'last_seen',
         Header: t('last_seen'),
@@ -32,7 +32,7 @@ export function DevicesTable(props: DevicesTableProps) {
     }] : [];
     const availabilityCol = availabilityFeatureEnabled ? [{
         id: 'availability',
-        Header: t('avaliability:avaliability'),
+        Header: t('availability:availability'),
         accessor: ({ availabilityState }) => availabilityState,
         Cell: ({ row: { original: { availabilityState, availabilityEnabledForDevice } } }) => {
             return <Availability

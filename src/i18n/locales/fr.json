@@ -1220,8 +1220,8 @@
         "EndDevice": "Périphériques terminaux",
         "Router": "Routeurs"
     },
-    "avaliability": {
-        "avaliability": "Disponibilité",
+    "availability": {
+        "availability": "Disponibilité",
         "offline": "Hors ligne",
         "online": "En ligne",
         "disabled": "Désactivé",

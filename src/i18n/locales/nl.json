@@ -349,8 +349,8 @@
         "byModel": "Op model",
         "total": "Totaal"
     },
-    "avaliability": {
-        "avaliability": "Beschikbaar",
+    "availability": {
+        "availability": "Beschikbaar",
         "disabled": "Uitgeschakeld"
     }
 }

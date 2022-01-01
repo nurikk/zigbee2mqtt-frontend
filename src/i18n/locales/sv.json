@@ -1238,8 +1238,8 @@
         "total": "Totalt",
         "EndDevice": "Slutenheter"
     },
-    "avaliability": {
-        "avaliability": "Tillgänglighet",
+    "availability": {
+        "availability": "Tillgänglighet",
         "disabled": "Inaktiverad",
         "enabled": "Aktiverad"
     },

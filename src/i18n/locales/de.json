@@ -1212,8 +1212,8 @@
         "total": "Gesamt",
         "EndDevice": "Endgerät"
     },
-    "avaliability": {
-        "avaliability": "Verfügbarkeit",
+    "availability": {
+        "availability": "Verfügbarkeit",
         "disabled": "Deaktiviert",
         "enabled": "aktiviert"
     },

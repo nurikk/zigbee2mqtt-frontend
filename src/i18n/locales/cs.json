@@ -383,8 +383,8 @@
         "total": "celkové",
         "EndDevice": "Koncové zařízení"
     },
-    "avaliability": {
-        "avaliability": "Dostupnost",
+    "availability": {
+        "availability": "Dostupnost",
         "offline": "Nedostupné",
         "online": "Dostupné",
         "disabled": "Zakázáno",

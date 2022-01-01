@@ -483,8 +483,8 @@
         "EndDevice": "终端设备",
         "Router": "路由设备"
     },
-    "avaliability": {
-        "avaliability": "可用性",
+    "availability": {
+        "availability": "可用性",
         "offline": "离线",
         "online": "在线",
         "disabled": "已禁用",

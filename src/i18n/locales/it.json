@@ -1233,8 +1233,8 @@
         "total": "Totale",
         "EndDevice": "Dispositivi finali"
     },
-    "avaliability": {
-        "avaliability": "Disponibilità",
+    "availability": {
+        "availability": "Disponibilità",
         "disabled": "Disabilitato",
         "enabled": "Abilitato"
     },

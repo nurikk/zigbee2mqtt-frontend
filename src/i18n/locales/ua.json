@@ -1257,8 +1257,8 @@
         "EndDevice": "Кінцевий прилад",
         "Router": "Роутер"
     },
-    "avaliability": {
-        "avaliability": "Доступність",
+    "availability": {
+        "availability": "Доступність",
         "offline": "Офлайн",
         "online": "Онлайн",
         "disabled": "Вимкнено",

@@ -491,8 +491,8 @@
         "EndDevice": "Urządzenia końcowe",
         "Router": "Rutery"
     },
-    "avaliability": {
-        "avaliability": "Dostępność",
+    "availability": {
+        "availability": "Dostępność",
         "offline": "Poza siecią",
         "online": "W sieci",
         "disabled": "Wyłączone",

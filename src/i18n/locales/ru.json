@@ -716,8 +716,8 @@
         "EndDevice": "Конечные устройства",
         "Router": "Роутеры"
     },
-    "avaliability": {
-        "avaliability": "Доступность",
+    "availability": {
+        "availability": "Доступность",
         "offline": "Оффлайн",
         "online": "В сети",
         "disabled": "Выключен",

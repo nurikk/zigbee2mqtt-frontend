@@ -1265,8 +1265,8 @@
         "EndDevice": "End devices",
         "Router": "Router"
     },
-    "avaliability": {
-        "avaliability": "Availability",
+    "availability": {
+        "availability": "Availability",
         "offline": "Offline",
         "online": "Online",
         "disabled": "Disabled",

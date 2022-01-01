@@ -11,7 +11,7 @@ export type AvailabilityStateProps = {
 }
 
 export function Availability(props: AvailabilityStateProps): JSX.Element {
-    const { t } = useTranslation(["avaliability"]);
+    const { t } = useTranslation(["availability"]);
     const { availability, availabilityFeatureEnabled = true, availabilityEnabledForDevice = true } = props;
     if (availabilityFeatureEnabled && availabilityEnabledForDevice) {
         return <span className={cx({
