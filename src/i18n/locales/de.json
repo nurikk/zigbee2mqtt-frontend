@@ -1048,7 +1048,6 @@
         "system_status_water": "Systemstatus Wasser",
         "multimaster_role": "Multimaster-Rolle",
         "l3": "L 4",
-        "sensitivity": "Sensibilität",
         "consumer_overload": "Verbraucherüberlastung"
     },
     "groups": {

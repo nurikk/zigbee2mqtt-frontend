@@ -542,8 +542,7 @@
         "service_mode": "Сервисный режим",
         "output_status": "Состояние выхода",
         "room_status_code": "Код состояния комнаты",
-        "system_status_code": "Код состояния системы",
-        "sensitivity": "Чувствительность"
+        "system_status_code": "Код состояния системы"
     },
     "groups": {
         "add_to_group": "Добавить в группу",
