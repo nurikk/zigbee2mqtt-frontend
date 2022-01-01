@@ -159,7 +159,7 @@
         "State of the lock": "锁的状态",
         "Actual state of the lock": "锁的实际状态",
         "User ID to set or clear the pincode for": "用于设置或清空密码的用户ID。",
-        "Type of user, unrestrictied: owner (default), (year|week)_day_schedule: user has ability to open lock based on specific time period, master: user has ability to both program and operate the door lock, non_access: user is recognized by the lock but does not have the ability to open the lock": "用户类型，非限制性：所有者（默认），（年|周）_日_日程：用户有能力根据特定的时间段打开锁，主：用户有能力同时编程和操作门锁，非访问：用户被锁识别，但没有能力打开锁。",
+        "Type of user, unrestricted: owner (default), (year|week)_day_schedule: user has ability to open lock based on specific time period, master: user has ability to both program and operate the door lock, non_access: user is recognized by the lock but does not have the ability to open the lock": "用户类型，非限制性：所有者（默认），（年|周）_日_日程：用户有能力根据特定的时间段打开锁，主：用户有能力同时编程和操作门锁，非访问：用户被锁识别，但没有能力打开锁。",
         "Whether the user is enabled/disabled": "用户是否被启用/停用",
         "Pincode to set, set pincode to null to clear": "要设置的PIN，将PIN设置为空以清除",
         "Click mode, fast: only supports single click which will be send immediately after clicking, multi: supports more events like double and hold": "点击模式，快速：只支持单次点击，点击后会立即发送，多重：支持更多事件，如双击和长按",
