@@ -49,7 +49,7 @@
     },
     "extensions": {
         "create_new_extension": "Create new extension",
-        "extension_name_propmt": "Enter new extension name",
+        "extension_name_prompt": "Enter new extension name",
         "select_extension_to_edit": "Select extension to edit"
     },
     "featureDescriptions": {

@@ -48,7 +48,7 @@
     },
     "extensions": {
         "create_new_extension": "Створити нове розширення",
-        "extension_name_propmt": "Введіть назву нового розширення",
+        "extension_name_prompt": "Введіть назву нового розширення",
         "select_extension_to_edit": "Виберіть розширення для редагування"
     },
     "featureDescriptions": {

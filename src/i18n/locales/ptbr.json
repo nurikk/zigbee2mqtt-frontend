@@ -39,7 +39,7 @@
     },
     "extensions": {
         "create_new_extension": "Criar nova extensão",
-        "extension_name_propmt": "Insira o nome da nova extensão",
+        "extension_name_prompt": "Insira o nome da nova extensão",
         "select_extension_to_edit": "Selecione a extensão para editar"
     },
     "featureDescriptions": {

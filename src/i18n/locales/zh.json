@@ -44,7 +44,7 @@
     },
     "extensions": {
         "create_new_extension": "建立新擴充",
-        "extension_name_propmt": "輸入新擴充的名稱",
+        "extension_name_prompt": "輸入新擴充的名稱",
         "select_extension_to_edit": "選擇擴充以編輯"
     },
     "featureDescriptions": {

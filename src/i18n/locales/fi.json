@@ -46,7 +46,7 @@
     },
     "extensions": {
         "create_new_extension": "Luo uusi laajennus",
-        "extension_name_propmt": "Anna laajennuksen nimi",
+        "extension_name_prompt": "Anna laajennuksen nimi",
         "select_extension_to_edit": "Valitse muokattava laajennus"
     },
     "featureDescriptions": {

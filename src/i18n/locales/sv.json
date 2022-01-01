@@ -47,7 +47,7 @@
     },
     "extensions": {
         "create_new_extension": "Skapa nytt tillägg",
-        "extension_name_propmt": "Ange nytt tilläggsnamn",
+        "extension_name_prompt": "Ange nytt tilläggsnamn",
         "select_extension_to_edit": "Välj tillägg att redigera"
     },
     "featureDescriptions": {

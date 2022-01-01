@@ -48,7 +48,7 @@
     },
     "extensions": {
         "create_new_extension": "创建新扩展",
-        "extension_name_propmt": "输入新扩展的名称",
+        "extension_name_prompt": "输入新扩展的名称",
         "select_extension_to_edit": "选择扩展以编辑"
     },
     "featureDescriptions": {

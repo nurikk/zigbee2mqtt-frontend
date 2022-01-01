@@ -45,7 +45,7 @@
     },
     "extensions": {
         "create_new_extension": "Nieuwe extensie aanmaken",
-        "extension_name_propmt": "Voer nieuwe extensienaam in",
+        "extension_name_prompt": "Voer nieuwe extensienaam in",
         "select_extension_to_edit": "Selecteer extensie om te bewerken"
     },
     "featureDescriptions": {

@@ -45,7 +45,7 @@
     },
     "extensions": {
         "create_new_extension": "Vytvořit nové rozšíření",
-        "extension_name_propmt": "Zadejte nový název rozšíření",
+        "extension_name_prompt": "Zadejte nový název rozšíření",
         "select_extension_to_edit": "Vyberte rozšíření, které chcete upravit"
     },
     "featureDescriptions": {

@@ -33,7 +33,7 @@
     },
     "extensions": {
         "create_new_extension": "새 익스텐션 만들기",
-        "extension_name_propmt": "새 익스텐션 이름 입력",
+        "extension_name_prompt": "새 익스텐션 이름 입력",
         "select_extension_to_edit": "바꿀 익스텐션 선택"
     },
     "featureNames": {

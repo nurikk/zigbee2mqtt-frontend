@@ -34,7 +34,7 @@ export default function CreateNewExtension(props: CreateNewExtensionProps): JSX.
                 {t('create_new_extension')}
             </ModalHeader>
             <ModalBody>
-                <label htmlFor="exampleFormControlInput1" className="form-label">{t('extension_name_propmt')}</label>
+                <label htmlFor="exampleFormControlInput1" className="form-label">{t('extension_name_prompt')}</label>
                 <input id="exampleFormControlInput1" className="form-control" type="text" name="" value={extensionName} onChange={(e) => setExtensionName(e.target.value)}></input>
             </ModalBody>
             <ModalFooter>
