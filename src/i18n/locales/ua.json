@@ -1302,7 +1302,7 @@
         "Log rotation": "Обертання журналу",
         "Create symlink to current logs in the log directory": "Створіть символьне посилання на поточні журнали в каталозі журналів",
         "Logging level": "Рівень ведення журналів",
-        "Output location of the log, leave empty to supress logging": "Вивести розташування журналу, залиште порожнім, щоб придавити ведення журналу",
+        "Output location of the log, leave empty to suppress logging": "Вивести розташування журналу, залиште порожнім, щоб придавити ведення журналу",
         "Location of log directory": "Розташування каталогу журналів",
         "Log file name, can also contain timestamp": "Ім'я файлу журналу, також може містити мітку часу",
         "Baud rate speed for serial port, this can be anything firmware support but default is 115200 for Z-Stack and EZSP, 38400 for Deconz, however note that some EZSP firmware need 57600": "Швидкість передачі даних для послідовного порту, це може бути будь-яка підтримка мікропрограми, але за замовчуванням 115200 для Z-Stack і EZSP, 38400 для Deconz. Зверніть увагу, що деякі мікропрограми EZSP потребують 57600",

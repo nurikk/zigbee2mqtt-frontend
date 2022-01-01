@@ -509,7 +509,7 @@
         "Log rotation": "日志滚动",
         "Create symlink to current logs in the log directory": "在日志目录中创建指向当前日志的符号链接",
         "Logging level": "日志等级",
-        "Output location of the log, leave empty to supress logging": "日志的输出位置，留空表示不记录日志。",
+        "Output location of the log, leave empty to suppress logging": "日志的输出位置，留空表示不记录日志。",
         "Location of log directory": "日志目录的位置",
         "Log file name, can also contain timestamp": "日志文件名称，也可以包含时间戳",
         "Baud rate speed for serial port, this can be anything firmware support but default is 115200 for Z-Stack and EZSP, 38400 for Deconz, however note that some EZSP firmware need 57600": "串行端口的波特率速度，这可以是任何固件支持的，但对于Z-Stack和EZSP来说，默认是115200，对于Deconz来说是38400，但请注意，一些EZSP固件需要57600。",

@@ -1281,7 +1281,7 @@
         "Log rotation": "Loggrotation",
         "Create symlink to current logs in the log directory": "Skapa symbollänk till aktuella loggar i loggkatalogen",
         "Logging level": "Loggningsnivå",
-        "Output location of the log, leave empty to supress logging": "Utdataplats för loggen, lämna tom för att undertrycka loggning",
+        "Output location of the log, leave empty to suppress logging": "Utdataplats för loggen, lämna tom för att undertrycka loggning",
         "Location of log directory": "Plats för loggkatalogen",
         "Log file name, can also contain timestamp": "Loggfilens namn, kan också innehålla tidsstämpel",
         "Baud rate speed for serial port, this can be anything firmware support but default is 115200 for Z-Stack and EZSP, 38400 for Deconz, however note that some EZSP firmware need 57600": "Baudhastighet för seriell port, detta kan vara allt stöd för firmware men standard är 115200 för Z-Stack och EZSP, 38400 för Deconz, notera dock att vissa EZSP firmware behöver 57600",

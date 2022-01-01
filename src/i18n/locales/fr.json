@@ -1265,7 +1265,7 @@
         "Log rotation": "Rotation des journaux",
         "Create symlink to current logs in the log directory": "Créer un lien symbolique vers les journaux actuels dans le dossier des journaux",
         "Logging level": "Niveau des journaux",
-        "Output location of the log, leave empty to supress logging": "Emplacement de sortie des journaux, laisser vide pour supprimer la journalisation",
+        "Output location of the log, leave empty to suppress logging": "Emplacement de sortie des journaux, laisser vide pour supprimer la journalisation",
         "Location of log directory": "Emplacement du dossier des journaux",
         "Log file name, can also contain timestamp": "Nom de fichier des journaux, peut aussi contenir un horodatage",
         "Baud rate speed for serial port, this can be anything firmware support but default is 115200 for Z-Stack and EZSP, 38400 for Deconz, however note that some EZSP firmware need 57600": "Vitesse de débit en bauds pour le port série, cela peut être n'importe quel micrologiciel pris en charge, mais la valeur par défaut est 115200 pour Z-Stack et EZSP, 38400 pour Deconz, cependant notez que certains micrologiciels EZSP ont besoin de 57600",

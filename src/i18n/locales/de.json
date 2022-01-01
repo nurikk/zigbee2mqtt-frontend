@@ -1255,7 +1255,7 @@
         "Log rotation": "Protokollrotation",
         "Create symlink to current logs in the log directory": "Symlink zu aktuellen Logs im Log-Verzeichnis erstellen",
         "Logging level": "Protokollierungsebene",
-        "Output location of the log, leave empty to supress logging": "Ausgabeort des Protokolls, leer lassen, um die Protokollierung zu unterdrücken",
+        "Output location of the log, leave empty to suppress logging": "Ausgabeort des Protokolls, leer lassen, um die Protokollierung zu unterdrücken",
         "Location of log directory": "Speicherort des Protokollverzeichnisses",
         "Log file name, can also contain timestamp": "Name der Protokolldatei, kann auch Zeitstempel enthalten",
         "Baud rate speed for serial port, this can be anything firmware support but default is 115200 for Z-Stack and EZSP, 38400 for Deconz, however note that some EZSP firmware need 57600": "Baudrate für den seriellen Port, dies kann alles sein, was von der Firmware unterstützt wird, aber der Standardwert ist 115200 für Z-Stack und EZSP, 38400 für Deconz. Beachte jedoch, dass einige EZSP-Firmware 57600 benötigt",

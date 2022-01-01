@@ -1310,7 +1310,7 @@
         "Log rotation": "Log rotation",
         "Create symlink to current logs in the log directory": "Create symlink to current logs in the log directory",
         "Logging level": "Logging level",
-        "Output location of the log, leave empty to supress logging": "Output location of the log, leave empty to supress logging",
+        "Output location of the log, leave empty to suppress logging": "Output location of the log, leave empty to suppress logging",
         "Location of log directory": "Location of log directory",
         "Log file name, can also contain timestamp": "Log file name, can also contain timestamp",
         "Baud rate speed for serial port, this can be anything firmware support but default is 115200 for Z-Stack and EZSP, 38400 for Deconz, however note that some EZSP firmware need 57600": "Baud rate speed for serial port, this can be anything firmware support but default is 115200 for Z-Stack and EZSP, 38400 for Deconz, however note that some EZSP firmware need 57600",

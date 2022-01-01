@@ -1277,7 +1277,7 @@
         "Log rotation": "Rotazione registro",
         "Create symlink to current logs in the log directory": "Crea un collegamento simbolico ai registri correnti nella directory dei registri",
         "Logging level": "Livello di registrazione",
-        "Output location of the log, leave empty to supress logging": "Posizione di output del registro, lasciare vuoto per sopprimere la registrazione",
+        "Output location of the log, leave empty to suppress logging": "Posizione di output del registro, lasciare vuoto per sopprimere la registrazione",
         "Location of log directory": "Posizione della directory del registro",
         "Log file name, can also contain timestamp": "Nome del file di registro, può contenere anche timestamp",
         "Baud rate speed for serial port, this can be anything firmware support but default is 115200 for Z-Stack and EZSP, 38400 for Deconz, however note that some EZSP firmware need 57600": "Velocità di trasmissione in baud per la porta seriale, questo può essere qualsiasi supporto firmware, ma l'impostazione predefinita è 115200 per Z-Stack ed EZSP, 38400 per Deconz, tuttavia si noti che alcuni firmware EZSP richiedono 57600",
