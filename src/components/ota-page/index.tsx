@@ -1,11 +1,11 @@
-
 import React, { Component, FunctionComponent } from "react";
-
+import style from "./style.css";
 import { connect } from "unistore/react";
 import actions from "../../actions/actions";
 import { OtaApi } from "../../actions/OtaApi";
 import { GlobalState } from "../../store";
 import Button from "../button";
+import DeviceImage from "../device-image";
 import { genDeviceDetailsLink, toHHMMSS } from "../../utils";
 import { Link } from "react-router-dom";
 import { Device, DeviceState, OTAState } from "../../types";
@@ -70,6 +70,11 @@ class OtaPage extends Component<PropsFromStore & OtaApi & WithTranslation<"ota">
         const otaApi = { checkOTA, updateOTA };
         const otaDevices = this.getAllOtaDevices();
         const columns: Column<OtaGridData>[] = [
+            {
+                Header: t('zigbee:pic') as string,
+                Cell: ({ row: { original: { device, state } } }) => <DeviceImage className={style["device-image"]} device={device} deviceStatus={state} />,
+                disableSortBy: true,
+            },
             {
                 Header: t('zigbee:friendly_name') as string,
                 accessor: ({ device }) => device.friendly_name,
