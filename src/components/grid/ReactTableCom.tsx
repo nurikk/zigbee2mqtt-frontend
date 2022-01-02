@@ -103,7 +103,7 @@ export const Table: React.FC<Props> = ({ columns, data, id }) => {
           <tr {...headerGroup.getHeaderGroupProps()}>
             {headerGroup.headers.map(column => (
               <th className="text-nowrap" {...column.getHeaderProps(column.getSortByToggleProps())}>
-                <span className={cx({ 'btn-link mr-1': column.canSort })}>{column.render('Header')}</span>
+                <span className={cx({ 'btn-link me-1': column.canSort })}>{column.render('Header')}</span>
                 <span>
                   <i className={cx('fa', {
                     'fa-sort-amount-down invisible': !column.isSorted,
