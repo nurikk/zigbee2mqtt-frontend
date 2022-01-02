@@ -9,7 +9,7 @@ import { connect } from "unistore/react";
 import { GlobalState, OnlineOrOffline } from "../../store";
 import get from 'lodash/get';
 import DeviceImage from "../device-image";
-import { ModelLink, VendorLink } from "../vendor-links/verndor-links";
+import { ModelLink, VendorLink } from "../vendor-links/vendor-links";
 import PowerSource from "../power-source";
 import { LastSeen } from "../LastSeen";
 import { WithTranslation, withTranslation } from "react-i18next";
