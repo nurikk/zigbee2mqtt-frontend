@@ -39,7 +39,7 @@ body:
     validations:
       required: true
     attributes:
-      label: Did you donwload state.json.zip?
+      label: Did you download state.json.zip?
       description: The file from error page (blinking link) or `Zigbee2MQTT frontend -> Settings -> Tools -> Download state`.<br> [How to attach file](https://docs.github.com/en/github/writing-on-github/working-with-advanced-formatting/attaching-files)<br>**NOT** `data/state.json` from zigbee2mqtt folder
       multiple: false
       options:
