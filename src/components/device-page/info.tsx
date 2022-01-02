@@ -23,7 +23,7 @@ type DeviceInfoProps = {
 }
 type PropsFromStore = Pick<GlobalState, 'deviceStates' | 'bridgeInfo' | 'availability'>;
 
-// [Flower sensor](http://modkam.ru/?p=1700)
+// [Flower sensor](https://modkam.ru/?p=1700)
 const markdownLinkRegex = /\[(.*?)]\((.*?)\)/;
 
 const displayProps = [
