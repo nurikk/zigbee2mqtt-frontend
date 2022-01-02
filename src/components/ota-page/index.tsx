@@ -88,11 +88,10 @@ class OtaPage extends Component<PropsFromStore & OtaApi & WithTranslation<"ota">
             {
                 Header: t('zigbee:firmware_build_date') as string,
                 accessor: ({ device }) => device.date_code
-
             },
             {
                 Header: t('zigbee:firmware_version') as string,
-                accessor: ({ device }) => [device.model_id, device.definition?.model].join(' '),
+                accessor: ({ device }) => device.software_build_id,
                 Cell: ({ row: { original: { device } } }) => <OTALink device={device} />
             },
             {
