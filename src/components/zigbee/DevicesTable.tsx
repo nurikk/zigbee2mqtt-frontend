@@ -3,7 +3,7 @@ import style from "./style.css";
 import { genDeviceDetailsLink, lastSeen, toHex } from "../../utils";
 import { useTranslation } from "react-i18next";
 import DeviceImage from "../device-image";
-import { ModelLink, VendorLink } from "../vendor-links/verndor-links";
+import { ModelLink, VendorLink } from "../vendor-links/vendor-links";
 import { Link } from "react-router-dom";
 import { DisplayValue } from "../display-value/DisplayValue";
 import { LastSeen } from "../LastSeen";

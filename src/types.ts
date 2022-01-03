@@ -126,7 +126,7 @@ export interface BinaryFeature extends GenericExposedFeature {
 
 export interface CompositeFeature extends Omit<GenericExposedFeature, "type"> {
     type: CompositeFeatureType;
-    features: (GenericExposedFeature | CompositeFeature)[];
+    features: GenericOrCompositeFeature[];
 }
 
 export type GenericOrCompositeFeature = GenericExposedFeature | CompositeFeature;
@@ -186,8 +186,8 @@ export interface DeviceDefinition {
     model: string;
     supports: string;
     vendor: string;
-    exposes: GenericExposedFeature[] | CompositeFeature[];
-    options: GenericExposedFeature[] | CompositeFeature[];
+    exposes: GenericOrCompositeFeature[];
+    options: GenericOrCompositeFeature[];
     supports_ota: boolean;
     icon?: string;
 }

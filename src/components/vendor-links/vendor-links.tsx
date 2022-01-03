@@ -49,6 +49,10 @@ export const OTALink: React.FunctionComponent<VendorProps> = (props: VendorProps
             url = `https://ww8.ikea.com/ikeahomesmart/releasenotes/releasenotes.html`
             break
 
+        case "Philips":
+            url = `https://www.philips-hue.com/en-us/support/release-notes/${device.definition?.exposes.find((feature) => feature.type === 'light') ? 'lamps' : 'accessories' }`
+            break
+
         case "Ubisys":
             url = `https://www.ubisys.de/en/support/firmware/changelog-${device.definition?.model?.replace(/[-]/g, '').toLowerCase()}/`
             break
