@@ -1,3 +1,18 @@
+## [0.6.68](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.67...0.6.68) (2022-01-03)
+
+
+### Bug Fixes
+
+* **OtaPage:** fix firmware version sorting ([#1227](https://github.com/nurikk/zigbee2mqtt-frontend/issues/1227)) ([a118626](https://github.com/nurikk/zigbee2mqtt-frontend/commit/a118626948beeaba504cc612ad7cf5258a98b053))
+* **ReactTableCom:** update Bootstrap spacer class ([#1223](https://github.com/nurikk/zigbee2mqtt-frontend/issues/1223)) ([c4fb8fc](https://github.com/nurikk/zigbee2mqtt-frontend/commit/c4fb8fcebbc7dd5d25593275efb3f8fdb2445cfa))
+
+
+### Features
+
+* **OtaPage:** display device images ([#1228](https://github.com/nurikk/zigbee2mqtt-frontend/issues/1228)) ([7844013](https://github.com/nurikk/zigbee2mqtt-frontend/commit/7844013b4f486308a992e6194316c7ca320be41f))
+
+
+
 ## [0.6.67](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.66...0.6.67) (2021-12-31)
 
 
