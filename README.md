@@ -7,6 +7,10 @@
 ![](images/screenshot_home.png)
 ![](images/screenshot_map.png)
 
+# Translation
+
+You miss a translation? You want to help? You can contribute new languages and improvements via the external website [poeditor.com](https://poeditor.com/join/project?hash=Az88waAhPd).
+
 # Develop
 
 Install dependencies
