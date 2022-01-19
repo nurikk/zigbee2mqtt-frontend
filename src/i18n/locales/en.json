@@ -1235,7 +1235,6 @@
         "select_attribute": "Select attribute",
         "select_cluster": "Select cluster",
         "support_status": "Support status",
-        "undefined": "undefined",
         "unsupported": "Unsupported",
         "updating_firmware": "Updating firmware",
         "update_Home_assistant_entity_id": "Update Home Assistant entity ID",
