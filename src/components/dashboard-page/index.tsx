@@ -24,7 +24,7 @@ const genericRendererIgnoredNames = [
     'illuminance_lux', 'color_temp_startup', 'voltage',
     'strength', 'color_options', 'warning', 'position', 
     'operation_mode', 'operation_mode2', 'programming_mode', 
-    'options'];
+    'options', 'programming'];
 
 const whitelistFeatureNames = ['state', 'brightness', 'color_temp', 'mode', 'sound', 'occupancy', 'tamper', 'alarm'];
 const whitelistFeatureTypes = ['light'];
