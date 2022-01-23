@@ -1,3 +1,17 @@
+## [0.6.69](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.68...0.6.69) (2022-01-23)
+
+
+### Bug Fixes
+
+* **dashboard:** remove programming mode from dashboard ([5f03b16](https://github.com/nurikk/zigbee2mqtt-frontend/commit/5f03b16f86f50dd8047f78016edc9be3ab1e5bfa))
+
+
+### Features
+
+* **i18n:** trim locales ([b505cac](https://github.com/nurikk/zigbee2mqtt-frontend/commit/b505cacc548cc2f39640d0b48005fcb904748c1f))
+
+
+
 ## [0.6.68](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.67...0.6.68) (2022-01-03)
 
 
