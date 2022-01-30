@@ -72,7 +72,8 @@ type DevicePageProps = RouteComponentProps<UrlParams> & PropsFromStore & DeviceA
 
 function ContentRenderer(props: DevicePageProps): JSX.Element {
     const { match, devices, logs } = props;
-    const { readDeviceAttributes, writeDeviceAttributes, setDeviceOptions, bridgeInfo, deviceStates } = props;
+    const { readDeviceAttributes, writeDeviceAttributes, setDeviceOptions, executeCommand, 
+        bridgeInfo, deviceStates } = props;
     const { tab, dev } = match.params;
     const device = devices[dev];
     const deviceState = deviceStates[device.friendly_name] ?? {};
@@ -108,6 +109,7 @@ function ContentRenderer(props: DevicePageProps): JSX.Element {
                 logs={logs}
                 readDeviceAttributes={readDeviceAttributes}
                 writeDeviceAttributes={writeDeviceAttributes}
+                executeCommand={executeCommand}
             />
         case "scene":
             return <Scene device={device} deviceState={deviceState} />;

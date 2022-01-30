@@ -8,12 +8,13 @@ import AttributePicker, { AttributeDefinition } from "../attribute-picker";
 import Button from "../button";
 import { DeviceApi } from "../../actions/DeviceApi";
 import { LogMessage } from "../../store";
-import { ALL, LogRow } from "../logs-page";
 import { WithTranslation, withTranslation } from "react-i18next";
 import EndpointPicker from "../endpoint-picker";
 import { getEndpoints } from "../../utils";
+import { CommandExecutor } from "./CommandExecutor";
+import { LastLogResult } from "./LastLogResult";
 
-interface DevConsoleProps extends WithTranslation, Pick<DeviceApi, "readDeviceAttributes" | "writeDeviceAttributes">{
+interface DevConsoleProps extends WithTranslation, Pick<DeviceApi, 'executeCommand' | "readDeviceAttributes" | "writeDeviceAttributes"> {
     device: Device;
     logs: LogMessage[];
 }
@@ -59,6 +60,8 @@ const logStartingStrings = [
     "Publish 'set' 'write' to",
     "Wrote "
 ]
+
+
 export class DevConsole extends Component<DevConsoleProps, DevConsoleState> {
 
 
@@ -109,16 +112,6 @@ export class DevConsole extends Component<DevConsoleProps, DevConsoleState> {
         writeDeviceAttributes(device.friendly_name, endpoint, cluster, attributes, {});
     }
 
-    renderLastResult(): JSX.Element[] {
-        const { logs } = this.props;
-        const filtered = logs.filter(l => logStartingStrings.some(startString => l.message.startsWith(startString)));
-        const lastLogMessage = filtered.length > 0 ? filtered[filtered.length - 1] : null;
-        const res: JSX.Element[] = [];
-        if (lastLogMessage) {
-            res.push(<LogRow key="log" log={lastLogMessage} search={""} logLevel={ALL} />)
-        }
-        return res;
-    }
     onAttributeValueChange = (attribute: Attribute, value: unknown): void => {
         const { attributes } = this.state;
         const newAttributes = [...attributes];
@@ -153,7 +146,9 @@ export class DevConsole extends Component<DevConsoleProps, DevConsoleState> {
                         </Button>
                     </div>
                 </div>
-            </div></div>
+
+            </div>
+        </div>
         )
 
     }
@@ -197,11 +192,24 @@ export class DevConsole extends Component<DevConsoleProps, DevConsoleState> {
         </>
     }
     render(): JSX.Element {
-
+        const { executeCommand, logs, device } = this.props;
+        const logsFilterFn = (l: LogMessage) => logStartingStrings.some(startString => l.message.startsWith(startString))
         return <div>
-
-            {this.renderRead()}
-            {this.renderLastResult()}
+            <div className="card">
+                <div className="card-body">
+                    {this.renderRead()}
+                    <LastLogResult logs={logs} filterFn={logsFilterFn} />
+                </div>
+            </div>
+            <div className="card">
+                <div className="card-body">
+                    <CommandExecutor
+                        device={device}
+                        logs={logs}
+                        executeCommand={executeCommand}
+                    />
+                </div>
+            </div>
         </div>
     }
 }
