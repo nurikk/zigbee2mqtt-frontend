@@ -25,7 +25,7 @@ export type XYColor = {
 }
 export type AnyColor = RGBColor | XYColor | HueSaturationColor;
 export type DeviceState = Record<string, unknown>;
-export type Cluster = string;
+export type Cluster = string | number;
 export type Attribute = string;
 
 export type Endpoint = string | number;

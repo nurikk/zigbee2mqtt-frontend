@@ -80,7 +80,7 @@ export class BindRow extends Component<BindRowProps, BindRowState> {
         this.setState({ stateRule });
     }
 
-    getBidingParams(): { from: string; to: string; clusters: string[] } {
+    getBidingParams(): { from: string; to: string; clusters: Cluster[] } {
         const { device, groups, devices } = this.props;
         const { stateRule } = this.state;
         const from = `${device.friendly_name}/${stateRule.source.endpoint}`;

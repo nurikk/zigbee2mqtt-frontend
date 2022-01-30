@@ -29,7 +29,7 @@ export const CommandExecutor = (props: CommandExecutorProps) => {
         return payloadIsValid && !isNaN(parseInt(cluster)) && !isNaN(parseInt(command))
     }
     const onExecuteClick = () => {
-        executeCommand(device.friendly_name, endpoint, cluster, command, JSON.parse(payload));
+        executeCommand(device.friendly_name, endpoint, parseInt(cluster), parseInt(command), JSON.parse(payload));
     }
     const logsFilterFn = (l: LogMessage): boolean => {
         return l.message.startsWith('Invoked ');

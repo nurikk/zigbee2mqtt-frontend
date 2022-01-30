@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
-import { Device } from "../../types";
+import { Cluster, Device } from "../../types";
 import treeStyle from "./tree.css";
 
 interface ClustersProps {
@@ -8,7 +8,7 @@ interface ClustersProps {
 }
 type ClustersCompProps = {
     label: string;
-    clusters: string[];
+    clusters: Cluster[];
 }
 const ClustersComp: FunctionComponent<ClustersCompProps> = (props) => {
     const { label, clusters } = props;

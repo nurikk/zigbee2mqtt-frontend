@@ -21,17 +21,17 @@ export function MultiPicker(props: MultiPickerProps): JSX.Element {
     if (isClusterGroup(clusters)) {
         console.warn("Not implemented");
     } else {
-        options = [...clusters].sort((a, b) => a.localeCompare(b)).map(cluster => (
+        options = [...clusters].sort((a, b) => (a.toString()).localeCompare(b.toString())).map(cluster => (
             <div key={cluster} className="form-check form-check-inline">
                 <input className="form-check-input"
                     type="checkbox"
                     checked={value.includes(cluster)}
-                    name={cluster}
+                    name={cluster as string}
                     id={`${pickerId}_${cluster}`}
                     value={cluster}
                     onChange={onChangeHandler}
                     disabled={disabled} />
-                <label className="form-check-label" htmlFor={`${pickerId}_${cluster}`} title={cluster}>{clusterDescriptions[cluster] ?? cluster}</label>
+                <label className="form-check-label" htmlFor={`${pickerId}_${cluster}`} title={cluster as string}>{clusterDescriptions[cluster] ?? cluster}</label>
             </div>
         ));
     }
