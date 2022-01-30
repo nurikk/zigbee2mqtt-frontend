@@ -1,3 +1,12 @@
+## [0.6.71](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.70...0.6.71) (2022-01-30)
+
+
+### Bug Fixes
+
+* **dev-console:** fix cluster and command type ([881a84a](https://github.com/nurikk/zigbee2mqtt-frontend/commit/881a84a531e4341a6b8b7359bb4b905270b526bf))
+
+
+
 ## [0.6.70](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.69...0.6.70) (2022-01-30)
 
 
