@@ -1,3 +1,13 @@
+## [0.6.70](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.69...0.6.70) (2022-01-30)
+
+
+### Features
+
+* **dev-console:** add support for command ([7363a94](https://github.com/nurikk/zigbee2mqtt-frontend/commit/7363a94ceb8395a2a0ca22e3c7c7bb5a0865abf2))
+* **i18n:** import new translations ([ce4cb61](https://github.com/nurikk/zigbee2mqtt-frontend/commit/ce4cb616463a208937e82b45766b8d0aec75b065))
+
+
+
 ## [0.6.69](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.68...0.6.69) (2022-01-23)
 
 
