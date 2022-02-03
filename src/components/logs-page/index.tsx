@@ -48,7 +48,7 @@ export function LogRow(props: LogRowProps): JSX.Element {
         </code></div>
 }
 
-const logLevels = [ALL, 'debug', 'info', 'warn', 'error'];
+const logLevels = [ALL, 'debug', 'info', 'warning', 'error'];
 
 type PropsFromStore = Pick<GlobalState, 'bridgeInfo' | 'logs'>;
 export class LogsPage extends Component<PropsFromStore & BridgeApi & UtilsApi & WithTranslation<"logs">, LogsPageState> {
