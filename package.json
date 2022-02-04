@@ -76,7 +76,7 @@
         "html-webpack-plugin": "^5.5.0",
         "husky": "^7.0.4",
         "i18next": "^21.6.10",
-        "i18next-browser-languagedetector": "^6.1.2",
+        "i18next-browser-languagedetector": "^6.1.3",
         "i18next-http-backend": "^1.3.2",
         "jszip": "^3.7.1",
         "line-reader": "^0.4.0",
