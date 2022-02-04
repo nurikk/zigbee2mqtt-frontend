@@ -87,7 +87,7 @@
         "prettier": "^2.5.1",
         "react": "^17.0.1",
         "react-ace": "^9.5.0",
-        "react-app-polyfill": "^2.0.0",
+        "react-app-polyfill": "^3.0.0",
         "react-css-theme-switcher": "^0.3.0",
         "react-dom": "^17.0.1",
         "react-i18next": "^11.14.3",
