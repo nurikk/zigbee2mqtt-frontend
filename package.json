@@ -27,7 +27,7 @@
         "dist/*"
     ],
     "devDependencies": {
-        "@commitlint/cli": "^15.0.0",
+        "@commitlint/cli": "^16.1.0",
         "@commitlint/config-conventional": "^15.0.0",
         "@fortawesome/fontawesome-free": "^5.15.4",
         "@rjsf/core": "^3.2.1",
