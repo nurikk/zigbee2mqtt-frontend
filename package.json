@@ -39,7 +39,7 @@
         "@types/d3-force": "^3.0.3",
         "@types/d3-selection": "^3.0.2",
         "@types/d3-zoom": "^3.0.1",
-        "@types/file-saver": "^2.0.4",
+        "@types/file-saver": "^2.0.5",
         "@types/lodash": "^4.14.178",
         "@types/react": "^17.0.37",
         "@types/react-dom": "^17.0.11",
