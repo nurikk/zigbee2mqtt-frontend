@@ -57,7 +57,7 @@
         "color-convert": "^2.0.1",
         "compression-webpack-plugin": "^9.2.0",
         "concurrently": "^7.0.0",
-        "conventional-changelog-cli": "^2.1.1",
+        "conventional-changelog-cli": "^2.2.2",
         "copy-webpack-plugin": "^10.2.4",
         "css-loader": "^6.6.0",
         "d3-drag": "^3.0.0",
