@@ -97,7 +97,7 @@
         "react-transition-group": "^4.4.2",
         "reconnecting-websocket": "^4.4.0",
         "rimraf": "^3.0.2",
-        "sass": "^1.44.0",
+        "sass": "^1.49.7",
         "sass-loader": "^12.4.0",
         "timeago.js": "^4.0.2",
         "ts-loader": "^9.2.6",
