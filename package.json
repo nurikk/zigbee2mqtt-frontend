@@ -108,7 +108,7 @@
         "webpack-cli": "4.9.1",
         "webpack-dev-server": "4.7.4",
         "zigbee-herdsman": "^0.14.11",
-        "zigbee-herdsman-converters": "^14.0.409",
+        "zigbee-herdsman-converters": "^14.0.422",
         "zip-webpack-plugin": "^4.0.1"
     },
     "main": "index.js",
