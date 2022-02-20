@@ -1,3 +1,24 @@
+## [0.6.72](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.71...0.6.72) (2022-02-20)
+
+
+### Bug Fixes
+
+* **logs:** fix warning log level filter ([#1284](https://github.com/nurikk/zigbee2mqtt-frontend/issues/1284)) ([4f11e0f](https://github.com/nurikk/zigbee2mqtt-frontend/commit/4f11e0f3cadc3c836ff7e62f8329d40b4b8b01d4))
+* **scenes:** fix iteration over null scenes ([f005477](https://github.com/nurikk/zigbee2mqtt-frontend/commit/f005477e2b38c9c761520d0d8e6e58a7e9134d2d))
+
+
+### Features
+
+* **exposes:** implement list feature ([#1353](https://github.com/nurikk/zigbee2mqtt-frontend/issues/1353)) ([e2d617e](https://github.com/nurikk/zigbee2mqtt-frontend/commit/e2d617e242aa310e9558adc7d97c463c34780d8e))
+* **i18n:** update features descriptions ([c8b3af2](https://github.com/nurikk/zigbee2mqtt-frontend/commit/c8b3af23cdeca97801a2ca44e0a452e5e5c90abc))
+
+
+### Reverts
+
+* Revert "chore(deps-dev): bump react-router-dom from 5.3.0 to 6.2.1 (#1313)" ([f3f3e8a](https://github.com/nurikk/zigbee2mqtt-frontend/commit/f3f3e8a0df96c1f0afdd6099944e52b1e4e8ef21)), closes [#1313](https://github.com/nurikk/zigbee2mqtt-frontend/issues/1313)
+
+
+
 ## [0.6.71](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.70...0.6.71) (2022-01-30)
 
 
