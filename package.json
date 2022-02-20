@@ -30,7 +30,7 @@
         "@commitlint/cli": "^16.1.0",
         "@commitlint/config-conventional": "^16.0.0",
         "@fortawesome/fontawesome-free": "^6.0.0",
-        "@rjsf/core": "^3.2.1",
+        "@rjsf/core": "^4.0.0",
         "@teamsupercell/typings-for-css-modules-loader": "^2.4.0",
         "@toolz/local-storage": "^1.0.5",
         "@types/classnames": "^2.3.1",
