@@ -11,7 +11,11 @@ let featureNames = {};
 const exportDescriptions = ({ features = [], description, name }) => {
     featureNames[name] = startCase(camelCase(name));
     featureDescriptions[description] = description;
-    features.forEach(exportDescriptions)
+    if (Array.isArray(features)) {
+        features.forEach(exportDescriptions)
+    } else {
+        features().forEach(exportDescriptions)
+    }
 }
 
 devices.forEach(device => {
