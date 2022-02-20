@@ -1,3 +1,18 @@
+## [0.6.73](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.72...0.6.73) (2022-02-20)
+
+
+### Bug Fixes
+
+* **dashboard:** add more features to blacklist ([6272ecc](https://github.com/nurikk/zigbee2mqtt-frontend/commit/6272eccbf443c73fe55e08a2c32b3e1b6a332257))
+* **i18n:** trim locales ([539f09e](https://github.com/nurikk/zigbee2mqtt-frontend/commit/539f09e9a8d99ade27e9c34ed3accf5a934565fc))
+
+
+### Features
+
+* **groups:** convert group rename modal to global ([7587ebf](https://github.com/nurikk/zigbee2mqtt-frontend/commit/7587ebf8a06089db0b2edc257395d6acba42e776))
+
+
+
 ## [0.6.72](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.71...0.6.72) (2022-02-20)
 
 
