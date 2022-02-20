@@ -23,7 +23,7 @@ export function getScenes(target: Group | Device): Scene[] {
         const scenes: Scene[] = [];
         Object.entries((target as Device).endpoints).forEach(
             ([endpoint, value]) => {
-                for (const _scene of value.scenes) {
+                for (const _scene of value.scenes ?? []) {
                     scenes.push({
                         ..._scene, ...{ endpoint }
                     })
@@ -32,7 +32,7 @@ export function getScenes(target: Group | Device): Scene[] {
         );
         return scenes;
     } else if ((target as WithScenes).scenes) {
-        return (target as WithScenes).scenes;
+        return (target as WithScenes).scenes as Scene[];
     }
     return []
 }

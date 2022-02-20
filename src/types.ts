@@ -199,7 +199,7 @@ export interface ReportingConfig {
     reportable_change: number;
 }
 export interface WithScenes {
-    scenes: Scene[];
+    scenes?: Scene[];
 }
 export interface EndpointDescription extends WithScenes{
     bindings: BindRule[];
