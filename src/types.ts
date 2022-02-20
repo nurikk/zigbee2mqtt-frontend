@@ -97,7 +97,7 @@ export interface BridgeInfo {
 
 export type PowerSource = "Battery" | "Mains (single phase)" | "DC Source";
 
-export type GenericFeatureType = "numeric" | "binary" | "enum" | "text";
+export type GenericFeatureType = "numeric" | "binary" | "enum" | "text" | "list";
 export type CompositeFeatureType = "fan" | "light" | "switch" | "cover" | "lock" | "composite" | "climate";
 
 
@@ -122,6 +122,11 @@ export interface BinaryFeature extends GenericExposedFeature {
     value_on: unknown;
     value_off: unknown;
     value_toggle?: unknown;
+}
+
+export interface ListFeature extends GenericExposedFeature {
+    type: "list";
+    item_type: "number";
 }
 
 export interface CompositeFeature extends Omit<GenericExposedFeature, "type"> {
