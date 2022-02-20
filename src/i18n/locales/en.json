@@ -1376,6 +1376,7 @@
         "new_group_name": "New group name",
         "new_group_name_placeholder": "example: my_bedroom_lights",
         "remove_group": "Remove group",
+        "rename_group": "Rename group",
         "group_id": "Group ID",
         "group_name": "Group Name",
         "group_members": "Group members",

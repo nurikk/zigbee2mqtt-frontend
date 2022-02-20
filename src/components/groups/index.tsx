@@ -5,21 +5,74 @@ import actions from "../../actions/actions";
 import { WithBridgeInfo, WithDevices, WithDeviceStates, WithGroups } from "../../store";
 import Button from "../button";
 
-import { RenameGroupForm } from "./RenameForm";
+import { RenameGroupForm } from "../modal/components/RenameGroupModal";
 import { GroupsApi } from "../../actions/GroupsApi";
-import { withTranslation, WithTranslation } from "react-i18next";
+import { useTranslation, withTranslation, WithTranslation } from "react-i18next";
 import { SceneApi } from "../../actions/SceneApi";
 import { Group } from "../../types";
 import { StateApi } from "../../actions/StateApi";
 import { Link } from "react-router-dom";
 import { Column } from "react-table";
 import { Table } from "../grid/ReactTableCom";
+import { MODAL_TYPES, useGlobalModalContext } from "../modal/GlobalModal";
 interface GroupsPageState {
     newGroupName: string;
     newGroupId?: number;
 }
 type PropsFromStore = WithDevices & WithDeviceStates & WithGroups & WithBridgeInfo;
 
+type GroupsTableProps = WithGroups & Pick<GroupsApi, 'removeGroup' | 'renameGroup'>;
+
+function GroupsTable(props: GroupsTableProps) {
+    const { t } = useTranslation(['groups']);
+    const { groups, removeGroup, renameGroup } = props;
+    debugger
+    const { showModal } = useGlobalModalContext();
+    const columns: Column<Group>[] = [
+        {
+            id: 'group_id',
+            Header: t('group_id') as string,
+            accessor: (group) => group.id,
+            Cell: ({ row: { original: group } }) => <Link to={`/group/${group.id}`}>{group.id}</Link>
+
+        },
+        {
+            id: 'friendly_name',
+            Header: t('group_name') as string,
+            accessor: (group) => group.friendly_name,
+            Cell: ({ row: { original: group } }) => <Link to={`/group/${group.id}`}>{group.friendly_name}</Link>
+
+        },
+
+        {
+            id: 'members',
+            Header: t('group_members') as string,
+            accessor: (group) => group.members.length ?? 0,
+        },
+        {
+            id: 'scenes',
+            Header: t('group_scenes') as string,
+            accessor: (group) => group.scenes?.length ?? 0,
+        },
+        {
+            Header: '',
+            id: 'actions',
+            Cell: ({ row: { original: group } }) => (
+                <div className="btn-group float-right btn-group-sm" role="group">
+                    <Button<void> className="btn btn-primary" onClick={() => showModal(MODAL_TYPES.RENAME_GROUP, { name: group.friendly_name, onRename: renameGroup })} title={t('rename_group')}><i className="fa fa-edit" /></Button>
+                    <Button<string> prompt title={t('remove_group')} item={group.friendly_name} onClick={removeGroup} className="btn btn-danger"><i className="fa fa-trash" /></Button>
+                </div>
+            )
+
+        },
+
+    ]
+    return <div className="card">
+        <Table id="groups"
+            columns={columns}
+            data={groups} />
+    </div>;
+}
 export class GroupsPage extends Component<PropsFromStore & StateApi & SceneApi & GroupsApi & WithTranslation<"groups">, GroupsPageState> {
     state: GroupsPageState = {
         newGroupName: '',
@@ -55,68 +108,24 @@ export class GroupsPage extends Component<PropsFromStore & StateApi & SceneApi &
             </div>
         )
     }
-    removeGroup = (friendlyName: string): void => {
-        const { removeGroup } = this.props;
-        removeGroup(friendlyName);
-    }
+
 
     renameGroup = (oldName: string, newName: string): void => {
+        debugger
         const { renameGroup } = this.props;
         renameGroup(oldName, newName);
     }
-    renderGroups(): JSX.Element {
-        const { groups, t } = this.props;
-        const columns: Column<Group>[] = [
-            {
-                id: 'group_id',
-                Header: t('group_id') as string,
-                accessor: (group) => group.id,
-                Cell: ({ row: { original: group } }) => <Link to={`/group/${group.id}`}>{group.id}</Link>
 
-            },
-            {
-                id: 'friendly_name',
-                Header: t('group_name') as string,
-                accessor: (group) => group.friendly_name,
-                Cell: ({ row: { original: group } }) => <Link to={`/group/${group.id}`}>{group.friendly_name}</Link>
-
-            },
-
-            {
-                id: 'members',
-                Header: t('group_members') as string,
-                accessor: (group) => group.members.length ?? 0,
-            },
-            {
-                id: 'scenes',
-                Header: t('group_scenes') as string,
-                accessor: (group) => group.scenes?.length ?? 0,
-            },
-            {
-                Header: '',
-                id: 'actions',
-                Cell: ({ row: { original: group } }) => (
-                    <div className="btn-group float-right btn-group-sm" role="group">
-                        <RenameGroupForm name={group.friendly_name} onRename={this.renameGroup} />
-                        <Button<string> prompt title={t('remove_group')} item={group.friendly_name} onClick={this.removeGroup} className="btn btn-danger"><i className="fa fa-trash" /></Button>
-                    </div>
-                )
-
-            },
-
-        ]
-        return <div className="card">
-            <Table id="groups" 
-            columns={columns} 
-            data={groups} />
-        </div>
-
-    }
 
     render(): JSX.Element {
+        const { groups, removeGroup, renameGroup } = this.props;
+        console.log({ groups })
         return <>
             {this.renderGroupCreationForm()}
-            {this.renderGroups()}
+            <GroupsTable
+                groups={groups}
+                removeGroup={removeGroup}
+                renameGroup={renameGroup} />
         </>
 
     }

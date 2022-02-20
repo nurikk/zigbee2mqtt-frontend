@@ -2,17 +2,20 @@ import React, { useState, createContext, useContext } from 'react';
 import { DialogConfirmationModal } from './components/DialogConfirmationModal';
 import { RemoveDeviceModal } from './components/RemoveDeviceModal';
 import { RenameDeviceModal } from './components/RenameDeviceModal';
+import { RenameGroupForm } from './components/RenameGroupModal';
 
 export const MODAL_TYPES = {
     RENAME_DEVICE: "RENAME_DEVICE",
     REMOVE_DEVICE: "REMOVE_DEVICE",
     DIALOG_CONFIRMATION: "DIALOG_CONFIRMATION",
+    RENAME_GROUP: "RENAME_GROUP",
 };
 
 const MODAL_COMPONENTS: Record<string, (props) => JSX.Element> = {
     [MODAL_TYPES.RENAME_DEVICE]: RenameDeviceModal,
     [MODAL_TYPES.REMOVE_DEVICE]: RemoveDeviceModal,
     [MODAL_TYPES.DIALOG_CONFIRMATION]: DialogConfirmationModal,
+    [MODAL_TYPES.RENAME_GROUP]: RenameGroupForm,
 
 };
 
@@ -54,6 +57,7 @@ export const GlobalModal: React.FC<Record<string, unknown>> = ({ children }) => 
     };
 
     const hideModal = () => {
+        debugger
         setStore({
             ...store,
             modalType: "",
