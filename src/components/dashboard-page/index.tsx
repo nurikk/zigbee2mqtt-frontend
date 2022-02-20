@@ -24,7 +24,10 @@ const genericRendererIgnoredNames = [
     'illuminance_lux', 'color_temp_startup', 'voltage',
     'strength', 'color_options', 'warning', 'position', 
     'operation_mode', 'operation_mode2', 'programming_mode', 
-    'options', 'programming'];
+    'options', 'programming', 
+    'schedule_monday', 'schedule_tuesday', 'schedule_wednesday', 
+    'schedule_thursday', 'schedule_friday', 'schedule_saturday', 'schedule_sunday',
+    'holiday_mode_date'];
 
 const whitelistFeatureNames = ['state', 'brightness', 'color_temp', 'mode', 'sound', 'occupancy', 'tamper', 'alarm'];
 const whitelistFeatureTypes = ['light'];

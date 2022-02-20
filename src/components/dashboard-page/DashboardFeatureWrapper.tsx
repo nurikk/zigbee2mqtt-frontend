@@ -87,7 +87,7 @@ export const DashboardFeatureWrapper: FunctionComponent<PropsWithChildren<Featur
             <i className={`fa fa-fw ${icon}`} />
         </div>}
         <div className="flex-shrink-1 flex-grow-1">{t(feature.name === 'state' ? feature.property : feature.name, {defaultValue: startCase(camelCase(feature.name === 'state' ? feature.property : feature.name))})}{feature.endpoint ? ` (${feature.endpoint})` : null}</div>
-        <div className="flex-shrink-0">{children}</div>
+        <div className="flex-shrink-1">{children}</div>
     </div>
 }
 
