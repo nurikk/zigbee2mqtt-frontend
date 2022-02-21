@@ -145,6 +145,7 @@ export interface NumericFeature extends GenericExposedFeature {
     type: "numeric";
     value_min?: number;
     value_max?: number;
+    value_step?: number;
     presets?: NumericFeaturePreset[];
 }
 

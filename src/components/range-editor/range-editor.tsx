@@ -7,6 +7,7 @@ import EnumEditor, { ValueWithLabelOrPrimitive } from "../enum-editor/enum-edito
 
 type RangeProps = {
     value: number;
+    valueStep?: number;
     unit?: string;
     onChange(value: number): void;
     steps?: ValueWithLabelOrPrimitive[];
@@ -14,7 +15,7 @@ type RangeProps = {
 }
 
 const RangeEditor: FunctionComponent<RangeProps & Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'>> = (props) => {
-    const { onChange, value, min, max, unit, steps, minimal, ...rest } = props;
+    const { onChange, value, valueStep, min, max, unit, steps, minimal, ...rest } = props;
     const [id, setId] = useState<string>(randomString(5));
     const [currentValue, setCurrentValue] = useState<number>(value)
 
@@ -29,7 +30,7 @@ const RangeEditor: FunctionComponent<RangeProps & Omit<InputHTMLAttributes<HTMLI
             id={id}
             min={min}
             max={max}
-            step={1}
+            step={valueStep}
             type="range"
             className="form-range form-control border-0"
             value={currentValue}
@@ -42,6 +43,7 @@ const RangeEditor: FunctionComponent<RangeProps & Omit<InputHTMLAttributes<HTMLI
             type="number"
             className={cx("form-control", { 'ms-1': showRange })}
             value={currentValue}
+            step={valueStep}
             onChange={e => setCurrentValue(e.target.valueAsNumber)}
             onBlur={() => onChange(currentValue)}
             min={min}
