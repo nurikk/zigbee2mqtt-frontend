@@ -26,7 +26,6 @@ type GroupsTableProps = WithGroups & Pick<GroupsApi, 'removeGroup' | 'renameGrou
 function GroupsTable(props: GroupsTableProps) {
     const { t } = useTranslation(['groups']);
     const { groups, removeGroup, renameGroup } = props;
-    debugger
     const { showModal } = useGlobalModalContext();
     const columns: Column<Group>[] = [
         {
@@ -111,7 +110,6 @@ export class GroupsPage extends Component<PropsFromStore & StateApi & SceneApi &
 
 
     renameGroup = (oldName: string, newName: string): void => {
-        debugger
         const { renameGroup } = this.props;
         renameGroup(oldName, newName);
     }

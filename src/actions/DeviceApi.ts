@@ -13,6 +13,7 @@ export interface DeviceApi {
     configureDevice(name: string): Promise<void>;
 
     setDeviceOptions(id: string, options: Record<string, unknown>): Promise<void>;
+    setDeviceDescription(id: string, description: string): Promise<void>;
 
     readDeviceAttributes(friendlyNameOrIEEEAddress: FriendlyName | IEEEEAddress, endpoint: Endpoint, cluster: Cluster, attributes: Attribute[], options: Record<string, unknown>): Promise<void>;
     writeDeviceAttributes(friendlyNameOrIEEEAddress: FriendlyName | IEEEEAddress, endpoint: Endpoint, cluster: Cluster, attributes: AttributeInfo[], options: Record<string, unknown>): Promise<void>;
@@ -48,6 +49,10 @@ export default {
 
     setDeviceOptions: (state, id: string, options: Record<string, unknown>): Promise<void> => {
         return api.send("bridge/request/device/options", { id, options });
+    },
+
+    setDeviceDescription: (state, id: string, description: string): Promise<void> => {
+        return api.send("bridge/request/device/options", { id, options: { description } });
     },
 
     readDeviceAttributes(state, id: FriendlyName | IEEEEAddress, endpoint: Endpoint, cluster: Cluster, attributes: Attribute[], options: Record<string, unknown>): Promise<void> {

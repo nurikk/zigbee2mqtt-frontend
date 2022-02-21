@@ -215,6 +215,9 @@ export interface EndpointDescription extends WithScenes{
         output: Cluster[];
     };
 }
+export interface WithDescription {
+    description: string;
+}
 export interface WithFriendlyName {
     friendly_name: FriendlyName;
 }
@@ -228,12 +231,12 @@ export type Scene = {
     name?: string;
     endpoint?: Endpoint;
 }
-export interface Group extends WithFriendlyName, WithScenes {
+export interface Group extends WithFriendlyName, WithDescription, WithScenes {
     id: number;
     members: GroupAddress[];
 }
 
-export interface Device extends WithFriendlyName {
+export interface Device extends WithFriendlyName, WithDescription {
     ieee_address: IEEEEAddress;
     type: DeviceType;
     network_address: number;

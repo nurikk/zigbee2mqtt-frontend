@@ -2,7 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { AddDeviceToGroup } from "./AddDeviceToGroup";
 import { DeviceGroup } from "./DeviceGroup";
-import { DeviceState } from "../../types";
+import { DeviceState, Group } from "../../types";
 
 import { connect } from "unistore/react";
 import actions from "../../actions/actions";
@@ -34,7 +34,7 @@ function GroupPage(props: GroupPageProps) {
         friendly_name: "Unknown group",
         members: [],
         scenes: []
-    };
+    } as unknown as Group;
     const { setStateValue, setDeviceState, getDeviceState } = props;
     const { addDeviceToGroup, removeDeviceFromGroup } = props;
     const { sceneStore, sceneRemoveAll, sceneRecall, sceneRemove } = props;

@@ -57,7 +57,6 @@ export const GlobalModal: React.FC<Record<string, unknown>> = ({ children }) => 
     };
 
     const hideModal = () => {
-        debugger
         setStore({
             ...store,
             modalType: "",

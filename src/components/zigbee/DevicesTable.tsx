@@ -58,7 +58,10 @@ export function DevicesTable(props: DevicesTableProps) {
             id: 'friendly_name',
             Header: t('friendly_name'),
             accessor: ({ device }) => device.friendly_name,
-            Cell: ({ row: { original: { device } } }) => <Link to={genDeviceDetailsLink(device.ieee_address)}>{device.friendly_name}</Link>
+            Cell: ({ row: { original: { device } } }) => <>
+                <Link to={genDeviceDetailsLink(device.ieee_address)}>{device.friendly_name}</Link>
+                <small className="d-block">{device.description}</small>
+            </>
         },
         {
             id: 'ieee_address',

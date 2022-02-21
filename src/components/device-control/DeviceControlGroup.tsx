@@ -17,12 +17,12 @@ interface DeviceControlGroupProps {
 type PropsFromStore = Pick<GlobalState, 'bridgeInfo'>;
 
 function DeviceControlGroup(props: DeviceControlGroupProps & DeviceApi & PropsFromStore) {
-    const { device, bridgeInfo, configureDevice, renameDevice, removeDevice } = props;
+    const { device, bridgeInfo, configureDevice, renameDevice, removeDevice, setDeviceDescription } = props;
     const { t } = useTranslation(["zigbee", "common"]);
     const { showModal } = useGlobalModalContext();
     return (
         <div className="btn-group btn-group-sm" role="group">
-            <Button<void> className="btn btn-primary" onClick={() => showModal(MODAL_TYPES.RENAME_DEVICE, { device, renameDevice, bridgeInfo })} title={t('rename_device')}><i className="fa fa-edit" /></Button>
+            <Button<void> className="btn btn-primary" onClick={() => showModal(MODAL_TYPES.RENAME_DEVICE, { device, renameDevice, setDeviceDescription, bridgeInfo })} title={t('rename_device')}><i className="fa fa-edit" /></Button>
             <Button<string>
                 className="btn btn-warning"
                 onClick={configureDevice}

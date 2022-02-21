@@ -18,6 +18,7 @@ import { Availability } from "../zigbee/Availability";
 
 
 
+
 type DeviceInfoProps = {
     device: Device;
 }
@@ -30,6 +31,10 @@ const displayProps = [
     {
         translationKey: 'friendly_name',
         render: (device: Device) => <dd className="col-12 col-md-7"><strong>{device.friendly_name}</strong></dd>,
+    },
+    {
+        translationKey: 'zigbee:description',
+        render: (device: Device) => <dd className="col-12 col-md-7"><pre>{device.description}</pre></dd>,
     },
     {
         translationKey: 'last_seen',
@@ -47,7 +52,7 @@ const displayProps = [
                     availability={availability}
                     availabilityFeatureEnabled={availabilityFeatureEnabled}
                     availabilityEnabledForDevice={availabilityEnabledForDevice}
-                     />
+                />
             </dd>
         },
     },
@@ -147,8 +152,6 @@ export class DeviceInfo extends Component<DeviceInfoProps & PropsFromStore & Wit
                         ))
                     }
                 </dl>
-
-
                 <DeviceControlGroup device={device} state={deviceState} />
 
             </Fragment>
