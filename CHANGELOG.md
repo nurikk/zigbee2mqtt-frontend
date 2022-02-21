@@ -1,3 +1,12 @@
+## [0.6.75](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.74...0.6.75) (2022-02-21)
+
+
+### Features
+
+* **descripton:** add device description ([034fa7c](https://github.com/nurikk/zigbee2mqtt-frontend/commit/034fa7c506edfc0bceb01610710b6ac1c40a3897))
+
+
+
 ## [0.6.74](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.73...0.6.74) (2022-02-21)
 
 
