@@ -1,3 +1,12 @@
+## [0.6.74](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.73...0.6.74) (2022-02-21)
+
+
+### Features
+
+* **exposes:** implement value_step for numeric ([8b4b063](https://github.com/nurikk/zigbee2mqtt-frontend/commit/8b4b063b5241651c511c827ba113b0c77e0943af))
+
+
+
 ## [0.6.73](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.72...0.6.73) (2022-02-20)
 
 
