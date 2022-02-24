@@ -5,6 +5,7 @@ import useComponentVisible from '../hooks/useComponentVisible';
 import cx from "classnames";
 import { Resource } from 'i18next';
 
+import ca from "./flags/ca.png";
 import en from "./flags/uk.png";
 import fr from "./flags/fr.png";
 import pl from "./flags/pl.png";
