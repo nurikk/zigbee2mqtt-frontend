@@ -28,7 +28,7 @@ import missing from "./flags/missing-locale.png";
 import localeNames from './locales/localeNames.json';
 
 const localesMap = {
-    en, fr, pl, de, ru, ptbr, es, ua, chs, nl, it, zh, ko, cs, fi, sv
+    ca, en, fr, pl, de, ru, ptbr, es, ua, chs, nl, it, zh, ko, cs, fi, sv
 }
 
 
