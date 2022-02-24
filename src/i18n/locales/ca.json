@@ -389,6 +389,6 @@
         "Options for passive devices (mostly battery powered)": "Opcions per a dispositius passius (principalment dispositius a bateria)",
         "Disable self-signed SSL certificate": "Desactiva el certificat SSL autosignat",
         "Your device may request a check for a new firmware update. This value determines how frequently third party servers may actually be contacted to look for firmware updates. The value is set in minutes, and the default is 1 day.": "És possible que el vostre dispositiu sol·liciti una comprovació d'una nova actualització del microprogramari. Aquest valor determina la freqüència amb què realment es poden contactar amb servidors de tercers per buscar actualitzacions de microprogramari. El valor s'estableix en minuts i el valor predeterminat és 1 dia."
-}
     }
 }
+
