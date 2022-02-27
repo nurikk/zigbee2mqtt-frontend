@@ -5,6 +5,7 @@ import useComponentVisible from '../hooks/useComponentVisible';
 import cx from "classnames";
 import { Resource } from 'i18next';
 
+import ca from "./flags/ca.png";
 import en from "./flags/uk.png";
 import fr from "./flags/fr.png";
 import pl from "./flags/pl.png";
@@ -27,7 +28,7 @@ import missing from "./flags/missing-locale.png";
 import localeNames from './locales/localeNames.json';
 
 const localesMap = {
-    en, fr, pl, de, ru, ptbr, es, ua, chs, nl, it, zh, ko, cs, fi, sv
+    ca, en, fr, pl, de, ru, ptbr, es, ua, chs, nl, it, zh, ko, cs, fi, sv
 }
 
 
