@@ -1,5 +1,4 @@
-{
-    "ca": "Català"
+{    
     "de": "Deutsch",
     "en": "English",
     "es": "Español",
@@ -15,5 +14,6 @@
     "ko": "한국어",
     "cs": "Česky",
     "fi": "Suomi",
-    "sv": "Svenska"
+    "sv": "Svenska",
+    "ca": "Català"
 }
