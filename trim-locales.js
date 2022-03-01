@@ -3,8 +3,21 @@ var diff = require('deep-diff')
 const _ = require('lodash');
 const fs = require('fs')
 
+let isObject = function(a) {
+    return (!!a) && (a.constructor === Object);
+};
+function removeEmpty(obj) {
+    return Object.entries(obj)
+        .filter(([_, v]) => v != null && v != "")
+        .reduce(
+            (acc, [k, v]) => ({ ...acc, [k]: isObject(v) ? removeEmpty(v) : v }),
+            {}
+        );
+}
+
 const enTranslationFile = './src/i18n/locales/en.json';
-const enTranslations = require(enTranslationFile);
+const enTranslations = removeEmpty(require(enTranslationFile));
+fs.writeFileSync(enTranslationFile, JSON.stringify(enTranslations, null, 4));
 
 const ignoredFiles = ['localeNames.json', 'en.json'];
 const localesDir = './src/i18n/locales'
