@@ -1,3 +1,18 @@
+## [0.6.76](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.75...0.6.76) (2022-03-01)
+
+
+### Bug Fixes
+
+* **i18n:** fix locale names ([92763f4](https://github.com/nurikk/zigbee2mqtt-frontend/commit/92763f4d43b92fce438eafea43a8b97140fd94a1))
+* **i18n:** trim locales ([5f91dfa](https://github.com/nurikk/zigbee2mqtt-frontend/commit/5f91dfaf9f68e0e1f31e591cdadb1efc3f81e4d0))
+
+
+### Features
+
+* **i18n:** add Catalan language ([#1382](https://github.com/nurikk/zigbee2mqtt-frontend/issues/1382)) ([533aeb2](https://github.com/nurikk/zigbee2mqtt-frontend/commit/533aeb2e97347431b1f7210e0a8637b90de18009))
+
+
+
 ## [0.6.75](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.74...0.6.75) (2022-02-21)
 
 
