@@ -7,7 +7,7 @@ import React, { FunctionComponent, Suspense } from 'react';
 
 
 import ConnectedMap from "./components/map";
-import './i18n';
+
 
 import {
     Switch,
@@ -34,7 +34,7 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import DashboardPage from "./components/dashboard-page";
 import ExtensionsEditorPage from "./components/extensions-editor";
 import GroupPage from "./components/groups/GroupPage";
-import StateNotifier from "./components/state-notifier/StateNotifier";
+
 import { ThemeSwitcherProvider } from "react-css-theme-switcher";
 import i18n from "./i18n";
 import { I18nextProvider } from 'react-i18next';
@@ -61,7 +61,6 @@ const Main = () => {
                 <GlobalModal>
                     <ThemeSwitcherProvider themeMap={themes} defaultTheme={theme}>
                         <HashRouter>
-                            <StateNotifier />
                             <div className="main">
                                 <NavBar />
                                 <main className="content p-0 p-sm-3">
