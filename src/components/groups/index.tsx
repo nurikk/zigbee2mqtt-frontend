@@ -117,7 +117,6 @@ export class GroupsPage extends Component<PropsFromStore & StateApi & SceneApi &
 
     render(): JSX.Element {
         const { groups, removeGroup, renameGroup } = this.props;
-        console.log({ groups })
         return <>
             {this.renderGroupCreationForm()}
             <GroupsTable
