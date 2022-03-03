@@ -10,7 +10,7 @@ import { select } from "d3-selection";
 import { drag } from "d3-drag";
 import { CSSTransition } from 'react-transition-group'; // ES6
 import isEqual from "lodash/isEqual";
-import { OnlineOrOffline, WithAvailability, WithDevices, WithDeviceStates } from "../../store";
+import { AvailabilityState, OnlineOrOffline, WithAvailability, WithDevices, WithDeviceStates } from "../../store";
 
 
 
@@ -36,7 +36,7 @@ interface NodeProps extends MouseEventsResponderNode {
     node: NodeI;
     deviceState: DeviceState;
     device: Device;
-    availability: OnlineOrOffline;
+    availability: AvailabilityState;
 }
 
 

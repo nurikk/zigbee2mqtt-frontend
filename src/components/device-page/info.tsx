@@ -6,7 +6,7 @@ import DeviceControlGroup from "../device-control/DeviceControlGroup";
 import cx from "classnames";
 import style from "./style.css";
 import { connect } from "unistore/react";
-import { GlobalState, OnlineOrOffline } from "../../store";
+import { AvailabilityState, GlobalState } from "../../store";
 import get from 'lodash/get';
 import DeviceImage from "../device-image";
 import { ModelLink, VendorLink } from "../vendor-links/vendor-links";
@@ -42,7 +42,7 @@ const displayProps = [
     },
     {
         translationKey: 'avaliability:avaliability',
-        render: (device: Device, state: DeviceState, bridgeInfo: BridgeInfo, availability: OnlineOrOffline) => {
+        render: (device: Device, state: DeviceState, bridgeInfo: BridgeInfo, availability: AvailabilityState) => {
             const { config } = bridgeInfo;
             const availabilityFeatureEnabled = !!config.availability;
             const availabilityEnabledForDevice = config.devices[device.ieee_address]?.availability !== false;

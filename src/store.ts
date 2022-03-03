@@ -31,10 +31,16 @@ export type WithBridgeInfo = {
     bridgeInfo: BridgeInfo;
 }
 
+
 export type OnlineOrOffline = 'online' | 'offline';
 
+export type AvailabilityState = OnlineOrOffline | {
+    state: OnlineOrOffline;
+}
+
+
 export type WithAvailability = {
-    availability: Record<FriendlyName, OnlineOrOffline>;
+    availability: Record<FriendlyName, AvailabilityState>;
 }
 
 
