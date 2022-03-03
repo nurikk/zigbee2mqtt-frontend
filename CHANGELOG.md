@@ -1,3 +1,13 @@
+## [0.6.77](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.76...0.6.77) (2022-03-03)
+
+
+### Features
+
+* **Availability:** add support for new payload format ([9b12806](https://github.com/nurikk/zigbee2mqtt-frontend/commit/9b12806c9aa0b0997846c4573e983310c3aa88ee))
+* **StateNotifier:** remove StateNotifier ([fd53546](https://github.com/nurikk/zigbee2mqtt-frontend/commit/fd53546d6010095c768c7c05d8d767d91f9a8680))
+
+
+
 ## [0.6.76](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.75...0.6.76) (2022-03-01)
 
 
