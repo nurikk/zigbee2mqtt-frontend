@@ -1,8 +1,8 @@
 import 'react-app-polyfill/stable';
-import "notyf/notyf.min.css";
+import 'react-notifications/lib/notifications.css';
 import "@fortawesome/fontawesome-free/css/all.css";
 import "./styles/styles.global.scss";
-
+import { NotificationContainer } from 'react-notifications';
 import React, { FunctionComponent, Suspense } from 'react';
 
 
@@ -56,6 +56,7 @@ api.connect();
 const Main = () => {
     const { theme } = store.getState();
     return <Suspense fallback="loading">
+        <NotificationContainer />
         <I18nextProvider i18n={i18n}>
             <Provider store={store}>
                 <GlobalModal>

@@ -2,7 +2,9 @@ import ReconnectingWebSocket from "reconnecting-websocket";
 import store, { Extension, LogMessage, OnlineOrOffline } from "./store";
 import { BridgeConfig, BridgeInfo, TouchLinkDevice, Device, DeviceState, BridgeState, Group } from './types';
 import { sanitizeGraph, isSecurePage, randomString, stringifyWithPreservingUndefinedAsNull, debounceArgs } from "./utils";
-import { Notyf } from "notyf";
+
+import { NotificationManager } from 'react-notifications';
+
 import { GraphI } from "./components/map/types";
 import { local } from "@toolz/local-storage";
 
@@ -12,7 +14,7 @@ const AUTH_FLAG_LOCAL_STORAGE_ITEM_NAME = "z2m-auth-v2";
 const UNAUTHORIZED_ERROR_CODE = 4401;
 
 const AVAILABILITY_FEATURE_TOPIC_ENDING = "/availability";
-const notyf = new Notyf();
+
 
 interface Message {
     topic: string;
@@ -46,10 +48,10 @@ const showNotify = (data: LogMessage | ResponseWithStatus): void => {
     switch (level) {
         case "error":
         case "warning":
-            notyf.error(message);
+            NotificationManager.error(message);
             break;
         case "info":
-            notyf.success(message);
+            NotificationManager.success(message);
             break;
 
         default:
@@ -261,7 +263,7 @@ class Api {
         if (e.code === UNAUTHORIZED_ERROR_CODE) {
             local.setItem(AUTH_FLAG_LOCAL_STORAGE_ITEM_NAME, true);
             local.remove(TOKEN_LOCAL_STORAGE_ITEM_NAME);
-            notyf.error("Unauthorized");
+            NotificationManager.error("Unauthorized");
             setTimeout(() => {
                 window.location.reload();
             }, 1000);
@@ -280,7 +282,7 @@ class Api {
                 this.processDeviceStateMessage(data);
             }
         } catch (e) {
-            notyf.error(e.message);
+            NotificationManager.error(e.message);
             console.error(event.data);
         }
 
