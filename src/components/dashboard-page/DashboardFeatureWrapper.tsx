@@ -57,6 +57,7 @@ const getGenericFeatureIcon = (name: string, value: unknown): string => {
     switch (name) {
         case 'device_temperature':
         case 'temperature':
+        case 'local_temperature':
             classes.push(cx('text-danger', getTemperatureIcon(value as number)))
             break;
         case 'contact':
