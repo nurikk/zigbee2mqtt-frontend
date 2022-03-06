@@ -4,8 +4,9 @@ import actions from "../../actions/actions";
 
 import { WithBridgeInfo, WithDevices, WithDeviceStates, WithGroups } from "../../store";
 import Button from "../button";
+import NiceModal from '@ebay/nice-modal-react';
 
-import { RenameGroupForm } from "../modal/components/RenameGroupModal";
+
 import { GroupsApi } from "../../actions/GroupsApi";
 import { useTranslation, withTranslation, WithTranslation } from "react-i18next";
 import { SceneApi } from "../../actions/SceneApi";
@@ -14,7 +15,8 @@ import { StateApi } from "../../actions/StateApi";
 import { Link } from "react-router-dom";
 import { Column } from "react-table";
 import { Table } from "../grid/ReactTableCom";
-import { MODAL_TYPES, useGlobalModalContext } from "../modal/GlobalModal";
+import { RenameGroupForm } from "../modal/components/RenameGroupModal";
+
 interface GroupsPageState {
     newGroupName: string;
     newGroupId?: number;
@@ -26,7 +28,7 @@ type GroupsTableProps = WithGroups & Pick<GroupsApi, 'removeGroup' | 'renameGrou
 function GroupsTable(props: GroupsTableProps) {
     const { t } = useTranslation(['groups']);
     const { groups, removeGroup, renameGroup } = props;
-    const { showModal } = useGlobalModalContext();
+
     const columns: Column<Group>[] = [
         {
             id: 'group_id',
@@ -58,7 +60,7 @@ function GroupsTable(props: GroupsTableProps) {
             id: 'actions',
             Cell: ({ row: { original: group } }) => (
                 <div className="btn-group float-right btn-group-sm" role="group">
-                    <Button<void> className="btn btn-primary" onClick={() => showModal(MODAL_TYPES.RENAME_GROUP, { name: group.friendly_name, onRename: renameGroup })} title={t('rename_group')}><i className="fa fa-edit" /></Button>
+                    <Button<void> className="btn btn-primary" onClick={() => NiceModal.show(RenameGroupForm, { name: group.friendly_name, onRename: renameGroup })} title={t('rename_group')}><i className="fa fa-edit" /></Button>
                     <Button<string> prompt title={t('remove_group')} item={group.friendly_name} onClick={removeGroup} className="btn btn-danger"><i className="fa fa-trash" /></Button>
                 </div>
             )

@@ -1,5 +1,7 @@
 import React, { ButtonHTMLAttributes } from "react";
-import { MODAL_TYPES, useGlobalModalContext } from "../modal/GlobalModal";
+import { DialogConfirmationModal } from "../modal/components/DialogConfirmationModal";
+import NiceModal from '@ebay/nice-modal-react';
+
 interface ButtonProps<T> extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'onClick'> {
     item?: T;
     onClick?(arg1: T): void;
@@ -9,14 +11,13 @@ interface ButtonProps<T> extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, '
 export default function Button<T>(props: ButtonProps<T>): JSX.Element {
     const { children, item, onClick, prompt, ...rest } = props;
 
-    const { showModal, hideModal } = useGlobalModalContext();
     const onConfirmHandler = (): void => {
         onClick && onClick(item as T);
-        hideModal()
+
     }
     const onClickHandler = (): void => {
         if (prompt) {
-            showModal(MODAL_TYPES.DIALOG_CONFIRMATION, { onConfirmHandler });
+            NiceModal.show(DialogConfirmationModal, { onConfirmHandler });
         } else {
             onClick && onClick(item as T);
         }

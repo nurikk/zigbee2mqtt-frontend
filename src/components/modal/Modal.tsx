@@ -1,3 +1,6 @@
+import React, { PropsWithChildren, useEffect } from "react";
+import ReactDOM from "react-dom";
+
 export function ModalHeader(props: PropsWithChildren<unknown>): JSX.Element {
     return <div className="modal-header">{props.children}</div>;
 }
@@ -10,8 +13,7 @@ export function ModalFooter(props: PropsWithChildren<unknown>): JSX.Element {
     return <div className="modal-footer">{props.children}</div>;
 }
 
-import React, { PropsWithChildren, useEffect } from "react";
-import ReactDOM from "react-dom";
+
 
 type ModalProps = {
     isOpen: boolean;
@@ -50,7 +52,7 @@ const Modal = ({ isOpen, children }: PropsWithChildren<ModalProps>): JSX.Element
             document.body.classList.remove("modal-open");
         }
     }, [isOpen]);
-    return isOpen ? ReactDOM.createPortal(
+    return isOpen ?
         <div className={"modal show overflow-scroll"} style={{ display: 'block' }}>
             <div className="modal-dialog">
                 <div className="modal-content">
@@ -59,8 +61,7 @@ const Modal = ({ isOpen, children }: PropsWithChildren<ModalProps>): JSX.Element
             </div>
             <BodyEnd />
         </div>
-        , document.body
-    ) : null;
+        : null;
 }
 
 export default Modal;

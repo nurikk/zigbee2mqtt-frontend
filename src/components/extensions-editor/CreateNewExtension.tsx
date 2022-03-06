@@ -1,47 +1,57 @@
 import React, { useState } from "react";
 
 import { useTranslation } from "react-i18next";
-import useModal from "../../hooks/useModal";
+import NiceModal, { useModal } from '@ebay/nice-modal-react';
+
+
 import { Extension } from "../../store";
-import Button from "../button";
 import Modal, { ModalBody, ModalFooter, ModalHeader } from "../modal/Modal";
 import exampleExtensionCode from './example-extension.js.txt';
+import Button from "../button";
 
 
 type CreateNewExtensionProps = {
     updateExtensionCode(extension: Extension): void;
     onCreated(extension: Extension): void;
+    ts: number;
 }
 
-export default function CreateNewExtension(props: CreateNewExtensionProps): JSX.Element {
-    const ts = Date.now() + '';
-    const { updateExtensionCode, onCreated } = props;
+const CreateNewExtensionModal = NiceModal.create((props: CreateNewExtensionProps): JSX.Element => {
+    const { updateExtensionCode, onCreated, ts } = props;
     const { t } = useTranslation(["extensions", "common"]);
-    const { isOpen, toggle } = useModal(false);
+    const modal = useModal();
     const [extensionName, setExtensionName] = useState(`example-user-extension${ts}.js`);
-    const templatedCode = exampleExtensionCode.replace(/_TS_/g, ts);
+    const templatedCode = exampleExtensionCode.replace(/_TS_/g, ts.toString());
 
     const onConfirmHandler = (): void => {
         updateExtensionCode({ name: extensionName, code: templatedCode });
         onCreated({ name: extensionName, code: templatedCode });
-        toggle()
+        modal.remove();
     }
 
-    return (<>
-        <Button onClick={toggle} className="btn btn-success me-2"><i className="fa fa-plus"></i></Button>
-        <Modal isOpen={isOpen}>
-            <ModalHeader>
-                {t('create_new_extension')}
-            </ModalHeader>
-            <ModalBody>
-                <label htmlFor="exampleFormControlInput1" className="form-label">{t('extension_name_propmt')}</label>
-                <input id="exampleFormControlInput1" className="form-control" type="text" name="" value={extensionName} onChange={(e) => setExtensionName(e.target.value)}></input>
-            </ModalBody>
-            <ModalFooter>
-                <button type="button" className="btn btn-secondary" onClick={toggle}>{t('common:close')}</button>
-                <button type="button" className="btn btn-primary" onClick={onConfirmHandler}>{t('common:ok')}</button>
-            </ModalFooter>
-        </Modal>
-    </>
-    );
+    return <Modal isOpen={modal.visible}>
+        <ModalHeader>
+            {t('create_new_extension')}
+        </ModalHeader>
+        <ModalBody>
+            <label className="form-label">{t('extension_name_propmt')}</label>
+            <input type="text" className="form-control"
+                value={extensionName}
+                onChange={(e) => setExtensionName(e.target.value)}>
+            </input>
+        </ModalBody>
+        <ModalFooter>
+            <button type="button" className="btn btn-secondary" onClick={modal.remove}>{t('common:close')}</button>
+            <button type="button" className="btn btn-primary" onClick={onConfirmHandler}>{t('common:ok')}</button>
+        </ModalFooter>
+    </Modal>
+        ;
+});
+
+export default function CreateNewExtension(props: Omit<CreateNewExtensionProps, 'ts'>): JSX.Element {
+    return <Button className="btn btn-success me-2"
+            onClick={() => NiceModal.show(CreateNewExtensionModal, { ts: Date.now(), ...{ ...props } })}
+        >
+            <i className="fa fa-plus" />
+        </Button>
 }

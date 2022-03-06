@@ -1,8 +1,8 @@
 import React, { ChangeEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Device } from "../../../types";
+import NiceModal, { useModal } from '@ebay/nice-modal-react';
 
-import { useGlobalModalContext } from "../GlobalModal";
 import Modal, { ModalBody, ModalFooter, ModalHeader } from "../Modal";
 
 type DeviceRemovalButtonProps = {
@@ -10,8 +10,8 @@ type DeviceRemovalButtonProps = {
     removeDevice(dev: string, force: boolean, block: boolean): Promise<void>;
 }
 
-export const RemoveDeviceModal = (props: DeviceRemovalButtonProps): JSX.Element => {
-
+export const RemoveDeviceModal = NiceModal.create((props: DeviceRemovalButtonProps): JSX.Element => {
+    const modal = useModal();
     const { t } = useTranslation(["zigbee", "common"]);
     const { device, removeDevice } = props;
     const [removeParams, setRemoveParams] = useState({ block: false, force: false });
@@ -26,15 +26,15 @@ export const RemoveDeviceModal = (props: DeviceRemovalButtonProps): JSX.Element 
     }
     const onRemoveClick = () => {
         removeDevice(device.friendly_name, removeParams.force, removeParams.block);
-        hideModal()
+        modal.remove();
     }
 
-    const { hideModal } = useGlobalModalContext();
+
 
 
 
     return (
-        <Modal isOpen={true}>
+        <Modal isOpen={modal.visible}>
             <ModalHeader>
                 <h3>{t('remove_device')}</h3>
                 <small>{device.friendly_name}</small>
@@ -51,9 +51,9 @@ export const RemoveDeviceModal = (props: DeviceRemovalButtonProps): JSX.Element 
                 }
             </ModalBody>
             <ModalFooter>
-                <button type="button" className="btn btn-secondary" onClick={hideModal}>{t('common:close')}</button>
+                <button type="button" className="btn btn-secondary" onClick={modal.remove}>{t('common:close')}</button>
                 <button type="button" className="btn btn-danger" onClick={onRemoveClick}>{t('common:delete')}</button>
             </ModalFooter>
         </Modal>
     );
-};
+});

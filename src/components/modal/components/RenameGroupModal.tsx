@@ -1,27 +1,28 @@
 import React, { ChangeEvent } from "react";
 import { useInputChange } from "../../../hooks/useInputChange";
-import { useGlobalModalContext } from "../GlobalModal";
-import Modal, { ModalHeader, ModalBody, ModalFooter } from "../Modal";
 
-interface RenameGroupFormProps {
+import Modal, { ModalHeader, ModalBody, ModalFooter } from "../Modal";
+import NiceModal, { useModal } from '@ebay/nice-modal-react';
+
+type RenameGroupFormProps = {
     name: string;
     onRename(oldName: string, newName: string): Promise<void>;
 }
 
-export function RenameGroupForm(props: RenameGroupFormProps): JSX.Element {
+export const RenameGroupForm = NiceModal.create((props: RenameGroupFormProps): JSX.Element => {
     const { name, onRename } = props;
 
-    const { hideModal } = useGlobalModalContext();
+    const modal = useModal();
 
     const [renameGroupForm, handleInputChange] = useInputChange({ friendlyName: name });
 
     const onSaveClick = async (): Promise<void> => {
         await onRename(name, renameGroupForm['friendlyName']);
-        hideModal();
+        modal.remove();
     };
 
     return (
-        <Modal isOpen={true}>
+        <Modal isOpen={modal.visible}>
             <ModalHeader>
                 <h3>Rename group</h3>
                 <small>{name}</small>
@@ -33,11 +34,14 @@ export function RenameGroupForm(props: RenameGroupFormProps): JSX.Element {
                 </div>
             </ModalBody>
             <ModalFooter>
-                <button type="button" className="btn btn-secondary" onClick={hideModal}>Close</button>
+                <button type="button" className="btn btn-secondary" onClick={modal.remove}>Close</button>
                 <button type="button" className="btn btn-primary" onClick={onSaveClick}>Save changes</button>
             </ModalFooter>
         </Modal>
 
     )
-}
+});
+
+
+
 

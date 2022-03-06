@@ -3,20 +3,21 @@ import { useTranslation } from "react-i18next";
 
 import { BridgeInfo, Device } from "../../../types";
 
-import { useGlobalModalContext } from "../GlobalModal";
+import NiceModal, { useModal } from '@ebay/nice-modal-react';
+
 import Modal, { ModalBody, ModalFooter, ModalHeader } from "../Modal";
 
 export type RenameActionProps = {
     device: Device;
-    bridgeInfo: BridgeInfo;
+    homeassistantEnabled: boolean;
 
     renameDevice(old: string, newName: string, homeassistantRename: boolean): Promise<void>;
     setDeviceDescription(friendly_name: string, description: string): Promise<void>;
 
 }
-export const RenameDeviceModal = (props: RenameActionProps): JSX.Element => {
-    const { hideModal } = useGlobalModalContext();
-    const { bridgeInfo, device, renameDevice, setDeviceDescription } = props;
+export const RenameDeviceModal = NiceModal.create((props: RenameActionProps): JSX.Element => {
+    const modal = useModal();
+    const { homeassistantEnabled, device, renameDevice, setDeviceDescription } = props;
     const [isHASSRename, setIsHASSRename] = useState(false);
     const [friendlyName, setFriendlyName] = useState(device.friendly_name);
     const [description, setDescription] = useState(device.description);
@@ -24,16 +25,16 @@ export const RenameDeviceModal = (props: RenameActionProps): JSX.Element => {
 
     const onRenameClick = async (): Promise<void> => {
         await renameDevice(device.friendly_name, friendlyName, isHASSRename);
-        hideModal();
+        modal.remove();
     };
 
     const onSaveDescriptionClick = async (): Promise<void> => {
         await setDeviceDescription(device.friendly_name, description);
-        hideModal();
+        modal.remove();
     };
 
     return (
-        <Modal isOpen={true}>
+        <Modal isOpen={modal.visible}>
             <ModalHeader>
                 <h3>{t('rename_device')}</h3>
                 <small>{device.friendly_name}</small>
@@ -45,7 +46,7 @@ export const RenameDeviceModal = (props: RenameActionProps): JSX.Element => {
                             <label className="form-label">{t('friendly_name')}</label>
                             <input onChange={(e) => setFriendlyName(e.target.value)} type="text" className="form-control" value={friendlyName} />
                         </div>
-                        {bridgeInfo?.config?.homeassistant ? (
+                        {homeassistantEnabled ? (
                             <div className="form-check form-switch">
                                 <input className="form-check-input" checked={isHASSRename} type="checkbox" id={`hass${device.ieee_address}`} onChange={(e) => setIsHASSRename(e.target.checked)} />
                                 <label className="form-check-label" htmlFor={`hass${device.ieee_address}`}>{t('update_Home_assistant_entity_id')}</label>
@@ -69,10 +70,8 @@ export const RenameDeviceModal = (props: RenameActionProps): JSX.Element => {
                 </div>
             </ModalBody>
             <ModalFooter>
-                <button type="button" className="btn btn-secondary" onClick={hideModal}>{t('common:close')}</button>
-
-
+                <button type="button" className="btn btn-secondary" onClick={modal.remove}>{t('common:close')}</button>
             </ModalFooter>
         </Modal>
     );
-};
+});

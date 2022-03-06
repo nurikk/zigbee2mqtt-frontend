@@ -98,7 +98,11 @@ export function DevicesTable(props: DevicesTableProps) {
         {
             id: 'controls',
             Header: '',
-            Cell: ({ row: { original: { device, state } } }) => <DeviceControlGroup device={device} state={state} />,
+            Cell: ({ row: { original: { device, state } } }) => {
+                return <DeviceControlGroup 
+                device={device} state={state} 
+                />
+            },
             disableSortBy: true,
         }
     ];

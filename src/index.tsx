@@ -4,6 +4,7 @@ import "@fortawesome/fontawesome-free/css/all.css";
 import "./styles/styles.global.scss";
 import { NotificationContainer } from 'react-notifications';
 import React, { FunctionComponent, Suspense } from 'react';
+import NiceModal from '@ebay/nice-modal-react';
 
 
 import ConnectedMap from "./components/map";
@@ -38,7 +39,6 @@ import GroupPage from "./components/groups/GroupPage";
 import { ThemeSwitcherProvider } from "react-css-theme-switcher";
 import i18n from "./i18n";
 import { I18nextProvider } from 'react-i18next';
-import { GlobalModal } from './components/modal/GlobalModal';
 
 
 
@@ -58,8 +58,8 @@ const Main = () => {
     return <Suspense fallback="loading">
         <NotificationContainer />
         <I18nextProvider i18n={i18n}>
-            <Provider store={store}>
-                <GlobalModal>
+            <NiceModal.Provider>
+                <Provider store={store}>
                     <ThemeSwitcherProvider themeMap={themes} defaultTheme={theme}>
                         <HashRouter>
                             <div className="main">
@@ -85,8 +85,8 @@ const Main = () => {
                             </div>
                         </HashRouter>
                     </ThemeSwitcherProvider>
-                </GlobalModal>
-            </Provider >
+                </Provider >
+            </NiceModal.Provider>
         </I18nextProvider>
     </Suspense>
 }

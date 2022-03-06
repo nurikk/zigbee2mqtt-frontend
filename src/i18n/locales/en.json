@@ -1379,7 +1379,8 @@
         "group_id": "Group ID",
         "group_name": "Group Name",
         "group_members": "Group members",
-        "group_scenes": "Group scenes"
+        "group_scenes": "Group scenes",
+        "rename_group": "Rename group"
     },
     "logs": {
         "empty_logs_message": "Nothing to display",
@@ -1522,9 +1523,10 @@
         "channel": "Channel",
         "possible": "Possible",
         "available": "Available",
-        "execute": "",
-        "command": "",
-        "payload": ""
+        "execute": "Execute",
+        "command": "Command",
+        "payload": "Payload",
+        "save_description": "Save description"
     },
     "scene": {
         "scene_id": "Scene ID",
