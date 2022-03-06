@@ -16,8 +16,8 @@ function removeEmpty(obj) {
 }
 
 const enTranslationFile = './src/i18n/locales/en.json';
-const enTranslations = removeEmpty(require(enTranslationFile));
-fs.writeFileSync(enTranslationFile, JSON.stringify(enTranslations, null, 4));
+const enTranslations = require(enTranslationFile);
+
 
 const ignoredFiles = ['localeNames.json', 'en.json'];
 const localesDir = './src/i18n/locales'
