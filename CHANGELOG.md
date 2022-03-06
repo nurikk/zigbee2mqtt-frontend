@@ -1,3 +1,16 @@
+## [0.6.78](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.77...0.6.78) (2022-03-06)
+
+
+### Features
+
+* **getGenericFeatureIcon:** add local temperature ([ce1c29e](https://github.com/nurikk/zigbee2mqtt-frontend/commit/ce1c29e86e4e490b1020833abb7b976376f5009c))
+* **groups:** show device endpoint on group page ([44caa76](https://github.com/nurikk/zigbee2mqtt-frontend/commit/44caa76fed8df2897993950bf4335114039a5631))
+* **i18n:** trim locales ([5dff8fc](https://github.com/nurikk/zigbee2mqtt-frontend/commit/5dff8fcad444b3c0e98451aa64347d40f4d7fa0b))
+* **modal:** refactor modals ([fe9a89d](https://github.com/nurikk/zigbee2mqtt-frontend/commit/fe9a89d20346b23dc4f92a0e3bc81143824cc5cf))
+* **notifications:** replacy notyf with react-notifications ([f465a7d](https://github.com/nurikk/zigbee2mqtt-frontend/commit/f465a7d0c8fa59ab5693eb24a58efb9090f1a261))
+
+
+
 ## [0.6.77](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.76...0.6.77) (2022-03-03)
 
 
