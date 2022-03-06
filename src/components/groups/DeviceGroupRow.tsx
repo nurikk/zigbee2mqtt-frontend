@@ -42,7 +42,8 @@ export function DeviceGroupRow(props: DeviceGroupRowProps): JSX.Element {
     const { t } = useTranslation('devicePage');
 
     const { removeDeviceFromGroup, groupAddress, devices, deviceStates, bridgeInfo } = props;
-    const device = devices[groupAddress.ieee_address] ?? { ieee_address: groupAddress.ieee_address, friendly_name: t('unknown_device') };
+    const { endpoint, ieee_address: IEEEEAddress } = groupAddress;
+    const device = devices[IEEEEAddress] ?? { ieee_address: IEEEEAddress, friendly_name: t('unknown_device') };
     const deviceState = deviceStates[device.friendly_name] ?? {} as DeviceState;
 
     const { setDeviceState, getDeviceState } = props;
@@ -55,9 +56,9 @@ export function DeviceGroupRow(props: DeviceGroupRowProps): JSX.Element {
     }
 
     return <DashboardDevice
-        key={device.ieee_address}
         feature={{ features: filteredFeatures } as CompositeFeature}
         device={device}
+        endpoint={endpoint}
         deviceState={deviceState}
         onChange={(endpoint, value) =>
             setDeviceState(device.friendly_name, value)
