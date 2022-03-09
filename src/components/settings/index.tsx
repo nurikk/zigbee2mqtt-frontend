@@ -144,7 +144,7 @@ export class SettingsPage extends Component<PropsFromStore & SettingsPageProps &
     }
     renderTranslate(): JSX.Element {
         return <div className="p-3">
-            <p>Hello with translation, join us <a target="_blank" rel="noopener noreferrer" href="https://poeditor.com/join/project?hash=Az88waAhPd">POEditor</a></p>
+            <p>You can help with the translation at <a target="_blank" rel="noopener noreferrer" href="https://poeditor.com/join/project?hash=Az88waAhPd">POEditor</a></p>
         </div>
     }
     renderAbout(): JSX.Element {
