@@ -1,3 +1,13 @@
+## [0.6.79](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.78...0.6.79) (2022-03-13)
+
+
+### Bug Fixes
+
+* **DevicesTable:** split IEEE address and short address ([8faeb0b](https://github.com/nurikk/zigbee2mqtt-frontend/commit/8faeb0b126563b0a9026533a86de51194d933670))
+* **VendorLink:** fix vendor parameter ([f9499f5](https://github.com/nurikk/zigbee2mqtt-frontend/commit/f9499f5a3015e39270b4308a7ed44e858133000c))
+
+
+
 ## [0.6.78](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.77...0.6.78) (2022-03-06)
 
 
