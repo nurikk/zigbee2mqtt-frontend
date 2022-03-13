@@ -41,12 +41,7 @@ export function DevicesTable(props: DevicesTableProps) {
         },
     }] : [];
     const columns = [
-        {
-            id: 'number',
-            Header: '#',
-            Cell: ({ row }: CellProps<DevicesPageData>) => <div className="font-weight-bold">{row.index + 1}</div>,
-            disableSortBy: true,
-        },
+
         {
             id: 'pic',
             Header: t('pic'),
@@ -67,7 +62,7 @@ export function DevicesTable(props: DevicesTableProps) {
             id: 'ieee_address',
             Header: t('ieee_address'),
             accessor: ({ device }) => [device.ieee_address, toHex(device.network_address, 4)].join(' '),
-            Cell: ({ row: { original: { device } } }) => <>{device.ieee_address} ({toHex(device.network_address, 4)})</>,
+            Cell: ({ row: { original: { device } } }) => <><div>{device.ieee_address}</div><div>({toHex(device.network_address, 4)})</div></>,
         },
         {
             id: 'manufacturer',
@@ -99,8 +94,8 @@ export function DevicesTable(props: DevicesTableProps) {
             id: 'controls',
             Header: '',
             Cell: ({ row: { original: { device, state } } }) => {
-                return <DeviceControlGroup 
-                device={device} state={state} 
+                return <DeviceControlGroup
+                    device={device} state={state}
                 />
             },
             disableSortBy: true,

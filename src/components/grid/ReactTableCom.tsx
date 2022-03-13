@@ -48,10 +48,10 @@ const persist = debounce((key: string, data: Record<string, unknown>): void => {
 
 
 const stateReducer = (
-    newState: TableState<Record<string, unknown>>,
-    action: ActionType,
-    previousState: TableState<Record<string, unknown>>,
-    instance?: TableInstance<any>): TableState<Record<string, unknown>> => {
+  newState: TableState<Record<string, unknown>>,
+  action: ActionType,
+  previousState: TableState<Record<string, unknown>>,
+  instance?: TableInstance<any>): TableState<Record<string, unknown>> => {
   if (instance) {
     const { instanceId } = instance;
     const { sortBy, globalFilter } = newState;
@@ -101,6 +101,7 @@ export const Table: React.FC<Props> = ({ columns, data, id }) => {
         </tr>
         {headerGroups.map((headerGroup: HeaderGroup<Record<string, unknown>>) => (
           <tr {...headerGroup.getHeaderGroupProps()}>
+            <th className="text-nowrap">#</th>
             {headerGroup.headers.map(column => (
               <th className="text-nowrap" {...column.getHeaderProps(column.getSortByToggleProps())}>
                 <span className={cx({ 'btn-link me-1': column.canSort })}>{column.render('Header')}</span>
@@ -123,6 +124,7 @@ export const Table: React.FC<Props> = ({ columns, data, id }) => {
             prepareRow(row);
             return (
               <tr {...row.getRowProps()}>
+                <td><div className="font-weight-bold">{i + 1}</div></td>
                 {row.cells.map(cell => <td {...cell.getCellProps()}>{cell.render('Cell')}</td>)}
               </tr>
             )
