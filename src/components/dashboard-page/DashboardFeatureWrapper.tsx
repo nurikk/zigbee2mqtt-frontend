@@ -51,6 +51,7 @@ const typeToClassMap = {
     workdays_schedule: ['fa-calendar-day', 'text-info'],
     holidays_schedule: ['fa-calendar-day', 'text-danger'],
     away_mode: ['fa-plane'],
+    vibration: ['fa-water fa-rotate-270'],
 };
 
 const getGenericFeatureIcon = (name: string, value: unknown): string => {
