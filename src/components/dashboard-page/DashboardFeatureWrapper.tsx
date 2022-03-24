@@ -70,6 +70,9 @@ const getGenericFeatureIcon = (name: string, value: unknown): string => {
         case 'water_leak':
             classes.push(cx({ 'text-primary': value }));
             break;
+        case 'away_mode':
+            classes.push(cx({ 'text-info': value }));
+            break;
         default:
             break;
     }
