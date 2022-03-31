@@ -50,8 +50,7 @@ const typeToClassMap = {
     week: ['fa-calendar-week'],
     workdays_schedule: ['fa-calendar-day', 'text-info'],
     holidays_schedule: ['fa-calendar-day', 'text-danger'],
-    away_mode: ['fa-plane'],
-    vibration: ['fa-water fa-rotate-270'],
+    away_mode: ['fa-plane', 'text-info'],
 };
 
 const getGenericFeatureIcon = (name: string, value: unknown): string => {
@@ -71,8 +70,8 @@ const getGenericFeatureIcon = (name: string, value: unknown): string => {
         case 'water_leak':
             classes.push(cx({ 'text-primary': value }));
             break;
-        case 'away_mode':
-            classes.push(cx({ 'text-info': value }));
+        case 'vibration':
+            classes.push(cx({ 'fa-water fa-rotate-270 text-muted': value, 'fa-water fa-rotate-270 fa-shake text-primary': !value }));
             break;
         default:
             break;
