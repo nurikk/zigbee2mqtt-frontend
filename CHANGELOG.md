@@ -1,3 +1,17 @@
+## [0.6.80](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.79...0.6.80) (2022-03-31)
+
+
+### Bug Fixes
+
+* **i18n:** trim locales ([f08c8d7](https://github.com/nurikk/zigbee2mqtt-frontend/commit/f08c8d78adda3c9c032fb2062a40139ed502d777))
+
+
+### Features
+
+* **DashboardFeatureWrapper:** Add plane icon to away mode ([#1413](https://github.com/nurikk/zigbee2mqtt-frontend/issues/1413)) ([6a3bdf5](https://github.com/nurikk/zigbee2mqtt-frontend/commit/6a3bdf57a050919f06fe7ae08b7b57d7053e9d9a))
+
+
+
 ## [0.6.79](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.78...0.6.79) (2022-03-13)
 
 
