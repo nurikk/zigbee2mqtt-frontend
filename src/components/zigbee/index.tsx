@@ -6,6 +6,7 @@ import { GlobalState, OnlineOrOffline } from "../../store";
 import actions from "../../actions/actions";
 import { WithTranslation, withTranslation } from "react-i18next";
 import { DevicesTable } from "./DevicesTable";
+import { DeviceApi } from "../../actions/DeviceApi";
 export interface DevicesPageData {
     id: string;
     device: Device;
@@ -16,13 +17,15 @@ export interface DevicesPageData {
 
 
 type PropsFromStore = Pick<GlobalState, 'devices' | 'deviceStates' | 'bridgeInfo' | 'availability'>;
-type DevicesPageProps = PropsFromStore & WithTranslation<"zigbee">;
+type DevicesPageProps = Pick<DeviceApi, 'configureDevice' | 'renameDevice' | 'removeDevice' | 'setDeviceDescription'> & PropsFromStore & WithTranslation<"zigbee">;
 
 
 
 export function DevicesPage(props: DevicesPageProps): JSX.Element {
     const { devices, deviceStates, bridgeInfo: { config }, availability } = props;
+    const { renameDevice, removeDevice, configureDevice, setDeviceDescription } = props;
     const availabilityFeatureEnabled = !!config.availability;
+    const homeassistantEnabled = !!config?.homeassistant;
     const getDevicesToRender = (): DevicesPageData[] => {
         return Object.values<Device>(devices)
             .filter(device => device.type !== "Coordinator")
@@ -43,6 +46,8 @@ export function DevicesPage(props: DevicesPageProps): JSX.Element {
         data={data}
         lastSeenType={config.advanced.last_seen}
         availabilityFeatureEnabled={availabilityFeatureEnabled}
+        homeassistantEnabled={homeassistantEnabled}
+        {...{ renameDevice, removeDevice, configureDevice, setDeviceDescription }}
     />
 
 }

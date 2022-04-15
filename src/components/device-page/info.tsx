@@ -15,6 +15,7 @@ import { LastSeen } from "../LastSeen";
 import { WithTranslation, withTranslation } from "react-i18next";
 import { DisplayValue } from "../display-value/DisplayValue";
 import { Availability } from "../zigbee/Availability";
+import { DeviceApi } from "../../actions/DeviceApi";
 
 
 
@@ -130,10 +131,11 @@ const displayProps = [
     }
 ];
 // eslint-disable-next-line react/prefer-stateless-function
-export class DeviceInfo extends Component<DeviceInfoProps & PropsFromStore & WithTranslation<"zigbee">, unknown> {
+export class DeviceInfo extends Component<Pick<DeviceApi, 'configureDevice' | 'renameDevice' | 'removeDevice' | 'setDeviceDescription'> & DeviceInfoProps & PropsFromStore & WithTranslation<"zigbee">, unknown> {
     render(): JSX.Element {
         const { device, deviceStates, bridgeInfo, availability, t } = this.props;
-
+        const { configureDevice, renameDevice, removeDevice, setDeviceDescription } = this.props;
+        const homeassistantEnabled = !!bridgeInfo.config?.homeassistant;
         const deviceState: DeviceState = deviceStates[device.friendly_name] ?? {} as DeviceState;
         return (
             <Fragment>
@@ -152,7 +154,12 @@ export class DeviceInfo extends Component<DeviceInfoProps & PropsFromStore & Wit
                         ))
                     }
                 </dl>
-                <DeviceControlGroup device={device} state={deviceState} />
+                <DeviceControlGroup
+                    device={device}
+                    state={deviceState}
+                    homeassistantEnabled={homeassistantEnabled}
+                    {...{ configureDevice, renameDevice, removeDevice, setDeviceDescription }}
+                />
 
             </Fragment>
         );

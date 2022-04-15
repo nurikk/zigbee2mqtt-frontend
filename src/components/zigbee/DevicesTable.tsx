@@ -10,19 +10,23 @@ import { LastSeen } from "../LastSeen";
 import PowerSource from "../power-source";
 import DeviceControlGroup from "../device-control/DeviceControlGroup";
 import { Table } from "../grid/ReactTableCom";
-import { CellProps, Column } from "react-table";
+import { Column } from "react-table";
 import { DevicesPageData } from "./index";
 import { Availability } from "./Availability";
 import { LastSeenType } from "../../types";
+import { DeviceApi } from "../../actions/DeviceApi";
 
 export type DevicesTableProps = {
     data: DevicesPageData[];
     lastSeenType: LastSeenType;
     availabilityFeatureEnabled: boolean;
+    homeassistantEnabled: boolean;
 }
 
-export function DevicesTable(props: DevicesTableProps) {
-    const { data, lastSeenType, availabilityFeatureEnabled } = props;
+export function DevicesTable(props: DevicesTableProps & Pick<DeviceApi, 'configureDevice' | 'renameDevice' | 'removeDevice' | 'setDeviceDescription'>) {
+    const { data, lastSeenType, availabilityFeatureEnabled, homeassistantEnabled, setDeviceDescription } = props;
+    const { renameDevice, removeDevice, configureDevice } = props;
+
     const { t } = useTranslation(["zigbee", "common", "avaliability"]);
     const lastSeenCol = lastSeenType !== "disable" ? [{
         id: 'last_seen',
@@ -95,7 +99,10 @@ export function DevicesTable(props: DevicesTableProps) {
             Header: '',
             Cell: ({ row: { original: { device, state } } }) => {
                 return <DeviceControlGroup
-                    device={device} state={state}
+                    device={device}
+                    state={state}
+                    homeassistantEnabled={homeassistantEnabled}
+                    {...{renameDevice, removeDevice, configureDevice, setDeviceDescription}}
                 />
             },
             disableSortBy: true,
