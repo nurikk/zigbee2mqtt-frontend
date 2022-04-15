@@ -1,3 +1,14 @@
+## [0.6.82](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.81...0.6.82) (2022-04-15)
+
+
+### Features
+
+* **EndpointPicker:** add known endpoints from exposes definition ([705cf11](https://github.com/nurikk/zigbee2mqtt-frontend/commit/705cf11c39dd265c884448fba046529f113012cb))
+* **LogsPage:** add timestamp to logs ([89082f2](https://github.com/nurikk/zigbee2mqtt-frontend/commit/89082f26f05c4b5ce25281e64587aacc78a3821e))
+* **NavBar:** show hostname if running in iframe ([8beb536](https://github.com/nurikk/zigbee2mqtt-frontend/commit/8beb536dc31a171111e605720914a73b42ed738b))
+
+
+
 ## [0.6.81](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.80...0.6.81) (2022-04-15)
 
 
