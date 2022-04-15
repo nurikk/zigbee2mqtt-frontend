@@ -1524,7 +1524,8 @@
         "available": "Available",
         "execute": "Execute",
         "command": "Command",
-        "payload": "Payload"
+        "payload": "Payload",
+        "save_description": "Save description"
     },
     "scene": {
         "scene_id": "Scene ID",
