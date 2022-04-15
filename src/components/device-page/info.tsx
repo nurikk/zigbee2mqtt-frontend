@@ -16,6 +16,7 @@ import { WithTranslation, withTranslation } from "react-i18next";
 import { DisplayValue } from "../display-value/DisplayValue";
 import { Availability } from "../zigbee/Availability";
 import { DeviceApi } from "../../actions/DeviceApi";
+import actions from "../../actions/actions";
 
 
 
@@ -168,5 +169,5 @@ export class DeviceInfo extends Component<Pick<DeviceApi, 'configureDevice' | 'r
 
 const mappedProps = ["deviceStates", "bridgeInfo", "availability"];
 
-const ConnectedDeviceInfoPage = withTranslation("zigbee")(connect<DeviceInfoProps, unknown, GlobalState, PropsFromStore>(mappedProps)(DeviceInfo));
+const ConnectedDeviceInfoPage = withTranslation("zigbee")(connect<DeviceInfoProps, unknown, GlobalState, PropsFromStore>(mappedProps, actions)(DeviceInfo));
 export default ConnectedDeviceInfoPage;

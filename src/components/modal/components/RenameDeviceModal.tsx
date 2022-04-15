@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { BridgeInfo, Device } from "../../../types";
+import { Device } from "../../../types";
 
 import NiceModal, { useModal } from '@ebay/nice-modal-react';
 
