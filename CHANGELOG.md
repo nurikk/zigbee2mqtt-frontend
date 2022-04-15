@@ -1,3 +1,12 @@
+## [0.6.83](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.82...0.6.83) (2022-04-15)
+
+
+### Bug Fixes
+
+* **Nodes:** don't clear fx/fy after drag end ([b345855](https://github.com/nurikk/zigbee2mqtt-frontend/commit/b345855b4041bac12a6945850392d0edcc3db5e5))
+
+
+
 ## [0.6.82](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.81...0.6.82) (2022-04-15)
 
 
