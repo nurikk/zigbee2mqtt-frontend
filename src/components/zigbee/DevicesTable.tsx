@@ -23,7 +23,7 @@ export type DevicesTableProps = {
     homeassistantEnabled: boolean;
 }
 
-export function DevicesTable(props: DevicesTableProps & Pick<DeviceApi, 'configureDevice' | 'renameDevice' | 'removeDevice' | 'setDeviceDescription'>) {
+export function DevicesTable(props: DevicesTableProps & Pick<DeviceApi, 'configureDevice' | 'renameDevice' | 'removeDevice' | 'setDeviceDescription'>): JSX.Element {
     const { data, lastSeenType, availabilityFeatureEnabled, homeassistantEnabled, setDeviceDescription } = props;
     const { renameDevice, removeDevice, configureDevice } = props;
 

@@ -52,7 +52,7 @@ function AttributeValueEditor(props: AttributeValueEditorProps): JSX.Element {
     }
 
 
-    return <input className="form-control" type={type} value={value as string | number} onChange={onValueChanged}></input>
+    return <input className="form-control" type={type} value={value as string | number} onChange={onValueChanged} />
 }
 const logStartingStrings = [
     'Read result of',
@@ -142,7 +142,7 @@ export class DevConsole extends Component<DevConsoleProps, DevConsoleState> {
                             className="btn btn-danger btn-sm"
                             item={attribute}
                             onClick={this.onAttributeDelete}>
-                            <i className="fas fa-trash"></i>
+                            <i className="fas fa-trash" />
                         </Button>
                     </div>
                 </div>

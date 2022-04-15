@@ -17,14 +17,14 @@ interface DeviceControlGroupProps {
 }
 
 
-export function DeviceControlGroup(props: DeviceControlGroupProps & Pick<DeviceApi, 'configureDevice' | 'renameDevice' | 'removeDevice' | 'setDeviceDescription'>) {
+export function DeviceControlGroup(props: DeviceControlGroupProps & Pick<DeviceApi, 'configureDevice' | 'renameDevice' | 'removeDevice' | 'setDeviceDescription'>): JSX.Element {
     const { homeassistantEnabled, device, configureDevice, renameDevice, removeDevice, setDeviceDescription } = props;
     const { t } = useTranslation(["zigbee", "common"]);
 
     return (
         <div className="btn-group btn-group-sm" role="group">
-            <Button<void> className="btn btn-primary" 
-            onClick={() => NiceModal.show(RenameDeviceModal, { device, renameDevice, setDeviceDescription, homeassistantEnabled })} 
+            <Button<void> className="btn btn-primary"
+            onClick={() => NiceModal.show(RenameDeviceModal, { device, renameDevice, setDeviceDescription, homeassistantEnabled })}
             title={t('rename_device')}>
                 <i className="fa fa-edit" />
             </Button>

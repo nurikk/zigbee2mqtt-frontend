@@ -25,7 +25,7 @@ const Highlighted = ({ text = '', highlight = '' }) => {
     return (
         <>
             {parts.filter(part => part).map((part, i) => (
-                regex.test(part) ? <mark key={i}>{part}</mark> : <TextWrapper key={i} text={part}></TextWrapper>
+                regex.test(part) ? <mark key={i}>{part}</mark> : <TextWrapper key={i} text={part}/>
             ))}
         </>
     )
@@ -48,7 +48,7 @@ export function LogRow(props: LogRowProps): JSX.Element {
         {badge}
         <small className="pe-1">{formatDate(log.timestamp)}</small>
         <code>
-            <Highlighted text={log.message} highlight={search}></Highlighted>
+            <Highlighted text={log.message} highlight={search}/>
         </code>
     </div>
 }
@@ -73,7 +73,7 @@ export class LogsPage extends Component<PropsFromStore & BridgeApi & UtilsApi & 
                     </div>
                     <div className="col-12 col-sm-4 col-xxl-4">
                         <label htmlFor="search-filter" className="form-label">{t('filter_by_text')}</label>
-                        <input id="search-filter" className="form-control col-10" placeholder={t('common:enter_search_criteria')} value={search} onChange={(e) => this.setState({ search: e.target.value })} type="text"></input>
+                        <input id="search-filter" className="form-control col-10" placeholder={t('common:enter_search_criteria')} value={search} onChange={(e) => this.setState({search: e.target.value})} type="text"/>
                     </div>
                     <div className="col-12 col-sm-4 col-xxl-4">
                         <ConfigureLogs

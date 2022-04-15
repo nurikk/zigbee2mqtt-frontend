@@ -1,5 +1,4 @@
 import React, { FunctionComponent, InputHTMLAttributes, useEffect, useState } from "react";
-import { randomString } from "../../utils";
 import cx from "classnames";
 import EnumEditor, { ValueWithLabelOrPrimitive } from "../enum-editor/enum-editor";
 
@@ -16,7 +15,6 @@ type RangeProps = {
 
 const RangeEditor: FunctionComponent<RangeProps & Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'>> = (props) => {
     const { onChange, value, valueStep, min, max, unit, steps, minimal, ...rest } = props;
-    const [id, setId] = useState<string>(randomString(5));
     const [currentValue, setCurrentValue] = useState<number>(value)
 
     useEffect(() => {
@@ -27,7 +25,6 @@ const RangeEditor: FunctionComponent<RangeProps & Omit<InputHTMLAttributes<HTMLI
     return <div className="input-group align-items-center">
         {!minimal && steps ? <EnumEditor values={steps} onChange={onChange} value={currentValue} /> : null}
         {showRange ? <input
-            id={id}
             min={min}
             max={max}
             step={valueStep}

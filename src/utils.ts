@@ -11,7 +11,8 @@ import debounce from "lodash/debounce";
 export const genDeviceDetailsLink = (deviceIdentifier: string | number): string => (`/device/${deviceIdentifier}`);
 
 export const toHex = (input: number, padding = 4): string => {
-    return `0x${(`${'0'.repeat(padding)}${input.toString(16)}`).substr(-1 * padding).toUpperCase()}`;
+    const padStr = '0'.repeat(padding);
+    return '0x' + (padStr + input.toString(16)).slice(-1 * padding).toUpperCase()
 };
 
 
@@ -87,7 +88,8 @@ export const sanitizeGraph = (inGraph: GraphI): GraphI => {
         nodes[node.ieeeAddr] = node;
     });
 
-    inGraph.links.sort((a, b) => a.relationship - b.relationship).forEach(link => {
+    inGraph.links.sort((a, b) => a.relationship - b.relationship)
+    inGraph.links.forEach(link => {
 
         const src: NodeI = nodes[link.source.ieeeAddr];
         const dst: NodeI = nodes[link.target.ieeeAddr];
@@ -115,7 +117,7 @@ export const getDeviceDisplayName = (device: Device): string => {
     return `${device.friendly_name} ${device.definition?.model ? `(${device.definition?.model})` : ''}`;
 };
 
-export const randomString = (len: number): string => Math.random().toString(36).substr(2, len);
+export const randomString = (len: number): string => Math.random().toString(36).slice(2, 2 + len);
 
 export const isSecurePage = (): boolean => location.protocol === 'https:';
 
@@ -164,7 +166,7 @@ export const isOnlyOneBitIsSet = (b: number): number | boolean => {
 }
 const THEME_STORAGE_KEY = 'z2m-theme';
 
-export const getCurrentTheme = (): Theme => local.getItem(THEME_STORAGE_KEY) as Theme ?? 'light';
+export const getCurrentTheme = (): Theme => local.getItem<Theme>(THEME_STORAGE_KEY) ?? 'light';
 export const saveCurrentTheme = (theme: string): void => local.setItem(THEME_STORAGE_KEY, theme);
 
 
@@ -183,7 +185,7 @@ export const debounceArgs = (fn: (...args: any) => any, options?: Record<string,
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars,@typescript-eslint/no-empty-function
-export const assertUnreachable = (x: never): void => { }
+export const assertUnreachable = (_x: never): void => undefined;
 
 
 export const isIframe = (): boolean => window.location !== window.parent.location;

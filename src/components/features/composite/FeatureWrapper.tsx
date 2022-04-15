@@ -23,7 +23,7 @@ export const FeatureWrapper: FunctionComponent<PropsWithChildren<FeatureWrapperP
                     {isReadable ? (
                         <Button<CompositeFeature | GenericExposedFeature> item={feature} onClick={(item) => {
                             onRead(feature.endpoint as Endpoint, { [item.property]: "" })
-                        }} className="btn btn-primary btn-sm"><i className="fa fa-sync"></i></Button>
+                        }} className="btn btn-primary btn-sm"><i className="fa fa-sync" /></Button>
                     ) : null}
                 </div>
                 {feature.description ? <small className="d-block text-muted">{t(feature.description)}</small> : null}

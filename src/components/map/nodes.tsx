@@ -10,7 +10,7 @@ import { select } from "d3-selection";
 import { drag } from "d3-drag";
 import { CSSTransition } from 'react-transition-group'; // ES6
 import isEqual from "lodash/isEqual";
-import { AvailabilityState, OnlineOrOffline, WithAvailability, WithDevices, WithDeviceStates } from "../../store";
+import { AvailabilityState, WithAvailability, WithDevices, WithDeviceStates } from "../../store";
 
 
 

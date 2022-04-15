@@ -37,7 +37,7 @@ const Toggle: FunctionComponent<ToggleProps> = (props) => {
                 <div className="form-check form-switch form-check-inline align-middle me-0">
                     <input className="form-check-input" type="checkbox" checked={value === valueOn} onChange={onCheckboxChange} />
                 </div>
-            ) : <i className="fa fa-question" title="Current value unknown"></i>}
+            ) : <i className="fa fa-question" title="Current value unknown"/>}
             {showOnOffButtons && <ControlButton value={valueOn} name={name} onClick={onChange} />}
 
         </div>

@@ -7,7 +7,7 @@ export type LastLogResultProps = {
     filterFn: (l: LogMessage) => boolean;
 }
 
-export function LastLogResult(props: LastLogResultProps) {
+export function LastLogResult(props: LastLogResultProps): JSX.Element {
     const { logs, filterFn } = props;
     const filtered = logs.filter(filterFn);
     const lastLogMessage = filtered.length > 0 ? filtered[filtered.length - 1] : null;

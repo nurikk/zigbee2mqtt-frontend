@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ImgHTMLAttributes, useState } from "react";
+import React, { FunctionComponent, ImgHTMLAttributes } from "react";
 import genericDevice from "../../images/generic-zigbee-device.png";
 import { Device, DeviceState, OTAState } from "../../types";
 import cx from "classnames";

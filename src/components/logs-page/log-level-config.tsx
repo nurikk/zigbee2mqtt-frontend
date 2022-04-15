@@ -30,5 +30,5 @@ export default function ConfigureLogs(props: ConfigureLogsProps): JSX.Element {
     return <Form schema={_schema} className={styles["hide-description"]}
         formData={formData}
         onChange={handleChange}
-    ><div></div></Form>
+    ><div/></Form>
 }

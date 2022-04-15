@@ -12,7 +12,7 @@ interface CommandExecutorProps extends Pick<DeviceApi, "executeCommand"> {
     device: Device;
 
 }
-export const CommandExecutor = (props: CommandExecutorProps) => {
+export const CommandExecutor = (props: CommandExecutorProps): JSX.Element => {
     const { executeCommand, device, logs } = props;
     const { t } = useTranslation("zigbee");
     const [endpoint, setEndpoint] = useState<number>(1);
