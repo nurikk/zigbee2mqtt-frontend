@@ -8,6 +8,7 @@ import initialState from './initialState.json';
 export interface LogMessage {
     level: "error" | "info" | "warning";
     message: string;
+    timestamp: Date;
 }
 
 export type Extension = {

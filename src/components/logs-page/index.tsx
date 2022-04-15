@@ -7,6 +7,7 @@ import escapeRegExp from "lodash/escapeRegExp";
 import { BridgeApi } from "../../actions/BridgeApi";
 import ConfigureLogs from "./log-level-config";
 import { WithTranslation, withTranslation } from "react-i18next";
+import { formatDate } from "../../utils";
 
 
 type LogsPageState = {
@@ -37,15 +38,19 @@ type LogRowProps = {
 }
 export function LogRow(props: LogRowProps): JSX.Element {
     const { logLevel, log, search } = props
+    const badge = logLevel === ALL && <><span style={{ width: '60px' }} className={cx("badge", {
+        'bg-danger': log.level === 'error',
+        'bg-warning': log.level === 'warning',
+        'bg-info': log.level === 'info',
+        'bg-secondary': !['error', 'warning', 'info'].includes(log.level),
+    }, "text-capitalize")}>{log.level}</span>&nbsp;</>
     return <div>
-        {logLevel === ALL && <><span style={{ width: '60px' }} className={cx("badge", {
-            'bg-danger': log.level === 'error',
-            'bg-warning': log.level === 'warning',
-            'bg-info': log.level === 'info',
-            'bg-secondary': !['error', 'warning', 'info'].includes(log.level),
-        }, "text-capitalize")}>{log.level}</span>&nbsp;</>}<code>
+        {badge}
+        <small className="pe-1">{formatDate(log.timestamp)}</small>
+        <code>
             <Highlighted text={log.message} highlight={search}></Highlighted>
-        </code></div>
+        </code>
+    </div>
 }
 
 const logLevels = [ALL, 'debug', 'info', 'warning', 'error'];

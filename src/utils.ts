@@ -29,6 +29,7 @@ export const toHHMMSS = (secs: number): string => {
         .join(":");
 };
 
+
 export type CallbackHandler<T> = (err: boolean, res: T) => void;
 export interface ApiResponse<T> {
     success: boolean;
@@ -56,6 +57,26 @@ export const lastSeen = (state: DeviceState, lastSeenType: LastSeenType): Date |
             return undefined;
     }
 };
+
+export function padTo2Digits(num: number): string {
+    return num.toString().padStart(2, '0');
+}
+
+export function formatDate(date: Date): string {
+    return (
+        [
+            date.getFullYear(),
+            padTo2Digits(date.getMonth() + 1),
+            padTo2Digits(date.getDate()),
+        ].join('-') +
+        ' ' +
+        [
+            padTo2Digits(date.getHours()),
+            padTo2Digits(date.getMinutes()),
+            padTo2Digits(date.getSeconds()),
+        ].join(':')
+    );
+}
 
 
 export const sanitizeGraph = (inGraph: GraphI): GraphI => {
@@ -145,11 +166,11 @@ export const saveCurrentTheme = (theme: string): void => local.setItem(THEME_STO
 
 export const debounceArgs = (fn: (...args: any) => any, options?: Record<string, any>) => {
     let __dbArgs: any[] = [];
-    
+
     const __dbFn = debounce(() => {
         fn.call(undefined, __dbArgs);
         __dbArgs = []
-    // @ts-ignore
+        // @ts-ignore
     }, options);
     return (...args) => {
         __dbArgs.push(...args);
@@ -158,4 +179,4 @@ export const debounceArgs = (fn: (...args: any) => any, options?: Record<string,
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars,@typescript-eslint/no-empty-function
-export const assertUnreachable = (x: never): void => {}
+export const assertUnreachable = (x: never): void => { }

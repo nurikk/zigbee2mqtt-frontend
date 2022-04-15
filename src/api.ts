@@ -183,7 +183,7 @@ class Api {
                 {
                     const { logs } = store.getState();
                     const newLogs = [...logs.slice(-MAX_LOGS_RECORDS_IN_BUFFER)];
-                    newLogs.push(data.payload as unknown as LogMessage);
+                    newLogs.push({...(data.payload as unknown as LogMessage), timestamp: new Date()} as LogMessage);
                     store.setState({ logs: newLogs });
                     const log = data.payload as unknown as LogMessage;
                     if (blacklistedMessages.every(val => !val.test(log.message))) {
