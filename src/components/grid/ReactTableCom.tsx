@@ -92,7 +92,7 @@ export const Table: React.FC<Props> = ({ columns, data, id }) => {
     <table {...getTableProps()} className="table responsive">
       <thead>
         <tr>
-          <th colSpan={visibleColumns.length}>
+          <th colSpan={visibleColumns.length + 1}>
             <GlobalFilter
               globalFilter={state.globalFilter}
               setGlobalFilter={setGlobalFilter}
