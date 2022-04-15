@@ -1,3 +1,23 @@
+## [0.6.81](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.80...0.6.81) (2022-04-15)
+
+
+### Bug Fixes
+
+* **DeviceControlGroup:** fix missing deviceapi methods ([e7b6566](https://github.com/nurikk/zigbee2mqtt-frontend/commit/e7b65664232931f034d2981f11bfe0dedc2a6450))
+* **i18:** add save_description ([ae35dc9](https://github.com/nurikk/zigbee2mqtt-frontend/commit/ae35dc980e90a068019e06ab4fe911e5aa55a7ab))
+* **i18n:** add rename_group ([721dbc9](https://github.com/nurikk/zigbee2mqtt-frontend/commit/721dbc945a0cf3303060d598a0dbed407810187b))
+* **LogRow:** make badge wider ([0832da7](https://github.com/nurikk/zigbee2mqtt-frontend/commit/0832da71287bda605090f908807c5c0489b71666))
+* **Table:** increase colspan to accomodate # column ([38b8ed0](https://github.com/nurikk/zigbee2mqtt-frontend/commit/38b8ed0cd7f8a32341222c1201689e56b3f2bf00))
+
+
+### Features
+
+* **DashboardDevice:** add description to device tile ([056b988](https://github.com/nurikk/zigbee2mqtt-frontend/commit/056b98856b163c90fe5ad055a550c017f1917e91))
+* **i18n:** import new translations ([27c64c9](https://github.com/nurikk/zigbee2mqtt-frontend/commit/27c64c97d4e2b1d4d604cce91c3c185e555cd790))
+* **StartStopJoinButton:** convert seconds to mmss ([f26013c](https://github.com/nurikk/zigbee2mqtt-frontend/commit/f26013cbd71ee63a263c092fb3804534b7e28e56))
+
+
+
 ## [0.6.80](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.79...0.6.80) (2022-03-31)
 
 
