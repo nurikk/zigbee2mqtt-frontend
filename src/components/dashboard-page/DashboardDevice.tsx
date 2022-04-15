@@ -14,8 +14,8 @@ import DeviceImage from '../device-image';
 import { useTranslation } from 'react-i18next';
 
 
-type Props = BaseFeatureProps<CompositeFeature> & { 
-    lastSeenType: LastSeenType, 
+type Props = BaseFeatureProps<CompositeFeature> & {
+    lastSeenType: LastSeenType,
     controls?: JSX.Element,
     endpoint?: Endpoint;
 };
@@ -33,7 +33,12 @@ const DashboardDevice: React.FC<Props> = ({ onChange, onRead, device, endpoint, 
                     </Link>
                     {controls}
                 </div>
-                <div className={`card-body align-items-center row`}>
+
+                <div className="card-header py-0 d-flex justify-content-between">
+                    <small>{device.description}</small>
+                </div>
+
+                <div className={cx('card-body align-items-center row')}>
                     <Composite feature={{ features } as CompositeFeature}
                         className="row"
                         type="composite"
