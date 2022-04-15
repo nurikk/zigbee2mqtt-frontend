@@ -84,7 +84,7 @@
         "lodash": "^4.17.21",
         "mini-css-extract-plugin": "^2.5.3",
         "notyf": "^3.10.0",
-        "pinst": "^2.1.6",
+        "pinst": "^3.0.0",
         "prettier": "^2.5.1",
         "react": "^17.0.1",
         "react-ace": "^9.5.0",
