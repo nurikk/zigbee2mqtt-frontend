@@ -51,6 +51,7 @@ const typeToClassMap = {
     workdays_schedule: ['fa-calendar-day', 'text-info'],
     holidays_schedule: ['fa-calendar-day', 'text-danger'],
     away_mode: ['fa-plane', 'text-info'],
+    vibration: ['fa-water fa-rotate-270'],
 };
 
 const getGenericFeatureIcon = (name: string, value: unknown): string => {
@@ -71,7 +72,7 @@ const getGenericFeatureIcon = (name: string, value: unknown): string => {
             classes.push(cx({ 'fa-beat-fade text-primary': value }));
             break;
         case 'vibration':
-            classes.push(cx({ 'fa-water fa-rotate-270 text-muted': value, 'fa-water fa-rotate-270 fa-shake text-primary': !value }));
+            classes.push(cx({ 'fa-shake text-primary': value }));
             break;
         default:
             break;
