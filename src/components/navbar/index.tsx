@@ -13,7 +13,7 @@ import { BridgeApi } from '../../actions/BridgeApi';
 import { ThemeSwitcher } from '../theme-switcher';
 import { WithTranslation, withTranslation, useTranslation } from 'react-i18next';
 import LocalePicker from '../../i18n/LocalePicker';
-import { toHHMMSS } from '../../utils';
+import { isIframe, toHHMMSS } from '../../utils';
 
 
 
@@ -111,7 +111,7 @@ const NavBar: FunctionComponent<PropsFromStore & ThemeActions & WithTranslation<
     });
     return (<nav className="navbar navbar-expand-md navbar-light">
         <div ref={ref as React.MutableRefObject<HTMLDivElement>} className="container-fluid">
-            <Link onClick={() => setNavbarIsVisible(false)} to="/">Zigbee2MQTT</Link>
+            <Link onClick={() => setNavbarIsVisible(false)} to="/">{isIframe() ? `Z2M@${document.location.hostname}` : 'Zigbee2MQTT'}</Link>
 
             <button onClick={() => { setNavbarIsVisible(!navbarIsVisible) }} className="navbar-toggler" type="button">
                 <span className="navbar-toggler-icon" />
