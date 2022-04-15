@@ -163,8 +163,6 @@ export default class Nodes extends Component<NodesProps, NodesState> {
                 if (!event.active) {
                     simulation.alphaTarget(0);
                 }
-                d.fx = undefined;
-                d.fy = undefined;
             });
         select(root).selectAll<SVGCircleElement, NodeI>(`.${style.node}`)
             .call(dragForce);
