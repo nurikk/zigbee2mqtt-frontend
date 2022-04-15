@@ -140,14 +140,18 @@ export const download = (data: Record<string, unknown>, filename: string): void 
 export const sanitizeZ2MDeviceName = (deviceName?: string): string => deviceName ? deviceName.replace(/:|\s|\//g, "-") : "NA";
 
 export const getEndpoints = (obj: Device | Group): Endpoint[] => {
+    let eps: Endpoint[] = [];
     if (!obj) {
-        return [];
+        return eps;
     } else if ((obj as Device).endpoints) {
-        return Object.keys((obj as Device).endpoints);
+        eps = eps.concat(Object.keys((obj as Device).endpoints) as Endpoint[]);
     } else if ((obj as Group).members) {
-        return (obj as Group).members.map(g => g.endpoint);
+        eps = eps.concat((obj as Group).members.map(g => g.endpoint));
     }
-    return [];
+    if ((obj as Device).definition?.exposes){
+        eps = eps.concat((obj as Device).definition?.exposes?.map(e => e.endpoint).filter(Boolean) as Endpoint[]);
+    }
+    return eps;
 }
 
 
