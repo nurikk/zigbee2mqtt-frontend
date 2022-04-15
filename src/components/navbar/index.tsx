@@ -13,6 +13,7 @@ import { BridgeApi } from '../../actions/BridgeApi';
 import { ThemeSwitcher } from '../theme-switcher';
 import { WithTranslation, withTranslation, useTranslation } from 'react-i18next';
 import LocalePicker from '../../i18n/LocalePicker';
+import { toHHMMSS } from '../../utils';
 
 
 
@@ -75,7 +76,7 @@ const StartStopJoinButton: FunctionComponent<StartStopJoinButtonProps> = ({ devi
     const onBtnClick = () => {
         setPermitJoin(!permitJoin, selectedRouter);
     }
-    const permitJoinTimer = <>{permitJoinTimeout ? <div className="d-inline-block ms-1" style={{ width: '30px', maxWidth: '30px' }}> {permitJoinTimeout}</div> : null}</>;
+    const permitJoinTimer = <>{permitJoinTimeout ? <div className="d-inline-block mx-1" style={{ width: '30px', maxWidth: '30px' }}>{toHHMMSS(permitJoinTimeout)}</div> : null}</>;
     const buttonLabel = <>{permitJoin ? t("disable_join") : t("permit_join")} ({selectedRouter?.friendly_name ?? t("all")}){permitJoinTimer}</>;
     return (
         <div className="btn-group text-nowrap me-1">
@@ -85,7 +86,7 @@ const StartStopJoinButton: FunctionComponent<StartStopJoinButtonProps> = ({ devi
                 className="btn btn-outline-secondary">{buttonLabel}</button>
 
 
-            {routers.length ? (<><Button<boolean> type="button" onClick={setIsComponentVisible} item={!isComponentVisible} className="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-expanded="false">
+            {routers.length ? (<><Button<boolean> type="button" onClick={setIsComponentVisible} item={!isComponentVisible} className="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split">
                 <span className="visually-hidden">{t('toggle_dropdown')}</span>
             </Button>
                 <ul ref={ref as RefObject<HTMLUListElement>} className={cx('dropdown-menu', { show: isComponentVisible })}>
