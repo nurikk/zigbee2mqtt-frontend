@@ -68,6 +68,9 @@ const getGenericFeatureIcon = (name: string, value: unknown): string => {
         case 'occupancy':
             classes.push(cx({ 'text-warning': value }))
             break;
+        case 'tamper':
+            classes.push(cx({ 'fa-beat-fade': value }))
+            break;
         case 'water_leak':
             classes.push(cx({ 'fa-beat-fade text-primary': value }))
             break;
