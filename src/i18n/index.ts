@@ -19,6 +19,7 @@ import koTranslations from './locales/ko.json';
 import csTranslations from './locales/cs.json';
 import fiTranslations from './locales/fi.json';
 import svTranslations from './locales/sv.json';
+import trTranslations from './locales/tr.json';
 
 
 import timeCa from "timeago.js/lib/lang/ca";
@@ -37,6 +38,7 @@ import timeKo from "timeago.js/lib/lang/ko";
 import timeCs from "timeago.js/lib/lang/cs";
 import timeFi from "timeago.js/lib/lang/fi";
 import timeSv from "timeago.js/lib/lang/sv";
+import timeTr from "timeago.js/lib/lang/tr";
 
 
 register("ca", timeCa);
@@ -55,6 +57,7 @@ register("zh", timeZh);
 register("cs", timeCs);
 register("fi", timeFi);
 register("sv", timeSv);
+register("tr", timeTr);
 
 
 
@@ -77,6 +80,7 @@ export const resources = {
     cs: csTranslations as ResourceLanguage,
     fi: fiTranslations as ResourceLanguage,
     sv: svTranslations as ResourceLanguage,
+    tr: trTranslations as ResourceLanguage,
 
 } as const;
 
