@@ -45,7 +45,7 @@ export function isCompositeFeature(feature: GenericExposedFeature | CompositeFea
 }
 
 export function isColorFeature(feature: GenericExposedFeature | CompositeFeature): feature is ColorFeature {
-  return feature.type === "composite" && (feature.name == "color_xy" || feature.name == "color_hs");
+  return feature.type === "composite" && (feature.name === "color_xy" || feature.name === "color_hs");
 }
 
 export function isClimateFeature(feature: GenericExposedFeature | CompositeFeature): feature is ClimateFeature {

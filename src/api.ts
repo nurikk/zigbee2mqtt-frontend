@@ -195,7 +195,7 @@ class Api {
             case "bridge/response/networkmap":
                 {
                     const response = data.payload as unknown as ResponseWithStatus;
-                    if (response.status == "ok") {
+                    if (response.status === "ok") {
                         const { value } = response.data as { value: unknown };
                         store.setState({
                             networkGraphIsLoading: false,
@@ -250,7 +250,7 @@ class Api {
         const { transaction, status } = message;
         if (transaction !== undefined && this.requests.has(transaction)) {
             const [resolve, reject] = this.requests.get(transaction) as [Callable, Callable];
-            if (status == "ok" || status == undefined) {
+            if (status === "ok" || status === undefined) {
                 resolve();
             } else {
                 reject();
