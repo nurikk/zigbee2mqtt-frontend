@@ -1,3 +1,12 @@
+## [0.6.84](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.83...0.6.84) (2022-05-02)
+
+
+### Features
+
+* **exposes:** if tamper true tamper icon fade ([0e4b0d8](https://github.com/nurikk/zigbee2mqtt-frontend/commit/0e4b0d857a7cc2260d31e016334432f9719647d0))
+
+
+
 ## [0.6.83](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.82...0.6.83) (2022-04-15)
 
 
