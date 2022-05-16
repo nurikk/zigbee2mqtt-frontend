@@ -1,3 +1,19 @@
+## [0.6.85](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.84...0.6.85) (2022-05-16)
+
+
+### Bug Fixes
+
+* **Availability:** lowercase availabilityState ([e217b35](https://github.com/nurikk/zigbee2mqtt-frontend/commit/e217b35d8c999a01a0851bec175bd28d377b6e28))
+* **i18n:** trim locales ([1e53753](https://github.com/nurikk/zigbee2mqtt-frontend/commit/1e53753dfd26c1ec4e1730f059f12fc562a84c37))
+
+
+### Features
+
+* **devServer:** update mocks ([5396085](https://github.com/nurikk/zigbee2mqtt-frontend/commit/53960857fe116e45c95d5b8f31545ebed1e324bc))
+* **i18n:** add Turkish Translation ([78bb6d6](https://github.com/nurikk/zigbee2mqtt-frontend/commit/78bb6d6058ea1ca6370f3a8c486b458fd4e233c7))
+
+
+
 ## [0.6.84](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.83...0.6.84) (2022-05-02)
 
 
