@@ -3,7 +3,7 @@ import 'react-notifications/lib/notifications.css';
 import "@fortawesome/fontawesome-free/css/all.css";
 import "./styles/styles.global.scss";
 import { NotificationContainer } from 'react-notifications';
-import React, { FunctionComponent, Suspense } from 'react';
+import React, { FunctionComponent } from 'react';
 import NiceModal from '@ebay/nice-modal-react';
 
 
@@ -55,7 +55,7 @@ api.connect();
 
 const Main = () => {
     const { theme } = store.getState();
-    return <Suspense fallback="loading">
+    return <>
         <NotificationContainer />
         <I18nextProvider i18n={i18n}>
             <NiceModal.Provider>
@@ -88,7 +88,8 @@ const Main = () => {
                 </Provider >
             </NiceModal.Provider>
         </I18nextProvider>
-    </Suspense>
+        </>
+
 }
 
 ReactDOM.render(<Main />, document.getElementById("root"));
