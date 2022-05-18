@@ -15,17 +15,36 @@ type DeviceImageProps = {
 
 const sanitizeModelIDForImageUrl = (modelName: string): string => modelName?.replace("/", "_");
 
+type ImageGeneratorFn = (device: Device) => string | undefined;
 const getZ2mDeviceImage = (device: Device): string => `https://www.zigbee2mqtt.io/images/devices/${sanitizeZ2MDeviceName(device?.definition?.model)}.jpg`;
 const getConverterDeviceImage = (device: Device): string | undefined => device.definition?.icon;
 const getSlsDeviceImage = (device: Device): string => (`https://slsys.github.io/Gateway/devices/png/${sanitizeModelIDForImageUrl(device.model_id)}.png`);
 
 
-const AVAILABLE_GENERATORS = [
+const AVAILABLE_GENERATORS: ImageGeneratorFn[] = [
     getConverterDeviceImage,
     getZ2mDeviceImage,
     getSlsDeviceImage,
+    () => genericDevice
 ];
 
+class ErrorBoundary extends React.Component<{}, { hasError: boolean }> {
+    constructor(props) {
+        super(props);
+        this.state = { hasError: false };
+    }
+
+    componentDidCatch() {
+        this.setState({ hasError: true });
+    }
+
+    render() {
+        if (this.state.hasError) {
+            return <>ERROR</>;
+        }
+        return this.props.children;
+    }
+}
 type LazyImageProps = {
     device: Device;
     type?: "img" | "svg";
@@ -52,7 +71,9 @@ const DeviceImage: FunctionComponent<DeviceImageProps & ImgHTMLAttributes<HTMLDi
 
     if (type === "svg") {
         return <Suspense fallback={<image crossOrigin={"anonymous"} {...rest} href={genericDevice} />}>
-            <LazyImage type="svg" device={device} {...rest}></LazyImage>
+            <ErrorBoundary>
+                <LazyImage type="svg" device={device} {...rest}></LazyImage>
+            </ErrorBoundary>
         </Suspense>
     }
     const otaState = (deviceStatus?.update ?? {}) as OTAState;
@@ -63,7 +84,9 @@ const DeviceImage: FunctionComponent<DeviceImageProps & ImgHTMLAttributes<HTMLDi
 
     return <div className={cx(className, "position-relative")} {...rest}>
         <Suspense fallback={<img src={genericDevice} className={style.img} />}>
-            <LazyImage device={device}></LazyImage>
+            <ErrorBoundary>
+                <LazyImage device={device}></LazyImage>
+            </ErrorBoundary>
         </Suspense>
         {interviewSpinner}
         {otaSpinner}
