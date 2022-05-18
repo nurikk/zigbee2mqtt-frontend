@@ -1,3 +1,12 @@
+## [0.6.86](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.85...0.6.86) (2022-05-18)
+
+
+### Bug Fixes
+
+* **DeviceImage:** handle error during image loading ([0c3cc69](https://github.com/nurikk/zigbee2mqtt-frontend/commit/0c3cc69aef64ef4eb18eb9b4d943c7ad779f2008))
+
+
+
 ## [0.6.85](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.84...0.6.85) (2022-05-16)
 
 
