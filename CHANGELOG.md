@@ -1,3 +1,12 @@
+## [0.6.92](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.91...0.6.92) (2022-05-20)
+
+
+### Bug Fixes
+
+* **build:** add node token ([7ee52f2](https://github.com/nurikk/zigbee2mqtt-frontend/commit/7ee52f2c229113c3a123089b138653fe82aaa9d6))
+
+
+
 ## [0.6.91](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.90...0.6.91) (2022-05-20)
 
 
