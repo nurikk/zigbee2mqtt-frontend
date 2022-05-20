@@ -1,4 +1,4 @@
-import api from "../api";
+import api from "../ws-client";
 import { Device } from "../types";
 
 export interface BridgeApi {

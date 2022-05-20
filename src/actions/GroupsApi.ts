@@ -1,4 +1,4 @@
-import api from "../api";
+import api from "../ws-client";
 
 export interface GroupsApi {
     createGroup(name: string, id?: number): Promise<void>;

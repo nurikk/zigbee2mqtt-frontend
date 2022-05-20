@@ -3,17 +3,14 @@ declare module "*.png" {
     export default content;
 }
 
-declare module "*.txt" {
+
+
+declare module "*?url" {
     const value: string;
     export default value;
 }
 
-
-declare module "*.json" {
-    const value: Record<string, unknown>;
-    export default value;
-}
-declare module "*.js?raw" {
+declare module "*?raw" {
     const value: string;
     export default value;
 }

@@ -1,9 +1,9 @@
-import React, { FunctionComponent, ImgHTMLAttributes, Suspense, useEffect } from "react";
+import React, { FunctionComponent, ImgHTMLAttributes, Suspense } from "react";
 import genericDevice from "../../images/generic-zigbee-device.png";
 import { Device, DeviceState, OTAState } from "../../types";
 import cx from "classnames";
 import { sanitizeZ2MDeviceName } from "../../utils";
-import style from "./style.css";
+import style from "./style.module.css";
 import { useTranslation } from "react-i18next";
 import { useImage } from 'react-image'
 

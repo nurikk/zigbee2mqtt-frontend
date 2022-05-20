@@ -6,7 +6,7 @@ import NiceModal, { useModal } from '@ebay/nice-modal-react';
 
 import { Extension } from "../../store";
 import Modal, { ModalBody, ModalFooter, ModalHeader } from "../modal/Modal";
-import exampleExtensionCode from './example-extension.js.txt';
+import exampleExtensionCode from './example-extension.js?raw';
 import Button from "../button";
 
 

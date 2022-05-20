@@ -1,7 +1,7 @@
 import React, { Component, createRef, RefObject } from "react";
 import { LinkI, NodeI } from "./types";
 import cx from "classnames";
-import style from "./map.css";
+import style from "./map.module.css";
 import { MouseEventsResponderNode } from ".";
 import { Device, DeviceState, FriendlyName } from "../../types";
 import DeviceImage from "../device-image";

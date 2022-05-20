@@ -1,4 +1,4 @@
-import api from "../api";
+import api from "../ws-client";
 import { Cluster } from "../types";
 
 export type BindParams = {

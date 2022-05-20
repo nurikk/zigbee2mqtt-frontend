@@ -1,4 +1,4 @@
-import api from "../api";
+import api from "../ws-client";
 import { FriendlyName } from "../types";
 
 export interface StateApi {

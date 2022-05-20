@@ -1,4 +1,4 @@
-import api from "../api";
+import api from "../ws-client";
 import store from "../store";
 import { TouchLinkDevice } from "../types";
 

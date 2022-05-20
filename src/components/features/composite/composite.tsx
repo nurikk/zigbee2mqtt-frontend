@@ -82,7 +82,7 @@ export class Composite extends Component<CompositeProps & WithTranslation<"compo
             }
             for (const epName in groupedFeatures) {
                 const featuresGroup = groupedFeatures[epName];
-                result.push(<div key={epName}>{showEndpointLabels ?  `Endpoint: ${epName}` : null}<div className="ps-4">{...featuresGroup.map(f => <Feature
+                result.push(<div key={epName}>{showEndpointLabels ?  `Endpoint: ${epName}` : null}<div className="ps-4">{featuresGroup.map(f => <Feature
                     key={f.name + f.endpoint}
                     feature={f}
                     device={device}

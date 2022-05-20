@@ -1,4 +1,4 @@
-import api from "../api";
+import api from "../ws-client";
 
 export interface OtaApi {
     checkOTA(deviceName: string): Promise<void>;

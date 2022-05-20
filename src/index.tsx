@@ -21,7 +21,7 @@ import TouchlinkPage from "./components/touchlink-page";
 
 import store from "./store";
 import { Provider } from "unistore/react";
-import api from './api';
+import api from './ws-client';
 
 
 import ConnectedSettingsPage from "./components/settings";
@@ -46,9 +46,11 @@ const ConnectedDevicePageWrap: FunctionComponent<{ dev: string }> = ({ dev }) =>
     <ConnectedDevicePageWrap dev={dev} />
 );
 
+import lightTheme from './bootstrap-theme/css/light.css?url'
+import darkTheme from './bootstrap-theme/css/dark.css?url'
 const themes = {
-    light: './css/light.css',
-    dark: './css/dark.css',
+    light: lightTheme,
+    dark: darkTheme
 };
 
 api.connect();

@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import { Cluster, Device } from "../../types";
-import treeStyle from "./tree.css";
+import treeStyle from "./tree.module.css";
 
 interface ClustersProps {
     device: Device;

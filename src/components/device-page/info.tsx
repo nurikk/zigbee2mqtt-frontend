@@ -4,7 +4,7 @@ import { BridgeInfo, Device, DeviceState } from "../../types";
 import { toHex } from "../../utils";
 import DeviceControlGroup from "../device-control/DeviceControlGroup";
 import cx from "classnames";
-import style from "./style.css";
+import style from "./style.module.css";
 import { connect } from "unistore/react";
 import { AvailabilityState, GlobalState } from "../../store";
 import get from 'lodash/get';

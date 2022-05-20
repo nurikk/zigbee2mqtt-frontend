@@ -4,7 +4,7 @@ import { GlobalState } from "../store";
 import { Store } from "unistore";
 
 import { Endpoint, FriendlyName, IEEEEAddress, ReportingConfig } from "../types";
-import api from "../api";
+import api from "../ws-client";
 import { download, saveCurrentTheme } from "../utils";
 import bridgeActions from "./BridgeApi";
 import deviceActions from "./DeviceApi";

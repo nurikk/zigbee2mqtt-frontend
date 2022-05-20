@@ -1511,6 +1511,7 @@
         "reconfigure": "Reconfigure",
         "remove_device": "Remove device",
         "rename_device": "Rename device",
+        "save_description": "Save description",
         "select_attribute": "Select attribute",
         "select_cluster": "Select cluster",
         "support_status": "Support status",
@@ -1525,8 +1526,7 @@
         "available": "Available",
         "execute": "Execute",
         "command": "Command",
-        "payload": "Payload",
-        "save_description": ""
+        "payload": "Payload"
     },
     "scene": {
         "scene_id": "Scene ID",

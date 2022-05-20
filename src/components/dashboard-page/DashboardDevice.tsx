@@ -4,7 +4,7 @@ import cx from "classnames";
 import { BaseFeatureProps } from '../features/base';
 import DeviceFooter from './DeviceFooter';
 
-import styles from './DashboardDevice.scss';
+import styles from './DashboardDevice.module.scss';
 
 import { Link } from 'react-router-dom';
 import { genDeviceDetailsLink } from '../../utils';

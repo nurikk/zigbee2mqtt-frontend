@@ -1,6 +1,6 @@
 import React, { Fragment, FunctionComponent } from "react";
 import { PowerSource as PowerSourceType } from "../../types";
-import style from "./style.css";
+import style from "./style.module.css";
 import { useTranslation } from "react-i18next";
 
 

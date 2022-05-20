@@ -14,7 +14,7 @@ import { zoom, zoomIdentity, ZoomTransform } from "d3-zoom";
 import { linkTypes } from "./consts";
 import Spinner from "../spinner";
 import intersection from "lodash/intersection";
-import style from "./map.css";
+import style from "./map.module.css";
 import cx from "classnames";
 import { WithTranslation, withTranslation } from "react-i18next";
 export interface MouseEventsResponderNode {

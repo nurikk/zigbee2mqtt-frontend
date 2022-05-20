@@ -14,7 +14,7 @@ import { ISubmitEvent, UiSchema } from "@rjsf/core";
 import { WithTranslation, withTranslation } from "react-i18next";
 import customFields from "./../../i18n/rjsf-translation-fields";
 import { Stats } from "./stats";
-
+import frontentPackageJson from '../../../package.json';
 
 type SettingsTab = "settings" | "bridge" | "about" | "tools" | "donate" | "translate";
 
@@ -24,7 +24,7 @@ type UrlParams = {
 };
 type SettingsPageProps = RouteComponentProps<UrlParams>;
 
-declare const FRONTEND_VERSION: string; //injected by webpack.DefinePlugin
+
 
 type SettingsPageState = {
     keyName: SettingsKeys;
@@ -162,7 +162,7 @@ export class SettingsPage extends Component<PropsFromStore & SettingsPageProps &
             { translationKey: 'coordinator_type', content: <>{bridgeInfo.coordinator?.type ?? t('common:unknown')}</> },
             { translationKey: 'coordinator_revision', content: <>{bridgeInfo.coordinator?.meta?.revision ?? t('common:unknown')}</> },
             { translationKey: 'coordinator_ieee_address', content: <>{bridgeInfo.coordinator?.ieee_address ?? t('common:unknown')}</> },       
-            { translationKey: 'frontend_version', content: FRONTEND_VERSION },
+            { translationKey: 'frontend_version', content: frontentPackageJson.version },
             { translationKey: 'stats', content: <Stats devices={devices} /> },
         ];
 

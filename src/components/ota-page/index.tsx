@@ -1,5 +1,5 @@
 import React, { Component, FunctionComponent } from "react";
-import style from "./style.css";
+import style from "./style.module.css";
 import { connect } from "unistore/react";
 import actions from "../../actions/actions";
 import { OtaApi } from "../../actions/OtaApi";

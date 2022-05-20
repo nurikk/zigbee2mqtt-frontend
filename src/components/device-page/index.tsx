@@ -11,7 +11,7 @@ import ConnectedDeviceExposes from "./exposes";
 import Clusters from "./clusters";
 import DeviceSettings from "./settings";
 import Scene from "./scene";
-import styles from "./style.css";
+import styles from "./style.module.css";
 
 import DevConsole from "./dev-console";
 import { DeviceApi } from "../../actions/DeviceApi";

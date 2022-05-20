@@ -1,6 +1,6 @@
 import { LinkI } from "./types";
 import React, { Fragment, FunctionComponent, RefObject, useLayoutEffect, useRef } from "react";
-import style from "./map.css";
+import style from "./map.module.css";
 import cx from "classnames";
 import { select } from "d3-selection";
 

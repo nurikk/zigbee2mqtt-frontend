@@ -6,7 +6,7 @@ import { KVP, Z2MConfig } from "../../types";
 import get from "lodash/get";
 import set from "lodash/set";
 import { ISubmitEvent } from "@rjsf/core";
-import styles from "./log-level-config.css";
+import styles from "./log-level-config.module.css";
 
 
 type ConfigureLogsProps = {

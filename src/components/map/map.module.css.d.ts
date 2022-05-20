@@ -1,23 +1,46 @@
-export const container: string;
-export const node: string;
-export const link: string;
-export const linkLabel: string;
-export const label: string;
-export const Coordinator: string;
-export const coordinator: string;
-export const labels: string;
-export const links: string;
-export const nodes: string;
-export const EndDevice: string;
-export const endDevice: string;
-export const Router: string;
-export const router: string;
-export const Router2Coordinator: string;
-export const router2Coordinator: string;
-export const Router2Router: string;
-export const router2Router: string;
-export const EndDevice2Coordinator: string;
-export const endDevice2Coordinator: string;
-export const EndDevice2Router: string;
-export const endDevice2Router: string;
-export const foreignObject: string;
+declare const classNames: {
+    readonly container: 'container';
+    readonly img: 'img';
+    readonly node: 'node';
+    readonly link: 'link';
+    readonly linkLabel: 'linkLabel';
+    readonly links: 'links';
+    readonly nodes: 'nodes';
+    readonly EndDevice: 'EndDevice';
+    readonly Coordinator: 'Coordinator';
+    readonly Router: 'Router';
+    readonly BrokenLink: 'BrokenLink';
+    readonly Coordinator2Router: 'Coordinator2Router';
+    readonly Router2Coordinator: 'Router2Coordinator';
+    readonly Router2Router: 'Router2Router';
+    readonly Coordinator2EndDevice: 'Coordinator2EndDevice';
+    readonly EndDevice2Coordinator: 'EndDevice2Coordinator';
+    readonly Router2EndDevice: 'Router2EndDevice';
+    readonly EndDevice2Router: 'EndDevice2Router';
+    readonly foreignObject: 'foreignObject';
+    readonly offline: 'offline';
+    readonly controls: 'controls';
+};
+export default classNames;
+export type ClassNames =
+    | 'container'
+    | 'img'
+    | 'node'
+    | 'link'
+    | 'linkLabel'
+    | 'links'
+    | 'nodes'
+    | 'EndDevice'
+    | 'Coordinator'
+    | 'Router'
+    | 'BrokenLink'
+    | 'Coordinator2Router'
+    | 'Router2Coordinator'
+    | 'Router2Router'
+    | 'Coordinator2EndDevice'
+    | 'EndDevice2Coordinator'
+    | 'Router2EndDevice'
+    | 'EndDevice2Router'
+    | 'foreignObject'
+    | 'offline'
+    | 'controls';

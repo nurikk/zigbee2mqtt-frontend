@@ -1,5 +1,5 @@
 import React from "react";
-import style from "./style.css";
+import style from "./style.module.css";
 import { genDeviceDetailsLink, lastSeen, toHex } from "../../utils";
 import { useTranslation } from "react-i18next";
 import DeviceImage from "../device-image";
