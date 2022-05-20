@@ -65,7 +65,6 @@ specifiers:
   react-table: ^7.7.0
   react-transition-group: ^4.4.2
   reconnecting-websocket: ^4.4.0
-  rimraf: ^3.0.2
   sass: ^1.52.0
   timeago.js: ^4.0.2
   typescript: ^4.5.5
@@ -143,7 +142,6 @@ devDependencies:
   react-table: 7.8.0_react@17.0.2
   react-transition-group: 4.4.2_sfoxds7t5ydpegc3knd667wn6m
   reconnecting-websocket: 4.4.0
-  rimraf: 3.0.2
   sass: 1.52.0
   timeago.js: 4.0.2
   typescript: 4.6.4
