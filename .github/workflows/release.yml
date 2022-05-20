@@ -38,7 +38,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install
       - run: pnpm build
-      - run: pnpm publish --dry-run --publish-branch=dev
+      - run: pnpm publish --dry-run
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
       # - uses: "marvinpinto/action-automatic-releases@latest"
