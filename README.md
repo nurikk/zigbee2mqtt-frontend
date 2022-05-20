@@ -16,7 +16,7 @@ You miss a translation? You want to help? You can contribute new languages and i
 Install dependencies
 
 ```bash
-npm ci
+pnpm install
 ````
 
 Develop using mock data
