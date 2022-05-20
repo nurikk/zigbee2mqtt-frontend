@@ -1,3 +1,12 @@
+## [0.6.93](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.92...0.6.93) (2022-05-20)
+
+
+### Bug Fixes
+
+* **npmrc:** fix registry url ([5052243](https://github.com/nurikk/zigbee2mqtt-frontend/commit/5052243f021d1e92dce77087e8c5d1b90a85ad71))
+
+
+
 ## [0.6.92](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.91...0.6.92) (2022-05-20)
 
 
