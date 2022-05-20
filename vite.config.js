@@ -8,9 +8,7 @@ export default defineConfig({
     logLevel: 'debug',
     root: 'src',
     build: {
-        // Relative to the root
-        outDir: './dist',
-        emptyOutDir: true,
+        outDir: './dist'
     },
     plugins: [
         react({
