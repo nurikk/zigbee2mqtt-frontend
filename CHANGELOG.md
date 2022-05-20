@@ -1,3 +1,12 @@
+## [0.6.91](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.90...0.6.91) (2022-05-20)
+
+
+### Bug Fixes
+
+* **deps:** update lock file ([8a29f41](https://github.com/nurikk/zigbee2mqtt-frontend/commit/8a29f413e3c924429066c68f7d87736a666bf2d2))
+
+
+
 ## [0.6.90](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.89...0.6.90) (2022-05-20)
 
 
