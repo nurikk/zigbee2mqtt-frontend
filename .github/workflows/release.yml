@@ -41,16 +41,16 @@ jobs:
       - run: pnpm publish --no-git-checks
         env:
           NPM_TOKEN: ${{secrets.NPM_TOKEN}}
-      # - uses: "marvinpinto/action-automatic-releases@latest"
-      #   with:
-      #     repo_token: "${{ secrets.GITHUB_TOKEN }}"
-      #     prerelease: false
-      # - id: frontend-version
-      #   run: |
-      #     version=$(node -p "require('./package.json').version")
-      #     echo "::set-output name=version::$version"
-      # - run: |
-      #       curl -XPOST -H "Authorization: token ${{ secrets.GH_TOKEN }}" -H "Accept: application/vnd.github.everest-preview+json" -H "Content-Type: application/json" https://api.github.com/repos/koenkk/zigbee2mqtt/dispatches --data '{"event_type": "update_frontend", "client_payload": { "version": "${{ steps.frontend-version.outputs.version }}"}}'
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          prerelease: false
+      - id: frontend-version
+        run: |
+          version=$(node -p "require('./package.json').version")
+          echo "::set-output name=version::$version"
+      - run: |
+            curl -XPOST -H "Authorization: token ${{ secrets.GH_TOKEN }}" -H "Accept: application/vnd.github.everest-preview+json" -H "Content-Type: application/json" https://api.github.com/repos/koenkk/zigbee2mqtt/dispatches --data '{"event_type": "update_frontend", "client_payload": { "version": "${{ steps.frontend-version.outputs.version }}"}}'
 
 
 
