@@ -1,3 +1,17 @@
+## [0.6.87](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.86...0.6.87) (2022-05-20)
+
+
+### Bug Fixes
+
+* **build:** add sass dependency ([d23e0fd](https://github.com/nurikk/zigbee2mqtt-frontend/commit/d23e0fd1a8865a770fdc6f4735da2f313593d771))
+
+
+### Features
+
+* **build:** migrate to pnpm ([420aed7](https://github.com/nurikk/zigbee2mqtt-frontend/commit/420aed7573d46e06d767ff2a17fdc20e0203897b))
+
+
+
 ## [0.6.86](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.85...0.6.86) (2022-05-18)
 
 
