@@ -5,10 +5,10 @@ import viteCompression from 'vite-plugin-compression';
 
 
 export default defineConfig({
-    logLevel: 'debug',
     root: 'src',
     build: {
-        outDir: './dist'
+        emptyOutDir: true,
+        outDir: '../dist'
     },
     plugins: [
         react({
