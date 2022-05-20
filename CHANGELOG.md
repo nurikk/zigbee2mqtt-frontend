@@ -1,3 +1,12 @@
+## [0.6.88](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.87...0.6.88) (2022-05-20)
+
+
+### Bug Fixes
+
+* **build:** fix publish command ([e42a892](https://github.com/nurikk/zigbee2mqtt-frontend/commit/e42a892dac6e341908a729cd72b014b346fd75bd))
+
+
+
 ## [0.6.87](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.86...0.6.87) (2022-05-20)
 
 
