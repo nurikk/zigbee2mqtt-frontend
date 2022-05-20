@@ -1,3 +1,12 @@
+## [0.6.94](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.93...0.6.94) (2022-05-20)
+
+
+### Features
+
+* **release:** enable z2m PR ([d186d32](https://github.com/nurikk/zigbee2mqtt-frontend/commit/d186d32f1b02098a4694d08e9f27a1e8dfdb7535))
+
+
+
 ## [0.6.93](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.92...0.6.93) (2022-05-20)
 
 
