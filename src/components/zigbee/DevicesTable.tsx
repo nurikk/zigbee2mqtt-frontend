@@ -15,6 +15,7 @@ import { DevicesPageData } from "./index";
 import { Availability } from "./Availability";
 import { LastSeenType } from "../../types";
 import { DeviceApi } from "../../actions/DeviceApi";
+import isString from "lodash/isString";
 
 export type DevicesTableProps = {
     data: DevicesPageData[];
@@ -37,7 +38,7 @@ export function DevicesTable(props: DevicesTableProps & Pick<DeviceApi, 'configu
     const availabilityCol = availabilityFeatureEnabled ? [{
         id: 'availability',
         Header: t('avaliability:avaliability'),
-        accessor: ({ availabilityState }) => availabilityState,
+        accessor: ({ availabilityState }) => isString(availabilityState) ? availabilityState : availabilityState.state,
         Cell: ({ row: { original: { availabilityState, availabilityEnabledForDevice } } }) => {
             return <Availability
                 availability={availabilityState}
