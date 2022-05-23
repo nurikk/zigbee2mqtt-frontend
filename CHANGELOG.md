@@ -1,3 +1,12 @@
+## [0.6.95](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.94...0.6.95) (2022-05-23)
+
+
+### Bug Fixes
+
+* **DevicesTable:** fix sorting Availability column ([22c1dc3](https://github.com/nurikk/zigbee2mqtt-frontend/commit/22c1dc36719264466ff6ae52b4a38a768a89605a))
+
+
+
 ## [0.6.94](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.93...0.6.94) (2022-05-20)
 
 
