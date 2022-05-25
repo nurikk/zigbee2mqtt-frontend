@@ -21,15 +21,9 @@ export const isValidSceneId = (id: SceneId, existingScenes: Scene[] = []): boole
 export function getScenes(target: Group | Device): Scene[] {
     if ((target as Device).endpoints) {
         const scenes: Scene[] = [];
-        Object.entries((target as Device).endpoints).forEach(
-            ([endpoint, value]) => {
-                for (const _scene of value.scenes ?? []) {
-                    scenes.push({
-                        ..._scene, ...{ endpoint }
-                    })
-                }
-            }
-        );
+        Object.entries((target as Device).endpoints).forEach(([endpoint, value]) => {
+            value.scenes?.forEach(_scene => scenes.push({ ..._scene, ...{ endpoint } }));
+        });
         return scenes;
     } else if ((target as WithScenes).scenes) {
         return (target as WithScenes).scenes as Scene[];
@@ -39,27 +33,22 @@ export function getScenes(target: Group | Device): Scene[] {
 
 const whitelistFeatureNames = ['state', 'color_temp', 'color', 'transition', 'brightness'];
 
-export const onlyValidFeaturesForScenes = (feature: GenericExposedFeature | CompositeFeature,
-    deviceState: DeviceState = {} as DeviceState): GenericExposedFeature | CompositeFeature | false => {
+export function onlyValidFeaturesForScenes(
+    feature: GenericExposedFeature | CompositeFeature,
+    deviceState: DeviceState = {} as DeviceState): GenericExposedFeature | CompositeFeature | undefined {
 
-    const { property, name } = feature;
-    let { features } = feature as CompositeFeature;
+    let { property, name, features } = feature as CompositeFeature;
     if (isLightFeature(feature)) {
         features = features
             .map(f => onlyValidFeaturesForScenes(f, (property ? deviceState[property] : deviceState) as DeviceState))
             .filter(f => f) as (GenericExposedFeature | CompositeFeature)[];
-        const groupedFeatures = groupBy(features, 'property');
-        features = Object.values(groupedFeatures)
-            .map(f => f[0]);
+
+        features = Object.values(groupBy(features, 'property')).map(f => f[0]);
     }
-    const filteredOutFeature = { ...feature, features } as GenericExposedFeature | CompositeFeature;
-    if (whitelistFeatureNames.includes(name)) {
-        return filteredOutFeature;
+
+    if (whitelistFeatureNames.includes(name) || (Array.isArray(features) && features.length > 0)) {
+        return { ...feature, features } as GenericExposedFeature | CompositeFeature;
     }
-    if (Array.isArray(features) && features.length > 0) {
-        return filteredOutFeature;
-    }
-    return false;
 }
 
 type SceneProps = {

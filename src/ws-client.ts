@@ -4,6 +4,7 @@ import { BridgeConfig, BridgeInfo, TouchLinkDevice, Device, DeviceState, BridgeS
 import { sanitizeGraph, isSecurePage, randomString, stringifyWithPreservingUndefinedAsNull, debounceArgs } from "./utils";
 
 import { NotificationManager } from 'react-notifications';
+import keyBy from "lodash/keyBy";
 
 import { GraphI } from "./components/map/types";
 import { local } from "@toolz/local-storage";
@@ -110,10 +111,10 @@ class Api {
             if (!token) {
                 token = prompt("Enter your z2m admin token") as string;
                 if (token) {
-                    local.setItem(TOKEN_LOCAL_STORAGE_ITEM_NAME, token as string);
+                    local.setItem(TOKEN_LOCAL_STORAGE_ITEM_NAME, token);
                 }
             }
-            url.searchParams.append("token", token as string);
+            url.searchParams.append("token", token);
         }
         return url.toString();
     }
@@ -152,15 +153,9 @@ class Api {
                 break;
 
             case "bridge/devices":
-                {
-                    const devicesMap = {};
-                    (data.payload as unknown as Device[]).forEach((device) => {
-                        devicesMap[device.ieee_address] = device;
-                    });
-                    store.setState({
-                        devices: devicesMap
-                    });
-                }
+                store.setState({
+                    devices: keyBy(data.payload as unknown as Device[], 'ieee_address')
+                });
                 break;
 
             case "bridge/groups":
@@ -169,21 +164,16 @@ class Api {
                 })
                 break;
 
-            case "bridge/event":
-                break;
 
             case "bridge/extensions":
-                {
-                    const extensions = data.payload as Extension[];
-                    store.setState({ extensions });
-                }
+                store.setState({ extensions: data.payload as Extension[] });
                 break;
 
             case "bridge/logging":
                 {
                     const { logs } = store.getState();
                     const newLogs = [...logs.slice(-MAX_LOGS_RECORDS_IN_BUFFER)];
-                    newLogs.push({...(data.payload as unknown as LogMessage), timestamp: new Date()} as LogMessage);
+                    newLogs.push({ ...(data.payload as unknown as LogMessage), timestamp: new Date() } as LogMessage);
                     store.setState({ logs: newLogs });
                     const log = data.payload as unknown as LogMessage;
                     if (blacklistedMessages.every(val => !val.test(log.message))) {
@@ -195,15 +185,12 @@ class Api {
             case "bridge/response/networkmap":
                 {
                     const response = data.payload as unknown as ResponseWithStatus;
+                    const stateUpdate = { networkGraphIsLoading: false };
                     if (response.status === "ok") {
-                        const { value } = response.data as { value: unknown };
-                        store.setState({
-                            networkGraphIsLoading: false,
-                            networkGraph: sanitizeGraph(value as GraphI)
-                        });
-                    } else {
-                        store.setState({ networkGraphIsLoading: false });
+                        const networkGraph = sanitizeGraph((response.data as { value: unknown }).value as GraphI);
+                        stateUpdate['networkGraph'] = networkGraph;
                     }
+                    store.setState(stateUpdate);
                 }
                 break;
 
@@ -211,11 +198,12 @@ class Api {
             case "bridge/response/touchlink/scan":
                 {
                     const { status, data: payloadData } = data.payload as unknown as TouchllinkScanResponse;
+                    const stateUpdate = { touchlinkScanInProgress: false };
                     if (status === "ok") {
-                        store.setState({ touchlinkScanInProgress: false, touchlinkDevices: payloadData.found });
-                    } else {
-                        store.setState({ touchlinkScanInProgress: false });
+                        stateUpdate['touchlinkDevices'] = payloadData.found;
                     }
+                    store.setState(stateUpdate);
+
                 }
                 break;
 
