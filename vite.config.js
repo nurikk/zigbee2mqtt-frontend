@@ -6,6 +6,7 @@ import viteCompression from 'vite-plugin-compression';
 
 export default defineConfig({
     root: 'src',
+    base: '',
     build: {
         emptyOutDir: true,
         outDir: '../dist'
