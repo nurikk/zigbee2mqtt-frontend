@@ -1,3 +1,12 @@
+## [0.6.96](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.95...0.6.96) (2022-05-25)
+
+
+### Bug Fixes
+
+* **build:** relative assets path ([adb91de](https://github.com/nurikk/zigbee2mqtt-frontend/commit/adb91de54e27d39336c3f100397e9ff571ffda10))
+
+
+
 ## [0.6.95](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.94...0.6.95) (2022-05-23)
 
 
