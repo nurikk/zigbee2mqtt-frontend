@@ -57,7 +57,7 @@ export function DevicesTable(props: DevicesTableProps & Pick<DeviceApi, 'configu
         {
             id: 'friendly_name',
             Header: t('friendly_name'),
-            accessor: ({ device }) => device.friendly_name,
+            accessor: ({ device }) => [device.friendly_name, device.description].join(' '),
             Cell: ({ row: { original: { device } } }) => <>
                 <Link to={genDeviceDetailsLink(device.ieee_address)}>{device.friendly_name}</Link>
                 <small className="d-block">{device.description}</small>
