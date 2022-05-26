@@ -1,3 +1,18 @@
+## [0.6.97](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.96...0.6.97) (2022-05-26)
+
+
+### Bug Fixes
+
+* **i18n:** trim locales ([63625ce](https://github.com/nurikk/zigbee2mqtt-frontend/commit/63625ceb903c07b1409fb5d8429d8ab5e227cfe3))
+
+
+### Features
+
+* **DevicesTable:** add device description to searchable data ([da1654b](https://github.com/nurikk/zigbee2mqtt-frontend/commit/da1654b4afb711164b3e67d3c69752fbe142785c))
+* **i18n:** update en translation keys ([5818a01](https://github.com/nurikk/zigbee2mqtt-frontend/commit/5818a01801cebe15b7eda60d773838ebaac7503b))
+
+
+
 ## [0.6.96](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.95...0.6.96) (2022-05-25)
 
 
