@@ -3,7 +3,8 @@ import { Device, DeviceState, Endpoint, Group, LastSeenType } from "./types";
 import { GraphI, LinkI, LinkType, NodeI } from "./components/map/types";
 import { Theme } from "./components/theme-switcher";
 import JSZip from 'jszip';
-import FileSaver from 'file-saver';
+import { saveAs } from 'file-saver';
+
 import { local } from "@toolz/local-storage";
 import debounce from "lodash/debounce";
 
@@ -114,7 +115,8 @@ export const sanitizeGraph = (inGraph: GraphI): GraphI => {
 };
 
 export const getDeviceDisplayName = (device: Device): string => {
-    return `${device.friendly_name} ${device.definition?.model ? `(${device.definition?.model})` : ''}`;
+    const model = device.definition?.model ? `(${device.definition?.model})` : '';
+    return `${device.friendly_name} ${model}`;
 };
 
 export const randomString = (len: number): string => Math.random().toString(36).slice(2, 2 + len);
@@ -135,7 +137,7 @@ export const download = (data: Record<string, unknown>, filename: string): void 
     const zip = new JSZip();
     zip.file(filename, JSON.stringify(data, null, 4), { compression: 'DEFLATE' });
     zip.generateAsync({ type: "blob" }).then((content) => {
-        FileSaver.saveAs(content, `${filename}.zip`);
+        saveAs(content, `${filename}.zip`);
     });
 }
 

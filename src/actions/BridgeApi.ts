@@ -5,6 +5,7 @@ export interface BridgeApi {
     setPermitJoin(permit: boolean, device: Device): Promise<void>;
     updateBridgeConfig(options: unknown): Promise<void>;
     restartBridge(): Promise<void>;
+    requestBackup(): Promise<void>;
 }
 
 
@@ -18,4 +19,7 @@ export default {
     restartBridge(_state): Promise<void> {
         return api.send('bridge/request/restart', {});
     },
+    requestBackup(_state): Promise<void> {
+        return api.send('bridge/request/backup');
+    }
 }

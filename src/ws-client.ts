@@ -1,5 +1,5 @@
 import ReconnectingWebSocket from "reconnecting-websocket";
-import store, { Extension, LogMessage, OnlineOrOffline } from "./store";
+import store, { Base64String, Extension, LogMessage, OnlineOrOffline } from "./store";
 import { BridgeConfig, BridgeInfo, TouchLinkDevice, Device, DeviceState, BridgeState, Group } from './types';
 import { sanitizeGraph, isSecurePage, randomString, stringifyWithPreservingUndefinedAsNull, debounceArgs } from "./utils";
 
@@ -87,7 +87,7 @@ class Api {
         this.url = url;
         this.transactionRndPrefix = randomString(5);
     }
-    send = (topic: string, payload: Record<string, unknown>): Promise<void> => {
+    send = (topic: string, payload: Record<string, unknown> = {}): Promise<void> => {
         console.debug("Calling API", { topic, payload });
 
         if (topic.startsWith('bridge/request/')) {
@@ -213,6 +213,12 @@ class Api {
 
             case "bridge/response/touchlink/factory_reset":
                 store.setState({ touchlinkResetInProgress: false });
+                break;
+
+            
+            case "bridge/response/backup":
+                const { data: {zip} } = data.payload as {data: {zip: Base64String}};
+                store.setState({backup:zip});
                 break;
 
 

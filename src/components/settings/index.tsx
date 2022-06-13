@@ -4,17 +4,19 @@ import actions, { UtilsApi } from "../../actions/actions";
 import { GlobalState } from "../../store";
 import { NavLink, Redirect, RouteComponentProps, withRouter } from "react-router-dom";
 import Button from "../button";
-import Form from "@rjsf/core";
+import Form, { ISubmitEvent, UiSchema } from "@rjsf/core";
 import cx from "classnames";
 import { JSONSchema7 } from "json-schema";
 import cloneDeep from "lodash/cloneDeep";
 import uiSchemas from "./uiSchema.json";
 import { BridgeApi } from "../../actions/BridgeApi";
-import { ISubmitEvent, UiSchema } from "@rjsf/core";
 import { WithTranslation, withTranslation } from "react-i18next";
 import customFields from "./../../i18n/rjsf-translation-fields";
 import { Stats } from "./stats";
 import frontentPackageJson from '../../../package.json';
+import { formatDate } from "../../utils";
+import { saveAs } from 'file-saver';
+
 
 type SettingsTab = "settings" | "bridge" | "about" | "tools" | "donate" | "translate";
 
@@ -95,7 +97,7 @@ const rows = [
 ].sort(() => Math.random() - 0.5);
 
 const isValidKeyToRenderAsTab = (key: string, value: JSONSchema7): boolean => (validJsonSchemasAsTabs.includes(value.type as string) && !ignoredFields.includes(key)) || (value && value.oneOf ? value.oneOf.length > 0 : false);
-type PropsFromStore = Pick<GlobalState, 'bridgeInfo' | 'missingTranslations' | 'devices'>;
+type PropsFromStore = Pick<GlobalState, 'bridgeInfo' | 'missingTranslations' | 'devices' | 'backup'>;
 export class SettingsPage extends Component<PropsFromStore & SettingsPageProps & BridgeApi & UtilsApi & WithTranslation<"setting">, SettingsPageState> {
     state = {
         keyName: ROOT_KEY_NAME
@@ -161,7 +163,7 @@ export class SettingsPage extends Component<PropsFromStore & SettingsPageProps &
             { translationKey: 'zigbee2mqtt_version', content: <>{zigbee2mqttVersion} {zigbee2mqttCommit}</> },
             { translationKey: 'coordinator_type', content: <>{bridgeInfo.coordinator?.type ?? t('common:unknown')}</> },
             { translationKey: 'coordinator_revision', content: <>{bridgeInfo.coordinator?.meta?.revision ?? t('common:unknown')}</> },
-            { translationKey: 'coordinator_ieee_address', content: <>{bridgeInfo.coordinator?.ieee_address ?? t('common:unknown')}</> },       
+            { translationKey: 'coordinator_ieee_address', content: <>{bridgeInfo.coordinator?.ieee_address ?? t('common:unknown')}</> },
             { translationKey: 'frontend_version', content: frontentPackageJson.version },
             { translationKey: 'stats', content: <Stats devices={devices} /> },
         ];
@@ -177,12 +179,24 @@ export class SettingsPage extends Component<PropsFromStore & SettingsPageProps &
         return <div className="p-3"><pre>{JSON.stringify(bridgeInfo, null, 4)}</pre></div>
 
     }
+    downloadBackup = (): void => {
+        const { backup } = this.props;
+        const ts = formatDate(new Date()).replace(/[\s_:]/g, '-')
+        const backupFileName = `z2m-backup.${ts}.zip`;
+        saveAs(`data:application/zip;base64,${backup}`, backupFileName);
+    }
 
     renderTools(): JSX.Element {
-        const { exportState, restartBridge, t } = this.props;
+        const { exportState, restartBridge, requestBackup, backup, t } = this.props;
+
         return <div className="p-3">
             <Button className="btn btn-primary d-block mt-2" onClick={exportState}>{t('download_state')}</Button>
             <Button className="btn btn-danger d-block mt-2" onClick={restartBridge} prompt>{t('restart_zigbee2mqtt')}</Button>
+            {backup ?
+                <Button className="btn btn-primary d-block mt-2" onClick={this.downloadBackup}>{t('download_z2m_backup')}</Button> :
+                <Button className="btn btn-primary d-block mt-2" onClick={requestBackup}>{t('request_z2m_backup')}</Button>
+            }
+
         </div>
     }
     onSettingsSave = (e: ISubmitEvent<Record<string, unknown>>): void => {
@@ -267,7 +281,7 @@ export class SettingsPage extends Component<PropsFromStore & SettingsPageProps &
 
     renderDonate(): JSX.Element {
         const { t } = this.props;
-        const donateText = t("donation_text", { returnObjects: true, defaultValue: [] }) as string[];
+        const donateText = t("donation_text", { returnObjects: true, defaultValue: [] });
         return <div className="container-fluid">
             {donateText.map(row => <p key={row}>{row}</p>)}
             {rows}
@@ -275,6 +289,6 @@ export class SettingsPage extends Component<PropsFromStore & SettingsPageProps &
     }
 }
 const SettingsPageWithRouter = withRouter(SettingsPage);
-const mappedProps = ["bridgeInfo", "missingTranslations", "devices"];
+const mappedProps = ["bridgeInfo", "missingTranslations", "devices", "backup"];
 const ConnectedSettingsPage = withTranslation(["settings", "common"])(connect<Record<string, unknown>, Record<string, unknown>, GlobalState, BridgeApi>(mappedProps, actions)(SettingsPageWithRouter));
 export default ConnectedSettingsPage;
