@@ -1,3 +1,12 @@
+## [0.6.99](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.97...0.6.99) (2022-06-13)
+
+
+### Features
+
+* **tools:** add download backup ([20eda11](https://github.com/nurikk/zigbee2mqtt-frontend/commit/20eda11e313094aead0f0ec50a2416d735a4ddce))
+
+
+
 ## [0.6.98](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.97...0.6.98) (2022-06-13)
 
 
