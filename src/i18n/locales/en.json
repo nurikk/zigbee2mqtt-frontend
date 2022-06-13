@@ -1707,6 +1707,8 @@
             "Don't hesitate to say something nice as well ;)"
         ],
         "download_state": "Download state",
+        "request_z2m_backup": "Request data folder backup",
+        "download_z2m_backup": "Download data folder backup",
         "experimental": "Experimental",
         "external_converters": "External converters",
         "frontend": "Frontend",

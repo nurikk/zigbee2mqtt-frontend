@@ -44,6 +44,7 @@ export type WithAvailability = {
     availability: Record<FriendlyName, AvailabilityState>;
 }
 
+export type Base64String = string
 
 export interface GlobalState extends WithDevices, WithDeviceStates, WithGroups, WithBridgeInfo, WithAvailability {
     touchlinkDevices: TouchLinkDevice[];
@@ -58,6 +59,7 @@ export interface GlobalState extends WithDevices, WithDeviceStates, WithGroups, 
     extensions: Extension[];
     theme: Theme;
     missingTranslations: Map<string, unknown>;
+    backup: Base64String;
 }
 
 const theme = getCurrentTheme();
