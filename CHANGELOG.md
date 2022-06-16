@@ -1,3 +1,12 @@
+## [0.6.101](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.100...0.6.101) (2022-06-16)
+
+
+### Features
+
+* **SettingsPage:** add z2m version to backup file name ([f1367c3](https://github.com/nurikk/zigbee2mqtt-frontend/commit/f1367c3bc6014a8efc7dbd7c9c883c350dd63b89))
+
+
+
 ## [0.6.100](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.99...0.6.100) (2022-06-16)
 
 
