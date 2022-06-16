@@ -1,3 +1,12 @@
+## [0.6.100](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.99...0.6.100) (2022-06-16)
+
+
+### Features
+
+* **SettingsPage:** add spinner for backup ([44fc604](https://github.com/nurikk/zigbee2mqtt-frontend/commit/44fc604396146e4166aeaf15cd2c4c7ea10e9aaa))
+
+
+
 ## [0.6.99](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.97...0.6.99) (2022-06-13)
 
 
