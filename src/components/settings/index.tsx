@@ -16,6 +16,7 @@ import { Stats } from "./stats";
 import frontentPackageJson from '../../../package.json';
 import { formatDate } from "../../utils";
 import { saveAs } from 'file-saver';
+import Spinner from "../spinner";
 
 
 type SettingsTab = "settings" | "bridge" | "about" | "tools" | "donate" | "translate";
@@ -97,7 +98,7 @@ const rows = [
 ].sort(() => Math.random() - 0.5);
 
 const isValidKeyToRenderAsTab = (key: string, value: JSONSchema7): boolean => (validJsonSchemasAsTabs.includes(value.type as string) && !ignoredFields.includes(key)) || (value && value.oneOf ? value.oneOf.length > 0 : false);
-type PropsFromStore = Pick<GlobalState, 'bridgeInfo' | 'missingTranslations' | 'devices' | 'backup'>;
+type PropsFromStore = Pick<GlobalState, 'bridgeInfo' | 'missingTranslations' | 'devices' | 'backup' | 'prepearingBackup'>;
 export class SettingsPage extends Component<PropsFromStore & SettingsPageProps & BridgeApi & UtilsApi & WithTranslation<"setting">, SettingsPageState> {
     state = {
         keyName: ROOT_KEY_NAME
@@ -186,17 +187,25 @@ export class SettingsPage extends Component<PropsFromStore & SettingsPageProps &
         saveAs(`data:application/zip;base64,${backup}`, backupFileName);
     }
 
-    renderTools(): JSX.Element {
-        const { exportState, restartBridge, requestBackup, backup, t } = this.props;
+    renderBackupControls(): JSX.Element {
+        const { backup, prepearingBackup, requestBackup, t } = this.props;
+        if (prepearingBackup) {
+            return <Button className="btn btn-primary d-block mt-2 disabled"><Spinner /></Button>
+        } else {
+            if (backup) {
+                return <Button className="btn btn-primary d-block mt-2" onClick={this.downloadBackup}>{t('download_z2m_backup')}</Button>
+            } else {
+                return <Button className="btn btn-primary d-block mt-2" onClick={requestBackup}>{t('request_z2m_backup')}</Button>
+            }
+        }
+    }
 
+    renderTools(): JSX.Element {
+        const { exportState, restartBridge, t } = this.props;
         return <div className="p-3">
             <Button className="btn btn-primary d-block mt-2" onClick={exportState}>{t('download_state')}</Button>
             <Button className="btn btn-danger d-block mt-2" onClick={restartBridge} prompt>{t('restart_zigbee2mqtt')}</Button>
-            {backup ?
-                <Button className="btn btn-primary d-block mt-2" onClick={this.downloadBackup}>{t('download_z2m_backup')}</Button> :
-                <Button className="btn btn-primary d-block mt-2" onClick={requestBackup}>{t('request_z2m_backup')}</Button>
-            }
-
+            {this.renderBackupControls()}
         </div>
     }
     onSettingsSave = (e: ISubmitEvent<Record<string, unknown>>): void => {
@@ -289,6 +298,6 @@ export class SettingsPage extends Component<PropsFromStore & SettingsPageProps &
     }
 }
 const SettingsPageWithRouter = withRouter(SettingsPage);
-const mappedProps = ["bridgeInfo", "missingTranslations", "devices", "backup"];
+const mappedProps = ["bridgeInfo", "missingTranslations", "devices", "backup", "prepearingBackup"];
 const ConnectedSettingsPage = withTranslation(["settings", "common"])(connect<Record<string, unknown>, Record<string, unknown>, GlobalState, BridgeApi>(mappedProps, actions)(SettingsPageWithRouter));
 export default ConnectedSettingsPage;

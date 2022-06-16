@@ -215,10 +215,10 @@ class Api {
                 store.setState({ touchlinkResetInProgress: false });
                 break;
 
-            
+
             case "bridge/response/backup":
-                const { data: {zip} } = data.payload as {data: {zip: Base64String}};
-                store.setState({backup:zip});
+                const { data: { zip } } = data.payload as { data: { zip: Base64String } };
+                store.setState({ backup: zip, prepearingBackup: false });
                 break;
 
 

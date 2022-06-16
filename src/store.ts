@@ -59,6 +59,7 @@ export interface GlobalState extends WithDevices, WithDeviceStates, WithGroups, 
     extensions: Extension[];
     theme: Theme;
     missingTranslations: Map<string, unknown>;
+    prepearingBackup: boolean;
     backup: Base64String;
 }
 

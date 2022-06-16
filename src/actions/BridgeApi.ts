@@ -1,5 +1,6 @@
 import api from "../ws-client";
 import { Device } from "../types";
+import store from "../store";
 
 export interface BridgeApi {
     setPermitJoin(permit: boolean, device: Device): Promise<void>;
@@ -20,6 +21,7 @@ export default {
         return api.send('bridge/request/restart', {});
     },
     requestBackup(_state): Promise<void> {
+        store.setState({ prepearingBackup: true });
         return api.send('bridge/request/backup');
     }
 }

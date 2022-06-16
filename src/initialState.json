@@ -28,5 +28,6 @@
   "theme": "light",
   "missingTranslations": {},
   "availability": {},
+  "prepearingBackup": false,
   "backup": ""
 }
