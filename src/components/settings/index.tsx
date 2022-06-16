@@ -181,9 +181,9 @@ export class SettingsPage extends Component<PropsFromStore & SettingsPageProps &
 
     }
     downloadBackup = (): void => {
-        const { backup } = this.props;
+        const { backup, bridgeInfo } = this.props;
         const ts = formatDate(new Date()).replace(/[\s_:]/g, '-')
-        const backupFileName = `z2m-backup.${ts}.zip`;
+        const backupFileName = `z2m-backup.${bridgeInfo.version}.${ts}.zip`;
         saveAs(`data:application/zip;base64,${backup}`, backupFileName);
     }
 
