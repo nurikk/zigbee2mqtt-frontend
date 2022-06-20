@@ -61,3 +61,10 @@ body {
     max-height: 280px;
     overflow-y: auto;
 }
+
+
+.rjsf {
+    .form-label:empty {
+        display: none;
+    }
+}
