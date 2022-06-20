@@ -4,7 +4,11 @@ import actions, { UtilsApi } from "../../actions/actions";
 import { GlobalState } from "../../store";
 import { NavLink, Redirect, RouteComponentProps, withRouter } from "react-router-dom";
 import Button from "../button";
-import Form, { ISubmitEvent, UiSchema } from "@rjsf/core";
+import { ISubmitEvent, UiSchema, withTheme } from "@rjsf/core";
+import { Theme as Bootstrap5Theme } from '@rjsf/bootstrap-5';
+
+const Form = withTheme(Bootstrap5Theme);
+
 import cx from "classnames";
 import { JSONSchema7 } from "json-schema";
 import cloneDeep from "lodash/cloneDeep";

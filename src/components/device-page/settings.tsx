@@ -1,9 +1,12 @@
 import React, { Component, ReactNode } from "react";
 import { Device, KVP } from "../../types";
 import { DeviceApi } from "../../actions/DeviceApi";
-import Form from "@rjsf/core";
+
 import { JSONSchema7 } from "json-schema"
-import { ISubmitEvent, UiSchema } from "@rjsf/core";
+import { ISubmitEvent, UiSchema, withTheme } from "@rjsf/core";
+import { Theme as Bootstrap5Theme } from '@rjsf/bootstrap-5';
+
+const Form = withTheme(Bootstrap5Theme);
 
 import customFields from "./../../i18n/rjsf-translation-fields";
 import merge from "lodash/merge";

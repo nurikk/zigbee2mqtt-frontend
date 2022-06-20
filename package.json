@@ -38,6 +38,7 @@
         "@types/d3-zoom": "^3.0.1",
         "@types/events": "^3.0.0",
         "@types/file-saver": "^2.0.5",
+        "@types/json-schema": "^7.0.11",
         "@types/lodash": "^4.14.178",
         "@types/react": "^17.0.39",
         "@types/react-dom": "^17.0.11",
@@ -79,6 +80,7 @@
         "react": "^17.0.1",
         "react-ace": "^9.5.0",
         "react-app-polyfill": "^3.0.0",
+        "react-bootstrap": "^2.4.0",
         "react-css-theme-switcher": "^0.3.0",
         "react-dom": "^17.0.1",
         "react-i18next": "^11.16.6",
@@ -112,5 +114,8 @@
     },
     "bugs": {
         "url": "https://github.com/nurikk/zigbee2mqtt-frontend/issues"
+    },
+    "dependencies": {
+        "@rjsf/bootstrap-5": "https://github.com/nurikk/fileshare/blob/main/rjsf-bootstrap-5-4.2.0.tgz?raw=true"
     }
 }

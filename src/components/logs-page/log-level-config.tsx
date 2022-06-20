@@ -1,11 +1,13 @@
 import React from "react";
 
-import Form from "@rjsf/core";
+import { ISubmitEvent, withTheme } from "@rjsf/core";
+import { Theme as Bootstrap5Theme } from '@rjsf/bootstrap-5';
+
+const Form = withTheme(Bootstrap5Theme);
 import { JSONSchema7 } from "json-schema"
 import { KVP, Z2MConfig } from "../../types";
 import get from "lodash/get";
 import set from "lodash/set";
-import { ISubmitEvent } from "@rjsf/core";
 import styles from "./log-level-config.module.css";
 
 
