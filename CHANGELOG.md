@@ -1,3 +1,12 @@
+## [0.6.103](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.102...0.6.103) (2022-06-20)
+
+
+### Bug Fixes
+
+* **rjsf:** fix empty label alignment ([1cd1f35](https://github.com/nurikk/zigbee2mqtt-frontend/commit/1cd1f357b47d8699cb684bf2e7cb13c180dcf90e))
+
+
+
 ## [0.6.102](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.101...0.6.102) (2022-06-20)
 
 
