@@ -1,3 +1,12 @@
+## [0.6.102](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.101...0.6.102) (2022-06-20)
+
+
+### Features
+
+* **settings:** use forked rjsf bootstrap5 theme ([f92b1db](https://github.com/nurikk/zigbee2mqtt-frontend/commit/f92b1db06ce7ad0a108dc31de0c1142346bb1624))
+
+
+
 ## [0.6.101](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.100...0.6.101) (2022-06-16)
 
 
