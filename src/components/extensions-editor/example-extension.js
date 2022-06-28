@@ -11,11 +11,11 @@ class MyExampleExtension_TS_ {
     async onStateChange(data) {
         console.log("State changed", data); // comment this out if clutters logs
         
-        const { ID, update } = data;
+        const { entity, update } = data;
         
         
         //example how to toggle state
-        if (ID === '0x00158d000224154d') { //state changed for some device (example: clicked a button)
+        if (entity.ID === '0x00158d000224154d') { //state changed for some device (example: clicked a button)
             if (update.action === 'single') {
                 const myLampIeeAddr = '0x00124b001e73227f'; // change this
                 this.mqtt.onMessage(`${this.mqttBaseTopic}/${myLampIeeAddr}/set`, JSON.stringify({state: 'toggle'}));
@@ -28,7 +28,7 @@ class MyExampleExtension_TS_ {
     }
 
     async stop() {
-        this.eventBus.removeListenersExtension(this.constructor.name);
+        this.eventBus.removeListeners(this.constructor.name);
     }
 }
 
