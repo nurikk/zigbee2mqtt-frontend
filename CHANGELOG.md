@@ -1,3 +1,13 @@
+## [0.6.104](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.103...0.6.104) (2022-07-01)
+
+
+### Features
+
+* **i18n:** import new translations ([d0d165f](https://github.com/nurikk/zigbee2mqtt-frontend/commit/d0d165fba2394ef1a7caa7431844a837ebeb54ff))
+* **i18n:** trim locales ([1547a09](https://github.com/nurikk/zigbee2mqtt-frontend/commit/1547a09ea90d7e08d792ab4da17ee2c340297665))
+
+
+
 ## [0.6.103](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.102...0.6.103) (2022-06-20)
 
 
