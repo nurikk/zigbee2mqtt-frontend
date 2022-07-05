@@ -52,6 +52,7 @@ const typeToClassMap = {
     holidays_schedule: ['fa-calendar-day', 'text-danger'],
     away_mode: ['fa-plane', 'text-info'],
     vibration: ['fa-water fa-rotate-270'],
+    power_outage_count: ['fa-plug-circle-xmark'],
 };
 
 const getGenericFeatureIcon = (name: string, value: unknown): string => {
