@@ -64,15 +64,18 @@ const StartStopJoinButton: FunctionComponent<StartStopJoinButtonProps> = ({ devi
     const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(false);
     const [selectedRouter, setSelectedRouter] = useState<Device>({} as Device);
     const { permit_join: permitJoin, permit_join_timeout: permitJoinTimeout } = bridgeInfo;
-    const routers: JSX.Element[] = [];
+
     const selectAndHide = (device: Device) => { setSelectedRouter(device); setIsComponentVisible(false) }
-    Object.values(devices).sort((a:any,b:any)=>a.friendly_name.localeCompare(b.friendly_name)).forEach((device) => {
-        if (device.type == "Router") {
-            routers.push(<li key={device.friendly_name}>
-                <Button<Device> item={device} className="dropdown-item" onClick={selectAndHide}>{device.friendly_name}</Button>
-            </li>)
-        }
-    });
+    const routers = Object.values(devices)
+        .filter(d => d.type === 'Router')
+        .sort((a: any, b: any) => a.friendly_name.localeCompare(b.friendly_name))
+        .map(device => (<li key={device.friendly_name}>
+            <Button<Device> item={device}
+                className="dropdown-item"
+                onClick={selectAndHide}>{device.friendly_name}
+            </Button>
+        </li>));
+
     const onBtnClick = () => {
         setPermitJoin(!permitJoin, selectedRouter);
     }
