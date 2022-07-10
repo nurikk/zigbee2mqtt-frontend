@@ -1,3 +1,13 @@
+## [0.6.105](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.104...0.6.105) (2022-07-10)
+
+
+### Features
+
+* **DashboardFeatureWrapper:** add power_outage_count icon ([#1513](https://github.com/nurikk/zigbee2mqtt-frontend/issues/1513)) ([c8f4c18](https://github.com/nurikk/zigbee2mqtt-frontend/commit/c8f4c18ee33126822e0da1bdec134610dfa120ac))
+* **StartStopJoinButton:** sort list of devices on friendly name ([#1514](https://github.com/nurikk/zigbee2mqtt-frontend/issues/1514)) ([9ecabb8](https://github.com/nurikk/zigbee2mqtt-frontend/commit/9ecabb8d6b8b11a572e5e1b61238a72015c9bde9))
+
+
+
 ## [0.6.104](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.103...0.6.104) (2022-07-01)
 
 
