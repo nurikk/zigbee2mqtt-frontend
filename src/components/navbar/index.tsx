@@ -68,7 +68,7 @@ const StartStopJoinButton: FunctionComponent<StartStopJoinButtonProps> = ({ devi
     const selectAndHide = (device: Device) => { setSelectedRouter(device); setIsComponentVisible(false) }
     const routers = Object.values(devices)
         .filter(d => d.type === 'Router')
-        .sort((a: any, b: any) => a.friendly_name.localeCompare(b.friendly_name))
+        .sort((a, b) => a.friendly_name.localeCompare(b.friendly_name))
         .map(device => (<li key={device.friendly_name}>
             <Button<Device> item={device}
                 className="dropdown-item"
