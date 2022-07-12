@@ -102,7 +102,7 @@ const rows = [
 ].sort(() => Math.random() - 0.5);
 
 const isValidKeyToRenderAsTab = (key: string, value: JSONSchema7): boolean => (validJsonSchemasAsTabs.includes(value.type as string) && !ignoredFields.includes(key)) || (value && value.oneOf ? value.oneOf.length > 0 : false);
-type PropsFromStore = Pick<GlobalState, 'bridgeInfo' | 'missingTranslations' | 'devices' | 'backup' | 'prepearingBackup'>;
+type PropsFromStore = Pick<GlobalState, 'bridgeInfo' | 'missingTranslations' | 'devices' | 'backup' | 'preparingBackup'>;
 export class SettingsPage extends Component<PropsFromStore & SettingsPageProps & BridgeApi & UtilsApi & WithTranslation<"setting">, SettingsPageState> {
     state = {
         keyName: ROOT_KEY_NAME
@@ -192,8 +192,8 @@ export class SettingsPage extends Component<PropsFromStore & SettingsPageProps &
     }
 
     renderBackupControls(): JSX.Element {
-        const { backup, prepearingBackup, requestBackup, t } = this.props;
-        if (prepearingBackup) {
+        const { backup, preparingBackup, requestBackup, t } = this.props;
+        if (preparingBackup) {
             return <Button className="btn btn-primary d-block mt-2 disabled"><Spinner /></Button>
         } else {
             if (backup) {
@@ -294,7 +294,7 @@ export class SettingsPage extends Component<PropsFromStore & SettingsPageProps &
 
     renderDonate(): JSX.Element {
         const { t } = this.props;
-        const donateText = t("donation_text", { returnObjects: true, defaultValue: [] });
+        const donateText: string[] = t("donation_text", { returnObjects: true, defaultValue: [] });
         return <div className="container-fluid">
             {donateText.map(row => <p key={row}>{row}</p>)}
             {rows}
@@ -302,6 +302,6 @@ export class SettingsPage extends Component<PropsFromStore & SettingsPageProps &
     }
 }
 const SettingsPageWithRouter = withRouter(SettingsPage);
-const mappedProps = ["bridgeInfo", "missingTranslations", "devices", "backup", "prepearingBackup"];
+const mappedProps = ["bridgeInfo", "missingTranslations", "devices", "backup", "preparingBackup"];
 const ConnectedSettingsPage = withTranslation(["settings", "common"])(connect<Record<string, unknown>, Record<string, unknown>, GlobalState, BridgeApi>(mappedProps, actions)(SettingsPageWithRouter));
 export default ConnectedSettingsPage;

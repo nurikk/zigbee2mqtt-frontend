@@ -72,7 +72,7 @@ const DeviceImage: FunctionComponent<DeviceImageProps & ImgHTMLAttributes<HTMLDi
     if (type === "svg") {
         return <Suspense fallback={<image crossOrigin={"anonymous"} {...rest} href={genericDevice} />}>
             <ErrorBoundary>
-                <LazyImage type="svg" device={device} {...rest}></LazyImage>
+                <LazyImage type="svg" device={device} {...rest} />
             </ErrorBoundary>
         </Suspense>
     }
@@ -85,7 +85,7 @@ const DeviceImage: FunctionComponent<DeviceImageProps & ImgHTMLAttributes<HTMLDi
     return <div className={cx(className, "position-relative")} {...rest}>
         <Suspense fallback={<img src={genericDevice} className={style.img} />}>
             <ErrorBoundary>
-                <LazyImage device={device}></LazyImage>
+                <LazyImage device={device} />
             </ErrorBoundary>
         </Suspense>
         {interviewSpinner}

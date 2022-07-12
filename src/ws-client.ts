@@ -218,7 +218,7 @@ class Api {
 
             case "bridge/response/backup":
                 const { data: { zip } } = data.payload as { data: { zip: Base64String } };
-                store.setState({ backup: zip, prepearingBackup: false });
+                store.setState({ backup: zip, preparingBackup: false });
                 break;
 
 

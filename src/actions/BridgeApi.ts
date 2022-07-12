@@ -21,7 +21,7 @@ export default {
         return api.send('bridge/request/restart', {});
     },
     requestBackup(_state): Promise<void> {
-        store.setState({ prepearingBackup: true });
+        store.setState({ preparingBackup: true });
         return api.send('bridge/request/backup');
     }
 }
