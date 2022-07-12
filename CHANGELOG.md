@@ -1,3 +1,12 @@
+## [0.6.106](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.105...0.6.106) (2022-07-12)
+
+
+### Features
+
+* **theme:** update appstack theme to the latest version ([7910802](https://github.com/nurikk/zigbee2mqtt-frontend/commit/79108025cac9b397b56d4dfd6327057ce392aca8))
+
+
+
 ## [0.6.105](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.104...0.6.105) (2022-07-10)
 
 
