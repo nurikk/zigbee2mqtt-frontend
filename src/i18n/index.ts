@@ -40,7 +40,7 @@ import timeCs from "timeago.js/lib/lang/cs";
 import timeFi from "timeago.js/lib/lang/fi";
 import timeSv from "timeago.js/lib/lang/sv";
 import timeTr from "timeago.js/lib/lang/tr";
-import timeTr from "timeago.js/lib/lang/no";
+import timeNo from "timeago.js/lib/lang/no";
 
 
 register("ca", timeCa);
@@ -60,7 +60,7 @@ register("cs", timeCs);
 register("fi", timeFi);
 register("sv", timeSv);
 register("tr", timeTr);
-register("tr", timeNo);
+register("no", timeNo);
 
 
 
@@ -84,7 +84,7 @@ export const resources = {
     fi: fiTranslations as ResourceLanguage,
     sv: svTranslations as ResourceLanguage,
     tr: trTranslations as ResourceLanguage,
-    no: trTranslations as ResourceLanguage,
+    no: noTranslations as ResourceLanguage,
 
 } as const;
 
