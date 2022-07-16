@@ -20,7 +20,7 @@ import csTranslations from './locales/cs.json';
 import fiTranslations from './locales/fi.json';
 import svTranslations from './locales/sv.json';
 import trTranslations from './locales/tr.json';
-import trTranslations from './locales/no.json';
+import noTranslations from './locales/no.json';
 
 
 import timeCa from "timeago.js/lib/lang/ca";
@@ -40,7 +40,7 @@ import timeCs from "timeago.js/lib/lang/cs";
 import timeFi from "timeago.js/lib/lang/fi";
 import timeSv from "timeago.js/lib/lang/sv";
 import timeTr from "timeago.js/lib/lang/tr";
-import timeNo from "timeago.js/lib/lang/no";
+import timeNo from "timeago.js/lib/lang/nb_NO";
 
 
 register("ca", timeCa);

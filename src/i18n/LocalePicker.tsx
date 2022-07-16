@@ -23,7 +23,7 @@ import cs from "./flags/cz.png";
 import fi from "./flags/fi.png";
 import sv from "./flags/sv.png";
 import tr from "./flags/tr.png";
-import tr from "./flags/.png";
+import no from "./flags/no.png";
 import missing from "./flags/missing-locale.png";
 
 
