@@ -1,3 +1,17 @@
+## [0.6.107](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.106...0.6.107) (2022-07-17)
+
+
+### Bug Fixes
+
+* **i18n:** fix Norwegian localisation scaffold ([d6e07da](https://github.com/nurikk/zigbee2mqtt-frontend/commit/d6e07daa87411dae026ec7a363a9f5040b856761))
+
+
+### Features
+
+* **StartStopJoinButton:** enable join over coordinator ([8222b06](https://github.com/nurikk/zigbee2mqtt-frontend/commit/8222b06a83195fa5c707f407d3845d3b27c5ed80))
+
+
+
 ## [0.6.106](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.105...0.6.106) (2022-07-12)
 
 
