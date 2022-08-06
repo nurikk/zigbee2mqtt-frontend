@@ -1732,7 +1732,7 @@
         "execute": "Execute",
         "command": "Command",
         "payload": "Payload",
-        "save_description": ""
+        "save_description": "Save description"
     },
     "scene": {
         "scene_id": "Scene ID",
