@@ -8,6 +8,8 @@ permissions:
   
 jobs:
   release:
+    environment:
+      NPM_TOKEN: ${{secrets.NPM_TOKEN}}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -25,9 +27,7 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
-      - run: pnpm publish --no-git-checks
-        env:
-          NPM_TOKEN: ${{secrets.NPM_TOKEN}}
+      - run: pnpm publish --no-git-checks        
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
