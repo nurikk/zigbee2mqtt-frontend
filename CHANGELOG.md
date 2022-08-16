@@ -1,3 +1,16 @@
+## [0.6.108](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.107...0.6.108) (2022-08-16)
+
+
+### Bug Fixes
+
+* **build:** add NPM_TOKEN ([24524ea](https://github.com/nurikk/zigbee2mqtt-frontend/commit/24524ea7e062f94efd54ba336ef30ff4cc7c715f))
+* **build:** fix env ([b54bcd4](https://github.com/nurikk/zigbee2mqtt-frontend/commit/b54bcd4f9671829a719c67c6a1f85cd517ac7d8f))
+* **build:** fix key ([8f459b1](https://github.com/nurikk/zigbee2mqtt-frontend/commit/8f459b1d0a8c70a985da7182934f691023f33206))
+* **Feature:** fix composite feature property ([3b2a6f8](https://github.com/nurikk/zigbee2mqtt-frontend/commit/3b2a6f8bd24950fb6ab951db2439788060eb46f6))
+* **github-workflow:** fix build ([efc0638](https://github.com/nurikk/zigbee2mqtt-frontend/commit/efc06382e881236cbb81c00325179676dc4002a2))
+
+
+
 ## [0.6.107](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.106...0.6.107) (2022-07-17)
 
 
