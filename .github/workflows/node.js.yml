@@ -9,10 +9,11 @@ on:
   pull_request:
     branches: [ dev ]
 
+env:
+  NPM_TOKEN: ${{secrets.NPM_TOKEN}}
+
 jobs:
   build:
-    environment:
-      NPM_TOKEN: ${{secrets.NPM_TOKEN}}
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3

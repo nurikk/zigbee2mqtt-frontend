@@ -5,11 +5,12 @@ on:
     tags: '*'
 permissions:
   contents: write
-  
+
+env:
+  NPM_TOKEN: ${{secrets.NPM_TOKEN}}
+
 jobs:
   release:
-    environment:
-      NPM_TOKEN: ${{secrets.NPM_TOKEN}}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
