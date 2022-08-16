@@ -77,7 +77,7 @@ export const Feature = (props: FeatureProps): JSX.Element => {
         return <Fan feature={feature} {...genericParams} />
     } else if (isCompositeFeature(feature)) {
         return <FeatureWrapper {...wrapperParams}>
-            <Composite type="composite" feature={feature} {...genericParams} />
+            <Composite type="composite" feature={feature} {...genericParams} deviceState={(deviceState[feature.property] ?? {}) as DeviceState} />
         </FeatureWrapper>
     }
     return (<FeatureWrapper {...wrapperParams}>
