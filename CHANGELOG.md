@@ -1,3 +1,14 @@
+## [0.6.109](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.108...0.6.109) (2022-08-29)
+
+
+### Features
+
+* **dashboard:** implement filter ([dae863c](https://github.com/nurikk/zigbee2mqtt-frontend/commit/dae863c9fe2e9a4498f2ea2e489f2ac5c092df33))
+* **i18n:** import z2m translations ([c82df11](https://github.com/nurikk/zigbee2mqtt-frontend/commit/c82df115bd8e49120eb823d33e54e6c46030fe51))
+* **i18n:** trim locales ([3b4cf4a](https://github.com/nurikk/zigbee2mqtt-frontend/commit/3b4cf4a20158c052cef97806c22fd1c00697024e))
+
+
+
 ## [0.6.108](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.107...0.6.108) (2022-08-16)
 
 
