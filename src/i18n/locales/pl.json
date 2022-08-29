@@ -1637,7 +1637,7 @@
         "load_type": "",
         "load_dimmable": "",
         "power_supply_mode": "",
-        "external_temperature": "",
+        "external_temperature": "temperatura_zewnętrzna",
         "hysteresis": "",
         "max_temperature_protection": ""
     },
@@ -1914,7 +1914,10 @@
         "Home Assistant legacy triggers, when enabled Zigbee2mqt will send an empty 'action' or 'click' after one has been send. A 'sensor_action' and 'sensor_click' will be discovered": "Użyj starych wyzwalaczy Homeassistant'a, gdy włączone Zigbee2mqtt wyśle puste 'action' oraz 'click' po tym jak jeden już został wysłany. 'sensor_action' oraz 'sensor_click' zostaną udostępnione.",
         "Payload to be used for device availabilty and bridge/state topics. true = text, false = JSON": "",
         "Name of the device in Home Assistant": "Nazwa urządzenia w Home Assistant",
-        "Control when to publish state OFF for a group. 'all_members_off': only publish state OFF when all group memebers are in state OFF, 'last_member_state': publish state OFF whenever one of its members changes to OFF": ""
+        "Control when to publish state OFF for a group. 'all_members_off': only publish state OFF when all group memebers are in state OFF, 'last_member_state': publish state OFF whenever one of its members changes to OFF": "",
+        "Filter attributes with regex from published payload.": "",
+        "Filter attributes with regex from being added to the cache, this prevents the attribute from being in the published payload when the value didn't change.": "",
+        "Filter attributes with regex from optimistic publish payload when calling /set. (This has no effect if optimistic is set to false).": ""
     },
     "settingsSchemaTitles": {
         "Home Assistant integration": "Integracja z Home Assistant",
@@ -2025,6 +2028,7 @@
         "Legacy availability payload": "Dziedziczone obciążenie użytkowe",
         "Home Assistant": "Home Assistant",
         "Home Assistant name": "Nazwa Home Assistant",
-        "Group off state": ""
+        "Group off state": "",
+        "Filtered attributes from cache": ""
     }
 }
