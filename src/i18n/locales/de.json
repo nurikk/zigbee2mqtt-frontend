@@ -1914,7 +1914,10 @@
         "Home Assistant legacy triggers, when enabled Zigbee2mqt will send an empty 'action' or 'click' after one has been send. A 'sensor_action' and 'sensor_click' will be discovered": "Home Assistant Legacy löst aus, wenn Zigbee2mqtt aktiviert ist und eine leere \"aktion\" oder einen \"klick\" gesendet wurde. Ein 'sensor_action' und 'sensor_click' werden erkannt.",
         "Payload to be used for device availabilty and bridge/state topics. true = text, false = JSON": "Nutzlast, die für Geräteverfügbarkeits- und Brücken-/Zustandsthemen verwendet werden soll. wahr = Text, falsch = JSON",
         "Name of the device in Home Assistant": "Name des Gerätes in Home Assistant",
-        "Control when to publish state OFF for a group. 'all_members_off': only publish state OFF when all group memebers are in state OFF, 'last_member_state': publish state OFF whenever one of its members changes to OFF": "Einstellung, wann der Zustand \"Aus\" für eine Gruppe veröffentlicht wird.\n'all_members_off': den Zustand \"Aus\" nur dann veröffentlichen, wenn alle Gruppenmitglieder im Zustand \"Aus\" sind, \"last_member_state\": den Zustand \"Aus\" immer dann veröffentlichen, wenn eines der Mitglieder auf \"Aus\" wechselt"
+        "Control when to publish state OFF for a group. 'all_members_off': only publish state OFF when all group memebers are in state OFF, 'last_member_state': publish state OFF whenever one of its members changes to OFF": "Einstellung, wann der Zustand \"Aus\" für eine Gruppe veröffentlicht wird.\n'all_members_off': den Zustand \"Aus\" nur dann veröffentlichen, wenn alle Gruppenmitglieder im Zustand \"Aus\" sind, \"last_member_state\": den Zustand \"Aus\" immer dann veröffentlichen, wenn eines der Mitglieder auf \"Aus\" wechselt",
+        "Filter attributes with regex from published payload.": "",
+        "Filter attributes with regex from being added to the cache, this prevents the attribute from being in the published payload when the value didn't change.": "",
+        "Filter attributes with regex from optimistic publish payload when calling /set. (This has no effect if optimistic is set to false).": ""
     },
     "settingsSchemaTitles": {
         "Home Assistant integration": "Home Assistant Integration",
@@ -2025,6 +2028,7 @@
         "Legacy availability payload": "Legacy-Verfügbarkeitsnutzlast",
         "Home Assistant": "Home Assistant",
         "Home Assistant name": "Home Assistant Name",
-        "Group off state": "Gruppe aus Zustand"
+        "Group off state": "Gruppe aus Zustand",
+        "Filtered attributes from cache": ""
     }
 }
