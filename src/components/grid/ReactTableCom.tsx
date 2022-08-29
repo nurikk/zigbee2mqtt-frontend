@@ -13,38 +13,46 @@ interface Props {
   data: Array<any>;
 }
 
-function GlobalFilter({
-  globalFilter,
-  setGlobalFilter,
-}) {
+type GlobalFilterProps = {
+  globalFilter: string;
+  setGlobalFilter(arg1: string): void;
+}
+
+export function GlobalFilter({ globalFilter, setGlobalFilter }: GlobalFilterProps) {
   const [value, setValue] = React.useState(globalFilter)
   const onChange = useAsyncDebounce(v => {
-    setGlobalFilter(v || undefined)
+    setGlobalFilter(v)
   }, 200);
 
   const { t } = useTranslation(['common'])
 
   return (
-    <span>
-      <input
-        value={value || ""}
-        onChange={e => {
-          setValue(e.target.value);
-          onChange(e.target.value);
-        }}
-        placeholder={t('common:enter_search_criteria')}
-        className="form-control"
-      />
-    </span>
+    <input
+      value={value || ""}
+      onChange={e => {
+        setValue(e.target.value);
+        onChange(e.target.value);
+      }}
+      placeholder={t('common:enter_search_criteria')}
+      className="form-control"
+    />
+
   )
 }
 
 const TABLE_STORAGE_PREFIX = 'z2m-';
-const getStorageKey = (id: string) => `${TABLE_STORAGE_PREFIX}${id}`;
+export const getStorageKey = (id: string) => `${TABLE_STORAGE_PREFIX}${id}`;
 
-const persist = debounce((key: string, data: Record<string, unknown>): void => {
+export type StateItem = Partial<TableState<Record<string, unknown>>>;
+
+export const persist = (key: string, data: StateItem): void => {
   local.setItem(getStorageKey(key), data);
-})
+};
+
+
+export const restore = (key: string): StateItem => {
+  return local.getItem<StateItem>(key);
+}
 
 
 const stateReducer = (

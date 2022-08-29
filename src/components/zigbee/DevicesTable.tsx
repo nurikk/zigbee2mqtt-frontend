@@ -24,6 +24,8 @@ export type DevicesTableProps = {
     homeassistantEnabled: boolean;
 }
 
+export const DEVICES_GLOBAL_NAME = 'zigbee';
+
 export function DevicesTable(props: DevicesTableProps & Pick<DeviceApi, 'configureDevice' | 'renameDevice' | 'removeDevice' | 'setDeviceDescription'>): JSX.Element {
     const { data, lastSeenType, availabilityFeatureEnabled, homeassistantEnabled, setDeviceDescription } = props;
     const { renameDevice, removeDevice, configureDevice } = props;
@@ -113,7 +115,7 @@ export function DevicesTable(props: DevicesTableProps & Pick<DeviceApi, 'configu
     return (<div className="card">
         <div className="table-responsive">
             <Table
-                id="zigbee"
+                id={DEVICES_GLOBAL_NAME}
                 columns={columns as unknown as Column<Record<string, unknown>>[]}
                 data={data as unknown as Record<string, unknown>[]} />
         </div>
