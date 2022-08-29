@@ -24,18 +24,23 @@ export function GlobalFilter({ globalFilter, setGlobalFilter }: GlobalFilterProp
     setGlobalFilter(v)
   }, 200);
 
-  const { t } = useTranslation(['common'])
+  const { t } = useTranslation(['common']);
+  const clearInput = () => {
+    setValue("");
+    setGlobalFilter('');
+  }
 
   return (
-    <input
-      value={value || ""}
-      onChange={e => {
-        setValue(e.target.value);
-        onChange(e.target.value);
-      }}
-      placeholder={t('common:enter_search_criteria')}
-      className="form-control"
-    />
+    <div className="input-group">
+      <input type="text" className="form-control"
+        value={value || ""}
+        onChange={e => {
+          setValue(e.target.value);
+          onChange(e.target.value);
+        }}
+        placeholder={t('common:enter_search_criteria')} />
+      <button className="btn btn-outline-secondary" type="button" onClick={clearInput}><i className="fa fa-times"></i></button>
+    </div>
 
   )
 }
