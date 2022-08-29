@@ -256,7 +256,7 @@
         "Volume of siren": "Hlasitost sirény",
         "Switch type settings": "Switch type settings",
         "Minimum light brightness": "Minimální jas světla",
-        "Device valve is open or closed (heating or not)": "Device valve is open or closed (heating or not)",
+        "Device valve is open or closed (heating or not)": "Ventil je otevřen nebo zavřen",
         "MANUAL MODE ☝ - In this mode, the device executes manual temperature setting. When the set temperature is lower than the \"minimum temperature\", the valve is closed (forced closed). AUTO MODE ⏱ - In this mode, the device executes a preset week programming temperature time and temperature. ON - In this mode, the thermostat stays open OFF - In this mode, the thermostat stays closed": "MANUAL MODE ☝ - In this mode, the device executes manual temperature setting. When the set temperature is lower than the \"minimum temperature\", the valve is closed (forced closed). AUTO MODE ⏱ - In this mode, the device executes a preset week programming temperature time and temperature. ON - In this mode, the thermostat stays open OFF - In this mode, the thermostat stays closed",
         "Auto MODE ⏱ - In this mode, the device executes a preset week programming temperature time and temperature. ": "Auto MODE ⏱ - In this mode, the device executes a preset week programming temperature time and temperature. ",
         "Enables/disables the status on the device": "Povolit/zakázat stav zařízení",
@@ -337,7 +337,7 @@
         "Motor is moving": "Motor jede",
         "Controls behaviour of led/siren on alarm": "Controls behaviour of LED/siren on alarm",
         "Alarm zone. Default value 23": "Alarm zone. Default value 23",
-        "Measured eCO2 value": "Measured CO2 value",
+        "Measured eCO2 value": "Změřená hodnota CO2",
         "Temperature setpoint automatic": "Temperature setpoint automatic",
         "Open window detection temperature": "Open window detection temperature",
         "Open window time in minute": "Open window time in minute",
@@ -415,7 +415,7 @@
         "When device is in regulator mode this controls the time between each in/out connection. When device is in thermostat mode this controls the  time between each in/out switch when measured temperature is within +-0.5 °C set temperature. Choose a long time for (slow) concrete floors and a short time for (quick) wooden floors.": "When device is in regulator mode this controls the time between each in/out connection. When device is in thermostat mode this controls the  time between each in/out switch when measured temperature is within +-0.5 °C set temperature. Choose a long time for (slow) concrete floors and a short time for (quick) wooden floors.",
         "Current temperature measured from the floor sensor": "Aktuální teplota měřená z podlahového čidla",
         "Set max floor temperature (between 20-35 °C) when \"supervisor_floor\" is set": "Set max floor temperature (between 20-35 °C) when \"supervisor_floor\" is set",
-        "Reports average power usage last 10 minutes": "Reports average power usage last 10 minutes",
+        "Reports average power usage last 10 minutes": "Zobrazuje průměrnou spotřebu za posledních 10 minut",
         "When frost guard is ON, it is activated when the thermostat is switched OFF with the ON/OFF button.At the same time, the display will fade and the text \"Frostsikring x °C\" appears in the display and remains until the thermostat is switched on again.": "When frost guard is ON, it is activated when the thermostat is switched OFF with the ON/OFF button.At the same time, the display will fade and the text \"Frostsikring x °C\" appears in the display and remains until the thermostat is switched on again.",
         "Turn on or off night setting.": "Zapnout nebo vypnout noční nastavení",
         "Current state": "Aktuální stav",
@@ -927,7 +927,7 @@
         "capabilities_overload_detection": "Capabilities Overload Detection",
         "status_forward_phase_control": "Status Forward Phase Control",
         "status_reverse_phase_control": "Status Reverse Phase Control",
-        "status_overload": "Status Overload",
+        "status_overload": "Stav přetížení",
         "status_capacitive_load": "Status Capacitive Load",
         "status_inductive_load": "Status Inductive Load",
         "mode_phase_control": "Mode Phase Control",
@@ -1799,7 +1799,7 @@
         "execute": "Vykonat",
         "command": "Příkaz",
         "payload": "Payload",
-        "save_description": ""
+        "save_description": "Save description"
     },
     "scene": {
         "scene_id": "ID scény",
@@ -1914,7 +1914,10 @@
         "Home Assistant legacy triggers, when enabled Zigbee2mqt will send an empty 'action' or 'click' after one has been send. A 'sensor_action' and 'sensor_click' will be discovered": "Home Assistant legacy triggers, when enabled Zigbee2mqt will send an empty 'action' or 'click' after one has been send. A 'sensor_action' and 'sensor_click' will be discovered",
         "Payload to be used for device availabilty and bridge/state topics. true = text, false = JSON": "",
         "Name of the device in Home Assistant": "Název zařízení v Home Assistant",
-        "Control when to publish state OFF for a group. 'all_members_off': only publish state OFF when all group memebers are in state OFF, 'last_member_state': publish state OFF whenever one of its members changes to OFF": ""
+        "Control when to publish state OFF for a group. 'all_members_off': only publish state OFF when all group memebers are in state OFF, 'last_member_state': publish state OFF whenever one of its members changes to OFF": "",
+        "Filter attributes with regex from published payload.": "",
+        "Filter attributes with regex from being added to the cache, this prevents the attribute from being in the published payload when the value didn't change.": "",
+        "Filter attributes with regex from optimistic publish payload when calling /set. (This has no effect if optimistic is set to false).": ""
     },
     "settingsSchemaTitles": {
         "Home Assistant integration": "Integrace Home Assistant",
@@ -2025,6 +2028,7 @@
         "Legacy availability payload": "",
         "Home Assistant": "Home Assistant",
         "Home Assistant name": "Home Assistant název",
-        "Group off state": ""
+        "Group off state": "",
+        "Filtered attributes from cache": ""
     }
 }
