@@ -1914,7 +1914,10 @@
         "Home Assistant legacy triggers, when enabled Zigbee2mqt will send an empty 'action' or 'click' after one has been send. A 'sensor_action' and 'sensor_click' will be discovered": "Anciens déclencheurs Home Assistant, lorsque activé Zigbee2mqtt enverra une 'action' vide ou 'click' après qu'un ait été envoyé. Un 'sensor_action' et 'sensor_click' seront découverts",
         "Payload to be used for device availabilty and bridge/state topics. true = text, false = JSON": "Payload MQTT à utiliser pour la disponibilité des appareils et les topics de pont/état. true = texte, false = JSON ",
         "Name of the device in Home Assistant": "Nom du périphérique dans Home Assistant",
-        "Control when to publish state OFF for a group. 'all_members_off': only publish state OFF when all group memebers are in state OFF, 'last_member_state': publish state OFF whenever one of its members changes to OFF": "Contrôle le moment où publier l'état DÉSACTIVÉ pour un groupe. 'all_members_off': seulement lorsque tous les membres du groupe sont à l'état DÉSACTIVÉ, 'last_member_state': lorsque n'importe lequel de ses membres passe à l'état DÉSACTIVÉ"
+        "Control when to publish state OFF for a group. 'all_members_off': only publish state OFF when all group memebers are in state OFF, 'last_member_state': publish state OFF whenever one of its members changes to OFF": "Contrôle le moment où publier l'état DÉSACTIVÉ pour un groupe. 'all_members_off': seulement lorsque tous les membres du groupe sont à l'état DÉSACTIVÉ, 'last_member_state': lorsque n'importe lequel de ses membres passe à l'état DÉSACTIVÉ",
+        "Filter attributes with regex from published payload.": "",
+        "Filter attributes with regex from being added to the cache, this prevents the attribute from being in the published payload when the value didn't change.": "",
+        "Filter attributes with regex from optimistic publish payload when calling /set. (This has no effect if optimistic is set to false).": ""
     },
     "settingsSchemaTitles": {
         "Home Assistant integration": "Intégration Home Assistant",
@@ -2025,6 +2028,7 @@
         "Legacy availability payload": "Ancien payload de disponibilité",
         "Home Assistant": "Home Assistant",
         "Home Assistant name": "Nom de Home Assistant",
-        "Group off state": "État désactivé du groupe"
+        "Group off state": "État désactivé du groupe",
+        "Filtered attributes from cache": ""
     }
 }
