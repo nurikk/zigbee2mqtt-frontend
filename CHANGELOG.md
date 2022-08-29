@@ -1,3 +1,12 @@
+## [0.6.110](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.109...0.6.110) (2022-08-29)
+
+
+### Features
+
+* **GlobalFilter:** add clear button ([7bad83f](https://github.com/nurikk/zigbee2mqtt-frontend/commit/7bad83f25f99a0d98f5a6a8745e857a502e74bf3))
+
+
+
 ## [0.6.109](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.108...0.6.109) (2022-08-29)
 
 
