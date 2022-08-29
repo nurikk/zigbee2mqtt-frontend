@@ -235,8 +235,8 @@
         "The dimmer is currently operating in AC forward phase control mode.": "De dimmer werkt momenteel in de voorwaartse fase-aansturingsmodus voor wisselstroom.",
         "The dimmer is currently operating in AC reverse phase control mode.": "De dimmer werkt momenteel in de fase-omkeringmodus voor wisselstroom.",
         "The output is currently turned off, because the dimmer has detected an overload.": "De output is momenteel uitgeschakeld, omdat de dimmer een overbelasting heeft gedetecteerd.",
-        "The dimmer's reactance discriminator had detected a capacitive load.": "The dimmer's reactance discriminator had detected a capacitive load.",
-        "The dimmer's reactance discriminator had detected an inductive load.": "The dimmer's reactance discriminator had detected an inductive load.",
+        "The dimmer's reactance discriminator had detected a capacitive load.": "De reactantie discriminator heeft een capacitieve belasting gedetecteerd.",
+        "The dimmer's reactance discriminator had detected an inductive load.": "De reactantie discriminator heeft een inductieve belasting gedetecteerd.",
         "Configures the dimming technique.": "Configugreert de dimtechniek",
         "Operation mode: \"command\" - for group control, \"event\" - for clicks": "Operation mode: \"command\" - for group control, \"event\" - for clicks",
         "moving inside the range of the sensor": "begeef binnen het bereik van de sensor",
@@ -477,7 +477,7 @@
         "Manual start of siren": "Handmatige start van de sirene",
         "Type of user, unrestricted: owner (default), (year|week)_day_schedule: user has ability to open lock based on specific time period, master: user has ability to both program and operate the door lock, non_access: user is recognized by the lock but does not have the ability to open the lock": "",
         "After turn on, the indicator light turns on while switch is off, and vice versa": "",
-        "The current state of the motor.": "",
+        "The current state of the motor.": "De huidige staat van de motor",
         "Whether the motor is moving or not.": "Of de motor draait of niet",
         "Value of gas concentration": "Concentratie gas",
         "Gas concentration value at which an alarm is triggered (\"10%LEL\" is more sensitive than \"15%LEL\")": "",
@@ -532,7 +532,7 @@
         "Set if the TRV should solely rely on external_measured_room_sensor or operate in offset mode. `false` = Auto Offset Mode or `true` = Room Sensor Mode": "",
         "Whether or not the window open feature is enabled": "Of de \"open raam\" optie is ingeschakeld of niet",
         "Mean radiator load for room calculated by gateway for load balancing purposes (-8000=undefined)": "",
-        "Current display unit": "",
+        "Current display unit": "Huidige weergave-eenheid",
         "Temperature alarm status": "Temperatuur alarmstatus",
         "Temperature sensitivity": "Temperatuursgevoeligheid",
         "Indicator light status": "Indicator verlichting status",
@@ -1914,7 +1914,10 @@
         "Home Assistant legacy triggers, when enabled Zigbee2mqt will send an empty 'action' or 'click' after one has been send. A 'sensor_action' and 'sensor_click' will be discovered": "Oude Home assistent triggers, wanneer aan zal Zigbee2mqtt een lege 'actie' of 'click' sturen na dat er een ander bericht gestuurd is. Een 'sensor_action' en 'sensor_click' zal worden gedetecteerd.",
         "Payload to be used for device availabilty and bridge/state topics. true = text, false = JSON": "",
         "Name of the device in Home Assistant": "Apparaatnaam in Home Assistant",
-        "Control when to publish state OFF for a group. 'all_members_off': only publish state OFF when all group memebers are in state OFF, 'last_member_state': publish state OFF whenever one of its members changes to OFF": ""
+        "Control when to publish state OFF for a group. 'all_members_off': only publish state OFF when all group memebers are in state OFF, 'last_member_state': publish state OFF whenever one of its members changes to OFF": "",
+        "Filter attributes with regex from published payload.": "",
+        "Filter attributes with regex from being added to the cache, this prevents the attribute from being in the published payload when the value didn't change.": "",
+        "Filter attributes with regex from optimistic publish payload when calling /set. (This has no effect if optimistic is set to false).": ""
     },
     "settingsSchemaTitles": {
         "Home Assistant integration": "Home Assistant integratie",
@@ -2025,6 +2028,7 @@
         "Legacy availability payload": "Verouderde beschikbaarheidslading",
         "Home Assistant": "Home Assistant",
         "Home Assistant name": "Home Assistant naam",
-        "Group off state": ""
+        "Group off state": "",
+        "Filtered attributes from cache": ""
     }
 }
