@@ -1725,7 +1725,8 @@
         "stats": "Stats",
         "coordinator_ieee_address": "Coordinator IEEE Address",
         "enter_install_code": "Enter install code",
-        "add_install_code": "Add install code"
+        "add_install_code": "Add install code",
+        "request_z2m_backup": "Request data folder backup"
     },
     "touchlink": {
         "detected_devices_message": "Detected {{count}} touchlink devices.",
