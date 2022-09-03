@@ -1,3 +1,13 @@
+## [0.6.111](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.110...0.6.111) (2022-09-03)
+
+
+### Features
+
+* **i18n:** add missing translation key ([317c5fa](https://github.com/nurikk/zigbee2mqtt-frontend/commit/317c5faa7f4563bb8a14e914b80495e35e17f2ca))
+* **settings:** add install code support ([b878bc7](https://github.com/nurikk/zigbee2mqtt-frontend/commit/b878bc7952c2472efdf69d2fdc03e59dee497002))
+
+
+
 ## [0.6.110](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.109...0.6.110) (2022-08-29)
 
 
