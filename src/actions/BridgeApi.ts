@@ -7,6 +7,7 @@ export interface BridgeApi {
     updateBridgeConfig(options: unknown): Promise<void>;
     restartBridge(): Promise<void>;
     requestBackup(): Promise<void>;
+    addInstallCode(installCode: string): Promise<void>;
 }
 
 
@@ -23,5 +24,8 @@ export default {
     requestBackup(_state): Promise<void> {
         store.setState({ preparingBackup: true });
         return api.send('bridge/request/backup');
+    },
+    addInstallCode(_state, installCode: string): Promise<void> {
+        return api.send('bridge/request/install_code/add', {value: installCode});
     }
 }

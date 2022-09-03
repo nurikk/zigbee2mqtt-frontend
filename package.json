@@ -13,7 +13,7 @@
     "scripts": {
         "build": "vite build",
         "preview": "vite preview",
-        "start": "vite serve",
+        "start": "vite dev",
         "postversion": "git push && git push --tags",
         "version": "conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md",
         "pretty": "prettier --write \"./**/*.{js,jsx,json}\"",

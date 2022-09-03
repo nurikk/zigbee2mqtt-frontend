@@ -204,12 +204,21 @@ export class SettingsPage extends Component<PropsFromStore & SettingsPageProps &
         }
     }
 
+    addInstallCode = () => {
+        const { t, addInstallCode } = this.props;
+        const code = prompt(t('enter_install_code'));
+        if (code) {
+            addInstallCode(code);
+        }
+    }
+
     renderTools(): JSX.Element {
         const { exportState, restartBridge, t } = this.props;
         return <div className="p-3">
             <Button className="btn btn-primary d-block mt-2" onClick={exportState}>{t('download_state')}</Button>
             <Button className="btn btn-danger d-block mt-2" onClick={restartBridge} prompt>{t('restart_zigbee2mqtt')}</Button>
             {this.renderBackupControls()}
+            <Button className="btn btn-danger d-block mt-2" onClick={this.addInstallCode}>{t('add_install_code')}</Button>
         </div>
     }
     onSettingsSave = (e: ISubmitEvent<Record<string, unknown>>): void => {
