@@ -218,7 +218,7 @@ export class SettingsPage extends Component<PropsFromStore & SettingsPageProps &
             <Button className="btn btn-primary d-block mt-2" onClick={exportState}>{t('download_state')}</Button>
             <Button className="btn btn-danger d-block mt-2" onClick={restartBridge} prompt>{t('restart_zigbee2mqtt')}</Button>
             {this.renderBackupControls()}
-            <Button className="btn btn-danger d-block mt-2" onClick={this.addInstallCode}>{t('add_install_code')}</Button>
+            <Button className="btn btn-primary d-block mt-2" onClick={this.addInstallCode}>{t('add_install_code')}</Button>
         </div>
     }
     onSettingsSave = (e: ISubmitEvent<Record<string, unknown>>): void => {
