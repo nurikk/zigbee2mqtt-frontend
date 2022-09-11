@@ -2,6 +2,7 @@ node_modules
 /build
 /*.log
 dist
+.DS_Store
 
 ### IntelliJ IDEA ###
 .idea
@@ -9,3 +10,4 @@ dist
 *.iml
 *.ipr
 out/
+.DS_Store
