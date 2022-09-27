@@ -47,7 +47,7 @@ const getClusters = (device: Device, endpoint: Endpoint, currentCluster: Cluster
 }
 const requiredRuleFiled = ['maximum_report_interval', 'minimum_report_interval', 'reportable_change', 'endpoint', 'cluster', 'attribute'];
 const isValidRule = (rule: NiceRepointingRule): boolean => {
-    return requiredRuleFiled.every(field => rule[field] !== undefined)
+    return requiredRuleFiled.every(field => (rule[field] !== undefined) && (rule[field] !== '') )
 }
 
 type FormGroupInputProps = {
