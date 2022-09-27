@@ -1723,10 +1723,7 @@
         "zigbee2mqtt_version": "Zigbee2MQTT version",
         "translate": "Translate",
         "stats": "Stats",
-        "coordinator_ieee_address": "Coordinator IEEE Address",
-        "enter_install_code": "Enter install code",
-        "add_install_code": "Add install code",
-        "request_z2m_backup": "Request data folder backup"
+        "coordinator_ieee_address": "Coordinator IEEE Address"
     },
     "touchlink": {
         "detected_devices_message": "Detected {{count}} touchlink devices.",
@@ -2017,8 +2014,8 @@
         "Passive": "Passive",
         "Home Assistant (simple)": "Home Assistant (simple)",
         "Home Assistant (advanced)": "Home Assistant (advanced)",
-        "Availability (simple)": "",
-        "Availability (advanced)": "",
+        "Availability (simple)": "Availability (simple)",
+        "Availability (advanced)": "Availability (advanced)",
         "OTA index override file name": "",
         "Frontend (simple)": "",
         "Frontend (advanced)": "",
