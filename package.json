@@ -28,7 +28,7 @@
         "@commitlint/cli": "16.3.0",
         "@commitlint/config-conventional": "16.2.4",
         "@ebay/nice-modal-react": "1.2.7",
-        "@fortawesome/fontawesome-free": "^6.0.0",
+        "@fortawesome/fontawesome-free": "6.2.0",
         "@rjsf/core": "4.2.3",
         "@toolz/local-storage": "1.0.5",
         "@types/color-convert": "2.0.0",
