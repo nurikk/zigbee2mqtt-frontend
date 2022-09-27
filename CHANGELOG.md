@@ -1,3 +1,17 @@
+## [0.6.112](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.111...0.6.112) (2022-09-27)
+
+
+### Bug Fixes
+
+* **i18n:** fix danish locale ([db9f4d8](https://github.com/nurikk/zigbee2mqtt-frontend/commit/db9f4d88d6b83da5d38667146172debd4a8986b7))
+
+
+### Features
+
+* **settigns:** change install code class ([873f115](https://github.com/nurikk/zigbee2mqtt-frontend/commit/873f115e9943855e997549f85c1607479eb20fa5))
+
+
+
 ## [0.6.111](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.110...0.6.111) (2022-09-03)
 
 
