@@ -20,6 +20,7 @@
         "groups": "Групи",
         "loading": "Завантажується...",
         "none": "Ні",
+        "ok": "OK",
         "read": "Читати",
         "save": "Зберегти",
         "select_device": "Виберіть прилад",
@@ -840,6 +841,8 @@
         "operation_mode": "Режим роботи",
         "pi_heating_demand": "Потреба в нагрівання Pi",
         "undefined": "невизначений",
+        "x": "X",
+        "y": "Y",
         "effect": "Ефект",
         "linkquality": "Якість звя'зку",
         "occupied_heating_setpoint": "Відсутність заданої температури",
@@ -1677,10 +1680,12 @@
         "groups": "Групи",
         "logs": "Журнали",
         "map": "Мапа",
+        "ota": "OTA",
         "permit_join": "Дозволити приєднання",
         "restart": "Перезавантажити",
         "settings": "Налаштування",
-        "toggle_dropdown": "Перемкнути випадаючий список"
+        "toggle_dropdown": "Перемкнути випадаючий список",
+        "touchlink": "Touchlink"
     },
     "ota": {
         "check": "Перевірити на наявність нових оновлень",
@@ -1707,6 +1712,7 @@
         "frontend": "Інтерфейс",
         "frontend_version": "Версія веб інтерфейсу",
         "main": "Головні",
+        "mqtt": "MQTT",
         "ota": "OTA",
         "passlist": "Список дозволів",
         "raw": "Вихідні дані",
@@ -1762,6 +1768,7 @@
         "interview_failed": "Невдалий запит інформації про прилад",
         "interviewing": "Запит інформації...",
         "last_seen": "Останні дані",
+        "lqi": "LQI",
         "mains_single_phase": "Мережа (однофазна)",
         "manufacturer": "Виробник",
         "max_rep_interval": "Макс.інт-л.звіт",
@@ -1907,7 +1914,10 @@
         "Home Assistant legacy triggers, when enabled Zigbee2mqt will send an empty 'action' or 'click' after one has been send. A 'sensor_action' and 'sensor_click' will be discovered": "Застарілі тригери Home Assistant, якщо вони ввімкнені, Zigbee2MQTT надішле порожнє «action» або «click» після відправки. Будуть виявлені \"sensor_action\" і \"sensor_click\".",
         "Payload to be used for device availabilty and bridge/state topics. true = text, false = JSON": "Корисне навантаження, яке буде використовуватися для тем доступності приладу та мосту/стану. true = текст, false = JSON",
         "Name of the device in Home Assistant": "Назва приладу в Home Assistant",
-        "Control when to publish state OFF for a group. 'all_members_off': only publish state OFF when all group memebers are in state OFF, 'last_member_state': publish state OFF whenever one of its members changes to OFF": "Контролюйте, коли публікувати стан OFF для групи. 'all_members_off': стан публікації OFF, лише тоді коли всі учасники групи перебувають у стані OFF, 'last_member_state': стан публікації OFF щоразу, коли один із її учасників переходить в стан OFF"
+        "Control when to publish state OFF for a group. 'all_members_off': only publish state OFF when all group memebers are in state OFF, 'last_member_state': publish state OFF whenever one of its members changes to OFF": "Контролюйте, коли публікувати стан OFF для групи. 'all_members_off': стан публікації OFF, лише тоді коли всі учасники групи перебувають у стані OFF, 'last_member_state': стан публікації OFF щоразу, коли один із її учасників переходить в стан OFF",
+        "Filter attributes with regex from published payload.": "Фільтрувати атрибути з регулярним виразом з опублікованого корисного навантаження.",
+        "Filter attributes with regex from being added to the cache, this prevents the attribute from being in the published payload when the value didn't change.": "Фільтрувати атрибути з регулярним виразом від додавання до кешу, це запобігає появі атрибута в опублікованому корисному навантаженні, коли значення не змінилося.",
+        "Filter attributes with regex from optimistic publish payload when calling /set. (This has no effect if optimistic is set to false).": "Фільтрувати атрибути з регулярним виразом з оптимістичного корисного навантаження публікації під час викл./вст. (Це не дає ефекту, якщо для параметру Optimistic встановлено значення false)."
     },
     "settingsSchemaTitles": {
         "Home Assistant integration": "Інтеграція Home Assistant",
@@ -1923,6 +1933,8 @@
         "MQTT server": "Сервер MQTT",
         "Keepalive": "Підтримувати активність",
         "Certificate authority": "Центр сертифікації",
+        "SSL/TLS key": "SSL/TLS key",
+        "SSL/TLS certificate": "SSL/TLS certificate",
         "User": "Користувач",
         "Password": "Пароль",
         "Client ID": "Клієнт ID",
@@ -1945,6 +1957,8 @@
         "Legacy API": "Застарілий API",
         "Pan ID (string)": "Pan ID (рядок)",
         "Pan ID (number)": "Pan ID (номер)",
+        "Pan ID": "Pan ID",
+        "Ext Pan ID": "Ext Pan ID",
         "ZigBee channel": "ZigBee канал",
         "Cache state": "Стан кешу",
         "Persist cache state": "Зберігати стан кешу",
@@ -2014,6 +2028,7 @@
         "Legacy availability payload": "Корисне навантаження доступності застаріле",
         "Home Assistant": "Home Assistant (Домашній Асистент)",
         "Home Assistant name": "Ім'я Home Assistant",
-        "Group off state": "Стан групи OFF"
+        "Group off state": "Стан групи OFF",
+        "Filtered attributes from cache": "Відфільтровані атрибути з кешу"
     }
 }
