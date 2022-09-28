@@ -45,7 +45,7 @@ specifiers:
   eslint-plugin-react: 7.31.8
   events: 3.3.0
   file-saver: 2.0.5
-  husky: 7.0.4
+  husky: 8.0.1
   i18next: 21.9.2
   i18next-browser-languagedetector: 6.1.5
   jszip: 3.10.1
@@ -126,7 +126,7 @@ devDependencies:
   eslint-plugin-react: 7.31.8_eslint@7.32.0
   events: 3.3.0
   file-saver: 2.0.5
-  husky: 7.0.4
+  husky: 8.0.1
   i18next: 21.9.2
   i18next-browser-languagedetector: 6.1.5
   jszip: 3.10.1
@@ -3089,9 +3089,9 @@ packages:
     engines: {node: '>=10.17.0'}
     dev: true
 
-  /husky/7.0.4:
-    resolution: {integrity: sha512-vbaCKN2QLtP/vD4yvs6iz6hBEo6wkSzs8HpRah1Z6aGmF2KW5PdYuAd7uX5a+OyBZHBhd+TFLqgjUgytQr4RvQ==}
-    engines: {node: '>=12'}
+  /husky/8.0.1:
+    resolution: {integrity: sha512-xs7/chUH/CKdOCs7Zy0Aev9e/dKOMZf3K1Az1nar3tzlv0jfqnYtu235bstsWTmXOR0EfINrPa97yy4Lz6RiKw==}
+    engines: {node: '>=14'}
     hasBin: true
     dev: true
 
