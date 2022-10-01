@@ -1,3 +1,19 @@
+## [0.6.113](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.112...0.6.113) (2022-10-01)
+
+
+### Bug Fixes
+
+* **reporting:** fix reporting rule validation ([ce20ed1](https://github.com/nurikk/zigbee2mqtt-frontend/commit/ce20ed1a7f199799a2e5809e932e27ea519039f3))
+* **template:** remove prefetch ([5821e0c](https://github.com/nurikk/zigbee2mqtt-frontend/commit/5821e0ce4bc8d7110100824ee7811aa43d486bef))
+
+
+### Features
+
+* **i18n:** import translation from z2m ([19f76db](https://github.com/nurikk/zigbee2mqtt-frontend/commit/19f76db708cb800e72a69eb4134aed2699000e90))
+* **i18n:** trim locales ([8427005](https://github.com/nurikk/zigbee2mqtt-frontend/commit/8427005654094671c8d890819b71dda66bb7d4e3))
+
+
+
 ## [0.6.112](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.111...0.6.112) (2022-09-27)
 
 
