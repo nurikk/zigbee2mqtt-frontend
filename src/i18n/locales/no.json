@@ -1914,9 +1914,9 @@
         "Payload to be used for device availabilty and bridge/state topics. true = text, false = JSON": "Belastning som skal brukes for enhetens tilgjengelighet og bro/tilstands emne. sann = tekst, falsk = JSON",
         "Name of the device in Home Assistant": "Navn på enheten i Home Assistant",
         "Control when to publish state OFF for a group. 'all_members_off': only publish state OFF when all group memebers are in state OFF, 'last_member_state': publish state OFF whenever one of its members changes to OFF": "Kontroll når staten skal publiseres AV for en gruppe. 'all_members_off': only publish state OFF when all group memebers are in state OFF, 'last_member_state': publish state OFF when one of its members changes to OFF",
-        "Filter attributes with regex from published payload.": "",
-        "Filter attributes with regex from being added to the cache, this prevents the attribute from being in the published payload when the value didn't change.": "",
-        "Filter attributes with regex from optimistic publish payload when calling /set. (This has no effect if optimistic is set to false).": ""
+        "Filter attributes with regex from published payload.": "Filtrer attributter med regex fra publisert nyttelast.",
+        "Filter attributes with regex from being added to the cache, this prevents the attribute from being in the published payload when the value didn't change.": "Filtrer attributter med regex fra å bli lagt til i hurtigbufferen, dette forhindrer at attributtet er i den publiserte nyttelasten når verdien ikke endret seg.",
+        "Filter attributes with regex from optimistic publish payload when calling /set. (This has no effect if optimistic is set to false).": "Filtrer attributter med regex fra optimistisk publiseringsnyttelast når kaller /sett. (Dette har ingen effekt hvis optimistisk er satt til usann)."
     },
     "settingsSchemaTitles": {
         "Home Assistant integration": "Home Assistant integrasjon",
@@ -2028,6 +2028,6 @@
         "Home Assistant": "Home Assistant",
         "Home Assistant name": "Navn på Home Assistant",
         "Group off state": "Gruppe uten status",
-        "Filtered attributes from cache": ""
+        "Filtered attributes from cache": "Filtrerte attributter fra hurtigbuffer"
     }
 }
