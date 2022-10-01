@@ -1629,7 +1629,7 @@
         "defaultLed7ColorWhenOff": "Колір СД7 якщо Викл.",
         "defaultLed7IntensityWhenOn": "Інтенсивність СД7 якщо Вкл.",
         "defaultLed7IntensityWhenOff": "Інтенсивність СД7 якщо Викл.",
-        "doubleTapUpEvent": "Подвія подвійного дотику",
+        "doubleTapUpEvent": "Подія подвійного дотику",
         "battery2": "Батарея 2",
         "control_mode": "Режим керування",
         "switch_status": "Стан перемикача",
