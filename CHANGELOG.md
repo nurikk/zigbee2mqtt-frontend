@@ -1,3 +1,17 @@
+## [0.6.114](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.113...0.6.114) (2022-10-02)
+
+
+### Bug Fixes
+
+* **ColorEditor:** fix rgb to other colors conversion ([8a7fa80](https://github.com/nurikk/zigbee2mqtt-frontend/commit/8a7fa80f9c5661a0627f0f319a77b2cee22d2d1b))
+
+
+### Features
+
+* **DashboardFeatureWrapper:** Add more icons ([#1560](https://github.com/nurikk/zigbee2mqtt-frontend/issues/1560)) ([ba978e0](https://github.com/nurikk/zigbee2mqtt-frontend/commit/ba978e084095f58a38744a425444f68585c34d93))
+
+
+
 ## [0.6.113](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.112...0.6.113) (2022-10-01)
 
 
