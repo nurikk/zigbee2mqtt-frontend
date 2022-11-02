@@ -105,7 +105,8 @@ class Api {
 
     urlProvider = async () => {
         const url = new URL(this.url)
-        let token = local.getItem<string>(TOKEN_LOCAL_STORAGE_ITEM_NAME);
+        let token = new URLSearchParams(window.location.search).get("token")
+            ?? local.getItem<string>(TOKEN_LOCAL_STORAGE_ITEM_NAME);
         const authRequired = !!local.getItem(AUTH_FLAG_LOCAL_STORAGE_ITEM_NAME);
         if (authRequired) {
             if (!token) {
