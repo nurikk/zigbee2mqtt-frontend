@@ -1944,7 +1944,10 @@
         "zigbee2mqtt_version": "Zigbee2MQTT version",
         "translate": "Translate",
         "stats": "Stats",
-        "coordinator_ieee_address": "Coordinator IEEE Address"
+        "coordinator_ieee_address": "Coordinator IEEE Address",
+        "request_z2m_backup": "Request z2m backup",
+        "add_install_code": "Add install code",
+        "homeassistant": "Home Assistant integration"
     },
     "touchlink": {
         "detected_devices_message": "Detected {{count}} touchlink devices.",
