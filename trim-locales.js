@@ -36,7 +36,7 @@ for (const file of files) {
     const translations = require(localeFileName);
     const diffR = diff(enTranslations, translations)
 
-    const newTranslation = {};
+    let newTranslation = {};
     diffR.forEach(d => {
         switch (d.kind) {
             case 'E':
@@ -45,6 +45,7 @@ for (const file of files) {
         }
 
     })
+    newTranslation = removeEmpty(newTranslation);
     console.log(`Trimmed ${localeFileName}`)
     fs.writeFileSync(localeFileName, JSON.stringify(newTranslation, null, 4));
 }
