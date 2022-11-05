@@ -79,14 +79,12 @@ specifiers:
   zigbee-herdsman: 0.14.59
   zigbee-herdsman-converters: 14.0.630
 
-dependencies:
-  '@rjsf/bootstrap-5': '@github.com/nurikk/fileshare/blob/main/rjsf-bootstrap-5-4.2.0.tgz?raw=true_tu7gqgg7rmwmbhns3tayxqxfsy'
-
 devDependencies:
   '@commitlint/cli': 16.3.0
   '@commitlint/config-conventional': 16.2.4
   '@ebay/nice-modal-react': 1.2.7_sfoxds7t5ydpegc3knd667wn6m
   '@fortawesome/fontawesome-free': 6.2.0
+  '@rjsf/bootstrap-5': '@github.com/nurikk/fileshare/blob/main/rjsf-bootstrap-5-4.2.0.tgz?raw=true_tu7gqgg7rmwmbhns3tayxqxfsy'
   '@rjsf/core': 4.2.3_react@17.0.2
   '@toolz/local-storage': 1.0.5
   '@types/color-convert': 2.0.0
@@ -4260,7 +4258,7 @@ packages:
       react: '*'
     dependencies:
       react: 17.0.2
-    dev: false
+    dev: true
 
   /react-image/4.0.3_fglqcofbt3wapbfjlwrqvbirfy:
     resolution: {integrity: sha512-19MUK9u1qaw9xys8XEsVkSpVhHctEBUeYFvrLTe1PN+4w5Co13AN2WA7xtBshPM6SthsOj77SlDrEAeOaJpf7g==}
@@ -5417,4 +5415,4 @@ packages:
       react: 17.0.2
       react-bootstrap: 2.5.0_hiunvzosbwliizyirxfy6hjyim
       react-icons: 4.4.0_react@17.0.2
-    dev: false
+    dev: true
