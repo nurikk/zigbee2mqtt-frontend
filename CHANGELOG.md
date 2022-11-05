@@ -1,3 +1,21 @@
+## [0.6.115](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.114...0.6.115) (2022-11-05)
+
+
+### Bug Fixes
+
+* **i18n:** remove empty strings ([885a8aa](https://github.com/nurikk/zigbee2mqtt-frontend/commit/885a8aa84702b9fd4b267077e7d7896534c40be9))
+
+
+### Features
+
+* **auth:** read auth token from URL ([#1590](https://github.com/nurikk/zigbee2mqtt-frontend/issues/1590)) ([32a885d](https://github.com/nurikk/zigbee2mqtt-frontend/commit/32a885d749065d64fb370464be770063bdd70bda))
+* **BridgeApi:** enable join after adding install code ([0b0d7ba](https://github.com/nurikk/zigbee2mqtt-frontend/commit/0b0d7baf2d7010b5d0e3fb0941815737523e6c3e))
+* **i18:** import translations ([1e4a0b9](https://github.com/nurikk/zigbee2mqtt-frontend/commit/1e4a0b9eb60053f0e6035869ec6b74a3bd8f3e6d))
+* **i18n:** add missing locale keys ([80d4109](https://github.com/nurikk/zigbee2mqtt-frontend/commit/80d41095ecf6ccc705e1fc0b8748c064f1f1dbde))
+* **i18n:** trim locales ([3b093aa](https://github.com/nurikk/zigbee2mqtt-frontend/commit/3b093aa9998d7139de335701fc68df713a7d0152))
+
+
+
 ## [0.6.114](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.113...0.6.114) (2022-10-02)
 
 
