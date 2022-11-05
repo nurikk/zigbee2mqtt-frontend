@@ -11,10 +11,12 @@ export interface BridgeApi {
 }
 
 
+const setPermitJoin = (_state, permit = true, device?: Device, time = 254): Promise<void> => {
+    return api.send("bridge/request/permit_join", { value: permit, time, device: device?.friendly_name });
+}
+
 export default {
-    setPermitJoin(_state, permit = true, device?: Device, time = 254): Promise<void> {
-        return api.send("bridge/request/permit_join", { value: permit, time, device: device?.friendly_name });
-    },
+    setPermitJoin,
     updateBridgeConfig(_state, options: unknown): Promise<void> {
         return api.send('bridge/request/options', { options });
     },
@@ -25,7 +27,8 @@ export default {
         store.setState({ preparingBackup: true });
         return api.send('bridge/request/backup');
     },
-    addInstallCode(_state, installCode: string): Promise<void> {
-        return api.send('bridge/request/install_code/add', {value: installCode});
+    async addInstallCode(_state, installCode: string): Promise<void> {
+        await api.send('bridge/request/install_code/add', { value: installCode });
+        return setPermitJoin(_state, true)
     }
 }
