@@ -76,7 +76,7 @@
         "line-reader": "0.4.0",
         "lodash": "4.17.21",
         "notyf": "3.10.0",
-        "pinst": "2.1.6",
+        "pinst": "3.0.0",
         "prettier": "2.7.1",
         "react": "17.0.2",
         "react-ace": "9.5.0",
