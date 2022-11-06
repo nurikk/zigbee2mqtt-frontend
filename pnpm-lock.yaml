@@ -28,7 +28,7 @@ specifiers:
   '@typescript-eslint/parser': 4.33.0
   '@vitejs/plugin-react': 1.3.2
   ace-builds: 1.11.2
-  bootstrap: 5.2.1
+  bootstrap: 5.2.2
   classnames: 2.3.2
   color-convert: 2.0.1
   conventional-changelog-cli: 2.2.2
@@ -107,7 +107,7 @@ devDependencies:
   '@typescript-eslint/parser': 4.33.0_3rubbgt5ekhqrcgx4uwls3neim
   '@vitejs/plugin-react': 1.3.2
   ace-builds: 1.11.2
-  bootstrap: 5.2.1_@popperjs+core@2.11.6
+  bootstrap: 5.2.2_@popperjs+core@2.11.6
   classnames: 2.3.2
   color-convert: 2.0.1
   conventional-changelog-cli: 2.2.2
@@ -1410,8 +1410,8 @@ packages:
     resolution: {integrity: sha512-JZOSA7Mo9sNGB8+UjSgzdLtokWAky1zbztM3WRLCbZ70/3cTANmQmOdR7y2g+J0e2WXywy1yS468tY+IruqEww==}
     dev: true
 
-  /bootstrap/5.2.1_@popperjs+core@2.11.6:
-    resolution: {integrity: sha512-UQi3v2NpVPEi1n35dmRRzBJFlgvWHYwyem6yHhuT6afYF+sziEt46McRbT//kVXZ7b1YUYEVGdXEH74Nx3xzGA==}
+  /bootstrap/5.2.2_@popperjs+core@2.11.6:
+    resolution: {integrity: sha512-dEtzMTV71n6Fhmbg4fYJzQsw1N29hJKO1js5ackCgIpDcGid2ETMGC6zwSYw09v05Y+oRdQ9loC54zB1La3hHQ==}
     peerDependencies:
       '@popperjs/core': ^2.11.6
     dependencies:
