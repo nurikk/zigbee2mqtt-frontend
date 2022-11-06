@@ -53,9 +53,6 @@ export function AddScene(props: AddSceneProps & Pick<SceneApi, 'sceneStore'> & P
                 onChange={(endpoint, value) => {
                     setDeviceState(target.friendly_name, value)
                 }}
-                onRead={() => {
-                    // empty function
-                }}
                 featureWrapperClass={DashboardFeatureWrapper}
                 minimal={true} />
         </div>

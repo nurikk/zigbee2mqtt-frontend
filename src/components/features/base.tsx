@@ -10,7 +10,7 @@ export interface BaseFeatureProps<T> extends Omit<React.HTMLAttributes<HTMLDivEl
     deviceState: DeviceState;
     device: Device;
     onChange(endpoint: Endpoint, value: Record<string, unknown>): void;
-    onRead(endpoint: Endpoint, value: Record<string, unknown>): void;
+    onRead?(endpoint: Endpoint, value: Record<string, unknown>): void;
     featureWrapperClass: FunctionComponent<PropsWithChildren<FeatureWrapperProps>>;
     minimal?: boolean;
 

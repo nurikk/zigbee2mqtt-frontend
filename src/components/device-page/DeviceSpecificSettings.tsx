@@ -27,9 +27,6 @@ function DeviceSpecificSettings(props: DeviceSpecificSettingsProps & Pick<Device
             onChange={async (endpoint, value) => {
                 await setDeviceOptions(device.ieee_address, value as Record<string, unknown>);
             }}
-            onRead={(endpoint, value) => {
-                //empty function to prevent read
-            }}
             featureWrapperClass={FeatureWrapper}
         />
     } else {

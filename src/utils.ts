@@ -186,8 +186,5 @@ export const debounceArgs = (fn: (...args: any) => any, options?: Record<string,
     }
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars,@typescript-eslint/no-empty-function
-export const assertUnreachable = (_x: never): void => undefined;
-
 
 export const isIframe = (): boolean => window.location !== window.parent.location;

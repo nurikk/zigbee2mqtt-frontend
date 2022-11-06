@@ -49,9 +49,9 @@ export class Composite extends Component<CompositeProps & WithTranslation<"compo
     onRead = (endpoint: Endpoint, property: Record<string, unknown>): void => {
         const { onRead, feature } = this.props;
         if (isCompositeFeature(feature)) {
-            onRead(endpoint, { [feature.property]: property })
+            onRead && onRead(endpoint, { [feature.property]: property })
         } else {
-            onRead(endpoint, property);
+            onRead && onRead(endpoint, property);
         }
     }
     render(): JSX.Element[] {
