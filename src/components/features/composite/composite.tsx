@@ -25,7 +25,7 @@ interface CompositeState {
 
 export class Composite extends Component<CompositeProps & WithTranslation<"composite">, CompositeState> {
     state: Readonly<CompositeState> = {}
-    onChange = (endpoint: Endpoint, value: Record<string, unknown>): void=> {
+    onChange = (endpoint: Endpoint, value: Record<string, unknown>): void => {
         const { onChange, feature } = this.props;
 
         if (isCompositeFeature(feature)) {
@@ -41,12 +41,12 @@ export class Composite extends Component<CompositeProps & WithTranslation<"compo
             onChange(endpoint, value);
         }
     }
-    onCompositeFeatureApply = (): void=> {
+    onCompositeFeatureApply = (): void => {
         const { onChange, feature: { endpoint, property } } = this.props;
         onChange(endpoint as Endpoint, property ? { [property]: this.state } : this.state);
     }
 
-    onRead = (endpoint: Endpoint, property: Record<string, unknown>): void=> {
+    onRead = (endpoint: Endpoint, property: Record<string, unknown>): void => {
         const { onRead, feature } = this.props;
         if (isCompositeFeature(feature)) {
             onRead(endpoint, { [feature.property]: property })
@@ -58,12 +58,14 @@ export class Composite extends Component<CompositeProps & WithTranslation<"compo
 
         const MAGIC_NO_ENDPOINT = 'MAGIC_NO_ENDPOINT';
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const { t, showEndpointLabels = false , feature, device, deviceState, onRead: _onRead, onChange: _onChange, featureWrapperClass, minimal } = this.props;
+        const { t, showEndpointLabels = false, feature, device, deviceState, onRead: _onRead, onChange: _onChange, featureWrapperClass, minimal } = this.props;
         const { features = [] } = feature;
+        const { state } = this;
         const isThisACompositeFeature = isCompositeFeature(feature)
         const isMoreThanOneFeature = features.length > 1;
         const doGroupingByEndpoint = !minimal;
         let result = [] as JSX.Element[];
+        const combinedState = { ...deviceState, ...state };
         if (doGroupingByEndpoint) {
             const groupedFeatures = groupBy(features, f => f.endpoint ?? MAGIC_NO_ENDPOINT);
 
@@ -72,7 +74,7 @@ export class Composite extends Component<CompositeProps & WithTranslation<"compo
                     key={JSON.stringify(f)}
                     feature={f}
                     device={device}
-                    deviceState={deviceState}
+                    deviceState={combinedState}
                     onChange={this.onChange}
                     onRead={this.onRead}
                     featureWrapperClass={featureWrapperClass}
@@ -82,11 +84,11 @@ export class Composite extends Component<CompositeProps & WithTranslation<"compo
             }
             for (const epName in groupedFeatures) {
                 const featuresGroup = groupedFeatures[epName];
-                result.push(<div key={epName}>{showEndpointLabels ?  `Endpoint: ${epName}` : null}<div className="ps-4">{featuresGroup.map(f => <Feature
+                result.push(<div key={epName}>{showEndpointLabels ? `Endpoint: ${epName}` : null}<div className="ps-4">{featuresGroup.map(f => <Feature
                     key={f.name + f.endpoint}
                     feature={f}
                     device={device}
-                    deviceState={deviceState}
+                    deviceState={combinedState}
                     onChange={this.onChange}
                     onRead={this.onRead}
                     featureWrapperClass={featureWrapperClass}
@@ -98,7 +100,7 @@ export class Composite extends Component<CompositeProps & WithTranslation<"compo
                 key={JSON.stringify(f)}
                 feature={f}
                 device={device}
-                deviceState={deviceState}
+                deviceState={combinedState}
                 onChange={this.onChange}
                 onRead={this.onRead}
                 featureWrapperClass={featureWrapperClass}
@@ -109,7 +111,7 @@ export class Composite extends Component<CompositeProps & WithTranslation<"compo
 
 
         if (isThisACompositeFeature && isMoreThanOneFeature) {
-            result.push(<div key={feature.name + 'apply'}><Button className={cx('btn btn-primary float-end', {'btn-sm': minimal})} onClick={this.onCompositeFeatureApply}>{t('common:apply')}</Button></div>)
+            result.push(<div key={feature.name + 'apply'}><Button className={cx('btn btn-primary float-end', { 'btn-sm': minimal })} onClick={this.onCompositeFeatureApply}>{t('common:apply')}</Button></div>)
         }
         return result;
 
