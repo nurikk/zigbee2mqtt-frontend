@@ -1,3 +1,12 @@
+## [0.6.116](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.115...0.6.116) (2022-11-15)
+
+
+### Bug Fixes
+
+* **composite:** fix controlled state update ([42177b8](https://github.com/nurikk/zigbee2mqtt-frontend/commit/42177b8526c1938d0b31a2b0afbbad2a3f91b154))
+
+
+
 ## [0.6.115](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.114...0.6.115) (2022-11-05)
 
 
