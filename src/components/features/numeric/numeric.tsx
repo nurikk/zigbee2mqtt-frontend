@@ -13,7 +13,7 @@ const Numeric: FunctionComponent<NumericProps> = (props) => {
     if (access & FeatureAccessMode.ACCESS_WRITE) {
         return <RangeEditor
             onChange={(value) => onChange(endpoint as Endpoint, { [property]: value })}
-            value={deviceState[property] as number ?? 0}
+            value={(deviceState[property] ?? '') as number }
             min={valueMin}
             max={valueMax}
             step={valueStep}

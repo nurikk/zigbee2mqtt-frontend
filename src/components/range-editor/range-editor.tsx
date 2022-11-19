@@ -13,7 +13,7 @@ type RangeProps = {
     minimal?: boolean;
 }
 
-const RangeEditor: FunctionComponent<RangeProps & Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'>> = (props) => {
+const RangeEditor: FunctionComponent<RangeProps & Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'value'>> = (props) => {
     const { onChange, value, valueStep, min, max, unit, steps, minimal, ...rest } = props;
     const [currentValue, setCurrentValue] = useState<number>(value)
 

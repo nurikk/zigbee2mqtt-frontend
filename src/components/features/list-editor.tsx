@@ -35,7 +35,7 @@ const ListEditor: FunctionComponent<ListEditorProps> = (props) => {
         replaceList(newListValue);
     };
 
-    const handleAddClick = () => replaceList([...currentValue, {}]);
+    const handleAddClick = () => setCurrentValue([...currentValue, {}]);
 
     if (currentValue.length === 0) {
         return <div className="mt-3 mb-3 row">

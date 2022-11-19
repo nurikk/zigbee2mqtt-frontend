@@ -41,6 +41,13 @@ export class Composite extends Component<CompositeProps & WithTranslation<"compo
             onChange(endpoint, value);
         }
     }
+
+    allInnerFeaturesHaveValues = (): boolean => {
+        const { feature: { property, features } } = this.props;
+        const featureValue = property ? { [property]: this.state } : this.state;
+        return features.every(el => featureValue[el.property] !== undefined)
+    }
+    
     onCompositeFeatureApply = (): void => {
         const { onChange, feature: { endpoint, property } } = this.props;
         onChange(endpoint as Endpoint, property ? { [property]: this.state } : this.state);
@@ -111,7 +118,9 @@ export class Composite extends Component<CompositeProps & WithTranslation<"compo
 
 
         if (isThisACompositeFeature && isMoreThanOneFeature) {
-            result.push(<div key={feature.name + 'apply'}><Button className={cx('btn btn-primary float-end', { 'btn-sm': minimal })} onClick={this.onCompositeFeatureApply}>{t('common:apply')}</Button></div>)
+            result.push(<div key={feature.name + 'apply'}>
+                <Button disabled={!this.allInnerFeaturesHaveValues()} className={cx('btn btn-primary float-end', { 'btn-sm': minimal })} onClick={this.onCompositeFeatureApply}>{t('common:apply')}</Button>
+            </div>)
         }
         return result;
 
