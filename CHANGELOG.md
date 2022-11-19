@@ -1,3 +1,18 @@
+## [0.6.118](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.117...0.6.118) (2022-11-19)
+
+
+### Bug Fixes
+
+* **exposes:** fix composite attribute behaviour ([52c1d87](https://github.com/nurikk/zigbee2mqtt-frontend/commit/52c1d872884dfa169df1b6bd79c388f9acacb7fb))
+
+
+### Features
+
+* **exposes:** add support for list exposes ([bfab254](https://github.com/nurikk/zigbee2mqtt-frontend/commit/bfab254f0def618168db240377b0575b5f03d2b7))
+* **i18n:** trim locales ([ad75cbf](https://github.com/nurikk/zigbee2mqtt-frontend/commit/ad75cbf165e3654c40c98c1480fa932b58fe77e4))
+
+
+
 ## [0.6.117](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.115...0.6.117) (2022-11-15)
 
 
