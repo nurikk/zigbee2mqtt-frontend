@@ -1,3 +1,12 @@
+## [0.6.119](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.118...0.6.119) (2022-11-20)
+
+
+### Bug Fixes
+
+* **composite:** fix allInnerFeaturesHaveValues ([ee70262](https://github.com/nurikk/zigbee2mqtt-frontend/commit/ee70262e8d71eabe12ca7d156c36644f71a9cc7a))
+
+
+
 ## [0.6.118](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.117...0.6.118) (2022-11-19)
 
 
