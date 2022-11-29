@@ -1,7 +1,7 @@
 import React, { FunctionComponent, PropsWithChildren } from "react";
 
 import { CompositeFeature, Device, DeviceState, Endpoint, GenericExposedFeature } from "../../../types";
-import { isBinaryFeature, isNumericFeature, isTextualFeature, isEnumFeature, isLightFeature, isSwitchFeature, isCoverFeature, isLockFeature, isColorFeature, isClimateFeature, isCompositeFeature, isFanFeature, isListFeature } from "../../device-page/type-guards";
+import { isBinaryFeature, isNumericFeature, isTextualFeature, isEnumFeature, isLightFeature, isSwitchFeature, isCoverFeature, isLockFeature, isColorFeature, isClimateFeature, isCompositeFeature, isFanFeature, isListFeature, isGradientFeature } from "../../device-page/type-guards";
 import Binary from "../binary/binary";
 import Climate from "../climate/climate";
 import Cover from "../cover/cover";
@@ -17,6 +17,7 @@ import { FeatureWrapperProps } from "./FeatureWrapper";
 import { ValueWithLabelOrPrimitive } from "../../enum-editor/enum-editor";
 import Fan from "../fan/fan";
 import List from "../list/list";
+import Gradient from "../gradient/gradient";
 
 
 interface FeatureProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange"> {
@@ -46,6 +47,10 @@ export const Feature = (props: FeatureProps): JSX.Element => {
             <Numeric feature={feature} {...genericParams}
                 steps={stepsConfiguration?.[feature.name] as ValueWithLabelOrPrimitive[]}
             />
+        </FeatureWrapper>
+    } else if (isGradientFeature(feature)) {
+        return <FeatureWrapper {...wrapperParams}>
+           <Gradient feature={feature} {...genericParams}/>
         </FeatureWrapper>
     } else if (isListFeature(feature)) {
         return <FeatureWrapper {...wrapperParams}>

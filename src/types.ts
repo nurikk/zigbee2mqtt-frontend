@@ -159,6 +159,11 @@ export interface EnumFeature extends GenericExposedFeature {
     values: unknown[];
 }
 
+export interface GradientFeature extends GenericExposedFeature {
+    type: "text";
+    name: "philips_hue_multicolor";
+}
+
 export interface LightFeature extends CompositeFeature {
     type: "light";
 }
