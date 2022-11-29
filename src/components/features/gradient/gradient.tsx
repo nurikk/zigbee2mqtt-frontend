@@ -22,7 +22,7 @@ const Gradient: FunctionComponent<GradientProps> = (props) => {
     const c = [...colors]
     c[idx] = hex
     setColors(c)
-    onChange(endpoint as Endpoint, { "philips_hue_multicolor": c.join(",") })
+    onChange(endpoint as Endpoint, { "colors": c })
   }
 
   return <div>
