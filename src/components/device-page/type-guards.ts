@@ -54,5 +54,5 @@ export function isClimateFeature(feature: GenericExposedFeature | CompositeFeatu
 }
 
 export function isGradientFeature(feature: GenericExposedFeature | CompositeFeature): feature is GradientFeature {
-  return isTextualFeature(feature) && feature.name === "philips_hue_multicolor";
+  return isListFeature(feature) && feature.name === "gradient" && feature.length_min !== undefined && feature.length_max !== undefined;
 }

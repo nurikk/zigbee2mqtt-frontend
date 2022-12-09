@@ -128,6 +128,9 @@ export interface ListFeature extends GenericExposedFeature {
     type: "list";
     // bad design descision
     item_type: "number" | GenericOrCompositeFeature;
+    
+    length_min?: number;
+    length_max?: number;
 }
 
 export interface CompositeFeature extends Omit<GenericExposedFeature, "type"> {
@@ -161,7 +164,7 @@ export interface EnumFeature extends GenericExposedFeature {
 
 export interface GradientFeature extends GenericExposedFeature {
     type: "text";
-    name: "philips_hue_multicolor";
+    name: "gradient";
 }
 
 export interface LightFeature extends CompositeFeature {
