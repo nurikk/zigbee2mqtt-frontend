@@ -1890,7 +1890,7 @@
         "help_router_links_description": "Dashed lines are the link with Routes",
         "hide": "Click on me to hide",
         "load": "Load map",
-        "loading": "Depending on the size of your network this can take somewhere between 10 seconds and 2 minutes."
+        "loading": "Depending on the size of your network this can take somewhere between 10 seconds and 5 minutes."
     },
     "navbar": {
         "all": "All",
