@@ -1987,6 +1987,7 @@
         "force_remove": "Force remove",
         "friendly_name": "Friendly name",
         "ieee_address": "IEEE Address",
+        "image": "Image",
         "input_clusters": "Input clusters",
         "interview_completed": "Interview completed",
         "interview_failed": "Interview failed",

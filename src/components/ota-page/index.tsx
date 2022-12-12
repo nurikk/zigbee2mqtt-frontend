@@ -71,7 +71,7 @@ class OtaPage extends Component<PropsFromStore & OtaApi & WithTranslation<"ota">
         const otaDevices = this.getAllOtaDevices();
         const columns: Column<OtaGridData>[] = [
             {
-                Header: t('zigbee:pic') as string,
+                Header: t('zigbee:image') as string,
                 Cell: ({ row: { original: { device, state } } }) => <DeviceImage className={style["device-image"]} device={device} deviceStatus={state} />,
                 disableSortBy: true,
             },
