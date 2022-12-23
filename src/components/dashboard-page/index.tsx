@@ -10,7 +10,7 @@ import actions from '../../actions/actions';
 import { StateApi } from "../../actions/StateApi";
 import { GlobalState } from '../../store';
 import { DashboardFeatureWrapper } from './DashboardFeatureWrapper';
-import { isOnlyOneBitIsSet } from '../../utils';
+import { isDeviceDisabled, isOnlyOneBitIsSet } from '../../utils';
 
 import { isClimateFeature, isLightFeature } from '../device-page/type-guards';
 import groupBy from "lodash/groupBy";
@@ -101,6 +101,9 @@ const Dashboard: React.FC<PropsFromStore & StateApi> = (props) => {
     }
 
     const filteredDevices = pickBy(devices, (device, ieeeAddress) => {
+        if (isDeviceDisabled(device, bridgeInfo.config)) {
+            return false;
+        }
         if (filter.globalFilter) {
             return filterKeys.map(k => get(device, k)).filter(Boolean).map(v => v.toLowerCase()).some(v => v.includes(filter.globalFilter.toLowerCase()))
         }

@@ -1990,6 +1990,7 @@
         "input_clusters": "Input clusters",
         "interview_completed": "Interview completed",
         "interview_failed": "Interview failed",
+        "device_disabled": "Device is disabled",
         "interviewing": "Interviewing",
         "last_seen": "Last seen",
         "lqi": "LQI",

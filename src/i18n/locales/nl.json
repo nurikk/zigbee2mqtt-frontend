@@ -841,6 +841,7 @@
         "input_clusters": "Invoercluster",
         "interview_completed": "Interview voltooid",
         "interview_failed": "Interview mislukt",
+        "device_disabled": "Apparaat is buiten werking gesteld",
         "interviewing": "Interviewen",
         "last_seen": "Laatst gezien",
         "mains_single_phase": "Netstroom (1-fase)",

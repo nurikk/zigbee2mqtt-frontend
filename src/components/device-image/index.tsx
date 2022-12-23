@@ -10,6 +10,7 @@ import { useImage } from 'react-image'
 type DeviceImageProps = {
     device: Device;
     deviceStatus?: DeviceState;
+    disabled: boolean;
     type?: "img" | "svg";
 }
 
@@ -66,7 +67,7 @@ const LazyImage = (props: LazyImageProps) => {
 const DeviceImage: FunctionComponent<DeviceImageProps & ImgHTMLAttributes<HTMLDivElement | SVGImageElement>> = (props) => {
     const { t } = useTranslation("zigbee");
 
-    const { device = {} as Device, deviceStatus, type = "img", className, ...rest } = props;
+    const { device = {} as Device, disabled, deviceStatus, type = "img", className, ...rest } = props;
 
 
     if (type === "svg") {
@@ -80,7 +81,7 @@ const DeviceImage: FunctionComponent<DeviceImageProps & ImgHTMLAttributes<HTMLDi
     const otaSpinner = otaState.state === "updating" ? <i title={t("updating_firmware")} className="fa fa-sync fa-spin position-absolute bottom-0 right-0" /> : null;
     const interviewSpinner = device.interviewing ? <i title={t("interviewing")} className="fa fa-spinner fa-spin position-absolute bottom-0 right-0" /> : null;
     const unsuccessfulInterview = !device.interviewing && !device.interview_completed;
-
+    const disabledIcon = disabled ? <i title={t("device_disabled")} className="fa fa-ban position-absolute bottom-0 right-0" /> : null;
 
     return <div className={cx(className, "position-relative")} {...rest}>
         <Suspense fallback={<img src={genericDevice} className={style.img} />}>
@@ -90,6 +91,7 @@ const DeviceImage: FunctionComponent<DeviceImageProps & ImgHTMLAttributes<HTMLDi
         </Suspense>
         {interviewSpinner}
         {otaSpinner}
+        {disabledIcon}
         {unsuccessfulInterview && <i title={t("interview_failed")} className="fa fa-exclamation-triangle position-absolute top-0 right-0 text-danger" />}
     </div>;
 

@@ -7,10 +7,12 @@ import actions from "../../actions/actions";
 import { WithTranslation, withTranslation } from "react-i18next";
 import { DevicesTable } from "./DevicesTable";
 import { DeviceApi } from "../../actions/DeviceApi";
+import { isDeviceDisabled } from "../../utils";
 export interface DevicesPageData {
     id: string;
     device: Device;
     state: DeviceState;
+    disabled: boolean;
     availabilityState: OnlineOrOffline;
     availabilityEnabledForDevice: boolean;
 }
@@ -33,6 +35,7 @@ export function DevicesPage(props: DevicesPageProps): JSX.Element {
                 const state = deviceStates[device.friendly_name] ?? {} as DeviceState;
                 return {
                     id: device.friendly_name,
+                    disabled: isDeviceDisabled(device, config),
                     device,
                     state,
                     availabilityState: availability[device.friendly_name] ?? "offline",
