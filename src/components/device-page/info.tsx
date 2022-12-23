@@ -1,7 +1,7 @@
 /* eslint-disable react/display-name */
 import React, { Component, Fragment } from "react";
 import { BridgeInfo, Device, DeviceState } from "../../types";
-import { toHex } from "../../utils";
+import { isDeviceDisabled, toHex } from "../../utils";
 import DeviceControlGroup from "../device-control/DeviceControlGroup";
 import cx from "classnames";
 import style from "./style.module.css";
@@ -141,7 +141,7 @@ export class DeviceInfo extends Component<Pick<DeviceApi, 'configureDevice' | 'r
         return (
             <Fragment>
                 <div className="d-flex justify-content-center">
-                    <DeviceImage className={`card-img-top w-auto ${style["device-pic"]}`} device={device} deviceStatus={deviceState} />
+                    <DeviceImage className={`card-img-top w-auto ${style["device-pic"]}`} device={device} deviceStatus={deviceState} disabled={isDeviceDisabled(device, bridgeInfo.config)} />
                 </div>
                 <dl className="row">
                     {

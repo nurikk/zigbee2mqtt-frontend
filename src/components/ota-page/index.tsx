@@ -6,7 +6,7 @@ import { OtaApi } from "../../actions/OtaApi";
 import { GlobalState } from "../../store";
 import Button from "../button";
 import DeviceImage from "../device-image";
-import { genDeviceDetailsLink, toHHMMSS } from "../../utils";
+import { genDeviceDetailsLink, isDeviceDisabled, toHHMMSS } from "../../utils";
 import { Link } from "react-router-dom";
 import { Device, DeviceState, OTAState } from "../../types";
 import { VendorLink, ModelLink, OTALink } from "../vendor-links/vendor-links";
@@ -43,7 +43,7 @@ const StateCell: FunctionComponent<OtaRowProps & OtaApi> = (props) => {
     }
 }
 
-type PropsFromStore = Pick<GlobalState, 'devices' | 'deviceStates'>;
+type PropsFromStore = Pick<GlobalState, 'devices' | 'deviceStates' | 'bridgeInfo'>;
 
 type OtaGridData = {
     id: string;
@@ -52,9 +52,9 @@ type OtaGridData = {
 }
 class OtaPage extends Component<PropsFromStore & OtaApi & WithTranslation<"ota">, unknown> {
     getAllOtaDevices() {
-        const { devices, deviceStates } = this.props;
+        const { devices, deviceStates, bridgeInfo: {config} } = this.props;
         return Object.values(devices)
-            .filter(device => device?.definition?.supports_ota)
+            .filter(device => device?.definition?.supports_ota && !isDeviceDisabled(device, config))
             .map((device) => {
                 const state = deviceStates[device.friendly_name] ?? {} as DeviceState;
                 return { id: device.friendly_name, device, state } as OtaGridData;
@@ -72,7 +72,8 @@ class OtaPage extends Component<PropsFromStore & OtaApi & WithTranslation<"ota">
         const columns: Column<OtaGridData>[] = [
             {
                 Header: t('zigbee:pic') as string,
-                Cell: ({ row: { original: { device, state } } }) => <DeviceImage className={style["device-image"]} device={device} deviceStatus={state} />,
+                // Disabled always false since OTA page does not contain disabled devices
+                Cell: ({ row: { original: { device, state } } }) => <DeviceImage className={style["device-image"]} device={device} deviceStatus={state} disabled={false} />,
                 disableSortBy: true,
             },
             {
@@ -116,6 +117,6 @@ class OtaPage extends Component<PropsFromStore & OtaApi & WithTranslation<"ota">
     }
 }
 
-const mappedProps = ["devices", "deviceStates"];
+const mappedProps = ["devices", "deviceStates", "bridgeInfo"];
 
 export default withTranslation(["ota", "zigbee", "common"])(connect<unknown, unknown, PropsFromStore, unknown>(mappedProps, actions)(OtaPage));

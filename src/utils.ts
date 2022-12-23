@@ -1,5 +1,5 @@
 
-import { Device, DeviceState, Endpoint, Group, LastSeenType } from "./types";
+import { Device, DeviceState, Endpoint, Group, LastSeenType, Z2MConfig } from "./types";
 import { GraphI, LinkI, LinkType, NodeI } from "./components/map/types";
 import { Theme } from "./components/theme-switcher";
 import JSZip from 'jszip';
@@ -157,6 +157,8 @@ export const getEndpoints = (obj: Device | Group): Endpoint[] => {
     }
     return eps;
 }
+
+export const isDeviceDisabled = (device: Device, config: Z2MConfig): boolean => !!(config.device_options?.disabled || config.devices[device.ieee_address]?.disabled);
 
 
 export const stringifyWithPreservingUndefinedAsNull = (data: Record<string, unknown>): string => JSON.stringify(data, (k, v) => v === undefined ? null : v)

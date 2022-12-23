@@ -117,6 +117,7 @@ class Node extends Component<NodeProps, NodeState> {
                         <DeviceImage
                             type="svg"
                             width={32}
+                            disabled={false} // Network map does never contain disabled devices
                             height={32}
                             device={device}
                             className={`${style.img}`}

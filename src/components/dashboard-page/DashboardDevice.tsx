@@ -28,7 +28,8 @@ const DashboardDevice: React.FC<Props> = ({ onChange, onRead, device, endpoint, 
             <div className={`flex-fill card flex-shrink-1`}>
                 <div className="card-header pb-0 d-flex justify-content-between">
                     <Link to={genDeviceDetailsLink(device.ieee_address)}>
-                        <DeviceImage device={device} className={cx(styles.deviceImage, 'me-2 d-inline')} />{device.friendly_name}
+                        {/* disabled always false because dashboard does not contain disabled devices */}
+                        <DeviceImage disabled={false} device={device} className={cx(styles.deviceImage, 'me-2 d-inline')} />{device.friendly_name}
                         {endpoint ? ` (${t('endpoint')}: ${endpoint})` : ''}
                     </Link>
                     {controls}

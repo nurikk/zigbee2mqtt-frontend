@@ -52,7 +52,7 @@ export function DevicesTable(props: DevicesTableProps & Pick<DeviceApi, 'configu
         {
             id: 'pic',
             Header: t('pic'),
-            Cell: ({ row: { original: { device, state } } }) => <DeviceImage className={style["device-image"]} device={device} deviceStatus={state} />,
+            Cell: ({ row: { original: { device, state, disabled } } }) => <DeviceImage className={style["device-image"]} device={device} deviceStatus={state} disabled={disabled} />,
             accessor: rowData => rowData,
             disableSortBy: true,
         },
