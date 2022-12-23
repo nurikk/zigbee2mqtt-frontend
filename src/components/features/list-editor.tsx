@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useEffect, useState } from "react";
 import { CompositeFeature, Device, DeviceState, GenericOrCompositeFeature } from "../../types";
 import Button from "../button";
-import Composite from "./composite/composite";
+import { Feature } from "./composite/Feature";
 import { FeatureWrapper } from "./composite/FeatureWrapper";
 
 type ListEditorProps = {
@@ -47,12 +47,13 @@ const ListEditor: FunctionComponent<ListEditorProps> = (props) => {
             const showAddButton = currentValue.length - 1 === itemIndex;
             return <div className="mt-3 mb-3 row" key={itemIndex}>
                 <div className="col-10">
-                    <Composite showEndpointLabels={true} feature={feature as CompositeFeature} type="composite"
+                    <Feature feature={feature as CompositeFeature}
                         device={{} as Device}
                         deviceState={itemValue as DeviceState}
                         onChange={(endpoint, value) => {
                             onItemChange(value, itemIndex)
                         }}
+                        onRead={(a, b) => {}}
                         featureWrapperClass={FeatureWrapper}
                     />
 

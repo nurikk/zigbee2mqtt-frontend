@@ -20,7 +20,12 @@ function Exposes(props: ExposesProps & PropsFromStore & StateApi) {
     const { t } = useTranslation(["exposes"]);
     const deviceState = deviceStates[device.friendly_name] ?? {} as DeviceState;
     if (device.definition?.exposes?.length) {
-        return <Composite showEndpointLabels={true} feature={{ features: device.definition.exposes } as CompositeFeature} type="composite" device={device} deviceState={deviceState}
+        return <Composite 
+            showEndpointLabels={true}
+            feature={{ features: device.definition.exposes } as CompositeFeature}
+            type="composite"
+            device={device}
+            deviceState={deviceState}
             onChange={(endpoint, value) => {
                 setDeviceState(device.friendly_name, value)
             }}

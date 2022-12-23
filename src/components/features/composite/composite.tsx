@@ -43,9 +43,10 @@ export class Composite extends Component<CompositeProps & WithTranslation<"compo
     }
 
     allInnerFeaturesHaveValues = (): boolean => {
-        const { feature: { property, features }, deviceState } = this.props;
-        const featureValue = property ? { [property]: this.state } : this.state;
-        const combinedState = { ...deviceState, ...featureValue };
+        const { feature: { features }, deviceState } = this.props;
+
+        const combinedState = { ...deviceState, ...this.state };
+
         return features.every(el => combinedState[el.property] !== undefined)
     }
     
