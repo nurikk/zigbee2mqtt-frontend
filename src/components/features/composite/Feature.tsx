@@ -24,6 +24,7 @@ interface FeatureProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onCha
     feature: CompositeFeature | GenericExposedFeature;
     deviceState: DeviceState;
     device: Device;
+    depth: number;
     stepsConfiguration?: Record<string, unknown>;
     onChange(endpoint: Endpoint, value: Record<string, unknown>): void;
     onRead(endpoint: Endpoint, value: Record<string, unknown>): void;
@@ -33,7 +34,7 @@ interface FeatureProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onCha
 
 export const Feature = (props: FeatureProps): JSX.Element => {
 
-    const { feature, device, deviceState, stepsConfiguration, onRead, onChange, featureWrapperClass: FeatureWrapper, minimal } = props;
+    const { feature, device, deviceState, stepsConfiguration, onRead, onChange, featureWrapperClass: FeatureWrapper, minimal, depth } = props;
 
     const genericParams = { key: JSON.stringify(feature), device, deviceState, onChange, onRead, featureWrapperClass: FeatureWrapper, minimal };
     const wrapperParams = { key: JSON.stringify(feature), feature, onRead, deviceState };
@@ -82,7 +83,7 @@ export const Feature = (props: FeatureProps): JSX.Element => {
         return <Fan feature={feature} {...genericParams} />
     } else if (isCompositeFeature(feature)) {
         return <FeatureWrapper {...wrapperParams}>
-            <Composite type="composite" feature={feature} {...genericParams} deviceState={(deviceState[feature.property] ?? {}) as DeviceState} />
+            <Composite type="composite" feature={feature} {...genericParams} depth={depth} deviceState={(deviceState[feature.property] ?? {}) as DeviceState} />
         </FeatureWrapper>
     }
     return (<FeatureWrapper {...wrapperParams}>

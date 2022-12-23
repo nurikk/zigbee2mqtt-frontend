@@ -12,6 +12,7 @@ type CompositeType = "composite" | "light" | "switch" | "cover" | "lock" | "fan"
 
 interface CompositeProps extends BaseFeatureProps<CompositeFeature> {
     type: CompositeType;
+    depth?: number;
     stepsConfiguration?: Record<string, unknown>;
     minimal?: boolean;
     showEndpointLabels?: boolean;
@@ -69,6 +70,7 @@ export class Composite extends Component<CompositeProps & WithTranslation<"compo
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { t, showEndpointLabels = false, feature, device, deviceState, onRead: _onRead, onChange: _onChange, featureWrapperClass, minimal } = this.props;
         const { features = [] } = feature;
+        const depth = this.props.depth ?? 0;
         const { state } = this;
         const isThisACompositeFeature = isCompositeFeature(feature)
         const isMoreThanOneFeature = features.length > 1;
@@ -84,6 +86,7 @@ export class Composite extends Component<CompositeProps & WithTranslation<"compo
                     feature={f}
                     device={device}
                     deviceState={combinedState}
+                    depth={depth + 1}
                     onChange={this.onChange}
                     onRead={this.onRead}
                     featureWrapperClass={featureWrapperClass}
@@ -98,6 +101,7 @@ export class Composite extends Component<CompositeProps & WithTranslation<"compo
                     feature={f}
                     device={device}
                     deviceState={combinedState}
+                    depth={depth + 1}
                     onChange={this.onChange}
                     onRead={this.onRead}
                     featureWrapperClass={featureWrapperClass}
@@ -109,6 +113,7 @@ export class Composite extends Component<CompositeProps & WithTranslation<"compo
                 key={JSON.stringify(f)}
                 feature={f}
                 device={device}
+                depth={depth + 1}
                 deviceState={combinedState}
                 onChange={this.onChange}
                 onRead={this.onRead}
@@ -119,7 +124,7 @@ export class Composite extends Component<CompositeProps & WithTranslation<"compo
         }
 
 
-        if (isThisACompositeFeature && isMoreThanOneFeature) {
+        if (isThisACompositeFeature && isMoreThanOneFeature && depth === 1) {
             result.push(<div key={feature.name + 'apply'}>
                 <Button disabled={!this.allInnerFeaturesHaveValues()} className={cx('btn btn-primary float-end', { 'btn-sm': minimal })} onClick={this.onCompositeFeatureApply}>{t('common:apply')}</Button>
             </div>)
