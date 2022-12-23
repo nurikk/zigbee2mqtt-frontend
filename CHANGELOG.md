@@ -1,3 +1,17 @@
+## [0.6.120](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.119...0.6.120) (2022-12-23)
+
+
+### Bug Fixes
+
+* **composite:** fix list of enums and greyed out apply button ([f3ae8f8](https://github.com/nurikk/zigbee2mqtt-frontend/commit/f3ae8f84d3c1941b0ca53c9505abe7bb2f1d3bd7))
+
+
+### Features
+
+* **disabled:** add disabled option ([#1637](https://github.com/nurikk/zigbee2mqtt-frontend/issues/1637)) ([01ab599](https://github.com/nurikk/zigbee2mqtt-frontend/commit/01ab5999844f4246f2e1cc103ec08af9d9005b77))
+
+
+
 ## [0.6.119](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.118...0.6.119) (2022-11-20)
 
 
