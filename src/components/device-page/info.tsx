@@ -52,6 +52,7 @@ const displayProps = [
             return <dd className="col-12 col-md-7">
                 <Availability
                     availability={availability}
+                    disabled={isDeviceDisabled(device, config)}
                     availabilityFeatureEnabled={availabilityFeatureEnabled}
                     availabilityEnabledForDevice={availabilityEnabledForDevice}
                 />

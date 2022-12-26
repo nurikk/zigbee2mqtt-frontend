@@ -23,7 +23,7 @@ type ParamValue = {
 }
 
 const genericUiSchema: UiSchema = {
-    "ui:order": ["friendly_name", "retain", "disabled", "retention", "qos", "filtered_attributes", "*"]
+    "ui:order": ["friendly_name", "disabled", "retain", "retention", "qos", "filtered_attributes", "*"]
 };
 
 type DeviceSettingsState = {
