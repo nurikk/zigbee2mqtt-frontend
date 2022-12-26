@@ -41,8 +41,9 @@ export function DevicesTable(props: DevicesTableProps & Pick<DeviceApi, 'configu
         id: 'availability',
         Header: t('avaliability:avaliability'),
         accessor: ({ availabilityState }) => isString(availabilityState) ? availabilityState : availabilityState.state,
-        Cell: ({ row: { original: { availabilityState, availabilityEnabledForDevice } } }) => {
+        Cell: ({ row: { original: { availabilityState, availabilityEnabledForDevice, disabled } } }) => {
             return <Availability
+                disabled={disabled}
                 availability={availabilityState}
                 availabilityEnabledForDevice={availabilityEnabledForDevice} />;
         },

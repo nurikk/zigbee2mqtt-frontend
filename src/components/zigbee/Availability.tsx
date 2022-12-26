@@ -8,11 +8,12 @@ export type AvailabilityStateProps = {
     availability: AvailabilityState;
     availabilityFeatureEnabled?: boolean;
     availabilityEnabledForDevice?: boolean;
+    disabled: boolean;
 }
 
 export function Availability(props: AvailabilityStateProps): JSX.Element {
     const { t } = useTranslation(["avaliability"]);
-    const { availability, availabilityFeatureEnabled = true, availabilityEnabledForDevice = true } = props;
+    const { availability, availabilityFeatureEnabled = true, availabilityEnabledForDevice = true, disabled } = props;
 
     let availabilityState: OnlineOrOffline;
 
@@ -22,8 +23,9 @@ export function Availability(props: AvailabilityStateProps): JSX.Element {
         availabilityState = availability.state;
     }
     availabilityState = availabilityState.toLowerCase() as OnlineOrOffline;
-
-    if (availabilityFeatureEnabled && availabilityEnabledForDevice) {
+    if (disabled) {
+        return <span>{t('disabled')}</span>;
+    } else if (availabilityFeatureEnabled && availabilityEnabledForDevice) {
         return <span className={cx({
             "text-danger animation-blinking": availabilityState === "offline",
             'text-success': availability === "online"
