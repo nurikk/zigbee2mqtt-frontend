@@ -1,3 +1,13 @@
+## [0.6.121](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.120...0.6.121) (2022-12-31)
+
+
+### Features
+
+* **disabled:** improve disabled ([#1639](https://github.com/nurikk/zigbee2mqtt-frontend/issues/1639)) ([957c234](https://github.com/nurikk/zigbee2mqtt-frontend/commit/957c234d776c8fadfde2d02709ec8856ab2db5c4))
+* **i18n:** trim locales ([f521420](https://github.com/nurikk/zigbee2mqtt-frontend/commit/f5214208642fa603e4c334d38542b9f4663f3dff))
+
+
+
 ## [0.6.120](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.119...0.6.120) (2022-12-23)
 
 
