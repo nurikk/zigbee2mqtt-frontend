@@ -874,7 +874,7 @@
         "color_hs": "Farbe Farbton/Sättigung",
         "color_temp_startup": "Start Farbtemperatur",
         "consumer_connected": "Verbraucher angeschlossen",
-        "current": "Aktuell",
+        "current": "Strom",
         "current_heating_setpoint": "Aktuelle Solltemperatur",
         "current_level_startup": "Aktuelles Startlevel",
         "device_temperature": "Gerätetemperatur",
