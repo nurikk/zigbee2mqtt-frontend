@@ -1,5 +1,5 @@
 
-import { GenericExposedFeature, BinaryFeature, NumericFeature, EnumFeature, LightFeature, CompositeFeature, SwitchFeature, CoverFeature, LockFeature, ColorFeature, TextualFeature, ClimateFeature, FanFeature, ListFeature } from "../../types";
+import { GenericExposedFeature, BinaryFeature, NumericFeature, EnumFeature, LightFeature, CompositeFeature, SwitchFeature, CoverFeature, LockFeature, ColorFeature, TextualFeature, ClimateFeature, FanFeature, ListFeature, GradientFeature } from "../../types";
 
 export function isBinaryFeature(feature: GenericExposedFeature | CompositeFeature): feature is BinaryFeature {
   return feature.type === "binary";
@@ -24,6 +24,7 @@ export function isEnumFeature(feature: GenericExposedFeature | CompositeFeature)
 export function isLightFeature(feature: GenericExposedFeature | CompositeFeature): feature is LightFeature {
   return feature.type === "light";
 }
+
 export function isSwitchFeature(feature: GenericExposedFeature | CompositeFeature): feature is SwitchFeature {
   return feature.type === "switch";
 }
@@ -50,4 +51,8 @@ export function isColorFeature(feature: GenericExposedFeature | CompositeFeature
 
 export function isClimateFeature(feature: GenericExposedFeature | CompositeFeature): feature is ClimateFeature {
   return feature.type === "climate";
+}
+
+export function isGradientFeature(feature: GenericExposedFeature | CompositeFeature): feature is GradientFeature {
+  return isListFeature(feature) && feature.name === "gradient" && feature.length_min !== undefined && feature.length_max !== undefined;
 }

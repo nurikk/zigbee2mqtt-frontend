@@ -1,12 +1,13 @@
 import React, { FunctionComponent, InputHTMLAttributes, useEffect, useState } from "react";
 import * as convertColors from "color-convert";
-import { AnyColor, XYColor, HueSaturationColor } from "../../types";
+import { AnyColor, XYColor, HueSaturationColor, RGBColor } from "../../types";
 import Button from "../button";
 
 
 type Payload = AnyColor;
 
-export type ColorFormat = "color_xy" | "color_hs";
+export type ColorFormat = "color_xy" | "color_hs" | "color_rgb";
+
 type ColorProps = {
     value: Payload;
     steps?: string[][];
@@ -32,6 +33,11 @@ export const toRGB = (source: AnyColor, sourceFormat: ColorFormat): string => {
                 const { hue = 0, saturation = 0 } = source as HueSaturationColor;
                 return '#' + convertColors.hsv.hex([hue, saturation, 100]);
             }
+        
+        case "color_rgb":
+            const {r, g, b} = source as RGBColor
+            return '#' + convertColors.rgb.hex([r, g, b])
+
         default:
             return '#FFFFFF';
     }
