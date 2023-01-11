@@ -1,6 +1,10 @@
 
 import { GenericExposedFeature, BinaryFeature, NumericFeature, EnumFeature, LightFeature, CompositeFeature, SwitchFeature, CoverFeature, LockFeature, ColorFeature, TextualFeature, ClimateFeature, FanFeature, ListFeature, GradientFeature } from "../../types";
 
+export function isGenericExposedFeature(feature: GenericExposedFeature | CompositeFeature): feature is GenericExposedFeature {
+  return !feature.hasOwnProperty('features');
+}
+
 export function isBinaryFeature(feature: GenericExposedFeature | CompositeFeature): feature is BinaryFeature {
   return feature.type === "binary";
 }

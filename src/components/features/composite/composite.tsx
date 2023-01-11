@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { CompositeFeature, Endpoint } from "../../../types";
-import { isCompositeFeature } from "../../device-page/type-guards";
+import { CompositeFeature, Endpoint, GenericExposedFeature } from "../../../types";
+import { isCompositeFeature, isGenericExposedFeature } from "../../device-page/type-guards";
 import { BaseFeatureProps } from "../base";
 import Button from "../../button";
 import groupBy from "lodash/groupBy";
@@ -12,7 +12,7 @@ type CompositeType = "composite" | "light" | "switch" | "cover" | "lock" | "fan"
 
 interface CompositeProps extends BaseFeatureProps<CompositeFeature> {
     type: CompositeType;
-    depth?: number;
+    parentFeatures?: (CompositeFeature | GenericExposedFeature)[];
     stepsConfiguration?: Record<string, unknown>;
     minimal?: boolean;
     showEndpointLabels?: boolean;
@@ -28,27 +28,36 @@ export class Composite extends Component<CompositeProps & WithTranslation<"compo
     state: Readonly<CompositeState> = {}
     onChange = (endpoint: Endpoint, value: Record<string, unknown>): void => {
         const { onChange, feature } = this.props;
-
-        if (isCompositeFeature(feature)) {
-            const { features = [] } = feature;
-            const isOnlyOneFeature = features.length == 1;
-            this.setState(value, () => {
-                if (isOnlyOneFeature) {
-                    this.onCompositeFeatureApply();
-                }
-            })
-
+        if (this.isCompositeRoot()) {
+            this.setState({...this.state, ...value});
         } else {
-            onChange(endpoint, value);
+            if (isCompositeFeature(feature)) {
+                this.setState(value, () => onChange(endpoint, {[feature.property]: this.state}));
+            } else {
+                onChange(endpoint, value);
+            }
         }
     }
 
     allInnerFeaturesHaveValues = (): boolean => {
-        const { feature: { features }, deviceState } = this.props;
+        const checkRecurse = (feature: CompositeFeature | GenericExposedFeature, state: CompositeState) => {
+            if (!isGenericExposedFeature(feature) && feature.type !== 'composite') {
+                feature = feature.features[0];
+            }
 
-        const combinedState = { ...deviceState, ...this.state };
+            if (state[feature.property] === undefined) {
+                return false;
+            } else if (isCompositeFeature(feature)) {
+                return feature.features.every(f => checkRecurse(f, state[feature.property] as CompositeState));
+            }
+            return true;
+        }
 
-        return features.every(el => combinedState[el.property] !== undefined)
+        return this.props.feature.features.every(f => checkRecurse(f, this.state));
+    }
+    
+    isCompositeRoot = (): boolean => {
+        return isCompositeFeature(this.props.feature) && !this.props.parentFeatures?.find((f) => f.type);
     }
     
     onCompositeFeatureApply = (): void => {
@@ -70,10 +79,8 @@ export class Composite extends Component<CompositeProps & WithTranslation<"compo
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { t, showEndpointLabels = false, feature, device, deviceState, onRead: _onRead, onChange: _onChange, featureWrapperClass, minimal } = this.props;
         const { features = [] } = feature;
-        const depth = this.props.depth ?? 0;
+        const parentFeatures = this.props.parentFeatures ?? [];
         const { state } = this;
-        const isThisACompositeFeature = isCompositeFeature(feature)
-        const isMoreThanOneFeature = features.length > 1;
         const doGroupingByEndpoint = !minimal;
         let result = [] as JSX.Element[];
         const combinedState = { ...deviceState, ...state };
@@ -84,9 +91,9 @@ export class Composite extends Component<CompositeProps & WithTranslation<"compo
                 result.push(...groupedFeatures[MAGIC_NO_ENDPOINT].map(f => <Feature
                     key={JSON.stringify(f)}
                     feature={f}
+                    parentFeatures={[...parentFeatures, feature]}
                     device={device}
                     deviceState={combinedState}
-                    depth={depth + 1}
                     onChange={this.onChange}
                     onRead={this.onRead}
                     featureWrapperClass={featureWrapperClass}
@@ -99,9 +106,9 @@ export class Composite extends Component<CompositeProps & WithTranslation<"compo
                 result.push(<div key={epName}>{showEndpointLabels ? `Endpoint: ${epName}` : null}<div className="ps-4">{featuresGroup.map(f => <Feature
                     key={f.name + f.endpoint}
                     feature={f}
+                    parentFeatures={[...parentFeatures, feature]}
                     device={device}
                     deviceState={combinedState}
-                    depth={depth + 1}
                     onChange={this.onChange}
                     onRead={this.onRead}
                     featureWrapperClass={featureWrapperClass}
@@ -112,8 +119,8 @@ export class Composite extends Component<CompositeProps & WithTranslation<"compo
             const renderedFeatures = features.map(f => <Feature
                 key={JSON.stringify(f)}
                 feature={f}
+                parentFeatures={[...parentFeatures, feature]}
                 device={device}
-                depth={depth + 1}
                 deviceState={combinedState}
                 onChange={this.onChange}
                 onRead={this.onRead}
@@ -124,7 +131,7 @@ export class Composite extends Component<CompositeProps & WithTranslation<"compo
         }
 
 
-        if (isThisACompositeFeature && isMoreThanOneFeature && depth === 1) {
+        if (this.isCompositeRoot()) {
             result.push(<div key={feature.name + 'apply'}>
                 <Button disabled={!this.allInnerFeaturesHaveValues()} className={cx('btn btn-primary float-end', { 'btn-sm': minimal })} onClick={this.onCompositeFeatureApply}>{t('common:apply')}</Button>
             </div>)
