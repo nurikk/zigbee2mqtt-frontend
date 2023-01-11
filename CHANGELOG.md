@@ -1,3 +1,13 @@
+## [0.6.122](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.121...0.6.122) (2023-01-11)
+
+
+### Features
+
+* **gradient:** support setting philips hue gradients ([#1618](https://github.com/nurikk/zigbee2mqtt-frontend/issues/1618)) ([eb03a05](https://github.com/nurikk/zigbee2mqtt-frontend/commit/eb03a05a01727e685bfe071da368d542e5c60ab7))
+* **i18n:** import translations ([2b12042](https://github.com/nurikk/zigbee2mqtt-frontend/commit/2b1204297c4cbce1f58403d284b4c58d4592935e))
+
+
+
 ## [0.6.121](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.120...0.6.121) (2022-12-31)
 
 
