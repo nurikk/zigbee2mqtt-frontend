@@ -101,7 +101,7 @@
         "vite-plugin-sass-dts": "1.1.42",
         "ws": "8.9.0",
         "zigbee-herdsman": "0.14.59",
-        "zigbee-herdsman-converters": "14.0.630"
+        "zigbee-herdsman-converters": "15.0.21"
     },
     "main": "index.js",
     "husky": {
