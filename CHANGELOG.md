@@ -1,3 +1,7 @@
+## [0.6.123](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.122...0.6.123) (2023-01-13)
+
+
+
 ## [0.6.122](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.121...0.6.122) (2023-01-11)
 
 
