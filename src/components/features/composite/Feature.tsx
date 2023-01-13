@@ -22,6 +22,7 @@ import Gradient from "../gradient/gradient";
 
 interface FeatureProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange"> {
     feature: CompositeFeature | GenericExposedFeature;
+    parentFeatures: (CompositeFeature | GenericExposedFeature)[];
     deviceState: DeviceState;
     device: Device;
     stepsConfiguration?: Record<string, unknown>;
@@ -33,9 +34,9 @@ interface FeatureProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onCha
 
 export const Feature = (props: FeatureProps): JSX.Element => {
 
-    const { feature, device, deviceState, stepsConfiguration, onRead, onChange, featureWrapperClass: FeatureWrapper, minimal } = props;
+    const { feature, device, deviceState, stepsConfiguration, onRead, onChange, featureWrapperClass: FeatureWrapper, minimal, parentFeatures } = props;
 
-    const genericParams = { key: JSON.stringify(feature), device, deviceState, onChange, onRead, featureWrapperClass: FeatureWrapper, minimal };
+    const genericParams = { key: JSON.stringify(feature), device, deviceState, onChange, onRead, featureWrapperClass: FeatureWrapper, minimal, parentFeatures };
     const wrapperParams = { key: JSON.stringify(feature), feature, onRead, deviceState };
 
     if (isBinaryFeature(feature)) {
