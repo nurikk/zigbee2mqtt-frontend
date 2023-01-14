@@ -127,5 +127,23 @@
         "detected_devices_message": "Открити {{count}} touchlink устройства.",
         "rescan": "Сканирай пак",
         "scan": "Сканиране"
+    },
+    "values": {
+        "clear": "Изчисти",
+        "closed": "Затворено",
+        "false": "Грешно",
+        "not_supported": "Не се поддържа",
+        "occupied": "Заето",
+        "open": "Отворено",
+        "supported": "Поддържа се",
+        "true": "Вярно",
+        "empty_string": "Празен стринг(\"\")",
+        "leaking": "Тече",
+        "tampered": "Нарушение",
+        "null": "Null",
+        "Clear": "Изчистено",
+        "Closed": "Затворено",
+        "Occupied": "Заено",
+        "Open": "Отворено"
     }
 }
