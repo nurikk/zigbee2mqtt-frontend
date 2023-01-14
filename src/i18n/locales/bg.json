@@ -49,5 +49,44 @@
         "group_members": "Членове група",
         "group_scenes": "Групови сцени",
         "rename_group": "Преименувай група"
+    },
+    "logs": {
+        "empty_logs_message": "Няма съобщения",
+        "filter_by_text": "Филтрирай по текст",
+        "show_only": "Покажи само"
+    },
+    "map": {
+        "help_coordinator_link_description": "Плътните линии са връзка с координатор",
+        "help_end_device_description": "Зелено значи Крайно Устройство",
+        "help_is_coordinator": "е Координатор",
+        "help_lqi_description": "Качеството на връзката е между 0 - 255 (по-високо е по-добре), стойности с / показват много типове връзки",
+        "help_router_description": "Синьо значи Рутер",
+        "help_router_links_description": "Прекъснатите линии са връзки с Рутер",
+        "hide": "Щракни за скриване",
+        "load": "Зареди карта",
+        "loading": "В зависимост от размера на мрежата може да отнеме от 10 сек. до 2 минути."
+    },
+    "navbar": {
+        "all": "Всички",
+        "dashboard": "Табло",
+        "devices": "Устройства",
+        "disable_join": "Забр. прис.",
+        "extensions": "Раширения",
+        "groups": "Групи",
+        "logs": "Логове",
+        "map": "Карта",
+        "ota": "Обновл.",
+        "permit_join": "Позвол. прис.",
+        "restart": "Рестартирай",
+        "settings": "Настройки",
+        "toggle_dropdown": "Промени пад. меню",
+        "touchlink": "Touchlink"
+    },
+    "ota": {
+        "check": "Провери за обновление",
+        "check_all": "Провери всички",
+        "empty_ota_message": "Нямате устройства поддържащи OTA",
+        "remaining_time": "Оставащо време {{- remaining}}",
+        "update": "Обн. софтуер на устройство"
     }
 }
