@@ -1,1 +1,7 @@
-{}
+{
+    "extensions": {
+        "create_new_extension": "Създай ново разширение",
+        "extension_name_propmt": "Име на разширение",
+        "select_extension_to_edit": "Избери разширение за редактиране"
+    }
+}
