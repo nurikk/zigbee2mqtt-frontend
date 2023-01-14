@@ -35,5 +35,19 @@
         "create_new_extension": "Създай ново разширение",
         "extension_name_propmt": "Име на разширение",
         "select_extension_to_edit": "Избери разширение за редактиране"
+    },
+    "groups": {
+        "add_to_group": "Добави в група",
+        "create_group": "Създай група",
+        "new_group_id": "Номер на група",
+        "new_group_id_placeholder": "ID на група (ако е необходим)",
+        "new_group_name": "Име на нова група",
+        "new_group_name_placeholder": "пример: my_bedroom_lights",
+        "remove_group": "Премахни група",
+        "group_id": "ID група",
+        "group_name": "Име група",
+        "group_members": "Членове група",
+        "group_scenes": "Групови сцени",
+        "rename_group": "Преименувай група"
     }
 }
