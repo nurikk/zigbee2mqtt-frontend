@@ -31,6 +31,22 @@
         "write": "Запиши",
         "destination_endpoint": "Целеви endpoint"
     },
+    "devicePage": {
+        "about": "За устройството",
+        "bind": "Свързвания",
+        "clusters": "Клъстери",
+        "dev_console": "Конзола за разработчици",
+        "reporting": "Reporting",
+        "settings": "Настройки",
+        "settings_specific": "Настройки (специфични)",
+        "state": "Статус",
+        "scene": "Сцена",
+        "unknown_device": "Неизв. устройство",
+        "exposes": "Свойства"
+    },
+    "exposes": {
+        "empty_exposes_definition": "Няма налични свойства"
+    },
     "extensions": {
         "create_new_extension": "Създай ново разширение",
         "extension_name_propmt": "Име на разширение",
