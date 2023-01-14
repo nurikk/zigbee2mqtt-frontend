@@ -22,6 +22,7 @@ import svTranslations from './locales/sv.json';
 import trTranslations from './locales/tr.json';
 import noTranslations from './locales/no.json';
 import daTranslations from './locales/da.json';
+import bgTranslations from './locales/bg.json';
 
 
 import timeCa from "timeago.js/lib/lang/ca";
@@ -43,6 +44,7 @@ import timeSv from "timeago.js/lib/lang/sv";
 import timeTr from "timeago.js/lib/lang/tr";
 import timeNo from "timeago.js/lib/lang/nb_NO";
 import timeDa from "timeago.js/lib/lang/da";
+import timeBg from "timeago.js/lib/lang/bg";
 
 
 register("ca", timeCa);
@@ -64,6 +66,7 @@ register("sv", timeSv);
 register("tr", timeTr);
 register("no", timeNo);
 register("da", timeDa);
+register("da", timeBg);
 
 
 
@@ -89,6 +92,7 @@ export const resources = {
     tr: trTranslations as ResourceLanguage,
     no: noTranslations as ResourceLanguage,
     da: daTranslations as ResourceLanguage,
+    bg: bgTranslations as ResourceLanguage,
 
 } as const;
 
