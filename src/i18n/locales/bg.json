@@ -88,5 +88,44 @@
         "empty_ota_message": "Нямате устройства поддържащи OTA",
         "remaining_time": "Оставащо време {{- remaining}}",
         "update": "Обн. софтуер на устройство"
+    },
+    "settings": {
+        "about": "За системата",
+        "advanced": "Разширени",
+        "availability": "Наличност",
+        "blocklist": "Списък блокирания",
+        "coordinator_revision": "Версия на Координатор",
+        "coordinator_type": "Тип на Координатор",
+        "donate": "Дари",
+        "donation_text": [
+            "Здравей, %username%, тук можеш да ни благодариш за работата",
+            "Не се страхувай да ни кажеш и нещо хубаво :)"
+        ],
+        "download_state": "Свали статус",
+        "experimental": "Експериментално",
+        "external_converters": "Външни конвертори",
+        "frontend": "Интерфейс",
+        "frontend_version": "Версия на интерфейса",
+        "main": "Основни",
+        "mqtt": "MQTT",
+        "ota": "OTA Обновления",
+        "passlist": "Списък разрешения",
+        "raw": "Raw",
+        "restart_zigbee2mqtt": "Рестартирай Zigbee2MQTT",
+        "serial": "Сериен порт",
+        "settings": "Настройки",
+        "tools": "Инструменти",
+        "zigbee2mqtt_version": "Весия на Zigbee2MQTT",
+        "translate": "Превод",
+        "stats": "Статистика",
+        "coordinator_ieee_address": "IEEE Адрес на Координатора",
+        "request_z2m_backup": "Заяви архив на z2m",
+        "add_install_code": "Добави код за инсталация",
+        "homeassistant": "Интеграция с Home Assistant"
+    },
+    "touchlink": {
+        "detected_devices_message": "Открити {{count}} touchlink устройства.",
+        "rescan": "Сканирай пак",
+        "scan": "Сканиране"
     }
 }
