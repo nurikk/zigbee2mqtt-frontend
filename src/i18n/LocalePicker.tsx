@@ -25,13 +25,14 @@ import sv from "./flags/sv.png";
 import tr from "./flags/tr.png";
 import no from "./flags/no.png";
 import dk from "./flags/dk.png";
+import bg from "./flags/bg.png";
 import missing from "./flags/missing-locale.png";
 
 
 import localeNames from './locales/localeNames.json';
 
 const localesMap = {
-    ca, en, fr, pl, de, ru, ptbr, es, ua, chs, nl, it, zh, ko, cs, fi, sv, tr, no, dk
+    ca, en, fr, pl, de, ru, ptbr, es, ua, chs, nl, it, zh, ko, cs, fi, sv, tr, no, dk, bg
 }
 
 
