@@ -66,7 +66,7 @@ register("sv", timeSv);
 register("tr", timeTr);
 register("no", timeNo);
 register("da", timeDa);
-register("da", timeBg);
+register("bg", timeBg);
 
 
 
