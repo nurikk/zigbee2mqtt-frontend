@@ -198,5 +198,31 @@
         "command": "Команда",
         "payload": "Параметри",
         "save_description": "Запази Описание"
+    },
+    "scene": {
+        "scene_id": "№ Сцена",
+        "recall": "Възстанови",
+        "store": "Запази",
+        "remove": "Премахни",
+        "remove_all": "Премахни вс.",
+        "add": "Добави",
+        "select_scene": "Избери Сцена",
+        "scene_name": "Име на Сцена"
+    },
+    "stats": {
+        "byType": "По тип устр.",
+        "byPowerSource": "По изт. захранване",
+        "byVendor": "По производител",
+        "byModel": "По модел",
+        "total": "Общо",
+        "EndDevice": "Крайни устр.",
+        "Router": "Рутер"
+    },
+    "avaliability": {
+        "avaliability": "Наличност",
+        "offline": "Неналичен",
+        "online": "Наличен",
+        "disabled": "Прекр. набл.",
+        "enabled": "Наблюдаван"
     }
 }
