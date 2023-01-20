@@ -1,3 +1,12 @@
+## [0.6.124](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.123...0.6.124) (2023-01-20)
+
+
+### Features
+
+* **list:** fix composite list not showing values from state ([#1658](https://github.com/nurikk/zigbee2mqtt-frontend/issues/1658)) ([9f1cf7a](https://github.com/nurikk/zigbee2mqtt-frontend/commit/9f1cf7ae63ad81f0883c84635093290eb3f26ec9))
+
+
+
 ## [0.6.123](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.122...0.6.123) (2023-01-13)
 
 
