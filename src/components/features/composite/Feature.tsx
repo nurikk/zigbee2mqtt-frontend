@@ -82,8 +82,11 @@ export const Feature = (props: FeatureProps): JSX.Element => {
     } else if (isFanFeature(feature)) {
         return <Fan feature={feature} {...genericParams} />
     } else if (isCompositeFeature(feature)) {
+        // When parent is a list (this is when parentFeatures is not set), we don't 
+        // need to take the key of the deviceState (deviceState[feature.property])
+        const deviceState_ = parentFeatures ? (deviceState[feature.property] ?? {}) : deviceState;
         return <FeatureWrapper {...wrapperParams}>
-            <Composite type="composite" feature={feature} {...genericParams} deviceState={(deviceState[feature.property] ?? {}) as DeviceState} />
+            <Composite type="composite" feature={feature} {...genericParams} deviceState={deviceState_ as DeviceState} />
         </FeatureWrapper>
     }
     return (<FeatureWrapper {...wrapperParams}>
