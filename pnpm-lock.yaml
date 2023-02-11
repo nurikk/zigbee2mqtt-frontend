@@ -17,7 +17,7 @@ specifiers:
   '@types/file-saver': 2.0.5
   '@types/json-schema': 7.0.11
   '@types/lodash': 4.14.185
-  '@types/react': 17.0.50
+  '@types/react': 18.0.28
   '@types/react-dom': 17.0.17
   '@types/react-router-dom': 5.3.3
   '@types/react-table': 7.7.12
@@ -96,7 +96,7 @@ devDependencies:
   '@types/file-saver': 2.0.5
   '@types/json-schema': 7.0.11
   '@types/lodash': 4.14.185
-  '@types/react': 17.0.50
+  '@types/react': 18.0.28
   '@types/react-dom': 17.0.17
   '@types/react-router-dom': 5.3.3
   '@types/react-table': 7.7.12
@@ -136,7 +136,7 @@ devDependencies:
   react: 17.0.2
   react-ace: 9.5.0_sfoxds7t5ydpegc3knd667wn6m
   react-app-polyfill: 3.0.0
-  react-bootstrap: 2.5.0_hiunvzosbwliizyirxfy6hjyim
+  react-bootstrap: 2.5.0_osjumu6i5wv2qmetn5rca62i6y
   react-css-theme-switcher: 0.3.0_react@17.0.2
   react-dom: 17.0.2_react@17.0.2
   react-i18next: 11.18.6_jlvubkh2ypz6tastophpvdjiqq
@@ -534,7 +534,7 @@ packages:
       '@types/node': 17.0.35
       chalk: 4.1.2
       cosmiconfig: 7.0.1
-      cosmiconfig-typescript-loader: 2.0.0_n25z2epmztii6xa2hzhjcem4e4
+      cosmiconfig-typescript-loader: 2.0.0_unjtu23ym3kawulv5yedxslkxm
       lodash: 4.17.21
       resolve-from: 5.0.0
       typescript: 4.8.4
@@ -1059,7 +1059,7 @@ packages:
     resolution: {integrity: sha512-kpqnYK4wcdm5UaWI3fLcELopqLrHgLqNsdpHauzlQktfkHL3npOSwtj1Uz9oKBAzs7lFtVkV8j83voAz2D8fhw==}
     dependencies:
       '@types/history': 4.7.11
-      '@types/react': 17.0.50
+      '@types/react': 18.0.28
       '@types/react-router': 5.1.18
     dev: true
 
@@ -1067,23 +1067,31 @@ packages:
     resolution: {integrity: sha512-YYknwy0D0iOwKQgz9v8nOzt2J6l4gouBmDnWqUUznltOTaon+r8US8ky8HvN0tXvc38U9m6z/t2RsVsnd1zM0g==}
     dependencies:
       '@types/history': 4.7.11
-      '@types/react': 17.0.50
+      '@types/react': 18.0.28
     dev: true
 
   /@types/react-table/7.7.12:
     resolution: {integrity: sha512-bRUent+NR/WwtDGwI/BqhZ8XnHghwHw0HUKeohzB5xN3K2qKWYE5w19e7GCuOkL1CXD9Gi1HFy7TIm2AvgWUHg==}
     dependencies:
-      '@types/react': 17.0.50
+      '@types/react': 18.0.28
     dev: true
 
   /@types/react-transition-group/4.4.5:
     resolution: {integrity: sha512-juKD/eiSM3/xZYzjuzH6ZwpP+/lejltmiS3QEzV/vmb/Q8+HfDmxu+Baga8UEMGBqV88Nbg4l2hY/K2DkyaLLA==}
     dependencies:
-      '@types/react': 17.0.50
+      '@types/react': 18.0.28
     dev: true
 
   /@types/react/17.0.50:
     resolution: {integrity: sha512-ZCBHzpDb5skMnc1zFXAXnL3l1FAdi+xZvwxK+PkglMmBrwjpp9nKaWuEvrGnSifCJmBFGxZOOFuwC6KH/s0NuA==}
+    dependencies:
+      '@types/prop-types': 15.7.5
+      '@types/scheduler': 0.16.2
+      csstype: 3.1.0
+    dev: true
+
+  /@types/react/18.0.28:
+    resolution: {integrity: sha512-RD0ivG1kEztNBdoAK7lekI9M+azSnitIn85h4iOiaLjaTrMjzslhaqCGaI4IyCJ1RljWiLCEu4jyrLLgqxBTew==}
     dependencies:
       '@types/prop-types': 15.7.5
       '@types/scheduler': 0.16.2
@@ -1904,11 +1912,12 @@ packages:
     resolution: {integrity: sha512-ZQBvi1DcpJ4GDqanjucZ2Hj3wEO5pZDS89BWbkcrvdxksJorwUDDZamX9ldFkp9aw2lmBDLgkObEA4DWNJ9FYQ==}
     dev: true
 
-  /cosmiconfig-typescript-loader/2.0.0_n25z2epmztii6xa2hzhjcem4e4:
+  /cosmiconfig-typescript-loader/2.0.0_unjtu23ym3kawulv5yedxslkxm:
     resolution: {integrity: sha512-2NlGul/E3vTQEANqPziqkA01vfiuUU8vT0jZAuUIjEW8u3eCcnCQWLggapCjhbF76s7KQF0fM0kXSKmzaDaG1g==}
     engines: {node: '>=12', npm: '>=6'}
     peerDependencies:
       '@types/node': '*'
+      cosmiconfig: '>=7'
       typescript: '>=3'
     dependencies:
       '@types/node': 17.0.35
@@ -4331,7 +4340,7 @@ packages:
       whatwg-fetch: 3.6.2
     dev: true
 
-  /react-bootstrap/2.5.0_hiunvzosbwliizyirxfy6hjyim:
+  /react-bootstrap/2.5.0_osjumu6i5wv2qmetn5rca62i6y:
     resolution: {integrity: sha512-j/aLR+okzbYk61TM3eDOU1NqOqnUdwyVrF+ojoCRUxPdzc2R0xXvqyRsjSoyRoCo7n82Fs/LWjPCin/QJNdwvA==}
     peerDependencies:
       '@types/react': '>=16.14.8'
@@ -4344,7 +4353,7 @@ packages:
       '@babel/runtime': 7.19.0
       '@restart/hooks': 0.4.7_react@17.0.2
       '@restart/ui': 1.4.0_sfoxds7t5ydpegc3knd667wn6m
-      '@types/react': 17.0.50
+      '@types/react': 18.0.28
       '@types/react-transition-group': 4.4.5
       classnames: 2.3.2
       dom-helpers: 5.2.1
@@ -5256,7 +5265,7 @@ packages:
       react: '>=15.0.0'
     dependencies:
       '@babel/runtime': 7.19.0
-      '@types/react': 17.0.50
+      '@types/react': 18.0.28
       invariant: 2.2.4
       react: 17.0.2
       react-lifecycles-compat: 3.0.4
@@ -5619,6 +5628,6 @@ packages:
     dependencies:
       '@rjsf/core': 4.2.3_react@17.0.2
       react: 17.0.2
-      react-bootstrap: 2.5.0_hiunvzosbwliizyirxfy6hjyim
+      react-bootstrap: 2.5.0_osjumu6i5wv2qmetn5rca62i6y
       react-icons: 4.7.1_react@17.0.2
     dev: true

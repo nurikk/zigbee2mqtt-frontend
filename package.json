@@ -41,7 +41,7 @@
         "@types/file-saver": "2.0.5",
         "@types/json-schema": "7.0.11",
         "@types/lodash": "4.14.185",
-        "@types/react": "17.0.50",
+        "@types/react": "18.0.28",
         "@types/react-dom": "17.0.17",
         "@types/react-router-dom": "5.3.3",
         "@types/react-table": "7.7.12",
