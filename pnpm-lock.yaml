@@ -10,7 +10,7 @@ specifiers:
   '@toolz/local-storage': 1.0.5
   '@types/color-convert': 2.0.0
   '@types/d3-drag': 3.0.1
-  '@types/d3-force': 3.0.3
+  '@types/d3-force': 3.0.4
   '@types/d3-selection': 3.0.3
   '@types/d3-zoom': 3.0.1
   '@types/events': 3.0.0
@@ -89,7 +89,7 @@ devDependencies:
   '@toolz/local-storage': 1.0.5
   '@types/color-convert': 2.0.0
   '@types/d3-drag': 3.0.1
-  '@types/d3-force': 3.0.3
+  '@types/d3-force': 3.0.4
   '@types/d3-selection': 3.0.3
   '@types/d3-zoom': 3.0.1
   '@types/events': 3.0.0
@@ -534,7 +534,7 @@ packages:
       '@types/node': 17.0.35
       chalk: 4.1.2
       cosmiconfig: 7.0.1
-      cosmiconfig-typescript-loader: 2.0.0_n25z2epmztii6xa2hzhjcem4e4
+      cosmiconfig-typescript-loader: 2.0.0_unjtu23ym3kawulv5yedxslkxm
       lodash: 4.17.21
       resolve-from: 5.0.0
       typescript: 4.8.4
@@ -988,8 +988,8 @@ packages:
       '@types/d3-selection': 3.0.3
     dev: true
 
-  /@types/d3-force/3.0.3:
-    resolution: {integrity: sha512-z8GteGVfkWJMKsx6hwC3SiTSLspL98VNpmvLpEFJQpZPq6xpA1I8HNBDNSpukfK0Vb0l64zGFhzunLgEAcBWSA==}
+  /@types/d3-force/3.0.4:
+    resolution: {integrity: sha512-q7xbVLrWcXvSBBEoadowIUJ7sRpS1yvgMWnzHJggFy5cUZBq2HZL5k/pBSm0GdYWS1vs5/EDwMjSKF55PDY4Aw==}
     dev: true
 
   /@types/d3-interpolate/3.0.1:
@@ -1904,11 +1904,12 @@ packages:
     resolution: {integrity: sha512-ZQBvi1DcpJ4GDqanjucZ2Hj3wEO5pZDS89BWbkcrvdxksJorwUDDZamX9ldFkp9aw2lmBDLgkObEA4DWNJ9FYQ==}
     dev: true
 
-  /cosmiconfig-typescript-loader/2.0.0_n25z2epmztii6xa2hzhjcem4e4:
+  /cosmiconfig-typescript-loader/2.0.0_unjtu23ym3kawulv5yedxslkxm:
     resolution: {integrity: sha512-2NlGul/E3vTQEANqPziqkA01vfiuUU8vT0jZAuUIjEW8u3eCcnCQWLggapCjhbF76s7KQF0fM0kXSKmzaDaG1g==}
     engines: {node: '>=12', npm: '>=6'}
     peerDependencies:
       '@types/node': '*'
+      cosmiconfig: '>=7'
       typescript: '>=3'
     dependencies:
       '@types/node': 17.0.35
