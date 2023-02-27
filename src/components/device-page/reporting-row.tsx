@@ -95,10 +95,10 @@ export class ReportingRow extends Component<ReportingRowProps & WithTranslation,
         this.setState({ stateRule });
     }
 
-    changeHandler = (event: ChangeEvent<HTMLInputElement>): void => {
+    changeHandlerNumber = (event: ChangeEvent<HTMLInputElement>): void => {
         const { stateRule } = this.state;
         const { name, value } = event.target;
-        stateRule[name] = value;
+        stateRule[name] = Number(value);
         this.setState({ stateRule });
     }
 
@@ -134,7 +134,7 @@ export class ReportingRow extends Component<ReportingRowProps & WithTranslation,
             </div>
             <div className="col-md-2">
                 <FormGroupInput
-                    onChange={this.changeHandler}
+                    onChange={this.changeHandlerNumber}
                     value={stateRule.minimum_report_interval}
                     name="minimum_report_interval"
                     label={t('min_rep_interval')}
@@ -142,7 +142,7 @@ export class ReportingRow extends Component<ReportingRowProps & WithTranslation,
             </div>
             <div className="col-md-1">
                 <FormGroupInput
-                    onChange={this.changeHandler}
+                    onChange={this.changeHandlerNumber}
                     value={stateRule.maximum_report_interval}
                     name="maximum_report_interval"
                     label={t('max_rep_interval')}
@@ -151,7 +151,7 @@ export class ReportingRow extends Component<ReportingRowProps & WithTranslation,
             <div className="col-md-1">
                 <div className="form-group">
                     <label className="form-label text-nowrap">{t('min_rep_change') }</label>
-                    <input onChange={this.changeHandler} value={stateRule.reportable_change} required type="number" name="reportable_change" className="form-control" />
+                    <input onChange={this.changeHandlerNumber} value={stateRule.reportable_change} required type="number" name="reportable_change" className="form-control" />
                 </div>
 
             </div>
