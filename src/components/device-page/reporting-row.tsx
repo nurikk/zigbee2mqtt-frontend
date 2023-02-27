@@ -97,8 +97,10 @@ export class ReportingRow extends Component<ReportingRowProps & WithTranslation,
 
     changeHandlerNumber = (event: ChangeEvent<HTMLInputElement>): void => {
         const { stateRule } = this.state;
-        const { name, value } = event.target;
-        stateRule[name] = Number(value);
+        const { name, valueAsNumber } = event.target;
+        if (!Number.isNaN(valueAsNumber)) {
+            stateRule[name] = valueAsNumber;
+        }
         this.setState({ stateRule });
     }
 
