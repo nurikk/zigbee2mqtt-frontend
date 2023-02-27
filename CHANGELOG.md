@@ -1,3 +1,12 @@
+## [0.6.125](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.124...0.6.125) (2023-02-27)
+
+
+### Features
+
+* **reporting:** fix min/max/change reporting interval being a string ([#1686](https://github.com/nurikk/zigbee2mqtt-frontend/issues/1686)) ([c1ca9dc](https://github.com/nurikk/zigbee2mqtt-frontend/commit/c1ca9dc4fba11f529697a1be127ba2c3237f0fad))
+
+
+
 ## [0.6.124](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.123...0.6.124) (2023-01-20)
 
 
