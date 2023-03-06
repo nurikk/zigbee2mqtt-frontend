@@ -1,3 +1,12 @@
+## [0.6.126](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.125...0.6.126) (2023-03-06)
+
+
+### Features
+
+* **deps:** update zh and zhc deps ([1ff5bc1](https://github.com/nurikk/zigbee2mqtt-frontend/commit/1ff5bc10747f3e82af5628de303cdcee16726b64))
+
+
+
 ## [0.6.125](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.124...0.6.125) (2023-02-27)
 
 
