@@ -20,7 +20,7 @@ specifiers:
   '@types/react': 17.0.50
   '@types/react-dom': 17.0.17
   '@types/react-router-dom': 5.3.3
-  '@types/react-table': 7.7.12
+  '@types/react-table': 7.7.14
   '@types/react-transition-group': 4.4.5
   '@types/reconnectingwebsocket': 1.0.7
   '@types/ws': 8.5.3
@@ -98,7 +98,7 @@ devDependencies:
   '@types/react': 17.0.50
   '@types/react-dom': 17.0.17
   '@types/react-router-dom': 5.3.3
-  '@types/react-table': 7.7.12
+  '@types/react-table': 7.7.14
   '@types/react-transition-group': 4.4.5
   '@types/reconnectingwebsocket': 1.0.7
   '@types/ws': 8.5.3
@@ -532,7 +532,7 @@ packages:
       '@types/node': 17.0.35
       chalk: 4.1.2
       cosmiconfig: 7.0.1
-      cosmiconfig-typescript-loader: 2.0.0_n25z2epmztii6xa2hzhjcem4e4
+      cosmiconfig-typescript-loader: 2.0.0_unjtu23ym3kawulv5yedxslkxm
       lodash: 4.17.21
       resolve-from: 5.0.0
       typescript: 4.8.4
@@ -988,8 +988,8 @@ packages:
       '@types/react': 17.0.50
     dev: true
 
-  /@types/react-table/7.7.12:
-    resolution: {integrity: sha512-bRUent+NR/WwtDGwI/BqhZ8XnHghwHw0HUKeohzB5xN3K2qKWYE5w19e7GCuOkL1CXD9Gi1HFy7TIm2AvgWUHg==}
+  /@types/react-table/7.7.14:
+    resolution: {integrity: sha512-TYrv7onCiakaG1uAu/UpQ9FojNEt/4/ht87EgJQaEGFoWV606ZLWUZAcUHzMxgc3v1mywP1cDyz3qB4ho3hWOw==}
     dependencies:
       '@types/react': 17.0.50
     dev: true
@@ -1772,11 +1772,12 @@ packages:
     resolution: {integrity: sha512-ZQBvi1DcpJ4GDqanjucZ2Hj3wEO5pZDS89BWbkcrvdxksJorwUDDZamX9ldFkp9aw2lmBDLgkObEA4DWNJ9FYQ==}
     dev: true
 
-  /cosmiconfig-typescript-loader/2.0.0_n25z2epmztii6xa2hzhjcem4e4:
+  /cosmiconfig-typescript-loader/2.0.0_unjtu23ym3kawulv5yedxslkxm:
     resolution: {integrity: sha512-2NlGul/E3vTQEANqPziqkA01vfiuUU8vT0jZAuUIjEW8u3eCcnCQWLggapCjhbF76s7KQF0fM0kXSKmzaDaG1g==}
     engines: {node: '>=12', npm: '>=6'}
     peerDependencies:
       '@types/node': '*'
+      cosmiconfig: '>=7'
       typescript: '>=3'
     dependencies:
       '@types/node': 17.0.35
