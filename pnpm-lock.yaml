@@ -11,7 +11,7 @@ specifiers:
   '@types/color-convert': 2.0.0
   '@types/d3-drag': 3.0.1
   '@types/d3-force': 3.0.3
-  '@types/d3-selection': 3.0.3
+  '@types/d3-selection': 3.0.5
   '@types/d3-zoom': 3.0.1
   '@types/events': 3.0.0
   '@types/file-saver': 2.0.5
@@ -89,7 +89,7 @@ devDependencies:
   '@types/color-convert': 2.0.0
   '@types/d3-drag': 3.0.1
   '@types/d3-force': 3.0.3
-  '@types/d3-selection': 3.0.3
+  '@types/d3-selection': 3.0.5
   '@types/d3-zoom': 3.0.1
   '@types/events': 3.0.0
   '@types/file-saver': 2.0.5
@@ -903,7 +903,7 @@ packages:
   /@types/d3-drag/3.0.1:
     resolution: {integrity: sha512-o1Va7bLwwk6h03+nSM8dpaGEYnoIG19P0lKqlic8Un36ymh9NSkNFX1yiXMKNMx8rJ0Kfnn2eovuFaL6Jvj0zA==}
     dependencies:
-      '@types/d3-selection': 3.0.3
+      '@types/d3-selection': 3.0.5
     dev: true
 
   /@types/d3-force/3.0.3:
@@ -916,15 +916,15 @@ packages:
       '@types/d3-color': 3.0.2
     dev: true
 
-  /@types/d3-selection/3.0.3:
-    resolution: {integrity: sha512-Mw5cf6nlW1MlefpD9zrshZ+DAWL4IQ5LnWfRheW6xwsdaWOb6IRRu2H7XPAQcyXEx1D7XQWgdoKR83ui1/HlEA==}
+  /@types/d3-selection/3.0.5:
+    resolution: {integrity: sha512-xCB0z3Hi8eFIqyja3vW8iV01+OHGYR2di/+e+AiOcXIOrY82lcvWW8Ke1DYE/EUVMsBl4Db9RppSBS3X1U6J0w==}
     dev: true
 
   /@types/d3-zoom/3.0.1:
     resolution: {integrity: sha512-7s5L9TjfqIYQmQQEUcpMAcBOahem7TRoSO/+Gkz02GbMVuULiZzjF2BOdw291dbO2aNon4m2OdFsRGaCq2caLQ==}
     dependencies:
       '@types/d3-interpolate': 3.0.1
-      '@types/d3-selection': 3.0.3
+      '@types/d3-selection': 3.0.5
     dev: true
 
   /@types/events/3.0.0:
