@@ -11,7 +11,7 @@ specifiers:
   '@types/color-convert': 2.0.0
   '@types/d3-drag': 3.0.1
   '@types/d3-force': 3.0.3
-  '@types/d3-selection': 3.0.3
+  '@types/d3-selection': 3.0.5
   '@types/d3-zoom': 3.0.1
   '@types/events': 3.0.0
   '@types/file-saver': 2.0.5
@@ -90,7 +90,7 @@ devDependencies:
   '@types/color-convert': 2.0.0
   '@types/d3-drag': 3.0.1
   '@types/d3-force': 3.0.3
-  '@types/d3-selection': 3.0.3
+  '@types/d3-selection': 3.0.5
   '@types/d3-zoom': 3.0.1
   '@types/events': 3.0.0
   '@types/file-saver': 2.0.5
@@ -534,7 +534,7 @@ packages:
       '@types/node': 17.0.35
       chalk: 4.1.2
       cosmiconfig: 7.0.1
-      cosmiconfig-typescript-loader: 2.0.0_n25z2epmztii6xa2hzhjcem4e4
+      cosmiconfig-typescript-loader: 2.0.0_unjtu23ym3kawulv5yedxslkxm
       lodash: 4.17.21
       resolve-from: 5.0.0
       typescript: 4.8.4
@@ -905,7 +905,7 @@ packages:
   /@types/d3-drag/3.0.1:
     resolution: {integrity: sha512-o1Va7bLwwk6h03+nSM8dpaGEYnoIG19P0lKqlic8Un36ymh9NSkNFX1yiXMKNMx8rJ0Kfnn2eovuFaL6Jvj0zA==}
     dependencies:
-      '@types/d3-selection': 3.0.3
+      '@types/d3-selection': 3.0.5
     dev: true
 
   /@types/d3-force/3.0.3:
@@ -918,15 +918,15 @@ packages:
       '@types/d3-color': 3.0.2
     dev: true
 
-  /@types/d3-selection/3.0.3:
-    resolution: {integrity: sha512-Mw5cf6nlW1MlefpD9zrshZ+DAWL4IQ5LnWfRheW6xwsdaWOb6IRRu2H7XPAQcyXEx1D7XQWgdoKR83ui1/HlEA==}
+  /@types/d3-selection/3.0.5:
+    resolution: {integrity: sha512-xCB0z3Hi8eFIqyja3vW8iV01+OHGYR2di/+e+AiOcXIOrY82lcvWW8Ke1DYE/EUVMsBl4Db9RppSBS3X1U6J0w==}
     dev: true
 
   /@types/d3-zoom/3.0.1:
     resolution: {integrity: sha512-7s5L9TjfqIYQmQQEUcpMAcBOahem7TRoSO/+Gkz02GbMVuULiZzjF2BOdw291dbO2aNon4m2OdFsRGaCq2caLQ==}
     dependencies:
       '@types/d3-interpolate': 3.0.1
-      '@types/d3-selection': 3.0.3
+      '@types/d3-selection': 3.0.5
     dev: true
 
   /@types/events/3.0.0:
@@ -1774,11 +1774,12 @@ packages:
     resolution: {integrity: sha512-ZQBvi1DcpJ4GDqanjucZ2Hj3wEO5pZDS89BWbkcrvdxksJorwUDDZamX9ldFkp9aw2lmBDLgkObEA4DWNJ9FYQ==}
     dev: true
 
-  /cosmiconfig-typescript-loader/2.0.0_n25z2epmztii6xa2hzhjcem4e4:
+  /cosmiconfig-typescript-loader/2.0.0_unjtu23ym3kawulv5yedxslkxm:
     resolution: {integrity: sha512-2NlGul/E3vTQEANqPziqkA01vfiuUU8vT0jZAuUIjEW8u3eCcnCQWLggapCjhbF76s7KQF0fM0kXSKmzaDaG1g==}
     engines: {node: '>=12', npm: '>=6'}
     peerDependencies:
       '@types/node': '*'
+      cosmiconfig: '>=7'
       typescript: '>=3'
     dependencies:
       '@types/node': 17.0.35
