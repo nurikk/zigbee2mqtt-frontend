@@ -1,3 +1,12 @@
+## [0.6.127](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.126...0.6.127) (2023-03-19)
+
+
+### Bug Fixes
+
+* **forms:** fix disapearing changes on device state update ([84882cc](https://github.com/nurikk/zigbee2mqtt-frontend/commit/84882cc525d607bcf403bca2288288ddde60ae89))
+
+
+
 ## [0.6.126](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.125...0.6.126) (2023-03-06)
 
 
