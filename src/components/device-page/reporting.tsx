@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { Device, Cluster, Endpoint, Attribute } from "../../types";
 
 import actions, { ReportingApi } from "../../actions/actions";
@@ -51,7 +51,7 @@ function Reporting(props: ReportingProps & PropsFromStore & ReportingApi): JSX.E
             cluster, attribute, minimum_report_interval, maximum_report_interval, reportable_change
         });
     }
-    const reportingRules = convertBindingsIntoNiceStructure(device);
+    const reportingRules = useMemo(() => convertBindingsIntoNiceStructure(device), [device]);
     return (
         <div className="container-fluid">
             {

@@ -7,6 +7,7 @@ import groupBy from "lodash/groupBy";
 import { Feature } from "./Feature";
 import cx from "classnames";
 import { WithTranslation, withTranslation } from "react-i18next";
+import isEqual from "lodash/isEqual";
 
 type CompositeType = "composite" | "light" | "switch" | "cover" | "lock" | "fan" | "climate";
 
@@ -140,5 +141,8 @@ export class Composite extends Component<CompositeProps & WithTranslation<"compo
 
     }
 }
-
-export default withTranslation(["composite", "common"])(Composite);
+function compositePropsAreEqual(prevProps: CompositeProps, nextProps: CompositeProps){
+    const checkProps: (keyof CompositeProps)[] = ['deviceState', 'device', 'feature'];
+    return checkProps.every(p => isEqual(prevProps[p], nextProps[p]));
+}
+export default withTranslation(["composite", "common"])(React.memo(Composite, compositePropsAreEqual));
