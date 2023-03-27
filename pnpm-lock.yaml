@@ -4,7 +4,7 @@ specifiers:
   '@commitlint/cli': 16.3.0
   '@commitlint/config-conventional': 16.2.4
   '@ebay/nice-modal-react': 1.2.8
-  '@fortawesome/fontawesome-free': 6.2.0
+  '@fortawesome/fontawesome-free': 6.4.0
   '@rjsf/bootstrap-5': https://github.com/nurikk/fileshare/blob/main/rjsf-bootstrap-5-4.2.0.tgz?raw=true
   '@rjsf/core': 4.2.3
   '@toolz/local-storage': 1.0.5
@@ -82,7 +82,7 @@ devDependencies:
   '@commitlint/cli': 16.3.0
   '@commitlint/config-conventional': 16.2.4
   '@ebay/nice-modal-react': 1.2.8_sfoxds7t5ydpegc3knd667wn6m
-  '@fortawesome/fontawesome-free': 6.2.0
+  '@fortawesome/fontawesome-free': 6.4.0
   '@rjsf/bootstrap-5': '@github.com/nurikk/fileshare/blob/main/rjsf-bootstrap-5-4.2.0.tgz?raw=true_tu7gqgg7rmwmbhns3tayxqxfsy'
   '@rjsf/core': 4.2.3_react@17.0.2
   '@toolz/local-storage': 1.0.5
@@ -646,8 +646,8 @@ packages:
       - supports-color
     dev: true
 
-  /@fortawesome/fontawesome-free/6.2.0:
-    resolution: {integrity: sha512-CNR7qRIfCwWHNN7FnKUniva94edPdyQzil/zCwk3v6k4R6rR2Fr8i4s3PM7n/lyfPA6Zfko9z5WDzFxG9SW1uQ==}
+  /@fortawesome/fontawesome-free/6.4.0:
+    resolution: {integrity: sha512-0NyytTlPJwB/BF5LtRV8rrABDbe3TdTXqNB3PdZ+UUUZAEIrdOJdmABqKjt4AXwIoJNaRVVZEXxpNrqvE1GAYQ==}
     engines: {node: '>=6'}
     requiresBuild: true
     dev: true
