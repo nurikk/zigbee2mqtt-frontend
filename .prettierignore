@@ -3,3 +3,4 @@ ws-messages/
 package-lock.json
 package.json
 .vscode/
+src/i18n/locales/

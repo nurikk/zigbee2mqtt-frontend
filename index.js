@@ -1,5 +1,5 @@
-const path = require("path");
+const path = require('path');
 
 module.exports = {
-    getPath: () => path.join(__dirname, "dist"),
+    getPath: () => path.join(__dirname, 'dist'),
 };

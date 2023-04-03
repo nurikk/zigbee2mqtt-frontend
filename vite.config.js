@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import sassDts from "vite-plugin-sass-dts";
+import sassDts from 'vite-plugin-sass-dts';
 import viteCompression from 'vite-plugin-compression';
 import { startServer } from './ws';
 
@@ -14,7 +14,7 @@ export default defineConfig(async ({ command }) => {
         base: '',
         build: {
             emptyOutDir: true,
-            outDir: '../dist'
+            outDir: '../dist',
         },
         plugins: [
             react({
@@ -27,10 +27,10 @@ export default defineConfig(async ({ command }) => {
             proxy: {
                 '/api': {
                     changeOrigin: true,
-                    target: process.env.Z2M_API_URI ? process.env.Z2M_API_URI : "ws://localhost:8579",
-                    ws: true
-                }
-            }
-        }
-    }
+                    target: process.env.Z2M_API_URI ? process.env.Z2M_API_URI : 'ws://localhost:8579',
+                    ws: true,
+                },
+            },
+        },
+    };
 });

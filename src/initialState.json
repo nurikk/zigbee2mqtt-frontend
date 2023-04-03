@@ -1,33 +1,32 @@
 {
-  "devices": {},
-  "deviceStates": {},
-  "touchlinkDevices": [],
-  "touchlinkScanInProgress": false,
-  "touchlinkIdentifyInProgress": false,
-  "touchlinkResetInProgress": false,
-  "networkGraph": {
-    "links": [],
-    "nodes": []
-  },
-  "networkGraphIsLoading": false,
-  "groups": [],
-  "bridgeState": "online",
-  "bridgeConfig": {
-  },
-  "bridgeInfo": {
-    "configSchema": {
-      "properties": {},
-      "required": []
+    "devices": {},
+    "deviceStates": {},
+    "touchlinkDevices": [],
+    "touchlinkScanInProgress": false,
+    "touchlinkIdentifyInProgress": false,
+    "touchlinkResetInProgress": false,
+    "networkGraph": {
+        "links": [],
+        "nodes": []
     },
-    "config": {
-        "advanced": {}
-    }
-  },
-  "logs": [],
-  "extensions": [],
-  "theme": "light",
-  "missingTranslations": {},
-  "availability": {},
-  "prepearingBackup": false,
-  "backup": ""
+    "networkGraphIsLoading": false,
+    "groups": [],
+    "bridgeState": "online",
+    "bridgeConfig": {},
+    "bridgeInfo": {
+        "configSchema": {
+            "properties": {},
+            "required": []
+        },
+        "config": {
+            "advanced": {}
+        }
+    },
+    "logs": [],
+    "extensions": [],
+    "theme": "light",
+    "missingTranslations": {},
+    "availability": {},
+    "prepearingBackup": false,
+    "backup": ""
 }
