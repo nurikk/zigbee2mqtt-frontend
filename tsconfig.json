@@ -12,7 +12,7 @@
         "allowSyntheticDefaultImports": true,
         "esModuleInterop": true,
         "strictNullChecks": true,
-        "resolveJsonModule": true,
+        "resolveJsonModule": true
     },
     "suppressImplicitAnyIndexErrors": true,
     "lib": ["dom", "esnext"],
