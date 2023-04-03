@@ -26,10 +26,11 @@ export default function AttributePicker(props: AttributePickerProps & Omit<Input
         const { value: inputValue } = e.target;
         const currentCluster = Clusters[cluster];
         const attributeInfo = currentCluster.attributes[inputValue]
-        onChange(inputValue, attributeInfo);
+        // inputValue could be "Select attribute" which isn't a proper cluster attribute
+        if (attributeInfo) {
+            onChange(inputValue, attributeInfo);
+        }
     }
-
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
 
     let attrs = [] as string[];
     const clusterDefinition = Clusters[cluster];
