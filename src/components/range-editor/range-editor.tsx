@@ -43,6 +43,7 @@ const RangeEditor: FunctionComponent<RangeProps & Omit<InputHTMLAttributes<HTMLI
             step={valueStep}
             onChange={e => setCurrentValue(e.target.valueAsNumber)}
             onBlur={() => onChange(currentValue)}
+            onMouseUp={() => onChange(currentValue)}
             min={min}
             max={max}
             {...rest}
