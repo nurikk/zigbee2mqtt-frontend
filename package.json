@@ -16,7 +16,7 @@
         "start": "vite dev",
         "postversion": "git push && git push --tags",
         "version": "conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md",
-        "pretty": "prettier --write \"./**/*.{js,jsx,json}\"",
+        "pretty": "prettier --write \"./**/*.{js,jsx,tsx}\"",
         "postinstall": "husky install",
         "prepublishOnly": "pinst --disable",
         "postpublish": "pinst --enable"
