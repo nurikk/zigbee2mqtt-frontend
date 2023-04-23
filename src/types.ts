@@ -165,6 +165,8 @@ export interface EnumFeature extends GenericExposedFeature {
 export interface GradientFeature extends GenericExposedFeature {
     type: "text";
     name: "gradient";
+    length_min: number;
+    length_max: number;
 }
 
 export interface LightFeature extends CompositeFeature {
