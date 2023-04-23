@@ -13,7 +13,7 @@ type CompositeType = "composite" | "light" | "switch" | "cover" | "lock" | "fan"
 
 interface CompositeProps extends BaseFeatureProps<CompositeFeature> {
     type: CompositeType;
-    parentFeatures?: (CompositeFeature | GenericExposedFeature)[];
+    parentFeatures: (CompositeFeature | GenericExposedFeature)[];
     stepsConfiguration?: Record<string, unknown>;
     minimal?: boolean;
     showEndpointLabels?: boolean;
@@ -33,7 +33,8 @@ export class Composite extends Component<CompositeProps & WithTranslation<"compo
             this.setState({...this.state, ...value});
         } else {
             if (isCompositeFeature(feature)) {
-                this.setState(value, () => onChange(endpoint, {[feature.property]: this.state}));
+                debugger
+                this.setState(value, () => onChange(endpoint, feature.property ? {[feature.property]: this.state} : this.state));
             } else {
                 onChange(endpoint, value);
             }
@@ -46,21 +47,22 @@ export class Composite extends Component<CompositeProps & WithTranslation<"compo
                 feature = feature.features[0];
             }
 
-            if (state[feature.property] === undefined) {
+            if (feature.property && state[feature.property] === undefined) {
                 return false;
             } else if (isCompositeFeature(feature)) {
-                return feature.features.every(f => checkRecurse(f, state[feature.property] as CompositeState));
+                return feature.features.every(f => feature.property && checkRecurse(f, state[feature.property] as CompositeState));
             }
             return true;
         }
 
         return this.props.feature.features.every(f => checkRecurse(f, this.state));
     }
-    
+
     isCompositeRoot = (): boolean => {
-        return isCompositeFeature(this.props.feature) && !this.props.parentFeatures?.find((f) => f.type);
+        const {parentFeatures, feature} = this.props;
+        return isCompositeFeature(this.props.feature) && (parentFeatures.length == 2);
     }
-    
+
     onCompositeFeatureApply = (): void => {
         const { onChange, feature: { endpoint, property } } = this.props;
         onChange(endpoint as Endpoint, property ? { [property]: this.state } : this.state);
@@ -69,7 +71,7 @@ export class Composite extends Component<CompositeProps & WithTranslation<"compo
     onRead = (endpoint: Endpoint, property: Record<string, unknown>): void => {
         const { onRead, feature } = this.props;
         if (isCompositeFeature(feature)) {
-            onRead && onRead(endpoint, { [feature.property]: property })
+            onRead && onRead(endpoint, feature.property ? { [feature.property]: property } : property)
         } else {
             onRead && onRead(endpoint, property);
         }
@@ -107,7 +109,7 @@ export class Composite extends Component<CompositeProps & WithTranslation<"compo
                 result.push(<div key={epName}>{showEndpointLabels ? `Endpoint: ${epName}` : null}<div className="ps-4">{featuresGroup.map(f => <Feature
                     key={f.name + f.endpoint}
                     feature={f}
-                    parentFeatures={[...parentFeatures, feature]}
+                    parentFeatures={parentFeatures}
                     device={device}
                     deviceState={combinedState}
                     onChange={this.onChange}
@@ -120,7 +122,7 @@ export class Composite extends Component<CompositeProps & WithTranslation<"compo
             const renderedFeatures = features.map(f => <Feature
                 key={JSON.stringify(f)}
                 feature={f}
-                parentFeatures={[...parentFeatures, feature]}
+                parentFeatures={parentFeatures}
                 device={device}
                 deviceState={combinedState}
                 onChange={this.onChange}
