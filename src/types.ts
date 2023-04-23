@@ -113,7 +113,7 @@ export interface GenericExposedFeature {
     unit?: "string";
     access: FeatureAccessMode;
     endpoint?: Endpoint;
-    property: string;
+    property?: string;
     description?: string;
 }
 
@@ -128,7 +128,7 @@ export interface ListFeature extends GenericExposedFeature {
     type: "list";
     // bad design descision
     item_type: "number" | GenericOrCompositeFeature;
-    
+
     length_min?: number;
     length_max?: number;
 }

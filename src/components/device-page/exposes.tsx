@@ -5,9 +5,9 @@ import { StateApi } from "../../actions/StateApi";
 import { connect } from "unistore/react";
 import { GlobalState } from "../../store";
 
-import Composite from "../features/composite/composite";
 import { FeatureWrapper } from "../features/composite/FeatureWrapper";
 import { useTranslation } from "react-i18next";
+import {Feature} from "../features/composite/Feature";
 
 type ExposesProps = {
     device: Device;
@@ -20,18 +20,18 @@ function Exposes(props: ExposesProps & PropsFromStore & StateApi) {
     const { t } = useTranslation(["exposes"]);
     const deviceState = deviceStates[device.friendly_name] ?? {} as DeviceState;
     if (device.definition?.exposes?.length) {
-        return <Composite 
-            showEndpointLabels={true}
-            feature={{ features: device.definition.exposes } as CompositeFeature}
-            type="composite"
+        return <Feature
+            // showEndpointLabels={true}
+            feature={{ features: device.definition.exposes, type: "composite" } as CompositeFeature}
             device={device}
             deviceState={deviceState}
-            onChange={(endpoint, value) => {
-                setDeviceState(device.friendly_name, value)
+            onChange={async (endpoint, value) => {
+                await setDeviceState(device.friendly_name, value)
             }}
-            onRead={(endpoint, value) => {
-                getDeviceState(device.friendly_name, value)
+            onRead={async (endpoint, value) => {
+                await getDeviceState(device.friendly_name, value)
             }}
+            parentFeatures={[]}
             featureWrapperClass={FeatureWrapper}
         />
     } else {

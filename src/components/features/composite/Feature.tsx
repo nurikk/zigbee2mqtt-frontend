@@ -34,9 +34,11 @@ interface FeatureProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onCha
 
 export const Feature = (props: FeatureProps): JSX.Element => {
 
-    const { feature, device, deviceState, stepsConfiguration, onRead, onChange, featureWrapperClass: FeatureWrapper, minimal, parentFeatures } = props;
+    const { feature, device, deviceState, stepsConfiguration, onRead, onChange,
+        featureWrapperClass: FeatureWrapper, minimal, parentFeatures } = props;
 
-    const genericParams = { key: JSON.stringify(feature), device, deviceState, onChange, onRead, featureWrapperClass: FeatureWrapper, minimal, parentFeatures };
+    const genericParams = { key: JSON.stringify(feature), device, deviceState, onChange,
+        onRead, featureWrapperClass: FeatureWrapper, minimal, parentFeatures };
     const wrapperParams = { key: JSON.stringify(feature), feature, onRead, deviceState };
 
     if (isBinaryFeature(feature)) {
@@ -82,9 +84,9 @@ export const Feature = (props: FeatureProps): JSX.Element => {
     } else if (isFanFeature(feature)) {
         return <Fan feature={feature} {...genericParams} />
     } else if (isCompositeFeature(feature)) {
-        // When parent is a list (this is when parentFeatures is not set), we don't 
+        // When parent is a list (this is when parentFeatures is not set), we don't
         // need to take the key of the deviceState (deviceState[feature.property])
-        const deviceState_ = parentFeatures ? (deviceState[feature.property] ?? {}) : deviceState;
+        const deviceState_ = parentFeatures ? (feature.property ? deviceState[feature.property] : deviceState) : deviceState;
         return <FeatureWrapper {...wrapperParams}>
             <Composite type="composite" feature={feature} {...genericParams} deviceState={deviceState_ as DeviceState} />
         </FeatureWrapper>

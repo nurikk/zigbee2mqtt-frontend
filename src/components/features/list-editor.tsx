@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useEffect, useState } from "react";
-import { CompositeFeature, Device, DeviceState, GenericOrCompositeFeature } from "../../types";
+import {CompositeFeature, Device, DeviceState, GenericExposedFeature, GenericOrCompositeFeature} from "../../types";
 import Button from "../button";
 import { Feature } from "./composite/Feature";
 import { FeatureWrapper } from "./composite/FeatureWrapper";
@@ -8,10 +8,11 @@ type ListEditorProps = {
     value: any[];
     onChange(value: any[]): void;
     feature: GenericOrCompositeFeature;
+    parentFeatures: (CompositeFeature | GenericExposedFeature)[];
 }
 
 const ListEditor: FunctionComponent<ListEditorProps> = (props) => {
-    const { onChange, value, feature, ...rest } = props;
+    const { onChange, value, feature, parentFeatures, ...rest } = props;
     const [currentValue, setCurrentValue] = useState<any[]>(value)
 
     useEffect(() => {
@@ -55,6 +56,7 @@ const ListEditor: FunctionComponent<ListEditorProps> = (props) => {
                         }}
                         onRead={(a, b) => {}}
                         featureWrapperClass={FeatureWrapper}
+                        parentFeatures={parentFeatures}
                     />
 
                 </div>
