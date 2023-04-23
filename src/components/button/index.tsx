@@ -1,5 +1,5 @@
-import React, { ButtonHTMLAttributes } from "react";
-import { DialogConfirmationModal } from "../modal/components/DialogConfirmationModal";
+import React, { ButtonHTMLAttributes } from 'react';
+import { DialogConfirmationModal } from '../modal/components/DialogConfirmationModal';
 import NiceModal from '@ebay/nice-modal-react';
 
 interface ButtonProps<T> extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'onClick'> {
@@ -13,8 +13,7 @@ export default function Button<T>(props: ButtonProps<T>): JSX.Element {
 
     const onConfirmHandler = (): void => {
         onClick && onClick(item as T);
-
-    }
+    };
     const onClickHandler = (): void => {
         if (prompt) {
             NiceModal.show(DialogConfirmationModal, { onConfirmHandler });
@@ -22,7 +21,9 @@ export default function Button<T>(props: ButtonProps<T>): JSX.Element {
             onClick && onClick(item as T);
         }
     };
-    return <button type="button" {...rest} onClick={onClickHandler}>{children}</button>;
-
-
+    return (
+        <button type="button" {...rest} onClick={onClickHandler}>
+            {children}
+        </button>
+    );
 }

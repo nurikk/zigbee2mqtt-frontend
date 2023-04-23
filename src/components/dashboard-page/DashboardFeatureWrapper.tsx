@@ -1,9 +1,9 @@
-import camelCase from "lodash/camelCase";
-import startCase from "lodash/startCase";
-import React, { FunctionComponent, PropsWithChildren } from "react";
-import { FeatureWrapperProps } from "../features/composite/FeatureWrapper";
-import cx from "classnames";
-import { useTranslation } from "react-i18next";
+import camelCase from 'lodash/camelCase';
+import startCase from 'lodash/startCase';
+import React, { FunctionComponent, PropsWithChildren } from 'react';
+import { FeatureWrapperProps } from '../features/composite/FeatureWrapper';
+import cx from 'classnames';
+import { useTranslation } from 'react-i18next';
 
 const getTemperatureIcon = (temperature: number) => {
     let icon = 'fa-thermometer-empty';
@@ -65,22 +65,22 @@ const getGenericFeatureIcon = (name: string, value: unknown): string => {
         case 'device_temperature':
         case 'temperature':
         case 'local_temperature':
-            classes.push(cx('text-danger', getTemperatureIcon(value as number)))
+            classes.push(cx('text-danger', getTemperatureIcon(value as number)));
             break;
         case 'contact':
-            classes.push(cx({ 'fa-door-closed text-muted': value, 'fa-door-open text-primary': !value }))
+            classes.push(cx({ 'fa-door-closed text-muted': value, 'fa-door-open text-primary': !value }));
             break;
         case 'occupancy':
-            classes.push(cx({ 'text-warning': value }))
+            classes.push(cx({ 'text-warning': value }));
             break;
         case 'tamper':
-            classes.push(cx({ 'fa-beat-fade': value }))
+            classes.push(cx({ 'fa-beat-fade': value }));
             break;
         case 'water_leak':
-            classes.push(cx({ 'fa-beat-fade text-primary': value }))
+            classes.push(cx({ 'fa-beat-fade text-primary': value }));
             break;
         case 'vibration':
-            classes.push(cx({ 'fa-shake fa-rotate-270 text-primary': value }))
+            classes.push(cx({ 'fa-shake fa-rotate-270 text-primary': value }));
             break;
         default:
             break;
@@ -90,7 +90,7 @@ const getGenericFeatureIcon = (name: string, value: unknown): string => {
         classes.push('invisible');
     }
     return cx(classes);
-}
+};
 
 export const DashboardFeatureWrapper: FunctionComponent<PropsWithChildren<FeatureWrapperProps>> = (props) => {
     const { children, feature, deviceState = {} } = props;
@@ -98,12 +98,18 @@ export const DashboardFeatureWrapper: FunctionComponent<PropsWithChildren<Featur
     const { t } = useTranslation(['featureNames']);
     const featureName = feature.name === 'state' ? feature.property : feature.name;
     const fallbackFeatureName = startCase(camelCase(featureName));
-    return <div className="d-flex align-items-center">
-        {icon && <div className="me-1">
-            <i className={`fa fa-fw ${icon}`} />
-        </div>}
-        <div className="flex-shrink-1 flex-grow-1">{t(featureName, { defaultValue: fallbackFeatureName })}{feature.endpoint ? ` (${feature.endpoint})` : null}</div>
-        <div className="flex-shrink-1">{children}</div>
-    </div>
-}
-
+    return (
+        <div className="d-flex align-items-center">
+            {icon && (
+                <div className="me-1">
+                    <i className={`fa fa-fw ${icon}`} />
+                </div>
+            )}
+            <div className="flex-shrink-1 flex-grow-1">
+                {t(featureName, { defaultValue: fallbackFeatureName })}
+                {feature.endpoint ? ` (${feature.endpoint})` : null}
+            </div>
+            <div className="flex-shrink-1">{children}</div>
+        </div>
+    );
+};

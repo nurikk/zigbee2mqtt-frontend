@@ -1,14 +1,12 @@
 import * as React from 'react';
 
-import { useThemeSwitcher } from "react-css-theme-switcher";
+import { useThemeSwitcher } from 'react-css-theme-switcher';
 import Button from './button';
-export type Theme = "light" | "dark";
-
-
+export type Theme = 'light' | 'dark';
 
 type ThemeSwitcherProps = {
     saveCurrentTheme(theme: Theme): void;
-}
+};
 export const ThemeSwitcher = (props: ThemeSwitcherProps): JSX.Element => {
     const { saveCurrentTheme } = props;
     const { switcher, themes, status, currentTheme } = useThemeSwitcher();
@@ -23,6 +21,8 @@ export const ThemeSwitcher = (props: ThemeSwitcherProps): JSX.Element => {
         switcher({ theme });
     };
     return (
-        <Button<boolean> item={isDarkMode} className="btn btn-info" onClick={toggleDarkMode}>{isDarkMode ? '🌑' : `🌞`}</Button>
+        <Button<boolean> item={isDarkMode} className="btn btn-info" onClick={toggleDarkMode}>
+            {isDarkMode ? '🌑' : `🌞`}
+        </Button>
     );
 };

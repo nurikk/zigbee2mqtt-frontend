@@ -1,20 +1,20 @@
-import React from "react";
-import { DeviceState, LastSeenType } from "../types";
+import React from 'react';
+import { DeviceState, LastSeenType } from '../types';
 import { format } from 'timeago.js';
-import { lastSeen } from "../utils";
+import { lastSeen } from '../utils';
 
-import { useTranslation } from "react-i18next";
+import { useTranslation } from 'react-i18next';
 
 type LastSeenProps = {
     state: DeviceState;
     lastSeenType: LastSeenType;
-}
+};
 export function LastSeen(props: LastSeenProps): JSX.Element {
     const { i18n } = useTranslation();
     const { state, lastSeenType } = props;
     const lastSeenDate = lastSeen(state, lastSeenType);
     if (lastSeenDate) {
-        return <>{format(lastSeenDate, i18n.language)}</>
+        return <>{format(lastSeenDate, i18n.language)}</>;
     } else {
         return <>N/A</>;
     }

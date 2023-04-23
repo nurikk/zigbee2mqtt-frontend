@@ -1,8 +1,7 @@
-import React, { Fragment, FunctionComponent } from "react";
-import { PowerSource as PowerSourceType } from "../../types";
-import style from "./style.module.css";
-import { useTranslation } from "react-i18next";
-
+import React, { Fragment, FunctionComponent } from 'react';
+import { PowerSource as PowerSourceType } from '../../types';
+import style from './style.module.css';
+import { useTranslation } from 'react-i18next';
 
 interface PowerSourceProps {
     source?: PowerSourceType;
@@ -12,44 +11,68 @@ interface PowerSourceProps {
 }
 
 export const powerSourceTypeToTranslationKey = (source: PowerSourceType | undefined): string => {
-    return (source + '').toLowerCase().replace(/\s/g, '_').replace(/[^a-z0-9_]/g, '');
-}
+    return (source + '')
+        .toLowerCase()
+        .replace(/\s/g, '_')
+        .replace(/[^a-z0-9_]/g, '');
+};
 
 const PowerSource: FunctionComponent<PowerSourceProps> = ({ source, battery, batteryLow, showLevel, ...rest }) => {
-    const { t } = useTranslation("zigbee");
-    let batteryClass = "";
+    const { t } = useTranslation('zigbee');
+    let batteryClass = '';
 
     switch (source) {
-        case "Battery":
+        case 'Battery':
             let title = t(powerSourceTypeToTranslationKey(source));
             if (batteryLow !== undefined) {
-                batteryClass = batteryLow ? `fa-battery-empty animation-blinking text-danger` : 'fa-battery-full text-success';
+                batteryClass = batteryLow
+                    ? `fa-battery-empty animation-blinking text-danger`
+                    : 'fa-battery-full text-success';
                 title += batteryLow ? ' LOW' : ' OK';
             }
             if (battery !== undefined) {
                 if (battery >= 85) {
-                    batteryClass += " fa-battery-full";
+                    batteryClass += ' fa-battery-full';
                 } else if (battery >= 75) {
-                    batteryClass += " fa-battery-three-quarters";
+                    batteryClass += ' fa-battery-three-quarters';
                 } else if (battery >= 50) {
-                    batteryClass += " fa-battery-half";
+                    batteryClass += ' fa-battery-half';
                 } else if (battery >= 25) {
-                    batteryClass += " fa-battery-quarter";
+                    batteryClass += ' fa-battery-quarter';
                 } else if (battery >= 10) {
-                    batteryClass += ` fa-battery-empty animation-blinking`
+                    batteryClass += ` fa-battery-empty animation-blinking`;
                 } else {
-                    return <span className={`animation-blinking text-danger`} role="alert">{battery}%</span>
+                    return (
+                        <span className={`animation-blinking text-danger`} role="alert">
+                            {battery}%
+                        </span>
+                    );
                 }
             }
-            title += `${battery ? (`, ` + t(`power_level`) + ` ${battery}%`) : ""}`;
+            title += `${battery ? `, ` + t(`power_level`) + ` ${battery}%` : ''}`;
             if (!batteryClass) {
-                batteryClass = "fa-question";
+                batteryClass = 'fa-question';
             }
-            return <Fragment>{showLevel ? <span className="pe-2">{t('battery')} {battery !== undefined ? `${battery}%` : null}</span> : null}<i className={`fa ${batteryClass}`} title={title} {...rest} /></Fragment>;
+            return (
+                <Fragment>
+                    {showLevel ? (
+                        <span className="pe-2">
+                            {t('battery')} {battery !== undefined ? `${battery}%` : null}
+                        </span>
+                    ) : null}
+                    <i className={`fa ${batteryClass}`} title={title} {...rest} />
+                </Fragment>
+            );
 
-        case "Mains (single phase)":
-        case "DC Source":
-            return <i className={`fa fa-plug ${style.plug}`} title={t(powerSourceTypeToTranslationKey(source))} {...rest} />;
+        case 'Mains (single phase)':
+        case 'DC Source':
+            return (
+                <i
+                    className={`fa fa-plug ${style.plug}`}
+                    title={t(powerSourceTypeToTranslationKey(source))}
+                    {...rest}
+                />
+            );
         default:
             return <i className={`fa fa-question`} title={source} {...rest} />;
     }

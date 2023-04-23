@@ -1,17 +1,16 @@
-import React, { ChangeEvent, Component } from "react";
-import merge from "lodash/merge";
-import { Device, Endpoint, Cluster, Attribute } from "../../types";
+import React, { ChangeEvent, Component } from 'react';
+import merge from 'lodash/merge';
+import { Device, Endpoint, Cluster, Attribute } from '../../types';
 
-import EndpointPicker from "../endpoint-picker";
-import ClusterPicker, { ClusterGroup, PickerType } from "../cluster-picker";
+import EndpointPicker from '../endpoint-picker';
+import ClusterPicker, { ClusterGroup, PickerType } from '../cluster-picker';
 
-import { NiceRepointingRule } from "./reporting";
-import { getEndpoints } from "../../utils";
-import AttributePicker from "../attribute-picker";
-import Clusters from "zigbee-herdsman/dist/zcl/definition/cluster"
-import Button from "../button";
-import { WithTranslation, withTranslation } from "react-i18next";
-
+import { NiceRepointingRule } from './reporting';
+import { getEndpoints } from '../../utils';
+import AttributePicker from '../attribute-picker';
+import Clusters from 'zigbee-herdsman/dist/zcl/definition/cluster';
+import Button from '../button';
+import { WithTranslation, withTranslation } from 'react-i18next';
 
 interface ReportingRowProps {
     rule: NiceRepointingRule;
@@ -28,7 +27,7 @@ const getClusters = (device: Device, endpoint: Endpoint, currentCluster: Cluster
     const ep = device.endpoints[endpoint];
     if (ep) {
         availableClusters = availableClusters.concat(ep.clusters.output);
-        possibleClusters = possibleClusters.filter(cluster => !availableClusters.includes(cluster))
+        possibleClusters = possibleClusters.filter((cluster) => !availableClusters.includes(cluster));
     }
 
     if (currentCluster && !availableClusters.includes(currentCluster)) {
@@ -37,44 +36,55 @@ const getClusters = (device: Device, endpoint: Endpoint, currentCluster: Cluster
     return [
         {
             name: 'available',
-            clusters: availableClusters
+            clusters: availableClusters,
         },
         {
             name: 'possible',
-            clusters: possibleClusters
-        }
-    ]
-}
-const requiredRuleFiled = ['maximum_report_interval', 'minimum_report_interval', 'reportable_change', 'endpoint', 'cluster', 'attribute'];
+            clusters: possibleClusters,
+        },
+    ];
+};
+const requiredRuleFiled = [
+    'maximum_report_interval',
+    'minimum_report_interval',
+    'reportable_change',
+    'endpoint',
+    'cluster',
+    'attribute',
+];
 const isValidRule = (rule: NiceRepointingRule): boolean => {
-    return requiredRuleFiled.every(field => (rule[field] !== undefined) && (rule[field] !== '') )
-}
+    return requiredRuleFiled.every((field) => rule[field] !== undefined && rule[field] !== '');
+};
 
 type FormGroupInputProps = {
     onChange(event: ChangeEvent<HTMLInputElement>): void;
     label: string;
     value: number;
     name: string;
-}
+};
 function FormGroupInput(props: FormGroupInputProps) {
-    const { onChange, label, value, name } = props
-    return <div className="form-group">
-        <label className="form-label text-nowrap">{label}</label>
-        <input onChange={onChange} value={value} required type="number" name={name} className="form-control" />
-    </div>
+    const { onChange, label, value, name } = props;
+    return (
+        <div className="form-group">
+            <label className="form-label text-nowrap">{label}</label>
+            <input onChange={onChange} value={value} required type="number" name={name} className="form-control" />
+        </div>
+    );
 }
 export class ReportingRow extends Component<ReportingRowProps & WithTranslation, ReportingRowState> {
-
     state: Readonly<ReportingRowState> = {
-        stateRule: {} as NiceRepointingRule
-    }
+        stateRule: {} as NiceRepointingRule,
+    };
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    static getDerivedStateFromProps(props: Readonly<ReportingRowProps>, state: ReportingRowState): Partial<ReportingRowState> {
+    static getDerivedStateFromProps(
+        props: Readonly<ReportingRowProps>,
+        state: ReportingRowState,
+    ): Partial<ReportingRowState> {
         const { rule } = props;
         const { stateRule } = state;
         return {
-            stateRule: merge({}, rule, stateRule)
+            stateRule: merge({}, rule, stateRule),
         };
     }
 
@@ -82,18 +92,18 @@ export class ReportingRow extends Component<ReportingRowProps & WithTranslation,
         const { stateRule } = this.state;
         stateRule.endpoint = sourceEp;
         this.setState({ stateRule });
-    }
+    };
     setCluster = (cluster: Cluster): void => {
         const { stateRule } = this.state;
         stateRule.cluster = cluster;
         this.setState({ stateRule });
-    }
+    };
 
     setAttribute = (attr: Attribute): void => {
         const { stateRule } = this.state;
         stateRule.attribute = attr;
         this.setState({ stateRule });
-    }
+    };
 
     changeHandlerNumber = (event: ChangeEvent<HTMLInputElement>): void => {
         const { stateRule } = this.state;
@@ -102,74 +112,109 @@ export class ReportingRow extends Component<ReportingRowProps & WithTranslation,
             stateRule[name] = valueAsNumber;
         }
         this.setState({ stateRule });
-    }
+    };
 
     applyRule = (): void => {
         const { onApply } = this.props;
         const { stateRule } = this.state;
         onApply(stateRule);
-    }
+    };
 
     disableRule = (): void => {
         const { onApply } = this.props;
         const { stateRule } = this.state;
 
-        onApply({ ...stateRule, maximum_report_interval: 0xFFFF });
-    }
+        onApply({ ...stateRule, maximum_report_interval: 0xffff });
+    };
 
-
-    render(): JSX.Element{
+    render(): JSX.Element {
         const { rule, device, t } = this.props;
         const { stateRule } = this.state;
         const sourceEndpoints = getEndpoints(device);
 
-        return (<div className="row pb-2 border-bottom">
-
-            <div className="col-md-2">
-                <EndpointPicker label={t('endpoint')} disabled={!rule.isNew} values={sourceEndpoints} value={stateRule.endpoint} onChange={this.setSourceEp} />
-            </div>
-            <div className="col-md-2">
-                <ClusterPicker label={t('cluster')} disabled={!stateRule.endpoint} pickerType={PickerType.SINGLE} clusters={getClusters(device, stateRule.endpoint, stateRule.cluster)} value={stateRule.cluster} onChange={this.setCluster} />
-            </div>
-            <div className="col-md-2">
-                <AttributePicker label={t('attribute')} disabled={!stateRule.cluster} value={stateRule.attribute} cluster={stateRule.cluster} onChange={this.setAttribute} />
-            </div>
-            <div className="col-md-2">
-                <FormGroupInput
-                    onChange={this.changeHandlerNumber}
-                    value={stateRule.minimum_report_interval}
-                    name="minimum_report_interval"
-                    label={t('min_rep_interval')}
-                />
-            </div>
-            <div className="col-md-1">
-                <FormGroupInput
-                    onChange={this.changeHandlerNumber}
-                    value={stateRule.maximum_report_interval}
-                    name="maximum_report_interval"
-                    label={t('max_rep_interval')}
-                />
-            </div>
-            <div className="col-md-1">
-                <div className="form-group">
-                    <label className="form-label text-nowrap">{t('min_rep_change') }</label>
-                    <input onChange={this.changeHandlerNumber} value={stateRule.reportable_change} required type="number" name="reportable_change" className="form-control" />
+        return (
+            <div className="row pb-2 border-bottom">
+                <div className="col-md-2">
+                    <EndpointPicker
+                        label={t('endpoint')}
+                        disabled={!rule.isNew}
+                        values={sourceEndpoints}
+                        value={stateRule.endpoint}
+                        onChange={this.setSourceEp}
+                    />
                 </div>
-
-            </div>
-            <div className="col-md-2">
-                <div className="form-group">
-                    <label className="form-label">{ t('actions')}</label>
+                <div className="col-md-2">
+                    <ClusterPicker
+                        label={t('cluster')}
+                        disabled={!stateRule.endpoint}
+                        pickerType={PickerType.SINGLE}
+                        clusters={getClusters(device, stateRule.endpoint, stateRule.cluster)}
+                        value={stateRule.cluster}
+                        onChange={this.setCluster}
+                    />
+                </div>
+                <div className="col-md-2">
+                    <AttributePicker
+                        label={t('attribute')}
+                        disabled={!stateRule.cluster}
+                        value={stateRule.attribute}
+                        cluster={stateRule.cluster}
+                        onChange={this.setAttribute}
+                    />
+                </div>
+                <div className="col-md-2">
+                    <FormGroupInput
+                        onChange={this.changeHandlerNumber}
+                        value={stateRule.minimum_report_interval}
+                        name="minimum_report_interval"
+                        label={t('min_rep_interval')}
+                    />
+                </div>
+                <div className="col-md-1">
+                    <FormGroupInput
+                        onChange={this.changeHandlerNumber}
+                        value={stateRule.maximum_report_interval}
+                        name="maximum_report_interval"
+                        label={t('max_rep_interval')}
+                    />
+                </div>
+                <div className="col-md-1">
                     <div className="form-group">
-                        <div className="btn-group" role="group" aria-label="Basic example">
-                            <Button<void> disabled={!isValidRule(stateRule)} className="btn btn-primary" onClick={this.applyRule}>{t('common:apply') }</Button>
-                            {!stateRule.isNew ? <Button<void> prompt className="btn btn-danger" onClick={this.disableRule}>{t('common:disable') }</Button> : null}
+                        <label className="form-label text-nowrap">{t('min_rep_change')}</label>
+                        <input
+                            onChange={this.changeHandlerNumber}
+                            value={stateRule.reportable_change}
+                            required
+                            type="number"
+                            name="reportable_change"
+                            className="form-control"
+                        />
+                    </div>
+                </div>
+                <div className="col-md-2">
+                    <div className="form-group">
+                        <label className="form-label">{t('actions')}</label>
+                        <div className="form-group">
+                            <div className="btn-group" role="group" aria-label="Basic example">
+                                <Button<void>
+                                    disabled={!isValidRule(stateRule)}
+                                    className="btn btn-primary"
+                                    onClick={this.applyRule}
+                                >
+                                    {t('common:apply')}
+                                </Button>
+                                {!stateRule.isNew ? (
+                                    <Button<void> prompt className="btn btn-danger" onClick={this.disableRule}>
+                                        {t('common:disable')}
+                                    </Button>
+                                ) : null}
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>);
+        );
     }
 }
 
-export default withTranslation(["zigbee", "common"])(ReportingRow);
+export default withTranslation(['zigbee', 'common'])(ReportingRow);
