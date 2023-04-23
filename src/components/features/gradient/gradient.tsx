@@ -7,75 +7,79 @@ import Button from "../../button";
 
 
 const hexToRGB = (hex: string): RGBColor => {
-  hex = hex.replace('#', '');
-  const bigint = parseInt(hex, 16);
-  const r = (bigint >> 16) & 255;
-  const g = (bigint >> 8) & 255;
-  const b = bigint & 255;
-  return { r, g, b }
+    hex = hex.replace('#', '');
+    const bigint = parseInt(hex, 16);
+    const r = (bigint >> 16) & 255;
+    const g = (bigint >> 8) & 255;
+    const b = bigint & 255;
+    return { r, g, b }
 }
 
 const rgbToHex = (rgb: RGBColor): string => {
-  const { r, g, b } = rgb
-  return '#' + convertColors.rgb.hex([r, g, b])
+    const { r, g, b } = rgb
+    return '#' + convertColors.rgb.hex([r, g, b])
 }
 
-type GradientProps = BaseFeatureProps<GradientFeature> & { deviceState: { gradient: string[] } }
-
+type GradientProps = BaseFeatureProps<GradientFeature>;
+//{ deviceState: { gradient: string[] }
 const Gradient: FunctionComponent<GradientProps> = (props) => {
-  const gradientColors = 5
-  const { onChange, feature: { endpoint, length_min, length_max }, deviceState: { gradient: inputGradient } } = props;
-  const [colors, setColors] = useState<Array<RGBColor>>(Array(gradientColors).fill({ x: 0, y: 0 }))
+    const gradientColors = 5
+    const { onChange, feature: { endpoint, length_min, length_max }, deviceState } = props;
+    const [colors, setColors] = useState<Array<RGBColor>>(Array(gradientColors).fill({ x: 0, y: 0 }))
 
-  const setColor = (idx: number, hex: string) => {
-    const c = [...colors]
-    c[idx] = hexToRGB(hex)
-    setColors(c)
-    onChange(endpoint as Endpoint, { "gradient": c.map(rgbToHex) })
-  }
-
-  const addColor = () => {
-    const c = [...colors]
-    c.push({ r: 255, g: 255, b: 255 })
-    setColors(c)
-    onChange(endpoint as Endpoint, { "gradient": c.map(rgbToHex) })
-  }
-
-  const removeColor = (idx: number) => {
-    const c = [...colors]
-    c.splice(idx, 1)
-    setColors(c)
-    onChange(endpoint as Endpoint, { "gradient": c.map(rgbToHex) })
-  }
-
-  useEffect(() => {
-    if (inputGradient && inputGradient.length > 0) {
-      setColors(inputGradient.map(hexToRGB))
+    const setColor = (idx: number, hex: string) => {
+        const c = [...colors]
+        c[idx] = hexToRGB(hex)
+        setColors(c)
+        onChange(endpoint as Endpoint, { "gradient": c.map(rgbToHex) })
     }
-  }, [inputGradient])
 
-  const [canAdd, setCanAdd] = useState(false)
-  const [canRemove, setCanRemove] = useState(false)
+    const addColor = () => {
+        const c = [...colors]
+        c.push({ r: 255, g: 255, b: 255 })
+        setColors(c)
+        onChange(endpoint as Endpoint, { "gradient": c.map(rgbToHex) })
+    }
 
-  useEffect(() => {
-    setCanAdd(colors.length < length_max)
-    setCanRemove(colors.length > length_min)
-  }, [colors, length_min, length_max])
+    const removeColor = (idx: number) => {
+        const c = [...colors]
+        c.splice(idx, 1)
+        setColors(c)
+        onChange(endpoint as Endpoint, { "gradient": c.map(rgbToHex) })
+    }
 
-  return <div className="d-flex flex-column gap-1">
-    {colors.map((color, idx) => (
-      <div key={idx} className="d-flex gap-2">
-        <ColorEditor
-          onChange={(ch) => { setColor(idx, ch.hex as string) }}
-          value={color}
-          format="color_rgb"
-        />
-        {canRemove && <Button<void> className="btn btn-danger me-2" onClick={() => removeColor(idx)}>-</Button>}
-      </div>
-    ))}
+    useEffect(() => {
+        const { gradient: inputGradient } = deviceState as { gradient: string[] };
 
-    {canAdd && <Button<void> className="btn btn-success me-2" onClick={addColor}>+</Button>}
-  </div>
+        if (inputGradient && inputGradient.length > 0) {
+            setColors(inputGradient.map(hexToRGB))
+        }
+    }, [deviceState])
+
+    const [canAdd, setCanAdd] = useState(false)
+    const [canRemove, setCanRemove] = useState(false)
+
+    useEffect(() => {
+        setCanAdd(colors.length < length_max)
+        setCanRemove(colors.length > length_min)
+    }, [colors, length_min, length_max])
+
+    return <div className="d-flex flex-column gap-1">
+        {colors.map((color, idx) => (
+            <div key={idx} className="d-flex gap-2">
+                <ColorEditor
+                    onChange={(ch) => {
+                        setColor(idx, ch.hex as string)
+                    }}
+                    value={color}
+                    format="color_rgb"
+                />
+                {canRemove && <Button<void> className="btn btn-danger me-2" onClick={() => removeColor(idx)}>-</Button>}
+            </div>
+        ))}
+
+        {canAdd && <Button<void> className="btn btn-success me-2" onClick={addColor}>+</Button>}
+    </div>
 }
 
 export default Gradient;
