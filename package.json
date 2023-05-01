@@ -73,7 +73,6 @@
         "i18next": "21.9.2",
         "i18next-browser-languagedetector": "6.1.5",
         "jszip": "3.10.1",
-        "line-reader": "0.4.0",
         "lodash": "4.17.21",
         "notyf": "3.10.0",
         "pinst": "3.0.0",

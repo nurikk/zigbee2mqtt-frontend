@@ -1,5 +1,5 @@
 const WebSocket = require('ws');
-const lineReader = require('line-reader');
+
 const fs = require('fs');
 function startServer() {
     const wss = new WebSocket.Server({
@@ -7,8 +7,10 @@ function startServer() {
     });
 
     wss.on('connection', (ws) => {
-        lineReader.eachLine('./ws-messages/onConnect.json', (line) => {
-            ws.send(line);
+        const messages = JSON.parse(fs.readFileSync('./ws-messages/onConnect.json'));
+
+        messages.forEach(message => {
+            ws.send(JSON.stringify(message));
         });
 
         ws.addEventListener('message', (message) => {

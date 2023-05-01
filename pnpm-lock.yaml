@@ -49,7 +49,6 @@ specifiers:
   i18next: 21.9.2
   i18next-browser-languagedetector: 6.1.5
   jszip: 3.10.1
-  line-reader: 0.4.0
   lodash: 4.17.21
   notyf: 3.10.0
   pinst: 3.0.0
@@ -128,7 +127,6 @@ devDependencies:
   i18next: 21.9.2
   i18next-browser-languagedetector: 6.1.5
   jszip: 3.10.1
-  line-reader: 0.4.0
   lodash: 4.17.21
   notyf: 3.10.0
   pinst: 3.0.0
@@ -3355,10 +3353,6 @@ packages:
     resolution: {integrity: sha512-UaiMJzeWRlEujzAuw5LokY1L5ecNQYZKfmyZ9L7wDHb/p5etKaxXhohBcrw0EYby+G/NA52vRSN4N39dxHAIwQ==}
     dependencies:
       immediate: 3.0.6
-    dev: true
-
-  /line-reader/0.4.0:
-    resolution: {integrity: sha512-AYJ8g+eE7v+Ba4s/cuYqzuNulH/WbjdKQ55fvx8fNVn8WQzTpioY6vI1MoxTuMgcHYX3VlmZWbVvnkIqkyJbCA==}
     dev: true
 
   /lines-and-columns/1.2.4:
