@@ -1,3 +1,15 @@
+## [0.6.128](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.127...0.6.128) (2023-05-01)
+
+
+### Bug Fixes
+
+* **attribute-picker:** picking "select attribute" crashes ([#1704](https://github.com/nurikk/zigbee2mqtt-frontend/issues/1704)) ([113cb46](https://github.com/nurikk/zigbee2mqtt-frontend/commit/113cb4651ece0440e5580bd1a7ef1997ea0ac787))
+* **composite:** fix composite feature property changes ([1c5d431](https://github.com/nurikk/zigbee2mqtt-frontend/commit/1c5d431afe3ee8ae43c93370d1df82c042e14fc5))
+* **gradient:** fix gradient feature types ([99314c7](https://github.com/nurikk/zigbee2mqtt-frontend/commit/99314c78e9c24e9cc1a32e3d692256ef02f273ad))
+* **range-editor:** send value on stepper click ([#1710](https://github.com/nurikk/zigbee2mqtt-frontend/issues/1710)) ([85d0761](https://github.com/nurikk/zigbee2mqtt-frontend/commit/85d076103a9759a5a9abf04513a9b51205a21c9c))
+
+
+
 ## [0.6.127](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.126...0.6.127) (2023-03-19)
 
 
