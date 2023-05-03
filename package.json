@@ -40,7 +40,7 @@
         "@types/events": "3.0.0",
         "@types/file-saver": "2.0.5",
         "@types/json-schema": "7.0.11",
-        "@types/lodash": "4.14.185",
+        "@types/lodash": "4.14.194",
         "@types/react": "17.0.50",
         "@types/react-dom": "17.0.17",
         "@types/react-router-dom": "5.3.3",
