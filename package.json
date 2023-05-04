@@ -69,7 +69,7 @@
         "eslint-plugin-react": "7.31.8",
         "events": "3.3.0",
         "file-saver": "2.0.5",
-        "husky": "8.0.1",
+        "husky": "8.0.3",
         "i18next": "21.9.2",
         "i18next-browser-languagedetector": "6.1.5",
         "jszip": "3.10.1",
