@@ -1,3 +1,32 @@
+## [0.6.129](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.128...0.6.129) (2023-05-06)
+
+
+### Bug Fixes
+
+* BG translation update group translations ([ab0babc](https://github.com/nurikk/zigbee2mqtt-frontend/commit/ab0babc6da1aea405d0086109cd7b4ed4b8e29f3))
+* rewording some BG translations ([2c5e6a3](https://github.com/nurikk/zigbee2mqtt-frontend/commit/2c5e6a37125475095b89d033447ec75bfd27bfe1))
+* rewording some BG translations ([7d788ed](https://github.com/nurikk/zigbee2mqtt-frontend/commit/7d788edb4d2fc55fe4f474f989e5e2cad62e75a3))
+
+
+### Features
+
+* Add initial support for Bulgarian language ([57558d7](https://github.com/nurikk/zigbee2mqtt-frontend/commit/57558d737aa12c90a86f504d8fa8cb53f8ae56ee))
+* BG - add common translations ([b1633db](https://github.com/nurikk/zigbee2mqtt-frontend/commit/b1633db892c926279a9f51ab4467d6e1f4dbdd80))
+* BG - add extensions translations ([203c941](https://github.com/nurikk/zigbee2mqtt-frontend/commit/203c94155e4012574ba2dd57fffae91eac490586))
+* BG - add groups translations ([89dad51](https://github.com/nurikk/zigbee2mqtt-frontend/commit/89dad518fb4ccd3fa17a24864c38be30cdb75229))
+* BG - add logs, map, navbar, ota translations ([e5449fd](https://github.com/nurikk/zigbee2mqtt-frontend/commit/e5449fd22ae454feb511d201bf74d88d569cd5ce))
+* BG - add scene, stats, vailability translations ([63be1fc](https://github.com/nurikk/zigbee2mqtt-frontend/commit/63be1fcc47add36e4e84d8e8d1d0eb4144b87646))
+* BG - add settings, touchlink translations ([580b14e](https://github.com/nurikk/zigbee2mqtt-frontend/commit/580b14e080335ac91e64ac5678c99347a644c486))
+* BG - add values translations ([f327859](https://github.com/nurikk/zigbee2mqtt-frontend/commit/f327859348c7aa1e65f0b21204a13f3503a1ea53))
+* BG - add zigbee translations ([05aa39c](https://github.com/nurikk/zigbee2mqtt-frontend/commit/05aa39c754c9d0456b95ae98d3609b75409f1a3a))
+* BG - devicePage and exposes translations ([fb9cce0](https://github.com/nurikk/zigbee2mqtt-frontend/commit/fb9cce0651b0af136d99eebf231fd79ad0565059))
+* BG - featureNames translations first pass ([8a2f20f](https://github.com/nurikk/zigbee2mqtt-frontend/commit/8a2f20f9a5f98f72e5401c51af30bb6956d1de17))
+* BG - settingsSchemaTitles translations ([3071b2c](https://github.com/nurikk/zigbee2mqtt-frontend/commit/3071b2cf011f394412bc348215ab7546d1e48f59))
+* **i18n:** import z2m translation ([f00dab3](https://github.com/nurikk/zigbee2mqtt-frontend/commit/f00dab33c2830c6a4bdaceb4afdbe1f4ab7b7b2e))
+* **i18n:** trim locales ([7e71ef3](https://github.com/nurikk/zigbee2mqtt-frontend/commit/7e71ef38399fe228ca6a35a1184ff259f29c7480))
+
+
+
 ## [0.6.128](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.127...0.6.128) (2023-05-01)
 
 
