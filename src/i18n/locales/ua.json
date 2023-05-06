@@ -20,6 +20,7 @@
         "groups": "Групи",
         "loading": "Завантажується...",
         "none": "Ні",
+        "ok": "OK",
         "read": "Читати",
         "save": "Зберегти",
         "select_device": "Виберіть прилад",
@@ -702,6 +703,7 @@
         "The difference between the temperature at which the thermostat switches off, and the temperature at which it switches on again.": "Різниця між температурою, при якій термостат вимикається, і температурою, при якій він знову вмикається.",
         "Max guarding temperature": "Максимальна температура захисту",
         "Brightness of this backlight LED": "Яскравість даної СД підсвітки",
+        "3": "3",
         "Units to show on the display": "Одиниці, які відображатимуться на дисплеї",
         "Hooks state": "Стан гачків",
         "Target position": "Цільова позиція",
@@ -925,6 +927,8 @@
         "operation_mode": "Режим роботи",
         "pi_heating_demand": "Потреба в нагрівання Pi",
         "undefined": "невизначений",
+        "x": "X",
+        "y": "Y",
         "effect": "Ефект",
         "linkquality": "Якість звя'зку",
         "occupied_heating_setpoint": "Відсутність заданої температури",
@@ -1783,6 +1787,7 @@
         "voltage_max": "Напруга макс.",
         "power_max": "Потужність макс.",
         "consumed_energy_limit": "Обмеження споживаної енергії",
+        "rssi": "Rssi",
         "last_message_lqi": "Останнє повідомлення Lqi",
         "last_message_rssi": "Останнє повідомлення Rssi",
         "unoccupied_cooling_setpoint": "Задане значення охолодження без людей",
@@ -1896,10 +1901,12 @@
         "groups": "Групи",
         "logs": "Журнали",
         "map": "Мапа",
+        "ota": "OTA",
         "permit_join": "Дозволити приєднання",
         "restart": "Перезавантажити",
         "settings": "Налаштування",
-        "toggle_dropdown": "Перемкнути випадаючий список"
+        "toggle_dropdown": "Перемкнути випадаючий список",
+        "touchlink": "Touchlink"
     },
     "ota": {
         "check": "Перевірити на наявність нових оновлень",
@@ -1926,6 +1933,7 @@
         "frontend": "Інтерфейс",
         "frontend_version": "Версія веб інтерфейсу",
         "main": "Головні",
+        "mqtt": "MQTT",
         "ota": "OTA",
         "passlist": "Список дозволів",
         "raw": "Вихідні дані",
@@ -1984,6 +1992,7 @@
         "interview_failed": "Невдалий запит інформації про прилад",
         "interviewing": "Запит інформації...",
         "last_seen": "Останні дані",
+        "lqi": "LQI",
         "mains_single_phase": "Мережа (однофазна)",
         "manufacturer": "Виробник",
         "max_rep_interval": "Макс.інт-л.звіт",
@@ -2129,7 +2138,11 @@
         "Control when to publish state OFF for a group. 'all_members_off': only publish state OFF when all group memebers are in state OFF, 'last_member_state': publish state OFF whenever one of its members changes to OFF": "Контролюйте, коли публікувати стан OFF для групи. 'all_members_off': стан публікації OFF, лише тоді коли всі учасники групи перебувають у стані OFF, 'last_member_state': стан публікації OFF щоразу, коли один із її учасників переходить в стан OFF",
         "Filter attributes with regex from published payload.": "Фільтрувати атрибути з регулярним виразом з опублікованого корисного навантаження.",
         "Filter attributes with regex from being added to the cache, this prevents the attribute from being in the published payload when the value didn't change.": "Фільтрувати атрибути з регулярним виразом від додавання до кешу, це запобігає появі атрибута в опублікованому корисному навантаженні, коли значення не змінилося.",
-        "Filter attributes with regex from optimistic publish payload when calling /set. (This has no effect if optimistic is set to false).": "Фільтрувати атрибути з регулярним виразом з оптимістичного корисного навантаження публікації під час викл./вст. (Це не дає ефекту, якщо для параметру Optimistic встановлено значення false)."
+        "Filter attributes with regex from optimistic publish payload when calling /set. (This has no effect if optimistic is set to false).": "Фільтрувати атрибути з регулярним виразом з оптимістичного корисного навантаження публікації під час викл./вст. (Це не дає ефекту, якщо для параметру Optimistic встановлено значення false).",
+        "SSL Certificate file path for exposing HTTPS. The sibling property 'ssl_key' must be set for HTTPS to be activated.": "Шлях до файлу сертифіката SSL для надання доступу до HTTPS. Щоб активувати HTTPS, має бути налаштовано властивість «ssl_key».",
+        "SSL key file path for exposing HTTPS. The sibling property 'ssl_cert' must be set for HTTPS to be activated.": "Шлях файлу ключа SSL для надання доступу до HTTPS. Для активації протоколу HTTPS має бути налаштовано рідну властивість \"ssl_cert\".",
+        "Disables the device (excludes device from network scans, availability and group state updates)": "Вимикає прилад (виключає прилад із сканування мережі, доступності та оновлень стану групи)",
+        "The user-defined device icon for the frontend. It can be a full URL link to an image (e.g. https://SOME.SITE/MODEL123.jpg) (you cannot use a path to a local file) or base64 encoded data URL (e.g. image/svg+xml;base64,PHN2ZyB3aW....R0aD)": "Визначений користувачем значок приладу для інтерфейсу. Це може бути повне URL-посилання на зображення (наприклад, https://ЯКИЙСЯ.САЙТ/МОДЕЛЬ123.jpg) (ви не можете використовувати шлях до локального файлу) або URL-адреса даних у кодуванні base64 (наприклад, image/svg+xml;base64, PHN2ZyB3aW....R0aD)"
     },
     "settingsSchemaTitles": {
         "Home Assistant integration": "Інтеграція Home Assistant",
@@ -2143,6 +2156,8 @@
         "MQTT server": "Сервер MQTT",
         "Keepalive": "Підтримувати активність",
         "Certificate authority": "Центр сертифікації",
+        "SSL/TLS key": "SSL/TLS key",
+        "SSL/TLS certificate": "SSL/TLS certificate",
         "User": "Користувач",
         "Password": "Пароль",
         "Client ID": "Клієнт ID",
@@ -2164,6 +2179,8 @@
         "Legacy API": "Застарілий API",
         "Pan ID (string)": "Pan ID (рядок)",
         "Pan ID (number)": "Pan ID (номер)",
+        "Pan ID": "Pan ID",
+        "Ext Pan ID": "Ext Pan ID",
         "ZigBee channel": "ZigBee канал",
         "Cache state": "Стан кешу",
         "Persist cache state": "Зберігати стан кешу",
@@ -2234,6 +2251,9 @@
         "Home Assistant": "Home Assistant (Домашній Асистент)",
         "Home Assistant name": "Ім'я Home Assistant",
         "Group off state": "Стан групи OFF",
-        "Filtered attributes from cache": "Відфільтровані атрибути з кешу"
+        "Filtered attributes from cache": "Відфільтровані атрибути з кешу",
+        "Certificate file path": "Шлях до файлу сертифіката",
+        "key file path": "шлях до ключового файлу",
+        "Disabled": "Вимкнено"
     }
 }
