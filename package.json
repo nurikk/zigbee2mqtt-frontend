@@ -71,7 +71,7 @@
         "file-saver": "2.0.5",
         "husky": "8.0.3",
         "i18next": "21.9.2",
-        "i18next-browser-languagedetector": "6.1.5",
+        "i18next-browser-languagedetector": "6.1.8",
         "jszip": "3.10.1",
         "lodash": "4.17.21",
         "notyf": "3.10.0",
