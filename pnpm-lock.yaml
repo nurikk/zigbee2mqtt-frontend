@@ -47,7 +47,7 @@ specifiers:
   file-saver: 2.0.5
   husky: 8.0.3
   i18next: 21.9.2
-  i18next-browser-languagedetector: 6.1.5
+  i18next-browser-languagedetector: 6.1.8
   jszip: 3.10.1
   lodash: 4.17.21
   notyf: 3.10.0
@@ -125,7 +125,7 @@ devDependencies:
   file-saver: 2.0.5
   husky: 8.0.3
   i18next: 21.9.2
-  i18next-browser-languagedetector: 6.1.5
+  i18next-browser-languagedetector: 6.1.8
   jszip: 3.10.1
   lodash: 4.17.21
   notyf: 3.10.0
@@ -744,7 +744,7 @@ packages:
     peerDependencies:
       react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
     dependencies:
-      '@babel/runtime': 7.19.0
+      '@babel/runtime': 7.21.0
       react: 17.0.2
     dev: true
 
@@ -763,7 +763,7 @@ packages:
       react: '>=16.14.0'
       react-dom: '>=16.14.0'
     dependencies:
-      '@babel/runtime': 7.19.0
+      '@babel/runtime': 7.21.0
       '@popperjs/core': 2.11.5
       '@react-aria/ssr': 3.2.0_react@17.0.2
       '@restart/hooks': 0.4.7_react@17.0.2
@@ -2018,7 +2018,7 @@ packages:
   /dom-helpers/5.2.1:
     resolution: {integrity: sha512-nRCa7CK3VTrM2NmGkIy4cbK7IZlgBE/PYMn55rrXefr5xXDP0LdtfPnblFDoVdcAfslJ7or6iqAUnx0CCGIWQA==}
     dependencies:
-      '@babel/runtime': 7.19.0
+      '@babel/runtime': 7.21.0
       csstype: 3.1.0
     dev: true
 
@@ -2936,7 +2936,7 @@ packages:
   /history/4.10.1:
     resolution: {integrity: sha512-36nwAD620w12kuzPAsyINPWJqlNbij+hpK1k9XRloDtym8mxzGYl2c17LnV6IAGB2Dmg4tEa7G7DlawS0+qjew==}
     dependencies:
-      '@babel/runtime': 7.19.0
+      '@babel/runtime': 7.21.0
       loose-envify: 1.4.0
       resolve-pathname: 3.0.0
       tiny-invariant: 1.2.0
@@ -3002,10 +3002,10 @@ packages:
     hasBin: true
     dev: true
 
-  /i18next-browser-languagedetector/6.1.5:
-    resolution: {integrity: sha512-11t7b39oKeZe4uyMxLSPnfw28BCPNLZgUk7zyufex0zKXZ+Bv+JnmJgoB+IfQLZwDt1d71PM8vwBX1NCgliY3g==}
+  /i18next-browser-languagedetector/6.1.8:
+    resolution: {integrity: sha512-Svm+MduCElO0Meqpj1kJAriTC6OhI41VhlT/A0UPjGoPZBhAHIaGE5EfsHlTpgdH09UVX7rcc72pSDDBeKSQQA==}
     dependencies:
-      '@babel/runtime': 7.19.0
+      '@babel/runtime': 7.21.0
     dev: true
 
   /i18next/21.9.2:
@@ -3520,7 +3520,7 @@ packages:
       prop-types: ^15.0.0
       react: ^0.14.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
     dependencies:
-      '@babel/runtime': 7.19.0
+      '@babel/runtime': 7.21.0
       prop-types: 15.8.1
       react: 17.0.2
       tiny-warning: 1.0.3
@@ -4189,7 +4189,7 @@ packages:
     peerDependencies:
       react: '>=15'
     dependencies:
-      '@babel/runtime': 7.19.0
+      '@babel/runtime': 7.21.0
       history: 4.10.1
       hoist-non-react-statics: 3.3.2
       loose-envify: 1.4.0
@@ -4895,7 +4895,7 @@ packages:
     peerDependencies:
       react: '>=15.0.0'
     dependencies:
-      '@babel/runtime': 7.19.0
+      '@babel/runtime': 7.21.0
       '@types/react': 17.0.50
       invariant: 2.2.4
       react: 17.0.2
