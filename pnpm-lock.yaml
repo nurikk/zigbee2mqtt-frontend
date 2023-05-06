@@ -21,7 +21,7 @@ specifiers:
   '@types/react-dom': 17.0.17
   '@types/react-router-dom': 5.3.3
   '@types/react-table': 7.7.14
-  '@types/react-transition-group': 4.4.5
+  '@types/react-transition-group': 4.4.6
   '@types/reconnectingwebsocket': 1.0.7
   '@types/ws': 8.5.3
   '@typescript-eslint/eslint-plugin': 4.33.0
@@ -99,7 +99,7 @@ devDependencies:
   '@types/react-dom': 17.0.17
   '@types/react-router-dom': 5.3.3
   '@types/react-table': 7.7.14
-  '@types/react-transition-group': 4.4.5
+  '@types/react-transition-group': 4.4.6
   '@types/reconnectingwebsocket': 1.0.7
   '@types/ws': 8.5.3
   '@typescript-eslint/eslint-plugin': 4.33.0_k4l66av2tbo6kxzw52jzgbfzii
@@ -994,8 +994,8 @@ packages:
       '@types/react': 17.0.50
     dev: true
 
-  /@types/react-transition-group/4.4.5:
-    resolution: {integrity: sha512-juKD/eiSM3/xZYzjuzH6ZwpP+/lejltmiS3QEzV/vmb/Q8+HfDmxu+Baga8UEMGBqV88Nbg4l2hY/K2DkyaLLA==}
+  /@types/react-transition-group/4.4.6:
+    resolution: {integrity: sha512-VnCdSxfcm08KjsJVQcfBmhEQAPnLB8G08hAxn39azX1qYBQ/5RVQuoHuKIcfKOdncuaUvEpFKFzEvbtIMsfVew==}
     dependencies:
       '@types/react': 17.0.50
     dev: true
@@ -4067,7 +4067,7 @@ packages:
       '@restart/hooks': 0.4.7_react@17.0.2
       '@restart/ui': 1.4.0_sfoxds7t5ydpegc3knd667wn6m
       '@types/react': 17.0.50
-      '@types/react-transition-group': 4.4.5
+      '@types/react-transition-group': 4.4.6
       classnames: 2.3.2
       dom-helpers: 5.2.1
       invariant: 2.2.4
