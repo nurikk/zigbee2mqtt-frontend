@@ -39,7 +39,7 @@ const localesMap = {
     ptbr,
     es,
     ua,
-    chs,
+    "zh-CN": chs,
     nl,
     it,
     zh,
@@ -80,7 +80,7 @@ export default function LocalePicker(): JSX.Element {
             <span className="align-middle">{localeNames[language]}</span>
         </a>
     ));
-    const currentLanguage = i18n.language.split('-')[0];
+    const currentLanguage = localesMap[i18n.language] ? i18n.language : i18n.language.split('-')[0];
 
     return (
         <li className="nav-item dropdown">
