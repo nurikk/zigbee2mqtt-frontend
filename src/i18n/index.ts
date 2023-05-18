@@ -55,7 +55,7 @@ register("ru", timeRu);
 register("ptbr", timePtBr);
 register("es", timeEs);
 register("ua", timeUa);
-register("chs", timeChs);
+register("zh-CN", timeChs);
 register("nl", timeNl);
 register("it", timeIt);
 register("ko", timeKo);
@@ -81,7 +81,7 @@ export const resources = {
     ptbr: ptbrTranslations as ResourceLanguage,
     es: esTranslations as ResourceLanguage,
     ua: uaTranslations as ResourceLanguage,
-    chs: chsTranslations as ResourceLanguage,
+    "zh-CN": chsTranslations as ResourceLanguage,
     nl: nlTranslations as ResourceLanguage,
     it: itTranslations as ResourceLanguage,
     zh: zhTranslations as ResourceLanguage,
