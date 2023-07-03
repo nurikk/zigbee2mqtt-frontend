@@ -31,32 +31,11 @@ export class Composite extends Component<CompositeProps & WithTranslation<'compo
             this.setState({ ...this.state, ...value });
         } else {
             if (isCompositeFeature(feature)) {
-                this.setState(value, () =>
-                    onChange(endpoint, feature.property ? { [feature.property]: this.state } : this.state),
-                );
+                onChange(endpoint, feature.property ? { [feature.property]: value } : value);
             } else {
                 onChange(endpoint, value);
             }
         }
-    };
-
-    allInnerFeaturesHaveValues = (): boolean => {
-        const checkRecurse = (feature: CompositeFeature | GenericExposedFeature, state: CompositeState) => {
-            if (!isGenericExposedFeature(feature) && feature.type !== 'composite') {
-                feature = feature.features[0];
-            }
-
-            if (feature.property && state[feature.property] === undefined) {
-                return false;
-            } else if (isCompositeFeature(feature)) {
-                return feature.features.every(
-                    (f) => feature.property && checkRecurse(f, state[feature.property] as CompositeState),
-                );
-            }
-            return true;
-        };
-
-        return this.props.feature.features.every((f) => checkRecurse(f, this.state));
     };
 
     isCompositeRoot = (): boolean => {
@@ -66,10 +45,13 @@ export class Composite extends Component<CompositeProps & WithTranslation<'compo
 
     onCompositeFeatureApply = (): void => {
         const {
+            deviceState,
             onChange,
             feature: { endpoint, property },
         } = this.props;
-        onChange(endpoint as Endpoint, property ? { [property]: this.state } : this.state);
+        const { state } = this;
+        const newState = { ...deviceState, ...state };
+        onChange(endpoint as Endpoint, property ? { [property]: newState } : newState);
     };
 
     onRead = (endpoint: Endpoint, property: Record<string, unknown>): void => {
@@ -165,7 +147,6 @@ export class Composite extends Component<CompositeProps & WithTranslation<'compo
             result.push(
                 <div key={feature.name + 'apply'}>
                     <Button
-                        disabled={!this.allInnerFeaturesHaveValues()}
                         className={cx('btn btn-primary float-end', { 'btn-sm': minimal })}
                         onClick={this.onCompositeFeatureApply}
                     >
