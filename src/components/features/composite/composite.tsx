@@ -31,7 +31,6 @@ export class Composite extends Component<CompositeProps & WithTranslation<'compo
             this.setState({ ...this.state, ...value });
         } else {
             if (isCompositeFeature(feature)) {
-                debugger;
                 this.setState(value, () =>
                     onChange(endpoint, feature.property ? { [feature.property]: this.state } : this.state),
                 );
