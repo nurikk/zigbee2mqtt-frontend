@@ -1,3 +1,14 @@
+## [0.6.130](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.129...0.6.130) (2023-07-03)
+
+
+### Bug Fixes
+
+* **Composite:** fix features aggregation ([b6499e1](https://github.com/nurikk/zigbee2mqtt-frontend/commit/b6499e1894920dbc41182654bd8a30043e59eda9)), closes [#1736](https://github.com/nurikk/zigbee2mqtt-frontend/issues/1736)
+* **i18n:** simplified Chinese auto detect ([4e337c5](https://github.com/nurikk/zigbee2mqtt-frontend/commit/4e337c5a8718d4977585c94cdf8895cae1a65385))
+* **LocalePicker:** cix Dannish flag ([8629b58](https://github.com/nurikk/zigbee2mqtt-frontend/commit/8629b5865858344fb538d6ebcd5142d6e61c9c4e))
+
+
+
 ## [0.6.129](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.128...0.6.129) (2023-05-06)
 
 

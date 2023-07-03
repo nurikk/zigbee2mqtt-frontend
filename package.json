@@ -8,7 +8,7 @@
         "*.css"
     ],
     "name": "zigbee2mqtt-frontend",
-    "version": "0.6.129",
+    "version": "0.6.130",
     "license": "GPL-3.0",
     "scripts": {
         "build": "vite build",
