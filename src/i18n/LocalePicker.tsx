@@ -23,7 +23,7 @@ import fi from './flags/fi.png';
 import sv from './flags/sv.png';
 import tr from './flags/tr.png';
 import no from './flags/no.png';
-import dk from './flags/dk.png';
+import da from './flags/da.png';
 import bg from './flags/bg.png';
 import missing from './flags/missing-locale.png';
 
@@ -49,7 +49,8 @@ const localesMap = {
     sv,
     tr,
     no,
-    dk, bg,
+    da, 
+    bg,
 };
 
 export default function LocalePicker(): JSX.Element {
