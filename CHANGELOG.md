@@ -1,3 +1,12 @@
+## [0.6.131](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.130...0.6.131) (2023-07-03)
+
+
+### Bug Fixes
+
+* **ci:** fix update_dep ([3c42fc8](https://github.com/nurikk/zigbee2mqtt-frontend/commit/3c42fc8af738a18bc58ff96839c2307cd538713b))
+
+
+
 ## [0.6.130](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.129...0.6.130) (2023-07-03)
 
 
