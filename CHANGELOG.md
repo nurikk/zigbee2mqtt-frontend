@@ -1,3 +1,12 @@
+## [0.6.132](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.131...0.6.132) (2023-07-11)
+
+
+### Features
+
+* **BindRow:** allow to select any known cluster for coordinator binding ([56d2311](https://github.com/nurikk/zigbee2mqtt-frontend/commit/56d2311cb5c057fba8e56d9d0868970759adb618))
+
+
+
 ## [0.6.131](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.130...0.6.131) (2023-07-03)
 
 
