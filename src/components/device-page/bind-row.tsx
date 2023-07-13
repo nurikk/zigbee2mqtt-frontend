@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Device, Endpoint, Cluster, ObjectType, Group } from '../../types';
 import DevicePicker from '../device-picker';
 import EndpointPicker from '../endpoint-picker';
-import ClusterPicker, { PickerType, clusterDescriptions } from '../cluster-picker';
+import ClusterPicker, { PickerType } from '../cluster-picker';
 import Button from '../button';
 import { WithDevices, Devices } from '../../store';
 import { NiceBindingRule } from './bind';
@@ -129,13 +129,20 @@ export class BindRow extends Component<BindRowProps, BindRowState> {
         const destinationEndpoints = getEndpoints(target);
 
         const possibleClusters: Set<Cluster> = new Set(stateRule.clusters);
-        const destEndpoint = device.endpoints[stateRule.source.endpoint];
-        if (destEndpoint) {
-            destEndpoint.clusters.output.forEach((cluster) => possibleClusters.add(cluster));
+        const srcEndpoint = device.endpoints[stateRule.source.endpoint];
+        const dstEndpoint = (stateRule.target.type === 'endpoint' && stateRule.target.endpoint) ?
+            (target as Device)?.endpoints[stateRule.target.endpoint] : undefined;
+        const allClustersValid = stateRule.target.type === 'group' || (target as Device)?.type == "Coordinator";
+        if (srcEndpoint && (dstEndpoint || allClustersValid)) {
+            for (const cluster of [...srcEndpoint.clusters.input, ...srcEndpoint.clusters.output]) {
+                const supportedInputOutput = srcEndpoint.clusters.input.includes(cluster) && dstEndpoint?.clusters.output.includes(cluster);
+                const supportedOutputInput = srcEndpoint.clusters.output.includes(cluster) && dstEndpoint?.clusters.input.includes(cluster);
+                if (supportedInputOutput || supportedOutputInput || allClustersValid) {
+                    possibleClusters.add(cluster);
+                }
+            }
         }
-        if (target && (target as Device).type == "Coordinator") {
-            Object.keys(clusterDescriptions).forEach(cluster => possibleClusters.add(cluster));
-        }
+
         return (
             <div className="row pb-2 border-bottom">
                 <div className="col-md-2">
