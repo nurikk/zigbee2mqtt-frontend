@@ -1,3 +1,12 @@
+## [0.6.133](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.132...0.6.133) (2023-07-21)
+
+
+### Bug Fixes
+
+* **bind:** show correct clusters in bind list https://github.com/Koenkk/zigbee2mqtt/issues/10740 ([ab5cc39](https://github.com/nurikk/zigbee2mqtt-frontend/commit/ab5cc3955c89228767a3dda47a0d71e6d6ac9ea3))
+
+
+
 ## [0.6.132](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.131...0.6.132) (2023-07-11)
 
 
