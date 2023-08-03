@@ -39,7 +39,7 @@ specifiers:
   d3-zoom: 3.0.0
   deep-diff: 1.0.2
   eslint: 7.32.0
-  eslint-config-prettier: 8.5.0
+  eslint-config-prettier: 8.10.0
   eslint-config-react: 1.1.7
   eslint-plugin-prettier: 4.2.1
   eslint-plugin-react: 7.31.8
@@ -117,9 +117,9 @@ devDependencies:
   d3-zoom: 3.0.0
   deep-diff: 1.0.2
   eslint: 7.32.0
-  eslint-config-prettier: 8.5.0_eslint@7.32.0
+  eslint-config-prettier: 8.10.0_eslint@7.32.0
   eslint-config-react: 1.1.7
-  eslint-plugin-prettier: 4.2.1_7gsvg5lgwpfdww3i7smtqxamuy
+  eslint-plugin-prettier: 4.2.1_ra7uisy6uf5kkmj7ntivicfzga
   eslint-plugin-react: 7.31.8_eslint@7.32.0
   events: 3.3.0
   file-saver: 2.0.5
@@ -2373,8 +2373,8 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /eslint-config-prettier/8.5.0_eslint@7.32.0:
-    resolution: {integrity: sha512-obmWKLUNCnhtQRKc+tmnYuQl0pFU1ibYJQ5BGhTVB08bHe9wC8qUeG7c08dj9XX+AuPj1YSGSQIHl1pnDHZR0Q==}
+  /eslint-config-prettier/8.10.0_eslint@7.32.0:
+    resolution: {integrity: sha512-SM8AMJdeQqRYT9O9zguiruQZaN7+z+E4eAP9oiLNGKMtomwaB1E9dcgUD6ZAn/eQAb52USbvezbiljfZUhbJcg==}
     hasBin: true
     peerDependencies:
       eslint: '>=7.0.0'
@@ -2386,7 +2386,7 @@ packages:
     resolution: {integrity: sha512-P4Z6u68wf0BvIvZNu+U8uQsk3DcZ1CcCI1XpUkJlG6vOa+iVcSQLgE01f2DB2kXlKRcT8/3dsH+wveLgvEgbkQ==}
     dev: true
 
-  /eslint-plugin-prettier/4.2.1_7gsvg5lgwpfdww3i7smtqxamuy:
+  /eslint-plugin-prettier/4.2.1_ra7uisy6uf5kkmj7ntivicfzga:
     resolution: {integrity: sha512-f/0rXLXUt0oFYs8ra4w49wYZBG5GKZpAYsJSm6rnYL5uVDjd+zowwMwVZHnAjf4edNrKpCDYfXDgmRE/Ak7QyQ==}
     engines: {node: '>=12.0.0'}
     peerDependencies:
@@ -2398,7 +2398,7 @@ packages:
         optional: true
     dependencies:
       eslint: 7.32.0
-      eslint-config-prettier: 8.5.0_eslint@7.32.0
+      eslint-config-prettier: 8.10.0_eslint@7.32.0
       prettier: 2.7.1
       prettier-linter-helpers: 1.0.0
     dev: true
