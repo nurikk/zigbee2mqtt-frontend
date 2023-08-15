@@ -45,7 +45,9 @@ const themes = {
 api.connect();
 
 const Main = () => {
-    const { theme } = store.getState();
+    const theme = store.getState().theme 
+    || (typeof window !== 'undefined' && window.matchMedia?.('(prefers-color-scheme: dark)')?.matches ? 'dark' : 'light');
+
     return (
         <>
             <NotificationContainer />
