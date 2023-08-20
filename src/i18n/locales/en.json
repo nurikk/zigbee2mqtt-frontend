@@ -857,7 +857,7 @@
         "Current temperature measured from the air sensor": "Current temperature measured from the air sensor",
         "Swing mode": "Swing mode",
         "Fan quiet mode": "Fan quiet mode",
-        "Controls the behavior when the device is powered on after power loss": "Styr beteendet när enheten slås på efter ett strömavbrott",
+        "Controls the behavior when the device is powered on after power loss": "Controls the behavior when the device is powered on after power loss",
         "Remaining battery in %, can take up to 24 hours before reported.": "Remaining battery in %, can take up to 24 hours before reported.",
         "[Soft Switch]: There is a configuration window, opens once an hour on itself, only during which the cube will respond to mode switch. Mode switch will be scheduled to take effect when the window becomes available. You can also give it a throw action (no backward motion) to force a respond! Otherwise, you may open lid and click LINK once to make the cube respond immediately. [Hard Switch]: Open lid and click LINK button 5 times.": "[Soft Switch]: There is a configuration window, opens once an hour on itself, only during which the cube will respond to mode switch. Mode switch will be scheduled to take effect when the window becomes available. You can also give it a throw action (no backward motion) to force a respond! Otherwise, you may open lid and click LINK once to make the cube respond immediately. [Hard Switch]: Open lid and click LINK button 5 times.",
         "Triggered action": "Triggered action",
