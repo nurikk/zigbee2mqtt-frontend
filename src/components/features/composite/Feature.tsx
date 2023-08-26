@@ -69,7 +69,7 @@ export const Feature = (props: FeatureProps): JSX.Element => {
         minimal,
         parentFeatures,
     };
-    const wrapperParams = { key: JSON.stringify(feature), feature, onRead, deviceState };
+    const wrapperParams = { key: JSON.stringify(feature), feature, onRead, deviceState, parentFeatures };
 
     if (isBinaryFeature(feature)) {
         return (

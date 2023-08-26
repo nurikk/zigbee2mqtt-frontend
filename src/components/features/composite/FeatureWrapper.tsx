@@ -6,6 +6,7 @@ import { isColorFeature } from '../../device-page/type-guards';
 
 export type FeatureWrapperProps = {
     feature: CompositeFeature | GenericExposedFeature;
+    parentFeatures: (CompositeFeature | GenericExposedFeature)[];
     deviceState?: DeviceState;
     onRead(endpoint: Endpoint, property: Record<string, unknown>): void;
 };
@@ -14,13 +15,19 @@ export const FeatureWrapper: FunctionComponent<PropsWithChildren<FeatureWrapperP
     const { children, feature, onRead } = props;
     const isColor = isColorFeature(feature);
     const isReadable = (feature.property && feature.access & FeatureAccessMode.ACCESS_READ) || isColor;
+
+    const parentFeature = props.parentFeatures?.[props.parentFeatures.length - 1]
+    let label = feature.label;
+    if (feature.name === 'state' && !['light', 'switch'].includes(parentFeature.type)) {
+        label = `${parentFeature.label} ${feature.label.charAt(0).toLowerCase()}${feature.label.slice(1)}`;
+    }
+
+    // if (feature.name === 'state')
     const leftColumn = (
         <div className="col-12 col-md-3">
             <label className="col-form-label w-100">
                 <div className="d-flex justify-content-between">
-                    <strong title={JSON.stringify(feature)}>
-                        {feature.name === 'state' ? feature.property : feature.name}
-                    </strong>
+                    <strong title={JSON.stringify(feature)}>{label}</strong>
                     {isReadable ? (
                         <Button<CompositeFeature | GenericExposedFeature>
                             item={feature}

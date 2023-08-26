@@ -110,6 +110,7 @@ export enum FeatureAccessMode {
 export interface GenericExposedFeature {
     type: GenericFeatureType;
     name: string;
+    label: string;
     unit?: "string";
     access: FeatureAccessMode;
     endpoint?: Endpoint;
