@@ -22,7 +22,6 @@ export const FeatureWrapper: FunctionComponent<PropsWithChildren<FeatureWrapperP
         label = `${parentFeature.label} ${feature.label.charAt(0).toLowerCase()}${feature.label.slice(1)}`;
     }
 
-    // if (feature.name === 'state')
     const leftColumn = (
         <div className="col-12 col-md-3">
             <label className="col-form-label w-100">
