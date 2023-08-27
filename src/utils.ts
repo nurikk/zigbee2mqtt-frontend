@@ -170,7 +170,10 @@ export const isOnlyOneBitIsSet = (b: number): number | boolean => {
 }
 const THEME_STORAGE_KEY = 'z2m-theme';
 
-export const getCurrentTheme = (): Theme => local.getItem<Theme>(THEME_STORAGE_KEY) ?? 'light';
+export const getCurrentTheme = (): Theme => {
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    return local.getItem<Theme>(THEME_STORAGE_KEY) ?? prefersDark ? 'dark' : 'light';
+};
 export const saveCurrentTheme = (theme: string): void => local.setItem(THEME_STORAGE_KEY, theme);
 
 
