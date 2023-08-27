@@ -1,3 +1,20 @@
+## [0.6.134](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.133...0.6.134) (2023-08-27)
+
+
+### Bug Fixes
+
+* **expose:** remove commented line ([26af80c](https://github.com/nurikk/zigbee2mqtt-frontend/commit/26af80c833ffdc39233f016149719dbbbb2d7e14))
+
+
+### Features
+
+* **expose:** use label name in expose ([d4873e5](https://github.com/nurikk/zigbee2mqtt-frontend/commit/d4873e5e2a718d08ca9e9c23bb97acea9799858f))
+* **getCurrentTheme:** auto detect prefered theme ([2985773](https://github.com/nurikk/zigbee2mqtt-frontend/commit/2985773019b25103461894e935466a08ef8e74a0))
+* **i18n:** import new strings ([e95d9fa](https://github.com/nurikk/zigbee2mqtt-frontend/commit/e95d9fab18cb1c8f952ff54200420796a7c670e3))
+* **i18n:** trim locales ([d2540ff](https://github.com/nurikk/zigbee2mqtt-frontend/commit/d2540ffcb5a03ed5dc02f31b53a1ed3c6e2d12d0))
+
+
+
 ## [0.6.133](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.132...0.6.133) (2023-07-21)
 
 
