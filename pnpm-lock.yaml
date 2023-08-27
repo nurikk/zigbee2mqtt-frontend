@@ -52,7 +52,7 @@ specifiers:
   lodash: 4.17.21
   notyf: 3.10.0
   pinst: 3.0.0
-  prettier: 2.7.1
+  prettier: 2.8.8
   react: 17.0.2
   react-ace: 9.5.0
   react-app-polyfill: 3.0.0
@@ -119,7 +119,7 @@ devDependencies:
   eslint: 7.32.0
   eslint-config-prettier: 8.5.0_eslint@7.32.0
   eslint-config-react: 1.1.7
-  eslint-plugin-prettier: 4.2.1_7gsvg5lgwpfdww3i7smtqxamuy
+  eslint-plugin-prettier: 4.2.1_tws6zzcbi263k6mrunrp7sbycq
   eslint-plugin-react: 7.31.8_eslint@7.32.0
   events: 3.3.0
   file-saver: 2.0.5
@@ -130,7 +130,7 @@ devDependencies:
   lodash: 4.17.21
   notyf: 3.10.0
   pinst: 3.0.0
-  prettier: 2.7.1
+  prettier: 2.8.8
   react: 17.0.2
   react-ace: 9.5.0_sfoxds7t5ydpegc3knd667wn6m
   react-app-polyfill: 3.0.0
@@ -151,7 +151,7 @@ devDependencies:
   vite: 2.9.15_sass@1.55.0
   vite-plugin-compression: 0.5.1_vite@2.9.15
   vite-plugin-html: 3.2.0_vite@2.9.15
-  vite-plugin-sass-dts: 1.1.42_36raz75cmdmkgmpgvnr6dfjdei
+  vite-plugin-sass-dts: 1.1.42_jvmibepw676y3z6iw65wk5quka
   ws: 8.9.0
   zigbee-herdsman: 0.14.97
   zigbee-herdsman-converters: 15.0.62
@@ -525,7 +525,7 @@ packages:
       '@types/node': 20.5.6
       chalk: 4.1.2
       cosmiconfig: 7.1.0
-      cosmiconfig-typescript-loader: 2.0.2_mq2j5tmbocaxm2lwr7cghto5ba
+      cosmiconfig-typescript-loader: 2.0.2_irlohhtf5mvuiinoeihwq7plxq
       lodash: 4.17.21
       resolve-from: 5.0.0
       typescript: 4.8.4
@@ -1790,11 +1790,12 @@ packages:
     resolution: {integrity: sha512-ZQBvi1DcpJ4GDqanjucZ2Hj3wEO5pZDS89BWbkcrvdxksJorwUDDZamX9ldFkp9aw2lmBDLgkObEA4DWNJ9FYQ==}
     dev: true
 
-  /cosmiconfig-typescript-loader/2.0.2_mq2j5tmbocaxm2lwr7cghto5ba:
+  /cosmiconfig-typescript-loader/2.0.2_irlohhtf5mvuiinoeihwq7plxq:
     resolution: {integrity: sha512-KmE+bMjWMXJbkWCeY4FJX/npHuZPNr9XF9q9CIQ/bpFwi1qHfCmSiKarrCcRa0LO4fWjk93pVoeRtJAkTGcYNw==}
     engines: {node: '>=12', npm: '>=6'}
     peerDependencies:
       '@types/node': '*'
+      cosmiconfig: '>=7'
       typescript: '>=3'
     dependencies:
       '@types/node': 20.5.6
@@ -2430,7 +2431,7 @@ packages:
     resolution: {integrity: sha512-P4Z6u68wf0BvIvZNu+U8uQsk3DcZ1CcCI1XpUkJlG6vOa+iVcSQLgE01f2DB2kXlKRcT8/3dsH+wveLgvEgbkQ==}
     dev: true
 
-  /eslint-plugin-prettier/4.2.1_7gsvg5lgwpfdww3i7smtqxamuy:
+  /eslint-plugin-prettier/4.2.1_tws6zzcbi263k6mrunrp7sbycq:
     resolution: {integrity: sha512-f/0rXLXUt0oFYs8ra4w49wYZBG5GKZpAYsJSm6rnYL5uVDjd+zowwMwVZHnAjf4edNrKpCDYfXDgmRE/Ak7QyQ==}
     engines: {node: '>=12.0.0'}
     peerDependencies:
@@ -2443,7 +2444,7 @@ packages:
     dependencies:
       eslint: 7.32.0
       eslint-config-prettier: 8.5.0_eslint@7.32.0
-      prettier: 2.7.1
+      prettier: 2.8.8
       prettier-linter-helpers: 1.0.0
     dev: true
 
@@ -4035,8 +4036,8 @@ packages:
       fast-diff: 1.3.0
     dev: true
 
-  /prettier/2.7.1:
-    resolution: {integrity: sha512-ujppO+MkdPqoVINuDFDRLClm7D78qbDt0/NR+wp5FqEZOoTNAjPHWj17QRhu7geIHJfcNhRk1XVQmF8Bp3ye+g==}
+  /prettier/2.8.8:
+    resolution: {integrity: sha512-tdN8qQGvNjw4CHbY+XXk0JgCXn9QiF21a55rBe5LJAU+kDyC4WQn4+awm2Xfk2lQMk5fKup9XgzTZtGkjBdP9Q==}
     engines: {node: '>=10.13.0'}
     hasBin: true
     dev: true
@@ -5166,7 +5167,7 @@ packages:
       vite: 2.9.15_sass@1.55.0
     dev: true
 
-  /vite-plugin-sass-dts/1.1.42_36raz75cmdmkgmpgvnr6dfjdei:
+  /vite-plugin-sass-dts/1.1.42_jvmibepw676y3z6iw65wk5quka:
     resolution: {integrity: sha512-DPxY6mbb4bwa+G/ejQ82he3v1/3ercyxHf4gsTdaDEFwIxM0x+H0bckhuY4Be0lFAeSqtxMI1Bp5Sd/tD0Xa9A==}
     peerDependencies:
       postcss: ^8
@@ -5175,7 +5176,7 @@ packages:
     dependencies:
       postcss: 8.4.28
       postcss-js: 4.0.1_postcss@8.4.28
-      prettier: 2.7.1
+      prettier: 2.8.8
       sass: 1.55.0
     dev: true
 
