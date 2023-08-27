@@ -70,7 +70,7 @@ specifiers:
   timeago.js: 4.0.2
   typescript: 4.8.4
   unistore: 3.5.2
-  vite: 2.9.15
+  vite: 2.9.16
   vite-plugin-compression: 0.5.1
   vite-plugin-html: 3.2.0
   vite-plugin-sass-dts: 1.1.42
@@ -148,9 +148,9 @@ devDependencies:
   timeago.js: 4.0.2
   typescript: 4.8.4
   unistore: 3.5.2_react@17.0.2
-  vite: 2.9.15_sass@1.55.0
-  vite-plugin-compression: 0.5.1_vite@2.9.15
-  vite-plugin-html: 3.2.0_vite@2.9.15
+  vite: 2.9.16_sass@1.55.0
+  vite-plugin-compression: 0.5.1_vite@2.9.16
+  vite-plugin-html: 3.2.0_vite@2.9.16
   vite-plugin-sass-dts: 1.1.42_36raz75cmdmkgmpgvnr6dfjdei
   ws: 8.9.0
   zigbee-herdsman: 0.14.97
@@ -525,7 +525,7 @@ packages:
       '@types/node': 20.5.6
       chalk: 4.1.2
       cosmiconfig: 7.1.0
-      cosmiconfig-typescript-loader: 2.0.2_mq2j5tmbocaxm2lwr7cghto5ba
+      cosmiconfig-typescript-loader: 2.0.2_irlohhtf5mvuiinoeihwq7plxq
       lodash: 4.17.21
       resolve-from: 5.0.0
       typescript: 4.8.4
@@ -1790,11 +1790,12 @@ packages:
     resolution: {integrity: sha512-ZQBvi1DcpJ4GDqanjucZ2Hj3wEO5pZDS89BWbkcrvdxksJorwUDDZamX9ldFkp9aw2lmBDLgkObEA4DWNJ9FYQ==}
     dev: true
 
-  /cosmiconfig-typescript-loader/2.0.2_mq2j5tmbocaxm2lwr7cghto5ba:
+  /cosmiconfig-typescript-loader/2.0.2_irlohhtf5mvuiinoeihwq7plxq:
     resolution: {integrity: sha512-KmE+bMjWMXJbkWCeY4FJX/npHuZPNr9XF9q9CIQ/bpFwi1qHfCmSiKarrCcRa0LO4fWjk93pVoeRtJAkTGcYNw==}
     engines: {node: '>=12', npm: '>=6'}
     peerDependencies:
       '@types/node': '*'
+      cosmiconfig: '>=7'
       typescript: '>=3'
     dependencies:
       '@types/node': 20.5.6
@@ -5133,7 +5134,7 @@ packages:
     resolution: {integrity: sha512-NOJ6JZCAWr0zlxZt+xqCHNTEKOsrks2HQd4MqhP1qy4z1SkbEP467eNx6TgDKXMvUOb+OENfJCZwM+16n7fRfw==}
     dev: true
 
-  /vite-plugin-compression/0.5.1_vite@2.9.15:
+  /vite-plugin-compression/0.5.1_vite@2.9.16:
     resolution: {integrity: sha512-5QJKBDc+gNYVqL/skgFAP81Yuzo9R+EAf19d+EtsMF/i8kFUpNi3J/H01QD3Oo8zBQn+NzoCIFkpPLynoOzaJg==}
     peerDependencies:
       vite: '>=2.0.0'
@@ -5141,12 +5142,12 @@ packages:
       chalk: 4.1.2
       debug: 4.3.4
       fs-extra: 10.1.0
-      vite: 2.9.15_sass@1.55.0
+      vite: 2.9.16_sass@1.55.0
     transitivePeerDependencies:
       - supports-color
     dev: true
 
-  /vite-plugin-html/3.2.0_vite@2.9.15:
+  /vite-plugin-html/3.2.0_vite@2.9.16:
     resolution: {integrity: sha512-2VLCeDiHmV/BqqNn5h2V+4280KRgQzCFN47cst3WiNK848klESPQnzuC3okH5XHtgwHH/6s1Ho/YV6yIO0pgoQ==}
     peerDependencies:
       vite: '>=2.0.0'
@@ -5163,7 +5164,7 @@ packages:
       html-minifier-terser: 6.1.0
       node-html-parser: 5.4.2
       pathe: 0.2.0
-      vite: 2.9.15_sass@1.55.0
+      vite: 2.9.16_sass@1.55.0
     dev: true
 
   /vite-plugin-sass-dts/1.1.42_36raz75cmdmkgmpgvnr6dfjdei:
@@ -5179,8 +5180,8 @@ packages:
       sass: 1.55.0
     dev: true
 
-  /vite/2.9.15_sass@1.55.0:
-    resolution: {integrity: sha512-fzMt2jK4vQ3yK56te3Kqpkaeq9DkcZfBbzHwYpobasvgYmP2SoAr6Aic05CsB4CzCZbsDv4sujX3pkEGhLabVQ==}
+  /vite/2.9.16_sass@1.55.0:
+    resolution: {integrity: sha512-X+6q8KPyeuBvTQV8AVSnKDvXoBMnTx8zxh54sOwmmuOdxkjMmEJXH2UEchA+vTMps1xw9vL64uwJOWryULg7nA==}
     engines: {node: '>=12.2.0'}
     hasBin: true
     peerDependencies:
