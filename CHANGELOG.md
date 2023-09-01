@@ -1,3 +1,12 @@
+## [0.6.135](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.134...0.6.135) (2023-09-01)
+
+
+### Bug Fixes
+
+* fix https://github.com/nurikk/zigbee2mqtt-frontend/issues/1772 ([#1775](https://github.com/nurikk/zigbee2mqtt-frontend/issues/1775)) ([44ade96](https://github.com/nurikk/zigbee2mqtt-frontend/commit/44ade9695fb907228debce6b5e2794dce5c958f6))
+
+
+
 ## [0.6.134](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.133...0.6.134) (2023-08-27)
 
 
