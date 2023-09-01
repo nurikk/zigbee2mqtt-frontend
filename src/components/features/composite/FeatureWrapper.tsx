@@ -18,7 +18,7 @@ export const FeatureWrapper: FunctionComponent<PropsWithChildren<FeatureWrapperP
 
     const parentFeature = props.parentFeatures?.[props.parentFeatures.length - 1]
     let label = feature.label;
-    if (feature.name === 'state' && !['light', 'switch'].includes(parentFeature.type)) {
+    if (parentFeature && feature.name === 'state' && !['light', 'switch'].includes(parentFeature.type)) {
         label = `${parentFeature.label} ${feature.label.charAt(0).toLowerCase()}${feature.label.slice(1)}`;
     }
 
