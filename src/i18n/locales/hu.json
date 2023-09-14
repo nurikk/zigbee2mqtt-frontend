@@ -1,0 +1,100 @@
+{
+    "common": {
+        "action": "Művelet",
+        "actions": "Műveletek",
+        "apply": "Alkalmaz",
+        "attribute": "Attribútum",
+        "bind": "Kötés",
+        "check_all": "Mindent ellenőriz",
+        "clear": "Törlés",
+        "close": "Bezárás",
+        "cluster": "Klaszter",
+        "clusters": "Klaszterek",
+        "confirmation": "Megerősítési ablak",
+        "delete": "Törlés",
+        "destination": "Cél",
+        "devices": "Eszközök",
+        "dialog_confirmation_prompt": "Biztos vagy benne?",
+        "disable": "Letiltás",
+        "enter_search_criteria": "Keresési feltétel megadása",
+        "groups": "Csoportok",
+        "loading": "Betöltés...",
+        "none": "Nincs",
+        "ok": "OK",
+        "read": "Olvasás",
+        "save": "Mentés",
+        "select_device": "Eszköz kiválasztása",
+        "select_endpoint": "Végpont kiválasztása",
+        "source_endpoint": "Forrás végpont",
+        "the_only_endpoint": "Az egyetlen végpont",
+        "unbind": "Kapcsolat feloldása",
+        "write": "Írás",
+        "destination_endpoint": "Cél végpont"
+    },
+    "devicePage": {
+        "about": "Információk",
+        "bind": "Kötés",
+        "clusters": "Klaszterek",
+        "dev_console": "Fejlesztői konzol",
+        "reporting": "Jelentés",
+        "settings": "Beállítások",
+        "settings_specific": "Beállítások (specifikus)",
+        "state": "Állapot",
+        "scene": "Jelenet",
+        "unknown_device": "Ismeretlen eszköz",
+        "exposes": "Közzétett adatok"
+    },
+    "exposes": {
+        "empty_exposes_definition": "Nincsenek elérhető adatok"
+    },
+    "extensions": {
+        "create_new_extension": "Új kiterjesztés létrehozása",
+        "extension_name_propmt": "Adja meg az új kiterjesztés nevét",
+        "select_extension_to_edit": "Kiterjesztés kiválasztása szerkesztéshez"
+    },
+    "groups": {
+        "add_to_group": "Csoporthoz hozzáadás",
+        "create_group": "Csoport létrehozása",
+        "new_group_id": "Új csoportazonosító",
+        "new_group_id_placeholder": "Adja meg a csoportazonosítót szükség esetén",
+        "new_group_name": "Új csoportnév",
+        "new_group_name_placeholder": "példa: hálószoba_lámpák",
+        "remove_group": "Csoport eltávolítása",
+        "group_id": "Csoport azonosító",
+        "group_name": "Csoport név",
+        "group_members": "Csoport tagok",
+        "group_scenes": "Csoport jelenetek",
+        "rename_group": "Csoport átnevezése"
+    },
+    "logs": {
+        "empty_logs_message": "Nincs megjelenítendő tartalom",
+        "filter_by_text": "Szűrés szöveg alapján",
+        "show_only": "Csak megjelenítés"
+    },
+    "map": {
+        "help_coordinator_link_description": "A teli vonalak a koordinátorhoz vezetnek",
+        "help_end_device_description": "Zöld a végeszközt jelenti",
+        "help_is_coordinator": "Koordinátor",
+        "help_lqi_description": "A hivatkozási minőség 0 és 255 között van (minél magasabb, annál jobb), a /-el jelölt értékek többféle kapcsolódást jelentenek",
+        "help_router_description": "Kék az útválasztókat jelenti",
+        "help_router_links_description": "A szaggatott vonalak az útválasztókkal való kapcsolatot mutatják",
+        "hide": "Kattintson rám a rejtéshez",
+        "load": "Térkép betöltése",
+        "loading": "A hálózat méretétől függően ez 10 másodperc és 2 perc között is eltarthat."
+    },
+    "navbar": {
+        "all": "Összes",
+        "dashboard": "Irányítópult",
+        "devices": "Eszközök",
+        "disable_join": "Csatlakozás letiltása",
+        "extensions": "Kiterjesztések",
+        "groups": "Csoportok",
+        "logs": "Naplók",
+        "map": "Térkép",
+        "ota": "OTA",
+        "permit_join": "Csatlakozás engedélyezése",
+        "scenes": "Jelenetek",
+        "sw_update": "Szoftverfrissítés",
+        "z2m_update": "Z2M frissítés"
+    }
+}
