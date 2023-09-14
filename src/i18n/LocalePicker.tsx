@@ -25,6 +25,7 @@ import tr from './flags/tr.png';
 import no from './flags/no.png';
 import da from './flags/da.png';
 import bg from './flags/bg.png';
+import hu from './flags/hu.png';
 import missing from './flags/missing-locale.png';
 
 import localeNames from './locales/localeNames.json';
@@ -51,6 +52,7 @@ const localesMap = {
     no,
     da, 
     bg,
+    hu,
 };
 
 export default function LocalePicker(): JSX.Element {
