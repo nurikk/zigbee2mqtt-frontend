@@ -25,5 +25,23 @@ export default function useComponentVisible(initialIsVisible: boolean) {
         };
     });
 
+    useEffect(() => {
+        if (!isComponentVisible || !ref.current || !ref.current?.parentElement) {
+            return;
+        }
+
+        // show on top
+        if (ref.current.clientHeight + ref.current.parentElement.offsetTop > window.screen.height + window.scrollY) {
+            ref.current.parentElement.style.position = 'relative';
+            ref.current.style.position = 'absolute';
+            ref.current.style.bottom = '0';
+            return;
+        }
+
+        // fall back to default
+        ref.current.parentElement.style.position = '';
+        ref.current.style.position = '';
+        ref.current.style.bottom = '';
+    }, [isComponentVisible]);
     return { ref, isComponentVisible, setIsComponentVisible };
 }
