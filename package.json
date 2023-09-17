@@ -99,7 +99,7 @@
         "vite-plugin-html": "3.2.0",
         "vite-plugin-sass-dts": "1.1.42",
         "ws": "8.9.0",
-        "zigbee-herdsman": "0.14.97",
+        "zigbee-herdsman": "0.19.0",
         "zigbee-herdsman-converters": "15.0.62"
     },
     "main": "index.js",
