@@ -1,3 +1,12 @@
+## [0.6.136](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.135...0.6.136) (2023-09-21)
+
+
+### Bug Fixes
+
+* **expose:** fix `undefined` in label for binary state expose ([912b1b0](https://github.com/nurikk/zigbee2mqtt-frontend/commit/912b1b0d0f2c0a2f252ddbeffdc2bdf909bbb042))
+
+
+
 ## [0.6.135](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.134...0.6.135) (2023-09-01)
 
 
