@@ -14,19 +14,14 @@ type DeviceImageProps = {
     type?: 'img' | 'svg';
 };
 
-const sanitizeModelIDForImageUrl = (modelName: string): string => modelName?.replace('/', '_');
-
 type ImageGeneratorFn = (device: Device) => string | undefined;
 const getZ2mDeviceImage = (device: Device): string =>
     `https://www.zigbee2mqtt.io/images/devices/${sanitizeZ2MDeviceName(device?.definition?.model)}.jpg`;
 const getConverterDeviceImage = (device: Device): string | undefined => device.definition?.icon;
-const getSlsDeviceImage = (device: Device): string =>
-    `https://slsys.github.io/Gateway/devices/png/${sanitizeModelIDForImageUrl(device.model_id)}.png`;
 
 const AVAILABLE_GENERATORS: ImageGeneratorFn[] = [
     getConverterDeviceImage,
     getZ2mDeviceImage,
-    getSlsDeviceImage,
     () => genericDevice,
 ];
 
