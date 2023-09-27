@@ -28,7 +28,7 @@ const typeToClassMap = {
     state: ['fa-star-half-alt'],
     brightness: ['fa-sun'],
     occupancy: ['fa-walking'],
-    presence: ['fa-walking'],
+    presence: ['fa-person-rays'],
     current: ['fa-copyright', 'text-warning'],
     power: ['fa-power-off', 'text-success'],
     energy: ['fa-plug', 'text-info'],
