@@ -14,21 +14,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2.2.4
+      - uses: pnpm/action-setup@v2
         name: Install pnpm
         with:
-          version: 7
+          version: 8
 
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
-          cache: pnpm      
-
+          node-version: 18
+          cache: pnpm
 
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
-      - run: pnpm publish --no-git-checks        
+      - run: pnpm publish --no-git-checks
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
@@ -39,8 +38,3 @@ jobs:
           echo "::set-output name=version::$version"
       - run: |
             curl -XPOST -H "Authorization: token ${{ secrets.GH_TOKEN }}" -H "Accept: application/vnd.github.everest-preview+json" -H "Content-Type: application/json" https://api.github.com/repos/koenkk/zigbee2mqtt/dispatches --data '{"event_type": "update_dep", "client_payload": { "version": "${{ steps.frontend-version.outputs.version }}", "package": "zigbee2mqtt-frontend"}}'
-
-
-
-
-      
