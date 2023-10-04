@@ -16,7 +16,7 @@ export const FeatureWrapper: FunctionComponent<PropsWithChildren<FeatureWrapperP
     const isColor = isColorFeature(feature);
     const isReadable = (feature.property && feature.access & FeatureAccessMode.ACCESS_READ) || isColor;
 
-    const parentFeature = props.parentFeatures?.[props.parentFeatures.length - 1]
+    const parentFeature = props.parentFeatures?.[props.parentFeatures.length - 1];
     let label = feature.label;
     if (parentFeature?.label && feature.name === 'state' && !['light', 'switch'].includes(parentFeature.type)) {
         label = `${parentFeature.label} ${feature.label.charAt(0).toLowerCase()}${feature.label.slice(1)}`;

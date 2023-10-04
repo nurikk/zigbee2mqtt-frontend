@@ -39,7 +39,7 @@ const localesMap = {
     ptbr,
     es,
     ua,
-    "zh-CN": chs,
+    'zh-CN': chs,
     nl,
     it,
     zh,
@@ -49,7 +49,7 @@ const localesMap = {
     sv,
     tr,
     no,
-    da, 
+    da,
     bg,
 };
 
