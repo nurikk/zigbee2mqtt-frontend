@@ -32,3 +32,6 @@ jobs:
 
     - run: pnpm install --frozen-lockfile
     - run: pnpm build
+
+    - name: Check style.
+      run: pnpm run test:pretty
