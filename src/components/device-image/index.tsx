@@ -19,6 +19,7 @@ const getZ2mDeviceImage = (device: Device): string =>
     `https://www.zigbee2mqtt.io/images/devices/${sanitizeZ2MDeviceName(device?.definition?.model)}.jpg`;
 const getConverterDeviceImage = (device: Device): string | undefined => device.definition?.icon;
 
+/* prettier-ignore */
 const AVAILABLE_GENERATORS: ImageGeneratorFn[] = [
     getConverterDeviceImage,
     getZ2mDeviceImage,
