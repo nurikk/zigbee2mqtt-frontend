@@ -19,7 +19,8 @@
         "pretty": "prettier --write \"./**/*.{js,jsx,tsx}\"",
         "postinstall": "husky install",
         "prepublishOnly": "pinst --disable",
-        "postpublish": "pinst --enable"
+        "postpublish": "pinst --enable",
+        "test:pretty": "prettier --check \"./**/*.{js,jsx,tsx}\""
     },
     "eslintIgnore": [
         "dist/*"
