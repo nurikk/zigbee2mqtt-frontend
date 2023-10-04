@@ -45,7 +45,7 @@ export const FeatureWrapper: FunctionComponent<PropsWithChildren<FeatureWrapperP
     );
     return (
         <div className="row border-bottom py-1 w-100 align-items-center">
-            {(isReadable || feature.description) && leftColumn}
+            {(isReadable || feature.label) && leftColumn}
             <div className="col-12 col-md-9">{children}</div>
         </div>
     );
