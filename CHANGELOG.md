@@ -1,3 +1,21 @@
+## [0.6.137](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.136...0.6.137) (2023-10-04)
+
+
+### Bug Fixes
+
+* **device image:** remove slsys pictures since it doesn't exist anymore ([a2e3dc3](https://github.com/nurikk/zigbee2mqtt-frontend/commit/a2e3dc31110b33aa5fe38e5e8ec7970aabf315bf))
+* **expose:** label not shown ([a9c2291](https://github.com/nurikk/zigbee2mqtt-frontend/commit/a9c22917c20050739def61a542746a257044cdfb))
+* **getCurrentTheme:** fix light theme switching ([91d8508](https://github.com/nurikk/zigbee2mqtt-frontend/commit/91d85081c4d84b587803b2787b10abd3c610ae38))
+* **typo:** correct typo ([5764c1f](https://github.com/nurikk/zigbee2mqtt-frontend/commit/5764c1f7dd7dc0029f3100f89f44b4aa9ae3c7ef))
+
+
+### Features
+
+* **ci:** check code style ([0f1994d](https://github.com/nurikk/zigbee2mqtt-frontend/commit/0f1994d4e96c32017a4aa814dfac69d4b8ba1f7c))
+* **deps:** add engine dependency ([ab54eda](https://github.com/nurikk/zigbee2mqtt-frontend/commit/ab54eda4e97637efd9a6e928d7902348dbd10e17))
+
+
+
 ## [0.6.136](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.135...0.6.136) (2023-09-21)
 
 
