@@ -127,7 +127,7 @@ export interface BinaryFeature extends GenericExposedFeature {
 
 export interface ListFeature extends GenericExposedFeature {
     type: "list";
-    // bad design descision
+    // bad design decision
     item_type: "number" | GenericOrCompositeFeature;
 
     length_min?: number;
