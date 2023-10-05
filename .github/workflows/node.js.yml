@@ -33,5 +33,8 @@ jobs:
     - run: pnpm install --frozen-lockfile
     - run: pnpm build
 
-    - name: Check style.
+    - name: Check static code analysis.
+      run: pnpm run test:eslint
+
+    - name: Check code style.
       run: pnpm run test:pretty

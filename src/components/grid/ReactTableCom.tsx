@@ -112,10 +112,10 @@ export const Table: React.FC<Props> = ({ columns, data, id }) => {
                     </th>
                 </tr>
                 {headerGroups.map((headerGroup: HeaderGroup<Record<string, unknown>>) => (
-                    <tr {...headerGroup.getHeaderGroupProps()}>
+                    <tr {...headerGroup.getHeaderGroupProps()} key={headerGroup.id}>
                         <th className="text-nowrap">#</th>
                         {headerGroup.headers.map((column) => (
-                            <th className="text-nowrap" {...column.getHeaderProps(column.getSortByToggleProps())}>
+                            <th className="text-nowrap" {...column.getHeaderProps(column.getSortByToggleProps())} key={headerGroup.id}>
                                 <span className={cx({ 'btn-link me-1': column.canSort })}>
                                     {column.render('Header')}
                                 </span>
@@ -137,12 +137,12 @@ export const Table: React.FC<Props> = ({ columns, data, id }) => {
                 {rows.map((row, i) => {
                     prepareRow(row);
                     return (
-                        <tr {...row.getRowProps()}>
+                        <tr {...row.getRowProps()} key={i}>
                             <td>
                                 <div className="font-weight-bold">{i + 1}</div>
                             </td>
                             {row.cells.map((cell) => (
-                                <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                                <td {...cell.getCellProps()} key={i}>{cell.render('Cell')}</td>
                             ))}
                         </tr>
                     );

@@ -26,7 +26,7 @@ const AVAILABLE_GENERATORS: ImageGeneratorFn[] = [
     () => genericDevice,
 ];
 
-class ErrorBoundary extends React.Component<{}, { hasError: boolean }> {
+class ErrorBoundary extends React.Component<unknown, { hasError: boolean }> {
     constructor(props) {
         super(props);
         this.state = { hasError: false };

@@ -33,6 +33,7 @@ export function onlyValidFeaturesForScenes(
     feature: GenericExposedFeature | CompositeFeature,
     deviceState: DeviceState = {} as DeviceState,
 ): GenericExposedFeature | CompositeFeature | undefined {
+    // eslint-disable-next-line prefer-const
     let { property, name, features } = feature as CompositeFeature;
     if (isLightFeature(feature)) {
         features = features

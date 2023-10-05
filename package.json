@@ -20,6 +20,7 @@
         "postinstall": "husky install",
         "prepublishOnly": "pinst --disable",
         "postpublish": "pinst --enable",
+        "test:eslint": "eslint \"./src/**/*.{js,jsx,tsx}\"",
         "test:pretty": "prettier --check \"./**/*.{js,jsx,tsx}\""
     },
     "eslintIgnore": [
