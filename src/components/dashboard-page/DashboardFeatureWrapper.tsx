@@ -54,10 +54,13 @@ const typeToClassMap = {
     away_mode: ['fa-plane', 'text-info'],
     vibration: ['fa-water fa-rotate-270'],
     power_outage_count: ['fa-plug-circle-xmark'],
+    action: ['fa-a'],
     angle_x: ['fa-x'],
     angle_y: ['fa-y'],
     angle_z: ['fa-z'],
     side: ['fa-cube'],
+    humidity_alarm: ['fa-triangle-exclamation'],
+    temperature_alarm: ['fa-triangle-exclamation'],
 };
 
 const getGenericFeatureIcon = (name: string, value: unknown): string => {
