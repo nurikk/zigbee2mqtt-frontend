@@ -161,12 +161,7 @@ const displayProps = [
         translationKey: 'power',
         render: (device: Device, deviceStatus: DeviceState) => (
             <dd className="col-12 col-md-7">
-                <PowerSource
-                    showLevel={true}
-                    source={device.power_source}
-                    battery={deviceStatus.battery as number}
-                    batteryLow={deviceStatus.battery_low as boolean}
-                />
+                <PowerSource showLevel={true} device={device} deviceState={deviceStatus} />
             </dd>
         ),
     },
