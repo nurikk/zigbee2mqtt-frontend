@@ -24,13 +24,7 @@ const DeviceFooter: React.FC<Props> = ({ device, deviceState, lastSeenType }) =>
                     <span key="linkquality" className="me-1">
                         <i className="fa fa-signal fa-fw" /> {linkquality} LQI
                     </span>
-                    {supported && (
-                        <PowerSource
-                            key={'power'}
-                            source={device.power_source}
-                            battery={deviceState.battery as number}
-                        />
-                    )}
+                    {supported && <PowerSource key={'power'} device={device} deviceState={deviceState} />}
                 </div>
             </div>
         </footer>

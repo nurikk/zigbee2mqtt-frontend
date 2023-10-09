@@ -161,13 +161,7 @@ export function DevicesTable(
                 row: {
                     original: { state, device },
                 },
-            }) => (
-                <PowerSource
-                    source={device.power_source}
-                    battery={state.battery as number}
-                    batteryLow={state.battery_low as boolean}
-                />
-            ),
+            }) => <PowerSource device={device} deviceState={state} />,
         },
         {
             id: 'controls',
