@@ -42,7 +42,8 @@
         "state": "State",
         "scene": "Scene",
         "unknown_device": "Unknown device",
-        "exposes": "Exposes"
+        "exposes": "Exposes",
+        "select_a_device": "Select a device"
     },
     "exposes": {
         "empty_exposes_definition": "Empty exposes definition"
