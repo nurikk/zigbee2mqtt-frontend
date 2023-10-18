@@ -1851,6 +1851,7 @@
         "experimental": "Experimenteel",
         "external_converters": "Externe converters",
         "frontend_version": "Versie frontend",
+        "zigbee_herdsman_converters_version": "Zigbee-herdsman-converters versie",
         "main": "Hoofd",
         "passlist": "Toegangslijst",
         "raw": "Ruw",
