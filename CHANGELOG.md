@@ -1,3 +1,19 @@
+## [0.6.138](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.137...0.6.138) (2023-10-21)
+
+
+### Bug Fixes
+
+* **code-style:** run prettier ([4731e09](https://github.com/nurikk/zigbee2mqtt-frontend/commit/4731e0935d82359fc60382280df3ddd1f5d7287f)), closes [#1803](https://github.com/nurikk/zigbee2mqtt-frontend/issues/1803)
+
+
+### Features
+
+* **about:** add zigbee-herdsman-converters/zigbee-herdsman version to about page ([#1817](https://github.com/nurikk/zigbee2mqtt-frontend/issues/1817)) ([474888c](https://github.com/nurikk/zigbee2mqtt-frontend/commit/474888cb80ec5bbf8f1f1999627e2ff76803b7d6))
+* **dashboard:** add icons for some features ([652b689](https://github.com/nurikk/zigbee2mqtt-frontend/commit/652b689207d097a06ca779ac5b1e0b44cc2bf184))
+* **eslint:** add to GH Actions check ([db8ee06](https://github.com/nurikk/zigbee2mqtt-frontend/commit/db8ee06baff6156d7a54b5b263ecd5606e98e548))
+
+
+
 ## [0.6.137](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.136...0.6.137) (2023-10-04)
 
 
