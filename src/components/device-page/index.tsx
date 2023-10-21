@@ -1,7 +1,6 @@
 import React from 'react';
 import { NavLink, Redirect, RouteComponentProps, withRouter } from 'react-router-dom';
 import { connect } from 'unistore/react';
-import Dropdown from 'react-bootstrap/Dropdown';
 import actions from '../../actions/actions';
 import { GlobalState } from '../../store';
 import DeviceInfo from './info';
@@ -18,6 +17,8 @@ import DevConsole from './dev-console';
 import { DeviceApi } from '../../actions/DeviceApi';
 import { WithTranslation, withTranslation } from 'react-i18next';
 import DeviceSpecificSettings from './DeviceSpecificSettings';
+import { HeaderDeviceSelector } from './header-device-selector';
+import { TabName } from './types';
 
 const getDeviceLinks = (dev: string) => [
     {
@@ -61,17 +62,6 @@ const getDeviceLinks = (dev: string) => [
         url: `/device/${dev}/dev-console`,
     },
 ];
-type TabName =
-    | 'info'
-    | 'bind'
-    | 'state'
-    | 'exposes'
-    | 'clusters'
-    | 'reporting'
-    | 'settings'
-    | 'settings-specific'
-    | 'dev-console'
-    | 'scene';
 type UrlParams = {
     dev: string;
     tab?: TabName;
@@ -135,22 +125,7 @@ export function DevicePage(props: DevicePageProps): JSX.Element {
 
     return (
         <>
-            <h1 className="h3">
-                <Dropdown>
-                    <Dropdown.Toggle aria-label={t('select_a_device')} variant="" size="lg">
-                        {device.friendly_name}{' '}
-                    </Dropdown.Toggle>
-
-                    <Dropdown.Menu>
-                        {Object.entries(devices).map(([id, device]) => (
-                            <Dropdown.Item active={id === dev} key={id} href={`#/device/${id}/${tab}`}>
-                                {device.friendly_name}
-                            </Dropdown.Item>
-                        ))}
-                    </Dropdown.Menu>
-                </Dropdown>
-            </h1>
-
+            <HeaderDeviceSelector devices={devices} dev={dev} tab={tab} t={t} />
             <div className="tab">
                 <ul className="nav nav-tabs">
                     {links.map((link) => (
