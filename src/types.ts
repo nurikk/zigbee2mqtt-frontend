@@ -84,7 +84,8 @@ export interface BridgeInfo {
     permit_join_timeout: number;
     commit?: string;
     version?: string;
-    zigbee_herdsman_converters_version: string,
+    zigbee_herdsman_converters: {version: string},
+    zigbee_herdsman: {version: string},
     coordinator?: {
         meta?: {
             revision?: string;
