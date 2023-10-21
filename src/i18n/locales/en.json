@@ -2232,6 +2232,8 @@
         "external_converters": "External converters",
         "frontend": "Frontend",
         "frontend_version": "Frontend version",
+        "zigbee_herdsman_converters_version": "Zigbee-herdsman-converters version",
+        "zigbee_herdsman_version": "Zigbee-herdsman version",
         "main": "Main",
         "mqtt": "MQTT",
         "ota": "OTA updates",
