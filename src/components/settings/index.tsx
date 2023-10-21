@@ -227,8 +227,14 @@ export class SettingsPage extends Component<
                 content: <>{bridgeInfo.coordinator?.ieee_address ?? t('common:unknown')}</>,
             },
             { translationKey: 'frontend_version', content: frontentPackageJson.version },
-            { translationKey: 'zigbee_herdsman_converters_version', content: bridgeInfo.zigbee_herdsman_converters?.version ?? t('common:unknown') },
-            { translationKey: 'zigbee_herdsman_version', content: bridgeInfo.zigbee_herdsman?.version ?? t('common:unknown') },
+            {
+                translationKey: 'zigbee_herdsman_converters_version',
+                content: bridgeInfo.zigbee_herdsman_converters?.version ?? t('common:unknown'),
+            },
+            {
+                translationKey: 'zigbee_herdsman_version',
+                content: bridgeInfo.zigbee_herdsman?.version ?? t('common:unknown'),
+            },
             { translationKey: 'stats', content: <Stats devices={devices} /> },
         ];
 
