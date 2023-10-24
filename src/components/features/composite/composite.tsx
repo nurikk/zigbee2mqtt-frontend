@@ -13,7 +13,7 @@ type CompositeType = 'composite' | 'light' | 'switch' | 'cover' | 'lock' | 'fan'
 
 interface CompositeProps extends BaseFeatureProps<CompositeFeature> {
     type: CompositeType;
-    parentFeatures: (CompositeFeature | GenericExposedFeature)[];
+    parentFeatures?: (CompositeFeature | GenericExposedFeature)[];
     stepsConfiguration?: Record<string, unknown>;
     minimal?: boolean;
     showEndpointLabels?: boolean;
@@ -39,8 +39,8 @@ export class Composite extends Component<CompositeProps & WithTranslation<'compo
     };
 
     isCompositeRoot = (): boolean => {
-        const { parentFeatures, feature } = this.props;
-        return isCompositeFeature(this.props.feature) && parentFeatures.length == 2;
+        const { parentFeatures } = this.props;
+        return isCompositeFeature(this.props.feature) && parentFeatures?.length == 1;
     };
 
     onCompositeFeatureApply = (): void => {
