@@ -1,3 +1,13 @@
+## [0.6.140](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.139...0.6.140) (2023-10-24)
+
+
+### Bug Fixes
+
+* **composite:** fix apply button missing for composite exposes [#1759](https://github.com/nurikk/zigbee2mqtt-frontend/issues/1759) ([8be8925](https://github.com/nurikk/zigbee2mqtt-frontend/commit/8be8925d0ec95ae271e02f832e24a4c82531dff0))
+* **gradient:** submit gradient through apply button instead of every value ([97e2c6d](https://github.com/nurikk/zigbee2mqtt-frontend/commit/97e2c6db6f68601138099c31c99f5f24c2e9587f))
+
+
+
 ## [0.6.139](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.138...0.6.139) (2023-10-22)
 
 
