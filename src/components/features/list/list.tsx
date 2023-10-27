@@ -11,30 +11,32 @@ interface State {
     value: any[];
 }
 
-type Props = BaseFeatureProps<ListFeature> & { parentFeatures: (CompositeFeature | GenericExposedFeature)[] } & WithTranslation<'list'>;
+type Props = BaseFeatureProps<ListFeature> & {
+    parentFeatures: (CompositeFeature | GenericExposedFeature)[];
+} & WithTranslation<'list'>;
 
 class List extends Component<Props, State> {
     constructor(props: Props) {
         super(props);
-        const {deviceState, feature} = this.props;
-        const {property} = feature;
-        const value = (property ? ((deviceState[property] ?? []) as any[]) : []);;
-        this.state = {value}
+        const { deviceState, feature } = this.props;
+        const { property } = feature;
+        const value = property ? ((deviceState[property] ?? []) as any[]) : [];
+        this.state = { value };
     }
 
     onChange = (value: any[]): void => {
-        const {endpoint, property} = this.props.feature;
-        this.setState({value});
+        const { endpoint, property } = this.props.feature;
+        this.setState({ value });
         if (!this.isListRoot()) {
             this.props.onChange(endpoint as Endpoint, property ? { [property]: value } : value);
         }
-    }
+    };
 
     onApply = () => {
-        const {value} = this.state;
-        const {endpoint, property} = this.props.feature;
+        const { value } = this.state;
+        const { endpoint, property } = this.props.feature;
         this.props.onChange(endpoint as Endpoint, property ? { [property]: value } : value);
-    }
+    };
 
     isListRoot = (): boolean => {
         return this.props.parentFeatures?.length === 1;
@@ -45,34 +47,28 @@ class List extends Component<Props, State> {
         const { access = FeatureAccessMode.ACCESS_WRITE, item_type: itemType } = feature;
         if (access & FeatureAccessMode.ACCESS_WRITE) {
             if (itemType == 'number') {
-                return (
-                    <RangeListEditor
-                        onChange={this.onChange}
-                        value={this.state.value}
-                        minimal={minimal}
-                    />
-                );
+                return <RangeListEditor onChange={this.onChange} value={this.state.value} minimal={minimal} />;
             } else {
                 const result = [
                     <ListEditor
-                        key='1'
+                        key="1"
                         feature={itemType}
                         parentFeatures={[...parentFeatures, feature]}
                         onChange={this.onChange}
                         value={this.state.value}
-                    />
+                    />,
                 ];
 
                 if (this.isListRoot()) {
                     result.push(
-                        <div key='2'>
+                        <div key="2">
                             <Button
                                 className={cx('btn btn-primary float-end', { 'btn-sm': minimal })}
                                 onClick={this.onApply}
                             >
                                 {t('common:apply')}
                             </Button>
-                        </div>
+                        </div>,
                     );
                 }
 
@@ -84,6 +80,6 @@ class List extends Component<Props, State> {
             return <NoAccessError {...this.props} />;
         }
     }
-};
+}
 
 export default withTranslation(['list', 'common'])(React.memo(List));
