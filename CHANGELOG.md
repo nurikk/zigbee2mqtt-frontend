@@ -1,3 +1,12 @@
+## [0.6.141](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.140...0.6.141) (2023-10-27)
+
+
+### Bug Fixes
+
+* **pretty:** pretty it ([b29dabf](https://github.com/nurikk/zigbee2mqtt-frontend/commit/b29dabf0f3898e799509fb35ccdddc00b97db5db))
+
+
+
 ## [0.6.140](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.139...0.6.140) (2023-10-24)
 
 
