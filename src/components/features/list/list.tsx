@@ -1,38 +1,89 @@
-import React, { FunctionComponent } from 'react';
+import React, { Component } from 'react';
 import { CompositeFeature, Endpoint, FeatureAccessMode, GenericExposedFeature, ListFeature } from '../../../types';
 import RangeListEditor from '../../range-list-editor/range-list-editor';
 import { BaseFeatureProps, BaseViewer, NoAccessError } from '../base';
 import ListEditor from '../list-editor';
+import Button from '../../button';
+import cx from 'classnames';
+import { WithTranslation, withTranslation } from 'react-i18next';
 
-const List: FunctionComponent<
-    BaseFeatureProps<ListFeature> & { parentFeatures: (CompositeFeature | GenericExposedFeature)[] }
-> = (props) => {
-    const { feature, deviceState, onChange, minimal, parentFeatures } = props;
-    const { access = FeatureAccessMode.ACCESS_WRITE, endpoint, property, item_type: itemType } = feature;
-    if (access & FeatureAccessMode.ACCESS_WRITE) {
-        if (itemType == 'number') {
-            return (
-                <RangeListEditor
-                    onChange={(value) => onChange(endpoint as Endpoint, property ? { [property]: value } : value)}
-                    value={property ? (deviceState[property] as number[]) : []}
-                    minimal={minimal}
-                />
-            );
-        } else {
-            return (
-                <ListEditor
-                    feature={itemType}
-                    parentFeatures={[...parentFeatures, feature]}
-                    onChange={(value) => onChange(endpoint as Endpoint, property ? { [property]: value } : value)}
-                    value={property ? ((deviceState[property] ?? []) as any[]) : []}
-                />
-            );
+interface State {
+    value: any[];
+}
+
+type Props = BaseFeatureProps<ListFeature> & { parentFeatures: (CompositeFeature | GenericExposedFeature)[] } & WithTranslation<'list'>;
+
+class List extends Component<Props, State> {
+    constructor(props: Props) {
+        super(props);
+        const {deviceState, feature} = this.props;
+        const {property} = feature;
+        const value = (property ? ((deviceState[property] ?? []) as any[]) : []);;
+        this.state = {value}
+    }
+
+    onChange = (value: any[]): void => {
+        const {endpoint, property} = this.props.feature;
+        this.setState({value});
+        if (!this.isListRoot()) {
+            this.props.onChange(endpoint as Endpoint, property ? { [property]: value } : value);
         }
-    } else if (access & FeatureAccessMode.ACCESS_STATE) {
-        return <BaseViewer {...props} />;
-    } else {
-        return <NoAccessError {...props} />;
+    }
+
+    onApply = () => {
+        const {value} = this.state;
+        const {endpoint, property} = this.props.feature;
+        this.props.onChange(endpoint as Endpoint, property ? { [property]: value } : value);
+    }
+
+    isListRoot = (): boolean => {
+        return this.props.parentFeatures?.length === 1;
+    };
+
+    render(): JSX.Element | JSX.Element[] {
+        const { feature, minimal, parentFeatures, t } = this.props;
+        const { access = FeatureAccessMode.ACCESS_WRITE, item_type: itemType } = feature;
+        if (access & FeatureAccessMode.ACCESS_WRITE) {
+            if (itemType == 'number') {
+                return (
+                    <RangeListEditor
+                        onChange={this.onChange}
+                        value={this.state.value}
+                        minimal={minimal}
+                    />
+                );
+            } else {
+                const result = [
+                    <ListEditor
+                        key='1'
+                        feature={itemType}
+                        parentFeatures={[...parentFeatures, feature]}
+                        onChange={this.onChange}
+                        value={this.state.value}
+                    />
+                ];
+
+                if (this.isListRoot()) {
+                    result.push(
+                        <div key='2'>
+                            <Button
+                                className={cx('btn btn-primary float-end', { 'btn-sm': minimal })}
+                                onClick={this.onApply}
+                            >
+                                {t('common:apply')}
+                            </Button>
+                        </div>
+                    );
+                }
+
+                return result;
+            }
+        } else if (access & FeatureAccessMode.ACCESS_STATE) {
+            return <BaseViewer {...this.props} />;
+        } else {
+            return <NoAccessError {...this.props} />;
+        }
     }
 };
 
-export default List;
+export default withTranslation(['list', 'common'])(React.memo(List));
