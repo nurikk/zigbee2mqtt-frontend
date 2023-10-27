@@ -86,20 +86,20 @@ const Gradient: FunctionComponent<GradientProps & WithTranslation<'gradient'>> =
                     )}
                 </div>
             ))}
-
             {canAdd && (
                 <Button<void> className="btn btn-success me-2" onClick={addColor}>
                     +
                 </Button>
             )}
-
             <div>
                 <Button
                     className={cx('btn btn-primary float-end', { 'btn-sm': minimal })}
-                    onClick={() => onChange(endpoint as Endpoint, { gradient: colors.map(rgbToHex) })}>
+                    onClick={() => onChange(endpoint as Endpoint, { gradient: colors.map(rgbToHex) })}
+                >
                     {t('common:apply')}
                 </Button>
-            </div>,
+            </div>
+            ,
         </div>
     );
 };
