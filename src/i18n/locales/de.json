@@ -110,7 +110,7 @@
         "One serving size": "Eine Portionsgröße",
         "Portion weight": "Portions Gewicht",
         "Indicates if the device is in setup mode (E11)": "Zeigt an, ob sich das Gerät im Setup-Modus befindet (E11)",
-        "Mode of this device (similar to system_mode)": "Modus des Thermostats (identisch zu system_mode)",
+        "Mode of this device (similar to system_mode)": "Modus des Thermostats (ähnlich wie system_mode)",
         "Select temperature sensor to use": "Auswahl des genutzten Temperatursensors",
         "Is the valve calibrated": "Ist das Ventil kalibriert?",
         "Enables/disables window detection on the device": "Aktiviert/Deaktiviert die Fensterstatus-Erkennung",
