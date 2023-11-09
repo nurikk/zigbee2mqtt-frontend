@@ -27,11 +27,10 @@ export class Composite extends Component<CompositeProps & WithTranslation<'compo
     state: Readonly<CompositeState> = {};
     onChange = (endpoint: Endpoint, value: Record<string, unknown>): void => {
         const { onChange, feature } = this.props;
-        if (this.isCompositeRoot()) {
-            this.setState({ ...this.state, ...value });
-        } else {
+        this.setState({ ...this.state, ...value });
+        if (!this.isCompositeRoot()) {
             if (isCompositeFeature(feature)) {
-                onChange(endpoint, feature.property ? { [feature.property]: value } : value);
+                onChange(endpoint, feature.property ? { [feature.property]: { ...this.state, ...value } } : value);
             } else {
                 onChange(endpoint, value);
             }
@@ -40,7 +39,13 @@ export class Composite extends Component<CompositeProps & WithTranslation<'compo
 
     isCompositeRoot = (): boolean => {
         const { parentFeatures } = this.props;
-        return isCompositeFeature(this.props.feature) && parentFeatures?.length == 1;
+        return (
+            isCompositeFeature(this.props.feature) &&
+            parentFeatures !== undefined &&
+            (parentFeatures.length === 1 ||
+                // When parent is e.g. climate
+                (parentFeatures.length === 2 && ![undefined, 'composite', 'list'].includes(parentFeatures[1].type)))
+        );
     };
 
     onCompositeFeatureApply = (): void => {

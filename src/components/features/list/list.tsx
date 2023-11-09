@@ -39,7 +39,13 @@ class List extends Component<Props, State> {
     };
 
     isListRoot = (): boolean => {
-        return this.props.parentFeatures?.length === 1;
+        const { parentFeatures } = this.props;
+        return (
+            parentFeatures !== undefined &&
+            (parentFeatures.length === 1 ||
+                // When parent is e.g. climate
+                (parentFeatures.length === 2 && ![undefined, 'composite', 'list'].includes(parentFeatures[1].type)))
+        );
     };
 
     render(): JSX.Element | JSX.Element[] {
