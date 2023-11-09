@@ -1,3 +1,12 @@
+## [0.6.143](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.142...0.6.143) (2023-11-09)
+
+
+### Bug Fixes
+
+* **composite/list:** fix climate schedule not working ([5803577](https://github.com/nurikk/zigbee2mqtt-frontend/commit/58035775b6cdc622ec7a0468481fce08fae9a538))
+
+
+
 ## [0.6.142](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.141...0.6.142) (2023-10-27)
 
 
