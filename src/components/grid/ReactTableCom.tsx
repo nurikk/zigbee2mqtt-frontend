@@ -14,13 +14,14 @@ import {
 import cx from 'classnames';
 import { useTranslation } from 'react-i18next';
 
-import debounce from 'lodash/debounce';
 import { local } from '@toolz/local-storage';
+type PartialTableState = Partial<TableState<Record<string, unknown>>>;
 
 interface Props {
     id: string;
     columns: Array<Column<any>>;
     data: Array<any>;
+    initialState?: PartialTableState;
 }
 
 type GlobalFilterProps = {
@@ -86,8 +87,9 @@ const stateReducer = (
     return newState;
 };
 
-export const Table: React.FC<Props> = ({ columns, data, id }) => {
-    const initialState = local.getItem<Partial<TableState<Record<string, unknown>>>>(getStorageKey(id)) || {};
+
+export const Table: React.FC<Props> = ({ columns, data, id, initialState={} }) => {
+    const storedOrDefaultState = local.getItem<PartialTableState>(getStorageKey(id)) || initialState;
     const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow, state, visibleColumns, setGlobalFilter } =
         useTable<Record<string, unknown>>(
             {
@@ -97,7 +99,7 @@ export const Table: React.FC<Props> = ({ columns, data, id }) => {
                 data,
                 autoResetSortBy: false,
                 autoResetFilters: false,
-                initialState,
+                initialState: storedOrDefaultState,
             },
             useGlobalFilter,
             useSortBy,
