@@ -5,6 +5,7 @@ import './styles/styles.global.scss';
 import { NotificationContainer } from 'react-notifications';
 import React, { FunctionComponent } from 'react';
 import NiceModal from '@ebay/nice-modal-react';
+import { createRoot } from 'react-dom/client';
 
 import ConnectedMap from './components/map';
 
@@ -23,7 +24,6 @@ import ConnectedGroupsPage from './components/groups';
 import ConnectedZigbeePage from './components/zigbee';
 import LogsPage from './components/logs-page';
 import OtaPage from './components/ota-page';
-import ReactDOM from 'react-dom';
 import ErrorBoundary from './components/ErrorBoundary';
 import DashboardPage from './components/dashboard-page';
 import ExtensionsEditorPage from './components/extensions-editor';
@@ -161,4 +161,9 @@ const Main = () => {
     );
 };
 
-ReactDOM.render(<Main />, document.getElementById('root'));
+
+const domNode = document.getElementById('root');
+if (domNode) {
+    createRoot(domNode).render(<Main />);
+}
+
