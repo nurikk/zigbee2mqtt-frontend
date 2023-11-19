@@ -1,3 +1,12 @@
+## [0.6.144](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.143...0.6.144) (2023-11-19)
+
+
+### Features
+
+* **ota:** allow sorting by ota update avaliable state ([a298487](https://github.com/nurikk/zigbee2mqtt-frontend/commit/a298487e1825a6ed50c45c2fde7bf6cf8d78b15e)), closes [#1819](https://github.com/nurikk/zigbee2mqtt-frontend/issues/1819)
+
+
+
 ## [0.6.143](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.142...0.6.143) (2023-11-09)
 
 
