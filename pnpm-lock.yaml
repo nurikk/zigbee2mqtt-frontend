@@ -185,9 +185,9 @@ devDependencies:
   react-image:
     specifier: ~4.1.0
     version: 4.1.0(@babel/runtime@7.23.1)(react-dom@18.2.0)(react@18.2.0)
-  react-notifications:
-    specifier: ~1.7.4
-    version: 1.7.4(react-dom@18.2.0)(react@18.2.0)
+  react-notifications-component:
+    specifier: ^4.0.1
+    version: 4.0.1(react@18.2.0)
   react-router-dom:
     specifier: ~5.3.4
     version: 5.3.4(react@18.2.0)
@@ -1510,12 +1510,6 @@ packages:
   /acorn-walk@8.2.0:
     resolution: {integrity: sha512-k+iyHEuPgSw6SbuDpGQM+06HQUa04DZ3o+F6CSzXMvvI5KMvnaEqXe+YVe555R9nn6GPt404fos4wcgpw12SDA==}
     engines: {node: '>=0.4.0'}
-    dev: true
-
-  /acorn@6.4.1:
-    resolution: {integrity: sha512-ZVA9k326Nwrj3Cj9jlh3wGFutC2ZornPNARZwsNYqQYgN0EsV2d53w5RN/co65Ohn4sUAUtb1rSUAOD6XN9idA==}
-    engines: {node: '>=0.4.0'}
-    hasBin: true
     dev: true
 
   /acorn@8.10.0:
@@ -4587,16 +4581,12 @@ packages:
     resolution: {integrity: sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==}
     dev: true
 
-  /react-notifications@1.7.4(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-dsR7mUQfe8YdFLqVsjT0GFd4n26UWkzefdjMELfEVygjuuyU6ZZ0LpZhFHdfmraGeBFLWHNxygpGlHHituUyjQ==}
+  /react-notifications-component@4.0.1(react@18.2.0):
+    resolution: {integrity: sha512-NRBkWO19AsXmN0b8YQ0L12eoCAhrnmIZtGm77ATWSfQEXPL5PYSyeACpx7tePP+R2De9b0IP4yk9vY4TtzC02w==}
+    peerDependencies:
+      react: ^18.0.1
     dependencies:
-      acorn: 6.4.1
-      classnames: 2.3.2
-      prop-types: 15.8.1
-      react-transition-group: 4.4.5(react-dom@18.2.0)(react@18.2.0)
-    transitivePeerDependencies:
-      - react
-      - react-dom
+      react: 18.2.0
     dev: true
 
   /react-refresh@0.14.0:

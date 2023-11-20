@@ -90,7 +90,7 @@
         "react-dom": "~18.2.0",
         "react-i18next": "~13.2.2",
         "react-image": "~4.1.0",
-        "react-notifications": "~1.7.4",
+        "react-notifications-component": "^4.0.1",
         "react-router-dom": "~5.3.4",
         "react-table": "~7.8.0",
         "react-transition-group": "~4.4.5",

@@ -1,8 +1,8 @@
 import 'react-app-polyfill/stable';
-import 'react-notifications/lib/notifications.css';
+import 'react-notifications-component/dist/theme.css'
 import '@fortawesome/fontawesome-free/css/all.css';
 import './styles/styles.global.scss';
-import { NotificationContainer } from 'react-notifications';
+
 import React, { FunctionComponent } from 'react';
 import NiceModal from '@ebay/nice-modal-react';
 import { createRoot } from 'react-dom/client';
@@ -10,6 +10,8 @@ import { createRoot } from 'react-dom/client';
 import ConnectedMap from './components/map';
 
 import { Switch, Route, HashRouter } from 'react-router-dom';
+import { ReactNotifications } from 'react-notifications-component'
+
 
 import ConnectedDevicePage from './components/device-page';
 import TouchlinkPage from './components/touchlink-page';
@@ -47,8 +49,8 @@ api.connect();
 const Main = () => {
     const { theme } = store.getState();
     return (
-        <>
-            <NotificationContainer />
+        <React.StrictMode>
+            <ReactNotifications />
             <I18nextProvider i18n={i18n}>
                 <NiceModal.Provider>
                     <Provider store={store}>
@@ -157,7 +159,7 @@ const Main = () => {
                     </Provider>
                 </NiceModal.Provider>
             </I18nextProvider>
-        </>
+        </React.StrictMode>
     );
 };
 

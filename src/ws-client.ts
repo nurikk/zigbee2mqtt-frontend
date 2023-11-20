@@ -3,7 +3,7 @@ import store, { Base64String, Extension, LogMessage, OnlineOrOffline } from "./s
 import { BridgeConfig, BridgeInfo, TouchLinkDevice, Device, DeviceState, BridgeState, Group } from './types';
 import { sanitizeGraph, isSecurePage, randomString, stringifyWithPreservingUndefinedAsNull, debounceArgs } from "./utils";
 
-import { NotificationManager } from 'react-notifications';
+import { Store } from 'react-notifications-component';
 import keyBy from "lodash/keyBy";
 
 import { GraphI } from "./components/map/types";
@@ -49,10 +49,19 @@ const showNotify = (data: LogMessage | ResponseWithStatus): void => {
     switch (level) {
         case "error":
         case "warning":
-            NotificationManager.error(message);
+            Store.addNotification({
+                message: message,
+                type: "danger",
+                container: "bottom-right",
+            });
+
             break;
         case "info":
-            NotificationManager.success(message);
+            Store.addNotification({
+                message: message,
+                type: "info",
+                container: "bottom-right",
+            });
             break;
 
         default:
