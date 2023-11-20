@@ -113,14 +113,14 @@ export const Table: React.FC<Props> = ({ columns, data, id, initialState={} }) =
                         <GlobalFilter globalFilter={state.globalFilter} setGlobalFilter={setGlobalFilter} />
                     </th>
                 </tr>
-                {headerGroups.map((headerGroup: HeaderGroup<Record<string, unknown>>) => (
-                    <tr {...headerGroup.getHeaderGroupProps()} key={headerGroup.id}>
+                {headerGroups.map((headerGroup: HeaderGroup<Record<string, unknown>>, idx) => (
+                    <tr {...headerGroup.getHeaderGroupProps()} key={idx}>
                         <th className="text-nowrap">#</th>
                         {headerGroup.headers.map((column) => (
                             <th
                                 className="text-nowrap"
                                 {...column.getHeaderProps(column.getSortByToggleProps())}
-                                key={headerGroup.id}
+                                key={column.id}
                             >
                                 <span className={cx({ 'btn-link me-1': column.canSort })}>
                                     {column.render('Header')}
@@ -143,12 +143,12 @@ export const Table: React.FC<Props> = ({ columns, data, id, initialState={} }) =
                 {rows.map((row, i) => {
                     prepareRow(row);
                     return (
-                        <tr {...row.getRowProps()} key={i}>
+                        <tr {...row.getRowProps()} key={row.id}>
                             <td>
                                 <div className="font-weight-bold">{i + 1}</div>
                             </td>
                             {row.cells.map((cell) => (
-                                <td {...cell.getCellProps()} key={i}>
+                                <td {...cell.getCellProps()} key={cell.column.id}>
                                     {cell.render('Cell')}
                                 </td>
                             ))}
