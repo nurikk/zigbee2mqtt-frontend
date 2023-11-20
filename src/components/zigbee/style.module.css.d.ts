@@ -3,5 +3,4 @@ declare const classNames: {
     readonly 'device-pic': 'device-pic';
     readonly 'device-image': 'device-image';
 };
-export default classNames;
-export type ClassNames = 'action-column' | 'device-pic' | 'device-image';
+export = classNames;
