@@ -1,5 +1,5 @@
 import 'react-app-polyfill/stable';
-import 'react-notifications-component/dist/theme.css'
+import 'react-notifications-component/dist/theme.css';
 import '@fortawesome/fontawesome-free/css/all.css';
 import './styles/styles.global.scss';
 
@@ -10,8 +10,7 @@ import { createRoot } from 'react-dom/client';
 import ConnectedMap from './components/map';
 
 import { Switch, Route, HashRouter } from 'react-router-dom';
-import { ReactNotifications } from 'react-notifications-component'
-
+import { ReactNotifications } from 'react-notifications-component';
 
 import ConnectedDevicePage from './components/device-page';
 import TouchlinkPage from './components/touchlink-page';
@@ -163,9 +162,7 @@ const Main = () => {
     );
 };
 
-
 const domNode = document.getElementById('root');
 if (domNode) {
     createRoot(domNode).render(<Main />);
 }
-

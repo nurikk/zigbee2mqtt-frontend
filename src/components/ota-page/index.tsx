@@ -153,7 +153,7 @@ class OtaPage extends Component<PropsFromStore & OtaApi & WithTranslation<'ota'>
                     </Button>
                 ),
                 accessor: ({ state }) => {
-                    return (((state?.update ?? {}) as OTAState).state) + ''
+                    return ((state?.update ?? {}) as OTAState).state + '';
                 },
                 id: 'check_all',
                 Cell: ({
@@ -171,16 +171,14 @@ class OtaPage extends Component<PropsFromStore & OtaApi & WithTranslation<'ota'>
                         id="otaDevices"
                         columns={columns as unknown as Column<Record<string, unknown>>[]}
                         data={otaDevices}
-                        initialState={
-                            {
-                                sortBy: [
-                                    {
-                                        id: "check_all",
-                                        desc: false
-                                    }
-                                ]
-                            }
-                        }
+                        initialState={{
+                            sortBy: [
+                                {
+                                    id: 'check_all',
+                                    desc: false,
+                                },
+                            ],
+                        }}
                     />
                 </div>
             </div>

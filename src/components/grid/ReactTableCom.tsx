@@ -87,8 +87,7 @@ const stateReducer = (
     return newState;
 };
 
-
-export const Table: React.FC<Props> = ({ columns, data, id, initialState={} }) => {
+export const Table: React.FC<Props> = ({ columns, data, id, initialState = {} }) => {
     const storedOrDefaultState = local.getItem<PartialTableState>(getStorageKey(id)) || initialState;
     const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow, state, visibleColumns, setGlobalFilter } =
         useTable<Record<string, unknown>>(
