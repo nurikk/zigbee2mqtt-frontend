@@ -19,7 +19,7 @@ import store from './store';
 import { Provider } from 'unistore/react';
 import api from './ws-client';
 
-import ConnectedSettingsPage from './components/settings';
+import ConnectedSettingsPage from './components/settings-page';
 import NavBar from './components/navbar';
 import ConnectedGroupsPage from './components/groups';
 import ConnectedZigbeePage from './components/zigbee';

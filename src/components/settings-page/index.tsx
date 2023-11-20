@@ -15,7 +15,7 @@ import cloneDeep from 'lodash/cloneDeep';
 import uiSchemas from './uiSchema.json';
 import { BridgeApi } from '../../actions/BridgeApi';
 import { WithTranslation, withTranslation } from 'react-i18next';
-import customFields from './../../i18n/rjsf-translation-fields';
+import customFields from '../../i18n/rjsf-translation-fields';
 import { Stats } from './stats';
 import frontentPackageJson from '../../../package.json';
 import { formatDate } from '../../utils';
