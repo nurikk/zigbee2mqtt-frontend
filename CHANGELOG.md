@@ -1,3 +1,12 @@
+## [0.6.146](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.145...0.6.146) (2023-11-20)
+
+
+### Features
+
+* **deviceImage:** allow to pre download device images ([db81940](https://github.com/nurikk/zigbee2mqtt-frontend/commit/db8194069b46cebc34cd4701d85109afe81c894a))
+
+
+
 ## [0.6.145](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.144...0.6.145) (2023-11-20)
 
 
