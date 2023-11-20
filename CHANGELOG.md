@@ -1,3 +1,17 @@
+## [0.6.145](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.144...0.6.145) (2023-11-20)
+
+
+### Bug Fixes
+
+* **Table:** fix uniq keys ([189ba35](https://github.com/nurikk/zigbee2mqtt-frontend/commit/189ba352815521ffbfdb43fc70b9478cb6bd6c21))
+
+
+### Features
+
+* **notifications:** replace notifications library ([1f477f1](https://github.com/nurikk/zigbee2mqtt-frontend/commit/1f477f15519a084cd1733ad6ed9635ecbe311063))
+
+
+
 ## [0.6.144](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.143...0.6.144) (2023-11-19)
 
 
