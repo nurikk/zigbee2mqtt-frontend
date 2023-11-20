@@ -2249,7 +2249,8 @@
         "coordinator_ieee_address": "Coordinator IEEE Address",
         "request_z2m_backup": "Request Z2m backup",
         "add_install_code": "Add install code",
-        "homeassistant": "Home Assistant integration"
+        "homeassistant": "Home Assistant integration",
+        "localise_images": "Localise device images"
     },
     "touchlink": {
         "detected_devices_message": "Detected {{count}} touchlink devices.",

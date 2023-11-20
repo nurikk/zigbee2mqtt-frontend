@@ -21,6 +21,8 @@ import frontentPackageJson from '../../../package.json';
 import { formatDate } from '../../utils';
 import { saveAs } from 'file-saver';
 import Spinner from '../spinner';
+import ImageLocaliser from './image-localiser';
+import { DeviceApi } from '../../actions/DeviceApi';
 
 type SettingsTab = 'settings' | 'bridge' | 'about' | 'tools' | 'donate' | 'translate';
 
@@ -115,7 +117,7 @@ type PropsFromStore = Pick<
     'bridgeInfo' | 'missingTranslations' | 'devices' | 'backup' | 'preparingBackup'
 >;
 export class SettingsPage extends Component<
-    PropsFromStore & SettingsPageProps & BridgeApi & UtilsApi & WithTranslation<'setting'>,
+    PropsFromStore & SettingsPageProps & DeviceApi & BridgeApi & UtilsApi & WithTranslation<'setting'>,
     SettingsPageState
 > {
     state = {
@@ -298,7 +300,7 @@ export class SettingsPage extends Component<
     };
 
     renderTools(): JSX.Element {
-        const { exportState, restartBridge, t } = this.props;
+        const { exportState, restartBridge, setDeviceOptions, devices, t } = this.props;
         return (
             <div className="p-3">
                 <Button className="btn btn-primary d-block mt-2" onClick={exportState}>
@@ -311,6 +313,7 @@ export class SettingsPage extends Component<
                 <Button className="btn btn-primary d-block mt-2" onClick={this.addInstallCode}>
                     {t('add_install_code')}
                 </Button>
+                <ImageLocaliser setDeviceOptions={setDeviceOptions} devices={devices}/>
             </div>
         );
     }
@@ -436,7 +439,7 @@ export class SettingsPage extends Component<
 const SettingsPageWithRouter = withRouter(SettingsPage);
 const mappedProps = ['bridgeInfo', 'missingTranslations', 'devices', 'backup', 'preparingBackup'];
 const ConnectedSettingsPage = withTranslation(['settings', 'common'])(
-    connect<Record<string, unknown>, Record<string, unknown>, GlobalState, BridgeApi>(
+    connect<Record<string, unknown>, Record<string, unknown>, GlobalState, DeviceApi & BridgeApi>(
         mappedProps,
         actions,
     )(SettingsPageWithRouter),
