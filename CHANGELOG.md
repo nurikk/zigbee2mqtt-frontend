@@ -1,3 +1,12 @@
+## [0.6.147](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.146...0.6.147) (2023-11-21)
+
+
+### Features
+
+* **battery:** use `battery_state` ([c16faeb](https://github.com/nurikk/zigbee2mqtt-frontend/commit/c16faebe1b96bb7da9c48901a0f4223ba64b9683))
+
+
+
 ## [0.6.146](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.145...0.6.146) (2023-11-20)
 
 
