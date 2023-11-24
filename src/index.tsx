@@ -29,6 +29,7 @@ import ErrorBoundary from './components/ErrorBoundary';
 import DashboardPage from './components/dashboard-page';
 import ExtensionsEditorPage from './components/extensions-editor';
 import GroupPage from './components/groups/GroupPage';
+import ScrollToTop from './components/scroll-to-top';
 
 import { ThemeSwitcherProvider } from 'react-css-theme-switcher';
 import i18n from './i18n';
@@ -55,6 +56,7 @@ const Main = () => {
                     <Provider store={store}>
                         <ThemeSwitcherProvider themeMap={themes} defaultTheme={theme}>
                             <HashRouter>
+                                <ScrollToTop />
                                 <div className="main">
                                     <NavBar />
                                     <main className="content p-0 p-sm-3">
