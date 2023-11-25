@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import style from './style.module.css';
 import { genDeviceDetailsLink, lastSeen, toHex } from '../../utils';
 import { useTranslation } from 'react-i18next';
@@ -72,7 +72,7 @@ export function DevicesTable(
               },
           ]
         : [];
-    const columns = [
+    const columns = useMemo(() => [
         {
             id: 'pic',
             Header: t('pic'),
@@ -182,7 +182,7 @@ export function DevicesTable(
             },
             disableSortBy: true,
         },
-    ];
+    ], []);
 
     return (
         <div className="card">
