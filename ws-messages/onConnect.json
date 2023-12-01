@@ -1010,7 +1010,10 @@
                                 ],
                                 "requiresRestart": true,
                                 "title": "OTA index override file name",
-                                "type": "string"
+                                "type": [
+                                    "string",
+                                    "null"
+                                ]
                             }
                         },
                         "title": "OTA updates",
