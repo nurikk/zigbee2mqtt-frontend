@@ -2225,7 +2225,7 @@
         "firmware_version": "Firmware-Version",
         "force_remove": "Erzwinge entfernen",
         "friendly_name": "Gerätename",
-        "ieee_address": "IEEE-Addresse",
+        "ieee_address": "IEEE-Adresse",
         "input_clusters": "Eingabe-Cluster",
         "interview_completed": "Interview erfolgreich",
         "interview_failed": "Interview fehlgeschlagen",
