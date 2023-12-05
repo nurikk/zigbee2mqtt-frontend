@@ -1,3 +1,12 @@
+## [0.6.148](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.147...0.6.148) (2023-12-05)
+
+
+### Bug Fixes
+
+* **i18n:** fix typo in German translations ([#1848](https://github.com/nurikk/zigbee2mqtt-frontend/issues/1848)) ([f23375f](https://github.com/nurikk/zigbee2mqtt-frontend/commit/f23375fee8c0527bef17d804de4359c7490b6283))
+
+
+
 ## [0.6.147](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.146...0.6.147) (2023-11-21)
 
 
