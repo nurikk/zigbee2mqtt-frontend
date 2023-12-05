@@ -133,7 +133,7 @@ export const Feature = (props: FeatureProps): JSX.Element => {
         // When parent is a list (this is when parentFeatures is not set), we don't
         // need to take the key of the deviceState (deviceState[feature.property])
         const deviceState_ = parentFeatures
-            ? feature.property
+            ? feature.property && !["programming_mode"].includes(feature.property)
                 ? deviceState[feature.property]
                 : deviceState
             : deviceState;
