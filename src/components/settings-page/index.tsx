@@ -313,7 +313,7 @@ export class SettingsPage extends Component<
                 <Button className="btn btn-primary d-block mt-2" onClick={this.addInstallCode}>
                     {t('add_install_code')}
                 </Button>
-                <ImageLocaliser setDeviceOptions={setDeviceOptions} devices={devices}/>
+                <ImageLocaliser setDeviceOptions={setDeviceOptions} devices={devices} />
             </div>
         );
     }

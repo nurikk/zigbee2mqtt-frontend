@@ -72,117 +72,120 @@ export function DevicesTable(
               },
           ]
         : [];
-    const columns = useMemo(() => [
-        {
-            id: 'pic',
-            Header: t('pic'),
-            Cell: ({
-                row: {
-                    original: { device, state, disabled },
-                },
-            }) => (
-                <DeviceImage
-                    className={style['device-image']}
-                    device={device}
-                    deviceStatus={state}
-                    disabled={disabled}
-                />
-            ),
-            accessor: (rowData) => rowData,
-            disableSortBy: true,
-        },
-        {
-            id: 'friendly_name',
-            Header: t('friendly_name'),
-            accessor: ({ device }) => [device.friendly_name, device.description].join(' '),
-            Cell: ({
-                row: {
-                    original: { device },
-                },
-            }) => (
-                <>
-                    <Link to={genDeviceDetailsLink(device.ieee_address)}>{device.friendly_name}</Link>
-                    <small className="d-block">{device.description}</small>
-                </>
-            ),
-        },
-        {
-            id: 'ieee_address',
-            Header: t('ieee_address'),
-            accessor: ({ device }) => [device.ieee_address, toHex(device.network_address, 4)].join(' '),
-            Cell: ({
-                row: {
-                    original: { device },
-                },
-            }) => (
-                <>
-                    <div>{device.ieee_address}</div>
-                    <div>({toHex(device.network_address, 4)})</div>
-                </>
-            ),
-        },
-        {
-            id: 'manufacturer',
-            Header: t('manufacturer'),
-            accessor: ({ device }) => [device.definition?.vendor, device.manufacturer].join(' '),
-            Cell: ({
-                row: {
-                    original: { device },
-                },
-            }) => <VendorLink device={device} />,
-        },
-        {
-            id: 'model',
-            Header: t('model'),
-            accessor: ({ device }) => [device.definition?.model, device.model_id].join(' '),
-            Cell: ({
-                row: {
-                    original: { device },
-                },
-            }) => <ModelLink device={device} />,
-        },
-        {
-            id: 'lqi',
-            Header: t('lqi'),
-            accessor: ({ state }) => state.linkquality,
-            Cell: ({
-                row: {
-                    original: { state },
-                },
-            }) => <DisplayValue value={state.linkquality} name="linkquality" />,
-        },
-        ...lastSeenCol,
-        ...availabilityCol,
-        {
-            id: 'power',
-            Header: t('power'),
-            accessor: ({ state, device }) => [state.battery, device.definition?.power].join(' '),
-            Cell: ({
-                row: {
-                    original: { state, device },
-                },
-            }) => <PowerSource device={device} deviceState={state} />,
-        },
-        {
-            id: 'controls',
-            Header: '',
-            Cell: ({
-                row: {
-                    original: { device, state },
-                },
-            }) => {
-                return (
-                    <DeviceControlGroup
+    const columns = useMemo(
+        () => [
+            {
+                id: 'pic',
+                Header: t('pic'),
+                Cell: ({
+                    row: {
+                        original: { device, state, disabled },
+                    },
+                }) => (
+                    <DeviceImage
+                        className={style['device-image']}
                         device={device}
-                        state={state}
-                        homeassistantEnabled={homeassistantEnabled}
-                        {...{ renameDevice, removeDevice, configureDevice, setDeviceDescription }}
+                        deviceStatus={state}
+                        disabled={disabled}
                     />
-                );
+                ),
+                accessor: (rowData) => rowData,
+                disableSortBy: true,
             },
-            disableSortBy: true,
-        },
-    ], []);
+            {
+                id: 'friendly_name',
+                Header: t('friendly_name'),
+                accessor: ({ device }) => [device.friendly_name, device.description].join(' '),
+                Cell: ({
+                    row: {
+                        original: { device },
+                    },
+                }) => (
+                    <>
+                        <Link to={genDeviceDetailsLink(device.ieee_address)}>{device.friendly_name}</Link>
+                        <small className="d-block">{device.description}</small>
+                    </>
+                ),
+            },
+            {
+                id: 'ieee_address',
+                Header: t('ieee_address'),
+                accessor: ({ device }) => [device.ieee_address, toHex(device.network_address, 4)].join(' '),
+                Cell: ({
+                    row: {
+                        original: { device },
+                    },
+                }) => (
+                    <>
+                        <div>{device.ieee_address}</div>
+                        <div>({toHex(device.network_address, 4)})</div>
+                    </>
+                ),
+            },
+            {
+                id: 'manufacturer',
+                Header: t('manufacturer'),
+                accessor: ({ device }) => [device.definition?.vendor, device.manufacturer].join(' '),
+                Cell: ({
+                    row: {
+                        original: { device },
+                    },
+                }) => <VendorLink device={device} />,
+            },
+            {
+                id: 'model',
+                Header: t('model'),
+                accessor: ({ device }) => [device.definition?.model, device.model_id].join(' '),
+                Cell: ({
+                    row: {
+                        original: { device },
+                    },
+                }) => <ModelLink device={device} />,
+            },
+            {
+                id: 'lqi',
+                Header: t('lqi'),
+                accessor: ({ state }) => state.linkquality,
+                Cell: ({
+                    row: {
+                        original: { state },
+                    },
+                }) => <DisplayValue value={state.linkquality} name="linkquality" />,
+            },
+            ...lastSeenCol,
+            ...availabilityCol,
+            {
+                id: 'power',
+                Header: t('power'),
+                accessor: ({ state, device }) => [state.battery, device.definition?.power].join(' '),
+                Cell: ({
+                    row: {
+                        original: { state, device },
+                    },
+                }) => <PowerSource device={device} deviceState={state} />,
+            },
+            {
+                id: 'controls',
+                Header: '',
+                Cell: ({
+                    row: {
+                        original: { device, state },
+                    },
+                }) => {
+                    return (
+                        <DeviceControlGroup
+                            device={device}
+                            state={state}
+                            homeassistantEnabled={homeassistantEnabled}
+                            {...{ renameDevice, removeDevice, configureDevice, setDeviceDescription }}
+                        />
+                    );
+                },
+                disableSortBy: true,
+            },
+        ],
+        [],
+    );
 
     return (
         <div className="card">
