@@ -1,3 +1,19 @@
+## [0.6.149](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.148...0.6.149) (2023-12-10)
+
+
+### Bug Fixes
+
+* **notification:** automatically hide notifications ([6e68715](https://github.com/nurikk/zigbee2mqtt-frontend/commit/6e68715c482c4281f188e08303d243fcc86db214))
+
+
+### Features
+
+* **memoize-table-columns:** memoize device list table columns ([ec9bf9e](https://github.com/nurikk/zigbee2mqtt-frontend/commit/ec9bf9e41d97a73b374978a598aff9ea6430e13e))
+* **scrolltotop:** add ScrollToTop component ([ab454fc](https://github.com/nurikk/zigbee2mqtt-frontend/commit/ab454fc957c9391e39e979e60aa723d344be5486))
+* **ui:** allow display illuminance_lux in dashboard ([5a8509a](https://github.com/nurikk/zigbee2mqtt-frontend/commit/5a8509a86cde169f4071f74d35cfad447ffac99d))
+
+
+
 ## [0.6.148](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.147...0.6.148) (2023-12-05)
 
 
