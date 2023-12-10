@@ -53,6 +53,9 @@ const showNotify = (data: LogMessage | ResponseWithStatus): void => {
                 message: message,
                 type: "danger",
                 container: "bottom-right",
+                dismiss: {
+                    duration: 5000
+                }
             });
 
             break;
@@ -61,6 +64,9 @@ const showNotify = (data: LogMessage | ResponseWithStatus): void => {
                 message: message,
                 type: "info",
                 container: "bottom-right",
+                dismiss: {
+                    duration: 5000
+                }
             });
             break;
 
