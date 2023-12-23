@@ -237,6 +237,11 @@ class Api {
                 store.setState({ backup: zip, preparingBackup: false });
                 break;
 
+            case "bridge/response/device/generate_external_definition":
+                const { data: { source, id } } = data.payload as { data: { source: Base64String, id: string } };
+                const generatedExternalDefinitions = {...store.getState().generatedExternalDefinitions, [id]: source};
+                store.setState({ generatedExternalDefinitions });
+                break;
 
             default:
                 break;

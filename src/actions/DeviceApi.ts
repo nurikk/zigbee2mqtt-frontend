@@ -15,6 +15,7 @@ export interface DeviceApi {
     setDeviceOptions(id: string, options: Record<string, unknown>): Promise<void>;
     setDeviceDescription(id: string, description: string): Promise<void>;
 
+    generateExternalDefinition(friendlyNameOrIEEEAddress: FriendlyName | IEEEEAddress): Promise<void>;
     readDeviceAttributes(friendlyNameOrIEEEAddress: FriendlyName | IEEEEAddress, endpoint: Endpoint, cluster: Cluster, attributes: Attribute[], options: Record<string, unknown>): Promise<void>;
     writeDeviceAttributes(friendlyNameOrIEEEAddress: FriendlyName | IEEEEAddress, endpoint: Endpoint, cluster: Cluster, attributes: AttributeInfo[], options: Record<string, unknown>): Promise<void>;
     executeCommand(friendlyNameOrIEEEAddress: FriendlyName | IEEEEAddress, endpoint: Endpoint, cluster: Cluster, command: unknown, payload: Record<string, unknown>): Promise<void>;
@@ -57,6 +58,10 @@ export default {
 
     readDeviceAttributes(_state, id: FriendlyName | IEEEEAddress, endpoint: Endpoint, cluster: Cluster, attributes: Attribute[], options: Record<string, unknown>): Promise<void> {
         return api.send(`${toDeviceId(id, endpoint)}/set`, { read: { cluster, attributes, options } });
+    },
+
+    generateExternalDefinition(_state, id: FriendlyName | IEEEEAddress): Promise<void> {
+        return api.send("bridge/request/device/generate_external_definition", { id });
     },
 
     writeDeviceAttributes(_state, id: FriendlyName | IEEEEAddress, endpoint: Endpoint, cluster: Cluster, attributes: AttributeInfo[], options: Record<string, unknown>): Promise<void> {

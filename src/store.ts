@@ -61,6 +61,7 @@ export interface GlobalState extends WithDevices, WithDeviceStates, WithGroups, 
     missingTranslations: Map<string, unknown>;
     preparingBackup: boolean;
     backup: Base64String;
+    generatedExternalDefinitions: Map<string, string>;
 }
 
 const theme = getCurrentTheme();

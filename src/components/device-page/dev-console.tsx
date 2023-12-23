@@ -1,13 +1,14 @@
 import React, { ChangeEvent, Component } from 'react';
 import { Attribute, Cluster, Device, Endpoint } from '../../types';
 import ClusterPicker, { PickerType } from '../cluster-picker';
+import AceEditor from 'react-ace';
 
 import DataType from 'zigbee-herdsman/dist/zcl/definition/dataType';
 import ZclCluster from 'zigbee-herdsman/dist/zcl/definition/cluster';
 import AttributePicker, { AttributeDefinition } from '../attribute-picker';
 import Button from '../button';
 import { DeviceApi } from '../../actions/DeviceApi';
-import { LogMessage } from '../../store';
+import { GlobalState, LogMessage } from '../../store';
 import { WithTranslation, withTranslation } from 'react-i18next';
 import EndpointPicker from '../endpoint-picker';
 import { getEndpoints } from '../../utils';
@@ -16,7 +17,8 @@ import { LastLogResult } from './LastLogResult';
 
 interface DevConsoleProps
     extends WithTranslation,
-        Pick<DeviceApi, 'executeCommand' | 'readDeviceAttributes' | 'writeDeviceAttributes'> {
+        Pick<DeviceApi, 'executeCommand' | 'readDeviceAttributes' | 'writeDeviceAttributes' | 'generateExternalDefinition'>,
+        Pick<GlobalState, 'generatedExternalDefinitions' | 'theme'> {
     device: Device;
     logs: LogMessage[];
 }
@@ -102,6 +104,10 @@ export class DevConsole extends Component<DevConsoleProps, DevConsoleState> {
             attributes.map((info) => info.attribute),
             {},
         );
+    };
+    onGenerateExternalDefinitionClick = (): void => {
+        const { generateExternalDefinition, device } = this.props;
+        generateExternalDefinition(device.ieee_address);
     };
 
     onWriteClick = (): void => {
@@ -210,12 +216,52 @@ export class DevConsole extends Component<DevConsoleProps, DevConsoleState> {
             </>
         );
     }
+    renderGenerateExternalDefinition(): JSX.Element {
+        const { t, generatedExternalDefinitions, device, theme } = this.props;
+        const externalDefinition = generatedExternalDefinitions[device.ieee_address];
+        const supportNewDevicesLink = `https://www.zigbee2mqtt.io/advanced/support-new-devices/01_support_new_devices.html`;
+        if (externalDefinition) {
+            const editorTheme = theme === 'light' ? 'github' : 'dracula';
+            return (
+                <>
+                    {t('generated_external_definition')} (<a href={supportNewDevicesLink} target='_blank' rel='noreferrer'>{t('documentation')}</a>)
+                    <AceEditor
+                        setOptions={{ useWorker: false }}
+                        mode="javascript"
+                        readOnly={true}
+                        name="UNIQUE_ID_OF_DIV"
+                        editorProps={{ $blockScrolling: true }}
+                        value={externalDefinition}
+                        width="100%"
+                        maxLines={Infinity}
+                        theme={editorTheme}
+                        showPrintMargin={false}
+                    />
+                </>
+            );
+        } else {
+            return (
+                <Button<void>
+                    className="btn btn-primary"
+                    onClick={this.onGenerateExternalDefinitionClick}
+                >
+                    {t('generate_external_definition')}
+                </Button>
+            );
+        }
+        
+    }
     render(): JSX.Element {
         const { executeCommand, logs, device } = this.props;
         const logsFilterFn = (l: LogMessage) =>
             logStartingStrings.some((startString) => l.message.startsWith(startString));
         return (
             <div>
+                <div className="card">
+                    <div className="card-body">
+                        {this.renderGenerateExternalDefinition()}
+                    </div>
+                </div>
                 <div className="card">
                     <div className="card-body">
                         {this.renderRead()}
@@ -232,4 +278,4 @@ export class DevConsole extends Component<DevConsoleProps, DevConsoleState> {
     }
 }
 
-export default withTranslation('common')(DevConsole);
+export default withTranslation(['devConsole', 'common'])(DevConsole);
