@@ -197,3 +197,5 @@ export const debounceArgs = (fn: (...args: any) => any, options?: Record<string,
 
 
 export const isIframe = (): boolean => window.location !== window.parent.location;
+
+export const supportNewDevicesUrl = "https://www.zigbee2mqtt.io/advanced/support-new-devices/01_support_new_devices.html";

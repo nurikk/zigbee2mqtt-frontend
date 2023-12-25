@@ -29,7 +29,12 @@
         "the_only_endpoint": "The only endpoint",
         "unbind": "Unbind",
         "write": "Write",
-        "destination_endpoint": "Destination endpoint"
+        "destination_endpoint": "Destination endpoint",
+        "documentation": "Documentation"
+    },
+    "devConsole": {
+        "generate_external_definition": "Generate external definition",
+        "generated_external_definition": "Generated external definition"
     },
     "devicePage": {
         "about": "About",
@@ -2247,7 +2252,8 @@
         "translate": "Translate",
         "stats": "Stats",
         "coordinator_ieee_address": "Coordinator IEEE Address",
-        "request_z2m_backup": "Request Z2m backup",
+        "request_z2m_backup": "Request Z2M backup",
+        "download_z2m_backup": "Download Z2M backup",
         "add_install_code": "Add install code",
         "homeassistant": "Home Assistant integration",
         "localise_images": "Localise device images"
@@ -2326,7 +2332,8 @@
         "execute": "Execute",
         "command": "Command",
         "payload": "Payload",
-        "save_description": "Save description"
+        "save_description": "Save description",
+        "how_to_add_support": "How to add support"
     },
     "scene": {
         "scene_id": "Scene ID",
