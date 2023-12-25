@@ -1,7 +1,7 @@
 /* eslint-disable react/display-name */
 import React, { Component, Fragment } from 'react';
 import { BridgeInfo, Device, DeviceState } from '../../types';
-import { isDeviceDisabled, toHex } from '../../utils';
+import { isDeviceDisabled, supportNewDevicesUrl, toHex } from '../../utils';
 import DeviceControlGroup from '../device-control/DeviceControlGroup';
 import cx from 'classnames';
 import style from './style.module.css';
@@ -17,6 +17,7 @@ import { DisplayValue } from '../display-value/DisplayValue';
 import { Availability } from '../zigbee/Availability';
 import { DeviceApi } from '../../actions/DeviceApi';
 import actions from '../../actions/actions';
+import { TFunction } from 'i18next';
 
 type DeviceInfoProps = {
     device: Device;
@@ -102,7 +103,13 @@ const displayProps = [
         },
     },
     {
-        render: (device: Device) => (
+        render: (
+            device: Device,
+            state: DeviceState,
+            bridgeInfo: BridgeInfo,
+            availability: AvailabilityState,
+            t: TFunction,
+        ) => (
             <dd className="col-12 col-md-7">
                 <p
                     className={cx('mb-0', 'font-weight-bold', {
@@ -111,6 +118,14 @@ const displayProps = [
                     })}
                 >
                     <DisplayValue name="supported" value={device.supported} />
+                    {!device.supported && (
+                        <>
+                            {' '}
+                            <a target="_blank" rel="noopener noreferrer" href={supportNewDevicesUrl}>
+                                ({t('how_to_add_support')})
+                            </a>
+                        </>
+                    )}
                 </p>
             </dd>
         ),
@@ -209,6 +224,7 @@ export class DeviceInfo extends Component<
                                         deviceState,
                                         bridgeInfo,
                                         availability[device.friendly_name] ?? 'offline',
+                                        t,
                                     )
                                 ) : (
                                     <dd className="col-12 col-md-7">{get(device, prop.key)}</dd>

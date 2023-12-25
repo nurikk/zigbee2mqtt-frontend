@@ -75,15 +75,25 @@ type UrlParams = {
     dev: string;
     tab?: TabName;
 };
-type PropsFromStore = Pick<GlobalState, 'bridgeInfo' | 'devices' | 'logs' | 'deviceStates' | 'generatedExternalDefinitions' | 'theme'>;
+type PropsFromStore = Pick<
+    GlobalState,
+    'bridgeInfo' | 'devices' | 'logs' | 'deviceStates' | 'generatedExternalDefinitions' | 'theme'
+>;
 
 type DevicePageProps = RouteComponentProps<UrlParams> & PropsFromStore & DeviceApi & WithTranslation<'devicePage'>;
 
 function ContentRenderer(props: DevicePageProps): JSX.Element {
     const { match, devices, logs } = props;
-    const { 
-        readDeviceAttributes, writeDeviceAttributes, setDeviceOptions, executeCommand, generateExternalDefinition, bridgeInfo,
-        deviceStates, generatedExternalDefinitions, theme,
+    const {
+        readDeviceAttributes,
+        writeDeviceAttributes,
+        setDeviceOptions,
+        executeCommand,
+        generateExternalDefinition,
+        bridgeInfo,
+        deviceStates,
+        generatedExternalDefinitions,
+        theme,
     } = props;
     const { tab, dev } = match.params;
     const device = devices[dev];

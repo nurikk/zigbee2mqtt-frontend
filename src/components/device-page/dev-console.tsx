@@ -11,13 +11,16 @@ import { DeviceApi } from '../../actions/DeviceApi';
 import { GlobalState, LogMessage } from '../../store';
 import { WithTranslation, withTranslation } from 'react-i18next';
 import EndpointPicker from '../endpoint-picker';
-import { getEndpoints } from '../../utils';
+import { getEndpoints, supportNewDevicesUrl } from '../../utils';
 import { CommandExecutor } from './CommandExecutor';
 import { LastLogResult } from './LastLogResult';
 
 interface DevConsoleProps
     extends WithTranslation,
-        Pick<DeviceApi, 'executeCommand' | 'readDeviceAttributes' | 'writeDeviceAttributes' | 'generateExternalDefinition'>,
+        Pick<
+            DeviceApi,
+            'executeCommand' | 'readDeviceAttributes' | 'writeDeviceAttributes' | 'generateExternalDefinition'
+        >,
         Pick<GlobalState, 'generatedExternalDefinitions' | 'theme'> {
     device: Device;
     logs: LogMessage[];
@@ -219,12 +222,15 @@ export class DevConsole extends Component<DevConsoleProps, DevConsoleState> {
     renderGenerateExternalDefinition(): JSX.Element {
         const { t, generatedExternalDefinitions, device, theme } = this.props;
         const externalDefinition = generatedExternalDefinitions[device.ieee_address];
-        const supportNewDevicesLink = `https://www.zigbee2mqtt.io/advanced/support-new-devices/01_support_new_devices.html`;
         if (externalDefinition) {
             const editorTheme = theme === 'light' ? 'github' : 'dracula';
             return (
                 <>
-                    {t('generated_external_definition')} (<a href={supportNewDevicesLink} target='_blank' rel='noreferrer'>{t('documentation')}</a>)
+                    {t('generated_external_definition')} (
+                    <a href={supportNewDevicesUrl} target="_blank" rel="noreferrer">
+                        {t('documentation')}
+                    </a>
+                    )
                     <AceEditor
                         setOptions={{ useWorker: false }}
                         mode="javascript"
@@ -241,15 +247,11 @@ export class DevConsole extends Component<DevConsoleProps, DevConsoleState> {
             );
         } else {
             return (
-                <Button<void>
-                    className="btn btn-primary"
-                    onClick={this.onGenerateExternalDefinitionClick}
-                >
+                <Button<void> className="btn btn-primary" onClick={this.onGenerateExternalDefinitionClick}>
                     {t('generate_external_definition')}
                 </Button>
             );
         }
-        
     }
     render(): JSX.Element {
         const { executeCommand, logs, device } = this.props;
@@ -258,9 +260,7 @@ export class DevConsole extends Component<DevConsoleProps, DevConsoleState> {
         return (
             <div>
                 <div className="card">
-                    <div className="card-body">
-                        {this.renderGenerateExternalDefinition()}
-                    </div>
+                    <div className="card-body">{this.renderGenerateExternalDefinition()}</div>
                 </div>
                 <div className="card">
                     <div className="card-body">
