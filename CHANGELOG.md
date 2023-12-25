@@ -1,3 +1,12 @@
+## [0.6.150](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.149...0.6.150) (2023-12-25)
+
+
+### Features
+
+* **dev-console:** add external definition generator ([#1866](https://github.com/nurikk/zigbee2mqtt-frontend/issues/1866)) ([945af60](https://github.com/nurikk/zigbee2mqtt-frontend/commit/945af6097bd6dc8aac0ee6247a637c3e5f7ea451))
+
+
+
 ## [0.6.149](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.148...0.6.149) (2023-12-10)
 
 
