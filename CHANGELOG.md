@@ -1,3 +1,12 @@
+## [0.6.151](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.150...0.6.151) (2024-01-02)
+
+
+### Bug Fixes
+
+* **memoize:** fix memoize ([12bcb5f](https://github.com/nurikk/zigbee2mqtt-frontend/commit/12bcb5f573abf50545a507ad0e3ef2464fb36f9d))
+
+
+
 ## [0.6.150](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.149...0.6.150) (2023-12-25)
 
 
