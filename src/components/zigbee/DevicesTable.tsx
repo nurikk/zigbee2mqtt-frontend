@@ -184,7 +184,7 @@ export function DevicesTable(
                 disableSortBy: true,
             },
         ],
-        [],
+        [lastSeenCol, availabilityCol, t, homeassistantEnabled, renameDevice, removeDevice, configureDevice],
     );
 
     return (
