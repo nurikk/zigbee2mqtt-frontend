@@ -26,7 +26,7 @@ const genericRendererIgnoredNames = [
     'linkquality',
     'battery',
     'battery_low',
-    'illuminance_lux',
+    'battery_state',
     'color_temp_startup',
     'voltage',
     'strength',

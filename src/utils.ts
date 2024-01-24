@@ -172,9 +172,13 @@ const THEME_STORAGE_KEY = 'z2m-theme';
 
 export const getCurrentTheme = (): Theme => {
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    return local.getItem<Theme>(THEME_STORAGE_KEY) ?? prefersDark ? 'dark' : 'light';
+    const selectedTheme = local.getItem<Theme>(THEME_STORAGE_KEY);
+    return selectedTheme || (prefersDark ? 'dark' : 'light');
 };
-export const saveCurrentTheme = (theme: string): void => local.setItem(THEME_STORAGE_KEY, theme);
+export const saveCurrentTheme = (theme: string): void => {
+    console.log('save', theme);
+    local.setItem(THEME_STORAGE_KEY, theme);
+}
 
 
 export const debounceArgs = (fn: (...args: any) => any, options?: Record<string, any>) => {
@@ -193,3 +197,5 @@ export const debounceArgs = (fn: (...args: any) => any, options?: Record<string,
 
 
 export const isIframe = (): boolean => window.location !== window.parent.location;
+
+export const supportNewDevicesUrl = "https://www.zigbee2mqtt.io/advanced/support-new-devices/01_support_new_devices.html";

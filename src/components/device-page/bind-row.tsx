@@ -130,13 +130,17 @@ export class BindRow extends Component<BindRowProps, BindRowState> {
 
         const possibleClusters: Set<Cluster> = new Set(stateRule.clusters);
         const srcEndpoint = device.endpoints[stateRule.source.endpoint];
-        const dstEndpoint = (stateRule.target.type === 'endpoint' && stateRule.target.endpoint) ?
-            (target as Device)?.endpoints[stateRule.target.endpoint] : undefined;
-        const allClustersValid = stateRule.target.type === 'group' || (target as Device)?.type == "Coordinator";
+        const dstEndpoint =
+            stateRule.target.type === 'endpoint' && stateRule.target.endpoint
+                ? (target as Device)?.endpoints[stateRule.target.endpoint]
+                : undefined;
+        const allClustersValid = stateRule.target.type === 'group' || (target as Device)?.type == 'Coordinator';
         if (srcEndpoint && (dstEndpoint || allClustersValid)) {
             for (const cluster of [...srcEndpoint.clusters.input, ...srcEndpoint.clusters.output]) {
-                const supportedInputOutput = srcEndpoint.clusters.input.includes(cluster) && dstEndpoint?.clusters.output.includes(cluster);
-                const supportedOutputInput = srcEndpoint.clusters.output.includes(cluster) && dstEndpoint?.clusters.input.includes(cluster);
+                const supportedInputOutput =
+                    srcEndpoint.clusters.input.includes(cluster) && dstEndpoint?.clusters.output.includes(cluster);
+                const supportedOutputInput =
+                    srcEndpoint.clusters.output.includes(cluster) && dstEndpoint?.clusters.input.includes(cluster);
                 if (supportedInputOutput || supportedOutputInput || allClustersValid) {
                     possibleClusters.add(cluster);
                 }

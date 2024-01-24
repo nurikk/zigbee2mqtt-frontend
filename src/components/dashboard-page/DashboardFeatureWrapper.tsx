@@ -28,6 +28,7 @@ const typeToClassMap = {
     state: ['fa-star-half-alt'],
     brightness: ['fa-sun'],
     occupancy: ['fa-walking'],
+    presence: ['fa-person-rays'],
     current: ['fa-copyright', 'text-warning'],
     power: ['fa-power-off', 'text-success'],
     energy: ['fa-plug', 'text-info'],
@@ -53,10 +54,13 @@ const typeToClassMap = {
     away_mode: ['fa-plane', 'text-info'],
     vibration: ['fa-water fa-rotate-270'],
     power_outage_count: ['fa-plug-circle-xmark'],
+    action: ['fa-a'],
     angle_x: ['fa-x'],
     angle_y: ['fa-y'],
     angle_z: ['fa-z'],
     side: ['fa-cube'],
+    humidity_alarm: ['fa-triangle-exclamation'],
+    temperature_alarm: ['fa-triangle-exclamation'],
 };
 
 const getGenericFeatureIcon = (name: string, value: unknown): string => {
@@ -71,6 +75,9 @@ const getGenericFeatureIcon = (name: string, value: unknown): string => {
             classes.push(cx({ 'fa-door-closed text-muted': value, 'fa-door-open text-primary': !value }));
             break;
         case 'occupancy':
+            classes.push(cx({ 'text-warning': value }));
+            break;
+        case 'presence':
             classes.push(cx({ 'text-warning': value }));
             break;
         case 'tamper':

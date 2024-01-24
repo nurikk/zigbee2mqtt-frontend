@@ -29,7 +29,12 @@
         "the_only_endpoint": "The only endpoint",
         "unbind": "Unbind",
         "write": "Write",
-        "destination_endpoint": "Destination endpoint"
+        "destination_endpoint": "Destination endpoint",
+        "documentation": "Documentation"
+    },
+    "devConsole": {
+        "generate_external_definition": "Generate external definition",
+        "generated_external_definition": "Generated external definition"
     },
     "devicePage": {
         "about": "About",
@@ -2232,6 +2237,8 @@
         "external_converters": "External converters",
         "frontend": "Frontend",
         "frontend_version": "Frontend version",
+        "zigbee_herdsman_converters_version": "Zigbee-herdsman-converters version",
+        "zigbee_herdsman_version": "Zigbee-herdsman version",
         "main": "Main",
         "mqtt": "MQTT",
         "ota": "OTA updates",
@@ -2245,9 +2252,11 @@
         "translate": "Translate",
         "stats": "Stats",
         "coordinator_ieee_address": "Coordinator IEEE Address",
-        "request_z2m_backup": "Request Z2m backup",
+        "request_z2m_backup": "Request Z2M backup",
+        "download_z2m_backup": "Download Z2M backup",
         "add_install_code": "Add install code",
-        "homeassistant": "Home Assistant integration"
+        "homeassistant": "Home Assistant integration",
+        "localise_images": "Localise device images"
     },
     "touchlink": {
         "detected_devices_message": "Detected {{count}} touchlink devices.",
@@ -2323,7 +2332,8 @@
         "execute": "Execute",
         "command": "Command",
         "payload": "Payload",
-        "save_description": "Save description"
+        "save_description": "Save description",
+        "how_to_add_support": "How to add support"
     },
     "scene": {
         "scene_id": "Scene ID",

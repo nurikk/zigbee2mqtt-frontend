@@ -26,7 +26,8 @@
     "extensions": [],
     "theme": "light",
     "missingTranslations": {},
+    "generatedExternalDefinitions": {},
     "availability": {},
-    "prepearingBackup": false,
+    "preparingBackup": false,
     "backup": ""
 }

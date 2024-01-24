@@ -75,14 +75,26 @@ type UrlParams = {
     dev: string;
     tab?: TabName;
 };
-type PropsFromStore = Pick<GlobalState, 'bridgeInfo' | 'devices' | 'logs' | 'deviceStates'>;
+type PropsFromStore = Pick<
+    GlobalState,
+    'bridgeInfo' | 'devices' | 'logs' | 'deviceStates' | 'generatedExternalDefinitions' | 'theme'
+>;
 
 type DevicePageProps = RouteComponentProps<UrlParams> & PropsFromStore & DeviceApi & WithTranslation<'devicePage'>;
 
 function ContentRenderer(props: DevicePageProps): JSX.Element {
     const { match, devices, logs } = props;
-    const { readDeviceAttributes, writeDeviceAttributes, setDeviceOptions, executeCommand, bridgeInfo, deviceStates } =
-        props;
+    const {
+        readDeviceAttributes,
+        writeDeviceAttributes,
+        setDeviceOptions,
+        executeCommand,
+        generateExternalDefinition,
+        bridgeInfo,
+        deviceStates,
+        generatedExternalDefinitions,
+        theme,
+    } = props;
     const { tab, dev } = match.params;
     const device = devices[dev];
     const deviceState = deviceStates[device.friendly_name] ?? {};
@@ -113,7 +125,10 @@ function ContentRenderer(props: DevicePageProps): JSX.Element {
                     logs={logs}
                     readDeviceAttributes={readDeviceAttributes}
                     writeDeviceAttributes={writeDeviceAttributes}
+                    generateExternalDefinition={generateExternalDefinition}
+                    generatedExternalDefinitions={generatedExternalDefinitions}
                     executeCommand={executeCommand}
+                    theme={theme}
                 />
             );
         case 'scene':
@@ -160,7 +175,7 @@ export function DevicePage(props: DevicePageProps): JSX.Element {
     );
 }
 const devicePageWithRouter = withRouter(DevicePage);
-const mappedProps = ['devices', 'deviceStates', 'logs', 'bridgeInfo'];
+const mappedProps = ['devices', 'deviceStates', 'logs', 'bridgeInfo', 'generatedExternalDefinitions', 'theme'];
 const ConnectedDevicePage = withTranslation('devicePage')(
     connect<unknown, unknown, GlobalState, unknown>(mappedProps, actions)(devicePageWithRouter),
 );

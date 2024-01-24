@@ -1,3 +1,172 @@
+## [0.6.151](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.150...0.6.151) (2024-01-02)
+
+
+### Bug Fixes
+
+* **memoize:** fix memoize ([12bcb5f](https://github.com/nurikk/zigbee2mqtt-frontend/commit/12bcb5f573abf50545a507ad0e3ef2464fb36f9d))
+
+
+
+## [0.6.150](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.149...0.6.150) (2023-12-25)
+
+
+### Features
+
+* **dev-console:** add external definition generator ([#1866](https://github.com/nurikk/zigbee2mqtt-frontend/issues/1866)) ([945af60](https://github.com/nurikk/zigbee2mqtt-frontend/commit/945af6097bd6dc8aac0ee6247a637c3e5f7ea451))
+
+
+
+## [0.6.149](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.148...0.6.149) (2023-12-10)
+
+
+### Bug Fixes
+
+* **notification:** automatically hide notifications ([6e68715](https://github.com/nurikk/zigbee2mqtt-frontend/commit/6e68715c482c4281f188e08303d243fcc86db214))
+
+
+### Features
+
+* **memoize-table-columns:** memoize device list table columns ([ec9bf9e](https://github.com/nurikk/zigbee2mqtt-frontend/commit/ec9bf9e41d97a73b374978a598aff9ea6430e13e))
+* **scrolltotop:** add ScrollToTop component ([ab454fc](https://github.com/nurikk/zigbee2mqtt-frontend/commit/ab454fc957c9391e39e979e60aa723d344be5486))
+* **ui:** allow display illuminance_lux in dashboard ([5a8509a](https://github.com/nurikk/zigbee2mqtt-frontend/commit/5a8509a86cde169f4071f74d35cfad447ffac99d))
+
+
+
+## [0.6.148](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.147...0.6.148) (2023-12-05)
+
+
+### Bug Fixes
+
+* **i18n:** fix typo in German translations ([#1848](https://github.com/nurikk/zigbee2mqtt-frontend/issues/1848)) ([f23375f](https://github.com/nurikk/zigbee2mqtt-frontend/commit/f23375fee8c0527bef17d804de4359c7490b6283))
+
+
+
+## [0.6.147](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.146...0.6.147) (2023-11-21)
+
+
+### Features
+
+* **battery:** use `battery_state` ([c16faeb](https://github.com/nurikk/zigbee2mqtt-frontend/commit/c16faebe1b96bb7da9c48901a0f4223ba64b9683))
+
+
+
+## [0.6.146](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.145...0.6.146) (2023-11-20)
+
+
+### Features
+
+* **deviceImage:** allow to pre download device images ([db81940](https://github.com/nurikk/zigbee2mqtt-frontend/commit/db8194069b46cebc34cd4701d85109afe81c894a))
+
+
+
+## [0.6.145](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.144...0.6.145) (2023-11-20)
+
+
+### Bug Fixes
+
+* **Table:** fix uniq keys ([189ba35](https://github.com/nurikk/zigbee2mqtt-frontend/commit/189ba352815521ffbfdb43fc70b9478cb6bd6c21))
+
+
+### Features
+
+* **notifications:** replace notifications library ([1f477f1](https://github.com/nurikk/zigbee2mqtt-frontend/commit/1f477f15519a084cd1733ad6ed9635ecbe311063))
+
+
+
+## [0.6.144](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.143...0.6.144) (2023-11-19)
+
+
+### Features
+
+* **ota:** allow sorting by ota update avaliable state ([a298487](https://github.com/nurikk/zigbee2mqtt-frontend/commit/a298487e1825a6ed50c45c2fde7bf6cf8d78b15e)), closes [#1819](https://github.com/nurikk/zigbee2mqtt-frontend/issues/1819)
+
+
+
+## [0.6.143](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.142...0.6.143) (2023-11-09)
+
+
+### Bug Fixes
+
+* **composite/list:** fix climate schedule not working ([5803577](https://github.com/nurikk/zigbee2mqtt-frontend/commit/58035775b6cdc622ec7a0468481fce08fae9a538))
+
+
+
+## [0.6.142](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.141...0.6.142) (2023-10-27)
+
+
+### Bug Fixes
+
+* **list:** fix list editor ([3df395b](https://github.com/nurikk/zigbee2mqtt-frontend/commit/3df395b774816b7605cf34699c4e9cdf288f1b56))
+* **pretty:** pretty it ([4009890](https://github.com/nurikk/zigbee2mqtt-frontend/commit/4009890e0ece16a069b511e079ac341e343e3d19))
+
+
+
+## [0.6.141](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.140...0.6.141) (2023-10-27)
+
+
+### Bug Fixes
+
+* **pretty:** pretty it ([b29dabf](https://github.com/nurikk/zigbee2mqtt-frontend/commit/b29dabf0f3898e799509fb35ccdddc00b97db5db))
+
+
+
+## [0.6.140](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.139...0.6.140) (2023-10-24)
+
+
+### Bug Fixes
+
+* **composite:** fix apply button missing for composite exposes [#1759](https://github.com/nurikk/zigbee2mqtt-frontend/issues/1759) ([8be8925](https://github.com/nurikk/zigbee2mqtt-frontend/commit/8be8925d0ec95ae271e02f832e24a4c82531dff0))
+* **gradient:** submit gradient through apply button instead of every value ([97e2c6d](https://github.com/nurikk/zigbee2mqtt-frontend/commit/97e2c6db6f68601138099c31c99f5f24c2e9587f))
+
+
+
+## [0.6.139](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.138...0.6.139) (2023-10-22)
+
+
+
+## [0.6.138](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.137...0.6.138) (2023-10-21)
+
+
+### Bug Fixes
+
+* **code-style:** run prettier ([4731e09](https://github.com/nurikk/zigbee2mqtt-frontend/commit/4731e0935d82359fc60382280df3ddd1f5d7287f)), closes [#1803](https://github.com/nurikk/zigbee2mqtt-frontend/issues/1803)
+
+
+### Features
+
+* **about:** add zigbee-herdsman-converters/zigbee-herdsman version to about page ([#1817](https://github.com/nurikk/zigbee2mqtt-frontend/issues/1817)) ([474888c](https://github.com/nurikk/zigbee2mqtt-frontend/commit/474888cb80ec5bbf8f1f1999627e2ff76803b7d6))
+* **dashboard:** add icons for some features ([652b689](https://github.com/nurikk/zigbee2mqtt-frontend/commit/652b689207d097a06ca779ac5b1e0b44cc2bf184))
+* **eslint:** add to GH Actions check ([db8ee06](https://github.com/nurikk/zigbee2mqtt-frontend/commit/db8ee06baff6156d7a54b5b263ecd5606e98e548))
+
+
+
+## [0.6.137](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.136...0.6.137) (2023-10-04)
+
+
+### Bug Fixes
+
+* **device image:** remove slsys pictures since it doesn't exist anymore ([a2e3dc3](https://github.com/nurikk/zigbee2mqtt-frontend/commit/a2e3dc31110b33aa5fe38e5e8ec7970aabf315bf))
+* **expose:** label not shown ([a9c2291](https://github.com/nurikk/zigbee2mqtt-frontend/commit/a9c22917c20050739def61a542746a257044cdfb))
+* **getCurrentTheme:** fix light theme switching ([91d8508](https://github.com/nurikk/zigbee2mqtt-frontend/commit/91d85081c4d84b587803b2787b10abd3c610ae38))
+* **typo:** correct typo ([5764c1f](https://github.com/nurikk/zigbee2mqtt-frontend/commit/5764c1f7dd7dc0029f3100f89f44b4aa9ae3c7ef))
+
+
+### Features
+
+* **ci:** check code style ([0f1994d](https://github.com/nurikk/zigbee2mqtt-frontend/commit/0f1994d4e96c32017a4aa814dfac69d4b8ba1f7c))
+* **deps:** add engine dependency ([ab54eda](https://github.com/nurikk/zigbee2mqtt-frontend/commit/ab54eda4e97637efd9a6e928d7902348dbd10e17))
+
+
+
+## [0.6.136](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.135...0.6.136) (2023-09-21)
+
+
+### Bug Fixes
+
+* **expose:** fix `undefined` in label for binary state expose ([912b1b0](https://github.com/nurikk/zigbee2mqtt-frontend/commit/912b1b0d0f2c0a2f252ddbeffdc2bdf909bbb042))
+
+
+
 ## [0.6.135](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.134...0.6.135) (2023-09-01)
 
 

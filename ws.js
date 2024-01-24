@@ -9,7 +9,7 @@ function startServer() {
     wss.on('connection', (ws) => {
         const messages = JSON.parse(fs.readFileSync('./ws-messages/onConnect.json'));
 
-        messages.forEach(message => {
+        messages.forEach((message) => {
             ws.send(JSON.stringify(message));
         });
 

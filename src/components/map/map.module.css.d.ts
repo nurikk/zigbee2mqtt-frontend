@@ -21,26 +21,4 @@ declare const classNames: {
     readonly offline: 'offline';
     readonly controls: 'controls';
 };
-export default classNames;
-export type ClassNames =
-    | 'container'
-    | 'img'
-    | 'node'
-    | 'link'
-    | 'linkLabel'
-    | 'links'
-    | 'nodes'
-    | 'EndDevice'
-    | 'Coordinator'
-    | 'Router'
-    | 'BrokenLink'
-    | 'Coordinator2Router'
-    | 'Router2Coordinator'
-    | 'Router2Router'
-    | 'Coordinator2EndDevice'
-    | 'EndDevice2Coordinator'
-    | 'Router2EndDevice'
-    | 'EndDevice2Router'
-    | 'foreignObject'
-    | 'offline'
-    | 'controls';
+export = classNames;

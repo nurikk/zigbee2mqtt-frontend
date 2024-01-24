@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Device } from '../../types';
+import { supportNewDevicesUrl } from '../../utils';
 
 type VendorProps = {
     device: Device;
@@ -28,8 +29,8 @@ export const VendorLink: React.FunctionComponent<VendorProps> = (props: VendorPr
 
 export const ModelLink: React.FunctionComponent<VendorProps> = (props: VendorProps) => {
     const { device, anchor } = props;
-    let url = 'https://www.zigbee2mqtt.io/advanced/support-new-devices/01_support_new_devices.html';
     let title = device.model_id;
+    let url = supportNewDevicesUrl;
     if (device.supported && device.definition) {
         const detailsAnchor = [
             encodeURIComponent(device.definition?.vendor?.toLowerCase()),
@@ -55,6 +56,10 @@ export const OTALink: React.FunctionComponent<VendorProps> = (props: VendorProps
     switch (device?.definition?.vendor) {
         case 'IKEA':
             url = `https://ww8.ikea.com/ikeahomesmart/releasenotes/releasenotes.html`;
+            break;
+
+        case 'Inovelli':
+            url = `https://help.inovelli.com/en/articles/8503774-what-is-the-latest-firmware-version-for-your-device#h_b74c1e7dc6`;
             break;
 
         case 'Philips':

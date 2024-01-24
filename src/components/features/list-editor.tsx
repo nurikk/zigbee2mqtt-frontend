@@ -26,6 +26,9 @@ const ListEditor: FunctionComponent<ListEditorProps> = (props) => {
 
     const onItemChange = (itemValue: any, itemIndex: number) => {
         const newListValue = [...currentValue];
+        if (typeof itemValue === 'object') {
+            itemValue = { ...currentValue[itemIndex], ...itemValue };
+        }
         newListValue[itemIndex] = itemValue;
         replaceList(newListValue);
     };

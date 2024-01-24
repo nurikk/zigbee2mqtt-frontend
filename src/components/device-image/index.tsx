@@ -14,23 +14,19 @@ type DeviceImageProps = {
     type?: 'img' | 'svg';
 };
 
-const sanitizeModelIDForImageUrl = (modelName: string): string => modelName?.replace('/', '_');
-
 type ImageGeneratorFn = (device: Device) => string | undefined;
-const getZ2mDeviceImage = (device: Device): string =>
+export const getZ2mDeviceImage = (device: Device): string =>
     `https://www.zigbee2mqtt.io/images/devices/${sanitizeZ2MDeviceName(device?.definition?.model)}.jpg`;
 const getConverterDeviceImage = (device: Device): string | undefined => device.definition?.icon;
-const getSlsDeviceImage = (device: Device): string =>
-    `https://slsys.github.io/Gateway/devices/png/${sanitizeModelIDForImageUrl(device.model_id)}.png`;
 
+/* prettier-ignore */
 const AVAILABLE_GENERATORS: ImageGeneratorFn[] = [
     getConverterDeviceImage,
     getZ2mDeviceImage,
-    getSlsDeviceImage,
     () => genericDevice,
 ];
 
-class ErrorBoundary extends React.Component<{}, { hasError: boolean }> {
+class ErrorBoundary extends React.Component<unknown, { hasError: boolean }> {
     constructor(props) {
         super(props);
         this.state = { hasError: false };

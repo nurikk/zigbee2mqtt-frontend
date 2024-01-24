@@ -84,6 +84,8 @@ export interface BridgeInfo {
     permit_join_timeout: number;
     commit?: string;
     version?: string;
+    zigbee_herdsman_converters: {version: string},
+    zigbee_herdsman: {version: string},
     coordinator?: {
         meta?: {
             revision?: string;
@@ -127,7 +129,7 @@ export interface BinaryFeature extends GenericExposedFeature {
 
 export interface ListFeature extends GenericExposedFeature {
     type: "list";
-    // bad design descision
+    // bad design decision
     item_type: "number" | GenericOrCompositeFeature;
 
     length_min?: number;

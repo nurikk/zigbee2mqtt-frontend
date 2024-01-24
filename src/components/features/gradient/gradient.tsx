@@ -4,6 +4,8 @@ import { BaseFeatureProps } from '../base';
 import ColorEditor from '../../color-editor/color-editor';
 import * as convertColors from 'color-convert';
 import Button from '../../button';
+import { WithTranslation, withTranslation } from 'react-i18next';
+import cx from 'classnames';
 
 const hexToRGB = (hex: string): RGBColor => {
     hex = hex.replace('#', '');
@@ -21,9 +23,11 @@ const rgbToHex = (rgb: RGBColor): string => {
 
 type GradientProps = BaseFeatureProps<GradientFeature>;
 //{ deviceState: { gradient: string[] }
-const Gradient: FunctionComponent<GradientProps> = (props) => {
+const Gradient: FunctionComponent<GradientProps & WithTranslation<'gradient'>> = (props) => {
     const gradientColors = 5;
     const {
+        t,
+        minimal,
         onChange,
         feature: { endpoint, length_min, length_max },
         deviceState,
@@ -34,21 +38,18 @@ const Gradient: FunctionComponent<GradientProps> = (props) => {
         const c = [...colors];
         c[idx] = hexToRGB(hex);
         setColors(c);
-        onChange(endpoint as Endpoint, { gradient: c.map(rgbToHex) });
     };
 
     const addColor = () => {
         const c = [...colors];
         c.push({ r: 255, g: 255, b: 255 });
         setColors(c);
-        onChange(endpoint as Endpoint, { gradient: c.map(rgbToHex) });
     };
 
     const removeColor = (idx: number) => {
         const c = [...colors];
         c.splice(idx, 1);
         setColors(c);
-        onChange(endpoint as Endpoint, { gradient: c.map(rgbToHex) });
     };
 
     useEffect(() => {
@@ -85,14 +86,22 @@ const Gradient: FunctionComponent<GradientProps> = (props) => {
                     )}
                 </div>
             ))}
-
             {canAdd && (
                 <Button<void> className="btn btn-success me-2" onClick={addColor}>
                     +
                 </Button>
             )}
+            <div>
+                <Button
+                    className={cx('btn btn-primary float-end', { 'btn-sm': minimal })}
+                    onClick={() => onChange(endpoint as Endpoint, { gradient: colors.map(rgbToHex) })}
+                >
+                    {t('common:apply')}
+                </Button>
+            </div>
+            ,
         </div>
     );
 };
 
-export default Gradient;
+export default withTranslation(['gradient', 'common'])(React.memo(Gradient));

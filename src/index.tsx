@@ -1,14 +1,16 @@
 import 'react-app-polyfill/stable';
-import 'react-notifications/lib/notifications.css';
+import 'react-notifications-component/dist/theme.css';
 import '@fortawesome/fontawesome-free/css/all.css';
 import './styles/styles.global.scss';
-import { NotificationContainer } from 'react-notifications';
+
 import React, { FunctionComponent } from 'react';
 import NiceModal from '@ebay/nice-modal-react';
+import { createRoot } from 'react-dom/client';
 
 import ConnectedMap from './components/map';
 
 import { Switch, Route, HashRouter } from 'react-router-dom';
+import { ReactNotifications } from 'react-notifications-component';
 
 import ConnectedDevicePage from './components/device-page';
 import TouchlinkPage from './components/touchlink-page';
@@ -17,17 +19,17 @@ import store from './store';
 import { Provider } from 'unistore/react';
 import api from './ws-client';
 
-import ConnectedSettingsPage from './components/settings';
+import ConnectedSettingsPage from './components/settings-page';
 import NavBar from './components/navbar';
 import ConnectedGroupsPage from './components/groups';
 import ConnectedZigbeePage from './components/zigbee';
 import LogsPage from './components/logs-page';
 import OtaPage from './components/ota-page';
-import ReactDOM from 'react-dom';
 import ErrorBoundary from './components/ErrorBoundary';
 import DashboardPage from './components/dashboard-page';
 import ExtensionsEditorPage from './components/extensions-editor';
 import GroupPage from './components/groups/GroupPage';
+import ScrollToTop from './components/scroll-to-top';
 
 import { ThemeSwitcherProvider } from 'react-css-theme-switcher';
 import i18n from './i18n';
@@ -47,13 +49,14 @@ api.connect();
 const Main = () => {
     const { theme } = store.getState();
     return (
-        <>
-            <NotificationContainer />
+        <React.StrictMode>
+            <ReactNotifications />
             <I18nextProvider i18n={i18n}>
                 <NiceModal.Provider>
                     <Provider store={store}>
                         <ThemeSwitcherProvider themeMap={themes} defaultTheme={theme}>
                             <HashRouter>
+                                <ScrollToTop />
                                 <div className="main">
                                     <NavBar />
                                     <main className="content p-0 p-sm-3">
@@ -157,8 +160,11 @@ const Main = () => {
                     </Provider>
                 </NiceModal.Provider>
             </I18nextProvider>
-        </>
+        </React.StrictMode>
     );
 };
 
-ReactDOM.render(<Main />, document.getElementById('root'));
+const domNode = document.getElementById('root');
+if (domNode) {
+    createRoot(domNode).render(<Main />);
+}

@@ -1,5 +1,6 @@
 **
 !index.js
+!CHANGELOG.md
 !dist/**/*
 dist/report.html
 *.map

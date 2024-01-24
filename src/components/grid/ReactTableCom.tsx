@@ -14,13 +14,14 @@ import {
 import cx from 'classnames';
 import { useTranslation } from 'react-i18next';
 
-import debounce from 'lodash/debounce';
 import { local } from '@toolz/local-storage';
+type PartialTableState = Partial<TableState<Record<string, unknown>>>;
 
 interface Props {
     id: string;
     columns: Array<Column<any>>;
     data: Array<any>;
+    initialState?: PartialTableState;
 }
 
 type GlobalFilterProps = {
@@ -86,8 +87,8 @@ const stateReducer = (
     return newState;
 };
 
-export const Table: React.FC<Props> = ({ columns, data, id }) => {
-    const initialState = local.getItem<Partial<TableState<Record<string, unknown>>>>(getStorageKey(id)) || {};
+export const Table: React.FC<Props> = ({ columns, data, id, initialState = {} }) => {
+    const storedOrDefaultState = local.getItem<PartialTableState>(getStorageKey(id)) || initialState;
     const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow, state, visibleColumns, setGlobalFilter } =
         useTable<Record<string, unknown>>(
             {
@@ -97,7 +98,7 @@ export const Table: React.FC<Props> = ({ columns, data, id }) => {
                 data,
                 autoResetSortBy: false,
                 autoResetFilters: false,
-                initialState,
+                initialState: storedOrDefaultState,
             },
             useGlobalFilter,
             useSortBy,
@@ -111,11 +112,15 @@ export const Table: React.FC<Props> = ({ columns, data, id }) => {
                         <GlobalFilter globalFilter={state.globalFilter} setGlobalFilter={setGlobalFilter} />
                     </th>
                 </tr>
-                {headerGroups.map((headerGroup: HeaderGroup<Record<string, unknown>>) => (
-                    <tr {...headerGroup.getHeaderGroupProps()}>
+                {headerGroups.map((headerGroup: HeaderGroup<Record<string, unknown>>, idx) => (
+                    <tr {...headerGroup.getHeaderGroupProps()} key={idx}>
                         <th className="text-nowrap">#</th>
                         {headerGroup.headers.map((column) => (
-                            <th className="text-nowrap" {...column.getHeaderProps(column.getSortByToggleProps())}>
+                            <th
+                                className="text-nowrap"
+                                {...column.getHeaderProps(column.getSortByToggleProps())}
+                                key={column.id}
+                            >
                                 <span className={cx({ 'btn-link me-1': column.canSort })}>
                                     {column.render('Header')}
                                 </span>
@@ -137,12 +142,14 @@ export const Table: React.FC<Props> = ({ columns, data, id }) => {
                 {rows.map((row, i) => {
                     prepareRow(row);
                     return (
-                        <tr {...row.getRowProps()}>
+                        <tr {...row.getRowProps()} key={row.id}>
                             <td>
                                 <div className="font-weight-bold">{i + 1}</div>
                             </td>
                             {row.cells.map((cell) => (
-                                <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                                <td {...cell.getCellProps()} key={cell.column.id}>
+                                    {cell.render('Cell')}
+                                </td>
                             ))}
                         </tr>
                     );

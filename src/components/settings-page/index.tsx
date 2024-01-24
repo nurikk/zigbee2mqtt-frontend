@@ -15,12 +15,14 @@ import cloneDeep from 'lodash/cloneDeep';
 import uiSchemas from './uiSchema.json';
 import { BridgeApi } from '../../actions/BridgeApi';
 import { WithTranslation, withTranslation } from 'react-i18next';
-import customFields from './../../i18n/rjsf-translation-fields';
+import customFields from '../../i18n/rjsf-translation-fields';
 import { Stats } from './stats';
 import frontentPackageJson from '../../../package.json';
 import { formatDate } from '../../utils';
 import { saveAs } from 'file-saver';
 import Spinner from '../spinner';
+import ImageLocaliser from './image-localiser';
+import { DeviceApi } from '../../actions/DeviceApi';
 
 type SettingsTab = 'settings' | 'bridge' | 'about' | 'tools' | 'donate' | 'translate';
 
@@ -115,7 +117,7 @@ type PropsFromStore = Pick<
     'bridgeInfo' | 'missingTranslations' | 'devices' | 'backup' | 'preparingBackup'
 >;
 export class SettingsPage extends Component<
-    PropsFromStore & SettingsPageProps & BridgeApi & UtilsApi & WithTranslation<'setting'>,
+    PropsFromStore & SettingsPageProps & DeviceApi & BridgeApi & UtilsApi & WithTranslation<'setting'>,
     SettingsPageState
 > {
     state = {
@@ -227,6 +229,14 @@ export class SettingsPage extends Component<
                 content: <>{bridgeInfo.coordinator?.ieee_address ?? t('common:unknown')}</>,
             },
             { translationKey: 'frontend_version', content: frontentPackageJson.version },
+            {
+                translationKey: 'zigbee_herdsman_converters_version',
+                content: bridgeInfo.zigbee_herdsman_converters?.version ?? t('common:unknown'),
+            },
+            {
+                translationKey: 'zigbee_herdsman_version',
+                content: bridgeInfo.zigbee_herdsman?.version ?? t('common:unknown'),
+            },
             { translationKey: 'stats', content: <Stats devices={devices} /> },
         ];
 
@@ -290,7 +300,7 @@ export class SettingsPage extends Component<
     };
 
     renderTools(): JSX.Element {
-        const { exportState, restartBridge, t } = this.props;
+        const { exportState, restartBridge, setDeviceOptions, devices, t } = this.props;
         return (
             <div className="p-3">
                 <Button className="btn btn-primary d-block mt-2" onClick={exportState}>
@@ -303,6 +313,7 @@ export class SettingsPage extends Component<
                 <Button className="btn btn-primary d-block mt-2" onClick={this.addInstallCode}>
                     {t('add_install_code')}
                 </Button>
+                <ImageLocaliser setDeviceOptions={setDeviceOptions} devices={devices} />
             </div>
         );
     }
@@ -428,7 +439,7 @@ export class SettingsPage extends Component<
 const SettingsPageWithRouter = withRouter(SettingsPage);
 const mappedProps = ['bridgeInfo', 'missingTranslations', 'devices', 'backup', 'preparingBackup'];
 const ConnectedSettingsPage = withTranslation(['settings', 'common'])(
-    connect<Record<string, unknown>, Record<string, unknown>, GlobalState, BridgeApi>(
+    connect<Record<string, unknown>, Record<string, unknown>, GlobalState, DeviceApi & BridgeApi>(
         mappedProps,
         actions,
     )(SettingsPageWithRouter),
