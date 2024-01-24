@@ -1,5 +1,5 @@
 import api from "../ws-client";
-import { AttributeInfo } from "../components/device-page/dev-console";
+import { AttributeInfo } from '../components/device-page/AttributeEditor';
 import { Attribute, Cluster, Endpoint, FriendlyName, IEEEEAddress } from "../types";
 import { toDeviceId } from "./actions";
 
