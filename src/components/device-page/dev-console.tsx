@@ -1,7 +1,6 @@
 import React, { ChangeEvent, Component } from 'react';
 import { Attribute, Cluster, Device, Endpoint } from '../../types';
 import ClusterPicker, { PickerType } from '../cluster-picker';
-import AceEditor from 'react-ace';
 
 import DataType from 'zigbee-herdsman/dist/zcl/definition/dataType';
 import ZclCluster from 'zigbee-herdsman/dist/zcl/definition/cluster';
@@ -11,9 +10,11 @@ import { DeviceApi } from '../../actions/DeviceApi';
 import { GlobalState, LogMessage } from '../../store';
 import { WithTranslation, withTranslation } from 'react-i18next';
 import EndpointPicker from '../endpoint-picker';
-import { getEndpoints, supportNewDevicesUrl } from '../../utils';
+import { getEndpoints } from '../../utils';
 import { CommandExecutor } from './CommandExecutor';
 import { LastLogResult } from './LastLogResult';
+import ExternalDefinition from './ExternalDefinition';
+import { Theme } from '@rjsf/bootstrap-5';
 
 interface DevConsoleProps
     extends WithTranslation,
@@ -108,10 +109,6 @@ export class DevConsole extends Component<DevConsoleProps, DevConsoleState> {
             {},
         );
     };
-    onGenerateExternalDefinitionClick = (): void => {
-        const { generateExternalDefinition, device } = this.props;
-        generateExternalDefinition(device.ieee_address);
-    };
 
     onWriteClick = (): void => {
         const { writeDeviceAttributes, device } = this.props;
@@ -167,6 +164,8 @@ export class DevConsole extends Component<DevConsoleProps, DevConsoleState> {
         const noSelectedCluster = cluster === '';
         const { t, device } = this.props;
         const endpoints = getEndpoints(device);
+        const logsFilterFn = (l: LogMessage) =>
+            logStartingStrings.some((startString) => l.message.startsWith(startString));
         return (
             <>
                 <div className="mb-3 row">
@@ -216,61 +215,34 @@ export class DevConsole extends Component<DevConsoleProps, DevConsoleState> {
                         </Button>
                     </div>
                 </div>
+                <LastLogResult logs={this.props.logs} filterFn={logsFilterFn} />
             </>
         );
     }
-    renderGenerateExternalDefinition(): JSX.Element {
-        const { t, generatedExternalDefinitions, device, theme } = this.props;
-        const externalDefinition = generatedExternalDefinitions[device.ieee_address];
-        if (externalDefinition) {
-            const editorTheme = theme === 'light' ? 'github' : 'dracula';
-            return (
-                <>
-                    {t('generated_external_definition')} (
-                    <a href={supportNewDevicesUrl} target="_blank" rel="noreferrer">
-                        {t('documentation')}
-                    </a>
-                    )
-                    <AceEditor
-                        setOptions={{ useWorker: false }}
-                        mode="javascript"
-                        readOnly={true}
-                        name="UNIQUE_ID_OF_DIV"
-                        editorProps={{ $blockScrolling: true }}
-                        value={externalDefinition}
-                        width="100%"
-                        maxLines={Infinity}
-                        theme={editorTheme}
-                        showPrintMargin={false}
-                    />
-                </>
-            );
-        } else {
-            return (
-                <Button<void> className="btn btn-primary" onClick={this.onGenerateExternalDefinitionClick}>
-                    {t('generate_external_definition')}
-                </Button>
-            );
-        }
-    }
+
     render(): JSX.Element {
-        const { executeCommand, logs, device } = this.props;
-        const logsFilterFn = (l: LogMessage) =>
-            logStartingStrings.some((startString) => l.message.startsWith(startString));
         return (
             <div>
                 <div className="card">
-                    <div className="card-body">{this.renderGenerateExternalDefinition()}</div>
-                </div>
-                <div className="card">
                     <div className="card-body">
-                        {this.renderRead()}
-                        <LastLogResult logs={logs} filterFn={logsFilterFn} />
+                        <ExternalDefinition
+                            device={this.props.device}
+                            theme={this.props.theme}
+                            generateExternalDefinition={this.props.generateExternalDefinition}
+                            generatedExternalDefinitions={this.props.generatedExternalDefinitions}
+                        />
                     </div>
                 </div>
                 <div className="card">
+                    <div className="card-body">{this.renderRead()}</div>
+                </div>
+                <div className="card">
                     <div className="card-body">
-                        <CommandExecutor device={device} logs={logs} executeCommand={executeCommand} />
+                        <CommandExecutor
+                            device={this.props.device}
+                            logs={this.props.logs}
+                            executeCommand={this.props.executeCommand}
+                        />
                     </div>
                 </div>
             </div>
