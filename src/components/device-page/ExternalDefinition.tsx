@@ -14,7 +14,7 @@ export interface ExternalDefinitionProps
     device: Device;
 }
 
-class ExternalDefinition extends React.Component<ExternalDefinitionProps, {}> {
+class ExternalDefinition extends React.Component<ExternalDefinitionProps, Record<string, never>> {
     onGenerateExternalDefinitionClick = (): void => {
         const { generateExternalDefinition, device } = this.props;
         generateExternalDefinition(device.ieee_address);

@@ -21,7 +21,7 @@ interface DevConsoleProps
     logs: LogMessage[];
 }
 
-export class DevConsole extends Component<DevConsoleProps, {}> {
+export class DevConsole extends Component<DevConsoleProps, Record<string, never>> {
     render(): JSX.Element {
         return (
             <div>
