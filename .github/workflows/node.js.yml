@@ -30,11 +30,12 @@ jobs:
         node-version: 18
         cache: pnpm
 
-    - run: pnpm install --frozen-lockfile
-    - run: pnpm build
+    - run: pnpm install --frozen-lockfile    
 
     - name: Check static code analysis.
       run: pnpm run test:eslint
 
     - name: Check code style.
       run: pnpm run test:pretty
+    
+    - run: pnpm build
