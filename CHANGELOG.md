@@ -1,3 +1,18 @@
+## [0.6.152](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.151...0.6.152) (2024-01-25)
+
+
+### Bug Fixes
+
+* **linter:** update component types in ExternalDefinition and DevConsole ([438a61c](https://github.com/nurikk/zigbee2mqtt-frontend/commit/438a61cbe25e5731e2635944de24733a85d86539))
+
+
+### Features
+
+* **device-page:** fitler devices in select ([814cd8c](https://github.com/nurikk/zigbee2mqtt-frontend/commit/814cd8c9f06ae5ab5bf4ccd9e45bd428bfb79635))
+* **device-page:** nav to devices from device page ([f054d04](https://github.com/nurikk/zigbee2mqtt-frontend/commit/f054d04f2c8aac4505d412420e548d29dc41272c))
+
+
+
 ## [0.6.151](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.150...0.6.151) (2024-01-02)
 
 
