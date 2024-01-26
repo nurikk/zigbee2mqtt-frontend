@@ -33,6 +33,12 @@ Z2M_API_URI="ws://192.168.1.200:8080" npm run start
 open http://localhost:3030/
 ```
 
+# Tests
+
+```bash
+npm run test:unit
+```
+
 # Build
 
 ```bash

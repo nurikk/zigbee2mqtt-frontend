@@ -17,7 +17,6 @@ import get from 'lodash/get';
 
 import { filterDeviceByFeatures } from '../groups/DeviceGroupRow';
 import { getStorageKey, GlobalFilter, persist, restore } from '../grid/ReactTableCom';
-import { local } from '@toolz/local-storage';
 import { DEVICES_GLOBAL_NAME } from '../zigbee/DevicesTable';
 
 type PropsFromStore = Pick<GlobalState, 'devices' | 'deviceStates' | 'bridgeInfo'>;

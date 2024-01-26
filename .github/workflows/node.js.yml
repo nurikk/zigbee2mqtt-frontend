@@ -16,26 +16,31 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
+    - name: 📥 Checkout Repository
+      uses: actions/checkout@v4
 
-    - uses: pnpm/action-setup@v2
-      name: Install pnpm
-      id: pnpm-install
+    - name: 📦 Install pnpm
+      uses: pnpm/action-setup@v2
       with:
         version: 8
 
-    - name: Use Node.js
+    - name: 🚀 Use Node.js
       uses: actions/setup-node@v3
       with:
         node-version: 18
         cache: pnpm
 
-    - run: pnpm install --frozen-lockfile    
+    - name: 🛠️ Install Dependencies
+      run: pnpm install --frozen-lockfile
 
-    - name: Check static code analysis.
+    - name: 🔍 Check static code analysis
       run: pnpm run test:eslint
 
-    - name: Check code style.
+    - name: 💅 Check code style
       run: pnpm run test:pretty
-    
-    - run: pnpm build
+
+    - name: 🧪 Run tests
+      run: pnpm run test:unit
+
+    - name: 🏗️ Build production bundle
+      run: pnpm build

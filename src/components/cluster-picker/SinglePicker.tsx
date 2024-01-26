@@ -5,7 +5,7 @@ import { SinglePickerProps, isClusterGroup, clusterDescriptions } from './index'
 
 export function SinglePicker(props: SinglePickerProps): JSX.Element {
     const [pickerId] = useState(randomString(5));
-    const { clusters = [], onChange, value, label, disabled } = props;
+    const { clusters = [], onChange, value, label, disabled, ...rest } = props;
     const { t } = useTranslation(['zigbee', 'common']);
     const options = [
         <option key="hidden" hidden>
@@ -53,7 +53,14 @@ export function SinglePicker(props: SinglePickerProps): JSX.Element {
                     {label}
                 </label>
             )}
-            <select id={pickerId} value={value} className="form-select" onChange={onChangeHandler} disabled={disabled}>
+            <select
+                id={pickerId}
+                value={value}
+                className="form-select"
+                onChange={onChangeHandler}
+                disabled={disabled}
+                {...rest}
+            >
                 {options}
             </select>
         </div>
