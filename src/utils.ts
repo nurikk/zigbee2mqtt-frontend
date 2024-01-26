@@ -5,7 +5,7 @@ import { Theme } from "./components/theme-switcher";
 import JSZip from 'jszip';
 import { saveAs } from 'file-saver';
 
-import { local } from "@toolz/local-storage";
+import local from "store2";
 import debounce from "lodash/debounce";
 
 
@@ -172,12 +172,12 @@ const THEME_STORAGE_KEY = 'z2m-theme';
 
 export const getCurrentTheme = (): Theme => {
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const selectedTheme = local.getItem<Theme>(THEME_STORAGE_KEY);
+    const selectedTheme = local.get<Theme>(THEME_STORAGE_KEY);
     return selectedTheme || (prefersDark ? 'dark' : 'light');
 };
 export const saveCurrentTheme = (theme: string): void => {
     console.log('save', theme);
-    local.setItem(THEME_STORAGE_KEY, theme);
+    local.set(THEME_STORAGE_KEY, theme);
 }
 
 

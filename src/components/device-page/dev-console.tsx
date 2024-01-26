@@ -42,7 +42,6 @@ export class DevConsole extends Component<DevConsoleProps, Record<string, never>
                             device={this.props.device}
                             logs={this.props.logs}
                             i18n={this.props.i18n}
-                            executeCommand={this.props.executeCommand}
                             readDeviceAttributes={this.props.readDeviceAttributes}
                             writeDeviceAttributes={this.props.writeDeviceAttributes}
                         />

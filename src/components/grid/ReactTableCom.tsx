@@ -14,7 +14,7 @@ import {
 import cx from 'classnames';
 import { useTranslation } from 'react-i18next';
 
-import { local } from '@toolz/local-storage';
+import * as local from 'store2';
 type PartialTableState = Partial<TableState<Record<string, unknown>>>;
 
 interface Props {
@@ -66,11 +66,11 @@ export const getStorageKey = (id: string) => `${TABLE_STORAGE_PREFIX}${id}`;
 export type StateItem = Partial<TableState<Record<string, unknown>>>;
 
 export const persist = (key: string, data: StateItem): void => {
-    local.setItem(getStorageKey(key), data);
+    local.set(getStorageKey(key), data);
 };
 
 export const restore = (key: string): StateItem => {
-    return local.getItem<StateItem>(key);
+    return local.get<StateItem>(key);
 };
 
 const stateReducer = (
@@ -88,7 +88,7 @@ const stateReducer = (
 };
 
 export const Table: React.FC<Props> = ({ columns, data, id, initialState = {} }) => {
-    const storedOrDefaultState = local.getItem<PartialTableState>(getStorageKey(id)) || initialState;
+    const storedOrDefaultState = local.get<PartialTableState>(getStorageKey(id)) || initialState;
     const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow, state, visibleColumns, setGlobalFilter } =
         useTable<Record<string, unknown>>(
             {

@@ -14,7 +14,7 @@ import DataType from 'zigbee-herdsman/dist/zcl/definition/dataType';
 
 export interface AttributeEditorProps
     extends WithTranslation,
-        Pick<DeviceApi, 'executeCommand' | 'readDeviceAttributes' | 'writeDeviceAttributes'>,
+        Pick<DeviceApi, 'readDeviceAttributes' | 'writeDeviceAttributes'>,
         Pick<GlobalState, 'theme'> {
     device: Device;
     logs: LogMessage[];
@@ -29,10 +29,7 @@ export type AttributeEditorState = {
     cluster: Cluster;
     endpoint: Endpoint;
     attributes: AttributeInfo[];
-    mode: Mode;
 };
-
-export type Mode = 'read' | 'write';
 
 export type AttributeValueInputProps = {
     onChange(attribute: Attribute, value: unknown): void;
@@ -42,7 +39,7 @@ export type AttributeValueInputProps = {
 };
 
 function AttributeValueInput(props: AttributeValueInputProps): JSX.Element {
-    const { value, onChange, attribute, definition } = props;
+    const { value, onChange, attribute, definition, ...rest } = props;
     const typesMap = {
         [DataType.charStr]: 'string',
         [DataType.longCharStr]: 'string',
@@ -54,7 +51,15 @@ function AttributeValueInput(props: AttributeValueInputProps): JSX.Element {
         onChange(attribute, val);
     };
 
-    return <input className="form-control" type={type} value={value as string | number} onChange={onValueChanged} />;
+    return (
+        <input
+            className="form-control"
+            type={type}
+            value={value as string | number}
+            onChange={onValueChanged}
+            {...rest}
+        />
+    );
 }
 const logStartingStrings = ['Read result of', "Publish 'set' 'read' to", "Publish 'set' 'write' to", 'Wrote '];
 
@@ -67,7 +72,6 @@ class AttributeEditor extends React.Component<AttributeEditorProps, AttributeEdi
             endpoint: defaultEndpoint,
             cluster: '',
             attributes: [],
-            mode: 'read',
         };
     }
 
@@ -139,12 +143,14 @@ class AttributeEditor extends React.Component<AttributeEditorProps, AttributeEdi
                                 attribute={attribute}
                                 definition={definition}
                                 onChange={this.onAttributeValueChange}
+                                data-testid="attribute-value-input"
                             />
                         </div>
                         <div className="col-2">
                             <Button<Attribute>
                                 className="btn btn-danger btn-sm"
                                 item={attribute}
+                                data-testid="remove-attribute"
                                 onClick={this.onAttributeDelete}
                             >
                                 <i className="fas fa-trash" />
@@ -155,9 +161,6 @@ class AttributeEditor extends React.Component<AttributeEditorProps, AttributeEdi
             </div>
         ));
     }
-    setMode = (mode: Mode): void => {
-        this.setState({ mode });
-    };
 
     render() {
         const { cluster, attributes, endpoint } = this.state;
@@ -172,6 +175,7 @@ class AttributeEditor extends React.Component<AttributeEditorProps, AttributeEdi
                 <div className="mb-3 row">
                     <div className="col-6 col-sm-3">
                         <EndpointPicker
+                            data-testid="endpoint-picker"
                             label={t('zigbee:endpoint')}
                             values={endpoints}
                             value={endpoint as Endpoint}
@@ -180,6 +184,7 @@ class AttributeEditor extends React.Component<AttributeEditorProps, AttributeEdi
                     </div>
                     <div className="col-6 col-sm-3">
                         <ClusterPicker
+                            data-testid="cluster-picker"
                             label={t('cluster')}
                             pickerType={PickerType.SINGLE}
                             clusters={Object.keys(ZclCluster)}
@@ -190,6 +195,7 @@ class AttributeEditor extends React.Component<AttributeEditorProps, AttributeEdi
 
                     <div className="col-6 col-sm-3">
                         <AttributePicker
+                            data-testid="attribute-picker"
                             label={t('attribute')}
                             value={''}
                             cluster={cluster}
@@ -197,12 +203,15 @@ class AttributeEditor extends React.Component<AttributeEditorProps, AttributeEdi
                         />
                     </div>
                 </div>
-                <div className="mb-3 row">{this.renderSelectedAttribute()}</div>
+                <div className="mb-3 row" data-testid="selected-attribute">
+                    {this.renderSelectedAttribute()}
+                </div>
                 <div className="mb-3 row">
                     <div className="btn-group col col-3" role="group">
                         <Button<void>
                             disabled={noAttributesSelected || noSelectedCluster}
                             className="btn btn-success me-2"
+                            data-testid="read-attribute"
                             onClick={this.onReadClick}
                         >
                             {t('read')}
@@ -210,6 +219,7 @@ class AttributeEditor extends React.Component<AttributeEditorProps, AttributeEdi
                         <Button<void>
                             disabled={noAttributesSelected || noSelectedCluster}
                             className="btn btn-danger"
+                            data-testid="write-attribute"
                             onClick={this.onWriteClick}
                         >
                             {t('write')}

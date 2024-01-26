@@ -7,7 +7,7 @@ import { Store } from 'react-notifications-component';
 import keyBy from "lodash/keyBy";
 
 import { GraphI } from "./components/map/types";
-import { local } from "@toolz/local-storage";
+import local from "store2";
 
 const MAX_LOGS_RECORDS_IN_BUFFER = 100;
 const TOKEN_LOCAL_STORAGE_ITEM_NAME = "z2m-token-v2";
@@ -121,13 +121,13 @@ class Api {
     urlProvider = async () => {
         const url = new URL(this.url)
         let token = new URLSearchParams(window.location.search).get("token")
-            ?? local.getItem<string>(TOKEN_LOCAL_STORAGE_ITEM_NAME);
-        const authRequired = !!local.getItem(AUTH_FLAG_LOCAL_STORAGE_ITEM_NAME);
+            ?? local.get<string>(TOKEN_LOCAL_STORAGE_ITEM_NAME);
+        const authRequired = !!local.get(AUTH_FLAG_LOCAL_STORAGE_ITEM_NAME);
         if (authRequired) {
             if (!token) {
                 token = prompt("Enter your z2m admin token") as string;
                 if (token) {
-                    local.setItem(TOKEN_LOCAL_STORAGE_ITEM_NAME, token);
+                    local.set(TOKEN_LOCAL_STORAGE_ITEM_NAME, token);
                 }
             }
             url.searchParams.append("token", token);
@@ -276,7 +276,7 @@ class Api {
 
     private onClose = (e: CloseEvent): void => {
         if (e.code === UNAUTHORIZED_ERROR_CODE) {
-            local.setItem(AUTH_FLAG_LOCAL_STORAGE_ITEM_NAME, true);
+            local.set(AUTH_FLAG_LOCAL_STORAGE_ITEM_NAME, true);
             local.remove(TOKEN_LOCAL_STORAGE_ITEM_NAME);
             NotificationManager.error("Unauthorized");
             setTimeout(() => {

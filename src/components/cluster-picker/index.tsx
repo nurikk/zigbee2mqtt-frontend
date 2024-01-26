@@ -58,7 +58,7 @@ export interface SinglePickerProps extends PickerProps {
     value: Cluster;
 }
 export default function ClusterPicker(props: ClusterPickerProps): JSX.Element {
-    const { pickerType, onChange, clusters, value, label, disabled } = props;
+    const { pickerType, onChange, clusters, value, label, disabled, ...rest } = props;
     if (pickerType === PickerType.MULTIPLE) {
         return (
             <MultiPicker
@@ -67,6 +67,7 @@ export default function ClusterPicker(props: ClusterPickerProps): JSX.Element {
                 value={value as Cluster[]}
                 disabled={disabled}
                 label={label}
+                {...rest}
             />
         );
     } else {
@@ -77,6 +78,7 @@ export default function ClusterPicker(props: ClusterPickerProps): JSX.Element {
                 value={value as Cluster}
                 disabled={disabled}
                 label={label}
+                {...rest}
             />
         );
     }

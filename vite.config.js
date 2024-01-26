@@ -4,8 +4,8 @@ import sassDts from 'vite-plugin-sass-dts';
 import viteCompression from 'vite-plugin-compression';
 import { startServer } from './ws';
 
-export default defineConfig(async ({ command }) => {
-    if (command === 'serve') {
+export default defineConfig(async ({ command, mode }) => {
+    if (command === 'serve' && mode !== 'test') {
         startServer();
     }
 
@@ -15,6 +15,16 @@ export default defineConfig(async ({ command }) => {
         build: {
             emptyOutDir: true,
             outDir: '../dist',
+        },
+        test: {
+            globals: true,
+            environment: 'jsdom',
+            setupFiles: '../setupTests.js',
+            onConsoleLog(log, type) {
+                if (log?.includes('18next: initialized')) {
+                    return false;
+                }
+            },
         },
         plugins: [
             react({
