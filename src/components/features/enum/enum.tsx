@@ -16,7 +16,7 @@ const Enum: FunctionComponent<EnumProps> = (props) => {
         minimal,
     } = props;
 
-    const thisIsVeryBigEnumeration = values.length > VERY_BIG_ENUM_SIZE;
+    const thisIsVeryBigEnumeration = values && values.length > VERY_BIG_ENUM_SIZE;
 
     if (access & FeatureAccessMode.ACCESS_WRITE) {
         return (
