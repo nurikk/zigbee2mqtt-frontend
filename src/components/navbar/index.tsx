@@ -14,6 +14,13 @@ import LocalePicker from '../../i18n/LocalePicker';
 import { isIframe } from '../../utils';
 import { StartStopJoinButton } from './StartStopJoinButton';
 
+import BootstrapButton from 'react-bootstrap/Button';
+import Navbar from 'react-bootstrap/Navbar';
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Collapse from 'react-bootstrap/esm/Collapse';
+import NavbarBrand from 'react-bootstrap/esm/NavbarBrand';
+
 const urls = [
     {
         href: '/',
@@ -57,18 +64,29 @@ const urls = [
 type PropsFromStore = Pick<GlobalState, 'devices' | 'bridgeInfo'>;
 
 const NavBar: FunctionComponent<PropsFromStore & ThemeActions & WithTranslation<'navbar'> & BridgeApi> = (props) => {
-    const { devices, setPermitJoin, bridgeInfo, restartBridge, setTheme, t } = props;
+    const { devices, setPermitJoin, bridgeInfo, restartBridge, t } = props;
     const ref = useRef<HTMLDivElement>();
     const [navbarIsVisible, setNavbarIsVisible] = useState<boolean>(false);
     useOnClickOutside(ref, () => {
         setNavbarIsVisible(false);
     });
     return (
-        <nav className="navbar navbar-expand-md navbar-light">
-            <div ref={ref as React.MutableRefObject<HTMLDivElement>} className="container-fluid">
-                <Link onClick={() => setNavbarIsVisible(false)} to="/">
-                    {isIframe() ? `Z2M@${document.location.hostname}` : 'Zigbee2MQTT'}
-                </Link>
+        <nav className="navbar navbar-expand-lg navbar-light">
+            <div ref={ref as React.MutableRefObject<HTMLDivElement>} className="container-fluid align-items-baseline">
+                <NavbarBrand href="/#/">
+                    <img
+                        alt=""
+                        src="/images/logo.png"
+                        width="30"
+                        height="30"
+                        className="d-inline-block align-top"
+
+                    />{' '}
+                    <Link onClick={() => setNavbarIsVisible(false)} to="/">
+                        {isIframe() ? `Z2M@${document.location.hostname}` : 'Zigbee2MQTT'}
+                    </Link>
+                </NavbarBrand>
+
 
                 <button
                     onClick={() => {
@@ -79,12 +97,11 @@ const NavBar: FunctionComponent<PropsFromStore & ThemeActions & WithTranslation<
                 >
                     <span className="navbar-toggler-icon" />
                 </button>
-                <div className={cx('navbar-collapse collapse', { show: navbarIsVisible })}>
-                    <ul className="navbar-nav">
+                <div className={cx('navbar-collapse collapse d-flex flex-wrap', { 'd-none': navbarIsVisible })}>
+                    <ul className="navbar-nav flex-wrap flex-grow-1">
                         {urls.map((url) => (
                             <li key={url.href} className="nav-item">
                                 <NavLink
-                                    onClick={() => setNavbarIsVisible(false)}
                                     exact={url.exact}
                                     className="nav-link"
                                     to={url.href}
@@ -94,16 +111,18 @@ const NavBar: FunctionComponent<PropsFromStore & ThemeActions & WithTranslation<
                                 </NavLink>
                             </li>
                         ))}
-                        <LocalePicker />
                     </ul>
-                    <StartStopJoinButton devices={devices} setPermitJoin={setPermitJoin} bridgeInfo={bridgeInfo} />
-                    <ThemeSwitcher saveCurrentTheme={setTheme} />
+                    <div className="d-flex align-self-start align-items-stretch flex-wrap justify-content-end">
+                        <StartStopJoinButton devices={devices} setPermitJoin={setPermitJoin} bridgeInfo={bridgeInfo} />
+                        <LocalePicker />
+                        <ThemeSwitcher />
+                        {bridgeInfo.restart_required ? (
+                            <Button onClick={restartBridge} prompt className="btn btn-danger my-2 mx-1">
+                                {t('restart')}
+                            </Button>
+                        ) : null}
+                    </div>
                 </div>
-                {bridgeInfo.restart_required ? (
-                    <Button onClick={restartBridge} prompt className="btn btn-danger me-1">
-                        {t('restart')}
-                    </Button>
-                ) : null}
             </div>
         </nav>
     );
