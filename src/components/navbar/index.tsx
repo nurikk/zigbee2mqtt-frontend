@@ -71,7 +71,7 @@ const NavBar: FunctionComponent<PropsFromStore & ThemeActions & WithTranslation<
         setNavbarIsVisible(false);
     });
     return (
-        <nav className="navbar navbar-expand-lg navbar-light">
+        <nav className="navbar navbar-expand-lg">
             <div ref={ref as React.MutableRefObject<HTMLDivElement>} className="container-fluid align-items-baseline">
                 <NavbarBrand href="/#/">
                     <img
@@ -86,8 +86,6 @@ const NavBar: FunctionComponent<PropsFromStore & ThemeActions & WithTranslation<
                         {isIframe() ? `Z2M@${document.location.hostname}` : 'Zigbee2MQTT'}
                     </Link>
                 </NavbarBrand>
-
-
                 <button
                     onClick={() => {
                         setNavbarIsVisible(!navbarIsVisible);
@@ -97,7 +95,7 @@ const NavBar: FunctionComponent<PropsFromStore & ThemeActions & WithTranslation<
                 >
                     <span className="navbar-toggler-icon" />
                 </button>
-                <div className={cx('navbar-collapse collapse d-flex flex-wrap', { 'd-none': navbarIsVisible })}>
+                <div className={cx('navbar-collapse collapse d-flex flex-wrap', { 'd-none': !navbarIsVisible })}>
                     <ul className="navbar-nav flex-wrap flex-grow-1">
                         {urls.map((url) => (
                             <li key={url.href} className="nav-item">
@@ -106,6 +104,7 @@ const NavBar: FunctionComponent<PropsFromStore & ThemeActions & WithTranslation<
                                     className="nav-link"
                                     to={url.href}
                                     activeClassName="active"
+                                    onClick={() => setNavbarIsVisible(false)}
                                 >
                                     {t(url.key)}
                                 </NavLink>
