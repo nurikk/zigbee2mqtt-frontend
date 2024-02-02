@@ -19,7 +19,7 @@ devDependencies:
     version: 6.4.2
   '@rjsf/bootstrap-5':
     specifier: https://github.com/nurikk/fileshare/blob/main/rjsf-bootstrap-5-4.2.0.tgz?raw=true
-    version: '@github.com/nurikk/fileshare/blob/main/rjsf-bootstrap-5-4.2.0.tgz?raw=true(@rjsf/core@4.2.3)(react-bootstrap@2.9.0)(react@18.2.0)'
+    version: '@github.com/nurikk/fileshare/blob/main/rjsf-bootstrap-5-4.2.0.tgz?raw=true(@rjsf/core@4.2.3)(react-bootstrap@2.10.0)(react@18.2.0)'
   '@rjsf/core':
     specifier: ~4.2.3
     version: 4.2.3(react@18.2.0)
@@ -180,8 +180,8 @@ devDependencies:
     specifier: ~3.0.0
     version: 3.0.0
   react-bootstrap:
-    specifier: ~2.9.0
-    version: 2.9.0(@types/react@18.2.24)(react-dom@18.2.0)(react@18.2.0)
+    specifier: ~2.10.0
+    version: 2.10.0(@types/react@18.2.24)(react-dom@18.2.0)(react@18.2.0)
   react-css-theme-switcher:
     specifier: ~0.3.0
     version: 0.3.0(react@18.2.0)
@@ -5365,8 +5365,8 @@ packages:
       whatwg-fetch: 3.6.19
     dev: true
 
-  /react-bootstrap@2.9.0(@types/react@18.2.24)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-dGh6fGjqR9MBzPOp2KbXJznt1Zy6SWepXYUdxMT18Zu/wJ73HCU8JNZe9dfzjmVssZYsJH9N3HHE4wAtQvNz7g==}
+  /react-bootstrap@2.10.0(@types/react@18.2.24)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-87gRP69VAfeU2yKgp8RI3HvzhPNrnYIV2QNranYXataz3ef+k7OhvKGGdxQLQfUsQ2RTmlY66tn4pdFrZ94hNg==}
     peerDependencies:
       '@types/react': '>=16.14.8'
       react: '>=16.14.0'
@@ -6972,7 +6972,7 @@ packages:
       - supports-color
     dev: true
 
-  '@github.com/nurikk/fileshare/blob/main/rjsf-bootstrap-5-4.2.0.tgz?raw=true(@rjsf/core@4.2.3)(react-bootstrap@2.9.0)(react@18.2.0)':
+  '@github.com/nurikk/fileshare/blob/main/rjsf-bootstrap-5-4.2.0.tgz?raw=true(@rjsf/core@4.2.3)(react-bootstrap@2.10.0)(react@18.2.0)':
     resolution: {tarball: https://github.com/nurikk/fileshare/blob/main/rjsf-bootstrap-5-4.2.0.tgz?raw=true}
     id: '@github.com/nurikk/fileshare/blob/main/rjsf-bootstrap-5-4.2.0.tgz?raw=true'
     name: '@rjsf/bootstrap-5'
@@ -6985,6 +6985,6 @@ packages:
     dependencies:
       '@rjsf/core': 4.2.3(react@18.2.0)
       react: 18.2.0
-      react-bootstrap: 2.9.0(@types/react@18.2.24)(react-dom@18.2.0)(react@18.2.0)
+      react-bootstrap: 2.10.0(@types/react@18.2.24)(react-dom@18.2.0)(react@18.2.0)
       react-icons: 4.11.0(react@18.2.0)
     dev: true
