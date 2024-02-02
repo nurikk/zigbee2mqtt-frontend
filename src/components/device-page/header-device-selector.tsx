@@ -67,26 +67,17 @@ export function HeaderDeviceSelector(props: HeaderDeviceSelectorProps): JSX.Elem
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu as={SearchMenu} searchTerm={searchTerm} t={t} setSearchTerm={setSearchTerm}>
-                    <HeaderDeviceSelectorItems devices={devices} dev={dev} tab={tab} setSearchTerm={setSearchTerm} />
+                    {HeaderDeviceSelectorItems({ devices, dev, tab, setSearchTerm })}
                 </Dropdown.Menu>
             </Dropdown>
         </h1>
     );
 }
 
-function HeaderDeviceSelectorItems({ devices, dev, tab, setSearchTerm }: HeaderDeviceSelectorItemsProps): JSX.Element {
-    return (
-        <>
-            {Object.entries(devices).map(([id, device]) => (
-                <Dropdown.Item
-                    active={id === dev}
-                    key={id}
-                    href={`#/device/${id}/${tab}`}
-                    onClick={() => setSearchTerm('')}
-                >
-                    {device.friendly_name}
-                </Dropdown.Item>
-            ))}
-        </>
-    );
+function HeaderDeviceSelectorItems({ devices, dev, tab, setSearchTerm }: HeaderDeviceSelectorItemsProps) {
+    return Object.entries(devices).map(([id, device]) => (
+        <Dropdown.Item active={id === dev} key={id} href={`#/device/${id}/${tab}`} onClick={() => setSearchTerm('')}>
+            {device.friendly_name}
+        </Dropdown.Item>
+    ));
 }
