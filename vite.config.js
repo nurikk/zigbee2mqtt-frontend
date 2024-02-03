@@ -21,7 +21,7 @@ export default defineConfig(async ({ command, mode }) => {
             environment: 'jsdom',
             setupFiles: '../setupTests.js',
             coverage: {
-                provider: 'v8'
+                provider: 'v8',
             },
             onConsoleLog(log, type) {
                 if (log?.includes('18next')) {

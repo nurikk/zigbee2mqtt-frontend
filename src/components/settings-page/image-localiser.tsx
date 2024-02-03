@@ -38,10 +38,10 @@ async function asyncSome<X>(arr: Iterable<X>, predicate: (x: X) => Promise<boole
             if (await predicate(e)) {
                 return true;
             }
-        } catch (err) { }
+        } catch (err) {}
     }
     return false;
-};
+}
 
 function ImageLocaliser(props: Props): JSX.Element {
     const [currentState, setCurrentState] = useState<LocaliserState>('none');
@@ -52,10 +52,7 @@ function ImageLocaliser(props: Props): JSX.Element {
         setLocalisationStatus((curr) => {
             return { ...curr, [device.ieee_address]: 'init' };
         });
-        const success = await asyncSome([
-            getZ2mDeviceImagePng,
-            getZ2mDeviceImage,
-        ], async (generator) => {
+        const success = await asyncSome([getZ2mDeviceImagePng, getZ2mDeviceImage], async (generator) => {
             const imageUrl = generator(device);
             const imageContent = await downloadImage(imageUrl);
             await setDeviceOptions(device.ieee_address, { icon: imageContent });
