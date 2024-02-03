@@ -40,7 +40,7 @@ jobs:
       run: pnpm run test:pretty
 
     - name: 🧪 Run tests
-      run: pnpm run test:unit
+      run: pnpm run test:coverage
 
     - name: 🏗️ Build production bundle
       run: pnpm build
