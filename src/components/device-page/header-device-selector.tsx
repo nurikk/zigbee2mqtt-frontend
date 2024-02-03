@@ -8,7 +8,6 @@ import { Device } from '../../types';
 import Button from '../button';
 import { withTranslation } from 'react-i18next';
 
-
 interface HeaderDeviceSelectorProps {
     allDevices: Devices;
     currentDevice: Device;
@@ -27,7 +26,7 @@ export function HeaderDeviceSelectorRaw(props: HeaderDeviceSelectorProps): JSX.E
     const { allDevices, currentDevice, tab = 'info', t } = props;
     const [searchTerm, setSearchTerm] = useState<string>('');
 
-    const selectedDevices = Object.values(allDevices).filter(d => d.friendly_name.includes(searchTerm))
+    const selectedDevices = Object.values(allDevices).filter((d) => d.friendly_name.includes(searchTerm));
 
     return (
         <h1 className="h3">
@@ -44,7 +43,12 @@ export function HeaderDeviceSelectorRaw(props: HeaderDeviceSelectorProps): JSX.E
                         onChange={(e) => setSearchTerm(e.target.value)}
                         value={searchTerm}
                     />
-                    <HeaderDeviceSelectorItems devices={selectedDevices} currentDevice={currentDevice} tab={tab} setSearchTerm={setSearchTerm} />
+                    <HeaderDeviceSelectorItems
+                        devices={selectedDevices}
+                        currentDevice={currentDevice}
+                        tab={tab}
+                        setSearchTerm={setSearchTerm}
+                    />
                 </Dropdown.Menu>
             </Dropdown>
         </h1>
@@ -53,10 +57,15 @@ export function HeaderDeviceSelectorRaw(props: HeaderDeviceSelectorProps): JSX.E
 
 export const HeaderDeviceSelector = withTranslation('devicePage')(HeaderDeviceSelectorRaw);
 
-function HeaderDeviceSelectorItems({ devices, currentDevice, tab, setSearchTerm }: HeaderDeviceSelectorItemsProps): JSX.Element {
+function HeaderDeviceSelectorItems({
+    devices,
+    currentDevice,
+    tab,
+    setSearchTerm,
+}: HeaderDeviceSelectorItemsProps): JSX.Element {
     return (
         <>
-            {Object.values(devices).map(listDevice => (
+            {Object.values(devices).map((listDevice) => (
                 <Dropdown.Item
                     active={currentDevice.ieee_address === listDevice.ieee_address}
                     key={listDevice.ieee_address}
