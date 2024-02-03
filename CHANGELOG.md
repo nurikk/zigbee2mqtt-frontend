@@ -1,3 +1,12 @@
+## [0.6.153](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.152...0.6.153) (2024-02-03)
+
+
+### Features
+
+* **deviceImage:** add support for PNG images ([27d94a7](https://github.com/nurikk/zigbee2mqtt-frontend/commit/27d94a771d4ea53576694ca3af27c69c133189fc))
+
+
+
 ## [0.6.152](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.151...0.6.152) (2024-01-25)
 
 
