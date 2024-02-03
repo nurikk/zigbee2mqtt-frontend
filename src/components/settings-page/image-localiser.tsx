@@ -5,7 +5,7 @@ import Button from '../button';
 import { Device, IEEEEAddress } from '../../types';
 import { WithDevices } from '../../store';
 import { DeviceApi } from '../../actions/DeviceApi';
-import { getZ2mDeviceImage } from '../device-image';
+import { getZ2mDeviceImage, getZ2mDeviceImagePng } from '../device-image';
 
 type LocaliserState = 'none' | 'start' | 'inprogress' | 'done';
 
@@ -32,6 +32,17 @@ async function downloadImage(imageSrc: string): Promise<string> {
     }
 }
 
+async function asyncSome<X>(arr: Iterable<X>, predicate: (x: X) => Promise<boolean>): Promise<boolean> {
+    for (let e of arr) {
+        try {
+            if (await predicate(e)) {
+                return true;
+            }
+        } catch (err) { }
+    }
+    return false;
+};
+
 function ImageLocaliser(props: Props): JSX.Element {
     const [currentState, setCurrentState] = useState<LocaliserState>('none');
     const { setDeviceOptions, t, devices } = props;
@@ -41,21 +52,28 @@ function ImageLocaliser(props: Props): JSX.Element {
         setLocalisationStatus((curr) => {
             return { ...curr, [device.ieee_address]: 'init' };
         });
-
-        const imageUrl = getZ2mDeviceImage(device);
-
-        const imageContent = await downloadImage(imageUrl);
-        console.log(device.friendly_name, imageUrl, imageContent);
-        await setDeviceOptions(device.ieee_address, { icon: imageContent });
-        setLocalisationStatus((curr) => {
-            return { ...curr, [device.ieee_address]: 'done' };
+        const success = await asyncSome([
+            getZ2mDeviceImagePng,
+            getZ2mDeviceImage,
+        ], async (generator) => {
+            const imageUrl = generator(device);
+            const imageContent = await downloadImage(imageUrl);
+            await setDeviceOptions(device.ieee_address, { icon: imageContent });
+            setLocalisationStatus((curr) => {
+                return { ...curr, [device.ieee_address]: 'done' };
+            });
+            return true;
         });
+        if (!success) {
+            throw new Error('Failed to localise image');
+        }
     }
     useEffect(() => {
         if (currentState == 'start') {
             for (const device of Object.values<Device>(devices).filter((d) => d.type !== 'Coordinator')) {
                 localiseImage(device)
                     .catch((err) => {
+                        console.log('Error localising image', err);
                         setLocalisationStatus((curr) => {
                             return { ...curr, [device.ieee_address]: 'error' };
                         });
