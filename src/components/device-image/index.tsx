@@ -15,13 +15,16 @@ type DeviceImageProps = {
 };
 
 type ImageGeneratorFn = (device: Device) => string | undefined;
-export const getZ2mDeviceImage = (device: Device): string =>
-    `https://www.zigbee2mqtt.io/images/devices/${sanitizeZ2MDeviceName(device?.definition?.model)}.jpg`;
+const z2mBasePath = 'https://www.zigbee2mqtt.io/images/devices/';
+
+export const getZ2mDeviceImage = (device: Device): string =>`${z2mBasePath}${sanitizeZ2MDeviceName(device?.definition?.model)}.jpg`;
+export const getZ2mDeviceImagePng = (device: Device): string =>`${z2mBasePath}${sanitizeZ2MDeviceName(device?.definition?.model)}.png`;
 const getConverterDeviceImage = (device: Device): string | undefined => device.definition?.icon;
 
 /* prettier-ignore */
 const AVAILABLE_GENERATORS: ImageGeneratorFn[] = [
     getConverterDeviceImage,
+    getZ2mDeviceImagePng,
     getZ2mDeviceImage,
     () => genericDevice,
 ];
