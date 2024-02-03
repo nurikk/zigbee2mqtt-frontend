@@ -33,7 +33,7 @@ async function downloadImage(imageSrc: string): Promise<string> {
 }
 
 async function asyncSome<X>(arr: Iterable<X>, predicate: (x: X) => Promise<boolean>): Promise<boolean> {
-    for (let e of arr) {
+    for (const e of arr) {
         try {
             if (await predicate(e)) {
                 return true;
