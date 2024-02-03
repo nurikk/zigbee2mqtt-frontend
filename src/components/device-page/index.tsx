@@ -140,7 +140,7 @@ export function DevicePage(props: DevicePageProps): JSX.Element {
 
     return (
         <>
-            <HeaderDeviceSelector devices={devices} dev={dev} tab={tab} t={t} />
+            <HeaderDeviceSelector allDevices={devices} currentDevice={device} tab={tab} />
             <div className="tab">
                 <ul className="nav nav-tabs">
                     {links.map((link) => (
