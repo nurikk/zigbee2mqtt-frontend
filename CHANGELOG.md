@@ -1,3 +1,12 @@
+## [0.6.154](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.153...0.6.154) (2024-02-03)
+
+
+### Bug Fixes
+
+* **device-page:** fix search in header device selector ([919a3aa](https://github.com/nurikk/zigbee2mqtt-frontend/commit/919a3aa2cd2853bd2bf69cb3e92c5344101bceef))
+
+
+
 ## [0.6.153](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.152...0.6.153) (2024-02-03)
 
 
