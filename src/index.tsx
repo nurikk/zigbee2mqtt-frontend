@@ -31,23 +31,14 @@ import ExtensionsEditorPage from './components/extensions-editor';
 import GroupPage from './components/groups/GroupPage';
 import ScrollToTop from './components/scroll-to-top';
 
-import { ThemeSwitcherProvider } from 'react-css-theme-switcher';
 import i18n from './i18n';
 import { I18nextProvider } from 'react-i18next';
 
 const ConnectedDevicePageWrap: FunctionComponent<{ dev: string }> = ({ dev }) => <ConnectedDevicePageWrap dev={dev} />;
 
-import lightTheme from './bootstrap-theme/css/light.css?url';
-import darkTheme from './bootstrap-theme/css/dark.css?url';
-const themes = {
-    light: lightTheme,
-    dark: darkTheme,
-};
-
 api.connect();
 
 const Main = () => {
-    const { theme } = store.getState();
     return (
         <React.StrictMode>
             <ReactNotifications />
