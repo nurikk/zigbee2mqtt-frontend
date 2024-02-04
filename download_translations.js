@@ -2,29 +2,29 @@ const fs = require('fs').promises;
 
 async function getAvaliableLanguages(project_id, api_token) {
     const body = new FormData();
-    body.set("api_token", api_token);
-    body.set("id", project_id);
+    body.set('api_token', api_token);
+    body.set('id', project_id);
 
     const resp = await fetch('https://api.poeditor.com/v2/languages/list', {
         method: 'POST',
-        body
-    })
+        body,
+    });
     const languages = await resp.json();
-    return languages.result.languages.map(lang => ({ code: lang.code, name: lang.name }));
+    return languages.result.languages.map((lang) => ({ code: lang.code, name: lang.name }));
 }
 
 async function downloadLanguage(project_id, api_token, language) {
     console.log(`Downloading ${language.name} ${language.code}`);
     const body = new FormData();
-    body.set("api_token", api_token);
-    body.set("id", project_id);
-    body.set("language", language.code);
-    body.set("type", "i18next");
+    body.set('api_token', api_token);
+    body.set('id', project_id);
+    body.set('language', language.code);
+    body.set('type', 'i18next');
 
     const resp = await fetch('https://api.poeditor.com/v2/projects/export', {
         method: 'POST',
-        body
-    })
+        body,
+    });
     const exportResult = await resp.json();
     const languageRes = await fetch(exportResult.result.url);
     const languageData = await languageRes.json();
@@ -32,12 +32,11 @@ async function downloadLanguage(project_id, api_token, language) {
 }
 
 const locale2fileMap = {
-    'uk': 'ua',
+    uk: 'ua',
     'pt-br': 'ptbr',
     'zh-Hans': 'chs',
-    'zh-TW': 'zh'
-
-}
+    'zh-TW': 'zh',
+};
 async function main(project_id, api_token) {
     const locales = await getAvaliableLanguages(project_id, api_token);
 
