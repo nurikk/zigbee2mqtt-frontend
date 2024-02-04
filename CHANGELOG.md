@@ -1,3 +1,12 @@
+## [0.6.156](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.155...0.6.156) (2024-02-04)
+
+
+### Bug Fixes
+
+* **i18n:** add missing keys ([efdedfe](https://github.com/nurikk/zigbee2mqtt-frontend/commit/efdedfe237455b3ad0fc0d71c5ee521c00a7fb99))
+
+
+
 ## [0.6.155](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.154...0.6.155) (2024-02-04)
 
 
