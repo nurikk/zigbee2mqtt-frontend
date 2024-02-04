@@ -32,7 +32,7 @@ async function downloadLanguage(project_id, api_token, language) {
 }
 
 const locale2fileMap = {
-    'uk': 'en',
+    'uk': 'ua',
     'pt-br': 'ptbr',
     'zh-Hans': 'chs',
     'zh-TW': 'zh'
