@@ -1,7 +1,5 @@
-import React, { RefObject } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
-import useComponentVisible from '../hooks/useComponentVisible';
-import cx from 'classnames';
 import { Resource } from 'i18next';
 
 import ca from './flags/ca.png';
@@ -29,9 +27,10 @@ import missing from './flags/missing-locale.png';
 
 import localeNames from './locales/localeNames.json';
 
-import Button from 'react-bootstrap/button';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Image from 'react-bootstrap/Image';
+import Button from 'react-bootstrap/Button';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
 
 const localesMap = {
     ca,
@@ -59,36 +58,37 @@ const localesMap = {
 
 export default function LocalePicker(): JSX.Element {
     const { i18n } = useTranslation('localeNames');
-    const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(false);
+    const { t } = useTranslation(['navbar']);
 
-    const selectAndHide = (lang: string) => {
+    const select = (lang: string) => {
         i18n.changeLanguage(lang);
-        //setIsComponentVisible(false);
     };
 
     const locales = Object.keys(i18n.options.resources as Resource).map((language) => (
-        <Dropdown.Item key={language} onClick={(e) => { selectAndHide(language) }}>
+        <Dropdown.Item key={language} onClick={(e) => { select(language) }}>
             <img
                 src={localesMap[language] ?? missing}
                 alt={localeNames[language]}
-                width="20"
-                className="align-middle me-1 border border-secondary"
+                width={'20'}
+                className={'align-middle me-1 border border-secondary'}
             />
-            <span className="align-middle">{localeNames[language]}</span>
+            <span className={'align-middle'}>{localeNames[language]}</span>
         </Dropdown.Item>
     ));
     const currentLanguage = localesMap[i18n.language] ? i18n.language : i18n.language.split('-')[0];
 
     return (
-        <Dropdown className="my-2 mx-1">
-            <Dropdown.Toggle variant='outline-secondary'>
+        <Dropdown as={ButtonGroup}>
+            <Button variant={'outline-secondary'} className={'d-flex align-items-center'}>
                 <Image
-                    roundedCircle={true}
-                    className='me-1 mb-1 border border-secondary d-inline-block align-middle'
+                    roundedCircle={true} className={'border border-secondary'}
                     src={localesMap[currentLanguage] ?? missing}
                     alt={localeNames[currentLanguage]}
-                    style={{ "height": "18px", "width": "18px"}}
+                    height={18} width={18}
                 />
+            </Button>
+            <Dropdown.Toggle split={true} variant={'outline-secondary'} data-bs-reference={'parent'}>
+                <span className={'visually-hidden'}>{t('toggle_dropdown')}</span>
             </Dropdown.Toggle>
             <Dropdown.Menu className={'my-1'}>
                 {locales}
