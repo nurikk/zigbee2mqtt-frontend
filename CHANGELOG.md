@@ -1,3 +1,19 @@
+## [0.6.155](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.154...0.6.155) (2024-02-04)
+
+
+### Bug Fixes
+
+* **i18n:** fix locale map ([ee42125](https://github.com/nurikk/zigbee2mqtt-frontend/commit/ee42125546378e08c1364de8d285cf50568c4283))
+
+
+### Features
+
+* **i18:** add locale downloader script ([c7061cf](https://github.com/nurikk/zigbee2mqtt-frontend/commit/c7061cf9dadc169237a5faf0f7a00369de7b873f))
+* **i18n:** update locales ([d2a4358](https://github.com/nurikk/zigbee2mqtt-frontend/commit/d2a4358d320e9e10329167ca355f3b27ea78c013))
+* **ImageLocaliser:** add support for downloading PNG device images ([732dee9](https://github.com/nurikk/zigbee2mqtt-frontend/commit/732dee9e073644e0fed3ccbeb3e3a4ff86df3a23))
+
+
+
 ## [0.6.154](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.153...0.6.154) (2024-02-03)
 
 
