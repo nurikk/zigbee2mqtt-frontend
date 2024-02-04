@@ -27,6 +27,7 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
+      - run: pnpm run test:coverage
       - run: pnpm publish --no-git-checks
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
