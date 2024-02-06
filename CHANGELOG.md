@@ -1,3 +1,12 @@
+## [0.6.157](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.156...0.6.157) (2024-02-06)
+
+
+### Bug Fixes
+
+* **getCurrentTheme:** fix legacy theme format ([0145f7a](https://github.com/nurikk/zigbee2mqtt-frontend/commit/0145f7ab0dbfdbe1978bbe7c61f9ef187d52e427))
+
+
+
 ## [0.6.156](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.155...0.6.156) (2024-02-04)
 
 
