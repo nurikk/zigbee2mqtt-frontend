@@ -8,6 +8,8 @@ permissions:
 
 env:
   NPM_TOKEN: ${{secrets.NPM_TOKEN}}
+  POEDITOR_API_TOKEN: ${{secrets.POEDITOR_API_TOKEN}}
+  POEDITOR_PROJECT_ID: ${{secrets.POEDITOR_PROJECT_ID}}
 
 jobs:
   release:
@@ -26,8 +28,10 @@ jobs:
           cache: pnpm
 
       - run: pnpm install --frozen-lockfile
-      - run: pnpm build
       - run: pnpm run test:coverage
+      - run: pnpm run i18n:download        
+      - run: pnpm run i18n:trim
+      - run: pnpm build      
       - run: pnpm publish --no-git-checks
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:

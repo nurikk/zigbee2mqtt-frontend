@@ -23,7 +23,9 @@
         "test:unit": "vitest",
         "test:coverage": "vitest run --coverage",
         "test:eslint": "eslint \"./src/**/*.{js,jsx,tsx}\"",
-        "test:pretty": "prettier --check \"./**/*.{js,jsx,tsx}\""
+        "test:pretty": "prettier --check \"./**/*.{js,jsx,tsx}\"",
+        "i18n:download": "node download_translations.js",
+        "i18n:trim": "node trim-locales.js"
     },
     "eslintIgnore": [
         "dist/*"
