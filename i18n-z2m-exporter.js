@@ -22,8 +22,7 @@ devices.forEach((device) => {
 });
 const enTranslationFile = './src/i18n/locales/en.json';
 const enTranslations = require(enTranslationFile);
-enTranslations.featureDescriptions = featureDescriptions;
-enTranslations.featureNames = featureNames;
+
 
 let settingsSchemaDescriptions = {};
 let settingsSchemaTitles = {};
@@ -43,6 +42,8 @@ const exportSettingsSchemaDescriptions = (obj) => {
 
 exportSettingsSchemaDescriptions(settingsSchema);
 
+enTranslations.featureDescriptions = featureDescriptions;
+enTranslations.featureNames = featureNames;
 enTranslations.settingsSchemaDescriptions = settingsSchemaDescriptions;
 enTranslations.settingsSchemaTitles = settingsSchemaTitles;
 
