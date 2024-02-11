@@ -23,7 +23,6 @@ devices.forEach((device) => {
 const enTranslationFile = './src/i18n/locales/en.json';
 const enTranslations = require(enTranslationFile);
 
-
 let settingsSchemaDescriptions = {};
 let settingsSchemaTitles = {};
 const isObject = (value) => value !== null && typeof value === 'object';

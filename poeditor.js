@@ -27,7 +27,7 @@ async function downloadLanguage(project_id, api_token, language) {
 async function getAvaliableLanguages(project_id, api_token) {
     const languages = await callApi('https://api.poeditor.com/v2/languages/list', {
         api_token,
-        id: project_id
+        id: project_id,
     });
     return languages.result.languages.map((lang) => ({ code: lang.code, name: lang.name }));
 }
@@ -36,20 +36,18 @@ async function getTerms(project_id, api_token, language) {
     const terms = await callApi('https://api.poeditor.com/v2/terms/list', {
         api_token,
         id: project_id,
-        language
+        language,
     });
     return terms.result.terms.map((term) => ({ term: term.term, context: term.context }));
 }
-
 
 async function deleteTerms(project_id, api_token, terms) {
     const res = await callApi('https://api.poeditor.com/v2/terms/delete', {
         api_token,
         id: project_id,
-        data: JSON.stringify(terms)
+        data: JSON.stringify(terms),
     });
     return res;
 }
-
 
 module.exports = { downloadLanguage, getAvaliableLanguages, getTerms, deleteTerms };
