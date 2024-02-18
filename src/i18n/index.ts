@@ -1,4 +1,4 @@
-import i18n, { ResourceLanguage } from 'i18next';
+import i18n, { InitOptions, ResourceLanguage } from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import { register } from "timeago.js"
 import LanguageDetector from 'i18next-browser-languagedetector';
@@ -96,19 +96,46 @@ export const resources = {
 
 } as const;
 
-const debug = process.env.NODE_ENV !== 'production'
+const i18nConfig: InitOptions = {
+    fallbackLng: 'en',
+    resources,
+    ns: Object.keys(enTranslations),
+}
+if(process.env.NODE_ENV == 'development') {
+    i18nConfig.debug = true;
+    i18nConfig.saveMissing = true;
+    i18nConfig.missingKeyHandler = (
+        lngs: readonly string[],
+        ns: string,
+        key: string,
+        fallbackValue: string,
+        updateMissing: boolean,
+        options: any,
+    ) => {
+        for(const lng of lngs) {
+            const url = `/locales/add/${lng}/${ns}`;
+            const data = {
+                [key]: fallbackValue,
+            };
+
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+        }
+    }
+}
+
 i18n.on("languageChanged", (lng: string) => {
     document.documentElement.lang = lng;
 })
 i18n
     .use(LanguageDetector)
     .use(initReactI18next)
-    .init({
-        fallbackLng: 'en',
-        debug,
-        resources,
-        ns: Object.keys(enTranslations),
-    })
+    .init(i18nConfig)
 
 
 const currentLanguage = i18n.language.split('-')[0].toLocaleLowerCase();
