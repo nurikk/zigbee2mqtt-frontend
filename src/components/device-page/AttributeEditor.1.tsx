@@ -25,11 +25,6 @@ export class AttributeEditor extends React.Component<AttributeEditorProps, Attri
         };
     }
 
-    canRead = (): boolean => {
-        const { cluster, attributes, endpoint } = this.state;
-        return !!endpoint && attributes.length > 0 && !!cluster;
-    };
-
     onEndpointChange = (endpoint: Endpoint): void => {
         this.setState({ attributes: [], cluster: '', endpoint });
     };
