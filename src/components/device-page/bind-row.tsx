@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { Device, Endpoint, Cluster, ObjectType, Group } from '../../types';
+import { Cluster, Device, Endpoint, Group, ObjectType } from '../../types';
 import DevicePicker from '../device-picker';
 import EndpointPicker from '../endpoint-picker';
 import { PickerType } from '../cluster-picker';
 import ClusterPicker from '../cluster-picker/ClusterPicker';
 import Button from '../button';
-import { WithDevices, Devices } from '../../store';
+import { Devices, WithDevices } from '../../store';
 import { NiceBindingRule } from './bind';
 import { getEndpoints } from '../../utils';
 import { BindParams } from '../../actions/BindApi';

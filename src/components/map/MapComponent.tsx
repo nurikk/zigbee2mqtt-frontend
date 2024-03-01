@@ -4,7 +4,7 @@ import Nodes, { getStarShape } from './nodes';
 import { LinkI, NodeI } from './types';
 import { MapApi } from '../../actions/actions';
 import Button from '../button';
-import { ForceLink, forceLink, forceCollide, forceCenter, forceSimulation, forceX, forceY } from 'd3-force';
+import { forceCenter, forceCollide, ForceLink, forceLink, forceSimulation, forceX, forceY } from 'd3-force';
 import { select } from 'd3-selection';
 import { forceManyBodyReuse } from 'd3-force-reuse';
 import { zoom, zoomIdentity, ZoomTransform } from 'd3-zoom';
@@ -15,13 +15,13 @@ import style from './map.module.css';
 import cx from 'classnames';
 import { WithTranslation } from 'react-i18next';
 import {
-    PropsFromStore,
-    MapState,
     defaultVisibleRelationsLinks,
-    ticked,
-    processHighlights,
     getDistance,
     linkStrength,
+    MapState,
+    processHighlights,
+    PropsFromStore,
+    ticked,
 } from '.';
 
 export class MapComponent extends Component<PropsFromStore & MapApi & WithTranslation<'map'>, MapState> {

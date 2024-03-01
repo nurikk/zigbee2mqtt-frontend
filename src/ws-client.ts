@@ -1,13 +1,19 @@
-import ReconnectingWebSocket from "reconnecting-websocket";
-import store, { Base64String, Extension, LogMessage, OnlineOrOffline } from "./store";
-import { BridgeConfig, BridgeInfo, TouchLinkDevice, Device, DeviceState, BridgeState, Group } from './types';
-import { sanitizeGraph, isSecurePage, randomString, stringifyWithPreservingUndefinedAsNull, debounceArgs } from "./utils";
+import ReconnectingWebSocket from 'reconnecting-websocket';
+import store, { Base64String, Extension, LogMessage, OnlineOrOffline } from './store';
+import { BridgeConfig, BridgeInfo, BridgeState, Device, DeviceState, Group, TouchLinkDevice } from './types';
+import {
+    debounceArgs,
+    isSecurePage,
+    randomString,
+    sanitizeGraph,
+    stringifyWithPreservingUndefinedAsNull,
+} from './utils';
 
 import { Store } from 'react-notifications-component';
-import keyBy from "lodash/keyBy";
+import keyBy from 'lodash/keyBy';
 
-import { GraphI } from "./components/map/types";
-import local from "store2";
+import { GraphI } from './components/map/types';
+import local from 'store2';
 
 const MAX_LOGS_RECORDS_IN_BUFFER = 100;
 const TOKEN_LOCAL_STORAGE_ITEM_NAME = "z2m-token-v2";
@@ -203,8 +209,9 @@ class Api {
                     const response = data.payload as unknown as ResponseWithStatus;
                     const stateUpdate = { networkGraphIsLoading: false };
                     if (response.status === "ok") {
-                        const networkGraph = sanitizeGraph((response.data as { value: unknown }).value as GraphI);
-                        stateUpdate['networkGraph'] = networkGraph;
+                        stateUpdate['networkGraph'] = sanitizeGraph((response.data as {
+                            value: unknown
+                        }).value as GraphI);
                     }
                     store.setState(stateUpdate);
                 }

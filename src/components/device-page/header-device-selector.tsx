@@ -5,7 +5,6 @@ import { Devices } from '../../store';
 import { TabName } from './types';
 import { TFunction } from 'i18next';
 import { Device } from '../../types';
-import Button from '../button';
 import { withTranslation } from 'react-i18next';
 
 interface HeaderDeviceSelectorProps {

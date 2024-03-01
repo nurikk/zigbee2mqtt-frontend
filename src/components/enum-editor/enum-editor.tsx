@@ -2,6 +2,7 @@ import React, { FunctionComponent } from 'react';
 import Button from '../button';
 import cx from 'classnames';
 import { DisplayValue } from '../display-value/DisplayValue';
+
 type Primitive = number | string;
 
 export type ValueWithLabel = {

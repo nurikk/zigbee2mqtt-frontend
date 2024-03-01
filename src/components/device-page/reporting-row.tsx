@@ -1,6 +1,6 @@
 import React, { ChangeEvent, Component } from 'react';
 import merge from 'lodash/merge';
-import { Device, Endpoint, Cluster, Attribute } from '../../types';
+import { Attribute, Cluster, Device, Endpoint } from '../../types';
 
 import EndpointPicker from '../endpoint-picker';
 import { ClusterGroup, PickerType } from '../cluster-picker';

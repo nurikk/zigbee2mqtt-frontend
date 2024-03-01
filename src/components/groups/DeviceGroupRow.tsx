@@ -1,8 +1,8 @@
 import React from 'react';
 import Button from '../button';
-import { WithBridgeInfo, WithDevices, WithDeviceStates, Devices } from '../../store';
+import { WithBridgeInfo, WithDevices, WithDeviceStates } from '../../store';
 import { useTranslation } from 'react-i18next';
-import { CompositeFeature, Device, DeviceState, FriendlyName, GenericExposedFeature, GroupAddress } from '../../types';
+import { CompositeFeature, DeviceState, GenericExposedFeature, GroupAddress } from '../../types';
 import DashboardDevice from '../dashboard-page/DashboardDevice';
 import { DashboardFeatureWrapper } from '../dashboard-page/DashboardFeatureWrapper';
 import { StateApi } from '../../actions/StateApi';

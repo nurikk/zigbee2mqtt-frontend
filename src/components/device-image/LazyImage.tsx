@@ -9,7 +9,7 @@ type LazyImageProps = {
     type?: 'img' | 'svg';
 };
 
-export function LazyImage(props: LazyImageProps) {
+export function LazyImage(props: Readonly<LazyImageProps>) {
     const { device, type, ...rest } = props;
 
     const { src } = useImage({
@@ -18,5 +18,5 @@ export function LazyImage(props: LazyImageProps) {
     if (type === 'svg') {
         return <image crossOrigin={'anonymous'} {...rest} href={src} />;
     }
-    return <img crossOrigin={'anonymous'} src={src} className={style.img} />;
+    return <img alt='' crossOrigin={'anonymous'} src={src} className={style.img} />;
 }

@@ -6,23 +6,22 @@ import { NavLink, Redirect, RouteComponentProps, withRouter } from 'react-router
 import Button from '../button';
 import { ISubmitEvent, UiSchema, withTheme } from '@rjsf/core';
 import { Theme as Bootstrap5Theme } from '@rjsf/bootstrap-5';
-
-const Form = withTheme(Bootstrap5Theme);
-
 import cx from 'classnames';
 import { JSONSchema7 } from 'json-schema';
 import cloneDeep from 'lodash/cloneDeep';
 import uiSchemas from './uiSchema.json';
 import { BridgeApi } from '../../actions/BridgeApi';
 import { WithTranslation, withTranslation } from 'react-i18next';
-import { TitleField, DescriptionField } from '../../i18n/rjsf-translation-fields';
+import { DescriptionField, TitleField } from '../../i18n/rjsf-translation-fields';
 import { Stats } from './stats';
-import frontentPackageJson from '../../../package.json';
+import frontendPackageJson from '../../../package.json';
 import { formatDate } from '../../utils';
 import { saveAs } from 'file-saver';
 import Spinner from '../spinner';
 import { TranslatedImageLocaliser } from './image-localiser';
 import { DeviceApi } from '../../actions/DeviceApi';
+
+const Form = withTheme(Bootstrap5Theme);
 
 type SettingsTab = 'settings' | 'bridge' | 'about' | 'tools' | 'donate' | 'translate';
 
@@ -228,7 +227,7 @@ class SettingsPage extends Component<
                 translationKey: 'coordinator_ieee_address',
                 content: <>{bridgeInfo.coordinator?.ieee_address ?? t('common:unknown')}</>,
             },
-            { translationKey: 'frontend_version', content: frontentPackageJson.version },
+            { translationKey: 'frontend_version', content: frontendPackageJson.version },
             {
                 translationKey: 'zigbee_herdsman_converters_version',
                 content: bridgeInfo.zigbee_herdsman_converters?.version ?? t('common:unknown'),

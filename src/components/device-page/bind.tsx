@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { Device, Cluster, Endpoint } from '../../types';
+import { Cluster, Device, Endpoint } from '../../types';
 import { TranslatedBindRow } from './bind-row';
 import actions from '../../actions/actions';
 import { BindApi } from '../../actions/BindApi';

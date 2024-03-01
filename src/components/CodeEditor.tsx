@@ -10,7 +10,7 @@ type CodeEditorProps = {
     theme: Theme;
     onChange?: (value: string) => void;
 };
-export default function CodeEditor(props: CodeEditorProps) {
+export default function CodeEditor(props: Readonly<CodeEditorProps>) {
     const editorTheme = props.theme == 'light' ? githubLight : githubDark;
     return (
         <CodeMirror

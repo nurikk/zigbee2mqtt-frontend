@@ -3,6 +3,7 @@ import { GlobalState } from '../../store';
 
 import { Selection } from 'd3-selection';
 import { ZoomTransform } from 'd3-zoom';
+
 export interface MouseEventsResponderNode {
     onMouseOver?: (arg0: NodeI, el: SVGElement) => void;
     onMouseOut?: (arg0: NodeI, el: SVGElement) => void;

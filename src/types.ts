@@ -1,4 +1,4 @@
-import { JSONSchema7 } from "json-schema";
+import { JSONSchema7 } from 'json-schema';
 
 export type DeviceType = "EndDevice" | "Router" | "Coordinator";
 export type FriendlyName = string;

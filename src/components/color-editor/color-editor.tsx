@@ -1,6 +1,5 @@
-import { FunctionComponent } from 'react';
 import * as convertColors from 'color-convert';
-import { AnyColor, XYColor, HueSaturationColor, RGBColor } from '../../types';
+import { AnyColor, HueSaturationColor, RGBColor, XYColor } from '../../types';
 
 type Payload = AnyColor;
 

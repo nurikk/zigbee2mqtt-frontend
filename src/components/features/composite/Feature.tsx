@@ -3,19 +3,19 @@ import React, { FunctionComponent, PropsWithChildren } from 'react';
 import { CompositeFeature, Device, DeviceState, Endpoint, GenericExposedFeature } from '../../../types';
 import {
     isBinaryFeature,
-    isNumericFeature,
-    isTextualFeature,
-    isEnumFeature,
-    isLightFeature,
-    isSwitchFeature,
-    isCoverFeature,
-    isLockFeature,
-    isColorFeature,
     isClimateFeature,
+    isColorFeature,
     isCompositeFeature,
+    isCoverFeature,
+    isEnumFeature,
     isFanFeature,
-    isListFeature,
     isGradientFeature,
+    isLightFeature,
+    isListFeature,
+    isLockFeature,
+    isNumericFeature,
+    isSwitchFeature,
+    isTextualFeature,
 } from '../../device-page/type-guards';
 import Binary from '../binary/binary';
 import Climate from '../climate/climate';

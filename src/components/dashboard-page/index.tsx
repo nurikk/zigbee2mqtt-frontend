@@ -1,4 +1,4 @@
-import { DeviceState, CompositeFeature, GenericExposedFeature, FeatureAccessMode, Device, Paths } from '../../types';
+import { CompositeFeature, Device, DeviceState, FeatureAccessMode, GenericExposedFeature, Paths } from '../../types';
 import { GlobalState } from '../../store';
 import { isOnlyOneBitIsSet } from '../../utils';
 

@@ -1,6 +1,6 @@
 import i18n, { ResourceLanguage } from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import { register } from "timeago.js"
+import { register } from 'timeago.js';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import caTranslations from './locales/ca.json';
 import enTranslations from './locales/en.json';
@@ -26,27 +26,27 @@ import bgTranslations from './locales/bg.json';
 import huTranslations from './locales/hu.json';
 
 
-import timeCa from "timeago.js/lib/lang/ca";
-import timePl from "timeago.js/lib/lang/pl";
-import timeFR from "timeago.js/lib/lang/fr";
-import timeDe from "timeago.js/lib/lang/de";
-import timeRu from "timeago.js/lib/lang/ru";
-import timePtBr from "timeago.js/lib/lang/pt_BR";
-import timeEs from "timeago.js/lib/lang/es";
-import timeUa from "timeago.js/lib/lang/uk";
-import timeChs from "timeago.js/lib/lang/zh_CN";
-import timeNl from "timeago.js/lib/lang/nl";
-import timeIt from "timeago.js/lib/lang/it";
-import timeZh from "timeago.js/lib/lang/zh_TW";
-import timeKo from "timeago.js/lib/lang/ko";
-import timeCs from "timeago.js/lib/lang/cs";
-import timeFi from "timeago.js/lib/lang/fi";
-import timeSv from "timeago.js/lib/lang/sv";
-import timeTr from "timeago.js/lib/lang/tr";
-import timeNo from "timeago.js/lib/lang/nb_NO";
-import timeDa from "timeago.js/lib/lang/da";
-import timeBg from "timeago.js/lib/lang/bg";
-import timeHu from "timeago.js/lib/lang/hu";
+import timeCa from 'timeago.js/lib/lang/ca';
+import timePl from 'timeago.js/lib/lang/pl';
+import timeFR from 'timeago.js/lib/lang/fr';
+import timeDe from 'timeago.js/lib/lang/de';
+import timeRu from 'timeago.js/lib/lang/ru';
+import timePtBr from 'timeago.js/lib/lang/pt_BR';
+import timeEs from 'timeago.js/lib/lang/es';
+import timeUa from 'timeago.js/lib/lang/uk';
+import timeChs from 'timeago.js/lib/lang/zh_CN';
+import timeNl from 'timeago.js/lib/lang/nl';
+import timeIt from 'timeago.js/lib/lang/it';
+import timeZh from 'timeago.js/lib/lang/zh_TW';
+import timeKo from 'timeago.js/lib/lang/ko';
+import timeCs from 'timeago.js/lib/lang/cs';
+import timeFi from 'timeago.js/lib/lang/fi';
+import timeSv from 'timeago.js/lib/lang/sv';
+import timeTr from 'timeago.js/lib/lang/tr';
+import timeNo from 'timeago.js/lib/lang/nb_NO';
+import timeDa from 'timeago.js/lib/lang/da';
+import timeBg from 'timeago.js/lib/lang/bg';
+import timeHu from 'timeago.js/lib/lang/hu';
 
 
 register("ca", timeCa);

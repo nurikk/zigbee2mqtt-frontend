@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import { useThemeSwitcher } from 'react-css-theme-switcher';
 import Button from './button';
+
 export type Theme = 'light' | 'dark';
 
 type ThemeSwitcherProps = {

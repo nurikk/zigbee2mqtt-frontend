@@ -8,6 +8,7 @@ import { WithTranslation, withTranslation } from 'react-i18next';
 import { DevicesTable } from './DevicesTable';
 import { DeviceApi } from '../../actions/DeviceApi';
 import { isDeviceDisabled } from '../../utils';
+
 export interface DevicesPageData {
     id: string;
     device: Device;

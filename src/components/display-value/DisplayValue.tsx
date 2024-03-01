@@ -2,6 +2,7 @@ import React from 'react';
 
 import cx from 'classnames';
 import { useTranslation } from 'react-i18next';
+
 type DisplayValueProps = {
     name: string;
     value: unknown;

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { CompositeFeature, Endpoint, GenericExposedFeature } from '../../../types';
-import { isCompositeFeature, isGenericExposedFeature } from '../../device-page/type-guards';
+import { isCompositeFeature } from '../../device-page/type-guards';
 import { BaseFeatureProps } from '../base';
 import Button from '../../button';
 import groupBy from 'lodash/groupBy';

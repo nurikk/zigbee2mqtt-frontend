@@ -1,5 +1,5 @@
-import React, { FunctionComponent, useEffect, useState } from 'react';
-import { RGBColor, Endpoint, GradientFeature } from '../../../types';
+import React, { useEffect, useState } from 'react';
+import { Endpoint, GradientFeature, RGBColor } from '../../../types';
 import { BaseFeatureProps } from '../base';
 import ColorEditor from '../../color-editor/ColorEditor';
 import * as convertColors from 'color-convert';

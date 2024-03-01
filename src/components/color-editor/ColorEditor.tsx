@@ -1,7 +1,7 @@
 import React, { InputHTMLAttributes, useEffect, useState } from 'react';
 import { AnyColor } from '../../types';
 import Button from '../button';
-import { ColorProps, pridePallet, whitePallet, toRGB } from './color-editor';
+import { ColorProps, pridePallet, toRGB, whitePallet } from './color-editor';
 
 export default function ColorEditor(
     props: ColorProps & Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'value'>,
@@ -14,8 +14,8 @@ export default function ColorEditor(
     return (
         <>
             {!minimal &&
-                steps.map((pallet, idx) => (
-                    <div key={idx} className="btn-group me-2 float-start border">
+                steps.map((pallet) => (
+                    <div key={JSON.stringify(pallet)} className="btn-group me-2 float-start border">
                         {pallet.map((step) => (
                             <Button<string>
                                 className="btn"

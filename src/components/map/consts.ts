@@ -1,4 +1,4 @@
-import { ZigbeeRelationship } from "./types";
+import { ZigbeeRelationship } from './types';
 
 interface LinkType {
   title: string;

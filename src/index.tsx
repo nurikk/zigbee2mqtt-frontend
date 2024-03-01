@@ -3,7 +3,7 @@ import 'react-notifications-component/dist/theme.css';
 import '@fortawesome/fontawesome-free/css/all.css';
 import './styles/styles.global.scss';
 
-import React, { FunctionComponent, lazy } from 'react';
+import React from 'react';
 import { createRoot } from 'react-dom/client';
 
 import api from './ws-client';

@@ -4,7 +4,7 @@ import { MultiPicker } from './MultiPicker';
 import { SinglePicker } from './SinglePicker';
 import { ClusterPickerProps, PickerType } from '.';
 
-export default function ClusterPicker(props: ClusterPickerProps): JSX.Element {
+export default function ClusterPicker(props: Readonly<ClusterPickerProps>): JSX.Element {
     const { pickerType, onChange, clusters, value, label, disabled, ...rest } = props;
     if (pickerType === PickerType.MULTIPLE) {
         return (

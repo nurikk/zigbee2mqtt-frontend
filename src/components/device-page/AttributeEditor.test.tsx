@@ -1,9 +1,9 @@
 import '@testing-library/jest-dom';
 import React from 'react';
-import AttributeEditor from './AttributeEditor';
+import { TranslatedAttributeEditor } from './AttributeEditor';
 import { fireEvent, render, screen } from '../../test-utils';
 import { createMockDevice } from '../../createMockDevice';
-import { vi, it, expect } from 'vitest';
+import { expect, it, vi } from 'vitest';
 
 it('display pickers', async () => {
     const readDeviceAttributes = vi.fn();
@@ -11,7 +11,7 @@ it('display pickers', async () => {
     const mockDevice = createMockDevice();
 
     render(
-        <AttributeEditor
+        <TranslatedAttributeEditor
             readDeviceAttributes={readDeviceAttributes}
             writeDeviceAttributes={writeDeviceAttributes}
             theme={'light'}
@@ -35,7 +35,7 @@ it('attribute can be selected and removed', async () => {
     const mockDevice = createMockDevice();
 
     render(
-        <AttributeEditor
+        <TranslatedAttributeEditor
             readDeviceAttributes={readDeviceAttributes}
             writeDeviceAttributes={writeDeviceAttributes}
             theme={'light'}
@@ -70,7 +70,7 @@ it('attribute can be read', async () => {
     const mockDevice = createMockDevice();
 
     render(
-        <AttributeEditor
+        <TranslatedAttributeEditor
             readDeviceAttributes={readDeviceAttributes}
             writeDeviceAttributes={writeDeviceAttributes}
             theme={'light'}
@@ -103,7 +103,7 @@ it('attribute can be write', async () => {
     const mockDevice = createMockDevice();
 
     render(
-        <AttributeEditor
+        <TranslatedAttributeEditor
             readDeviceAttributes={readDeviceAttributes}
             writeDeviceAttributes={writeDeviceAttributes}
             theme={'light'}

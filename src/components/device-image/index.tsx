@@ -1,6 +1,5 @@
-import { FunctionComponent, ImgHTMLAttributes } from 'react';
 import genericDevice from '../../images/generic-zigbee-device.png';
-import { Device, DeviceState } from '../../types';
+import { Device } from '../../types';
 import { sanitizeZ2MDeviceName } from '../../utils';
 
 type ImageGeneratorFn = (device: Device) => string | undefined;

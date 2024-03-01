@@ -2,7 +2,7 @@
 import React from 'react';
 import { fireEvent, render, screen, waitFor } from '../../test-utils';
 import { createMockDevice } from '../../createMockDevice';
-import { it, expect } from 'vitest';
+import { expect, it } from 'vitest';
 import { HeaderDeviceSelector } from './header-device-selector';
 
 it('all devices are visible in dropdown', async () => {

@@ -1,5 +1,5 @@
-import api from "../ws-client";
-import { FriendlyName } from "../types";
+import api from '../ws-client';
+import { FriendlyName } from '../types';
 
 export interface StateApi {
     setStateValue(friendlyName: FriendlyName, name: string, value: unknown): Promise<void>;

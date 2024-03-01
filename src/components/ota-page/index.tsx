@@ -9,7 +9,7 @@ import { DeviceImage } from '../device-image/DeviceImage';
 import { genDeviceDetailsLink, isDeviceDisabled, toHHMMSS } from '../../utils';
 import { Link } from 'react-router-dom';
 import { Device, DeviceState, OTAState } from '../../types';
-import { VendorLink, ModelLink, OTALink } from '../vendor-links/vendor-links';
+import { ModelLink, OTALink, VendorLink } from '../vendor-links/vendor-links';
 import { useTranslation, WithTranslation, withTranslation } from 'react-i18next';
 import { Column } from 'react-table';
 import { Table } from '../grid/ReactTableCom';

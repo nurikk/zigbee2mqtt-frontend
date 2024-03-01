@@ -60,7 +60,7 @@ export default function LocalePicker(): JSX.Element {
     const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(false);
 
     const selectAndHide = (lang: string) => {
-        i18n.changeLanguage(lang);
+        i18n.changeLanguage(lang).then();
         setIsComponentVisible(false);
     };
 

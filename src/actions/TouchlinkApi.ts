@@ -1,6 +1,6 @@
-import api from "../ws-client";
-import store from "../store";
-import { TouchLinkDevice } from "../types";
+import api from '../ws-client';
+import store from '../store';
+import { TouchLinkDevice } from '../types';
 
 
 export interface TouchlinkApi {

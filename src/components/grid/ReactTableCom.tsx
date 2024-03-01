@@ -1,20 +1,21 @@
 import React from 'react';
 import {
-    useTable,
-    useSortBy,
-    HeaderGroup,
-    Column,
-    useGlobalFilter,
     ActionType,
+    Column,
+    HeaderGroup,
     TableInstance,
     TableState,
+    useGlobalFilter,
+    useSortBy,
+    useTable,
 } from 'react-table';
 
 import cx from 'classnames';
 
 import * as local from 'store2';
 import { GlobalFilter } from './GlobalFilter';
-import { persist, getStorageKey } from './persist';
+import { getStorageKey, persist } from './persist';
+
 type PartialTableState = Partial<TableState<Record<string, unknown>>>;
 
 interface Props {

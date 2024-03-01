@@ -1,6 +1,6 @@
 import React, { FunctionComponent, PropsWithChildren } from 'react';
 import { useTranslation } from 'react-i18next';
-import { CompositeFeature, GenericExposedFeature, Endpoint, FeatureAccessMode, DeviceState } from '../../../types';
+import { CompositeFeature, DeviceState, Endpoint, FeatureAccessMode, GenericExposedFeature } from '../../../types';
 import Button from '../../button';
 import { isColorFeature } from '../../device-page/type-guards';
 

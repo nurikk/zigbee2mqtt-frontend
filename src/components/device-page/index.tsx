@@ -1,4 +1,4 @@
-import { RouteComponentProps, withRouter } from 'react-router-dom';
+import { RouteComponentProps } from 'react-router-dom';
 import { GlobalState } from '../../store';
 
 import { DeviceApi } from '../../actions/DeviceApi';

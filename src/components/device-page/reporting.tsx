@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { Device, Cluster, Endpoint, Attribute } from '../../types';
+import { Attribute, Cluster, Device, Endpoint } from '../../types';
 
 import actions, { ReportingApi } from '../../actions/actions';
 import { connect } from 'unistore/react';

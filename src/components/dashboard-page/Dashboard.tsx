@@ -10,7 +10,7 @@ import get from 'lodash/get';
 import { getStorageKey, persist, restore } from '../grid/persist';
 import { GlobalFilter } from '../grid/GlobalFilter';
 import { DEVICES_GLOBAL_NAME } from '../zigbee/DEVICES_GLOBAL_NAME';
-import { PropsFromStore, filterKeys, onlyValidFeaturesForDashboard } from '.';
+import { filterKeys, onlyValidFeaturesForDashboard, PropsFromStore } from '.';
 import { Devices, GlobalState } from '../../store';
 import { actions } from 'react-table';
 import { connect } from 'unistore/react';

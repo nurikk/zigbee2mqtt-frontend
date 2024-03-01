@@ -2,9 +2,9 @@ import React, { Component, ReactNode } from 'react';
 import { KVP } from '../../types';
 import { JSONSchema7 } from 'json-schema';
 import { ISubmitEvent, UiSchema } from '@rjsf/core';
-import { TitleField, DescriptionField } from './../../i18n/rjsf-translation-fields';
+import { DescriptionField, TitleField } from '../../i18n/rjsf-translation-fields';
 import merge from 'lodash/merge';
-import { DeviceSettingsProps, DeviceSettingsState, ParamValue, Form } from './settings';
+import { DeviceSettingsProps, DeviceSettingsState, Form, ParamValue } from './settings';
 
 const genericUiSchema: UiSchema = {
     'ui:order': ['friendly_name', 'disabled', 'retain', 'retention', 'qos', 'filtered_attributes', '*'],

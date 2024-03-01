@@ -1,6 +1,6 @@
-import React, { Suspense, lazy } from 'react';
+import React, { lazy, Suspense } from 'react';
 import NiceModal from '@ebay/nice-modal-react';
-import { Switch, Route, HashRouter } from 'react-router-dom';
+import { HashRouter, Route, Switch } from 'react-router-dom';
 import { ReactNotifications } from 'react-notifications-component';
 
 import store from './store';
