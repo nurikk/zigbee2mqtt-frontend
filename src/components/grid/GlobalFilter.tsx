@@ -7,7 +7,7 @@ type GlobalFilterProps = {
     setGlobalFilter(arg1: string): void;
 };
 
-export function GlobalFilter({ globalFilter, setGlobalFilter }: GlobalFilterProps) {
+export function GlobalFilter({ globalFilter, setGlobalFilter }: Readonly<GlobalFilterProps>) {
     const [value, setValue] = React.useState(globalFilter);
     const onChange = useAsyncDebounce((v) => {
         setGlobalFilter(v);

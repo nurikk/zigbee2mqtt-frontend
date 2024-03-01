@@ -33,7 +33,7 @@ export type AttributeValueInputProps = {
     value?: unknown;
 };
 
-export function AttributeValueInput(props: AttributeValueInputProps): JSX.Element {
+export function AttributeValueInput(props: Readonly<AttributeValueInputProps>): JSX.Element {
     const { value, onChange, attribute, definition, ...rest } = props;
     const typesMap = {
         [DataType.charStr]: 'string',
