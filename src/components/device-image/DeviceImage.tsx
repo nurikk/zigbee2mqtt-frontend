@@ -44,7 +44,7 @@ export function DeviceImage(props: Readonly<DeviceImageProps>) {
 
     return (
         <div className={cx(className, 'position-relative')} {...rest}>
-            <Suspense fallback={<img alt='' src={genericDevice} className={style.img} />}>
+            <Suspense fallback={<img alt="" src={genericDevice} className={style.img} />}>
                 <ErrorBoundary>
                     <LazyImage device={device} />
                 </ErrorBoundary>

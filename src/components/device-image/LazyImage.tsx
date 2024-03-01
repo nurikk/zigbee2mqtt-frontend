@@ -18,5 +18,5 @@ export function LazyImage(props: Readonly<LazyImageProps>) {
     if (type === 'svg') {
         return <image crossOrigin={'anonymous'} {...rest} href={src} />;
     }
-    return <img alt='' crossOrigin={'anonymous'} src={src} className={style.img} />;
+    return <img alt="" crossOrigin={'anonymous'} src={src} className={style.img} />;
 }
