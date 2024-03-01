@@ -185,7 +185,7 @@ class AttributeEditor extends React.Component<AttributeEditorProps, AttributeEdi
                     <div className="col-6 col-sm-3">
                         <ClusterPicker
                             data-testid="cluster-picker"
-                            label={t('cluster')}
+                            label={t('zigbee:cluster')}
                             pickerType={PickerType.SINGLE}
                             clusters={Object.keys(ZclCluster)}
                             value={cluster}
@@ -196,7 +196,7 @@ class AttributeEditor extends React.Component<AttributeEditorProps, AttributeEdi
                     <div className="col-6 col-sm-3">
                         <AttributePicker
                             data-testid="attribute-picker"
-                            label={t('attribute')}
+                            label={t('zigbee:attribute')}
                             value={''}
                             cluster={cluster}
                             onChange={this.onAttributeSelect}

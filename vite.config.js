@@ -2,13 +2,10 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import sassDts from 'vite-plugin-sass-dts';
 import viteCompression from 'vite-plugin-compression';
-import { startServer } from './ws';
+import mockServer from './ws';
+import i18next from './i18n';
 
-export default defineConfig(async ({ command, mode }) => {
-    if (command === 'serve' && mode !== 'test') {
-        startServer();
-    }
-
+export default defineConfig(async () => {
     return {
         root: 'src',
         base: '',
@@ -35,6 +32,8 @@ export default defineConfig(async ({ command, mode }) => {
             }),
             sassDts(),
             viteCompression({ verbose: true }),
+            mockServer(),
+            i18next(),
         ],
         server: {
             proxy: {

@@ -2911,5 +2911,12 @@
     "Home Assistant": "Home Assistant",
     "Home Assistant name": "Home Assistant name",
     "Group off state": "Group off state"
+  },
+  "devConsole": {
+    "generate_external_definition": "Generate external definition",
+    "generated_external_definition": "Generated external definition",
+    "write": "Write",
+    "read": "Read",
+    "documentation": "Documentation"
   }
 }
