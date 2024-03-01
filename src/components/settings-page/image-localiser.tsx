@@ -106,4 +106,4 @@ function ImageLocaliser(props: Props): JSX.Element {
     return <div>Unknown</div>;
 }
 
-export default withTranslation(['settings'])(ImageLocaliser);
+export const TranslatedImageLocaliser = withTranslation(['settings'])(ImageLocaliser);

@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { CompositeFeature, Device, DeviceState, GenericExposedFeature, Group } from '../../types';
 import { SceneApi, SceneId } from '../../actions/SceneApi';
 import { useTranslation } from 'react-i18next';
-import Composite from '../features/composite/composite';
+import { TranslatedComposite } from '../features/composite/composite';
 import { DashboardFeatureWrapper } from '../dashboard-page/DashboardFeatureWrapper';
 import { StateApi } from '../../actions/StateApi';
-import { getScenes, onlyValidFeaturesForScenes, isValidSceneId } from './scene';
+import { onlyValidFeaturesForScenes } from './onlyValidFeaturesForScenes';
+import { getScenes } from './getScenes';
+import { isValidSceneId } from './isValidSceneId';
 
 type AddSceneProps = {
     target: Device | Group;
@@ -55,7 +57,7 @@ export function AddScene(
                     placeholder={defaultSceneName}
                 />
 
-                <Composite
+                <TranslatedComposite
                     feature={{ features: filteredFeatures } as CompositeFeature}
                     className="row"
                     type="composite"

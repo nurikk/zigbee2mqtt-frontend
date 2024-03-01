@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { RGBColor, Endpoint, GradientFeature } from '../../../types';
 import { BaseFeatureProps } from '../base';
-import ColorEditor from '../../color-editor/color-editor';
+import ColorEditor from '../../color-editor/ColorEditor';
 import * as convertColors from 'color-convert';
 import Button from '../../button';
 import { WithTranslation, withTranslation } from 'react-i18next';
@@ -22,8 +22,8 @@ const rgbToHex = (rgb: RGBColor): string => {
 };
 
 type GradientProps = BaseFeatureProps<GradientFeature>;
-//{ deviceState: { gradient: string[] }
-const Gradient: FunctionComponent<GradientProps & WithTranslation<'gradient'>> = (props) => {
+
+function Gradient(props: GradientProps & WithTranslation<'gradient'>) {
     const gradientColors = 5;
     const {
         t,
@@ -102,6 +102,6 @@ const Gradient: FunctionComponent<GradientProps & WithTranslation<'gradient'>> =
             ,
         </div>
     );
-};
+}
 
-export default withTranslation(['gradient', 'common'])(React.memo(Gradient));
+export const TranslatedGradient = withTranslation(['gradient', 'common'])(React.memo(Gradient));

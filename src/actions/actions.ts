@@ -58,8 +58,7 @@ const actions = (store: Store<GlobalState>): Record<string, (state: GlobalState,
     },
 
     exportState(state): Promise<void> {
-        download(state as unknown as Record<string, unknown>, 'state.json');
-        return Promise.resolve();
+        return download(state as unknown as Record<string, unknown>, 'state.json');
     },
     configureReport(state, device: string, config: ReportingConfig): Promise<void> {
         return api.send('bridge/request/device/configure_reporting', {

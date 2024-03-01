@@ -15,13 +15,13 @@ import cloneDeep from 'lodash/cloneDeep';
 import uiSchemas from './uiSchema.json';
 import { BridgeApi } from '../../actions/BridgeApi';
 import { WithTranslation, withTranslation } from 'react-i18next';
-import customFields from '../../i18n/rjsf-translation-fields';
+import { TitleField, DescriptionField } from '../../i18n/rjsf-translation-fields';
 import { Stats } from './stats';
 import frontentPackageJson from '../../../package.json';
 import { formatDate } from '../../utils';
 import { saveAs } from 'file-saver';
 import Spinner from '../spinner';
-import ImageLocaliser from './image-localiser';
+import { TranslatedImageLocaliser } from './image-localiser';
 import { DeviceApi } from '../../actions/DeviceApi';
 
 type SettingsTab = 'settings' | 'bridge' | 'about' | 'tools' | 'donate' | 'translate';
@@ -116,7 +116,7 @@ type PropsFromStore = Pick<
     GlobalState,
     'bridgeInfo' | 'missingTranslations' | 'devices' | 'backup' | 'preparingBackup'
 >;
-export class SettingsPage extends Component<
+class SettingsPage extends Component<
     PropsFromStore & SettingsPageProps & DeviceApi & BridgeApi & UtilsApi & WithTranslation<'setting'>,
     SettingsPageState
 > {
@@ -313,7 +313,7 @@ export class SettingsPage extends Component<
                 <Button className="btn btn-primary d-block mt-2" onClick={this.addInstallCode}>
                     {t('add_install_code')}
                 </Button>
-                <ImageLocaliser setDeviceOptions={setDeviceOptions} devices={devices} />
+                <TranslatedImageLocaliser setDeviceOptions={setDeviceOptions} devices={devices} />
             </div>
         );
     }
@@ -415,7 +415,7 @@ export class SettingsPage extends Component<
                             formData={currentConfig}
                             onSubmit={this.onSettingsSave}
                             uiSchema={uiSchemas[keyName] as UiSchema}
-                            fields={customFields}
+                            fields={{ TitleField, DescriptionField }}
                         />
                     </div>
                 </div>
@@ -438,10 +438,9 @@ export class SettingsPage extends Component<
 }
 const SettingsPageWithRouter = withRouter(SettingsPage);
 const mappedProps = ['bridgeInfo', 'missingTranslations', 'devices', 'backup', 'preparingBackup'];
-const ConnectedSettingsPage = withTranslation(['settings', 'common'])(
+export const ConnectedSettingsPage = withTranslation(['settings', 'common'])(
     connect<Record<string, unknown>, Record<string, unknown>, GlobalState, DeviceApi & BridgeApi>(
         mappedProps,
         actions,
     )(SettingsPageWithRouter),
 );
-export default ConnectedSettingsPage;

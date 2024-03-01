@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Device, Endpoint, Cluster, ObjectType, Group } from '../../types';
 import DevicePicker from '../device-picker';
 import EndpointPicker from '../endpoint-picker';
-import ClusterPicker, { PickerType } from '../cluster-picker';
+import { PickerType } from '../cluster-picker';
+import ClusterPicker from '../cluster-picker/ClusterPicker';
 import Button from '../button';
 import { WithDevices, Devices } from '../../store';
 import { NiceBindingRule } from './bind';
@@ -30,7 +31,7 @@ const getTarget = (rule: NiceBindingRule, devices: Devices, groups: Group[]): De
     return devices[rule.target?.ieee_address as string];
 };
 type Action = 'Bind' | 'Unbind';
-export class BindRow extends Component<BindRowProps, BindRowState> {
+class BindRow extends Component<BindRowProps, BindRowState> {
     state: Readonly<BindRowState> = {
         stateRule: {} as NiceBindingRule,
     };
@@ -222,4 +223,4 @@ export class BindRow extends Component<BindRowProps, BindRowState> {
     }
 }
 
-export default withTranslation(['common', 'zigbee'])(BindRow);
+export const TranslatedBindRow = withTranslation(['common', 'zigbee'])(BindRow);

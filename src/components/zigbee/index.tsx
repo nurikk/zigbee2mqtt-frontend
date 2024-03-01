@@ -22,7 +22,7 @@ type DevicesPageProps = Pick<DeviceApi, 'configureDevice' | 'renameDevice' | 're
     PropsFromStore &
     WithTranslation<'zigbee'>;
 
-export function DevicesPage(props: DevicesPageProps): JSX.Element {
+function DevicesPage(props: DevicesPageProps): JSX.Element {
     const {
         devices,
         deviceStates,
@@ -61,7 +61,7 @@ export function DevicesPage(props: DevicesPageProps): JSX.Element {
 }
 
 const mappedProps = ['devices', 'deviceStates', 'bridgeInfo', 'availability'];
-const ConnectedZigbeePage = withTranslation(['zigbee', 'common'])(
-    connect<unknown, unknown, PropsFromStore, unknown>(mappedProps, actions)(DevicesPage),
-);
-export default ConnectedZigbeePage;
+export const ConnectedZigbeePage = connect<unknown, unknown, PropsFromStore, unknown>(
+    mappedProps,
+    actions,
+)(withTranslation(['zigbee', 'common'])(DevicesPage));

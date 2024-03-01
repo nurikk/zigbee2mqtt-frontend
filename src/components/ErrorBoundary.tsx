@@ -16,7 +16,7 @@ export default class ErrorBoundary extends React.Component<ErrorBoundaryProps, E
     }
 
     downloadState = (e: SyntheticEvent): void => {
-        download(store.getState() as unknown as Record<string, unknown>, 'initialState.json');
+        download(store.getState() as unknown as Record<string, unknown>, 'initialState.json').then();
         e.preventDefault();
     };
 

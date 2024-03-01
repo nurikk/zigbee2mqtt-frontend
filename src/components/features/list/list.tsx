@@ -88,4 +88,4 @@ class List extends Component<Props, State> {
     }
 }
 
-export default withTranslation(['list', 'common'])(React.memo(List));
+export const TranslatedList = withTranslation(['list', 'common'])(React.memo(List));

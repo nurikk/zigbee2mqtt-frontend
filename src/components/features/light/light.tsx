@@ -3,7 +3,7 @@ import { LightFeature } from '../../../types';
 import { scale } from '../../../utils';
 import { ValueWithLabelOrPrimitive } from '../../enum-editor/enum-editor';
 import { BaseFeatureProps } from '../base';
-import Composite from '../composite/composite';
+import { TranslatedComposite } from '../composite/composite';
 
 type LightProps = BaseFeatureProps<LightFeature>;
 const stepsConfiguration = {
@@ -18,6 +18,6 @@ const stepsConfiguration = {
 };
 
 const Light: FunctionComponent<LightProps> = (props) => (
-    <Composite type="light" {...props} stepsConfiguration={stepsConfiguration} />
+    <TranslatedComposite type="light" {...props} stepsConfiguration={stepsConfiguration} />
 );
 export default Light;

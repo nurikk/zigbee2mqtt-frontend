@@ -1,52 +1,12 @@
 import React from 'react';
-import { CompositeFeature, Device, DeviceState, GenericExposedFeature, Group, Scene, WithScenes } from '../../types';
+import { Device, DeviceState } from '../../types';
 import actions from '../../actions/actions';
-import { SceneApi, SceneId } from '../../actions/SceneApi';
+import { SceneApi } from '../../actions/SceneApi';
 import { connect } from 'unistore/react';
 import { GlobalState } from '../../store';
-import { isLightFeature } from './type-guards';
 import { StateApi } from '../../actions/StateApi';
-import groupBy from 'lodash/groupBy';
 import { AddScene } from './AddScene';
 import { RecallRemove } from './RecallRemove';
-
-export const isValidSceneId = (id: SceneId, existingScenes: Scene[] = []): boolean => {
-    return id >= 0 && id <= 255 && !existingScenes.find((s) => s.id == id);
-};
-
-export function getScenes(target: Group | Device): Scene[] {
-    if ((target as Device).endpoints) {
-        const scenes: Scene[] = [];
-        Object.entries((target as Device).endpoints).forEach(([endpoint, value]) => {
-            value.scenes?.forEach((_scene) => scenes.push({ ..._scene, ...{ endpoint } }));
-        });
-        return scenes;
-    } else if ((target as WithScenes).scenes) {
-        return (target as WithScenes).scenes as Scene[];
-    }
-    return [];
-}
-
-const whitelistFeatureNames = ['state', 'color_temp', 'color', 'transition', 'brightness'];
-
-export function onlyValidFeaturesForScenes(
-    feature: GenericExposedFeature | CompositeFeature,
-    deviceState: DeviceState = {} as DeviceState,
-): GenericExposedFeature | CompositeFeature | undefined {
-    // eslint-disable-next-line prefer-const
-    let { property, name, features } = feature as CompositeFeature;
-    if (isLightFeature(feature)) {
-        features = features
-            .map((f) => onlyValidFeaturesForScenes(f, (property ? deviceState[property] : deviceState) as DeviceState))
-            .filter((f) => f) as (GenericExposedFeature | CompositeFeature)[];
-
-        features = Object.values(groupBy(features, 'property')).map((f) => f[0]);
-    }
-
-    if (whitelistFeatureNames.includes(name) || (Array.isArray(features) && features.length > 0)) {
-        return { ...feature, features } as GenericExposedFeature | CompositeFeature;
-    }
-}
 
 type SceneProps = {
     device: Device;

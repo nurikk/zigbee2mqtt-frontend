@@ -1,4 +1,5 @@
 module.exports = {
+    plugins: ['react-refresh'],
     parser: '@typescript-eslint/parser', // Specifies the ESLint parser
     parserOptions: {
         ecmaVersion: 2020, // Allows for the parsing of modern ECMAScript features
@@ -26,5 +27,6 @@ module.exports = {
         '@typescript-eslint/no-unused-vars': 'off',
         'react/no-deprecated': 'warn',
         'react/prop-types': 'off',
+        'react-refresh/only-export-components': 'warn',
     },
 };

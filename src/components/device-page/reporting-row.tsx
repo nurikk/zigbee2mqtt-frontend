@@ -3,7 +3,8 @@ import merge from 'lodash/merge';
 import { Device, Endpoint, Cluster, Attribute } from '../../types';
 
 import EndpointPicker from '../endpoint-picker';
-import ClusterPicker, { ClusterGroup, PickerType } from '../cluster-picker';
+import { ClusterGroup, PickerType } from '../cluster-picker';
+import ClusterPicker from '../cluster-picker/ClusterPicker';
 
 import { NiceRepointingRule } from './reporting';
 import { getEndpoints } from '../../utils';
@@ -71,7 +72,7 @@ function FormGroupInput(props: FormGroupInputProps) {
         </div>
     );
 }
-export class ReportingRow extends Component<ReportingRowProps & WithTranslation, ReportingRowState> {
+class ReportingRow extends Component<ReportingRowProps & WithTranslation, ReportingRowState> {
     state: Readonly<ReportingRowState> = {
         stateRule: {} as NiceRepointingRule,
     };
@@ -217,4 +218,4 @@ export class ReportingRow extends Component<ReportingRowProps & WithTranslation,
     }
 }
 
-export default withTranslation(['zigbee', 'common'])(ReportingRow);
+export const TranslatedReportingRow = withTranslation(['zigbee', 'common'])(ReportingRow);

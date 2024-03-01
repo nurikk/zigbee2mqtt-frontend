@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { Device, Cluster, Endpoint } from '../../types';
-import BindRow from './bind-row';
+import { TranslatedBindRow } from './bind-row';
 import actions from '../../actions/actions';
 import { BindApi } from '../../actions/BindApi';
 import { connect } from 'unistore/react';
@@ -69,7 +69,7 @@ export function Bind(props: BindProps & PropsFromStore & BindApi): JSX.Element {
     return (
         <div className="container-fluid">
             {[...bidingRules, newBindingRule].map((rule, idx) => (
-                <BindRow
+                <TranslatedBindRow
                     key={rule2key(rule)}
                     rule={rule}
                     groups={groups}

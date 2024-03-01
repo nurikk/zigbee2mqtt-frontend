@@ -117,7 +117,8 @@
         "zigbee-herdsman-converters": "~15.87.0",
         "@codemirror/lang-javascript": "^6.2.2",
         "@uiw/codemirror-theme-github": "^4.21.24",
-        "@uiw/react-codemirror": "^4.21.24"
+        "@uiw/react-codemirror": "^4.21.24",
+        "eslint-plugin-react-refresh": "*"
     },
     "main": "index.js",
     "husky": {

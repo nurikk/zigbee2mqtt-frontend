@@ -8,7 +8,7 @@ import style from './style.module.css';
 import { connect } from 'unistore/react';
 import { AvailabilityState, GlobalState } from '../../store';
 import get from 'lodash/get';
-import DeviceImage from '../device-image';
+import { DeviceImage } from '../device-image/DeviceImage';
 import { ModelLink, VendorLink } from '../vendor-links/vendor-links';
 import PowerSource from '../power-source';
 import { LastSeen } from '../LastSeen';

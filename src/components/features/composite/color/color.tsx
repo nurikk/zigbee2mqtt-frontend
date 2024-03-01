@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { AnyColor, ColorFeature, Endpoint } from '../../../../types';
-import ColorEditor from '../../../color-editor/color-editor';
+import ColorEditor from '../../../color-editor/ColorEditor';
 
 import { BaseFeatureProps } from '../../base';
 

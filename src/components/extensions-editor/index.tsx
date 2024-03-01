@@ -15,7 +15,7 @@ type ExtensionsEditorPageState = {
     currentExtension?: string;
 };
 type PropsFromStore = Pick<GlobalState, 'extensions' | 'theme'>;
-export class ExtensionsEditorPage extends Component<
+class ExtensionsEditorPage extends Component<
     PropsFromStore & ExtensionApi & WithTranslation<'extensions'>,
     ExtensionsEditorPageState
 > {
@@ -86,9 +86,7 @@ export class ExtensionsEditorPage extends Component<
         const { currentExtension } = this.state;
         const { extensions, theme } = this.props;
         const code = extensions.find((e) => e.name === currentExtension)?.code ?? '';
-        return (
-            <CodeEditor value={code} onChange={this.onExtensionCodeChange} theme={theme} />        
-        );
+        return <CodeEditor value={code} onChange={this.onExtensionCodeChange} theme={theme} />;
     }
 
     render(): JSX.Element {
@@ -105,6 +103,7 @@ export class ExtensionsEditorPage extends Component<
 
 const mappedProps = ['extensions', 'theme'];
 
-export default withTranslation('extensions')(
-    connect<unknown, unknown, GlobalState, unknown>(mappedProps, actions)(ExtensionsEditorPage),
-);
+export const ConnectedExtensionsEditorPage = connect<unknown, unknown, GlobalState, unknown>(
+    mappedProps,
+    actions,
+)(withTranslation('extensions')(ExtensionsEditorPage));

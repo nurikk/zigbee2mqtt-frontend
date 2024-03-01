@@ -2,7 +2,7 @@
 import { Device, DeviceState, Endpoint, Group, LastSeenType, Z2MConfig } from "./types";
 import { GraphI, LinkI, LinkType, NodeI } from "./components/map/types";
 import { Theme } from "./components/theme-switcher";
-import JSZip from 'jszip';
+
 import { saveAs } from 'file-saver';
 
 import local from "store2";
@@ -133,7 +133,8 @@ export const scale = (inputY: number, yRange: Array<number>, xRange: Array<numbe
 };
 
 
-export const download = (data: Record<string, unknown>, filename: string): void => {
+export const download = async (data: Record<string, unknown>, filename: string) => {
+    const JSZip = await require('jszip');
     const zip = new JSZip();
     zip.file(filename, JSON.stringify(data, null, 4), { compression: 'DEFLATE' });
     zip.generateAsync({ type: "blob" }).then((content) => {

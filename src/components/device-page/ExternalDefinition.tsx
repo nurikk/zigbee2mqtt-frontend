@@ -6,13 +6,12 @@ import React, { lazy } from 'react';
 import { supportNewDevicesUrl } from '../../utils';
 import Button from '../button';
 
-
 const CodeEditor = lazy(() => import('../CodeEditor'));
 
 export interface ExternalDefinitionProps
     extends WithTranslation,
-    Pick<DeviceApi, 'generateExternalDefinition'>,
-    Pick<GlobalState, 'generatedExternalDefinitions' | 'theme'> {
+        Pick<DeviceApi, 'generateExternalDefinition'>,
+        Pick<GlobalState, 'generatedExternalDefinitions' | 'theme'> {
     device: Device;
 }
 
@@ -26,9 +25,7 @@ class ExternalDefinition extends React.Component<ExternalDefinitionProps, Record
         const { t, generatedExternalDefinitions, device, theme } = this.props;
         const externalDefinition = generatedExternalDefinitions[device.ieee_address];
 
-
         if (externalDefinition) {
-
             return (
                 <>
                     {t('generated_external_definition')} (
@@ -49,4 +46,4 @@ class ExternalDefinition extends React.Component<ExternalDefinitionProps, Record
     }
 }
 
-export default withTranslation(['devConsole', 'common'])(ExternalDefinition);
+export const TranslatedExternalDefinition = withTranslation(['devConsole', 'common'])(ExternalDefinition);

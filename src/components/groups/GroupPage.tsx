@@ -110,8 +110,7 @@ function GroupPage(props: GroupPageProps) {
 }
 const GroupPageWithRouter = withRouter(GroupPage);
 const mappedProps = ['groups', 'devices', 'deviceStates', 'bridgeInfo'];
-const ConnectedGroupPage = connect<unknown, unknown, PropsFromStore, GroupsApi>(
+export const ConnectedGroupPage = connect<unknown, unknown, PropsFromStore, GroupsApi>(
     mappedProps,
     actions,
 )(GroupPageWithRouter);
-export default ConnectedGroupPage;

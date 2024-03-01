@@ -1,6 +1,7 @@
 // import '@testing-library/jest-dom';
 import React from 'react';
-import { createMockDevice, fireEvent, render, screen, waitFor } from '../../test-utils';
+import { fireEvent, render, screen, waitFor } from '../../test-utils';
+import { createMockDevice } from '../../createMockDevice';
 import { it, expect } from 'vitest';
 import { HeaderDeviceSelector } from './header-device-selector';
 

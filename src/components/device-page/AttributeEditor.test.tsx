@@ -1,7 +1,8 @@
 import '@testing-library/jest-dom';
 import React from 'react';
 import AttributeEditor from './AttributeEditor';
-import { createMockDevice, fireEvent, render, screen } from '../../test-utils';
+import { fireEvent, render, screen } from '../../test-utils';
+import { createMockDevice } from '../../createMockDevice';
 import { vi, it, expect } from 'vitest';
 
 it('display pickers', async () => {

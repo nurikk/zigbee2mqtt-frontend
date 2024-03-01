@@ -4,7 +4,7 @@ import { Device, Cluster, Endpoint, Attribute } from '../../types';
 import actions, { ReportingApi } from '../../actions/actions';
 import { connect } from 'unistore/react';
 import { GlobalState } from '../../store';
-import ReportingRow from './reporting-row';
+import { TranslatedReportingRow } from './reporting-row';
 
 type PropsFromStore = Pick<GlobalState, 'groups' | 'devices'>;
 interface ReportingProps {
@@ -65,7 +65,7 @@ function Reporting(props: ReportingProps & PropsFromStore & ReportingApi): JSX.E
     return (
         <div className="container-fluid">
             {[...reportingRules, newReportingRule].map((rule) => (
-                <ReportingRow key={rule2key(rule)} rule={rule} device={device} onApply={onApply} />
+                <TranslatedReportingRow key={rule2key(rule)} rule={rule} device={device} onApply={onApply} />
             ))}
         </div>
     );
