@@ -64,10 +64,10 @@ devDependencies:
     version: 4.14.199
   '@types/react':
     specifier: ~18.2.24
-    version: 18.2.24
+    version: 18.2.61
   '@types/react-dom':
     specifier: ~18.2.8
-    version: 18.2.8
+    version: 18.2.19
   '@types/react-router-dom':
     specifier: ~5.3.3
     version: 5.3.3
@@ -94,7 +94,7 @@ devDependencies:
     version: 4.21.24(@codemirror/language@6.10.1)(@codemirror/state@6.4.1)(@codemirror/view@6.24.1)
   '@uiw/react-codemirror':
     specifier: ^4.21.24
-    version: 4.21.24(@babel/runtime@7.23.1)(@codemirror/autocomplete@6.13.0)(@codemirror/language@6.10.1)(@codemirror/lint@6.5.0)(@codemirror/search@6.5.6)(@codemirror/state@6.4.1)(@codemirror/theme-one-dark@6.1.2)(@codemirror/view@6.24.1)(codemirror@6.0.1)(react-dom@18.2.0)(react@18.2.0)
+    version: 4.21.24(@babel/runtime@7.24.0)(@codemirror/autocomplete@6.13.0)(@codemirror/language@6.10.1)(@codemirror/lint@6.5.0)(@codemirror/search@6.5.6)(@codemirror/state@6.4.1)(@codemirror/theme-one-dark@6.1.2)(@codemirror/view@6.24.1)(codemirror@6.0.1)(react-dom@18.2.0)(react@18.2.0)
   '@vitejs/plugin-react':
     specifier: ~4.1.0
     version: 4.1.0(vite@4.5.2)
@@ -190,7 +190,7 @@ devDependencies:
     version: 3.0.0
   react-bootstrap:
     specifier: ~2.10.0
-    version: 2.10.0(@types/react@18.2.24)(react-dom@18.2.0)(react@18.2.0)
+    version: 2.10.0(@types/react@18.2.61)(react-dom@18.2.0)(react@18.2.0)
   react-css-theme-switcher:
     specifier: ~0.3.0
     version: 0.3.0(react@18.2.0)
@@ -202,7 +202,7 @@ devDependencies:
     version: 13.5.0(i18next@23.5.1)(react-dom@18.2.0)(react@18.2.0)
   react-image:
     specifier: ~4.1.0
-    version: 4.1.0(@babel/runtime@7.23.1)(react-dom@18.2.0)(react@18.2.0)
+    version: 4.1.0(@babel/runtime@7.24.0)(react-dom@18.2.0)(react@18.2.0)
   react-notifications-component:
     specifier: ^4.0.1
     version: 4.0.1(react@18.2.0)
@@ -244,7 +244,7 @@ devDependencies:
     version: 3.2.0(vite@4.5.2)
   vite-plugin-sass-dts:
     specifier: ~1.3.11
-    version: 1.3.11(postcss@8.4.33)(prettier@3.0.3)(sass@1.71.1)(vite@4.5.2)
+    version: 1.3.11(postcss@8.4.35)(prettier@3.0.3)(sass@1.71.1)(vite@4.5.2)
   vitest:
     specifier: ^1.3.1
     version: 1.3.1(@types/node@20.5.1)(jsdom@24.0.0)(sass@1.71.1)
@@ -475,6 +475,13 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       regenerator-runtime: 0.14.0
+    dev: true
+
+  /@babel/runtime@7.24.0:
+    resolution: {integrity: sha512-Chk32uHMg6TnQdvw2e9IlqPpFX/6NLuK0Ys2PqLb7/gL5uFn9mXvK715FGLlOLQrcO4qIkNHkvPGktzzXexsFw==}
+    engines: {node: '>=6.9.0'}
+    dependencies:
+      regenerator-runtime: 0.14.1
     dev: true
 
   /@babel/template@7.22.15:
@@ -1668,7 +1675,7 @@ packages:
     dependencies:
       '@babel/runtime': 7.23.1
       '@testing-library/dom': 9.3.4
-      '@types/react-dom': 18.2.8
+      '@types/react-dom': 18.2.19
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
     dev: true
@@ -1816,21 +1823,21 @@ packages:
     resolution: {integrity: sha512-lqa4UEhhv/2sjjIQgjX8B+RBjj47eo0mzGasklVJ78UKGQY1r0VpB9XHDaZZO9qzEFDdy4MrXLuEaSmPrPSe/A==}
     dev: true
 
-  /@types/prop-types@15.7.8:
-    resolution: {integrity: sha512-kMpQpfZKSCBqltAJwskgePRaYRFukDkm1oItcAbC3gNELR20XIBcN9VRgg4+m8DKsTfkWeA4m4Imp4DDuWy7FQ==}
+  /@types/prop-types@15.7.11:
+    resolution: {integrity: sha512-ga8y9v9uyeiLdpKddhxYQkxNDrfvuPrlFb0N1qnZZByvcElJaXthF1UhvCh9TLWJBEHeNtdnbysW7Y6Uq8CVng==}
     dev: true
 
-  /@types/react-dom@18.2.8:
-    resolution: {integrity: sha512-bAIvO5lN/U8sPGvs1Xm61rlRHHaq5rp5N3kp9C+NJ/Q41P8iqjkXSu0+/qu8POsjH9pNWb0OYabFez7taP7omw==}
+  /@types/react-dom@18.2.19:
+    resolution: {integrity: sha512-aZvQL6uUbIJpjZk4U8JZGbau9KDeAwMfmhyWorxgBkqDIEf6ROjRozcmPIicqsUwPUjbkDfHKgGee1Lq65APcA==}
     dependencies:
-      '@types/react': 18.2.24
+      '@types/react': 18.2.61
     dev: true
 
   /@types/react-router-dom@5.3.3:
     resolution: {integrity: sha512-kpqnYK4wcdm5UaWI3fLcELopqLrHgLqNsdpHauzlQktfkHL3npOSwtj1Uz9oKBAzs7lFtVkV8j83voAz2D8fhw==}
     dependencies:
       '@types/history': 4.7.11
-      '@types/react': 18.2.24
+      '@types/react': 18.2.61
       '@types/react-router': 5.1.20
     dev: true
 
@@ -1838,35 +1845,35 @@ packages:
     resolution: {integrity: sha512-jGjmu/ZqS7FjSH6owMcD5qpq19+1RS9DeVRqfl1FeBMxTDQAGwlMWOcs52NDoXaNKyG3d1cYQFMs9rCrb88o9Q==}
     dependencies:
       '@types/history': 4.7.11
-      '@types/react': 18.2.24
+      '@types/react': 18.2.61
     dev: true
 
   /@types/react-table@7.7.16:
     resolution: {integrity: sha512-khfVwkNkvFnQV+Dx5Z/4jeMWIi+qytR8/Hl89fMPQ3aGiIgVlnghwdnyrq45UVSU+9wTqQFL0kUmIk4MGaM20Q==}
     dependencies:
-      '@types/react': 18.2.24
+      '@types/react': 18.2.61
     dev: true
 
   /@types/react-transition-group@4.4.7:
     resolution: {integrity: sha512-ICCyBl5mvyqYp8Qeq9B5G/fyBSRC0zx3XM3sCC6KkcMsNeAHqXBKkmat4GqdJET5jtYUpZXrxI5flve5qhi2Eg==}
     dependencies:
-      '@types/react': 18.2.24
+      '@types/react': 18.2.61
     dev: true
 
-  /@types/react@18.2.24:
-    resolution: {integrity: sha512-Ee0Jt4sbJxMu1iDcetZEIKQr99J1Zfb6D4F3qfUWoR1JpInkY1Wdg4WwCyBjL257D0+jGqSl1twBjV8iCaC0Aw==}
+  /@types/react@18.2.61:
+    resolution: {integrity: sha512-NURTN0qNnJa7O/k4XUkEW2yfygA+NxS0V5h1+kp9jPwhzZy95q3ADoGMP0+JypMhrZBTTgjKAUlTctde1zzeQA==}
     dependencies:
-      '@types/prop-types': 15.7.8
-      '@types/scheduler': 0.16.4
-      csstype: 3.1.2
+      '@types/prop-types': 15.7.11
+      '@types/scheduler': 0.16.8
+      csstype: 3.1.3
     dev: true
 
   /@types/reconnectingwebsocket@1.0.8:
     resolution: {integrity: sha512-Yl1qB4H+2B44qd7xrZSVIggdr2ecLiGeOJrKFVe/3Zwhe3toX3DJguJWoW4asoKLnVoKkquk3ZM4atuLdIG7nw==}
     dev: true
 
-  /@types/scheduler@0.16.4:
-    resolution: {integrity: sha512-2L9ifAGl7wmXwP4v3pN4p2FLhD0O1qsJpvKmNin5VA8+UvNVb447UDaAEV6UdrkA+m/Xs58U1RFps44x6TFsVQ==}
+  /@types/scheduler@0.16.8:
+    resolution: {integrity: sha512-WZLiwShhwLRmeV6zH+GkbOFT6Z6VklCItrDioxUnv+u4Ll+8vKeFySoFyK/0ctcRpOmwAicELfmys1sDc/Rw+A==}
     dev: true
 
   /@types/semver@7.5.3:
@@ -2056,7 +2063,7 @@ packages:
       '@codemirror/view': 6.24.1
     dev: true
 
-  /@uiw/react-codemirror@4.21.24(@babel/runtime@7.23.1)(@codemirror/autocomplete@6.13.0)(@codemirror/language@6.10.1)(@codemirror/lint@6.5.0)(@codemirror/search@6.5.6)(@codemirror/state@6.4.1)(@codemirror/theme-one-dark@6.1.2)(@codemirror/view@6.24.1)(codemirror@6.0.1)(react-dom@18.2.0)(react@18.2.0):
+  /@uiw/react-codemirror@4.21.24(@babel/runtime@7.24.0)(@codemirror/autocomplete@6.13.0)(@codemirror/language@6.10.1)(@codemirror/lint@6.5.0)(@codemirror/search@6.5.6)(@codemirror/state@6.4.1)(@codemirror/theme-one-dark@6.1.2)(@codemirror/view@6.24.1)(codemirror@6.0.1)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-8zs5OuxbhikHocHBsVBMuW1vqlv4ccZAkt4rFwr7ebLP2Q6RwHsjpsR9GeGyAigAqonKRoeHugqF78UMrkaTgg==}
     peerDependencies:
       '@babel/runtime': '>=7.11.0'
@@ -2067,7 +2074,7 @@ packages:
       react: '>=16.8.0'
       react-dom: '>=16.8.0'
     dependencies:
-      '@babel/runtime': 7.23.1
+      '@babel/runtime': 7.24.0
       '@codemirror/commands': 6.3.3
       '@codemirror/state': 6.4.1
       '@codemirror/theme-one-dark': 6.1.2
@@ -2953,8 +2960,8 @@ packages:
       rrweb-cssom: 0.6.0
     dev: true
 
-  /csstype@3.1.2:
-    resolution: {integrity: sha512-I7K1Uu0MBPzaFKg4nI5Q7Vs2t+3gWWW648spaF+Rg7pI9ds18Ugn+lvg4SHczUdKlHI5LWBXyqfS8+DufyBsgQ==}
+  /csstype@3.1.3:
+    resolution: {integrity: sha512-M1uQkMl8rQK/szD0LNhtqxIPLpimGm8sOBwU7lLnCpSbTyY3yeU1Vc7l4KT5zT4s/yOxHH5O7tIuuLOCnLADRw==}
     dev: true
 
   /d3-color@3.1.0:
@@ -3247,7 +3254,7 @@ packages:
     resolution: {integrity: sha512-nRCa7CK3VTrM2NmGkIy4cbK7IZlgBE/PYMn55rrXefr5xXDP0LdtfPnblFDoVdcAfslJ7or6iqAUnx0CCGIWQA==}
     dependencies:
       '@babel/runtime': 7.23.1
-      csstype: 3.1.2
+      csstype: 3.1.3
     dev: true
 
   /dom-serializer@1.4.1:
@@ -5505,18 +5512,27 @@ packages:
       pathe: 1.1.2
     dev: true
 
-  /postcss-js@4.0.1(postcss@8.4.33):
+  /postcss-js@4.0.1(postcss@8.4.35):
     resolution: {integrity: sha512-dDLF8pEO191hJMtlHFPRa8xsizHaM82MLfNkUHdUtVEV3tgTp5oj+8qbEqYM57SLfc74KSbw//4SeJma2LRVIw==}
     engines: {node: ^12 || ^14 || >= 16}
     peerDependencies:
       postcss: ^8.4.21
     dependencies:
       camelcase-css: 2.0.1
-      postcss: 8.4.33
+      postcss: 8.4.35
     dev: true
 
   /postcss@8.4.33:
     resolution: {integrity: sha512-Kkpbhhdjw2qQs2O2DGX+8m5OVqEcbB9HRBvuYM9pgrjEFUg30A9LmXNlTAUj4S9kgtGyrMbTzVjH7E+s5Re2yg==}
+    engines: {node: ^10 || ^12 || >=14}
+    dependencies:
+      nanoid: 3.3.7
+      picocolors: 1.0.0
+      source-map-js: 1.0.2
+    dev: true
+
+  /postcss@8.4.35:
+    resolution: {integrity: sha512-u5U8qYpBCpN13BsiEB0CbR1Hhh4Gc0zLFuedrHJKMctHCHAGrMdG0PRM/KErzAL3CU6/eckEtmHNB3x6e3c0vA==}
     engines: {node: ^10 || ^12 || >=14}
     dependencies:
       nanoid: 3.3.7
@@ -5641,7 +5657,7 @@ packages:
       whatwg-fetch: 3.6.19
     dev: true
 
-  /react-bootstrap@2.10.0(@types/react@18.2.24)(react-dom@18.2.0)(react@18.2.0):
+  /react-bootstrap@2.10.0(@types/react@18.2.61)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-87gRP69VAfeU2yKgp8RI3HvzhPNrnYIV2QNranYXataz3ef+k7OhvKGGdxQLQfUsQ2RTmlY66tn4pdFrZ94hNg==}
     peerDependencies:
       '@types/react': '>=16.14.8'
@@ -5654,7 +5670,7 @@ packages:
       '@babel/runtime': 7.23.1
       '@restart/hooks': 0.4.11(react@18.2.0)
       '@restart/ui': 1.6.6(react-dom@18.2.0)(react@18.2.0)
-      '@types/react': 18.2.24
+      '@types/react': 18.2.61
       '@types/react-transition-group': 4.4.7
       classnames: 2.3.2
       dom-helpers: 5.2.1
@@ -5715,14 +5731,14 @@ packages:
       react: 18.2.0
     dev: true
 
-  /react-image@4.1.0(@babel/runtime@7.23.1)(react-dom@18.2.0)(react@18.2.0):
+  /react-image@4.1.0(@babel/runtime@7.24.0)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-qwPNlelQe9Zy14K2pGWSwoL+vHsAwmJKS6gkotekDgRpcnRuzXNap00GfibD3eEPYu3WCPlyIUUNzcyHOrLHjw==}
     peerDependencies:
       '@babel/runtime': '>=7'
       react: '>=16.8'
       react-dom: '>=16.8'
     dependencies:
-      '@babel/runtime': 7.23.1
+      '@babel/runtime': 7.24.0
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
     dev: true
@@ -5917,6 +5933,10 @@ packages:
 
   /regenerator-runtime@0.14.0:
     resolution: {integrity: sha512-srw17NI0TUWHuGa5CFGGmhfNIeja30WMBfbslPNhf6JrqQlLN5gcrvig1oqPxiVaXb0oW0XRKtH6Nngs5lKCIA==}
+    dev: true
+
+  /regenerator-runtime@0.14.1:
+    resolution: {integrity: sha512-dYnhHh0nJoMfnkZs6GmmhFknAGRrLznOu5nc9ML+EJxGvrx6H7teuevqVqCuPcPK//3eDrrjQhehXVx9cnkGdw==}
     dev: true
 
   /regexp.prototype.flags@1.5.1:
@@ -6692,7 +6712,7 @@ packages:
       react: '>=15.0.0'
     dependencies:
       '@babel/runtime': 7.23.1
-      '@types/react': 18.2.24
+      '@types/react': 18.2.61
       invariant: 2.2.4
       react: 18.2.0
       react-lifecycles-compat: 3.0.4
@@ -6866,7 +6886,7 @@ packages:
       vite: 4.5.2(@types/node@20.5.1)(sass@1.71.1)
     dev: true
 
-  /vite-plugin-sass-dts@1.3.11(postcss@8.4.33)(prettier@3.0.3)(sass@1.71.1)(vite@4.5.2):
+  /vite-plugin-sass-dts@1.3.11(postcss@8.4.35)(prettier@3.0.3)(sass@1.71.1)(vite@4.5.2):
     resolution: {integrity: sha512-3kEMwyejRFf8KGotbUVrYgALWE6JhN+EuZga5ngfDQspaDpqxJbjgKdSVw9cLS+5DGF70QIgr6QCt6Y6lqXF6A==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
@@ -6875,8 +6895,8 @@ packages:
       sass: '*'
       vite: ^3 || ^4
     dependencies:
-      postcss: 8.4.33
-      postcss-js: 4.0.1(postcss@8.4.33)
+      postcss: 8.4.35
+      postcss-js: 4.0.1(postcss@8.4.35)
       prettier: 3.0.3
       sass: 1.71.1
       vite: 4.5.2(@types/node@20.5.1)(sass@1.71.1)
@@ -7303,6 +7323,6 @@ packages:
     dependencies:
       '@rjsf/core': 4.2.3(react@18.2.0)
       react: 18.2.0
-      react-bootstrap: 2.10.0(@types/react@18.2.24)(react-dom@18.2.0)(react@18.2.0)
+      react-bootstrap: 2.10.0(@types/react@18.2.61)(react-dom@18.2.0)(react@18.2.0)
       react-icons: 4.11.0(react@18.2.0)
     dev: true
