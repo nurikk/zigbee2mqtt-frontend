@@ -3,10 +3,6 @@ import React from 'react';
 import { FieldProps } from '@rjsf/core';
 import { useTranslation } from 'react-i18next';
 
-export interface DescriptionFieldProps extends Partial<FieldProps> {
-    description?: string;
-}
-
 const DescriptionField = (props: Partial<FieldProps>): JSX.Element => {
     const { description } = props;
     const { t } = useTranslation('settingsSchemaDescriptions');
@@ -20,10 +16,6 @@ const DescriptionField = (props: Partial<FieldProps>): JSX.Element => {
     return <></>;
 };
 
-export interface TitleFieldProps extends Partial<FieldProps> {
-    title: string;
-}
-
 const TitleField = ({ title }: Partial<FieldProps>): JSX.Element => {
     const { t } = useTranslation('settingsSchemaTitles');
 
@@ -35,4 +27,4 @@ const TitleField = ({ title }: Partial<FieldProps>): JSX.Element => {
     );
 };
 
-export default { TitleField, DescriptionField };
+export { TitleField, DescriptionField };

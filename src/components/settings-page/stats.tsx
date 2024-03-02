@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { WithDevices } from '../../store';
 import orderBy from 'lodash/orderBy';
-import { powerSourceTypeToTranslationKey } from '../power-source';
+import { powerSourceTypeToTranslationKey } from '../power-source/powerSourceTypeToTranslationKey';
 
 type StatsProps = WithDevices;
 

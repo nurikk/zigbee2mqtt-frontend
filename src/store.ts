@@ -1,10 +1,21 @@
-import createStore from "unistore";
-import { Device, DeviceState, BridgeConfig, BridgeInfo, TouchLinkDevice, BridgeState, FriendlyName, IEEEEAddress, Group } from "./types";
-import { GraphI } from "./components/map/types";
-import { getCurrentTheme } from "./utils";
-import { Theme } from "./components/theme-switcher";
+import createStore from 'unistore';
+import {
+    BridgeConfig,
+    BridgeInfo,
+    BridgeState,
+    Device,
+    DeviceState,
+    FriendlyName,
+    Group,
+    IEEEEAddress,
+    TouchLinkDevice,
+} from './types';
+import { GraphI } from './components/map/types';
+import { getCurrentTheme } from './utils';
+import { Theme } from './components/theme-switcher';
 
 import initialState from './initialState.json';
+
 export interface LogMessage {
     level: "error" | "info" | "warning";
     message: string;

@@ -34,7 +34,7 @@ export default defineConfig(async ({ command, mode }) => {
                 include: '**/*.{jsx,tsx}',
             }),
             sassDts(),
-            viteCompression({ verbose: true }),
+            viteCompression({ verbose: true, algorithm: 'brotliCompress' }),
         ],
         server: {
             proxy: {

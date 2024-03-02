@@ -4,7 +4,7 @@ import actions from '../../actions/actions';
 import { connect } from 'unistore/react';
 import { GlobalState, WithBridgeInfo } from '../../store';
 
-import Composite from '../features/composite/composite';
+import { TranslatedComposite } from '../features/composite/composite';
 import { FeatureWrapper } from '../features/composite/FeatureWrapper';
 import { useTranslation } from 'react-i18next';
 import { DeviceApi } from '../../actions/DeviceApi';
@@ -24,7 +24,7 @@ function DeviceSpecificSettings(props: DeviceSpecificSettingsProps & Pick<Device
     const deviceState = config.devices[device.ieee_address] ?? {};
     if (device.definition?.options?.length) {
         return (
-            <Composite
+            <TranslatedComposite
                 showEndpointLabels={true}
                 feature={{ features: device.definition.options } as CompositeFeature}
                 type="composite"

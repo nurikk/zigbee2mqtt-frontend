@@ -164,7 +164,6 @@ export class GroupsPage extends Component<
 }
 
 const mappedProps = ['groups', 'devices', 'deviceStates', 'bridgeInfo'];
-const ConnectedGroupsPage = withTranslation('groups')(
+export const ConnectedGroupsPage = withTranslation('groups')(
     connect<unknown, unknown, PropsFromStore, GroupsApi>(mappedProps, actions)(GroupsPage),
 );
-export default ConnectedGroupsPage;

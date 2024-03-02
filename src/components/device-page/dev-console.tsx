@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
-import { Cluster, Device, Endpoint } from '../../types';
+import { Device } from '../../types';
 
-import Button from '../button';
 import { DeviceApi } from '../../actions/DeviceApi';
 import { GlobalState, LogMessage } from '../../store';
 import { WithTranslation, withTranslation } from 'react-i18next';
 import { CommandExecutor } from './CommandExecutor';
-import ExternalDefinition from './ExternalDefinition';
-import { Theme } from '@rjsf/bootstrap-5';
-import AttributeEditor from './AttributeEditor';
+import { TranslatedExternalDefinition } from './ExternalDefinition';
+import { TranslatedAttributeEditor } from './AttributeEditor';
 
 interface DevConsoleProps
     extends WithTranslation,
@@ -21,13 +19,13 @@ interface DevConsoleProps
     logs: LogMessage[];
 }
 
-export class DevConsole extends Component<DevConsoleProps, Record<string, never>> {
+class DevConsole extends Component<DevConsoleProps, Record<string, never>> {
     render(): JSX.Element {
         return (
             <div>
                 <div className="card">
                     <div className="card-body">
-                        <ExternalDefinition
+                        <TranslatedExternalDefinition
                             theme={this.props.theme}
                             device={this.props.device}
                             generateExternalDefinition={this.props.generateExternalDefinition}
@@ -37,7 +35,7 @@ export class DevConsole extends Component<DevConsoleProps, Record<string, never>
                 </div>
                 <div className="card">
                     <div className="card-body">
-                        <AttributeEditor
+                        <TranslatedAttributeEditor
                             theme={this.props.theme}
                             device={this.props.device}
                             logs={this.props.logs}
@@ -61,4 +59,4 @@ export class DevConsole extends Component<DevConsoleProps, Record<string, never>
     }
 }
 
-export default withTranslation(['devConsole', 'common'])(DevConsole);
+export const TranslatedDevConsole = withTranslation(['devConsole', 'common'])(DevConsole);

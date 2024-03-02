@@ -1,7 +1,8 @@
 // import '@testing-library/jest-dom';
 import React from 'react';
-import { createMockDevice, fireEvent, render, screen, waitFor } from '../../test-utils';
-import { it, expect } from 'vitest';
+import { fireEvent, render, screen, waitFor } from '../../test-utils';
+import { createMockDevice } from '../../createMockDevice';
+import { expect, it } from 'vitest';
 import { HeaderDeviceSelector } from './header-device-selector';
 
 it('all devices are visible in dropdown', async () => {

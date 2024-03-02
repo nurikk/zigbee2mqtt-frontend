@@ -1,21 +1,21 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-import { GlobalState } from "../store";
-import { Store } from "unistore";
+import { GlobalState } from '../store';
+import { Store } from 'unistore';
 
-import { Endpoint, FriendlyName, IEEEEAddress, ReportingConfig } from "../types";
-import api from "../ws-client";
-import { download, saveCurrentTheme } from "../utils";
-import bridgeActions from "./BridgeApi";
-import deviceActions from "./DeviceApi";
-import groupActions from "./GroupsApi";
-import stateActions from "./StateApi";
-import otaActions from "./OtaApi";
-import bindActions from "./BindApi";
-import touchlinkActions from "./TouchlinkApi";
-import extensionActions from "./ExtensionApi";
-import sceneActions from "./SceneApi";
-import { Theme } from "../components/theme-switcher";
+import { Endpoint, FriendlyName, IEEEEAddress, ReportingConfig } from '../types';
+import api from '../ws-client';
+import { download, saveCurrentTheme } from '../utils';
+import bridgeActions from './BridgeApi';
+import deviceActions from './DeviceApi';
+import groupActions from './GroupsApi';
+import stateActions from './StateApi';
+import otaActions from './OtaApi';
+import bindActions from './BindApi';
+import touchlinkActions from './TouchlinkApi';
+import extensionActions from './ExtensionApi';
+import sceneActions from './SceneApi';
+import { Theme } from '../components/theme-switcher';
 
 export interface UtilsApi {
     exportState(): Promise<void>;
@@ -58,8 +58,7 @@ const actions = (store: Store<GlobalState>): Record<string, (state: GlobalState,
     },
 
     exportState(state): Promise<void> {
-        download(state as unknown as Record<string, unknown>, 'state.json');
-        return Promise.resolve();
+        return download(state as unknown as Record<string, unknown>, 'state.json');
     },
     configureReport(state, device: string, config: ReportingConfig): Promise<void> {
         return api.send('bridge/request/device/configure_reporting', {

@@ -1,5 +1,5 @@
 import React, { FunctionComponent, PropsWithChildren } from 'react';
-import { DeviceState, Device, Endpoint, GenericExposedFeature, CompositeFeature } from '../../types';
+import { CompositeFeature, Device, DeviceState, Endpoint, GenericExposedFeature } from '../../types';
 import { DisplayValue } from '../display-value/DisplayValue';
 
 import { FeatureWrapperProps } from './composite/FeatureWrapper';

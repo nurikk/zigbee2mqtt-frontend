@@ -1,23 +1,21 @@
-import React, { ChangeEvent, Component } from 'react';
+import React, { ChangeEvent, Component, lazy } from 'react';
 import { connect } from 'unistore/react';
 import actions from '../../actions/actions';
 import { Extension, GlobalState } from '../../store';
 
 import { ExtensionApi } from '../../actions/ExtensionApi';
 import Button from '../button';
-import AceEditor from 'react-ace';
 
-import 'ace-builds/src-noconflict/mode-javascript';
-import 'ace-builds/src-noconflict/theme-github';
-import 'ace-builds/src-noconflict/theme-dracula';
 import { WithTranslation, withTranslation } from 'react-i18next';
 import CreateNewExtension from './CreateNewExtension';
+
+const CodeEditor = lazy(() => import('../CodeEditor'));
 
 type ExtensionsEditorPageState = {
     currentExtension?: string;
 };
 type PropsFromStore = Pick<GlobalState, 'extensions' | 'theme'>;
-export class ExtensionsEditorPage extends Component<
+class ExtensionsEditorPage extends Component<
     PropsFromStore & ExtensionApi & WithTranslation<'extensions'>,
     ExtensionsEditorPageState
 > {
@@ -88,21 +86,7 @@ export class ExtensionsEditorPage extends Component<
         const { currentExtension } = this.state;
         const { extensions, theme } = this.props;
         const code = extensions.find((e) => e.name === currentExtension)?.code ?? '';
-        const editorTheme = theme === 'light' ? 'github' : 'dracula';
-        return (
-            <AceEditor
-                setOptions={{ useWorker: false }}
-                mode="javascript"
-                onChange={this.onExtensionCodeChange}
-                name="UNIQUE_ID_OF_DIV"
-                editorProps={{ $blockScrolling: true }}
-                value={code}
-                width="100%"
-                maxLines={Infinity}
-                theme={editorTheme}
-                showPrintMargin={false}
-            />
-        );
+        return <CodeEditor value={code} onChange={this.onExtensionCodeChange} theme={theme} />;
     }
 
     render(): JSX.Element {
@@ -119,6 +103,7 @@ export class ExtensionsEditorPage extends Component<
 
 const mappedProps = ['extensions', 'theme'];
 
-export default withTranslation('extensions')(
-    connect<unknown, unknown, GlobalState, unknown>(mappedProps, actions)(ExtensionsEditorPage),
-);
+export const ConnectedExtensionsEditorPage = connect<unknown, unknown, GlobalState, unknown>(
+    mappedProps,
+    actions,
+)(withTranslation('extensions')(ExtensionsEditorPage));

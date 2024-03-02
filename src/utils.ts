@@ -1,12 +1,11 @@
+import { Device, DeviceState, Endpoint, Group, LastSeenType, Z2MConfig } from './types';
+import { GraphI, LinkI, LinkType, NodeI } from './components/map/types';
+import { Theme } from './components/theme-switcher';
 
-import { Device, DeviceState, Endpoint, Group, LastSeenType, Z2MConfig } from "./types";
-import { GraphI, LinkI, LinkType, NodeI } from "./components/map/types";
-import { Theme } from "./components/theme-switcher";
-import JSZip from 'jszip';
 import { saveAs } from 'file-saver';
 
-import local from "store2";
-import debounce from "lodash/debounce";
+import local from 'store2';
+import debounce from 'lodash/debounce';
 
 
 export const genDeviceDetailsLink = (deviceIdentifier: string | number): string => (`/device/${deviceIdentifier}`);
@@ -30,14 +29,6 @@ export const toHHMMSS = (secs: number): string => {
         .filter((v, i) => v !== "00" || i > 0)
         .join(":");
 };
-
-
-export type CallbackHandler<T> = (err: boolean, res: T) => void;
-export interface ApiResponse<T> {
-    success: boolean;
-    result: T;
-}
-
 
 export const lastSeen = (state: DeviceState, lastSeenType: LastSeenType): Date | undefined => {
     if (!state.last_seen) {
@@ -133,7 +124,8 @@ export const scale = (inputY: number, yRange: Array<number>, xRange: Array<numbe
 };
 
 
-export const download = (data: Record<string, unknown>, filename: string): void => {
+export const download = async (data: Record<string, unknown>, filename: string) => {
+    const JSZip = await require('jszip');
     const zip = new JSZip();
     zip.file(filename, JSON.stringify(data, null, 4), { compression: 'DEFLATE' });
     zip.generateAsync({ type: "blob" }).then((content) => {

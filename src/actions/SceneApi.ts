@@ -1,5 +1,5 @@
-import api from "../ws-client";
-import { Endpoint, Scene } from "../types";
+import api from '../ws-client';
+import { Endpoint, Scene } from '../types';
 
 export type SceneId = number;
 export interface SceneApi {

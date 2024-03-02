@@ -2,10 +2,11 @@ import { WithTranslation, withTranslation } from 'react-i18next';
 import { DeviceApi } from '../../actions/DeviceApi';
 import { GlobalState } from '../../store';
 import { Device } from '../../types';
-import React from 'react';
-import AceEditor from 'react-ace';
+import React, { lazy } from 'react';
 import { supportNewDevicesUrl } from '../../utils';
 import Button from '../button';
+
+const CodeEditor = lazy(() => import('../CodeEditor'));
 
 export interface ExternalDefinitionProps
     extends WithTranslation,
@@ -23,8 +24,8 @@ class ExternalDefinition extends React.Component<ExternalDefinitionProps, Record
     render(): JSX.Element {
         const { t, generatedExternalDefinitions, device, theme } = this.props;
         const externalDefinition = generatedExternalDefinitions[device.ieee_address];
+
         if (externalDefinition) {
-            const editorTheme = theme === 'light' ? 'github' : 'dracula';
             return (
                 <>
                     {t('generated_external_definition')} (
@@ -32,18 +33,7 @@ class ExternalDefinition extends React.Component<ExternalDefinitionProps, Record
                         {t('documentation')}
                     </a>
                     )
-                    <AceEditor
-                        setOptions={{ useWorker: false }}
-                        mode="javascript"
-                        readOnly={true}
-                        name="UNIQUE_ID_OF_DIV"
-                        editorProps={{ $blockScrolling: true }}
-                        value={externalDefinition}
-                        width="100%"
-                        maxLines={Infinity}
-                        theme={editorTheme}
-                        showPrintMargin={false}
-                    />
+                    <CodeEditor value={externalDefinition} theme={theme} />
                 </>
             );
         } else {
@@ -56,4 +46,4 @@ class ExternalDefinition extends React.Component<ExternalDefinitionProps, Record
     }
 }
 
-export default withTranslation(['devConsole', 'common'])(ExternalDefinition);
+export const TranslatedExternalDefinition = withTranslation(['devConsole', 'common'])(ExternalDefinition);

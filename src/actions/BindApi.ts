@@ -1,5 +1,5 @@
-import api from "../ws-client";
-import { Cluster } from "../types";
+import api from '../ws-client';
+import { Cluster } from '../types';
 
 export type BindParams = {
     from: string;

@@ -9,8 +9,8 @@ import styles from './DashboardDevice.module.scss';
 import { Link } from 'react-router-dom';
 import { genDeviceDetailsLink } from '../../utils';
 
-import Composite from '../features/composite/composite';
-import DeviceImage from '../device-image';
+import { TranslatedComposite } from '../features/composite/composite';
+import { DeviceImage } from '../device-image/DeviceImage';
 import { useTranslation } from 'react-i18next';
 
 type Props = BaseFeatureProps<CompositeFeature> & {
@@ -53,7 +53,7 @@ const DashboardDevice: React.FC<Props> = ({
                 </div>
 
                 <div className={cx('card-body align-items-center row')}>
-                    <Composite
+                    <TranslatedComposite
                         feature={{ features } as CompositeFeature}
                         className="row"
                         type="composite"

@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { WithTranslation, withTranslation } from 'react-i18next';
 import Button from '../button';
@@ -106,4 +106,4 @@ function ImageLocaliser(props: Props): JSX.Element {
     return <div>Unknown</div>;
 }
 
-export default withTranslation(['settings'])(ImageLocaliser);
+export const TranslatedImageLocaliser = withTranslation(['settings'])(ImageLocaliser);

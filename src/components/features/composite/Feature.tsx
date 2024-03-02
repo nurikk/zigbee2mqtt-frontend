@@ -3,19 +3,19 @@ import React, { FunctionComponent, PropsWithChildren } from 'react';
 import { CompositeFeature, Device, DeviceState, Endpoint, GenericExposedFeature } from '../../../types';
 import {
     isBinaryFeature,
-    isNumericFeature,
-    isTextualFeature,
-    isEnumFeature,
-    isLightFeature,
-    isSwitchFeature,
-    isCoverFeature,
-    isLockFeature,
-    isColorFeature,
     isClimateFeature,
+    isColorFeature,
     isCompositeFeature,
+    isCoverFeature,
+    isEnumFeature,
     isFanFeature,
-    isListFeature,
     isGradientFeature,
+    isLightFeature,
+    isListFeature,
+    isLockFeature,
+    isNumericFeature,
+    isSwitchFeature,
+    isTextualFeature,
 } from '../../device-page/type-guards';
 import Binary from '../binary/binary';
 import Climate from '../climate/climate';
@@ -26,13 +26,13 @@ import Light from '../light/light';
 import Lock from '../lock/lock';
 import Numeric from '../numeric/numeric';
 import Textual from '../textual/textual';
-import Composite from './composite';
+import { TranslatedComposite } from './composite';
 import Switch from '../switch/switch';
 import { FeatureWrapperProps } from './FeatureWrapper';
 import { ValueWithLabelOrPrimitive } from '../../enum-editor/enum-editor';
 import Fan from '../fan/fan';
-import List from '../list/list';
-import Gradient from '../gradient/gradient';
+import { TranslatedList } from '../list/list';
+import { TranslatedGradient } from '../gradient/gradient';
 
 interface FeatureProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
     feature: CompositeFeature | GenericExposedFeature;
@@ -90,13 +90,13 @@ export const Feature = (props: FeatureProps): JSX.Element => {
     } else if (isGradientFeature(feature)) {
         return (
             <FeatureWrapper {...wrapperParams}>
-                <Gradient feature={feature} {...genericParams} />
+                <TranslatedGradient feature={feature} {...genericParams} />
             </FeatureWrapper>
         );
     } else if (isListFeature(feature)) {
         return (
             <FeatureWrapper {...wrapperParams}>
-                <List feature={feature} {...genericParams} />
+                <TranslatedList feature={feature} {...genericParams} />
             </FeatureWrapper>
         );
     } else if (isTextualFeature(feature)) {
@@ -139,7 +139,7 @@ export const Feature = (props: FeatureProps): JSX.Element => {
             : deviceState;
         return (
             <FeatureWrapper {...wrapperParams}>
-                <Composite
+                <TranslatedComposite
                     type="composite"
                     feature={feature}
                     {...genericParams}

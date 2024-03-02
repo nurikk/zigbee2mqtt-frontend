@@ -1,15 +1,15 @@
 import React, { PropsWithChildren, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 
-export function ModalHeader(props: PropsWithChildren<unknown>): JSX.Element {
+export function ModalHeader(props: PropsWithChildren): JSX.Element {
     return <div className="modal-header">{props.children}</div>;
 }
 
-export function ModalBody(props: PropsWithChildren<unknown>): JSX.Element {
+export function ModalBody(props: PropsWithChildren): JSX.Element {
     return <div className="modal-body">{props.children}</div>;
 }
 
-export function ModalFooter(props: PropsWithChildren<unknown>): JSX.Element {
+export function ModalFooter(props: PropsWithChildren): JSX.Element {
     return <div className="modal-footer">{props.children}</div>;
 }
 

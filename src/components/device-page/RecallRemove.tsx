@@ -4,7 +4,7 @@ import { SceneApi } from '../../actions/SceneApi';
 import { useTranslation } from 'react-i18next';
 import Button from '../button';
 import { ScenePicker } from './ScenePicker';
-import { getScenes } from './scene';
+import { getScenes } from './getScenes';
 
 export interface RecallRemoveAndMayBeStoreSceneProps {
     target: Device | Group;

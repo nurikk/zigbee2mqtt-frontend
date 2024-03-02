@@ -14,7 +14,7 @@ import { Column } from 'react-table';
 import { Table } from '../grid/ReactTableCom';
 
 // eslint-disable-next-line react/prefer-stateless-function
-export class TouchlinkPage extends Component<TouchlinkApi & GlobalState & WithTranslation<'touchlink'>, unknown> {
+class TouchlinkPage extends Component<TouchlinkApi & GlobalState & WithTranslation<'touchlink'>, unknown> {
     onIdentifyClick = (device: TouchLinkDevice): void => {
         const { touchlinkIdentify } = this.props;
         touchlinkIdentify(device);
@@ -143,6 +143,7 @@ const mappedProps = [
     'touchlinkResetInProgress',
 ];
 
-export default withTranslation(['touchlink', 'zigbee', 'common'])(
-    connect<unknown, unknown, GlobalState, TouchlinkApi>(mappedProps, actions)(TouchlinkPage),
-);
+export const ConnectedTouchlinkPage = connect<unknown, unknown, GlobalState, TouchlinkApi>(
+    mappedProps,
+    actions,
+)(withTranslation(['touchlink', 'zigbee', 'common'])(TouchlinkPage));

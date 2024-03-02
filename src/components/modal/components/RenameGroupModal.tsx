@@ -1,7 +1,7 @@
 import React, { ChangeEvent } from 'react';
 import { useInputChange } from '../../../hooks/useInputChange';
 
-import Modal, { ModalHeader, ModalBody, ModalFooter } from '../Modal';
+import Modal, { ModalBody, ModalFooter, ModalHeader } from '../Modal';
 import NiceModal, { useModal } from '@ebay/nice-modal-react';
 
 type RenameGroupFormProps = {
