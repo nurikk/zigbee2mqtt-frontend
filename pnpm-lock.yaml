@@ -43,7 +43,7 @@ devDependencies:
     version: 3.0.7
   '@types/d3-force':
     specifier: ~3.0.6
-    version: 3.0.6
+    version: 3.0.9
   '@types/d3-selection':
     specifier: ~3.0.7
     version: 3.0.7
@@ -1758,8 +1758,8 @@ packages:
       '@types/d3-selection': 3.0.7
     dev: true
 
-  /@types/d3-force@3.0.6:
-    resolution: {integrity: sha512-G9wbOvCxkNlLrppoHLZ6oFpbm3z7ibfkXwLD8g5/4Aa7iTEV0Z7TQ0OL8UxAtvdOhCa2VZcSuqn1NQqyCEqmiw==}
+  /@types/d3-force@3.0.9:
+    resolution: {integrity: sha512-IKtvyFdb4Q0LWna6ymywQsEYjK/94SGhPrMfEr1TIc5OBeziTi+1jcCvttts8e0UWZIxpasjnQk9MNk/3iS+kA==}
     dev: true
 
   /@types/d3-interpolate@3.0.2:
