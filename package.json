@@ -73,7 +73,7 @@
         "d3-selection": "~3.0.0",
         "d3-zoom": "~3.0.0",
         "deep-diff": "~1.0.2",
-        "eslint": "~8.50.0",
+        "eslint": "~8.57.0",
         "eslint-config-prettier": "~9.0.0",
         "eslint-config-react": "~1.1.7",
         "eslint-plugin-prettier": "~5.0.0",
