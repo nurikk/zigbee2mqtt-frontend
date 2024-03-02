@@ -46,7 +46,7 @@ devDependencies:
     version: 3.0.9
   '@types/d3-selection':
     specifier: ~3.0.7
-    version: 3.0.7
+    version: 3.0.10
   '@types/d3-zoom':
     specifier: ~3.0.5
     version: 3.0.5
@@ -1755,7 +1755,7 @@ packages:
   /@types/d3-drag@3.0.7:
     resolution: {integrity: sha512-HE3jVKlzU9AaMazNufooRJ5ZpWmLIoc90A37WU2JMmeq28w1FQqCZswHZ3xR+SuxYftzHq6WU6KJHvqxKzTxxQ==}
     dependencies:
-      '@types/d3-selection': 3.0.7
+      '@types/d3-selection': 3.0.10
     dev: true
 
   /@types/d3-force@3.0.9:
@@ -1768,15 +1768,15 @@ packages:
       '@types/d3-color': 3.1.1
     dev: true
 
-  /@types/d3-selection@3.0.7:
-    resolution: {integrity: sha512-qoj2O7KjfqCobmtFOth8FMvjwMVPUAAmn6xiUbLl1ld7vQCPgffvyV5BBcEFfqWdilAUm+3zciU/3P3vZrUMlg==}
+  /@types/d3-selection@3.0.10:
+    resolution: {integrity: sha512-cuHoUgS/V3hLdjJOLTT691+G2QoqAjCVLmr4kJXR4ha56w1Zdu8UUQ5TxLRqudgNjwXeQxKMq4j+lyf9sWuslg==}
     dev: true
 
   /@types/d3-zoom@3.0.5:
     resolution: {integrity: sha512-mIefdTLtxuWUWTbBupCUXPAXVPmi8/Uwrq41gQpRh0rD25GMU1ku+oTELqNY2NuuiI0F3wXC5e1liBQi7YS7XQ==}
     dependencies:
       '@types/d3-interpolate': 3.0.2
-      '@types/d3-selection': 3.0.7
+      '@types/d3-selection': 3.0.10
     dev: true
 
   /@types/estree@1.0.5:
