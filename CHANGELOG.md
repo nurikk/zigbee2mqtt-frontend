@@ -1,3 +1,12 @@
+## [0.6.161](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.160...0.6.161) (2024-03-03)
+
+
+### Bug Fixes
+
+* **ci:** fix release ci ([42caa85](https://github.com/nurikk/zigbee2mqtt-frontend/commit/42caa85cb337d29f4500121d8476d31c8edb7414))
+
+
+
 ## [0.6.160](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.159...0.6.160) (2024-03-03)
 
 
