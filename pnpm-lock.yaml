@@ -76,7 +76,7 @@ devDependencies:
     version: 7.7.16
   '@types/react-transition-group':
     specifier: ~4.4.7
-    version: 4.4.7
+    version: 4.4.10
   '@types/reconnectingwebsocket':
     specifier: ~1.0.8
     version: 1.0.8
@@ -1854,8 +1854,8 @@ packages:
       '@types/react': 18.2.61
     dev: true
 
-  /@types/react-transition-group@4.4.7:
-    resolution: {integrity: sha512-ICCyBl5mvyqYp8Qeq9B5G/fyBSRC0zx3XM3sCC6KkcMsNeAHqXBKkmat4GqdJET5jtYUpZXrxI5flve5qhi2Eg==}
+  /@types/react-transition-group@4.4.10:
+    resolution: {integrity: sha512-hT/+s0VQs2ojCX823m60m5f0sL5idt9SO6Tj6Dg+rdphGPIeJbJ6CxvBYkgkGKrYeDjvIpKTR38UzmtHJOGW3Q==}
     dependencies:
       '@types/react': 18.2.61
     dev: true
@@ -5671,7 +5671,7 @@ packages:
       '@restart/hooks': 0.4.11(react@18.2.0)
       '@restart/ui': 1.6.6(react-dom@18.2.0)(react@18.2.0)
       '@types/react': 18.2.61
-      '@types/react-transition-group': 4.4.7
+      '@types/react-transition-group': 4.4.10
       classnames: 2.3.2
       dom-helpers: 5.2.1
       invariant: 2.2.4
