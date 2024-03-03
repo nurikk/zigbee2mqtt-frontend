@@ -8,7 +8,7 @@
         "*.css"
     ],
     "name": "zigbee2mqtt-frontend",
-    "version": "0.6.159",
+    "version": "0.6.160",
     "license": "GPL-3.0",
     "scripts": {
         "build": "vite build",
@@ -90,7 +90,6 @@
         "pinst": "~3.0.0",
         "prettier": "~3.0.3",
         "react": "~18.2.0",
-
         "react-app-polyfill": "~3.0.0",
         "react-bootstrap": "~2.10.0",
         "react-css-theme-switcher": "~0.3.0",
@@ -133,5 +132,4 @@
     "bugs": {
         "url": "https://github.com/nurikk/zigbee2mqtt-frontend/issues"
     }
-    
 }
