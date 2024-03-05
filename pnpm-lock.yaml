@@ -73,7 +73,7 @@ devDependencies:
     version: 5.3.3
   '@types/react-table':
     specifier: ~7.7.16
-    version: 7.7.16
+    version: 7.7.19
   '@types/react-transition-group':
     specifier: ~4.4.7
     version: 4.4.7
@@ -1848,8 +1848,8 @@ packages:
       '@types/react': 18.2.61
     dev: true
 
-  /@types/react-table@7.7.16:
-    resolution: {integrity: sha512-khfVwkNkvFnQV+Dx5Z/4jeMWIi+qytR8/Hl89fMPQ3aGiIgVlnghwdnyrq45UVSU+9wTqQFL0kUmIk4MGaM20Q==}
+  /@types/react-table@7.7.19:
+    resolution: {integrity: sha512-47jMa1Pai7ily6BXJCW33IL5ghqmCWs2VM9s+h1D4mCaK5P4uNkZOW3RMMg8MCXBvAJ0v9+sPqKjhid0PaJPQA==}
     dependencies:
       '@types/react': 18.2.61
     dev: true
