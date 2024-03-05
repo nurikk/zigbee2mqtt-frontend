@@ -52,7 +52,7 @@ devDependencies:
     version: 3.0.5
   '@types/events':
     specifier: ~3.0.1
-    version: 3.0.1
+    version: 3.0.3
   '@types/file-saver':
     specifier: ~2.0.5
     version: 2.0.5
@@ -1783,8 +1783,8 @@ packages:
     resolution: {integrity: sha512-/kYRxGDLWzHOB7q+wtSUQlFrtcdUccpfy+X+9iMBpHK8QLLhx2wIPYuS5DYtR9Wa/YlZAbIovy7qVdB1Aq6Lyw==}
     dev: true
 
-  /@types/events@3.0.1:
-    resolution: {integrity: sha512-QfUFdKjGSc+iCf8OFZhqJKfDuqB6lP57kSMkPw8ba3yNDANicUwCdaPt5ytZ4nDXXVFxQkvT8v73I4stSVrCxA==}
+  /@types/events@3.0.3:
+    resolution: {integrity: sha512-trOc4AAUThEz9hapPtSd7wf5tiQKvTtu5b371UxXdTuqzIh0ArcRspRP0i0Viu+LXstIQ1z96t1nsPxT9ol01g==}
     dev: true
 
   /@types/file-saver@2.0.5:
