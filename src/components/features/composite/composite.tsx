@@ -115,7 +115,7 @@ class Composite extends Component<CompositeProps & WithTranslation<'composite'>,
                 result.push(
                     <div key={epName}>
                         {showEndpointLabels ? `Endpoint: ${epName}` : null}
-                        <div className={noNeedIndent ? "" : "ps-4"}>
+                        <div className={noNeedIndent ? '' : 'ps-4'}>
                             {featuresGroup.map((f) => (
                                 <Feature
                                     key={f.name + f.endpoint}
