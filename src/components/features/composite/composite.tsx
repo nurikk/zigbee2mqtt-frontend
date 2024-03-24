@@ -110,10 +110,12 @@ class Composite extends Component<CompositeProps & WithTranslation<'composite'>,
             }
             for (const epName in groupedFeatures) {
                 const featuresGroup = groupedFeatures[epName];
+                // do not indent groups with one element inside
+                const noNeedIndent = featuresGroup.length == 1;
                 result.push(
                     <div key={epName}>
                         {showEndpointLabels ? `Endpoint: ${epName}` : null}
-                        <div className="ps-4">
+                        <div className={noNeedIndent ? '' : 'ps-4'}>
                             {featuresGroup.map((f) => (
                                 <Feature
                                     key={f.name + f.endpoint}
