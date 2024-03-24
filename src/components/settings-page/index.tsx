@@ -168,10 +168,11 @@ export class SettingsPage extends Component<
         }
     }
     renderTranslate(): JSX.Element {
+        const { t } = this.props;
         return (
             <div className="p-3">
                 <p>
-                    You can help with the translation at{' '}
+                    {t('settings:translation_prompt')}{' '}
                     <a
                         target="_blank"
                         rel="noopener noreferrer"
