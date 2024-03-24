@@ -23,7 +23,7 @@ export const FeatureWrapper: FunctionComponent<PropsWithChildren<FeatureWrapperP
     }
 
     const {hint, ...featureWithoutHint } = feature;
-    const title = JSON.stringify(featureWithoutHint) + "\n\n" + hint;
+    const title = JSON.stringify(featureWithoutHint) + (hint ? "\n\n" + hint : "");
 
     const leftColumn = (
         <div className="col-12 col-md-3">
