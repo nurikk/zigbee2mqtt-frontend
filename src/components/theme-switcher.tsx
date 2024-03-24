@@ -63,15 +63,15 @@ export const ThemeSwitcher = (): JSX.Element => {
             <Dropdown.Menu className={'my-1'}>
                 <Dropdown.Item onClick={(e) => { updateTheme('light') }}>
                     <i className={'fa-solid fa-sun me-2'} style={{ width: '16px' }}></i>
-                    <span>Light</span> {/* probably something like t('theme:light')*/}
+                    <span>{t('themes:light')}</span>
                 </Dropdown.Item>
                 <Dropdown.Item onClick={(e) => { updateTheme('dark') }}>
                     <i className={'fa-solid fa-moon me-2'} style={{ width: '16px' }}></i>
-                    <span>Dark</span> {/* probably something like t('theme:dark')*/}
+                    <span>{t('themes:dark')}</span>
                 </Dropdown.Item>
                 <Dropdown.Item onClick={(e) => { updateTheme('auto') }}>
                     <i className={'fa-solid fa-circle-half-stroke me-2'} style={{ width: '16px' }}></i>
-                    <span>Auto</span> {/* probably something like t('theme:auto')*/}
+                    <span>{t('themes:auto')}</span>
                 </Dropdown.Item>
             </Dropdown.Menu>
         </Dropdown>

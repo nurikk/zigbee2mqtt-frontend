@@ -2215,6 +2215,11 @@
         "toggle_dropdown": "Toggle dropdown",
         "touchlink": "Touchlink"
     },
+    "themes": {
+        "light": "Light",
+        "dark": "Dark",
+        "auto": "Auto"
+    },
     "ota": {
         "check": "Check for new updates",
         "check_all": "Check all",
