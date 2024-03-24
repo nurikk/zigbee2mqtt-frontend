@@ -165,7 +165,7 @@ const THEME_STORAGE_KEY = 'z2m-theme';
 export const getCurrentTheme = (): Theme => {
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     const selectedTheme = local.get(THEME_STORAGE_KEY);
-    return selectedTheme === 'dark' ? 'dark' : (prefersDark ? 'dark' : 'light');
+    return ['light', 'dark'].includes(selectedTheme) ? selectedTheme : (prefersDark ? 'dark' : 'light');
 };
 export const saveCurrentTheme = (theme: string): void => {
     console.log('save', theme);
