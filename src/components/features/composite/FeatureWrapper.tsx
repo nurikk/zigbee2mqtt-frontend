@@ -22,11 +22,14 @@ export const FeatureWrapper: FunctionComponent<PropsWithChildren<FeatureWrapperP
         label = `${parentFeature.label} ${feature.label.charAt(0).toLowerCase()}${feature.label.slice(1)}`;
     }
 
+    const {hint, ...featureWithoutHint } = feature;
+    const title = JSON.stringify(featureWithoutHint) + "\n\n" + hint;
+
     const leftColumn = (
         <div className="col-12 col-md-3">
             <label className="col-form-label w-100">
                 <div className="d-flex justify-content-between">
-                    <strong title={JSON.stringify(feature)}>{label}</strong>
+                    <strong title={title}>{label}</strong>
                     {isReadable ? (
                         <Button<CompositeFeature | GenericExposedFeature>
                             item={feature}
