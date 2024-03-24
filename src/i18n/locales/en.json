@@ -2335,7 +2335,8 @@
         "command": "Command",
         "payload": "Payload",
         "save_description": "Save description",
-        "how_to_add_support": "How to add support"
+        "how_to_add_support": "How to add support",
+        "coordinator": "Coordinator"
     },
     "scene": {
         "scene_id": "Scene ID",
