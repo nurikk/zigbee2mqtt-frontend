@@ -21,17 +21,21 @@ export function StartStopJoinButton({ devices, setPermitJoin, bridgeInfo }: Star
         setSelectedRouter(device ? device : {} as Device);
     };
     const sortByName = (a: Device, b: Device) => a.friendly_name.localeCompare(b.friendly_name);
-    const prioritizeCoordinator = (a: Device, b: Device) =>
-        a.type === 'Coordinator' ? -1 : b.type === 'Coordinator' ? 1 : 0;
     const routers = Object.values(devices)
-        .filter((d) => d.type === 'Router' || d.type === 'Coordinator')
+        .filter((d) => d.type === 'Router')
         .sort(sortByName)
-        .sort(prioritizeCoordinator)
         .map((device) => (
             <Dropdown.Item key={device.friendly_name} active={selectedRouter?.ieee_address === device.ieee_address ? true : false} onClick={() => { select(device) }}>
                 {device.friendly_name}
             </Dropdown.Item>
         ));
+    const coordinator = Object.values(devices)
+    .filter((d) => d.type === 'Coordinator')
+    .map((device) => (
+        <Dropdown.Item key={device.friendly_name} active={selectedRouter?.ieee_address === device.ieee_address ? true : false} onClick={() => { select(device) }}>
+            {t('zigbee:coordinator')}
+        </Dropdown.Item>
+    ));
 
     const onBtnClick = () => {
         setPermitJoin(!permitJoin, selectedRouter);
@@ -66,6 +70,7 @@ export function StartStopJoinButton({ devices, setPermitJoin, bridgeInfo }: Star
                         <Dropdown.Item key={'all'} onClick={() => { select(undefined) }} active={selectedRouter?.friendly_name ? false : true}>
                             {t('all')}
                         </Dropdown.Item>
+                        {coordinator}
                         {routers}
                     </Dropdown.Menu>
                 </>
