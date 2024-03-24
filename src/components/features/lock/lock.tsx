@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { LockFeature } from '../../../types';
 import { BaseFeatureProps } from '../base';
-import Composite from '../composite/composite';
+import { TranslatedComposite } from '../composite/composite';
 
 type LockProps = BaseFeatureProps<LockFeature>;
 
-const Lock: FunctionComponent<LockProps> = (props) => <Composite type="lock" {...props} />;
+const Lock: FunctionComponent<LockProps> = (props) => <TranslatedComposite type="lock" {...props} />;
 export default Lock;

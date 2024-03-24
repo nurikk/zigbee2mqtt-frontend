@@ -1,20 +1,21 @@
 import React from 'react';
 import {
-    useTable,
-    useSortBy,
-    HeaderGroup,
-    Column,
-    useAsyncDebounce,
-    useGlobalFilter,
     ActionType,
+    Column,
+    HeaderGroup,
     TableInstance,
     TableState,
+    useGlobalFilter,
+    useSortBy,
+    useTable,
 } from 'react-table';
 
 import cx from 'classnames';
-import { useTranslation } from 'react-i18next';
 
 import * as local from 'store2';
+import { GlobalFilter } from './GlobalFilter';
+import { getStorageKey, persist } from './persist';
+
 type PartialTableState = Partial<TableState<Record<string, unknown>>>;
 
 interface Props {
@@ -23,55 +24,6 @@ interface Props {
     data: Array<any>;
     initialState?: PartialTableState;
 }
-
-type GlobalFilterProps = {
-    globalFilter: string;
-    setGlobalFilter(arg1: string): void;
-};
-
-export function GlobalFilter({ globalFilter, setGlobalFilter }: GlobalFilterProps) {
-    const [value, setValue] = React.useState(globalFilter);
-    const onChange = useAsyncDebounce((v) => {
-        setGlobalFilter(v);
-    }, 200);
-
-    const { t } = useTranslation(['common']);
-    const clearInput = () => {
-        setValue('');
-        setGlobalFilter('');
-    };
-
-    return (
-        <div className="input-group">
-            <input
-                type="text"
-                className="form-control"
-                value={value || ''}
-                onChange={(e) => {
-                    setValue(e.target.value);
-                    onChange(e.target.value);
-                }}
-                placeholder={t('common:enter_search_criteria')}
-            />
-            <button className="btn btn-outline-secondary" type="button" onClick={clearInput}>
-                <i className="fa fa-times"></i>
-            </button>
-        </div>
-    );
-}
-
-const TABLE_STORAGE_PREFIX = 'z2m-';
-export const getStorageKey = (id: string) => `${TABLE_STORAGE_PREFIX}${id}`;
-
-export type StateItem = Partial<TableState<Record<string, unknown>>>;
-
-export const persist = (key: string, data: StateItem): void => {
-    local.set(getStorageKey(key), data);
-};
-
-export const restore = (key: string): StateItem => {
-    return local.get<StateItem>(key);
-};
 
 const stateReducer = (
     newState: TableState<Record<string, unknown>>,

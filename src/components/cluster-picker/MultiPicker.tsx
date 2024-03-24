@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useState } from 'react';
 import { randomString } from '../../utils';
-import { MultiPickerProps, isClusterGroup, clusterDescriptions } from './index';
+import { clusterDescriptions, isClusterGroup, MultiPickerProps } from './index';
 
 export function MultiPicker(props: MultiPickerProps): JSX.Element {
     const [pickerId] = useState(randomString(5));

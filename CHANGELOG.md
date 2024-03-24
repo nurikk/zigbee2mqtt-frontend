@@ -1,3 +1,76 @@
+## [0.6.161](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.160...0.6.161) (2024-03-03)
+
+
+### Bug Fixes
+
+* **ci:** fix release ci ([42caa85](https://github.com/nurikk/zigbee2mqtt-frontend/commit/42caa85cb337d29f4500121d8476d31c8edb7414))
+
+
+
+## [0.6.160](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.159...0.6.160) (2024-03-03)
+
+
+
+## [0.6.159](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.158...0.6.159) (2024-02-29)
+
+
+
+## [0.6.158](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.157...0.6.158) (2024-02-11)
+
+
+
+## [0.6.157](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.156...0.6.157) (2024-02-06)
+
+
+### Bug Fixes
+
+* **getCurrentTheme:** fix legacy theme format ([0145f7a](https://github.com/nurikk/zigbee2mqtt-frontend/commit/0145f7ab0dbfdbe1978bbe7c61f9ef187d52e427))
+
+
+
+## [0.6.156](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.155...0.6.156) (2024-02-04)
+
+
+### Bug Fixes
+
+* **i18n:** add missing keys ([efdedfe](https://github.com/nurikk/zigbee2mqtt-frontend/commit/efdedfe237455b3ad0fc0d71c5ee521c00a7fb99))
+
+
+
+## [0.6.155](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.154...0.6.155) (2024-02-04)
+
+
+### Bug Fixes
+
+* **i18n:** fix locale map ([ee42125](https://github.com/nurikk/zigbee2mqtt-frontend/commit/ee42125546378e08c1364de8d285cf50568c4283))
+
+
+### Features
+
+* **i18:** add locale downloader script ([c7061cf](https://github.com/nurikk/zigbee2mqtt-frontend/commit/c7061cf9dadc169237a5faf0f7a00369de7b873f))
+* **i18n:** update locales ([d2a4358](https://github.com/nurikk/zigbee2mqtt-frontend/commit/d2a4358d320e9e10329167ca355f3b27ea78c013))
+* **ImageLocaliser:** add support for downloading PNG device images ([732dee9](https://github.com/nurikk/zigbee2mqtt-frontend/commit/732dee9e073644e0fed3ccbeb3e3a4ff86df3a23))
+
+
+
+## [0.6.154](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.153...0.6.154) (2024-02-03)
+
+
+### Bug Fixes
+
+* **device-page:** fix search in header device selector ([919a3aa](https://github.com/nurikk/zigbee2mqtt-frontend/commit/919a3aa2cd2853bd2bf69cb3e92c5344101bceef))
+
+
+
+## [0.6.153](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.152...0.6.153) (2024-02-03)
+
+
+### Features
+
+* **deviceImage:** add support for PNG images ([27d94a7](https://github.com/nurikk/zigbee2mqtt-frontend/commit/27d94a771d4ea53576694ca3af27c69c133189fc))
+
+
+
 ## [0.6.152](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.151...0.6.152) (2024-01-25)
 
 

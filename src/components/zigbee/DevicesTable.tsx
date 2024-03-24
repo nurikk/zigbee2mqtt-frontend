@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import style from './style.module.css';
 import { genDeviceDetailsLink, lastSeen, toHex } from '../../utils';
 import { useTranslation } from 'react-i18next';
-import DeviceImage from '../device-image';
+
 import { ModelLink, VendorLink } from '../vendor-links/vendor-links';
 import { Link } from 'react-router-dom';
 import { DisplayValue } from '../display-value/DisplayValue';
@@ -16,6 +16,8 @@ import { Availability } from './Availability';
 import { LastSeenType } from '../../types';
 import { DeviceApi } from '../../actions/DeviceApi';
 import isString from 'lodash/isString';
+import { DeviceImage } from '../device-image/DeviceImage';
+import { DEVICES_GLOBAL_NAME } from './DEVICES_GLOBAL_NAME';
 
 export type DevicesTableProps = {
     data: DevicesPageData[];
@@ -23,8 +25,6 @@ export type DevicesTableProps = {
     availabilityFeatureEnabled: boolean;
     homeassistantEnabled: boolean;
 };
-
-export const DEVICES_GLOBAL_NAME = 'zigbee';
 
 export function DevicesTable(
     props: DevicesTableProps &

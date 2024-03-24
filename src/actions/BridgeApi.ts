@@ -1,6 +1,6 @@
-import api from "../ws-client";
-import { Device } from "../types";
-import store from "../store";
+import api from '../ws-client';
+import { Device } from '../types';
+import store from '../store';
 
 export interface BridgeApi {
     setPermitJoin(permit: boolean, device: Device): Promise<void>;

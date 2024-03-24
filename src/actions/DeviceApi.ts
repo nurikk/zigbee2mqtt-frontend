@@ -1,7 +1,7 @@
-import api from "../ws-client";
+import api from '../ws-client';
 import { AttributeInfo } from '../components/device-page/AttributeEditor';
-import { Attribute, Cluster, Endpoint, FriendlyName, IEEEEAddress } from "../types";
-import { toDeviceId } from "./actions";
+import { Attribute, Cluster, Endpoint, FriendlyName, IEEEEAddress } from '../types';
+import { toDeviceId } from './actions';
 
 export interface DeviceApi {
     renameDevice(

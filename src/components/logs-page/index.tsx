@@ -8,12 +8,12 @@ import { BridgeApi } from '../../actions/BridgeApi';
 import ConfigureLogs from './log-level-config';
 import { WithTranslation, withTranslation } from 'react-i18next';
 import { formatDate } from '../../utils';
+import { ALL } from './ALL';
 
 type LogsPageState = {
     search: string;
     logLevel: string;
 };
-export const ALL = 'all';
 const TextWrapper = ({ text }) => <>{text}</>;
 const Highlighted = ({ text = '', highlight = '' }) => {
     if (!highlight.trim()) {
@@ -73,10 +73,7 @@ export function LogRow(props: LogRowProps): JSX.Element {
 const logLevels = [ALL, 'debug', 'info', 'warning', 'error'];
 
 type PropsFromStore = Pick<GlobalState, 'bridgeInfo' | 'logs'>;
-export class LogsPage extends Component<
-    PropsFromStore & BridgeApi & UtilsApi & WithTranslation<'logs'>,
-    LogsPageState
-> {
+class LogsPage extends Component<PropsFromStore & BridgeApi & UtilsApi & WithTranslation<'logs'>, LogsPageState> {
     state = { search: '', logLevel: ALL };
     renderSearch(): JSX.Element {
         const {
@@ -176,6 +173,7 @@ export class LogsPage extends Component<
 
 const mappedProps = ['logs', 'bridgeInfo'];
 
-export default withTranslation(['logs', 'common'])(
-    connect<unknown, unknown, GlobalState, unknown>(mappedProps, actions)(LogsPage),
-);
+export const ConnectedLogsPage = connect<unknown, unknown, GlobalState, unknown>(
+    mappedProps,
+    actions,
+)(withTranslation(['logs', 'common'])(LogsPage));

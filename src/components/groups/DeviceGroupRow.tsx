@@ -1,12 +1,12 @@
 import React from 'react';
 import Button from '../button';
-import { WithBridgeInfo, WithDevices, WithDeviceStates, Devices } from '../../store';
+import { WithBridgeInfo, WithDevices, WithDeviceStates } from '../../store';
 import { useTranslation } from 'react-i18next';
-import { CompositeFeature, Device, DeviceState, FriendlyName, GenericExposedFeature, GroupAddress } from '../../types';
+import { CompositeFeature, DeviceState, GenericExposedFeature, GroupAddress } from '../../types';
 import DashboardDevice from '../dashboard-page/DashboardDevice';
 import { DashboardFeatureWrapper } from '../dashboard-page/DashboardFeatureWrapper';
 import { StateApi } from '../../actions/StateApi';
-import { onlyValidFeaturesForScenes } from '../device-page/scene';
+import { onlyValidFeaturesForScenes } from '../device-page/onlyValidFeaturesForScenes';
 
 type DeviceGroupRowProps = {
     groupAddress: GroupAddress;
@@ -16,33 +16,6 @@ type DeviceGroupRowProps = {
     WithBridgeInfo &
     StateApi;
 
-type FeatureFilteringFn = (
-    feature: GenericExposedFeature | CompositeFeature,
-    deviceState: DeviceState,
-) => GenericExposedFeature | CompositeFeature | false;
-type DeviceStateAndFilteredFeatures = {
-    device: Device;
-    deviceState: DeviceState;
-    filteredFeatures: GenericExposedFeature[];
-};
-export function filterDeviceByFeatures(
-    devices: Devices,
-    deviceStates: Record<FriendlyName, DeviceState>,
-    filterFn: FeatureFilteringFn,
-): DeviceStateAndFilteredFeatures[] {
-    return Object.values(devices)
-        .filter((device) => device.supported)
-        .map((device) => ({ device, deviceState: deviceStates[device.friendly_name] ?? ({} as DeviceState) }))
-        .map(({ device, deviceState }) => {
-            const _features = (device.definition?.exposes ?? []) as (GenericExposedFeature | CompositeFeature)[];
-            const filteredFeatures = _features
-                .map((e: GenericExposedFeature | CompositeFeature) => filterFn(e, deviceState))
-                .filter((f) => f);
-            return { device, deviceState, filteredFeatures } as DeviceStateAndFilteredFeatures;
-        })
-        .filter(({ filteredFeatures }) => filteredFeatures.length > 0)
-        .sort((a, b) => a.device.friendly_name.localeCompare(b.device.friendly_name));
-}
 export function DeviceGroupRow(props: DeviceGroupRowProps): JSX.Element {
     const { t } = useTranslation('devicePage');
 

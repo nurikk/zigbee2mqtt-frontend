@@ -1,5 +1,5 @@
-import { SimulationLinkDatum, SimulationNodeDatum } from "d3-force";
-import { DeviceType, DeviceDefinition } from "../../types";
+import { SimulationLinkDatum, SimulationNodeDatum } from 'd3-force';
+import { DeviceDefinition, DeviceType } from '../../types';
 
 export interface NodeI extends SimulationNodeDatum {
     ieeeAddr: string;

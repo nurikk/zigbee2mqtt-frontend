@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { randomString } from '../../utils';
-import { SinglePickerProps, isClusterGroup, clusterDescriptions } from './index';
+import { clusterDescriptions, isClusterGroup, SinglePickerProps } from './index';
 
 export function SinglePicker(props: SinglePickerProps): JSX.Element {
     const [pickerId] = useState(randomString(5));

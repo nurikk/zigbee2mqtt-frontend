@@ -4,6 +4,7 @@ import actions from '../../actions/actions';
 import { StateApi } from '../../actions/StateApi';
 import { connect } from 'unistore/react';
 import { GlobalState } from '../../store';
+
 type PropsFromStore = Pick<GlobalState, 'deviceStates'> & StateApi;
 type StatesProps = { device: Device };
 

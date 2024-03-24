@@ -1,6 +1,7 @@
 import React from 'react';
 import { LogMessage } from '../../store';
-import { ALL, LogRow } from '../logs-page';
+import { LogRow } from '../logs-page';
+import { ALL } from '../logs-page/ALL';
 
 export type LastLogResultProps = {
     logs: LogMessage[];

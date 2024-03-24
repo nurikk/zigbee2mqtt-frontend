@@ -1,6 +1,5 @@
-import api from "../ws-client";
-import store, { Extension } from "../store";
-
+import api from '../ws-client';
+import store, { Extension } from '../store';
 
 
 export interface ExtensionApi {

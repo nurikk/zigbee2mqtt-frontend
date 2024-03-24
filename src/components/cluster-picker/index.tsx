@@ -1,8 +1,4 @@
-import React from 'react';
-
 import { Cluster } from '../../types';
-import { MultiPicker } from './MultiPicker';
-import { SinglePicker } from './SinglePicker';
 
 export const clusterDescriptions = {
     genPowerCfg: 'PowerCfg',
@@ -31,7 +27,7 @@ export interface ClusterGroup {
     name: string;
     clusters: Cluster[];
 }
-interface ClusterPickerProps {
+export interface ClusterPickerProps {
     disabled?: boolean;
     value: Cluster[] | Cluster;
     label?: string;
@@ -56,30 +52,4 @@ export interface MultiPickerProps extends PickerProps {
 export interface SinglePickerProps extends PickerProps {
     clusters: Cluster[] | ClusterGroup[];
     value: Cluster;
-}
-export default function ClusterPicker(props: ClusterPickerProps): JSX.Element {
-    const { pickerType, onChange, clusters, value, label, disabled, ...rest } = props;
-    if (pickerType === PickerType.MULTIPLE) {
-        return (
-            <MultiPicker
-                onChange={onChange}
-                clusters={clusters as Cluster[]}
-                value={value as Cluster[]}
-                disabled={disabled}
-                label={label}
-                {...rest}
-            />
-        );
-    } else {
-        return (
-            <SinglePicker
-                onChange={onChange}
-                clusters={clusters as Cluster[]}
-                value={value as Cluster}
-                disabled={disabled}
-                label={label}
-                {...rest}
-            />
-        );
-    }
 }

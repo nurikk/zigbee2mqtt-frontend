@@ -1,4 +1,5 @@
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useState } from 'react';
+
 type KVP = { [key: string]: string };
 export const useInputChange = (initialState: KVP) => {
   const [input, setInput] = useState<KVP>(initialState);

@@ -1,20 +1,14 @@
 import React, { Fragment, FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Device, DeviceState, PowerSource as PowerSourceType } from '../../types';
+import { Device, DeviceState } from '../../types';
 import style from './style.module.css';
+import { powerSourceTypeToTranslationKey } from './powerSourceTypeToTranslationKey';
 
 interface PowerSourceProps {
     device?: Device;
     deviceState?: DeviceState;
     showLevel?: boolean;
 }
-
-export const powerSourceTypeToTranslationKey = (source: PowerSourceType | undefined): string => {
-    return (source + '')
-        .toLowerCase()
-        .replace(/\s/g, '_')
-        .replace(/[^a-z0-9_]/g, '');
-};
 
 const PowerSource: FunctionComponent<PowerSourceProps> = ({ device, deviceState, showLevel, ...rest }) => {
     const { t } = useTranslation('zigbee');

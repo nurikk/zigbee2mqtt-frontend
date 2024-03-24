@@ -4,7 +4,7 @@ import cx from 'classnames';
 import style from './map.module.css';
 import { MouseEventsResponderNode } from '.';
 import { Device, DeviceState, FriendlyName } from '../../types';
-import DeviceImage from '../device-image';
+import { DeviceImage } from '../device-image/DeviceImage';
 import { Simulation } from 'd3-force';
 import { select } from 'd3-selection';
 import { drag } from 'd3-drag';

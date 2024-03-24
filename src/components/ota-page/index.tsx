@@ -5,11 +5,11 @@ import actions from '../../actions/actions';
 import { OtaApi } from '../../actions/OtaApi';
 import { GlobalState } from '../../store';
 import Button from '../button';
-import DeviceImage from '../device-image';
+import { DeviceImage } from '../device-image/DeviceImage';
 import { genDeviceDetailsLink, isDeviceDisabled, toHHMMSS } from '../../utils';
 import { Link } from 'react-router-dom';
 import { Device, DeviceState, OTAState } from '../../types';
-import { VendorLink, ModelLink, OTALink } from '../vendor-links/vendor-links';
+import { ModelLink, OTALink, VendorLink } from '../vendor-links/vendor-links';
 import { useTranslation, WithTranslation, withTranslation } from 'react-i18next';
 import { Column } from 'react-table';
 import { Table } from '../grid/ReactTableCom';
@@ -188,6 +188,7 @@ class OtaPage extends Component<PropsFromStore & OtaApi & WithTranslation<'ota'>
 
 const mappedProps = ['devices', 'deviceStates', 'bridgeInfo'];
 
-export default withTranslation(['ota', 'zigbee', 'common'])(
-    connect<unknown, unknown, PropsFromStore, unknown>(mappedProps, actions)(OtaPage),
-);
+export const ConnectedOtaPage = connect<unknown, unknown, PropsFromStore, unknown>(
+    mappedProps,
+    actions,
+)(withTranslation(['ota', 'zigbee', 'common'])(OtaPage));

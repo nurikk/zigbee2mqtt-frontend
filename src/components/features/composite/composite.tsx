@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { CompositeFeature, Endpoint, GenericExposedFeature } from '../../../types';
-import { isCompositeFeature, isGenericExposedFeature } from '../../device-page/type-guards';
+import { isCompositeFeature } from '../../device-page/type-guards';
 import { BaseFeatureProps } from '../base';
 import Button from '../../button';
 import groupBy from 'lodash/groupBy';
@@ -23,7 +23,7 @@ interface CompositeState {
     [key: string]: unknown;
 }
 
-export class Composite extends Component<CompositeProps & WithTranslation<'composite'>, CompositeState> {
+class Composite extends Component<CompositeProps & WithTranslation<'composite'>, CompositeState> {
     state: Readonly<CompositeState> = {};
     onChange = (endpoint: Endpoint, value: Record<string, unknown>): void => {
         const { onChange, feature } = this.props;
@@ -167,4 +167,6 @@ function compositePropsAreEqual(prevProps: CompositeProps, nextProps: CompositeP
     const checkProps: (keyof CompositeProps)[] = ['deviceState', 'device', 'feature'];
     return checkProps.every((p) => isEqual(prevProps[p], nextProps[p]));
 }
-export default withTranslation(['composite', 'common'])(React.memo(Composite, compositePropsAreEqual));
+export const TranslatedComposite = withTranslation(['composite', 'common'])(
+    React.memo(Composite, compositePropsAreEqual),
+);

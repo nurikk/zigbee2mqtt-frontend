@@ -20,8 +20,11 @@ export default defineConfig(async ({ command, mode }) => {
             globals: true,
             environment: 'jsdom',
             setupFiles: '../setupTests.js',
+            coverage: {
+                provider: 'v8',
+            },
             onConsoleLog(log, type) {
-                if (log?.includes('18next: initialized')) {
+                if (log?.includes('18next')) {
                     return false;
                 }
             },
@@ -31,7 +34,7 @@ export default defineConfig(async ({ command, mode }) => {
                 include: '**/*.{jsx,tsx}',
             }),
             sassDts(),
-            viteCompression({ verbose: true }),
+            viteCompression({ verbose: true, algorithm: 'brotliCompress' }),
         ],
         server: {
             proxy: {
