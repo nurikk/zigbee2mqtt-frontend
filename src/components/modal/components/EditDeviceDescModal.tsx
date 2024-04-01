@@ -33,27 +33,25 @@ export const UpdateDeviceDescModal = NiceModal.create((props: RenameActionProps)
             </ModalHeader>
             <ModalBody>
                 <div className="card">
-                        <div className="card-body">
-                            <div className="mb-3">
-                                <label className="form-label">{t('description')}</label>
-                                <textarea
-                                    rows={3}
-                                    onChange={(e) => setDescription(e.target.value)}
-                                    className="form-control"
-                                    value={description}
-                                />
-                            </div>
-                        </div>
-                        <div className="card-footer">
-                            <button type="button" className="btn btn-primary" onClick={onSaveDescriptionClick}>
-                                {t('zigbee:save_description')}
-                            </button>
+                    <div className="card-body">
+                        <div className="mb-3">
+                            <label className="form-label">{t('description')}</label>
+                            <textarea
+                                rows={3}
+                                onChange={(e) => setDescription(e.target.value)}
+                                className="form-control"
+                                value={description}
+                            />
                         </div>
                     </div>
+                </div>
             </ModalBody>
             <ModalFooter>
                 <button type="button" className="btn btn-secondary" onClick={modal.remove}>
                     {t('common:close')}
+                </button>
+                <button type="button" className="btn btn-primary" onClick={onSaveDescriptionClick}>
+                    {t('zigbee:save_description')}
                 </button>
             </ModalFooter>
         </Modal>

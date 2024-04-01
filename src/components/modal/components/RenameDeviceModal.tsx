@@ -57,17 +57,15 @@ export const RenameDeviceModal = NiceModal.create((props: RenameActionProps): JS
                             </div>
                         ) : null}
                     </div>
-                    <div className="card-footer">
-                        <button type="button" className="btn btn-primary" onClick={onRenameClick}>
-                            {t('zigbee:rename_device')}
-                        </button>
-                    </div>
                 </div>
 
             </ModalBody>
             <ModalFooter>
                 <button type="button" className="btn btn-secondary" onClick={modal.remove}>
                     {t('common:close')}
+                </button>
+                <button type="button" className="btn btn-primary" onClick={onRenameClick}>
+                    {t('zigbee:rename_device')}
                 </button>
             </ModalFooter>
         </Modal>

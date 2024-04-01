@@ -10,15 +10,16 @@ interface DeviceControlEditNameProps {
     device: Device;
     renameDevice(old: string, newName: string, homeassistantRename: boolean): Promise<void>;
     homeassistantEnabled: boolean;
+    style: 'link' | 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'light' | 'dark';
 }
 
 export const DeviceControlEditName = (props: DeviceControlEditNameProps): JSX.Element => {
-    const { homeassistantEnabled, device, renameDevice } = props;
+    const { homeassistantEnabled, device, renameDevice, style } = props;
     const { t } = useTranslation(['zigbee', 'common']);
 
     return (
         <Button<void>
-            className="btn btn-primary btn btn-primary btn-sm d-none d-md-inline mx-1"
+            className={`btn btn-${style} btn-sm d-none d-md-inline-block mx-1`}
             onClick={() =>
                 NiceModal.show(RenameDeviceModal, {
                     device,

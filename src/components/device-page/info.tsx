@@ -52,6 +52,7 @@ export class DeviceInfo extends Component<
                             device={device}
                             renameDevice={renameDevice}
                             homeassistantEnabled={homeassistantEnabled}
+                            style={'link'}
                         />
                     </dd>
                 ),
@@ -64,6 +65,7 @@ export class DeviceInfo extends Component<
                         <DeviceControlUpdateDesc
                             device={device}
                             setDeviceDescription={setDeviceDescription}
+                            style={'link'}
                         />
                     </dd>
                 ),

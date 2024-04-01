@@ -29,6 +29,7 @@ export function DeviceControlGroup(
                 device={device}
                 renameDevice={props.renameDevice}
                 homeassistantEnabled={props.homeassistantEnabled}
+                style={'primary'}
             />
             <Button<string>
                 className="btn btn-warning"
