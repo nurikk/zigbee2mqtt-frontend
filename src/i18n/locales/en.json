@@ -2683,7 +2683,8 @@
     "execute": "Execute",
     "command": "Command",
     "payload": "Payload",
-    "save_description": "Save description"
+    "save_description": "Save description",
+    "update_description": "Update description"
   },
   "scene": {
     "scene_id": "Scene ID",

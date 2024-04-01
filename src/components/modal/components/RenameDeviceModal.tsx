@@ -10,25 +10,17 @@ import Modal, { ModalBody, ModalFooter, ModalHeader } from '../Modal';
 export type RenameActionProps = {
     device: Device;
     homeassistantEnabled: boolean;
-
     renameDevice(old: string, newName: string, homeassistantRename: boolean): Promise<void>;
-    setDeviceDescription(friendly_name: string, description: string): Promise<void>;
 };
 export const RenameDeviceModal = NiceModal.create((props: RenameActionProps): JSX.Element => {
     const modal = useModal();
-    const { homeassistantEnabled, device, renameDevice, setDeviceDescription } = props;
+    const { homeassistantEnabled, device, renameDevice } = props;
     const [isHASSRename, setIsHASSRename] = useState(false);
     const [friendlyName, setFriendlyName] = useState(device.friendly_name);
-    const [description, setDescription] = useState(device.description);
     const { t } = useTranslation(['zigbee', 'common']);
 
     const onRenameClick = async (): Promise<void> => {
         await renameDevice(device.friendly_name, friendlyName, isHASSRename);
-        modal.remove();
-    };
-
-    const onSaveDescriptionClick = async (): Promise<void> => {
-        await setDeviceDescription(device.friendly_name, description);
         modal.remove();
     };
 
@@ -71,24 +63,7 @@ export const RenameDeviceModal = NiceModal.create((props: RenameActionProps): JS
                         </button>
                     </div>
                 </div>
-                <div className="card">
-                    <div className="card-body">
-                        <div className="mb-3">
-                            <label className="form-label">{t('description')}</label>
-                            <textarea
-                                rows={3}
-                                onChange={(e) => setDescription(e.target.value)}
-                                className="form-control"
-                                value={description}
-                            />
-                        </div>
-                    </div>
-                    <div className="card-footer">
-                        <button type="button" className="btn btn-primary" onClick={onSaveDescriptionClick}>
-                            {t('zigbee:save_description')}
-                        </button>
-                    </div>
-                </div>
+
             </ModalBody>
             <ModalFooter>
                 <button type="button" className="btn btn-secondary" onClick={modal.remove}>

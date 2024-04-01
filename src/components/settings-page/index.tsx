@@ -14,7 +14,7 @@ import { BridgeApi } from '../../actions/BridgeApi';
 import { WithTranslation, withTranslation } from 'react-i18next';
 import { DescriptionField, TitleField } from '../../i18n/rjsf-translation-fields';
 import { Stats } from './stats';
-import frontendPackageJson from '../../../package.json';
+import frontendPackageJson from '../../../../app/package.json';
 import { formatDate } from '../../utils';
 import { saveAs } from 'file-saver';
 import Spinner from '../spinner';
