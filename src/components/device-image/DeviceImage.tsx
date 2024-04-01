@@ -2,7 +2,6 @@ import React, { Suspense } from 'react';
 import genericDevice from '../../images/generic-zigbee-device.png';
 import { Device, DeviceState, OTAState } from '../../types';
 import cx from 'classnames';
-import style from './style.module.css';
 import { useTranslation } from 'react-i18next';
 import { LazyImage } from './LazyImage';
 import { ErrorBoundary } from './ErrorBoundary';
@@ -44,7 +43,7 @@ export function DeviceImage(props: Readonly<DeviceImageProps>) {
 
     return (
         <div className={cx(className, 'position-relative')} {...rest}>
-            <Suspense fallback={<img alt="" src={genericDevice} className={style.img} />}>
+            <Suspense fallback={<img alt="" src={genericDevice} />}>
                 <ErrorBoundary>
                     <LazyImage device={device} />
                 </ErrorBoundary>
