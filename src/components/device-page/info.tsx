@@ -80,7 +80,12 @@ export class DeviceInfo extends Component<
             },
             {
                 translationKey: 'avaliability:avaliability',
-                render: (device: Device, state: DeviceState, bridgeInfo: BridgeInfo, availability: AvailabilityState) => {
+                render: (
+                    device: Device,
+                    state: DeviceState,
+                    bridgeInfo: BridgeInfo,
+                    availability: AvailabilityState,
+                ) => {
                     const { config } = bridgeInfo;
                     const availabilityFeatureEnabled = !!config.availability;
                     const availabilityEnabledForDevice = config.devices[device.ieee_address]?.availability !== false;

@@ -29,4 +29,4 @@ export const DeviceControlUpdateDesc = (props: DeviceControlUpdateDescProps): JS
             <i className="fa fa-edit" />
         </Button>
     );
-}
+};

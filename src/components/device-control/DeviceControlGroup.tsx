@@ -51,5 +51,4 @@ export function DeviceControlGroup(
     );
 }
 
-
 export default DeviceControlGroup;

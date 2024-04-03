@@ -58,7 +58,6 @@ export const RenameDeviceModal = NiceModal.create((props: RenameActionProps): JS
                         ) : null}
                     </div>
                 </div>
-
             </ModalBody>
             <ModalFooter>
                 <button type="button" className="btn btn-secondary" onClick={modal.remove}>

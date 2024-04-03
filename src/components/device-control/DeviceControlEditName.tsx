@@ -31,4 +31,4 @@ export const DeviceControlEditName = (props: DeviceControlEditNameProps): JSX.El
             <i className="fa fa-edit" />
         </Button>
     );
-}
+};
