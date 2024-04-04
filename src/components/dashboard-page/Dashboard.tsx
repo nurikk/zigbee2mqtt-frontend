@@ -12,7 +12,7 @@ import { GlobalFilter } from '../grid/GlobalFilter';
 import { DEVICES_GLOBAL_NAME } from '../zigbee/DEVICES_GLOBAL_NAME';
 import { filterKeys, onlyValidFeaturesForDashboard, PropsFromStore } from '.';
 import { Devices, GlobalState } from '../../store';
-import { actions } from 'react-table';
+import actions from '../../actions/actions';
 import { connect } from 'unistore/react';
 
 type FeatureFilteringFn = (
