@@ -59,7 +59,7 @@ const removePropertiesFromSchema = (
     return { schema, config };
 };
 
-const tabs = [
+export const tabs = [
     {
         translationKey: 'settings',
         url: `/settings/settings`,

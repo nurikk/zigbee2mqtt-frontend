@@ -13,6 +13,7 @@ import { WithTranslation, withTranslation } from 'react-i18next';
 import LocalePicker from '../../i18n/LocalePicker';
 import { isIframe } from '../../utils';
 import { StartStopJoinButton } from './StartStopJoinButton';
+import { SettingsDropdown } from './SettingsDropdown';
 
 const urls = [
     {
@@ -27,10 +28,6 @@ const urls = [
     {
         href: '/map',
         key: 'map',
-    },
-    {
-        href: '/settings',
-        key: 'settings',
     },
     {
         href: '/groups',
@@ -94,7 +91,9 @@ const NavBar: FunctionComponent<PropsFromStore & ThemeActions & WithTranslation<
                                 </NavLink>
                             </li>
                         ))}
+                        <SettingsDropdown />
                         <LocalePicker />
+
                     </ul>
                     <StartStopJoinButton devices={devices} setPermitJoin={setPermitJoin} bridgeInfo={bridgeInfo} />
                     <ThemeSwitcher saveCurrentTheme={setTheme} />

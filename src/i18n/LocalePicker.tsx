@@ -88,7 +88,7 @@ export default function LocalePicker(): JSX.Element {
     return (
         <li className="nav-item dropdown">
             <a
-                className={cx('nav-flag dropdown-toggle', { show: isComponentVisible })}
+                className={cx('nav-flag dropdown-toggle my-0 py-0', { show: isComponentVisible })}
                 href="#"
                 onClick={(e) => {
                     setIsComponentVisible(!isComponentVisible);
