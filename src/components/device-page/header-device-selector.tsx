@@ -25,7 +25,10 @@ export function HeaderDeviceSelectorRaw(props: HeaderDeviceSelectorProps): JSX.E
     const { allDevices, currentDevice, tab = 'info', t } = props;
     const [searchTerm, setSearchTerm] = useState<string>('');
 
-    const selectedDevices = Object.values(allDevices).filter((d) => d.friendly_name.includes(searchTerm));
+    const selectedDevices = Object.values(allDevices).filter((d) => (
+        d.friendly_name.toLowerCase().includes(searchTerm.toLowerCase()) &&
+        d.ieee_address !== currentDevice.ieee_address
+    ));
 
     return (
         <h1 className="h3">
