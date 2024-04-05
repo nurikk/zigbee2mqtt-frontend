@@ -12,8 +12,8 @@ export function SettingsDropdown() {
             <NavDropdown title={<i className={'fa fa-cog'} />} id="navbarScrollingDropdown">
                 <>
                     {settingsTabs.map((tab) => (
-                        <NavDropdown.Item as={NavLink} key={tab.url} activeClassName={'active'} to={tab.url} >
-                                {t(tab.translationKey)}
+                        <NavDropdown.Item as={NavLink} key={tab.url} activeClassName={'active'} to={tab.url}>
+                            {t(tab.translationKey)}
                         </NavDropdown.Item>
                     ))}
                 </>

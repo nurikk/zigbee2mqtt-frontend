@@ -93,7 +93,6 @@ const NavBar: FunctionComponent<PropsFromStore & ThemeActions & WithTranslation<
                         ))}
                         <SettingsDropdown />
                         <LocalePicker />
-
                     </ul>
                     <StartStopJoinButton devices={devices} setPermitJoin={setPermitJoin} bridgeInfo={bridgeInfo} />
                     <ThemeSwitcher saveCurrentTheme={setTheme} />
