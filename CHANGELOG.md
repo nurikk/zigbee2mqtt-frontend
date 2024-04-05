@@ -1,3 +1,14 @@
+## [0.6.162](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.161...0.6.162) (2024-04-05)
+
+
+### Bug Fixes
+
+* **animation:** remove annoying image animation ([#1969](https://github.com/nurikk/zigbee2mqtt-frontend/issues/1969)) ([d27a7ce](https://github.com/nurikk/zigbee2mqtt-frontend/commit/d27a7ce250148dd70e502a8c78e2c9ea683fb272))
+* **i18n:** missing keys and hardcoded translation prompt ([#1963](https://github.com/nurikk/zigbee2mqtt-frontend/issues/1963)) ([03f1c80](https://github.com/nurikk/zigbee2mqtt-frontend/commit/03f1c801235cc65cf8ff7c5d3c01a84209759e94))
+* incorrect import in Dashboard.tsx ([#1973](https://github.com/nurikk/zigbee2mqtt-frontend/issues/1973)) ([09cc016](https://github.com/nurikk/zigbee2mqtt-frontend/commit/09cc016bfbde26b9266854669cd932f49abd9712))
+
+
+
 ## [0.6.161](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.160...0.6.161) (2024-03-03)
 
 
