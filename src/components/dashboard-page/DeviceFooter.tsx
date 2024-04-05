@@ -1,4 +1,4 @@
-import PowerSource from '../../components/power-source';
+import PowerSource from '../power-source';
 import React from 'react';
 import { Device, DeviceState, LastSeenType } from '../../types';
 
