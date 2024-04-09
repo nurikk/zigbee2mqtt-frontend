@@ -3,7 +3,6 @@ import Links from './links';
 import Nodes, { getStarShape } from './nodes';
 import { LinkI, NodeI } from './types';
 import { MapApi } from '../../actions/actions';
-import Button from '../button';
 import { forceCenter, forceCollide, ForceLink, forceLink, forceSimulation, forceX, forceY } from 'd3-force';
 import { select } from 'd3-selection';
 import { forceManyBodyReuse } from 'd3-force-reuse';
@@ -23,6 +22,7 @@ import {
     PropsFromStore,
     ticked,
 } from '.';
+import { Offcanvas, Button } from 'react-bootstrap';
 
 export class MapComponent extends Component<PropsFromStore & MapApi & WithTranslation<'map'>, MapState> {
     ref = createRef<HTMLDivElement>();
@@ -32,7 +32,7 @@ export class MapComponent extends Component<PropsFromStore & MapApi & WithTransl
         width: 0,
         height: 0,
         visibleLinks: defaultVisibleRelationsLinks,
-        legendIsVisible: true,
+        legendIsVisible: false,
     };
     transform: ZoomTransform = zoomIdentity;
 
@@ -186,24 +186,39 @@ export class MapComponent extends Component<PropsFromStore & MapApi & WithTransl
         const { t } = this.props;
         const { legendIsVisible } = this.state;
         return (
-            <div
-                className={cx('fixed-bottom', { 'd-none': !legendIsVisible })}
-                onClick={() => this.setState({ legendIsVisible: false })}
-            >
-                <div className={cx(style.node, style.Coordinator)}>
-                    <svg width="28" height="28" viewBox="0 0 28 28">
-                        <polygon points={getStarShape(5, 5, 14)} />
-                    </svg>{' '}
-                    {t('help_is_coordinator')}
-                </div>
-                <div className={cx(style.node, style.EndDevice)}>{t('help_end_device_description')}</div>
-                <div className={cx(style.node, style.Router)}>{t('help_router_description')}</div>
-
-                <div>{t('help_coordinator_link_description')}</div>
-                <div>{t('help_router_links_description')}</div>
-                <div>{t('help_lqi_description')}</div>
-                <div>{t('hide')}</div>
-            </div>
+            <>
+                <Button
+                    onClick={() => this.setState({ legendIsVisible: true })}
+                    style={{ position: 'fixed', bottom: '1rem', left: '1rem' }}
+                >
+                    <i className="fa fa-question-circle" />
+                </Button>
+                <Offcanvas show={legendIsVisible} onHide={() => {
+                    this.setState({ legendIsVisible: false });
+                }}>
+                    <Offcanvas.Header closeButton>
+                        <Offcanvas.Title>Map Help</Offcanvas.Title>
+                    </Offcanvas.Header>
+                    <Offcanvas.Body>
+                    <ul className="list-unstyled">
+                        <li>
+                            <div className={cx(style.node, style.Coordinator)}>
+                                <svg width="28" height="28" viewBox="0 0 28 28">
+                                    <polygon points={getStarShape(5, 5, 14)} />
+                                </svg>{' '}
+                                {t('help_is_coordinator')}
+                            </div>
+                        </li>
+                        <li className={cx(style.EndDevice)}>{t('help_end_device_description')}</li>
+                        <li className={cx(style.Router)}>{t('help_router_description')}</li>
+                        <li>{t('help_coordinator_link_description')}</li>
+                        <li>{t('help_router_links_description')}</li>
+                        <hr />
+                        <li>{t('help_lqi_description')}</li>
+                    </ul>
+                </Offcanvas.Body>
+            </Offcanvas>
+            </>
         );
     }
     render(): JSX.Element {
