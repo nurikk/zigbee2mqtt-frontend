@@ -14,7 +14,7 @@ import { BridgeApi } from '../../actions/BridgeApi';
 import { WithTranslation, withTranslation } from 'react-i18next';
 import { DescriptionField, TitleField } from '../../i18n/rjsf-translation-fields';
 import { Stats } from './stats';
-import frontendPackageJson from '../../../package.json';
+import frontendPackageJson from './../../../package.json';
 import { formatDate } from '../../utils';
 import { saveAs } from 'file-saver';
 import Spinner from '../spinner';
@@ -59,7 +59,7 @@ const removePropertiesFromSchema = (
     return { schema, config };
 };
 
-const tabs = [
+export const tabs = [
     {
         translationKey: 'settings',
         url: `/settings/settings`,
@@ -167,10 +167,11 @@ class SettingsPage extends Component<
         }
     }
     renderTranslate(): JSX.Element {
+        const { t } = this.props;
         return (
             <div className="p-3">
                 <p>
-                    You can help with the translation at{' '}
+                    {t('settings:translation_prompt')}{' '}
                     <a
                         target="_blank"
                         rel="noopener noreferrer"

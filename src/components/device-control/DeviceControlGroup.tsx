@@ -6,9 +6,9 @@ import { DeviceApi } from '../../actions/DeviceApi';
 import cx from 'classnames';
 
 import { useTranslation } from 'react-i18next';
-import { RenameDeviceModal } from '../modal/components/RenameDeviceModal';
 import NiceModal from '@ebay/nice-modal-react';
 import { RemoveDeviceModal } from '../modal/components/RemoveDeviceModal';
+import { DeviceControlEditName } from './DeviceControlEditName';
 
 interface DeviceControlGroupProps {
     device: Device;
@@ -20,25 +20,17 @@ export function DeviceControlGroup(
     props: DeviceControlGroupProps &
         Pick<DeviceApi, 'configureDevice' | 'renameDevice' | 'removeDevice' | 'setDeviceDescription'>,
 ): JSX.Element {
-    const { homeassistantEnabled, device, configureDevice, renameDevice, removeDevice, setDeviceDescription } = props;
+    const { device, configureDevice, removeDevice } = props;
     const { t } = useTranslation(['zigbee', 'common']);
 
     return (
         <div className="btn-group btn-group-sm" role="group">
-            <Button<void>
-                className="btn btn-primary"
-                onClick={() =>
-                    NiceModal.show(RenameDeviceModal, {
-                        device,
-                        renameDevice,
-                        setDeviceDescription,
-                        homeassistantEnabled,
-                    })
-                }
-                title={t('rename_device')}
-            >
-                <i className="fa fa-edit" />
-            </Button>
+            <DeviceControlEditName
+                device={device}
+                renameDevice={props.renameDevice}
+                homeassistantEnabled={props.homeassistantEnabled}
+                style={'primary'}
+            />
             <Button<string>
                 className="btn btn-warning"
                 onClick={configureDevice}
@@ -58,4 +50,5 @@ export function DeviceControlGroup(
         </div>
     );
 }
+
 export default DeviceControlGroup;

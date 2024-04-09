@@ -15,7 +15,23 @@ it('all devices are visible in dropdown', async () => {
     };
     render(<HeaderDeviceSelector allDevices={devices} currentDevice={currentDevice} />);
     await waitFor(() => fireEvent.click(screen.getByLabelText(/Select a device/)));
-    expect(document.querySelectorAll('.dropdown-item')).toHaveLength(2);
+    expect(document.querySelectorAll('.dropdown-item')).toHaveLength(1);
+});
+
+it('the current device is excluded from the list', async () => {
+    const ieeeAddress1 = 'FF:FF:FF:FF:FF:AA';
+    const ieeeAddress2 = 'AA:AA:AA:AA:AA:AA';
+    const currentDevice = createMockDevice({ ieee_address: ieeeAddress1, friendly_name: 'DONT SHOW ME' });
+    const devices = {
+        [ieeeAddress1]: currentDevice,
+        [ieeeAddress2]: createMockDevice({ ieee_address: ieeeAddress2, friendly_name: 'Other Device' }),
+    };
+    render(<HeaderDeviceSelector allDevices={devices} currentDevice={currentDevice} />);
+    await waitFor(() => fireEvent.click(screen.getByLabelText(/Select a device/)));
+    expect(document.querySelectorAll('.dropdown-item'));
+
+    expect(document.querySelectorAll('.dropdown-item').item(0).textContent).toContain('Other Device');
+    expect(document.querySelectorAll('.dropdown-item').item(0).textContent).not.toContain('DONT SHOW ME');
 });
 
 it('device can be selected', async () => {

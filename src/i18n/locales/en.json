@@ -2607,7 +2607,12 @@
     "coordinator_ieee_address": "Coordinator IEEE Address",
     "request_z2m_backup": "Request Z2m backup",
     "add_install_code": "Add install code",
-    "homeassistant": "Home Assistant integration"
+    "enter_install_code": "Enter install code",
+    "homeassistant": "Home Assistant integration",
+    "translation_prompt": "You can help with the translation at",
+    "zigbee_herdsman_converters_version": "zigbee-herdsman-converters version",
+    "zigbee_herdsman_version": "zigbee-herdsman version",
+    "localise_images": "Localise device images"
   },
   "touchlink": {
     "detected_devices_message": "Detected {{count}} touchlink devices.",
@@ -2685,6 +2690,7 @@
     "payload": "Payload",
     "save_description": "Save description",
     "coordinator": "Coordinator"
+    "update_description": "Update description"
   },
   "scene": {
     "scene_id": "Scene ID",

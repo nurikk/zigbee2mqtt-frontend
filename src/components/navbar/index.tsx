@@ -12,6 +12,7 @@ import { ThemeSwitcher } from '../theme-switcher';
 import { WithTranslation, withTranslation } from 'react-i18next';
 import LocalePicker from '../../i18n/LocalePicker';
 import { StartStopJoinButton } from './StartStopJoinButton';
+import { SettingsDropdown } from './SettingsDropdown';
 
 import NavbarBrand from 'react-bootstrap/esm/NavbarBrand';
 
@@ -28,10 +29,6 @@ const urls = [
     {
         href: '/map',
         key: 'map',
-    },
-    {
-        href: '/settings',
-        key: 'settings',
     },
     {
         href: '/groups',
@@ -102,6 +99,7 @@ const NavBar: FunctionComponent<PropsFromStore & ThemeActions & WithTranslation<
                     </ul>
                     <div className="d-flex align-self-start align-items-center flex-wrap justify-content-end gap-1 py-2">
                         <StartStopJoinButton devices={devices} setPermitJoin={setPermitJoin} bridgeInfo={bridgeInfo} />
+                        <SettingsDropdown />
                         <LocalePicker />
                         <ThemeSwitcher />
                         {bridgeInfo.restart_required ? (

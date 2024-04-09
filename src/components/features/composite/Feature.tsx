@@ -20,7 +20,7 @@ import {
 import Binary from '../binary/binary';
 import Climate from '../climate/climate';
 import Cover from '../cover/cover';
-import Color from '../composite/color/color';
+import Color from './color/color';
 import Enum from '../enum/enum';
 import Light from '../light/light';
 import Lock from '../lock/lock';
