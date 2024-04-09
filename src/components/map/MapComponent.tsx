@@ -129,9 +129,13 @@ export class MapComponent extends Component<PropsFromStore & MapApi & WithTransl
         return (
             <div className="h-100 d-flex justify-content-center align-items-center">
                 {networkGraphIsLoading ? (
-                    <div>
-                        <Spinner />
-                        <div>{t('loading')}</div>
+                    <div className="card">
+                        <div className="card-body">
+                            <div className="card-title">
+                                <Spinner />
+                            </div>
+                            <div>{t('loading')}</div>
+                        </div>
                     </div>
                 ) : (
                     <Button onClick={this.onRequestClick} className="btn btn-primary d-block">
@@ -214,11 +218,11 @@ export class MapComponent extends Component<PropsFromStore & MapApi & WithTransl
                 {networkGraph.nodes.length ? (
                     <Fragment>
                         {this.renderMapControls()} {this.renderMap()}
+                        {this.renderHelp()}
                     </Fragment>
                 ) : (
                     this.renderMessage()
                 )}
-                {this.renderHelp()}
             </div>
         );
     }
