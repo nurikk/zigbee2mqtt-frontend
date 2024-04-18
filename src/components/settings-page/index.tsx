@@ -20,6 +20,7 @@ import { saveAs } from 'file-saver';
 import Spinner from '../spinner';
 import { TranslatedImageLocaliser } from './image-localiser';
 import { DeviceApi } from '../../actions/DeviceApi';
+import { tabs } from './tabs';
 
 const Form = withTheme(Bootstrap5Theme);
 
@@ -59,32 +60,6 @@ const removePropertiesFromSchema = (
     return { schema, config };
 };
 
-export const tabs = [
-    {
-        translationKey: 'settings',
-        url: `/settings/settings`,
-    },
-    {
-        translationKey: 'tools',
-        url: `/settings/tools`,
-    },
-    {
-        translationKey: 'about',
-        url: `/settings/about`,
-    },
-    {
-        translationKey: 'raw',
-        url: `/settings/bridge`,
-    },
-    {
-        translationKey: 'translate',
-        url: '/settings/translate',
-    },
-    {
-        translationKey: 'donate',
-        url: '/settings/donate',
-    },
-];
 const rows = [
     <div key="nurikk" className="row pb-2">
         <div className="col">
