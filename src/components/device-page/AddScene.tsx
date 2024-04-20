@@ -32,6 +32,7 @@ export function AddScene(
 
     return (
         <>
+            <h3>{t('add_update_header')}</h3>
             <div className="mb-3">
                 <label htmlFor="add-scene" className="form-label">
                     {t('scene_id')}

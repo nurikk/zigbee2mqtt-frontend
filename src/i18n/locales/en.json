@@ -2518,6 +2518,7 @@
     "self_checking": "Self Checking"
   },
   "groups": {
+    "add_to_group_header": "Add a device to the group",
     "add_to_group": "Add to group",
     "create_group": "Create group",
     "new_group_id": "New group id",
@@ -2687,6 +2688,8 @@
     "update_description": "Update description"
   },
   "scene": {
+    "manage_scenes_header": "Manage scenes",
+    "add_update_header": "Add/update a scene",
     "scene_id": "Scene ID",
     "recall": "Recall",
     "store": "Store",
