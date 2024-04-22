@@ -25,7 +25,7 @@ export function ScenePicker(props: ScenePickerProps): JSX.Element {
                 </option>
                 {scenes.map((scene) => (
                     <option key={`${scene.id}-${scene.endpoint}`} value={`${scene.id}-${scene.endpoint}`}>
-                        {scene.name}
+                       {scene.id}: {scene.name}
                     </option>
                 ))}
             </select>
