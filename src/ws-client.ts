@@ -15,7 +15,6 @@ import keyBy from 'lodash/keyBy';
 import { GraphI } from './components/map/types';
 import local from 'store2';
 
-const MAX_LOGS_RECORDS_IN_BUFFER = 100;
 const TOKEN_LOCAL_STORAGE_ITEM_NAME = "z2m-token-v2";
 const AUTH_FLAG_LOCAL_STORAGE_ITEM_NAME = "z2m-auth-v2";
 const UNAUTHORIZED_ERROR_CODE = 4401;
@@ -193,8 +192,8 @@ class Api {
 
             case "bridge/logging":
                 {
-                    const { logs } = store.getState();
-                    const newLogs = [...logs.slice(-MAX_LOGS_RECORDS_IN_BUFFER)];
+                    const { logs, logsLimit } = store.getState();
+                    const newLogs = [...logs.slice(-logsLimit)];
                     newLogs.push({ ...(data.payload as unknown as LogMessage), timestamp: new Date() } as LogMessage);
                     store.setState({ logs: newLogs });
                     const log = data.payload as unknown as LogMessage;

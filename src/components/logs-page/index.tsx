@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'unistore/react';
 import actions, { UtilsApi } from '../../actions/actions';
-import { GlobalState, LogMessage } from '../../store';
+import store, { GlobalState, LogMessage } from '../../store';
 import cx from 'classnames';
 import escapeRegExp from 'lodash/escapeRegExp';
 import { BridgeApi } from '../../actions/BridgeApi';
@@ -71,6 +71,7 @@ export function LogRow(props: LogRowProps): JSX.Element {
 }
 
 const logLevels = [ALL, 'debug', 'info', 'warning', 'error'];
+const logLimits = [100, 200, 500, 1000];
 
 type PropsFromStore = Pick<GlobalState, 'bridgeInfo' | 'logs'>;
 class LogsPage extends Component<PropsFromStore & BridgeApi & UtilsApi & WithTranslation<'logs'>, LogsPageState> {
@@ -124,6 +125,28 @@ class LogsPage extends Component<PropsFromStore & BridgeApi & UtilsApi & WithTra
                                 configKey="advanced.log_level"
                                 onChange={updateBridgeConfig}
                             />
+                        </div>
+                        <div className="col-12 col-sm-4 col-xxl-4">
+                            <label htmlFor="logs-limit" className="form-label">
+                                {t('logs_limit')}
+                            </label>
+                            <select
+                                id="logs-limit"
+                                className="form-select"
+                                onChange={(e) => {
+                                    const limit = parseInt(e.target.value);
+                                    store.setState({
+                                        logsLimit: limit,
+                                        logs: [...store.getState().logs.slice(-limit)],
+                                    });
+                                }}
+                            >
+                                {logLimits.map((limit) => (
+                                    <option key={limit} value={limit} selected={limit == store.getState().logsLimit}>
+                                        {limit}
+                                    </option>
+                                ))}
+                            </select>
                         </div>
                         <div className="col-12">
                             <label htmlFor="reset">&nbsp;</label>

@@ -67,6 +67,7 @@ export interface GlobalState extends WithDevices, WithDeviceStates, WithGroups, 
     bridgeConfig: BridgeConfig;
     bridgeState: BridgeState;
     logs: LogMessage[];
+    logsLimit: number;
     extensions: Extension[];
     theme: Theme;
     missingTranslations: Map<string, unknown>;

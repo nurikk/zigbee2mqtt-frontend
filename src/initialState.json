@@ -23,6 +23,7 @@
         }
     },
     "logs": [],
+    "logsLimit": 100,
     "extensions": [],
     "theme": "light",
     "missingTranslations": {},
