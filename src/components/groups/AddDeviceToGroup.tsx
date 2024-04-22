@@ -36,6 +36,7 @@ export function AddDeviceToGroup(props: AddDeviceToGroupProps): JSX.Element {
 
     return (
         <>
+            <h3>{t('add_to_group_header')}</h3>
             <div className="mb-3">
                 <DevicePicker
                     label={t('zigbee:device')}

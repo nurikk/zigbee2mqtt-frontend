@@ -22,6 +22,7 @@ export function RecallRemove(props: RecallRemoveProps): JSX.Element {
     const { friendly_name } = target as WithFriendlyName;
     return (
         <>
+            <h3>{t('manage_scenes_header')}</h3>
             <div className="mb-3">
                 <ScenePicker onSceneSelected={setScene} value={scene} scenes={scenes} />
             </div>
