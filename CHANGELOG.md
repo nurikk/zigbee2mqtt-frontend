@@ -1,3 +1,20 @@
+## [0.6.163](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.162...0.6.163) (2024-04-22)
+
+
+### Bug Fixes
+
+* **settings:** fix tabs export ([2db25c8](https://github.com/nurikk/zigbee2mqtt-frontend/commit/2db25c8172d8691ca4217f3bf443dc216fbb2dd8))
+* **styles:** pretty ([b6f9d8f](https://github.com/nurikk/zigbee2mqtt-frontend/commit/b6f9d8ffa1ee5493dc9c4ea641e45cf49943174f))
+
+
+### Features
+
+* **groups:** headers for panels ([#1997](https://github.com/nurikk/zigbee2mqtt-frontend/issues/1997)) ([3280ca5](https://github.com/nurikk/zigbee2mqtt-frontend/commit/3280ca5cf6d02f648372fe244b76b8af1ca25d97))
+* **map:** improve loading screen ([#1980](https://github.com/nurikk/zigbee2mqtt-frontend/issues/1980)) ([ca636a8](https://github.com/nurikk/zigbee2mqtt-frontend/commit/ca636a8938dfe1f75c1ea86b887f00ef88a2b962))
+* **ScenePicker:** show scene id when selecting a scene ([#1994](https://github.com/nurikk/zigbee2mqtt-frontend/issues/1994)) ([819f798](https://github.com/nurikk/zigbee2mqtt-frontend/commit/819f798da7e918f3e0c1d77d389a2bf1be6ec98e))
+
+
+
 ## [0.6.162](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.161...0.6.162) (2024-04-05)
 
 
