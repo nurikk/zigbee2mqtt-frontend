@@ -84,6 +84,7 @@ class LogsPage extends Component<PropsFromStore & BridgeApi & UtilsApi & WithTra
             t,
         } = this.props;
         const { search } = this.state;
+        const { logsLimit } = store.getState();
         return (
             <div className="card">
                 <div className="card-body">
@@ -142,7 +143,7 @@ class LogsPage extends Component<PropsFromStore & BridgeApi & UtilsApi & WithTra
                                 }}
                             >
                                 {logLimits.map((limit) => (
-                                    <option key={limit} value={limit} selected={limit == store.getState().logsLimit}>
+                                    <option key={limit} value={limit} selected={limit == logsLimit}>
                                         {limit}
                                     </option>
                                 ))}
