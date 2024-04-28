@@ -1,3 +1,12 @@
+## [0.6.164](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.163...0.6.164) (2024-04-28)
+
+
+### Bug Fixes
+
+* **dashboard:** fix modernExtend entities not appearing on dashboard ([#2004](https://github.com/nurikk/zigbee2mqtt-frontend/issues/2004)) ([14b90ae](https://github.com/nurikk/zigbee2mqtt-frontend/commit/14b90aee94edd752006e30714e40f94fb982c77f))
+
+
+
 ## [0.6.163](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.162...0.6.163) (2024-04-22)
 
 
