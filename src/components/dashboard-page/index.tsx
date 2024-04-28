@@ -74,8 +74,7 @@ export const onlyValidFeaturesForDashboard = (
     if (genericRendererIgnoredNames.includes(name)) {
         return false;
     }
-
-    if (access & FeatureAccessMode.ACCESS_STATE && isOnlyOneBitIsSet(access)) {
+    if (access & FeatureAccessMode.ACCESS_STATE) {
         return filteredOutFeature;
     }
     if (Array.isArray(features) && features.length > 0) {
