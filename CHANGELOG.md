@@ -1,3 +1,12 @@
+## [0.6.165](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.164...0.6.165) (2024-04-30)
+
+
+### Bug Fixes
+
+* **dashboard:** fix dasbhoard entities ([c2303a3](https://github.com/nurikk/zigbee2mqtt-frontend/commit/c2303a3ad59fd7b3585be057847b0bbac3c072dc))
+
+
+
 ## [0.6.164](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.163...0.6.164) (2024-04-28)
 
 
