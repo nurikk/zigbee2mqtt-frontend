@@ -74,7 +74,7 @@ export const onlyValidFeaturesForDashboard = (
     if (genericRendererIgnoredNames.includes(name)) {
         return false;
     }
-    if (access & FeatureAccessMode.ACCESS_STATE) {
+    if (access === FeatureAccessMode.ACCESS_STATE || access === (FeatureAccessMode.ACCESS_STATE + FeatureAccessMode.ACCESS_READ)) {
         return filteredOutFeature;
     }
     if (Array.isArray(features) && features.length > 0) {
