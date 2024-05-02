@@ -1,3 +1,12 @@
+## [0.6.166](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.165...0.6.166) (2024-05-02)
+
+
+### Bug Fixes
+
+* **ui:** display toggle to rename Home Assistant entity ID ([#2010](https://github.com/nurikk/zigbee2mqtt-frontend/issues/2010)) ([3279bf6](https://github.com/nurikk/zigbee2mqtt-frontend/commit/3279bf6bf1d46e340def571b594a3fb12923e64e))
+
+
+
 ## [0.6.165](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.164...0.6.165) (2024-04-30)
 
 
