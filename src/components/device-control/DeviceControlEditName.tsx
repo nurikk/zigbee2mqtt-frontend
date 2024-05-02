@@ -24,6 +24,7 @@ export const DeviceControlEditName = (props: DeviceControlEditNameProps): JSX.El
                 NiceModal.show(RenameDeviceModal, {
                     device,
                     renameDevice,
+                    homeassistantEnabled,
                 })
             }
             title={t('rename_device')}
