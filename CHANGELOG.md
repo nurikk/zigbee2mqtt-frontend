@@ -1,3 +1,12 @@
+## [0.6.167](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.166...0.6.167) (2024-05-03)
+
+
+### Bug Fixes
+
+* **devicecontrol:** show edit buttons on mobile width ([#2012](https://github.com/nurikk/zigbee2mqtt-frontend/issues/2012)) ([07536d1](https://github.com/nurikk/zigbee2mqtt-frontend/commit/07536d1ab791a3c86ffc2c9d00954626c80bda95))
+
+
+
 ## [0.6.166](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.165...0.6.166) (2024-05-02)
 
 
