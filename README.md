@@ -2,10 +2,15 @@
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=nurikk_zigbee2mqtt-frontend&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=nurikk_zigbee2mqtt-frontend)
 [![codebeat badge](https://codebeat.co/badges/5ca1254f-569b-4ec0-99fa-fe6f0fa2896b)](https://codebeat.co/projects/github-com-nurikk-zigbee2mqtt-frontend-dev)
 
+# Zigbee2MQTT Frontend
+A frontend UI for [Zigbee2MQTT](https://github.com/Koenkk/zigbee2mqtt)
+
 # Screenshots
 
-![](images/screenshot_home.png)
-![](images/screenshot_map.png)
+![image](https://github.com/nurikk/zigbee2mqtt-frontend/assets/655807/85a0c03e-7583-4ce0-84be-8295534d1f02)
+
+![image](https://github.com/nurikk/zigbee2mqtt-frontend/assets/655807/c29ec9cb-6fa6-428c-b0b2-bfd932cb04f1)
+
 
 # Translation
 
