@@ -17,7 +17,7 @@ export const DeviceControlUpdateDesc = (props: DeviceControlUpdateDescProps): JS
 
     return (
         <Button<void>
-            className="btn btn-link btn-sm d-none d-md-inline-block mx-1"
+            className="btn btn-link btn-sm d-md-inline-block mx-1"
             onClick={() =>
                 NiceModal.show(UpdateDeviceDescModal, {
                     device,
