@@ -19,7 +19,7 @@ export const DeviceControlEditName = (props: DeviceControlEditNameProps): JSX.El
 
     return (
         <Button<void>
-            className={`btn btn-${style} btn-sm d-none d-md-inline-block mx-1`}
+            className={`btn btn-${style} btn-sm d-md-inline-block mx-1`}
             onClick={() =>
                 NiceModal.show(RenameDeviceModal, {
                     device,
