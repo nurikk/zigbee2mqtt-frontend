@@ -2535,7 +2535,8 @@
   "logs": {
     "empty_logs_message": "Nothing to display",
     "filter_by_text": "Filter by text",
-    "show_only": "Show only"
+    "show_only": "Show only",
+    "logs_limit": "Logs limit"
   },
   "map": {
     "help_coordinator_link_description": "Solid lines are the link to the Coordinator",
