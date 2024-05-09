@@ -2,7 +2,7 @@ import { FC, useEffect } from 'react';
 
 import { useLoadGraph, useRegisterEvents } from '@react-sigma/core';
 import { useLayoutCircular } from '@react-sigma/layout-circular';
-import { GraphI, ZigbeeRelationship } from './types';
+import { GraphI } from './types';
 import { MultiDirectedGraph } from 'graphology';
 import { getDeviceImage } from '../device-image';
 import { DEFAULT_EDGE_CURVATURE, indexParallelEdgesIndex } from '@sigma/edge-curve';
@@ -52,18 +52,18 @@ export const ZigbeeGraph: FC<{
 
         // const links = networkGraph.links.filter((l) => visibleLinks.includes(l.relationship));
         networkGraph.links.forEach((link) => {
-            const defaultEdgeParams = {
-                forceLabel: true,
-                type: 'curved',
-                size: 2,
-                relationship: link.relationship,
-            };
+            // debugger
             if (graph.hasNode(link.source.ieeeAddr) && graph.hasNode(link.target.ieeeAddr)) {
                 graph.addEdge(link.source.ieeeAddr, link.target.ieeeAddr, {
-                        ...defaultEdgeParams,
-                        label: link.lqi + '',
-                        weight: link.lqi,
-                    });
+                    forceLabel: true,
+                    // type: 'curved',
+                    size: 2,
+                    relationship: link.relationship,
+                    // weight: link.depth,
+                    weight: link.lqi,
+                    label: link.lqi + '',
+
+                });
             }
         });
 
