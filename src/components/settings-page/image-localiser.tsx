@@ -5,7 +5,7 @@ import Button from '../button';
 import { Device, IEEEEAddress } from '../../types';
 import { WithDevices } from '../../store';
 import { DeviceApi } from '../../actions/DeviceApi';
-import { getZ2mDeviceImage, getZ2mDeviceImagePng } from '../device-image';
+import { getDeviceImage } from '../device-image';
 
 type LocaliserState = 'none' | 'start' | 'inprogress' | 'done';
 
@@ -52,8 +52,8 @@ function ImageLocaliser(props: Props): JSX.Element {
         setLocalisationStatus((curr) => {
             return { ...curr, [device.ieee_address]: 'init' };
         });
-        const success = await asyncSome([getZ2mDeviceImagePng, getZ2mDeviceImage], async (generator) => {
-            const imageUrl = generator(device);
+        const success = await asyncSome([getDeviceImage], async (generator) => {
+            const imageUrl = generator(device, true);
             const imageContent = await downloadImage(imageUrl);
             await setDeviceOptions(device.ieee_address, { icon: imageContent });
             setLocalisationStatus((curr) => {

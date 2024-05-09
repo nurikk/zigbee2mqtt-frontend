@@ -1,24 +1,6 @@
 declare const classNames: {
+    readonly 'sigma-container': 'sigma-container';
     readonly container: 'container';
-    readonly img: 'img';
-    readonly node: 'node';
-    readonly link: 'link';
-    readonly linkLabel: 'linkLabel';
-    readonly links: 'links';
-    readonly nodes: 'nodes';
-    readonly EndDevice: 'EndDevice';
-    readonly Coordinator: 'Coordinator';
-    readonly Router: 'Router';
-    readonly BrokenLink: 'BrokenLink';
-    readonly Coordinator2Router: 'Coordinator2Router';
-    readonly Router2Coordinator: 'Router2Coordinator';
-    readonly Router2Router: 'Router2Router';
-    readonly Coordinator2EndDevice: 'Coordinator2EndDevice';
-    readonly EndDevice2Coordinator: 'EndDevice2Coordinator';
-    readonly Router2EndDevice: 'Router2EndDevice';
-    readonly EndDevice2Router: 'EndDevice2Router';
-    readonly foreignObject: 'foreignObject';
-    readonly offline: 'offline';
     readonly controls: 'controls';
 };
 export = classNames;

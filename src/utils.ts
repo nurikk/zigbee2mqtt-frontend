@@ -133,7 +133,7 @@ export const download = async (data: Record<string, unknown>, filename: string) 
     });
 }
 
-export const sanitizeZ2MDeviceName = (deviceName?: string): string => deviceName ? deviceName.replace(/:|\s|\//g, "-") : "NA";
+export const sanitizeDeviceName = (deviceName?: string): string => deviceName ? deviceName.replace(/:|\s|\//g, "-") : "NA";
 
 export const getEndpoints = (obj: Device | Group): Endpoint[] => {
     let eps: Endpoint[] = [];

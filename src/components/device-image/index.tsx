@@ -1,20 +1,22 @@
 import genericDevice from '../../images/generic-zigbee-device.png';
 import { Device } from '../../types';
-import { sanitizeZ2MDeviceName } from '../../utils';
+import { sanitizeDeviceName } from '../../utils';
 
-type ImageGeneratorFn = (device: Device) => string | undefined;
-const z2mBasePath = 'https://www.zigbee2mqtt.io/images/devices/';
+type ImageGeneratorFn = (device: Device) => string;
+const imagesBasePath = 'https://www.zigbee2mqtt.io/images/devices/';
 
-export const getZ2mDeviceImage = (device: Device): string =>
-    `${z2mBasePath}${sanitizeZ2MDeviceName(device?.definition?.model)}.jpg`;
-export const getZ2mDeviceImagePng = (device: Device): string =>
-    `${z2mBasePath}${sanitizeZ2MDeviceName(device?.definition?.model)}.png`;
-const getConverterDeviceImage = (device: Device): string | undefined => device.definition?.icon;
+export const getDeviceImage = (device: Device, direct = false): string => {
+    if (device.type === 'Coordinator' && !direct) {
+        return genericDevice;
+    } else if (device.definition?.icon) {
+        return device.definition.icon;
+    } else {
+        return `${imagesBasePath}${sanitizeDeviceName(device?.definition?.model)}.png`;
+    }
+};
 
 /* prettier-ignore */
 export const AVAILABLE_GENERATORS: ImageGeneratorFn[] = [
-    getConverterDeviceImage,
-    getZ2mDeviceImagePng,
-    getZ2mDeviceImage,
+    getDeviceImage,
     () => genericDevice,
 ];
