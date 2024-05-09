@@ -38,12 +38,10 @@ export interface LinkI extends SimulationLinkDatum<NodeI> {
     source: NodeI;
     target: NodeI;
     linkquality: number;
-    linkqualities: number[];
     depth: number;
     routes: unknown[];
     lqi: number;
     relationship: ZigbeeRelationship;
-    relationships: ZigbeeRelationship[];
     linkType: LinkType;
 }
 

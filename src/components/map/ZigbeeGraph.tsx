@@ -1,29 +1,36 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect } from 'react';
 
-import { useLoadGraph, useRegisterEvents, useSetSettings, useSigma } from '@react-sigma/core';
+import { useLoadGraph, useRegisterEvents } from '@react-sigma/core';
 import { useLayoutCircular } from '@react-sigma/layout-circular';
 import { GraphI, ZigbeeRelationship } from './types';
 import { MultiDirectedGraph } from 'graphology';
 import { getDeviceImage } from '../device-image';
 import { DEFAULT_EDGE_CURVATURE, indexParallelEdgesIndex } from '@sigma/edge-curve';
 import { Devices } from '../../store';
-import { intersection } from 'lodash';
+import { Attributes } from 'graphology-types';
 
-type NodeType = { x: number; y: number; label: string; size: number; color?: string; highlighted?: boolean };
-type EdgeType = { label: string };
+export type NodeType = {
+    x: number;
+    y: number;
+    label: string;
+    size: number;
+    color?: string;
+    highlighted?: boolean;
+    image: string;
+};
+export type EdgeType = {
+    label: string;
+    weight: number;
+} & Attributes;
 
 export const ZigbeeGraph: FC<{
-    disableHoverEffect?: boolean;
     networkGraph: GraphI;
     devices: Devices;
-    visibleLinks: ZigbeeRelationship[];
-}> = ({ disableHoverEffect, networkGraph, devices, visibleLinks }) => {
-    const sigma = useSigma<NodeType, EdgeType>();
+}> = ({ networkGraph, devices }) => {
     const registerEvents = useRegisterEvents<NodeType, EdgeType>();
-    const setSettings = useSetSettings<NodeType, EdgeType>();
     const loadGraph = useLoadGraph<NodeType, EdgeType>();
     const { assign: assignCircular } = useLayoutCircular();
-    const [hoveredNode, setHoveredNode] = useState<string | null>(null);
+
 
     /**
      * When component mount
@@ -31,38 +38,33 @@ export const ZigbeeGraph: FC<{
      */
     useEffect(() => {
         // Create & load the graph
-        const graph = new MultiDirectedGraph();
+        const graph = new MultiDirectedGraph<NodeType, EdgeType>();
+
         networkGraph.nodes.forEach((node) => {
             graph.addNode(node.ieeeAddr, {
-                label: node.friendlyName,
+                label: node.friendlyName as string,
                 size: 25,
                 x: Math.random(),
                 y: Math.random(),
                 image: getDeviceImage(devices[node.ieeeAddr]),
             });
         });
-        const links = networkGraph.links.filter((l) => intersection(visibleLinks, l.relationships).length);
-        links.forEach((link) => {
+
+        // const links = networkGraph.links.filter((l) => visibleLinks.includes(l.relationship));
+        networkGraph.links.forEach((link) => {
             const defaultEdgeParams = {
-                // forceLabel: true,
+                forceLabel: true,
                 type: 'curved',
                 size: 2,
+                relationship: link.relationship,
             };
-            link.linkqualities.forEach((lqi, idx) => {
-                if (idx == 0) {
-                    graph.addEdge(link.source.ieeeAddr, link.target.ieeeAddr, {
+            if (graph.hasNode(link.source.ieeeAddr) && graph.hasNode(link.target.ieeeAddr)) {
+                graph.addEdge(link.source.ieeeAddr, link.target.ieeeAddr, {
                         ...defaultEdgeParams,
-                        label: lqi,
-                        weight: lqi,
+                        label: link.lqi + '',
+                        weight: link.lqi,
                     });
-                } else {
-                    graph.addEdge(link.target.ieeeAddr, link.source.ieeeAddr, {
-                        ...defaultEdgeParams,
-                        label: lqi,
-                        weight: lqi,
-                    });
-                }
-            });
+            }
         });
 
         indexParallelEdgesIndex(graph, {
@@ -84,43 +86,13 @@ export const ZigbeeGraph: FC<{
 
         loadGraph(graph);
         assignCircular();
-
-        // Register the events
-        registerEvents({
-            enterNode: (event) => setHoveredNode(event.node),
-            leaveNode: () => setHoveredNode(null),
-        });
-    }, [assignCircular, loadGraph, registerEvents, visibleLinks, networkGraph, devices]);
+    }, [assignCircular, loadGraph, registerEvents, networkGraph, devices]);
 
     /**
      * When component mount or hovered node change
      * => Setting the sigma reducers
      */
-    useEffect(() => {
-        setSettings({
-            nodeReducer: (node, data) => {
-                const graph = sigma.getGraph();
-                const newData = { ...data, highlighted: data.highlighted || false, hidden: false };
 
-                if (!disableHoverEffect && hoveredNode) {
-                    if (node === hoveredNode || graph.neighbors(hoveredNode).includes(node)) {
-                        newData.highlighted = true;
-                    } else {
-                        newData.hidden = true;
-                    }
-                }
-                return newData;
-            },
-            edgeReducer: (edge, data) => {
-                const graph = sigma.getGraph();
-                const newData = { ...data, hidden: false };
-                if (!disableHoverEffect && hoveredNode && !graph.extremities(edge).includes(hoveredNode)) {
-                    newData.hidden = true;
-                }
-                return newData;
-            },
-        });
-    }, [hoveredNode, setSettings, sigma, disableHoverEffect, networkGraph, devices, visibleLinks]);
 
     return null;
 };

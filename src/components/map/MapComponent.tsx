@@ -63,8 +63,8 @@ export class MapComponent extends Component<PropsFromStore & MapApi & WithTransl
         const { visibleLinks } = this.state;
         return (
             <SigmaContainer settings={sigmaSettings} graph={MultiDirectedGraph}>
-                <ZigbeeGraph devices={devices} networkGraph={networkGraph} visibleLinks={visibleLinks} />
-                <GraphEvents />
+                <ZigbeeGraph devices={devices} networkGraph={networkGraph} />
+                <GraphEvents visibleLinks={visibleLinks} />
                 <ControlsContainer position={'bottom-right'}>
                     <ZoomControl />
                     <FullScreenControl />

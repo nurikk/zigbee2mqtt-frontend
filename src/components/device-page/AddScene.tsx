@@ -23,7 +23,7 @@ export function AddScene(
     const [sceneName, setSceneName] = useState<string>('');
 
     const defaultSceneName = `Scene ${sceneId}`;
-    let filteredFeatures: (false | GenericExposedFeature | CompositeFeature)[] = [];
+    let filteredFeatures: (GenericExposedFeature | CompositeFeature | undefined)[] = [];
     if ((target as Device).definition) {
         filteredFeatures = (((target as Device).definition?.exposes ?? []) as GenericExposedFeature[])
             .map((e: GenericExposedFeature | CompositeFeature) => onlyValidFeaturesForScenes(e, deviceState))

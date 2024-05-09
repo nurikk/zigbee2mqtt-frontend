@@ -1,14 +1,26 @@
-import { useEffect, useState } from 'react';
-import { useRegisterEvents, useSigma } from '@react-sigma/core';
+import { FC, useEffect, useState } from 'react';
+import { useRegisterEvents, useSetSettings, useSigma } from '@react-sigma/core';
+import { EdgeType, NodeType } from './ZigbeeGraph';
+import { ZigbeeRelationship } from './types';
 
-export function GraphEvents() {
+type GraphEventsProps = {
+    disableHoverEffect?: boolean;
+    visibleLinks: ZigbeeRelationship[];
+}
+export const GraphEvents: FC<GraphEventsProps> = ({ disableHoverEffect, visibleLinks }) => {
     const registerEvents = useRegisterEvents();
     const sigma = useSigma();
+    const setSettings = useSetSettings<NodeType, EdgeType>();
     const [draggedNode, setDraggedNode] = useState<string | null>(null);
+    const [hoveredNode, setHoveredNode] = useState<string | null>(null);
 
     useEffect(() => {
         // Register the events
         registerEvents({
+            enterNode: (event) => {
+                setHoveredNode(event.node);
+            },
+            leaveNode: () => setHoveredNode(null),
             downNode: (e) => {
                 setDraggedNode(e.node);
                 sigma.getGraph().setNodeAttribute(e.node, 'highlighted', true);
@@ -38,7 +50,32 @@ export function GraphEvents() {
                 if (!sigma.getCustomBBox()) sigma.setCustomBBox(sigma.getBBox());
             },
         });
-    }, [registerEvents, sigma, draggedNode]);
+    }, [registerEvents, sigma, draggedNode, hoveredNode]);
 
+    useEffect(() => {
+        setSettings({
+            nodeReducer: (node, data) => {
+                const graph = sigma.getGraph();
+                const newData = { ...data, highlighted: data.highlighted || false, hidden: false };
+                if (!disableHoverEffect && hoveredNode) {
+                    if (node === hoveredNode || graph.neighbors(hoveredNode).includes(node)) {
+                        newData.highlighted = true;
+                    } else {
+                        newData.hidden = true;
+                    }
+                }
+                return newData;
+            },
+            edgeReducer: (edge, data) => {
+                const graph = sigma.getGraph();
+                const newData = { ...data, hidden: false };
+                const disabledByHover = !disableHoverEffect && hoveredNode && !graph.extremities(edge).includes(hoveredNode);
+                if (disabledByHover || !visibleLinks.includes(data.relationship)) {
+                    newData.hidden = true;
+                }
+                return newData;
+            },
+        });
+    }, [hoveredNode, setSettings, sigma, disableHoverEffect, visibleLinks]);
     return null;
-}
+};

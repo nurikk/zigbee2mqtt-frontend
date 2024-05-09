@@ -69,40 +69,6 @@ export function formatDate(date: Date): string {
             padTo2Digits(date.getSeconds()),
         ].join(':')
     );
-}
-
-
-export const sanitizeGraph = (inGraph: GraphI): GraphI => {
-    const nodes = {};
-    const links = new Map<string, LinkI>();
-
-    inGraph.nodes.forEach(node => {
-        nodes[node.ieeeAddr] = node;
-    });
-
-    inGraph.links.sort((a, b) => a.relationship - b.relationship)
-    inGraph.links.forEach(link => {
-
-        const src: NodeI = nodes[link.source.ieeeAddr];
-        const dst: NodeI = nodes[link.target.ieeeAddr];
-
-        if (src && dst) {
-            const linkId = [link.source.ieeeAddr, link.target.ieeeAddr].sort().join('');
-            const repeatedLink = links.get(linkId);
-            const linkType = [src.type, dst.type].join('2') as LinkType;
-            if (repeatedLink) {
-                repeatedLink.linkqualities.push(link.linkquality);
-                repeatedLink.relationships.push(link.relationship);
-            } else {
-                links.set(linkId, { ...link, ...{ source: src, target: dst, linkType, linkqualities: [link.linkquality], relationships: [link.relationship] } });
-            }
-        } else {
-            console.warn(`Broken link${src ? "" : " ,source node is missing"}${dst ? "" : " ,target node is missing"}`, link);
-        }
-    });
-
-    inGraph.links = Array.from(links.values());
-    return inGraph;
 };
 
 export const getDeviceDisplayName = (device: Device): string => {
