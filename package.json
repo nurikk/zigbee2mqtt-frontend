@@ -115,9 +115,7 @@
         "vite-plugin-html": "~3.2.0",
         "vite-plugin-sass-dts": "~1.3.11",
         "vitest": "^1.3.1",
-        "ws": "~8.14.2",
-        "zigbee-herdsman": "~0.35.3",
-        "zigbee-herdsman-converters": "~15.132.0"
+        "ws": "~8.14.2"
     },
     "main": "index.js",
     "husky": {
@@ -131,5 +129,6 @@
     },
     "bugs": {
         "url": "https://github.com/nurikk/zigbee2mqtt-frontend/issues"
-    }
+    },
+    "packageManager": "pnpm@9.1.0+sha256.22e36fba7f4880ecf749a5ca128b8435da085ecd49575e7fb9e64d6bf4fad394"
 }
