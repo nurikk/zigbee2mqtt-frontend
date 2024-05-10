@@ -1,4 +1,5 @@
 import { JSONSchema7 } from 'json-schema';
+import {CustomClusters} from './zcl/definition/tstype'
 
 export type DeviceType = "EndDevice" | "Router" | "Coordinator";
 export type FriendlyName = string;
@@ -29,9 +30,6 @@ export type Cluster = string | number;
 export type Attribute = string;
 
 export type Endpoint = string | number;
-
-
-
 
 export interface Meta {
     revision: number;
@@ -210,6 +208,7 @@ export interface DeviceDefinition {
     options: GenericOrCompositeFeature[];
     supports_ota: boolean;
     icon?: string;
+    custom_clusters?: CustomClusters;
 }
 export interface ReportingConfig {
     cluster: Cluster;

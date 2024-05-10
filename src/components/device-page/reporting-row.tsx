@@ -9,7 +9,7 @@ import ClusterPicker from '../cluster-picker/ClusterPicker';
 import { NiceRepointingRule } from './reporting';
 import { getEndpoints } from '../../utils';
 import AttributePicker from '../attribute-picker';
-import Clusters from 'zigbee-herdsman/dist/zcl/definition/cluster';
+import {Clusters} from '../../zcl/definition/cluster';
 import Button from '../button';
 import { WithTranslation, withTranslation } from 'react-i18next';
 
@@ -160,6 +160,7 @@ class ReportingRow extends Component<ReportingRowProps & WithTranslation, Report
                         disabled={!stateRule.cluster}
                         value={stateRule.attribute}
                         cluster={stateRule.cluster}
+                        device={device}
                         onChange={this.setAttribute}
                     />
                 </div>

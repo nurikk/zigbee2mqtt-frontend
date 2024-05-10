@@ -2,7 +2,6 @@ import React from 'react';
 import { Attribute, Cluster, Endpoint } from '../../types';
 import { PickerType } from '../cluster-picker';
 import ClusterPicker from '../cluster-picker/ClusterPicker';
-import ZclCluster from 'zigbee-herdsman/dist/zcl/definition/cluster';
 import AttributePicker, { AttributeDefinition } from '../attribute-picker';
 import Button from '../button';
 import { LogMessage } from '../../store';
@@ -132,7 +131,7 @@ export class AttributeEditor extends React.Component<AttributeEditorProps, Attri
                             data-testid="cluster-picker"
                             label={t('cluster')}
                             pickerType={PickerType.SINGLE}
-                            clusters={Object.keys(ZclCluster)}
+                            clusters={device.endpoints[endpoint].clusters.input}
                             value={cluster}
                             onChange={this.onClusterChange}
                         />
@@ -144,6 +143,7 @@ export class AttributeEditor extends React.Component<AttributeEditorProps, Attri
                             label={t('attribute')}
                             value={''}
                             cluster={cluster}
+                            device={device}
                             onChange={this.onAttributeSelect}
                         />
                     </div>
