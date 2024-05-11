@@ -72,7 +72,7 @@ export class DeviceSettings extends Component<DeviceSettingsProps, DeviceSetting
                             href="https://www.zigbee2mqtt.io/guide/configuration/devices-groups.html#common-device-options"
                             target="_blank"
                             rel="noreferrer"
-                            className="alert-link"
+                            className="alert-link align-middle"
                         >
                             Read about this in the documentation…
                         </a>
