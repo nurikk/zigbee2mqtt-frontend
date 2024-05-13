@@ -23,17 +23,20 @@ interface ReportingRowState {
 }
 
 const getClusters = (device: Device, endpoint: Endpoint, currentCluster: Cluster): ClusterGroup[] => {
-    let possibleClusters = Object.keys(Clusters);
+    let possibleClusters = [] as Cluster[];
     let availableClusters = [] as Cluster[];
-    const ep = device.endpoints[endpoint];
-    if (ep) {
-        availableClusters = availableClusters.concat(ep.clusters.output);
-        possibleClusters = possibleClusters.filter((cluster) => !availableClusters.includes(cluster));
-    }
 
     if (currentCluster && !availableClusters.includes(currentCluster)) {
         availableClusters.push(currentCluster);
     }
+
+    const ep = device.endpoints[endpoint];
+    if (ep) {
+        availableClusters = availableClusters.concat(ep.clusters.output);
+        possibleClusters = [...ep.clusters.input as []]
+        possibleClusters = possibleClusters.filter((cluster) => !availableClusters.includes(cluster));
+    }
+
     return [
         {
             name: 'available',
