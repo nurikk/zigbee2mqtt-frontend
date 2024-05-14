@@ -6,6 +6,28 @@ import { DescriptionField, TitleField } from '../../i18n/rjsf-translation-fields
 import merge from 'lodash/merge';
 import { DeviceSettingsProps, DeviceSettingsState, Form, ParamValue } from './settings';
 
+const ReadTheDocsInfo = (props: {
+    docsUrl: string;
+}): JSX.Element => {
+    const { docsUrl } = props;
+    return (
+        <div className="card alert alert-info" role="alert">
+            <div className="card-body">
+                <i className="fa-solid fa-circle-info fa-2xl me-2"></i>
+
+                <a
+                    href={docsUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="alert-link align-middle"
+                >
+                    Read about this in the documentation…
+                </a>
+            </div>
+        </div>
+    );
+};
+
 const genericUiSchema: UiSchema = {
     'ui:order': ['friendly_name', 'disabled', 'retain', 'retention', 'qos', 'filtered_attributes', '*'],
 };
@@ -55,20 +77,9 @@ export class DeviceSettings extends Component<DeviceSettingsProps, DeviceSetting
         const { schema, data, uiSchema } = this.getSchemaAndConfig();
         return (
             <>
-                <div className="card alert alert-info" role="alert">
-                    <div className="card-body">
-                        <i className="fa-solid fa-circle-info fa-2xl me-2"></i>
-
-                        <a
-                            href="https://www.zigbee2mqtt.io/guide/configuration/devices-groups.html#common-device-options"
-                            target="_blank"
-                            rel="noreferrer"
-                            className="alert-link align-middle"
-                        >
-                            Read about this in the documentation…
-                        </a>
-                    </div>
-                </div>
+                <ReadTheDocsInfo
+                    docsUrl={'https://www.zigbee2mqtt.io/guide/configuration/devices-groups.html#common-device-options'}
+                />
 
                 <Form
                     schema={schema}
