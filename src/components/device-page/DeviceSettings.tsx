@@ -54,7 +54,7 @@ export class DeviceSettings extends Component<DeviceSettingsProps, DeviceSetting
     render(): ReactNode {
         const { schema, data, uiSchema } = this.getSchemaAndConfig();
         return (
-            <div>
+            <>
                 <div className="card alert alert-info" role="alert">
                     <div className="card-body">
                         <i className="fa-solid fa-circle-info fa-2xl me-2"></i>
@@ -78,7 +78,7 @@ export class DeviceSettings extends Component<DeviceSettingsProps, DeviceSetting
                     uiSchema={uiSchema}
                     fields={{ TitleField, DescriptionField }}
                 />
-            </div>
+            </>
         );
     }
 }
