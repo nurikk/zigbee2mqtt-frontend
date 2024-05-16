@@ -3,6 +3,7 @@ import {
     BridgeConfig,
     BridgeInfo,
     BridgeState,
+    BridgeDefinitions,
     Device,
     DeviceState,
     FriendlyName,
@@ -66,6 +67,7 @@ export interface GlobalState extends WithDevices, WithDeviceStates, WithGroups, 
     networkGraphIsLoading: boolean;
     bridgeConfig: BridgeConfig;
     bridgeState: BridgeState;
+    bridgeDefinitions: BridgeDefinitions;
     logs: LogMessage[];
     logsLimit: number;
     extensions: Extension[];

@@ -4,7 +4,7 @@ import { AttributeDefinition } from '../attribute-picker';
 import { GlobalState, LogMessage } from '../../store';
 import { WithTranslation, withTranslation } from 'react-i18next';
 import { DeviceApi } from '../../actions/DeviceApi';
-import { DataType } from '../../zcl/definition/enums';
+import { DataType } from '../../ZCLenums';
 import { AttributeEditor } from './AttributeEditor.1';
 
 export interface AttributeEditorProps
