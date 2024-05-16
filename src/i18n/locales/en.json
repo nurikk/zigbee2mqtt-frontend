@@ -29,7 +29,8 @@
     "the_only_endpoint": "The only endpoint",
     "unbind": "Unbind",
     "write": "Write",
-    "destination_endpoint": "Destination endpoint"
+    "destination_endpoint": "Destination endpoint",
+    "read_the_docs_info": "Read about this in the documentation…"
   },
   "devicePage": {
     "about": "About",
