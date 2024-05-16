@@ -1,9 +1,11 @@
 /**
  * This is the specification-defined data types. It should not contain "custom" types and is expected to have [0x00-0xFF] values.
- * 
+ *
  * - Values of analog types may be added to or subtracted from other values of the same type and are typically
  * used to measure the value of properties in the real world that vary continuously over a range.
  * - Values of discrete data types only have meaning as individual values and may not be added or subtracted.
+ *
+ * Imported from zigbee-herdsman
  */
 export enum DataType {
     /** length=0 */
@@ -183,7 +185,7 @@ export enum Direction {
 export enum StructuredIndicatorType {
     /**
      * Write: Only for attributes of type other than array, structure, set or bag
-     * 
+     *
      * Read: Only for attributes of type other than array or structure
      */
     Whole = 0x00,

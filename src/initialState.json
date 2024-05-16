@@ -13,6 +13,7 @@
     "groups": [],
     "bridgeState": "online",
     "bridgeConfig": {},
+    "bridgeDefinitions": {},
     "bridgeInfo": {
         "configSchema": {
             "properties": {},
