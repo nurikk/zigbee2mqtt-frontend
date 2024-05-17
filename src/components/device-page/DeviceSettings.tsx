@@ -5,6 +5,7 @@ import { ISubmitEvent, UiSchema } from '@rjsf/core';
 import { DescriptionField, TitleField } from '../../i18n/rjsf-translation-fields';
 import merge from 'lodash/merge';
 import { DeviceSettingsProps, DeviceSettingsState, Form, ParamValue } from './settings';
+import { diff } from 'deep-object-diff';
 
 const genericUiSchema: UiSchema = {
     'ui:order': ['friendly_name', 'disabled', 'retain', 'retention', 'qos', 'filtered_attributes', '*'],
@@ -25,7 +26,7 @@ export class DeviceSettings extends Component<DeviceSettingsProps, DeviceSetting
             bridgeInfo: { config_schema: configSchema = {} },
         } = this.props;
         return (configSchema.definitions?.device ?? { properties: {} }) as JSONSchema7;
-    }
+    };
     getDeviceConfig(): KVP | KVP[] {
         const {
             bridgeInfo: { config },
@@ -33,15 +34,13 @@ export class DeviceSettings extends Component<DeviceSettingsProps, DeviceSetting
         } = this.props;
         const { updatedDeviceConfig } = this.state;
         return merge({}, config?.device_options, config?.devices[device.ieee_address], updatedDeviceConfig);
-    }
-    onFormChange = (params: ISubmitEvent<KVP | KVP[]>): void => {
-        const { formData } = params;
-        this.setState({ updatedDeviceConfig: formData });
     };
     updateConfig = async (params: ISubmitEvent<KVP | KVP[]>): Promise<void> => {
         const { formData } = params;
+        const { data } = this.getSchemaAndConfig();
         const { setDeviceOptions, device } = this.props;
-        await setDeviceOptions(device.ieee_address, formData as Record<string, unknown>);
+        const diffSettings = diff(data, formData);
+        await setDeviceOptions(device.ieee_address, diffSettings as Record<string, unknown>);
         this.setState({ updatedDeviceConfig: {} });
     };
 
@@ -58,7 +57,6 @@ export class DeviceSettings extends Component<DeviceSettingsProps, DeviceSetting
                 schema={schema}
                 formData={data}
                 onSubmit={this.updateConfig}
-                onChange={this.onFormChange}
                 uiSchema={uiSchema}
                 fields={{ TitleField, DescriptionField }}
             />

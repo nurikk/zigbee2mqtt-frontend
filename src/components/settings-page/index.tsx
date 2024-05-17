@@ -21,6 +21,7 @@ import Spinner from '../spinner';
 import { TranslatedImageLocaliser } from './image-localiser';
 import { DeviceApi } from '../../actions/DeviceApi';
 import { tabs } from './tabs';
+import { diff } from 'deep-object-diff';
 
 const Form = withTheme(Bootstrap5Theme);
 
@@ -296,10 +297,11 @@ class SettingsPage extends Component<
         const { formData } = e;
         const { updateBridgeConfig } = this.props;
         const { keyName } = this.state;
+        const diffSettings = diff(this.getSettingsInfo().currentConfig, formData);
         if (keyName === ROOT_KEY_NAME) {
-            updateBridgeConfig(formData);
+            updateBridgeConfig(diffSettings);
         } else {
-            updateBridgeConfig({ [keyName]: formData });
+            updateBridgeConfig({ [keyName]: diffSettings });
         }
     };
 
