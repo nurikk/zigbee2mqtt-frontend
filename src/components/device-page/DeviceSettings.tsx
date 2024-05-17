@@ -5,6 +5,7 @@ import { ISubmitEvent, UiSchema } from '@rjsf/core';
 import { DescriptionField, TitleField } from '../../i18n/rjsf-translation-fields';
 import merge from 'lodash/merge';
 import { DeviceSettingsProps, DeviceSettingsState, Form, ParamValue } from './settings';
+import { ReadTheDocsInfo } from '../ReadTheDocsInfo';
 
 const genericUiSchema: UiSchema = {
     'ui:order': ['friendly_name', 'disabled', 'retain', 'retention', 'qos', 'filtered_attributes', '*'],
@@ -54,14 +55,20 @@ export class DeviceSettings extends Component<DeviceSettingsProps, DeviceSetting
     render(): ReactNode {
         const { schema, data, uiSchema } = this.getSchemaAndConfig();
         return (
-            <Form
-                schema={schema}
-                formData={data}
-                onSubmit={this.updateConfig}
-                onChange={this.onFormChange}
-                uiSchema={uiSchema}
-                fields={{ TitleField, DescriptionField }}
-            />
+            <>
+                <ReadTheDocsInfo
+                    docsUrl={'https://www.zigbee2mqtt.io/guide/configuration/devices-groups.html#common-device-options'}
+                />
+
+                <Form
+                    schema={schema}
+                    formData={data}
+                    onSubmit={this.updateConfig}
+                    onChange={this.onFormChange}
+                    uiSchema={uiSchema}
+                    fields={{ TitleField, DescriptionField }}
+                />
+            </>
         );
     }
 }
