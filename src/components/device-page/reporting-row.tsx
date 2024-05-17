@@ -9,7 +9,6 @@ import ClusterPicker from '../cluster-picker/ClusterPicker';
 import { NiceRepointingRule } from './reporting';
 import { getEndpoints } from '../../utils';
 import AttributePicker from '../attribute-picker';
-import {Clusters} from '../../zcl/definition/cluster';
 import Button from '../button';
 import { WithTranslation, withTranslation } from 'react-i18next';
 
@@ -33,7 +32,7 @@ const getClusters = (device: Device, endpoint: Endpoint, currentCluster: Cluster
     const ep = device.endpoints[endpoint];
     if (ep) {
         availableClusters = availableClusters.concat(ep.clusters.output);
-        possibleClusters = [...ep.clusters.input as []]
+        possibleClusters = [...(ep.clusters.input as [])];
         possibleClusters = possibleClusters.filter((cluster) => !availableClusters.includes(cluster));
     }
 

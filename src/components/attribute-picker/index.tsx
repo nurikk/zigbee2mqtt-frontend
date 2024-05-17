@@ -1,7 +1,7 @@
 import React, { ChangeEvent, InputHTMLAttributes } from 'react';
 import { Attribute, Cluster, Device } from '../../types';
 
-import {DataType} from '../../ZCLenums';
+import { DataType } from '../../ZCLenums';
 
 import { useTranslation } from 'react-i18next';
 import store from '../../store';
@@ -25,7 +25,7 @@ export default function AttributePicker(
     props: AttributePickerProps & Omit<InputHTMLAttributes<HTMLSelectElement>, 'onChange'>,
 ): JSX.Element {
     const { cluster, device, onChange, label, value, ...rest } = props;
-    const {bridgeDefinitions} = store.getState();
+    const { bridgeDefinitions } = store.getState();
     const { t } = useTranslation('zigbee');
     const onChangeHandler = (e: ChangeEvent<HTMLSelectElement>): void => {
         const { value: inputValue } = e.target;
@@ -38,7 +38,7 @@ export default function AttributePicker(
         }
     };
     // Retrieve Cluster attributes: from ZH first, then from device definition
-    const getClusterAttributes = (cluster) : string[] | Readonly<Record<string, Readonly<AttributeDefinition>>> => {
+    const getClusterAttributes = (cluster): string[] | Readonly<Record<string, Readonly<AttributeDefinition>>> => {
         const _clusterDefinition = bridgeDefinitions.clusters[cluster];
 
         if (_clusterDefinition) {
@@ -51,7 +51,7 @@ export default function AttributePicker(
             }
         }
         return [];
-    }
+    };
     const attrs = Object.keys(getClusterAttributes(cluster));
 
     if (value !== undefined && !attrs.includes(value)) {
