@@ -19,22 +19,22 @@ importers:
         version: 17.8.1
       '@ebay/nice-modal-react':
         specifier: ~1.2.13
-        version: 1.2.13(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        version: 1.2.13(react-dom@18.2.0)(react@18.2.0)
       '@fortawesome/fontawesome-free':
         specifier: ~6.4.2
         version: 6.4.2
       '@rjsf/bootstrap-5':
         specifier: https://github.com/nurikk/fileshare/blob/main/rjsf-bootstrap-5-4.2.0.tgz?raw=true
-        version: https://github.com/nurikk/fileshare/blob/main/rjsf-bootstrap-5-4.2.0.tgz?raw=true(@rjsf/core@4.2.3(react@18.2.0))(react-bootstrap@2.10.0(@types/react@18.2.61)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)
+        version: https://github.com/nurikk/fileshare/blob/main/rjsf-bootstrap-5-4.2.0.tgz?raw=true(@rjsf/core@4.2.3)(react-bootstrap@2.10.0)(react@18.2.0)
       '@rjsf/core':
         specifier: ~4.2.3
         version: 4.2.3(react@18.2.0)
       '@testing-library/jest-dom':
         specifier: ^6.3.0
-        version: 6.3.0(vitest@1.3.1(@types/node@20.5.1)(jsdom@24.0.0)(sass@1.71.1)(terser@5.21.0))
+        version: 6.3.0(vitest@1.3.1)
       '@testing-library/react':
         specifier: ^14.1.2
-        version: 14.1.2(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        version: 14.1.2(react-dom@18.2.0)(react@18.2.0)
       '@testing-library/user-event':
         specifier: ^14.5.2
         version: 14.5.2(@testing-library/dom@10.0.0)
@@ -88,22 +88,22 @@ importers:
         version: 8.5.6
       '@typescript-eslint/eslint-plugin':
         specifier: ~6.7.4
-        version: 6.7.4(@typescript-eslint/parser@6.7.4(eslint@8.57.0)(typescript@5.2.2))(eslint@8.57.0)(typescript@5.2.2)
+        version: 6.7.4(@typescript-eslint/parser@6.7.4)(eslint@8.57.0)(typescript@5.2.2)
       '@typescript-eslint/parser':
         specifier: ~6.7.4
         version: 6.7.4(eslint@8.57.0)(typescript@5.2.2)
       '@uiw/codemirror-theme-github':
         specifier: ^4.21.24
-        version: 4.21.24(@codemirror/language@6.10.1)(@codemirror/state@6.4.1)(@codemirror/view@6.24.1)
+        version: 4.21.24(@codemirror/language@6.10.1)(@codemirror/state@6.4.1)(@codemirror/view@6.26.3)
       '@uiw/react-codemirror':
         specifier: ^4.21.24
-        version: 4.21.24(@babel/runtime@7.24.4)(@codemirror/autocomplete@6.16.0(@codemirror/language@6.10.1)(@codemirror/state@6.4.1)(@codemirror/view@6.24.1)(@lezer/common@1.2.1))(@codemirror/language@6.10.1)(@codemirror/lint@6.5.0)(@codemirror/search@6.5.6)(@codemirror/state@6.4.1)(@codemirror/theme-one-dark@6.1.2)(@codemirror/view@6.24.1)(codemirror@6.0.1(@lezer/common@1.2.1))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        version: 4.21.24(@babel/runtime@7.24.4)(@codemirror/autocomplete@6.16.0)(@codemirror/language@6.10.1)(@codemirror/lint@6.5.0)(@codemirror/search@6.5.6)(@codemirror/state@6.4.1)(@codemirror/theme-one-dark@6.1.2)(@codemirror/view@6.26.3)(codemirror@6.0.1)(react-dom@18.2.0)(react@18.2.0)
       '@vitejs/plugin-react':
         specifier: ~4.1.0
-        version: 4.1.0(vite@4.5.2(@types/node@20.5.1)(sass@1.71.1)(terser@5.21.0))
+        version: 4.1.0(vite@4.5.2)
       '@vitest/coverage-v8':
         specifier: ^1.2.2
-        version: 1.3.1(vitest@1.3.1(@types/node@20.5.1)(jsdom@24.0.0)(sass@1.71.1)(terser@5.21.0))
+        version: 1.3.1(vitest@1.3.1)
       bootstrap:
         specifier: ~5.3.2
         version: 5.3.2(@popperjs/core@2.11.8)
@@ -145,7 +145,7 @@ importers:
         version: 1.1.7
       eslint-plugin-prettier:
         specifier: ~5.0.0
-        version: 5.0.0(eslint-config-prettier@9.0.0(eslint@8.57.0))(eslint@8.57.0)(prettier@3.0.3)
+        version: 5.0.0(eslint-config-prettier@9.0.0)(eslint@8.57.0)(prettier@3.0.3)
       eslint-plugin-react:
         specifier: ~7.33.2
         version: 7.33.2(eslint@8.57.0)
@@ -193,7 +193,7 @@ importers:
         version: 3.0.0
       react-bootstrap:
         specifier: ~2.10.0
-        version: 2.10.0(@types/react@18.2.61)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        version: 2.10.0(@types/react@18.2.61)(react-dom@18.2.0)(react@18.2.0)
       react-css-theme-switcher:
         specifier: ~0.3.0
         version: 0.3.0(react@18.2.0)
@@ -202,10 +202,10 @@ importers:
         version: 18.2.0(react@18.2.0)
       react-i18next:
         specifier: ~13.5.0
-        version: 13.5.0(i18next@23.5.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        version: 13.5.0(i18next@23.5.1)(react-dom@18.2.0)(react@18.2.0)
       react-image:
         specifier: ~4.1.0
-        version: 4.1.0(@babel/runtime@7.24.4)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        version: 4.1.0(@babel/runtime@7.24.4)(react-dom@18.2.0)(react@18.2.0)
       react-notifications-component:
         specifier: ^4.0.1
         version: 4.0.1(react@18.2.0)
@@ -217,7 +217,7 @@ importers:
         version: 7.8.0(react@18.2.0)
       react-transition-group:
         specifier: ~4.4.5
-        version: 4.4.5(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        version: 4.4.5(react-dom@18.2.0)(react@18.2.0)
       reconnecting-websocket:
         specifier: ~4.4.0
         version: 4.4.0
@@ -238,19 +238,19 @@ importers:
         version: 3.5.2(react@18.2.0)
       vite:
         specifier: ~4.5.0
-        version: 4.5.2(@types/node@20.5.1)(sass@1.71.1)(terser@5.21.0)
+        version: 4.5.2(@types/node@20.5.1)(sass@1.71.1)
       vite-plugin-compression:
         specifier: ~0.5.1
-        version: 0.5.1(vite@4.5.2(@types/node@20.5.1)(sass@1.71.1)(terser@5.21.0))
+        version: 0.5.1(vite@4.5.2)
       vite-plugin-html:
         specifier: ~3.2.0
-        version: 3.2.0(vite@4.5.2(@types/node@20.5.1)(sass@1.71.1)(terser@5.21.0))
+        version: 3.2.0(vite@4.5.2)
       vite-plugin-sass-dts:
         specifier: ~1.3.11
-        version: 1.3.11(postcss@8.4.38)(prettier@3.0.3)(sass@1.71.1)(vite@4.5.2(@types/node@20.5.1)(sass@1.71.1)(terser@5.21.0))
+        version: 1.3.11(postcss@8.4.38)(prettier@3.0.3)(sass@1.71.1)(vite@4.5.2)
       vitest:
         specifier: ^1.3.1
-        version: 1.3.1(@types/node@20.5.1)(jsdom@24.0.0)(sass@1.71.1)(terser@5.21.0)
+        version: 1.3.1(@types/node@20.5.1)(jsdom@24.0.0)(sass@1.71.1)
       ws:
         specifier: ~8.14.2
         version: 8.14.2
@@ -917,6 +917,7 @@ packages:
 
   '@rjsf/bootstrap-5@https://github.com/nurikk/fileshare/blob/main/rjsf-bootstrap-5-4.2.0.tgz?raw=true':
     resolution: {tarball: https://github.com/nurikk/fileshare/blob/main/rjsf-bootstrap-5-4.2.0.tgz?raw=true}
+    name: '@rjsf/bootstrap-5'
     version: 4.2.0
     engines: {node: '>=12'}
     peerDependencies:
@@ -4188,13 +4189,6 @@ snapshots:
       '@codemirror/view': 6.24.1
       '@lezer/common': 1.2.1
 
-  '@codemirror/autocomplete@6.16.0(@codemirror/language@6.10.1)(@codemirror/state@6.4.1)(@codemirror/view@6.24.1)(@lezer/common@1.2.1)':
-    dependencies:
-      '@codemirror/language': 6.10.1
-      '@codemirror/state': 6.4.1
-      '@codemirror/view': 6.24.1
-      '@lezer/common': 1.2.1
-
   '@codemirror/autocomplete@6.16.0(@codemirror/language@6.10.1)(@codemirror/state@6.4.1)(@codemirror/view@6.26.3)(@lezer/common@1.2.1)':
     dependencies:
       '@codemirror/language': 6.10.1
@@ -4330,7 +4324,7 @@ snapshots:
       '@types/node': 20.5.1
       chalk: 4.1.2
       cosmiconfig: 8.3.6(typescript@5.2.2)
-      cosmiconfig-typescript-loader: 4.4.0(@types/node@20.5.1)(cosmiconfig@8.3.6(typescript@5.2.2))(ts-node@10.9.1(@types/node@20.5.1)(typescript@5.2.2))(typescript@5.2.2)
+      cosmiconfig-typescript-loader: 4.4.0(@types/node@20.5.1)(cosmiconfig@8.3.6)(ts-node@10.9.1)(typescript@5.2.2)
       lodash.isplainobject: 4.0.6
       lodash.merge: 4.6.2
       lodash.uniq: 4.5.0
@@ -4388,7 +4382,7 @@ snapshots:
     dependencies:
       '@jridgewell/trace-mapping': 0.3.9
 
-  '@ebay/nice-modal-react@1.2.13(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
+  '@ebay/nice-modal-react@1.2.13(react-dom@18.2.0)(react@18.2.0)':
     dependencies:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -4649,7 +4643,7 @@ snapshots:
       dequal: 2.0.3
       react: 18.2.0
 
-  '@restart/ui@1.6.6(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
+  '@restart/ui@1.6.6(react-dom@18.2.0)(react@18.2.0)':
     dependencies:
       '@babel/runtime': 7.23.1
       '@popperjs/core': 2.11.8
@@ -4663,11 +4657,12 @@ snapshots:
       uncontrollable: 8.0.4(react@18.2.0)
       warning: 4.0.3
 
-  '@rjsf/bootstrap-5@https://github.com/nurikk/fileshare/blob/main/rjsf-bootstrap-5-4.2.0.tgz?raw=true(@rjsf/core@4.2.3(react@18.2.0))(react-bootstrap@2.10.0(@types/react@18.2.61)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)':
+  '@rjsf/bootstrap-5@https://github.com/nurikk/fileshare/blob/main/rjsf-bootstrap-5-4.2.0.tgz?raw=true(@rjsf/core@4.2.3)(react-bootstrap@2.10.0)(react@18.2.0)':
+    id: '@rjsf/bootstrap-5@https://github.com/nurikk/fileshare/blob/main/rjsf-bootstrap-5-4.2.0.tgz?raw=true'
     dependencies:
       '@rjsf/core': 4.2.3(react@18.2.0)
       react: 18.2.0
-      react-bootstrap: 2.10.0(@types/react@18.2.61)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      react-bootstrap: 2.10.0(@types/react@18.2.61)(react-dom@18.2.0)(react@18.2.0)
       react-icons: 4.11.0(react@18.2.0)
 
   '@rjsf/core@4.2.3(react@18.2.0)':
@@ -4756,7 +4751,7 @@ snapshots:
       lz-string: 1.5.0
       pretty-format: 27.5.1
 
-  '@testing-library/jest-dom@6.3.0(vitest@1.3.1(@types/node@20.5.1)(jsdom@24.0.0)(sass@1.71.1)(terser@5.21.0))':
+  '@testing-library/jest-dom@6.3.0(vitest@1.3.1)':
     dependencies:
       '@adobe/css-tools': 4.3.3
       '@babel/runtime': 7.23.1
@@ -4766,10 +4761,9 @@ snapshots:
       dom-accessibility-api: 0.6.3
       lodash: 4.17.21
       redent: 3.0.0
-    optionalDependencies:
-      vitest: 1.3.1(@types/node@20.5.1)(jsdom@24.0.0)(sass@1.71.1)(terser@5.21.0)
+      vitest: 1.3.1(@types/node@20.5.1)(jsdom@24.0.0)(sass@1.71.1)
 
-  '@testing-library/react@14.1.2(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
+  '@testing-library/react@14.1.2(react-dom@18.2.0)(react@18.2.0)':
     dependencies:
       '@babel/runtime': 7.23.1
       '@testing-library/dom': 9.3.4
@@ -4902,7 +4896,7 @@ snapshots:
     dependencies:
       '@types/node': 20.8.2
 
-  '@typescript-eslint/eslint-plugin@6.7.4(@typescript-eslint/parser@6.7.4(eslint@8.57.0)(typescript@5.2.2))(eslint@8.57.0)(typescript@5.2.2)':
+  '@typescript-eslint/eslint-plugin@6.7.4(@typescript-eslint/parser@6.7.4)(eslint@8.57.0)(typescript@5.2.2)':
     dependencies:
       '@eslint-community/regexpp': 4.9.1
       '@typescript-eslint/parser': 6.7.4(eslint@8.57.0)(typescript@5.2.2)
@@ -4917,7 +4911,6 @@ snapshots:
       natural-compare: 1.4.0
       semver: 7.5.4
       ts-api-utils: 1.0.3(typescript@5.2.2)
-    optionalDependencies:
       typescript: 5.2.2
     transitivePeerDependencies:
       - supports-color
@@ -4930,7 +4923,6 @@ snapshots:
       '@typescript-eslint/visitor-keys': 6.7.4
       debug: 4.3.4
       eslint: 8.57.0
-    optionalDependencies:
       typescript: 5.2.2
     transitivePeerDependencies:
       - supports-color
@@ -4947,7 +4939,6 @@ snapshots:
       debug: 4.3.4
       eslint: 8.57.0
       ts-api-utils: 1.0.3(typescript@5.2.2)
-    optionalDependencies:
       typescript: 5.2.2
     transitivePeerDependencies:
       - supports-color
@@ -4963,7 +4954,6 @@ snapshots:
       is-glob: 4.0.3
       semver: 7.5.4
       ts-api-utils: 1.0.3(typescript@5.2.2)
-    optionalDependencies:
       typescript: 5.2.2
     transitivePeerDependencies:
       - supports-color
@@ -4987,38 +4977,38 @@ snapshots:
       '@typescript-eslint/types': 6.7.4
       eslint-visitor-keys: 3.4.3
 
-  '@uiw/codemirror-extensions-basic-setup@4.21.24(@codemirror/autocomplete@6.16.0(@codemirror/language@6.10.1)(@codemirror/state@6.4.1)(@codemirror/view@6.24.1)(@lezer/common@1.2.1))(@codemirror/commands@6.3.3)(@codemirror/language@6.10.1)(@codemirror/lint@6.5.0)(@codemirror/search@6.5.6)(@codemirror/state@6.4.1)(@codemirror/view@6.24.1)':
+  '@uiw/codemirror-extensions-basic-setup@4.21.24(@codemirror/autocomplete@6.16.0)(@codemirror/commands@6.3.3)(@codemirror/language@6.10.1)(@codemirror/lint@6.5.0)(@codemirror/search@6.5.6)(@codemirror/state@6.4.1)(@codemirror/view@6.26.3)':
     dependencies:
-      '@codemirror/autocomplete': 6.16.0(@codemirror/language@6.10.1)(@codemirror/state@6.4.1)(@codemirror/view@6.24.1)(@lezer/common@1.2.1)
+      '@codemirror/autocomplete': 6.16.0(@codemirror/language@6.10.1)(@codemirror/state@6.4.1)(@codemirror/view@6.26.3)(@lezer/common@1.2.1)
       '@codemirror/commands': 6.3.3
       '@codemirror/language': 6.10.1
       '@codemirror/lint': 6.5.0
       '@codemirror/search': 6.5.6
       '@codemirror/state': 6.4.1
-      '@codemirror/view': 6.24.1
+      '@codemirror/view': 6.26.3
 
-  '@uiw/codemirror-theme-github@4.21.24(@codemirror/language@6.10.1)(@codemirror/state@6.4.1)(@codemirror/view@6.24.1)':
+  '@uiw/codemirror-theme-github@4.21.24(@codemirror/language@6.10.1)(@codemirror/state@6.4.1)(@codemirror/view@6.26.3)':
     dependencies:
-      '@uiw/codemirror-themes': 4.21.24(@codemirror/language@6.10.1)(@codemirror/state@6.4.1)(@codemirror/view@6.24.1)
+      '@uiw/codemirror-themes': 4.21.24(@codemirror/language@6.10.1)(@codemirror/state@6.4.1)(@codemirror/view@6.26.3)
     transitivePeerDependencies:
       - '@codemirror/language'
       - '@codemirror/state'
       - '@codemirror/view'
 
-  '@uiw/codemirror-themes@4.21.24(@codemirror/language@6.10.1)(@codemirror/state@6.4.1)(@codemirror/view@6.24.1)':
+  '@uiw/codemirror-themes@4.21.24(@codemirror/language@6.10.1)(@codemirror/state@6.4.1)(@codemirror/view@6.26.3)':
     dependencies:
       '@codemirror/language': 6.10.1
       '@codemirror/state': 6.4.1
-      '@codemirror/view': 6.24.1
+      '@codemirror/view': 6.26.3
 
-  '@uiw/react-codemirror@4.21.24(@babel/runtime@7.24.4)(@codemirror/autocomplete@6.16.0(@codemirror/language@6.10.1)(@codemirror/state@6.4.1)(@codemirror/view@6.24.1)(@lezer/common@1.2.1))(@codemirror/language@6.10.1)(@codemirror/lint@6.5.0)(@codemirror/search@6.5.6)(@codemirror/state@6.4.1)(@codemirror/theme-one-dark@6.1.2)(@codemirror/view@6.24.1)(codemirror@6.0.1(@lezer/common@1.2.1))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
+  '@uiw/react-codemirror@4.21.24(@babel/runtime@7.24.4)(@codemirror/autocomplete@6.16.0)(@codemirror/language@6.10.1)(@codemirror/lint@6.5.0)(@codemirror/search@6.5.6)(@codemirror/state@6.4.1)(@codemirror/theme-one-dark@6.1.2)(@codemirror/view@6.26.3)(codemirror@6.0.1)(react-dom@18.2.0)(react@18.2.0)':
     dependencies:
       '@babel/runtime': 7.24.4
       '@codemirror/commands': 6.3.3
       '@codemirror/state': 6.4.1
       '@codemirror/theme-one-dark': 6.1.2
-      '@codemirror/view': 6.24.1
-      '@uiw/codemirror-extensions-basic-setup': 4.21.24(@codemirror/autocomplete@6.16.0(@codemirror/language@6.10.1)(@codemirror/state@6.4.1)(@codemirror/view@6.24.1)(@lezer/common@1.2.1))(@codemirror/commands@6.3.3)(@codemirror/language@6.10.1)(@codemirror/lint@6.5.0)(@codemirror/search@6.5.6)(@codemirror/state@6.4.1)(@codemirror/view@6.24.1)
+      '@codemirror/view': 6.26.3
+      '@uiw/codemirror-extensions-basic-setup': 4.21.24(@codemirror/autocomplete@6.16.0)(@codemirror/commands@6.3.3)(@codemirror/language@6.10.1)(@codemirror/lint@6.5.0)(@codemirror/search@6.5.6)(@codemirror/state@6.4.1)(@codemirror/view@6.26.3)
       codemirror: 6.0.1(@lezer/common@1.2.1)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -5030,18 +5020,18 @@ snapshots:
 
   '@ungap/structured-clone@1.2.0': {}
 
-  '@vitejs/plugin-react@4.1.0(vite@4.5.2(@types/node@20.5.1)(sass@1.71.1)(terser@5.21.0))':
+  '@vitejs/plugin-react@4.1.0(vite@4.5.2)':
     dependencies:
       '@babel/core': 7.23.0
       '@babel/plugin-transform-react-jsx-self': 7.22.5(@babel/core@7.23.0)
       '@babel/plugin-transform-react-jsx-source': 7.22.5(@babel/core@7.23.0)
       '@types/babel__core': 7.20.2
       react-refresh: 0.14.0
-      vite: 4.5.2(@types/node@20.5.1)(sass@1.71.1)(terser@5.21.0)
+      vite: 4.5.2(@types/node@20.5.1)(sass@1.71.1)
     transitivePeerDependencies:
       - supports-color
 
-  '@vitest/coverage-v8@1.3.1(vitest@1.3.1(@types/node@20.5.1)(jsdom@24.0.0)(sass@1.71.1)(terser@5.21.0))':
+  '@vitest/coverage-v8@1.3.1(vitest@1.3.1)':
     dependencies:
       '@ampproject/remapping': 2.2.1
       '@bcoe/v8-coverage': 0.2.3
@@ -5056,7 +5046,7 @@ snapshots:
       std-env: 3.7.0
       test-exclude: 6.0.0
       v8-to-istanbul: 9.2.0
-      vitest: 1.3.1(@types/node@20.5.1)(jsdom@24.0.0)(sass@1.71.1)(terser@5.21.0)
+      vitest: 1.3.1(@types/node@20.5.1)(jsdom@24.0.0)(sass@1.71.1)
     transitivePeerDependencies:
       - supports-color
 
@@ -5507,7 +5497,7 @@ snapshots:
 
   core-util-is@1.0.3: {}
 
-  cosmiconfig-typescript-loader@4.4.0(@types/node@20.5.1)(cosmiconfig@8.3.6(typescript@5.2.2))(ts-node@10.9.1(@types/node@20.5.1)(typescript@5.2.2))(typescript@5.2.2):
+  cosmiconfig-typescript-loader@4.4.0(@types/node@20.5.1)(cosmiconfig@8.3.6)(ts-node@10.9.1)(typescript@5.2.2):
     dependencies:
       '@types/node': 20.5.1
       cosmiconfig: 8.3.6(typescript@5.2.2)
@@ -5520,7 +5510,6 @@ snapshots:
       js-yaml: 4.1.0
       parse-json: 5.2.0
       path-type: 4.0.0
-    optionalDependencies:
       typescript: 5.2.2
 
   create-require@1.1.1: {}
@@ -5910,14 +5899,13 @@ snapshots:
 
   eslint-config-react@1.1.7: {}
 
-  eslint-plugin-prettier@5.0.0(eslint-config-prettier@9.0.0(eslint@8.57.0))(eslint@8.57.0)(prettier@3.0.3):
+  eslint-plugin-prettier@5.0.0(eslint-config-prettier@9.0.0)(eslint@8.57.0)(prettier@3.0.3):
     dependencies:
       eslint: 8.57.0
+      eslint-config-prettier: 9.0.0(eslint@8.57.0)
       prettier: 3.0.3
       prettier-linter-helpers: 1.0.0
       synckit: 0.8.5
-    optionalDependencies:
-      eslint-config-prettier: 9.0.0(eslint@8.57.0)
 
   eslint-plugin-react-refresh@0.4.5(eslint@8.57.0):
     dependencies:
@@ -7143,11 +7131,12 @@ snapshots:
       regenerator-runtime: 0.13.11
       whatwg-fetch: 3.6.19
 
-  react-bootstrap@2.10.0(@types/react@18.2.61)(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
+  react-bootstrap@2.10.0(@types/react@18.2.61)(react-dom@18.2.0)(react@18.2.0):
     dependencies:
       '@babel/runtime': 7.23.1
       '@restart/hooks': 0.4.11(react@18.2.0)
-      '@restart/ui': 1.6.6(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@restart/ui': 1.6.6(react-dom@18.2.0)(react@18.2.0)
+      '@types/react': 18.2.61
       '@types/react-transition-group': 4.4.7
       classnames: 2.3.2
       dom-helpers: 5.2.1
@@ -7156,11 +7145,9 @@ snapshots:
       prop-types-extra: 1.1.1(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-      react-transition-group: 4.4.5(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      react-transition-group: 4.4.5(react-dom@18.2.0)(react@18.2.0)
       uncontrollable: 7.2.1(react@18.2.0)
       warning: 4.0.3
-    optionalDependencies:
-      '@types/react': 18.2.61
 
   react-css-theme-switcher@0.3.0(react@18.2.0):
     dependencies:
@@ -7172,20 +7159,19 @@ snapshots:
       react: 18.2.0
       scheduler: 0.23.0
 
-  react-i18next@13.5.0(i18next@23.5.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
+  react-i18next@13.5.0(i18next@23.5.1)(react-dom@18.2.0)(react@18.2.0):
     dependencies:
       '@babel/runtime': 7.23.1
       html-parse-stringify: 3.0.1
       i18next: 23.5.1
       react: 18.2.0
-    optionalDependencies:
       react-dom: 18.2.0(react@18.2.0)
 
   react-icons@4.11.0(react@18.2.0):
     dependencies:
       react: 18.2.0
 
-  react-image@4.1.0(@babel/runtime@7.24.4)(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
+  react-image@4.1.0(@babel/runtime@7.24.4)(react-dom@18.2.0)(react@18.2.0):
     dependencies:
       '@babel/runtime': 7.24.4
       react: 18.2.0
@@ -7235,7 +7221,7 @@ snapshots:
     dependencies:
       react: 18.2.0
 
-  react-transition-group@4.4.5(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
+  react-transition-group@4.4.5(react-dom@18.2.0)(react@18.2.0):
     dependencies:
       '@babel/runtime': 7.23.1
       dom-helpers: 5.2.1
@@ -7750,7 +7736,7 @@ snapshots:
       react: 18.2.0
 
   unistore@3.5.2(react@18.2.0):
-    optionalDependencies:
+    dependencies:
       react: 18.2.0
 
   universalify@0.2.0: {}
@@ -7806,13 +7792,13 @@ snapshots:
 
   value-equal@1.0.1: {}
 
-  vite-node@1.3.1(@types/node@20.5.1)(sass@1.71.1)(terser@5.21.0):
+  vite-node@1.3.1(@types/node@20.5.1)(sass@1.71.1):
     dependencies:
       cac: 6.7.14
       debug: 4.3.4
       pathe: 1.1.2
       picocolors: 1.0.0
-      vite: 5.0.12(@types/node@20.5.1)(sass@1.71.1)(terser@5.21.0)
+      vite: 5.0.12(@types/node@20.5.1)(sass@1.71.1)
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -7823,16 +7809,16 @@ snapshots:
       - supports-color
       - terser
 
-  vite-plugin-compression@0.5.1(vite@4.5.2(@types/node@20.5.1)(sass@1.71.1)(terser@5.21.0)):
+  vite-plugin-compression@0.5.1(vite@4.5.2):
     dependencies:
       chalk: 4.1.2
       debug: 4.3.4
       fs-extra: 10.1.0
-      vite: 4.5.2(@types/node@20.5.1)(sass@1.71.1)(terser@5.21.0)
+      vite: 4.5.2(@types/node@20.5.1)(sass@1.71.1)
     transitivePeerDependencies:
       - supports-color
 
-  vite-plugin-html@3.2.0(vite@4.5.2(@types/node@20.5.1)(sass@1.71.1)(terser@5.21.0)):
+  vite-plugin-html@3.2.0(vite@4.5.2):
     dependencies:
       '@rollup/pluginutils': 4.2.1
       colorette: 2.0.20
@@ -7846,40 +7832,39 @@ snapshots:
       html-minifier-terser: 6.1.0
       node-html-parser: 5.4.2
       pathe: 0.2.0
-      vite: 4.5.2(@types/node@20.5.1)(sass@1.71.1)(terser@5.21.0)
+      vite: 4.5.2(@types/node@20.5.1)(sass@1.71.1)
 
-  vite-plugin-sass-dts@1.3.11(postcss@8.4.38)(prettier@3.0.3)(sass@1.71.1)(vite@4.5.2(@types/node@20.5.1)(sass@1.71.1)(terser@5.21.0)):
+  vite-plugin-sass-dts@1.3.11(postcss@8.4.38)(prettier@3.0.3)(sass@1.71.1)(vite@4.5.2):
     dependencies:
       postcss: 8.4.38
       postcss-js: 4.0.1(postcss@8.4.38)
       prettier: 3.0.3
       sass: 1.71.1
-      vite: 4.5.2(@types/node@20.5.1)(sass@1.71.1)(terser@5.21.0)
+      vite: 4.5.2(@types/node@20.5.1)(sass@1.71.1)
 
-  vite@4.5.2(@types/node@20.5.1)(sass@1.71.1)(terser@5.21.0):
+  vite@4.5.2(@types/node@20.5.1)(sass@1.71.1):
     dependencies:
+      '@types/node': 20.5.1
       esbuild: 0.18.20
       postcss: 8.4.33
       rollup: 3.29.4
-    optionalDependencies:
-      '@types/node': 20.5.1
-      fsevents: 2.3.3
       sass: 1.71.1
-      terser: 5.21.0
+    optionalDependencies:
+      fsevents: 2.3.3
 
-  vite@5.0.12(@types/node@20.5.1)(sass@1.71.1)(terser@5.21.0):
+  vite@5.0.12(@types/node@20.5.1)(sass@1.71.1):
     dependencies:
+      '@types/node': 20.5.1
       esbuild: 0.19.12
       postcss: 8.4.33
       rollup: 4.9.6
-    optionalDependencies:
-      '@types/node': 20.5.1
-      fsevents: 2.3.3
       sass: 1.71.1
-      terser: 5.21.0
+    optionalDependencies:
+      fsevents: 2.3.3
 
-  vitest@1.3.1(@types/node@20.5.1)(jsdom@24.0.0)(sass@1.71.1)(terser@5.21.0):
+  vitest@1.3.1(@types/node@20.5.1)(jsdom@24.0.0)(sass@1.71.1):
     dependencies:
+      '@types/node': 20.5.1
       '@vitest/expect': 1.3.1
       '@vitest/runner': 1.3.1
       '@vitest/snapshot': 1.3.1
@@ -7889,6 +7874,7 @@ snapshots:
       chai: 4.4.1
       debug: 4.3.4
       execa: 8.0.1
+      jsdom: 24.0.0
       local-pkg: 0.5.0
       magic-string: 0.30.5
       pathe: 1.1.2
@@ -7897,12 +7883,9 @@ snapshots:
       strip-literal: 2.0.0
       tinybench: 2.6.0
       tinypool: 0.8.2
-      vite: 5.0.12(@types/node@20.5.1)(sass@1.71.1)(terser@5.21.0)
-      vite-node: 1.3.1(@types/node@20.5.1)(sass@1.71.1)(terser@5.21.0)
+      vite: 5.0.12(@types/node@20.5.1)(sass@1.71.1)
+      vite-node: 1.3.1(@types/node@20.5.1)(sass@1.71.1)
       why-is-node-running: 2.2.2
-    optionalDependencies:
-      '@types/node': 20.5.1
-      jsdom: 24.0.0
     transitivePeerDependencies:
       - less
       - lightningcss
