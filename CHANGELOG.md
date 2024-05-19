@@ -1,3 +1,18 @@
+## [0.6.168](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.167...0.6.168) (2024-05-19)
+
+
+### Bug Fixes
+
+* **settings:** send settings diff to Z2M instead of whole object ([#2023](https://github.com/nurikk/zigbee2mqtt-frontend/issues/2023)) ([23f61fa](https://github.com/nurikk/zigbee2mqtt-frontend/commit/23f61fadbab027f76d4da5fd404d6f2326870d6a))
+
+
+### Features
+
+* **DeviceSettings:** info alert with a link to the documentation ([#2020](https://github.com/nurikk/zigbee2mqtt-frontend/issues/2020)) ([152942d](https://github.com/nurikk/zigbee2mqtt-frontend/commit/152942dace5a1838d3b5bc196017801576fe1aa2)), closes [abc0b6e7a3e7413805d102d3ffc7768051e2a534#r1599289271](https://github.com/abc0b6e7a3e7413805d102d3ffc7768051e2a534/issues/r1599289271) [5e2778062d202eb99a16aa4c191977a151fb561a#r1604031584](https://github.com/5e2778062d202eb99a16aa4c191977a151fb561a/issues/r1604031584)
+* **logs:** user-selectable logs limit ([#1999](https://github.com/nurikk/zigbee2mqtt-frontend/issues/1999)) ([a4b6bc2](https://github.com/nurikk/zigbee2mqtt-frontend/commit/a4b6bc2c5bfc46c1507c7344a8ea62d0aa0a3032)), closes [9bca1ad6688ad003b85faf0de4acb4c9e467e075#r1574572268](https://github.com/9bca1ad6688ad003b85faf0de4acb4c9e467e075/issues/r1574572268)
+
+
+
 ## [0.6.167](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.166...0.6.167) (2024-05-03)
 
 
