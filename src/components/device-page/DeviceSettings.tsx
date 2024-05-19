@@ -5,7 +5,7 @@ import { ISubmitEvent, UiSchema } from '@rjsf/core';
 import { DescriptionField, TitleField } from '../../i18n/rjsf-translation-fields';
 import merge from 'lodash/merge';
 import { DeviceSettingsProps, DeviceSettingsState, Form, ParamValue } from './settings';
-import { diff } from 'deep-object-diff';
+import { computeSettingsDiff } from '../../utils';
 
 const genericUiSchema: UiSchema = {
     'ui:order': ['friendly_name', 'disabled', 'retain', 'retention', 'qos', 'filtered_attributes', '*'],
@@ -39,8 +39,8 @@ export class DeviceSettings extends Component<DeviceSettingsProps, DeviceSetting
         const { formData } = params;
         const { data } = this.getSchemaAndConfig();
         const { setDeviceOptions, device } = this.props;
-        const diffSettings = diff(data, formData);
-        await setDeviceOptions(device.ieee_address, diffSettings as Record<string, unknown>);
+        const diff = computeSettingsDiff(data, formData);
+        await setDeviceOptions(device.ieee_address, diff as Record<string, unknown>);
         this.setState({ updatedDeviceConfig: {} });
     };
 

@@ -6,6 +6,7 @@ import { saveAs } from 'file-saver';
 
 import local from 'store2';
 import debounce from 'lodash/debounce';
+import { diff } from 'deep-object-diff';
 
 
 export const genDeviceDetailsLink = (deviceIdentifier: string | number): string => (`/device/${deviceIdentifier}`);
@@ -131,6 +132,25 @@ export const download = async (data: Record<string, unknown>, filename: string) 
     zip.generateAsync({ type: "blob" }).then((content) => {
         saveAs(content, `${filename}.zip`);
     });
+}
+
+export const computeSettingsDiff = (before: object, after: object) => {
+    const diffObj = diff(before, after);
+
+    // diff converts arrays to objects, set original array back here
+    const setArrays = (localAfter: object, localDiff: object): void => {
+        for (const [key, value] of Object.entries(localDiff)) {
+            if (typeof value === 'object') {
+                if (Array.isArray(localAfter[key])) {
+                    localDiff[key] = localAfter[key];
+                } else {
+                    setArrays(localAfter[key], value);
+                }
+            }
+        }
+    }
+    setArrays(after, diffObj);
+    return diffObj;
 }
 
 export const sanitizeZ2MDeviceName = (deviceName?: string): string => deviceName ? deviceName.replace(/:|\s|\//g, "-") : "NA";
