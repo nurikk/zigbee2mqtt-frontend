@@ -27,7 +27,7 @@ export class DeviceSettings extends Component<DeviceSettingsProps, DeviceSetting
             bridgeInfo: { config_schema: configSchema = {} },
         } = this.props;
         return (configSchema.definitions?.device ?? { properties: {} }) as JSONSchema7;
-    };
+    }
     getDeviceConfig(): KVP | KVP[] {
         const {
             bridgeInfo: { config },
@@ -35,7 +35,7 @@ export class DeviceSettings extends Component<DeviceSettingsProps, DeviceSetting
         } = this.props;
         const { updatedDeviceConfig } = this.state;
         return merge({}, config?.device_options, config?.devices[device.ieee_address], updatedDeviceConfig);
-    };
+    }
     updateConfig = async (params: ISubmitEvent<KVP | KVP[]>): Promise<void> => {
         const { formData } = params;
         const { data } = this.getSchemaAndConfig();
