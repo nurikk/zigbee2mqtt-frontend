@@ -15,7 +15,7 @@ import { WithTranslation, withTranslation } from 'react-i18next';
 import { DescriptionField, TitleField } from '../../i18n/rjsf-translation-fields';
 import { Stats } from './stats';
 import frontendPackageJson from './../../../package.json';
-import { formatDate } from '../../utils';
+import { computeSettingsDiff, formatDate } from '../../utils';
 import { saveAs } from 'file-saver';
 import Spinner from '../spinner';
 import { TranslatedImageLocaliser } from './image-localiser';
@@ -296,10 +296,11 @@ class SettingsPage extends Component<
         const { formData } = e;
         const { updateBridgeConfig } = this.props;
         const { keyName } = this.state;
+        const diff = computeSettingsDiff(this.getSettingsInfo().currentConfig, formData);
         if (keyName === ROOT_KEY_NAME) {
-            updateBridgeConfig(formData);
+            updateBridgeConfig(diff);
         } else {
-            updateBridgeConfig({ [keyName]: formData });
+            updateBridgeConfig({ [keyName]: diff });
         }
     };
 
