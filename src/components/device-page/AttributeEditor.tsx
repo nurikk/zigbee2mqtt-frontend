@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from 'react';
-import { Attribute, Cluster, Device, Endpoint } from '../../types';
+import { Attribute, Cluster, Device, Endpoint, BridgeDefinitions } from '../../types';
 import { AttributeDefinition } from '../attribute-picker';
 import { GlobalState, LogMessage } from '../../store';
 import { WithTranslation, withTranslation } from 'react-i18next';
@@ -13,6 +13,7 @@ export interface AttributeEditorProps
         Pick<GlobalState, 'theme'> {
     device: Device;
     logs: LogMessage[];
+    clusters?: BridgeDefinitions;
 }
 export type AttributeInfo = {
     attribute: Attribute;

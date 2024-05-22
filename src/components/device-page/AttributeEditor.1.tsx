@@ -15,7 +15,7 @@ export const logStartingStrings = ['Read result of', "Publish 'set' 'read' to", 
 export class AttributeEditor extends React.Component<AttributeEditorProps, AttributeEditorState> {
     constructor(props: AttributeEditorProps) {
         super(props);
-        const { device } = props;
+        const { device, clusters } = props;
         const defaultEndpoint = Object.keys(device.endpoints)[0];
         this.state = {
             endpoint: defaultEndpoint,
@@ -110,7 +110,7 @@ export class AttributeEditor extends React.Component<AttributeEditorProps, Attri
         const { cluster, attributes, endpoint } = this.state;
         const noAttributesSelected = attributes.length === 0;
         const noSelectedCluster = cluster === '';
-        const { t, device } = this.props;
+        const { t, device, clusters } = this.props;
         const endpoints = getEndpoints(device);
         const logsFilterFn = (l: LogMessage) =>
             logStartingStrings.some((startString) => l.message.startsWith(startString));
@@ -144,6 +144,7 @@ export class AttributeEditor extends React.Component<AttributeEditorProps, Attri
                             value={''}
                             cluster={cluster}
                             device={device}
+                            clusters={clusters}
                             onChange={this.onAttributeSelect}
                         />
                     </div>

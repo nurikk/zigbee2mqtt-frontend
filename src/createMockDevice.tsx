@@ -58,7 +58,7 @@ export function createMockDevice(overries: Partial<Device> = {}): Device {
                     },
                 ],
                 clusters: {
-                    input: ['onOff', 'levelControl'],
+                    input: ['onOff', 'levelControl', 'genPowerCfg', 'hvacUserInterfaceCfg'],
                     output: ['time'],
                 },
                 scenes: [

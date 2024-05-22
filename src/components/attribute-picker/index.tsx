@@ -1,5 +1,5 @@
 import React, { ChangeEvent, InputHTMLAttributes } from 'react';
-import { Attribute, Cluster, Device } from '../../types';
+import { Attribute, Cluster, Device, BridgeDefinitions } from '../../types';
 
 import { DataType } from '../../ZCLenums';
 
@@ -16,6 +16,7 @@ interface AttributePickerProps {
     cluster: Cluster;
     device: Device;
     value: Attribute;
+    clusters?: BridgeDefinitions;
     label?: string;
     onChange: (attr: Attribute, definition: AttributeDefinition) => void;
 }
@@ -24,7 +25,7 @@ interface AttributePickerProps {
 export default function AttributePicker(
     props: AttributePickerProps & Omit<InputHTMLAttributes<HTMLSelectElement>, 'onChange'>,
 ): JSX.Element {
-    const { cluster, device, onChange, label, value, ...rest } = props;
+    const { cluster, device, onChange, label, value, clusters, ...rest } = props;
     const { bridgeDefinitions } = store.getState();
     const { t } = useTranslation('zigbee');
     const onChangeHandler = (e: ChangeEvent<HTMLSelectElement>): void => {
@@ -39,17 +40,24 @@ export default function AttributePicker(
     };
     // Retrieve Cluster attributes: from ZH first, then from device definition
     const getClusterAttributes = (cluster): string[] | Readonly<Record<string, Readonly<AttributeDefinition>>> => {
-        const _clusterDefinition = bridgeDefinitions.clusters[cluster];
+        // If the clusters definition have been passed as attribute (for example for testing), we use it
+        // Otherwise we retrieve from the store state
+        const _bridgedefinition: BridgeDefinitions = clusters ?? bridgeDefinitions;
 
-        if (_clusterDefinition) {
-            return _clusterDefinition.attributes;
-        } else {
-            const _customClusters = bridgeDefinitions.custom_clusters[device.ieee_address];
+        if (_bridgedefinition.clusters) {
+            const _clusterDefinition = _bridgedefinition.clusters[cluster];
 
-            if (_customClusters && _customClusters[cluster]) {
-                return _customClusters[cluster].attributes;
+            if (_clusterDefinition) {
+                return _clusterDefinition.attributes;
+            } else {
+                const _customClusters = _bridgedefinition.custom_clusters[device.ieee_address];
+
+                if (_customClusters && _customClusters[cluster]) {
+                    return _customClusters[cluster].attributes;
+                }
             }
         }
+
         return [];
     };
     const attrs = Object.keys(getClusterAttributes(cluster));
