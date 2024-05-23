@@ -10,14 +10,14 @@ import { BridgeDefinitions } from '../../types';
 import { expect, it, vi, beforeEach } from 'vitest';
 
 interface LocalTestContext {
-    cluster_data: BridgeDefinitions
+    cluster_data: BridgeDefinitions;
 }
 beforeEach<LocalTestContext>(async (context) => {
     // extend context
-    context.cluster_data = jsonmessage.filter(m => m.topic == "bridge/definitions")[0].payload as BridgeDefinitions
-})
+    context.cluster_data = jsonmessage.filter((m) => m.topic == 'bridge/definitions')[0].payload as BridgeDefinitions;
+});
 
-it<LocalTestContext>('display pickers', async ({cluster_data}) => {
+it<LocalTestContext>('display pickers', async ({ cluster_data }) => {
     const readDeviceAttributes = vi.fn();
     const writeDeviceAttributes = vi.fn();
     const mockDevice = createMockDevice();
@@ -42,7 +42,7 @@ it<LocalTestContext>('display pickers', async ({cluster_data}) => {
     expect(attributePicker.options).toHaveLength(2);
 });
 
-it<LocalTestContext>('attribute can be selected and removed', async ({cluster_data}) => {
+it<LocalTestContext>('attribute can be selected and removed', async ({ cluster_data }) => {
     const readDeviceAttributes = vi.fn();
     const writeDeviceAttributes = vi.fn();
     const mockDevice = createMockDevice();
@@ -78,7 +78,7 @@ it<LocalTestContext>('attribute can be selected and removed', async ({cluster_da
     expect(screen.getByTestId('selected-attribute').children).toHaveLength(0);
 });
 
-it<LocalTestContext>('attribute can be read', async ({cluster_data}) => {
+it<LocalTestContext>('attribute can be read', async ({ cluster_data }) => {
     const readDeviceAttributes = vi.fn();
     const writeDeviceAttributes = vi.fn();
     const mockDevice = createMockDevice();
@@ -112,7 +112,7 @@ it<LocalTestContext>('attribute can be read', async ({cluster_data}) => {
     ]);
 });
 
-it<LocalTestContext>('attribute can be write', async ({cluster_data}) => {
+it<LocalTestContext>('attribute can be write', async ({ cluster_data }) => {
     const readDeviceAttributes = vi.fn();
     const writeDeviceAttributes = vi.fn();
     const mockDevice = createMockDevice();

@@ -51,9 +51,11 @@ export default function AttributePicker(
                 return _cluster.attributes;
             }
         } // Or the cluster name is part the clustom cluster of the device
-        else if (_bridgedefinition.hasOwnProperty('custom_clusters') &&
-                    _bridgedefinition.custom_clusters.hasOwnProperty(device.ieee_address) &&
-                    _bridgedefinition.custom_clusters[device.ieee_address].hasOwnProperty(cluster)) {
+        else if (
+            _bridgedefinition.hasOwnProperty('custom_clusters') &&
+            _bridgedefinition.custom_clusters.hasOwnProperty(device.ieee_address) &&
+            _bridgedefinition.custom_clusters[device.ieee_address].hasOwnProperty(cluster)
+        ) {
             const _custom_clusters = _bridgedefinition.custom_clusters[device.ieee_address][cluster];
             if (_custom_clusters && Object.keys(_custom_clusters).length !== 0) {
                 return _custom_clusters.attributes;
