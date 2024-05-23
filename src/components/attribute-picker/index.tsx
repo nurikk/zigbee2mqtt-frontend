@@ -44,20 +44,23 @@ export default function AttributePicker(
         // Otherwise we retrieve from the store state
         const _bridgedefinition: BridgeDefinitions = clusters ?? bridgeDefinitions;
 
-        if (_bridgedefinition.clusters) {
-            const _clusterDefinition = _bridgedefinition.clusters[cluster];
-
-            if (_clusterDefinition) {
-                return _clusterDefinition.attributes;
-            } else {
-                const _customClusters = _bridgedefinition.custom_clusters[device.ieee_address];
-
-                if (_customClusters && _customClusters[cluster]) {
-                    return _customClusters[cluster].attributes;
-                }
+        // Cluster name is part of the default definition
+        if (_bridgedefinition.hasOwnProperty('clusters') && _bridgedefinition.clusters.hasOwnProperty(cluster)) {
+            const _cluster = _bridgedefinition.clusters[cluster];
+            if (_cluster && Object.keys(_cluster).length !== 0) {
+                return _cluster.attributes;
+            }
+        } // Or the cluster name is part the clustom cluster of the device
+        else if (_bridgedefinition.hasOwnProperty('custom_clusters') &&
+                    _bridgedefinition.custom_clusters.hasOwnProperty(device.ieee_address) &&
+                    _bridgedefinition.custom_clusters[device.ieee_address].hasOwnProperty(cluster)) {
+            const _custom_clusters = _bridgedefinition.custom_clusters[device.ieee_address][cluster];
+            if (_custom_clusters && Object.keys(_custom_clusters).length !== 0) {
+                return _custom_clusters.attributes;
             }
         }
 
+        // Return empty if no matches found
         return [];
     };
     const attrs = Object.keys(getClusterAttributes(cluster));
