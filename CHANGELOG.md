@@ -1,3 +1,12 @@
+# [0.7.0](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.168...0.7.0) (2024-05-24)
+
+
+### Features
+
+* **attributePicker:** support custom attributes (nurikk/zigbee2mqtt-frontend[#2001](https://github.com/nurikk/zigbee2mqtt-frontend/issues/2001)) ([#2019](https://github.com/nurikk/zigbee2mqtt-frontend/issues/2019)) ([324538c](https://github.com/nurikk/zigbee2mqtt-frontend/commit/324538ca6663e0f7a85e1f354201bea9a0373bd9))
+
+
+
 ## [0.6.168](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.167...0.6.168) (2024-05-19)
 
 
