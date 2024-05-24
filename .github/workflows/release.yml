@@ -16,10 +16,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v3
+      - uses: pnpm/action-setup@v4
         name: Install pnpm
-        with:
-          version: 8
 
       - name: Use Node.js
         uses: actions/setup-node@v4
@@ -29,9 +27,9 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
       - run: pnpm run test:coverage
-      - run: pnpm run i18n:download        
+      - run: pnpm run i18n:download
       - run: pnpm run i18n:trim
-      - run: pnpm build      
+      - run: pnpm build
       - run: pnpm publish --no-git-checks
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:

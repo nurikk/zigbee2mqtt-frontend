@@ -1,4 +1,5 @@
 import { JSONSchema7 } from 'json-schema';
+import {CustomClusters} from './zcl/definition/tstype'
 
 export type DeviceType = "EndDevice" | "Router" | "Coordinator";
 export type FriendlyName = string;
@@ -30,8 +31,34 @@ export type Attribute = string;
 
 export type Endpoint = string | number;
 
+export interface AttributeDefinition {
+    ID: number;
+    type: number;
+    manufacturerCode?: number;
+}
+export interface Parameter {
+    name: string;
+    type: number;
+}
+export interface CommandDefinition {
+    ID: number;
+    parameters: readonly Parameter[];
+    response?: number;
+}
 
+export interface ClusterDefinition {
+    ID: number;
+    name?: string;
+    manufacturerCode?: number;
+    attributes: Readonly<Record<string, Readonly<AttributeDefinition>>>;
+    commands: Readonly<Record<string, Readonly<CommandDefinition>>>;
+    commandsResponse: Readonly<Record<string, Readonly<CommandDefinition>>>;
+}
 
+export interface BridgeDefinitions {
+    clusters: Readonly<Record<Cluster, Readonly<ClusterDefinition>>>,
+    custom_clusters: Readonly<Record<IEEEEAddress, Readonly<CustomClusters>>>,
+}
 
 export interface Meta {
     revision: number;
@@ -210,6 +237,7 @@ export interface DeviceDefinition {
     options: GenericOrCompositeFeature[];
     supports_ota: boolean;
     icon?: string;
+    custom_clusters?: CustomClusters;
 }
 export interface ReportingConfig {
     cluster: Cluster;

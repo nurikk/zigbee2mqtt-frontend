@@ -1,6 +1,6 @@
 import ReconnectingWebSocket from 'reconnecting-websocket';
 import store, { Base64String, Extension, LogMessage, OnlineOrOffline } from './store';
-import { BridgeConfig, BridgeInfo, BridgeState, Device, DeviceState, Group, TouchLinkDevice } from './types';
+import { BridgeConfig, BridgeInfo, BridgeState, BridgeDefinitions, Device, DeviceState, Group, TouchLinkDevice } from './types';
 import {
     debounceArgs,
     isSecurePage,
@@ -176,6 +176,12 @@ class Api {
             case "bridge/devices":
                 store.setState({
                     devices: keyBy(data.payload as unknown as Device[], 'ieee_address')
+                });
+                break;
+
+            case "bridge/definitions":
+                store.setState({
+                    bridgeDefinitions: data.payload as unknown as BridgeDefinitions
                 });
                 break;
 

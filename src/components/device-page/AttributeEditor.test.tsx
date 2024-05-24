@@ -3,9 +3,21 @@ import React from 'react';
 import { TranslatedAttributeEditor } from './AttributeEditor';
 import { fireEvent, render, screen } from '../../test-utils';
 import { createMockDevice } from '../../createMockDevice';
-import { expect, it, vi } from 'vitest';
 
-it('display pickers', async () => {
+import jsonmessage from '../../../ws-messages/onConnect.json';
+import { BridgeDefinitions } from '../../types';
+
+import { expect, it, vi, beforeEach } from 'vitest';
+
+interface LocalTestContext {
+    cluster_data: BridgeDefinitions;
+}
+beforeEach<LocalTestContext>(async (context) => {
+    // extend context
+    context.cluster_data = jsonmessage.filter((m) => m.topic == 'bridge/definitions')[0].payload as BridgeDefinitions;
+});
+
+it<LocalTestContext>('display pickers', async ({ cluster_data }) => {
     const readDeviceAttributes = vi.fn();
     const writeDeviceAttributes = vi.fn();
     const mockDevice = createMockDevice();
@@ -16,6 +28,7 @@ it('display pickers', async () => {
             writeDeviceAttributes={writeDeviceAttributes}
             theme={'light'}
             device={mockDevice}
+            clusters={cluster_data}
             logs={[]}
         />,
     );
@@ -25,11 +38,11 @@ it('display pickers', async () => {
     const attributePicker = screen.getByTestId<HTMLSelectElement>('attribute-picker');
 
     expect(endpointPicker.options).toHaveLength(2);
-    expect(clusterPicker.options.length).toBeGreaterThan(10);
+    expect(clusterPicker.options.length).toBeLessThanOrEqual(5);
     expect(attributePicker.options).toHaveLength(2);
 });
 
-it('attribute can be selected and removed', async () => {
+it<LocalTestContext>('attribute can be selected and removed', async ({ cluster_data }) => {
     const readDeviceAttributes = vi.fn();
     const writeDeviceAttributes = vi.fn();
     const mockDevice = createMockDevice();
@@ -40,6 +53,7 @@ it('attribute can be selected and removed', async () => {
             writeDeviceAttributes={writeDeviceAttributes}
             theme={'light'}
             device={mockDevice}
+            clusters={cluster_data}
             logs={[]}
         />,
     );
@@ -64,7 +78,7 @@ it('attribute can be selected and removed', async () => {
     expect(screen.getByTestId('selected-attribute').children).toHaveLength(0);
 });
 
-it('attribute can be read', async () => {
+it<LocalTestContext>('attribute can be read', async ({ cluster_data }) => {
     const readDeviceAttributes = vi.fn();
     const writeDeviceAttributes = vi.fn();
     const mockDevice = createMockDevice();
@@ -75,6 +89,7 @@ it('attribute can be read', async () => {
             writeDeviceAttributes={writeDeviceAttributes}
             theme={'light'}
             device={mockDevice}
+            clusters={cluster_data}
             logs={[]}
         />,
     );
@@ -97,7 +112,7 @@ it('attribute can be read', async () => {
     ]);
 });
 
-it('attribute can be write', async () => {
+it<LocalTestContext>('attribute can be write', async ({ cluster_data }) => {
     const readDeviceAttributes = vi.fn();
     const writeDeviceAttributes = vi.fn();
     const mockDevice = createMockDevice();
@@ -108,6 +123,7 @@ it('attribute can be write', async () => {
             writeDeviceAttributes={writeDeviceAttributes}
             theme={'light'}
             device={mockDevice}
+            clusters={cluster_data}
             logs={[]}
         />,
     );

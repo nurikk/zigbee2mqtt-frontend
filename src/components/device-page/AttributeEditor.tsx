@@ -1,10 +1,10 @@
 import React, { ChangeEvent } from 'react';
-import { Attribute, Cluster, Device, Endpoint } from '../../types';
+import { Attribute, Cluster, Device, Endpoint, BridgeDefinitions } from '../../types';
 import { AttributeDefinition } from '../attribute-picker';
 import { GlobalState, LogMessage } from '../../store';
 import { WithTranslation, withTranslation } from 'react-i18next';
 import { DeviceApi } from '../../actions/DeviceApi';
-import DataType from 'zigbee-herdsman/dist/zcl/definition/dataType';
+import { DataType } from '../../ZCLenums';
 import { AttributeEditor } from './AttributeEditor.1';
 
 export interface AttributeEditorProps
@@ -13,6 +13,7 @@ export interface AttributeEditorProps
         Pick<GlobalState, 'theme'> {
     device: Device;
     logs: LogMessage[];
+    clusters?: BridgeDefinitions;
 }
 export type AttributeInfo = {
     attribute: Attribute;
@@ -36,8 +37,8 @@ export type AttributeValueInputProps = {
 export function AttributeValueInput(props: Readonly<AttributeValueInputProps>): JSX.Element {
     const { value, onChange, attribute, definition, ...rest } = props;
     const typesMap = {
-        [DataType.charStr]: 'string',
-        [DataType.longCharStr]: 'string',
+        [DataType.CHAR_STR]: 'string',
+        [DataType.LONG_CHAR_STR]: 'string',
     };
     const type = typesMap[definition.type] ?? 'number';
 
