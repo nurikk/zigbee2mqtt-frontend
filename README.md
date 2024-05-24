@@ -7,10 +7,8 @@ A frontend UI for [Zigbee2MQTT](https://github.com/Koenkk/zigbee2mqtt)
 
 # Screenshots
 
-![image](https://github.com/nurikk/zigbee2mqtt-frontend/assets/655807/85a0c03e-7583-4ce0-84be-8295534d1f02)
-
-![image](https://github.com/nurikk/zigbee2mqtt-frontend/assets/655807/c29ec9cb-6fa6-428c-b0b2-bfd932cb04f1)
-
+![Homepage Screenshot](images/screenshot_home.png)
+![Map Screenshot](images/screenshot_map.png)
 
 # Translation
 
