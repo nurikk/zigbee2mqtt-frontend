@@ -18,9 +18,9 @@ interface DeviceControlGroupProps {
 
 export function DeviceControlGroup(
     props: DeviceControlGroupProps &
-        Pick<DeviceApi, 'configureDevice' | 'renameDevice' | 'removeDevice' | 'setDeviceDescription'>,
+        Pick<DeviceApi, 'configureDevice' | 'renameDevice' | 'removeDevice' | 'setDeviceDescription' | 'interviewDevice'>,
 ): JSX.Element {
-    const { device, configureDevice, removeDevice } = props;
+    const { device, configureDevice, removeDevice, interviewDevice } = props;
     const { t } = useTranslation(['zigbee', 'common']);
 
     return (
@@ -39,6 +39,15 @@ export function DeviceControlGroup(
                 prompt
             >
                 <i className={cx('fa', 'fa-retweet')} />
+            </Button>
+            <Button<string>
+                className="btn btn-info"
+                onClick={interviewDevice}
+                item={device.friendly_name}
+                title={t('interview')}
+                prompt
+            >
+                <i className={cx('fa', 'fa-info')} />
             </Button>
             <button
                 onClick={() => NiceModal.show(RemoveDeviceModal, { device, removeDevice })}

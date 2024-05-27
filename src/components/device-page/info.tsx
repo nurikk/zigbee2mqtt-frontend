@@ -30,7 +30,7 @@ const markdownLinkRegex = /\[(.*?)]\((.*?)\)/;
 
 // eslint-disable-next-line react/prefer-stateless-function
 export class DeviceInfo extends Component<
-    Pick<DeviceApi, 'configureDevice' | 'renameDevice' | 'removeDevice' | 'setDeviceDescription'> &
+    Pick<DeviceApi, 'configureDevice' | 'renameDevice' | 'removeDevice' | 'setDeviceDescription' | 'interviewDevice'> &
         DeviceInfoProps &
         PropsFromStore &
         WithTranslation<'zigbee'>,
@@ -38,7 +38,7 @@ export class DeviceInfo extends Component<
 > {
     render(): JSX.Element {
         const { device, deviceStates, bridgeInfo, availability, t } = this.props;
-        const { configureDevice, renameDevice, removeDevice, setDeviceDescription } = this.props;
+        const { configureDevice, renameDevice, removeDevice, setDeviceDescription, interviewDevice } = this.props;
         const homeassistantEnabled = !!bridgeInfo.config?.homeassistant;
         const deviceState: DeviceState = deviceStates[device.friendly_name] ?? ({} as DeviceState);
 
@@ -255,7 +255,7 @@ export class DeviceInfo extends Component<
                     device={device}
                     state={deviceState}
                     homeassistantEnabled={homeassistantEnabled}
-                    {...{ configureDevice, renameDevice, removeDevice, setDeviceDescription }}
+                    {...{ configureDevice, renameDevice, removeDevice, setDeviceDescription, interviewDevice }}
                 />
             </Fragment>
         );

@@ -11,6 +11,7 @@ export interface DeviceApi {
     ): Promise<void>;
     removeDevice(dev: string, force: boolean, block: boolean): Promise<void>;
     configureDevice(name: string): Promise<void>;
+    interviewDevice(name: string): Promise<void>;
 
     setDeviceOptions(id: string, options: Record<string, unknown>): Promise<void>;
     setDeviceDescription(id: string, description: string): Promise<void>;
@@ -46,6 +47,10 @@ export default {
 
     configureDevice: (_state, name: string): Promise<void> => {
         return api.send("bridge/request/device/configure", { id: name });
+    },
+
+    interviewDevice: (_state, name: string): Promise<void> => {
+        return api.send("bridge/request/device/interview", { id: name });
     },
 
     setDeviceOptions: (_state, id: string, options: Record<string, unknown>): Promise<void> => {
