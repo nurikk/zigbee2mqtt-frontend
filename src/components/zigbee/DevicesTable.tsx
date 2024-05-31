@@ -28,10 +28,13 @@ export type DevicesTableProps = {
 
 export function DevicesTable(
     props: DevicesTableProps &
-        Pick<DeviceApi, 'configureDevice' | 'renameDevice' | 'removeDevice' | 'setDeviceDescription'>,
+        Pick<
+            DeviceApi,
+            'configureDevice' | 'renameDevice' | 'removeDevice' | 'setDeviceDescription' | 'interviewDevice'
+        >,
 ): JSX.Element {
     const { data, lastSeenType, availabilityFeatureEnabled, homeassistantEnabled, setDeviceDescription } = props;
-    const { renameDevice, removeDevice, configureDevice } = props;
+    const { renameDevice, removeDevice, configureDevice, interviewDevice } = props;
 
     const { t } = useTranslation(['zigbee', 'common', 'avaliability']);
     const lastSeenCol =
@@ -177,14 +180,23 @@ export function DevicesTable(
                             device={device}
                             state={state}
                             homeassistantEnabled={homeassistantEnabled}
-                            {...{ renameDevice, removeDevice, configureDevice, setDeviceDescription }}
+                            {...{ renameDevice, removeDevice, configureDevice, setDeviceDescription, interviewDevice }}
                         />
                     );
                 },
                 disableSortBy: true,
             },
         ],
-        [lastSeenCol, availabilityCol, t, homeassistantEnabled, renameDevice, removeDevice, configureDevice],
+        [
+            lastSeenCol,
+            availabilityCol,
+            t,
+            homeassistantEnabled,
+            renameDevice,
+            removeDevice,
+            configureDevice,
+            interviewDevice,
+        ],
     );
 
     return (

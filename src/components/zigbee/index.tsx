@@ -19,7 +19,10 @@ export interface DevicesPageData {
 }
 
 type PropsFromStore = Pick<GlobalState, 'devices' | 'deviceStates' | 'bridgeInfo' | 'availability'>;
-type DevicesPageProps = Pick<DeviceApi, 'configureDevice' | 'renameDevice' | 'removeDevice' | 'setDeviceDescription'> &
+type DevicesPageProps = Pick<
+    DeviceApi,
+    'configureDevice' | 'renameDevice' | 'removeDevice' | 'setDeviceDescription' | 'interviewDevice'
+> &
     PropsFromStore &
     WithTranslation<'zigbee'>;
 
@@ -30,7 +33,7 @@ function DevicesPage(props: DevicesPageProps): JSX.Element {
         bridgeInfo: { config },
         availability,
     } = props;
-    const { renameDevice, removeDevice, configureDevice, setDeviceDescription } = props;
+    const { renameDevice, removeDevice, configureDevice, setDeviceDescription, interviewDevice } = props;
     const availabilityFeatureEnabled = !!config.availability;
     const homeassistantEnabled = !!config?.homeassistant;
     const getDevicesToRender = (): DevicesPageData[] => {
@@ -56,7 +59,7 @@ function DevicesPage(props: DevicesPageProps): JSX.Element {
             lastSeenType={config.advanced.last_seen}
             availabilityFeatureEnabled={availabilityFeatureEnabled}
             homeassistantEnabled={homeassistantEnabled}
-            {...{ renameDevice, removeDevice, configureDevice, setDeviceDescription }}
+            {...{ renameDevice, removeDevice, configureDevice, setDeviceDescription, interviewDevice }}
         />
     );
 }
