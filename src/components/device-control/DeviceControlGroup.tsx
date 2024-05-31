@@ -18,7 +18,10 @@ interface DeviceControlGroupProps {
 
 export function DeviceControlGroup(
     props: DeviceControlGroupProps &
-        Pick<DeviceApi, 'configureDevice' | 'renameDevice' | 'removeDevice' | 'setDeviceDescription' | 'interviewDevice'>,
+        Pick<
+            DeviceApi,
+            'configureDevice' | 'renameDevice' | 'removeDevice' | 'setDeviceDescription' | 'interviewDevice'
+        >,
 ): JSX.Element {
     const { device, configureDevice, removeDevice, interviewDevice } = props;
     const { t } = useTranslation(['zigbee', 'common']);

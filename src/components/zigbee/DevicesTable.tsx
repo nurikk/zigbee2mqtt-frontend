@@ -28,7 +28,10 @@ export type DevicesTableProps = {
 
 export function DevicesTable(
     props: DevicesTableProps &
-        Pick<DeviceApi, 'configureDevice' | 'renameDevice' | 'removeDevice' | 'setDeviceDescription' | 'interviewDevice'>,
+        Pick<
+            DeviceApi,
+            'configureDevice' | 'renameDevice' | 'removeDevice' | 'setDeviceDescription' | 'interviewDevice'
+        >,
 ): JSX.Element {
     const { data, lastSeenType, availabilityFeatureEnabled, homeassistantEnabled, setDeviceDescription } = props;
     const { renameDevice, removeDevice, configureDevice, interviewDevice } = props;
@@ -184,7 +187,16 @@ export function DevicesTable(
                 disableSortBy: true,
             },
         ],
-        [lastSeenCol, availabilityCol, t, homeassistantEnabled, renameDevice, removeDevice, configureDevice, interviewDevice],
+        [
+            lastSeenCol,
+            availabilityCol,
+            t,
+            homeassistantEnabled,
+            renameDevice,
+            removeDevice,
+            configureDevice,
+            interviewDevice,
+        ],
     );
 
     return (

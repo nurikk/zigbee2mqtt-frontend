@@ -19,7 +19,10 @@ export interface DevicesPageData {
 }
 
 type PropsFromStore = Pick<GlobalState, 'devices' | 'deviceStates' | 'bridgeInfo' | 'availability'>;
-type DevicesPageProps = Pick<DeviceApi, 'configureDevice' | 'renameDevice' | 'removeDevice' | 'setDeviceDescription' | 'interviewDevice'> &
+type DevicesPageProps = Pick<
+    DeviceApi,
+    'configureDevice' | 'renameDevice' | 'removeDevice' | 'setDeviceDescription' | 'interviewDevice'
+> &
     PropsFromStore &
     WithTranslation<'zigbee'>;
 
