@@ -1,3 +1,12 @@
+## [0.7.1](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.7.0...0.7.1) (2024-05-31)
+
+
+### Features
+
+* **DeviceControlGroup:** add interview button ([#2027](https://github.com/nurikk/zigbee2mqtt-frontend/issues/2027)) ([452fc00](https://github.com/nurikk/zigbee2mqtt-frontend/commit/452fc008c86cfd916405588dd2f76c440ef03aa8))
+
+
+
 # [0.7.0](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.6.168...0.7.0) (2024-05-24)
 
 
