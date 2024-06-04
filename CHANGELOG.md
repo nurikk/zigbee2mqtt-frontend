@@ -1,3 +1,12 @@
+## [0.7.2](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.7.1...0.7.2) (2024-06-04)
+
+
+### Bug Fixes
+
+* **settings:** fix setting external converters and passlist not working ([cb2b887](https://github.com/nurikk/zigbee2mqtt-frontend/commit/cb2b887867bb6df716554d5bef92042c97223a24))
+
+
+
 ## [0.7.1](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.7.0...0.7.1) (2024-05-31)
 
 
