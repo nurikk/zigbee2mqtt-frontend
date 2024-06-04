@@ -135,7 +135,7 @@ export const download = async (data: Record<string, unknown>, filename: string) 
 }
 
 export const computeSettingsDiff = (before: object, after: object) => {
-    const diffObj = diff(before, after);
+    let diffObj = diff(before, after);
 
     // diff converts arrays to objects, set original array back here
     const setArrays = (localAfter: object, localDiff: object): void => {
@@ -149,7 +149,12 @@ export const computeSettingsDiff = (before: object, after: object) => {
             }
         }
     }
-    setArrays(after, diffObj);
+    if (Array.isArray(after)) {
+        diffObj = after;
+    } else {
+        setArrays(after, diffObj);
+    }
+
     return diffObj;
 }
 
