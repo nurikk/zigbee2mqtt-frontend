@@ -169,7 +169,13 @@ export class DeviceInfo extends Component<
             {
                 key: 'network_address',
                 translationKey: 'network_address',
-                render: (device: Device) => <dd className="col-12 col-md-7">{toHex(device.network_address)}</dd>,
+                render: (device: Device) => (
+                    <dd className="col-12 col-md-7">
+                        <abbr title={t('network_address_hex')}>{toHex(device.network_address)}</abbr>
+                        {' / '}
+                        <abbr title={t('network_address_dec')}>{device.network_address}</abbr>
+                    </dd>
+                ),
             },
             {
                 key: 'date_code',

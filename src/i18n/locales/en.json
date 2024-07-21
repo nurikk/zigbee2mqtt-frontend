@@ -2663,6 +2663,8 @@
     "min_rep_interval": "Min rep interval",
     "model": "Model",
     "network_address": "Network address",
+    "network_address_hex": "Network address in hexadecimal format",
+    "network_address_dec": "Network address in decimal format",
     "none": "None",
     "output_clusters": "Output clusters",
     "pic": "Pic",
