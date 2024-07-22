@@ -1,3 +1,12 @@
+## [0.7.3](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.7.2...0.7.3) (2024-07-22)
+
+
+### Features
+
+* display hexadecimal and decimal values for network addresses ([#2078](https://github.com/nurikk/zigbee2mqtt-frontend/issues/2078)) ([48568dd](https://github.com/nurikk/zigbee2mqtt-frontend/commit/48568dd005acbd72087fb92e6a8f6f01df9500dd))
+
+
+
 ## [0.7.2](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.7.1...0.7.2) (2024-06-04)
 
 
