@@ -121,7 +121,15 @@ export function DevicesTable(
                 }) => (
                     <>
                         <div>{device.ieee_address}</div>
-                        <div>({toHex(device.network_address, 4)})</div>
+                        <div>
+                            <abbr
+                                title={`${t('network_address_hex')} (${t('network_address_dec')}: ${
+                                    device.network_address
+                                })`}
+                            >
+                                ({toHex(device.network_address, 4)})
+                            </abbr>
+                        </div>
                     </>
                 ),
             },
