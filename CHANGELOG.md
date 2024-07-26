@@ -1,3 +1,12 @@
+## [0.7.4](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.7.3...0.7.4) (2024-07-26)
+
+
+### Bug Fixes
+
+* **translation:** ignore `en` translation from poeeditor ([#2085](https://github.com/nurikk/zigbee2mqtt-frontend/issues/2085)) ([ad2784f](https://github.com/nurikk/zigbee2mqtt-frontend/commit/ad2784f4e5022706813d477046548ab0ad19fbe8))
+
+
+
 ## [0.7.3](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.7.2...0.7.3) (2024-07-22)
 
 
