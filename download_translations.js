@@ -12,8 +12,12 @@ async function main(project_id, api_token) {
 
     for (const locale of locales) {
         const exported = await downloadLanguage(project_id, api_token, locale);
-        const fileName = locale2fileMap[locale.code] || locale.code;
-        await fs.writeFile(`./src/i18n/locales/${fileName}.json`, JSON.stringify(exported, null, 2));
+        const code = locale2fileMap[locale.code] || locale.code;
+        if (code === 'en') {
+            console.log('Ignoring `en` translation');
+        } else {
+            await fs.writeFile(`./src/i18n/locales/${code}.json`, JSON.stringify(exported, null, 2));
+        }
     }
 }
 
