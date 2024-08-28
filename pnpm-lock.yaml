@@ -55,7 +55,7 @@ importers:
         version: 3.0.5
       '@types/events':
         specifier: ~3.0.1
-        version: 3.0.1
+        version: 3.0.3
       '@types/file-saver':
         specifier: ~2.0.5
         version: 2.0.5
@@ -1088,8 +1088,8 @@ packages:
   '@types/estree@1.0.5':
     resolution: {integrity: sha512-/kYRxGDLWzHOB7q+wtSUQlFrtcdUccpfy+X+9iMBpHK8QLLhx2wIPYuS5DYtR9Wa/YlZAbIovy7qVdB1Aq6Lyw==}
 
-  '@types/events@3.0.1':
-    resolution: {integrity: sha512-QfUFdKjGSc+iCf8OFZhqJKfDuqB6lP57kSMkPw8ba3yNDANicUwCdaPt5ytZ4nDXXVFxQkvT8v73I4stSVrCxA==}
+  '@types/events@3.0.3':
+    resolution: {integrity: sha512-trOc4AAUThEz9hapPtSd7wf5tiQKvTtu5b371UxXdTuqzIh0ArcRspRP0i0Viu+LXstIQ1z96t1nsPxT9ol01g==}
 
   '@types/file-saver@2.0.5':
     resolution: {integrity: sha512-zv9kNf3keYegP5oThGLaPk8E081DFDuwfqjtiTzm6PoxChdJ1raSuADf2YGCVIyrSynLrgc8JWv296s7Q7pQSQ==}
@@ -2341,6 +2341,7 @@ packages:
 
   inflight@1.0.6:
     resolution: {integrity: sha512-k92I/b08q4wvFscXCLvqfsHCrjrF7yiXsQuIVvVE7N82W3+aqpzuUdBbfhWcy/FZR3/4IgflMgKLOsvPDrGCJA==}
+    deprecated: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
 
   inherits@2.0.4:
     resolution: {integrity: sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==}
@@ -4801,7 +4802,7 @@ snapshots:
 
   '@types/estree@1.0.5': {}
 
-  '@types/events@3.0.1': {}
+  '@types/events@3.0.3': {}
 
   '@types/file-saver@2.0.5': {}
 
