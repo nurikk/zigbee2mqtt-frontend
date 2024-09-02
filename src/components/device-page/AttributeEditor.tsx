@@ -39,6 +39,8 @@ export function AttributeValueInput(props: Readonly<AttributeValueInputProps>): 
     const typesMap = {
         [DataType.CHAR_STR]: 'string',
         [DataType.LONG_CHAR_STR]: 'string',
+        [DataType.OCTET_STR]: 'string',
+        [DataType.LONG_OCTET_STR]: 'string',
     };
     const type = typesMap[definition.type] ?? 'number';
 
