@@ -100,14 +100,11 @@ export interface BridgeConfig {
     coordinator: Coordinator;
     network: Network;
     log_level: string;
-    permit_join: boolean;
-
 }
 export type BridgeState = "online" | "offline";
 export interface BridgeInfo {
     config: Z2MConfig;
     config_schema: JSONSchema7;
-    permit_join: boolean;
     permit_join_timeout: number;
     commit?: string;
     version?: string;
