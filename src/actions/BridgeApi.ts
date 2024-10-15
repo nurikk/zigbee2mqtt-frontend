@@ -3,7 +3,7 @@ import { Device } from '../types';
 import store from '../store';
 
 export interface BridgeApi {
-    setPermitJoin(permit: boolean, device: Device): Promise<void>;
+    setPermitJoin(time: number, device: Device): Promise<void>;
     updateBridgeConfig(options: unknown): Promise<void>;
     restartBridge(): Promise<void>;
     requestBackup(): Promise<void>;
@@ -11,8 +11,8 @@ export interface BridgeApi {
 }
 
 
-const setPermitJoin = (_state, permit = true, device?: Device, time = 254): Promise<void> => {
-    return api.send("bridge/request/permit_join", { value: permit, time, device: device?.friendly_name });
+const setPermitJoin = (_state, time = 254, device?: Device): Promise<void> => {
+    return api.send("bridge/request/permit_join", { time, device: device?.friendly_name });
 }
 
 export default {
@@ -29,6 +29,6 @@ export default {
     },
     async addInstallCode(_state, installCode: string): Promise<void> {
         await api.send('bridge/request/install_code/add', { value: installCode });
-        return setPermitJoin(_state, true)
+        return setPermitJoin(_state, 254)
     }
 }

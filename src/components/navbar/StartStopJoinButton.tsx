@@ -14,7 +14,8 @@ export function StartStopJoinButton({ devices, setPermitJoin, bridgeInfo }: Star
     const { t } = useTranslation(['navbar']);
     const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(false);
     const [selectedRouter, setSelectedRouter] = useState<Device>({} as Device);
-    const { permit_join: permitJoin, permit_join_timeout: permitJoinTimeout } = bridgeInfo;
+    const { permit_join_timeout: permitJoinTimeout } = bridgeInfo;
+    const permitJoin = permitJoinTimeout > 0;
 
     const selectAndHide = (device: Device) => {
         setSelectedRouter(device);
@@ -36,7 +37,7 @@ export function StartStopJoinButton({ devices, setPermitJoin, bridgeInfo }: Star
         ));
 
     const onBtnClick = () => {
-        setPermitJoin(!permitJoin, selectedRouter);
+        setPermitJoin(permitJoin ? 0 : 254, selectedRouter);
     };
     const permitJoinTimer = (
         <>
