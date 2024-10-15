@@ -1,7 +1,7 @@
 import React from 'react';
 import { DeviceState, LastSeenType } from '../types';
 import { format } from 'timeago.js';
-import { lastSeen } from '../utils';
+import { lastSeen, formatDate } from '../utils';
 
 import { useTranslation } from 'react-i18next';
 
@@ -14,7 +14,7 @@ export function LastSeen(props: LastSeenProps): JSX.Element {
     const { state, lastSeenType } = props;
     const lastSeenDate = lastSeen(state, lastSeenType);
     if (lastSeenDate) {
-        return <>{format(lastSeenDate, i18n.language)}</>;
+        return <span title={formatDate(lastSeenDate)}>{format(lastSeenDate, i18n.language)}</span>;
     } else {
         return <>N/A</>;
     }
