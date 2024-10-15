@@ -1,7 +1,5 @@
-import React, { RefObject } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
-import useComponentVisible from '../hooks/useComponentVisible';
-import cx from 'classnames';
 import { Resource } from 'i18next';
 
 import ca from './flags/ca.png';
@@ -30,6 +28,11 @@ import missing from './flags/missing-locale.png';
 
 import localeNames from './locales/localeNames.json';
 
+import Dropdown from 'react-bootstrap/Dropdown';
+import Image from 'react-bootstrap/Image';
+import Button from 'react-bootstrap/Button';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+
 const localesMap = {
     ca,
     en,
@@ -57,52 +60,41 @@ const localesMap = {
 
 export default function LocalePicker(): JSX.Element {
     const { i18n } = useTranslation('localeNames');
-    const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(false);
+    const { t } = useTranslation(['navbar']);
 
-    const selectAndHide = (lang: string) => {
-        i18n.changeLanguage(lang).then();
-        setIsComponentVisible(false);
+    const select = (lang: string) => {
+        i18n.changeLanguage(lang);
     };
 
     const locales = Object.keys(i18n.options.resources as Resource).map((language) => (
-        <a
-            key={language}
-            className="dropdown-item"
-            href="#"
-            onClick={(e) => {
-                selectAndHide(language);
-                e.preventDefault();
-            }}
-        >
+        <Dropdown.Item key={language} onClick={(e) => { select(language) }}>
             <img
                 src={localesMap[language] ?? missing}
                 alt={localeNames[language]}
-                width="20"
-                className="align-middle me-1"
+                width={'20'}
+                className={'align-middle me-1 border border-secondary'}
             />
-            <span className="align-middle">{localeNames[language]}</span>
-        </a>
+            <span className={'align-middle'}>{localeNames[language]}</span>
+        </Dropdown.Item>
     ));
     const currentLanguage = localesMap[i18n.language] ? i18n.language : i18n.language.split('-')[0];
 
     return (
-        <li className="nav-item dropdown">
-            <a
-                className={cx('nav-flag dropdown-toggle my-0 py-0', { show: isComponentVisible })}
-                href="#"
-                onClick={(e) => {
-                    setIsComponentVisible(!isComponentVisible);
-                    e.preventDefault();
-                }}
-            >
-                <img src={localesMap[currentLanguage] ?? missing} alt={localeNames[currentLanguage]} />
-            </a>
-            <div
-                ref={ref as RefObject<HTMLDivElement>}
-                className={cx('dropdown-menu dropdown-menu-end', { show: isComponentVisible })}
-            >
+        <Dropdown as={ButtonGroup}>
+            <Button variant={'outline-secondary'} className={'d-flex align-items-center'}>
+                <Image
+                    roundedCircle={true} className={'border border-secondary'}
+                    src={localesMap[currentLanguage] ?? missing}
+                    alt={localeNames[currentLanguage]}
+                    height={18} width={18}
+                />
+            </Button>
+            <Dropdown.Toggle split={true} variant={'outline-secondary'} data-bs-reference={'parent'}>
+                <span className={'visually-hidden'}>{t('toggle_dropdown')}</span>
+            </Dropdown.Toggle>
+            <Dropdown.Menu className={'my-1'}>
                 {locales}
-            </div>
-        </li>
+            </Dropdown.Menu>
+        </Dropdown>
     );
 }

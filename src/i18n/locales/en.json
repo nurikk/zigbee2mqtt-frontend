@@ -2566,6 +2566,11 @@
     "toggle_dropdown": "Toggle dropdown",
     "touchlink": "Touchlink"
   },
+  "themes": {
+    "light": "Light",
+    "dark": "Dark",
+    "auto": "Auto"
+  },
   "ota": {
     "check": "Check for new updates",
     "check_all": "Check all",
@@ -2689,6 +2694,7 @@
     "command": "Command",
     "payload": "Payload",
     "save_description": "Save description",
+    "coordinator": "Coordinator"
     "update_description": "Update description"
   },
   "scene": {
