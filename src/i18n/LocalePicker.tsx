@@ -1,34 +1,37 @@
 import React, { RefObject } from 'react';
 import { useTranslation } from 'react-i18next';
-import useComponentVisible from '../hooks/useComponentVisible';
 import cx from 'classnames';
 import { Resource } from 'i18next';
+import Dropdown from 'react-bootstrap/Dropdown';
 
-import ca from './flags/ca.png';
-import en from './flags/uk.png';
-import fr from './flags/fr.png';
-import pl from './flags/pl.png';
-import de from './flags/de.png';
-import ru from './flags/ru.png';
-import ptbr from './flags/ptbr.png';
-import es from './flags/es.png';
-import ua from './flags/ua.png';
-import chs from './flags/cn.png';
-import nl from './flags/nl.png';
-import it from './flags/it.png';
-import zh from './flags/tw.png';
-import ko from './flags/kr.png';
-import cs from './flags/cz.png';
-import fi from './flags/fi.png';
-import sv from './flags/sv.png';
-import tr from './flags/tr.png';
-import no from './flags/no.png';
-import da from './flags/da.png';
-import bg from './flags/bg.png';
-import hu from './flags/hu.png';
-import missing from './flags/missing-locale.png';
+import {
+    ca,
+    en,
+    fr,
+    pl,
+    de,
+    ru,
+    ptbr,
+    es,
+    ua,
+    chs,
+    nl,
+    it,
+    zh,
+    ko,
+    cs,
+    fi,
+    sv,
+    tr,
+    no,
+    da,
+    bg,
+    hu,
+    missing,
+} from './flags/index.ts';
 
 import localeNames from './locales/localeNames.json';
+import { ToggleButtonProps } from 'react-bootstrap';
 
 const localesMap = {
     ca,
@@ -57,21 +60,17 @@ const localesMap = {
 
 export default function LocalePicker(): JSX.Element {
     const { i18n } = useTranslation('localeNames');
-    const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(false);
 
     const selectAndHide = (lang: string) => {
         i18n.changeLanguage(lang).then();
-        setIsComponentVisible(false);
     };
 
     const locales = Object.keys(i18n.options.resources as Resource).map((language) => (
-        <a
+        <Dropdown.Item
+            as="li"
             key={language}
-            className="dropdown-item"
-            href="#"
-            onClick={(e) => {
+            onClick={() => {
                 selectAndHide(language);
-                e.preventDefault();
             }}
         >
             <img
@@ -81,28 +80,30 @@ export default function LocalePicker(): JSX.Element {
                 className="align-middle me-1"
             />
             <span className="align-middle">{localeNames[language]}</span>
-        </a>
+        </Dropdown.Item>
     ));
     const currentLanguage = localesMap[i18n.language] ? i18n.language : i18n.language.split('-')[0];
 
+    const toggleButton = React.forwardRef<HTMLAnchorElement, ToggleButtonProps>(({ children, onClick }, _) => (
+        <a
+            href="#"
+            className={cx('nav-flag dropdown-toggle my-0 py-0')}
+            onClick={(e) => {
+                e.preventDefault();
+                onClick(e);
+            }}
+        >
+            {children}
+        </a>
+    ));
+    toggleButton.displayName = 'ToggleButton';
     return (
-        <li className="nav-item dropdown">
-            <a
-                className={cx('nav-flag dropdown-toggle my-0 py-0', { show: isComponentVisible })}
-                href="#"
-                onClick={(e) => {
-                    setIsComponentVisible(!isComponentVisible);
-                    e.preventDefault();
-                }}
-            >
+        <Dropdown>
+            <Dropdown.Toggle as={toggleButton} variant="success" id="dropdown-basic">
                 <img src={localesMap[currentLanguage] ?? missing} alt={localeNames[currentLanguage]} />
-            </a>
-            <div
-                ref={ref as RefObject<HTMLDivElement>}
-                className={cx('dropdown-menu dropdown-menu-end', { show: isComponentVisible })}
-            >
-                {locales}
-            </div>
-        </li>
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>{locales}</Dropdown.Menu>
+        </Dropdown>
     );
 }
