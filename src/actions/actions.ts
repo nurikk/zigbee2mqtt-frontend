@@ -26,7 +26,7 @@ export interface MapApi {
     networkMapRequest(): Promise<void>;
 }
 export interface ReportingApi {
-    configureReport(device: string, config: ReportingConfig): Promise<void>;
+    configureReport(device: string, endpoint: Endpoint, config: ReportingConfig): Promise<void>;
 }
 export interface ThemeActions {
     setTheme(theme: Theme): Promise<void>;
@@ -60,12 +60,15 @@ const actions = (store: Store<GlobalState>): Record<string, (state: GlobalState,
     exportState(state): Promise<void> {
         return download(state as unknown as Record<string, unknown>, 'state.json');
     },
-    configureReport(state, device: string, config: ReportingConfig): Promise<void> {
+
+    configureReport(state, device: string, endpoint: Endpoint, config: ReportingConfig): Promise<void> {
         return api.send('bridge/request/device/configure_reporting', {
             id: device,
+            endpoint,
             ...config
         });
     },
+
     setTheme(state, theme: Theme): Promise<void> {
         saveCurrentTheme(theme);
         store.setState({ theme });

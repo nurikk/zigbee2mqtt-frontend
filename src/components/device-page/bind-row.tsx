@@ -78,32 +78,41 @@ class BindRow extends Component<BindRowProps, BindRowState> {
         this.setState({ stateRule });
     };
 
-    getBidingParams(): { from: string; to: string; clusters: Cluster[] } {
+    getBidingParams(): BindParams {
         const { device, groups, devices } = this.props;
         const { stateRule } = this.state;
-        const from = `${device.friendly_name}/${stateRule.source.endpoint}`;
         let to = '';
+        let toEndpoint: Endpoint | undefined;
+
         if (stateRule.target.type === 'group') {
             const targetGroup = groups.find((group) => group.id === stateRule.target.id) as Group;
-            to = `${targetGroup.friendly_name}`;
+            to = targetGroup.friendly_name;
         } else if (stateRule.target.type === 'endpoint') {
             const targetDevice = devices[stateRule.target?.ieee_address as string];
-            if (targetDevice.type === 'Coordinator') {
-                to = `${targetDevice.friendly_name}`;
-            } else {
-                to = `${targetDevice.friendly_name}/${stateRule.target.endpoint}`;
+            to = targetDevice.friendly_name;
+
+            if (targetDevice.type !== 'Coordinator') {
+                toEndpoint = stateRule.target.endpoint;
             }
         }
-        return { from, to, clusters: stateRule.clusters };
+
+        return {
+            from: device.friendly_name,
+            from_endpoint: stateRule.source.endpoint,
+            to,
+            to_endpoint: toEndpoint,
+            clusters: stateRule.clusters,
+        };
     }
 
     onBindOrUnBindClick = (action: Action): void => {
         const { onUnBind, onBind } = this.props;
-        const { from, to, clusters } = this.getBidingParams();
+        const params = this.getBidingParams();
+
         if (action == 'Bind') {
-            onBind({ from, to, clusters });
+            onBind(params);
         } else {
-            onUnBind({ from, to, clusters });
+            onUnBind(params);
         }
     };
 

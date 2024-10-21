@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { AddDeviceToGroup } from './AddDeviceToGroup';
 import { DeviceGroup } from './DeviceGroup';
-import { DeviceState, Group } from '../../types';
+import { DeviceState, Endpoint, Group } from '../../types';
 
 import { connect } from 'unistore/react';
 import actions from '../../actions/actions';
@@ -100,9 +100,7 @@ function GroupPage(props: GroupPageProps) {
                 devices={devices}
                 deviceStates={deviceStates}
                 bridgeInfo={bridgeInfo}
-                removeDeviceFromGroup={(groupFriendlyName: string, deviceFriendlyName: string): void => {
-                    removeDeviceFromGroup(deviceFriendlyName, groupFriendlyName);
-                }}
+                removeDeviceFromGroup={removeDeviceFromGroup}
                 {...{ setStateValue, setDeviceState, getDeviceState }}
             />
         </div>

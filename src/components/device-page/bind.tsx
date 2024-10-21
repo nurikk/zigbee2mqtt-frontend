@@ -57,7 +57,6 @@ const convertBindingsIntoNiceStructure = (device: Device): NiceBindingRule[] => 
 };
 export function Bind(props: BindProps & PropsFromStore & BindApi): JSX.Element {
     const { device, devices, groups, removeBind, addBind } = props;
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [newBindingRule] = useState<NiceBindingRule>({
         isNew: Date.now(),
         target: {} as BindTarget,
