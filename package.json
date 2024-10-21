@@ -40,7 +40,7 @@
         "@ebay/nice-modal-react": "~1.2.13",
         "@fortawesome/fontawesome-free": "~6.4.2",
         "@rjsf/bootstrap-5": "https://github.com/nurikk/fileshare/blob/main/rjsf-bootstrap-5-4.2.0.tgz?raw=true",
-        "@rjsf/core": "~4.2.3",
+        "@rjsf/core": "~5.22.0",
         "@testing-library/jest-dom": "^6.3.0",
         "@testing-library/react": "^14.1.2",
         "@testing-library/user-event": "^14.5.2",
