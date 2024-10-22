@@ -53,7 +53,7 @@ function Reporting(props: ReportingProps & PropsFromStore & ReportingApi): JSX.E
     const onApply = (rule: NiceRepointingRule): void => {
         const { cluster, endpoint, attribute, minimum_report_interval, maximum_report_interval, reportable_change } =
             rule;
-        configureReport(`${device.friendly_name}/${endpoint}`, {
+        configureReport(device.friendly_name, endpoint, {
             cluster,
             attribute,
             minimum_report_interval,

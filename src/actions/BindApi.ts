@@ -1,9 +1,11 @@
 import api from '../ws-client';
-import { Cluster } from '../types';
+import { Cluster, Endpoint } from '../types';
 
 export type BindParams = {
     from: string;
+    from_endpoint: Endpoint;
     to: string;
+    to_endpoint?: Endpoint;
     clusters: Cluster[];
 }
 export interface BindApi {

@@ -6,11 +6,11 @@ import EndpointPicker from '../endpoint-picker';
 import DevicePicker from '../device-picker';
 import { useTranslation } from 'react-i18next';
 import { WithDevices } from '../../store';
+import { GroupsApi } from '../../actions/GroupsApi';
 
-type AddDeviceToGroupProps = {
+interface AddDeviceToGroupProps extends WithDevices, Pick<GroupsApi, 'addDeviceToGroup'> {
     group: Group;
-    addDeviceToGroup(deviceName: string, groupName: string): void;
-} & WithDevices;
+}
 
 export function AddDeviceToGroup(props: AddDeviceToGroupProps): JSX.Element {
     const [endpoint, setEndpoint] = useState<Endpoint>('');
@@ -22,7 +22,7 @@ export function AddDeviceToGroup(props: AddDeviceToGroupProps): JSX.Element {
     const { t } = useTranslation(['groups', 'zigbee']);
 
     const onSubmit = (): void => {
-        addDeviceToGroup(endpoint ? `${device}/${endpoint}` : (device as string), group.friendly_name);
+        addDeviceToGroup(device, endpoint, group.friendly_name);
     };
     const onDeviceSelect = (d: Device): void => {
         const eps = getEndpoints(d);
