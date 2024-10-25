@@ -69,7 +69,7 @@ export const OTALink: React.FunctionComponent<VendorProps> = (props: VendorProps
             break;
 
         case 'Ubisys':
-            url = `https://www.ubisys.de/en/support/firmware/changelog-${device.definition?.model
+            url = `https://www.ubisys.de/en/support/firmware/change-logs-${device.definition?.model
                 ?.replace(/[-]/g, '')
                 .toLowerCase()}/`;
             break;
