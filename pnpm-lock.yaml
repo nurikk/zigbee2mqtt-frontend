@@ -21,8 +21,8 @@ importers:
         specifier: ~1.2.13
         version: 1.2.13(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@fortawesome/fontawesome-free':
-        specifier: ~6.4.2
-        version: 6.4.2
+        specifier: ~6.6.0
+        version: 6.6.0
       '@rjsf/bootstrap-5':
         specifier: https://github.com/nurikk/fileshare/blob/main/rjsf-bootstrap-5-4.2.0.tgz?raw=true
         version: https://github.com/nurikk/fileshare/blob/main/rjsf-bootstrap-5-4.2.0.tgz?raw=true(@rjsf/core@4.2.3(react@18.2.0))(react-bootstrap@2.10.5(@types/react@18.2.61)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)
@@ -827,8 +827,8 @@ packages:
     resolution: {integrity: sha512-d9zaMRSTIKDLhctzH12MtXvJKSSUhaHcjV+2Z+GK+EEY7XKpP5yR4x+N3TAcHTcu963nIr+TMcCb4DBCYX1z6Q==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
 
-  '@fortawesome/fontawesome-free@6.4.2':
-    resolution: {integrity: sha512-m5cPn3e2+FDCOgi1mz0RexTUvvQibBebOUlUlW0+YrMjDTPkiJ6VTKukA1GRsvRw+12KyJndNjj0O4AgTxm2Pg==}
+  '@fortawesome/fontawesome-free@6.6.0':
+    resolution: {integrity: sha512-60G28ke/sXdtS9KZCpZSHHkCbdsOGEhIUGlwq6yhY74UpTiToIh8np7A8yphhM4BWsvNFtIvLpi4co+h9Mr9Ow==}
     engines: {node: '>=6'}
 
   '@humanwhocodes/config-array@0.13.0':
@@ -4608,7 +4608,7 @@ snapshots:
 
   '@eslint/js@8.57.1': {}
 
-  '@fortawesome/fontawesome-free@6.4.2': {}
+  '@fortawesome/fontawesome-free@6.6.0': {}
 
   '@humanwhocodes/config-array@0.13.0':
     dependencies:
