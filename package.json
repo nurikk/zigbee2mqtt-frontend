@@ -52,7 +52,7 @@
         "@types/events": "~3.0.1",
         "@types/file-saver": "~2.0.5",
         "@types/json-schema": "~7.0.13",
-        "@types/lodash": "~4.14.199",
+        "@types/lodash": "~4.17.0",
         "@types/react": "~18.2.24",
         "@types/react-dom": "~18.2.8",
         "@types/react-router-dom": "~5.3.3",
