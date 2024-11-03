@@ -79,7 +79,7 @@ importers:
         version: 7.7.20
       '@types/react-transition-group':
         specifier: ~4.4.7
-        version: 4.4.10
+        version: 4.4.11
       '@types/reconnectingwebsocket':
         specifier: ~1.0.8
         version: 1.0.10
@@ -1165,8 +1165,8 @@ packages:
   '@types/react-table@7.7.20':
     resolution: {integrity: sha512-ahMp4pmjVlnExxNwxyaDrFgmKxSbPwU23sGQw2gJK4EhCvnvmib2s/O/+y1dfV57dXOwpr2plfyBol+vEHbi2w==}
 
-  '@types/react-transition-group@4.4.10':
-    resolution: {integrity: sha512-hT/+s0VQs2ojCX823m60m5f0sL5idt9SO6Tj6Dg+rdphGPIeJbJ6CxvBYkgkGKrYeDjvIpKTR38UzmtHJOGW3Q==}
+  '@types/react-transition-group@4.4.11':
+    resolution: {integrity: sha512-RM05tAniPZ5DZPzzNFP+DmrcOdD0efDUxMy3145oljWSl3x9ZV5vhme98gTxFrj2lhXvmGNnUiuDyJgY9IKkNA==}
 
   '@types/react@18.2.61':
     resolution: {integrity: sha512-NURTN0qNnJa7O/k4XUkEW2yfygA+NxS0V5h1+kp9jPwhzZy95q3ADoGMP0+JypMhrZBTTgjKAUlTctde1zzeQA==}
@@ -4945,7 +4945,7 @@ snapshots:
     dependencies:
       '@types/react': 18.2.61
 
-  '@types/react-transition-group@4.4.10':
+  '@types/react-transition-group@4.4.11':
     dependencies:
       '@types/react': 18.2.61
 
@@ -7221,7 +7221,7 @@ snapshots:
       '@babel/runtime': 7.26.0
       '@restart/hooks': 0.4.16(react@18.2.0)
       '@restart/ui': 1.8.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      '@types/react-transition-group': 4.4.10
+      '@types/react-transition-group': 4.4.11
       classnames: 2.3.2
       dom-helpers: 5.2.1
       invariant: 2.2.4
