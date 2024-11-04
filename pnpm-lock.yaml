@@ -141,14 +141,14 @@ importers:
         specifier: ~8.57.0
         version: 8.57.1
       eslint-config-prettier:
-        specifier: ~9.0.0
-        version: 9.0.0(eslint@8.57.1)
+        specifier: ~9.1.0
+        version: 9.1.0(eslint@8.57.1)
       eslint-config-react:
         specifier: ~1.1.7
         version: 1.1.7
       eslint-plugin-prettier:
         specifier: ~5.0.0
-        version: 5.0.0(eslint-config-prettier@9.0.0(eslint@8.57.1))(eslint@8.57.1)(prettier@3.0.3)
+        version: 5.0.0(eslint-config-prettier@9.1.0(eslint@8.57.1))(eslint@8.57.1)(prettier@3.0.3)
       eslint-plugin-react:
         specifier: ~7.33.2
         version: 7.33.2(eslint@8.57.1)
@@ -2013,8 +2013,8 @@ packages:
     resolution: {integrity: sha512-TtpcNJ3XAzx3Gq8sWRzJaVajRs0uVxA2YAkdb1jm2YkPz4G6egUFAyA3n5vtEIZefPk5Wa4UXbKuS5fKkJWdgA==}
     engines: {node: '>=10'}
 
-  eslint-config-prettier@9.0.0:
-    resolution: {integrity: sha512-IcJsTkJae2S35pRsRAwoCE+925rJJStOdkKnLVgtE+tEpqU0EVVM7OqrwxqgptKdX29NUwC82I5pXsGFIgSevw==}
+  eslint-config-prettier@9.1.0:
+    resolution: {integrity: sha512-NSWl5BFQWEPi1j4TjVNItzYV7dZXZ+wP6I6ZhrBGpChQhZRUaElihE9uRRkcbRnNb76UMKDF3r+WTmNcGPKsqw==}
     hasBin: true
     peerDependencies:
       eslint: '>=7.0.0'
@@ -6027,20 +6027,20 @@ snapshots:
 
   escape-string-regexp@4.0.0: {}
 
-  eslint-config-prettier@9.0.0(eslint@8.57.1):
+  eslint-config-prettier@9.1.0(eslint@8.57.1):
     dependencies:
       eslint: 8.57.1
 
   eslint-config-react@1.1.7: {}
 
-  eslint-plugin-prettier@5.0.0(eslint-config-prettier@9.0.0(eslint@8.57.1))(eslint@8.57.1)(prettier@3.0.3):
+  eslint-plugin-prettier@5.0.0(eslint-config-prettier@9.1.0(eslint@8.57.1))(eslint@8.57.1)(prettier@3.0.3):
     dependencies:
       eslint: 8.57.1
       prettier: 3.0.3
       prettier-linter-helpers: 1.0.0
       synckit: 0.8.5
     optionalDependencies:
-      eslint-config-prettier: 9.0.0(eslint@8.57.1)
+      eslint-config-prettier: 9.1.0(eslint@8.57.1)
 
   eslint-plugin-react-refresh@0.4.14(eslint@8.57.1):
     dependencies:
