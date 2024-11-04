@@ -108,8 +108,8 @@ importers:
         specifier: ~5.3.2
         version: 5.3.3(@popperjs/core@2.11.8)
       classnames:
-        specifier: ~2.3.2
-        version: 2.3.2
+        specifier: ~2.5.0
+        version: 2.5.1
       color-convert:
         specifier: ~2.0.1
         version: 2.0.1
@@ -1553,8 +1553,8 @@ packages:
     resolution: {integrity: sha512-Dr3sfKRP6oTcjf2JmUmFJfeVMvXBdegxB0iVQ5eb2V10uFJUCAS8OByZdVAyVb8xXNz3GjjTgj9kLWsZTqE6kw==}
     engines: {node: '>= 8.10.0'}
 
-  classnames@2.3.2:
-    resolution: {integrity: sha512-CSbhY4cFEJRe6/GQzIk5qXZ4Jeg5pcsP7b5peFSDpffpe1cqjASH/n9UTjBwOp6XpMSTwQ8Za2K5V02ueA7Tmw==}
+  classnames@2.5.1:
+    resolution: {integrity: sha512-saHYOzhIQs6wy2sVxTM6bUDsQO4F50V9RQ22qBpEdCW+I+/Wmke2HOl6lS6dTpdxVhb88/I6+Hs+438c3lfUow==}
 
   clean-css@5.3.2:
     resolution: {integrity: sha512-JVJbM+f3d3Q704rF4bqQ5UUyTtuJ0JRKNbTKVEeujCCBoMdkEi+V+e8oktO9qGQNSvHrFTM6JZRXrUvGR1czww==}
@@ -5453,7 +5453,7 @@ snapshots:
     optionalDependencies:
       fsevents: 2.3.3
 
-  classnames@2.3.2: {}
+  classnames@2.5.1: {}
 
   clean-css@5.3.2:
     dependencies:
@@ -7274,7 +7274,7 @@ snapshots:
       '@restart/hooks': 0.4.16(react@18.2.0)
       '@restart/ui': 1.8.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@types/react-transition-group': 4.4.11
-      classnames: 2.3.2
+      classnames: 2.5.1
       dom-helpers: 5.2.1
       invariant: 2.2.4
       prop-types: 15.8.1
