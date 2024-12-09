@@ -1,34 +1,64 @@
 class MyExampleExtension_TS_ {
-    constructor(zigbee, mqtt, state, publishEntityState, eventBus, settings, logger) {
-        logger.info('Loaded  MyExampleExtension_TS_');
-        mqtt.publish('example/extension', 'hello from MyExampleExtension_TS_');
-        this.mqttBaseTopic = settings.get().mqtt.base_topic;
-        this.eventBus = eventBus;
+    constructor(
+        zigbee,
+        mqtt,
+        state,
+        publishEntityState,
+        eventBus,
+        enableDisableExtension,
+        restartCallback,
+        addExtension,
+        settings,
+        logger,
+    ) {
+        this.zigbee = zigbee;
         this.mqtt = mqtt;
-        this.eventBus.on('stateChange', this.onStateChange.bind(this), this.constructor.name);
+        this.state = state;
+        this.publishEntityState = publishEntityState;
+        this.eventBus = eventBus;
+        this.enableDisableExtension = enableDisableExtension;
+        this.restartCallback = restartCallback;
+        this.addExtension = addExtension;
+        this.settings = settings;
+        this.logger = logger;
+
+        this.logger.info('Loaded  MyExampleExtension_TS_');
+        this.mqttBaseTopic = this.settings.get().mqtt.base_topic;
+    }
+
+    /**
+     * Called when the extension starts (on Zigbee2MQTT startup, or when the extension is saved at runtime)
+     */
+    start() {
+        this.mqtt.publish('example/extension', 'hello from MyExampleExtension_TS_');
+
+        // all possible events can be seen here: https://github.com/Koenkk/zigbee2mqtt/blob/master/lib/eventBus.ts
+
+        this.eventBus.onStateChange(this, this.onStateChange.bind(this));
+    }
+
+    /**
+     * Called when the extension stops (on Zigbee2MQTT shutdown, or when the extension is saved/removed at runtime)
+     */
+    stop() {
+        this.eventBus.removeListeners(this);
     }
 
     async onStateChange(data) {
-        console.log('State changed', data); // comment this out if clutters logs
-
+        // see typing (properties) here: https://github.com/Koenkk/zigbee2mqtt/blob/master/lib/types/types.d.ts => namespace eventdata
         const { entity, update } = data;
 
-        //example how to toggle state
+        // example how to toggle state
         if (entity.ID === '0x00158d000224154d') {
-            //state changed for some device (example: clicked a button)
+            this.logger.info(`State changed for 0x00158d000224154d: ${JSON.stringify(data)}`);
+
+            // state changed for some device (example: clicked a button)
             if (update.action === 'single') {
                 const myLampIeeAddr = '0x00124b001e73227f'; // change this
+
                 this.mqtt.onMessage(`${this.mqttBaseTopic}/${myLampIeeAddr}/set`, JSON.stringify({ state: 'toggle' }));
             }
         }
-    }
-
-    async onMQTTMessage(topic, message) {
-        // console.log({topic, message});
-    }
-
-    async stop() {
-        this.eventBus.removeListeners(this.constructor.name);
     }
 }
 
