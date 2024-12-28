@@ -34,8 +34,8 @@ function DevicesPage(props: DevicesPageProps): JSX.Element {
         availability,
     } = props;
     const { renameDevice, removeDevice, configureDevice, setDeviceDescription, interviewDevice } = props;
-    const availabilityFeatureEnabled = !!config.availability;
-    const homeassistantEnabled = !!config?.homeassistant;
+    const availabilityFeatureEnabled = !!config.availability?.enabled;
+    const homeassistantEnabled = !!config?.homeassistant?.enabled;
     const getDevicesToRender = (): DevicesPageData[] => {
         return Object.values<Device>(devices)
             .filter((device) => device.type !== 'Coordinator')

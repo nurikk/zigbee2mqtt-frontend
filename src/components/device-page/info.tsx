@@ -39,7 +39,7 @@ export class DeviceInfo extends Component<
     render(): JSX.Element {
         const { device, deviceStates, bridgeInfo, availability, t } = this.props;
         const { configureDevice, renameDevice, removeDevice, setDeviceDescription, interviewDevice } = this.props;
-        const homeassistantEnabled = !!bridgeInfo.config?.homeassistant;
+        const homeassistantEnabled = !!bridgeInfo.config?.homeassistant?.enabled;
         const deviceState: DeviceState = deviceStates[device.friendly_name] ?? ({} as DeviceState);
 
         const displayProps = [
@@ -87,7 +87,7 @@ export class DeviceInfo extends Component<
                     availability: AvailabilityState,
                 ) => {
                     const { config } = bridgeInfo;
-                    const availabilityFeatureEnabled = !!config.availability;
+                    const availabilityFeatureEnabled = !!config.availability?.enabled;
                     const availabilityEnabledForDevice = config.devices[device.ieee_address]?.availability !== false;
 
                     return (

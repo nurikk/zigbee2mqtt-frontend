@@ -87,7 +87,12 @@ export interface AdvancedConfig {
     legacy_api: boolean;
 }
 export interface Z2MConfig {
-    homeassistant: boolean;
+    homeassistant?: {
+        enabled: boolean;
+    };
+    availability?: {
+        enabled: boolean;
+    };
     advanced: AdvancedConfig;
     devices: Record<string, DeviceConfig>;
     device_options: DeviceConfig;
