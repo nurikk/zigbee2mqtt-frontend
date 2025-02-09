@@ -93,7 +93,7 @@
         "lodash": "~4.17.21",
         "notyf": "~3.10.0",
         "pinst": "~3.0.0",
-        "prettier": "~3.0.3",
+        "prettier": "~3.5.0",
         "react": "~18.2.0",
         "react-app-polyfill": "~3.0.0",
         "react-bootstrap": "~2.10.0",
