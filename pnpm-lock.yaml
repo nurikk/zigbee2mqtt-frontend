@@ -25,7 +25,7 @@ importers:
         version: 6.6.0
       '@rjsf/bootstrap-5':
         specifier: https://github.com/nurikk/fileshare/blob/main/rjsf-bootstrap-5-4.2.0.tgz?raw=true
-        version: https://github.com/nurikk/fileshare/blob/main/rjsf-bootstrap-5-4.2.0.tgz?raw=true(@rjsf/core@4.2.3(react@18.2.0))(react-bootstrap@2.10.5(@types/react@18.2.61)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)
+        version: https://raw.githubusercontent.com/nurikk/fileshare/refs/heads/main/rjsf-bootstrap-5-4.2.0.tgz(@rjsf/core@4.2.3(react@18.2.0))(react-bootstrap@2.10.5(@types/react@18.2.61)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)
       '@rjsf/core':
         specifier: ~4.2.3
         version: 4.2.3(react@18.2.0)
@@ -85,7 +85,7 @@ importers:
         version: 1.0.10
       '@types/ws':
         specifier: ~8.5.6
-        version: 8.5.10
+        version: 8.5.14
       '@typescript-eslint/eslint-plugin':
         specifier: ~6.7.4
         version: 6.7.4(@typescript-eslint/parser@6.7.4(eslint@8.57.1)(typescript@5.2.2))(eslint@8.57.1)(typescript@5.2.2)
@@ -412,6 +412,9 @@ packages:
 
   '@codemirror/commands@6.7.1':
     resolution: {integrity: sha512-llTrboQYw5H4THfhN4U3qCnSZ1SOJ60ohhz+SzU0ADGtwlc533DtklQP0vSFaQuCPDn3BPpOd1GbbnUtwNjsrw==}
+
+  '@codemirror/commands@6.8.0':
+    resolution: {integrity: sha512-q8VPEFaEP4ikSlt6ZxjB3zW72+7osfAYW9i8Zu943uqbKuz6utc1+F170hyLUCUltXORjQXRyYQNfkckzA/bPQ==}
 
   '@codemirror/lang-javascript@6.2.2':
     resolution: {integrity: sha512-VGQfY+FCc285AhWuwjYxQyUQcYurWlxdKYT4bqwr3Twnd5wP5WSeu52t4tvvuWmljT4EmgEgZCqSieokhtY8hg==}
@@ -938,8 +941,8 @@ packages:
       react: '>=16.14.0'
       react-dom: '>=16.14.0'
 
-  '@rjsf/bootstrap-5@https://github.com/nurikk/fileshare/blob/main/rjsf-bootstrap-5-4.2.0.tgz?raw=true':
-    resolution: {tarball: https://github.com/nurikk/fileshare/blob/main/rjsf-bootstrap-5-4.2.0.tgz?raw=true}
+  '@rjsf/bootstrap-5@https://raw.githubusercontent.com/nurikk/fileshare/refs/heads/main/rjsf-bootstrap-5-4.2.0.tgz':
+    resolution: {tarball: https://raw.githubusercontent.com/nurikk/fileshare/refs/heads/main/rjsf-bootstrap-5-4.2.0.tgz}
     version: 4.2.0
     engines: {node: '>=12'}
     peerDependencies:
@@ -1173,11 +1176,11 @@ packages:
   '@types/minimist@1.2.3':
     resolution: {integrity: sha512-ZYFzrvyWUNhaPomn80dsMNgMeXxNWZBdkuG/hWlUvXvbdUH8ZERNBGXnU87McuGcWDsyzX2aChCv/SVN348k3A==}
 
-  '@types/node@20.12.12':
-    resolution: {integrity: sha512-eWLDGF/FOSPtAvEqeRAQ4C8LSA7M1I7i0ky1I8U7kD1J5ITyW3AsRhQrKVoWf5pFKZ2kILsEGJhsI9r93PYnOw==}
-
   '@types/node@20.5.1':
     resolution: {integrity: sha512-4tT2UrL5LBqDwoed9wZ6N3umC4Yhz3W3FloMmiiG4JwmUJWpie0c7lcnUNd4gtMKuDEO4wRVS8B6Xa0uMRsMKg==}
+
+  '@types/node@22.13.8':
+    resolution: {integrity: sha512-G3EfaZS+iOGYWLLRCEAXdWK9my08oHNZ+FHluRiggIYJPOXzhOiDgpVCUHaUvyIC5/fj7C/p637jdzC666AOKQ==}
 
   '@types/normalize-package-data@2.4.2':
     resolution: {integrity: sha512-lqa4UEhhv/2sjjIQgjX8B+RBjj47eo0mzGasklVJ78UKGQY1r0VpB9XHDaZZO9qzEFDdy4MrXLuEaSmPrPSe/A==}
@@ -1215,8 +1218,8 @@ packages:
   '@types/warning@3.0.3':
     resolution: {integrity: sha512-D1XC7WK8K+zZEveUPY+cf4+kgauk8N4eHr/XIHXGlGYkHLud6hK9lYfZk1ry1TNh798cZUCgb6MqGEG8DkJt6Q==}
 
-  '@types/ws@8.5.10':
-    resolution: {integrity: sha512-vmQSUcfalpIq0R9q7uTo2lXs6eGIpt9wtnLdMv9LVpIjCA/+ufZRozlVoVelIYixx1ugCBKDhn89vnsEGOCx9A==}
+  '@types/ws@8.5.14':
+    resolution: {integrity: sha512-bd/YFLW+URhBzMXurx7lWByOu+xzU9+kb3RboOteXYDfW+tr+JZa99OyNmPINEGB/ahzKrEuc8rcv4gnpJmxTw==}
 
   '@typescript-eslint/eslint-plugin@6.7.4':
     resolution: {integrity: sha512-DAbgDXwtX+pDkAHwiGhqP3zWUGpW49B7eqmgpPtg+BKJXwdct79ut9+ifqOFPJGClGKSHXn2PTBatCnldJRUoA==}
@@ -3779,8 +3782,8 @@ packages:
     peerDependencies:
       react: '>=16.14.0'
 
-  undici-types@5.26.5:
-    resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==}
+  undici-types@6.20.0:
+    resolution: {integrity: sha512-Ny6QZ2Nju20vw1SRHe3d9jVu6gJ+4e3+MMpqu7pqE5HT6WsTSlce++GQmK5UXS8mzV8DSYHrQH+Xrf2jVcuKNg==}
 
   unistore@3.5.2:
     resolution: {integrity: sha512-2Aa4eX0Ua1umyiI3Eai6Li+wXYOHgaDBGOPB3Hvw7PAVuD30TAyh5kS4yNKb2fLDbQgizvPhKQRcYnOdfsm4VQ==}
@@ -4286,6 +4289,13 @@ snapshots:
       '@codemirror/view': 6.34.1
       '@lezer/common': 1.2.3
 
+  '@codemirror/commands@6.8.0':
+    dependencies:
+      '@codemirror/language': 6.10.3
+      '@codemirror/state': 6.4.1
+      '@codemirror/view': 6.34.1
+      '@lezer/common': 1.2.3
+
   '@codemirror/lang-javascript@6.2.2':
     dependencies:
       '@codemirror/autocomplete': 6.13.0(@codemirror/language@6.10.1)(@codemirror/state@6.4.1)(@codemirror/view@6.24.1)(@lezer/common@1.2.1)
@@ -4772,7 +4782,7 @@ snapshots:
       uncontrollable: 8.0.4(react@18.2.0)
       warning: 4.0.3
 
-  '@rjsf/bootstrap-5@https://github.com/nurikk/fileshare/blob/main/rjsf-bootstrap-5-4.2.0.tgz?raw=true(@rjsf/core@4.2.3(react@18.2.0))(react-bootstrap@2.10.5(@types/react@18.2.61)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)':
+  '@rjsf/bootstrap-5@https://raw.githubusercontent.com/nurikk/fileshare/refs/heads/main/rjsf-bootstrap-5-4.2.0.tgz(@rjsf/core@4.2.3(react@18.2.0))(react-bootstrap@2.10.5(@types/react@18.2.61)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)':
     dependencies:
       '@rjsf/core': 4.2.3(react@18.2.0)
       react: 18.2.0
@@ -4979,11 +4989,11 @@ snapshots:
 
   '@types/minimist@1.2.3': {}
 
-  '@types/node@20.12.12':
-    dependencies:
-      undici-types: 5.26.5
-
   '@types/node@20.5.1': {}
+
+  '@types/node@22.13.8':
+    dependencies:
+      undici-types: 6.20.0
 
   '@types/normalize-package-data@2.4.2': {}
 
@@ -5026,9 +5036,9 @@ snapshots:
 
   '@types/warning@3.0.3': {}
 
-  '@types/ws@8.5.10':
+  '@types/ws@8.5.14':
     dependencies:
-      '@types/node': 20.12.12
+      '@types/node': 22.13.8
 
   '@typescript-eslint/eslint-plugin@6.7.4(@typescript-eslint/parser@6.7.4(eslint@8.57.1)(typescript@5.2.2))(eslint@8.57.1)(typescript@5.2.2)':
     dependencies:
@@ -5479,7 +5489,7 @@ snapshots:
   codemirror@6.0.1(@lezer/common@1.2.1):
     dependencies:
       '@codemirror/autocomplete': 6.16.0(@codemirror/language@6.10.3)(@codemirror/state@6.4.1)(@codemirror/view@6.34.1)(@lezer/common@1.2.1)
-      '@codemirror/commands': 6.7.1
+      '@codemirror/commands': 6.8.0
       '@codemirror/language': 6.10.3
       '@codemirror/lint': 6.5.0
       '@codemirror/search': 6.5.6
@@ -7896,7 +7906,7 @@ snapshots:
     dependencies:
       react: 18.2.0
 
-  undici-types@5.26.5: {}
+  undici-types@6.20.0: {}
 
   unistore@3.5.2(react@18.2.0):
     optionalDependencies:
