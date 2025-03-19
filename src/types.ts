@@ -86,6 +86,9 @@ export interface AdvancedConfig {
     last_seen: 'disable' | 'ISO_8601' | 'ISO_8601_local' | 'epoch';
     legacy_api: boolean;
 }
+export interface FrontendConfig {
+    notification_filter?: string[];
+}
 export interface Z2MConfig {
     homeassistant?: {
         enabled: boolean;
@@ -96,6 +99,7 @@ export interface Z2MConfig {
     advanced: AdvancedConfig;
     devices: Record<string, DeviceConfig>;
     device_options: DeviceConfig;
+    frontend: FrontendConfig;
     [k: string]: unknown;
 }
 export type BridgeState = 'online' | 'offline';
