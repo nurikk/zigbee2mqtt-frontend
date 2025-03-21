@@ -17,7 +17,7 @@ import { Theme } from './components/theme-switcher';
 import initialState from './initialState.json';
 
 export interface LogMessage {
-    level: "error" | "info" | "warning";
+    level: "error" | "info" | "warning" | "debug";
     message: string;
     timestamp: Date;
 }

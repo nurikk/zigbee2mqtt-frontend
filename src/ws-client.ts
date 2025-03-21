@@ -27,27 +27,17 @@ interface Message {
     payload: string | Record<string, unknown> | Record<string, unknown>[] | string[];
 }
 
-const blacklistedMessages: RegExp[] = [
-    /MQTT publish/
+const blacklistedMessages: string[] = [
+    'MQTT publish'
 ];
 
-const isLogMessage = (msg: LogMessage | ResponseWithStatus): msg is LogMessage => {
-    return (msg as LogMessage).level !== undefined && (msg as LogMessage).message !== undefined;
-}
+const showNotify = (level: string, message: string, filter: boolean): void => {
+    if (filter) {
+        const { bridgeInfo } = store.getState();
+        const notificationFilter = blacklistedMessages.concat(bridgeInfo?.config?.frontend?.notification_filter ?? []);
 
-const isResponseWithStatus = (msg: LogMessage | ResponseWithStatus): msg is ResponseWithStatus => {
-    return (msg as ResponseWithStatus).status !== undefined;
-}
-
-const showNotify = (data: LogMessage | ResponseWithStatus): void => {
-    let message = "", level = "";
-    if (isLogMessage(data)) {
-        message = data.message;
-        level = data.level;
-    } else if (isResponseWithStatus(data)) {
-        if (data.status === "error") {
-            level = "error";
-            message = data.error as string;
+        if (notificationFilter.some((val) => (new RegExp(val)).test(message))) {
+            return;
         }
     }
 
@@ -197,8 +187,8 @@ class Api {
                     newLogs.push({ ...(data.payload as unknown as LogMessage), timestamp: new Date() } as LogMessage);
                     store.setState({ logs: newLogs });
                     const log = data.payload as unknown as LogMessage;
-                    if (blacklistedMessages.every(val => !val.test(log.message))) {
-                        showNotify(log);
+                    if (log.level !== 'debug') {
+                        showNotify(log.level, log.message, true);
                     }
                 }
                 break;
@@ -253,8 +243,11 @@ class Api {
                 break;
         }
         if (data.topic.startsWith("bridge/response/")) {
-            showNotify(data.payload as unknown as ResponseWithStatus);
-            this.resolvePromises(data.payload as unknown as ResponseWithStatus);
+            const log = data.payload as unknown as ResponseWithStatus;
+            if (log.status === "error") {
+                showNotify(log.status, log.error ?? "Unknown error", false);
+            }
+            this.resolvePromises(log);
         }
     }
 
