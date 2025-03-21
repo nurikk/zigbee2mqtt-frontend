@@ -69,7 +69,6 @@ class Composite extends Component<CompositeProps & WithTranslation<'composite'>,
     };
     render(): JSX.Element[] {
         const MAGIC_NO_ENDPOINT = 'MAGIC_NO_ENDPOINT';
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const {
             t,
             showEndpointLabels = false,

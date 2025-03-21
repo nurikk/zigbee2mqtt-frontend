@@ -38,7 +38,9 @@ async function asyncSome<X>(arr: Iterable<X>, predicate: (x: X) => Promise<boole
             if (await predicate(e)) {
                 return true;
             }
-        } catch (err) {}
+        } catch (err) {
+            /* empty */
+        }
     }
     return false;
 }

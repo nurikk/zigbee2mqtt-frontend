@@ -4,7 +4,6 @@ import { clusterDescriptions, isClusterGroup, MultiPickerProps } from './index';
 
 export function MultiPicker(props: MultiPickerProps): JSX.Element {
     const [pickerId] = useState(randomString(5));
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { clusters = [], onChange, label, value, disabled } = props;
 
     let options = [] as JSX.Element[];

@@ -1,4 +1,3 @@
-/* eslint-disable react/display-name */
 import React, { Component, Fragment } from 'react';
 import { BridgeInfo, Device, DeviceState } from '../../types';
 import { isDeviceDisabled, supportNewDevicesUrl, toHex } from '../../utils';
@@ -28,7 +27,6 @@ type PropsFromStore = Pick<GlobalState, 'deviceStates' | 'bridgeInfo' | 'availab
 // [Flower sensor](https://modkam.ru/?p=1700)
 const markdownLinkRegex = /\[(.*?)]\((.*?)\)/;
 
-// eslint-disable-next-line react/prefer-stateless-function
 export class DeviceInfo extends Component<
     Pick<DeviceApi, 'configureDevice' | 'renameDevice' | 'removeDevice' | 'setDeviceDescription' | 'interviewDevice'> &
         DeviceInfoProps &
@@ -122,7 +120,6 @@ export class DeviceInfo extends Component<
                     const result = markdownLinkRegex.exec(device.definition?.description as string);
                     let content = <span>{device.definition?.description}</span>;
                     if (result) {
-                        // eslint-disable-next-line @typescript-eslint/no-unused-vars
                         const [all, title, link] = result;
                         content = (
                             <a target="_blank" rel="noopener noreferrer" href={link}>

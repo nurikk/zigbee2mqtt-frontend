@@ -13,7 +13,6 @@ import { WithTranslation, withTranslation } from 'react-i18next';
 import { Column } from 'react-table';
 import { Table } from '../grid/ReactTableCom';
 
-// eslint-disable-next-line react/prefer-stateless-function
 class TouchlinkPage extends Component<TouchlinkApi & GlobalState & WithTranslation<'touchlink'>, unknown> {
     onIdentifyClick = (device: TouchLinkDevice): void => {
         const { touchlinkIdentify } = this.props;

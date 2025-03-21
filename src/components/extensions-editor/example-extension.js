@@ -62,4 +62,5 @@ class MyExampleExtension_TS_ {
     }
 }
 
+// eslint-disable-next-line no-undef
 module.exports = MyExampleExtension_TS_;

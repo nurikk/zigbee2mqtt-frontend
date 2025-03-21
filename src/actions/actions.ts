@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
 import { GlobalState } from '../store';
 import { Store } from 'unistore';
 

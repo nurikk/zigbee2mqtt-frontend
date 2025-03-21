@@ -39,7 +39,6 @@ const rule2key = (rule: NiceRepointingRule): string => `${rule.isNew}${rule.endp
 
 function Reporting(props: ReportingProps & PropsFromStore & ReportingApi): JSX.Element {
     const { configureReport, device } = props;
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [newReportingRule] = useState<NiceRepointingRule>({
         isNew: Date.now(),
         reportable_change: 0,

@@ -79,7 +79,6 @@ class ReportingRow extends Component<ReportingRowProps & WithTranslation, Report
         stateRule: {} as NiceRepointingRule,
     };
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     static getDerivedStateFromProps(
         props: Readonly<ReportingRowProps>,
         state: ReportingRowState,

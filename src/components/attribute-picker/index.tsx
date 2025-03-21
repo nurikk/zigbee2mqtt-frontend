@@ -21,7 +21,6 @@ interface AttributePickerProps {
     onChange: (attr: Attribute, definition: AttributeDefinition) => void;
 }
 
-// eslint-disable-next-line react/prefer-stateless-function
 export default function AttributePicker(
     props: AttributePickerProps & Omit<InputHTMLAttributes<HTMLSelectElement>, 'onChange'>,
 ): JSX.Element {

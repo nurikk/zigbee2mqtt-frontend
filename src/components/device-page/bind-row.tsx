@@ -20,7 +20,6 @@ interface BindRowProps extends WithTranslation, WithDevices {
     onUnBind(params: BindParams): void;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface BindRowState {
     stateRule: NiceBindingRule;
 }
@@ -35,7 +34,6 @@ class BindRow extends Component<BindRowProps, BindRowState> {
     state: Readonly<BindRowState> = {
         stateRule: {} as NiceBindingRule,
     };
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     static getDerivedStateFromProps(props: Readonly<BindRowProps>, state: BindRowState): Partial<BindRowState> {
         const { rule } = props;
         return {
