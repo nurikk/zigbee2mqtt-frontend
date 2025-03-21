@@ -61,6 +61,12 @@ const typeToClassMap = {
     side: ['fa-cube'],
     humidity_alarm: ['fa-triangle-exclamation'],
     temperature_alarm: ['fa-triangle-exclamation'],
+    approach_distance: ['fa-arrows-left-right-to-line', 'text-warning'],
+    distance: ['fa-arrows-left-right-to-line', 'text-warning'],
+    trigger_count: ['fa-turn-up fa-flip-horizontal', 'text-info'],
+    level_config: ['fa-gear'],
+    station: ['fa-warehouse'],
+    test: ['fa-check', 'text-success'],
 };
 
 const getGenericFeatureIcon = (name: string, value: unknown): string => {
