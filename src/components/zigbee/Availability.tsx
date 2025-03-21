@@ -13,7 +13,7 @@ export type AvailabilityStateProps = {
 
 export function Availability(props: AvailabilityStateProps): JSX.Element {
     const { t } = useTranslation(['avaliability']);
-    const { availability, availabilityFeatureEnabled = true, availabilityEnabledForDevice = true, disabled } = props;
+    const { availability, availabilityFeatureEnabled, availabilityEnabledForDevice, disabled } = props;
 
     let availabilityState: OnlineOrOffline;
 
@@ -25,7 +25,7 @@ export function Availability(props: AvailabilityStateProps): JSX.Element {
     availabilityState = availabilityState.toLowerCase() as OnlineOrOffline;
     if (disabled) {
         return <span>{t('disabled')}</span>;
-    } else if (availabilityFeatureEnabled && availabilityEnabledForDevice) {
+    } else if (availabilityEnabledForDevice || (availabilityFeatureEnabled && availabilityEnabledForDevice !== false)) {
         return (
             <span
                 className={cx({

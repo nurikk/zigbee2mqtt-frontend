@@ -52,7 +52,12 @@ export function DevicesTable(
                   },
               ]
             : [];
-    const availabilityCol = availabilityFeatureEnabled
+    const showAvailabilityColumn = data.some(
+        (device) =>
+            device.availabilityEnabledForDevice ||
+            (availabilityFeatureEnabled && device.availabilityEnabledForDevice !== false),
+    );
+    const availabilityCol = showAvailabilityColumn
         ? [
               {
                   id: 'availability',
@@ -69,6 +74,7 @@ export function DevicesTable(
                               disabled={disabled}
                               availability={availabilityState}
                               availabilityEnabledForDevice={availabilityEnabledForDevice}
+                              availabilityFeatureEnabled={availabilityFeatureEnabled}
                           />
                       );
                   },
