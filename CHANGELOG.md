@@ -1,3 +1,17 @@
+## [0.9.5](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.9.4...0.9.5) (2025-03-21)
+
+
+### Bug Fixes
+
+* **availability:** device check condition ([#2427](https://github.com/nurikk/zigbee2mqtt-frontend/issues/2427)) ([#2428](https://github.com/nurikk/zigbee2mqtt-frontend/issues/2428)) ([f3aa380](https://github.com/nurikk/zigbee2mqtt-frontend/commit/f3aa380f060a1dfc2c7b5df7a9bef61852601b72))
+
+
+### Features
+
+* Frontend notification filter ([#2439](https://github.com/nurikk/zigbee2mqtt-frontend/issues/2439)) ([aed2cbd](https://github.com/nurikk/zigbee2mqtt-frontend/commit/aed2cbd9d10e211fe34d3f137ad7ce4c9eeda668))
+
+
+
 ## [0.9.4](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.9.3...0.9.4) (2024-12-30)
 
 
