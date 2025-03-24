@@ -1,7 +1,7 @@
 import { JSONSchema7 } from 'json-schema';
 import { CustomClusters } from './zcl/definition/tstype';
 
-export type DeviceType = 'EndDevice' | 'Router' | 'Coordinator';
+export type DeviceType = 'Coordinator' | 'Router' | 'EndDevice' | 'Unknown' | 'GreenPower';
 export type FriendlyName = string;
 export type IEEEEAddress = string;
 
@@ -123,7 +123,14 @@ export interface BridgeInfo {
     restart_required: boolean;
 }
 
-export type PowerSource = 'Battery' | 'Mains (single phase)' | 'DC Source';
+export type PowerSource =
+    | 'Unknown'
+    | 'Mains (single phase)'
+    | 'Mains (3 phase)'
+    | 'Battery'
+    | 'DC Source'
+    | 'Emergency mains constantly powered'
+    | 'Emergency mains and transfer switch';
 
 export type GenericFeatureType = 'numeric' | 'binary' | 'enum' | 'text' | 'list';
 export type CompositeFeatureType = 'fan' | 'light' | 'switch' | 'cover' | 'lock' | 'composite' | 'climate';
