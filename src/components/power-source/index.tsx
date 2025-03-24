@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Device, DeviceState } from '../../types';
 import style from './style.module.css';
 import { powerSourceTypeToTranslationKey } from './powerSourceTypeToTranslationKey';
+import type { PowerSource } from '../../types';
 
 interface PowerSourceProps {
     device?: Device;
@@ -12,7 +13,7 @@ interface PowerSourceProps {
 
 const PowerSource: FunctionComponent<PowerSourceProps> = ({ device, deviceState, showLevel, ...rest }) => {
     const { t } = useTranslation('zigbee');
-    let source: string | undefined = undefined;
+    let source: PowerSource | undefined = undefined;
 
     if (device !== undefined) {
         source = device.power_source;
@@ -94,8 +95,8 @@ const PowerSource: FunctionComponent<PowerSourceProps> = ({ device, deviceState,
                     <i className={`fa ${batteryClass}`} title={title} {...rest} />
                 </Fragment>
             );
-
         case 'Mains (single phase)':
+        case 'Mains (3 phase)':
         case 'DC Source':
             return (
                 <i
@@ -104,7 +105,20 @@ const PowerSource: FunctionComponent<PowerSourceProps> = ({ device, deviceState,
                     {...rest}
                 />
             );
+        case 'Emergency mains and transfer switch':
+        case 'Emergency mains constantly powered':
+            return (
+                <i
+                    className={`fa fa-plug-circle-exclamation ${style.plug}`}
+                    title={t(powerSourceTypeToTranslationKey(source))}
+                    {...rest}
+                />
+            );
         default:
+            if (device?.type === 'GreenPower') {
+                return <i className={`fa fa-leaf`} title={`Green`} {...rest} />;
+            }
+
             return <i className={`fa fa-question`} title={source} {...rest} />;
     }
 };
