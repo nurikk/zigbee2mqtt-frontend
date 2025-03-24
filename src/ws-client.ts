@@ -9,6 +9,7 @@ import {
     stringifyWithPreservingUndefinedAsNull,
 } from './utils';
 
+import NiceModal from '@ebay/nice-modal-react';
 import { Store } from 'react-notifications-component';
 import keyBy from 'lodash/keyBy';
 
@@ -113,21 +114,27 @@ class Api {
         }
     }
 
-    urlProvider = async () => {
-        const url = new URL(this.url)
-        let token = new URLSearchParams(window.location.search).get("token")
-            ?? local.get<string>(TOKEN_LOCAL_STORAGE_ITEM_NAME);
-        const authRequired = !!local.get(AUTH_FLAG_LOCAL_STORAGE_ITEM_NAME);
-        if (authRequired) {
-            if (!token) {
-                token = prompt("Enter your z2m admin token") as string;
-                if (token) {
-                    local.set(TOKEN_LOCAL_STORAGE_ITEM_NAME, token);
+    urlProvider = async (): Promise<string> => {
+        const promise = new Promise<string>((resolve) => {
+            const url = new URL(this.url)
+            let token = new URLSearchParams(window.location.search).get("token")
+                ?? local.get<string>(TOKEN_LOCAL_STORAGE_ITEM_NAME);
+            const authRequired = !!local.get(AUTH_FLAG_LOCAL_STORAGE_ITEM_NAME);
+            if (authRequired) {
+                if (!token) {
+                    NiceModal.show('auth-form', { onAuth: (token: string) => {
+                        local.set(TOKEN_LOCAL_STORAGE_ITEM_NAME, token);
+                        url.searchParams.append("token", token);
+                        resolve(url.toString());
+                    }});
+                    return;
                 }
+                url.searchParams.append("token", token);
             }
-            url.searchParams.append("token", token);
-        }
-        return url.toString();
+            resolve(url.toString());
+        });
+
+        return promise;
     }
 
     connect(): void {
@@ -277,7 +284,7 @@ class Api {
         if (e.code === UNAUTHORIZED_ERROR_CODE) {
             local.set(AUTH_FLAG_LOCAL_STORAGE_ITEM_NAME, true);
             local.remove(TOKEN_LOCAL_STORAGE_ITEM_NAME);
-            NotificationManager.error("Unauthorized");
+            showNotify('error', "Unauthorized", false);
             setTimeout(() => {
                 window.location.reload();
             }, 1000);
@@ -296,7 +303,7 @@ class Api {
                 this.processDeviceStateMessage(data);
             }
         } catch (e) {
-            NotificationManager.error(e.message);
+            showNotify('error', e.message, false);
             console.error(event.data);
         }
 
