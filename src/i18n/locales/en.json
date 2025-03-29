@@ -2581,8 +2581,8 @@
     "check_all": "Check all",
     "empty_ota_message": "You don't have any devices that support OTA",
     "remaining_time": "Remaining time {{- remaining}}",
-    "schedule": "Schedule on next device OTA request",
-    "scheduled": "Device scheduled on next OTA request",
+    "schedule": "Schedule update on next device OTA request",
+    "scheduled": "Remove scheduled update on next OTA request",
     "update": "Update device firmware"
   },
   "settings": {
