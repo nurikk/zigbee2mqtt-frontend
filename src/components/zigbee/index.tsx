@@ -47,7 +47,7 @@ function DevicesPage(props: DevicesPageProps): JSX.Element {
                     device,
                     state,
                     availabilityState: availability[device.friendly_name] ?? 'offline',
-                    availabilityEnabledForDevice: config.devices[device.ieee_address]?.availability !== false,
+                    availabilityEnabledForDevice: config.devices[device.ieee_address]?.availability,
                 } as DevicesPageData;
             });
     };

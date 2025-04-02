@@ -53,9 +53,7 @@ export function DevicesTable(
               ]
             : [];
     const showAvailabilityColumn = data.some(
-        (device) =>
-            device.availabilityEnabledForDevice ||
-            (availabilityFeatureEnabled && device.availabilityEnabledForDevice !== false),
+        (device) => device.availabilityEnabledForDevice ?? availabilityFeatureEnabled,
     );
     const availabilityCol = showAvailabilityColumn
         ? [

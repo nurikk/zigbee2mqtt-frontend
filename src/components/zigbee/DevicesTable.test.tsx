@@ -110,6 +110,14 @@ describe('Availability column visibility', () => {
         expect(screen.queryByRole('columnheader', { name: /avaliability:avaliability/i })).not.toBeInTheDocument();
     });
 
+    it('should show availability column when device has no config, and global availabilty is enabled', () => {
+        const deviceWithoutAvailability = createMockDeviceData({
+            availabilityEnabledForDevice: undefined,
+        });
+        render(<DevicesTable {...defaultProps} data={[deviceWithoutAvailability]} availabilityFeatureEnabled={true} />);
+        expect(screen.queryByRole('columnheader', { name: /avaliability:avaliability/i })).toBeInTheDocument();
+    });
+
     it('should show availability column when some devices have it enabled and others disabled', () => {
         const deviceWithAvailability = createMockDeviceData({
             availabilityEnabledForDevice: true,

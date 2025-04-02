@@ -85,8 +85,10 @@ export class DeviceInfo extends Component<
                     availability: AvailabilityState,
                 ) => {
                     const { config } = bridgeInfo;
-                    const availabilityFeatureEnabled = !!config.availability?.enabled;
-                    const availabilityEnabledForDevice = config.devices[device.ieee_address]?.availability !== false;
+                    const availabilityFeatureEnabled = config.availability?.enabled;
+                    const availabilityEnabledForDevice = config.devices[device.ieee_address]?.availability as
+                        | boolean
+                        | undefined;
 
                     return (
                         <dd className="col-12 col-md-7">
