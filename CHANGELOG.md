@@ -1,3 +1,18 @@
+## [0.9.6](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.9.5...0.9.6) (2025-04-02)
+
+
+### Bug Fixes
+
+* **availabilty:** fix offline showing when availability is not enabled ([7e72b00](https://github.com/nurikk/zigbee2mqtt-frontend/commit/7e72b00c55012e6d44d3e1856d34a667b9479928))
+* typing & icons ([#2444](https://github.com/nurikk/zigbee2mqtt-frontend/issues/2444)) ([403ffac](https://github.com/nurikk/zigbee2mqtt-frontend/commit/403ffacef7865873cdb755b95c91e1850a2b9443))
+
+
+### Features
+
+* Use modal for authentication ([#2443](https://github.com/nurikk/zigbee2mqtt-frontend/issues/2443)) ([627da6c](https://github.com/nurikk/zigbee2mqtt-frontend/commit/627da6ccf9755f944e93eabe5eff5a96a13c95d6))
+
+
+
 ## [0.9.5](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.9.4...0.9.5) (2025-03-21)
 
 
