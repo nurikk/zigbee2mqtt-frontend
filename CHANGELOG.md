@@ -1,3 +1,12 @@
+## [0.9.7](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.9.6...0.9.7) (2025-04-03)
+
+
+### Reverts
+
+* Revert "feat: Use modal for authentication (#2443)" (#2451) ([814ce15](https://github.com/nurikk/zigbee2mqtt-frontend/commit/814ce15a0fa6333c713f9d8dff82147d1055a0af)), closes [#2443](https://github.com/nurikk/zigbee2mqtt-frontend/issues/2443) [#2451](https://github.com/nurikk/zigbee2mqtt-frontend/issues/2451)
+
+
+
 ## [0.9.6](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.9.5...0.9.6) (2025-04-02)
 
 
