@@ -52,8 +52,6 @@ const ConnectedDashboardPage = lazy(() =>
     import('./components/dashboard-page/Dashboard').then((module) => ({ default: module.ConnectedDashboardPage })),
 );
 
-import { AuthForm } from './components/modal/components/AuthModal';
-
 export function Main() {
     const { theme } = store.getState();
     return (
@@ -61,7 +59,6 @@ export function Main() {
             <ReactNotifications />
             <I18nextProvider i18n={i18n}>
                 <NiceModal.Provider>
-                    <AuthForm id="auth-form" onAuth={() => null} />
                     <Provider store={store}>
                         <ThemeSwitcherProvider
                             themeMap={{
