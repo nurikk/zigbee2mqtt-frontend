@@ -1,3 +1,12 @@
+## [0.9.8](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.9.7...0.9.8) (2025-04-06)
+
+
+### Features
+
+* **auth:** Use modal for authentication ([#2455](https://github.com/nurikk/zigbee2mqtt-frontend/issues/2455)) ([8970463](https://github.com/nurikk/zigbee2mqtt-frontend/commit/897046356982fe54f2b3f72ce7aecdf66a2dd2fe))
+
+
+
 ## [0.9.7](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.9.6...0.9.7) (2025-04-03)
 
 
