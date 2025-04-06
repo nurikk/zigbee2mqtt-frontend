@@ -6,11 +6,7 @@ import './styles/styles.global.scss';
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 
-import api from './ws-client';
-
 import { Main } from './Main';
-
-api.connect();
 
 const domNode = document.getElementById('root');
 if (domNode) {

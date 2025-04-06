@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from 'react';
+import React, { lazy, Suspense, useEffect } from 'react';
 import NiceModal from '@ebay/nice-modal-react';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import { ReactNotifications } from 'react-notifications-component';
@@ -52,13 +52,23 @@ const ConnectedDashboardPage = lazy(() =>
     import('./components/dashboard-page/Dashboard').then((module) => ({ default: module.ConnectedDashboardPage })),
 );
 
+import { AuthForm } from './components/modal/components/AuthModal';
+
+import api from './ws-client';
+
 export function Main() {
     const { theme } = store.getState();
+
+    useEffect(() => {
+        api.connect();
+    }, []);
+
     return (
         <React.StrictMode>
             <ReactNotifications />
             <I18nextProvider i18n={i18n}>
                 <NiceModal.Provider>
+                    <AuthForm id="auth-form" onAuth={() => null} />
                     <Provider store={store}>
                         <ThemeSwitcherProvider
                             themeMap={{
