@@ -286,7 +286,7 @@ class Api {
             local.remove(TOKEN_LOCAL_STORAGE_ITEM_NAME);
             showNotify('error', "Unauthorized", false);
             setTimeout(() => {
-                window.location.reload();
+                this.connect();
             }, 1000);
         }
     }
