@@ -1,3 +1,17 @@
+## [0.9.9](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.9.8...0.9.9) (2025-04-14)
+
+
+### Bug Fixes
+
+* **auth:** reconnect instead of reloading page on auth error ([#2461](https://github.com/nurikk/zigbee2mqtt-frontend/issues/2461)) ([7d2e12b](https://github.com/nurikk/zigbee2mqtt-frontend/commit/7d2e12b9344da708dd86d330235315d63612a88d))
+
+
+### Features
+
+* **ota:** add support for scheduled OTA ([#2449](https://github.com/nurikk/zigbee2mqtt-frontend/issues/2449)) ([b9acc54](https://github.com/nurikk/zigbee2mqtt-frontend/commit/b9acc5478f09ca0f5a04d1b50625cc0ff2af3482))
+
+
+
 ## [0.9.8](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.9.7...0.9.8) (2025-04-06)
 
 
