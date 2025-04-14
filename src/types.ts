@@ -6,7 +6,7 @@ export type FriendlyName = string;
 export type IEEEEAddress = string;
 
 export type OTAState = {
-    state: 'available' | 'updating';
+    state: 'available' | 'updating' | 'scheduled';
     progress: number;
     remaining: number;
 };

@@ -13,6 +13,7 @@ import { ModelLink, OTALink, VendorLink } from '../vendor-links/vendor-links';
 import { useTranslation, WithTranslation, withTranslation } from 'react-i18next';
 import { Column } from 'react-table';
 import { Table } from '../grid/ReactTableCom';
+import cx from 'classnames';
 
 type OtaRowProps = {
     device: Device;
@@ -21,7 +22,7 @@ type OtaRowProps = {
 
 const StateCell: FunctionComponent<OtaRowProps & OtaApi> = (props) => {
     const { t } = useTranslation('ota');
-    const { device, state, checkOTA, updateOTA } = props;
+    const { device, state, checkOTA, scheduleOTA, unscheduleOTA, updateOTA } = props;
     const otaState = (state?.update ?? {}) as OTAState;
     switch (otaState.state) {
         case 'updating':
@@ -40,20 +41,67 @@ const StateCell: FunctionComponent<OtaRowProps & OtaApi> = (props) => {
             );
         case 'available':
             return (
-                <Button<string>
-                    className="btn btn-danger btn-sm"
-                    onClick={updateOTA}
-                    item={device.friendly_name}
-                    prompt
-                >
-                    {t('update')}
-                </Button>
+                <div className="btn-group btn-group-sm" role="group">
+                    <Button<string>
+                        className="btn btn-danger btn-sm me-1"
+                        onClick={updateOTA}
+                        item={device.friendly_name}
+                        prompt
+                    >
+                        {t('update')}
+                    </Button>
+                    <Button<string>
+                        className="btn btn-sm btn-info"
+                        onClick={scheduleOTA}
+                        item={device.friendly_name}
+                        title={t('schedule')}
+                        prompt
+                    >
+                        <i className={cx('fa', 'fa-clock')} />
+                    </Button>
+                </div>
+            );
+        case 'scheduled':
+            return (
+                <div className="btn-group btn-group-sm" role="group">
+                    <Button<string>
+                        className="btn btn-primary btn-sm me-1"
+                        onClick={checkOTA}
+                        item={device.friendly_name}
+                    >
+                        {t('check')}
+                    </Button>
+                    <Button<string>
+                        className={cx('btn', 'btn-sm', 'btn-danger')}
+                        onClick={unscheduleOTA}
+                        item={device.friendly_name}
+                        title={t('scheduled')}
+                        prompt
+                    >
+                        <i className={cx('fa', 'fa-clock')} />
+                    </Button>
+                </div>
             );
         default:
             return (
-                <Button<string> className="btn btn-primary btn-sm" onClick={checkOTA} item={device.friendly_name}>
-                    {t('check')}
-                </Button>
+                <div className="btn-group btn-group-sm" role="group">
+                    <Button<string>
+                        className="btn btn-primary btn-sm me-1"
+                        onClick={checkOTA}
+                        item={device.friendly_name}
+                    >
+                        {t('check')}
+                    </Button>
+                    <Button<string>
+                        className={cx('btn', 'btn-sm', 'btn-info')}
+                        onClick={scheduleOTA}
+                        item={device.friendly_name}
+                        title={t('schedule')}
+                        prompt
+                    >
+                        <i className={cx('fa', 'fa-clock')} />
+                    </Button>
+                </div>
             );
     }
 };
@@ -85,8 +133,8 @@ class OtaPage extends Component<PropsFromStore & OtaApi & WithTranslation<'ota'>
         otaDevices.forEach(({ device }) => checkOTA(device.friendly_name));
     };
     render() {
-        const { checkOTA, updateOTA, t } = this.props;
-        const otaApi = { checkOTA, updateOTA };
+        const { checkOTA, scheduleOTA, unscheduleOTA, updateOTA, t } = this.props;
+        const otaApi = { checkOTA, scheduleOTA, unscheduleOTA, updateOTA };
         const otaDevices = this.getAllOtaDevices();
         const columns: Column<OtaGridData>[] = [
             {
