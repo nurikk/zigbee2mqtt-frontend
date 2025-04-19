@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 import genericDevice from '../../images/generic-zigbee-device.png';
-import { Device, DeviceState, OTAState } from '../../types';
+import { Device, DeviceState, InterviewState, OTAState } from '../../types';
 import cx from 'classnames';
 import { useTranslation } from 'react-i18next';
 import { LazyImage } from './LazyImage';
@@ -33,10 +33,9 @@ export function DeviceImage(props: Readonly<DeviceImageProps>) {
         otaState.state === 'updating' ? (
             <i title={t('updating_firmware')} className="fa fa-sync fa-spin position-absolute bottom-0 right-0" />
         ) : null;
-    const interviewSpinner = device.interviewing ? (
+    const interviewSpinner = device.interview_state === InterviewState.IN_PROGRESS ? (
         <i title={t('interviewing')} className="fa fa-spinner fa-spin position-absolute bottom-0 right-0" />
     ) : null;
-    const unsuccessfulInterview = !device.interviewing && !device.interview_completed;
     const disabledIcon = disabled ? (
         <i title={t('device_disabled')} className="fa fa-ban position-absolute bottom-0 right-0" />
     ) : null;
@@ -51,7 +50,7 @@ export function DeviceImage(props: Readonly<DeviceImageProps>) {
             {interviewSpinner}
             {otaSpinner}
             {disabledIcon}
-            {unsuccessfulInterview && (
+            {device.interview_state === InterviewState.FAILED && (
                 <i
                     title={t('interview_failed')}
                     className="fa fa-exclamation-triangle position-absolute top-0 right-0 text-danger"

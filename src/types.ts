@@ -283,6 +283,13 @@ export interface Group extends WithFriendlyName, WithDescription, WithScenes {
     members: GroupAddress[];
 }
 
+export enum InterviewState {
+    PENDING = "PENDING",
+    IN_PROGRESS = "IN_PROGRESS",
+    SUCCESSFUL = "SUCCESSFUL",
+    FAILED = "FAILED",
+}
+
 export interface Device extends WithFriendlyName, WithDescription {
     ieee_address: IEEEEAddress;
     type: DeviceType;
@@ -290,8 +297,7 @@ export interface Device extends WithFriendlyName, WithDescription {
     power_source?: PowerSource;
     model_id: string;
     manufacturer: string;
-    interviewing: boolean;
-    interview_completed: boolean;
+    interview_state: InterviewState;
     software_build_id: number;
     supported: boolean;
     definition?: DeviceDefinition;
