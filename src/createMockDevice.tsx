@@ -1,4 +1,4 @@
-import { Device } from './types';
+import { Device, InterviewState } from './types';
 
 export function createMockDevice(overries: Partial<Device> = {}): Device {
     return {
@@ -8,8 +8,7 @@ export function createMockDevice(overries: Partial<Device> = {}): Device {
         power_source: 'Mains (single phase)',
         model_id: 'LWB010',
         manufacturer: 'Philips',
-        interviewing: false,
-        interview_completed: true,
+        interview_state: InterviewState.SUCCESSFUL,
         software_build_id: 12345678,
         supported: true,
         definition: {

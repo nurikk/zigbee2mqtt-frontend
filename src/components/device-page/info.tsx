@@ -217,10 +217,16 @@ export class DeviceInfo extends Component<
                 ),
             },
             {
-                translationKey: 'interview_completed',
+                translationKey: 'interview_state',
                 render: (device: Device) => (
                     <dd className="col-12 col-md-7">
-                        <DisplayValue name="interview_completed" value={device.interview_completed} />
+                        <DisplayValue
+                            name="interview_state"
+                            value={device.interview_state
+                                .toLowerCase()
+                                .replace('_', ' ')
+                                .replace(/^./, (match) => match.toUpperCase())}
+                        />
                     </dd>
                 ),
             },
