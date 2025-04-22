@@ -33,9 +33,10 @@ export function DeviceImage(props: Readonly<DeviceImageProps>) {
         otaState.state === 'updating' ? (
             <i title={t('updating_firmware')} className="fa fa-sync fa-spin position-absolute bottom-0 right-0" />
         ) : null;
-    const interviewSpinner = device.interview_state === InterviewState.IN_PROGRESS ? (
-        <i title={t('interviewing')} className="fa fa-spinner fa-spin position-absolute bottom-0 right-0" />
-    ) : null;
+    const interviewSpinner =
+        device.interview_state === InterviewState.IN_PROGRESS ? (
+            <i title={t('interviewing')} className="fa fa-spinner fa-spin position-absolute bottom-0 right-0" />
+        ) : null;
     const disabledIcon = disabled ? (
         <i title={t('device_disabled')} className="fa fa-ban position-absolute bottom-0 right-0" />
     ) : null;

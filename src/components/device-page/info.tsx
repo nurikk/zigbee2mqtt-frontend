@@ -220,7 +220,13 @@ export class DeviceInfo extends Component<
                 translationKey: 'interview_state',
                 render: (device: Device) => (
                     <dd className="col-12 col-md-7">
-                        <DisplayValue name="interview_state" value={device.interview_state.toLowerCase().replace("_", " ").replace(/^./, match => match.toUpperCase())} />
+                        <DisplayValue
+                            name="interview_state"
+                            value={device.interview_state
+                                .toLowerCase()
+                                .replace('_', ' ')
+                                .replace(/^./, (match) => match.toUpperCase())}
+                        />
                     </dd>
                 ),
             },
