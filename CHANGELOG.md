@@ -1,3 +1,12 @@
+## [0.9.10](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.9.9...0.9.10) (2025-04-22)
+
+
+### Features
+
+* **device:** show interview state on device page ([#2466](https://github.com/nurikk/zigbee2mqtt-frontend/issues/2466)) ([e68072e](https://github.com/nurikk/zigbee2mqtt-frontend/commit/e68072e59464a037751175362f9c0a3d9d5b741c))
+
+
+
 ## [0.9.9](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.9.8...0.9.9) (2025-04-14)
 
 
