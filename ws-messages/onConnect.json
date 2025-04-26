@@ -8734,7 +8734,12 @@
             "color_temp": 454,
             "color_temp_startup": 500,
             "last_seen": "2022-04-15T17:48:28+08:00",
-            "state": "ON"
+            "state": "ON",
+            "update": {
+                "installed_version": 65552,
+                "latest_version": 16777233,
+                "state": "available"
+            }
         },
         "topic": "hue_back_tv"
     },
