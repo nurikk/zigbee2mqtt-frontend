@@ -2662,7 +2662,6 @@
     "firmware_installed_version": "Firmware installed version",
     "firmware_available_version": "Firmware available version",
     "firmware_installed_version_na": "Not yet reported by device",
-    "firmware_available_version_na": "N/A",
     "force_remove": "Force remove",
     "friendly_name": "Friendly name",
     "ieee_address": "IEEE Address",

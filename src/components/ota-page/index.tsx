@@ -198,7 +198,7 @@ class OtaPage extends Component<PropsFromStore & OtaApi & WithTranslation<'ota'>
                     const latest_version = ((state?.update ?? {}) as OTAState).latest_version;
 
                     if (typeof latest_version === 'number' && latest_version) return fileVersion2String(latest_version);
-                    else return t('zigbee:firmware_available_version_na');
+                    else return 'N/A';
                 },
             },
             {
