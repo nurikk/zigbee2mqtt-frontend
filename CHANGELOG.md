@@ -1,3 +1,12 @@
+## [0.9.11](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.9.10...0.9.11) (2025-05-03)
+
+
+### Bug Fixes
+
+* **ota:** report `installed_version` and `available_version` states in OTA page instead of build id and date ([#2470](https://github.com/nurikk/zigbee2mqtt-frontend/issues/2470)) ([d76f3cc](https://github.com/nurikk/zigbee2mqtt-frontend/commit/d76f3cc96c3e2936b21e1113c18110679210cc9a))
+
+
+
 ## [0.9.10](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.9.9...0.9.10) (2025-04-22)
 
 
