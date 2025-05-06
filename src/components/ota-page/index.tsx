@@ -13,6 +13,7 @@ import { ModelLink, OTALink, VendorLink } from '../vendor-links/vendor-links';
 import { useTranslation, WithTranslation, withTranslation } from 'react-i18next';
 import { Column } from 'react-table';
 import { Table } from '../grid/ReactTableCom';
+import PowerSourceOTA from '../power-source/powerSourceOTA';
 import cx from 'classnames';
 
 type OtaRowProps = {
@@ -59,6 +60,7 @@ const StateCell: FunctionComponent<OtaRowProps & OtaApi> = (props) => {
                     >
                         <i className={cx('fa', 'fa-clock')} />
                     </Button>
+                    <PowerSourceOTA device={device} deviceState={state} />
                 </div>
             );
         case 'scheduled':
