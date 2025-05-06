@@ -39,15 +39,14 @@ const PowerSourceOTA: FunctionComponent<PowerSourceOTAProps> = ({ device, device
     }
 
     // Some devices do not use the standardized feature `battery` to report power level.
-    if ((batteryPercent !== undefined && batteryPercent <= 50) ||
+    if (
+        (batteryPercent !== undefined && batteryPercent <= 50) ||
         (batteryState !== undefined && batteryState === 'low') ||
-        (batteryLow !== undefined && batteryLow === true)) {
+        (batteryLow !== undefined && batteryLow === true)
+    ) {
         return (
             <Fragment>
-                <i
-                    title={t('ota:battery_low_upd')}
-                    className="fa fa-circle-exclamation text-danger ms-2"
-                />
+                <i title={t('ota:battery_low_upd')} className="fa fa-circle-exclamation text-danger ms-2" />
             </Fragment>
         );
     }
