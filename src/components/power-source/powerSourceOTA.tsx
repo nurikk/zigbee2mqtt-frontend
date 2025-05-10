@@ -2,7 +2,6 @@ import React, { Fragment, FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Device, DeviceState } from '../../types';
 import style from './style.module.css';
-import { powerSourceTypeToTranslationKey } from './powerSourceTypeToTranslationKey';
 import type { PowerSource } from '../../types';
 
 interface PowerSourceOTAProps {
@@ -46,7 +45,7 @@ const PowerSourceOTA: FunctionComponent<PowerSourceOTAProps> = ({ device, device
     ) {
         return (
             <Fragment>
-                <i title={t('ota:battery_low_upd')} className="fa fa-circle-exclamation text-danger ms-2" />
+                <i title={t('ota:battery_low_upd')} className="fa fa-triangle-exclamation text-warning ms-2" />
             </Fragment>
         );
     }
