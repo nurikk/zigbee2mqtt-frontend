@@ -1,3 +1,12 @@
+## [0.9.12](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.9.11...0.9.12) (2025-05-11)
+
+
+### Features
+
+* **ota:** add a warning icon to OTA page for battery devices when battery is too low to safely run an update ([#2478](https://github.com/nurikk/zigbee2mqtt-frontend/issues/2478)) ([ed87878](https://github.com/nurikk/zigbee2mqtt-frontend/commit/ed878787921f29a987d13be998b00e9097c7a270))
+
+
+
 ## [0.9.11](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.9.10...0.9.11) (2025-05-03)
 
 
