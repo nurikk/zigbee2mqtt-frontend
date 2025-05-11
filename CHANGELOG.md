@@ -1,3 +1,12 @@
+## [0.9.13](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.9.12...0.9.13) (2025-05-11)
+
+
+### Bug Fixes
+
+* **frontend:** various fixes ([342a5d8](https://github.com/nurikk/zigbee2mqtt-frontend/commit/342a5d869858267924b11c0be06325d281cec086))
+
+
+
 ## [0.9.12](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.9.11...0.9.12) (2025-05-11)
 
 
