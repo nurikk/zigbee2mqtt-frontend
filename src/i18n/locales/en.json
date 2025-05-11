@@ -2577,6 +2577,7 @@
     "touchlink": "Touchlink"
   },
   "ota": {
+    "battery_low_upd": "The firmware update may fail if the batteries are not replaced",
     "check": "Check for new updates",
     "check_all": "Check all",
     "empty_ota_message": "You don't have any devices that support OTA",
