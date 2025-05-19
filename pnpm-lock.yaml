@@ -223,7 +223,7 @@ importers:
         version: 1.71.1
       store2:
         specifier: ^2.14.2
-        version: 2.14.3
+        version: 2.14.4
       timeago.js:
         specifier: ~4.0.2
         version: 4.0.2
@@ -3701,8 +3701,8 @@ packages:
     resolution: {integrity: sha512-iCGQj+0l0HOdZ2AEeBADlsRC+vsnDsZsbdSiH1yNSjcfKM7fdpCMfqAL/dwF5BLiw/XhRft/Wax6zQbhq2BcjQ==}
     engines: {node: '>= 0.4'}
 
-  store2@2.14.3:
-    resolution: {integrity: sha512-4QcZ+yx7nzEFiV4BMLnr/pRa5HYzNITX2ri0Zh6sT9EyQHbBHacC6YigllUPU9X3D0f/22QCgfokpKs52YRrUg==}
+  store2@2.14.4:
+    resolution: {integrity: sha512-srTItn1GOvyvOycgxjAnPA63FZNwy0PTyUBFMHRM+hVFltAeoh0LmNBz9SZqUS9mMqGk8rfyWyXn3GH5ReJ8Zw==}
 
   string-width@4.2.3:
     resolution: {integrity: sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==}
@@ -8160,7 +8160,7 @@ snapshots:
     dependencies:
       internal-slot: 1.0.5
 
-  store2@2.14.3: {}
+  store2@2.14.4: {}
 
   string-width@4.2.3:
     dependencies:
