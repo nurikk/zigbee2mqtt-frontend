@@ -1,3 +1,12 @@
+## [0.9.14](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.9.13...0.9.14) (2025-06-07)
+
+
+### Bug Fixes
+
+* **ota:** when OTA file version is negative number return N/A ([#2499](https://github.com/nurikk/zigbee2mqtt-frontend/issues/2499)) ([bea922e](https://github.com/nurikk/zigbee2mqtt-frontend/commit/bea922e79115a331c7ce1107cf062b5d7cc1a6f0))
+
+
+
 ## [0.9.13](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.9.12...0.9.13) (2025-05-11)
 
 
