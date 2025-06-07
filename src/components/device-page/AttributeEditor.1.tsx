@@ -135,7 +135,7 @@ export class AttributeEditor extends React.Component<AttributeEditorProps, Attri
                                 data-testid="cluster-picker"
                                 label={t('cluster')}
                                 pickerType={PickerType.SINGLE}
-                                clusters={device.endpoints[endpoint].clusters.input}
+                                clusters={device.endpoints?.[endpoint]?.clusters.input ?? []}
                                 value={cluster}
                                 onChange={this.onClusterChange}
                             />

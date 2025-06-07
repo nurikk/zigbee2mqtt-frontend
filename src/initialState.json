@@ -1,6 +1,111 @@
 {
     "devices": {},
     "deviceStates": {},
+    "groups": [],
+    "bridgeState": "online",
+    "bridgeInfo": {
+        "configSchema": {
+            "properties": {},
+            "required": [],
+            "definitions": {}
+        },
+        "config": {
+            "advanced": {
+                "elapsed": false,
+                "last_seen": "disable",
+                "log_level": "info",
+                "log_rotation": false,
+                "log_console_json": false,
+                "log_symlink_current": false,
+                "log_output": [],
+                "log_directory": "",
+                "log_file": "",
+                "log_namespaced_levels": {},
+                "log_syslog": {},
+                "log_debug_to_mqtt_frontend": false,
+                "log_debug_namespace_ignore": "",
+                "log_directories_to_keep": 0,
+                "pan_id": 0,
+                "ext_pan_id": [],
+                "channel": 0,
+                "cache_state": false,
+                "cache_state_persistent": false,
+                "cache_state_send_on_startup": false,
+                "network_key": [],
+                "timestamp_format": "",
+                "output": "json"
+            },
+            "devices": {},
+            "device_options": {},
+            "frontend": {
+                "enabled": true,
+                "port": 8080,
+                "base_url": "/"
+            },
+            "homeassistant": {
+                "enabled": false,
+                "discovery_topic": "",
+                "status_topic": "",
+                "experimental_event_entities": false,
+                "legacy_action_sensor": false
+            },
+            "availability": {
+                "enabled": false,
+                "active": {
+                    "timeout": 0,
+                    "max_jitter": 0,
+                    "backoff": false,
+                    "pause_on_backoff_gt": 0
+                },
+                "passive": {
+                    "timeout": 0
+                }
+            },
+            "mqtt": {
+                "base_topic": "",
+                "include_device_information": false,
+                "force_disable_retain": false,
+                "server": "",
+                "maximum_packet_size": 0
+            },
+            "serial": {
+                "disable_led": false
+            },
+            "passlist": [],
+            "blocklist": [],
+            "map_options": {
+                "graphviz": {}
+            },
+            "ota": {
+                "update_check_interval": 0,
+                "disable_automatic_update_check": false,
+                "zigbee_ota_override_index_location": null,
+                "image_block_response_delay": null,
+                "default_maximum_data_size": null
+            },
+            "groups": {}
+        },
+        "permit_join": false,
+        "permit_join_end": null,
+        "zigbee_herdsman_converters": {
+            "version": ""
+        },
+        "zigbee_herdsman": {
+            "version": ""
+        },
+        "device_options": {},
+        "restart_required": false,
+        "version": "",
+        "coordinator": {
+            "meta": {},
+            "type": "",
+            "ieee_address": ""
+        }
+    },
+    "bridgeDefinitions": {
+        "clusters": {},
+        "custom_clusters": {}
+    },
     "touchlinkDevices": [],
     "touchlinkScanInProgress": false,
     "touchlinkIdentifyInProgress": false,
@@ -10,18 +115,6 @@
         "nodes": []
     },
     "networkGraphIsLoading": false,
-    "groups": [],
-    "bridgeState": "online",
-    "bridgeDefinitions": {},
-    "bridgeInfo": {
-        "configSchema": {
-            "properties": {},
-            "required": []
-        },
-        "config": {
-            "advanced": {}
-        }
-    },
     "logs": [],
     "logsLimit": 100,
     "extensions": [],
