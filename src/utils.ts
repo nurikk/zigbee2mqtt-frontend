@@ -31,16 +31,6 @@ export const toHHMMSS = (secs: number): string => {
         .join(":");
 };
 
-export const fileVersion2String = (file_version: number): string => {
-    const versionString = file_version.toString(16).padStart(8, "0");
-    const appRelease = `${versionString[0]}.${versionString[1]}`;
-    const appBuild = versionString.slice(2, 4);
-    const stackRelease = `${versionString[4]}.${versionString[5]}`;
-    const stackBuild = versionString.slice(6);
-
-    return `${appRelease}.${appBuild}-${stackRelease}.${stackBuild}`;
-};
-
 export const lastSeen = (state: DeviceState, lastSeenType: LastSeenType): Date | undefined => {
     if (!state.last_seen) {
         return undefined;

@@ -6,7 +6,7 @@ import { OtaApi } from '../../actions/OtaApi';
 import { GlobalState } from '../../store';
 import Button from '../button';
 import { DeviceImage } from '../device-image/DeviceImage';
-import { genDeviceDetailsLink, isDeviceDisabled, toHHMMSS, fileVersion2String } from '../../utils';
+import { genDeviceDetailsLink, isDeviceDisabled, toHHMMSS } from '../../utils';
 import { Link } from 'react-router-dom';
 import { Device, DeviceState, OTAState } from '../../types';
 import { ModelLink, OTALink, VendorLink } from '../vendor-links/vendor-links';
@@ -134,7 +134,6 @@ class OtaPage extends Component<PropsFromStore & OtaApi & WithTranslation<'ota'>
         const otaDevices = this.getAllOtaDevices();
         otaDevices.forEach(({ device }) => checkOTA(device.friendly_name));
     };
-
     render() {
         const { checkOTA, scheduleOTA, unscheduleOTA, updateOTA, t } = this.props;
         const otaApi = { checkOTA, scheduleOTA, unscheduleOTA, updateOTA };
@@ -185,23 +184,17 @@ class OtaPage extends Component<PropsFromStore & OtaApi & WithTranslation<'ota'>
                 }) => <ModelLink device={device} />,
             },
             {
-                Header: t('zigbee:firmware_installed_version') as string,
-                accessor: ({ state }) => {
-                    const installed_version = ((state?.update ?? {}) as OTAState).installed_version;
-
-                    if (typeof installed_version === 'number' && installed_version)
-                        return fileVersion2String(installed_version);
-                    else return t('zigbee:firmware_installed_version_na');
-                },
+                Header: t('zigbee:firmware_build_date') as string,
+                accessor: ({ device }) => device.date_code,
             },
             {
-                Header: t('zigbee:firmware_available_version') as string,
-                accessor: ({ state }) => {
-                    const latest_version = ((state?.update ?? {}) as OTAState).latest_version;
-
-                    if (typeof latest_version === 'number' && latest_version) return fileVersion2String(latest_version);
-                    else return 'N/A';
-                },
+                Header: t('zigbee:firmware_version') as string,
+                accessor: ({ device }) => device.software_build_id,
+                Cell: ({
+                    row: {
+                        original: { device },
+                    },
+                }) => <OTALink device={device} />,
             },
             {
                 Header: () => (
