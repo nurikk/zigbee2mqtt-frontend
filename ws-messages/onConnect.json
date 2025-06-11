@@ -8694,7 +8694,7 @@
         "topic": "dining room/ac power/availability"
     },
     {
-        "payload": "online",
+        "payload": "offline",
         "topic": "0x0017880103d55d65/availability"
     },
     {
@@ -8858,12 +8858,7 @@
             "brightness": 110,
             "color_mode": "xy",
             "last_seen": "2022-04-15T17:48:30+08:00",
-            "state": "ON",
-            "update": {
-                "installed_version": -1,
-                "latest_version": -1,
-                "state": "unknown"
-	    }
+            "state": "ON"
         },
         "topic": "0x0017880103d55d65"
     }
