@@ -51,7 +51,7 @@ export const ModelLink: React.FunctionComponent<VendorProps> = (props: VendorPro
 export const OTALink: React.FunctionComponent<VendorProps> = (props: VendorProps) => {
     const { device } = props;
     let url = '';
-    const title = device.software_build_id;
+    const title = device.software_build_id ?? 'N/A';
 
     switch (device?.definition?.vendor) {
         case 'IKEA':
