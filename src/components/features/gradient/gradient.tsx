@@ -29,7 +29,7 @@ function Gradient(props: GradientProps & WithTranslation<'gradient'>) {
         t,
         minimal,
         onChange,
-        feature: { endpoint, length_min, length_max },
+        feature: { endpoint, length_min, length_max, property },
         deviceState,
     } = props;
     const [colors, setColors] = useState<Array<RGBColor>>(Array(gradientColors).fill({ x: 0, y: 0 }));
@@ -94,7 +94,7 @@ function Gradient(props: GradientProps & WithTranslation<'gradient'>) {
             <div>
                 <Button
                     className={cx('btn btn-primary float-end', { 'btn-sm': minimal })}
-                    onClick={() => onChange(endpoint as Endpoint, { gradient: colors.map(rgbToHex) })}
+                    onClick={() => onChange(endpoint as Endpoint, { [property ?? 'gradient']: colors.map(rgbToHex) })}
                 >
                     {t('common:apply')}
                 </Button>

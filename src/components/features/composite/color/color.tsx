@@ -15,7 +15,7 @@ const Light: FunctionComponent<ColorProps> = (props) => {
     }
     return (
         <ColorEditor
-            onChange={(color) => onChange(feature.endpoint as Endpoint, { color })}
+            onChange={(color) => onChange(feature.endpoint as Endpoint, { [feature.property ?? 'color']: color })}
             value={value as AnyColor}
             format={feature.name}
             minimal={minimal}
