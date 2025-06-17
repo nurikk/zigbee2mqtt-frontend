@@ -2617,6 +2617,7 @@
     "stats": "Stats",
     "coordinator_ieee_address": "Coordinator IEEE Address",
     "request_z2m_backup": "Request Z2m backup",
+    "download_z2m_backup": "Download Z2m backup",
     "add_install_code": "Add install code",
     "enter_install_code": "Enter install code",
     "homeassistant": "Home Assistant integration",
