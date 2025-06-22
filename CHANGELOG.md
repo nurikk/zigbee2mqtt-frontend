@@ -1,3 +1,12 @@
+## [0.9.16](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.9.15...0.9.16) (2025-06-22)
+
+
+### Bug Fixes
+
+* **i8n:** add missing button label ([#2505](https://github.com/nurikk/zigbee2mqtt-frontend/issues/2505)) ([9c2ee5e](https://github.com/nurikk/zigbee2mqtt-frontend/commit/9c2ee5ebdeb6e732e9d623719899f37576bf835b))
+
+
+
 ## [0.9.15](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.9.14...0.9.15) (2025-06-13)
 
 
