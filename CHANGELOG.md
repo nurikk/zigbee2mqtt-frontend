@@ -1,3 +1,12 @@
+## [0.9.17](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.9.16...0.9.17) (2025-07-06)
+
+
+### Bug Fixes
+
+* **light:** fix multi-endpoint light support ([#2515](https://github.com/nurikk/zigbee2mqtt-frontend/issues/2515)) ([c0ab978](https://github.com/nurikk/zigbee2mqtt-frontend/commit/c0ab97880ce8d60c5b355022f1682f5af4c58612))
+
+
+
 ## [0.9.16](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.9.15...0.9.16) (2025-06-22)
 
 
