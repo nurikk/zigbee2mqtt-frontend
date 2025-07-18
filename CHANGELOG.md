@@ -1,3 +1,12 @@
+## [0.9.18](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.9.17...0.9.18) (2025-07-18)
+
+
+### Bug Fixes
+
+* **endpoints:** fix duplicate endpoints in endpoint picker ([1844371](https://github.com/nurikk/zigbee2mqtt-frontend/commit/1844371341b01af818fbabf56523dcb819b556fb))
+
+
+
 ## [0.9.17](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.9.16...0.9.17) (2025-07-06)
 
 
