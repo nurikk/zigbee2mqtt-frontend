@@ -169,19 +169,36 @@ export const computeSettingsDiff = (before: object, after: object) => {
 
 export const sanitizeZ2MDeviceName = (deviceName?: string): string => deviceName ? deviceName.replace(/:|\s|\//g, "-") : "NA";
 
-export const getEndpoints = (obj: Device | Group): Endpoint[] => {
-    let eps: Endpoint[] = [];
-    if (!obj) {
-        return eps;
-    } else if ((obj as Device).endpoints) {
-        eps = eps.concat(Object.keys((obj as Device).endpoints) as Endpoint[]);
-    } else if ((obj as Group).members) {
-        eps = eps.concat((obj as Group).members.map(g => g.endpoint));
+export function isDevice(entity: Device | Group): entity is Device {
+    return !("members" in entity);
+}
+
+export const getEndpoints = (entity?: Device | Group): Endpoint[] => {
+    const endpoints = new Set<string | number>();
+
+    if (!entity) {
+        return [...endpoints];
     }
-    if ((obj as Device).definition?.exposes){
-        eps = eps.concat((obj as Device).definition?.exposes?.map(e => e.endpoint).filter(Boolean) as Endpoint[]);
+
+    if (isDevice(entity)) {
+        for (const key in entity.endpoints) {
+            endpoints.add(Number.parseInt(key, 10));
+        }
+
+        if (entity.definition?.exposes) {
+            for (const expose of entity.definition.exposes) {
+                if (expose.endpoint) {
+                    endpoints.add(expose.endpoint);
+                }
+            }
+        }
+    } else {
+        for (const member of entity.members) {
+            endpoints.add(member.endpoint);
+        }
     }
-    return eps;
+
+    return [...endpoints];
 }
 
 export const isDeviceDisabled = (device: Device, config: Z2MConfig): boolean => !!(config.device_options?.disabled || config.devices[device.ieee_address]?.disabled);
