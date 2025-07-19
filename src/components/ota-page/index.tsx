@@ -13,6 +13,7 @@ import { ModelLink, OTALink, VendorLink } from '../vendor-links/vendor-links';
 import { useTranslation, WithTranslation, withTranslation } from 'react-i18next';
 import { Column } from 'react-table';
 import { Table } from '../grid/ReactTableCom';
+import PowerSourceOTA from '../power-source/powerSourceOTA';
 import cx from 'classnames';
 
 type OtaRowProps = {
@@ -36,7 +37,11 @@ const StateCell: FunctionComponent<OtaRowProps & OtaApi> = (props) => {
                             {otaState.progress}%
                         </div>
                     </div>
-                    <div>{t('remaining_time', { remaining: toHHMMSS(otaState.remaining) })}</div>
+                    <div>
+                        {t('remaining_time', {
+                            remaining: otaState.remaining != null ? toHHMMSS(otaState.remaining) : 'N/A',
+                        })}
+                    </div>
                 </>
             );
         case 'available':
@@ -59,6 +64,7 @@ const StateCell: FunctionComponent<OtaRowProps & OtaApi> = (props) => {
                     >
                         <i className={cx('fa', 'fa-clock')} />
                     </Button>
+                    <PowerSourceOTA device={device} deviceState={state} />
                 </div>
             );
         case 'scheduled':
@@ -183,21 +189,36 @@ class OtaPage extends Component<PropsFromStore & OtaApi & WithTranslation<'ota'>
                 }) => <ModelLink device={device} />,
             },
             {
-                Header: t('zigbee:firmware_installed_version') as string,
+                Header: t('zigbee:firmware_id') as string,
+                accessor: ({ device }) => device.software_build_id,
+                Cell: ({
+                    row: {
+                        original: { device },
+                    },
+                }) => (
+                    <>
+                        <OTALink device={device} />
+                        <span title={t('zigbee:firmware_build_date')}> ({device.date_code ?? 'N/A'})</span>
+                    </>
+                ),
+            },
+            {
+                Header: t('zigbee:installed_version') as string,
                 accessor: ({ state }) => {
                     const installed_version = ((state?.update ?? {}) as OTAState).installed_version;
 
-                    if (typeof installed_version === 'number' && installed_version)
+                    if (typeof installed_version === 'number' && installed_version >= 0)
                         return fileVersion2String(installed_version);
-                    else return t('zigbee:firmware_installed_version_na');
+                    else return t('zigbee:installed_version_na');
                 },
             },
             {
-                Header: t('zigbee:firmware_available_version') as string,
+                Header: t('zigbee:available_version') as string,
                 accessor: ({ state }) => {
                     const latest_version = ((state?.update ?? {}) as OTAState).latest_version;
 
-                    if (typeof latest_version === 'number' && latest_version) return fileVersion2String(latest_version);
+                    if (typeof latest_version === 'number' && latest_version >= 0)
+                        return fileVersion2String(latest_version);
                     else return 'N/A';
                 },
             },

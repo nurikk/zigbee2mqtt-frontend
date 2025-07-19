@@ -1407,7 +1407,7 @@
                 },
                 "friendly_name": "0xbc33acfffe17628b",
                 "ieee_address": "0xbc33acfffe17628b",
-                "interview_state": "FAILED",
+                "interview_state": "SUCCESSFUL",
                 "manufacturer": "IKEA of Sweden",
                 "model_id": "TRADFRI on/off switch",
                 "network_address": 25249,
@@ -2010,7 +2010,7 @@
                             "value_on": true
                         }
                     ],
-                    "supports_ota": false,
+                    "supports_ota": true,
                     "vendor": "Xiaomi"
                 },
                 "endpoints": {
@@ -2327,7 +2327,7 @@
                             "type": "numeric"
                         }
                     ],
-                    "supports_ota": false,
+                    "supports_ota": true,
                     "vendor": "Xiaomi"
                 },
                 "endpoints": {
@@ -2596,7 +2596,7 @@
                             "type": "numeric"
                         }
                     ],
-                    "supports_ota": false,
+                    "supports_ota": true,
                     "vendor": "Xiaomi"
                 },
                 "endpoints": {
@@ -8652,7 +8652,7 @@
         "topic": "bridge/extensions"
     },
     {
-        "payload": "offline",
+        "payload": "online",
         "topic": "0xbc33acfffe17628b/availability"
     },
     {
@@ -8694,7 +8694,7 @@
         "topic": "dining room/ac power/availability"
     },
     {
-        "payload": "offline",
+        "payload": "online",
         "topic": "0x0017880103d55d65/availability"
     },
     {
@@ -8707,7 +8707,13 @@
     },
     {
         "payload": {
-            "last_seen": "2022-04-15T16:33:53+08:00"
+	    "battery": 45,
+            "last_seen": "2022-04-15T16:33:53+08:00",
+            "update": {
+                "installed_version": 65552,
+                "latest_version": 16777233,
+                "state": "available"
+	    }
         },
         "topic": "0xbc33acfffe17628b"
     },
@@ -8748,7 +8754,12 @@
             "battery": 100,
             "last_seen": "2022-05-16T20:46:44+08:00",
             "linkquality": 66,
-            "voltage": 3042
+            "voltage": 3042,
+            "update": {
+                "installed_version": 65552,
+                "latest_version": 16777233,
+                "state": "available"
+            }
         },
         "topic": "0x00158d000224154d"
     },
@@ -8780,12 +8791,17 @@
     },
     {
         "payload": {
-            "battery": 100,
+            "battery": 65,
             "humidity": 65.59,
             "last_seen": "2022-05-16T20:37:54+08:00",
             "linkquality": 90,
             "temperature": 25.84,
-            "voltage": 3035
+            "voltage": 3035,
+            "update": {
+                "installed_version": 65552,
+                "latest_version": 16777233,
+                "state": "available"
+            }
         },
         "topic": "livingroom/temp_humidity"
     },
@@ -8811,13 +8827,19 @@
     },
     {
         "payload": {
-            "battery": 0,
+            "battery": 5,
             "humidity": 59.96,
             "last_seen": "2022-05-16T21:06:04+08:00",
+            "state": "ON",
             "linkquality": 12,
             "pressure": 1009.8,
             "temperature": 32.9,
-            "voltage": 2815
+            "voltage": 2815,
+            "update": {
+                "installed_version": 65552,
+                "latest_version": 16777233,
+                "state": "available"
+            }
         },
         "topic": "0x00158d0004866f11"
     },
@@ -8836,7 +8858,12 @@
             "brightness": 110,
             "color_mode": "xy",
             "last_seen": "2022-04-15T17:48:30+08:00",
-            "state": "ON"
+            "state": "ON",
+            "update": {
+                "installed_version": -1,
+                "latest_version": -1,
+                "state": "unknown"
+	    }
         },
         "topic": "0x0017880103d55d65"
     }

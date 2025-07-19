@@ -183,7 +183,7 @@ export class DeviceInfo extends Component<
             },
             {
                 key: 'software_build_id',
-                translationKey: 'firmware_version',
+                translationKey: 'firmware_id',
                 if: 'software_build_id',
             },
 

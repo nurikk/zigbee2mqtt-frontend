@@ -1,3 +1,70 @@
+## [0.9.19](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.9.18...0.9.19) (2025-07-18)
+
+
+
+## [0.9.18](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.9.17...0.9.18) (2025-07-18)
+
+
+### Bug Fixes
+
+* **endpoints:** fix duplicate endpoints in endpoint picker ([1844371](https://github.com/nurikk/zigbee2mqtt-frontend/commit/1844371341b01af818fbabf56523dcb819b556fb))
+
+
+
+## [0.9.17](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.9.16...0.9.17) (2025-07-06)
+
+
+### Bug Fixes
+
+* **light:** fix multi-endpoint light support ([#2515](https://github.com/nurikk/zigbee2mqtt-frontend/issues/2515)) ([c0ab978](https://github.com/nurikk/zigbee2mqtt-frontend/commit/c0ab97880ce8d60c5b355022f1682f5af4c58612))
+
+
+
+## [0.9.16](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.9.15...0.9.16) (2025-06-22)
+
+
+### Bug Fixes
+
+* **i8n:** add missing button label ([#2505](https://github.com/nurikk/zigbee2mqtt-frontend/issues/2505)) ([9c2ee5e](https://github.com/nurikk/zigbee2mqtt-frontend/commit/9c2ee5ebdeb6e732e9d623719899f37576bf835b))
+
+
+
+## [0.9.15](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.9.14...0.9.15) (2025-06-13)
+
+
+### Bug Fixes
+
+* **various:** various fixes ([#2503](https://github.com/nurikk/zigbee2mqtt-frontend/issues/2503)) ([bf56810](https://github.com/nurikk/zigbee2mqtt-frontend/commit/bf568102f6a9ac02df86332fc186986c0493c3d3))
+
+
+
+## [0.9.14](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.9.13...0.9.14) (2025-06-07)
+
+
+### Bug Fixes
+
+* **ota:** when OTA file version is negative number return N/A ([#2499](https://github.com/nurikk/zigbee2mqtt-frontend/issues/2499)) ([bea922e](https://github.com/nurikk/zigbee2mqtt-frontend/commit/bea922e79115a331c7ce1107cf062b5d7cc1a6f0))
+
+
+
+## [0.9.13](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.9.12...0.9.13) (2025-05-11)
+
+
+### Bug Fixes
+
+* **frontend:** various fixes ([342a5d8](https://github.com/nurikk/zigbee2mqtt-frontend/commit/342a5d869858267924b11c0be06325d281cec086))
+
+
+
+## [0.9.12](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.9.11...0.9.12) (2025-05-11)
+
+
+### Features
+
+* **ota:** add a warning icon to OTA page for battery devices when battery is too low to safely run an update ([#2478](https://github.com/nurikk/zigbee2mqtt-frontend/issues/2478)) ([ed87878](https://github.com/nurikk/zigbee2mqtt-frontend/commit/ed878787921f29a987d13be998b00e9097c7a270))
+
+
+
 ## [0.9.11](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.9.10...0.9.11) (2025-05-03)
 
 

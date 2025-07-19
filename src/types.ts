@@ -7,8 +7,10 @@ export type IEEEEAddress = string;
 
 export type OTAState = {
     state: 'available' | 'updating' | 'scheduled';
-    progress: number;
-    remaining: number;
+    progress?: number;
+    remaining?: number;
+    installed_version: number | null;
+    latest_version: number | null;
 };
 export type RGBColor = {
     r: number;
