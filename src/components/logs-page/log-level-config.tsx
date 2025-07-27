@@ -6,7 +6,7 @@ import { JSONSchema7 } from 'json-schema';
 import { KVP, Z2MConfig } from '../../types';
 import get from 'lodash/get';
 import set from 'lodash/set';
-import styles from './log-level-config.module.css';
+import omit from 'lodash/omit'
 
 const Form = withTheme(Bootstrap5Theme);
 
@@ -21,14 +21,14 @@ type ConfigureLogsProps = {
 export default function ConfigureLogs(props: ConfigureLogsProps): JSX.Element {
     const { schema = {}, schemaKey = '', config = {}, configKey = '', onChange } = props;
     const formData = get(config, configKey, {});
-    const _schema = get(schema, schemaKey, {});
+    const _schema = omit(get(schema, schemaKey, {}), ['description']);
     const handleChange = (params: ISubmitEvent<KVP | KVP[]>) => {
         const payload = {};
         set(payload, configKey, params.formData);
         onChange(payload);
     };
     return (
-        <Form schema={_schema} className={styles['hide-description']} formData={formData} onChange={handleChange}>
+        <Form schema={_schema} formData={formData} onChange={handleChange}>
             <div />
         </Form>
     );
