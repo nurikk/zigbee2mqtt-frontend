@@ -43,7 +43,7 @@ const RangeEditor: FunctionComponent<RangeProps & Omit<InputHTMLAttributes<HTMLI
                 <input
                     type="number"
                     className={cx('form-control', { 'ms-1': showRange })}
-                    value={currentValue}
+                    value={Number.isNaN(currentValue) ? '' : currentValue}
                     step={valueStep}
                     onChange={(e) => setCurrentValue(e.target.valueAsNumber)}
                     onBlur={() => onChange(currentValue)}
