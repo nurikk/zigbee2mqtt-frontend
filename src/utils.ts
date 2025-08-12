@@ -149,7 +149,7 @@ export const computeSettingsDiff = (before: object, after: object) => {
     // diff converts arrays to objects, set original array back here
     const setArrays = (localAfter: object, localDiff: object): void => {
         for (const [key, value] of Object.entries(localDiff)) {
-            if (typeof value === 'object') {
+            if (typeof value === 'object' && value !== null) {
                 if (Array.isArray(localAfter[key])) {
                     localDiff[key] = localAfter[key];
                 } else {
