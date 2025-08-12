@@ -1,3 +1,12 @@
+## [0.9.20](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.9.19...0.9.20) (2025-08-12)
+
+
+### Bug Fixes
+
+* Settings saving issue when value is null ([#2586](https://github.com/nurikk/zigbee2mqtt-frontend/issues/2586)) ([5dd58cb](https://github.com/nurikk/zigbee2mqtt-frontend/commit/5dd58cb73ae050165dabb2d700b8d1430a5e74b9))
+
+
+
 ## [0.9.19](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.9.18...0.9.19) (2025-07-18)
 
 
