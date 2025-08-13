@@ -66,6 +66,7 @@ const typeToClassMap = {
     trigger_count: ['fa-turn-up fa-flip-horizontal', 'text-info'],
     level_config: ['fa-gear'],
     station: ['fa-warehouse'],
+    rainwater: ['fa-cloud-rain'],
     test: ['fa-check', 'text-success'],
 };
 
