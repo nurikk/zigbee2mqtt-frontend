@@ -20,66 +20,65 @@ const getTemperatureIcon = (temperature: number) => {
 };
 
 const typeToClassMap = {
-    humidity: ['text-info', 'fa-tint'],
-    illuminance: ['fa-sun'],
-    pressure: ['fa-cloud-download-alt'],
-    co2: ['fa-atom', 'text-warning'],
-    voltage: ['fa-bolt', 'text-success'],
-    state: ['fa-star-half-alt'],
-    brightness: ['fa-sun'],
-    occupancy: ['fa-walking'],
-    presence: ['fa-person-rays'],
-    current: ['fa-copyright', 'text-warning'],
-    power: ['fa-power-off', 'text-success'],
-    energy: ['fa-plug', 'text-info'],
-    frequency: ['fa-wave-square'],
-    tamper: ['fa-exclamation-circle', 'text-danger'],
-    smoke: ['fa-smoking', 'text-danger'],
-    radiation_dose_per_hour: ['fa-radiation', 'text-danger'],
-    radioactive_events_per_minute: ['fa-radiation-alt', 'text-warning'],
-    power_factor: ['fa-industry', 'text-danger'],
-    mode: ['fa-user-cog', 'text-warning'],
-    sound: ['fa-volume-up', 'text-info'],
-    position: ['fa-percent', 'text-info'],
-    alarm: ['fa-exclamation-triangle', 'text-danger'],
-    color_xy: ['fa-palette'],
-    color_hs: ['fa-palette'],
-    color_temp: ['fa-sliders-h'],
-    illuminance_lux: ['fa-sun'],
-    soil_moisture: ['fa-fill-drip'],
-    water_leak: ['fa-water'],
-    week: ['fa-calendar-week'],
-    workdays_schedule: ['fa-calendar-day', 'text-info'],
-    holidays_schedule: ['fa-calendar-day', 'text-danger'],
-    away_mode: ['fa-plane', 'text-info'],
-    vibration: ['fa-water fa-rotate-270'],
-    power_outage_count: ['fa-plug-circle-xmark'],
     action: ['fa-a'],
+    alarm: ['fa-exclamation-triangle', 'text-danger'],
     angle_x: ['fa-x'],
     angle_y: ['fa-y'],
     angle_z: ['fa-z'],
-    side: ['fa-cube'],
-    humidity_alarm: ['fa-triangle-exclamation'],
-    temperature_alarm: ['fa-triangle-exclamation'],
     approach_distance: ['fa-arrows-left-right-to-line', 'text-warning'],
+    away_mode: ['fa-plane', 'text-info'],
+    brightness: ['fa-sun'],
+    co2: ['fa-atom', 'text-warning'],
+    color_hs: ['fa-palette'],
+    color_temp: ['fa-sliders-h'],
+    color_xy: ['fa-palette'],
+    current: ['fa-copyright', 'text-warning'],
     distance: ['fa-arrows-left-right-to-line', 'text-warning'],
-    trigger_count: ['fa-turn-up fa-flip-horizontal', 'text-info'],
+    energy: ['fa-plug', 'text-info'],
+    frequency: ['fa-wave-square'],
+    holidays_schedule: ['fa-calendar-day', 'text-danger'],
+    humidity: ['text-info', 'fa-tint'],
+    humidity_alarm: ['fa-triangle-exclamation'],
+    illuminance: ['fa-sun'],
+    illuminance_lux: ['fa-sun'],
     level_config: ['fa-gear'],
-    station: ['fa-warehouse'],
+    mode: ['fa-user-cog', 'text-warning'],
+    occupancy: ['fa-walking'],
+    position: ['fa-percent', 'text-info'],
+    power: ['fa-power-off', 'text-success'],
+    power_factor: ['fa-industry', 'text-danger'],
+    power_outage_count: ['fa-plug-circle-xmark'],
+    presence: ['fa-person-rays'],
+    pressure: ['fa-cloud-download-alt'],
+    radiation_dose_per_hour: ['fa-radiation', 'text-danger'],
+    radioactive_events_per_minute: ['fa-radiation-alt', 'text-warning'],
     rainwater: ['fa-cloud-rain'],
+    side: ['fa-cube'],
+    smoke: ['fa-smoking', 'text-danger'],
+    soil_moisture: ['fa-fill-drip'],
+    sound: ['fa-volume-up', 'text-info'],
+    state: ['fa-star-half-alt'],
+    station: ['fa-warehouse'],
+    tamper: ['fa-exclamation-circle', 'text-danger'],
+    temperature_alarm: ['fa-triangle-exclamation'],
     test: ['fa-check', 'text-success'],
+    trigger_count: ['fa-turn-up fa-flip-horizontal', 'text-info'],
+    voltage: ['fa-bolt', 'text-success'],
+    vibration: ['fa-water fa-rotate-270'],
+    water_leak: ['fa-water'],
+    week: ['fa-calendar-week'],
+    workdays_schedule: ['fa-calendar-day', 'text-info'],
 };
 
 const getGenericFeatureIcon = (name: string, value: unknown): string => {
     let classes = [] as string[];
     switch (name) {
-        case 'device_temperature':
-        case 'temperature':
-        case 'local_temperature':
-            classes.push(cx('text-danger', getTemperatureIcon(value as number)));
-            break;
         case 'contact':
             classes.push(cx({ 'fa-door-closed text-muted': value, 'fa-door-open text-primary': !value }));
+            break;
+        case 'device_temperature':
+        case 'local_temperature':
+            classes.push(cx('text-danger', getTemperatureIcon(value as number)));
             break;
         case 'occupancy':
             classes.push(cx({ 'text-warning': value }));
@@ -90,11 +89,12 @@ const getGenericFeatureIcon = (name: string, value: unknown): string => {
         case 'tamper':
             classes.push(cx({ 'fa-beat-fade': value }));
             break;
-        case 'water_leak':
-            classes.push(cx({ 'fa-beat-fade text-primary': value }));
-            break;
+        case 'temperature':
         case 'vibration':
             classes.push(cx({ 'fa-shake fa-rotate-270 text-primary': value }));
+            break;
+        case 'water_leak':
+            classes.push(cx({ 'fa-beat-fade text-primary': value }));
             break;
         default:
             break;
