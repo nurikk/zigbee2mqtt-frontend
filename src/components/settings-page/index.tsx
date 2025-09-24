@@ -39,6 +39,7 @@ type SettingsPageState = {
 const ROOT_KEY_NAME = 'main';
 
 const ignoredFields = ['groups', 'devices', 'device_options', 'ban', 'whitelist', 'map_options'];
+const ignoredAdvancedFields = ['ext_pan_id', 'pan_id', 'network_key'];
 const validJsonSchemasAsTabs = ['object', 'array'];
 
 const removePropertiesFromSchema = (
@@ -350,6 +351,11 @@ class SettingsPage extends Component<
             currentConfig = configAndSchema.config[keyName] as Record<string, unknown>;
             if (configAndSchema.schema.properties) {
                 currentSchema = configAndSchema.schema.properties[keyName] as JSONSchema7;
+            }
+            if (keyName === 'advanced') {
+                configAndSchema = removePropertiesFromSchema(ignoredAdvancedFields, currentSchema, currentConfig);
+                currentSchema = configAndSchema.schema;
+                currentConfig = configAndSchema.config;
             }
         }
         return { currentSchema, currentConfig };
