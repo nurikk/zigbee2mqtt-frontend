@@ -1,3 +1,12 @@
+## [0.9.21](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.9.20...0.9.21) (2025-09-26)
+
+
+### Bug Fixes
+
+* remove ext pan id, pan id and network key from settings ([#2724](https://github.com/nurikk/zigbee2mqtt-frontend/issues/2724)) ([8a1b93c](https://github.com/nurikk/zigbee2mqtt-frontend/commit/8a1b93c0ffb464c82fd6d4bd51b9ccf4211e5ce0))
+
+
+
 ## [0.9.20](https://github.com/nurikk/zigbee2mqtt-frontend/compare/0.9.19...0.9.20) (2025-08-12)
 
 
