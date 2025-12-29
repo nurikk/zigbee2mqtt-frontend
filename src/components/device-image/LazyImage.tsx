@@ -15,7 +15,7 @@ export function LazyImage(props: Readonly<LazyImageProps>) {
         srcList: AVAILABLE_GENERATORS.map((fn) => fn(device)).filter(Boolean) as string[],
     });
     if (type === 'svg') {
-        return <image crossOrigin={'anonymous'} {...rest} href={src} />;
+        return <image {...rest} href={src} />;
     }
-    return <img alt="" crossOrigin={'anonymous'} src={src} />;
+    return <img alt="" src={src} />;
 }

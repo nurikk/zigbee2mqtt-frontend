@@ -21,7 +21,7 @@ export function DeviceImage(props: Readonly<DeviceImageProps>) {
 
     if (type === 'svg') {
         return (
-            <Suspense fallback={<image crossOrigin={'anonymous'} {...rest} href={genericDevice} />}>
+            <Suspense fallback={<image {...rest} href={genericDevice} />}>
                 <ErrorBoundary>
                     <LazyImage type="svg" device={device} {...rest} />
                 </ErrorBoundary>

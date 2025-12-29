@@ -66,7 +66,6 @@ const rows = [
         <div className="col">
             <a target="_blank" rel="noopener noreferrer" href="https://www.buymeacoffee.com/nurikk">
                 <img
-                    crossOrigin="anonymous"
                     src="https://img.buymeacoffee.com/button-api/?text=Thanks for frontend&emoji=🍺&slug=nurikk&button_colour=FFDD00&font_colour=000000&font_family=Arial&outline_colour=000000&coffee_colour=ffffff"
                 />
             </a>
@@ -76,7 +75,6 @@ const rows = [
         <div className="col">
             <a target="_blank" rel="noopener noreferrer" href="https://www.buymeacoffee.com/koenkk">
                 <img
-                    crossOrigin="anonymous"
                     src="https://img.buymeacoffee.com/button-api/?text=Thanks for zigbee2mqtt&emoji=☕&slug=koenkk&button_colour=FFDD00&font_colour=000000&font_family=Arial&outline_colour=000000&coffee_colour=ffffff"
                 />
             </a>
