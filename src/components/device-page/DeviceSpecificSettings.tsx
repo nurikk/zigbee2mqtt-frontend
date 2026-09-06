@@ -21,7 +21,16 @@ function DeviceSpecificSettings(props: DeviceSpecificSettingsProps & Pick<Device
         setDeviceOptions,
     } = props;
     const { t } = useTranslation(['exposes']);
-    const deviceState = config.devices[device.ieee_address] ?? {};
+    const defaults = Object.fromEntries(
+        (device.definition?.options ?? [])
+            .filter((option) => option.default !== undefined)
+            .map((option) => [option.property ?? option.name, option.default]),
+    );
+    const deviceState = {
+        ...defaults,
+        ...config.device_options,
+        ...config.devices[device.ieee_address],
+    };
     if (device.definition?.options?.length) {
         return (
             <TranslatedComposite

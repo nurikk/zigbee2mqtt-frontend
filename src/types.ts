@@ -152,6 +152,7 @@ export interface GenericExposedFeature {
     endpoint?: Endpoint;
     property?: string;
     description?: string;
+    default?: unknown;
 }
 
 export interface BinaryFeature extends GenericExposedFeature {
